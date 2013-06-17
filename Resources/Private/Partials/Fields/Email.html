@@ -1,0 +1,14 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<div class="femanager_fieldset control-group">
+	<label for="email" class="control-label">
+		<f:translate key="tx_femanager_domain_model_user.email" />
+		<span>*</span>
+	</label>
+	<div class="controls">
+		<femanager:form.textfield
+				id="email"
+				property="email"
+				class="input-block-level"
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'email')}" />
+	</div>
+</div>

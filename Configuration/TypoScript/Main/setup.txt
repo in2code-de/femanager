@@ -1,0 +1,671 @@
+plugin.tx_femanager {
+	view {
+		templateRootPath = {$plugin.tx_femanager.view.templateRootPath}
+		partialRootPath = {$plugin.tx_femanager.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_femanager.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_femanager.persistence.storagePid}
+	}
+	features {
+		rewrittenPropertyMapper = 1
+	}
+	settings {
+
+		# Todo Empty Usergroup Selection in New Action leads to error / No usergroup prefill
+		# Todo Add to third party software (CRM)
+		# Todo Save in third table
+		# Todo Create an femanager backend module with a fulltextsearch and a usergroup filter
+		# Todo Extend registration with new fields (manual)
+		# Todo Extend validation with new validator (manual)
+
+
+		###################################
+		# Settings for CREATE user profiles
+		###################################
+		new {
+			# take username and copy it to the email field (so email field is not nessesary in FE)
+#			fillEmailWithUsername = 1
+
+			# login after profile creation
+			login = 1
+
+			# redirect after profile creation
+#			redirect = TEXT
+#			redirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
+
+			# prfilling (empty) input fields with values from TypoScript
+			prefill {
+#				username = TEXT
+#				username.value = ExampleUsername
+
+#				email = TEXT
+#				email.value = test@in2code.de
+			}
+
+			# validation of user input values
+			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, mustInclude(number,letter,special), inList(1,2,3)
+			validation {
+				# Enable clientside Formvalidation (JavaScript)
+				_enable.client = 1
+
+				# Enable serverside Formvalidation (PHP)
+				_enable.server = 1
+
+				username {
+					required = 1
+					uniqueInDb = 1
+				}
+				email {
+					required = 1
+					email = 1
+					#uniqueInPage = 1
+				}
+				password {
+					required = 1
+					#min = 10
+					#mustInclude = number,letter,special
+				}
+				usergroup {
+					#inList = 1,2,3
+					#\Validation\xyzvalidator.php
+				}
+			}
+
+
+			# All email settings within the creation process
+			email {
+
+				# Email for User confirmation (User must confirm his Email address)
+				createUserConfirmation {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receivers (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value = {$plugin.tx_femanager.settings.adminEmail}
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.value = Please confirm your profile creation request
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+					attachments = COA
+					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+					}
+				}
+
+				# Email for Admin confirmation (Admin must confirm registration in an email)
+				createAdminConfirmation {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receivers (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.value = Please confirm a new registration
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+					attachments = COA
+					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+					}
+				}
+
+				# Email for User notify, if admin confirms is profile
+				createUserNotify {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receivers (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value = {$plugin.tx_femanager.settings.adminEmail}
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.value = Your registration was confirmed
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+					attachments = COA
+					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+					}
+				}
+
+				# Email for User notify, if admin refused profile registration
+				createUserNotifyRefused {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receivers (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value = {$plugin.tx_femanager.settings.adminEmail}
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.value = Your registration was refused
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+					attachments = COA
+					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+					}
+				}
+
+				# Email for Admin notify, if profile registration
+				createAdminNotify {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receivers (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.value = New profile registration
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+					attachments = COA
+					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+					}
+				}
+			}
+
+			# overwrite any user values with TypoScript
+			forceValues {
+				# Overwrite initally (default)
+				beforeAnyConfirmation {
+					# Usergroups can be set with a commaseparated list
+#					usergroup = TEXT
+#					usergroup.value = 2
+
+					# Set a fix value
+#					email = TEXT
+#					email.value = service@in2code.de
+				}
+
+				# Overwrite on user confirmation (only if user confirmation was activated)
+				onUserConfirmation {
+					# Usergroups can be set with a commaseparated list
+#					usergroup = TEXT
+#					usergroup.value = 3
+
+					# Set a fix value
+#					company = TEXT
+#					company.value = in2code.de
+				}
+
+				# Overwrite on admin confirmation (only if admin confirmation was activated)
+				onAdminConfirmation {
+					# Usergroups can be set with a commaseparated list
+#					usergroup = TEXT
+#					usergroup.value = 4
+
+					# Set a fix value
+#					www = TEXT
+#					www.value = http://www.in2code.de
+				}
+			}
+
+			# initially save password as hash (empty, "md5", "sha1")
+#			passwordSave = md5
+		}
+
+
+
+
+		###################################
+		# Settings for UPDATE user profiles
+		###################################
+		edit {
+			# take username and copy it to the email field (so email field is not nessesary in FE)
+			#fillEmailWithUsername = 1
+
+			# redirect after profile update
+#			redirect = TEXT
+#			redirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
+
+			# prfilling (empty) input fields with values from TypoScript
+			prefill {
+#				username = TEXT
+#				username.value = ExampleUsername
+
+#				email = TEXT
+#				email.value = test@in2code.de
+			}
+
+			# validation of user input values
+			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, mustInclude(number,letter,special), inList(1,2,3)
+			validation {
+				# Enable clientside Formvalidation (JavaScript)
+				_enable.client = 1
+
+				# Enable serverside Formvalidation (PHP)
+				_enable.server = 1
+
+				username {
+					required = 1
+				}
+				email {
+					required = 1
+					email = 1
+				}
+				password {
+					required = 1
+					#min = 10
+					#mustInclude = number,letter,special
+				}
+				usergroup {
+					#inList = 1,2,3
+					#\Validation\xyzvalidator.php
+				}
+			}
+
+			# All email settings within the update process
+			email {
+
+				# Email for admin if user requests update (only if confirmation by admin is activated)
+				updateRequest {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receivers (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.value = New profile change request
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+					attachments = COA
+					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+					}
+				}
+
+				# Email to user if update request was refused by admin
+				updateRequestRefused {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receiver (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value = {$plugin.tx_femanager.settings.adminEmail}
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.value = You're update request was refused
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5 (from important to not important)
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+					attachments = COA
+					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+					}
+				}
+
+				# Email for if update request was refused by admin
+				notifyAdmin {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receiver (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.value = Profile update
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5 (from important to not important)
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+					attachments = COA
+					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+					}
+				}
+			}
+
+			# overwrite any user values with TypoScript
+			forceValues {
+				# Overwrite initally (default) - Note: This values will be updated as soon as the admin confirms the request (if admin confirm is activated)
+				beforeAnyConfirmation {
+					# Usergroups can be set with a commaseparated list
+#					usergroup = TEXT
+#					usergroup.value = 2
+
+					# Set a fix value
+#					email = TEXT
+#					email.value = service@in2code.de
+				}
+
+				# Overwrite on admin confirmation (only if admin confirmation was activated)
+				onAdminConfirmation {
+					# Usergroups can be set with a commaseparated list
+#					usergroup = TEXT
+#					usergroup.value = 3
+
+					# Set a fix value
+#					www = TEXT
+#					www.value = http://www.in2code.de
+				}
+			}
+
+			# initially save password as hash (empty, "md5", "sha1")
+#			passwordSave = md5
+		}
+
+		delete {
+			# redirect after profile delete
+#			redirect = TEXT
+#			redirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
+		}
+
+		# Don't touch this - this is needed to let the plugin know if the main typoscript is included - otherwise an errormessage will be shown in the frontend
+		_TypoScriptIncluded = 1
+	}
+}
+
+
+
+
+#########################
+# Inlude JavaScript files
+#########################
+# add jQuery if it was turned on in the constants
+[globalVar = LIT:0 < {$plugin.tx_femanager.settings.jQuery}]
+page.includeJSFooterlibs.femanagerJQuery = //ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+page.includeJSFooterlibs.femanagerJQuery.external = 1
+[end]
+
+# add twittr bootstrap JS if it was turned on in the constants
+[globalVar = LIT:0 < {$plugin.tx_femanager.settings.bootstrap}]
+page.includeJSFooterlibs.femanangerBootstrap = //netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js
+page.includeJSFooterlibs.femanangerBootstrap.external = 1
+[end]
+
+# add fineuploader JS if it was turned on in the constants
+[globalVar = LIT:0 < {$plugin.tx_femanager.settings.fineuploader}]
+page.includeJSFooterlibs.femanangerFineuploader = EXT:femanager/Resources/Public/JavaScripts/jquery.fineuploader-3.5.0.min.js
+[end]
+
+#########################
+# Inlude CSS files
+#########################
+# add twittr bootstrap CSS if it was turned on in the constants
+[globalVar = LIT:0 < {$plugin.tx_femanager.settings.bootstrapCSS}]
+page.includeCSS.femanangerBootstrap = //netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css
+page.includeCSS.femanangerBootstrap.external = 1
+[end]
+
+page {
+	includeCSS {
+		femanagerMain = EXT:femanager/Resources/Public/Css/Main.css
+	}
+	includeJSFooter {
+		femanagerValidation = EXT:femanager/Resources/Public/JavaScripts/Validation.js
+		femanager = EXT:femanager/Resources/Public/JavaScripts/Femanager.js
+	}
+}

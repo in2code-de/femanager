@@ -1,0 +1,18 @@
+config.tx_extbase {
+	persistence {
+		classes {
+			In2\Femanager\Domain\Model\User {
+				mapping {
+					tableName = fe_users
+					recordType =
+				}
+			}
+			In2\Femanager\Domain\Model\UserGroup {
+				mapping {
+					tableName = fe_groups
+					recordType =
+				}
+			}
+		}
+	}
+}

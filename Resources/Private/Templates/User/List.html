@@ -1,0 +1,60 @@
+<f:layout name="Default" />
+
+	User / List
+
+<f:section name="main">
+
+	<div class="femanager_list">
+		<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+
+		<f:if condition="{users}">
+			<f:then>
+				<ul>
+					<f:for each="{users}" as="user">
+						<li>
+							<ul>
+								<li>
+									<f:translate key="tx_femanager_domain_model_user.username" />:
+									<f:link.action action="show" arguments="{user:user}">{user.username}</f:link.action>
+								</li>
+								<li>
+									<f:translate key="tx_femanager_domain_model_user.usergroup" />:
+									<f:for each="{user.usergroup}" as="usergroup" iteration="i">{usergroup.title}<f:if condition="{i.isLast}"><f:else>, </f:else></f:if></f:for>
+								</li>
+								<li>
+									<f:translate key="tx_femanager_domain_model_user.firstName" />:
+									{user.firstName}
+								</li>
+								<li>
+									<f:translate key="tx_femanager_domain_model_user.username" />:
+									{user.lastName}
+								</li>
+								<li>
+									<f:translate key="tx_femanager_domain_model_user.address" />:
+									{user.address}
+								</li>
+								<li>
+									<f:translate key="tx_femanager_domain_model_user.zip" />:
+									{user.zip}
+								</li>
+								<li>
+									<f:translate key="tx_femanager_domain_model_user.city" />:
+									{user.city}
+								</li>
+								<li>
+									<f:translate key="tx_femanager_domain_model_user.country" />:
+									{user.country}
+								</li>
+							</ul>
+						</li>
+					</f:for>
+				</ul>
+			</f:then>
+			<f:else>
+				<div class="femanager_note">
+					<f:translate key="noRecordsFound" />
+				</div>
+			</f:else>
+		</f:if>
+	</div>
+</f:section>

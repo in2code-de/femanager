@@ -1,0 +1,13 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<div class="femanager_fieldset control-group">
+	<label for="lastName" class="control-label">
+		<f:translate key="tx_femanager_domain_model_user.lastName" />
+	</label>
+	<div class="controls">
+		<femanager:form.textfield
+				id="lastName"
+				property="lastName"
+				class="input-block-level"
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'lastName')}" />
+	</div>
+</div>

@@ -1,0 +1,13 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<div class="femanager_fieldset control-group">
+	<label for="address" class="control-label">
+		<f:translate key="tx_femanager_domain_model_user.address" />
+	</label>
+	<div class="controls">
+		<f:form.textarea
+				id="address"
+				property="address"
+				class="input-block-level"
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'address')}" />
+	</div>
+</div>

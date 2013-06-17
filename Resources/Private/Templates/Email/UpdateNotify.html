@@ -1,0 +1,45 @@
+<f:layout name="Clean" />
+
+	Email / UpdateNotify
+
+	This mail will be send to the admin, to inform him about a profile update.
+	It's only activated, if there is min. one email in the flexform setting.
+
+	Available variables:
+		{user} User Object
+		{changes} User Changes
+		{settings} Array with Flexform and TypoScript settings
+
+<f:section name="main">
+	<p><f:translate key="emailUpdateNotifySalutation" /></p>
+
+	<p>
+		<f:format.printf arguments="{0: '{user.username}'}">
+			<f:translate key="emailUpdateNotifyText1" />
+		</f:format.printf>
+	</p>
+
+	<table border="1" cellpadding="2" cellspacing="2">
+		<tr>
+			<td><b><f:translate key="emailUpdateNotifyField" /></b></td>
+			<td><b><f:translate key="emailUpdateNotifyOld" /></b></td>
+			<td><b><f:translate key="emailUpdateNotifyNew" /></b></td>
+		</tr>
+		<f:for each="{changes}" as="change" key="property">
+			<tr>
+				<td><f:translate key="tx_femanager_domain_model_user.{property}" /></td>
+				<td>
+					<f:if condition="{change.old}">
+						<f:then>
+							{change.old}
+						</f:then>
+						<f:else>
+							[<f:translate key="empty" />]
+						</f:else>
+					</f:if>
+				</td>
+				<td>{change.new}</td>
+			</tr>
+		</f:for>
+	</table>
+</f:section>

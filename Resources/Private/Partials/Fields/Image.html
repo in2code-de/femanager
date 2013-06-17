@@ -1,0 +1,54 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<div class="femanager_fieldset control-group" xmlns:f="http://www.w3.org/1999/html">
+	<label class="control-label" for="image">
+		<f:translate key="tx_femanager_domain_model_user.image" />
+	</label>
+	<div class="controls">
+		<div id="fine-uploader">
+			<f:translate key="field_image_fineuploader" />
+		</div>
+		<div id="preview-image">
+			<f:if condition="{user.image}">
+				<ul class="qq-upload-list">
+					<li class="alert alert-success">
+						<span class="qq-upload-file">{user.image}</span>
+						<span class="qq-upload-size" style="display: inline;"><femanager:Misc.FileSize path="uploads/pics/{user.image}" />kB</span>
+						<a href="#" class="qq-upload-delete icon-trash" style="display: inline;">Delete</a>
+					</li>
+				</ul>
+				<f:image src="uploads/pics/{user.image}" alt="{user.firstName} {user.lastName}" width="250" class="fileupload_image" />
+			</f:if>
+		</div>
+		<f:form.hidden id="image" property="image" class="fine_uploader_image" />
+	</div>
+	<div class="hidden" style="display: none;">
+		<div class="image_container_template">
+			<div class="qq-uploader">
+				<pre class="qq-upload-drop-area">
+					<span><f:translate key="field_image_drag" /></span>
+				</pre>
+				<div class="qq-upload-button btn btn-block btn-success">
+					<f:translate key="field_image_upload" />
+				</div>
+				<span class="qq-drop-processing">
+					<span><f:translate key="field_image_drag_processing" /></span>
+					<span class="qq-drop-processing-spinner"></span>
+				</span>
+				<ul class="qq-upload-list"></ul>
+			</div>
+		</div>
+		<div class="image_container_filetemplate">
+			<li>
+				<div class="qq-progress-bar"></div>
+				<span class="qq-upload-spinner"></span>
+				<span class="qq-upload-finished"></span>
+				<span class="qq-upload-file"></span>
+				<span class="qq-upload-size"></span>
+				<a class="qq-upload-cancel" href="#">Cancel</a>
+				<a class="qq-upload-retry" href="#">Retry</a>
+				<a class="qq-upload-delete" href="#">Del</a>
+				<span class="qq-upload-status-text">Status</span>
+			</li>
+		</div>
+	</div>
+</div>

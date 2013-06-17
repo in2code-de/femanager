@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager">
+		<header/>
+		<body>
+			<trans-unit id="tx_femanager_domain_model_user">
+				<source>User</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.username">
+				<source>Username</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.password">
+				<source>Password</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.usergroup">
+				<source>Usergroup</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.firstName">
+				<source>Firstname</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.middleName">
+				<source>Middlename</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.lastName">
+				<source>Lastname</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.telephone">
+				<source>Telephone</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.fax">
+				<source>Fax</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.zip">
+				<source>ZIP</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.www">
+				<source>Website</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.company">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.image">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.lastlogin">
+				<source>Last login</source>
+			</trans-unit>
+			<trans-unit id="fe_users.crdate">
+				<source>Creation Time</source>
+			</trans-unit>
+			<trans-unit id="fe_users.tstamp">
+				<source>Last profile change at</source>
+			</trans-unit>
+			<trans-unit id="fe_users.registrationconfirmedbyuser">
+				<source>Registration confirmed by user</source>
+			</trans-unit>
+			<trans-unit id="fe_users.registrationconfirmedbyadmin">
+				<source>Registration confirmed by admin</source>
+			</trans-unit>
+			<trans-unit id="fe_users.tab">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="fe_users.log">
+				<source>FE_user Log</source>
+			</trans-unit>
+			<trans-unit id="fe_users.changerequest">
+				<source>Change Request</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log">
+				<source>User Log</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.crdate">
+				<source>Time</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state">
+				<source>State</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.100">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.101">
+				<source>New Registration</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.102">
+				<source>Registration confirmed by user</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.103">
+				<source>Registration confirmed by admin</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.104">
+				<source>Registration refused by user</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.105">
+				<source>Registration refused by admin</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.106">
+				<source>Profile creation request</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.200">
+				<source>Update</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.201">
+				<source>Profile updated</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.202">
+				<source>Profile update confirmed by admin</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.203">
+				<source>Profile update refused by admin</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.204">
+				<source>Profile update request</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.300">
+				<source>Delete</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.301">
+				<source>Profile deleted</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.user">
+				<source>User</source>
+			</trans-unit>
+
+			<trans-unit id="flexform.main.title">
+				<source>Main Settings</source>
+			</trans-unit>
+			<trans-unit id="flexform.main.view">
+				<source>Choose View</source>
+			</trans-unit>
+			<trans-unit id="flexform.main.view.0">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="flexform.main.view.1">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="flexform.main.view.2">
+				<source>List</source>
+			</trans-unit>
+			<trans-unit id="flexform.main.view.3">
+				<source>Detail</source>
+			</trans-unit>
+			<trans-unit id="flexform.new.title">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="flexform.new.fields">
+				<source>Select Fields for New-Form (empty = all fields)</source>
+			</trans-unit>
+			<trans-unit id="flexform.new.overrideUserGroup">
+				<source>Select related Usergroups</source>
+			</trans-unit>
+			<trans-unit id="flexform.new.confirmByUser">
+				<source>Registration must be confirmed from sender</source>
+			</trans-unit>
+			<trans-unit id="flexform.new.confirmByAdmin">
+				<source>Registration must be confirmed from an admin (add one ore more emails)</source>
+			</trans-unit>
+			<trans-unit id="flexform.new.notifyAdmin">
+				<source>Notify admin on registration (add one ore more emails)</source>
+			</trans-unit>
+			<trans-unit id="flexform.edit.title">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="flexform.edit.fields">
+				<source>Select Fields for Edit-Form (empty = all fields)</source>
+			</trans-unit>
+			<trans-unit id="flexform.edit.confirmByAdmin">
+				<source>Profile update must be confirmed from an admin (add one ore more emails)</source>
+			</trans-unit>
+			<trans-unit id="flexform.edit.notifyAdmin">
+				<source>Notify admin on Profile update (add one ore more emails)</source>
+			</trans-unit>
+			<trans-unit id="flexform.list.title">
+				<source>Listview</source>
+			</trans-unit>
+			<trans-unit id="flexform.list.limit">
+				<source>Limit</source>
+			</trans-unit>
+			<trans-unit id="flexform.list.orderby">
+				<source>Order by</source>
+			</trans-unit>
+			<trans-unit id="flexform.list.orderby.0">
+				<source>Lastname</source>
+			</trans-unit>
+			<trans-unit id="flexform.list.orderby.1">
+				<source>Firstname</source>
+			</trans-unit>
+			<trans-unit id="flexform.list.orderby.2">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="flexform.list.sorting">
+				<source>Sorting</source>
+			</trans-unit>
+			<trans-unit id="flexform.list.sorting.0">
+				<source>Ascending</source>
+			</trans-unit>
+			<trans-unit id="flexform.list.sorting.1">
+				<source>Descending</source>
+			</trans-unit>
+			<trans-unit id="flexform.list.usergroup">
+				<source>Show from usergroup (empty = show all)</source>
+			</trans-unit>
+			<trans-unit id="flexform.show.title">
+				<source>Detailview</source>
+			</trans-unit>
+			<trans-unit id="flexform.show.user">
+				<source>User to show</source>
+			</trans-unit>
+			<trans-unit id="flexform.show.user.1">
+				<source>[Logged in FE User]</source>
+			</trans-unit>
+
+			<trans-unit id="pleaseChoose">
+				<source>Please choose...</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

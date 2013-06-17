@@ -1,0 +1,12 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"	xmlns:f="http://typo3.org/ns/fluid/ViewHelpers" >
+	<f:layout name="Default" />
+
+	User / ConfirmUpdateRequest
+	Available variables:
+	{user}
+
+	<f:section name="main">
+		<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+		<f:render partial="Misc/FormErrors" arguments="{object:User}" />
+	</f:section>
+</div>

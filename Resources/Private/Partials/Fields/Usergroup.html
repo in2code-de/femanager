@@ -1,0 +1,31 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<div class="femanager_fieldset control-group">
+	<label for="usergroup" class="control-label">
+		<f:translate key="tx_femanager_domain_model_user.usergroup" />
+	</label>
+	<div class="controls">
+		<f:comment>
+			<femanager:form.select
+					id="usergroup"
+					name="user[usergroup][]"
+					options="{allUserGroups}"
+					optionValueField="uid"
+					optionLabelField="title"
+					sortByOptionLabel="1"
+					defaultOption="{f:translate(key:'pleaseChoose')}"
+					value="{femanager:misc.request(parameter:'tx_femanager_pi1|user|usergroup|0')}"
+					class="input-block-level" />
+		</f:comment>
+		<femanager:form.select
+				id="usergroup"
+				property="usergroup.0"
+				options="{allUserGroups}"
+				optionValueField="uid"
+				optionLabelField="title"
+				sortByOptionLabel="1"
+				defaultOption="{f:translate(key:'pleaseChoose')}"
+				class="input-block-level"
+				value="{femanager:Misc.GetFirst(objectStorage:'{user.usergroup}')}"
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'usergroup')}" />
+	</div>
+</div>

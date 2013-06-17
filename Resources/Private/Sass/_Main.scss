@@ -1,0 +1,26 @@
+.femanager_flashmessages {
+  > div {
+    @include message;
+  }
+  > .message-error {
+    @include message_error;
+  }
+  > .message-ok {
+    @include message_ok;
+  }
+  > .message-notice {
+    @include message_note;
+  }
+}
+.femanager_note {
+  @include message;
+  @include message_note;
+  list-style-type: none;
+  margin-left: 0;
+}
+.femanager_error {
+  @include message;
+  @include message_error;
+  list-style-type: none;
+  margin-left: 0;
+}

@@ -1,0 +1,32 @@
+<f:comment>
+	PHP Validation Errormessages
+</f:comment>
+
+{namespace femanager=In2\Femanager\ViewHelpers}
+<f:form.validationResults for="{object}">
+	<f:if condition="{validationResults.flattenedErrors}">
+		<ul class="femanager_error">
+			<f:for each="{validationResults.flattenedErrors}" key="propertyPath" as="errors">
+				<f:for each="{errors}" as="error">
+					<li>
+						<f:if condition="{error.code} == 1221560718">
+							<f:else>
+								<f:comment>
+									If a validator check (see TypoScript) failed
+								</f:comment>
+								<femanager:misc.upper string="{error.code}" />:
+								<f:translate key="{error.message}">{error.message}</f:translate>
+							</f:else>
+							<f:then>
+								<f:comment>
+									If any required field in model was empty (normally username or password)
+								</f:comment>
+								<f:translate key="validationErrorRequiredModel" />
+							</f:then>
+						</f:if>
+					</li>
+				</f:for>
+			</f:for>
+		</ul>
+	</f:if>
+</f:form.validationResults>

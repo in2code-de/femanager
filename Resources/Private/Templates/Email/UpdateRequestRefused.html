@@ -1,0 +1,24 @@
+<f:layout name="Clean" />
+
+	Email / UpdateRequestRefused
+
+	This mail will be send to the user, to inform him about a declined profile update from the admin.
+	It's only activated, if the admin clicks the related link in his UpdateRequest Email.
+
+	Available variables:
+		{user} User Object
+
+<f:section name="main">
+	<p><f:translate key="emailUpdateRequestRefusedSalutation" /> {user.username},</p>
+
+	<p><f:translate key="emailUpdateRequestRefusedText1" /></p>
+
+	<p>
+		<f:format.printf arguments="{0: '{settings.edit.email.updateRequestRefused.sender.email.value}'}">
+			<f:translate key="emailUpdateRequestRefusedText2" />
+		</f:format.printf>
+	</p>
+
+	<p><f:translate key="emailUpdateRequestRefusedSignature" /></p>
+
+</f:section>

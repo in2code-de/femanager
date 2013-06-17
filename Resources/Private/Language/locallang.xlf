@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager">
+		<header/>
+		<body>
+			<trans-unit id="tx_femanager_domain_model_user">
+				<source>User</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.username">
+				<source>Username</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.password">
+				<source>Password</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.usergroup">
+				<source>Usergroup</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.firstName">
+				<source>Firstname</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.middleName">
+				<source>Middlename</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.lastName">
+				<source>Lastname</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.telephone">
+				<source>Telephone</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.fax">
+				<source>Fax</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.zip">
+				<source>ZIP</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.www">
+				<source>Website</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.company">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.image">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.lastlogin">
+				<source>Last login</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log">
+				<source>User Log</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.crdate">
+				<source>Time</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state">
+				<source>State</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.100">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.101">
+				<source>New Registration</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.102">
+				<source>Registration confirmed by user</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.103">
+				<source>Registration confirmed by admin</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.104">
+				<source>Registration refused by user</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.105">
+				<source>Registration refused by admin</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.106">
+				<source>Profile creation request</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.200">
+				<source>Update</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.201">
+				<source>Profile updated</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.202">
+				<source>Profile update confirmed by admin</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.203">
+				<source>Profile update refused by admin</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.204">
+				<source>Profile update request</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.300">
+				<source>Delete</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.301">
+				<source>Profile deleted</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.user">
+				<source>User</source>
+			</trans-unit>
+
+			<trans-unit id="error_no_typoscript">
+				<source>No TypoScript found. Did you already include the static Template?</source>
+			</trans-unit>
+			<trans-unit id="error_no_storagepid">
+				<source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
+			</trans-unit>
+			<trans-unit id="validationError">
+				<source>Error</source>
+			</trans-unit>
+			<trans-unit id="validationErrorRequiredModel">
+				<source>Username and Password must be filled</source>
+			</trans-unit>
+			<trans-unit id="validationErrorRequired">
+				<source>This field is required</source>
+			</trans-unit>
+			<trans-unit id="validationErrorEmail">
+				<source>This is not a valid Email address</source>
+			</trans-unit>
+			<trans-unit id="validationErrorMin">
+				<source>Please add more characters to this field</source>
+			</trans-unit>
+			<trans-unit id="validationErrorMax">
+				<source>Please add less characters to this field</source>
+			</trans-unit>
+			<trans-unit id="validationErrorInt">
+				<source>Only numbers are allowed</source>
+			</trans-unit>
+			<trans-unit id="validationErrorLetters">
+				<source>Only letters are allowed</source>
+			</trans-unit>
+			<trans-unit id="validationErrorUniquePage">
+				<source>This value is already in use</source>
+			</trans-unit>
+			<trans-unit id="validationErrorUniqueDb">
+				<source>This value is already in use</source>
+			</trans-unit>
+			<trans-unit id="validationErrorMustInclude">
+				<source>Try another value</source>
+			</trans-unit>
+			<trans-unit id="validationErrorInList">
+				<source>This value is not allowed</source>
+			</trans-unit>
+			<trans-unit id="validationErrorPasswordRepeat">
+				<source>Both passwords do not fit</source>
+			</trans-unit>
+
+			<trans-unit id="emailCreateAdminConfirmationSalutation">
+				<source>Dear Admin,</source>
+			</trans-unit>
+			<trans-unit id="emailCreateAdminConfirmationText1">
+				<source>Please confirm registration of %s by clicking the following link:</source>
+			</trans-unit>
+			<trans-unit id="emailCreateAdminConfirmationLinkConfirm">
+				<source>Confirm Registration</source>
+			</trans-unit>
+			<trans-unit id="emailCreateAdminConfirmationText2">
+				<source>If you want to delete the registration, click this link:</source>
+			</trans-unit>
+			<trans-unit id="emailCreateAdminConfirmationLinkConfirmRefused">
+				<source>Delete Profile</source>
+			</trans-unit>
+			<trans-unit id="emailCreateAdminConfirmationText3">
+				<source>If you want to delete the registration, without sending an email to the user, click this link:</source>
+			</trans-unit>
+			<trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent">
+				<source>Silent Delete Profile</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserConfirmationSalutation">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserConfirmationText1">
+				<source>Please confirm your profile registration on our server by clicking the following link:</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserConfirmationLinkConfirm">
+				<source>Confirm Profile</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserConfirmationText2">
+				<source>If you don\'t want to be registered on our system, click this link</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserConfirmationLinkConfirmRefused">
+				<source>Delete Profile</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserConfirmationSignature">
+				<source>Your website team.</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserNotifySalutation">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserNotifyText1">
+				<source>Your profile was confirmed and successfully created.</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserNotifySignature">
+				<source>Your website team.</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserNotifyRefusedSalutation">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserNotifyRefusedText1">
+				<source>Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserNotifyRefusedSignature">
+				<source>Your website team.</source>
+			</trans-unit>
+			<trans-unit id="emailCreateNotifySalutation">
+				<source>Dear Admin,</source>
+			</trans-unit>
+			<trans-unit id="emailCreateNotifyText1">
+				<source>Profile registration from %s</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateNotifySalutation">
+				<source>Dear Admin,</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateNotifyText1">
+				<source>Profile change from %s</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateNotifyField">
+				<source>Fieldname</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateNotifyOld">
+				<source>Old Value</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateNotifyNew">
+				<source>New Value</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestSalutation">
+				<source>Dear Admin,</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestText1">
+				<source>Profile change request from %s</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestText2">
+				<source>All changes:</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestField">
+				<source>Fieldname</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestOld">
+				<source>Old Value</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestNew">
+				<source>New Value</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestLinkConfirm">
+				<source>Confirm changes</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestLinkRefuse">
+				<source>Refuse changes and notify user</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestLinkSiltentRefuse">
+				<source>Refuse changes and do not notify user</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestRefusedSalutation">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestRefusedText1">
+				<source>Thank you for your update request. We're sorry to tell you, that we had to refuse your request.</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestRefusedText2">
+				<source>Please contact %s for further information.</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestRefusedSignature">
+				<source>Your website team.</source>
+			</trans-unit>
+
+			<trans-unit id="noRecordsFound">
+				<source>No records found.</source>
+			</trans-unit>
+			<trans-unit id="noRecordFoundShow">
+				<source>No FE_User given or not logged in</source>
+			</trans-unit>
+			<trans-unit id="notLoggedIn">
+				<source>Please log in before</source>
+			</trans-unit>
+			<trans-unit id="submitNew">
+				<source>Create Profile Now</source>
+			</trans-unit>
+			<trans-unit id="passwordRepeat">
+				<source>Repeat Password</source>
+			</trans-unit>
+			<trans-unit id="titleCreateProfile">
+				<source>Create a new user-profile</source>
+			</trans-unit>
+			<trans-unit id="submitEdit">
+				<source>Update Profile</source>
+			</trans-unit>
+			<trans-unit id="create">
+				<source>Profile successfully created</source>
+			</trans-unit>
+			<trans-unit id="createRequestWaitingForUserConfirm">
+				<source>Thank you for your request. Please check your mail account to confirm the profile.</source>
+			</trans-unit>
+			<trans-unit id="createRequestWaitingForAdminConfirm">
+				<source>Thank you for your confirmation. You're profile will be available as soon as the admin confirms your request.</source>
+			</trans-unit>
+			<trans-unit id="createFailedProfile">
+				<source>Profile creation failed</source>
+			</trans-unit>
+			<trans-unit id="createProfileDeleted">
+				<target state="translated">Das angegebene Profil wurde erfolgreich gelöscht</target>
+			</trans-unit>
+			<trans-unit id="titleUpdateProfile">
+				<source>Update your user-profile</source>
+			</trans-unit>
+			<trans-unit id="update">
+				<source>Profile successfully changed</source>
+			</trans-unit>
+			<trans-unit id="noChanges">
+				<source>No changes detected, nothing to update</source>
+			</trans-unit>
+			<trans-unit id="updateRequest">
+				<source>Your change request was transmitted to the administrator. After a confirmation, your profile will be up-to-date.</source>
+			</trans-unit>
+			<trans-unit id="login">
+				<source>You're successfully logged in now</source>
+			</trans-unit>
+			<trans-unit id="deleteProfile">
+				<source>Delete Profile</source>
+			</trans-unit>
+			<trans-unit id="updateProfile">
+				<source>Profile successfully updated</source>
+			</trans-unit>
+			<trans-unit id="updateFailedProfile">
+				<source>Profile update failed</source>
+			</trans-unit>
+			<trans-unit id="field_image_fineuploader">
+				<source>Please enable fineUploader Plugin</source>
+			</trans-unit>
+			<trans-unit id="field_image_drag">
+				<source>Drag File</source>
+			</trans-unit>
+			<trans-unit id="field_image_drag_processing">
+				<source>Drag in Progress...</source>
+			</trans-unit>
+			<trans-unit id="field_image_upload">
+				<source>Upload</source>
+			</trans-unit>
+			<trans-unit id="empty">
+				<source>empty</source>
+			</trans-unit>
+			<trans-unit id="pleaseChoose">
+				<source>Please choose...</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

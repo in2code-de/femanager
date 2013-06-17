@@ -1,0 +1,15 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<div class="femanager_fieldset control-group">
+	<label for="country" class="control-label">
+		<f:translate key="tx_femanager_domain_model_user.country" />
+	</label>
+	<div class="controls">
+		<femanager:form.select
+				id="country"
+				property="country"
+				options="{femanager:Form.GetCountries()}"
+				defaultOption="{f:translate(key:'pleaseChoose')}"
+				class="input-block-level"
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'country')}" />
+	</div>
+</div>

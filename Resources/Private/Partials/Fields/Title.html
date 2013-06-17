@@ -1,0 +1,13 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<div class="femanager_fieldset control-group">
+	<label for="title" class="control-label">
+		<f:translate key="tx_femanager_domain_model_user.title" />
+	</label>
+	<div class="controls">
+		<femanager:form.textfield
+				id="title"
+				property="title"
+				class="input-block-level"
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'title')}" />
+	</div>
+</div>

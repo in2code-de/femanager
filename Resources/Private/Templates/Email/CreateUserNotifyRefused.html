@@ -1,0 +1,17 @@
+<f:layout name="Clean" />
+
+	Email / CreateUserNotifyRefused
+
+	This mail will be send to the user, to inform him, that his registration was refused from the admin.
+	It's only activated, if the admin clicked the refused-profile link.
+
+	Available variables:
+		{user} User Object
+
+<f:section name="main">
+	<p><f:translate key="emailCreateUserNotifyRefusedSalutation" /> {user.username},</p>
+
+	<p><f:translate key="emailCreateUserNotifyRefusedText1" /></p>
+
+	<p><f:translate key="emailCreateUserNotifyRefusedSignature" /></p>
+</f:section>

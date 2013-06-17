@@ -1,0 +1,40 @@
+<f:layout name="Clean" />
+
+	Email / CreateAdminConfirmation
+
+	This mail will be send to the admin, to confirm the new profile.
+	It's only activated, if there is min. one email in the flexform setting for admin confirmation.
+
+	Available variables:
+		{user} User Object
+		{hash} Hash to ensure authentication of link
+
+<f:section name="main">
+	<p><f:translate key="emailCreateAdminConfirmationSalutation" /></p>
+
+	<p>
+		<f:format.printf arguments="{0: '{user.username}'}">
+			<f:translate key="emailCreateAdminConfirmationText1" />
+		</f:format.printf>
+		<br>
+		<f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'adminConfirmation'}">
+			<f:translate key="emailCreateAdminConfirmationLinkConfirm" />
+		</f:link.action>
+	</p>
+
+	<p>
+		<f:translate key="emailCreateAdminConfirmationText2" />
+		<br>
+		<f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'adminConfirmationRefused'}">
+			<f:translate key="emailCreateAdminConfirmationLinkConfirmRefused" />
+		</f:link.action>
+	</p>
+
+	<p>
+		<f:translate key="emailCreateAdminConfirmationText3" />
+		<br>
+		<f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'adminConfirmationRefusedSilent'}">
+			<f:translate key="emailCreateAdminConfirmationLinkConfirmRefusedSilent" />
+		</f:link.action>
+	</p>
+</f:section>

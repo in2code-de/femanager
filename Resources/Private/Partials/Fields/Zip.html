@@ -1,0 +1,13 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<div class="femanager_fieldset control-group">
+	<label for="zip" class="control-label">
+		<f:translate key="tx_femanager_domain_model_user.zip" />
+	</label>
+	<div class="controls">
+		<femanager:form.textfield
+				id="zip"
+				property="zip"
+				class="input-block-level"
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'zip')}" />
+	</div>
+</div>

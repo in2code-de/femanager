@@ -1,0 +1,5 @@
+page {
+	includeCSS {
+		femanagerLayout = EXT:femanager/Resources/Public/Css/Additional.css
+	}
+}
