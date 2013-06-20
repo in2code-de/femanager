@@ -359,35 +359,37 @@ class Div {
 	/**
 	 * SendPost - Send values via curl to target
 	 *
-	 * @param array $fields	Params from User
-	 * @param array $settings TypoScript Settings
-	 * @param object $configurationManager Configuration Manager to create cObj
+	 * @param \In2\Femanager\Domain\Model\User $user User properties
+	 * @param array $config TypoScript Settings
+	 * @param object $contentObject cObj
 	 * @return void
 	 */
 	public static function sendPost($user, $config, $contentObject) {
-//		if (!$conf['marketing.']['sendPost.']['_enable']) {
-//			return;
-//		}
-//		$fields = $this->getVariablesWithMarkers($fields);
-//		$cObj = $configurationManager->getContentObject();
-//		$cObj->start($fields);
-//		$curl = array(
-//			'url' => $conf['marketing.']['sendPost.']['targetUrl'],
-//			'params' => $cObj->cObjGetSingle($conf['marketing.']['sendPost.']['values'], $conf['marketing.']['sendPost.']['values.'])
-//		);
-//
-//		$ch = curl_init();
-//		curl_setopt($ch, CURLOPT_URL, $curl['url']);
-//		curl_setopt($ch, CURLOPT_POST, 1);
-//		curl_setopt($ch, CURLOPT_POSTFIELDS, $curl['params']);
-//		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//		curl_exec($ch);
-//		curl_close($ch);
-//
-//		// Debug Output
-//		if ($conf['marketing.']['sendPost.']['debug']) {
-//			t3lib_utility_Debug::debug($curl, 'powermail debug: Show SendPost Values');
-//		}
+		// stop if turned off
+		if (!$contentObject->cObjGetSingle($config['new.']['sendPost.']['_enable'], $config['new.']['sendPost.']['_enable.'])) {
+			return;
+		}
+
+		$properties = $user->_getCleanProperties(); // get properties from user
+		$contentObject->start($properties); // push properties to TypoScript to get used with .field
+		$curl = array(
+			'url' => $config['new.']['sendPost.']['targetUrl'],
+			'data' => $contentObject->cObjGetSingle($config['new.']['sendPost.']['data'], $config['new.']['sendPost.']['data.']),
+			'properties' => $properties
+		);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $curl['url']);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $curl['data']);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_exec($ch);
+		curl_close($ch);
+
+		// Debug Output
+		if ($config['new.']['sendPost.']['debug']) {
+			GeneralUtility::devLog('femanager sendpost values', 'femanager', 0, $curl);
+		}
 	}
 
 	/**

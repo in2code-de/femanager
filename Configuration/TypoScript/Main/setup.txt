@@ -379,9 +379,9 @@ plugin.tx_femanager {
 				#targetUrl = http://eloqua.com/e/f.aspx
 				targetUrl = http://extbase1.in2code.de/fileadmin/gp.php
 
-				# build your post values like &param1=value1&param2=value2
-				values = COA
-				values {
+				# build your post datas like &param1=value1&param2=value2
+				data = COA
+				data {
 					10 = TEXT
 					10 {
 						# value from field {username}
