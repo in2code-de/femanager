@@ -382,7 +382,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function initializeCreateAction() {
 		// workarround for empty usergroups
-		if ($this->pluginVariables['user']['usergroup'][0] < 1) {
+		if (intval($this->pluginVariables['user']['usergroup'][0]) === 0) {
 			unset($this->pluginVariables['user']['usergroup']);
 		}
 		$this->request->setArguments($this->pluginVariables);
@@ -395,7 +395,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function initializeUpdateAction() {
 		// workarround for empty usergroups
-		if ($this->pluginVariables['user']['usergroup'][0] < 1) {
+		if (intval($this->pluginVariables['user']['usergroup'][0]['__identity']) === 0) {
 			unset($this->pluginVariables['user']['usergroup']);
 		}
 		$this->request->setArguments($this->pluginVariables);

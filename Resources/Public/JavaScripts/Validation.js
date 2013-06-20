@@ -19,6 +19,7 @@ jQuery.fn.femanagerValidation = function() {
 			requestsCompleted = options.requestsCompleted || 0;
 			callBacks = [];
 			var fireCallbacks = function () {
+				$('body').css('cursor', 'default');
 				submitForm(); // submit form
 				for (var i = 0; i < callBacks.length; i++) callBacks[i]();
 			};
@@ -53,6 +54,7 @@ jQuery.fn.femanagerValidation = function() {
 
 	// form submit
 	$(document).on('submit', '.feManagerValidation', function(e) {
+		$('body').css('cursor', 'wait');
 		if (!submitFormAllowed) {
 			e.preventDefault();
 			validateAllFields(element);
