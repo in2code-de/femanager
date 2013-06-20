@@ -372,12 +372,11 @@ plugin.tx_femanager {
 			sendPost {
 				# Activate sendPost (0/1)
 				_enable = TEXT
-				_enable.value = 1
+				_enable.value = 0
 
 				# Target URL for POST values (like http://www.target.com/target.php)
-				#targetUrl = https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8
+				targetUrl = https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8
 				#targetUrl = http://eloqua.com/e/f.aspx
-				targetUrl = http://extbase1.in2code.de/fileadmin/gp.php
 
 				# build your post datas like &param1=value1&param2=value2
 				data = COA
