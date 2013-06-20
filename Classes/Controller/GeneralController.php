@@ -323,6 +323,9 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			);
 		}
 
+		// sendpost: send values via POST to any target
+		Div::sendPost($user, $this->config, $this->cObj);
+
 		// frontend redirect (if activated via TypoScript)
 		$this->redirectByAction($action);
 
