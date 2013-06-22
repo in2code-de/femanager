@@ -120,5 +120,33 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$users = $query->execute();
 		return $users;
 	}
+
+	/**
+	 * Find All for Backend Actions
+	 *
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findAllInBackend() {
+		$pid = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id');
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		$query->getQuerySettings()->setRespectEnableFields(FALSE);
+
+		$and = array(
+			$query->equals('deleted', 0)
+		);
+		if (intval($pid) > 0) {
+			$and[] = $query->equals('pid', $pid);
+		}
+
+		$query->matching($query->logicalAnd($and));
+
+		$query->setOrderings(
+			array(
+				 'username' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+			)
+		);
+		return $query->execute();
+	}
 }
 ?>

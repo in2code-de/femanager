@@ -1,2 +1,5 @@
-# cat=basic/enable/010; type=boolean; label= Disable Log: If you don't want to save each change of an fe_user, you can disable the logfile
+# cat=basic/enable/010; type=boolean; label= Disable Backend Module: You can deactivate the Backend Module if you don't need it
+disableModule = 0
+
+# cat=basic/enable/020; type=boolean; label= Disable Log: If you don't want to save each change of an fe_user, you can disable the logfile
 disableLog = 0

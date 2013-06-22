@@ -16,3 +16,17 @@ config.tx_extbase {
 		}
 	}
 }
+
+
+#################
+# Backend Module
+#################
+module.tx_femanager {
+	view {
+		templateRootPath = EXT:femanager/Resources/Private/Templates/
+		partialRootPath = EXT:femanager/Resources/Private/Partials/
+		layoutRootPath = EXT:femanager/Resources/Private/Layouts/
+	}
+	settings {
+	}
+}

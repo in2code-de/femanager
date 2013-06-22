@@ -63,6 +63,9 @@
 			<trans-unit id="tx_femanager_domain_model_user.lastlogin">
 				<source>Last login</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.crdate">
+				<source>Creation Time</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log">
 				<source>User Log</source>
 			</trans-unit>
@@ -287,6 +290,9 @@
 
 			<trans-unit id="noRecordsFound">
 				<source>No records found.</source>
+			</trans-unit>
+			<trans-unit id="noRecordsFoundGoToPage0">
+				<source>Show all records.</source>
 			</trans-unit>
 			<trans-unit id="noRecordFoundShow">
 				<source>No FE_User given or not logged in</source>

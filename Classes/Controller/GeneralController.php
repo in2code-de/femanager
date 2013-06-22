@@ -428,7 +428,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$this->allUserGroups = $this->userGroupRepository->findAll();
 
 		// check if ts is included
-		if ($this->settings['_TypoScriptIncluded'] != 1 && !GeneralUtility::_GP('eID')) {
+		if ($this->settings['_TypoScriptIncluded'] != 1 && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
 			$this->flashMessageContainer->add(
 				LocalizationUtility::translate('error_no_typoscript', 'femanager'),
 				'',
@@ -437,7 +437,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		}
 
 		// check if storage pid was set
-		if (intval($this->allConfig['persistence']['storagePid']) === 0 && !GeneralUtility::_GP('eID')) {
+		if (intval($this->allConfig['persistence']['storagePid']) === 0 && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
 			$this->flashMessageContainer->add(
 				LocalizationUtility::translate('error_no_storagepid', 'femanager'),
 				'',

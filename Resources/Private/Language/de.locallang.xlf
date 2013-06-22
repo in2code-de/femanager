@@ -63,6 +63,9 @@
 			<trans-unit id="tx_femanager_domain_model_user.lastlogin">
 				<target state="translated">Letzter Login</target>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.crdate">
+				<target state="translated">Erstellungszeitpunkt</target>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log">
 				<target state="translated">Benutzer Log</target>
 			</trans-unit>
@@ -287,6 +290,9 @@
 
 			<trans-unit id="noRecordsFound">
 				<target state="translated">Keine Datensätze gefunden.</target>
+			</trans-unit>
+			<trans-unit id="noRecordsFoundGoToPage0">
+				<target state="translated">Alle Datensätze anzeigen.</target>
 			</trans-unit>
 			<trans-unit id="noRecordFoundShow">
 				<target state="translated">Kein FE_User übergeben oder nicht eingeloggt.</target>

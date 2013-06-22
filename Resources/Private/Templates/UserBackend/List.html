@@ -1,0 +1,156 @@
+<f:layout name="Backend" />
+
+UserBackend / List
+
+<f:section name="main">
+
+	<div class="femanager_list">
+		<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+
+		<f:if condition="{users}">
+			<f:then>
+
+				<table cellspacing="0" cellpadding="0" border="0" class="typo3-dblist">
+					<tbody>
+
+						<tr class="c-table-row-spacer">
+							<td nowrap="nowrap" class="col-icon"><img width="1" height="8" alt="" src="clear.gif"></td>
+							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+							<td nowrap="nowrap" class="" width="10"><img width="1" height="1" alt="" src="clear.gif"></td>
+						</tr>
+						<tr class="t3-row-header">
+							<td nowrap="nowrap" class="col-icon">&nbsp;</td>
+							<td nowrap="nowrap" colspan="8">
+								<span class="c-table">
+									<f:translate key="tx_femanager_domain_model_user" />
+								</span>
+								(<f:count subject="{users}" />)
+							</td>
+							<td nowrap="nowrap" class="col-icon">&nbsp;</td>
+						</tr>
+						<tr class="c-headLine">
+							<td nowrap="nowrap" class="col-icon">
+								<a title="Create New User" onclick="window.location.href='alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[fe_users][{pid}]=new'; return false;" href="#">
+									<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-new">&nbsp;</span>
+								</a>
+							</td>
+							<td nowrap="nowrap" class="col-title">
+								<f:translate key="tx_femanager_domain_model_user.username" />
+							</td>
+							<td nowrap="nowrap" class="col-title">
+								<f:translate key="tx_femanager_domain_model_user.email" />
+							</td>
+							<td nowrap="nowrap" class="col-title">
+								<f:translate key="tx_femanager_domain_model_user.name" />
+							</td>
+							<td nowrap="nowrap" class="col-title">
+								<f:translate key="tx_femanager_domain_model_user.usergroup" />
+							</td>
+							<td nowrap="nowrap" class="col-title">
+								<f:translate key="tx_femanager_domain_model_user.crdate" />
+							</td>
+							<td nowrap="nowrap" class="col-title">
+								<f:translate key="tx_femanager_domain_model_user.lastlogin" />
+							</td>
+							<td nowrap="nowrap" class="col-title">
+								UID
+							</td>
+							<td nowrap="nowrap" class="col-title">
+								PID
+							</td>
+							<td nowrap="nowrap" class="col-icon"></td>
+						</tr>
+
+						<f:for each="{users}" as="user">
+							<tr class="db_list_normal firstcol powermail_listbe_overview">
+								<td nowrap="nowrap" class="col-icon">
+									<f:if condition="{user.disable}">
+										<f:then>
+											<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-user-frontend" style="" title="id={user.uid} - Hidden">
+												<span class="t3-icon t3-icon-status t3-icon-status-overlay t3-icon-overlay-hidden t3-icon-overlay">&nbsp;</span>
+											</span>
+										</f:then>
+										<f:else>
+											<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-user-frontend" title="id={user.uid}">&nbsp;</span>
+										</f:else>
+									</f:if>
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									{user.username}
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									{user.email}
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									{user.lastName}, {user.firstName}
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									<f:for each="{user.usergroup}" as="usergroup" iteration="i">
+										{usergroup.title}
+										<f:if condition="{i.isFirst}">
+											<f:else>
+												<br />
+											</f:else>
+										</f:if>
+									</f:for>
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									<f:format.date format="d.m.Y H:i">{user.crdate}</f:format.date>
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									<f:format.date format="d.m.Y H:i">{user.lastlogin}</f:format.date>
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									{user.uid}
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									{user.pid}
+								</td>
+								<td nowrap="nowrap" class="">
+									<a title="{f:translate(key: 'BackendListHelpEdit')}" onclick="window.location.href = 'alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[tx_powermail_domain_model_mails][{mail.uid}]=edit'; return false;" href="#">
+										<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-open">&nbsp;</span>
+									</a>
+
+									<span class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-delete deleteMail" title="{f:translate(key:'BackendListMailDelete')}">&nbsp;</span>
+
+									<f:if condition="{user.disable} == 1">
+										<f:then>
+											<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-unhide hideMail">&nbsp;</span>
+										</f:then>
+										<f:else>
+											<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-hide unhideMail">&nbsp;</span>
+										</f:else>
+									</f:if>
+
+									<input type="hidden" class="container_uid" name="container_uid" value="{mail.uid}" />
+									<input type="hidden" class="container_formtoken" name="container_formtoken" value="{token}" />
+									<input type="hidden" class="container_table" name="container_table" value="tx_powermail_domain_model_mails" />
+									<input type="hidden" class="container_label_delete_confirmation" name="container_label_delete_confirmation" value="{f:translate(key:'BackendListMailDeleteConfirmation')}" />
+								</td>
+							</tr>
+s
+						</f:for>
+
+					</tbody>
+				</table>
+
+			</f:then>
+			<f:else>
+				<div class="femanager_note">
+					<f:translate key="noRecordsFound" />
+					<br />
+					<a href="mod.php?M=web_FemanagerM1&id=0" class="underline">
+						<f:translate key="noRecordsFoundGoToPage0" />
+					</a>
+				</div>
+			</f:else>
+		</f:if>
+	</div>
+</f:section>

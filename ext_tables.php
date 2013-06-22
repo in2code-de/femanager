@@ -18,6 +18,26 @@ $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager'
 );
 
 /**
+ * Include Backend Module
+ */
+if (TYPO3_MODE === 'BE' && !$confArr['disableModule'] && !(TYPO3_REQUESTTYPE & TYPO3_REQUESTTYPE_INSTALL)) {
+	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+		'In2.' . $_EXTKEY,
+		'web',	 // Make module a submodule of 'web'
+		'm1',	 // Submodule key
+		'',		 // Position
+		array(
+			 'UserBackend' => 'list'
+		),
+		array(
+			 'access' => 'user,group',
+			 'icon'   => 'EXT:' . $_EXTKEY . '/ext_icon.gif',
+			 'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod.xlf',
+		)
+	);
+}
+
+/**
  * Static TypoScript
  */
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Main', 'Main Settings');
