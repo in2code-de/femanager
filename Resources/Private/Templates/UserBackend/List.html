@@ -74,7 +74,7 @@ UserBackend / List
 						</tr>
 
 						<f:for each="{users}" as="user">
-							<tr class="db_list_normal firstcol powermail_listbe_overview">
+							<tr class="db_list_normal firstcol femanager_list_line">
 								<td nowrap="nowrap" class="col-icon">
 									<f:if condition="{user.disable}">
 										<f:then>
@@ -104,16 +104,16 @@ UserBackend / List
 									{user.email}
 								</td>
 								<td nowrap="nowrap" class="col-title">
-									{user.lastName}, {user.firstName}
+									{user.lastName}<f:if condition="{user.lastName}">,</f:if> {user.firstName}
 								</td>
 								<td nowrap="nowrap" class="col-title">
 									<f:for each="{user.usergroup}" as="usergroup" iteration="i">
-										{usergroup.title}
 										<f:if condition="{i.isFirst}">
 											<f:else>
 												<br />
 											</f:else>
 										</f:if>
+										{usergroup.title}
 									</f:for>
 								</td>
 								<td nowrap="nowrap" class="col-title">
@@ -139,29 +139,31 @@ UserBackend / List
 									<f:comment>
 										Delete Icon
 									</f:comment>
-									<span class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-delete deleteMail" title="{f:translate(key:'BackendListMailDelete')}">&nbsp;</span>
+									<span class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-delete deleteUser cursorpointer" title="{f:translate(key:'BackendListMailDelete')}">&nbsp;</span>
 
 									<f:comment>
 										Enable/Disable Icon
 									</f:comment>
 									<f:if condition="{user.disable} == 1">
 										<f:then>
-											<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-unhide hideMail">&nbsp;</span>
+											<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-unhide unhideUser cursorpointer">&nbsp;</span>
 										</f:then>
 										<f:else>
-											<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-hide unhideMail">&nbsp;</span>
+											<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-hide hideUser cursorpointer">&nbsp;</span>
 										</f:else>
 									</f:if>
 
 									<f:comment>
 										Logout Icon
 									</f:comment>
-									<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-denied" title="Logout">&nbsp;</span>
+									<f:link.action action="userLogout" arguments="{user:user}" class="logoutUser">
+										<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-denied cursorpointer" title="Logout">&nbsp;</span>
+									</f:link.action>
 
 									<input type="hidden" class="container_uid" name="container_uid" value="{user.uid}" />
 									<input type="hidden" class="container_formtoken" name="container_formtoken" value="{token}" />
 									<input type="hidden" class="container_table" name="container_table" value="fe_users" />
-									<input type="hidden" class="container_label_delete_confirmation" name="container_label_delete_confirmation" value="{f:translate(key:'BackendListMailDeleteConfirmation')}" />
+									<input type="hidden" class="container_label_delete_confirmation" name="container_label_delete_confirmation" value="{f:translate(key:'BackendListUserDeleteConfirmation')}" />
 								</td>
 							</tr>
 						</f:for>

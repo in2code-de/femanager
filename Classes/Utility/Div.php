@@ -393,6 +393,34 @@ class Div {
 	}
 
 	/**
+	 * Remove FE Session to a given user
+	 *
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user
+	 * @return void
+	 */
+	public static function removeFrontendSessionToUser(\TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user) {
+		$GLOBALS['TYPO3_DB']->exec_DELETEquery('fe_sessions', 'ses_userid = ' . intval($user->getUid()));
+	}
+
+	/**
+	 * Check if FE Session exists
+	 *
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user
+	 * @return bool
+	 */
+	public static function checkFrontendSessionToUser(\TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user) {
+		$select = 'ses_id';
+		$from = 'fe_sessions';
+		$where = 'ses_userid = ' . intval($user->getUid());
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where);
+		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+		if (!empty($row['ses_id'])) {
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	/**
 	 * Generate and send Email
 	 *
 	 * @param \string $template					Template file in Templates/Email/

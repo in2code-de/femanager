@@ -370,6 +370,9 @@
 			<trans-unit id="pleaseChoose">
 				<target state="translated">Bitte wählen...</target>
 			</trans-unit>
+			<trans-unit id="BackendListUserDeleteConfirmation">
+				<target state="translated">Wollen Sie den Benutzer wirklich löschen?</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

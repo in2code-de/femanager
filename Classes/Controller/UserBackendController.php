@@ -1,6 +1,8 @@
 <?php
 namespace In2\Femanager\Controller;
 
+use \In2\Femanager\Utility\Div;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -42,6 +44,18 @@ class UserBackendController extends \In2\Femanager\Controller\GeneralController 
 		$users = $this->userRepository->findAllInBackend();
 		$this->view->assign('users', $users);
 		$this->view->assign('token', \TYPO3\CMS\Backend\Utility\BackendUtility::getUrlToken('tceAction'));
+	}
+
+	/**
+	 * action user logout
+	 *
+	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @return void
+	 */
+	public function userLogoutAction(\In2\Femanager\Domain\Model\User $user) {
+		Div::removeFrontendSessionToUser($user);
+		$this->flashMessageContainer->add('User successfully logged out');
+		$this->redirect('list');
 	}
 
 }

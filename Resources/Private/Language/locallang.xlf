@@ -369,6 +369,9 @@
 			<trans-unit id="pleaseChoose">
 				<source>Please choose...</source>
 			</trans-unit>
+			<trans-unit id="BackendListUserDeleteConfirmation">
+				<source>Are you sure to delete this User?</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

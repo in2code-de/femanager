@@ -27,7 +27,7 @@ if (TYPO3_MODE === 'BE' && !$confArr['disableModule'] && !(TYPO3_REQUESTTYPE & T
 		'm1',	 // Submodule key
 		'',		 // Position
 		array(
-			 'UserBackend' => 'list'
+			 'UserBackend' => 'list,userLogout'
 		),
 		array(
 			 'access' => 'user,group',

@@ -257,12 +257,12 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	 * @return boolean
 	 */
 	public function getIsOnline() {
-		$select = 'ses_id';
-		$from = 'fe_sessions';
-		$where = 'ses_userid = ' . intval($this->getUid()) . ' and ses_tstamp > ' . (time() - 30*60);
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where);
-		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-		if (!empty($row['ses_id'])) {
+		// check if last login was within 2h
+		if (
+			method_exists($this->getLastlogin(), 'getTimestamp') &&
+			$this->getLastlogin()->getTimestamp() > (time() - 2 * 60 * 60) &&
+			\In2\Femanager\Utility\Div::checkFrontendSessionToUser($this)
+		) {
 			return TRUE;
 		}
 		return $this->isOnline;
