@@ -124,9 +124,10 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Find All for Backend Actions
 	 *
+	 * @param \array $filter Filter Array
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findAllInBackend() {
+	public function findAllInBackend($filter) {
 		$pid = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id');
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);

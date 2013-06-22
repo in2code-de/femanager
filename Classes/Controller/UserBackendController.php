@@ -38,10 +38,11 @@ class UserBackendController extends \In2\Femanager\Controller\GeneralController 
 	/**
 	 * action list
 	 *
+	 * @param \array $filter Filter Array
 	 * @return void
 	 */
-	public function listAction() {
-		$users = $this->userRepository->findAllInBackend();
+	public function listAction($filter = array()) {
+		$users = $this->userRepository->findAllInBackend($filter);
 		$this->view->assign('users', $users);
 		$this->view->assign('token', \TYPO3\CMS\Backend\Utility\BackendUtility::getUrlToken('tceAction'));
 	}
