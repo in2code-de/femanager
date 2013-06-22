@@ -41,6 +41,7 @@ class UserBackendController extends \In2\Femanager\Controller\GeneralController 
 	public function listAction() {
 		$users = $this->userRepository->findAllInBackend();
 		$this->view->assign('users', $users);
+		$this->view->assign('token', \TYPO3\CMS\Backend\Utility\BackendUtility::getUrlToken('tceAction'));
 	}
 
 }

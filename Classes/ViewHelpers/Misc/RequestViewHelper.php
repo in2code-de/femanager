@@ -30,14 +30,18 @@ class RequestViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
 	/**
 	 * Get a GET or POST parameter
 	 *
-	 * @param \string $parameter		like tx_ext_pi1|list|field
+	 * @param \string $parameter			like tx_ext_pi1|list|field
+	 * @param \bool $htmlspecialchars		Enable/Disabe htmlspecialchars
 	 * @return \string
 	 */
-	public function render($parameter) {
-		$parameter = preg_replace('/[^a-zA-Z0-9_-\|]/', '', $parameter);
-		$string = str_replace('|', '\'][\'', $parameter);
-		$string = '$_REQUEST[\'' . $string . '\']';
-		eval('$value = ' . $string . ';');
+	public function render($parameter, $htmlspecialchars = TRUE) {
+		$parameter = preg_replace('/[^a-zA-Z0-9_-\|]/', '', $parameter); // allow only normal characters
+		$string = str_replace('|', '\'][\'', $parameter); // replace | with ][
+		$string = '$_REQUEST[\'' . $string . '\']'; // create $_REQUEST string
+		eval('$value = ' . $string . ';'); // create variable
+		if ($htmlspecialchars) {
+			$value = htmlspecialchars($value);
+		}
 		return $value;
 	}
 }

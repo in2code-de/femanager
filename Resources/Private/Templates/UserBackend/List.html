@@ -1,3 +1,4 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
 <f:layout name="Backend" />
 
 UserBackend / List
@@ -23,11 +24,12 @@ UserBackend / List
 							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
 							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
 							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
 							<td nowrap="nowrap" class="" width="10"><img width="1" height="1" alt="" src="clear.gif"></td>
 						</tr>
 						<tr class="t3-row-header">
 							<td nowrap="nowrap" class="col-icon">&nbsp;</td>
-							<td nowrap="nowrap" colspan="8">
+							<td nowrap="nowrap" colspan="9">
 								<span class="c-table">
 									<f:translate key="tx_femanager_domain_model_user" />
 								</span>
@@ -37,9 +39,12 @@ UserBackend / List
 						</tr>
 						<tr class="c-headLine">
 							<td nowrap="nowrap" class="col-icon">
-								<a title="Create New User" onclick="window.location.href='alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[fe_users][{pid}]=new'; return false;" href="#">
+								<a title="Create New User" onclick="window.location.href='alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[fe_users][{femanager:Misc.Request(parameter:'id')}]=new'; return false;" href="#">
 									<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-new">&nbsp;</span>
 								</a>
+							</td>
+							<td nowrap="nowrap" class="col-title">
+								Online
 							</td>
 							<td nowrap="nowrap" class="col-title">
 								<f:translate key="tx_femanager_domain_model_user.username" />
@@ -83,6 +88,16 @@ UserBackend / List
 									</f:if>
 								</td>
 								<td nowrap="nowrap" class="col-title">
+									<f:if condition="{user.isOnline}">
+										<f:then>
+											<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-granted" title="Online">&nbsp;</span>
+										</f:then>
+										<f:else>
+											<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-denied" title="Offline">&nbsp;</span>
+										</f:else>
+									</f:if>
+								</td>
+								<td nowrap="nowrap" class="col-title">
 									{user.username}
 								</td>
 								<td nowrap="nowrap" class="col-title">
@@ -114,12 +129,21 @@ UserBackend / List
 									{user.pid}
 								</td>
 								<td nowrap="nowrap" class="">
-									<a title="{f:translate(key: 'BackendListHelpEdit')}" onclick="window.location.href = 'alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[tx_powermail_domain_model_mails][{mail.uid}]=edit'; return false;" href="#">
+									<f:comment>
+										Edit Icon
+									</f:comment>
+									<a title="Edit" onclick="window.location.href = 'alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[fe_users][{user.uid}]=edit'; return false;" href="#">
 										<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-open">&nbsp;</span>
 									</a>
 
+									<f:comment>
+										Delete Icon
+									</f:comment>
 									<span class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-delete deleteMail" title="{f:translate(key:'BackendListMailDelete')}">&nbsp;</span>
 
+									<f:comment>
+										Enable/Disable Icon
+									</f:comment>
 									<f:if condition="{user.disable} == 1">
 										<f:then>
 											<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-unhide hideMail">&nbsp;</span>
@@ -129,13 +153,17 @@ UserBackend / List
 										</f:else>
 									</f:if>
 
-									<input type="hidden" class="container_uid" name="container_uid" value="{mail.uid}" />
+									<f:comment>
+										Logout Icon
+									</f:comment>
+									<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-denied" title="Logout">&nbsp;</span>
+
+									<input type="hidden" class="container_uid" name="container_uid" value="{user.uid}" />
 									<input type="hidden" class="container_formtoken" name="container_formtoken" value="{token}" />
-									<input type="hidden" class="container_table" name="container_table" value="tx_powermail_domain_model_mails" />
+									<input type="hidden" class="container_table" name="container_table" value="fe_users" />
 									<input type="hidden" class="container_label_delete_confirmation" name="container_label_delete_confirmation" value="{f:translate(key:'BackendListMailDeleteConfirmation')}" />
 								</td>
 							</tr>
-s
 						</f:for>
 
 					</tbody>

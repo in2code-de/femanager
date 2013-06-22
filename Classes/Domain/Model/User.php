@@ -99,6 +99,13 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	protected $txFemanagerConfirmedbyadmin;
 
 	/**
+	 * Online Status
+	 *
+	 * @var \bool
+	 */
+	protected $isOnline = FALSE;
+
+	/**
 	 * ignoreDirty (TRUE disables update)
 	 *
 	 * @var \bool
@@ -244,6 +251,21 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	 */
 	public function getIgnoreDirty() {
 		return $this->ignoreDirty;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getIsOnline() {
+		$select = 'ses_id';
+		$from = 'fe_sessions';
+		$where = 'ses_userid = ' . intval($this->getUid()) . ' and ses_tstamp > ' . (time() - 30*60);
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where);
+		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+		if (!empty($row['ses_id'])) {
+			return TRUE;
+		}
+		return $this->isOnline;
 	}
 
 	/**
