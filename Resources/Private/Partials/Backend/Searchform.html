@@ -1,9 +1,13 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
 <div class="femanager_list_searchform">
-	<f:form name="filter" action="list">
+	<form name="filter" method="get">
 		<label for="searchword">
 			Suche
 		</label>
-		<f:form.textfield property="searchword" id="searchword" />
+		<f:form.textfield name="tx_femanager_web_femanagerm1[filter][searchword]" id="searchword" value="{femanager:Misc.Request(parameter:'tx_femanager_web_femanagerm1|filter|searchword')}" />
 		<f:form.submit value="Suche" />
-	</f:form>
+
+		<input type="hidden" name="pid" value="18" />
+		<input type="hidden" name="M" value="web_FemanagerM1" />
+	</form>
 </div>

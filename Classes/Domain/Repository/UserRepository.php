@@ -133,15 +133,40 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 		$query->getQuerySettings()->setRespectEnableFields(FALSE);
 
+		// Where
 		$and = array(
 			$query->equals('deleted', 0)
 		);
 		if (intval($pid) > 0) {
 			$and[] = $query->equals('pid', $pid);
 		}
-
+		if (!empty($filter['searchword'])) {
+			$or = array();
+			$searchwords = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
+			foreach ($searchwords as $searchword) {
+				$or[] = $query->like('address', '%' . $searchword . '%');
+				$or[] = $query->like('city', '%' . $searchword . '%');
+				$or[] = $query->like('company', '%' . $searchword . '%');
+				$or[] = $query->like('country', '%' . $searchword . '%');
+				$or[] = $query->like('email', '%' . $searchword . '%');
+				$or[] = $query->like('fax', '%' . $searchword . '%');
+				$or[] = $query->like('first_name', '%' . $searchword . '%');
+				$or[] = $query->like('image', '%' . $searchword . '%');
+				$or[] = $query->like('last_name', '%' . $searchword . '%');
+				$or[] = $query->like('middle_name', '%' . $searchword . '%');
+				$or[] = $query->like('name', '%' . $searchword . '%');
+				$or[] = $query->like('telephone', '%' . $searchword . '%');
+				$or[] = $query->like('title', '%' . $searchword . '%');
+				$or[] = $query->like('usergroup.title', '%' . $searchword . '%');
+				$or[] = $query->like('username', '%' . $searchword . '%');
+				$or[] = $query->like('www', '%' . $searchword . '%');
+				$or[] = $query->like('zip', '%' . $searchword . '%');
+				$and[] = $query->logicalOr($or);
+			}
+		}
 		$query->matching($query->logicalAnd($and));
 
+		// Order
 		$query->setOrderings(
 			array(
 				 'username' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING

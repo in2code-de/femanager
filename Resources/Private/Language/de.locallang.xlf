@@ -291,8 +291,11 @@
 			<trans-unit id="noRecordsFound">
 				<target state="translated">Keine Datensätze gefunden.</target>
 			</trans-unit>
+			<trans-unit id="noRecordsFoundClearFilter">
+				<target state="translated">Filter löschen.</target>
+			</trans-unit>
 			<trans-unit id="noRecordsFoundGoToPage0">
-				<target state="translated">Alle Datensätze anzeigen.</target>
+				<target state="translated">Benutzer von allen Seiten anzeigen.</target>
 			</trans-unit>
 			<trans-unit id="noRecordFoundShow">
 				<target state="translated">Kein FE_User übergeben oder nicht eingeloggt.</target>

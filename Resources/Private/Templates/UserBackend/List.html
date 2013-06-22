@@ -13,174 +13,185 @@ UserBackend / List
 		<f:if condition="{users}">
 			<f:then>
 
-				<table cellspacing="0" cellpadding="0" border="0" class="typo3-dblist">
-					<tbody>
+				<f:widget.paginate objects="{users}" as="usersPage" configuration="{itemsPerPage: 100, insertBelow: 1}">
+					<table cellspacing="0" cellpadding="0" border="0" class="typo3-dblist">
+						<tbody>
 
-						<tr class="c-table-row-spacer">
-							<td nowrap="nowrap" class="col-icon"><img width="1" height="8" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class="" width="10"><img width="1" height="1" alt="" src="clear.gif"></td>
-						</tr>
-						<tr class="t3-row-header">
-							<td nowrap="nowrap" class="col-icon">&nbsp;</td>
-							<td nowrap="nowrap" colspan="9">
-								<span class="c-table">
-									<f:translate key="tx_femanager_domain_model_user" />
-								</span>
-								(<f:count subject="{users}" />)
-							</td>
-							<td nowrap="nowrap" class="col-icon">&nbsp;</td>
-						</tr>
-						<tr class="c-headLine">
-							<td nowrap="nowrap" class="col-icon">
-								<a title="Create New User" onclick="window.location.href='alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[fe_users][{femanager:Misc.Request(parameter:'id')}]=new'; return false;" href="#">
-									<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-new">&nbsp;</span>
-								</a>
-							</td>
-							<td nowrap="nowrap" class="col-title">
-								Online
-							</td>
-							<td nowrap="nowrap" class="col-title">
-								<f:translate key="tx_femanager_domain_model_user.username" />
-							</td>
-							<td nowrap="nowrap" class="col-title">
-								<f:translate key="tx_femanager_domain_model_user.email" />
-							</td>
-							<td nowrap="nowrap" class="col-title">
-								<f:translate key="tx_femanager_domain_model_user.name" />
-							</td>
-							<td nowrap="nowrap" class="col-title">
-								<f:translate key="tx_femanager_domain_model_user.usergroup" />
-							</td>
-							<td nowrap="nowrap" class="col-title">
-								<f:translate key="tx_femanager_domain_model_user.crdate" />
-							</td>
-							<td nowrap="nowrap" class="col-title">
-								<f:translate key="tx_femanager_domain_model_user.lastlogin" />
-							</td>
-							<td nowrap="nowrap" class="col-title">
-								UID
-							</td>
-							<td nowrap="nowrap" class="col-title">
-								PID
-							</td>
-							<td nowrap="nowrap" class="col-icon"></td>
-						</tr>
-
-						<f:for each="{users}" as="user">
-							<tr class="db_list_normal firstcol femanager_list_line">
+							<tr class="c-table-row-spacer">
+								<td nowrap="nowrap" class="col-icon"><img width="1" height="8" alt="" src="clear.gif"></td>
+								<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+								<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+								<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+								<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+								<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+								<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+								<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+								<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+								<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
+								<td nowrap="nowrap" class="" width="10"><img width="1" height="1" alt="" src="clear.gif"></td>
+							</tr>
+							<tr class="t3-row-header">
+								<td nowrap="nowrap" class="col-icon">&nbsp;</td>
+								<td nowrap="nowrap" colspan="9">
+									<span class="c-table">
+										<f:translate key="tx_femanager_domain_model_user" />
+									</span>
+									(<f:count subject="{users}" />)
+								</td>
+								<td nowrap="nowrap" class="col-icon">&nbsp;</td>
+							</tr>
+							<tr class="c-headLine">
 								<td nowrap="nowrap" class="col-icon">
-									<f:if condition="{user.disable}">
-										<f:then>
-											<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-user-frontend" style="" title="id={user.uid} - Hidden">
-												<span class="t3-icon t3-icon-status t3-icon-status-overlay t3-icon-overlay-hidden t3-icon-overlay">&nbsp;</span>
-											</span>
-										</f:then>
-										<f:else>
-											<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-user-frontend" title="id={user.uid}">&nbsp;</span>
-										</f:else>
-									</f:if>
+									<a title="Create New User" onclick="window.location.href='alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[fe_users][{femanager:Misc.Request(parameter:'id')}]=new'; return false;" href="#">
+										<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-new">&nbsp;</span>
+									</a>
 								</td>
 								<td nowrap="nowrap" class="col-title">
-									<f:if condition="{user.isOnline}">
-										<f:then>
-											<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-granted" title="Online">&nbsp;</span>
-										</f:then>
-										<f:else>
-											<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-denied" title="Offline">&nbsp;</span>
-										</f:else>
-									</f:if>
+									Online
 								</td>
 								<td nowrap="nowrap" class="col-title">
-									{user.username}
+									<f:translate key="tx_femanager_domain_model_user.username" />
 								</td>
 								<td nowrap="nowrap" class="col-title">
-									{user.email}
+									<f:translate key="tx_femanager_domain_model_user.email" />
 								</td>
 								<td nowrap="nowrap" class="col-title">
-									{user.lastName}<f:if condition="{user.lastName}">,</f:if> {user.firstName}
+									<f:translate key="tx_femanager_domain_model_user.name" />
 								</td>
 								<td nowrap="nowrap" class="col-title">
-									<f:for each="{user.usergroup}" as="usergroup" iteration="i">
-										<f:if condition="{i.isFirst}">
+									<f:translate key="tx_femanager_domain_model_user.usergroup" />
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									<f:translate key="tx_femanager_domain_model_user.crdate" />
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									<f:translate key="tx_femanager_domain_model_user.lastlogin" />
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									UID
+								</td>
+								<td nowrap="nowrap" class="col-title">
+									PID
+								</td>
+								<td nowrap="nowrap" class="col-icon"></td>
+							</tr>
+
+							<f:for each="{usersPage}" as="user">
+								<tr class="db_list_normal firstcol femanager_list_line">
+									<td nowrap="nowrap" class="col-icon">
+										<f:if condition="{user.disable}">
+											<f:then>
+												<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-user-frontend" style="" title="id={user.uid} - Hidden">
+													<span class="t3-icon t3-icon-status t3-icon-status-overlay t3-icon-overlay-hidden t3-icon-overlay">&nbsp;</span>
+												</span>
+											</f:then>
 											<f:else>
-												<br />
+												<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-user-frontend" title="id={user.uid}">&nbsp;</span>
 											</f:else>
 										</f:if>
-										{usergroup.title}
-									</f:for>
-								</td>
-								<td nowrap="nowrap" class="col-title">
-									<f:format.date format="d.m.Y H:i">{user.crdate}</f:format.date>
-								</td>
-								<td nowrap="nowrap" class="col-title">
-									<f:format.date format="d.m.Y H:i">{user.lastlogin}</f:format.date>
-								</td>
-								<td nowrap="nowrap" class="col-title">
-									{user.uid}
-								</td>
-								<td nowrap="nowrap" class="col-title">
-									{user.pid}
-								</td>
-								<td nowrap="nowrap" class="">
-									<f:comment>
-										Edit Icon
-									</f:comment>
-									<a title="Edit" onclick="window.location.href = 'alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[fe_users][{user.uid}]=edit'; return false;" href="#">
-										<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-open">&nbsp;</span>
-									</a>
+									</td>
+									<td nowrap="nowrap" class="col-title">
+										<f:if condition="{user.isOnline}">
+											<f:then>
+												<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-granted" title="Online">&nbsp;</span>
+											</f:then>
+											<f:else>
+												<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-denied" title="Offline">&nbsp;</span>
+											</f:else>
+										</f:if>
+									</td>
+									<td nowrap="nowrap" class="col-title">
+										{user.username}
+									</td>
+									<td nowrap="nowrap" class="col-title">
+										{user.email}
+									</td>
+									<td nowrap="nowrap" class="col-title">
+										{user.lastName}<f:if condition="{user.lastName}">,</f:if> {user.firstName}
+									</td>
+									<td nowrap="nowrap" class="col-title">
+										<f:for each="{user.usergroup}" as="usergroup" iteration="i">
+											<f:if condition="{i.isFirst}">
+												<f:else>
+													<br />
+												</f:else>
+											</f:if>
+											{usergroup.title}
+										</f:for>
+									</td>
+									<td nowrap="nowrap" class="col-title">
+										<f:format.date format="d.m.Y H:i">{user.crdate}</f:format.date>
+									</td>
+									<td nowrap="nowrap" class="col-title">
+										<f:format.date format="d.m.Y H:i">{user.lastlogin}</f:format.date>
+									</td>
+									<td nowrap="nowrap" class="col-title">
+										{user.uid}
+									</td>
+									<td nowrap="nowrap" class="col-title">
+										{user.pid}
+									</td>
+									<td nowrap="nowrap" class="">
+										<f:comment>
+											Edit Icon
+										</f:comment>
+										<a title="Edit" onclick="window.location.href = 'alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[fe_users][{user.uid}]=edit'; return false;" href="#">
+											<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-open">&nbsp;</span>
+										</a>
 
-									<f:comment>
-										Delete Icon
-									</f:comment>
-									<span class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-delete deleteUser cursorpointer" title="{f:translate(key:'BackendListMailDelete')}">&nbsp;</span>
+										<f:comment>
+											Delete Icon
+										</f:comment>
+										<span class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-delete deleteUser cursorpointer" title="{f:translate(key:'BackendListMailDelete')}">&nbsp;</span>
 
-									<f:comment>
-										Enable/Disable Icon
-									</f:comment>
-									<f:if condition="{user.disable} == 1">
-										<f:then>
-											<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-unhide unhideUser cursorpointer">&nbsp;</span>
-										</f:then>
-										<f:else>
-											<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-hide hideUser cursorpointer">&nbsp;</span>
-										</f:else>
-									</f:if>
+										<f:comment>
+											Enable/Disable Icon
+										</f:comment>
+										<f:if condition="{user.disable} == 1">
+											<f:then>
+												<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-unhide unhideUser cursorpointer">&nbsp;</span>
+											</f:then>
+											<f:else>
+												<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-hide hideUser cursorpointer">&nbsp;</span>
+											</f:else>
+										</f:if>
 
-									<f:comment>
-										Logout Icon
-									</f:comment>
-									<f:link.action action="userLogout" arguments="{user:user}" class="logoutUser">
-										<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-denied cursorpointer" title="Logout">&nbsp;</span>
-									</f:link.action>
+										<f:comment>
+											Logout Icon
+										</f:comment>
+										<f:link.action action="userLogout" arguments="{user:user}" class="logoutUser">
+											<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-denied cursorpointer" title="Logout">&nbsp;</span>
+										</f:link.action>
 
-									<input type="hidden" class="container_uid" name="container_uid" value="{user.uid}" />
-									<input type="hidden" class="container_formtoken" name="container_formtoken" value="{token}" />
-									<input type="hidden" class="container_table" name="container_table" value="fe_users" />
-									<input type="hidden" class="container_label_delete_confirmation" name="container_label_delete_confirmation" value="{f:translate(key:'BackendListUserDeleteConfirmation')}" />
-								</td>
-							</tr>
-						</f:for>
+										<input type="hidden" class="container_uid" name="container_uid" value="{user.uid}" />
+										<input type="hidden" class="container_formtoken" name="container_formtoken" value="{token}" />
+										<input type="hidden" class="container_table" name="container_table" value="fe_users" />
+										<input type="hidden" class="container_label_delete_confirmation" name="container_label_delete_confirmation" value="{f:translate(key:'BackendListUserDeleteConfirmation')}" />
+									</td>
+								</tr>
+							</f:for>
 
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</f:widget.paginate>
 
 			</f:then>
 			<f:else>
 				<div class="femanager_note">
 					<f:translate key="noRecordsFound" />
 					<br />
-					<a href="mod.php?M=web_FemanagerM1&id=0" class="underline">
-						<f:translate key="noRecordsFoundGoToPage0" />
-					</a>
+					<f:if condition="{femanager:Misc.Request(parameter:'tx_femanager_web_femanagerm1|filter|searchword')}">
+						<f:then>
+							<f:link.action>
+								<f:translate key="noRecordsFoundClearFilter" />
+							</f:link.action>
+						</f:then>
+						<f:else>
+							<a href="mod.php?M=web_FemanagerM1&id=0" class="underline">
+								<f:translate key="noRecordsFoundGoToPage0" />
+							</a>
+						</f:else>
+					</f:if>
 				</div>
 			</f:else>
 		</f:if>
