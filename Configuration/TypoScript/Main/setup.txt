@@ -10,12 +10,8 @@ plugin.tx_femanager {
 	features {
 		rewrittenPropertyMapper = 1
 	}
-	settings {
 
-		# Todo Save in third table
-		# Todo Create an femanager backend module with a fulltextsearch and a usergroup filter
-		# Todo Extend registration with new fields (manual)
-		# Todo Extend validation with new validator (manual)
+	settings {
 
 		###################################
 		# Settings for CREATE user profiles
