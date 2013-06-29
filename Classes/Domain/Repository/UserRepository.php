@@ -44,7 +44,7 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$object = $this->identityMap->getObjectByIdentifier($uid, $this->objectType);
 		} else {
 			$query = $this->createQuery();
-			$query->getQuerySettings()->setRespectEnableFields(FALSE);
+			$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
 			$query->getQuerySettings()->setRespectSysLanguage(FALSE);
 			$query->getQuerySettings()->setRespectStoragePage(FALSE);
 			$and = array(
@@ -106,7 +106,7 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function checkUniqueDb($field, $value) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		$query->getQuerySettings()->setRespectEnableFields(FALSE);
+		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
 
 		$and = array(
 			$query->equals($field, $value),
@@ -131,7 +131,7 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$pid = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id');
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		$query->getQuerySettings()->setRespectEnableFields(FALSE);
+		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
 
 		// Where
 		$and = array(
