@@ -24,7 +24,7 @@ plugin.tx_femanager {
 			# take username and copy it to the email field (so email field is not nessesary in FE)
 #			fillEmailWithUsername = 1
 
-			# login after profile creation
+			# login after profile creation (don't work if admin confirmation is turned on)
 			login = 1
 
 			# redirect after profile creation
@@ -490,6 +490,23 @@ plugin.tx_femanager {
 
 				# activate debug mode - shows all configuration from curl settings (needs extension devlog)
 				debug = 0
+			}
+
+			# Save user values to any other table (e.g. tt_address or something else)
+			storeInDatabase {
+				tt_address {
+					_enable = TEXT
+					_enable.value = 1
+
+					pid = TEXT
+					pid.value = 21
+
+					name = TEXT
+					name.value = test
+
+					email = TEXT
+					email.value = a@b.de
+				}
 			}
 
 			# initially save password as hash (empty, "md5", "sha1")

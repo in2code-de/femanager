@@ -403,8 +403,22 @@ class Div {
 	 * @return void
 	 */
 	public static function storeInDatabasePreflight($user, $config, $contentObject, $objectManager) {
-		$storeInDatabase = $objectManager->get('In2\Femanager\Utility\StoreInDatabase');
-		$storeInDatabase->execute();
+		if (empty($config['new.']['storeInDatabase.'])) {
+			return;
+		}
+		\TYPO3\CMS\Core\Utility\DebugUtility::debug($config, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+
+		// one loop for every table to store
+		$contentObject->start($user->_getProperties()); // push user values to TypoScript to use with ".field=username"
+		foreach ((array) $config['new.']['storeInDatabase.'] as $table => $storeSettings) {
+			if (!$contentObject->cObjGetSingle($config['new.']['storeInDatabase.'][$table]['_enable'], $config['new.']['storeInDatabase.'][$table]['_enable.'])) {
+				continue;
+			}
+			$storeInDatabase = $objectManager->get('In2\Femanager\Utility\StoreInDatabase');
+			$storeInDatabase->setTable($table);
+			$storeInDatabase->addProperty('email', 'abcde@tst.de');
+			$storeInDatabase->execute();
+		}
 	}
 
 	/**

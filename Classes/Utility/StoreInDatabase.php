@@ -40,27 +40,62 @@ class StoreInDatabase {
 	 * 
 	 * @var string
 	 */
-	protected $table;
+	protected $table = '';
+
+	/**
+	 * Array with fieldname=>value
+	 *
+	 * @var array
+	 */
+	protected $properties = array();
 
 	/**
 	 * Executes the storage
 	 */
 	public function execute() {
-		\TYPO3\CMS\Core\Utility\DebugUtility::debug('yeaH', 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+		\TYPO3\CMS\Core\Utility\DebugUtility::debug($this->table, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+
+		$GLOBALS['TYPO3_DB']->exec_INSERTquery($this->getTable(), $values);
 	}
 
 	/**
+	 * Set TableName
+	 *
 	 * @param string $table
+	 * @return void
 	 */
 	public function setTable($table) {
-		$this->table = $table;
+		$this->table = str_replace('.', '', $table);
 	}
 
 	/**
+	 * Get TableName
+	 *
 	 * @return string
 	 */
 	public function getTable() {
 		return $this->table;
+	}
+
+	/**
+	 * Add property/value pair to array
+	 *
+	 * @param $propertyName
+	 * @param $value
+	 * @return void
+	 */
+	public function addProperty($propertyName, $value) {
+		$this->properties[$propertyName] = $value;
+	}
+
+	/**
+	 * Remove property/value pair form array by its key
+	 *
+	 * @param $propertyName
+	 * @return void
+	 */
+	public function removeProperty($propertyName) {
+		unset($this->properties[$propertyName]);
 	}
 	
 }
