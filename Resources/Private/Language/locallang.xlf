@@ -201,7 +201,7 @@
 				<source>Confirm Profile</source>
 			</trans-unit>
 			<trans-unit id="emailCreateUserConfirmationText2">
-				<source>If you don\'t want to be registered on our system, click this link</source>
+				<source>If you don't want to be registered on our system, click this link</source>
 			</trans-unit>
 			<trans-unit id="emailCreateUserConfirmationLinkConfirmRefused">
 				<source>Delete Profile</source>

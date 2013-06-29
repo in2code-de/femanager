@@ -12,6 +12,8 @@
 <f:section name="main">
 	<p><f:translate key="emailCreateAdminConfirmationSalutation" /></p>
 
+	<f:render partial="Mail/UserProperties" arguments="{_all}" />
+
 	<p>
 		<f:format.printf arguments="{0: '{user.username}'}">
 			<f:translate key="emailCreateAdminConfirmationText1" />
