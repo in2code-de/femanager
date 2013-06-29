@@ -436,8 +436,21 @@ class Div {
 		// config
 		$email = $this->objectManager->get('\TYPO3\CMS\Core\Mail\MailMessage');
 		$this->cObj = $this->configurationManager->getContentObject();
+		if (!empty($variables['user']) && method_exists($variables['user'], '_getProperties')) {
+			$this->cObj->start($variables['user']->_getProperties()); // push user properties to TypoScript to use with ".field=username"
+		}
 		if (!$this->cObj->cObjGetSingle($typoScript['_enable'], $typoScript['_enable.'])) { // stop mail sending if turned off via TypoScritp
 			return FALSE;
+		}
+
+		// add embed images to mail body
+		if ($this->cObj->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.'])) {
+			$images = GeneralUtility::trimExplode(',', $this->cObj->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.']), 1);
+			$imageVariables = array();
+			foreach ($images as $image) {
+				$imageVariables[] = $email->embed(\Swift_Image::fromPath($image));
+			}
+			$variables = array_merge($variables, array('embedImages' => $imageVariables));
 		}
 
 		/**

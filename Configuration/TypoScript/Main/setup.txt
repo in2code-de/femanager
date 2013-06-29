@@ -115,8 +115,8 @@ plugin.tx_femanager {
 					priority.value =
 
 					# Add Attachment (separate each with comma)
-					attachments = COA
-					attachments {
+#					attachments = COA
+#					attachments {
 #						10 = TEXT
 #						10.value = fileadmin/file.pdf
 #						10.wrap = |,
@@ -124,7 +124,24 @@ plugin.tx_femanager {
 #						20 = TEXT
 #						20.value = fileadmin/file2.pdf
 #						20.wrap = |,
-					}
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+#					embedImage = COA
+#					embedImage {
+#						10 = IMG_RESOURCE
+#						10 {
+#							wrap = |,
+#							file.import = uploads/pics/
+#							file.import.field = image
+#							file.import.listNum = 0
+#							file.maxW = 120
+#							file.maxH = 120
+#						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
+#					}
 				}
 
 				# Email for Admin confirmation (Admin must confirm registration in an email)
@@ -166,8 +183,8 @@ plugin.tx_femanager {
 					priority.value =
 
 					# Add Attachment (separate each with comma)
-					attachments = COA
-					attachments {
+#					attachments = COA
+#					attachments {
 #						10 = TEXT
 #						10.value = fileadmin/file.pdf
 #						10.wrap = |,
@@ -175,6 +192,23 @@ plugin.tx_femanager {
 #						20 = TEXT
 #						20.value = fileadmin/file2.pdf
 #						20.wrap = |,
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+					embedImage = COA
+					embedImage {
+						10 = IMG_RESOURCE
+						10 {
+							wrap = |,
+							file.import = uploads/pics/
+							file.import.field = image
+							file.import.listNum = 0
+							file.maxW = 120
+							file.maxH = 120
+						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
 					}
 				}
 
@@ -217,8 +251,8 @@ plugin.tx_femanager {
 					priority.value =
 
 					# Add Attachment (separate each with comma)
-					attachments = COA
-					attachments {
+#					attachments = COA
+#					attachments {
 #						10 = TEXT
 #						10.value = fileadmin/file.pdf
 #						10.wrap = |,
@@ -226,7 +260,24 @@ plugin.tx_femanager {
 #						20 = TEXT
 #						20.value = fileadmin/file2.pdf
 #						20.wrap = |,
-					}
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+#					embedImage = COA
+#					embedImage {
+#						10 = IMG_RESOURCE
+#						10 {
+#							wrap = |,
+#							file.import = uploads/pics/
+#							file.import.field = image
+#							file.import.listNum = 0
+#							file.maxW = 120
+#							file.maxH = 120
+#						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
+#					}
 				}
 
 				# Email for User notify, if admin refused profile registration
@@ -268,8 +319,8 @@ plugin.tx_femanager {
 					priority.value =
 
 					# Add Attachment (separate each with comma)
-					attachments = COA
-					attachments {
+#					attachments = COA
+#					attachments {
 #						10 = TEXT
 #						10.value = fileadmin/file.pdf
 #						10.wrap = |,
@@ -277,7 +328,24 @@ plugin.tx_femanager {
 #						20 = TEXT
 #						20.value = fileadmin/file2.pdf
 #						20.wrap = |,
-					}
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+#					embedImage = COA
+#					embedImage {
+#						10 = IMG_RESOURCE
+#						10 {
+#							wrap = |,
+#							file.import = uploads/pics/
+#							file.import.field = image
+#							file.import.listNum = 0
+#							file.maxW = 120
+#							file.maxH = 120
+#						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
+#					}
 				}
 
 				# Email for Admin notify, if profile registration
@@ -319,8 +387,8 @@ plugin.tx_femanager {
 					priority.value =
 
 					# Add Attachment (separate each with comma)
-					attachments = COA
-					attachments {
+#					attachments = COA
+#					attachments {
 #						10 = TEXT
 #						10.value = fileadmin/file.pdf
 #						10.wrap = |,
@@ -328,6 +396,23 @@ plugin.tx_femanager {
 #						20 = TEXT
 #						20.value = fileadmin/file2.pdf
 #						20.wrap = |,
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+					embedImage = COA
+					embedImage {
+						10 = IMG_RESOURCE
+						10 {
+							wrap = |,
+							file.import = uploads/pics/
+							file.import.field = image
+							file.import.listNum = 0
+							file.maxW = 120
+							file.maxH = 120
+						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
 					}
 				}
 			}
@@ -506,8 +591,8 @@ plugin.tx_femanager {
 					priority.value =
 
 					# Add Attachment (separate each with comma)
-					attachments = COA
-					attachments {
+#					attachments = COA
+#					attachments {
 #						10 = TEXT
 #						10.value = fileadmin/file.pdf
 #						10.wrap = |,
@@ -515,7 +600,24 @@ plugin.tx_femanager {
 #						20 = TEXT
 #						20.value = fileadmin/file2.pdf
 #						20.wrap = |,
-					}
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+#					embedImage = COA
+#					embedImage {
+#						10 = IMG_RESOURCE
+#						10 {
+#							wrap = |,
+#							file.import = uploads/pics/
+#							file.import.field = image
+#							file.import.listNum = 0
+#							file.maxW = 120
+#							file.maxH = 120
+#						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
+#					}
 				}
 
 				# Email to user if update request was refused by admin
@@ -557,8 +659,8 @@ plugin.tx_femanager {
 					priority.value =
 
 					# Add Attachment (separate each with comma)
-					attachments = COA
-					attachments {
+#					attachments = COA
+#					attachments {
 #						10 = TEXT
 #						10.value = fileadmin/file.pdf
 #						10.wrap = |,
@@ -566,7 +668,24 @@ plugin.tx_femanager {
 #						20 = TEXT
 #						20.value = fileadmin/file2.pdf
 #						20.wrap = |,
-					}
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+#					embedImage = COA
+#					embedImage {
+#						10 = IMG_RESOURCE
+#						10 {
+#							wrap = |,
+#							file.import = uploads/pics/
+#							file.import.field = image
+#							file.import.listNum = 0
+#							file.maxW = 120
+#							file.maxH = 120
+#						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
+#					}
 				}
 
 				# Email for if update request was refused by admin
@@ -608,8 +727,8 @@ plugin.tx_femanager {
 					priority.value =
 
 					# Add Attachment (separate each with comma)
-					attachments = COA
-					attachments {
+#					attachments = COA
+#					attachments {
 #						10 = TEXT
 #						10.value = fileadmin/file.pdf
 #						10.wrap = |,
@@ -617,7 +736,24 @@ plugin.tx_femanager {
 #						20 = TEXT
 #						20.value = fileadmin/file2.pdf
 #						20.wrap = |,
-					}
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+#					embedImage = COA
+#					embedImage {
+#						10 = IMG_RESOURCE
+#						10 {
+#							wrap = |,
+#							file.import = uploads/pics/
+#							file.import.field = image
+#							file.import.listNum = 0
+#							file.maxW = 120
+#							file.maxH = 120
+#						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
+#					}
 				}
 			}
 
