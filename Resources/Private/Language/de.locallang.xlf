@@ -173,6 +173,9 @@
 			<trans-unit id="emailCreateAdminConfirmationSalutation">
 				<target state="translated">Hallo Admin,</target>
 			</trans-unit>
+			<trans-unit id="emailCreateAdminConfirmationUserProperties">
+				<target state="translated">Profileigenschaften:</target>
+			</trans-unit>
 			<trans-unit id="emailCreateAdminConfirmationText1">
 				<target state="translated">Bitte bestätige die Registrierung des Benutzers %s durch Klick auf nachfolgenden Link:</target>
 			</trans-unit>
@@ -232,6 +235,9 @@
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyText1">
 				<target state="translated">Es gibt ein neues Profil durch Benutzer %s</target>
+			</trans-unit>
+			<trans-unit id="emailCreateNotifyUserProperties">
+				<target state="translated">Profilangaben:</target>
 			</trans-unit>
 			<trans-unit id="emailUpdateNotifySalutation">
 				<target state="translated">Hallo Admin,</target>

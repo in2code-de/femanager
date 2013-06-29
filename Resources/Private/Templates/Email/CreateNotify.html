@@ -12,11 +12,12 @@
 <f:section name="main">
 	<p><f:translate key="emailCreateNotifySalutation" /></p>
 
-	<f:render partial="Mail/UserProperties" arguments="{_all}" />
-
 	<p>
 		<f:format.printf arguments="{0: '{user.username}'}">
 			<f:translate key="emailCreateNotifyText1" />
 		</f:format.printf>
 	</p>
+
+	<p><f:translate key="emailCreateNotifyUserProperties" /></p>
+	<f:render partial="Mail/UserProperties" arguments="{_all}" />
 </f:section>

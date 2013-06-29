@@ -173,6 +173,9 @@
 			<trans-unit id="emailCreateAdminConfirmationSalutation">
 				<source>Dear Admin,</source>
 			</trans-unit>
+			<trans-unit id="emailCreateAdminConfirmationUserProperties">
+				<source>User properties:</source>
+			</trans-unit>
 			<trans-unit id="emailCreateAdminConfirmationText1">
 				<source>Please confirm registration of %s by clicking the following link:</source>
 			</trans-unit>
@@ -232,6 +235,9 @@
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyText1">
 				<source>Profile registration from %s</source>
+			</trans-unit>
+			<trans-unit id="emailCreateNotifyUserProperties">
+				<source>Profile properties:</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateNotifySalutation">
 				<source>Dear Admin,</source>

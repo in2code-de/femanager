@@ -1,10 +1,62 @@
 <table border="1" cellpadding="2" cellspacing="2">
-	<f:for each="{user}" as="value" key="property">
 		<tr>
-			<td><f:translate key="tx_femanager_domain_model_user.{property}" /></td>
+			<td><f:translate key="tx_femanager_domain_model_user.username" /></td>
 			<td>
-				{value}
+				{user.username}
 			</td>
 		</tr>
-	</f:for>
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.email" /></td>
+			<td>
+				{user.email}
+			</td>
+		</tr>
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.www" /></td>
+			<td>
+				{user.www}
+			</td>
+		</tr>
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.firstName" /></td>
+			<td>
+				{user.firstName}
+			</td>
+		</tr>
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.lastName" /></td>
+			<td>
+				{user.lastName}
+			</td>
+		</tr>
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.telephone" /></td>
+			<td>
+				{user.telephone}
+			</td>
+		</tr>
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.address" /></td>
+			<td>
+				{user.address}
+			</td>
+		</tr>
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.zip" /></td>
+			<td>
+				{user.zip}
+			</td>
+		</tr>
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.city" /></td>
+			<td>
+				{user.city}
+			</td>
+		</tr>
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.country" /></td>
+			<td>
+				{user.country}
+			</td>
+		</tr>
 </table>
