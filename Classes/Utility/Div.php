@@ -362,7 +362,7 @@ class Div {
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user User properties
 	 * @param array $config TypoScript Settings
-	 * @param object $contentObject cObj
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject cObj
 	 * @return void
 	 */
 	public static function sendPost($user, $config, $contentObject) {
@@ -391,6 +391,20 @@ class Div {
 		if ($config['new.']['sendPost.']['debug']) {
 			GeneralUtility::devLog('femanager sendpost values', 'femanager', 0, $curl);
 		}
+	}
+
+	/**
+	 * Store user values in any database table
+	 *
+	 * @param \In2\Femanager\Domain\Model\User $user User properties
+	 * @param array $config TypoScript Settings
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject cObj
+	 * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+	 * @return void
+	 */
+	public static function storeInDatabasePreflight($user, $config, $contentObject, $objectManager) {
+		$storeInDatabase = $objectManager->get('In2\Femanager\Utility\StoreInDatabase');
+		$storeInDatabase->execute();
 	}
 
 	/**

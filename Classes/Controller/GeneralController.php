@@ -326,6 +326,9 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		// sendpost: send values via POST to any target
 		Div::sendPost($user, $this->config, $this->cObj);
 
+		// store in database: store values in any wanted table
+		Div::storeInDatabasePreflight($user, $this->config, $this->cObj, $this->objectManager);
+die('xyzzyx');
 		// frontend redirect (if activated via TypoScript)
 		$this->redirectByAction($action);
 
