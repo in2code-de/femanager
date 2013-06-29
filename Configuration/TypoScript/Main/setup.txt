@@ -64,7 +64,6 @@ plugin.tx_femanager {
 				}
 				usergroup {
 					#inList = 1,2,3
-					#\Validation\xyzvalidator.php
 				}
 			}
 
@@ -494,7 +493,7 @@ plugin.tx_femanager {
 			storeInDatabase {
 				tt_address {
 					_enable = TEXT
-					_enable.value = 1
+					_enable.value = 0
 
 					pid = TEXT
 					pid.value = 21

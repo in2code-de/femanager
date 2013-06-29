@@ -1,14 +1,16 @@
 plugin.tx_femanager {
 	view {
-		# cat=plugin.tx_femanager/file; type=string; label=Path to template root (FE)
+		# cat=plugin.tx_femanager/file; type=string; label= Path to template root (FE)
 		templateRootPath = EXT:femanager/Resources/Private/Templates/
-		# cat=plugin.tx_femanager/file; type=string; label=Path to template partials (FE)
+
+		# cat=plugin.tx_femanager/file; type=string; label= Path to template partials (FE)
 		partialRootPath = EXT:femanager/Resources/Private/Partials/
-		# cat=plugin.tx_femanager/file; type=string; label=Path to template layouts (FE)
+
+		# cat=plugin.tx_femanager/file; type=string; label= Path to template layouts (FE)
 		layoutRootPath = EXT:femanager/Resources/Private/Layouts/
 	}
 	persistence {
-		# cat=plugin.tx_femanager//a; type=string; label=Default storage PID
+		# cat=plugin.tx_femanager//a; type=int+; label= Default storage PID
 		storagePid =
 	}
 	settings {
