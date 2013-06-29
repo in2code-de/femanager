@@ -51,11 +51,12 @@ class StoreInDatabase {
 
 	/**
 	 * Executes the storage
+	 *
+	 * @return int uid of inserted record
 	 */
 	public function execute() {
-		\TYPO3\CMS\Core\Utility\DebugUtility::debug($this->table, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
-
-		$GLOBALS['TYPO3_DB']->exec_INSERTquery($this->getTable(), $values);
+		$GLOBALS['TYPO3_DB']->exec_INSERTquery($this->getTable(), $this->getProperties());
+		return $GLOBALS['TYPO3_DB']->sql_insert_id();
 	}
 
 	/**
@@ -65,7 +66,8 @@ class StoreInDatabase {
 	 * @return void
 	 */
 	public function setTable($table) {
-		$this->table = str_replace('.', '', $table);
+		$table = preg_replace('/[^a-zA-Z0-9_-]/', '', $table); // remove not allowed signs
+		$this->table = $table;
 	}
 
 	/**
@@ -78,6 +80,15 @@ class StoreInDatabase {
 	}
 
 	/**
+	 * Read properties
+	 *
+	 * @return array
+	 */
+	public function getProperties() {
+		return $this->properties;
+	}
+
+	/**
 	 * Add property/value pair to array
 	 *
 	 * @param $propertyName
@@ -85,6 +96,7 @@ class StoreInDatabase {
 	 * @return void
 	 */
 	public function addProperty($propertyName, $value) {
+		$propertyName = preg_replace('/[^a-zA-Z0-9_-]/', '', $propertyName); // remove not allowed signs
 		$this->properties[$propertyName] = $value;
 	}
 

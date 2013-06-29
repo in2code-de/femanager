@@ -492,7 +492,9 @@ plugin.tx_femanager {
 				debug = 0
 			}
 
-			# Save user values to any other table (e.g. tt_address or something else)
+			# Save user values to one or more other tables (e.g. tt_address or something else)
+			#       With .field=[fieldname] you have access to the user object
+			#       Possible values are: username, address, city, company, country, email, fax, firstName, lastName, middleName, name, password, telephone, fax, title, www, zip and lastGeneratedUid)
 			storeInDatabase {
 				tt_address {
 					_enable = TEXT
@@ -502,10 +504,16 @@ plugin.tx_femanager {
 					pid.value = 21
 
 					name = TEXT
-					name.value = test
+					name.field = username
 
 					email = TEXT
-					email.value = a@b.de
+					email.field = email
+
+					first_name = TEXT
+					first_name.field = firstName
+
+					last_name = TEXT
+					last_name.field = lastName
 				}
 			}
 
