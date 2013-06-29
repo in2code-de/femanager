@@ -110,7 +110,7 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 				// overwrite properties
 				$values = GeneralUtility::xml2array($user->getTxFemanagerChangerequest(), '', 0, 'changes');
 				foreach ((array) $values as $field => $value) {
-					if ($field != 'usergroup') {
+					if ($field != 'usergroup' && method_exists($user, 'set' . ucfirst($field))) {
 						$user->{'set' . ucfirst($field)}($value['new']);
 					} else {
 						$user->removeAllUsergroups();

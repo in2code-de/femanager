@@ -26,7 +26,7 @@
 									<f:comment>
 										If some fields are selected in the flexform
 									</f:comment>
-									<f:for each="{femanager:misc.explode(string:'{settings.new.fields}')}" as="field">
+									<f:for each="{femanager:misc.explode(string:'{settings.edit.fields}')}" as="field">
 										<f:render partial="Fields/{femanager:misc.upper(string:'{field}')}" arguments="{_all}" />
 									</f:for>
 									<f:render partial="Fields/SubmitUpdate" arguments="{_all}" />

@@ -167,7 +167,7 @@
 				<source>Select Fields for New-Form (empty = all fields)</source>
 			</trans-unit>
 			<trans-unit id="flexform.new.overrideUserGroup">
-				<source>Select related Usergroups</source>
+				<source>Select Usergroups for new Users</source>
 			</trans-unit>
 			<trans-unit id="flexform.new.confirmByUser">
 				<source>Registration must be confirmed from sender</source>

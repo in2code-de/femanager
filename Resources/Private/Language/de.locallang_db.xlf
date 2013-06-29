@@ -167,7 +167,7 @@
 				<target state="translated">Felder für Formular wählen (keine = alle Felder)</target>
 			</trans-unit>
 			<trans-unit id="flexform.new.overrideUserGroup">
-				<target state="translated">Zugewiesene Benutzergruppen</target>
+				<target state="translated">Zugewiesene Benutzergruppen für neue Benutzer</target>
 			</trans-unit>
 			<trans-unit id="flexform.new.confirmByUser">
 				<target state="translated">Registrierung muss vom Benutzer bestätigt werden</target>

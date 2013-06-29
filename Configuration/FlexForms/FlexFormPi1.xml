@@ -248,26 +248,22 @@
 										<numIndex index="1">zip</numIndex>
 									</numIndex>
 									<numIndex index="13" type="array">
-										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.zip</numIndex>
-										<numIndex index="1">zip</numIndex>
-									</numIndex>
-									<numIndex index="14" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.city</numIndex>
 										<numIndex index="1">city</numIndex>
 									</numIndex>
-									<numIndex index="15" type="array">
+									<numIndex index="14" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.country</numIndex>
 										<numIndex index="1">country</numIndex>
 									</numIndex>
-									<numIndex index="16" type="array">
+									<numIndex index="15" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.www</numIndex>
 										<numIndex index="1">www</numIndex>
 									</numIndex>
-									<numIndex index="17" type="array">
-										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.c</numIndex>
-										<numIndex index="1">country</numIndex>
+									<numIndex index="16" type="array">
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.company</numIndex>
+										<numIndex index="1">company</numIndex>
 									</numIndex>
-									<numIndex index="18" type="array">
+									<numIndex index="17" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.image</numIndex>
 										<numIndex index="1">image</numIndex>
 									</numIndex>

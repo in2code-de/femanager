@@ -237,6 +237,7 @@ class Div {
 		$ignoreProperties = array(
 			'txFemanagerChangerequest',
 			'ignoreDirty',
+			'isOnline',
 			'lastlogin'
 		);
 		foreach ($object1->_getProperties() as $propertyName => $propertyValue) {
