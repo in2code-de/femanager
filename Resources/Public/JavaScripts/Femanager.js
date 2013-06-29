@@ -90,12 +90,17 @@ function createUploader() {
  * @return string		Base Url
  */
 function getBaseUrl() {
+	var baseurl;
 	if (jQuery('base').length > 0) {
 		baseurl = jQuery('base').attr('href');
 	} else if (window.location.hostname.indexOf('localhost') !== -1) {
 		baseurl = '';
 	} else {
-		baseurl = window.location.hostname;
+		if (window.location.protocol != "https:") {
+			baseurl = 'http://' + window.location.hostname;
+		} else {
+			baseurl = 'https://' + window.location.hostname;
+		}
 	}
 	return baseurl;
 }

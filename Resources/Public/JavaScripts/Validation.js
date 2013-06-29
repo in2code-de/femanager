@@ -142,13 +142,16 @@ jQuery.fn.femanagerValidation = function() {
 	 */
 	function getBaseUrl() {
 		var baseurl;
-
-		if ($('base').length > 0) {
-			baseurl = $('base').attr('href');
+		if (jQuery('base').length > 0) {
+			baseurl = jQuery('base').attr('href');
 		} else if (window.location.hostname.indexOf('localhost') !== -1) {
 			baseurl = '';
 		} else {
-			baseurl = window.location.hostname;
+			if (window.location.protocol != "https:") {
+				baseurl = 'http://' + window.location.hostname;
+			} else {
+				baseurl = 'https://' + window.location.hostname;
+			}
 		}
 		return baseurl;
 	}
