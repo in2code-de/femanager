@@ -133,6 +133,8 @@
 								<autoSizeMax>20</autoSizeMax>
 								<minitems>0</minitems>
 								<allowNonIdValues>1</allowNonIdValues>
+								<itemsProcFunc>In2\Femanager\Utility\FlexFormFieldSelection->addOptions</itemsProcFunc>
+								<itemsProcFuncTab>new</itemsProcFuncTab>
 							</config>
 						</TCEforms>
 					</settings.new.fields>

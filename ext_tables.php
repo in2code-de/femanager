@@ -51,6 +51,13 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/FlexFormPi1.xml');
 
 /**
+ * Load UserFunc for FlexForm Field selection
+ */
+if (TYPO3_MODE == 'BE') {
+	require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FlexFormFieldSelection.php');
+}
+
+/**
  * Table configuration fe_users
  */
 $tempColumns = array (
