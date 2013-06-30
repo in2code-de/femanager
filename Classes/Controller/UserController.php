@@ -93,7 +93,7 @@ class UserController extends \In2\Femanager\Controller\GeneralController {
 	 * @return void
 	 */
 	public function validateAction($validation = NULL, $value = NULL, $field = NULL) {
-		$validater = $this->objectManager->get('\In2\Femanager\Domain\Validator\JavaScriptValidator');
+		$validater = $this->objectManager->get('\In2\Femanager\Domain\Validator\ClientsideValidator');
 		$validater->setValidationSettingsString($validation);
 		$validater->setValue($value);
 		$validater->setFieldName($field);

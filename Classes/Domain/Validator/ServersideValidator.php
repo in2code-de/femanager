@@ -1,7 +1,7 @@
 <?php
 namespace In2\Femanager\Domain\Validator;
 
-class MainValidator extends \In2\Femanager\Domain\Validator\GeneralValidator {
+class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidator {
 
 	/**
 	 * Validation of given Params

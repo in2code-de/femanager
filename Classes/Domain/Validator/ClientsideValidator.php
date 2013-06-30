@@ -4,7 +4,7 @@ namespace In2\Femanager\Domain\Validator;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \In2\Femanager\Utility\Div;
 
-class JavaScriptValidator extends \In2\Femanager\Domain\Validator\GeneralValidator {
+class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidator {
 
 	/**
 	 * Validation settings string

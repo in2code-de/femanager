@@ -55,7 +55,7 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 	 * action create
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user
-	 * @validate $user In2\Femanager\Domain\Validator\MainValidator
+	 * @validate $user In2\Femanager\Domain\Validator\ServersideValidator
 	 * @validate $user In2\Femanager\Domain\Validator\PasswordValidator
 	 * @return void
 	 */
