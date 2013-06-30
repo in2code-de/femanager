@@ -34,6 +34,14 @@ namespace In2\Femanager\Controller;
 class UserController extends \In2\Femanager\Controller\GeneralController {
 
 	/**
+	 * ClientsideValidator
+	 *
+	 * @var \In2\Femanager\Domain\Validator\ClientsideValidator
+	 * @inject
+	 */
+	protected $clientsideValidator;
+
+	/**
 	 * action list
 	 *
 	 * @return void
@@ -93,12 +101,11 @@ class UserController extends \In2\Femanager\Controller\GeneralController {
 	 * @return void
 	 */
 	public function validateAction($validation = NULL, $value = NULL, $field = NULL) {
-		$validator = $this->objectManager->get('\In2\Femanager\Domain\Validator\ClientsideValidator');
-		$validator->setValidationSettingsString($validation);
-		$validator->setValue($value);
-		$validator->setFieldName($field);
-		$isValid = $validator->validateField();
-		$messages = $validator->getMessages();
+		$this->clientsideValidator->setValidationSettingsString($validation);
+		$this->clientsideValidator->setValue($value);
+		$this->clientsideValidator->setFieldName($field);
+		$isValid = $this->clientsideValidator->validateField();
+		$messages = $this->clientsideValidator->getMessages();
 
 		$this->view->assign('messages', $messages);
 		$this->view->assign('isValid', $isValid);
