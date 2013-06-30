@@ -275,6 +275,8 @@
 								<autoSizeMax>20</autoSizeMax>
 								<minitems>0</minitems>
 								<allowNonIdValues>1</allowNonIdValues>
+								<itemsProcFunc>In2\Femanager\Utility\FlexFormFieldSelection->addOptions</itemsProcFunc>
+								<itemsProcFuncTab>edit</itemsProcFuncTab>
 							</config>
 						</TCEforms>
 					</settings.edit.fields>
