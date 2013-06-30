@@ -107,6 +107,16 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 								$this->isValid = FALSE;
 							}
 							break;
+
+						default:
+							// e.g. search for method validateCustom()
+							if (method_exists($this, 'validate' . ucfirst($validation))) {
+								if (!$this->{'validate' . ucfirst($validation)}($value, $validationSetting)) {
+									$this->addError('validationError' . ucfirst($validation), $field);
+									$this->isValid = FALSE;
+								}
+							}
+							break;
 					}
 				}
 			}
