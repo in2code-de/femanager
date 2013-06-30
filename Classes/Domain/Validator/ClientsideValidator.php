@@ -116,6 +116,17 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 						$this->isValid = FALSE;
 					}
 					break;
+
+				default:
+					// e.g. search for method validateCustom()
+					print_r(get_class_methods($this));
+					if (method_exists($this, 'validate' . ucfirst(Div::getValuesBeforeBrackets($validationSetting)))) {
+						if (!$this->{'validate' . ucfirst(Div::getValuesBeforeBrackets($validationSetting))}($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
+							$this->addMessage('validationError' . ucfirst($validationSetting));
+							$this->isValid = FALSE;
+						}
+					}
+					break;
 			}
 		}
 

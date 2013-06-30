@@ -87,18 +87,18 @@ class UserController extends \In2\Femanager\Controller\GeneralController {
 	/**
 	 * Call this Action from eID to validate field values
 	 *
-	 * @param \string $validation			Validation string like "required, email, min(10)"
-	 * @param \string $value				Given Field value
-	 * @param \string $fieldname			Fieldname like "username" or "email"
+	 * @param \string $validation Validation string like "required, email, min(10)"
+	 * @param \string $value Given Field value
+	 * @param \string $field Fieldname like "username" or "email"
 	 * @return void
 	 */
 	public function validateAction($validation = NULL, $value = NULL, $field = NULL) {
-		$validater = $this->objectManager->get('\In2\Femanager\Domain\Validator\ClientsideValidator');
-		$validater->setValidationSettingsString($validation);
-		$validater->setValue($value);
-		$validater->setFieldName($field);
-		$isValid = $validater->validateField();
-		$messages = $validater->getMessages();
+		$validator = $this->objectManager->get('\In2\Femanager\Domain\Validator\ClientsideValidator');
+		$validator->setValidationSettingsString($validation);
+		$validator->setValue($value);
+		$validator->setFieldName($field);
+		$isValid = $validator->validateField();
+		$messages = $validator->getMessages();
 
 		$this->view->assign('messages', $messages);
 		$this->view->assign('isValid', $isValid);

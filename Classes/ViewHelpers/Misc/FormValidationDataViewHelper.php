@@ -59,6 +59,7 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 				case 'max':
 				case 'mustInclude':
 				case 'inList':
+				default:
 					$string .= $validation;
 					$string .= '(' . str_replace(',', '|', $configuration) . ')';
 					break;

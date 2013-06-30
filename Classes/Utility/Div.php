@@ -358,6 +358,17 @@ class Div {
 	}
 
 	/**
+	 * Read values before brackets
+	 *
+	 * @param \string $value
+	 * @return \string
+	 */
+	public static function getValuesBeforeBrackets($value = 'test(1,2,3)') {
+		$valueParts = GeneralUtility::trimExplode('(', $value,1 );
+		return $valueParts[0];
+	}
+
+	/**
 	 * SendPost - Send values via curl to target
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user User properties
