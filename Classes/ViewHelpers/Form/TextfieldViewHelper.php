@@ -25,7 +25,7 @@ namespace In2\Femanager\ViewHelpers\Form;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class TextFieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldViewHelper {
+class TextfieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldViewHelper {
 
 	/**
 	 * Configuration Manager
