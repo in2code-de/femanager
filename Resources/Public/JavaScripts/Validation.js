@@ -90,7 +90,8 @@ jQuery.fn.femanagerValidation = function() {
 				'&tx_femanager_pi1[value]=' + element.val() +
 				'&tx_femanager_pi1[field]=' + element.attr('id') +
 				'&storagePid=' + $('#femanagerStoragePid').val() +
-				'&L=' + $('#femanagerLanguage').val(),
+				'&L=' + $('#femanagerLanguage').val() +
+				'&id=' + $('#femanagerPid').val(),
 			cache: false,
 			success: function(data) { // return values
 				requestCallback.addCallbackToQueue(true);

@@ -413,6 +413,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	public function assignForAll() {
 		$this->view->assign('languageUid', ($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ? $GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0));
 		$this->view->assign('storagePid', $this->allConfig['persistence']['storagePid']);
+		$this->view->assign('Pid', $GLOBALS['TSFE']->id);
 	}
 
 	/**
