@@ -34,10 +34,16 @@ class FlexFormFieldSelection {
 	 * @return int
 	 */
 	protected function getPid() {
+		$pid = 0;
 		$backUrl = GeneralUtility::_GP('returnUrl');
-		$urlParts = GeneralUtility::trimExplode('=', $backUrl, 1);
+		$urlParts = GeneralUtility::trimExplode('&', $backUrl, 1);
+		foreach ($urlParts as $part) {
+			if (stristr($part, 'id=')) {
+				$pid = str_replace('id=', '', $part);
+			}
+		}
 
-		return intval($urlParts[1]);
+		return intval($pid);
 	}
 
 }
