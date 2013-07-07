@@ -83,7 +83,7 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 	 * @return void
 	 */
 	public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation') {
-		$user = $this->userRepository->findByUid($user);
+		$user = $this->userRepository->findByUid($user); // workarround to also get hidden users
 
 		switch ($status) {
 			case 'userConfirmation': // registration confirmed by user
@@ -135,7 +135,7 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 						$this->finalCreate($user, 'new', 'createStatus');
 					}
 
-				} else { // has is not correct
+				} else { // hash is not correct
 					$this->flashMessageContainer->add(
 						LocalizationUtility::translate('createFailedProfile', 'femanager'),
 						'',

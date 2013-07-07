@@ -300,6 +300,10 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function finalCreate($user, $action, $redirectByActionName, $login = TRUE) {
+		// persist user (otherwise login is not possible if user is still disabled)
+		$persistenceManager = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager');
+		$persistenceManager->persistAll();
+
 		// login user
 		if ($login) {
 			$this->loginAfterCreate($user);
@@ -346,6 +350,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		if ($this->config['new.']['login'] != 1) {
 			return;
 		}
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($user);
 
 		$GLOBALS['TSFE']->fe_user->checkPid = '';
 		$info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
