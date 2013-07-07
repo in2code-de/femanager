@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'femanager',
-	'description' => 'FE-User Registration and Management based on Extbase and Fluid. This extension basicly works like sr_feuser_register.',
+	'description' => 'TYPO3 FE-User Registration and Management based on Extbase and Fluid with Namespaces and a lot of features and extension possibilities. This extension basicly works like sr_feuser_register.',
 	'category' => 'plugin',
 	'author' => 'Alex Kellner',
 	'author_email' => 'alexander.kellner@in2code.de',
@@ -27,7 +27,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '1.0.0',
+	'version' => '1.0.1',
 	'constraints' => array(
 		'depends' => array(
 			'extbase' => '6.0.0-6.2.99',
