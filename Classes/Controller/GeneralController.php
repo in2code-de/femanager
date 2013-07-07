@@ -63,6 +63,14 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	protected $persistenceManager;
 
 	/**
+	 * SignalSlot Dispatcher
+	 *
+	 * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
+	 * @inject
+	 */
+	protected $signalSlotDispatcher;
+
+	/**
 	 * Content Object
 	 *
 	 * @var object
@@ -235,12 +243,17 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$this->userRepository->update($user);
 		$this->persistenceManager->persistAll();
 
+		// add signal after profile update
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
+
+		// log
 		$this->div->log(
 			LocalizationUtility::translate('tx_femanager_domain_model_log.state.201', 'femanager'),
 			201,
 			$user
 		);
 
+		// redirect if turned on in TypoScript
 		$this->redirectByAction('edit');
 
 		$this->flashMessageContainer->add(
@@ -301,8 +314,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function finalCreate($user, $action, $redirectByActionName, $login = TRUE) {
 		// persist user (otherwise login is not possible if user is still disabled)
-		$persistenceManager = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager');
-		$persistenceManager->persistAll();
+		$this->persistenceManager->persistAll();
 
 		// login user
 		if ($login) {
@@ -332,6 +344,9 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
 		// store in database: store values in any wanted table
 		Div::storeInDatabasePreflight($user, $this->config, $this->cObj, $this->objectManager);
+
+		// add signal after user generation
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
 
 		// frontend redirect (if activated via TypoScript)
 		$this->redirectByAction($action);

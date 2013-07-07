@@ -66,6 +66,7 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 			$user->setEmail($user->getUsername());
 		}
 		Div::hashPassword($user, $this->settings['new']['passwordSave']); // convert password to md5 or sha1 hash
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this)); // add signal
 
 		if (!empty($this->settings['new']['confirmByUser']) || !empty($this->settings['new']['confirmByAdmin'])) {
 			$this->createRequest($user); // request user creation
