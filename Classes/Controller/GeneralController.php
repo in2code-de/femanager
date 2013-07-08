@@ -162,10 +162,6 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
 		if (!empty($this->settings['new']['confirmByUser'])) {
 
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('createRequestWaitingForUserConfirm', 'femanager')
-			);
-
 			// send email to user for confirmation
 			$this->div->sendEmail(
 				'createUserConfirmation',
@@ -182,6 +178,15 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 				$this->config['new.']['email.']['createUserConfirmation.']
 			);
 
+			// redirect by TypoScript
+			$this->redirectByAction('new', 'requestRedirect');
+
+			// add flashmessage
+			$this->flashMessageContainer->add(
+				LocalizationUtility::translate('createRequestWaitingForUserConfirm', 'femanager')
+			);
+
+			// redirect
 			$this->redirect('new');
 		}
 		if (!empty($this->settings['new']['confirmByAdmin'])) {
@@ -297,6 +302,9 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			$user
 		);
 
+		// redirect if turned on in TypoScript
+		$this->redirectByAction('edit', 'requestRedirect');
+
 		// add flashmessage
 		$this->flashMessageContainer->add(
 			LocalizationUtility::translate('updateRequest', 'femanager')
@@ -384,13 +392,14 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * Redirect
 	 *
 	 * @param \string $action		"new", "edit"
+	 * @param \string $category		"redirect", "requestRedirect" (subselection in TypoScript)
 	 * @return void
 	 */
-	protected function redirectByAction($action = 'new') {
+	protected function redirectByAction($action = 'new', $category = 'redirect') {
 		$target = null;
 		// redirect from TypoScript cObject
-		if ($this->cObj->cObjGetSingle($this->config[$action . '.']['redirect'], $this->config[$action . '.']['redirect.'])) {
-			$target = $this->cObj->cObjGetSingle($this->config[$action . '.']['redirect'], $this->config[$action . '.']['redirect.']);
+		if ($this->cObj->cObjGetSingle($this->config[$action . '.'][$category], $this->config[$action . '.'][$category . '.'])) {
+			$target = $this->cObj->cObjGetSingle($this->config[$action . '.'][$category], $this->config[$action . '.'][$category . '.']);
 		}
 
 		// if redirect target
