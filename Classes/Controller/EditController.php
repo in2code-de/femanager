@@ -58,6 +58,7 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 	 * @return void
 	 */
 	public function updateAction(User $user) {
+		/*
 		// check if there are no changes
 		if (!Div::isDirtyObject($user)) {
 			$this->flashMessageContainer->add(
@@ -74,7 +75,7 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 		}
 		Div::hashPassword($user, $this->settings['edit']['passwordSave']); // convert password to md5 or sha1 hash
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this)); // add signal
-
+*/
 		if (!empty($this->settings['edit']['confirmByAdmin'])) {
 			$this->updateRequest($user); // update request
 		} else {

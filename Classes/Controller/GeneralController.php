@@ -269,13 +269,15 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	/**
 	 * Prefix method to updateAction(): Update must be confirmed by Admin
 	 *
-	 * @param \array $user
+	 * @param \In2\Femanager\Domain\Model\User $user
 	 * @return void
 	 */
 	public function updateRequest($user) {
 		$existingUser = $this->userRepository->findByUid($user->getUid()); // read stored, existing values
 		$dirtyProperties = Div::getDirtyPropertiesFromObject($existingUser, $user); // get changes
 		$user->setIgnoreDirty(TRUE); // don't auto persist properties
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($dirtyProperties);
+		die;
 		$user->setUserGroup($existingUser->getUserGroup()); // workarround to disable auto persistance of usergroup
 		$existingUser->setTxFemanagerChangerequest( // store change request values as xml to user
 			GeneralUtility::array2xml($dirtyProperties, '', 0, 'changes')

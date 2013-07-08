@@ -233,6 +233,8 @@ class Div {
 	 * 			[firstName][new] = Alexander
 	 */
 	public static function getDirtyPropertiesFromObject($object1, $object2) {
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($object1);
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($object2);
 		$dirtyProperties = array();
 		$ignoreProperties = array(
 			'txFemanagerChangerequest',
