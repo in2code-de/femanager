@@ -226,13 +226,12 @@ class Div {
 	/**
 	 * Get changed properties (compare two objects with same getter methods)
 	 *
-	 * @param $object1			Old, stored object
-	 * @param $object2			Changed object
+	 * @param \In2\Femanager\Domain\Model\User $changedObject			Changed object
 	 * @return \array
 	 * 			[firstName][old] = Alex
 	 * 			[firstName][new] = Alexander
 	 */
-	public static function getDirtyPropertiesFromObject($object1, $object2) {
+	public static function getDirtyPropertiesFromObject($changedObject) {
 		$dirtyProperties = array();
 		$ignoreProperties = array(
 			'txFemanagerChangerequest',
@@ -240,18 +239,19 @@ class Div {
 			'isOnline',
 			'lastlogin'
 		);
-		foreach ($object1->_getProperties() as $propertyName => $propertyValue) {
-			if (!method_exists($object2, 'get' . ucfirst($propertyName)) || in_array($propertyName, $ignoreProperties)) {
+
+		foreach ($changedObject->_getCleanProperties() as $propertyName => $propertyValue) {
+			if (!method_exists($changedObject, 'get' . ucfirst($propertyName)) || in_array($propertyName, $ignoreProperties)) {
 				continue;
 			}
-			if (!is_object($propertyValue)) { // ignore usergroup
-				if ($propertyValue != $object2->{'get' . ucfirst($propertyName)}()) {
+			if (!is_object($propertyValue)) { // if not usergroup
+				if ($propertyValue != $changedObject->{'get' . ucfirst($propertyName)}()) {
 					$dirtyProperties[$propertyName]['old'] = $propertyValue;
-					$dirtyProperties[$propertyName]['new'] = $object2->{'get' . ucfirst($propertyName)}();
+					$dirtyProperties[$propertyName]['new'] = $changedObject->{'get' . ucfirst($propertyName)}();
 				}
-			} else {
+			} else { // if usergroup
 				$titlesOld = self::implodeObjectStorageOnProperty($propertyValue);
-				$titlesNew = self::implodeObjectStorageOnProperty($object2->{'get' . ucfirst($propertyName)}());
+				$titlesNew = self::implodeObjectStorageOnProperty($changedObject->{'get' . ucfirst($propertyName)}());
 				if ($titlesOld != $titlesNew) {
 					$dirtyProperties[$propertyName]['old'] = $titlesOld;
 					$dirtyProperties[$propertyName]['new'] = $titlesNew;
@@ -259,6 +259,30 @@ class Div {
 			}
 		}
 		return $dirtyProperties;
+	}
+
+	/**
+	 * overwrite user with old values and xml with new values
+	 *
+	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param \array $dirtyProperties
+	 * @return \In2\Femanager\Domain\Model\User $user
+	 */
+	public static function rollbackUserWithChangeRequest($user, $dirtyProperties) {
+		$existingUserProperties = $user->_getCleanProperties(); // get existing properties array
+
+		// reset old values
+		$user->setUserGroup($existingUserProperties['usergroup']);
+		foreach ($dirtyProperties as $propertyName => $propertyValue) {
+			$user->{'set' . ucfirst($propertyName)}($existingUserProperties[$propertyName]);
+		}
+
+		// store changes as xml in field fe_users.tx_femanager_changerequest
+		$user->setTxFemanagerChangerequest(
+			GeneralUtility::array2xml($dirtyProperties, '', 0, 'changes')
+		);
+
+		return $user;
 	}
 
 	/**
