@@ -292,6 +292,9 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			$user
 		);
 
+		// redirect if turned on in TypoScript
+		$this->redirectByAction('edit', 'requestRedirect');
+
 		// add flashmessage
 		$this->flashMessageContainer->add(
 			LocalizationUtility::translate('updateRequest', 'femanager')
