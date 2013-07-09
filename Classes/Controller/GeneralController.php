@@ -379,6 +379,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * Redirect
 	 *
 	 * @param \string $action		"new", "edit"
+	 * @param \string $category		"redirect", "requestRedirect" value from TypoScript
 	 * @return void
 	 */
 	protected function redirectByAction($action = 'new', $category = 'redirect') {
