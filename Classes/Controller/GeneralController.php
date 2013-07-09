@@ -255,7 +255,6 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function updateRequest($user) {
-		$existingUserProperties = $user->_getCleanProperties(); // get existing properties array
 		$dirtyProperties = Div::getDirtyPropertiesFromObject($user); // get changed properties
 		$user = Div::rollbackUserWithChangeRequest($user, $dirtyProperties); // overwrite user with old values and xml with new values
 
@@ -266,7 +265,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			array($user->getEmail() => $user->getUsername()),
 			'New Profile change request', // will be overwritten with TypoScript
 			array(
-				 'user' => $existingUserProperties,
+				 'user' => $user,
 				 'changes' => $dirtyProperties,
 				 'hash' => Div::createHash($user->getUsername() . $user->getUid())
 			),
