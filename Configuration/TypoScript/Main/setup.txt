@@ -24,18 +24,18 @@ plugin.tx_femanager {
 			login = 1
 
 			# redirect user (or admin if adminconfirmation) after profile creation
-			redirect = TEXT
-			redirect {
-				typolink.parameter = 1
-				typolink.returnLast = url
-			}
+#			redirect = TEXT
+#			redirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
 
 			# redirect user after profile creation request (only if user confirmation is activated)
-			requestRedirect = TEXT
-			requestRedirect {
-				typolink.parameter = 1
-				typolink.returnLast = url
-			}
+#			requestRedirect = TEXT
+#			requestRedirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
 
 			# prefilling (empty) input fields with values from TypoScript
 			prefill {
@@ -535,18 +535,18 @@ plugin.tx_femanager {
 			#fillEmailWithUsername = 1
 
 			# redirect user (or admin if adminconfirmation) after profile update
-			redirect = TEXT
-			redirect {
-				typolink.parameter = 1
-				typolink.returnLast = url
-			}
+#			redirect = TEXT
+#			redirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
 
 			# redirect user after profile update request (only if admin confirmation is activated)
-			requestRedirect = TEXT
-			requestRedirect {
-				typolink.parameter = 3
-				typolink.returnLast = url
-			}
+#			requestRedirect = TEXT
+#			requestRedirect {
+#				typolink.parameter = 3
+#				typolink.returnLast = url
+#			}
 
 			# prefilling (empty) input fields with values from TypoScript
 			prefill {
