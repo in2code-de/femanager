@@ -63,6 +63,14 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	protected $persistenceManager;
 
 	/**
+	 * SignalSlot Dispatcher
+	 *
+	 * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
+	 * @inject
+	 */
+	protected $signalSlotDispatcher;
+
+	/**
 	 * Content Object
 	 *
 	 * @var object
@@ -154,10 +162,6 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
 		if (!empty($this->settings['new']['confirmByUser'])) {
 
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('createRequestWaitingForUserConfirm', 'femanager')
-			);
-
 			// send email to user for confirmation
 			$this->div->sendEmail(
 				'createUserConfirmation',
@@ -174,6 +178,15 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 				$this->config['new.']['email.']['createUserConfirmation.']
 			);
 
+			// redirect by TypoScript
+			$this->redirectByAction('new', 'requestRedirect');
+
+			// add flashmessage
+			$this->flashMessageContainer->add(
+				LocalizationUtility::translate('createRequestWaitingForUserConfirm', 'femanager')
+			);
+
+			// redirect
 			$this->redirect('new');
 		}
 		if (!empty($this->settings['new']['confirmByAdmin'])) {
@@ -295,6 +308,9 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function finalCreate($user, $action, $redirectByActionName, $login = TRUE) {
+		// persist user (otherwise login is not possible if user is still disabled)
+		$this->persistenceManager->persistAll();
+
 		// login user
 		if ($login) {
 			$this->loginAfterCreate($user);
@@ -318,6 +334,15 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			);
 		}
 
+		// sendpost: send values via POST to any target
+		Div::sendPost($user, $this->config, $this->cObj);
+
+		// store in database: store values in any wanted table
+		Div::storeInDatabasePreflight($user, $this->config, $this->cObj, $this->objectManager);
+
+		// add signal after user generation
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
+
 		// frontend redirect (if activated via TypoScript)
 		$this->redirectByAction($action);
 
@@ -335,6 +360,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		if ($this->config['new.']['login'] != 1) {
 			return;
 		}
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($user);
 
 		$GLOBALS['TSFE']->fe_user->checkPid = '';
 		$info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
@@ -355,11 +381,11 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @param \string $action		"new", "edit"
 	 * @return void
 	 */
-	protected function redirectByAction($action = 'new') {
+	protected function redirectByAction($action = 'new', $category = 'redirect') {
 		$target = null;
 		// redirect from TypoScript cObject
-		if ($this->cObj->cObjGetSingle($this->config[$action . '.']['redirect'], $this->config[$action . '.']['redirect.'])) {
-			$target = $this->cObj->cObjGetSingle($this->config[$action . '.']['redirect'], $this->config[$action . '.']['redirect.']);
+		if ($this->cObj->cObjGetSingle($this->config[$action . '.'][$category], $this->config[$action . '.'][$category . '.'])) {
+			$target = $this->cObj->cObjGetSingle($this->config[$action . '.'][$category], $this->config[$action . '.'][$category . '.']);
 		}
 
 		// if redirect target
@@ -377,7 +403,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function initializeCreateAction() {
 		// workarround for empty usergroups
-		if ($this->pluginVariables['user']['usergroup'][0] < 1) {
+		if (intval($this->pluginVariables['user']['usergroup'][0]) === 0) {
 			unset($this->pluginVariables['user']['usergroup']);
 		}
 		$this->request->setArguments($this->pluginVariables);
@@ -390,7 +416,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function initializeUpdateAction() {
 		// workarround for empty usergroups
-		if ($this->pluginVariables['user']['usergroup'][0] < 1) {
+		if (intval($this->pluginVariables['user']['usergroup'][0]['__identity']) === 0) {
 			unset($this->pluginVariables['user']['usergroup']);
 		}
 		$this->request->setArguments($this->pluginVariables);
@@ -402,6 +428,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	public function assignForAll() {
 		$this->view->assign('languageUid', ($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ? $GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0));
 		$this->view->assign('storagePid', $this->allConfig['persistence']['storagePid']);
+		$this->view->assign('Pid', $GLOBALS['TSFE']->id);
 	}
 
 	/**
@@ -420,7 +447,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$this->allUserGroups = $this->userGroupRepository->findAll();
 
 		// check if ts is included
-		if ($this->settings['_TypoScriptIncluded'] != 1 && !GeneralUtility::_GP('eID')) {
+		if ($this->settings['_TypoScriptIncluded'] != 1 && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
 			$this->flashMessageContainer->add(
 				LocalizationUtility::translate('error_no_typoscript', 'femanager'),
 				'',
@@ -429,7 +456,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		}
 
 		// check if storage pid was set
-		if (intval($this->allConfig['persistence']['storagePid']) === 0 && !GeneralUtility::_GP('eID')) {
+		if (intval($this->allConfig['persistence']['storagePid']) === 0 && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
 			$this->flashMessageContainer->add(
 				LocalizationUtility::translate('error_no_storagepid', 'femanager'),
 				'',

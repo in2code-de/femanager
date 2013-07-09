@@ -53,7 +53,7 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 	 * action update
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user
-	 * @validate $user In2\Femanager\Domain\Validator\MainValidator
+	 * @validate $user In2\Femanager\Domain\Validator\ServersideValidator
 	 * @validate $user In2\Femanager\Domain\Validator\PasswordValidator
 	 * @return void
 	 */
@@ -73,6 +73,8 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 			$user->setEmail($user->getUsername());
 		}
 		Div::hashPassword($user, $this->settings['edit']['passwordSave']); // convert password to md5 or sha1 hash
+
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this)); // add signal
 
 		if (!empty($this->settings['edit']['confirmByAdmin'])) {
 			$this->updateRequest($user); // update request
@@ -110,7 +112,7 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 				// overwrite properties
 				$values = GeneralUtility::xml2array($user->getTxFemanagerChangerequest(), '', 0, 'changes');
 				foreach ((array) $values as $field => $value) {
-					if ($field != 'usergroup') {
+					if ($field != 'usergroup' && method_exists($user, 'set' . ucfirst($field))) {
 						$user->{'set' . ucfirst($field)}($value['new']);
 					} else {
 						$user->removeAllUsergroups();
