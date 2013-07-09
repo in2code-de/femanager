@@ -62,7 +62,9 @@
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.image" /></td>
 			<td>
-				<img src="{embedImages.0}" alt="Error in User Image">
+				<f:if condition="{embedImages.0}">
+					<img src="{embedImages.0}" alt="Error in User Image">
+				</f:if>
 			</td>
 		</tr>
 </table>
