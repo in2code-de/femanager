@@ -580,7 +580,6 @@ plugin.tx_femanager {
 				}
 				usergroup {
 					#inList = 1,2,3
-					#\Validation\xyzvalidator.php
 				}
 			}
 
