@@ -101,9 +101,10 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 *
 	 * @param $field
 	 * @param $value
+	 * @param \In2\Femanager\Domain\Model\User $user Existing User (only relevant for edit form)
 	 * @return query object
 	 */
-	public function checkUniqueDb($field, $value) {
+	public function checkUniqueDb($field, $value, \In2\Femanager\Domain\Model\User $user = null) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
@@ -112,12 +113,45 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$query->equals($field, $value),
 			$query->equals('deleted', 0)
 		);
+		if (method_exists($user, 'getUid')) {
+			$and[] = $query->logicalNot(
+				$query->equals('uid', intval($user->getUid()))
+			);
+		}
+		$constraint = $query->logicalAnd($and);
 
-		$query->matching(
-			$query->logicalAnd($and)
+		$query->matching($constraint);
+
+		$users = $query->execute()->getFirst();
+		return $users;
+	}
+
+	/**
+	 * Check if there is already an entry in the table on current page
+	 *
+	 * @param $field
+	 * @param $value
+	 * @param \In2\Femanager\Domain\Model\User $user Existing User (only relevant for edit form)
+	 * @return query object
+	 */
+	public function checkUniquePage($field, $value, \In2\Femanager\Domain\Model\User $user = null) {
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
+
+		$and = array(
+			$query->equals($field, $value),
+			$query->equals('deleted', 0)
 		);
+		if (method_exists($user, 'getUid')) {
+			$and[] = $query->logicalNot(
+				$query->equals('uid', intval($user->getUid()))
+			);
+		}
+		$constraint = $query->logicalAnd($and);
 
-		$users = $query->execute();
+		$query->matching($constraint);
+
+		$users = $query->execute()->getFirst();
 		return $users;
 	}
 

@@ -98,12 +98,14 @@ class UserController extends \In2\Femanager\Controller\GeneralController {
 	 * @param \string $validation Validation string like "required, email, min(10)"
 	 * @param \string $value Given Field value
 	 * @param \string $field Fieldname like "username" or "email"
+	 * @param \In2\Femanager\Domain\Model\User $user Existing User (only relevant for edit form)
 	 * @return void
 	 */
-	public function validateAction($validation = NULL, $value = NULL, $field = NULL) {
+	public function validateAction($validation = NULL, $value = NULL, $field = NULL, \In2\Femanager\Domain\Model\User $user = NULL) {
 		$this->clientsideValidator->setValidationSettingsString($validation);
 		$this->clientsideValidator->setValue($value);
 		$this->clientsideValidator->setFieldName($field);
+		$this->clientsideValidator->setUser($user);
 		$isValid = $this->clientsideValidator->validateField();
 		$messages = $this->clientsideValidator->getMessages();
 

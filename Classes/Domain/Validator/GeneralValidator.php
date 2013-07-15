@@ -124,11 +124,12 @@ class GeneralValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractV
 	 *
 	 * @param \string $value
 	 * @param \string $field
+	 * @param \In2\Femanager\Domain\Model\User $user Existing User (only relevant for edit form)
 	 * @return \bool
 	 */
-	protected function validateUniquePage($value, $field) {
-		$user = $this->userRepository->{'findOneBy' . ucfirst($field)}($value);
-		return !is_object($user);
+	protected function validateUniquePage($value, $field, \In2\Femanager\Domain\Model\User $user = null) {
+		$foundUser = $this->userRepository->checkUniquePage($field, $value, $user);
+		return !is_object($foundUser);
 	}
 
 	/**
@@ -136,11 +137,12 @@ class GeneralValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractV
 	 *
 	 * @param \string $value
 	 * @param \string $field			Fieldname like "username" or "email"
+	 * @param \In2\Femanager\Domain\Model\User $user Existing User (only relevant for edit form)
 	 * @return \bool
 	 */
-	protected function validateUniqueDb($value, $field) {
-		$user = $this->userRepository->checkUniqueDb($field, $value);
-		return !count($user);
+	protected function validateUniqueDb($value, $field, \In2\Femanager\Domain\Model\User $user = null) {
+		$foundUser = $this->userRepository->checkUniqueDb($field, $value, $user);
+		return !is_object($foundUser);
 	}
 
 	/**

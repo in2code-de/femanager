@@ -81,14 +81,14 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 							break;
 
 						case 'uniqueInPage':
-							if (!$this->validateUniquePage($value, $field)) {
+							if (!$this->validateUniquePage($value, $field, $user)) {
 								$this->addError('validationErrorUniquePage', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'uniqueInDb':
-							if (!$this->validateUniqueDb($value, $field)) {
+							if (!$this->validateUniqueDb($value, $field, $user)) {
 								$this->addError('validationErrorUniqueDb', $field);
 								$this->isValid = FALSE;
 							}

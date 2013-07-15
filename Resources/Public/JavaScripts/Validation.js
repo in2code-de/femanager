@@ -82,13 +82,16 @@ jQuery.fn.femanagerValidation = function() {
 	 * @return void
 	 */
 	function validateField(element) {
+		var user = $('input[name="tx_femanager_pi1[user][__identity]"]').val();
 		var url = getBaseUrl() + '/index.php' + '?eID=' + 'femanagerValidate';
+
 		$.ajax({
 			url: url,
 			data:
 				'tx_femanager_pi1[validation]=' + element.data('validation') +
 				'&tx_femanager_pi1[value]=' + element.val() +
 				'&tx_femanager_pi1[field]=' + element.attr('id') +
+				'&tx_femanager_pi1[user]=' + (user != undefined ? user : 0) +
 				'&storagePid=' + $('#femanagerStoragePid').val() +
 				'&L=' + $('#femanagerLanguage').val() +
 				'&id=' + $('#femanagerPid').val(),

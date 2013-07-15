@@ -30,6 +30,13 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 	protected $fieldName;
 
 	/**
+	 * User
+	 *
+	 * @var \In2\Femanager\Domain\Model\User
+	 */
+	protected $user = NULL;
+
+	/**
 	 * Error message container
 	 *
 	 * @var \array
@@ -90,14 +97,14 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 					break;
 
 				case 'uniqueInPage':
-					if (!$this->validateUniquePage($this->getValue(), $this->getFieldName())) {
+					if (!$this->validateUniquePage($this->getValue(), $this->getFieldName(), $this->getUser())) {
 						$this->addMessage('validationErrorUniquePage');
 						$this->isValid = FALSE;
 					}
 					break;
 
 				case 'uniqueInDb':
-					if (!$this->validateUniqueDb($this->getValue(), $this->getFieldName())) {
+					if (!$this->validateUniqueDb($this->getValue(), $this->getFieldName(), $this->getUser())) {
 						$this->addMessage('validationErrorUniqueDb');
 						$this->isValid = FALSE;
 					}
@@ -135,7 +142,7 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 	/**
 	 * Set validation
 	 *
-	 * @param \string $validation
+	 * @param \string $validationSettingsString
 	 * @return void
 	 */
 	public function setValidationSettingsString($validationSettingsString) {
@@ -189,7 +196,8 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 	}
 
 	/**
-	 * @param string $field
+	 * @param string $fieldName
+	 * @return void
 	 */
 	public function setFieldName($fieldName) {
 		$this->fieldName = $fieldName;
@@ -200,6 +208,20 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 	 */
 	public function getFieldName() {
 		return $this->fieldName;
+	}
+
+	/**
+	 * @param \In2\Femanager\Domain\Model\User $user
+	 */
+	public function setUser($user) {
+		$this->user = $user;
+	}
+
+	/**
+	 * @return \In2\Femanager\Domain\Model\User
+	 */
+	public function getUser() {
+		return $this->user;
 	}
 }
 ?>
