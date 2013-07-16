@@ -83,7 +83,7 @@ jQuery.fn.femanagerValidation = function() {
 	 */
 	function validateField(element) {
 		var user = $('input[name="tx_femanager_pi1[user][__identity]"]').val();
-		var url = getBaseUrl() + '/index.php' + '?eID=' + 'femanagerValidate';
+		var url = getBaseUrl() + 'index.php' + '?eID=' + 'femanagerValidate';
 
 		$.ajax({
 			url: url,
@@ -152,9 +152,9 @@ jQuery.fn.femanagerValidation = function() {
 			baseurl = '';
 		} else {
 			if (window.location.protocol != "https:") {
-				baseurl = 'http://' + window.location.hostname;
+				baseurl = 'http://' + window.location.hostname + '/';
 			} else {
-				baseurl = 'https://' + window.location.hostname;
+				baseurl = 'https://' + window.location.hostname + '/';
 			}
 		}
 		return baseurl;
