@@ -200,12 +200,21 @@ class Div {
 	 * @return void
 	 */
 	public static function hashPassword(&$user, $method) {
-		if ($method == 'md5') {
-			$user->setPassword(md5($user->getPassword()));
-		}
-		if ($method == 'sha1') {
-			$user->setPassword(sha1($user->getPassword()));
-		}
+		switch ($method) {
+			case 'md5':
+				$user->setPassword(md5($user->getPassword()));
+				break;
+			case 'sha1':
+				$user->setPassword(sha1($user->getPassword()));
+				break;
+			default:
+				if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('saltedpasswords')) {
+					if (\TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility::isUsageEnabled('FE')) {
+						$objInstanceSaltedPW = \TYPO3\CMS\Saltedpasswords\Salt\SaltFactory::getSaltingInstance();
+						$user->setPassword($objInstanceSaltedPW->getHashedPassword($user->getPassword()));
+					}
+				}
+ 		}
 	}
 
 	/**
@@ -244,19 +253,26 @@ class Div {
 			if (!method_exists($changedObject, 'get' . ucfirst($propertyName)) || in_array($propertyName, $ignoreProperties)) {
 				continue;
 			}
-			if (!is_object($propertyValue)) { // if not usergroup
+			if (!is_object($propertyValue)) { // if not object
 				if ($propertyValue != $changedObject->{'get' . ucfirst($propertyName)}()) {
 					$dirtyProperties[$propertyName]['old'] = $propertyValue;
 					$dirtyProperties[$propertyName]['new'] = $changedObject->{'get' . ucfirst($propertyName)}();
 				}
-			} else { // if usergroup
-				$titlesOld = self::implodeObjectStorageOnProperty($propertyValue);
-				$titlesNew = self::implodeObjectStorageOnProperty($changedObject->{'get' . ucfirst($propertyName)}());
-				if ($titlesOld != $titlesNew) {
-					$dirtyProperties[$propertyName]['old'] = $titlesOld;
-					$dirtyProperties[$propertyName]['new'] = $titlesNew;
-				}
-			}
+			} else { // if object
+				if (get_class($propertyValue) === DateTime) { // if DateTime object
+					if ($propertyValue->getTimestamp() != $changedObject->{'get' . ucfirst($propertyName)}()->getTimestamp()) {
+						$dirtyProperties[$propertyName]['old'] = $propertyValue->getTimestamp();
+						$dirtyProperties[$propertyName]['new'] = $changedObject->{'get' . ucfirst($propertyName)}()->getTimestamp();
+					}
+				} else { // should be a usergroup object
+					$titlesOld = self::implodeObjectStorageOnProperty($propertyValue);
+					$titlesNew = self::implodeObjectStorageOnProperty($changedObject->{'get' . ucfirst($propertyName)}());
+					if ($titlesOld != $titlesNew) {
+						$dirtyProperties[$propertyName]['old'] = $titlesOld;
+						$dirtyProperties[$propertyName]['new'] = $titlesNew;
+					}
+ 				}
+ 			}
 		}
 		return $dirtyProperties;
 	}

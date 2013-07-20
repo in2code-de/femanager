@@ -72,7 +72,11 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 		if ($this->settings['edit']['fillEmailWithUsername'] == 1) { // fill email with value from username
 			$user->setEmail($user->getUsername());
 		}
-		Div::hashPassword($user, $this->settings['edit']['passwordSave']); // convert password to md5 or sha1 hash
+
+		// convert password to md5 or sha1 hash
+		if (array_key_exists('password', Div::getDirtyPropertiesFromObject($user))) {
+			Div::hashPassword($user, $this->settings['edit']['passwordSave']);
+		}
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this)); // add signal
 
