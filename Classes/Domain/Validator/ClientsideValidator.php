@@ -9,7 +9,7 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 	/**
 	 * Validation settings string
 	 * 		possible validations for each field are:
-	 * 		required, email, min(12), max(13), intOnly, lettersOnly, uniqueInPage, uniqueInDb, mustInclude(number,letter,special), inList(1,2,3)
+	 * 		required, email, min(12), max(13), intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3)
 	 *
 	 * @var \string
 	 */
@@ -120,6 +120,13 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 				case stristr($validationSetting, 'inList('):
 					if (!$this->validateInList($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
 						$this->addMessage('validationErrorInList');
+						$this->isValid = FALSE;
+					}
+					break;
+
+				case 'date':
+					if (!$this->validateDate($this->getValue(), \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat', 'femanager'))) {
+						$this->addMessage('validationErrorDate');
 						$this->isValid = FALSE;
 					}
 					break;

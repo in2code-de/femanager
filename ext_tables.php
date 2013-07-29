@@ -61,6 +61,29 @@ if (TYPO3_MODE == 'BE') {
  * Table configuration fe_users
  */
 $tempColumns = array (
+	'gender' => Array (
+		'exclude' => 0,
+		'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gender',
+		'config' => Array (
+			'type' => 'radio',
+			'items' => Array (
+				Array('LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gender.item0', '0'),
+				Array('LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gender.item1', '1')
+			),
+		)
+	),
+	'date_of_birth' => Array (
+		'exclude' => 0,
+		'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.dateOfBirth',
+		'config' => Array (
+			'type' => 'input',
+			'size' => 10,
+			'max' => '20',
+			'eval' => 'date',
+			'checkbox' => '0',
+			'default' => ''
+		)
+	),
 	'crdate' => array (
 		'exclude' => 1,
 		'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.crdate',
@@ -133,6 +156,7 @@ $tempColumns['tx_femanager_changerequest'] = array (
 $fields .= ', tx_femanager_changerequest';
 
 \TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('fe_users');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users','gender, date_of_birth', '', 'after:name');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns, 1);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users',  '--div--;LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.tab;;;;1-1-1, ' . $fields);
 

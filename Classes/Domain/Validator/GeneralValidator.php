@@ -198,6 +198,35 @@ class GeneralValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractV
 	}
 
 	/**
+	 * Validation for checking if values is in date format
+	 *
+	 * @param \string $value
+	 * @param \string $validationSetting
+	 * @return \bool
+	 */
+	protected function validateDate($value, $validationSetting) {
+		$dateParts = array();
+		switch ($validationSetting) {
+			case 'd.m.Y':
+				if (preg_match('/^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$/', $value, $dateParts)) {
+					if (checkdate($dateParts[2], $dateParts[1], $dateParts[3])) {
+						return true;
+					}
+				}
+				break;
+			case 'm/d/Y':
+				if (preg_match('/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/', $value, $dateParts)) {
+					if (checkdate($dateParts[1], $dateParts[2], $dateParts[3])) {
+						return true;
+					}
+				}
+				break;
+			default:
+				return false;
+		}
+	}
+
+	/**
 	 * Init
 	 */
 	protected function init() {

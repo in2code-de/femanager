@@ -1,0 +1,26 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<div class="femanager_fieldset femanager_dateOfBirth control-group">
+	<label class="control-label">
+		<f:translate key="tx_femanager_domain_model_user.gender" />
+	</label>
+	<div class="controls">
+		<label class="radio">
+			<f:form.radio
+				id="gender0"
+				property="gender"
+				value="0"
+				checked="{user.gender} == 0"
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'gender')}" />
+			<f:translate key="tx_femanager_domain_model_user.gender.item0" />
+		</label>
+		<label class="radio">
+			<f:form.radio
+				id="gender1"
+				property="gender"
+				value="1"
+				checked="{user.gender} == 1"
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'gender')}" />
+			<f:translate key="tx_femanager_domain_model_user.gender.item1" />
+			</label>
+	</div>
+</div>

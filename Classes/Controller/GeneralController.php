@@ -450,6 +450,16 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$this->config = $this->config['plugin.']['tx_femanager.']['settings.'];
 		$this->allUserGroups = $this->userGroupRepository->findAll();
 
+		if (isset($this->arguments['user'])) {
+			$this->arguments['user']
+				->getPropertyMappingConfiguration()
+				->forProperty('dateOfBirth')
+				->setTypeConverterOption(
+					'TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter',
+					\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+					LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat', 'femanager')
+				);
+		}
 		// check if ts is included
 		if ($this->settings['_TypoScriptIncluded'] != 1 && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
 			$this->flashMessageContainer->add(
