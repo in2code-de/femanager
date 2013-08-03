@@ -148,7 +148,8 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	/**
 	 * Add usergroup
 	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $usergroup
+	 * @param \In2\Femanager\Domain\Model\UserGroup $usergroup
+	 * @return void
 	 */
 	public function addUsergroup(\In2\Femanager\Domain\Model\UserGroup $usergroup) {
 		$this->usergroup->attach($usergroup);

@@ -157,6 +157,9 @@
 			<trans-unit id="validationErrorRequiredModel">
 				<target state="translated">Benutzername und Passwort dürfen nicht leer sein</target>
 			</trans-unit>
+			<trans-unit id="validationErrorWrongDateFormat">
+				<target state="translated">Bitte Datumsformat überprüfen</target>
+			</trans-unit>
 			<trans-unit id="validationErrorRequired">
 				<target state="translated">Dieses Feld ist ein Pflichtfeld</target>
 			</trans-unit>

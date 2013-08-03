@@ -157,6 +157,9 @@
 			<trans-unit id="validationErrorRequiredModel">
 				<source>Username and Password must be filled</source>
 			</trans-unit>
+			<trans-unit id="validationErrorWrongDateFormat">
+				<source>Given date format is wrong</source>
+			</trans-unit>
 			<trans-unit id="validationErrorRequired">
 				<source>This field is required</source>
 			</trans-unit>
