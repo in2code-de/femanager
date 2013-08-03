@@ -179,9 +179,47 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 * @dataProvider getValuesInBracketsReturnsStringDataProvider
 	 * @test
 	 */
-	public function getValuesInBracketsReturnsString($start, $wantedResult) {
+	public function getValuesInBracketsReturnsString($start, $expectedResult) {
 		$result = \In2\Femanager\Utility\Div::getValuesInBrackets($start);
-		$this->assertEquals($result, $wantedResult);
+		$this->assertEquals($result, $expectedResult);
+	}
+
+	/**
+	 * Dataprovider for getValuesBeforeBrackets()
+	 *
+	 * @return array
+	 */
+	public function getValuesBeforeBracketsDataProvider() {
+		return array(
+			// #0
+			array(
+				'lala(1,2,3,5)test',
+				'lala',
+			),
+
+			// #1
+			array(
+				'.()',
+				'.',
+			),
+
+			// #2
+			array(
+				'min(10)',
+				'min',
+			),
+		);
+	}
+
+	/**
+	 * Test for getValuesBeforeBrackets()
+	 *
+	 * @dataProvider getValuesBeforeBracketsDataProvider
+	 * @test
+	 */
+	public function getValuesBeforeBracketsReturnsString($start, $expectedResult) {
+		$result = \In2\Femanager\Utility\Div::getValuesBeforeBrackets($start);
+		$this->assertEquals($result, $expectedResult);
 	}
 
 }
