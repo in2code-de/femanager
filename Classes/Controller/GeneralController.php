@@ -363,7 +363,6 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		if ($this->config['new.']['login'] != 1) {
 			return;
 		}
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($user);
 
 		$GLOBALS['TSFE']->fe_user->checkPid = '';
 		$info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
