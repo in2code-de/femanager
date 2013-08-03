@@ -113,6 +113,21 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	protected $ignoreDirty = FALSE;
 
 	/**
+	 * gender
+	 *
+	 * @var \integer
+	 */
+	protected $gender;
+
+	/**
+	 * dateOfBirth
+	 *
+	 * @var \DateTime
+	 */
+	protected $dateOfBirth;
+
+
+	/**
 	 * Get usergroup
 	 *
 	 * @return \In2\Femanager\Domain\Model\UserGroup
@@ -133,7 +148,8 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	/**
 	 * Add usergroup
 	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $usergroup
+	 * @param \In2\Femanager\Domain\Model\UserGroup $usergroup
+	 * @return void
 	 */
 	public function addUsergroup(\In2\Femanager\Domain\Model\UserGroup $usergroup) {
 		$this->usergroup->attach($usergroup);
@@ -251,6 +267,47 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	 */
 	public function getIgnoreDirty() {
 		return $this->ignoreDirty;
+	}
+
+	/**
+	 * Returns the gender
+	 *
+	 * @return \integer $gender
+	 */
+	public function getGender() {
+		return $this->gender;
+	}
+
+	/**
+	 * Sets the gender
+	 *
+	 * @param \integer $gender
+	 * @return void
+	 */
+	public function setGender($gender) {
+		$this->gender = $gender;
+	}
+
+	/**
+	 * Returns the dateOfBirth
+	 *
+	 * @return \DateTime $dateOfBirth
+	 */
+	public function getDateOfBirth() {
+		return $this->dateOfBirth;
+	}
+
+	/**
+	 * Sets the dateOfBirth
+	 *
+	 * @param \DateTime $dateOfBirth
+	 * @return void
+	 */
+	public function setDateOfBirth($dateOfBirth) {
+		if ($dateOfBirth instanceof \DateTime) {
+			$dateOfBirth->setTime(0, 0, 0);
+		}
+		$this->dateOfBirth = $dateOfBirth;
 	}
 
 	/**

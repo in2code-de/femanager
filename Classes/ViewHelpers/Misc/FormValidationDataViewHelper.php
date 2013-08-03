@@ -30,7 +30,7 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 
 	/**
 	 * Get validation string like
-	 * 		required, email, min(10), max(10), intOnly, lettersOnly, uniqueInPage, uniqueInDb, mustInclude(number|letter|special), inList(1|2|3)
+	 * 		required, email, min(10), max(10), intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number|letter|special), inList(1|2|3)
 	 *
 	 * @param \array $settings			Validation TypoScript
 	 * @param \string $fieldName		Fieldname
@@ -50,6 +50,7 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 				case 'lettersOnly':
 				case 'uniqueInPage':
 				case 'uniqueInDb':
+				case 'date':
 					if ($configuration == 1) {
 						$string .= $validation;
 					}

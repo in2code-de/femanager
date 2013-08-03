@@ -27,6 +27,18 @@
 			<trans-unit id="tx_femanager_domain_model_user.lastName">
 				<target state="translated">Nachname</target>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
+				<target state="translated">Geburtstag</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender">
+				<target state="translated">Geschlecht</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender.item0">
+				<target state="translated">männlich</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender.item1">
+				<target state="translated">weiblich</target>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.address">
 				<target state="translated">Adresse</target>
 			</trans-unit>

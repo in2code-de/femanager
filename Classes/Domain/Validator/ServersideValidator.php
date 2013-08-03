@@ -108,6 +108,13 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 							}
 							break;
 
+						case 'date':
+							debug($value);
+							// Nothing to do. ServersideValidator runs after converter
+							// If dateTimeConverter throws exception $value is the old DateTime Object => True
+							// If dateTimeConverter runs well we have an DateTime Object => True
+							break;
+
 						default:
 							// e.g. search for method validateCustom()
 							if (method_exists($this, 'validate' . ucfirst($validation))) {

@@ -127,6 +127,14 @@
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.image</numIndex>
 										<numIndex index="1">image</numIndex>
 									</numIndex>
+									<numIndex index="18" type="array">
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gender</numIndex>
+										<numIndex index="1">gender</numIndex>
+									</numIndex>
+									<numIndex index="19" type="array">
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.dateOfBirth</numIndex>
+										<numIndex index="1">dateOfBirth</numIndex>
+									</numIndex>
 								</items>
 								<maxitems>100</maxitems>
 								<size>10</size>
@@ -268,6 +276,14 @@
 									<numIndex index="17" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.image</numIndex>
 										<numIndex index="1">image</numIndex>
+									</numIndex>
+									<numIndex index="18" type="array">
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gender</numIndex>
+										<numIndex index="1">gender</numIndex>
+									</numIndex>
+									<numIndex index="19" type="array">
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.dateOfBirth</numIndex>
+										<numIndex index="1">dateOfBirth</numIndex>
 									</numIndex>
 								</items>
 								<maxitems>100</maxitems>

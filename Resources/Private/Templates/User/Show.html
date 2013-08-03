@@ -27,6 +27,21 @@
 						{user.lastName}
 					</li>
 					<li>
+						<f:translate key="tx_femanager_domain_model_user.gender" />:
+						<f:if condition="{user.gender} == 0">
+							<f:then>
+								<f:translate key="tx_femanager_domain_model_user.gender.item0" />
+							</f:then>
+							<f:else>
+								<f:translate key="tx_femanager_domain_model_user.gender.item1" />
+							</f:else>
+						</f:if>
+					</li>
+					<li>
+						<f:translate key="tx_femanager_domain_model_user.dateOfBirth" />:
+						<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{user.dateOfBirth}</f:format.date>
+					</li>
+					<li>
 						<f:translate key="tx_femanager_domain_model_user.address" />:
 						{user.address}
 					</li>

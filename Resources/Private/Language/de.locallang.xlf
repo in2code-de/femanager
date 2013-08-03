@@ -27,6 +27,27 @@
 			<trans-unit id="tx_femanager_domain_model_user.lastName">
 				<target state="translated">Nachname</target>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
+				<target state="translated">Geburtstag</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint">
+				<target state="translated">Bitte gebe dein Geburtsdatum als TT.MM.JJJJ ein</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.dateOfBirth.placeholder">
+				<target state="translated">TT.MM.JJJJ</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.dateFormat">
+				<target state="translated">d.m.Y</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender">
+				<target state="translated">Geschlecht</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender.item0">
+				<target state="translated">männlich</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender.item1">
+				<target state="translated">weiblich</target>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.address">
 				<target state="translated">Adresse</target>
 			</trans-unit>
@@ -134,7 +155,10 @@
 				<target state="translated">Fehler</target>
 			</trans-unit>
 			<trans-unit id="validationErrorRequiredModel">
-				<source>Benutzername und Passwort dürfen nicht leer sein</source>
+				<target state="translated">Benutzername und Passwort dürfen nicht leer sein</target>
+			</trans-unit>
+			<trans-unit id="validationErrorWrongDateFormat">
+				<target state="translated">Bitte Datumsformat überprüfen</target>
 			</trans-unit>
 			<trans-unit id="validationErrorRequired">
 				<target state="translated">Dieses Feld ist ein Pflichtfeld</target>
@@ -168,6 +192,9 @@
 			</trans-unit>
 			<trans-unit id="validationErrorPasswordRepeat">
 				<target state="translated">Passwort und Wiederholung stimmen nicht überein</target>
+			</trans-unit>
+			<trans-unit id="validationErrorDate">
+				<target state="translated">Das Datum hat ein falsches Format</target>
 			</trans-unit>
 
 			<trans-unit id="emailCreateAdminConfirmationSalutation">
@@ -307,7 +334,7 @@
 				<target state="translated">Kein FE_User übergeben oder nicht eingeloggt.</target>
 			</trans-unit>
 			<trans-unit id="notLoggedIn">
-				<source>Bitte loggen Sie sich zuvor ein.</source>
+				<target state="translated">Bitte loggen Sie sich zuvor ein.</target>
 			</trans-unit>
 			<trans-unit id="submitNew">
 				<target state="translated">Profil jetzt erstellen</target>
@@ -358,7 +385,6 @@
 				<target state="translated">Profil erfolgreich geändert</target>
 			</trans-unit>
 			<trans-unit id="updateFailedProfile">
-				<source>Profile update failed</source>
 				<target state="translated">Profil Änderung fehlgeschlagen</target>
 			</trans-unit>
 			<trans-unit id="field_image_fineuploader">

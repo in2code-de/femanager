@@ -186,7 +186,7 @@ class Div {
 		$extensionList = 'jpg,jpeg,png,gif,bmp'; // TODO: put list into TypoScript (no spaces allowed)
 		$fileInfo = pathinfo($filename);
 
-		if (!empty($fileInfo['extension']) && GeneralUtility::inList($extensionList, $fileInfo['extension'])) {
+		if (!empty($fileInfo['extension']) && GeneralUtility::inList($extensionList, strtolower($fileInfo['extension']))) {
 			return true;
 		}
 		return false;
@@ -360,9 +360,9 @@ class Div {
 	 */
 	public static function createHash($string, $length = 10) {
 		if (!empty($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'])) {
-			$hash = GeneralUtility::shortMD5($string . $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
+			$hash = GeneralUtility::shortMD5($string . $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'], $length);
 		} else {
-			$hash = GeneralUtility::shortMD5($string);
+			$hash = GeneralUtility::shortMD5($string, $length);
 		}
 		return $hash;
 	}

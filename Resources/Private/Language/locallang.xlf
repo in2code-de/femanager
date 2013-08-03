@@ -27,6 +27,27 @@
 			<trans-unit id="tx_femanager_domain_model_user.lastName">
 				<source>Lastname</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
+				<source>Birthdate</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint">
+				<source>Please type your Birthday as MM/DD/YYYY</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.dateOfBirth.placeholder">
+				<source>MM/DD/YYYY</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.dateFormat">
+				<source>m/d/Y</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender">
+				<source>Gender</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender.item0">
+				<source>male</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender.item1">
+				<source>female</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.address">
 				<source>Address</source>
 			</trans-unit>
@@ -136,6 +157,9 @@
 			<trans-unit id="validationErrorRequiredModel">
 				<source>Username and Password must be filled</source>
 			</trans-unit>
+			<trans-unit id="validationErrorWrongDateFormat">
+				<source>Given date format is wrong</source>
+			</trans-unit>
 			<trans-unit id="validationErrorRequired">
 				<source>This field is required</source>
 			</trans-unit>
@@ -168,6 +192,9 @@
 			</trans-unit>
 			<trans-unit id="validationErrorPasswordRepeat">
 				<source>Both passwords do not fit</source>
+			</trans-unit>
+			<trans-unit id="validationErrorDate">
+				<source>Date has the wrong format</source>
 			</trans-unit>
 
 			<trans-unit id="emailCreateAdminConfirmationSalutation">

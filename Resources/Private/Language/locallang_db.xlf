@@ -27,6 +27,18 @@
 			<trans-unit id="tx_femanager_domain_model_user.lastName">
 				<source>Lastname</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
+				<source>Birthdate</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender">
+				<source>Gender</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender.item0">
+				<source>male</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender.item1">
+				<source>female</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.address">
 				<source>Address</source>
 			</trans-unit>

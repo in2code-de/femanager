@@ -59,11 +59,99 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 
 	/**
+	 * Dataprovider for checkExtension()
+	 *
+	 * @return array
+	 */
+	public function checkExtensionReturnBoolDataProvider() {
+		return array(
+			// #0
+			array(
+				'theImage_dot.com',
+				FALSE,
+			),
+
+			// #1
+			array(
+				'theImage_dot.com.jpg',
+				TRUE,
+			),
+
+			// #2
+			array(
+				'test.ImagetheImage_dot.com.JPEG',
+				TRUE,
+			),
+
+			// #3
+			array(
+				'test.png',
+				TRUE,
+			),
+
+			// #4
+			array(
+				'SoNenntEinRedakteurEineDätaei.PNG',
+				TRUE,
+			),
+		);
+	}
+
+	/**
+	 * Test for checkExtension()
+	 *
+	 * @dataProvider checkExtensionReturnBoolDataProvider
+	 * @test
+	 */
+	public function checkExtensionReturnBool($givenValue, $expectedResult) {
+		$result = \In2\Femanager\Utility\Div::checkExtension($givenValue);
+		$this->assertEquals($result, $expectedResult);
+	}
+
+	/**
+	 * Dataprovider for isMd5()
+	 *
+	 * @return array
+	 */
+	public function isMd5ReturnBoolDataProvider() {
+		return array(
+			// #0
+			array(
+				md5('aeiou'),
+				TRUE,
+			),
+
+			// #1
+			array(
+				'409898rphfsdfapasdfu898weqr',
+				FALSE,
+			),
+
+			// #2
+			array(
+				1238097720989832023900,
+				FALSE,
+			),
+		);
+	}
+
+	/**
+	 * Test for isMd5()
+	 *
+	 * @dataProvider isMd5ReturnBoolDataProvider
+	 * @test
+	 */
+	public function isMd5ReturnBool($givenValue, $expectedResult) {
+		$result = \In2\Femanager\Utility\Div::isMd5($givenValue);
+		$this->assertEquals($result, $expectedResult);
+	}
+
+	/**
 	 * Dataprovider for getValuesInBrackets()
 	 *
 	 * @return array
 	 */
-	public function getValuesInBracketsReturnsStringProvider() {
+	public function getValuesInBracketsReturnsStringDataProvider() {
 		return array(
 			// #0
 			array(
@@ -88,7 +176,7 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for getValuesInBrackets()
 	 *
-	 * @dataProvider getValuesInBracketsReturnsStringProvider
+	 * @dataProvider getValuesInBracketsReturnsStringDataProvider
 	 * @test
 	 */
 	public function getValuesInBracketsReturnsString($start, $wantedResult) {

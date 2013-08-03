@@ -10,19 +10,29 @@
 				<f:for each="{errors}" as="error">
 					<li>
 						<f:if condition="{error.code} == 1221560718">
-							<f:else>
-								<f:comment>
-									If a validator check (see TypoScript) failed
-								</f:comment>
-								<femanager:misc.upper string="{error.code}" />:
-								<f:translate key="{error.message}">{error.message}</f:translate>
-							</f:else>
 							<f:then>
 								<f:comment>
 									If any required field in model was empty (normally username or password)
 								</f:comment>
 								<f:translate key="validationErrorRequiredModel" />
 							</f:then>
+							<f:else>
+								<f:if condition="{error.code} == 1307719788">
+									<f:then>
+										<f:comment>
+											If given date format failed
+										</f:comment>
+										<f:translate key="validationErrorWrongDateFormat" />
+									</f:then>
+									<f:else>
+										<f:comment>
+											If a validator check (see TypoScript) failed
+										</f:comment>
+										<femanager:misc.upper string="{error.code}" />:
+										<f:translate key="{error.message}">{error.message}</f:translate>
+									</f:else>
+								</f:if>
+							</f:else>
 						</f:if>
 					</li>
 				</f:for>

@@ -30,6 +30,25 @@
 			</td>
 		</tr>
 		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.gender" /></td>
+			<td>
+				<f:if condition="{user.gender} == 0">
+					<f:then>
+						<f:translate key="tx_femanager_domain_model_user.gender.item0" />
+					</f:then>
+					<f:else>
+						<f:translate key="tx_femanager_domain_model_user.gender.item1" />
+					</f:else>
+				</f:if>
+			</td>
+		</tr>
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.dateOfBirth" /></td>
+			<td>
+				<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{user.dateOfBirth}</f:format.date>
+			</td>
+		</tr>
+		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.telephone" /></td>
 			<td>
 				{user.telephone}

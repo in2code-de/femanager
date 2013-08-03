@@ -47,7 +47,7 @@ plugin.tx_femanager {
 			}
 
 			# validation of user input values
-			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, mustInclude(number,letter,special), inList(1,2,3)
+			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3)
 			# see manual for an example how to add custom serverside and clientside validation
 			validation {
 				# Enable clientside Formvalidation (JavaScript)
@@ -558,7 +558,7 @@ plugin.tx_femanager {
 			}
 
 			# validation of user input values
-			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, mustInclude(number,letter,special), inList(1,2,3)
+			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3)
 			validation {
 				# Enable clientside Formvalidation (JavaScript)
 				_enable.client = 1
