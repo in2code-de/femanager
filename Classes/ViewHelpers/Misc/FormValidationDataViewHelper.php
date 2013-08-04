@@ -22,9 +22,11 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 			return array();
 		}
 
-		$array = array(
-			'data-validation' => $this->getValidationString($settings, $fieldName, $actionName)
-		);
+		$array = array();
+		$validationString = $this->getValidationString($settings, $fieldName, $actionName);
+		if (!empty($validationString)) {
+			$array['data-validation'] = $validationString;
+		}
 		return $array;
 	}
 
