@@ -49,7 +49,7 @@ jQuery.fn.femanagerValidation = function() {
 
 	// on field blur
 	$('*[data-validation]').blur(function() {
-		validateField($(this)); // validate this field
+		validateField($(this), false); // validate this field only
 	});
 
 	// form submit
@@ -68,10 +68,9 @@ jQuery.fn.femanagerValidation = function() {
 	 * @return void
 	 */
 	function validateAllFields(element) {
-
 		// one loop for every field to validate
 		element.find('*[data-validation]').each(function() {
-			validateField($(this));
+			validateField($(this), true);
 		});
 	}
 
@@ -81,7 +80,7 @@ jQuery.fn.femanagerValidation = function() {
 	 * @param object element		Field object
 	 * @return void
 	 */
-	function validateField(element) {
+	function validateField(element, countForSubmit) {
 		var user = $('input[name="tx_femanager_pi1[user][__identity]"]').val();
 		var url = getBaseUrl() + 'index.php' + '?eID=' + 'femanagerValidate';
 
@@ -97,7 +96,9 @@ jQuery.fn.femanagerValidation = function() {
 				'&id=' + $('#femanagerPid').val(),
 			cache: false,
 			success: function(data) { // return values
-				requestCallback.addCallbackToQueue(true);
+				if (countForSubmit) {
+					requestCallback.addCallbackToQueue(true);
+				}
 				if (data) {
 					try {
 						var json = $.parseJSON(data);
