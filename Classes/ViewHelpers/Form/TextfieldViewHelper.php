@@ -28,14 +28,6 @@ namespace In2\Femanager\ViewHelpers\Form;
 class TextfieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldViewHelper {
 
 	/**
-	 * Configuration Manager
-	 *
-	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
-	 * @inject
-	 */
-	protected $configurationManager;
-
-	/**
 	 * Actionname
 	 *
 	 * @var \string
@@ -47,13 +39,12 @@ class TextfieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldVie
 	 *
 	 * @param boolean $required If the field is required or not
 	 * @param string $type The field type, e.g. "text", "email", "url" etc.
-	 * @param string $placeholder A string used as a placeholder for the value to enter
 	 * @return string
 	 * @api
 	 */
-	public function render($required = NULL, $type = 'text', $placeholder = NULL) {
+	public function render($required = NULL, $type = 'text') {
 		$this->actionName = $this->controllerContext->getRequest()->getControllerActionName();
-		return parent::render($required, $type, $placeholder);
+		return parent::render($required, $type);
 	}
 
 	/**
