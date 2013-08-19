@@ -120,6 +120,13 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	public $allUserGroups;
 
 	/**
+	 * controllerContext
+	 *
+	 * @var controllerContext
+	 */
+	public $controllerContext;
+
+	/**
 	 * Prefix method to createAction(): Create Confirmation from Admin is not necessary
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user
@@ -440,6 +447,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function initializeAction() {
+		$this->controllerContext = $this->buildControllerContext();
 		$this->div = $this->objectManager->get('In2\Femanager\Utility\Div');
 		$this->user = $this->div->getCurrentUser();
 		$this->cObj = $this->configurationManager->getContentObject();
