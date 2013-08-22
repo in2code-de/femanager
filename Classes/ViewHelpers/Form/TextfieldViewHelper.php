@@ -28,26 +28,6 @@ namespace In2\Femanager\ViewHelpers\Form;
 class TextfieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldViewHelper {
 
 	/**
-	 * Actionname
-	 *
-	 * @var \string
-	 */
-	protected $actionName;
-
-	/**
-	 * Renders the textfield.
-	 *
-	 * @param boolean $required If the field is required or not
-	 * @param string $type The field type, e.g. "text", "email", "url" etc.
-	 * @return string
-	 * @api
-	 */
-	public function render($required = NULL, $type = 'text') {
-		$this->actionName = $this->controllerContext->getRequest()->getControllerActionName();
-		return parent::render($required, $type);
-	}
-
-	/**
 	 * Get the value of this form element (changed to prefill from TypoScript)
 	 * Either returns arguments['value'], or the correct value for Object Access.
 	 *
@@ -55,33 +35,26 @@ class TextfieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldVie
 	 * @return mixed Value
 	 */
 	protected function getValue($convertObjects = TRUE) {
-		$value = NULL;
-		if ($this->hasArgument('value')) {
-			$value = $this->arguments['value'];
-		} elseif ($this->configurationManager->isFeatureEnabled('rewrittenPropertyMapper') && $this->hasMappingErrorOccured()) {
-			$value = $this->getLastSubmittedFormData();
-		} elseif ($this->isObjectAccessorMode() && $this->viewHelperVariableContainer->exists('TYPO3\\CMS\\Fluid\\ViewHelpers\\FormViewHelper', 'formObject')) {
-			$this->addAdditionalIdentityPropertiesIfNeeded();
-			$value = $this->getPropertyValue();
-		} elseif ($this->getValueFromTypoScript()) { // new line to prefill from TypoScript
+		$value = parent::getValue($convertObjects);
+
+		// prefill value from TypoScript
+		if (empty($value) && $this->getValueFromTypoScript()) {
 			$value = $this->getValueFromTypoScript();
 		}
-		if ($convertObjects === TRUE && is_object($value)) {
-			$identifier = $this->persistenceManager->getIdentifierByObject($value);
-			if ($identifier !== NULL) {
-				$value = $identifier;
-			}
-		}
+
 		return $value;
 	}
 
 	/**
 	 * Read value from TypoScript
+	 *
+	 * @return \string Value from TypoScript
 	 */
 	protected function getValueFromTypoScript() {
+		$actionName = $this->controllerContext->getRequest()->getControllerActionName();
 		$cObj = $this->configurationManager->getContentObject();
 		$typoScript = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-		$prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$this->actionName . '.']['prefill.'];
+		$prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$actionName . '.']['prefill.'];
 		$value = $cObj->cObjGetSingle($prefillTypoScript[$this->arguments['property']], $prefillTypoScript[$this->arguments['property'] . '.']);
 		return $value;
 	}
