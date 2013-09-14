@@ -107,7 +107,10 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 								$this->settings['new']['confirmByAdmin'],
 								$this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
 							),
-							array($user->getEmail() => $user->getUsername()),
+							Div::makeEmailArray(
+								$user->getEmail(),
+								$user->getUsername()
+							),
 							'New Registration request', // will be overwritten with TypoScript
 							array(
 								 'user' => $user,
@@ -195,7 +198,10 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 					// send email to user to inform him about his profile confirmation
 					$this->div->sendEmail(
 						'createUserNotify',
-						array($user->getEmail() => $user->getFirstName() . ' ' . $user->getLastName()),
+						Div::makeEmailArray(
+							$user->getEmail(),
+							$user->getFirstName() . ' ' . $user->getLastName()
+						),
 						array('sender@femanager.org' => 'Sender Name'), // will be overwritten by TypoScript (if set)
 						'Your profile was confirmed', // will be overwritten with TypoScript
 						array(
@@ -235,7 +241,10 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 						// send email to user to inform him about his profile confirmation
 						$this->div->sendEmail(
 							'CreateUserNotifyRefused',
-							array($user->getEmail() => $user->getFirstName() . ' ' . $user->getLastName()),
+							Div::makeEmailArray(
+								$user->getEmail(),
+								$user->getFirstName() . ' ' . $user->getLastName()
+							),
 							array('sender@femanager.org' => 'Sender Name'), // will be overwritten by TypoScript (if set)
 							'Your profile was refused', // will be overwritten with TypoScript
 							array(

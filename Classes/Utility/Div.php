@@ -368,13 +368,14 @@ class Div {
 	}
 
 	/**
-	 * Create array for sending mails
+	 * Create array for swiftmailer (sender and receiver mail/name combination with fallback)
 	 *
-	 * @param \string $emailString			String with separated emails (splitted by \n)
-	 * @param \string $name
+	 * @param \string $emailString String with separated emails (splitted by \n)
+	 * @param \string $name Name for every email name combination
+	 * @param \string $fallbackEmail Fallback email if no email given
 	 * @return \array $mailArray
 	 */
-	public static function makeEmailArray($emailString, $name = 'receiver') {
+	public static function makeEmailArray($emailString, $name = 'femanager', $fallbackEmail = 'femanager@typo3.org') {
 		$emails = GeneralUtility::trimExplode("\n", $emailString, 1);
 		$mailArray = array();
 		foreach ($emails as $email) {
@@ -383,6 +384,12 @@ class Div {
 			}
 			$mailArray[$email] = $name;
 		}
+
+		// Fallback if no (correct) email given
+		if (count($mailArray) === 0) {
+			$mailArray[$fallbackEmail] = $name;
+		}
+
 		return $mailArray;
 	}
 

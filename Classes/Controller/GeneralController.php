@@ -172,7 +172,10 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			// send email to user for confirmation
 			$this->div->sendEmail(
 				'createUserConfirmation',
-				array($user->getEmail() => $user->getUsername()),
+				Div::makeEmailArray(
+					$user->getEmail(),
+					$user->getUsername()
+				),
 				array(
 					$this->settings['new']['email']['createUserConfirmation']['sender']['email']['value']
 						=> $this->settings['settings']['new']['email']['createUserConfirmation']['sender']['name']['value']
@@ -209,7 +212,10 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 					$this->settings['new']['confirmByAdmin'],
 					$this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
 				),
-				array($user->getEmail() => $user->getUsername()),
+				Div::makeEmailArray(
+					$user->getEmail(),
+					$user->getUsername()
+				),
 				'New Registration request', // will be overwritten with TypoScript
 				array(
 					 'user' => $user,
@@ -240,7 +246,10 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 					$this->settings['edit']['notifyAdmin'],
 					$this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value']
 				),
-				array($user->getEmail() => $user->getUsername()), // will be overwritten by TypoScript (if set)
+				Div::makeEmailArray(
+					$user->getEmail(),
+					$user->getUsername()
+				),
 				'Profile update', // will be overwritten by TypoScript (if set)
 				array(
 					 'user' => $user,
@@ -282,7 +291,10 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$this->div->sendEmail(
 			'updateRequest',
 			array($this->settings['edit']['confirmByAdmin'] => $this->settings['edit']['email']['updateRequest']['sender']['name']['value']),
-			array($user->getEmail() => $user->getUsername()),
+			Div::makeEmailArray(
+				$user->getEmail(),
+				$user->getUsername()
+			),
 			'New Profile change request', // will be overwritten with TypoScript
 			array(
 				 'user' => $user,
@@ -334,7 +346,10 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 					$this->settings['new']['notifyAdmin'], // flexform value
 					$this->settings['new']['email']['createAdminNotify']['receiver']['name']['value'] // value from TypoScript
 				),
-				array($user->getEmail() => $user->getUsername()), // will be overwritten by TypoScript (if set)
+				Div::makeEmailArray(
+					$user->getEmail(),
+					$user->getUsername()
+				),
 				'Profile creation', // will be overwritten by TypoScript (if set)
 				array(
 					 'user' => $user,

@@ -143,7 +143,10 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 				// send email to user
 				$this->div->sendEmail(
 					'updateRequestRefused',
-					array($user->getEmail() => $user->getFirstName() . ' ' . $user->getLastName()),
+					Div::makeEmailArray(
+						$user->getEmail(),
+						$user->getFirstName() . ' ' . $user->getLastName()
+					),
 					array('sender@femanager.org' => 'Sender Name'), // will be overwritten by TypoScript (if set)
 					'You\'re change request was refused', // will be overwritten by TypoScript (if set)
 					array(
