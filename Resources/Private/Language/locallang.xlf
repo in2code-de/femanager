@@ -361,7 +361,7 @@
 				<source>Profile creation failed</source>
 			</trans-unit>
 			<trans-unit id="createProfileDeleted">
-				<target state="translated">Das angegebene Profil wurde erfolgreich gelöscht</target>
+				<source>Profile successfully deleted</source>
 			</trans-unit>
 			<trans-unit id="titleUpdateProfile">
 				<source>Update your user-profile</source>
