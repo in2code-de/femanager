@@ -29,7 +29,7 @@ function createUploader() {
 	var uploader = new qq.FineUploader({
 		element: document.getElementById('fine-uploader'),
 		request: {
-			endpoint: getBaseUrl() + 'index.php?eID=femanagerFileUpload',
+			endpoint: getBaseUrl() + 'index.php?eID=femanagerFileUpload&id=' + $('#femanagerPid').val(),
 			customHeaders: {
 				Accept: 'application/json'
 			}
@@ -50,7 +50,7 @@ function createUploader() {
 		deleteFile: {
 			enabled: true,
 			forceConfirm: true,
-			endpoint: getBaseUrl() + 'index.php?eID=femanagerFileDelete' // TODO delete file on server
+			endpoint: getBaseUrl() + 'index.php?eID=femanagerFileDelete&id=' + $('#femanagerPid').val() // TODO delete file on server
 		},
 		classes: {
 			success: 'alert alert-success',
