@@ -39,14 +39,14 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 					switch ($validation) {
 
 						case 'required':
-							if (!$this->validateRequired($value)) {
+							if ($validationSetting == 1 && !$this->validateRequired($value)) {
 								$this->addError('validationErrorRequired', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'email':
-							if (!$this->validateEmail($value)) {
+							if ($validationSetting == 1 && !$this->validateEmail($value)) {
 								$this->addError('validationErrorEmail', $field);
 								$this->isValid = FALSE;
 							}
@@ -67,28 +67,28 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 							break;
 
 						case 'intOnly':
-							if (!$this->validateInt($value)) {
+							if ($validationSetting == 1 && !$this->validateInt($value)) {
 								$this->addError('validationErrorInt', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'lettersOnly':
-							if (!$this->validateLetters($value)) {
+							if ($validationSetting == 1 && !$this->validateLetters($value)) {
 								$this->addError('validationErrorLetters', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'uniqueInPage':
-							if (!$this->validateUniquePage($value, $field, $user)) {
+							if ($validationSetting == 1 && !$this->validateUniquePage($value, $field, $user)) {
 								$this->addError('validationErrorUniquePage', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'uniqueInDb':
-							if (!$this->validateUniqueDb($value, $field, $user)) {
+							if ($validationSetting == 1 && !$this->validateUniqueDb($value, $field, $user)) {
 								$this->addError('validationErrorUniqueDb', $field);
 								$this->isValid = FALSE;
 							}
@@ -109,7 +109,6 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 							break;
 
 						case 'date':
-							debug($value);
 							// Nothing to do. ServersideValidator runs after converter
 							// If dateTimeConverter throws exception $value is the old DateTime Object => True
 							// If dateTimeConverter runs well we have an DateTime Object => True
