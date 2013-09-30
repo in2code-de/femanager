@@ -408,6 +408,9 @@
 			<trans-unit id="BackendListUserDeleteConfirmation">
 				<target state="translated">Wollen Sie den Benutzer wirklich löschen?</target>
 			</trans-unit>
+			<trans-unit id="BackendListFilterLabel">
+				<target state="translated">Suche</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
