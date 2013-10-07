@@ -82,7 +82,7 @@ jQuery.fn.femanagerValidation = function() {
 	 */
 	function validateField(element, countForSubmit) {
 		var user = $('input[name="tx_femanager_pi1[user][__identity]"]').val();
-		var url = getBaseUrl() + 'index.php' + '?eID=' + 'femanagerValidate';
+		var url = Femanager.getBaseUrl() + 'index.php' + '?eID=' + 'femanagerValidate';
 
 		$.ajax({
 			url: url,
@@ -141,27 +141,6 @@ jQuery.fn.femanagerValidation = function() {
 	}
 
 	/**
-	 * Return BaseUrl as prefix
-	 *
-	 * @return string		Base Url
-	 */
-	function getBaseUrl() {
-		var baseurl;
-		if (jQuery('base').length > 0) {
-			baseurl = jQuery('base').attr('href');
-		} else if (window.location.hostname.indexOf('localhost') !== -1) {
-			baseurl = '';
-		} else {
-			if (window.location.protocol != "https:") {
-				baseurl = 'http://' + window.location.hostname + '/';
-			} else {
-				baseurl = 'https://' + window.location.hostname + '/';
-			}
-		}
-		return baseurl;
-	}
-
-	/**
 	 * Check if there are errors and submit form
 	 */
 	function submitForm() {
@@ -171,5 +150,4 @@ jQuery.fn.femanagerValidation = function() {
 			element.submit();
 		}
 	}
-
 };

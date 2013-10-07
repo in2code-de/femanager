@@ -29,7 +29,7 @@ function createUploader() {
 	var uploader = new qq.FineUploader({
 		element: document.getElementById('fine-uploader'),
 		request: {
-			endpoint: getBaseUrl() + 'index.php?eID=femanagerFileUpload&id=' + $('#femanagerPid').val(),
+			endpoint: Femanager.getBaseUrl() + 'index.php?eID=femanagerFileUpload&id=' + $('#femanagerPid').val(),
 			customHeaders: {
 				Accept: 'application/json'
 			}
@@ -50,7 +50,7 @@ function createUploader() {
 		deleteFile: {
 			enabled: true,
 			forceConfirm: true,
-			endpoint: getBaseUrl() + 'index.php?eID=femanagerFileDelete&id=' + $('#femanagerPid').val() // TODO delete file on server
+			endpoint: Femanager.getBaseUrl() + 'index.php?eID=femanagerFileDelete&id=' + $('#femanagerPid').val() // TODO delete file on server
 		},
 		classes: {
 			success: 'alert alert-success',
@@ -84,22 +84,28 @@ function createUploader() {
 	});
 }
 
+window.Femanager = {};
+
 /**
  * Return BaseUrl as prefix
  *
- * @return string		Base Url
+ * @return string Base Url
  */
-function getBaseUrl() {
+window.Femanager.getBaseUrl = function() {
 	var baseurl;
 	if (jQuery('base').length > 0) {
 		baseurl = jQuery('base').attr('href');
 	} else if (window.location.hostname.indexOf('localhost') !== -1) {
 		baseurl = '';
 	} else {
+		var port = '';
+		if (window.location.port.length > 0) {
+			port = ':' + window.location.port;
+		}
 		if (window.location.protocol != "https:") {
-			baseurl = 'http://' + window.location.hostname + '/';
+			baseurl = 'http://' + window.location.hostname + port + '/';
 		} else {
-			baseurl = 'https://' + window.location.hostname + '/';
+			baseurl = 'https://' + window.location.hostname + port + '/';
 		}
 	}
 	return baseurl;
