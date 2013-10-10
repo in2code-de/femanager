@@ -42,11 +42,6 @@ jQuery.fn.femanagerValidation = function() {
 		};
 	})();
 
-	// Store number of ajax requests for queue function
-	requestCallback = new MyRequestsCompleted({
-		numRequest: element.find('*[data-validation]').length
-	});
-
 	// on field blur
 	$('*[data-validation]').blur(function() {
 		validateField($(this), false); // validate this field only
@@ -68,6 +63,11 @@ jQuery.fn.femanagerValidation = function() {
 	 * @return void
 	 */
 	function validateAllFields(element) {
+		// Store number of ajax requests for queue function
+		requestCallback = new MyRequestsCompleted({
+			numRequest: element.find('*[data-validation]').length
+		});
+
 		// one loop for every field to validate
 		element.find('*[data-validation]').each(function() {
 			validateField($(this), true);
