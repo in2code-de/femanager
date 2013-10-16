@@ -268,7 +268,8 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 				break;
 
 		}
-
+                # "userConfirmation", "userConfirmationRefused", "adminConfirmation", "adminConfirmationRefused", "adminConfirmationRefusedSilent"
+                $this->redirectByAction('new', $status . 'Redirect');
 		$this->redirect('new');
 	}
 
