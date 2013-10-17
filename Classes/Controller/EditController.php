@@ -212,5 +212,35 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 		$this->redirect('edit'); // redirect to edit
 	}
 
+	/**
+	 * initialize update action - check for user authentication
+	 *
+	 * @return void
+	 */
+	public function initializeUpdateAction() {
+		$userValues = $this->request->getArgument('user');
+		$user = $this->div->getCurrentUser();
+
+		// if given user values are not equal to currently logged in user
+		if ($user->getUid() === 0 || $user->getUid() != $userValues['__identity']) {
+
+			// write log
+			$this->div->log(
+				LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
+				205,
+				$user
+			);
+
+			// add flashmessage
+			$this->flashMessageContainer->add(
+				LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
+				'',
+				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+			);
+
+			$this->forward('edit');
+		}
+	}
+
 }
 ?>

@@ -144,6 +144,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.204">
 				<source>Profile update request</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.205">
+				<source>Profile update security failure</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.300">
 				<source>Delete</source>
 			</trans-unit>

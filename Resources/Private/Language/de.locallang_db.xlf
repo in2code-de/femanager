@@ -144,6 +144,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.204">
 				<target state="translated">Profil Änderung angefragt</target>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.205">
+				<target state="translated">Profil Änderung aus Sicherheitsgründen abgelehnt</target>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.300">
 				<target state="translated">Löschen</target>
 			</trans-unit>
