@@ -440,11 +440,54 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function initializeUpdateAction() {
+		$user = $this->div->getCurrentUser();
+		$userValues = $this->request->getArgument('user');
+		$this->testSpoof($user, $userValues['__identity']);
+
 		// workarround for empty usergroups
 		if (intval($this->pluginVariables['user']['usergroup'][0]['__identity']) === 0) {
 			unset($this->pluginVariables['user']['usergroup']);
 		}
 		$this->request->setArguments($this->pluginVariables);
+	}
+
+	/**
+	 * Init for User delete action
+	 *
+	 * @return void
+	 */
+	protected function initializeDeleteAction() {
+		$user = $this->div->getCurrentUser();
+		$uid = $this->request->getArgument('user');
+		$this->testSpoof($user, $uid);
+	}
+
+	/**
+	 * Check if user is authenticated
+	 *
+	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param int $uid Given fe_users uid
+	 * @return void
+	 */
+	protected function testSpoof($user, $uid) {
+		if ($user->getUid() != $uid && $uid > 0) {
+
+			// write log
+			$this->div->log(
+				LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
+				205,
+				$user
+			);
+
+			// add flashmessage
+			$this->flashMessageContainer->add(
+				LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
+				'',
+				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+			);
+
+			$this->forward('edit');
+		}
 	}
 
 	/**
