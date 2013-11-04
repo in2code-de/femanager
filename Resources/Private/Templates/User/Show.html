@@ -10,22 +10,36 @@
 		<f:if condition="{user}">
 			<f:then>
 				<ul>
-					<li>
-						<f:translate key="tx_femanager_domain_model_user.username" />:
-						<f:link.action action="show" arguments="{user:user}">{user.username}</f:link.action>
-					</li>
-					<li>
-						<f:translate key="tx_femanager_domain_model_user.usergroup" />:
-						<f:for each="{user.usergroup}" as="usergroup" iteration="i">{usergroup.title}<f:if condition="{i.isLast}"><f:else>, </f:else></f:if></f:for>
-					</li>
-					<li>
-						<f:translate key="tx_femanager_domain_model_user.firstName" />:
-						{user.firstName}
-					</li>
-					<li>
-						<f:translate key="tx_femanager_domain_model_user.username" />:
-						{user.lastName}
-					</li>
+					<f:if condition="{user.username}">
+						<li>
+							<f:translate key="tx_femanager_domain_model_user.username" />:
+							<f:link.action action="show" arguments="{user:user}">{user.username}</f:link.action>
+						</li>
+					</f:if>
+					<f:if condition="{user.usergroup}">
+						<li>
+							<f:translate key="tx_femanager_domain_model_user.usergroup" />:
+							<f:for each="{user.usergroup}" as="usergroup" iteration="i">{usergroup.title}<f:if condition="{i.isLast}"><f:else>, </f:else></f:if></f:for>
+						</li>
+					</f:if>
+					<f:if condition="{user.firstName}">
+						<li>
+							<f:translate key="tx_femanager_domain_model_user.firstName" />:
+							{user.firstName}
+						</li>
+					</f:if>
+					<f:if condition="{user.lastName}">
+						<li>
+							<f:translate key="tx_femanager_domain_model_user.lastName" />:
+							{user.lastName}
+						</li>
+					</f:if>
+					<f:if condition="{user.email}">
+						<li>
+							<f:translate key="tx_femanager_domain_model_user.email" />:
+							<f:link.email email="{user.email}" />
+						</li>
+					</f:if>
 					<li>
 						<f:translate key="tx_femanager_domain_model_user.gender" />:
 						<f:if condition="{user.gender} == 0">
@@ -37,26 +51,36 @@
 							</f:else>
 						</f:if>
 					</li>
-					<li>
-						<f:translate key="tx_femanager_domain_model_user.dateOfBirth" />:
-						<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{user.dateOfBirth}</f:format.date>
-					</li>
-					<li>
-						<f:translate key="tx_femanager_domain_model_user.address" />:
-						{user.address}
-					</li>
-					<li>
-						<f:translate key="tx_femanager_domain_model_user.zip" />:
-						{user.zip}
-					</li>
-					<li>
-						<f:translate key="tx_femanager_domain_model_user.city" />:
-						{user.city}
-					</li>
-					<li>
-						<f:translate key="tx_femanager_domain_model_user.country" />:
-						{user.country}
-					</li>
+					<f:if condition="{user.dateOfBirth}">
+						<li>
+							<f:translate key="tx_femanager_domain_model_user.dateOfBirth" />:
+							<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{user.dateOfBirth}</f:format.date>
+						</li>
+					</f:if>
+					<f:if condition="{user.address}">
+						<li>
+							<f:translate key="tx_femanager_domain_model_user.address" />:
+							{user.address}
+						</li>
+					</f:if>
+					<f:if condition="{user.zip}">
+						<li>
+							<f:translate key="tx_femanager_domain_model_user.zip" />:
+							{user.zip}
+						</li>
+					</f:if>
+					<f:if condition="{user.city}">
+						<li>
+							<f:translate key="tx_femanager_domain_model_user.city" />:
+							{user.city}
+						</li>
+					</f:if>
+					<f:if condition="{user.country}">
+						<li>
+							<f:translate key="tx_femanager_domain_model_user.country" />:
+							{user.country}
+						</li>
+					</f:if>
 				</ul>
 				<f:image src="uploads/pics/{user.image}" alt="{user.firstName} {user.lastName}" width="250" />
 			</f:then>
