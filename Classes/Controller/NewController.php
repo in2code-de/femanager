@@ -62,6 +62,7 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 	public function createAction(User $user) {
 		$user = $this->div->overrideUserGroup($user, $this->settings); // overwrite usergroup from flexform settings
 		$user = $this->div->forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.'], $this->cObj); // overwrite values from TypoScript
+		$user = $this->div->fallbackUsernameAndPassword($user); // autogenerate username or password if empty
 		if ($this->settings['new']['fillEmailWithUsername'] == 1) { // fill email with value from username
 			$user->setEmail($user->getUsername());
 		}

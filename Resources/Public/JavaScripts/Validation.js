@@ -2,6 +2,9 @@ jQuery.fn.femanagerValidation = function() {
 	var element = $(this);
 	var requestCallback;
 	var submitFormAllowed = false;
+	if (element.find('*[data-validation]').length == 0) {
+		submitFormAllowed = true;
+	}
 
 	/**
 	 * AJAX queue function

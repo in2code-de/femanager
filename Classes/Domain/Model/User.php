@@ -34,22 +34,6 @@ namespace In2\Femanager\Domain\Model;
 class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
-	 * Username
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $username = '';
-
-	/**
-	 * Password
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $password = '';
-
-	/**
 	 * usergroups
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2\Femanager\Domain\Model\UserGroup>

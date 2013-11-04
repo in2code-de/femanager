@@ -128,6 +128,26 @@ class Div {
 	}
 
 	/**
+	 * Autogenerate username and password if it's empty
+	 *
+	 * @param $user
+	 */
+	public function fallbackUsernameAndPassword($user) {
+		if (!$user->getUsername()) {
+			$user->setUsername(\In2\Femanager\Utility\Div::getRandomString());
+			if ($user->getEmail()) {
+				$user->setUsername(
+					$user->getEmail()
+				);
+			}
+		}
+		if (!$user->getPassword()) {
+			$user->setPassword(\In2\Femanager\Utility\Div::getRandomString());
+		}
+		return $user;
+	}
+
+	/**
 	 * Overwrite usergroups from user by flexform settings
 	 *
 	 * @param $object
@@ -514,6 +534,16 @@ class Div {
 			return TRUE;
 		}
 		return FALSE;
+	}
+
+	/**
+	 * Generate random string
+	 *
+	 * @return string
+	 */
+	public static function getRandomString() {
+		$randomNumber = mt_rand(0, 9999999999);
+		return GeneralUtility::shortMD5($randomNumber);
 	}
 
 	/**
