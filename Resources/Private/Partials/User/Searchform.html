@@ -1,0 +1,25 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<f:if condition="{settings.list.filter}">
+	<div class="femanager_list_searchform">
+		<f:form name="filter" class="form-horizontal" object="{filter}">
+			<div class="femanager_fieldset femanager_city control-group">
+				<label for="searchword" class="control-label">
+					<f:translate key="FilterLabel" />
+				</label>
+				<div class="controls">
+					<femanager:form.textfield
+							id="searchword"
+							property="searchword"
+							placeholder="{f:translate(key:'FilterPlaceholder')}"
+							class="input-block-level" />
+				</div>
+			</div>
+
+			<div class="femanager_fieldset femanager_submit control-group">
+				<div class="controls">
+					<f:form.submit value="{f:translate(key:'FilterSubmit')}" class="btn btn-primary" />
+				</div>
+			</div>
+		</f:form>
+	</div>
+</f:if>

@@ -12,7 +12,7 @@ if (!defined('TYPO3_MODE')) {
 		'Edit' => 'edit, update, delete, confirmUpdateRequest',
 	),
 	array(
-		 'User' => 'show, fileUpload, fileDelete, validate',
+		 'User' => 'list, show, fileUpload, fileDelete, validate',
 		 'New' => 'create, new, confirmCreateRequest, createStatus',
 		 'Edit' => 'edit, update, delete, confirmUpdateRequest',
 	)

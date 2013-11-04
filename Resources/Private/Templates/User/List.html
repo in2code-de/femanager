@@ -2,7 +2,53 @@
 
 	User / List
 
+
+
+
 <f:section name="main">
+
+	<div class="femanager_list">
+		<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+
+		<f:render partial="User/Searchform" arguments="{_all}" />
+
+		<f:if condition="{users}">
+			<f:then>
+				<ul class="media-list">
+					<f:for each="{users}" as="user">
+						<li class="media list-group-item">
+							<f:link.action action="show" arguments="{user:user}" class="pull-left">
+								<f:image src="uploads/pics/{user.image}" alt="{user.firstName} {user.lastName}" width="80c" height="80c" class="media-object" />
+							</f:link.action>
+							<div class="media-body">
+								<h4 class="media-heading">
+									<f:link.action action="show" arguments="{user:user}">
+										{user.username}
+									</f:link.action>
+								</h4>
+								{user.firstName} {user.lastName} <f:if condition="{user.email}"><f:link.email email="{user.email}">{user.email}</f:link.email></f:if>
+							</div>
+						</li>
+					</f:for>
+				</ul>
+			</f:then>
+			<f:else>
+				<div class="femanager_note">
+					<f:translate key="noRecordsFound" />
+				</div>
+			</f:else>
+		</f:if>
+	</div>
+</f:section>
+
+
+
+
+
+
+
+
+<f:section name="main_old">
 
 	<div class="femanager_list">
 		<f:flashMessages class="femanager_flashmessages" renderMode="div" />

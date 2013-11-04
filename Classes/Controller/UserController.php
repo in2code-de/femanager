@@ -44,11 +44,17 @@ class UserController extends \In2\Femanager\Controller\GeneralController {
 	/**
 	 * action list
 	 *
+	 * @param \array $filter
 	 * @return void
 	 */
-	public function listAction() {
-		$users = $this->userRepository->findByUsergroups($this->settings['list']['usergroup'], $this->settings);
+	public function listAction($filter = array()) {
+		$users = $this->userRepository->findByUsergroups(
+			$this->settings['list']['usergroup'],
+			$this->settings,
+			$filter
+		);
 		$this->view->assign('users', $users);
+		$this->view->assign('filter', $filter);
 	}
 
 	/**

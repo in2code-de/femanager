@@ -408,6 +408,15 @@
 			<trans-unit id="pleaseChoose">
 				<source>Please choose...</source>
 			</trans-unit>
+			<trans-unit id="FilterLabel">
+				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="FilterPlaceholder">
+				<source>Search...</source>
+			</trans-unit>
+			<trans-unit id="FilterSubmit">
+				<source>Filter Now</source>
+			</trans-unit>
 			<trans-unit id="BackendListUserDeleteConfirmation">
 				<source>Are you sure to delete this User?</source>
 			</trans-unit>

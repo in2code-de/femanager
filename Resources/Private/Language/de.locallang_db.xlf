@@ -208,6 +208,9 @@
 			<trans-unit id="flexform.list.title">
 				<target state="translated">Listenansicht</target>
 			</trans-unit>
+			<trans-unit id="flexform.list.filter">
+				<target state="translated">Aktiviere Suchmaske</target>
+			</trans-unit>
 			<trans-unit id="flexform.list.limit">
 				<target state="translated">Limit</target>
 			</trans-unit>

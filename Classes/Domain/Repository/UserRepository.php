@@ -61,19 +61,44 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 *
 	 * @param \string $userGroupList 		commaseparated list of usergroup uids
 	 * @param \array $settings 				Flexform and TypoScript Settings
+	 * @param \array $filter 				Filter Array
 	 * @return query object
 	 */
-	public function findByUsergroups($userGroupList, $settings) {
+	public function findByUsergroups($userGroupList, $settings, $filter) {
 		$query = $this->createQuery();
 
 		// where
+		$and = array(
+			$query->greaterThan('uid', 0)
+		);
 		if (!empty($userGroupList)) {
-			$query->matching(
-				$query->logicalOr(
-					$query->in('usergroup', explode(',', $userGroupList))
-				)
-			);
+			$and[] = $query->in('usergroup', explode(',', $userGroupList));
 		}
+		if (!empty($filter['searchword'])) {
+			$or = array();
+			$searchwords = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
+			foreach ($searchwords as $searchword) {
+				$or[] = $query->like('address', '%' . $searchword . '%');
+				$or[] = $query->like('city', '%' . $searchword . '%');
+				$or[] = $query->like('company', '%' . $searchword . '%');
+				$or[] = $query->like('country', '%' . $searchword . '%');
+				$or[] = $query->like('email', '%' . $searchword . '%');
+				$or[] = $query->like('fax', '%' . $searchword . '%');
+				$or[] = $query->like('first_name', '%' . $searchword . '%');
+				$or[] = $query->like('image', '%' . $searchword . '%');
+				$or[] = $query->like('last_name', '%' . $searchword . '%');
+				$or[] = $query->like('middle_name', '%' . $searchword . '%');
+				$or[] = $query->like('name', '%' . $searchword . '%');
+				$or[] = $query->like('telephone', '%' . $searchword . '%');
+				$or[] = $query->like('title', '%' . $searchword . '%');
+				$or[] = $query->like('usergroup.title', '%' . $searchword . '%');
+				$or[] = $query->like('username', '%' . $searchword . '%');
+				$or[] = $query->like('www', '%' . $searchword . '%');
+				$or[] = $query->like('zip', '%' . $searchword . '%');
+				$and[] = $query->logicalOr($or);
+			}
+		}
+		$query->matching($query->logicalAnd($and));
 
 		// sorting
 		$sorting = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING;

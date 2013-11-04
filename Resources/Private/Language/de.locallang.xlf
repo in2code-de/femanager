@@ -408,6 +408,15 @@
 			<trans-unit id="pleaseChoose">
 				<target state="translated">Bitte wählen...</target>
 			</trans-unit>
+			<trans-unit id="FilterLabel">
+				<target state="translated">Suche</target>
+			</trans-unit>
+			<trans-unit id="FilterPlaceholder">
+				<target state="translated">Suche...</target>
+			</trans-unit>
+			<trans-unit id="FilterSubmit">
+				<target state="translated">Jetzt Filtern</target>
+			</trans-unit>
 			<trans-unit id="BackendListUserDeleteConfirmation">
 				<target state="translated">Wollen Sie den Benutzer wirklich löschen?</target>
 			</trans-unit>

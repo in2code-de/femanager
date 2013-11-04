@@ -208,6 +208,9 @@
 			<trans-unit id="flexform.list.title">
 				<source>Listview</source>
 			</trans-unit>
+			<trans-unit id="flexform.list.filter">
+				<source>Show Searchfield</source>
+			</trans-unit>
 			<trans-unit id="flexform.list.limit">
 				<source>Limit</source>
 			</trans-unit>
