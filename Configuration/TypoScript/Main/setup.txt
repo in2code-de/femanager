@@ -23,6 +23,15 @@ plugin.tx_femanager {
 			# login after profile creation (don't work if admin confirmation is turned on)
 			login = 1
 
+			# prefilling (empty) input fields with values from TypoScript
+			prefill {
+#				username = TEXT
+#				username.value = ExampleUsername
+
+#				email = TEXT
+#				email.value = test@in2code.de
+			}
+
 			# redirect user (or admin if adminconfirmation) after profile creation
 #			redirect = TEXT
 #			redirect {
@@ -37,14 +46,40 @@ plugin.tx_femanager {
 #				typolink.returnLast = url
 #			}
 
-			# prefilling (empty) input fields with values from TypoScript
-			prefill {
-#				username = TEXT
-#				username.value = ExampleUsername
+			# redirect user after user clicks confirmation link in email (only if user confirmation is activated)
+#			userConfirmationRedirect = TEXT
+#			userConfirmationRedirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
 
-#				email = TEXT
-#				email.value = test@in2code.de
-			}
+			# redirect user after user clicks refuse link in confirmation email (only if user confirmation is activated)
+#			userConfirmationRefusedRedirect = TEXT
+#			userConfirmationRefusedRedirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
+
+			# redirect admin after admin clicks confirmation link in email (only if admin confirmation is activated)
+#			adminConfirmationRedirect = TEXT
+#			adminConfirmationRedirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
+
+			# redirect admin after admin clicks refuse link in email (only if admin confirmation is activated)
+#			adminConfirmationRefusedRedirect = TEXT
+#			adminConfirmationRefusedRedirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
+
+			# redirect admin after admin clicks silent-refuse link in email (only if admin confirmation is activated)
+#			adminConfirmationRefusedSilentRedirect = TEXT
+#			adminConfirmationRefusedSilentRedirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
 
 			# validation of user input values
 			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3)

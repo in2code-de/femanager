@@ -268,7 +268,10 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 				break;
 
 		}
-
+		
+		// redirect by TypoScript setting [userConfirmation, userConfirmationRefused, adminConfirmation, adminConfirmationRefused, adminConfirmationRefusedSilent] - Redirect
+		$this->redirectByAction('new', $status . 'Redirect');
+		
 		$this->redirect('new');
 	}
 
