@@ -1,7 +1,15 @@
 {namespace femanager=In2\Femanager\ViewHelpers}
 <f:layout name="Clean" />
 
-User / FileDelete
+	User / Validate
+
+	Available variables:
+	{isValid} Boolean value if validation was correct or not
+	{messages} Errormessage from Validator
+	{validation} Validation String from HTML (like "required, email, min(10)")
+	{value} Value from field
+	{fieldname} Fieldname (like "username")
+	{user} User Object (only filled when used with edit action)
 
 <f:section name="main">
 	<f:if condition="{isValid}">

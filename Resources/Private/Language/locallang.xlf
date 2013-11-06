@@ -164,34 +164,34 @@
 				<source>Given date format is wrong</source>
 			</trans-unit>
 			<trans-unit id="validationErrorRequired">
-				<source>This field is required</source>
+				<source>Field %s is required</source>
 			</trans-unit>
 			<trans-unit id="validationErrorEmail">
-				<source>This is not a valid Email address</source>
+				<source>Field %s is not a valid Email address</source>
 			</trans-unit>
 			<trans-unit id="validationErrorMin">
-				<source>Please add more characters to this field</source>
+				<source>Please add more characters to Field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorMax">
-				<source>Please add less characters to this field</source>
+				<source>Please add less characters to Field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorInt">
-				<source>Only numbers are allowed</source>
+				<source>Only numbers are allowed in Field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorLetters">
-				<source>Only letters are allowed</source>
+				<source>Only letters are allowed in Field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorUniquePage">
-				<source>This value is already in use</source>
+				<source>Value of Field %s is already in use</source>
 			</trans-unit>
 			<trans-unit id="validationErrorUniqueDb">
-				<source>This value is already in use</source>
+				<source>Value of Field %s already in use</source>
 			</trans-unit>
 			<trans-unit id="validationErrorMustInclude">
-				<source>Try another value</source>
+				<source>Try another value for Field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorInList">
-				<source>This value is not allowed</source>
+				<source>This value is not allowed in Field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorPasswordRepeat">
 				<source>Both passwords do not fit</source>

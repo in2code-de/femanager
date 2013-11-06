@@ -164,22 +164,22 @@
 				<target state="translated">Bitte Datumsformat überprüfen</target>
 			</trans-unit>
 			<trans-unit id="validationErrorRequired">
-				<target state="translated">Dieses Feld ist ein Pflichtfeld</target>
+				<target state="translated">Feld %s ist ein Pflichtfeld</target>
 			</trans-unit>
 			<trans-unit id="validationErrorEmail">
-				<target state="translated">Hierbei handelt es sich nicht um eine korrekte E-Mail-Adresse</target>
+				<target state="translated">Feld %s benötigt eine korrekte E-Mail-Adresse</target>
 			</trans-unit>
 			<trans-unit id="validationErrorMin">
-				<target state="translated">Bitte benutzen Sie mehr Zeichen</target>
+				<target state="translated">Bitte benutzen Sie mehr Zeichen im Feld %s</target>
 			</trans-unit>
 			<trans-unit id="validationErrorMax">
-				<target state="translated">Bitte benutzen Sie weniger Zeichen</target>
+				<target state="translated">Bitte benutzen Sie weniger Zeichen im Feld %s</target>
 			</trans-unit>
 			<trans-unit id="validationErrorInt">
-				<target state="translated">Lediglich Zahlen sind erlaubt</target>
+				<target state="translated">Lediglich Zahlen sind erlaubt im Feld %s</target>
 			</trans-unit>
 			<trans-unit id="validationErrorLetters">
-				<target state="translated">Lediglich Buchstaben sind erlaubt</target>
+				<target state="translated">Lediglich Buchstaben sind erlaubt im Feld %s</target>
 			</trans-unit>
 			<trans-unit id="validationErrorUniquePage">
 				<target state="translated">Dieser Wert wird bereits von jemand anderem verwendet</target>
@@ -188,10 +188,10 @@
 				<target state="translated">Dieser Wert wird bereits von jemand anderem verwendet</target>
 			</trans-unit>
 			<trans-unit id="validationErrorMustInclude">
-				<target state="translated">Bitte versuchen Sie einen anderen Wert</target>
+				<target state="translated">Bitte versuchen Sie einen anderen Wert im Feld %s</target>
 			</trans-unit>
 			<trans-unit id="validationErrorInList">
-				<target state="translated">Dieser Wert ist nicht zulässig</target>
+				<target state="translated">Dieser Wert ist nicht zulässig im Feld %s</target>
 			</trans-unit>
 			<trans-unit id="validationErrorPasswordRepeat">
 				<target state="translated">Passwort und Wiederholung stimmen nicht überein</target>

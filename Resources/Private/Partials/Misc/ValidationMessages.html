@@ -2,5 +2,8 @@
 	JavaScript Validation Errormessages
 </f:comment>
 <f:for each="{messages}" as="message">
-	<f:translate key="{message}">{message}</f:translate><br />
+	<f:format.printf arguments="{0: '{fieldname -> f:translate(key:\'tx_femanager_domain_model_user.{fieldname}\')}'}">
+		<f:translate key="{message}">{message}</f:translate>
+	</f:format.printf>
+	<br />
 </f:for>
