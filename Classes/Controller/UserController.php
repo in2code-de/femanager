@@ -117,6 +117,10 @@ class UserController extends \In2\Femanager\Controller\GeneralController {
 
 		$this->view->assign('messages', $messages);
 		$this->view->assign('isValid', $isValid);
+		$this->view->assign('validation', $validation);
+		$this->view->assign('value', $value);
+		$this->view->assign('fieldname', $field);
+		$this->view->assign('user', $user);
 	}
 
 }
