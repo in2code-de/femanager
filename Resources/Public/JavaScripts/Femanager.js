@@ -13,6 +13,14 @@ jQuery(document).ready(function() {
 			$(this).remove();
 		});
 	});
+
+	// confirmation
+	$('*[data-confirm]').click(function(e) {
+		var message = $(this).data('confirm');
+		if (!confirm(message)) {
+			e.preventDefault();
+		}
+	});
 });
 
 /**
