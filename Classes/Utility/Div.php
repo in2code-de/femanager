@@ -245,8 +245,20 @@ class Div {
 	 */
 	public static function isDirtyObject($object) {
 		foreach ($object->_getProperties() as $propertyName => $propertyValue) {
-			if ($object->_isDirty($propertyName)) {
-				return true;
+			if (!is_object($object->{'get' . ucfirst($propertyName)}())) {
+				if ($object->_isDirty($propertyName)) {
+					return true;
+				}
+			} else {
+				$subObject = $object->{'get' . ucfirst($propertyName)}();
+				if (!method_exists($subObject, '_getProperties')) {
+					continue;
+				}
+				foreach ($subObject->_getProperties() as $subPropertyName => $subPropertyValue) {
+					if (method_exists($subObject, '_isDirty') && $subObject->_isDirty($subPropertyName)) {
+						return true;
+					}
+				}
 			}
 		}
 		return false;
