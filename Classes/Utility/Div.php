@@ -251,6 +251,11 @@ class Div {
 				}
 			} else {
 				$subObject = $object->{'get' . ucfirst($propertyName)}();
+
+				if ($subObject instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage && $subObject->_isDirty()) {
+					return true;
+				}
+
 				if (!method_exists($subObject, '_getProperties')) {
 					continue;
 				}
