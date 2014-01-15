@@ -512,6 +512,9 @@ class Div {
 			// push user values to TypoScript to use with ".field=username"
 			$contentObject->start(array_merge($user->_getProperties(), array('lastGeneratedUid' => $uid)));
 
+			/**
+			 * @var $storeInDatabase \In2\Femanager\Utility\StoreInDatabase
+			 */
 			$storeInDatabase = $objectManager->get('In2\Femanager\Utility\StoreInDatabase');
 			$storeInDatabase->setTable($table);
 			foreach ($config['new.']['storeInDatabase.'][$table] as $field => $value) {
