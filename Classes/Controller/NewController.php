@@ -87,6 +87,16 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 	public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation') {
 		$user = $this->userRepository->findByUid($user); // workarround to also get hidden users
 
+		// if there is still no user in db
+		if ($user === NULL) {
+			$this->flashMessageContainer->add(
+				LocalizationUtility::translate('missingUserInDatabase', 'femanager'),
+				'',
+				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+			);
+			$this->redirect('new');
+		}
+
 		switch ($status) {
 			case 'userConfirmation': // registration confirmed by user
 				if (Div::createHash($user->getUsername()) === $hash) { // hash is correct

@@ -363,6 +363,9 @@
 			<trans-unit id="createFailedProfile">
 				<source>Profile creation failed</source>
 			</trans-unit>
+			<trans-unit id="missingUserInDatabase">
+				<source>No Profile found in database. Maybe it was deleted before.</source>
+			</trans-unit>
 			<trans-unit id="createProfileDeleted">
 				<source>Profile successfully deleted</source>
 			</trans-unit>

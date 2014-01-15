@@ -363,6 +363,9 @@
 			<trans-unit id="createFailedProfile">
 				<target state="translated">Profil Erstellung fehlgeschlagen</target>
 			</trans-unit>
+			<trans-unit id="missingUserInDatabase">
+				<target state="translated">Benutzer konnte nicht ermittelt werden. Eventuell wurde das Profil bereits gelöscht.</target>
+			</trans-unit>
 			<trans-unit id="createProfileDeleted">
 				<target state="translated">Das angegebene Profil wurde erfolgreich gelöscht</target>
 			</trans-unit>
