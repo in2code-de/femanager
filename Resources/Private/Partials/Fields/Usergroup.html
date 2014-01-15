@@ -2,6 +2,9 @@
 <div class="femanager_fieldset femanager_usergroup control-group">
 	<label for="usergroup" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.usergroup" />
+		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'usergroup', actionName: actionName)}">
+			<span>*</span>
+		</f:if>
 	</label>
 	<div class="controls">
 		<f:comment>

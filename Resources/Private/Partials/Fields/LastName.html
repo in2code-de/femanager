@@ -2,6 +2,9 @@
 <div class="femanager_fieldset femanager_lastname control-group">
 	<label for="lastName" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.lastName" />
+		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'lastName', actionName: actionName)}">
+			<span>*</span>
+		</f:if>
 	</label>
 	<div class="controls">
 		<femanager:form.textfield
