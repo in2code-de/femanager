@@ -44,4 +44,3 @@ class FileSizeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
 		return $filesize[$unit];
 	}
 }
-?>
