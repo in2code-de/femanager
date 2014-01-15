@@ -2,6 +2,9 @@
 <div class="femanager_fieldset femanager_country control-group">
 	<label for="country" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.country" />
+		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'country', actionName: actionName)}">
+			<span>*</span>
+		</f:if>
 	</label>
 	<div class="controls">
 		<femanager:form.select

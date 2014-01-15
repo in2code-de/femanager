@@ -2,6 +2,9 @@
 <div class="femanager_fieldset femanager_zip control-group">
 	<label for="zip" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.zip" />
+		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'zip', actionName: actionName)}">
+			<span>*</span>
+		</f:if>
 	</label>
 	<div class="controls">
 		<femanager:form.textfield

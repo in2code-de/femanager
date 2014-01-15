@@ -2,6 +2,9 @@
 <div class="femanager_fieldset femanager_gender control-group">
 	<label class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.gender" />
+		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'gender', actionName: actionName)}">
+			<span>*</span>
+		</f:if>
 	</label>
 	<div class="controls">
 		<label class="radio">
