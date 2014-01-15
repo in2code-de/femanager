@@ -100,6 +100,17 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 		switch ($status) {
 			case 'userConfirmation': // registration confirmed by user
 				if (Div::createHash($user->getUsername()) === $hash) { // hash is correct
+
+					// if user is already confirmed by himself
+					if ($user->getTxFemanagerConfirmedbyuser()) {
+						$this->flashMessageContainer->add(
+							LocalizationUtility::translate('userAlreadyConfirmed', 'femanager'),
+							'',
+							\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+						);
+						$this->redirect('new');
+					}
+
 					$user = $this->div->forceValues($user, $this->config['new.']['forceValues.']['onUserConfirmation.'], $this->cObj); // overwrite values from TypoScript
 					$user->setTxFemanagerConfirmedbyuser(TRUE);
 
