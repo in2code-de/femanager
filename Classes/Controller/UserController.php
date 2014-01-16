@@ -55,6 +55,7 @@ class UserController extends \In2\Femanager\Controller\GeneralController {
 		);
 		$this->view->assign('users', $users);
 		$this->view->assign('filter', $filter);
+		$this->assignForAll();
 	}
 
 	/**
@@ -73,6 +74,7 @@ class UserController extends \In2\Femanager\Controller\GeneralController {
 			}
 		}
 		$this->view->assign('user', $user);
+		$this->assignForAll();
 	}
 
 	/**

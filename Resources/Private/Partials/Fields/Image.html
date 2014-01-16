@@ -15,11 +15,11 @@
 				<ul class="qq-upload-list">
 					<li class="alert alert-success">
 						<span class="qq-upload-file">{user.image}</span>
-						<span class="qq-upload-size" style="display: inline;"><femanager:Misc.FileSize path="uploads/pics/{user.image}" />kB</span>
+						<span class="qq-upload-size" style="display: inline;"><femanager:Misc.FileSize path="{uploadFolder}/{user.image}" />kB</span>
 						<a href="#" class="qq-upload-delete icon-trash" style="display: inline;">Delete</a>
 					</li>
 				</ul>
-				<f:image src="uploads/pics/{user.image}" alt="{user.firstName} {user.lastName}" width="250" class="fileupload_image" />
+				<f:image src="{uploadFolder}/{user.image}" alt="{user.firstName} {user.lastName}" width="250" class="fileupload_image" />
 			</f:if>
 		</div>
 		<f:form.hidden id="image" property="image" class="fine_uploader_image" />

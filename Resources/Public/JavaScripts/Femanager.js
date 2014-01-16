@@ -75,7 +75,7 @@ function createUploader() {
 					// show preview image
 					image = $('<img />')
 						.addClass('fileupload_image')
-						.attr('src', 'uploads/pics/' + responseJSON.uploadName)
+						.attr('src', $('#uploadFolder').val() + '/' + responseJSON.uploadName)
 						.attr('alt', responseJSON.uploadName)
 					$('#preview-image').html(image);
 

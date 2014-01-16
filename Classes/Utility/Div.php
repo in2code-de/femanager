@@ -187,7 +187,12 @@ class Div {
 
 		// create new filename and upload it
 		$basicFileFunctions = $this->objectManager->get('TYPO3\CMS\Core\Utility\File\BasicFileUtility');
-		$newFile = $basicFileFunctions->getUniqueName($_FILES['qqfile']['name'], GeneralUtility::getFileAbsFileName('uploads/pics/'));
+		$newFile = $basicFileFunctions->getUniqueName(
+			$_FILES['qqfile']['name'],
+			GeneralUtility::getFileAbsFileName(
+				Div::getUploadFolderFromTCA()
+			)
+		);
 		if (GeneralUtility::upload_copy_move($_FILES['qqfile']['tmp_name'], $newFile)) {
 			$fileInfo = pathinfo($newFile);
 			return $fileInfo['basename'];
@@ -567,6 +572,19 @@ class Div {
 	}
 
 	/**
+	 * Read fe_users image uploadfolder from TCA
+	 *
+	 * @return \string path - standard "uploads/pics"
+	 */
+	public static function getUploadFolderFromTCA() {
+		$path = $GLOBALS['TCA']['fe_users']['columns']['image']['config']['uploadfolder'];
+		if (empty($path)) {
+			$path = 'uploads/pics';
+		}
+		return $path;
+	}
+
+	/**
 	 * Generate and send Email
 	 *
 	 * @param \string $template					Template file in Templates/Email/
@@ -677,4 +695,3 @@ class Div {
 		return $email->isSent();
 	}
 }
-?>

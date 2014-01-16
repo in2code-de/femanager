@@ -82,7 +82,9 @@
 						</li>
 					</f:if>
 				</ul>
-				<f:image src="uploads/pics/{user.image}" alt="{user.firstName} {user.lastName}" width="250" />
+				<f:if condition="{user.image}">
+					<f:image src="{uploadFolder}/{user.image}" alt="{user.firstName} {user.lastName}" width="250" />
+				</f:if>
 			</f:then>
 			<f:else>
 				<div class="femanager_note">

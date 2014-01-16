@@ -2,8 +2,7 @@
 
 	User / List
 
-
-
+	This Template is responsible for the femanager list view
 
 <f:section name="main">
 
@@ -17,9 +16,11 @@
 				<ul class="media-list">
 					<f:for each="{users}" as="user">
 						<li class="media list-group-item">
-							<f:link.action action="show" arguments="{user:user}" class="pull-left">
-								<f:image src="uploads/pics/{user.image}" alt="{user.firstName} {user.lastName}" width="80c" height="80c" class="media-object" />
-							</f:link.action>
+							<f:if condition="{user.image}">
+								<f:link.action action="show" arguments="{user:user}" class="pull-left">
+									<f:image src="{uploadFolder}/{user.image}" alt="{user.firstName} {user.lastName}" width="80c" height="80c" class="media-object" />
+								</f:link.action>
+							</f:if>
 							<div class="media-body">
 								<h4 class="media-heading">
 									<f:link.action action="show" arguments="{user:user}">
