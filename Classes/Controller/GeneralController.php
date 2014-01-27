@@ -417,6 +417,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		// if redirect target
 		if ($target) {
 			$this->uriBuilder->setTargetPageUid($target);
+			$this->uriBuilder->setLinkAccessRestrictedPages(TRUE);
 			$link = $this->uriBuilder->build();
 			$this->redirectToUri($link);
 		}
