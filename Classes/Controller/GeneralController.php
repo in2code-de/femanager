@@ -331,6 +331,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function finalCreate($user, $action, $redirectByActionName, $login = TRUE) {
 		// persist user (otherwise login is not possible if user is still disabled)
+		$this->userRepository->update($user);
 		$this->persistenceManager->persistAll();
 
 		// login user
