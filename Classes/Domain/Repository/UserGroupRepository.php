@@ -5,7 +5,7 @@ namespace In2\Femanager\Domain\Repository;
  *  Copyright notice
  *
  *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,7 +29,8 @@ namespace In2\Femanager\Domain\Repository;
  * UserGroup Repository
  *
  * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  */
 class UserGroupRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
@@ -43,11 +44,10 @@ class UserGroupRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		$query->setOrderings(
 			array(
-				 'title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+				'title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
 			)
 		);
 
 		return $query->execute();
 	}
 }
-?>

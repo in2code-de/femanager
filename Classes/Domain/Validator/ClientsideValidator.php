@@ -9,7 +9,9 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 	/**
 	 * Validation settings string
 	 * 		possible validations for each field are:
-	 * 		required, email, min(12), max(13), intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3)
+	 * 			required, email, min(12), max(13), intOnly, lettersOnly,
+	 * 			uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special),
+	 * 			inList(1,2,3)
 	 *
 	 * @var \string
 	 */
@@ -125,7 +127,10 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 					break;
 
 				case 'date':
-					if (!$this->validateDate($this->getValue(), \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat', 'femanager'))) {
+					if (!$this->validateDate(
+						$this->getValue(),
+						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat', 'femanager'))
+					) {
 						$this->addMessage('validationErrorDate');
 						$this->isValid = FALSE;
 					}
@@ -134,12 +139,16 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 				default:
 					// e.g. search for method validateCustom()
 					if (method_exists($this, 'validate' . ucfirst(Div::getValuesBeforeBrackets($validationSetting)))) {
-						if (!$this->{'validate' . ucfirst(Div::getValuesBeforeBrackets($validationSetting))}($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
+						if (
+							!$this->{'validate' . ucfirst(Div::getValuesBeforeBrackets($validationSetting))}(
+								$this->getValue(),
+								Div::getValuesInBrackets($validationSetting)
+							)
+						) {
 							$this->addMessage('validationError' . ucfirst(Div::getValuesBeforeBrackets($validationSetting)));
 							$this->isValid = FALSE;
 						}
 					}
-					break;
 			}
 		}
 
@@ -167,6 +176,7 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 
 	/**
 	 * @param string $value
+	 * @return void
 	 */
 	public function setValue($value) {
 		$this->value = $value;
@@ -183,6 +193,7 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 	 * Add a message to the errormessage array
 	 *
 	 * @param \string $message
+	 * @return void
 	 */
 	public function addMessage($message) {
 		$this->messages = array_merge($this->messages, array($message));
@@ -190,6 +201,7 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 
 	/**
 	 * @param array $messages
+	 * @return void
 	 */
 	public function setMessages($messages) {
 		$this->messages = $messages;
@@ -219,6 +231,7 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 
 	/**
 	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @return void
 	 */
 	public function setUser($user) {
 		$this->user = $user;
@@ -231,4 +244,3 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 		return $this->user;
 	}
 }
-?>

@@ -5,7 +5,7 @@ namespace In2\Femanager\Controller;
  *  Copyright notice
  *
  *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,7 +29,8 @@ namespace In2\Femanager\Controller;
  * User Controller
  *
  * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  */
 class UserController extends \In2\Femanager\Controller\GeneralController {
 
@@ -84,9 +85,9 @@ class UserController extends \In2\Femanager\Controller\GeneralController {
 	 */
 	public function fileUploadAction() {
 		$fileName = $this->div->uploadFile();
-		header("Content-Type: text/plain");
+		header('Content-Type: text/plain');
 		$result = array(
-			'success'=> $fileName ? true : false,
+			'success' => ($fileName ? TRUE : FALSE),
 			'uploadName' => $fileName
 		);
 		echo json_encode($result);
@@ -106,7 +107,7 @@ class UserController extends \In2\Femanager\Controller\GeneralController {
 	 * @param \string $validation Validation string like "required, email, min(10)"
 	 * @param \string $value Given Field value
 	 * @param \string $field Fieldname like "username" or "email"
-	 * @param \In2\Femanager\Domain\Model\User $user Existing User (only relevant for edit form)
+	 * @param \In2\Femanager\Domain\Model\User $user Existing User
 	 * @return void
 	 */
 	public function validateAction($validation = NULL, $value = NULL, $field = NULL, \In2\Femanager\Domain\Model\User $user = NULL) {
@@ -126,4 +127,3 @@ class UserController extends \In2\Femanager\Controller\GeneralController {
 	}
 
 }
-?>

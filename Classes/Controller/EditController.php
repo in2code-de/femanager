@@ -34,7 +34,8 @@ use \In2\Femanager\Utility\Div;
  * Edit Controller
  *
  * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  */
 class EditController extends \In2\Femanager\Controller\GeneralController {
 
@@ -68,8 +69,13 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 			$this->redirect('edit');
 		}
 
-		$user = $this->div->forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.'], $this->cObj); // overwrite values from TypoScript
-		if ($this->settings['edit']['fillEmailWithUsername'] == 1) { // fill email with value from username
+		// overwrite values from TypoScript
+		$user = $this->div->forceValues(
+			$user,
+			$this->config['edit.']['forceValues.']['beforeAnyConfirmation.'],
+			$this->cObj
+		);
+		if ($this->settings['edit']['fillEmailWithUsername'] == 1) {
 			$user->setEmail($user->getUsername());
 		}
 
@@ -78,12 +84,12 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 			Div::hashPassword($user, $this->settings['edit']['passwordSave']);
 		}
 
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this)); // add signal
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
 
 		if (!empty($this->settings['edit']['confirmByAdmin'])) {
-			$this->updateRequest($user); // update request
+			$this->updateRequest($user);
 		} else {
-			$this->updateAllConfirmed($user); // save user object
+			$this->updateAllConfirmed($user);
 		}
 
 		$this->redirect('edit');
@@ -126,7 +132,11 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 						}
 					}
 				}
-				$user = $this->div->forceValues($user, $this->config['edit.']['forceValues.']['onAdminConfirmation.'], $this->cObj); // overwrite values from TypoScript
+				$user = $this->div->forceValues(
+					$user,
+					$this->config['edit.']['forceValues.']['onAdminConfirmation.'],
+					$this->cObj
+				);
 
 				$this->div->log(
 					LocalizationUtility::translate('tx_femanager_domain_model_log.state.202', 'femanager'),
@@ -147,11 +157,11 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 						$user->getEmail(),
 						$user->getFirstName() . ' ' . $user->getLastName()
 					),
-					array('sender@femanager.org' => 'Sender Name'), // will be overwritten by TypoScript (if set)
-					'You\'re change request was refused', // will be overwritten by TypoScript (if set)
+					array('sender@femanager.org' => 'Sender Name'),
+					'You\'re change request was refused',
 					array(
-						 'user' => $user,
-						 'settings' => $this->settings
+						'user' => $user,
+						'settings' => $this->settings
 					),
 					$this->config['edit.']['email.']['updateRequestRefused.']
 				);
@@ -179,9 +189,11 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 				);
 				break;
 
+			default:
+
 		}
 
-		$user->setTxFemanagerChangerequest(''); // clean changerequest field
+		$user->setTxFemanagerChangerequest('');
 		$this->userRepository->update($user);
 	}
 
@@ -208,9 +220,8 @@ class EditController extends \In2\Femanager\Controller\GeneralController {
 		// delete user
 		$this->userRepository->remove($user);
 
-		$this->redirectByAction('delete'); // if redirect via TS was included
-		$this->redirect('edit'); // redirect to edit
+		$this->redirectByAction('delete');
+		$this->redirect('edit');
 	}
 
 }
-?>

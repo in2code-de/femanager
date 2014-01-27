@@ -29,7 +29,8 @@ namespace In2\Femanager\Domain\Model;
  * Log Model
  *
  * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  */
 class Log extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
@@ -67,6 +68,7 @@ class Log extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Set user
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @return void
 	 */
 	public function setUser(\In2\Femanager\Domain\Model\User $user) {
 		$this->user = $user;
@@ -74,6 +76,7 @@ class Log extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @param int $state
+	 * @return void
 	 */
 	public function setState($state) {
 		$this->state = $state;
@@ -88,6 +91,7 @@ class Log extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @param string $title
+	 * @return void
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
@@ -100,4 +104,3 @@ class Log extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		return $this->title;
 	}
 }
-?>

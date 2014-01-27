@@ -31,7 +31,8 @@ use \In2\Femanager\Utility\Div;
  * User Backend Controller
  *
  * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  */
 class UserBackendController extends \In2\Femanager\Controller\GeneralController {
 
@@ -60,4 +61,3 @@ class UserBackendController extends \In2\Femanager\Controller\GeneralController 
 	}
 
 }
-?>

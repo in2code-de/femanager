@@ -10,7 +10,7 @@ use \In2\Femanager\Utility\Div;
  *  Copyright notice
  *
  *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -34,7 +34,8 @@ use \In2\Femanager\Utility\Div;
  * User Controller
  *
  * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  */
 class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
@@ -122,12 +123,13 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	/**
 	 * controllerContext
 	 *
-	 * @var controllerContext
+	 * @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext
 	 */
 	public $controllerContext;
 
 	/**
-	 * Prefix method to createAction(): Create Confirmation from Admin is not necessary
+	 * Prefix method to createAction()
+	 * 		Create Confirmation from Admin is not necessary
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user
 	 * @return void
@@ -182,8 +184,8 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 				),
 				'Confirm your profile creation request',
 				array(
-					 'user' => $user,
-					 'hash' => Div::createHash($user->getUsername())
+					'user' => $user,
+					'hash' => Div::createHash($user->getUsername())
 				),
 				$this->config['new.']['email.']['createUserConfirmation.']
 			);
@@ -216,10 +218,10 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 					$user->getEmail(),
 					$user->getUsername()
 				),
-				'New Registration request', // will be overwritten with TypoScript
+				'New Registration request',
 				array(
-					 'user' => $user,
-					 'hash' => Div::createHash($user->getUsername() . $user->getUid())
+					'user' => $user,
+					'hash' => Div::createHash($user->getUsername() . $user->getUid())
 				),
 				$this->config['new.']['email.']['createAdminConfirmation.']
 			);
@@ -229,7 +231,8 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	}
 
 	/**
-	 * Prefix method to updateAction(): Update Confirmation from Admin is not necessary
+	 * Prefix method to updateAction()
+	 * 		Update Confirmation from Admin is not necessary
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user
 	 * @return void
@@ -238,8 +241,8 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
 		// send notify email to admin
 		if ($this->settings['edit']['notifyAdmin']) {
-			$existingUser = $this->userRepository->findByUid($user->getUid()); // read stored, existing values
-			$dirtyProperties = Div::getDirtyPropertiesFromObject($existingUser, $user); // get changes
+			$existingUser = $this->userRepository->findByUid($user->getUid());
+			$dirtyProperties = Div::getDirtyPropertiesFromObject($existingUser, $user);
 			$this->div->sendEmail(
 				'updateNotify',
 				Div::makeEmailArray(
@@ -250,11 +253,11 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 					$user->getEmail(),
 					$user->getUsername()
 				),
-				'Profile update', // will be overwritten by TypoScript (if set)
+				'Profile update',
 				array(
-					 'user' => $user,
-					 'changes' => $dirtyProperties,
-					 'settings' => $this->settings
+					'user' => $user,
+					'changes' => $dirtyProperties,
+					'settings' => $this->settings
 				),
 				$this->config['edit.']['email.']['notifyAdmin.']
 			);
@@ -284,22 +287,24 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function updateRequest($user) {
-		$dirtyProperties = Div::getDirtyPropertiesFromObject($user); // get changed properties
-		$user = Div::rollbackUserWithChangeRequest($user, $dirtyProperties); // overwrite user with old values and xml with new values
+		$dirtyProperties = Div::getDirtyPropertiesFromObject($user);
+		$user = Div::rollbackUserWithChangeRequest($user, $dirtyProperties);
 
 		// send email to admin
 		$this->div->sendEmail(
 			'updateRequest',
-			array($this->settings['edit']['confirmByAdmin'] => $this->settings['edit']['email']['updateRequest']['sender']['name']['value']),
+			array(
+				$this->settings['edit']['confirmByAdmin'] => $this->settings['edit']['email']['updateRequest']['sender']['name']['value']
+			),
 			Div::makeEmailArray(
 				$user->getEmail(),
 				$user->getUsername()
 			),
-			'New Profile change request', // will be overwritten with TypoScript
+			'New Profile change request',
 			array(
-				 'user' => $user,
-				 'changes' => $dirtyProperties,
-				 'hash' => Div::createHash($user->getUsername() . $user->getUid())
+				'user' => $user,
+				'changes' => $dirtyProperties,
+				'hash' => Div::createHash($user->getUsername() . $user->getUid())
 			),
 			$this->config['edit.']['email.']['updateRequest.']
 		);
@@ -344,17 +349,17 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			$this->div->sendEmail(
 				'createNotify',
 				Div::makeEmailArray(
-					$this->settings['new']['notifyAdmin'], // flexform value
-					$this->settings['new']['email']['createAdminNotify']['receiver']['name']['value'] // value from TypoScript
+					$this->settings['new']['notifyAdmin'],
+					$this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
 				),
 				Div::makeEmailArray(
 					$user->getEmail(),
 					$user->getUsername()
 				),
-				'Profile creation', // will be overwritten by TypoScript (if set)
+				'Profile creation',
 				array(
-					 'user' => $user,
-					 'settings' => $this->settings
+					'user' => $user,
+					'settings' => $this->settings
 				),
 				$this->config['new.']['email.']['createAdminNotify.']
 			);
@@ -408,7 +413,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	protected function redirectByAction($action = 'new', $category = 'redirect') {
-		$target = null;
+		$target = NULL;
 		// redirect from TypoScript cObject
 		if ($this->cObj->cObjGetSingle($this->config[$action . '.'][$category], $this->config[$action . '.'][$category . '.'])) {
 			$target = $this->cObj->cObjGetSingle($this->config[$action . '.'][$category], $this->config[$action . '.'][$category . '.']);
@@ -494,11 +499,14 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
 	/**
 	 * Assigns all values, which should be available in all views
+	 *
+	 * @return void
 	 */
 	public function assignForAll() {
 		$this->view->assign(
 			'languageUid',
-			($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ? $GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0)
+			($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ?
+				$GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0)
 		);
 		$this->view->assign('storagePid', $this->allConfig['persistence']['storagePid']);
 		$this->view->assign('Pid', $GLOBALS['TSFE']->id);
@@ -517,8 +525,12 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$this->user = $this->div->getCurrentUser();
 		$this->cObj = $this->configurationManager->getContentObject();
 		$this->pluginVariables = $this->request->getArguments();
-		$this->allConfig = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$this->config = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+		$this->allConfig = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
+		$this->config = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+		);
 		$this->config = $this->config['plugin.']['tx_femanager.']['settings.'];
 		$this->allUserGroups = $this->userGroupRepository->findAll();
 
@@ -557,8 +569,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return bool
 	 */
 	protected function getErrorFlashMessage() {
-		return false;
+		return FALSE;
 	}
 
 }
-?>

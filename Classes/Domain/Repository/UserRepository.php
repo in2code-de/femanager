@@ -29,7 +29,8 @@ namespace In2\Femanager\Domain\Repository;
  * User Repository
  *
  * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  */
 class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
@@ -105,10 +106,10 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		if ($settings['list']['sorting'] == 'desc') {
 			$sorting = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING;
 		}
-		$field = preg_replace('/[^a-zA-Z0-9_-]/', '', $settings['list']['orderby']); // ensure that there is no bad behaviour
+		$field = preg_replace('/[^a-zA-Z0-9_-]/', '', $settings['list']['orderby']);
 		$query->setOrderings(
 			array(
-				 $field => $sorting
+				$field => $sorting
 			)
 		);
 
@@ -126,10 +127,10 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 *
 	 * @param $field
 	 * @param $value
-	 * @param \In2\Femanager\Domain\Model\User $user Existing User (only relevant for edit form)
+	 * @param \In2\Femanager\Domain\Model\User $user Existing User
 	 * @return query object
 	 */
-	public function checkUniqueDb($field, $value, \In2\Femanager\Domain\Model\User $user = null) {
+	public function checkUniqueDb($field, $value, \In2\Femanager\Domain\Model\User $user = NULL) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
@@ -156,10 +157,10 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 *
 	 * @param $field
 	 * @param $value
-	 * @param \In2\Femanager\Domain\Model\User $user Existing User (only relevant for edit form)
+	 * @param \In2\Femanager\Domain\Model\User $user Existing User
 	 * @return query object
 	 */
-	public function checkUniquePage($field, $value, \In2\Femanager\Domain\Model\User $user = null) {
+	public function checkUniquePage($field, $value, \In2\Femanager\Domain\Model\User $user = NULL) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
 
@@ -228,10 +229,9 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// Order
 		$query->setOrderings(
 			array(
-				 'username' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+				'username' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
 			)
 		);
 		return $query->execute();
 	}
 }
-?>

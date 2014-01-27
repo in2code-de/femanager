@@ -29,7 +29,8 @@ namespace In2\Femanager\Domain\Model;
  * User Model
  *
  * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  */
 class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
@@ -124,6 +125,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	 * Set usergroup
 	 *
 	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $usergroup
+	 * @return void
 	 */
 	public function setUsergroup(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $usergroup) {
 		$this->usergroup = $usergroup;
@@ -143,6 +145,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	 * Remove usergroup
 	 *
 	 * @param UserGroup $usergroup
+	 * @return void
 	 */
 	public function removeUsergroup(\In2\Femanager\Domain\Model\UserGroup $usergroup) {
 		$this->usergroup->detach($usergroup);
@@ -150,6 +153,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * Remove all usergroups
+	 * @return void
 	 */
 	public function removeAllUsergroups() {
 		$this->usergroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -157,6 +161,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * @param string $txFemanagerChangerequest
+	 * @return void
 	 */
 	public function setTxFemanagerChangerequest($txFemanagerChangerequest) {
 		$this->txFemanagerChangerequest = $txFemanagerChangerequest;
@@ -171,6 +176,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * @param \DateTime $crdate
+	 * @return void
 	 */
 	public function setCrdate($crdate) {
 		$this->crdate = $crdate;
@@ -185,6 +191,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * @param \DateTime $tstamp
+	 * @return void
 	 */
 	public function setTstamp($tstamp) {
 		$this->tstamp = $tstamp;
@@ -199,6 +206,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * @param boolean $disable
+	 * @return void
 	 */
 	public function setDisable($disable) {
 		$this->disable = $disable;
@@ -213,6 +221,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * @param \bool $txFemanagerConfirmedbyadmin
+	 * @return void
 	 */
 	public function setTxFemanagerConfirmedbyadmin($txFemanagerConfirmedbyadmin) {
 		$this->txFemanagerConfirmedbyadmin = $txFemanagerConfirmedbyadmin;
@@ -227,6 +236,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * @param \bool $txFemanagerConfirmedbyuser
+	 * @return void
 	 */
 	public function setTxFemanagerConfirmedbyuser($txFemanagerConfirmedbyuser) {
 		$this->txFemanagerConfirmedbyuser = $txFemanagerConfirmedbyuser;
@@ -241,6 +251,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * @param boolean $ignoreDirty
+	 * @return void
 	 */
 	public function setIgnoreDirty($ignoreDirty) {
 		$this->ignoreDirty = $ignoreDirty;
@@ -319,4 +330,3 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 		return $this->getIgnoreDirty() ? FALSE : parent::_isDirty($propertyName);
 	}
 }
-?>
