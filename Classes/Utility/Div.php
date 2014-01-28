@@ -31,7 +31,8 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * Misc Functions
  *
  * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  */
 class Div {
 
@@ -102,6 +103,7 @@ class Div {
 	 */
 	public function forceValues($object, $settings, $cObj) {
 		foreach ((array) $settings as $field => $config) {
+			$config = NULL;
 			if (stristr($field, '.')) {
 				continue;
 			}
@@ -134,7 +136,7 @@ class Div {
 	 */
 	public function fallbackUsernameAndPassword($user) {
 		if (!$user->getUsername()) {
-			$user->setUsername(\In2\Femanager\Utility\Div::getRandomString());
+			$user->setUsername(self::getRandomString());
 			if ($user->getEmail()) {
 				$user->setUsername(
 					$user->getEmail()
@@ -142,7 +144,7 @@ class Div {
 			}
 		}
 		if (!$user->getPassword()) {
-			$user->setPassword(\In2\Femanager\Utility\Div::getRandomString());
+			$user->setPassword(self::getRandomString());
 		}
 		return $user;
 	}
@@ -177,12 +179,12 @@ class Div {
 	public function uploadFile() {
 
 		if (!is_array($_FILES['qqfile'])) {
-			return false;
+			return FALSE;
 		}
 
 		// Check extension
-		if (empty($_FILES['qqfile']['name']) || !\In2\Femanager\Utility\Div::checkExtension($_FILES['qqfile']['name'])) {
-			return false;
+		if (empty($_FILES['qqfile']['name']) || !self::checkExtension($_FILES['qqfile']['name'])) {
+			return FALSE;
 		}
 
 		// create new filename and upload it
@@ -190,7 +192,7 @@ class Div {
 		$newFile = $basicFileFunctions->getUniqueName(
 			$_FILES['qqfile']['name'],
 			GeneralUtility::getFileAbsFileName(
-				Div::getUploadFolderFromTCA()
+				self::getUploadFolderFromTca()
 			)
 		);
 		if (GeneralUtility::upload_copy_move($_FILES['qqfile']['tmp_name'], $newFile)) {
@@ -198,7 +200,7 @@ class Div {
 			return $fileInfo['basename'];
 		}
 
-		return false;
+		return FALSE;
 	}
 
 	/**
@@ -208,13 +210,14 @@ class Div {
 	 * @return \bool		If Extension is allowed
 	 */
 	public static function checkExtension($filename) {
-		$extensionList = 'jpg,jpeg,png,gif,bmp'; // TODO: put list into TypoScript (no spaces allowed)
+		// TODO: put list into TypoScript (no spaces allowed)
+		$extensionList = 'jpg,jpeg,png,gif,bmp';
 		$fileInfo = pathinfo($filename);
 
 		if (!empty($fileInfo['extension']) && GeneralUtility::inList($extensionList, strtolower($fileInfo['extension']))) {
-			return true;
+			return TRUE;
 		}
-		return false;
+		return FALSE;
 	}
 
 	/**
@@ -229,17 +232,19 @@ class Div {
 			case 'md5':
 				$user->setPassword(md5($user->getPassword()));
 				break;
+
 			case 'sha1':
 				$user->setPassword(sha1($user->getPassword()));
 				break;
+
 			default:
 				if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('saltedpasswords')) {
 					if (\TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility::isUsageEnabled('FE')) {
-						$objInstanceSaltedPW = \TYPO3\CMS\Saltedpasswords\Salt\SaltFactory::getSaltingInstance();
-						$user->setPassword($objInstanceSaltedPW->getHashedPassword($user->getPassword()));
+						$objInstanceSaltedPw = \TYPO3\CMS\Saltedpasswords\Salt\SaltFactory::getSaltingInstance();
+						$user->setPassword($objInstanceSaltedPw->getHashedPassword($user->getPassword()));
 					}
 				}
- 		}
+		}
 	}
 
 	/**
@@ -250,28 +255,30 @@ class Div {
 	 */
 	public static function isDirtyObject($object) {
 		foreach ($object->_getProperties() as $propertyName => $propertyValue) {
+			$propertyValue = NULL;
 			if (!is_object($object->{'get' . ucfirst($propertyName)}())) {
 				if ($object->_isDirty($propertyName)) {
-					return true;
+					return TRUE;
 				}
 			} else {
 				$subObject = $object->{'get' . ucfirst($propertyName)}();
 
 				if ($subObject instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage && $subObject->_isDirty()) {
-					return true;
+					return TRUE;
 				}
 
 				if (!method_exists($subObject, '_getProperties')) {
 					continue;
 				}
 				foreach ($subObject->_getProperties() as $subPropertyName => $subPropertyValue) {
+					$subPropertyValue = NULL;
 					if (method_exists($subObject, '_isDirty') && $subObject->_isDirty($subPropertyName)) {
-						return true;
+						return TRUE;
 					}
 				}
 			}
 		}
-		return false;
+		return FALSE;
 	}
 
 	/**
@@ -295,26 +302,26 @@ class Div {
 			if (!method_exists($changedObject, 'get' . ucfirst($propertyName)) || in_array($propertyName, $ignoreProperties)) {
 				continue;
 			}
-			if (!is_object($propertyValue)) { // if not object
+			if (!is_object($propertyValue)) {
 				if ($propertyValue != $changedObject->{'get' . ucfirst($propertyName)}()) {
 					$dirtyProperties[$propertyName]['old'] = $propertyValue;
 					$dirtyProperties[$propertyName]['new'] = $changedObject->{'get' . ucfirst($propertyName)}();
 				}
-			} else { // if object
-				if (get_class($propertyValue) === DateTime) { // if DateTime object
+			} else {
+				if (get_class($propertyValue) === DateTime) {
 					if ($propertyValue->getTimestamp() != $changedObject->{'get' . ucfirst($propertyName)}()->getTimestamp()) {
 						$dirtyProperties[$propertyName]['old'] = $propertyValue->getTimestamp();
 						$dirtyProperties[$propertyName]['new'] = $changedObject->{'get' . ucfirst($propertyName)}()->getTimestamp();
 					}
-				} else { // should be a usergroup object
+				} else {
 					$titlesOld = self::implodeObjectStorageOnProperty($propertyValue);
 					$titlesNew = self::implodeObjectStorageOnProperty($changedObject->{'get' . ucfirst($propertyName)}());
 					if ($titlesOld != $titlesNew) {
 						$dirtyProperties[$propertyName]['old'] = $titlesOld;
 						$dirtyProperties[$propertyName]['new'] = $titlesNew;
 					}
- 				}
- 			}
+				}
+			}
 		}
 		return $dirtyProperties;
 	}
@@ -327,11 +334,12 @@ class Div {
 	 * @return \In2\Femanager\Domain\Model\User $user
 	 */
 	public static function rollbackUserWithChangeRequest($user, $dirtyProperties) {
-		$existingUserProperties = $user->_getCleanProperties(); // get existing properties array
+		$existingUserProperties = $user->_getCleanProperties();
 
 		// reset old values
 		$user->setUserGroup($existingUserProperties['usergroup']);
 		foreach ($dirtyProperties as $propertyName => $propertyValue) {
+			$propertyValue = NULL;
 			$user->{'set' . ucfirst($propertyName)}($existingUserProperties[$propertyName]);
 		}
 
@@ -410,7 +418,8 @@ class Div {
 	}
 
 	/**
-	 * Create array for swiftmailer (sender and receiver mail/name combination with fallback)
+	 * Create array for swiftmailer
+	 * 		sender and receiver mail/name combination with fallback
 	 *
 	 * @param \string $emailString String with separated emails (splitted by \n)
 	 * @param \string $name Name for every email name combination
@@ -453,7 +462,7 @@ class Div {
 	 * @return \string
 	 */
 	public static function getValuesBeforeBrackets($value = 'test(1,2,3)') {
-		$valueParts = GeneralUtility::trimExplode('(', $value,1 );
+		$valueParts = GeneralUtility::trimExplode('(', $value, 1);
 		return $valueParts[0];
 	}
 
@@ -462,7 +471,7 @@ class Div {
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user User properties
 	 * @param array $config TypoScript Settings
-	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject cObj
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject
 	 * @return void
 	 */
 	public static function sendPost($user, $config, $contentObject) {
@@ -471,8 +480,8 @@ class Div {
 			return;
 		}
 
-		$properties = $user->_getCleanProperties(); // get properties from user
-		$contentObject->start($properties); // push properties to TypoScript to get used with .field
+		$properties = $user->_getCleanProperties();
+		$contentObject->start($properties);
 		$curl = array(
 			'url' => $config['new.']['sendPost.']['targetUrl'],
 			'data' => $contentObject->cObjGetSingle($config['new.']['sendPost.']['data'], $config['new.']['sendPost.']['data.']),
@@ -498,7 +507,7 @@ class Div {
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user User properties
 	 * @param array $config TypoScript Settings
-	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject cObj
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject
 	 * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
 	 * @return void
 	 */
@@ -510,8 +519,14 @@ class Div {
 
 		// one loop for every table to store
 		foreach ((array) $config['new.']['storeInDatabase.'] as $table => $storeSettings) {
+			$storeSettings = NULL;
 			// if turned off
-			if (!$contentObject->cObjGetSingle($config['new.']['storeInDatabase.'][$table]['_enable'], $config['new.']['storeInDatabase.'][$table]['_enable.'])) {
+			if (
+				!$contentObject->cObjGetSingle(
+					$config['new.']['storeInDatabase.'][$table]['_enable'],
+					$config['new.']['storeInDatabase.'][$table]['_enable.']
+				)
+			) {
 				continue;
 			}
 			// push user values to TypoScript to use with ".field=username"
@@ -526,7 +541,10 @@ class Div {
 				if ($field[0] === '_' || stristr($field, '.')) {
 					continue;
 				}
-				$value = $contentObject->cObjGetSingle($config['new.']['storeInDatabase.'][$table][$field], $config['new.']['storeInDatabase.'][$table][$field . '.']);
+				$value = $contentObject->cObjGetSingle(
+					$config['new.']['storeInDatabase.'][$table][$field],
+					$config['new.']['storeInDatabase.'][$table][$field . '.']
+				);
 				$storeInDatabase->addProperty($field, $value);
 			}
 			$uid = $storeInDatabase->execute();
@@ -576,7 +594,7 @@ class Div {
 	 *
 	 * @return \string path - standard "uploads/pics"
 	 */
-	public static function getUploadFolderFromTCA() {
+	public static function getUploadFolderFromTca() {
 		$path = $GLOBALS['TCA']['fe_users']['columns']['image']['config']['uploadfolder'];
 		if (empty($path)) {
 			$path = 'uploads/pics';
@@ -600,15 +618,19 @@ class Div {
 		$email = $this->objectManager->get('\TYPO3\CMS\Core\Mail\MailMessage');
 		$this->cObj = $this->configurationManager->getContentObject();
 		if (!empty($variables['user']) && method_exists($variables['user'], '_getProperties')) {
-			$this->cObj->start($variables['user']->_getProperties()); // push user properties to TypoScript to use with ".field=username"
+			$this->cObj->start($variables['user']->_getProperties());
 		}
-		if (!$this->cObj->cObjGetSingle($typoScript['_enable'], $typoScript['_enable.'])) { // stop mail sending if turned off via TypoScritp
+		if (!$this->cObj->cObjGetSingle($typoScript['_enable'], $typoScript['_enable.'])) {
 			return FALSE;
 		}
 
 		// add embed images to mail body
 		if ($this->cObj->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.'])) {
-			$images = GeneralUtility::trimExplode(',', $this->cObj->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.']), 1);
+			$images = GeneralUtility::trimExplode(
+				',',
+				$this->cObj->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.']),
+				1
+			);
 			$imageVariables = array();
 			foreach ($images as $image) {
 				$imageVariables[] = $email->embed(\Swift_Image::fromPath($image));
@@ -619,8 +641,13 @@ class Div {
 		/**
 		 * Generate Email Body
 		 */
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$templatePathAndFilename = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']) . 'Email/' . ucfirst($template) . '.html';
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
+		$templatePathAndFilename = GeneralUtility::getFileAbsFileName(
+			$extbaseFrameworkConfiguration['view']['templateRootPath']
+		);
+		$templatePathAndFilename .= 'Email/' . ucfirst($template) . '.html';
 		$emailView = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
 		$emailView->getRequest()->setControllerExtensionName('Femanager');
 		$emailView->getRequest()->setPluginName('Pi1');
@@ -684,7 +711,11 @@ class Div {
 
 		// add attachments from typoscript
 		if ($this->cObj->cObjGetSingle($typoScript['attachments'], $typoScript['attachments.'])) {
-			$files = GeneralUtility::trimExplode(',', $this->cObj->cObjGetSingle($typoScript['attachments'], $typoScript['attachments.']), 1);
+			$files = GeneralUtility::trimExplode(
+				',',
+				$this->cObj->cObjGetSingle($typoScript['attachments'], $typoScript['attachments.']),
+				1
+			);
 			foreach ($files as $file) {
 				$email->attach(\Swift_Attachment::fromPath($file));
 			}

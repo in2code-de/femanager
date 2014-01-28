@@ -7,7 +7,7 @@ use \In2\Femanager\Utility\Div;
  *  Copyright notice
  *
  *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is

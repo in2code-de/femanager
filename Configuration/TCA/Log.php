@@ -9,7 +9,12 @@ $TCA['tx_femanager_domain_model_log'] = array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, crdate, state, user',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'title, crdate, state, user, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, starttime, endtime'),
+		'1' => array(
+			'showitem' =>
+				'title, crdate, state, user,
+				--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,sys_language_uid;;;;1-1-1,
+				l10n_parent, l10n_diffsource, hidden;;1, starttime, endtime'
+		),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -38,7 +43,8 @@ $TCA['tx_femanager_domain_model_log'] = array(
 					array('', 0),
 				),
 				'foreign_table' => 'tx_femanager_domain_model_log',
-				'foreign_table_where' => 'AND tx_femanager_domain_model_log.pid = ###CURRENT_PID### AND tx_femanager_domain_model_log.sys_language_uid IN (-1,0)',
+				'foreign_table_where' =>
+					'AND tx_femanager_domain_model_log.pid = ###CURRENT_PID### AND tx_femanager_domain_model_log.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -144,5 +150,3 @@ $TCA['tx_femanager_domain_model_log'] = array(
 		),
 	),
 );
-
-?>

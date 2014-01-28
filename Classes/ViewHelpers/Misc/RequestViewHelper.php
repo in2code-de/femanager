@@ -25,6 +25,9 @@ namespace In2\Femanager\ViewHelpers\Misc;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+/**
+ * Class RequestViewHelper
+ */
 class RequestViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
@@ -35,15 +38,17 @@ class RequestViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
 	 * @return \string
 	 */
 	public function render($parameter, $htmlspecialchars = TRUE) {
-		$parameter = preg_replace('/[^a-zA-Z0-9_-\|]/', '', $parameter); // allow only normal characters
-		$string = str_replace('|', '\'][\'', $parameter); // replace | with ][
-		$string = '$_REQUEST[\'' . $string . '\']'; // create $_REQUEST string
-		eval('$value = ' . $string . ';'); // create variable
+		// allow only normal characters
+		$parameter = preg_replace('/[^a-zA-Z0-9_-\|]/', '', $parameter);
+		// replace | with ][
+		$string = str_replace('|', '\'][\'', $parameter);
+		// create $_REQUEST string
+		$string = '$_REQUEST[\'' . $string . '\']';
+		// create variable
+		eval('$value = ' . $string . ';');
 		if ($htmlspecialchars) {
 			$value = htmlspecialchars($value);
 		}
 		return $value;
 	}
 }
-
-?>

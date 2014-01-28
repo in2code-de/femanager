@@ -4,6 +4,9 @@ namespace In2\Femanager\Domain\Validator;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \In2\Femanager\Utility\Div;
 
+/**
+ * Class ClientsideValidator
+ */
 class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidator {
 
 	/**

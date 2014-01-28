@@ -1,6 +1,8 @@
 <?php
 namespace In2\Femanager\ViewHelpers\Misc;
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * View helper to explode a list
  *
@@ -17,9 +19,7 @@ class ExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
 	 * @param \boolean $trim 			Should be trimmed?
 	 * @return \array
 	 */
-	public function render($string = '', $separator = ',', $trim = 1) {
-		return $trim ? \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode($separator, $string, 1) : explode($separator, $string);
+	public function render($string = '', $separator = ',', $trim = TRUE) {
+		return $trim ? GeneralUtility::trimExplode($separator, $string, 1) : explode($separator, $string);
 	}
 }
-
-?>

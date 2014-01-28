@@ -31,7 +31,8 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * Store values in any table
  *
  * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  */
 class StoreInDatabase {
 
@@ -66,7 +67,7 @@ class StoreInDatabase {
 	 * @return void
 	 */
 	public function setTable($table) {
-		$table = preg_replace('/[^a-zA-Z0-9_-]/', '', $table); // remove not allowed signs
+		$table = preg_replace('/[^a-zA-Z0-9_-]/', '', $table);
 		$this->table = $table;
 	}
 
@@ -96,7 +97,7 @@ class StoreInDatabase {
 	 * @return void
 	 */
 	public function addProperty($propertyName, $value) {
-		$propertyName = preg_replace('/[^a-zA-Z0-9_-]/', '', $propertyName); // remove not allowed signs
+		$propertyName = preg_replace('/[^a-zA-Z0-9_-]/', '', $propertyName);
 		$this->properties[$propertyName] = $value;
 	}
 
@@ -109,7 +110,4 @@ class StoreInDatabase {
 	public function removeProperty($propertyName) {
 		unset($this->properties[$propertyName]);
 	}
-	
 }
-
-?>

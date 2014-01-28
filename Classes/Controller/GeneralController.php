@@ -511,7 +511,7 @@ class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$this->view->assign('storagePid', $this->allConfig['persistence']['storagePid']);
 		$this->view->assign('Pid', $GLOBALS['TSFE']->id);
 		$this->view->assign('actionName', $this->actionMethodName);
-		$this->view->assign('uploadFolder', Div::getUploadFolderFromTCA());
+		$this->view->assign('uploadFolder', Div::getUploadFolderFromTca());
 	}
 
 	/**

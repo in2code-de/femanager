@@ -25,20 +25,22 @@ namespace In2\Femanager\ViewHelpers\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+/**
+ * Class GetFirstViewHelper
+ */
 class GetFirstViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Call getFirst() method of object storage
 	 *
 	 * @param \object $objects
-	 * @return \object
+	 * @return \mixed
 	 */
 	public function render($objects) {
 		if (method_exists($objects, 'getFirst')) {
 			$object = $objects->getFirst();
 			return $object;
 		}
+		return FALSE;
 	}
 }
-
-?>

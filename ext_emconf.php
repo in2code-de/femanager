@@ -12,7 +12,11 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'femanager',
-	'description' => 'TYPO3 Frontend User Registration and Management based on Extbase and Fluid with Namespaces and a lot of features and extension possibilities. This extension basicly works like sr_feuser_register.',
+	'description' => '
+		TYPO3 Frontend User Registration and Management based on
+		Extbase and Fluid with Namespaces and a lot of features and e
+		xtension possibilities. This extension basicly works like sr_feuser_register.
+	',
 	'category' => 'plugin',
 	'author' => 'Alex Kellner',
 	'author_email' => 'alexander.kellner@in2code.de',
@@ -40,4 +44,3 @@ $EM_CONF[$_EXTKEY] = array(
 		),
 	),
 );
-?>

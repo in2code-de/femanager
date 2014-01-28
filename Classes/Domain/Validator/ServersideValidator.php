@@ -1,6 +1,9 @@
 <?php
 namespace In2\Femanager\Domain\Validator;
 
+/**
+ * Class ServersideValidator
+ */
 class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidator {
 
 	/**
@@ -110,7 +113,7 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 
 						case 'date':
 							// Nothing to do. ServersideValidator runs after converter
-							// If dateTimeConverter throws exception $value is the old DateTime Object => True
+							// If dateTimeConverter exception $value is the old DateTime Object => True
 							// If dateTimeConverter runs well we have an DateTime Object => True
 							break;
 
@@ -122,7 +125,6 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 									$this->isValid = FALSE;
 								}
 							}
-							break;
 					}
 				}
 			}
@@ -131,4 +133,3 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidat
 		return $this->isValid;
 	}
 }
-?>

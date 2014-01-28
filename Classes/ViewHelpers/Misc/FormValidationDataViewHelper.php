@@ -32,7 +32,9 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 
 	/**
 	 * Get validation string like
-	 * 		required, email, min(10), max(10), intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number|letter|special), inList(1|2|3)
+	 * 		required, email, min(10), max(10), intOnly,
+	 * 		lettersOnly, uniqueInPage, uniqueInDb, date,
+	 * 		mustInclude(number|letter|special), inList(1|2|3)
 	 *
 	 * @param \array $settings			Validation TypoScript
 	 * @param \string $fieldName		Fieldname
@@ -47,11 +49,17 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 
 			switch ($validation) {
 				case 'required':
+					// or
 				case 'email':
+					// or
 				case 'intOnly':
+					// or
 				case 'lettersOnly':
+				// or
 				case 'uniqueInPage':
+				// or
 				case 'uniqueInDb':
+				// or
 				case 'date':
 					if ($configuration == 1) {
 						$string .= $validation;
@@ -59,13 +67,15 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 					break;
 
 				case 'min':
+					// or
 				case 'max':
+					// or
 				case 'mustInclude':
+					// or
 				case 'inList':
 				default:
 					$string .= $validation;
 					$string .= '(' . str_replace(',', '|', $configuration) . ')';
-					break;
 			}
 
 			$string .= ',';
@@ -74,5 +84,3 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 		return substr($string, 0, -1);
 	}
 }
-
-?>

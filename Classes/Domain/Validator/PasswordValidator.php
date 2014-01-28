@@ -3,6 +3,9 @@ namespace In2\Femanager\Domain\Validator;
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * Class PasswordValidator
+ */
 class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 
 	/**
@@ -81,4 +84,3 @@ class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 		$this->actionName = $piVars['__referrer']['@action'];
 	}
 }
-?>

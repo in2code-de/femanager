@@ -1,6 +1,9 @@
 <?php
 namespace In2\Femanager\Domain\Validator;
 
+/**
+ * Class GeneralValidator
+ */
 class GeneralValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 
 	/**
@@ -124,10 +127,10 @@ class GeneralValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractV
 	 *
 	 * @param \string $value
 	 * @param \string $field
-	 * @param \In2\Femanager\Domain\Model\User $user Existing User (only relevant for edit form)
+	 * @param \In2\Femanager\Domain\Model\User $user Existing User
 	 * @return \bool
 	 */
-	protected function validateUniquePage($value, $field, \In2\Femanager\Domain\Model\User $user = null) {
+	protected function validateUniquePage($value, $field, \In2\Femanager\Domain\Model\User $user = NULL) {
 		$foundUser = $this->userRepository->checkUniquePage($field, $value, $user);
 		return !is_object($foundUser);
 	}
@@ -136,11 +139,11 @@ class GeneralValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractV
 	 * Validation for Unique in the db
 	 *
 	 * @param \string $value
-	 * @param \string $field			Fieldname like "username" or "email"
-	 * @param \In2\Femanager\Domain\Model\User $user Existing User (only relevant for edit form)
+	 * @param \string $field Fieldname like "username" or "email"
+	 * @param \In2\Femanager\Domain\Model\User $user Existing User
 	 * @return \bool
 	 */
-	protected function validateUniqueDb($value, $field, \In2\Femanager\Domain\Model\User $user = null) {
+	protected function validateUniqueDb($value, $field, \In2\Femanager\Domain\Model\User $user = NULL) {
 		$foundUser = $this->userRepository->checkUniqueDb($field, $value, $user);
 		return !is_object($foundUser);
 	}
@@ -163,23 +166,25 @@ class GeneralValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractV
 				// value must include numbers
 				case 'number':
 					if (strlen(preg_replace('/[^0-9]/', '', $value)) === 0) {
-						$isValid = false;
-					}
-					break;
-
-				// value must include letters
-				case 'letter':
-					if (strlen(preg_replace('/[^a-zA-Z_-]/', '', $value)) === 0) {
-						$isValid = false;
+						$isValid = FALSE;
 					}
 					break;
 
 				// value must include special characters (like .:,&äö#*+)
 				case 'special':
 					if (strlen(preg_replace('/[^a-zA-Z0-9]/', '', $value)) === strlen($value)) {
-						$isValid = false;
+						$isValid = FALSE;
 					}
 					break;
+
+				// value must include letters
+				case 'letter':
+					if (strlen(preg_replace('/[^a-zA-Z_-]/', '', $value)) === 0) {
+						$isValid = FALSE;
+					}
+					break;
+
+				default:
 			}
 		}
 		return $isValid;
@@ -210,27 +215,33 @@ class GeneralValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractV
 			case 'd.m.Y':
 				if (preg_match('/^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$/', $value, $dateParts)) {
 					if (checkdate($dateParts[2], $dateParts[1], $dateParts[3])) {
-						return true;
+						return TRUE;
 					}
 				}
 				break;
+
 			case 'm/d/Y':
 				if (preg_match('/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/', $value, $dateParts)) {
 					if (checkdate($dateParts[1], $dateParts[2], $dateParts[3])) {
-						return true;
+						return TRUE;
 					}
 				}
 				break;
+
 			default:
-				return false;
 		}
+		return FALSE;
 	}
 
 	/**
-	 * Init
+	 * Initialize Method
+	 *
+	 * @return void
 	 */
 	protected function init() {
-		$config = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$config = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
 		$this->pluginVariables = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_femanager_pi1');
 		$action = 'new';
 		if ($this->pluginVariables['__referrer']['@action'] == 'edit') {
@@ -239,4 +250,3 @@ class GeneralValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractV
 		$this->validationSettings = $config['settings'][$action]['validation'];
 	}
 }
-?>

@@ -30,7 +30,8 @@ namespace In2\Femanager\Tests;
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  *
  * @package TYPO3
  * @subpackage femanager
@@ -38,28 +39,38 @@ namespace In2\Femanager\Tests;
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
 class UserTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+
 	/**
 	 * @var \In2\Femanager\Domain\Model\User
 	 */
 	protected $fixture;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		$this->fixture = new \In2\Femanager\Domain\Model\User();
 	}
 
+	/**
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->fixture);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
-	public function getUsernameReturnsInitialValueForString() { }
+	public function getUsernameReturnsInitialValueForString() {
+	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
-	public function setUsernameForStringSetsUsername() { 
+	public function setUsernameForStringSetsUsername() {
 		$this->fixture->setUsername('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -67,6 +78,5 @@ class UserTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getUsername()
 		);
 	}
-	
+
 }
-?>

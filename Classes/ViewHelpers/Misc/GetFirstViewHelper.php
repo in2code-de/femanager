@@ -13,13 +13,12 @@ class GetFirstViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
 	 * View helper to get first subobject of objectstorage
 	 *
 	 * @param \object $objectStorage
-	 * @return \object
+	 * @return \mixed
 	 */
 	public function render($objectStorage) {
 		foreach ($objectStorage as $object) {
 			return $object;
 		}
+		return FALSE;
 	}
 }
-
-?>

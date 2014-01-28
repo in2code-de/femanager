@@ -30,7 +30,8 @@ namespace In2\Femanager\Tests;
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  *
  * @package TYPO3
  * @subpackage femanager
@@ -46,6 +47,7 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 	/**
 	 * Make object available
+	 * @return void
 	 */
 	public function setUp() {
 		$this->generalValidatorMock = $this->getAccessibleMock('\In2\Femanager\Domain\Validator\GeneralValidator', array('dummy'));
@@ -53,6 +55,7 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 	/**
 	 * Remove object
+	 * @return void
 	 */
 	public function tearDown() {
 		unset($this->generalValidatorMock);
@@ -60,7 +63,7 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 	/**
 	 * Test vor validateRequired()
-	 *
+	 * @return void
 	 * @test
 	 */
 	public function validateRequiredReturnsBool() {
@@ -127,6 +130,9 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for validateEmail()
 	 *
+	 * @param \string $value
+	 * @param \string $result
+	 * @return void
 	 * @dataProvider validateEmailReturnsBoolDataProvider
 	 * @test
 	 */
@@ -139,6 +145,7 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test vor validateMin()
 	 *
+	 * @return void
 	 * @test
 	 */
 	public function validateMinReturnsBool() {
@@ -155,6 +162,7 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test vor validateMax()
 	 *
+	 * @return void
 	 * @test
 	 */
 	public function validateMaxReturnsBool() {
@@ -171,6 +179,7 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test vor validateInt()
 	 *
+	 * @return void
 	 * @test
 	 */
 	public function validateIntReturnsBool() {
@@ -186,6 +195,7 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test vor validateLetters()
 	 *
+	 * @return void
 	 * @test
 	 */
 	public function validateLettersReturnsBool() {
@@ -259,6 +269,10 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for validateMustInclude()
 	 *
+	 * @param \string $value
+	 * @param \string $configuration
+	 * @param \string $result
+	 * @return void
 	 * @dataProvider validateMustIncludeReturnsBoolDataProvider
 	 * @test
 	 */
@@ -271,6 +285,7 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test vor validateInList()
 	 *
+	 * @return void
 	 * @test
 	 */
 	public function validateInListReturnsBool() {
@@ -291,5 +306,3 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 
 }
-
-?>

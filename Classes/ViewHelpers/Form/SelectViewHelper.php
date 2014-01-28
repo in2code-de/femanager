@@ -25,10 +25,17 @@ namespace In2\Femanager\ViewHelpers\Form;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+/**
+ * Extend select viewhelper with default option
+ *
+ * Class SelectViewHelper
+ */
 class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper {
 
 	/**
 	 * Initialize
+	 *
+	 * @return void
 	 */
 	public function initializeArguments() {
 		parent::initializeArguments();
@@ -41,8 +48,6 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
 	 * @return array
 	 */
 	protected function getOptions() {
-		return array("" => $this->arguments['defaultOption']) + parent::getOptions();
+		return array('' => $this->arguments['defaultOption']) + parent::getOptions();
 	}
 }
-
-?>

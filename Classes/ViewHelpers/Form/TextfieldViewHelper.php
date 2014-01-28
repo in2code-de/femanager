@@ -25,13 +25,16 @@ namespace In2\Femanager\ViewHelpers\Form;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+/**
+ * Class TextfieldViewHelper
+ */
 class TextfieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldViewHelper {
 
 	/**
 	 * Get the value of this form element (changed to prefill from TypoScript)
 	 * Either returns arguments['value'], or the correct value for Object Access.
 	 *
-	 * @param boolean $convertObjects whether or not to convert objects to identifiers
+	 * @param boolean $convertObjects whether to convert objects to identifiers
 	 * @return mixed Value
 	 */
 	protected function getValue($convertObjects = TRUE) {
@@ -53,10 +56,14 @@ class TextfieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldVie
 	protected function getValueFromTypoScript() {
 		$actionName = $this->controllerContext->getRequest()->getControllerActionName();
 		$cObj = $this->configurationManager->getContentObject();
-		$typoScript = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+		$typoScript = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+		);
 		$prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$actionName . '.']['prefill.'];
-		$value = $cObj->cObjGetSingle($prefillTypoScript[$this->arguments['property']], $prefillTypoScript[$this->arguments['property'] . '.']);
+		$value = $cObj->cObjGetSingle(
+			$prefillTypoScript[$this->arguments['property']],
+			$prefillTypoScript[$this->arguments['property'] . '.']
+		);
 		return $value;
 	}
 }
-?>

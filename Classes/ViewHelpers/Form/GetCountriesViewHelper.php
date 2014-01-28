@@ -25,6 +25,11 @@ namespace In2\Femanager\ViewHelpers\Form;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+/**
+ * Get Countries
+ *
+ * Class GetCountriesViewHelper
+ */
 class GetCountriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
@@ -289,5 +294,3 @@ class GetCountriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 		return $countries;
 	}
 }
-
-?>

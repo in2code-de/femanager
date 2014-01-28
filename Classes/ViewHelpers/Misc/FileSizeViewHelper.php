@@ -25,6 +25,11 @@ namespace In2\Femanager\ViewHelpers\Misc;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+/**
+ * Show filesize
+ *
+ * Class FileSizeViewHelper
+ */
 class FileSizeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**

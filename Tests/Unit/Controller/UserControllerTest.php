@@ -4,7 +4,7 @@ namespace In2\Femanager\Tests;
  *  Copyright notice
  *
  *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,7 +29,8 @@ namespace In2\Femanager\Tests;
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  *
  * @package TYPO3
  * @subpackage femanager
@@ -37,25 +38,32 @@ namespace In2\Femanager\Tests;
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
 class UserControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+
 	/**
 	 * @var 
 	 */
 	protected $fixture;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		$this->fixture = new \In2\Femanager\Domain\Model\User();
 	}
 
+	/**
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->fixture);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function dummyMethod() {
 		$this->markTestIncomplete();
 	}
 
 }
-?>

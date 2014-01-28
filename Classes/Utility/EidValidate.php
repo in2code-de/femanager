@@ -61,7 +61,7 @@ class EidValidate {
 	/**
 	 * Initialize Extbase
 	 *
-	 * @param \array $TYPO3_CONF_VARS 			The global $TYPO3_CONF_VARS array. Will be set internally in ->TYPO3_CONF_VARS
+	 * @param \array $TYPO3_CONF_VARS
 	 */
 	public function __construct($TYPO3_CONF_VARS) {
 		$this->configuration = array(
@@ -80,14 +80,20 @@ class EidValidate {
 				'storagePid' => GeneralUtility::_GET('storagePid')
 			)
 		);
-		$_POST['tx_femanager_pi1']['action'] = 'validate'; // set action
-		$_POST['tx_femanager_pi1']['controller'] = 'User'; // set action
+		$_POST['tx_femanager_pi1']['action'] = 'validate';
+		$_POST['tx_femanager_pi1']['controller'] = 'User';
 
 		$this->bootstrap = new \TYPO3\CMS\Extbase\Core\Bootstrap();
 
 		$userObj = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser();
 		$pid = (GeneralUtility::_GET('id') ? GeneralUtility::_GET('id') : 1);
-		$GLOBALS['TSFE'] = GeneralUtility::makeInstance('TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController', $TYPO3_CONF_VARS, $pid, 0, TRUE);
+		$GLOBALS['TSFE'] = GeneralUtility::makeInstance(
+			'TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController',
+			$TYPO3_CONF_VARS,
+			$pid,
+			0,
+			TRUE
+		);
 		$GLOBALS['TSFE']->connectToDB();
 		$GLOBALS['TSFE']->fe_user = $userObj;
 		$GLOBALS['TSFE']->id = $pid;
@@ -99,7 +105,5 @@ class EidValidate {
 	}
 }
 
-global $TYPO3_CONF_VARS;
-$eid = GeneralUtility::makeInstance('In2\Femanager\Utility\EidValidate', $TYPO3_CONF_VARS);
-echo $eid->run(); // print content
-?>
+$eid = GeneralUtility::makeInstance('In2\Femanager\Utility\EidValidate', $GLOBALS['TYPO3_CONF_VARS']);
+echo $eid->run();

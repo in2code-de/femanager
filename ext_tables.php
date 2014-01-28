@@ -23,16 +23,16 @@ $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager'
 if (TYPO3_MODE === 'BE' && !$confArr['disableModule'] && !(TYPO3_REQUESTTYPE & TYPO3_REQUESTTYPE_INSTALL)) {
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
 		'In2.' . $_EXTKEY,
-		'web',	 // Make module a submodule of 'web'
-		'm1',	 // Submodule key
-		'',		 // Position
+		'web',
+		'm1',
+		'',
 		array(
-			 'UserBackend' => 'list,userLogout'
+			'UserBackend' => 'list,userLogout'
 		),
 		array(
-			 'access' => 'user,group',
-			 'icon'   => 'EXT:' . $_EXTKEY . '/ext_icon.gif',
-			 'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod.xlf',
+			'access' => 'user,group',
+			'icon'   => 'EXT:' . $_EXTKEY . '/ext_icon.gif',
+			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod.xlf',
 		)
 	);
 }
@@ -48,13 +48,18 @@ if (TYPO3_MODE === 'BE' && !$confArr['disableModule'] && !(TYPO3_REQUESTTYPE & T
  */
 $pluginSignature = str_replace('_', '', $_EXTKEY) . '_pi1';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/FlexFormPi1.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+	$pluginSignature,
+	'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/FlexFormPi1.xml'
+);
 
 /**
  * Load UserFunc for FlexForm Field selection
  */
 if (TYPO3_MODE == 'BE') {
-	require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FlexFormFieldSelection.php');
+	require_once(
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FlexFormFieldSelection.php'
+	);
 }
 
 /**
@@ -156,9 +161,12 @@ $tempColumns['tx_femanager_changerequest'] = array (
 $fields .= ', tx_femanager_changerequest';
 
 \TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('fe_users');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users','gender, date_of_birth', '', 'after:name');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'gender, date_of_birth', '', 'after:name');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns, 1);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users',  '--div--;LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.tab;;;;1-1-1, ' . $fields);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+	'fe_users',
+	'--div--;LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.tab;;;;1-1-1, ' . $fields
+);
 
 
 /**
@@ -192,5 +200,3 @@ $TCA['tx_femanager_domain_model_log'] = array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/Log.gif'
 	),
 );
-
-?>

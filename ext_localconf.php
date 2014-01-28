@@ -12,9 +12,9 @@ if (!defined('TYPO3_MODE')) {
 		'Edit' => 'edit, update, delete, confirmUpdateRequest',
 	),
 	array(
-		 'User' => 'list, show, fileUpload, fileDelete, validate',
-		 'New' => 'create, new, confirmCreateRequest, createStatus',
-		 'Edit' => 'edit, update, delete, confirmUpdateRequest',
+		'User' => 'list, show, fileUpload, fileDelete, validate',
+		'New' => 'create, new, confirmCreateRequest, createStatus',
+		'Edit' => 'edit, update, delete, confirmUpdateRequest',
 	)
 );
 
@@ -35,4 +35,3 @@ $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['femanagerUserUnhide'] = 'EXT:f
 
 // eID for User delete (BE)
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['femanagerUserDelete'] = 'EXT:femanager/Classes/Utility/EidUserDelete.php';
-?>

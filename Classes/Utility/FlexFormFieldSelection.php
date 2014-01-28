@@ -4,6 +4,11 @@ namespace In2\Femanager\Utility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 
+/**
+ * Field Selection for FlexForm
+ *
+ * Class FlexFormFieldSelection
+ */
 class FlexFormFieldSelection {
 
 	/**
@@ -14,10 +19,10 @@ class FlexFormFieldSelection {
 	 * @return void
 	 */
 	public function addOptions(&$params, &$pObj) {
-		$TSConfig = BackendUtility::getPagesTSconfig($this->getPid());
+		$tSconfig = BackendUtility::getPagesTSconfig($this->getPid());
 
-		if (!empty($TSConfig['tx_femanager.']['flexForm.'][$params['config']['itemsProcFuncTab'] . '.']['addFieldOptions.'])) {
-			$options = $TSConfig['tx_femanager.']['flexForm.'][$params['config']['itemsProcFuncTab'] . '.']['addFieldOptions.'];
+		if (!empty($tSconfig['tx_femanager.']['flexForm.'][$params['config']['itemsProcFuncTab'] . '.']['addFieldOptions.'])) {
+			$options = $tSconfig['tx_femanager.']['flexForm.'][$params['config']['itemsProcFuncTab'] . '.']['addFieldOptions.'];
 			foreach ((array) $options as $value => $label) {
 				$params['items'][] = array(
 					$label,
@@ -29,7 +34,11 @@ class FlexFormFieldSelection {
 
 	/**
 	 * Read pid from current URL
-	 * 		URL example: http://powermailt361.in2code.de/typo3/alt_doc.php?&returnUrl=%2Ftypo3%2Fsysext%2Fcms%2Flayout%2Fdb_layout.php%3Fid%3D17%23element-tt_content-14&edit[tt_content][14]=edit
+	 * 		URL example:
+	 * 		http://powermailt361.in2code.de/typo3/alt_doc.php?&returnUrl=
+	 * 		%2Ftypo3%2Fsysext%2Fcms%2Flayout%2Fdb_layout.php
+	 * 		%3Fid%3D17%23element-tt_content-14
+	 * 		&edit[tt_content][14]=edit
 	 *
 	 * @return int
 	 */
@@ -47,4 +56,3 @@ class FlexFormFieldSelection {
 	}
 
 }
-?>

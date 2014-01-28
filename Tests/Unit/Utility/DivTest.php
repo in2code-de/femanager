@@ -30,7 +30,8 @@ namespace In2\Femanager\Tests;
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  *
  * @package TYPO3
  * @subpackage femanager
@@ -46,6 +47,8 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 	/**
 	 * Make object available
+	 *
+	 * @return void
 	 */
 	public function setUp() {
 		$this->fixture = new \In2\Femanager\Utility\Div();
@@ -53,6 +56,8 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 	/**
 	 * Remove object
+	 *
+	 * @return void
 	 */
 	public function tearDown() {
 		unset($this->fixture);
@@ -100,6 +105,9 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for checkExtension()
 	 *
+	 * @param \string $givenValue
+	 * @param \string $expectedResult
+	 * @return void
 	 * @dataProvider checkExtensionReturnBoolDataProvider
 	 * @test
 	 */
@@ -138,6 +146,9 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for isMd5()
 	 *
+	 * @param \string $givenValue
+	 * @param \string $expectedResult
+	 * @return void
 	 * @dataProvider isMd5ReturnBoolDataProvider
 	 * @test
 	 */
@@ -176,6 +187,9 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for getValuesInBrackets()
 	 *
+	 * @param \string $start
+	 * @param \string $expectedResult
+	 * @return void
 	 * @dataProvider getValuesInBracketsReturnsStringDataProvider
 	 * @test
 	 */
@@ -214,6 +228,9 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for getValuesBeforeBrackets()
 	 *
+	 * @param \string $start
+	 * @param \string $expectedResult
+	 * @return void
 	 * @dataProvider getValuesBeforeBracketsDataProvider
 	 * @test
 	 */
