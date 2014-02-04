@@ -117,4 +117,4 @@ window.Femanager.getBaseUrl = function() {
 		}
 	}
 	return baseurl;
-}
+};
