@@ -11,18 +11,18 @@
 			<f:translate key="field_image_fineuploader" />
 		</div>
 		<div id="preview-image">
-			<f:if condition="{user.image}">
-				<ul class="qq-upload-list">
+			<ul class="qq-upload-list">
+				<f:for each="{femanager:Misc.Explode(string:'{user.image}')}" as="image">
 					<li class="alert alert-success">
-						<span class="qq-upload-file">{user.image}</span>
-						<span class="qq-upload-size" style="display: inline;"><femanager:Misc.FileSize path="{uploadFolder}/{user.image}" />kB</span>
+						<span class="qq-upload-file">{image}</span>
+						<span class="qq-upload-size" style="display: inline;"><femanager:Misc.FileSize path="{uploadFolder}/{image}" />kB</span>
 						<a href="#" class="qq-upload-delete icon-trash" style="display: inline;">Delete</a>
+						<f:image src="{uploadFolder}/{image}" alt="{user.firstName} {user.lastName}" width="250" class="fileupload_image" />
 					</li>
-				</ul>
-				<f:image src="{uploadFolder}/{user.image}" alt="{user.firstName} {user.lastName}" width="250" class="fileupload_image" />
-			</f:if>
+				</f:for>
+			</ul>
 		</div>
-		<f:form.hidden id="image" property="image" class="fine_uploader_image" />
+		<f:form.hidden id="image" property="image" class="fine_uploader_image" value="{user.image}" />
 	</div>
 	<div class="hidden" style="display: none;">
 		<div class="image_container_template">

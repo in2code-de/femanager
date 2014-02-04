@@ -864,6 +864,11 @@ plugin.tx_femanager {
 #			}
 		}
 
+		misc {
+			# Number of allowed images to upload
+			uploadAmount = 3
+		}
+
 		# Don't touch this - this is needed to let the plugin know if the main typoscript is included - otherwise an errormessage will be shown in the frontend
 		_TypoScriptIncluded = 1
 	}
