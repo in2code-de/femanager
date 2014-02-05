@@ -1,3 +1,4 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
 <f:layout name="Default" />
 
 	User / Show
@@ -82,9 +83,9 @@
 						</li>
 					</f:if>
 				</ul>
-				<f:if condition="{user.image}">
-					<f:image src="{uploadFolder}/{user.image}" alt="{user.firstName} {user.lastName}" width="250" />
-				</f:if>
+				<f:for each="{femanager:Misc.Explode(string:'{user.image}')}" as="image">
+					<f:image src="{uploadFolder}/{image}" alt="{user.firstName} {user.lastName}" width="250" />
+				</f:for>
 			</f:then>
 			<f:else>
 				<div class="femanager_note">

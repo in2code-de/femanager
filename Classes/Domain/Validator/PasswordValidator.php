@@ -44,7 +44,7 @@ class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 			return TRUE;
 		}
 
-		$piVars = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_femanager_pi1');
+		$piVars = GeneralUtility::_GP('tx_femanager_pi1');
 		$password = $user->getPassword();
 		$passwordRepeat = $piVars['password_repeat'];
 
@@ -63,10 +63,12 @@ class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	 */
 	protected function passwordFieldsAdded() {
 		$flexFormValues = GeneralUtility::xml2array($this->cObj->data['pi_flexform']);
-		$fields = $flexFormValues['data'][$this->actionName]['lDEF']['settings.' . $this->actionName . '.fields']['vDEF'];
-		if (empty($fields) || GeneralUtility::inList($fields, 'password')) {
-			// password fields are added to form
-			return TRUE;
+		if (is_array($flexFormValues)) {
+			$fields = $flexFormValues['data'][$this->actionName]['lDEF']['settings.' . $this->actionName . '.fields']['vDEF'];
+			if (empty($fields) || GeneralUtility::inList($fields, 'password')) {
+				// password fields are added to form
+				return TRUE;
+			}
 		}
 
 		// password fields are not added to form

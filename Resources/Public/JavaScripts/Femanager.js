@@ -3,13 +3,23 @@ jQuery(document).ready(function() {
 	$('.feManagerValidation').femanagerValidation();
 
 	// ajax uploader
-	createUploader();
+	var images = createUploader();
+	// Store initially present filenames from hidden #image input in data structure
+	$.each($('#image').val().split(','), function(index, filename) {
+		if(filename.trim().length > 0) {
+			images.addImageName(filename, filename)
+		}
+	});
 
 	// delete image
 	$('#preview-image').find('.qq-upload-delete').click(function(e) {
 		e.preventDefault();
-		$('#image').val('');
-		$('.fileupload_image, .qq-upload-list').fadeOut('', function() {
+
+		var item = $(e.target).parent();
+		// Remove filename from hidden #image input
+		images.deleteImageName(item.find('.qq-upload-file').text());
+
+		item.fadeOut('', function() {
 			$(this).remove();
 		});
 	});
@@ -26,15 +36,37 @@ jQuery(document).ready(function() {
 /**
  * Create Fileuploader
  *
- * @return void
+ * @return object
  */
 function createUploader() {
 	if ($('#fine-uploader').length == 0) {
 		return;
 	}
 
-	var image;
+	var imageNameHandler = {
+		// Data structure to store image names for Femanager
+		imageNames: {},
+		// Join image names in data structure to be stored in hidden #image input
+		getImageNames: function () {
+			return $.map(this.imageNames, function(item) { return item; } ).join(',');
+		},
+		// Add filename to data structure and hidden #image input
+		addImageName: function(id, filename) {
+			this.imageNames[id] = filename;
+			$('#image').val(this.getImageNames());
+		},
+		// Remove filename from data structure and hidden #image input
+		deleteImageName: function (idToDelete) {
+			delete this.imageNames[idToDelete];
+			$('#image').val(this.getImageNames());
+		}
+	};
+	var uploadAmount = parseInt($('#uploadAmount').val());
+	if (uploadAmount == undefined || uploadAmount < 1) {
+		uploadAmount = 1;
+	}
 	var uploader = new qq.FineUploader({
+
 		element: document.getElementById('fine-uploader'),
 		request: {
 			endpoint: Femanager.getBaseUrl() + 'index.php?eID=femanagerFileUpload&id=' + $('#femanagerPid').val(),
@@ -42,7 +74,7 @@ function createUploader() {
 				Accept: 'application/json'
 			}
 		},
-		multiple: false,
+		multiple: true,
 		template: $('.image_container_template:first').html(),
 		fileTemplate: '<li>' +
 			'<div class="qq-progress-bar"></div>' +
@@ -67,29 +99,30 @@ function createUploader() {
 		validation: {
 			allowedExtensions: ['jpeg', 'jpg', 'gif', 'png', 'bmp'],
 			sizeLimit: 25000000, // in bytes
-			itemLimit: 1 // limit number of uploads
+			itemLimit: uploadAmount // limit number of uploads
 		},
 		callbacks: {
 			onComplete: function(id, fileName, responseJSON) {
 				if (responseJSON.success) {
 					// show preview image
-					image = $('<img />')
+					var image = $('<img />')
 						.addClass('fileupload_image')
 						.attr('src', $('#uploadFolder').val() + '/' + responseJSON.uploadName)
 						.attr('alt', responseJSON.uploadName)
-					$('#preview-image').html(image);
 
-					// fill filename to hidden field
-					$('#image').val(responseJSON.uploadName);
+					image.appendTo(this.getItemByFileId(id));
+
+					// add filename to Femanager data structure
+					imageNameHandler.addImageName(id, responseJSON.uploadName);
 				}
 			},
 			onDeleteComplete: function(id, xhr, isError) {
-				image.fadeOut('', function() {
-					$(this).remove();
-				});
+				// Remove filename from Femanager data structure
+				imageNameHandler.deleteImageName(id);
 			}
 		}
 	});
+	return imageNameHandler;
 }
 
 window.Femanager = {};
@@ -117,4 +150,4 @@ window.Femanager.getBaseUrl = function() {
 		}
 	}
 	return baseurl;
-}
+};

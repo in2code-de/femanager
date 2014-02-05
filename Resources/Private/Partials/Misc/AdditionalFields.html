@@ -10,7 +10,7 @@
 	<input type="hidden" id="femanagerStoragePid" value="{storagePid}" />
 
 	<f:comment>
-		This is the current pid for ajax calls (know TypoScript)
+		This is the current pid for ajax calls (to enable TypoScript)
 	</f:comment>
 	<input type="hidden" id="femanagerPid" value="{Pid}" />
 
@@ -18,6 +18,11 @@
 		This is the path to the upload folder for images - relevant to show an image that was uploaded in frontend
 	</f:comment>
 	<input type="hidden" id="uploadFolder" value="{uploadFolder}" />
+
+	<f:comment>
+		This is the maximum numbers of images that could be uploaded
+	</f:comment>
+	<input type="hidden" id="uploadAmount" value="{settings.misc.uploadAmount}" />
 
 	<f:comment>
 		This is the container for javascript validation messages above the fields

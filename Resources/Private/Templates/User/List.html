@@ -1,3 +1,4 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
 <f:layout name="Default" />
 
 	User / List
@@ -16,11 +17,11 @@
 				<ul class="media-list">
 					<f:for each="{users}" as="user">
 						<li class="media list-group-item">
-							<f:if condition="{user.image}">
+							<f:for each="{femanager:Misc.Explode(string:'{user.image}')}" as="image">
 								<f:link.action action="show" arguments="{user:user}" class="pull-left">
-									<f:image src="{uploadFolder}/{user.image}" alt="{user.firstName} {user.lastName}" width="80c" height="80c" class="media-object" />
+									<f:image src="{uploadFolder}/{image}" alt="{user.firstName} {user.lastName}" width="80c" height="80c" class="media-object" />
 								</f:link.action>
-							</f:if>
+							</f:for>
 							<div class="media-body">
 								<h4 class="media-heading">
 									<f:link.action action="show" arguments="{user:user}">

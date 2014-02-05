@@ -24,6 +24,7 @@ namespace In2\Femanager\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * User Repository
@@ -73,7 +74,12 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$query->greaterThan('uid', 0)
 		);
 		if (!empty($userGroupList)) {
-			$and[] = $query->in('usergroup', explode(',', $userGroupList));
+			$selectedUsergroups = GeneralUtility::trimExplode(',', $userGroupList, TRUE);
+			$or = array();
+			foreach ($selectedUsergroups as $group) {
+				$or[] = $query->contains('usergroup', $group);
+			}
+			$and[] = $query->logicalOr($or);
 		}
 		if (!empty($filter['searchword'])) {
 			$or = array();
