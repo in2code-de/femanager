@@ -14,8 +14,8 @@ $EM_CONF[$_EXTKEY] = array(
 	'title' => 'femanager',
 	'description' => '
 		TYPO3 Frontend User Registration and Management based on
-		Extbase and Fluid with Namespaces and a lot of features and e
-		xtension possibilities. This extension basicly works like sr_feuser_register.
+		Extbase and Fluid with Namespaces and a lot of features and
+		extension possibilities. Extension basicly works like sr_feuser_register
 	',
 	'category' => 'plugin',
 	'author' => 'Alex Kellner',
@@ -24,7 +24,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'shy' => '',
 	'priority' => '',
 	'module' => '',
-	'state' => 'beta',
+	'state' => 'stable',
 	'internal' => '',
 	'uploadfolder' => '0',
 	'createDirs' => '',
