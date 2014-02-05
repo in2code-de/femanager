@@ -12,7 +12,7 @@
 		</div>
 		<div id="preview-image">
 			<ul class="qq-upload-list">
-				<f:for each="{femanager:Misc.Explode(string:'{user.image}')}" as="image">
+				<f:for each="{femanager:Form.GetImages(property: 'image')}" as="image">
 					<li class="alert alert-success">
 						<span class="qq-upload-file">{image}</span>
 						<span class="qq-upload-size" style="display: inline;"><femanager:Misc.FileSize path="{uploadFolder}/{image}" />kB</span>
