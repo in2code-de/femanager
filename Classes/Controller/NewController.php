@@ -118,6 +118,8 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 
 					$user = $this->div->forceValues($user, $this->config['new.']['forceValues.']['onUserConfirmation.'], $this->cObj);
 					$user->setTxFemanagerConfirmedbyuser(TRUE);
+					$this->userRepository->update($user);
+					$this->persistenceManager->persistAll();
 
 					$this->div->log(
 						LocalizationUtility::translate('tx_femanager_domain_model_log.state.102', 'femanager'),

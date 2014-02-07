@@ -393,7 +393,7 @@ class Div {
 			return;
 		}
 
-		// Create Log
+		/* @var $log \In2\Femanager\Domain\Model\Log */
 		$log = $this->objectManager->get('In2\Femanager\Domain\Model\Log');
 		$log->setTitle($title);
 		$log->setState($state);
