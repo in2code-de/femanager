@@ -7,10 +7,10 @@
 		</f:if>
 	</label>
 	<div class="controls">
-		<div id="fine-uploader">
+		<div id="femanager_field_fine-uploader">
 			<f:translate key="field_image_fineuploader" />
 		</div>
-		<div id="preview-image">
+		<div id="femanager_field_preview-image">
 			<ul class="qq-upload-list">
 				<f:for each="{femanager:Form.GetImages(property: 'image')}" as="image">
 					<li class="alert alert-success">
@@ -22,7 +22,7 @@
 				</f:for>
 			</ul>
 		</div>
-		<f:form.hidden id="image" property="image" class="fine_uploader_image" value="{user.image}" />
+		<f:form.hidden id="femanager_field_image" property="image" class="fine_uploader_image" value="{user.image}" />
 	</div>
 	<div class="hidden" style="display: none;">
 		<div class="image_container_template">

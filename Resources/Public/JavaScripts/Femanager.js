@@ -5,14 +5,14 @@ jQuery(document).ready(function() {
 	// ajax uploader
 	var images = createUploader();
 	// Store initially present filenames from hidden #image input in data structure
-	$.each($('#image').val().split(','), function(index, filename) {
+	$.each($('#femanager_field_image').val().split(','), function(index, filename) {
 		if(filename.trim().length > 0) {
 			images.addImageName(filename, filename)
 		}
 	});
 
 	// delete image
-	$('#preview-image').find('.qq-upload-delete').click(function(e) {
+	$('#femanager_field_preview-image').find('.qq-upload-delete').click(function(e) {
 		e.preventDefault();
 
 		var item = $(e.target).parent();
@@ -39,7 +39,7 @@ jQuery(document).ready(function() {
  * @return object
  */
 function createUploader() {
-	if ($('#fine-uploader').length == 0) {
+	if ($('#femanager_field_fine-uploader').length == 0) {
 		return;
 	}
 
@@ -53,12 +53,12 @@ function createUploader() {
 		// Add filename to data structure and hidden #image input
 		addImageName: function(id, filename) {
 			this.imageNames[id] = filename;
-			$('#image').val(this.getImageNames());
+			$('#femanager_field_image').val(this.getImageNames());
 		},
 		// Remove filename from data structure and hidden #image input
 		deleteImageName: function (idToDelete) {
 			delete this.imageNames[idToDelete];
-			$('#image').val(this.getImageNames());
+			$('#femanager_field_image').val(this.getImageNames());
 		}
 	};
 	var uploadAmount = parseInt($('#uploadAmount').val());
