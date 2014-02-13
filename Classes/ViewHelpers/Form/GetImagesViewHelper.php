@@ -51,6 +51,6 @@ class GetImagesViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractForm
 	 * @return string
 	 */
 	public function render() {
-		return GeneralUtility::trimExplode(',', $this->getValue());
+		return GeneralUtility::trimExplode(',', $this->getValue(), TRUE);
 	}
 }
