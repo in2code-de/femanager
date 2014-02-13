@@ -1,6 +1,6 @@
 {namespace femanager=In2\Femanager\ViewHelpers}
 <div class="femanager_fieldset femanager_address control-group">
-	<label for="address" class="control-label">
+	<label for="femanager_field_address" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.address" />
 		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'address', actionName: actionName)}">
 			<span>*</span>
@@ -8,7 +8,7 @@
 	</label>
 	<div class="controls">
 		<f:form.textarea
-				id="address"
+				id="femanager_field_address"
 				property="address"
 				class="input-block-level"
 				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'address')}" />

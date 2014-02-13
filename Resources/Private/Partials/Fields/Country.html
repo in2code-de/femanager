@@ -1,6 +1,6 @@
 {namespace femanager=In2\Femanager\ViewHelpers}
 <div class="femanager_fieldset femanager_country control-group">
-	<label for="country" class="control-label">
+	<label for="femanager_field_country" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.country" />
 		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'country', actionName: actionName)}">
 			<span>*</span>
@@ -8,7 +8,7 @@
 	</label>
 	<div class="controls">
 		<femanager:form.select
-				id="country"
+				id="femanager_field_country"
 				property="country"
 				options="{femanager:Form.GetCountries()}"
 				defaultOption="{f:translate(key:'pleaseChoose')}"

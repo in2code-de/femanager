@@ -1,6 +1,6 @@
 {namespace femanager=In2\Femanager\ViewHelpers}
 <div class="femanager_fieldset femanager_usergroup control-group">
-	<label for="usergroup" class="control-label">
+	<label for="femanager_field_usergroup" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.usergroup" />
 		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'usergroup', actionName: actionName)}">
 			<span>*</span>
@@ -8,7 +8,7 @@
 	</label>
 	<div class="controls">
 		<femanager:form.select
-				id="usergroup"
+				id="femanager_field_usergroup"
 				property="usergroup.0"
 				options="{allUserGroups}"
 				optionValueField="uid"
