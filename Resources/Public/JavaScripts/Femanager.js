@@ -67,7 +67,7 @@ function createUploader() {
 	}
 	var uploader = new qq.FineUploader({
 
-		element: document.getElementById('fine-uploader'),
+		element: document.getElementById('femanager_field_fine-uploader'),
 		request: {
 			endpoint: Femanager.getBaseUrl() + 'index.php?eID=femanagerFileUpload&id=' + $('#femanagerPid').val(),
 			customHeaders: {
