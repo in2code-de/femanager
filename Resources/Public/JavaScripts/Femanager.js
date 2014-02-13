@@ -61,9 +61,9 @@ function createUploader() {
 			$('#femanager_field_image').val(this.getImageNames());
 		}
 	};
-	var uploadAmount = parseInt($('#uploadAmount').val());
-	if (uploadAmount == undefined || uploadAmount < 1) {
-		uploadAmount = 1;
+	var uploadAmount = 1;
+	if ($('#uploadAmount').length) {
+		uploadAmount = parseInt($('#uploadAmount').val());
 	}
 	var uploader = new qq.FineUploader({
 
