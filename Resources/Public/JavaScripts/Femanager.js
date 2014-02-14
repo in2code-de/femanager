@@ -5,11 +5,13 @@ jQuery(document).ready(function() {
 	// ajax uploader
 	var images = createUploader();
 	// Store initially present filenames from hidden #image input in data structure
-	$.each($('#femanager_field_image').val().split(','), function(index, filename) {
-		if(filename.trim().length > 0) {
-			images.addImageName(filename, filename)
-		}
-	});
+	if ($('#femanager_field_image').length > 0) {
+		$.each($('#femanager_field_image').val().split(','), function(index, filename) {
+			if(filename.trim().length > 0) {
+				images.addImageName(filename, filename)
+			}
+		});
+	}
 
 	// delete image
 	$('#femanager_field_preview-image').find('.qq-upload-delete').click(function(e) {
