@@ -45,7 +45,7 @@ jQuery(document).ready(function() {
 		e.preventDefault();
 		$(this).closest('tr').find('.t3-icon-status-permission-granted').removeClass('t3-icon-status-permission-granted').addClass('t3-icon-status-permission-denied');
 
-		var url = $(this).attr('href');
+		var url = $(this).prop('href');
 		$.ajax({
 			url: url
 		});

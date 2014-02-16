@@ -109,8 +109,8 @@ function createUploader() {
 					// show preview image
 					var image = $('<img />')
 						.addClass('fileupload_image')
-						.attr('src', $('#uploadFolder').val() + '/' + responseJSON.uploadName)
-						.attr('alt', responseJSON.uploadName)
+						.prop('src', $('#uploadFolder').val() + '/' + responseJSON.uploadName)
+						.prop('alt', responseJSON.uploadName)
 
 					image.appendTo(this.getItemByFileId(id));
 
@@ -137,7 +137,7 @@ window.Femanager = {};
 window.Femanager.getBaseUrl = function() {
 	var baseurl;
 	if (jQuery('base').length > 0) {
-		baseurl = jQuery('base').attr('href');
+		baseurl = jQuery('base').prop('href');
 	} else if (window.location.hostname.indexOf('localhost') !== -1) {
 		baseurl = '';
 	} else {
