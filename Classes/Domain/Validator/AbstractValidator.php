@@ -7,6 +7,14 @@ namespace In2\Femanager\Domain\Validator;
 class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 
 	/**
+	 * objectManager
+	 *
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+	 * @inject
+	 */
+	protected $objectManager;
+
+	/**
 	 * userRepository
 	 *
 	 * @var \In2\Femanager\Domain\Repository\UserRepository
