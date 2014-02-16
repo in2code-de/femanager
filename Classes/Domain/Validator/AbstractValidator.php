@@ -4,7 +4,7 @@ namespace In2\Femanager\Domain\Validator;
 /**
  * Class GeneralValidator
  */
-class GeneralValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
+class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 
 	/**
 	 * userRepository

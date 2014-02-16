@@ -4,7 +4,7 @@ namespace In2\Femanager\Domain\Validator;
 /**
  * Class ServersideValidator
  */
-class ServersideValidator extends \In2\Femanager\Domain\Validator\GeneralValidator {
+class ServersideValidator extends \In2\Femanager\Domain\Validator\AbstractValidator {
 
 	/**
 	 * Validation of given Params
