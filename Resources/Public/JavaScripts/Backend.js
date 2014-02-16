@@ -10,11 +10,11 @@ jQuery(document).ready(function() {
 
 		if ($this.hasClass('hideUser')) {
 			$this.removeClass('t3-icon-edit-hide').removeClass('hideUser').addClass('t3-icon-edit-unhide').addClass('unhideUser');
-			$this.closest('.femanager_list_line').children('.col-icon').children().html('<span class="t3-icon t3-icon-status t3-icon-status-overlay t3-icon-overlay-hidden t3-icon-overlay">&nbsp;</span>');
+			$this.closest('.femanager_list_line').children('.col-icon').children(':first').html('<span class="t3-icon t3-icon-status t3-icon-status-overlay t3-icon-overlay-hidden t3-icon-overlay">&nbsp;</span>');
 			var hidden = 1;
 		} else {
 			$this.removeClass('t3-icon-edit-unhide').removeClass('unhideUser').addClass('t3-icon-edit-hide').addClass('hideUser');
-			$this.closest('.femanager_list_line').children('.col-icon').children().html('');
+			$this.closest('.femanager_list_line').children('.col-icon').children(':first').html('');
 			var hidden = 0;
 		}
 		url = 'tce_db.php?&data[' + table + '][' + uid + '][disable]=' + hidden + '&redirect=' + T3_THIS_LOCATION + '&vC=b601970a97' + formToken + '&prErr=1&uPT=1';
