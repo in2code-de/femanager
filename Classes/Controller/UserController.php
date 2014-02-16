@@ -32,7 +32,7 @@ namespace In2\Femanager\Controller;
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class UserController extends \In2\Femanager\Controller\GeneralController {
+class UserController extends \In2\Femanager\Controller\AbstractController {
 
 	/**
 	 * ClientsideValidator

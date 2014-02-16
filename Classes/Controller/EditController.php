@@ -37,7 +37,7 @@ use \In2\Femanager\Utility\Div;
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class EditController extends \In2\Femanager\Controller\GeneralController {
+class EditController extends \In2\Femanager\Controller\AbstractController {
 
 	/**
 	 * action edit
