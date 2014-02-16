@@ -199,6 +199,9 @@
 			<trans-unit id="validationErrorDate">
 				<target state="translated">Das Datum hat ein falsches Format</target>
 			</trans-unit>
+			<trans-unit id="validationErrorCaptcha">
+				<target state="translated">Captcha Code falsch</target>
+			</trans-unit>
 
 			<trans-unit id="emailCreateAdminConfirmationSalutation">
 				<target state="translated">Hallo Admin,</target>

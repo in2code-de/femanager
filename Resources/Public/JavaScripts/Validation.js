@@ -92,7 +92,7 @@ jQuery.fn.femanagerValidation = function() {
 			data:
 				'tx_femanager_pi1[validation]=' + element.data('validation') +
 				'&tx_femanager_pi1[value]=' + element.val() +
-				'&tx_femanager_pi1[field]=' + element.attr('id') +
+				'&tx_femanager_pi1[field]=' + getFieldName(element) +
 				(user != undefined ? '&tx_femanager_pi1[user]=' + user : '') +
 				'&storagePid=' + $('#femanagerStoragePid').val() +
 				'&L=' + $('#femanagerLanguage').val() +
@@ -117,6 +117,20 @@ jQuery.fn.femanagerValidation = function() {
 				}
 			}
 		});
+	}
+
+	/**
+	 * Read fieldname
+	 * 		get "email" out of "tx_femanager_pi1[user][email]"
+	 * 		get "passwort_repeat" out of "tx_femanager_pi1[password_repeat]"
+	 *
+	 * @param element
+	 * @return string
+	 */
+	function getFieldName(element) {
+		var nameParts = element.prop('name').split('[');
+		var name = nameParts[nameParts.length-1].replace(']', '');
+		return name;
 	}
 
 	/**

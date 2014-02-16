@@ -31,13 +31,13 @@ use \In2\Femanager\Utility\Div;
  ***************************************************************/
 
 /**
- * User Controller
+ * Abstract Controller
  *
  * @package femanager
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class GeneralController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * userRepository

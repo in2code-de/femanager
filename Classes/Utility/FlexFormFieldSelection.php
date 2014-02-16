@@ -21,11 +21,20 @@ class FlexFormFieldSelection {
 	public function addOptions(&$params, &$pObj) {
 		$tSconfig = BackendUtility::getPagesTSconfig($this->getPid());
 
+		// add Captcha field
+		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('sr_freecap')) {
+			$params['items'][] = array(
+				$GLOBALS['LANG']->sL('LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.captcha'),
+				'captcha'
+			);
+		}
+
+		// add fields from TSconfig
 		if (!empty($tSconfig['tx_femanager.']['flexForm.'][$params['config']['itemsProcFuncTab'] . '.']['addFieldOptions.'])) {
 			$options = $tSconfig['tx_femanager.']['flexForm.'][$params['config']['itemsProcFuncTab'] . '.']['addFieldOptions.'];
 			foreach ((array) $options as $value => $label) {
 				$params['items'][] = array(
-					$label,
+					GeneralUtility::isFirstPartOfStr($label, 'LLL:') ? $GLOBALS['LANG']->sL($label) : $label,
 					$value
 				);
 			}

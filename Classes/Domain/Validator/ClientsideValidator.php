@@ -7,7 +7,7 @@ use \In2\Femanager\Utility\Div;
 /**
  * Class ClientsideValidator
  */
-class ClientsideValidator extends \In2\Femanager\Domain\Validator\GeneralValidator {
+class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValidator {
 
 	/**
 	 * Validation settings string

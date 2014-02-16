@@ -41,7 +41,7 @@ namespace In2\Femanager\Tests;
 class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 	/**
-	 * @var \In2\Femanager\Domain\Validator\MainValidator
+	 * @var \In2\Femanager\Domain\Validator\AbstractValidator
 	 */
 	protected $generalValidatorMock;
 
@@ -50,7 +50,7 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 * @return void
 	 */
 	public function setUp() {
-		$this->generalValidatorMock = $this->getAccessibleMock('\In2\Femanager\Domain\Validator\GeneralValidator', array('dummy'));
+		$this->generalValidatorMock = $this->getAccessibleMock('\In2\Femanager\Domain\Validator\AbstractValidator', array('dummy'));
 	}
 
 	/**

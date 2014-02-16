@@ -75,6 +75,9 @@
 			<trans-unit id="tx_femanager_domain_model_user.lastlogin">
 				<target state="translated">Letzter Login</target>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.captcha">
+				<target state="translated">Captcha</target>
+			</trans-unit>
 			<trans-unit id="fe_users.crdate">
 				<target state="translated">Erstellungszeitpunkt</target>
 			</trans-unit>

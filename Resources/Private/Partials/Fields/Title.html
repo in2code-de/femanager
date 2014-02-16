@@ -1,6 +1,6 @@
 {namespace femanager=In2\Femanager\ViewHelpers}
 <div class="femanager_fieldset femanager_title control-group">
-	<label for="title" class="control-label">
+	<label for="femanager_field_title" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.title" />
 		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'title', actionName: actionName)}">
 			<span>*</span>
@@ -8,7 +8,7 @@
 	</label>
 	<div class="controls">
 		<femanager:form.textfield
-				id="title"
+				id="femanager_field_title"
 				property="title"
 				class="input-block-level"
 				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'title')}" />

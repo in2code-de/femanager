@@ -5,14 +5,16 @@ jQuery(document).ready(function() {
 	// ajax uploader
 	var images = createUploader();
 	// Store initially present filenames from hidden #image input in data structure
-	$.each($('#image').val().split(','), function(index, filename) {
-		if(filename.trim().length > 0) {
-			images.addImageName(filename, filename)
-		}
-	});
+	if ($('#femanager_field_image').length > 0) {
+		$.each($('#femanager_field_image').val().split(','), function(index, filename) {
+			if(filename.trim().length > 0) {
+				images.addImageName(filename, filename)
+			}
+		});
+	}
 
 	// delete image
-	$('#preview-image').find('.qq-upload-delete').click(function(e) {
+	$('#femanager_field_preview-image').find('.qq-upload-delete').click(function(e) {
 		e.preventDefault();
 
 		var item = $(e.target).parent();
@@ -39,7 +41,7 @@ jQuery(document).ready(function() {
  * @return object
  */
 function createUploader() {
-	if ($('#fine-uploader').length == 0) {
+	if ($('#femanager_field_fine-uploader').length == 0) {
 		return;
 	}
 
@@ -53,21 +55,21 @@ function createUploader() {
 		// Add filename to data structure and hidden #image input
 		addImageName: function(id, filename) {
 			this.imageNames[id] = filename;
-			$('#image').val(this.getImageNames());
+			$('#femanager_field_image').val(this.getImageNames());
 		},
 		// Remove filename from data structure and hidden #image input
 		deleteImageName: function (idToDelete) {
 			delete this.imageNames[idToDelete];
-			$('#image').val(this.getImageNames());
+			$('#femanager_field_image').val(this.getImageNames());
 		}
 	};
-	var uploadAmount = parseInt($('#uploadAmount').val());
-	if (uploadAmount == undefined || uploadAmount < 1) {
-		uploadAmount = 1;
+	var uploadAmount = 1;
+	if ($('#uploadAmount').length) {
+		uploadAmount = parseInt($('#uploadAmount').val());
 	}
 	var uploader = new qq.FineUploader({
 
-		element: document.getElementById('fine-uploader'),
+		element: document.getElementById('femanager_field_fine-uploader'),
 		request: {
 			endpoint: Femanager.getBaseUrl() + 'index.php?eID=femanagerFileUpload&id=' + $('#femanagerPid').val(),
 			customHeaders: {
@@ -107,8 +109,8 @@ function createUploader() {
 					// show preview image
 					var image = $('<img />')
 						.addClass('fileupload_image')
-						.attr('src', $('#uploadFolder').val() + '/' + responseJSON.uploadName)
-						.attr('alt', responseJSON.uploadName)
+						.prop('src', $('#uploadFolder').val() + '/' + responseJSON.uploadName)
+						.prop('alt', responseJSON.uploadName)
 
 					image.appendTo(this.getItemByFileId(id));
 
@@ -135,7 +137,7 @@ window.Femanager = {};
 window.Femanager.getBaseUrl = function() {
 	var baseurl;
 	if (jQuery('base').length > 0) {
-		baseurl = jQuery('base').attr('href');
+		baseurl = jQuery('base').prop('href');
 	} else if (window.location.hostname.indexOf('localhost') !== -1) {
 		baseurl = '';
 	} else {

@@ -1,0 +1,18 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+{namespace freeCap=SJBR\SrFreecap\ViewHelpers}
+<div class="femanager_fieldset femanager_captcha control-group">
+	<label for="femanager_field_captcha" class="control-label">
+		<f:translate key="tx_femanager_domain_model_user.captcha" default="Captcha" />
+		<span>*</span>
+	</label>
+	<div class="controls">
+		<f:form.textfield
+				id="femanager_field_captcha"
+				name="captcha"
+				class="input-block-level"
+				additionalAttributes="{data-validation: 'required'}"
+				title="{freeCap:translate(key: 'notice')} {freeCap:translate(key: 'explain')}" />
+		<freeCap:image />
+		<freeCap:audio />
+	</div>
+</div>

@@ -37,7 +37,7 @@ use \In2\Femanager\Utility\Div;
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class NewController extends \In2\Femanager\Controller\GeneralController {
+class NewController extends \In2\Femanager\Controller\AbstractController {
 
 	/**
 	 * action new
@@ -58,6 +58,7 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 	 * @param \In2\Femanager\Domain\Model\User $user
 	 * @validate $user In2\Femanager\Domain\Validator\ServersideValidator
 	 * @validate $user In2\Femanager\Domain\Validator\PasswordValidator
+	 * @validate $user In2\Femanager\Domain\Validator\CaptchaValidator
 	 * @return void
 	 */
 	public function createAction(User $user) {
@@ -118,6 +119,8 @@ class NewController extends \In2\Femanager\Controller\GeneralController {
 
 					$user = $this->div->forceValues($user, $this->config['new.']['forceValues.']['onUserConfirmation.'], $this->cObj);
 					$user->setTxFemanagerConfirmedbyuser(TRUE);
+					$this->userRepository->update($user);
+					$this->persistenceManager->persistAll();
 
 					$this->div->log(
 						LocalizationUtility::translate('tx_femanager_domain_model_log.state.102', 'femanager'),

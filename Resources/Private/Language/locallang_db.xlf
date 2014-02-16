@@ -75,6 +75,9 @@
 			<trans-unit id="tx_femanager_domain_model_user.lastlogin">
 				<source>Last login</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.captcha">
+				<source>Captcha</source>
+			</trans-unit>
 			<trans-unit id="fe_users.crdate">
 				<source>Creation Time</source>
 			</trans-unit>
