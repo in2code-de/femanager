@@ -199,6 +199,9 @@
 			<trans-unit id="validationErrorDate">
 				<source>Date has the wrong format</source>
 			</trans-unit>
+			<trans-unit id="validationErrorCaptcha">
+				<source>Wrong Captcha Code</source>
+			</trans-unit>
 
 			<trans-unit id="emailCreateAdminConfirmationSalutation">
 				<source>Dear Admin,</source>

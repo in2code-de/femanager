@@ -1,0 +1,33 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<f:if condition="{femanager:Misc.CaptchaEnabled(settings: settings)}">
+	<f:then>
+		<f:render partial="Fields/CaptchaField" arguments="{_all}" />
+	</f:then>
+	<f:else>
+		<f:render section="error" arguments="{_all}" />
+	</f:else>
+</f:if>
+
+
+<f:section name="error">
+	<div class="femanager_fieldset femanager_captcha control-group">
+		<label class="control-label">
+			<f:translate key="tx_femanager_domain_model_user.captcha" default="Captcha" />
+			<span>*</span>
+		</label>
+		<div class="controls">
+			<ul>
+				<li>
+					Please install extension <strong>sr_freecap</strong>
+				</li>
+				<li>
+					And enable it with
+					<strong>plugin.tx_femanager.settings.new.validation.captcha.captcha = 1</strong> or
+					<strong>plugin.tx_femanager.settings.edit.validation.captcha.captcha = 1</strong>
+					in TypoScript
+				</li>
+			</ul>
+
+		</div>
+	</div>
+</f:section>
