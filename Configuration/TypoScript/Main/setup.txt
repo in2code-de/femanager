@@ -536,7 +536,7 @@ plugin.tx_femanager {
 
 			# Save user values to one or more other tables (e.g. tt_address or something else)
 			#       With .field=[fieldname] you have access to the user object
-			#       Possible values are: username, address, city, company, country, email, fax, firstName, lastName, middleName, name, password, telephone, fax, title, www, zip and lastGeneratedUid (to have access to the uid of the last loop in the next loop)
+			#       Possible values are: uid, username, address, city, company, country, email, fax, firstName, lastName, middleName, name, password, telephone, fax, title, www, zip and lastGeneratedUid (to have access to the uid of the last loop in the next loop)
 			storeInDatabase {
 				tt_address {
 					_enable = TEXT
