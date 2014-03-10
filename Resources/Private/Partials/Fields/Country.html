@@ -14,5 +14,21 @@
 				defaultOption="{f:translate(key:'pleaseChoose')}"
 				class="input-block-level"
 				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'country')}" />
+
+		<femanager:form.select
+				id="femanager_field_country"
+				property="country"
+				options="{femanager:Form.GetCountriesFromStaticInfoTables()}"
+				defaultOption="{f:translate(key:'pleaseChoose')}"
+				class="input-block-level"
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'country')}" />
+
+		<femanager:form.select
+				id="femanager_field_country"
+				property="country"
+				options="{femanager:Form.GetCountriesFromStaticInfoTables(key:'isoCodeA2',value:'shortNameDe')}"
+				defaultOption="{f:translate(key:'pleaseChoose')}"
+				class="input-block-level"
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'country')}" />
 	</div>
 </div>

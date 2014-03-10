@@ -17,7 +17,7 @@ plugin.tx_femanager {
 		# Settings for CREATE user profiles
 		###################################
 		new {
-			# take username and copy it to the email field (so email field is not nessesary in FE)
+			# take username and copy it to the email field (so email field is not necessary in FE)
 #			fillEmailWithUsername = 1
 
 			# login after profile creation (don't work if admin confirmation is turned on)
