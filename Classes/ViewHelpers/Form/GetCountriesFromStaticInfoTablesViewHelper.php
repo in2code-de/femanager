@@ -45,10 +45,12 @@ class GetCountriesFromStaticInfoTablesViewHelper extends \TYPO3\CMS\Fluid\Core\V
 	 *
 	 * @param \string $key
 	 * @param \string $value
+	 * @param \string $sortbyField
+	 * @param \string $sorting
 	 * @return \array
 	 */
-	public function render($key = 'isoCodeA3', $value = 'officialNameLocal') {
-		$countries = $this->countryRepository->findAll();
+	public function render($key = 'isoCodeA3', $value = 'officialNameLocal', $sortbyField = 'isoCodeA3', $sorting = 'asc') {
+		$countries = $this->countryRepository->findAllOrderedBy($sortbyField, $sorting);
 		$countriesArray = array();
 		foreach ($countries as $country) {
 			if (

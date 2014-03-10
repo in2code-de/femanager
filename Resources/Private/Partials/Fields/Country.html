@@ -32,10 +32,13 @@
 	<f:comment><![CDATA[
 
 		// Example how to add a countryselection from static_info_tables (and _de, _fr, etc...)
-		// Just install static_info_tables, clear cache and use
+		// Just install static_info_tables, clear cache and use (default values - key:'isoCodeA3',value:'officialNameLocal',sortbyField:'isoCodeA3',sorting:'asc')
 		//      {femanager:Form.GetCountriesFromStaticInfoTables()}
-		// or if you want to configure key and value
+		//
+		// some more examples (if you want to configure key and value or sorting)
 		//      {femanager:Form.GetCountriesFromStaticInfoTables(key:'isoCodeA2',value:'shortNameDe'))}
+		//      {femanager:Form.GetCountriesFromStaticInfoTables(key:'isoCodeA2',value:'shortNameFr',sortbyField:'shortNameFr'))}
+		//      {femanager:Form.GetCountriesFromStaticInfoTables(key:'isoCodeA3',value:'isoCodeA3',sortbyField:'isoCodeA3',sorting:'asc'))}
 		// to fill the options
 
 
