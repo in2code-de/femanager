@@ -1,18 +1,54 @@
 {namespace femanager=In2\Femanager\ViewHelpers}
-<div class="femanager_fieldset femanager_country control-group">
-	<label for="femanager_field_country" class="control-label">
-		<f:translate key="tx_femanager_domain_model_user.country" />
-		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'country', actionName: actionName)}">
-			<span>*</span>
-		</f:if>
-	</label>
-	<div class="controls">
+
+<f:render section="default" />
+
+
+
+
+<f:section name="default">
+	<div class="femanager_fieldset femanager_country control-group">
+		<label for="femanager_field_country" class="control-label">
+			<f:translate key="tx_femanager_domain_model_user.country" />
+			<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'country', actionName: actionName)}">
+				<span>*</span>
+			</f:if>
+		</label>
+		<div class="controls">
+			<femanager:form.select
+					id="femanager_field_country"
+					property="country"
+					options="{femanager:Form.GetCountries()}"
+					defaultOption="{f:translate(key:'pleaseChoose')}"
+					class="input-block-level"
+					additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'country')}" />
+		</div>
+	</div>
+</f:section>
+
+
+
+
+<f:section name="static_info_tables">
+	<f:comment><![CDATA[
+
+		// Example how to add a countryselection from static_info_tables (and _de, _fr, etc...)
+		// Just install static_info_tables, clear cache and use (default values - key:'isoCodeA3',value:'officialNameLocal',sortbyField:'isoCodeA3',sorting:'asc')
+		//      {femanager:Form.GetCountriesFromStaticInfoTables()}
+		//
+		// some more examples (if you want to configure key and value or sorting)
+		//      {femanager:Form.GetCountriesFromStaticInfoTables(key:'isoCodeA2',value:'shortNameDe')}
+		//      {femanager:Form.GetCountriesFromStaticInfoTables(key:'isoCodeA2',value:'shortNameFr',sortbyField:'shortNameFr')}
+		//      {femanager:Form.GetCountriesFromStaticInfoTables(key:'isoCodeA3',value:'isoCodeA3',sortbyField:'isoCodeA3',sorting:'asc')}
+		// to fill the options
+
+
 		<femanager:form.select
 				id="femanager_field_country"
 				property="country"
-				options="{femanager:Form.GetCountries()}"
+				options="{femanager:Form.GetCountriesFromStaticInfoTables()}"
 				defaultOption="{f:translate(key:'pleaseChoose')}"
 				class="input-block-level"
 				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'country')}" />
-	</div>
-</div>
+
+	]]></f:comment>
+</f:section>

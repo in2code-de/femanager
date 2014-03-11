@@ -31,17 +31,18 @@ $EM_CONF[$_EXTKEY] = array(
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '1.1.0',
+	'version' => '1.1.1',
 	'constraints' => array(
 		'depends' => array(
-			'extbase' => '6.0.0-6.1.99',
-			'fluid' => '6.0.0-6.1.99',
-			'typo3' => '6.0.0-6.1.99',
+			'extbase' => '6.0.0-6.2.99',
+			'fluid' => '6.0.0-6.2.99',
+			'typo3' => '6.0.0-6.2.99',
 		),
 		'conflicts' => array(
 		),
 		'suggests' => array(
-			'sr_freecap' => '2.0.4-2.99.99'
+			'sr_freecap' => '2.0.4-2.99.99',
+			'static_info_tables' => '6.0.0-6.99.99'
 		),
 	),
 );

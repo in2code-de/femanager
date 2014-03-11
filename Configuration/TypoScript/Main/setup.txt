@@ -17,7 +17,7 @@ plugin.tx_femanager {
 		# Settings for CREATE user profiles
 		###################################
 		new {
-			# take username and copy it to the email field (so email field is not nessesary in FE)
+			# take username and copy it to the email field (so email field is not necessary in FE)
 #			fillEmailWithUsername = 1
 
 			# login after profile creation (don't work if admin confirmation is turned on)
@@ -32,49 +32,49 @@ plugin.tx_femanager {
 #				email.value = test@in2code.de
 			}
 
-			# redirect user (or admin if adminconfirmation) after profile creation
+			# redirect user (or admin if adminconfirmation) after profile creation (could be a PID, URL or fileadmin-Link)
 #			redirect = TEXT
 #			redirect {
 #				typolink.parameter = 1
 #				typolink.returnLast = url
 #			}
 
-			# redirect user after profile creation request (only if user confirmation is activated)
+			# redirect user after profile creation request (only if user confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			requestRedirect = TEXT
 #			requestRedirect {
 #				typolink.parameter = 1
 #				typolink.returnLast = url
 #			}
 
-			# redirect user after user clicks confirmation link in email (only if user confirmation is activated)
+			# redirect user after user clicks confirmation link in email (only if user confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			userConfirmationRedirect = TEXT
 #			userConfirmationRedirect {
 #				typolink.parameter = 1
 #				typolink.returnLast = url
 #			}
 
-			# redirect user after user clicks refuse link in confirmation email (only if user confirmation is activated)
+			# redirect user after user clicks refuse link in confirmation email (only if user confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			userConfirmationRefusedRedirect = TEXT
 #			userConfirmationRefusedRedirect {
 #				typolink.parameter = 1
 #				typolink.returnLast = url
 #			}
 
-			# redirect admin after admin clicks confirmation link in email (only if admin confirmation is activated)
+			# redirect admin after admin clicks confirmation link in email (only if admin confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			adminConfirmationRedirect = TEXT
 #			adminConfirmationRedirect {
 #				typolink.parameter = 1
 #				typolink.returnLast = url
 #			}
 
-			# redirect admin after admin clicks refuse link in email (only if admin confirmation is activated)
+			# redirect admin after admin clicks refuse link in email (only if admin confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			adminConfirmationRefusedRedirect = TEXT
 #			adminConfirmationRefusedRedirect {
 #				typolink.parameter = 1
 #				typolink.returnLast = url
 #			}
 
-			# redirect admin after admin clicks silent-refuse link in email (only if admin confirmation is activated)
+			# redirect admin after admin clicks silent-refuse link in email (only if admin confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			adminConfirmationRefusedSilentRedirect = TEXT
 #			adminConfirmationRefusedSilentRedirect {
 #				typolink.parameter = 1
@@ -536,7 +536,7 @@ plugin.tx_femanager {
 
 			# Save user values to one or more other tables (e.g. tt_address or something else)
 			#       With .field=[fieldname] you have access to the user object
-			#       Possible values are: username, address, city, company, country, email, fax, firstName, lastName, middleName, name, password, telephone, fax, title, www, zip and lastGeneratedUid (to have access to the uid of the last loop in the next loop)
+			#       Possible values are: uid, username, address, city, company, country, email, fax, firstName, lastName, middleName, name, password, telephone, fax, title, www, zip and lastGeneratedUid (to have access to the uid of the last loop in the next loop)
 			storeInDatabase {
 				tt_address {
 					_enable = TEXT
@@ -894,7 +894,7 @@ page.includeJSFooterlibs.femanagerJQuery = //ajax.googleapis.com/ajax/libs/jquer
 page.includeJSFooterlibs.femanagerJQuery.external = 1
 [end]
 
-# add twittr bootstrap JS if it was turned on in the constants
+# add twitter bootstrap JS if it was turned on in the constants
 [globalVar = LIT:0 < {$plugin.tx_femanager.settings.bootstrap}]
 page.includeJSFooterlibs.femanangerBootstrap = //netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js
 page.includeJSFooterlibs.femanangerBootstrap.external = 1
@@ -908,7 +908,7 @@ page.includeJSFooterlibs.femanangerFineuploader = EXT:femanager/Resources/Public
 #########################
 # Inlude CSS files
 #########################
-# add twittr bootstrap CSS if it was turned on in the constants
+# add twitter bootstrap CSS if it was turned on in the constants
 [globalVar = LIT:0 < {$plugin.tx_femanager.settings.bootstrapCSS}]
 page.includeCSS.femanangerBootstrap = //netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css
 page.includeCSS.femanangerBootstrap.external = 1
