@@ -894,7 +894,7 @@ page.includeJSFooterlibs.femanagerJQuery = //ajax.googleapis.com/ajax/libs/jquer
 page.includeJSFooterlibs.femanagerJQuery.external = 1
 [end]
 
-# add twittr bootstrap JS if it was turned on in the constants
+# add twitter bootstrap JS if it was turned on in the constants
 [globalVar = LIT:0 < {$plugin.tx_femanager.settings.bootstrap}]
 page.includeJSFooterlibs.femanangerBootstrap = //netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js
 page.includeJSFooterlibs.femanangerBootstrap.external = 1
@@ -908,7 +908,7 @@ page.includeJSFooterlibs.femanangerFineuploader = EXT:femanager/Resources/Public
 #########################
 # Inlude CSS files
 #########################
-# add twittr bootstrap CSS if it was turned on in the constants
+# add twitter bootstrap CSS if it was turned on in the constants
 [globalVar = LIT:0 < {$plugin.tx_femanager.settings.bootstrapCSS}]
 page.includeCSS.femanangerBootstrap = //netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css
 page.includeCSS.femanangerBootstrap.external = 1
