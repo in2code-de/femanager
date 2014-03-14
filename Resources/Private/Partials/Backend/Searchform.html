@@ -1,13 +1,12 @@
 {namespace femanager=In2\Femanager\ViewHelpers}
 <div class="femanager_list_searchform">
-	<form name="filter" method="get">
+	<f:form>
 		<label for="searchword">
 			<f:translate key="BackendListFilterLabel" />
 		</label>
-		<f:form.textfield name="tx_femanager_web_femanagerm1[filter][searchword]" id="searchword" value="{femanager:Misc.Request(parameter:'tx_femanager_web_femanagerm1|filter|searchword')}" />
+		<f:form.textfield
+				name="filter[searchword]"
+				id="searchword" value="{femanager:Misc.Request(parameter:'tx_femanager_web_femanagerm1|filter|searchword')}" />
 		<f:form.submit value="{f:translate(key:'BackendListFilterLabel')}" />
-
-		<input type="hidden" name="pid" value="18" />
-		<input type="hidden" name="M" value="web_FemanagerM1" />
-	</form>
+	</f:form>
 </div>

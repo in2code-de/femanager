@@ -174,9 +174,9 @@ UserBackend / List
 							</f:link.action>
 						</f:then>
 						<f:else>
-							<a href="mod.php?M=web_FemanagerM1&id=0" class="underline">
+							<f:link.action class="underline" additionalParams="{id:0}">
 								<f:translate key="noRecordsFoundGoToPage0" />
-							</a>
+							</f:link.action>
 						</f:else>
 					</f:if>
 				</div>
