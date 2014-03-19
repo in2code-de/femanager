@@ -1,7 +1,8 @@
 <?php
 namespace In2\Femanager\Utility;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility,
+	\TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /***************************************************************
  *  Copyright notice
@@ -254,9 +255,8 @@ class Div {
 	 * @return \bool
 	 */
 	public static function isDirtyObject($object) {
-		foreach ($object->_getProperties() as $propertyName => $propertyValue) {
-			unset($propertyValue);
-			$property = $object->{'get' . ucfirst($propertyName)}();
+		foreach (array_keys($object->_getProperties()) as $propertyName) {
+			$property = ObjectAccess::getProperty($object, $propertyName);
 
 			/**
 			 * std::Property (string, int, etc..),
