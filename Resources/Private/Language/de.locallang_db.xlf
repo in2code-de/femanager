@@ -178,6 +178,9 @@
 			<trans-unit id="flexform.main.view.3">
 				<target state="translated">Detailansicht</target>
 			</trans-unit>
+			<trans-unit id="flexform.main.view.4">
+				<target state="translated">Stellvertretende Registrierung</target>
+			</trans-unit>
 			<trans-unit id="flexform.new.title">
 				<target state="translated">Registrierung</target>
 			</trans-unit>
