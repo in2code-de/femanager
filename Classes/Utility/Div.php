@@ -255,26 +255,24 @@ class Div {
 	 */
 	public static function isDirtyObject($object) {
 		foreach ($object->_getProperties() as $propertyName => $propertyValue) {
-			$propertyValue = NULL;
-			if (!is_object($object->{'get' . ucfirst($propertyName)}())) {
+			unset($propertyValue);
+			$property = $object->{'get' . ucfirst($propertyName)}();
+
+			/**
+			 * std::Property (string, int, etc..),
+			 * PHP-Objects (DateTime, RecurseiveIterator, etc...),
+			 * TYPO3-Objects (user, page, etc...)
+			 */
+			if (!$property instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
 				if ($object->_isDirty($propertyName)) {
 					return TRUE;
 				}
 			} else {
-				$subObject = $object->{'get' . ucfirst($propertyName)}();
-
-				if ($subObject instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage && $subObject->_isDirty()) {
+				/**
+				 * ObjectStorage
+				 */
+				if ($property->_isDirty()) {
 					return TRUE;
-				}
-
-				if (!method_exists($subObject, '_getProperties')) {
-					continue;
-				}
-				foreach ($subObject->_getProperties() as $subPropertyName => $subPropertyValue) {
-					$subPropertyValue = NULL;
-					if (method_exists($subObject, '_isDirty') && $subObject->_isDirty($subPropertyName)) {
-						return TRUE;
-					}
 				}
 			}
 		}
