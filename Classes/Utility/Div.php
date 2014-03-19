@@ -257,6 +257,10 @@ class Div {
 	public static function isDirtyObject($object) {
 		foreach (array_keys($object->_getProperties()) as $propertyName) {
 			$property = ObjectAccess::getProperty($object, $propertyName);
+			if ($property === NULL) {
+				// if property can not be accessed
+				continue;
+			}
 
 			/**
 			 * std::Property (string, int, etc..),
