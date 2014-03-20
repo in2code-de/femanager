@@ -253,6 +253,18 @@
 			<trans-unit id="flexform.show.user.1">
 				<source>[Logged in FE User]</source>
 			</trans-unit>
+			<trans-unit id="flexform.invitation.title">
+				<source>Invitation</source>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.fields">
+				<source>Select Fields for invitation-Form (empty = all fields)</source>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.confirmByAdmin">
+				<source>Registration must be confirmed from an admin (add one ore more emails)</source>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.notifyAdmin">
+				<source>Notify admin on registration (add one ore more emails)</source>
+			</trans-unit>
 
 			<trans-unit id="pleaseChoose">
 				<source>Please choose...</source>

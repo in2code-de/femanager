@@ -253,6 +253,18 @@
 			<trans-unit id="flexform.show.user.1">
 				<target state="translated">[Eingeloggter Benutzer]</target>
 			</trans-unit>
+			<trans-unit id="flexform.invitation.title">
+				<target state="translated">Invitation</target>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.fields">
+				<target state="translated">Select Fields for invitation-Form (empty = all fields)</target>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.confirmByAdmin">
+				<target state="translated">Registration must be confirmed from an admin (add one ore more emails)</target>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.notifyAdmin">
+				<target state="translated">Notify admin on registration (add one ore more emails)</target>
+			</trans-unit>
 
 			<trans-unit id="pleaseChoose">
 				<target state="translated">Bitte wählen...</target>

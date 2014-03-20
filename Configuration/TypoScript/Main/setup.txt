@@ -863,6 +863,48 @@ plugin.tx_femanager {
 #			passwordSave = md5
 		}
 
+
+
+
+
+
+		###################################
+		# Settings for INVITATION View
+		###################################
+		invitation {
+
+			# validation of user input values
+			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3), captcha
+			validation {
+				# Enable clientside Formvalidation (JavaScript)
+				_enable.client = 1
+
+				# Enable serverside Formvalidation (PHP)
+				_enable.server = 1
+
+				username {
+					required = 1
+				}
+				email {
+					required = 1
+					email = 1
+				}
+				password {
+					required = 1
+					#min = 10
+					#mustInclude = number,letter,special
+				}
+				usergroup {
+					#inList = 1,2,3
+				}
+				captcha {
+					# requires installation of sr_freecap
+#					captcha = 1
+				}
+			}
+		}
+
+
 		delete {
 			# redirect after profile delete
 #			redirect = TEXT

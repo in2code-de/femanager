@@ -40,6 +40,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	 * @return void
 	 */
 	public function newAction() {
+		$this->assignForAll();
 	}
 
 	/**
@@ -48,6 +49,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	 * @return void
 	 */
 	public function createAction() {
+		$this->assignForAll();
 	}
 
 	/**
@@ -56,6 +58,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	 * @return void
 	 */
 	public function editAction() {
+		$this->assignForAll();
 	}
 
 	/**
@@ -64,6 +67,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	 * @return void
 	 */
 	public function updateAction() {
+		$this->assignForAll();
 	}
 
 }
