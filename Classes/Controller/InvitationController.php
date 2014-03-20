@@ -58,6 +58,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	 * @return void
 	 */
 	public function createAction(User $user) {
+		$user->setDisable(TRUE);
 		$user = $this->div->forceValues($user, $this->config['invitation.']['forceValues.']['beforeAnyConfirmation.'], $this->cObj);
 		$user = $this->div->fallbackUsernameAndPassword($user);
 		if ($this->settings['invitation']['fillEmailWithUsername'] == 1) {
@@ -97,9 +98,8 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 
 		// send notify email to admin
 		if ($this->settings['invitation']['notifyAdmin']) {
-			// TODO
 			$this->div->sendEmail(
-				'createInvitationNotify',
+				'invitationNotify',
 				Div::makeEmailArray(
 					$this->settings['new']['notifyAdmin'],
 					$this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
@@ -121,11 +121,10 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
 
 		// frontend redirect (if activated via TypoScript)
-		// todo
-		//$this->redirectByAction($action);
+		$this->redirectByAction('invitation');
 
 		// go to an action
-		$this->redirect('new');
+		$this->redirect('invitation');
 	}
 
 	/**

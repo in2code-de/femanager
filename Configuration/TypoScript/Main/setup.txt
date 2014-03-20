@@ -875,6 +875,13 @@ plugin.tx_femanager {
 			# take username and copy it to the email field (so email field is not nessesary in FE)
 			#fillEmailWithUsername = 1
 
+			# redirect user (or admin if adminconfirmation) after profile update
+#			redirect = TEXT
+#			redirect {
+#				typolink.parameter = 1
+#				typolink.returnLast = url
+#			}
+
 			# validation of user input values
 			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3), captcha
 			validation {
