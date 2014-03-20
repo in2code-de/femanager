@@ -32,7 +32,7 @@ class GetFirstViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormF
 		}
 
 		// try to get value from originalRequest
-		if ($this->configurationManager->isFeatureEnabled('rewrittenPropertyMapper') && $this->hasMappingErrorOccurred()) {
+		if ($this->configurationManager->isFeatureEnabled('rewrittenPropertyMapper')) {
 			// seperate if version is 6.2 or lower
 			if (
 				(method_exists($this, 'hasMappingErrorOccured') && $this->hasMappingErrorOccured()) ||
