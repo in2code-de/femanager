@@ -551,6 +551,16 @@
 							</config>
 						</TCEforms>
 					</settings.invitation.confirmByAdmin>
+					<settings.invitation.notifyAdminStep1>
+						<TCEforms>
+							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.invitation.notifyAdminStep1</label>
+							<config>
+								<type>text</type>
+								<cols>32</cols>
+								<rows>2</rows>
+							</config>
+						</TCEforms>
+					</settings.invitation.notifyAdminStep1>
 					<settings.invitation.notifyAdmin>
 						<TCEforms>
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.invitation.notifyAdmin</label>

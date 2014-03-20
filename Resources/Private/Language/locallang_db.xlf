@@ -268,6 +268,9 @@
 			<trans-unit id="flexform.invitation.confirmByAdmin">
 				<source>Registration must be confirmed from an admin (add one ore more emails)</source>
 			</trans-unit>
+			<trans-unit id="flexform.invitation.notifyAdminStep1">
+				<source>Notify admin on step 1 (add one ore more emails)</source>
+			</trans-unit>
 			<trans-unit id="flexform.invitation.notifyAdmin">
 				<source>Notify admin on registration (add one ore more emails)</source>
 			</trans-unit>

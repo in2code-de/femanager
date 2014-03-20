@@ -260,16 +260,19 @@
 				<target state="translated">[Eingeloggter Benutzer]</target>
 			</trans-unit>
 			<trans-unit id="flexform.invitation.title">
-				<target state="translated">Invitation</target>
+				<target state="translated">Einladung</target>
 			</trans-unit>
 			<trans-unit id="flexform.invitation.fields">
-				<target state="translated">Select Fields for invitation-Form (empty = all fields)</target>
+				<target state="translated">Felder für Formular wählen (keine = alle Felder)</target>
 			</trans-unit>
 			<trans-unit id="flexform.invitation.confirmByAdmin">
-				<target state="translated">Registration must be confirmed from an admin (add one ore more emails)</target>
+				<target state="translated">Profiländerung muss vom Admin bestätigt werden (eine oder mehrere E-Mails eintragen)</target>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.notifyAdminStep1">
+				<target state="translated">Hinweis-E-Mail an Admin im Schritt 1 (eine oder mehrere E-Mails eintragen)</target>
 			</trans-unit>
 			<trans-unit id="flexform.invitation.notifyAdmin">
-				<target state="translated">Notify admin on registration (add one ore more emails)</target>
+				<target state="translated">Hinweis-E-Mail an Admin bei finaler Registrierung (eine oder mehrere E-Mails eintragen)</target>
 			</trans-unit>
 
 			<trans-unit id="pleaseChoose">
