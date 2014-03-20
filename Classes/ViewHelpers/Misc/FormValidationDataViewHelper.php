@@ -12,8 +12,8 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 	/**
 	 * Set javascript validation data for input fields
 	 *
-	 * @param \array $settings			TypoScript
-	 * @param \string $fieldName		Fieldname
+	 * @param \array $settings TypoScript
+	 * @param \string $fieldName Fieldname
 	 * @return \array
 	 */
 	public function render($settings, $fieldName) {
