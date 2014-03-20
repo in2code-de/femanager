@@ -264,7 +264,7 @@ class Div {
 
 			/**
 			 * std::Property (string, int, etc..),
-			 * PHP-Objects (DateTime, RecurseiveIterator, etc...),
+			 * PHP-Objects (DateTime, RecursiveIterator, etc...),
 			 * TYPO3-Objects (user, page, etc...)
 			 */
 			if (!$property instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
