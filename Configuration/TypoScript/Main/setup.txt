@@ -893,6 +893,7 @@ plugin.tx_femanager {
 
 				username {
 					required = 1
+					uniqueInDb = 1
 				}
 				email {
 					required = 1

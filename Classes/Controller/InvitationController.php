@@ -110,9 +110,10 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 			'Profile creation with invitation',
 			array(
 				'user' => $user,
-				'settings' => $this->settings
+				'settings' => $this->settings,
+				'hash' => Div::createHash($user->getUsername() . $user->getUid())
 			),
-			$this->config['invitation.']['email.']['invitationAdminNotify.']
+			$this->config['invitation.']['email.']['invitation.']
 		);
 
 		// send notify email to admin
