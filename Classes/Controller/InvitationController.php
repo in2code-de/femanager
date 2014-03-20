@@ -42,11 +42,9 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	/**
 	 * action new
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
-	 * @dontvalidate $user
 	 * @return void
 	 */
-	public function newAction(User $user = NULL) {
+	public function newAction() {
 		$this->assignForAll();
 	}
 
@@ -69,10 +67,65 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
 
 		if (!empty($this->settings['invitation']['confirmByAdmin'])) {
+			// todo
 			$this->createRequest($user);
 		} else {
 			$this->createAllConfirmed($user);
 		}
+	}
+
+	/**
+	 * Prefix method to createAction()
+	 * 		Create Confirmation from Admin is not necessary
+	 *
+	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @return void
+	 */
+	public function createAllConfirmed(User $user) {
+		$this->userRepository->add($user);
+		$this->persistenceManager->persistAll();
+
+		$this->flashMessageContainer->add(
+			LocalizationUtility::translate('createAndInvited', 'femanager')
+		);
+
+		$this->div->log(
+			LocalizationUtility::translate('tx_femanager_domain_model_log.state.400', 'femanager'),
+			400,
+			$user
+		);
+
+		// send notify email to admin
+		if ($this->settings['invitation']['notifyAdmin']) {
+			// TODO
+			$this->div->sendEmail(
+				'createInvitationNotify',
+				Div::makeEmailArray(
+					$this->settings['new']['notifyAdmin'],
+					$this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
+				),
+				Div::makeEmailArray(
+					$user->getEmail(),
+					$user->getUsername()
+				),
+				'Profile creation',
+				array(
+					'user' => $user,
+					'settings' => $this->settings
+				),
+				$this->config['new.']['email.']['createAdminNotify.']
+			);
+		}
+
+		// add signal after user generation
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
+
+		// frontend redirect (if activated via TypoScript)
+		// todo
+		//$this->redirectByAction($action);
+
+		// go to an action
+		$this->redirect('new');
 	}
 
 	/**

@@ -72,6 +72,14 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected $signalSlotDispatcher;
 
 	/**
+	 * Misc Functions
+	 *
+	 * @var \In2\Femanager\Utility\Div
+	 * @inject
+	 */
+	protected $div;
+
+	/**
 	 * Content Object
 	 *
 	 * @var object
@@ -84,13 +92,6 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @var array
 	 */
 	public $pluginVariables;
-
-	/**
-	 * Misc Functions
-	 *
-	 * @var \In2\Femanager\Utility\Div
-	 */
-	public $div;
 
 	/**
 	 * TypoScript
@@ -521,7 +522,6 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	public function initializeAction() {
 		$this->controllerContext = $this->buildControllerContext();
-		$this->div = $this->objectManager->get('In2\Femanager\Utility\Div');
 		$this->user = $this->div->getCurrentUser();
 		$this->cObj = $this->configurationManager->getContentObject();
 		$this->pluginVariables = $this->request->getArguments();

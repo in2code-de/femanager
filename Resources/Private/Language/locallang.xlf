@@ -144,6 +144,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.301">
 				<source>Profile deleted</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.400">
+				<source>Profile created and User invited</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<source>User</source>
 			</trans-unit>
@@ -356,6 +359,9 @@
 			</trans-unit>
 			<trans-unit id="create">
 				<source>Profile successfully created</source>
+			</trans-unit>
+			<trans-unit id="createAndInvited">
+				<source>Profile successfully created and User informed</source>
 			</trans-unit>
 			<trans-unit id="createRequestWaitingForUserConfirm">
 				<source>Thank you for your request. Please check your mail account to confirm the profile.</source>

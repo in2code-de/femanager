@@ -144,6 +144,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.301">
 				<target state="translated">Profil gelöscht</target>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.400">
+				<target state="translated">Benutzerprofil angelegt und Benutzer eingeladen</target>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<target state="translated">Benutzer</target>
 			</trans-unit>
@@ -356,6 +359,9 @@
 			</trans-unit>
 			<trans-unit id="create">
 				<target state="translated">Profil erstellt</target>
+			</trans-unit>
+			<trans-unit id="createAndInvited">
+				<target state="translated">Profil erstellt und Benutzer benachrichtigt</target>
 			</trans-unit>
 			<trans-unit id="createRequestWaitingForUserConfirm">
 				<target state="translated">Vielen Dank für die Anfrage. Bitte überprüfen Sie Ihr E-Mail-Postfach und bestätigen Sie Ihre Registrierung.</target>

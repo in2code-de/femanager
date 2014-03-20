@@ -891,11 +891,6 @@ plugin.tx_femanager {
 					required = 1
 					email = 1
 				}
-				password {
-					required = 1
-					#min = 10
-					#mustInclude = number,letter,special
-				}
 				usergroup {
 					#inList = 1,2,3
 				}
