@@ -872,6 +872,8 @@ plugin.tx_femanager {
 		# Settings for INVITATION View
 		###################################
 		invitation {
+			# take username and copy it to the email field (so email field is not nessesary in FE)
+			#fillEmailWithUsername = 1
 
 			# validation of user input values
 			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3), captcha
@@ -902,6 +904,34 @@ plugin.tx_femanager {
 #					captcha = 1
 				}
 			}
+
+			# overwrite any user values with TypoScript
+			forceValues {
+				# Overwrite initally (default)
+				beforeAnyConfirmation {
+					# Usergroups can be set with a commaseparated list
+#					usergroup = TEXT
+#					usergroup.value = 2
+
+					# Set a fix value
+#					email = TEXT
+#					email.value = service@in2code.de
+				}
+
+				# Overwrite on admin confirmation (only if admin confirmation was activated)
+				onAdminConfirmation {
+					# Usergroups can be set with a commaseparated list
+#					usergroup = TEXT
+#					usergroup.value = 4
+
+					# Set a fix value
+#					www = TEXT
+#					www.value = http://www.in2code.de
+				}
+			}
+
+			# initially save password as hash (empty, "md5", "sha1")
+#			passwordSave = md5
 		}
 
 

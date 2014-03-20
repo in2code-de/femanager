@@ -88,7 +88,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	/**
 	 * Misc Functions
 	 *
-	 * @var object
+	 * @var \In2\Femanager\Utility\Div
 	 */
 	public $div;
 

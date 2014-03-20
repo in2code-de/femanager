@@ -1,6 +1,11 @@
 <?php
 namespace In2\Femanager\Controller;
 
+use \TYPO3\CMS\Extbase\Utility\LocalizationUtility,
+	\TYPO3\CMS\Core\Utility\GeneralUtility,
+	\In2\Femanager\Domain\Model\User,
+	\In2\Femanager\Utility\Div;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -37,19 +42,37 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	/**
 	 * action new
 	 *
+	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @dontvalidate $user
 	 * @return void
 	 */
-	public function newAction() {
+	public function newAction(User $user = NULL) {
 		$this->assignForAll();
 	}
 
 	/**
 	 * action create
 	 *
+	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @validate $user In2\Femanager\Domain\Validator\ServersideValidator
+	 * @validate $user In2\Femanager\Domain\Validator\PasswordValidator
+	 * @validate $user In2\Femanager\Domain\Validator\CaptchaValidator
 	 * @return void
 	 */
-	public function createAction() {
-		$this->assignForAll();
+	public function createAction(User $user) {
+		$user = $this->div->forceValues($user, $this->config['invitation.']['forceValues.']['beforeAnyConfirmation.'], $this->cObj);
+		$user = $this->div->fallbackUsernameAndPassword($user);
+		if ($this->settings['invitation']['fillEmailWithUsername'] == 1) {
+			$user->setEmail($user->getUsername());
+		}
+		Div::hashPassword($user, $this->settings['invitation']['passwordSave']);
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
+
+		if (!empty($this->settings['invitation']['confirmByAdmin'])) {
+			$this->createRequest($user);
+		} else {
+			$this->createAllConfirmed($user);
+		}
 	}
 
 	/**

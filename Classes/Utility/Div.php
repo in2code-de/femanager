@@ -136,7 +136,9 @@ class Div {
 	 */
 	public function fallbackUsernameAndPassword($user) {
 		if (!$user->getUsername()) {
-			$user->setUsername(self::getRandomString());
+			$user->setUsername(
+				self::getRandomString()
+			);
 			if ($user->getEmail()) {
 				$user->setUsername(
 					$user->getEmail()
@@ -144,7 +146,9 @@ class Div {
 			}
 		}
 		if (!$user->getPassword()) {
-			$user->setPassword(self::getRandomString());
+			$user->setPassword(
+				self::getRandomString()
+			);
 		}
 		return $user;
 	}
@@ -585,7 +589,7 @@ class Div {
 	 * @return string
 	 */
 	public static function getRandomString() {
-		$randomNumber = mt_rand(0, 9999999999);
+		$randomNumber = mt_rand(0, 9999999999999999);
 		return GeneralUtility::shortMD5($randomNumber);
 	}
 
