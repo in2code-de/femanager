@@ -145,6 +145,9 @@
 				<source>Profile deleted</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.400">
+				<source>Invitation</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.401">
 				<source>Profile created and User invited</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">

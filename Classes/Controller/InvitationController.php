@@ -91,8 +91,8 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		);
 
 		$this->div->log(
-			LocalizationUtility::translate('tx_femanager_domain_model_log.state.400', 'femanager'),
-			400,
+			LocalizationUtility::translate('tx_femanager_domain_model_log.state.401', 'femanager'),
+			401,
 			$user
 		);
 
@@ -118,13 +118,13 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		}
 
 		// add signal after user generation
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
 
 		// frontend redirect (if activated via TypoScript)
 		$this->redirectByAction('invitation');
 
 		// go to an action
-		$this->redirect('invitation');
+		$this->redirect('new');
 	}
 
 	/**

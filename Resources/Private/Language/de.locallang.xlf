@@ -145,6 +145,9 @@
 				<target state="translated">Profil gelöscht</target>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.400">
+				<target state="translated">Benutzer einladen</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.401">
 				<target state="translated">Benutzerprofil angelegt und Benutzer eingeladen</target>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
