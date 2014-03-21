@@ -150,9 +150,24 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	/**
 	 * action edit
 	 *
+	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param \string $hash
 	 * @return void
 	 */
-	public function editAction() {
+	public function editAction(User $user, $hash = NULL) {
+		if (Div::createHash($user->getUsername() . $user->getUid()) === $hash) {
+			$this->view->assign('user', $user);
+			$this->view->assign('hash', $hash);
+		} else {
+			if ($user !== NULL) {
+				$this->userRepository->remove($user);
+			}
+			$this->flashMessageContainer->add(
+				LocalizationUtility::translate('createFailedProfile', 'femanager'),
+				'',
+				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+			);
+		}
 		$this->assignForAll();
 	}
 
