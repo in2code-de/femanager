@@ -10,21 +10,23 @@
 		{hash} Hash to ensure authentication of link
 
 <f:section name="main">
-	<p><f:translate key="emailCreateUserConfirmationSalutation" /> {user.username},</p>
+	<p><f:translate key="emailInvitationSalutation" /> {user.username},</p>
+
+	<p><f:translate key="emailInvitationText1" /></p>
 
 	<p>
-		<f:translate key="emailCreateUserConfirmationText1" />
+		<f:translate key="emailInvitationText2" />
 		<br>
-		<f:link.action action="edit" controller="Invitation" absolute="1" arguments="{user:user, hash:hash'}">
-			<f:translate key="emailCreateUserConfirmationLinkConfirm" />
+		<f:link.action action="edit" controller="Invitation" absolute="1" arguments="{user:user, hash:hash}">
+			<f:translate key="emailInvitationLinkConfirm" />
 		</f:link.action>
 	</p>
 
 	<p>
-		<f:translate key="emailCreateUserConfirmationText2" />
+		<f:translate key="emailInvitationText3" />
 		<br>
-		<f:link.action action="delete" controller="Invitation" absolute="1" arguments="{user:user, hash:hash'}">
-			<f:translate key="emailCreateUserConfirmationLinkConfirmRefused" />
+		<f:link.action action="delete" controller="Invitation" absolute="1" arguments="{user:user, hash:hash}">
+			<f:translate key="emailInvitationLinkConfirmRefused" />
 		</f:link.action>
 	</p>
 

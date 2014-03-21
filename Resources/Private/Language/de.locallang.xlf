@@ -332,6 +332,27 @@
 			<trans-unit id="emailUpdateRequestRefusedSignature">
 				<target state="translated">Ihr Website-Team.</target>
 			</trans-unit>
+			<trans-unit id="emailInvitationSalutation">
+				<target state="translated">Hallo</target>
+			</trans-unit>
+			<trans-unit id="emailInvitationText1">
+				<target state="translated">Es wurde für Sie ein Profil angelegt.</target>
+			</trans-unit>
+			<trans-unit id="emailInvitationText2">
+				<target state="translated">Bitte bestätigen Sie Ihre Registrierung auf unserem Server durch Klick auf nachstehenden Link. Im Anschluss müssen Sie sich noch ein Passwort vergeben.</target>
+			</trans-unit>
+			<trans-unit id="emailInvitationLinkConfirm">
+				<target state="translated">Bestätige Profil</target>
+			</trans-unit>
+			<trans-unit id="emailInvitationText3">
+				<target state="translated">Wenn Ihr Profil fälschlicherweise auf unserem System hinterlegt wurde, können Sie dieses durch Klick auf nachstehenden Link löschen.</target>
+			</trans-unit>
+			<trans-unit id="emailInvitationLinkConfirmRefused">
+				<target state="translated">Profil löschen</target>
+			</trans-unit>
+			<trans-unit id="emailInvitationSignature">
+				<target state="translated">Ihr Website-Team.</target>
+			</trans-unit>
 
 			<trans-unit id="noRecordsFound">
 				<target state="translated">Keine Datensätze gefunden.</target>

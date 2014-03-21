@@ -332,6 +332,27 @@
 			<trans-unit id="emailUpdateRequestRefusedSignature">
 				<source>Your website team.</source>
 			</trans-unit>
+			<trans-unit id="emailInvitationSalutation">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationText1">
+				<source>Your new profile was just created.</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationText2">
+				<source>Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationLinkConfirm">
+				<source>Confirm Profile</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationText3">
+				<source>If you don't want to be registered on our system, click this link.</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationLinkConfirmRefused">
+				<source>Delete Profile</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationSignature">
+				<source>Your website team.</source>
+			</trans-unit>
 
 			<trans-unit id="noRecordsFound">
 				<source>No records found.</source>

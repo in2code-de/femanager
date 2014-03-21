@@ -1007,7 +1007,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = New profile change request
+					subject.value = Profile was created
 
 					# Set CC receivers
 					cc = TEXT
