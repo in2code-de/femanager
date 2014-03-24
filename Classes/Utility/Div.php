@@ -1,7 +1,8 @@
 <?php
 namespace In2\Femanager\Utility;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility,
+	\TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /***************************************************************
  *  Copyright notice
@@ -254,27 +255,28 @@ class Div {
 	 * @return \bool
 	 */
 	public static function isDirtyObject($object) {
-		foreach ($object->_getProperties() as $propertyName => $propertyValue) {
-			$propertyValue = NULL;
-			if (!is_object($object->{'get' . ucfirst($propertyName)}())) {
+		foreach (array_keys($object->_getProperties()) as $propertyName) {
+			$property = ObjectAccess::getProperty($object, $propertyName);
+			if ($property === NULL) {
+				// if property can not be accessed
+				continue;
+			}
+
+			/**
+			 * std::Property (string, int, etc..),
+			 * PHP-Objects (DateTime, RecursiveIterator, etc...),
+			 * TYPO3-Objects (user, page, etc...)
+			 */
+			if (!$property instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
 				if ($object->_isDirty($propertyName)) {
 					return TRUE;
 				}
 			} else {
-				$subObject = $object->{'get' . ucfirst($propertyName)}();
-
-				if ($subObject instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage && $subObject->_isDirty()) {
+				/**
+				 * ObjectStorage
+				 */
+				if ($property->_isDirty()) {
 					return TRUE;
-				}
-
-				if (!method_exists($subObject, '_getProperties')) {
-					continue;
-				}
-				foreach ($subObject->_getProperties() as $subPropertyName => $subPropertyValue) {
-					$subPropertyValue = NULL;
-					if (method_exists($subObject, '_isDirty') && $subObject->_isDirty($subPropertyName)) {
-						return TRUE;
-					}
 				}
 			}
 		}

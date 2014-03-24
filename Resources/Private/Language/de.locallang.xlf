@@ -16,7 +16,7 @@
 				<target state="translated">Benutzergruppe</target>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.name">
-				<target state="translated">Name</target>
+				<target state="translated">Voller Name</target>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.firstName">
 				<target state="translated">Vorname</target>

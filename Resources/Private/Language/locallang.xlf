@@ -16,7 +16,7 @@
 				<source>Usergroup</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.name">
-				<source>Name</source>
+				<source>Full Name</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.firstName">
 				<source>Firstname</source>
