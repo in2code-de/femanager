@@ -86,6 +86,8 @@ jQuery.fn.femanagerValidation = function() {
 	function validateField(element, countForSubmit) {
 		var user = $('input[name="tx_femanager_pi1[user][__identity]"]').val();
 		var url = Femanager.getBaseUrl() + 'index.php' + '?eID=' + 'femanagerValidate';
+		var validations = getValidations(element);
+		var additionalValue = indexOfArray(validations, 'sameAs'); // search for "sameAs(password)"
 
 		$.ajax({
 			url: url,
@@ -94,6 +96,7 @@ jQuery.fn.femanagerValidation = function() {
 				'&tx_femanager_pi1[value]=' + element.val() +
 				'&tx_femanager_pi1[field]=' + getFieldName(element) +
 				(user != undefined ? '&tx_femanager_pi1[user]=' + user : '') +
+				(additionalValue ? '&tx_femanager_pi1[additionalValue]=' + getStringInBrackets(additionalValue) : '') +
 				'&storagePid=' + $('#femanagerStoragePid').val() +
 				'&L=' + $('#femanagerLanguage').val() +
 				'&id=' + $('#femanagerPid').val(),
@@ -166,5 +169,48 @@ jQuery.fn.femanagerValidation = function() {
 			submitFormAllowed = true;
 			element.submit();
 		}
+	}
+
+	/**
+	 * Check if part of a value exist in an array
+	 *
+	 * @param array
+	 * @return string found value
+	 */
+	function indexOfArray(array, string) {
+		for (var i=0; i < array.length; i++) {
+			if (array[i].indexOf(string) !== -1) {
+				return array[i];
+			}
+		}
+		return '';
+	}
+
+	/**
+	 * Get validation methods of a field
+	 * 		data-validation="required,max(5)" => array
+	 * 			required,
+	 * 			max(5)
+	 *
+	 * @param element
+	 * @return array
+	 */
+	function getValidations(element) {
+		return element.data('validation').split(',');
+	}
+
+	/**
+	 * Get string in brackets
+	 * 		lala(lulu) => lulu
+	 *
+	 * @param string
+	 * @return string
+	 */
+	function getStringInBrackets(string) {
+		if (string.indexOf('(') !== -1) {
+			var parts = string.split('(');
+		}
+		var result = parts[1].substr(0, parts[1].length - 1);
+		return result;
 	}
 };
