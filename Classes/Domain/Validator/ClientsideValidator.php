@@ -137,8 +137,8 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 					break;
 
 				case stristr($validationSetting, 'sameAs('):
-					if (!$this->validateInList($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
-						$this->addMessage('validationErrorInList');
+					if (!$this->validateSameAs($this->getValue(), $this->getAdditionalValue())) {
+						$this->addMessage('validationErrorSameAs');
 						$this->isValid = FALSE;
 					}
 					break;

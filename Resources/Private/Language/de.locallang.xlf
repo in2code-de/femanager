@@ -193,6 +193,9 @@
 			<trans-unit id="validationErrorInList">
 				<target state="translated">Dieser Wert ist nicht zulässig im Feld %s</target>
 			</trans-unit>
+			<trans-unit id="validationErrorSameAs">
+				<target state="translated">Bitte Eingabe vergleichen</target>
+			</trans-unit>
 			<trans-unit id="validationErrorPasswordRepeat">
 				<target state="translated">Passwort und Wiederholung stimmen nicht überein</target>
 			</trans-unit>
