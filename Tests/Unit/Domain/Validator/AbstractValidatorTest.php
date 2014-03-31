@@ -354,7 +354,6 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 */
 	public function validateSameAsReturnsBool($value, $value2, $result) {
 		$test = $this->generalValidatorMock->_callRef('validateSameAs', $value, $value2);
-
 		$this->assertSame($result, $test);
 	}
 
