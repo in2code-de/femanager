@@ -49,6 +49,13 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 	protected $messages = array();
 
 	/**
+	 * Additional Values (for comparing a value with another)
+	 *
+	 * @var \string
+	 */
+	protected $additionalValue;
+
+	/**
 	 * Validate Field
 	 */
 	public function validateField() {
@@ -123,6 +130,13 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 					break;
 
 				case stristr($validationSetting, 'inList('):
+					if (!$this->validateInList($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
+						$this->addMessage('validationErrorInList');
+						$this->isValid = FALSE;
+					}
+					break;
+
+				case stristr($validationSetting, 'sameAs('):
 					if (!$this->validateInList($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
 						$this->addMessage('validationErrorInList');
 						$this->isValid = FALSE;
@@ -245,5 +259,19 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 	 */
 	public function getUser() {
 		return $this->user;
+	}
+
+	/**
+	 * @param string $additionalValue
+	 */
+	public function setAdditionalValue($additionalValue) {
+		$this->additionalValue = $additionalValue;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAdditionalValue() {
+		return $this->additionalValue;
 	}
 }

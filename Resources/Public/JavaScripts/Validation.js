@@ -87,7 +87,12 @@ jQuery.fn.femanagerValidation = function() {
 		var user = $('input[name="tx_femanager_pi1[user][__identity]"]').val();
 		var url = Femanager.getBaseUrl() + 'index.php' + '?eID=' + 'femanagerValidate';
 		var validations = getValidations(element);
-		var additionalValue = indexOfArray(validations, 'sameAs'); // search for "sameAs(password)"
+		var additionalValue = '';
+		if (indexOfArray(validations, 'sameAs')) { // search for "sameAs(password)"
+			var validationSameAs = indexOfArray(validations, 'sameAs');
+			var fieldToCompare = getStringInBrackets(validationSameAs);
+			additionalValue = $('input[name="tx_femanager_pi1[user][' + fieldToCompare + ']"]').val();
+		}
 
 		$.ajax({
 			url: url,
@@ -96,7 +101,7 @@ jQuery.fn.femanagerValidation = function() {
 				'&tx_femanager_pi1[value]=' + element.val() +
 				'&tx_femanager_pi1[field]=' + getFieldName(element) +
 				(user != undefined ? '&tx_femanager_pi1[user]=' + user : '') +
-				(additionalValue ? '&tx_femanager_pi1[additionalValue]=' + getStringInBrackets(additionalValue) : '') +
+				(additionalValue ? '&tx_femanager_pi1[additionalValue]=' + additionalValue : '') +
 				'&storagePid=' + $('#femanagerStoragePid').val() +
 				'&L=' + $('#femanagerLanguage').val() +
 				'&id=' + $('#femanagerPid').val(),
@@ -207,10 +212,11 @@ jQuery.fn.femanagerValidation = function() {
 	 * @return string
 	 */
 	function getStringInBrackets(string) {
+		var result = '';
 		if (string.indexOf('(') !== -1) {
 			var parts = string.split('(');
+			result = parts[1].substr(0, parts[1].length - 1);
 		}
-		var result = parts[1].substr(0, parts[1].length - 1);
 		return result;
 	}
 };

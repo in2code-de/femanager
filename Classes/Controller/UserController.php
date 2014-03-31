@@ -1,6 +1,8 @@
 <?php
 namespace In2\Femanager\Controller;
 
+use \In2\Femanager\Domain\Model\User;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -66,7 +68,7 @@ class UserController extends \In2\Femanager\Controller\AbstractController {
 	 * @dontvalidate $user
 	 * @return void
 	 */
-	public function showAction(\In2\Femanager\Domain\Model\User $user = NULL) {
+	public function showAction(User $user = NULL) {
 		if (!is_object($user)) {
 			if (is_numeric($this->settings['show']['user'])) {
 				$user = $this->userRepository->findByUid($this->settings['show']['user']);
@@ -108,13 +110,15 @@ class UserController extends \In2\Femanager\Controller\AbstractController {
 	 * @param \string $value Given Field value
 	 * @param \string $field Fieldname like "username" or "email"
 	 * @param \In2\Femanager\Domain\Model\User $user Existing User
+	 * @param \string $additionalValue Additional Values
 	 * @return void
 	 */
-	public function validateAction($validation = NULL, $value = NULL, $field = NULL, \In2\Femanager\Domain\Model\User $user = NULL) {
+	public function validateAction($validation = NULL, $value = NULL, $field = NULL, User $user = NULL, $additionalValue = NULL) {
 		$this->clientsideValidator->setValidationSettingsString($validation);
 		$this->clientsideValidator->setValue($value);
 		$this->clientsideValidator->setFieldName($field);
 		$this->clientsideValidator->setUser($user);
+		$this->clientsideValidator->setAdditionalValue($additionalValue);
 		$isValid = $this->clientsideValidator->validateField();
 		$messages = $this->clientsideValidator->getMessages();
 
