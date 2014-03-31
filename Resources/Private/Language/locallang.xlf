@@ -194,7 +194,7 @@
 				<source>This value is not allowed in Field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorSameAs">
-				<source>Please compare your value</source>
+				<source>Please check your value</source>
 			</trans-unit>
 			<trans-unit id="validationErrorPasswordRepeat">
 				<source>Both passwords do not fit</source>

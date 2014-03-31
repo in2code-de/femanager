@@ -113,7 +113,7 @@ class UserController extends \In2\Femanager\Controller\AbstractController {
 	 * @param \string $additionalValue Additional Values
 	 * @return void
 	 */
-	public function validateAction($validation = NULL, $value = NULL, $field = NULL, User $user = NULL, $additionalValue = NULL) {
+	public function validateAction($validation = NULL, $value = NULL, $field = NULL, User $user = NULL, $additionalValue = '') {
 		$this->clientsideValidator->setValidationSettingsString($validation);
 		$this->clientsideValidator->setValue($value);
 		$this->clientsideValidator->setFieldName($field);
