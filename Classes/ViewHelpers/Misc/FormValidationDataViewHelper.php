@@ -12,20 +12,25 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 	/**
 	 * Set javascript validation data for input fields
 	 *
-	 * @param \array $settings			TypoScript
-	 * @param \string $fieldName		Fieldname
+	 * @param \array $settings TypoScript
+	 * @param \string $fieldName Fieldname
+	 * @param \array $additionalAttributes AdditionalAttributes
 	 * @return \array
 	 */
-	public function render($settings, $fieldName) {
+	public function render($settings, $fieldName, $additionalAttributes = array()) {
+		$array = $additionalAttributes;
+
 		$actionName = $this->controllerContext->getRequest()->getControllerActionName();
 		if ($settings[$actionName]['validation']['_enable']['client'] != 1) {
-			return array();
+			return $array;
 		}
 
-		$array = array();
 		$validationString = $this->getValidationString($settings, $fieldName, $actionName);
 		if (!empty($validationString)) {
 			$array['data-validation'] = $validationString;
+			if (!empty($additionalAttributes['data-validation'])) {
+				$array['data-validation'] .= ',' . $additionalAttributes['data-validation'];
+			}
 		}
 		return $array;
 	}
