@@ -211,6 +211,20 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	}
 
 	/**
+	 * Validation for comparing two fields
+	 *
+	 * @param \string $value
+	 * @param \string $value2
+	 * @return \bool
+	 */
+	protected function validateSameAs($value, $value2) {
+		if ($value === $value2) {
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	/**
 	 * Validation for checking if values is in date format
 	 *
 	 * @param \string $value

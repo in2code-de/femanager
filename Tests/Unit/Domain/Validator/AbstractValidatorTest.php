@@ -38,7 +38,7 @@ namespace In2\Femanager\Tests;
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 	/**
 	 * @var \In2\Femanager\Domain\Validator\AbstractValidator
@@ -303,6 +303,58 @@ class GeneralValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$configuration = '1,2,3';
 		$result = $this->generalValidatorMock->_callRef('validateInList', $value, $configuration);
 		$this->assertFalse($result);
+	}
+
+	/**
+	 * Dataprovider
+	 *
+	 * @return array
+	 */
+	public function validateSameAsReturnsBoolDateProvider() {
+		return array(
+			// #0
+			array(
+				'abcd',
+				'abcd',
+				TRUE
+			),
+
+			// #1
+			array(
+				'a',
+				'b',
+				FALSE
+			),
+
+			// #2
+			array(
+				'a',
+				'',
+				FALSE
+			),
+
+			// #3
+			array(
+				'',
+				'',
+				TRUE
+			),
+		);
+	}
+
+	/**
+	 * Test for validateSameAs()
+	 *
+	 * @param \string $value
+	 * @param \string $value2
+	 * @param \string $result
+	 * @return void
+	 * @dataProvider validateSameAsReturnsBoolDateProvider
+	 * @test
+	 */
+	public function validateSameAsReturnsBool($value, $value2, $result) {
+		$test = $this->generalValidatorMock->_callRef('validateSameAs', $value, $value2);
+		$this->assertSame($result, $test);
 	}
 
 }

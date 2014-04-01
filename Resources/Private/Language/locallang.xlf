@@ -16,7 +16,7 @@
 				<source>Usergroup</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.name">
-				<source>Name</source>
+				<source>Full Name</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.firstName">
 				<source>Firstname</source>
@@ -198,6 +198,9 @@
 			</trans-unit>
 			<trans-unit id="validationErrorInList">
 				<source>This value is not allowed in Field %s</source>
+			</trans-unit>
+			<trans-unit id="validationErrorSameAs">
+				<source>Please check your value</source>
 			</trans-unit>
 			<trans-unit id="validationErrorPasswordRepeat">
 				<source>Both passwords do not fit</source>

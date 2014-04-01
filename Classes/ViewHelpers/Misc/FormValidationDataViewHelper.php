@@ -14,18 +14,23 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 	 *
 	 * @param \array $settings TypoScript
 	 * @param \string $fieldName Fieldname
+	 * @param \array $additionalAttributes AdditionalAttributes
 	 * @return \array
 	 */
-	public function render($settings, $fieldName) {
-		$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-		if ($settings[$controllerName]['validation']['_enable']['client'] != 1) {
-			return array();
+	public function render($settings, $fieldName, $additionalAttributes = array()) {
+		$array = $additionalAttributes;
+
+		$actionName = $this->controllerContext->getRequest()->getControllerActionName();
+		if ($settings[$actionName]['validation']['_enable']['client'] != 1) {
+			return $array;
 		}
 
-		$array = array();
-		$validationString = $this->getValidationString($settings, $fieldName, $controllerName);
+		$validationString = $this->getValidationString($settings, $fieldName, $actionName);
 		if (!empty($validationString)) {
 			$array['data-validation'] = $validationString;
+			if (!empty($additionalAttributes['data-validation'])) {
+				$array['data-validation'] .= ',' . $additionalAttributes['data-validation'];
+			}
 		}
 		return $array;
 	}

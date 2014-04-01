@@ -16,7 +16,7 @@
 				<target state="translated">Benutzergruppe</target>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.name">
-				<target state="translated">Name</target>
+				<target state="translated">Voller Name</target>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.firstName">
 				<target state="translated">Vorname</target>
@@ -198,6 +198,9 @@
 			</trans-unit>
 			<trans-unit id="validationErrorInList">
 				<target state="translated">Dieser Wert ist nicht zulässig im Feld %s</target>
+			</trans-unit>
+			<trans-unit id="validationErrorSameAs">
+				<target state="translated">Bitte Eingabe überprüfen</target>
 			</trans-unit>
 			<trans-unit id="validationErrorPasswordRepeat">
 				<target state="translated">Passwort und Wiederholung stimmen nicht überein</target>
