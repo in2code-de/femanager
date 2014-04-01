@@ -197,6 +197,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 			$user
 		);
 
+		Div::hashPassword($user, $this->settings['invitation']['passwordSave']);
 		$this->userRepository->update($user);
 		$this->persistenceManager->persistAll();
 
@@ -205,11 +206,17 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	}
 
 	/**
-	 * Init for User delete action
+	 * Init for delete
 	 *
 	 * @return void
 	 */
 	protected function initializeDeleteAction() {
+	}
+
+	/**
+	 * Init for update
+	 */
+	public function initializeUpdateAction() {
 	}
 
 	/**
