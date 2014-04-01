@@ -159,6 +159,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.404">
 				<target state="translated">Zugang zu gesperrtem Bereich</target>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.405">
+				<target state="translated">Passwort von Benutzer geändert und Profil aktiviert</target>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<target state="translated">Benutzer</target>
 			</trans-unit>
@@ -399,6 +402,9 @@
 			<trans-unit id="createAndInvited">
 				<target state="translated">Profil erstellt und Benutzer benachrichtigt</target>
 			</trans-unit>
+			<trans-unit id="createAndInvitedFinished">
+				<target state="translated">Profil geändert und freigeschaltet</target>
+			</trans-unit>
 			<trans-unit id="createRequestWaitingForUserConfirm">
 				<target state="translated">Vielen Dank für die Anfrage. Bitte überprüfen Sie Ihr E-Mail-Postfach und bestätigen Sie Ihre Registrierung.</target>
 			</trans-unit>
@@ -471,8 +477,11 @@
 			<trans-unit id="UserDeleteConfirmation">
 				<target state="translated">Wollen Sie Ihr Profil wirklich löschen?</target>
 			</trans-unit>
-			<trans-unit id="titleInviteProfile">
+			<trans-unit id="titleInvitationProfile">
 				<target state="translated">Benutzer einladen</target>
+			</trans-unit>
+			<trans-unit id="titleInvitationSetPassword">
+				<target state="translated">Bitte vergeben Sie sich ein Passwort</target>
 			</trans-unit>
 			<trans-unit id="BackendListUserDeleteConfirmation">
 				<target state="translated">Wollen Sie den Benutzer wirklich löschen?</target>

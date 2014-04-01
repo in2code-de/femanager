@@ -159,6 +159,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.404">
 				<source>You tried to open a restricted page</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.405">
+				<source>Password changed and Profile activated</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<source>User</source>
 			</trans-unit>
@@ -399,6 +402,9 @@
 			<trans-unit id="createAndInvited">
 				<source>Profile successfully created and User informed</source>
 			</trans-unit>
+			<trans-unit id="createAndInvitedFinished">
+				<source>Profile successfully changed and enabled</source>
+			</trans-unit>
 			<trans-unit id="createRequestWaitingForUserConfirm">
 				<source>Thank you for your request. Please check your mail account to confirm the profile.</source>
 			</trans-unit>
@@ -471,8 +477,11 @@
 			<trans-unit id="UserDeleteConfirmation">
 				<source>Are you sure to delete your Profile?</source>
 			</trans-unit>
-			<trans-unit id="titleInviteProfile">
+			<trans-unit id="titleInvitationProfile">
 				<source>Invite a new user</source>
+			</trans-unit>
+			<trans-unit id="titleInvitationSetPassword">
+				<source>Please set a new password</source>
 			</trans-unit>
 			<trans-unit id="BackendListUserDeleteConfirmation">
 				<source>Are you sure to delete this User?</source>

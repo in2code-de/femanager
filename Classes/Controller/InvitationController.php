@@ -152,16 +152,22 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	/**
 	 * action edit
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param \int $user User UID
 	 * @param \string $hash
 	 * @return void
 	 */
-	public function editAction(User $user, $hash = NULL) {
-		if (Div::createHash($user->getUsername() . $user->getUid()) === $hash) {
-			$this->view->assign('user', $user);
-			$this->view->assign('hash', $hash);
-		} else {
+	public function editAction($user, $hash = NULL) {
+		$user = $this->userRepository->findByUid($user);
+		$user->setDisable(FALSE);
+		$this->userRepository->update($user);
+		$this->persistenceManager->persistAll();
+
+		$this->view->assign('user', $user);
+		$this->view->assign('hash', $hash);
+
+		if (Div::createHash($user->getUsername() . $user->getUid()) !== $hash) {
 			if ($user !== NULL) {
+				// delete user for security reasons
 				$this->userRepository->remove($user);
 			}
 			$this->flashMessageContainer->add(
@@ -169,6 +175,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 				'',
 				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
 			);
+			$this->forward('status');
 		}
 		$this->assignForAll();
 	}
@@ -176,10 +183,25 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	/**
 	 * action update
 	 *
+	 * @param \In2\Femanager\Domain\Model\User $user
 	 * @return void
 	 */
-	public function updateAction() {
-		$this->assignForAll();
+	public function updateAction($user) {
+		$this->flashMessageContainer->add(
+			LocalizationUtility::translate('createAndInvitedFinished', 'femanager')
+		);
+
+		$this->div->log(
+			LocalizationUtility::translate('tx_femanager_domain_model_log.state.405', 'femanager'),
+			401,
+			$user
+		);
+
+		$this->userRepository->update($user);
+		$this->persistenceManager->persistAll();
+
+		$this->redirectByAction('invitation', 'redirectPasswordChanged');
+		$this->redirect('status');
 	}
 
 	/**
