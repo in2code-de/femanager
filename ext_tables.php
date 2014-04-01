@@ -83,7 +83,7 @@ $tempColumns = array (
 		'config' => Array (
 			'type' => 'input',
 			'size' => 10,
-			'max' => '20',
+			'max' => 20,
 			'eval' => 'date',
 			'checkbox' => '0',
 			'default' => ''
@@ -96,7 +96,8 @@ $tempColumns = array (
 			'type' => 'input',
 			'size' => 30,
 			'eval' => 'datetime',
-			'readOnly' => 1
+			'readOnly' => 1,
+			'default' => time()
 		)
 	),
 	'tstamp' => array (
@@ -106,7 +107,8 @@ $tempColumns = array (
 			'type' => 'input',
 			'size' => 30,
 			'eval' => 'datetime',
-			'readOnly' => 1
+			'readOnly' => 1,
+			'default' => time()
 		)
 	),
 	'tx_femanager_confirmedbyuser' => array (
