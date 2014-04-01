@@ -69,13 +69,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		Div::hashPassword($user, $this->settings['invitation']['passwordSave']);
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
 
-		//TODO
-		if (!empty($this->settings['invitation']['confirmByAdmin']) && 0) {
-			// todo
-			$this->createRequest($user);
-		} else {
-			$this->createAllConfirmed($user);
-		}
+		$this->createAllConfirmed($user);
 	}
 
 	/**
