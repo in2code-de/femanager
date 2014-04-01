@@ -288,7 +288,10 @@
 				<source>Dear Admin,</source>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyText1">
-				<source>Profile registration from %s</source>
+				<source>Profile invitation of %s</source>
+			</trans-unit>
+			<trans-unit id="emailCreateNotifyText2">
+				<source>Profile invitation - User %s setted a new password and profile was enabled</source>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyUserProperties">
 				<source>Profile properties:</source>

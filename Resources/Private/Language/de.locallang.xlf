@@ -288,7 +288,10 @@
 				<target state="translated">Hallo Admin,</target>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyText1">
-				<target state="translated">Es gibt ein neues Profil durch Benutzer %s</target>
+				<target state="translated">Neue Profileinladung - Benutzer %s</target>
+			</trans-unit>
+			<trans-unit id="emailCreateNotifyText2">
+				<target state="translated">Profileinladung - Benutzer %s hat neues Passwort und Profil wurde freigeschaltet</target>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyUserProperties">
 				<target state="translated">Profilangaben:</target>

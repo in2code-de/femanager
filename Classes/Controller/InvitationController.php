@@ -69,7 +69,8 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		Div::hashPassword($user, $this->settings['invitation']['passwordSave']);
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
 
-		if (!empty($this->settings['invitation']['confirmByAdmin'])) {
+		//TODO
+		if (!empty($this->settings['invitation']['confirmByAdmin']) && 0) {
 			// todo
 			$this->createRequest($user);
 		} else {
@@ -121,31 +122,28 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		// send notify email to admin
 		if ($this->settings['invitation']['notifyAdminStep1']) {
 			$this->div->sendEmail(
-				'invitationNotify',
+				'invitationNotifyStep1',
 				Div::makeEmailArray(
 					$this->settings['invitation']['notifyAdminStep1'],
-					$this->settings['invitation']['email']['invitationAdminNotify']['receiver']['name']['value']
+					$this->settings['invitation']['email']['invitationAdminNotifyStep1']['receiver']['name']['value']
 				),
 				Div::makeEmailArray(
 					$user->getEmail(),
 					$user->getUsername()
 				),
-				'Profile creation with invitation',
+				'Profile creation with invitation - Step 1',
 				array(
 					'user' => $user,
 					'settings' => $this->settings
 				),
-				$this->config['invitation.']['email.']['invitationAdminNotify.']
+				$this->config['invitation.']['email.']['invitationAdminNotifyStep1.']
 			);
 		}
 
 		// add signal after user generation
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
 
-		// frontend redirect (if activated via TypoScript)
-		$this->redirectByAction('invitation');
-
-		// go to an action
+		$this->redirectByAction('redirectStep1');
 		$this->redirect('new');
 	}
 
@@ -196,6 +194,27 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 			401,
 			$user
 		);
+
+		// send notify email to admin
+		if ($this->settings['invitation']['notifyAdmin']) {
+			$this->div->sendEmail(
+				'invitationNotify',
+				Div::makeEmailArray(
+					$this->settings['invitation']['notifyAdmin'],
+					$this->settings['invitation']['email']['invitationAdminNotify']['receiver']['name']['value']
+				),
+				Div::makeEmailArray(
+					$user->getEmail(),
+					$user->getUsername()
+				),
+				'Profile creation with invitation - Final',
+				array(
+					'user' => $user,
+					'settings' => $this->settings
+				),
+				$this->config['invitation.']['email.']['invitationAdminNotify.']
+			);
+		}
 
 		$user = $this->div->overrideUserGroup($user, $this->settings, 'invitation');
 		Div::hashPassword($user, $this->settings['invitation']['passwordSave']);
