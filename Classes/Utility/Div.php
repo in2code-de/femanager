@@ -90,8 +90,24 @@ class Div {
 	 * @return query object
 	 */
 	public function getCurrentUser() {
-		$user = $this->userRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
-		return $user;
+		$currentLoggedInUser = $this->userRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+		return $currentLoggedInUser;
+	}
+
+	/**
+	 * Get Usergroups from current logged in user
+	 *
+	 * @return \array
+	 */
+	public function getCurrentUsergroupUids() {
+		$currentLoggedInUser = $this->getCurrentUser();
+		$usergroupUids = array();
+		if ($currentLoggedInUser !== NULL) {
+			foreach ($currentLoggedInUser->getUsergroup() as $usergroup) {
+				$usergroupUids[] = $usergroup->getUid();
+			}
+		}
+		return $usergroupUids;
 	}
 
 	/**

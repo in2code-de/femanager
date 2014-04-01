@@ -45,6 +45,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	 * @return void
 	 */
 	public function newAction() {
+		$this->allowedUserForInvitationNewAndCreate();
 		$this->assignForAll();
 	}
 
@@ -58,6 +59,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	 * @return void
 	 */
 	public function createAction(User $user) {
+		$this->allowedUserForInvitationNewAndCreate();
 		$user->setDisable(TRUE);
 		$user = $this->div->forceValues($user, $this->config['invitation.']['forceValues.']['beforeAnyConfirmation.'], $this->cObj);
 		$user = $this->div->fallbackUsernameAndPassword($user);
@@ -219,7 +221,9 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 			$this->redirect('status');
 		} else {
 			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('tx_femanager_domain_model_log.state.403', 'femanager')
+				LocalizationUtility::translate('tx_femanager_domain_model_log.state.403', 'femanager'),
+				'',
+				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
 			);
 			$this->redirect('status');
 		}
@@ -231,6 +235,33 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	 * @return void
 	 */
 	public function statusAction() {
+	}
+
+	/**
+	 * Check if user is allowed to see this action
+	 *
+	 * @return bool
+	 */
+	protected function allowedUserForInvitationNewAndCreate() {
+		if (empty($this->settings['invitation']['allowedUserGroups'])) {
+			return TRUE;
+		}
+		$allowedUsergroupUids = GeneralUtility::trimExplode(',', $this->settings['invitation']['allowedUserGroups'], TRUE);
+		$currentUsergroupUids = $this->div->getCurrentUsergroupUids();
+
+		// compare allowedUsergroups with currentUsergroups
+		if (count(array_intersect($allowedUsergroupUids, $currentUsergroupUids))) {
+			return TRUE;
+		}
+
+		// current user is not allowed
+		$this->flashMessageContainer->add(
+			LocalizationUtility::translate('tx_femanager_domain_model_log.state.404', 'femanager'),
+			'',
+			\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+		);
+		$this->forward('status');
+		return FALSE;
 	}
 
 }

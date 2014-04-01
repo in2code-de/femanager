@@ -156,6 +156,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.403">
 				<source>Wrong Hash</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.404">
+				<source>You tried to open a restricted page</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<source>User</source>
 			</trans-unit>
