@@ -35,7 +35,7 @@
 									</numIndex>
 									<numIndex index="4" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.4</numIndex>
-										<numIndex index="1">Invitation->new;Invitation->create;Invitation->edit;Invitation->update;</numIndex>
+										<numIndex index="1">Invitation->new;Invitation->create;Invitation->edit;Invitation->update;Invitation->delete;</numIndex>
 									</numIndex>
 								</items>
 								<maxitems>1</maxitems>
@@ -50,6 +50,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.new.title</sheetTitle>
+					<displayCond><![CDATA[FIELD:main.switchableControllerActions:=:New->new;New->create;New->createStatus;New->confirmCreateRequest;]]></displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
@@ -200,6 +201,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.edit.title</sheetTitle>
+					<displayCond><![CDATA[FIELD:main.switchableControllerActions:=:Edit->edit;Edit->update;Edit->delete;Edit->confirmUpdateRequest;]]></displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
@@ -327,6 +329,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.title</sheetTitle>
+					<displayCond><![CDATA[FIELD:main.switchableControllerActions:=:User->list;User->show;]]></displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
@@ -415,6 +418,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.show.title</sheetTitle>
+					<displayCond><![CDATA[FIELD:main.switchableControllerActions:=:User->show;]]></displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
@@ -449,6 +453,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.invitation.title</sheetTitle>
+					<displayCond><![CDATA[FIELD:main.switchableControllerActions:=:Invitation->new;Invitation->create;Invitation->edit;Invitation->update;Invitation->delete;]]></displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>
