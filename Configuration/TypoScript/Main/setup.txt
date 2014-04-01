@@ -1021,7 +1021,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = Profile was created
+					subject.value = User was invited
 
 					# Set CC receivers
 					cc = TEXT
@@ -1089,7 +1089,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = Profile was created
+					subject.value = User invitation - Profile finally created
 
 					# Set CC receivers
 					cc = TEXT

@@ -160,6 +160,9 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		$this->userRepository->update($user);
 		$this->persistenceManager->persistAll();
 
+		// add signal on edit
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $hash, $this));
+
 		$this->view->assign('user', $user);
 		$this->view->assign('hash', $hash);
 
@@ -175,6 +178,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 			);
 			$this->forward('status');
 		}
+
 		$this->assignForAll();
 	}
 
@@ -220,6 +224,9 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		Div::hashPassword($user, $this->settings['invitation']['passwordSave']);
 		$this->userRepository->update($user);
 		$this->persistenceManager->persistAll();
+
+		// add signal after user generation
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
 
 		$this->redirectByAction('invitation', 'redirectPasswordChanged');
 		$this->redirect('status');
