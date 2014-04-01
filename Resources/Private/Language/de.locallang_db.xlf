@@ -162,6 +162,18 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.401">
 				<target state="translated">Benutzerprofil angelegt und Benutzer eingeladen</target>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.401">
+				<target state="translated">Benutzerprofil angelegt und Benutzer eingeladen</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.401">
+				<target state="translated">Benutzerprofil angelegt und Benutzer eingeladen</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.402">
+				<target state="translated">Profil vom Benutzer gelöscht</target>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.403">
+				<target state="translated">Fehlerhafter Hash</target>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<target state="translated">Benutzer</target>
 			</trans-unit>
@@ -261,6 +273,9 @@
 			</trans-unit>
 			<trans-unit id="flexform.invitation.title">
 				<target state="translated">Einladung</target>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.allowedUserGroups">
+				<target state="translated">Beschränke "Neue Einladung" auf eine oder mehrere Benutzergruppen (leer = Keine Beschränkung)</target>
 			</trans-unit>
 			<trans-unit id="flexform.invitation.fields">
 				<target state="translated">Felder für Formular wählen (keine = alle Felder)</target>

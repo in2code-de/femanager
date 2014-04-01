@@ -181,13 +181,23 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	}
 
 	/**
+	 * Init for User delete action
+	 *
+	 * @return void
+	 */
+	protected function initializeDeleteAction() {
+	}
+
+	/**
 	 * action delete
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param \int $user User UID
 	 * @param \string $hash
 	 * @return void
 	 */
-	public function deleteAction(User $user, $hash = NULL) {
+	public function deleteAction($user, $hash = NULL) {
+		$user = $this->userRepository->findByUid($user);
+
 		if (Div::createHash($user->getUsername() . $user->getUid()) === $hash) {
 
 			// write log
@@ -205,11 +215,22 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 			// delete user
 			$this->userRepository->remove($user);
 
-			$this->redirectByAction('delete');
-			$this->redirect('new');
+			$this->redirectByAction('invitation', 'redirectDelete');
+			$this->redirect('status');
 		} else {
-
+			$this->flashMessageContainer->add(
+				LocalizationUtility::translate('tx_femanager_domain_model_log.state.403', 'femanager')
+			);
+			$this->redirect('status');
 		}
+	}
+
+	/**
+	 * Restricted Action to show messages
+	 *
+	 * @return void
+	 */
+	public function statusAction() {
 	}
 
 }

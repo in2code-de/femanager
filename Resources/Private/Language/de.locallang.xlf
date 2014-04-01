@@ -153,6 +153,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.402">
 				<target state="translated">Profil vom Benutzer gelöscht</target>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.403">
+				<target state="translated">Fehlerhafter Hash</target>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<target state="translated">Benutzer</target>
 			</trans-unit>

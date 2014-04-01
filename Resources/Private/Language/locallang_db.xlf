@@ -162,6 +162,12 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.401">
 				<source>Profile created and User invited</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.402">
+				<source>Profile deleted from User</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.403">
+				<source>Wrong Hash</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<source>User</source>
 			</trans-unit>
@@ -261,6 +267,9 @@
 			</trans-unit>
 			<trans-unit id="flexform.invitation.title">
 				<source>Invitation</source>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.allowedUserGroups">
+				<source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
 			</trans-unit>
 			<trans-unit id="flexform.invitation.fields">
 				<source>Select Fields for invitation-Form (empty = all fields)</source>

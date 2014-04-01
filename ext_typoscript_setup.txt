@@ -4,13 +4,13 @@ config.tx_extbase {
 			In2\Femanager\Domain\Model\User {
 				mapping {
 					tableName = fe_users
-					recordType = 0
+					recordType =
 				}
 			}
 			In2\Femanager\Domain\Model\UserGroup {
 				mapping {
 					tableName = fe_groups
-					recordType = 0
+					recordType =
 				}
 			}
 		}
