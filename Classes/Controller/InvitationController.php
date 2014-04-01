@@ -215,14 +215,6 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	}
 
 	/**
-	 * Init for update
-	 *
-	 * @return void
-	 */
-	public function initializeUpdateAction() {
-	}
-
-	/**
 	 * action delete
 	 *
 	 * @param \int $user User UID

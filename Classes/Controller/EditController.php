@@ -51,6 +51,23 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 	}
 
 	/**
+	 * Init for User creation
+	 *
+	 * @return void
+	 */
+	public function initializeUpdateAction() {
+		$user = $this->div->getCurrentUser();
+		$userValues = $this->request->getArgument('user');
+		$this->testSpoof($user, $userValues['__identity']);
+
+		// workarround for empty usergroups
+		if (intval($this->pluginVariables['user']['usergroup'][0]['__identity']) === 0) {
+			unset($this->pluginVariables['user']['usergroup']);
+		}
+		$this->request->setArguments($this->pluginVariables);
+	}
+
+	/**
 	 * action update
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user
