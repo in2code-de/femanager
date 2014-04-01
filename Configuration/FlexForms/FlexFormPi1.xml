@@ -574,6 +574,7 @@
 							</config>
 						</TCEforms>
 					</settings.invitation.overrideUserGroup>
+					<!--
 					<settings.invitation.confirmByAdmin>
 						<TCEforms>
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.invitation.confirmByAdmin</label>
@@ -584,6 +585,7 @@
 							</config>
 						</TCEforms>
 					</settings.invitation.confirmByAdmin>
+					-->
 					<settings.invitation.notifyAdminStep1>
 						<TCEforms>
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.invitation.notifyAdminStep1</label>
