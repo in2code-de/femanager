@@ -150,6 +150,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.401">
 				<source>Profile created and User invited</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.402">
+				<source>Profile deleted from User</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<source>User</source>
 			</trans-unit>
@@ -461,6 +464,9 @@
 			</trans-unit>
 			<trans-unit id="UserDeleteConfirmation">
 				<source>Are you sure to delete your Profile?</source>
+			</trans-unit>
+			<trans-unit id="titleInviteProfile">
+				<source>Invite a new user</source>
 			</trans-unit>
 			<trans-unit id="BackendListUserDeleteConfirmation">
 				<source>Are you sure to delete this User?</source>

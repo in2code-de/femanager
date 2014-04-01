@@ -180,4 +180,36 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		$this->assignForAll();
 	}
 
+	/**
+	 * action delete
+	 *
+	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param \string $hash
+	 * @return void
+	 */
+	public function deleteAction(User $user, $hash = NULL) {
+		if (Div::createHash($user->getUsername() . $user->getUid()) === $hash) {
+
+			// write log
+			$this->div->log(
+				LocalizationUtility::translate('tx_femanager_domain_model_log.state.402', 'femanager'),
+				300,
+				$user
+			);
+
+			// add flashmessage
+			$this->flashMessageContainer->add(
+				LocalizationUtility::translate('tx_femanager_domain_model_log.state.402', 'femanager')
+			);
+
+			// delete user
+			$this->userRepository->remove($user);
+
+			$this->redirectByAction('delete');
+			$this->redirect('new');
+		} else {
+
+		}
+	}
+
 }
