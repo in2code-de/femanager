@@ -286,6 +286,9 @@
 			<trans-unit id="flexform.invitation.fields">
 				<target state="translated">Felder für Formular wählen (keine = alle Felder)</target>
 			</trans-unit>
+			<trans-unit id="flexform.invitation.overrideUserGroup">
+				<target state="translated">Zugewiesene Benutzergruppen für neue Benutzer</target>
+			</trans-unit>
 			<trans-unit id="flexform.invitation.confirmByAdmin">
 				<target state="translated">Profiländerung muss vom Admin bestätigt werden (eine oder mehrere E-Mails eintragen)</target>
 			</trans-unit>

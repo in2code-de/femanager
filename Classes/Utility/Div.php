@@ -173,18 +173,19 @@ class Div {
 	/**
 	 * Overwrite usergroups from user by flexform settings
 	 *
-	 * @param $object
-	 * @param $settings
-	 * @return $object
+	 * @param \In2\Femanager\Domain\Model\User $object
+	 * @param \array $settings
+	 * @param \string $controllerName
+	 * @return \In2\Femanager\Domain\Model\User $object
 	 */
-	public function overrideUserGroup($object, $settings) {
-		if (empty($settings['new']['overrideUserGroup'])) {
+	public function overrideUserGroup($object, $settings, $controllerName = 'new') {
+		if (empty($settings[$controllerName]['overrideUserGroup'])) {
 			return $object;
 		}
 
 		// for each selected usergroup in the flexform
 		$object->removeAllUsergroups();
-		foreach (GeneralUtility::trimExplode(',', $settings['new']['overrideUserGroup'], 1) as $usergroupUid) {
+		foreach (GeneralUtility::trimExplode(',', $settings[$controllerName]['overrideUserGroup'], 1) as $usergroupUid) {
 			$usergroup = $this->userGroupRepository->findByUid($usergroupUid);
 			$object->addUsergroup($usergroup);
 		}

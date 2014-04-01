@@ -197,6 +197,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 			$user
 		);
 
+		$user = $this->div->overrideUserGroup($user, $this->settings, 'invitation');
 		Div::hashPassword($user, $this->settings['invitation']['passwordSave']);
 		$this->userRepository->update($user);
 		$this->persistenceManager->persistAll();
@@ -215,6 +216,8 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 
 	/**
 	 * Init for update
+	 *
+	 * @return void
 	 */
 	public function initializeUpdateAction() {
 	}
