@@ -13,27 +13,31 @@
 					<switchableControllerActions>
 						<TCEforms>
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view</label>
-							<!--<onChange>reload</onChange>-->
+							<onChange>reload</onChange>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.0</numIndex>
 										<numIndex index="1">New->new;New->create;New->createStatus;New->confirmCreateRequest;</numIndex>
 									</numIndex>
-									<numIndex index="1" type="array">
+									<numIndex index="2" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.1</numIndex>
 										<numIndex index="1">Edit->edit;Edit->update;Edit->delete;Edit->confirmUpdateRequest;</numIndex>
 									</numIndex>
-									<numIndex index="2" type="array">
+									<numIndex index="3" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.2</numIndex>
 										<numIndex index="1">User->list;User->show;</numIndex>
 									</numIndex>
-									<numIndex index="3" type="array">
+									<numIndex index="4" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.3</numIndex>
 										<numIndex index="1">User->show;</numIndex>
 									</numIndex>
-									<numIndex index="4" type="array">
+									<numIndex index="5" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.4</numIndex>
 										<numIndex index="1">Invitation->new;Invitation->create;Invitation->edit;Invitation->update;Invitation->delete;Invitation->status;</numIndex>
 									</numIndex>
