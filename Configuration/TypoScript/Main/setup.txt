@@ -1200,8 +1200,11 @@ plugin.tx_femanager {
 			# redirect after profile delete
 #			redirect = TEXT
 #			redirect {
-#				typolink.parameter = 1
-#				typolink.returnLast = url
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
 #			}
 		}
 
