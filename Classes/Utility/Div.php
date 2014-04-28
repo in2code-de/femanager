@@ -87,11 +87,13 @@ class Div {
 	/**
 	 * Return current logged in fe_user
 	 *
-	 * @return query object
+	 * @return object
 	 */
 	public function getCurrentUser() {
-		$currentLoggedInUser = $this->userRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
-		return $currentLoggedInUser;
+		if (!is_array($GLOBALS['TSFE']->fe_user->user)) {
+			return NULL;
+		}
+		return $this->userRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
 	}
 
 	/**
