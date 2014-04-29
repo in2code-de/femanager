@@ -46,6 +46,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	 */
 	public function newAction() {
 		$this->allowedUserForInvitationNewAndCreate();
+		$this->view->assign('allUserGroups', $this->allUserGroups);
 		$this->assignForAll();
 	}
 
