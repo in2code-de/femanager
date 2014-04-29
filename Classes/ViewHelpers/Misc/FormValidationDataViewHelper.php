@@ -20,12 +20,12 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 	public function render($settings, $fieldName, $additionalAttributes = array()) {
 		$array = $additionalAttributes;
 
-		$actionName = $this->controllerContext->getRequest()->getControllerActionName();
-		if ($settings[$actionName]['validation']['_enable']['client'] != 1) {
+		$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
+		if ($settings[$controllerName]['validation']['_enable']['client'] != 1) {
 			return $array;
 		}
 
-		$validationString = $this->getValidationString($settings, $fieldName, $actionName);
+		$validationString = $this->getValidationString($settings, $fieldName, $controllerName);
 		if (!empty($validationString)) {
 			$array['data-validation'] = $validationString;
 			if (!empty($additionalAttributes['data-validation'])) {
