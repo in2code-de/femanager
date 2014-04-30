@@ -83,7 +83,7 @@ $tempColumns = array (
 		'config' => Array (
 			'type' => 'input',
 			'size' => 10,
-			'max' => '20',
+			'max' => 20,
 			'eval' => 'date',
 			'checkbox' => '0',
 			'default' => ''
@@ -96,7 +96,8 @@ $tempColumns = array (
 			'type' => 'input',
 			'size' => 30,
 			'eval' => 'datetime',
-			'readOnly' => 1
+			'readOnly' => 1,
+			'default' => time()
 		)
 	),
 	'tstamp' => array (
@@ -106,7 +107,8 @@ $tempColumns = array (
 			'type' => 'input',
 			'size' => 30,
 			'eval' => 'datetime',
-			'readOnly' => 1
+			'readOnly' => 1,
+			'default' => time()
 		)
 	),
 	'tx_femanager_confirmedbyuser' => array (
@@ -162,7 +164,11 @@ $fields .= ', tx_femanager_changerequest';
 
 \TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('fe_users');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'gender, date_of_birth', '', 'after:name');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns, 1);
+if (version_compare(TYPO3_branch, '6.2', '<')) {
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns, 1);
+} else {
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns);
+}
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
 	'fe_users',
 	'--div--;LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.tab;;;;1-1-1, ' . $fields

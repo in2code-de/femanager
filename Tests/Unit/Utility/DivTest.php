@@ -70,34 +70,37 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 */
 	public function checkExtensionReturnBoolDataProvider() {
 		return array(
-			// #0
 			array(
 				'theImage_dot.com',
 				FALSE,
 			),
-
-			// #1
 			array(
 				'theImage_dot.com.jpg',
 				TRUE,
 			),
-
-			// #2
 			array(
 				'test.ImagetheImage_dot.com.JPEG',
 				TRUE,
 			),
-
-			// #3
 			array(
 				'test.png',
 				TRUE,
 			),
-
-			// #4
 			array(
 				'SoNenntEinRedakteurEineDätaei.PNG',
 				TRUE,
+			),
+			array(
+				'test.phx.bmp',
+				TRUE,
+			),
+			array(
+				'test.php.bmp',
+				FALSE,
+			),
+			array(
+				'test.phtml.bmp',
+				FALSE,
 			),
 		);
 	}

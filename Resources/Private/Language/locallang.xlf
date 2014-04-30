@@ -144,6 +144,24 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.301">
 				<source>Profile deleted</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.400">
+				<source>Invitation</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.401">
+				<source>Profile created and User invited</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.402">
+				<source>Profile deleted from User</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.403">
+				<source>Wrong Hash</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.404">
+				<source>You tried to open a restricted page</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.405">
+				<source>Password changed and Profile activated</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<source>User</source>
 			</trans-unit>
@@ -192,6 +210,9 @@
 			</trans-unit>
 			<trans-unit id="validationErrorInList">
 				<source>This value is not allowed in Field %s</source>
+			</trans-unit>
+			<trans-unit id="validationErrorSameAs">
+				<source>Please check your value</source>
 			</trans-unit>
 			<trans-unit id="validationErrorPasswordRepeat">
 				<source>Both passwords do not fit</source>
@@ -267,7 +288,10 @@
 				<source>Dear Admin,</source>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyText1">
-				<source>Profile registration from %s</source>
+				<source>Profile invitation of %s</source>
+			</trans-unit>
+			<trans-unit id="emailCreateNotifyText2">
+				<source>Profile invitation - User %s set a new password and profile was enabled</source>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyUserProperties">
 				<source>Profile properties:</source>
@@ -326,6 +350,27 @@
 			<trans-unit id="emailUpdateRequestRefusedSignature">
 				<source>Your website team.</source>
 			</trans-unit>
+			<trans-unit id="emailInvitationSalutation">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationText1">
+				<source>Your new profile was just created.</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationText2">
+				<source>Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationLinkConfirm">
+				<source>Confirm Profile</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationText3">
+				<source>If you don't want to be registered on our system, click this link.</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationLinkConfirmRefused">
+				<source>Delete Profile</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationSignature">
+				<source>Your website team.</source>
+			</trans-unit>
 
 			<trans-unit id="noRecordsFound">
 				<source>No records found.</source>
@@ -356,6 +401,12 @@
 			</trans-unit>
 			<trans-unit id="create">
 				<source>Profile successfully created</source>
+			</trans-unit>
+			<trans-unit id="createAndInvited">
+				<source>Profile successfully created and User informed</source>
+			</trans-unit>
+			<trans-unit id="createAndInvitedFinished">
+				<source>Profile successfully changed and enabled</source>
 			</trans-unit>
 			<trans-unit id="createRequestWaitingForUserConfirm">
 				<source>Thank you for your request. Please check your mail account to confirm the profile.</source>
@@ -428,6 +479,12 @@
 			</trans-unit>
 			<trans-unit id="UserDeleteConfirmation">
 				<source>Are you sure to delete your Profile?</source>
+			</trans-unit>
+			<trans-unit id="titleInvitationProfile">
+				<source>Invite a new user</source>
+			</trans-unit>
+			<trans-unit id="titleInvitationSetPassword">
+				<source>Please set a new password</source>
 			</trans-unit>
 			<trans-unit id="BackendListUserDeleteConfirmation">
 				<source>Are you sure to delete this User?</source>

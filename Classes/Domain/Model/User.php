@@ -115,7 +115,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	/**
 	 * Get usergroup
 	 *
-	 * @return \In2\Femanager\Domain\Model\UserGroup
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
 	public function getUsergroup() {
 		return $this->usergroup;
@@ -144,7 +144,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	/**
 	 * Remove usergroup
 	 *
-	 * @param UserGroup $usergroup
+	 * @param \In2\Femanager\Domain\Model\UserGroup $usergroup
 	 * @return void
 	 */
 	public function removeUsergroup(\In2\Femanager\Domain\Model\UserGroup $usergroup) {

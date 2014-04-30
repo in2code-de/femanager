@@ -15,6 +15,10 @@ config.tx_extbase {
 			}
 		}
 	}
+	objects {
+		# Disable tx_extbase_type=xyz in where clause (fe_users, fe_groups)
+		TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap.className = In2\Femanager\Persistence\Generic\Mapper\DataMap
+	}
 }
 
 

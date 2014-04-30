@@ -1,22 +1,61 @@
 {namespace femanager=In2\Femanager\ViewHelpers}
-<div class="femanager_fieldset femanager_usergroup control-group">
-	<label for="femanager_field_usergroup" class="control-label">
-		<f:translate key="tx_femanager_domain_model_user.usergroup" />
-		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'usergroup', actionName: actionName)}">
-			<span>*</span>
-		</f:if>
-	</label>
-	<div class="controls">
-		<femanager:form.select
-				id="femanager_field_usergroup"
-				property="usergroup.0"
-				options="{allUserGroups}"
-				optionValueField="uid"
-				optionLabelField="title"
-				sortByOptionLabel="1"
-				defaultOption="{f:translate(key:'pleaseChoose')}"
-				class="input-block-level"
-				value="{femanager:Misc.GetFirst(objectStorage:'{user.usergroup}')}"
-				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'usergroup')}" />
+
+<f:render section="default" arguments="{_all}" />
+
+
+<f:section name="default">
+	<div class="femanager_fieldset femanager_usergroup control-group">
+		<label for="femanager_field_usergroup" class="control-label">
+			<f:translate key="tx_femanager_domain_model_user.usergroup" />
+			<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'usergroup', actionName: actionName)}">
+				<span>*</span>
+			</f:if>
+		</label>
+		<div class="controls">
+			<femanager:form.select
+					id="femanager_field_usergroup"
+					name="user[usergroup][0]"
+					options="{allUserGroups}"
+					optionValueField="uid"
+					optionLabelField="title"
+					sortByOptionLabel="1"
+					defaultOption="{f:translate(key:'pleaseChoose')}"
+					class="input-block-level"
+					value="{femanager:Misc.GetFirst(objectStorage:'{user.usergroup}')}"
+					additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'usergroup')}" />
+		</div>
 	</div>
-</div>
+</f:section>
+
+
+<f:section name="multiselect">
+	<f:comment><![CDATA[
+
+		/////////////////////////////////////////
+		// Example how to add a multiselect field
+		/////////////////////////////////////////
+
+		<div class="femanager_fieldset femanager_usergroup control-group">
+			<label for="femanager_field_usergroup" class="control-label">
+				<f:translate key="tx_femanager_domain_model_user.usergroup" />
+				<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'usergroup', actionName: actionName)}">
+					<span>*</span>
+				</f:if>
+			</label>
+			<div class="controls">
+				<femanager:form.select
+						id="femanager_field_usergroup"
+						property="user[usergroup]"
+						multiple="multiple"
+						options="{allUserGroups}"
+						optionValueField="uid"
+						optionLabelField="title"
+						sortByOptionLabel="1"
+						class="input-block-level"
+						value="{femanager:Misc.GetFirst(objectStorage:'{user.usergroup}')}"
+						additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'usergroup')}" />
+			</div>
+		</div>
+
+		]]></f:comment>
+</f:section>

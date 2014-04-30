@@ -1,0 +1,28 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<f:layout name="Default" />
+
+Invitation / Edit
+Available variables:
+{user}
+{hash}
+
+<f:section name="main">
+	<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+	<f:render partial="Misc/FormErrors" arguments="{object:User}" />
+
+	<div class="femanager_invitation_edit">
+		<f:if condition="{user}">
+			<f:form name="user" object="{user}" action="update" class="form-horizontal {f:if(condition:'{settings.invitation.validation._enable.client}',then:'feManagerValidation',else:'')}">
+				<fieldset>
+					<legend>
+						<f:translate key="titleInvitationSetPassword" />
+					</legend>
+
+					<f:render partial="Fields/Password" arguments="{_all}" />
+
+					<f:render partial="Fields/SubmitUpdate" arguments="{_all}" />
+				</fieldset>
+			</f:form>
+		</f:if>
+	</div>
+</f:section>

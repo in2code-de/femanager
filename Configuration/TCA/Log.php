@@ -138,6 +138,8 @@ $TCA['tx_femanager_domain_model_log'] = array(
 					array('LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.205', '205'),
 					array('LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.300', '--div--'),
 					array('LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.301', '301'),
+					array('LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.400', '--div--'),
+					array('LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.401', '401'),
 				),
 				'size' => 1,
 				'maxitems' => 1

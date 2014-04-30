@@ -87,11 +87,29 @@ class Div {
 	/**
 	 * Return current logged in fe_user
 	 *
-	 * @return query object
+	 * @return object
 	 */
 	public function getCurrentUser() {
-		$user = $this->userRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
-		return $user;
+		if (!is_array($GLOBALS['TSFE']->fe_user->user)) {
+			return NULL;
+		}
+		return $this->userRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+	}
+
+	/**
+	 * Get Usergroups from current logged in user
+	 *
+	 * @return \array
+	 */
+	public function getCurrentUsergroupUids() {
+		$currentLoggedInUser = $this->getCurrentUser();
+		$usergroupUids = array();
+		if ($currentLoggedInUser !== NULL) {
+			foreach ($currentLoggedInUser->getUsergroup() as $usergroup) {
+				$usergroupUids[] = $usergroup->getUid();
+			}
+		}
+		return $usergroupUids;
 	}
 
 	/**
@@ -137,7 +155,9 @@ class Div {
 	 */
 	public function fallbackUsernameAndPassword($user) {
 		if (!$user->getUsername()) {
-			$user->setUsername(self::getRandomString());
+			$user->setUsername(
+				self::getRandomString()
+			);
 			if ($user->getEmail()) {
 				$user->setUsername(
 					$user->getEmail()
@@ -145,7 +165,9 @@ class Div {
 			}
 		}
 		if (!$user->getPassword()) {
-			$user->setPassword(self::getRandomString());
+			$user->setPassword(
+				self::getRandomString()
+			);
 		}
 		return $user;
 	}
@@ -153,18 +175,19 @@ class Div {
 	/**
 	 * Overwrite usergroups from user by flexform settings
 	 *
-	 * @param $object
-	 * @param $settings
-	 * @return $object
+	 * @param \In2\Femanager\Domain\Model\User $object
+	 * @param \array $settings
+	 * @param \string $controllerName
+	 * @return \In2\Femanager\Domain\Model\User $object
 	 */
-	public function overrideUserGroup($object, $settings) {
-		if (empty($settings['new']['overrideUserGroup'])) {
+	public function overrideUserGroup($object, $settings, $controllerName = 'new') {
+		if (empty($settings[$controllerName]['overrideUserGroup'])) {
 			return $object;
 		}
 
 		// for each selected usergroup in the flexform
 		$object->removeAllUsergroups();
-		foreach (GeneralUtility::trimExplode(',', $settings['new']['overrideUserGroup'], 1) as $usergroupUid) {
+		foreach (GeneralUtility::trimExplode(',', $settings[$controllerName]['overrideUserGroup'], 1) as $usergroupUid) {
 			$usergroup = $this->userGroupRepository->findByUid($usergroupUid);
 			$object->addUsergroup($usergroup);
 		}
@@ -207,15 +230,22 @@ class Div {
 	/**
 	 * Check extension of given filename
 	 *
-	 * @param \string		Filename like (upload.png)
-	 * @return \bool		If Extension is allowed
+	 * @param \string $filename Filename like (upload.png)
+	 * @return \bool If Extension is allowed
 	 */
 	public static function checkExtension($filename) {
-		// TODO: put list into TypoScript (no spaces allowed)
 		$extensionList = 'jpg,jpeg,png,gif,bmp';
+		if (!empty($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_femanager.']['settings.']['misc.']['uploadFileExtension'])) {
+			$extensionList = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_femanager.']['settings.']['misc.']['uploadFileExtension'];
+			$extensionList = str_replace(' ', '', $extensionList);
+		}
 		$fileInfo = pathinfo($filename);
 
-		if (!empty($fileInfo['extension']) && GeneralUtility::inList($extensionList, strtolower($fileInfo['extension']))) {
+		if (
+			!empty($fileInfo['extension']) &&
+			GeneralUtility::inList($extensionList, strtolower($fileInfo['extension'])) &&
+			GeneralUtility::verifyFilenameAgainstDenyPattern($filename)
+		) {
 			return TRUE;
 		}
 		return FALSE;
@@ -587,7 +617,7 @@ class Div {
 	 * @return string
 	 */
 	public static function getRandomString() {
-		$randomNumber = mt_rand(0, 9999999999);
+		$randomNumber = mt_rand(0, 9999999999999999);
 		return GeneralUtility::shortMD5($randomNumber);
 	}
 

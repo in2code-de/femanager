@@ -27,6 +27,9 @@ class GetFirstViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormF
 	 * @return \mixed
 	 */
 	public function render($objectStorage) {
+		if ($objectStorage === NULL) {
+			return NULL;
+		}
 		foreach ($objectStorage as $object) {
 			return $object;
 		}
@@ -42,6 +45,6 @@ class GetFirstViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormF
 			}
 		}
 
-		return FALSE;
+		return NULL;
 	}
 }

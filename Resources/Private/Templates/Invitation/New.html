@@ -1,0 +1,70 @@
+{namespace femanager=In2\Femanager\ViewHelpers}
+<f:layout name="Default" />
+
+Invitation / New
+	This view is for the invitation feature:
+	Let a third person create a new user account
+
+	Available variables:
+	{user}
+	{allUserGroups}
+
+<f:section name="main">
+	<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+	<f:render partial="Misc/FormErrors" arguments="{object:User}" />
+
+	<div class="femanager_invitation_new">
+		<f:form name="user" object="{user}" action="create" class="form-horizontal {f:if(condition:'{settings.invitation.validation._enable.client}',then:'feManagerValidation',else:'')}">
+			<fieldset>
+				<legend>
+					<f:translate key="titleInvitationProfile" />
+				</legend>
+
+				<f:if condition="{settings.invitation.fields}">
+
+					<f:then>
+						<f:comment>
+							If some fields are selected in the flexform
+						</f:comment>
+						<f:render partial="Fields/Email" arguments="{_all}" />
+						<f:for each="{femanager:misc.explode(string:'{settings.invitation.fields}')}" as="field">
+							<f:render partial="Fields/{femanager:misc.upper(string:'{field}')}" arguments="{_all}" />
+						</f:for>
+						<f:render partial="Fields/SubmitCreate" arguments="{_all}" />
+					</f:then>
+
+					<f:else>
+						<f:comment>
+							If no fields are selected in the flexform => show all
+						</f:comment>
+						<f:render partial="Fields/Email" arguments="{_all}" />
+						<f:render partial="Fields/Username" arguments="{_all}" />
+						<f:render partial="Fields/Title" arguments="{_all}" />
+						<f:render partial="Fields/Name" arguments="{_all}" />
+						<f:render partial="Fields/FirstName" arguments="{_all}" />
+						<f:render partial="Fields/MiddleName" arguments="{_all}" />
+						<f:render partial="Fields/LastName" arguments="{_all}" />
+						<f:render partial="Fields/Gender" arguments="{_all}" />
+						<f:render partial="Fields/DateOfBirth" arguments="{_all}" />
+						<f:render partial="Fields/Www" arguments="{_all}" />
+						<f:render partial="Fields/Telephone" arguments="{_all}" />
+						<f:render partial="Fields/Fax" arguments="{_all}" />
+						<f:render partial="Fields/Address" arguments="{_all}" />
+						<f:render partial="Fields/Zip" arguments="{_all}" />
+						<f:render partial="Fields/City" arguments="{_all}" />
+						<f:render partial="Fields/Country" arguments="{_all}" />
+						<f:render partial="Fields/Image" arguments="{_all}" />
+						<f:render partial="Fields/Usergroup" arguments="{_all}" />
+						<f:if condition="{femanager:Misc.CaptchaEnabled(settings:'{settings}')}">
+							<f:render partial="Fields/Captcha" arguments="{_all}" />
+						</f:if>
+
+						<f:render partial="Fields/SubmitCreate" arguments="{_all}" />
+					</f:else>
+
+				</f:if>
+
+			</fieldset>
+		</f:form>
+	</div>
+</f:section>

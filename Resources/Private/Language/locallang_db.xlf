@@ -156,6 +156,24 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.301">
 				<source>Profile deleted</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.400">
+				<source>Invitation</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.401">
+				<source>Profile created and User invited</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.402">
+				<source>Profile deleted from User</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.403">
+				<source>Wrong Hash</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.404">
+				<source>You tried to open a restricted page</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.405">
+				<source>Password changed and Profile activated</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<source>User</source>
 			</trans-unit>
@@ -178,6 +196,9 @@
 			<trans-unit id="flexform.main.view.3">
 				<source>Detail</source>
 			</trans-unit>
+			<trans-unit id="flexform.main.view.4">
+				<source>Invitation</source>
+			</trans-unit>
 			<trans-unit id="flexform.new.title">
 				<source>Registration</source>
 			</trans-unit>
@@ -191,10 +212,10 @@
 				<source>Registration must be confirmed from sender</source>
 			</trans-unit>
 			<trans-unit id="flexform.new.confirmByAdmin">
-				<source>Registration must be confirmed from an admin (add one ore more emails)</source>
+				<source>Registration must be confirmed from an admin (add one or more emails)</source>
 			</trans-unit>
 			<trans-unit id="flexform.new.notifyAdmin">
-				<source>Notify admin on registration (add one ore more emails)</source>
+				<source>Notify admin on registration (add one or more emails)</source>
 			</trans-unit>
 			<trans-unit id="flexform.edit.title">
 				<source>Edit</source>
@@ -203,10 +224,10 @@
 				<source>Select Fields for Edit-Form (empty = all fields)</source>
 			</trans-unit>
 			<trans-unit id="flexform.edit.confirmByAdmin">
-				<source>Profile update must be confirmed from an admin (add one ore more emails)</source>
+				<source>Profile update must be confirmed from an admin (add one or more emails)</source>
 			</trans-unit>
 			<trans-unit id="flexform.edit.notifyAdmin">
-				<source>Notify admin on Profile update (add one ore more emails)</source>
+				<source>Notify admin on Profile update (add one or more emails)</source>
 			</trans-unit>
 			<trans-unit id="flexform.list.title">
 				<source>Listview</source>
@@ -249,6 +270,27 @@
 			</trans-unit>
 			<trans-unit id="flexform.show.user.1">
 				<source>[Logged in FE User]</source>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.title">
+				<source>Invitation</source>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.allowedUserGroups">
+				<source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.fields">
+				<source>Select Fields for invitation-Form (empty = all fields)</source>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.overrideUserGroup">
+				<source>Select Usergroups for new Users</source>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.confirmByAdmin">
+				<source>Registration must be confirmed from an admin (add one or more emails)</source>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.notifyAdminStep1">
+				<source>Notify admin on step 1 (add one or more emails)</source>
+			</trans-unit>
+			<trans-unit id="flexform.invitation.notifyAdmin">
+				<source>Notify admin if user sets a password (add one or more emails)</source>
 			</trans-unit>
 
 			<trans-unit id="pleaseChoose">

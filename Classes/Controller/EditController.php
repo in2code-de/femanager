@@ -51,6 +51,23 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 	}
 
 	/**
+	 * Init for User creation
+	 *
+	 * @return void
+	 */
+	public function initializeUpdateAction() {
+		$user = $this->div->getCurrentUser();
+		$userValues = $this->request->getArgument('user');
+		$this->testSpoof($user, $userValues['__identity']);
+
+		// workarround for empty usergroups
+		if (intval($this->pluginVariables['user']['usergroup'][0]['__identity']) === 0) {
+			unset($this->pluginVariables['user']['usergroup']);
+		}
+		$this->request->setArguments($this->pluginVariables);
+	}
+
+	/**
 	 * action update
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user
@@ -159,7 +176,7 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 						$user->getFirstName() . ' ' . $user->getLastName()
 					),
 					array('sender@femanager.org' => 'Sender Name'),
-					'You\'re change request was refused',
+					'Your change request was refused',
 					array(
 						'user' => $user,
 						'settings' => $this->settings

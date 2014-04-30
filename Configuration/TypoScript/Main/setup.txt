@@ -35,54 +35,75 @@ plugin.tx_femanager {
 			# redirect user (or admin if adminconfirmation) after profile creation (could be a PID, URL or fileadmin-Link)
 #			redirect = TEXT
 #			redirect {
-#				typolink.parameter = 1
-#				typolink.returnLast = url
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
 #			}
 
 			# redirect user after profile creation request (only if user confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			requestRedirect = TEXT
 #			requestRedirect {
-#				typolink.parameter = 1
-#				typolink.returnLast = url
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
 #			}
 
 			# redirect user after user clicks confirmation link in email (only if user confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			userConfirmationRedirect = TEXT
 #			userConfirmationRedirect {
-#				typolink.parameter = 1
-#				typolink.returnLast = url
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
 #			}
 
 			# redirect user after user clicks refuse link in confirmation email (only if user confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			userConfirmationRefusedRedirect = TEXT
 #			userConfirmationRefusedRedirect {
-#				typolink.parameter = 1
-#				typolink.returnLast = url
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
 #			}
 
 			# redirect admin after admin clicks confirmation link in email (only if admin confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			adminConfirmationRedirect = TEXT
 #			adminConfirmationRedirect {
-#				typolink.parameter = 1
-#				typolink.returnLast = url
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
 #			}
 
 			# redirect admin after admin clicks refuse link in email (only if admin confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			adminConfirmationRefusedRedirect = TEXT
 #			adminConfirmationRefusedRedirect {
-#				typolink.parameter = 1
-#				typolink.returnLast = url
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
 #			}
 
 			# redirect admin after admin clicks silent-refuse link in email (only if admin confirmation is activated) (could be a PID, URL or fileadmin-Link)
 #			adminConfirmationRefusedSilentRedirect = TEXT
 #			adminConfirmationRefusedSilentRedirect {
-#				typolink.parameter = 1
-#				typolink.returnLast = url
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
 #			}
 
 			# validation of user input values
-			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3), captcha
+			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3), captcha, sameAs(password)
 			# see manual for an example how to add custom serverside and clientside validation
 			validation {
 				# Enable clientside Formvalidation (JavaScript)
@@ -576,15 +597,21 @@ plugin.tx_femanager {
 			# redirect user (or admin if adminconfirmation) after profile update
 #			redirect = TEXT
 #			redirect {
-#				typolink.parameter = 1
-#				typolink.returnLast = url
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
 #			}
 
 			# redirect user after profile update request (only if admin confirmation is activated)
 #			requestRedirect = TEXT
 #			requestRedirect {
-#				typolink.parameter = 3
-#				typolink.returnLast = url
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
 #			}
 
 			# prefilling (empty) input fields with values from TypoScript
@@ -597,7 +624,7 @@ plugin.tx_femanager {
 			}
 
 			# validation of user input values
-			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3), captcha
+			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3), captcha, sameAs(password)
 			validation {
 				# Enable clientside Formvalidation (JavaScript)
 				_enable.client = 1
@@ -863,18 +890,333 @@ plugin.tx_femanager {
 #			passwordSave = md5
 		}
 
+
+
+
+
+
+		###################################
+		# Settings for INVITATION View
+		###################################
+		invitation {
+			# take username and copy it to the email field (so email field is not nessesary in FE)
+			#fillEmailWithUsername = 1
+
+			# redirect admin after step 1
+#			redirectStep1 = TEXT
+#			redirectStep1 {
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
+#			}
+
+			# redirect user after profile delete (from email)
+#			redirectDelete = TEXT
+#			redirectDelete {
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
+#			}
+
+			# redirect user after he changed his password
+#			redirectPasswordChanged = TEXT
+#			redirectPasswordChanged {
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
+#			}
+
+			# validation of user input values
+			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special), inList(1,2,3), captcha, sameAs(password)
+			validation {
+				# Enable clientside Formvalidation (JavaScript)
+				_enable.client = 1
+
+				# Enable serverside Formvalidation (PHP)
+				_enable.server = 1
+
+				username {
+					required = 1
+					uniqueInDb = 1
+				}
+				email {
+					required = 1
+					email = 1
+				}
+				usergroup {
+					#inList = 1,2,3
+				}
+				captcha {
+					# requires installation of sr_freecap
+#					captcha = 1
+				}
+			}
+
+			# All email settings within the update process
+			email {
+
+				# Email to user for confirmation
+				invitation {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receivers (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value = {$plugin.tx_femanager.settings.adminEmail}
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.value = Confirm your profile
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+#					attachments = COA
+#					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+#					embedImage = COA
+#					embedImage {
+#						10 = IMG_RESOURCE
+#						10 {
+#							wrap = |,
+#							file.import = uploads/pics/
+#							file.import.field = image
+#							file.import.listNum = 0
+#							file.maxW = 120
+#							file.maxH = 120
+#						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
+#					}
+				}
+
+				# Email for admin if profile added (only if admin notify is activated)
+				invitationAdminNotifyStep1 {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receivers (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.value = User was invited
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+#					attachments = COA
+#					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+#					embedImage = COA
+#					embedImage {
+#						10 = IMG_RESOURCE
+#						10 {
+#							wrap = |,
+#							file.import = uploads/pics/
+#							file.import.field = image
+#							file.import.listNum = 0
+#							file.maxW = 120
+#							file.maxH = 120
+#						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
+#					}
+				}
+
+				# Email for admin if profile added (only if admin notify is activated)
+				invitationAdminNotify {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receivers (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.value = User invitation - Profile finally created
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+#					attachments = COA
+#					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+#					embedImage = COA
+#					embedImage {
+#						10 = IMG_RESOURCE
+#						10 {
+#							wrap = |,
+#							file.import = uploads/pics/
+#							file.import.field = image
+#							file.import.listNum = 0
+#							file.maxW = 120
+#							file.maxH = 120
+#						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
+#					}
+				}
+			}
+
+			# overwrite any user values with TypoScript
+			forceValues {
+				# Overwrite initally (default)
+				beforeAnyConfirmation {
+					# Usergroups can be set with a commaseparated list
+#					usergroup = TEXT
+#					usergroup.value = 2
+
+					# Set a fix value
+#					email = TEXT
+#					email.value = service@in2code.de
+				}
+
+				# Overwrite on admin confirmation (only if admin confirmation was activated)
+				onAdminConfirmation {
+					# Usergroups can be set with a commaseparated list
+#					usergroup = TEXT
+#					usergroup.value = 4
+
+					# Set a fix value
+#					www = TEXT
+#					www.value = http://www.in2code.de
+				}
+			}
+
+			# initially save password as hash (empty, "md5", "sha1")
+#			passwordSave = md5
+		}
+
+
 		delete {
 			# redirect after profile delete
 #			redirect = TEXT
 #			redirect {
-#				typolink.parameter = 1
-#				typolink.returnLast = url
+#				typolink {
+#					parameter = 1
+#					returnLast = url
+#					#linkAccessRestrictedPages = 1
+#				}
 #			}
 		}
 
 		misc {
 			# Number of allowed images to upload
 			uploadAmount = 3
+
+			# Maximum size for image upload in bytes
+			uploadSize = 25000000
+
+			# Number of allowed images to upload
+			uploadFileExtension = jpeg, jpg, gif, png, bmp
 		}
 
 		# Don't touch this - this is needed to let the plugin know if the main typoscript is included - otherwise an errormessage will be shown in the frontend

@@ -1,6 +1,8 @@
 <?php
 namespace In2\Femanager\Domain\Repository;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +26,6 @@ namespace In2\Femanager\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * User Repository
@@ -38,7 +39,7 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Overload Find by UID to also get hidden records
 	 *
-	 * @param \int $uid				fe_users UID
+	 * @param \int $uid fe_users UID
 	 * @return object
 	 */
 	public function findByUid($uid) {
