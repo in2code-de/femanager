@@ -212,10 +212,10 @@
 				<source>Registration must be confirmed from sender</source>
 			</trans-unit>
 			<trans-unit id="flexform.new.confirmByAdmin">
-				<source>Registration must be confirmed from an admin (add one ore more emails)</source>
+				<source>Registration must be confirmed from an admin (add one or more emails)</source>
 			</trans-unit>
 			<trans-unit id="flexform.new.notifyAdmin">
-				<source>Notify admin on registration (add one ore more emails)</source>
+				<source>Notify admin on registration (add one or more emails)</source>
 			</trans-unit>
 			<trans-unit id="flexform.edit.title">
 				<source>Edit</source>
@@ -224,10 +224,10 @@
 				<source>Select Fields for Edit-Form (empty = all fields)</source>
 			</trans-unit>
 			<trans-unit id="flexform.edit.confirmByAdmin">
-				<source>Profile update must be confirmed from an admin (add one ore more emails)</source>
+				<source>Profile update must be confirmed from an admin (add one or more emails)</source>
 			</trans-unit>
 			<trans-unit id="flexform.edit.notifyAdmin">
-				<source>Notify admin on Profile update (add one ore more emails)</source>
+				<source>Notify admin on Profile update (add one or more emails)</source>
 			</trans-unit>
 			<trans-unit id="flexform.list.title">
 				<source>Listview</source>
@@ -284,13 +284,13 @@
 				<source>Select Usergroups for new Users</source>
 			</trans-unit>
 			<trans-unit id="flexform.invitation.confirmByAdmin">
-				<source>Registration must be confirmed from an admin (add one ore more emails)</source>
+				<source>Registration must be confirmed from an admin (add one or more emails)</source>
 			</trans-unit>
 			<trans-unit id="flexform.invitation.notifyAdminStep1">
-				<source>Notify admin on step 1 (add one ore more emails)</source>
+				<source>Notify admin on step 1 (add one or more emails)</source>
 			</trans-unit>
 			<trans-unit id="flexform.invitation.notifyAdmin">
-				<source>Notify admin if user sets a password (add one ore more emails)</source>
+				<source>Notify admin if user sets a password (add one or more emails)</source>
 			</trans-unit>
 
 			<trans-unit id="pleaseChoose">
