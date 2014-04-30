@@ -1211,6 +1211,12 @@ plugin.tx_femanager {
 		misc {
 			# Number of allowed images to upload
 			uploadAmount = 3
+
+			# Maximum size for image upload in bytes
+			uploadSize = 25000000
+
+			# Number of allowed images to upload
+			uploadFileExtension = jpeg, jpg, gif, png, bmp
 		}
 
 		# Don't touch this - this is needed to let the plugin know if the main typoscript is included - otherwise an errormessage will be shown in the frontend

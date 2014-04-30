@@ -63,10 +63,6 @@ function createUploader() {
 			$('#femanager_field_image').val(this.getImageNames());
 		}
 	};
-	var uploadAmount = 1;
-	if ($('#uploadAmount').length) {
-		uploadAmount = parseInt($('#uploadAmount').val());
-	}
 	var uploader = new qq.FineUploader({
 
 		element: document.getElementById('femanager_field_fine-uploader'),
@@ -99,9 +95,9 @@ function createUploader() {
 			fail: 'alert alert-error'
 		},
 		validation: {
-			allowedExtensions: ['jpeg', 'jpg', 'gif', 'png', 'bmp'],
-			sizeLimit: 25000000, // in bytes
-			itemLimit: uploadAmount // limit number of uploads
+			allowedExtensions: getValueFromField('#uploadFileExtension', 'jpeg, jpg, gif, png, bmp', 'array'), // allowed file extensions
+			sizeLimit: getValueFromField('#uploadSize', 25000000, 'int'), // in bytes
+			itemLimit: getValueFromField('#uploadAmount', 1, 'int') // limit number of uploads
 		},
 		callbacks: {
 			onComplete: function(id, fileName, responseJSON) {
@@ -128,6 +124,31 @@ function createUploader() {
 }
 
 window.Femanager = {};
+
+/**
+ * Get value from a hidden field
+ *
+ * @param selector string
+ * @param fallback mixed
+ * @param mode string ("int", "array")
+ * @returns {*}
+ */
+function getValueFromField(selector, fallback, mode) {
+	var value = fallback;
+	if ($(selector).length) {
+		value = $(selector).val();
+	}
+	if (mode != undefined) {
+		if (mode === 'int') {
+			value = parseInt(value);
+		} else if (mode === 'array') {
+			value = value.toString();
+			value = value.replace(/[\s,]+/g, ','); // replace " , " to ","
+			value = value.split(',');
+		}
+	}
+	return value;
+}
 
 /**
  * Return BaseUrl as prefix
