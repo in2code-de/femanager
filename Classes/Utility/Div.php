@@ -230,15 +230,22 @@ class Div {
 	/**
 	 * Check extension of given filename
 	 *
-	 * @param \string		Filename like (upload.png)
-	 * @return \bool		If Extension is allowed
+	 * @param \string $filename Filename like (upload.png)
+	 * @return \bool If Extension is allowed
 	 */
 	public static function checkExtension($filename) {
-		// TODO: put list into TypoScript (no spaces allowed)
 		$extensionList = 'jpg,jpeg,png,gif,bmp';
+		if (!empty($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_femanager.']['settings.']['misc.']['uploadFileExtension'])) {
+			$extensionList = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_femanager.']['settings.']['misc.']['uploadFileExtension'];
+			$extensionList = str_replace(' ', '', $extensionList);
+		}
 		$fileInfo = pathinfo($filename);
 
-		if (!empty($fileInfo['extension']) && GeneralUtility::inList($extensionList, strtolower($fileInfo['extension']))) {
+		if (
+			!empty($fileInfo['extension']) &&
+			GeneralUtility::inList($extensionList, strtolower($fileInfo['extension'])) &&
+			GeneralUtility::verifyFilenameAgainstDenyPattern($filename)
+		) {
 			return TRUE;
 		}
 		return FALSE;
