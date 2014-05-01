@@ -111,6 +111,13 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	 */
 	protected $dateOfBirth;
 
+	/**
+	 * txExtbaseType
+	 *
+	 * @var \string
+	 */
+	protected $txExtbaseType;
+
 
 	/**
 	 * Get usergroup
@@ -321,7 +328,22 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 	}
 
 	/**
-	 * Workarround to disable persistence in updateAction
+	 * @param string $txExtbaseType
+	 * @return void
+	 */
+	public function setTxExtbaseType($txExtbaseType) {
+		$this->txExtbaseType = $txExtbaseType;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTxExtbaseType() {
+		return $this->txExtbaseType;
+	}
+
+	/**
+	 * Workaround to disable persistence in updateAction
 	 *
 	 * @param null $propertyName
 	 * @return bool
