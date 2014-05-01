@@ -224,6 +224,9 @@
 				<source>Wrong Captcha Code</source>
 			</trans-unit>
 
+			<trans-unit id="emailCreateAdminConfirmationSubject">
+				<source>Please confirm a new registration</source>
+			</trans-unit>
 			<trans-unit id="emailCreateAdminConfirmationSalutation">
 				<source>Dear Admin,</source>
 			</trans-unit>
@@ -247,6 +250,9 @@
 			</trans-unit>
 			<trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent">
 				<source>Silent Delete Profile</source>
+			</trans-unit>
+			<trans-unit id="emailCreateUserConfirmationSubject">
+				<source>Please confirm your profile creation request</source>
 			</trans-unit>
 			<trans-unit id="emailCreateUserConfirmationSalutation">
 				<source>Dear</source>

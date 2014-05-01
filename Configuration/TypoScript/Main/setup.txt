@@ -167,7 +167,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = Please confirm your profile creation request
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationSubject
 
 					# Set CC receivers
 					cc = TEXT
@@ -235,7 +235,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = Please confirm a new registration
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationSubject
 
 					# Set CC receivers
 					cc = TEXT
