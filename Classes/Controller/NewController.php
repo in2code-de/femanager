@@ -68,7 +68,7 @@ class NewController extends \In2\Femanager\Controller\AbstractController {
 		if ($this->settings['new']['fillEmailWithUsername'] == 1) {
 			$user->setEmail($user->getUsername());
 		}
-		Div::hashPassword($user, $this->settings['new']['passwordSave']);
+		Div::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
 
 		if (!empty($this->settings['new']['confirmByUser']) || !empty($this->settings['new']['confirmByAdmin'])) {

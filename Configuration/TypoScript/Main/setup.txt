@@ -580,8 +580,13 @@ plugin.tx_femanager {
 				}
 			}
 
-			# initially save password as hash (empty, "md5", "sha1")
-#			passwordSave = md5
+			misc {
+				# Remove Usergroups from Usergroup Selection in Frontend
+#				removeFromUserGroupSelection = 2,3
+
+				# initially save password as hash (empty, "md5", "sha1")
+#				passwordSave = md5
+			}
 		}
 
 
@@ -886,8 +891,13 @@ plugin.tx_femanager {
 				}
 			}
 
-			# initially save password as hash (empty, "md5", "sha1")
-#			passwordSave = md5
+			misc {
+				# Remove Usergroups from Usergroup Selection in Frontend
+#				removeFromUserGroupSelection = 2,3
+
+				# initially save password as hash (empty, "md5", "sha1")
+#				passwordSave = md5
+			}
 		}
 
 
@@ -1191,8 +1201,13 @@ plugin.tx_femanager {
 				}
 			}
 
-			# initially save password as hash (empty, "md5", "sha1")
-#			passwordSave = md5
+			misc {
+				# Remove Usergroups from Usergroup Selection in Frontend
+#				removeFromUserGroupSelection = 2,3
+
+				# initially save password as hash (empty, "md5", "sha1")
+#				passwordSave = md5
+			}
 		}
 
 
