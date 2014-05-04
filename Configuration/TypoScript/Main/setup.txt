@@ -303,7 +303,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = Your registration was confirmed
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifySubject
 
 					# Set CC receivers
 					cc = TEXT
@@ -371,7 +371,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = Your registration was refused
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifyRefusedSubject
 
 					# Set CC receivers
 					cc = TEXT
@@ -439,7 +439,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = New profile registration
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifySubject
 
 					# Set CC receivers
 					cc = TEXT
@@ -684,7 +684,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = New profile change request
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestSubject
 
 					# Set CC receivers
 					cc = TEXT
@@ -752,7 +752,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = You're update request was refused
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestRefusedSubject
 
 					# Set CC receivers
 					cc = TEXT
@@ -820,7 +820,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = Profile update
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateNotifySubject
 
 					# Set CC receivers
 					cc = TEXT
@@ -989,7 +989,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = Confirm your profile
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationSubject
 
 					# Set CC receivers
 					cc = TEXT
@@ -1057,7 +1057,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = User was invited
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationAdminNotifiyStep1Subject
 
 					# Set CC receivers
 					cc = TEXT
@@ -1125,7 +1125,7 @@ plugin.tx_femanager {
 
 					# Overwrite Subject
 					subject = TEXT
-					subject.value = User invitation - Profile finally created
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationAdminNotifiySubject
 
 					# Set CC receivers
 					cc = TEXT
