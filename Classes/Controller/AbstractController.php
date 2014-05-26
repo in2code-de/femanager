@@ -515,7 +515,9 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 		);
 		$this->config = $this->config['plugin.']['tx_femanager.']['settings.'];
-		$this->allUserGroups = $this->userGroupRepository->findAll();
+		$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
+		$removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'];
+		$this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
 
 		if (isset($this->arguments['user'])) {
 			$this->arguments['user']

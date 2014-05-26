@@ -67,7 +67,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		if ($this->settings['invitation']['fillEmailWithUsername'] == 1) {
 			$user->setEmail($user->getUsername());
 		}
-		Div::hashPassword($user, $this->settings['invitation']['passwordSave']);
+		Div::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
 
 		$this->createAllConfirmed($user);
@@ -216,7 +216,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		}
 
 		$user = $this->div->overrideUserGroup($user, $this->settings, 'invitation');
-		Div::hashPassword($user, $this->settings['invitation']['passwordSave']);
+		Div::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
 		$this->userRepository->update($user);
 		$this->persistenceManager->persistAll();
 

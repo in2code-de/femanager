@@ -22,8 +22,8 @@ class CaptchaEnabledViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
 		}
 
 		// is captcha enabled in TypoScript
-		$actionName = $this->controllerContext->getRequest()->getControllerActionName();
-		if (empty($settings[$actionName]['validation']['captcha']['captcha'])) {
+		$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
+		if (empty($settings[$controllerName]['validation']['captcha']['captcha'])) {
 			return FALSE;
 		}
 

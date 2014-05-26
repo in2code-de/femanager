@@ -35,12 +35,22 @@ namespace In2\Femanager\Domain\Repository;
 class UserGroupRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
-	 * Find all
+	 * Find all groups and respect exclude list
 	 *
-	 * @return query object
+	 * @param \string $removeFromUserGroupSelection commaseparated list
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
-	public function findAll() {
+	public function findAllForFrontendSelection($removeFromUserGroupSelection) {
 		$query = $this->createQuery();
+
+		if ($removeFromUserGroupSelection) {
+			$query->matching(
+				$query->logicalNot(
+					$query->in('uid', explode(',', $removeFromUserGroupSelection))
+				)
+			);
+		}
+
 
 		$query->setOrderings(
 			array(

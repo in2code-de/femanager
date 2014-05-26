@@ -224,6 +224,9 @@
 				<source>Wrong Captcha Code</source>
 			</trans-unit>
 
+			<trans-unit id="emailCreateAdminConfirmationSubject">
+				<source>Please confirm a new registration</source>
+			</trans-unit>
 			<trans-unit id="emailCreateAdminConfirmationSalutation">
 				<source>Dear Admin,</source>
 			</trans-unit>
@@ -248,6 +251,9 @@
 			<trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent">
 				<source>Silent Delete Profile</source>
 			</trans-unit>
+			<trans-unit id="emailCreateUserConfirmationSubject">
+				<source>Please confirm your profile creation request</source>
+			</trans-unit>
 			<trans-unit id="emailCreateUserConfirmationSalutation">
 				<source>Dear</source>
 			</trans-unit>
@@ -266,6 +272,9 @@
 			<trans-unit id="emailCreateUserConfirmationSignature">
 				<source>Your website team.</source>
 			</trans-unit>
+			<trans-unit id="emailCreateUserNotifySubject">
+				<source>Your registration was confirmed</source>
+			</trans-unit>
 			<trans-unit id="emailCreateUserNotifySalutation">
 				<source>Dear</source>
 			</trans-unit>
@@ -275,6 +284,9 @@
 			<trans-unit id="emailCreateUserNotifySignature">
 				<source>Your website team.</source>
 			</trans-unit>
+			<trans-unit id="emailCreateUserNotifyRefusedSubject">
+				<source>Dear</source>
+			</trans-unit>
 			<trans-unit id="emailCreateUserNotifyRefusedSalutation">
 				<source>Dear</source>
 			</trans-unit>
@@ -283,6 +295,9 @@
 			</trans-unit>
 			<trans-unit id="emailCreateUserNotifyRefusedSignature">
 				<source>Your website team.</source>
+			</trans-unit>
+			<trans-unit id="emailCreateNotifySubject">
+				<source>New profile registration</source>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifySalutation">
 				<source>Dear Admin,</source>
@@ -295,6 +310,9 @@
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyUserProperties">
 				<source>Profile properties:</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateNotifySubject">
+				<source>Profile update</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateNotifySalutation">
 				<source>Dear Admin,</source>
@@ -310,6 +328,9 @@
 			</trans-unit>
 			<trans-unit id="emailUpdateNotifyNew">
 				<source>New Value</source>
+			</trans-unit>
+			<trans-unit id="emailUpdateRequestSubject">
+				<source>New profile change request</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateRequestSalutation">
 				<source>Dear Admin,</source>
@@ -338,6 +359,9 @@
 			<trans-unit id="emailUpdateRequestLinkSiltentRefuse">
 				<source>Refuse changes and do not notify user</source>
 			</trans-unit>
+			<trans-unit id="emailUpdateRequestRefusedSubject">
+				<source>You're update request was refused</source>
+			</trans-unit>
 			<trans-unit id="emailUpdateRequestRefusedSalutation">
 				<source>Dear</source>
 			</trans-unit>
@@ -349,6 +373,9 @@
 			</trans-unit>
 			<trans-unit id="emailUpdateRequestRefusedSignature">
 				<source>Your website team.</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationSubject">
+				<source>Confirm your profile</source>
 			</trans-unit>
 			<trans-unit id="emailInvitationSalutation">
 				<source>Dear</source>
@@ -370,6 +397,12 @@
 			</trans-unit>
 			<trans-unit id="emailInvitationSignature">
 				<source>Your website team.</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationAdminNotifiyStep1Subject">
+				<source>User was invited</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationAdminNotifiySubject">
+				<source>User invitation - Profile finally created</source>
 			</trans-unit>
 
 			<trans-unit id="noRecordsFound">

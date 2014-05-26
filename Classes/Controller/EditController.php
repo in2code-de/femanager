@@ -99,7 +99,7 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 
 		// convert password to md5 or sha1 hash
 		if (array_key_exists('password', Div::getDirtyPropertiesFromObject($user))) {
-			Div::hashPassword($user, $this->settings['edit']['passwordSave']);
+			Div::hashPassword($user, $this->settings['edit']['misc']['passwordSave']);
 		}
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));

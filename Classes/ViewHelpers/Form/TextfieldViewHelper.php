@@ -54,12 +54,12 @@ class TextfieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldVie
 	 * @return \string Value from TypoScript
 	 */
 	protected function getValueFromTypoScript() {
-		$actionName = $this->controllerContext->getRequest()->getControllerActionName();
+		$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
 		$cObj = $this->configurationManager->getContentObject();
 		$typoScript = $this->configurationManager->getConfiguration(
 			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 		);
-		$prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$actionName . '.']['prefill.'];
+		$prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
 		$value = $cObj->cObjGetSingle(
 			$prefillTypoScript[$this->arguments['property']],
 			$prefillTypoScript[$this->arguments['property'] . '.']
