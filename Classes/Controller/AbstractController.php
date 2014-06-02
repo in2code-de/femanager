@@ -267,6 +267,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		// persist
 		$this->userRepository->update($user);
 		$this->persistenceManager->persistAll();
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
 
 		$this->div->log(
 			LocalizationUtility::translate('tx_femanager_domain_model_log.state.201', 'femanager'),
