@@ -15,8 +15,8 @@
 				<f:for each="{femanager:Form.GetImages(property: 'image')}" as="image">
 					<li class="alert alert-success">
 						<span class="qq-upload-file">{image}</span>
-						<span class="qq-upload-size" style="display: inline;"><femanager:Misc.FileSize path="{uploadFolder}/{image}" />kB</span>
-						<a href="#" class="qq-upload-delete icon-trash" style="display: inline;">Delete</a>
+						<span class="qq-upload-size"><femanager:Misc.FileSize path="{uploadFolder}/{image}" />kB</span>
+						<a href="#" class="qq-upload-delete icon-trash">Delete</a>
 						<f:image src="{uploadFolder}/{image}" alt="{user.firstName} {user.lastName}" width="250" class="fileupload_image" />
 					</li>
 				</f:for>
