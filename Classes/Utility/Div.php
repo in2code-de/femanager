@@ -213,8 +213,9 @@ class Div {
 
 		// create new filename and upload it
 		$basicFileFunctions = $this->objectManager->get('TYPO3\CMS\Core\Utility\File\BasicFileUtility');
+		$filename = $this->cleanFileName($_FILES['qqfile']['name']);
 		$newFile = $basicFileFunctions->getUniqueName(
-			$_FILES['qqfile']['name'],
+			$filename,
 			GeneralUtility::getFileAbsFileName(
 				self::getUploadFolderFromTca()
 			)
@@ -225,6 +226,18 @@ class Div {
 		}
 
 		return FALSE;
+	}
+
+	/**
+	 * Only allowed a-z, A-Z, 0-9, -, .
+	 * Others will be replaced
+	 *
+	 * @param string $filename
+	 * @param string $replace
+	 * @return string
+	 */
+	public function cleanFileName($filename, $replace = '_') {
+		return preg_replace('/[^a-zA-Z0-9-\.]/', $replace, trim($filename));
 	}
 
 	/**
