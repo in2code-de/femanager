@@ -678,7 +678,7 @@ class Div {
 		$emailBodyObject->getRequest()->setPluginName('Pi1');
 		$emailBodyObject->getRequest()->setControllerName('New');
 		$emailBodyObject->setTemplatePathAndFilename(
-			$this->getTemplateFolder() . 'Email/' . ucfirst($template) . '.html'
+			$this->getTemplatePath('Email/' . ucfirst($template) . '.html')
 		);
 		$emailBodyObject->setLayoutRootPath($this->getTemplateFolder('layout'));
 		$emailBodyObject->setPartialRootPath($this->getTemplateFolder('partial'));
@@ -768,5 +768,37 @@ class Div {
 		}
 		$absoluteTemplatePath = GeneralUtility::getFileAbsFileName($templatePath);
 		return $absoluteTemplatePath;
+	}
+
+	/**
+	 * Return path and filename for a file
+	 * 		respect *RootPaths and *RootPath
+	 *
+	 * @param string $relativePathAndFilename e.g. Email/Name.html
+	 * @param string $part "template", "partial", "layout"
+	 * @return string
+	 */
+	public function getTemplatePath($relativePathAndFilename, $part = 'template') {
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
+		if (!empty($extbaseFrameworkConfiguration['view'][$part . 'RootPaths'])) {
+			foreach ($extbaseFrameworkConfiguration['view'][$part . 'RootPaths'] as $path) {
+				$absolutePath = GeneralUtility::getFileAbsFileName($path);
+				if (file_exists($absolutePath . $relativePathAndFilename)) {
+					$absolutePathAndFilename = $absolutePath . $relativePathAndFilename;
+				}
+			}
+		} else {
+			$absolutePathAndFilename = GeneralUtility::getFileAbsFileName(
+				$extbaseFrameworkConfiguration['view'][$part . 'RootPath'] . $relativePathAndFilename
+			);
+		}
+		if (empty($absolutePathAndFilename)) {
+			$absolutePathAndFilename = GeneralUtility::getFileAbsFileName(
+				'EXT:femanager/Resources/Private/' . ucfirst($part) . 's/' . $relativePathAndFilename
+			);
+		}
+		return $absolutePathAndFilename;
 	}
 }
