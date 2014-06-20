@@ -673,22 +673,16 @@ class Div {
 		/**
 		 * Generate Email Body
 		 */
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		$emailBodyObject = $this->objectManager->get('\TYPO3\CMS\Fluid\View\StandaloneView');
+		$emailBodyObject->getRequest()->setControllerExtensionName('Femanager');
+		$emailBodyObject->getRequest()->setPluginName('Pi1');
+		$emailBodyObject->getRequest()->setControllerName('New');
+		$emailBodyObject->setTemplatePathAndFilename(
+			$this->getTemplateFolder() . 'Email/' . ucfirst($template) . '.html'
 		);
-		$templatePathAndFilename = GeneralUtility::getFileAbsFileName(
-			$extbaseFrameworkConfiguration['view']['templateRootPath']
-		);
-		$templatePathAndFilename .= 'Email/' . ucfirst($template) . '.html';
-		$emailView = $this->objectManager->get('\TYPO3\CMS\Fluid\View\StandaloneView');
-		$emailView->getRequest()->setControllerExtensionName('Femanager');
-		$emailView->getRequest()->setPluginName('Pi1');
-		$emailView->getRequest()->setControllerName('New');
-		$emailView->setTemplatePathAndFilename($templatePathAndFilename);
-		$emailView->setPartialRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
-		$emailView->setLayoutRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
-		$emailView->assignMultiple($variables);
-		$emailBody = $emailView->render();
+		$emailBodyObject->setLayoutRootPath($this->getTemplateFolder('layout'));
+		$emailBodyObject->setPartialRootPath($this->getTemplateFolder('partial'));
+		$emailBodyObject->assignMultiple($variables);
 
 		/**
 		 * Generate and send Email
@@ -698,7 +692,7 @@ class Div {
 			->setFrom($sender)
 			->setSubject($subject)
 			->setCharset($GLOBALS['TSFE']->metaCharset)
-			->setBody($emailBody, 'text/html');
+			->setBody($emailBodyObject->render(), 'text/html');
 
 		// overwrite email receiver
 		if (
@@ -756,5 +750,23 @@ class Div {
 		$email->send();
 
 		return $email->isSent();
+	}
+
+	/**
+	 * Get absolute paths for templates with fallback
+	 *
+	 * @param string $part "template", "partial", "layout"
+	 * @return string
+	 */
+	public function getTemplateFolder($part = 'template') {
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
+		$templatePath = $extbaseFrameworkConfiguration['view'][$part . 'RootPath'];
+		if (empty($templatePath)) {
+			$templatePath = 'EXT:femanager/Resources/Private/' . ucfirst($part) . 's/';
+		}
+		$absoluteTemplatePath = GeneralUtility::getFileAbsFileName($templatePath);
+		return $absoluteTemplatePath;
 	}
 }
