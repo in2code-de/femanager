@@ -680,7 +680,7 @@ class Div {
 			$extbaseFrameworkConfiguration['view']['templateRootPath']
 		);
 		$templatePathAndFilename .= 'Email/' . ucfirst($template) . '.html';
-		$emailView = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
+		$emailView = $this->objectManager->get('\TYPO3\CMS\Fluid\View\StandaloneView');
 		$emailView->getRequest()->setControllerExtensionName('Femanager');
 		$emailView->getRequest()->setPluginName('Pi1');
 		$emailView->getRequest()->setControllerName('New');
