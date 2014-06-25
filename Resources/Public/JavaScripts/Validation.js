@@ -173,6 +173,10 @@ jQuery.fn.femanagerValidation = function() {
 		if (element.find('.error').length == 0) {
 			submitFormAllowed = true;
 			element.submit();
+		} else {
+			$('html,body').animate({
+				scrollTop: element.find('.error:first').offset().top
+			});
 		}
 	}
 
