@@ -25,7 +25,7 @@ namespace In2\Femanager\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Tx_Femanager_Controller_UserController.
+ * Test case
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors

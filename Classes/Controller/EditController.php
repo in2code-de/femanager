@@ -213,6 +213,7 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 
 		$user->setTxFemanagerChangerequest('');
 		$this->userRepository->update($user);
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $hash, $status, $this));
 	}
 
 	/**

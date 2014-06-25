@@ -213,8 +213,9 @@ class Div {
 
 		// create new filename and upload it
 		$basicFileFunctions = $this->objectManager->get('TYPO3\CMS\Core\Utility\File\BasicFileUtility');
+		$filename = $this->cleanFileName($_FILES['qqfile']['name']);
 		$newFile = $basicFileFunctions->getUniqueName(
-			$_FILES['qqfile']['name'],
+			$filename,
 			GeneralUtility::getFileAbsFileName(
 				self::getUploadFolderFromTca()
 			)
@@ -225,6 +226,18 @@ class Div {
 		}
 
 		return FALSE;
+	}
+
+	/**
+	 * Only allowed a-z, A-Z, 0-9, -, .
+	 * Others will be replaced
+	 *
+	 * @param string $filename
+	 * @param string $replace
+	 * @return string
+	 */
+	public function cleanFileName($filename, $replace = '_') {
+		return preg_replace('/[^a-zA-Z0-9-\.]/', $replace, trim($filename));
 	}
 
 	/**
@@ -455,10 +468,9 @@ class Div {
 	 *
 	 * @param \string $emailString String with separated emails (splitted by \n)
 	 * @param \string $name Name for every email name combination
-	 * @param \string $fallbackEmail Fallback email if no email given
 	 * @return \array $mailArray
 	 */
-	public static function makeEmailArray($emailString, $name = 'femanager', $fallbackEmail = 'femanager@typo3.org') {
+	public static function makeEmailArray($emailString, $name = 'femanager') {
 		$emails = GeneralUtility::trimExplode("\n", $emailString, 1);
 		$mailArray = array();
 		foreach ($emails as $email) {
@@ -467,12 +479,6 @@ class Div {
 			}
 			$mailArray[$email] = $name;
 		}
-
-		// Fallback if no (correct) email given
-		if (count($mailArray) === 0) {
-			$mailArray[$fallbackEmail] = $name;
-		}
-
 		return $mailArray;
 	}
 
@@ -652,7 +658,10 @@ class Div {
 		if (!empty($variables['user']) && method_exists($variables['user'], '_getProperties')) {
 			$this->cObj->start($variables['user']->_getProperties());
 		}
-		if (!$this->cObj->cObjGetSingle($typoScript['_enable'], $typoScript['_enable.'])) {
+		if (
+			!$this->cObj->cObjGetSingle($typoScript['_enable'], $typoScript['_enable.']) ||
+			count($receiver) === 0
+		) {
 			return FALSE;
 		}
 
@@ -673,22 +682,16 @@ class Div {
 		/**
 		 * Generate Email Body
 		 */
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		$emailBodyObject = $this->objectManager->get('\TYPO3\CMS\Fluid\View\StandaloneView');
+		$emailBodyObject->getRequest()->setControllerExtensionName('Femanager');
+		$emailBodyObject->getRequest()->setPluginName('Pi1');
+		$emailBodyObject->getRequest()->setControllerName('New');
+		$emailBodyObject->setTemplatePathAndFilename(
+			$this->getTemplatePath('Email/' . ucfirst($template) . '.html')
 		);
-		$templatePathAndFilename = GeneralUtility::getFileAbsFileName(
-			$extbaseFrameworkConfiguration['view']['templateRootPath']
-		);
-		$templatePathAndFilename .= 'Email/' . ucfirst($template) . '.html';
-		$emailView = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
-		$emailView->getRequest()->setControllerExtensionName('Femanager');
-		$emailView->getRequest()->setPluginName('Pi1');
-		$emailView->getRequest()->setControllerName('New');
-		$emailView->setTemplatePathAndFilename($templatePathAndFilename);
-		$emailView->setPartialRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
-		$emailView->setLayoutRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
-		$emailView->assignMultiple($variables);
-		$emailBody = $emailView->render();
+		$emailBodyObject->setLayoutRootPath($this->getTemplateFolder('layout'));
+		$emailBodyObject->setPartialRootPath($this->getTemplateFolder('partial'));
+		$emailBodyObject->assignMultiple($variables);
 
 		/**
 		 * Generate and send Email
@@ -698,7 +701,7 @@ class Div {
 			->setFrom($sender)
 			->setSubject($subject)
 			->setCharset($GLOBALS['TSFE']->metaCharset)
-			->setBody($emailBody, 'text/html');
+			->setBody($emailBodyObject->render(), 'text/html');
 
 		// overwrite email receiver
 		if (
@@ -756,5 +759,55 @@ class Div {
 		$email->send();
 
 		return $email->isSent();
+	}
+
+	/**
+	 * Get absolute paths for templates with fallback
+	 *
+	 * @param string $part "template", "partial", "layout"
+	 * @return string
+	 */
+	public function getTemplateFolder($part = 'template') {
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
+		$templatePath = $extbaseFrameworkConfiguration['view'][$part . 'RootPath'];
+		if (empty($templatePath)) {
+			$templatePath = 'EXT:femanager/Resources/Private/' . ucfirst($part) . 's/';
+		}
+		$absoluteTemplatePath = GeneralUtility::getFileAbsFileName($templatePath);
+		return $absoluteTemplatePath;
+	}
+
+	/**
+	 * Return path and filename for a file
+	 * 		respect *RootPaths and *RootPath
+	 *
+	 * @param string $relativePathAndFilename e.g. Email/Name.html
+	 * @param string $part "template", "partial", "layout"
+	 * @return string
+	 */
+	public function getTemplatePath($relativePathAndFilename, $part = 'template') {
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
+		if (!empty($extbaseFrameworkConfiguration['view'][$part . 'RootPaths'])) {
+			foreach ($extbaseFrameworkConfiguration['view'][$part . 'RootPaths'] as $path) {
+				$absolutePath = GeneralUtility::getFileAbsFileName($path);
+				if (file_exists($absolutePath . $relativePathAndFilename)) {
+					$absolutePathAndFilename = $absolutePath . $relativePathAndFilename;
+				}
+			}
+		} else {
+			$absolutePathAndFilename = GeneralUtility::getFileAbsFileName(
+				$extbaseFrameworkConfiguration['view'][$part . 'RootPath'] . $relativePathAndFilename
+			);
+		}
+		if (empty($absolutePathAndFilename)) {
+			$absolutePathAndFilename = GeneralUtility::getFileAbsFileName(
+				'EXT:femanager/Resources/Private/' . ucfirst($part) . 's/' . $relativePathAndFilename
+			);
+		}
+		return $absolutePathAndFilename;
 	}
 }
