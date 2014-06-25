@@ -468,10 +468,9 @@ class Div {
 	 *
 	 * @param \string $emailString String with separated emails (splitted by \n)
 	 * @param \string $name Name for every email name combination
-	 * @param \string $fallbackEmail Fallback email if no email given
 	 * @return \array $mailArray
 	 */
-	public static function makeEmailArray($emailString, $name = 'femanager', $fallbackEmail = 'femanager@typo3.org') {
+	public static function makeEmailArray($emailString, $name = 'femanager') {
 		$emails = GeneralUtility::trimExplode("\n", $emailString, 1);
 		$mailArray = array();
 		foreach ($emails as $email) {
@@ -480,12 +479,6 @@ class Div {
 			}
 			$mailArray[$email] = $name;
 		}
-
-		// Fallback if no (correct) email given
-		if (count($mailArray) === 0) {
-			$mailArray[$fallbackEmail] = $name;
-		}
-
 		return $mailArray;
 	}
 
@@ -665,7 +658,10 @@ class Div {
 		if (!empty($variables['user']) && method_exists($variables['user'], '_getProperties')) {
 			$this->cObj->start($variables['user']->_getProperties());
 		}
-		if (!$this->cObj->cObjGetSingle($typoScript['_enable'], $typoScript['_enable.'])) {
+		if (
+			!$this->cObj->cObjGetSingle($typoScript['_enable'], $typoScript['_enable.']) ||
+			count($receiver) === 0
+		) {
 			return FALSE;
 		}
 
