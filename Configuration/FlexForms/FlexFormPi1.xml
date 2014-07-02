@@ -306,6 +306,15 @@
 							</config>
 						</TCEforms>
 					</settings.edit.fields>
+					<settings.edit.showDeleteLink>
+						<TCEforms>
+							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.edit.showDeleteLink</label>
+							<config>
+								<type>check</type>
+								<default>1</default>
+							</config>
+						</TCEforms>
+					</settings.edit.showDeleteLink>
 					<settings.edit.confirmByAdmin>
 						<TCEforms>
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.edit.confirmByAdmin</label>

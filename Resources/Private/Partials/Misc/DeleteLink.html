@@ -1,8 +1,14 @@
-<div class="femanager_fieldset control-group">
-	<div class="controls">
-		<f:link.action action="delete" arguments="{user:user}" class="btn btn-warning btn-large" additionalAttributes="{data-confirm:'{f:translate(key:\'UserDeleteConfirmation\')}'}">
-			<i class="icon-trash icon-white"></i>
-			<f:translate key="deleteProfile" />
-		</f:link.action>
+<f:if condition="{settings.edit.showDeleteLink}">
+	<div class="femanager_fieldset control-group">
+		<div class="controls">
+			<f:link.action
+					action="delete"
+					arguments="{user:user}"
+					class="btn btn-warning btn-large"
+					additionalAttributes="{data-confirm:'{f:translate(key:\'UserDeleteConfirmation\')}'}">
+				<i class="icon-trash icon-white"></i>
+				<f:translate key="deleteProfile" />
+			</f:link.action>
+		</div>
 	</div>
-</div>
+</f:if>
