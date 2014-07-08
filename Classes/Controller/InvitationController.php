@@ -181,6 +181,8 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	 * action update
 	 *
 	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @validate $user In2\Femanager\Domain\Validator\ServersideValidator
+	 * @validate $user In2\Femanager\Domain\Validator\PasswordValidator
 	 * @return void
 	 */
 	public function updateAction($user) {

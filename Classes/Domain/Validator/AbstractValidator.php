@@ -266,9 +266,13 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 		);
 		$this->pluginVariables = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_femanager_pi1');
 		$controllerName = 'new';
+		$validationName = 'validation';
 		if ($this->pluginVariables['__referrer']['@controller'] !== 'New') {
 			$controllerName = strtolower($this->pluginVariables['__referrer']['@controller']);
+			if ($controllerName === 'invitation' && $this->pluginVariables['__referrer']['@action'] === 'edit') {
+				$validationName = 'validationEdit';
+			}
 		}
-		$this->validationSettings = $config['settings'][$controllerName]['validation'];
+		$this->validationSettings = $config['settings'][$controllerName][$validationName];
 	}
 }
