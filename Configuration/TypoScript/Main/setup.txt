@@ -1189,6 +1189,74 @@ plugin.tx_femanager {
 #						20.value = fileadmin/image.jpg
 #					}
 				}
+
+				# Email for admin if user refused profile invitation (only if admin notify on step 1 is activated)
+				invitationRefused {
+					##########################
+					# Set values (overwrite)
+					##########################
+
+					# (de)activate email completely
+					_enable = TEXT
+					_enable.value = 1
+
+					# Overwrite Receivers (please fill both)
+					receiver {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value = {$plugin.tx_femanager.settings.adminName}
+					}
+
+					# Overwrite Senders (please fill both)
+					sender {
+						email = TEXT
+						email.value =
+						name = TEXT
+						name.value =
+					}
+
+					# Overwrite Subject
+					subject = TEXT
+					subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationUserRefusedAdminNotifiyStep1Subject
+
+					# Set CC receivers
+					cc = TEXT
+					cc.value =
+
+					# Set mail priority from 1 to 5
+					priority = TEXT
+					priority.value =
+
+					# Add Attachment (separate each with comma)
+#					attachments = COA
+#					attachments {
+#						10 = TEXT
+#						10.value = fileadmin/file.pdf
+#						10.wrap = |,
+
+#						20 = TEXT
+#						20.value = fileadmin/file2.pdf
+#						20.wrap = |,
+#					}
+
+					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
+#					embedImage = COA
+#					embedImage {
+#						10 = IMG_RESOURCE
+#						10 {
+#							wrap = |,
+#							file.import = uploads/pics/
+#							file.import.field = image
+#							file.import.listNum = 0
+#							file.maxW = 120
+#							file.maxH = 120
+#						}
+
+#						20 = TEXT
+#						20.value = fileadmin/image.jpg
+#					}
+				}
 			}
 
 			# overwrite any user values with TypoScript

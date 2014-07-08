@@ -261,6 +261,27 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 				LocalizationUtility::translate('tx_femanager_domain_model_log.state.402', 'femanager')
 			);
 
+			// send notify email to admin
+			if ($this->settings['invitation']['notifyAdminStep1']) {
+				$this->div->sendEmail(
+					'invitationRefused',
+					Div::makeEmailArray(
+						$this->settings['invitation']['notifyAdminStep1'],
+						$this->settings['invitation']['email']['invitationRefused']['receiver']['name']['value']
+					),
+					Div::makeEmailArray(
+						$user->getEmail(),
+						$user->getUsername()
+					),
+					'Profile deleted from User after invitation - Step 1',
+					array(
+						'user' => $user,
+						'settings' => $this->settings
+					),
+					$this->config['invitation.']['email.']['invitationRefused.']
+				);
+			}
+
 			// delete user
 			$this->userRepository->remove($user);
 

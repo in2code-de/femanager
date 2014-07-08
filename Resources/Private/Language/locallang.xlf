@@ -404,7 +404,21 @@
 			<trans-unit id="emailInvitationAdminNotifiySubject">
 				<source>User invitation - Profile finally created</source>
 			</trans-unit>
-
+			<trans-unit id="emailInvitationUserRefusedAdminNotifiyStep1Subject">
+				<source>User refused invitation</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationUserRefusedAdminNotifiySalutation">
+				<source>Dear Admin,</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationUserRefusedAdminNotifiyText1">
+				<source>Profile invitation of %s</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationUserRefusedAdminNotifiyText2">
+				<source>Profile invitation - User %s refused to set a new password. The profile was deleted.</source>
+			</trans-unit>
+			<trans-unit id="emailInvitationUserRefusedAdminNotifiyUserProperties">
+				<source>Profile properties:</source>
+			</trans-unit>
 			<trans-unit id="noRecordsFound">
 				<source>No records found.</source>
 			</trans-unit>
