@@ -332,11 +332,12 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 *
 	 * @param $user
 	 * @param $action
-	 * @param string $redirectByActionName		Action to redirect
-	 * @param bool $login						Login after creation
+	 * @param string $redirectByActionName Action to redirect
+	 * @param bool $login Login after creation
+	 * @param string $status
 	 * @return void
 	 */
-	public function finalCreate($user, $action, $redirectByActionName, $login = TRUE) {
+	public function finalCreate($user, $action, $redirectByActionName, $login = TRUE, $status = '') {
 		// persist user (otherwise login is not possible if user is still disabled)
 		$this->userRepository->update($user);
 		$this->persistenceManager->persistAll();
@@ -377,7 +378,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
 
 		// frontend redirect (if activated via TypoScript)
-		$this->redirectByAction($action);
+		$this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
 
 		// go to an action
 		$this->redirect($redirectByActionName);

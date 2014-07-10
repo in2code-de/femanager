@@ -1,83 +1,146 @@
 <table border="1" cellpadding="2" cellspacing="2">
+	<f:if condition="{user.username}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.username" /></td>
 			<td>
 				{user.username}
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.email}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.email" /></td>
 			<td>
 				{user.email}
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.www}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.www" /></td>
 			<td>
 				{user.www}
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.title}">
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.title" /></td>
+			<td>
+				{user.title}
+			</td>
+		</tr>
+	</f:if>
+	<f:if condition="{user.firstName}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.firstName" /></td>
 			<td>
 				{user.firstName}
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.middleName}">
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.middleName" /></td>
+			<td>
+				{user.middleName}
+			</td>
+		</tr>
+	</f:if>
+	<f:if condition="{user.lastName}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.lastName" /></td>
 			<td>
 				{user.lastName}
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.name}">
 		<tr>
-			<td><f:translate key="tx_femanager_domain_model_user.gender" /></td>
+			<td><f:translate key="tx_femanager_domain_model_user.name" /></td>
 			<td>
-				<f:if condition="{user.gender} == 0">
-					<f:then>
-						<f:translate key="tx_femanager_domain_model_user.gender.item0" />
-					</f:then>
-					<f:else>
-						<f:translate key="tx_femanager_domain_model_user.gender.item1" />
-					</f:else>
-				</f:if>
+				{user.name}
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.company}">
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.company" /></td>
+			<td>
+				{user.company}
+			</td>
+		</tr>
+	</f:if>
+	<tr>
+		<td><f:translate key="tx_femanager_domain_model_user.gender" /></td>
+		<td>
+			<f:if condition="{user.gender} == 0">
+				<f:then>
+					<f:translate key="tx_femanager_domain_model_user.gender.item0" />
+				</f:then>
+				<f:else>
+					<f:translate key="tx_femanager_domain_model_user.gender.item1" />
+				</f:else>
+			</f:if>
+		</td>
+	</tr>
+	<f:if condition="{user.dateOfBirth}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.dateOfBirth" /></td>
 			<td>
 				<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{user.dateOfBirth}</f:format.date>
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.telephone}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.telephone" /></td>
 			<td>
 				{user.telephone}
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.fax}">
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.fax" /></td>
+			<td>
+				{user.fax}
+			</td>
+		</tr>
+	</f:if>
+	<f:if condition="{user.address}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.address" /></td>
 			<td>
 				{user.address}
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.zip}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.zip" /></td>
 			<td>
 				{user.zip}
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.city}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.city" /></td>
 			<td>
 				{user.city}
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.country}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.country" /></td>
 			<td>
 				{user.country}
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.image}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.image" /></td>
 			<td>
@@ -86,4 +149,13 @@
 				</f:if>
 			</td>
 		</tr>
+	</f:if>
+	<f:if condition="{user.usergroup}">
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.usergroup" /></td>
+			<td>
+				<f:for each="{user.usergroup}" as="usergroup" iteration="i">{usergroup.title}<f:if condition="{i.isLast}"><f:else>, </f:else></f:if></f:for>
+			</td>
+		</tr>
+	</f:if>
 </table>

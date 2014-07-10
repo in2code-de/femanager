@@ -166,7 +166,7 @@ class NewController extends \In2\Femanager\Controller\AbstractController {
 							$user
 						);
 
-						$this->finalCreate($user, 'new', 'createStatus');
+						$this->finalCreate($user, 'new', 'createStatus', TRUE, $status);
 					}
 
 				} else {

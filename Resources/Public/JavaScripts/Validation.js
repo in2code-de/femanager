@@ -123,6 +123,9 @@ jQuery.fn.femanagerValidation = function() {
 					}
 
 				}
+			},
+			error: function() {
+				logAjaxError();
 			}
 		});
 	}
@@ -222,5 +225,16 @@ jQuery.fn.femanagerValidation = function() {
 			result = parts[1].substr(0, parts[1].length - 1);
 		}
 		return result;
+	}
+
+	/**
+	 * Log Error in Console
+	 *
+	 * @return void
+	 */
+	function logAjaxError() {
+		if (typeof console === 'object') {
+			console.log('Error: The called url is not available - if you use TYPO3 in a subfolder, please use config.baseURL in TypoScript');
+		}
 	}
 };

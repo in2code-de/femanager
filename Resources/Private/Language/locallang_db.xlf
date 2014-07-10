@@ -223,6 +223,9 @@
 			<trans-unit id="flexform.edit.fields">
 				<source>Select Fields for Edit-Form (empty = all fields)</source>
 			</trans-unit>
+			<trans-unit id="flexform.edit.showDeleteLink">
+				<source>Show Delete Button in Edit Form</source>
+			</trans-unit>
 			<trans-unit id="flexform.edit.confirmByAdmin">
 				<source>Profile update must be confirmed from an admin (add one or more emails)</source>
 			</trans-unit>
