@@ -67,10 +67,12 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
 				\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 			);
 			$prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
-			$selectedValue = $cObj->cObjGetSingle(
-				$prefillTypoScript[$this->getFieldName()],
-				$prefillTypoScript[$this->getFieldName() . '.']
-			);
+			if (!empty($prefillTypoScript[$this->getFieldName()])) {
+				$selectedValue = $cObj->cObjGetSingle(
+					$prefillTypoScript[$this->getFieldName()],
+					$prefillTypoScript[$this->getFieldName() . '.']
+				);
+			}
 		}
 
 		return $selectedValue;
