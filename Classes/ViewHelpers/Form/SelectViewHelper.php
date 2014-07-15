@@ -48,7 +48,11 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
 	 * @return array
 	 */
 	protected function getOptions() {
-		return array('' => $this->arguments['defaultOption']) + parent::getOptions();
+		$options = parent::getOptions();
+		if (!empty($this->arguments['defaultOption'])) {
+			$options = array('' => $this->arguments['defaultOption']) + $options;
+		}
+		return $options;
 	}
 
 	/**
