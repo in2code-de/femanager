@@ -225,21 +225,6 @@ class NewController extends \In2\Femanager\Controller\AbstractController {
 						$user
 					);
 
-					// send email to user to inform him about his profile confirmation
-					$this->div->sendEmail(
-						'createUserNotify',
-						Div::makeEmailArray(
-							$user->getEmail(),
-							$user->getFirstName() . ' ' . $user->getLastName()
-						),
-						array('sender@femanager.org' => 'Sender Name'),
-						'Your profile was confirmed',
-						array(
-							'user' => $user
-						),
-						$this->config['new.']['email.']['createUserNotify.']
-					);
-
 					$this->finalCreate($user, 'new', 'createStatus', FALSE);
 
 				} else {

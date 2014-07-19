@@ -347,6 +347,27 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$this->loginAfterCreate($user);
 		}
 
+		// send notify email to user
+		if ($this->settings['new']['email']['createUserNotify']) {
+			$this->div->sendEmail(
+				'createNotify',
+				Div::makeEmailArray(
+					$user->getEmail(),
+					$user->getFirstName() . ' ' . $user->getLastName()
+				),
+				array(
+					$this->settings['new']['email']['createUserNotify']['sender']['email']['value']
+						=> $this->settings['settings']['new']['email']['createUserNotify']['sender']['name']['value']
+				),
+				'Profile creation',
+				array(
+					'user' => $user,
+					'settings' => $this->settings
+				),
+				$this->config['new.']['email.']['createUserNotify.']
+			);
+		}
+
 		// send notify email to admin
 		if ($this->settings['new']['notifyAdmin']) {
 			$this->div->sendEmail(
