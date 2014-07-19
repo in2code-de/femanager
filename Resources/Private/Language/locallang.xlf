@@ -303,10 +303,10 @@
 				<source>Dear Admin,</source>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyText1">
-				<source>Profile invitation of %s</source>
+				<source>Profile creation of %s</source>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyText2">
-				<source>Profile invitation - User %s set a new password and profile was enabled</source>
+				<source>Profile creation - User %s set a new password and profile was enabled</source>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyUserProperties">
 				<source>Profile properties:</source>
