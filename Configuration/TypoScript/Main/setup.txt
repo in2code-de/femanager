@@ -275,7 +275,7 @@ plugin.tx_femanager {
 					}
 				}
 
-				# Email for User notify, if admin confirms is profile
+				# Email to user to confirm his new profile (with and without admin confirmation)
 				createUserNotify {
 					##########################
 					# Set values (overwrite)
