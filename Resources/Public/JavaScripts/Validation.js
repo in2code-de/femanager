@@ -20,15 +20,14 @@ jQuery.fn.femanagerValidation = function() {
 
 			numRequestToComplete = options.numRequest || 0;
 			requestsCompleted = options.requestsCompleted || 0;
+			element = options.element || 0;
 			callBacks = [];
-			var fireCallbacks = function () {
+			var fireCallbacks = function() {
 				$('body').css('cursor', 'default');
-				submitForm(); // submit form
+				submitForm(element); // submit form
 				for (var i = 0; i < callBacks.length; i++) callBacks[i]();
 			};
 			if (options.singleCallback) callBacks.push(options.singleCallback);
-
-
 
 			this.addCallbackToQueue = function(isComplete, callback) {
 				if (isComplete) requestsCompleted++;
@@ -51,11 +50,12 @@ jQuery.fn.femanagerValidation = function() {
 	});
 
 	// form submit
-	$(document).on('submit', '.feManagerValidation', function(e) {
+//	$(document).on('submit', '.feManagerValidation', function(e) {
+	element.submit(function(e) {
 		$('body').css('cursor', 'wait');
 		if (!submitFormAllowed) {
 			e.preventDefault();
-			validateAllFields(element);
+			validateAllFields($(this));
 		}
 	});
 
@@ -68,7 +68,8 @@ jQuery.fn.femanagerValidation = function() {
 	function validateAllFields(element) {
 		// Store number of ajax requests for queue function
 		requestCallback = new MyRequestsCompleted({
-			numRequest: element.find('*[data-validation]').length
+			numRequest: element.find('*[data-validation]').length,
+			element: element
 		});
 
 		// one loop for every field to validate
@@ -84,7 +85,7 @@ jQuery.fn.femanagerValidation = function() {
 	 * @return void
 	 */
 	function validateField(element, countForSubmit) {
-		var user = $('input[name="tx_femanager_pi1[user][__identity]"]').val();
+		var user = element.closest('form').find('div:first').find('input[name="tx_femanager_pi1[user][__identity]"]').val();
 		var url = Femanager.getBaseUrl() + 'index.php' + '?eID=' + 'femanagerValidate';
 		var validations = getValidations(element);
 		var additionalValue = '';
@@ -170,8 +171,10 @@ jQuery.fn.femanagerValidation = function() {
 
 	/**
 	 * Check if there are errors and submit form
+	 *
+	 * @param element
 	 */
-	function submitForm() {
+	function submitForm(element) {
 		// submit form if there are no errors
 		if (element.find('.error').length == 0) {
 			submitFormAllowed = true;
