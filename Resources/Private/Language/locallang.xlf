@@ -31,7 +31,7 @@
 				<source>Birthdate</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint">
-				<source>Please type your Birthday as MM/DD/YYYY</source>
+				<source>Please type your birthdate as MM/DD/YYYY</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.dateOfBirth.placeholder">
 				<source>MM/DD/YYYY</source>
@@ -43,10 +43,10 @@
 				<source>Gender</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.gender.item0">
-				<source>male</source>
+				<source>Male</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.gender.item1">
-				<source>female</source>
+				<source>Female</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.address">
 				<source>Address</source>
@@ -148,19 +148,19 @@
 				<source>Invitation</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.401">
-				<source>Profile created and User invited</source>
+				<source>Profile created and user invited</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.402">
-				<source>Profile deleted from User</source>
+				<source>Profile deleted by user</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.403">
-				<source>Wrong Hash</source>
+				<source>Wrong hash</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.404">
 				<source>You tried to open a restricted page</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.405">
-				<source>Password changed and Profile activated</source>
+				<source>Password changed and profile activated</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<source>User</source>
@@ -176,7 +176,7 @@
 				<source>Error</source>
 			</trans-unit>
 			<trans-unit id="validationErrorRequiredModel">
-				<source>Username and Password must be filled</source>
+				<source>Username and password must be filled</source>
 			</trans-unit>
 			<trans-unit id="validationErrorWrongDateFormat">
 				<source>Given date format is wrong</source>
@@ -185,31 +185,31 @@
 				<source>Field %s is required</source>
 			</trans-unit>
 			<trans-unit id="validationErrorEmail">
-				<source>Field %s is not a valid Email address</source>
+				<source>Field %s is not a valid email address</source>
 			</trans-unit>
 			<trans-unit id="validationErrorMin">
-				<source>Please add more characters to Field %s</source>
+				<source>Please add more characters to field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorMax">
-				<source>Please add less characters to Field %s</source>
+				<source>Please add less characters to field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorInt">
-				<source>Only numbers are allowed in Field %s</source>
+				<source>Only numbers are allowed in field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorLetters">
-				<source>Only letters are allowed in Field %s</source>
+				<source>Only letters are allowed in field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorUniquePage">
-				<source>Value of Field %s is already in use</source>
+				<source>Value of field %s is already in use</source>
 			</trans-unit>
 			<trans-unit id="validationErrorUniqueDb">
-				<source>Value of Field %s already in use</source>
+				<source>Value of field %s is already in use</source>
 			</trans-unit>
 			<trans-unit id="validationErrorMustInclude">
-				<source>Try another value for Field %s</source>
+				<source>Try another value for field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorInList">
-				<source>This value is not allowed in Field %s</source>
+				<source>This value is not allowed in field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorSameAs">
 				<source>Please check your value</source>
@@ -221,7 +221,7 @@
 				<source>Date has the wrong format</source>
 			</trans-unit>
 			<trans-unit id="validationErrorCaptcha">
-				<source>Wrong Captcha Code</source>
+				<source>Wrong Captcha code</source>
 			</trans-unit>
 
 			<trans-unit id="emailCreateAdminConfirmationSubject">
@@ -237,19 +237,19 @@
 				<source>Please confirm registration of %s by clicking the following link:</source>
 			</trans-unit>
 			<trans-unit id="emailCreateAdminConfirmationLinkConfirm">
-				<source>Confirm Registration</source>
+				<source>Confirm registration</source>
 			</trans-unit>
 			<trans-unit id="emailCreateAdminConfirmationText2">
 				<source>If you want to delete the registration, click this link:</source>
 			</trans-unit>
 			<trans-unit id="emailCreateAdminConfirmationLinkConfirmRefused">
-				<source>Delete Profile</source>
+				<source>Delete profile</source>
 			</trans-unit>
 			<trans-unit id="emailCreateAdminConfirmationText3">
 				<source>If you want to delete the registration, without sending an email to the user, click this link:</source>
 			</trans-unit>
 			<trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent">
-				<source>Silent Delete Profile</source>
+				<source>Silently delete profile</source>
 			</trans-unit>
 			<trans-unit id="emailCreateUserConfirmationSubject">
 				<source>Please confirm your profile creation request</source>
@@ -261,13 +261,13 @@
 				<source>Please confirm your profile registration on our server by clicking the following link:</source>
 			</trans-unit>
 			<trans-unit id="emailCreateUserConfirmationLinkConfirm">
-				<source>Confirm Profile</source>
+				<source>Confirm profile</source>
 			</trans-unit>
 			<trans-unit id="emailCreateUserConfirmationText2">
-				<source>If you don't want to be registered on our system, click this link</source>
+				<source>If you don't want to be registered on our system, click this link:</source>
 			</trans-unit>
 			<trans-unit id="emailCreateUserConfirmationLinkConfirmRefused">
-				<source>Delete Profile</source>
+				<source>Delete profile</source>
 			</trans-unit>
 			<trans-unit id="emailCreateUserConfirmationSignature">
 				<source>Your website team.</source>
@@ -303,10 +303,10 @@
 				<source>Dear Admin,</source>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyText1">
-				<source>Profile invitation of %s</source>
+				<source>Profile creation - User %s</source>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyText2">
-				<source>Profile invitation - User %s set a new password and profile was enabled</source>
+				<source>Profile creation - User %s set a new password and profile was enabled</source>
 			</trans-unit>
 			<trans-unit id="emailCreateNotifyUserProperties">
 				<source>Profile properties:</source>
@@ -318,16 +318,16 @@
 				<source>Dear Admin,</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateNotifyText1">
-				<source>Profile change from %s</source>
+				<source>Profile change by user %s</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateNotifyField">
 				<source>Fieldname</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateNotifyOld">
-				<source>Old Value</source>
+				<source>Old value</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateNotifyNew">
-				<source>New Value</source>
+				<source>New value</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateRequestSubject">
 				<source>New profile change request</source>
@@ -345,10 +345,10 @@
 				<source>Fieldname</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateRequestOld">
-				<source>Old Value</source>
+				<source>Old value</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateRequestNew">
-				<source>New Value</source>
+				<source>New value</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateRequestLinkConfirm">
 				<source>Confirm changes</source>
@@ -360,7 +360,7 @@
 				<source>Refuse changes and do not notify user</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateRequestRefusedSubject">
-				<source>You're update request was refused</source>
+				<source>Your update request was refused</source>
 			</trans-unit>
 			<trans-unit id="emailUpdateRequestRefusedSalutation">
 				<source>Dear</source>
@@ -450,7 +450,7 @@
 				<source>Profile successfully created</source>
 			</trans-unit>
 			<trans-unit id="createAndInvited">
-				<source>Profile successfully created and User informed</source>
+				<source>Profile successfully created and user informed</source>
 			</trans-unit>
 			<trans-unit id="createAndInvitedFinished">
 				<source>Profile successfully changed and enabled</source>
@@ -498,13 +498,13 @@
 				<source>Profile update failed</source>
 			</trans-unit>
 			<trans-unit id="field_image_fineuploader">
-				<source>Please enable fineUploader Plugin</source>
+				<source>Please enable fineUploader plugin</source>
 			</trans-unit>
 			<trans-unit id="field_image_drag">
-				<source>Drag File</source>
+				<source>Drag file</source>
 			</trans-unit>
 			<trans-unit id="field_image_drag_processing">
-				<source>Drag in Progress...</source>
+				<source>Drag in progress ...</source>
 			</trans-unit>
 			<trans-unit id="field_image_upload">
 				<source>Upload</source>
@@ -513,19 +513,19 @@
 				<source>empty</source>
 			</trans-unit>
 			<trans-unit id="pleaseChoose">
-				<source>Please choose...</source>
+				<source>Please choose ...</source>
 			</trans-unit>
 			<trans-unit id="FilterLabel">
 				<source>Search</source>
 			</trans-unit>
 			<trans-unit id="FilterPlaceholder">
-				<source>Search...</source>
+				<source>Search ...</source>
 			</trans-unit>
 			<trans-unit id="FilterSubmit">
-				<source>Filter Now</source>
+				<source>Filter now</source>
 			</trans-unit>
 			<trans-unit id="UserDeleteConfirmation">
-				<source>Are you sure to delete your Profile?</source>
+				<source>Are you sure to delete your profile?</source>
 			</trans-unit>
 			<trans-unit id="titleInvitationProfile">
 				<source>Invite a new user</source>
