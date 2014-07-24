@@ -344,24 +344,25 @@ class Div {
 			'lastlogin'
 		);
 
-		foreach ($changedObject->_getCleanProperties() as $propertyName => $propertyValue) {
+		foreach ($changedObject->_getCleanProperties() as $propertyName => $oldPropertyValue) {
 			if (!method_exists($changedObject, 'get' . ucfirst($propertyName)) || in_array($propertyName, $ignoreProperties)) {
 				continue;
 			}
-			if (!is_object($propertyValue)) {
-				if ($propertyValue != $changedObject->{'get' . ucfirst($propertyName)}()) {
-					$dirtyProperties[$propertyName]['old'] = $propertyValue;
-					$dirtyProperties[$propertyName]['new'] = $changedObject->{'get' . ucfirst($propertyName)}();
+			$newPropertyValue = $changedObject->{'get' . ucfirst($propertyName)}();
+			if (!is_object($oldPropertyValue) || !is_object($newPropertyValue)) {
+				if ($oldPropertyValue != $newPropertyValue) {
+					$dirtyProperties[$propertyName]['old'] = $oldPropertyValue;
+					$dirtyProperties[$propertyName]['new'] = $newPropertyValue;
 				}
 			} else {
-				if (get_class($propertyValue) === DateTime) {
-					if ($propertyValue->getTimestamp() != $changedObject->{'get' . ucfirst($propertyName)}()->getTimestamp()) {
-						$dirtyProperties[$propertyName]['old'] = $propertyValue->getTimestamp();
-						$dirtyProperties[$propertyName]['new'] = $changedObject->{'get' . ucfirst($propertyName)}()->getTimestamp();
+				if (get_class($oldPropertyValue) === DateTime) {
+					if ($oldPropertyValue->getTimestamp() != $newPropertyValue->getTimestamp()) {
+						$dirtyProperties[$propertyName]['old'] = $oldPropertyValue->getTimestamp();
+						$dirtyProperties[$propertyName]['new'] = $newPropertyValue->getTimestamp();
 					}
 				} else {
-					$titlesOld = self::implodeObjectStorageOnProperty($propertyValue);
-					$titlesNew = self::implodeObjectStorageOnProperty($changedObject->{'get' . ucfirst($propertyName)}());
+					$titlesOld = self::implodeObjectStorageOnProperty($oldPropertyValue);
+					$titlesNew = self::implodeObjectStorageOnProperty($newPropertyValue);
 					if ($titlesOld != $titlesNew) {
 						$dirtyProperties[$propertyName]['old'] = $titlesOld;
 						$dirtyProperties[$propertyName]['new'] = $titlesNew;
