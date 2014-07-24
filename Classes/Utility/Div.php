@@ -299,8 +299,9 @@ class Div {
 	 */
 	public static function isDirtyObject($object) {
 		foreach (array_keys($object->_getProperties()) as $propertyName) {
-			$property = ObjectAccess::getProperty($object, $propertyName);
-			if ($property === NULL) {
+			try {
+				$property = ObjectAccess::getProperty($object, $propertyName);
+			} catch (\TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException $e) {
 				// if property can not be accessed
 				continue;
 			}
