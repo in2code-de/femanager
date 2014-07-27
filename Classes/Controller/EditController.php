@@ -64,6 +64,18 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 		if (intval($this->pluginVariables['user']['usergroup'][0]['__identity']) === 0) {
 			unset($this->pluginVariables['user']['usergroup']);
 		}
+		// keep password if empty
+		if (
+			isset($this->settings['edit']['misc']['keepPasswordIfEmpty']) &&
+			$this->settings['edit']['misc']['keepPasswordIfEmpty'] == '1' &&
+			isset($this->pluginVariables['user']['password']) &&
+			$this->pluginVariables['user']['password'] === '' &&
+			isset($this->pluginVariables['password_repeat']) &&
+			$this->pluginVariables['password_repeat'] === ''
+		) {
+			unset($this->pluginVariables['user']['password']);
+			unset($this->pluginVariables['password_repeat']);
+		}
 		$this->request->setArguments($this->pluginVariables);
 	}
 
