@@ -257,7 +257,8 @@ class Div {
 		if (
 			!empty($fileInfo['extension']) &&
 			GeneralUtility::inList($extensionList, strtolower($fileInfo['extension'])) &&
-			GeneralUtility::verifyFilenameAgainstDenyPattern($filename)
+			GeneralUtility::verifyFilenameAgainstDenyPattern($filename) &&
+			GeneralUtility::validPathStr($filename)
 		) {
 			return TRUE;
 		}
