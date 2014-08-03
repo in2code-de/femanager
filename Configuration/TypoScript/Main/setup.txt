@@ -1306,6 +1306,14 @@ plugin.tx_femanager {
 #			}
 		}
 
+		list {
+			filter {
+				searchword {
+					fieldsToSearch = address, city, company, country, email, fax, first_name, image, last_name, middle_name, name, telephone, title, usergroup.title, username, www, zip
+				}
+			}
+		}
+
 		misc {
 			# Number of allowed images to upload
 			uploadAmount = 3
