@@ -99,7 +99,7 @@ jQuery.fn.femanagerValidation = function() {
 			url: url,
 			data:
 				'tx_femanager_pi1[validation]=' + element.data('validation') +
-				'&tx_femanager_pi1[value]=' + element.val() +
+				'&tx_femanager_pi1[value]=' + encodeURIComponent(element.val()) +
 				'&tx_femanager_pi1[field]=' + getFieldName(element) +
 				(user != undefined ? '&tx_femanager_pi1[user]=' + user : '') +
 				(additionalValue ? '&tx_femanager_pi1[additionalValue]=' + additionalValue : '') +
