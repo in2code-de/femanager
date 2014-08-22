@@ -88,18 +88,26 @@ jQuery.fn.femanagerValidation = function() {
 		var user = element.closest('form').find('div:first').find('input[name="tx_femanager_pi1[user][__identity]"]').val();
 		var url = Femanager.getBaseUrl() + 'index.php' + '?eID=' + 'femanagerValidate';
 		var validations = getValidations(element);
+		var elementValue = element.val();
+		if ((element.prop('type') == 'checkbox') && (element.prop('checked') == false)) {
+			elementValue = '';
+		}
 		var additionalValue = '';
 		if (indexOfArray(validations, 'sameAs')) { // search for "sameAs(password)"
 			var validationSameAs = indexOfArray(validations, 'sameAs');
 			var fieldToCompare = getStringInBrackets(validationSameAs);
-			additionalValue = $('input[name="tx_femanager_pi1[user][' + fieldToCompare + ']"]').val();
+			var fieldToCompareObject = $('input[name="tx_femanager_pi1[user][' + fieldToCompare + ']"]');
+			additionalValue = fieldToCompareObject.val();
+			if ((fieldToCompareObject.prop('type') == 'checkbox') && (fieldToCompareObject.prop('checked') == false)) {
+				additionalValue = '';
+			}
 		}
 
 		$.ajax({
 			url: url,
 			data:
 				'tx_femanager_pi1[validation]=' + element.data('validation') +
-				'&tx_femanager_pi1[value]=' + encodeURIComponent(element.val()) +
+				'&tx_femanager_pi1[value]=' + encodeURIComponent(elementValue) +
 				'&tx_femanager_pi1[field]=' + getFieldName(element) +
 				(user != undefined ? '&tx_femanager_pi1[user]=' + user : '') +
 				(additionalValue ? '&tx_femanager_pi1[additionalValue]=' + additionalValue : '') +
