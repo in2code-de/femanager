@@ -419,6 +419,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
 		$user = $GLOBALS['TSFE']->fe_user->fetchUserRecord($info['db_user'], $user->getUsername());
 		$GLOBALS['TSFE']->fe_user->createUserSession($user);
+		$GLOBALS['TSFE']->fe_user->user = $GLOBALS['TSFE']->fe_user->fetchUserSession();
 
 		// add login flashmessage
 		$this->flashMessageContainer->add(
