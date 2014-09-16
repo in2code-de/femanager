@@ -126,6 +126,10 @@ plugin.tx_femanager {
 					#min = 10
 					#mustInclude = number,letter,special
 				}
+				password_repeat {
+					required = 1
+					sameAs = password
+				}
 				usergroup {
 					#inList = 1,2,3
 				}
@@ -649,6 +653,10 @@ plugin.tx_femanager {
 					#min = 10
 					#mustInclude = number,letter,special
 				}
+				password_repeat {
+					required = 1
+					sameAs = password
+				}
 				usergroup {
 					#inList = 1,2,3
 				}
@@ -983,6 +991,10 @@ plugin.tx_femanager {
 					required = 1
 					#min = 10
 					#mustInclude = number,letter,special
+				}
+				password_repeat {
+					required = 1
+					sameAs = password
 				}
 			}
 

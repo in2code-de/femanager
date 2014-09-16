@@ -21,7 +21,7 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 		$array = $additionalAttributes;
 
 		$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-		if ($settings[$controllerName]['validation']['_enable']['client'] != 1) {
+		if ($settings[$controllerName]['validation']['_enable']['client'] !== '1') {
 			return $array;
 		}
 
