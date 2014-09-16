@@ -148,7 +148,6 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			101,
 			$user
 		);
-
 		$this->finalCreate($user, 'new', 'createStatus');
 	}
 
