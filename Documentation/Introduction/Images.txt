@@ -1,0 +1,47 @@
+.. |create1|      image:: ../Images/femanager_create1.png
+.. :align: left
+.. :border: 0
+.. :name: create1
+.. :vspace: 20
+
+.. |create2|      image:: ../Images/femanager_create2.png
+.. :align: left
+.. :border: 0
+.. :name: create2
+.. :vspace: 20
+
+.. |create3|      image:: ../Images/femanager_create3.png
+.. :align: left
+.. :border: 0
+.. :name: create3
+.. :vspace: 20
+
+.. |edit1|      image:: ../Images/femanager_edit1.png
+.. :align: left
+.. :border: 0
+.. :name: edit1
+.. :vspace: 20
+
+.. |edit2|      image:: ../Images/femanager_edit2.png
+.. :align: left
+.. :border: 0
+.. :name: edit2
+.. :vspace: 20
+
+.. |backend1|      image:: ../Images/femanager_backend1.png
+.. :align: left
+.. :border: 0
+.. :name: backend1
+.. :vspace: 20
+
+.. |backend2|      image:: ../Images/femanager_backend2.png
+.. :align: left
+.. :border: 0
+.. :name: backend2
+.. :vspace: 20
+
+.. |backend3|      image:: ../Images/femanager_backend3.png
+.. :align: left
+.. :border: 0
+.. :name: backend3
+.. :vspace: 20
