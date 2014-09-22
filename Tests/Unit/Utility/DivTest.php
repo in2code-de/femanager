@@ -120,69 +120,6 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 
 	/**
-	 * Dataprovider for fallbackUsernameAndPassword()
-	 *
-	 * @return array
-	 */
-	public function fallbackUsernameAndPasswordReturnBoolDataProvider() {
-		return array(
-			// #0
-			array(
-				'userN_ame',
-				'email@email.org',
-				'123456',
-				'email@email.org',
-			),
-
-			// #1
-			array(
-				'',
-				'email@email.org',
-				'',
-				'email@email.org',
-			),
-
-			// #2
-			array(
-				'Alex',
-				'email@email.org',
-				'',
-				'email@email.org',
-			),
-
-			// #3
-			array(
-				'',
-				'email@email.org',
-				'passW0rd',
-				'email@email.org',
-			),
-		);
-	}
-
-	/**
-	 * Test for fallbackUsernameAndPassword()
-	 *
-	 * @param \string $givenUsername
-	 * @param \string $givenEmail
-	 * @param \string $givenPassword
-	 * @param \string $expectedEmail
-	 * @return void
-	 * @dataProvider fallbackUsernameAndPasswordReturnBoolDataProvider
-	 * @test
-	 */
-	public function fallbackUsernameAndPasswordReturnBool($givenUsername, $givenEmail, $givenPassword, $expectedEmail) {
-		$user = new \In2\Femanager\Domain\Model\User();
-		$user->setUsername($givenUsername);
-		$user->setEmail($givenEmail);
-		$user->setPassword($givenPassword);
-		$changedUser = $this->fixture->fallbackUsernameAndPassword($user);
-		$this->assertEquals($changedUser->getEmail(), $expectedEmail);
-		$this->assertNotEmpty($changedUser->getUsername());
-		$this->assertNotEmpty($changedUser->getPassword());
-	}
-
-	/**
 	 * Dataprovider for isMd5()
 	 *
 	 * @return array
