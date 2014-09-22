@@ -186,7 +186,7 @@ Example file fileadmin/Partials/Fields/TwitterId.html:
 	{namespace femanager=In2\Femanager\ViewHelpers}
 	<div class="femanager_fieldset control-group">
 			<label for="twitterId" class="control-label">
-					Twitter
+					<f:translate key="tx_femanagerextended_domain_model_user.twitter_id" extensionName="femanagerextended">Twitter</f:translate>
 			</label>
 			<div class="controls">
 					<femanager:form.textfield
