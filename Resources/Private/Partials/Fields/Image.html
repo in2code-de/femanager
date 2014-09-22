@@ -17,7 +17,11 @@
 						<span class="qq-upload-file">{image}</span>
 						<span class="qq-upload-size"><femanager:Misc.FileSize path="{uploadFolder}/{image}" />kB</span>
 						<a href="#" class="qq-upload-delete icon-trash">Delete</a>
-						<f:image src="{uploadFolder}/{image}" alt="{user.firstName} {user.lastName}" width="250" class="fileupload_image" />
+						<f:image
+								src="{uploadFolder}/{image}"
+								alt="{user.firstName} {user.lastName}"
+								width="{settings.misc.renderImageWidth}"
+								class="fileupload_image" />
 					</li>
 				</f:for>
 			</ul>
