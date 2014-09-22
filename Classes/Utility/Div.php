@@ -686,7 +686,7 @@ class Div {
 	/**
 	 * Get absolute paths for templates with fallback
 	 * 		Returns paths from *RootPaths and *RootPath and "hardcoded"
-	 * 		paths pointing to the EXT:powermail-resources.
+	 * 		paths pointing to the EXT:femanager-resources.
 	 *
 	 * @param string $part "template", "partial", "layout"
 	 * @param boolean $returnAllPaths Default: FALSE, If FALSE only paths

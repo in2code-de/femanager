@@ -44,7 +44,7 @@ class FlexFormFieldSelection {
 	/**
 	 * Read pid from current URL
 	 * 		URL example:
-	 * 		http://powermailt361.in2code.de/typo3/alt_doc.php?&returnUrl=
+	 * 		http://femanager.localhost.de/typo3/alt_doc.php?&returnUrl=
 	 * 		%2Ftypo3%2Fsysext%2Fcms%2Flayout%2Fdb_layout.php
 	 * 		%3Fid%3D17%23element-tt_content-14
 	 * 		&edit[tt_content][14]=edit
