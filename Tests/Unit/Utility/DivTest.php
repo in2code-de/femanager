@@ -120,69 +120,6 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 
 	/**
-	 * Dataprovider for fallbackUsernameAndPassword()
-	 *
-	 * @return array
-	 */
-	public function fallbackUsernameAndPasswordReturnBoolDataProvider() {
-		return array(
-			// #0
-			array(
-				'userN_ame',
-				'email@email.org',
-				'123456',
-				'email@email.org',
-			),
-
-			// #1
-			array(
-				'',
-				'email@email.org',
-				'',
-				'email@email.org',
-			),
-
-			// #2
-			array(
-				'Alex',
-				'email@email.org',
-				'',
-				'email@email.org',
-			),
-
-			// #3
-			array(
-				'',
-				'email@email.org',
-				'passW0rd',
-				'email@email.org',
-			),
-		);
-	}
-
-	/**
-	 * Test for fallbackUsernameAndPassword()
-	 *
-	 * @param \string $givenUsername
-	 * @param \string $givenEmail
-	 * @param \string $givenPassword
-	 * @param \string $expectedEmail
-	 * @return void
-	 * @dataProvider fallbackUsernameAndPasswordReturnBoolDataProvider
-	 * @test
-	 */
-	public function fallbackUsernameAndPasswordReturnBool($givenUsername, $givenEmail, $givenPassword, $expectedEmail) {
-		$user = new \In2\Femanager\Domain\Model\User();
-		$user->setUsername($givenUsername);
-		$user->setEmail($givenEmail);
-		$user->setPassword($givenPassword);
-		$changedUser = $this->fixture->fallbackUsernameAndPassword($user);
-		$this->assertEquals($changedUser->getEmail(), $expectedEmail);
-		$this->assertNotEmpty($changedUser->getUsername());
-		$this->assertNotEmpty($changedUser->getPassword());
-	}
-
-	/**
 	 * Dataprovider for isMd5()
 	 *
 	 * @return array
@@ -305,4 +242,58 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$this->assertEquals($result, $expectedResult);
 	}
 
+	/**
+	 * Data Provider for getRandomStringAlwaysReturnsStringsOfGivenLength
+	 *
+	 * @return array
+	 */
+	public function getRandomStringAlwaysReturnsStringsOfGivenLengthDateProvider() {
+		return array(
+			'default params' => array(
+				32,
+				TRUE,
+				FALSE
+			),
+			'default length lowercase' => array(
+				32,
+				FALSE,
+				FALSE
+			),
+			'60 length' => array(
+				60,
+				TRUE,
+				FALSE
+			),
+			'60 length lowercase' => array(
+				60,
+				FALSE,
+				FALSE
+			),
+		);
+	}
+
+	/**
+	 * getRandomStringAlwaysReturnsStringsOfGivenLength Test
+	 *
+	 * @param int $length
+	 * @param bool $addUpperCase
+	 * @param bool $addSpecialCharacters
+	 * @dataProvider getRandomStringAlwaysReturnsStringsOfGivenLengthDateProvider
+	 * @return void
+	 * @test
+	 */
+	public function getRandomStringAlwaysReturnsStringsOfGivenLength($length, $addUpperCase, $addSpecialCharacters) {
+		for ($i = 0; $i < 100; $i++) {
+			$string = \In2\Femanager\Utility\Div::getRandomString($length, $addUpperCase, $addSpecialCharacters);
+
+			if ($addUpperCase) {
+				$regex = '~[a-zA-Z0-9]{' . $length . '}~';
+			} else {
+				$regex = '~[a-z0-9]{' . $length . '}~';
+			}
+
+			$this->assertSame(1, preg_match($regex, $string));
+
+		}
+	}
 }

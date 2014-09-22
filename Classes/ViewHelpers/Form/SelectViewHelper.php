@@ -48,7 +48,11 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
 	 * @return array
 	 */
 	protected function getOptions() {
-		return array('' => $this->arguments['defaultOption']) + parent::getOptions();
+		$options = parent::getOptions();
+		if (!empty($this->arguments['defaultOption'])) {
+			$options = array('' => $this->arguments['defaultOption']) + $options;
+		}
+		return $options;
 	}
 
 	/**
@@ -67,10 +71,12 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
 				\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 			);
 			$prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
-			$selectedValue = $cObj->cObjGetSingle(
-				$prefillTypoScript[$this->getFieldName()],
-				$prefillTypoScript[$this->getFieldName() . '.']
-			);
+			if (!empty($prefillTypoScript[$this->getFieldName()])) {
+				$selectedValue = $cObj->cObjGetSingle(
+					$prefillTypoScript[$this->getFieldName()],
+					$prefillTypoScript[$this->getFieldName() . '.']
+				);
+			}
 		}
 
 		return $selectedValue;

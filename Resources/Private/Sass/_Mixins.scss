@@ -14,6 +14,14 @@
   border: 1px solid $errorSoft;
   color: $error;
 }
+@mixin message_warning {
+  background: {
+    color: $warningSoft2;
+    image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/warning.png");
+  }
+  border: 1px solid $warningSoft;
+  color: $warning;
+}
 @mixin message_note {
   background: {
     color: $noteSoft2;
@@ -29,4 +37,12 @@
   }
   border: 1px solid $okSoft;
   color: $ok;
+}
+@mixin message_information {
+  background: {
+    color: $informationSoft2;
+    image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/information.png");
+  }
+  border: 1px solid $informationSoft;
+  color: $information;
 }

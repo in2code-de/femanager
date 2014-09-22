@@ -1,0 +1,41 @@
+.. |em|      image:: ../Images/femanager_extensionmanager.png
+.. :align: left
+.. :border: 0
+.. :name: em
+.. :vspace: 20
+
+.. |emConfiguration|      image:: ../Images/femanager_extensionmanager_configuration.png
+.. :align: left
+.. :border: 0
+.. :name: emConfiguration
+.. :vspace: 20
+
+.. |backendmodule|      image:: ../Images/femanager_backendmodule.png
+.. :align: left
+.. :border: 0
+.. :name: backendmodule
+.. :vspace: 20
+
+.. |constants|      image:: ../Images/femanager_constants.png
+.. :align: left
+.. :border: 0
+.. :name: constants
+.. :vspace: 20
+
+.. |feusersRecord|      image:: ../Images/femanager_feusers_record.png
+.. :align: left
+.. :border: 0
+.. :name: feusersRecord
+.. :vspace: 20
+
+.. |plugin|      image:: ../Images/femanager_plugin.png
+.. :align: left
+.. :border: 0
+.. :name: plugin
+.. :vspace: 20
+
+.. |plugin2|      image:: ../Images/femanager_plugin2.png
+.. :align: left
+.. :border: 0
+.. :name: plugin2
+.. :vspace: 20

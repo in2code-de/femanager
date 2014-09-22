@@ -49,56 +49,56 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 							break;
 
 						case 'email':
-							if ($validationSetting == 1 && !$this->validateEmail($value)) {
+							if (!empty($value) && $validationSetting == 1 && !$this->validateEmail($value)) {
 								$this->addError('validationErrorEmail', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'min':
-							if (!$this->validateMin($value, $validationSetting)) {
+							if (!empty($value) && !$this->validateMin($value, $validationSetting)) {
 								$this->addError('validationErrorMin', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'max':
-							if (!$this->validateMax($value, $validationSetting)) {
+							if (!empty($value) && !$this->validateMax($value, $validationSetting)) {
 								$this->addError('validationErrorMax', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'intOnly':
-							if ($validationSetting == 1 && !$this->validateInt($value)) {
+							if (!empty($value) && $validationSetting == 1 && !$this->validateInt($value)) {
 								$this->addError('validationErrorInt', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'lettersOnly':
-							if ($validationSetting == 1 && !$this->validateLetters($value)) {
+							if (!empty($value) && $validationSetting == 1 && !$this->validateLetters($value)) {
 								$this->addError('validationErrorLetters', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'uniqueInPage':
-							if ($validationSetting == 1 && !$this->validateUniquePage($value, $field, $user)) {
+							if (!empty($value) && $validationSetting == 1 && !$this->validateUniquePage($value, $field, $user)) {
 								$this->addError('validationErrorUniquePage', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'uniqueInDb':
-							if ($validationSetting == 1 && !$this->validateUniqueDb($value, $field, $user)) {
+							if (!empty($value) && $validationSetting == 1 && !$this->validateUniqueDb($value, $field, $user)) {
 								$this->addError('validationErrorUniqueDb', $field);
 								$this->isValid = FALSE;
 							}
 							break;
 
 						case 'mustInclude':
-							if (!$this->validateMustInclude($value, $validationSetting)) {
+							if (!empty($value) && !$this->validateMustInclude($value, $validationSetting)) {
 								$this->addError('validationErrorMustInclude', $field);
 								$this->isValid = FALSE;
 							}
@@ -108,6 +108,16 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 							if (!$this->validateInList($value, $validationSetting)) {
 								$this->addError('validationErrorInList', $field);
 								$this->isValid = FALSE;
+							}
+							break;
+
+						case 'sameAs':
+							if (method_exists($user, 'get' . ucfirst($validationSetting))) {
+								$valueToCompare = $user->{'get' . ucfirst($validationSetting)}();
+								if (!$this->validateSameAs($value, $valueToCompare)) {
+									$this->addError('validationErrorSameAs', $field);
+									$this->isValid = FALSE;
+								}
 							}
 							break;
 

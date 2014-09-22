@@ -13,10 +13,10 @@ if (!defined('TYPO3_MODE')) {
 		'Invitation' => 'new, create, edit, update, delete, status'
 	),
 	array(
-		'User' => 'list, show, fileUpload, fileDelete, validate',
+		'User' => 'list, fileUpload, fileDelete, validate',
 		'New' => 'create, new, confirmCreateRequest, createStatus',
 		'Edit' => 'edit, update, delete, confirmUpdateRequest',
-		'Invitation' => 'new, create, edit, update, delete, status'
+		'Invitation' => 'new, create, edit, update, delete'
 	)
 );
 

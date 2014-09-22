@@ -91,6 +91,8 @@ class NewController extends \In2\Femanager\Controller\AbstractController {
 	public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation') {
 		$user = $this->userRepository->findByUid($user);
 
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $hash, $status, $this));
+
 		// if there is still no user in db
 		if ($user === NULL) {
 			$this->flashMessageContainer->add(
@@ -131,7 +133,7 @@ class NewController extends \In2\Femanager\Controller\AbstractController {
 					// must be still confirmed from admin
 					if (!empty($this->settings['new']['confirmByAdmin']) && !$user->getTxFemanagerConfirmedbyadmin()) {
 						// send email to admin to get this confirmation
-						$this->div->sendEmail(
+						$this->sendMail->send(
 							'createAdminConfirmation',
 							Div::makeEmailArray(
 								$this->settings['new']['confirmByAdmin'],
@@ -225,21 +227,6 @@ class NewController extends \In2\Femanager\Controller\AbstractController {
 						$user
 					);
 
-					// send email to user to inform him about his profile confirmation
-					$this->div->sendEmail(
-						'createUserNotify',
-						Div::makeEmailArray(
-							$user->getEmail(),
-							$user->getFirstName() . ' ' . $user->getLastName()
-						),
-						array('sender@femanager.org' => 'Sender Name'),
-						'Your profile was confirmed',
-						array(
-							'user' => $user
-						),
-						$this->config['new.']['email.']['createUserNotify.']
-					);
-
 					$this->finalCreate($user, 'new', 'createStatus', FALSE);
 
 				} else {
@@ -270,7 +257,7 @@ class NewController extends \In2\Femanager\Controller\AbstractController {
 
 					if (!stristr($status, 'silent')) {
 						// send email to user to inform him about his profile confirmation
-						$this->div->sendEmail(
+						$this->sendMail->send(
 							'CreateUserNotifyRefused',
 							Div::makeEmailArray(
 								$user->getEmail(),

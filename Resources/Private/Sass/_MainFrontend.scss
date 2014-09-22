@@ -5,8 +5,14 @@
   > .message-error {
     @include message_error;
   }
+  > .message-warning {
+    @include message_warning;
+  }
   > .message-ok {
     @include message_ok;
+  }
+  > .message-information {
+    @include message_information;
   }
   > .message-notice {
     @include message_note;

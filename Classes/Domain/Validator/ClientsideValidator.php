@@ -1,8 +1,9 @@
 <?php
 namespace In2\Femanager\Domain\Validator;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \In2\Femanager\Utility\Div;
+use \TYPO3\CMS\Core\Utility\GeneralUtility,
+	\In2\Femanager\Utility\Div,
+	\TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Class ClientsideValidator
@@ -74,56 +75,56 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 					break;
 
 				case 'email':
-					if (!$this->validateEmail($this->getValue())) {
+					if ($this->getValue() && !$this->validateEmail($this->getValue())) {
 						$this->addMessage('validationErrorEmail');
 						$this->isValid = FALSE;
 					}
 					break;
 
 				case stristr($validationSetting, 'min('):
-					if (!$this->validateMin($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
+					if ($this->getValue() && !$this->validateMin($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
 						$this->addMessage('validationErrorMin');
 						$this->isValid = FALSE;
 					}
 					break;
 
 				case stristr($validationSetting, 'max('):
-					if (!$this->validateMax($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
+					if ($this->getValue() && !$this->validateMax($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
 						$this->addMessage('validationErrorMax');
 						$this->isValid = FALSE;
 					}
 					break;
 
 				case 'intOnly':
-					if (!$this->validateInt($this->getValue())) {
+					if ($this->getValue() && !$this->validateInt($this->getValue())) {
 						$this->addMessage('validationErrorInt');
 						$this->isValid = FALSE;
 					}
 					break;
 
 				case 'lettersOnly':
-					if (!$this->validateLetters($this->getValue())) {
+					if ($this->getValue() && !$this->validateLetters($this->getValue())) {
 						$this->addMessage('validationErrorLetters');
 						$this->isValid = FALSE;
 					}
 					break;
 
 				case 'uniqueInPage':
-					if (!$this->validateUniquePage($this->getValue(), $this->getFieldName(), $this->getUser())) {
+					if ($this->getValue() && !$this->validateUniquePage($this->getValue(), $this->getFieldName(), $this->getUser())) {
 						$this->addMessage('validationErrorUniquePage');
 						$this->isValid = FALSE;
 					}
 					break;
 
 				case 'uniqueInDb':
-					if (!$this->validateUniqueDb($this->getValue(), $this->getFieldName(), $this->getUser())) {
+					if ($this->getValue() && !$this->validateUniqueDb($this->getValue(), $this->getFieldName(), $this->getUser())) {
 						$this->addMessage('validationErrorUniqueDb');
 						$this->isValid = FALSE;
 					}
 					break;
 
 				case stristr($validationSetting, 'mustInclude('):
-					if (!$this->validateMustInclude($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
+					if ($this->getValue() && !$this->validateMustInclude($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
 						$this->addMessage('validationErrorMustInclude');
 						$this->isValid = FALSE;
 					}
@@ -144,9 +145,12 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 					break;
 
 				case 'date':
-					if (!$this->validateDate(
-						$this->getValue(),
-						\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat', 'femanager'))
+					if (
+						$this->getValue() &&
+						!$this->validateDate(
+							$this->getValue(),
+							LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat', 'femanager')
+						)
 					) {
 						$this->addMessage('validationErrorDate');
 						$this->isValid = FALSE;

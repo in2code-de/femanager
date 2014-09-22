@@ -80,6 +80,12 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected $div;
 
 	/**
+	 * @var \In2\Femanager\Utility\SendMail
+	 * @inject
+	 */
+	protected $sendMail;
+
+	/**
 	 * Content Object
 	 *
 	 * @var object
@@ -148,7 +154,6 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			101,
 			$user
 		);
-
 		$this->finalCreate($user, 'new', 'createStatus');
 	}
 
@@ -173,7 +178,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		if (!empty($this->settings['new']['confirmByUser'])) {
 
 			// send email to user for confirmation
-			$this->div->sendEmail(
+			$this->sendMail->send(
 				'createUserConfirmation',
 				Div::makeEmailArray(
 					$user->getEmail(),
@@ -209,7 +214,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			);
 
 			// send email to admin
-			$this->div->sendEmail(
+			$this->sendMail->send(
 				'createAdminConfirmation',
 				Div::makeEmailArray(
 					$this->settings['new']['confirmByAdmin'],
@@ -244,7 +249,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		if ($this->settings['edit']['notifyAdmin']) {
 			$existingUser = $this->userRepository->findByUid($user->getUid());
 			$dirtyProperties = Div::getDirtyPropertiesFromObject($existingUser, $user);
-			$this->div->sendEmail(
+			$this->sendMail->send(
 				'updateNotify',
 				Div::makeEmailArray(
 					$this->settings['edit']['notifyAdmin'],
@@ -293,10 +298,11 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$user = Div::rollbackUserWithChangeRequest($user, $dirtyProperties);
 
 		// send email to admin
-		$this->div->sendEmail(
+		$this->sendMail->send(
 			'updateRequest',
 			array(
-				$this->settings['edit']['confirmByAdmin'] => $this->settings['edit']['email']['updateRequest']['sender']['name']['value']
+				$this->settings['edit']['confirmByAdmin'] =>
+					$this->settings['edit']['email']['updateRequest']['sender']['name']['value']
 			),
 			Div::makeEmailArray(
 				$user->getEmail(),
@@ -347,9 +353,28 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$this->loginAfterCreate($user);
 		}
 
+		// send notify email to user
+		$this->sendMail->send(
+			'createUserNotify',
+			Div::makeEmailArray(
+				$user->getEmail(),
+				$user->getFirstName() . ' ' . $user->getLastName()
+			),
+			array(
+				$this->settings['new']['email']['createUserNotify']['sender']['email']['value']
+					=> $this->settings['settings']['new']['email']['createUserNotify']['sender']['name']['value']
+			),
+			'Profile creation',
+			array(
+				'user' => $user,
+				'settings' => $this->settings
+			),
+			$this->config['new.']['email.']['createUserNotify.']
+		);
+
 		// send notify email to admin
 		if ($this->settings['new']['notifyAdmin']) {
-			$this->div->sendEmail(
+			$this->sendMail->send(
 				'createNotify',
 				Div::makeEmailArray(
 					$this->settings['new']['notifyAdmin'],
@@ -399,6 +424,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
 		$user = $GLOBALS['TSFE']->fe_user->fetchUserRecord($info['db_user'], $user->getUsername());
 		$GLOBALS['TSFE']->fe_user->createUserSession($user);
+		$GLOBALS['TSFE']->fe_user->user = $GLOBALS['TSFE']->fe_user->fetchUserSession();
 
 		// add login flashmessage
 		$this->flashMessageContainer->add(

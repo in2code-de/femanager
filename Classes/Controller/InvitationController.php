@@ -95,7 +95,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		);
 
 		// send confirmation mail to user
-		$this->div->sendEmail(
+		$this->sendMail->send(
 			'invitation',
 			Div::makeEmailArray(
 				$user->getEmail(),
@@ -116,7 +116,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 
 		// send notify email to admin
 		if ($this->settings['invitation']['notifyAdminStep1']) {
-			$this->div->sendEmail(
+			$this->sendMail->send(
 				'invitationNotifyStep1',
 				Div::makeEmailArray(
 					$this->settings['invitation']['notifyAdminStep1'],
@@ -198,7 +198,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 
 		// send notify email to admin
 		if ($this->settings['invitation']['notifyAdmin']) {
-			$this->div->sendEmail(
+			$this->sendMail->send(
 				'invitationNotify',
 				Div::makeEmailArray(
 					$this->settings['invitation']['notifyAdmin'],
@@ -263,7 +263,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 
 			// send notify email to admin
 			if ($this->settings['invitation']['notifyAdminStep1']) {
-				$this->div->sendEmail(
+				$this->sendMail->send(
 					'invitationRefused',
 					Div::makeEmailArray(
 						$this->settings['invitation']['notifyAdminStep1'],

@@ -24,6 +24,20 @@ class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	public $cObj;
 
 	/**
+	 * Plugin Variables
+	 *
+	 * @var array
+	 */
+	public $piVars = array();
+
+	/**
+	 * TypoScript Configuration
+	 *
+	 * @var array
+	 */
+	public $configuration = array();
+
+	/**
 	 * Action Name
 	 *
 	 * @var \string
@@ -39,21 +53,39 @@ class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	public function isValid($user) {
 		$this->init();
 
-		// if password fields are not shown
-		if (!$this->passwordFieldsAdded()) {
+		// if password fields are not active or if keep function active
+		if (!$this->passwordFieldsAdded() || $this->keepPasswordIfEmpty()) {
 			return TRUE;
 		}
 
-		$piVars = GeneralUtility::_GP('tx_femanager_pi1');
 		$password = $user->getPassword();
-		$passwordRepeat = $piVars['password_repeat'];
+		$passwordRepeat = $this->piVars['password_repeat'];
 
-		if ($password != $passwordRepeat) {
+		if ($password !== $passwordRepeat) {
 			$this->addError('validationErrorPasswordRepeat', 'password');
 			return FALSE;
 		}
 
 		return TRUE;
+	}
+
+	/**
+	 * Check if Passwords are empty and if keep configuration is active
+	 *
+	 * @return bool
+	 */
+	protected function keepPasswordIfEmpty() {
+		if (
+			isset($this->configuration['settings']['edit']['misc']['keepPasswordIfEmpty']) &&
+			$this->configuration['settings']['edit']['misc']['keepPasswordIfEmpty'] == 1 &&
+			isset($this->piVars['user']['password']) &&
+			$this->piVars['user']['password'] === '' &&
+			isset($this->piVars['password_repeat']) &&
+			$this->piVars['password_repeat'] === ''
+		) {
+			return TRUE;
+		}
+		return FALSE;
 	}
 
 	/**
@@ -81,8 +113,11 @@ class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	 * @return void
 	 */
 	protected function init() {
+		$this->configuration = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
 		$this->cObj = $this->configurationManager->getContentObject();
-		$piVars = GeneralUtility::_GP('tx_femanager_pi1');
-		$this->actionName = $piVars['__referrer']['@action'];
+		$this->piVars = GeneralUtility::_GP('tx_femanager_pi1');
+		$this->actionName = $this->piVars['__referrer']['@action'];
 	}
 }
