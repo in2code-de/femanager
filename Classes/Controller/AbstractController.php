@@ -80,6 +80,12 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected $div;
 
 	/**
+	 * @var \In2\Femanager\Utility\SendMail
+	 * @inject
+	 */
+	protected $sendMail;
+
+	/**
 	 * Content Object
 	 *
 	 * @var object
@@ -172,7 +178,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		if (!empty($this->settings['new']['confirmByUser'])) {
 
 			// send email to user for confirmation
-			$this->div->sendEmail(
+			$this->sendMail->send(
 				'createUserConfirmation',
 				Div::makeEmailArray(
 					$user->getEmail(),
@@ -208,7 +214,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			);
 
 			// send email to admin
-			$this->div->sendEmail(
+			$this->sendMail->send(
 				'createAdminConfirmation',
 				Div::makeEmailArray(
 					$this->settings['new']['confirmByAdmin'],
@@ -243,7 +249,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		if ($this->settings['edit']['notifyAdmin']) {
 			$existingUser = $this->userRepository->findByUid($user->getUid());
 			$dirtyProperties = Div::getDirtyPropertiesFromObject($existingUser, $user);
-			$this->div->sendEmail(
+			$this->sendMail->send(
 				'updateNotify',
 				Div::makeEmailArray(
 					$this->settings['edit']['notifyAdmin'],
@@ -292,7 +298,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$user = Div::rollbackUserWithChangeRequest($user, $dirtyProperties);
 
 		// send email to admin
-		$this->div->sendEmail(
+		$this->sendMail->send(
 			'updateRequest',
 			array(
 				$this->settings['edit']['confirmByAdmin'] =>
@@ -348,7 +354,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		}
 
 		// send notify email to user
-		$this->div->sendEmail(
+		$this->sendMail->send(
 			'createUserNotify',
 			Div::makeEmailArray(
 				$user->getEmail(),
@@ -368,7 +374,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 		// send notify email to admin
 		if ($this->settings['new']['notifyAdmin']) {
-			$this->div->sendEmail(
+			$this->sendMail->send(
 				'createNotify',
 				Div::makeEmailArray(
 					$this->settings['new']['notifyAdmin'],

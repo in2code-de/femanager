@@ -181,7 +181,7 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 
 			case 'refuse':
 				// send email to user
-				$this->div->sendEmail(
+				$this->sendMail->send(
 					'updateRequestRefused',
 					Div::makeEmailArray(
 						$user->getEmail(),
