@@ -91,6 +91,8 @@ class NewController extends \In2\Femanager\Controller\AbstractController {
 	public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation') {
 		$user = $this->userRepository->findByUid($user);
 
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $hash, $status, $this));
+
 		// if there is still no user in db
 		if ($user === NULL) {
 			$this->flashMessageContainer->add(

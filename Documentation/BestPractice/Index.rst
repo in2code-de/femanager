@@ -635,6 +635,17 @@ SignalSlots List
       Use this signal if you want to hook into the process before the new user was persisted
 
  - :File:
+      NewController.php
+   :Located:
+      confirmCreateRequestAction()
+   :Signal:
+      confirmCreateRequestActionBeforePersist
+   :Parameters:
+      $user, $hash, $status, $this
+   :Description:
+      Use this signal if you want to hook into the confirmation process
+
+ - :File:
       AbstractController.php
    :Located:
       finalCreate()
