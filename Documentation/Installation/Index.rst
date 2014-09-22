@@ -1928,6 +1928,9 @@ Plain Text
 
 				# Number of allowed images to upload
 				uploadFileExtension = jpeg, jpg, gif, png, bmp
+
+				# Width of the rendered image in FE
+				renderImageWidth = 250
 			}
 
 			# Don't touch this - this is needed to let the plugin know if the main typoscript is included - otherwise an errormessage will be shown in the frontend
