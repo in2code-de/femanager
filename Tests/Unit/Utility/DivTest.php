@@ -1,6 +1,6 @@
 <?php
+namespace In2\Femanager\Tests\Utility;
 
-namespace In2\Femanager\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -26,17 +26,12 @@ namespace In2\Femanager\Tests;
  ***************************************************************/
 
 /**
- * Test case for class \In2\Femanager\Domain\Validator\GeneralValidator.
+ * Test case for class \In2\Femanager\Utility\Div
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
- *
- * @package TYPO3
- * @subpackage femanager
- *
- * @author Alex Kellner <alexander.kellner@in2code.de>
  */
 class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 

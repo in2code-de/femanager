@@ -1,10 +1,10 @@
 <?php
-namespace In2\Femanager\Tests\Domain\Model;
+namespace In2\Femanager\ViewHelpers\Form;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
+ *  (c) 2014 Alex Kellner <alexander.kellner@in2code.de>, in2code
  *
  *  All rights reserved
  *
@@ -26,52 +26,46 @@ namespace In2\Femanager\Tests\Domain\Model;
  ***************************************************************/
 
 /**
- * Test case for class \In2\Femanager\Domain\Model\User.
+ * Test case for class \In2\Femanager\ViewHelpers\Form\GetCountriesViewHelper
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class UserTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+class GetCountriesTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 	/**
-	 * @var \In2\Femanager\Domain\Model\User
+	 * @var \In2\Femanager\ViewHelpers\Form\GetCountriesViewHelper
 	 */
-	protected $fixture;
+	protected $generalValidatorMock;
 
 	/**
 	 * @return void
 	 */
 	public function setUp() {
-		$this->fixture = new \In2\Femanager\Domain\Model\User();
+		$this->generalValidatorMock = $this->getAccessibleMock(
+			'\In2\Femanager\ViewHelpers\Form\GetCountriesViewHelper',
+			array('dummy')
+		);
 	}
 
 	/**
 	 * @return void
 	 */
 	public function tearDown() {
-		unset($this->fixture);
+		unset($this->generalValidatorMock);
 	}
 
 	/**
-	 * @test
+	 * Test for render()
+	 *
 	 * @return void
-	 */
-	public function getUsernameReturnsInitialValueForString() {
-	}
-
-	/**
 	 * @test
-	 * @return void
 	 */
-	public function setUsernameForStringSetsUsername() {
-		$this->fixture->setUsername('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getUsername()
-		);
+	public function renderReturnArray() {
+		$result = $this->generalValidatorMock->_call('render');
+		$this->assertTrue(array_key_exists('DEU' ,$result));
+		$this->assertTrue(array_key_exists('FRA' ,$result));
+		$this->assertTrue(array_key_exists('SWZ' ,$result));
 	}
-
 }
