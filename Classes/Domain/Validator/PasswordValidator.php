@@ -59,7 +59,7 @@ class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 		}
 
 		$password = $user->getPassword();
-		$passwordRepeat = $this->piVars['password_repeat'];
+		$passwordRepeat = isset($this->piVars['password_repeat']) ? $this->piVars['password_repeat'] : '';
 
 		if ($password !== $passwordRepeat) {
 			$this->addError('validationErrorPasswordRepeat', 'password');
