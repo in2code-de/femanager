@@ -174,35 +174,107 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 
 	/**
+	 * Dataprovider
+	 *
+	 * @return array
+	 */
+	public function validateIntReturnsBoolDataProvider() {
+		return array(
+			array(
+				'123',
+				TRUE
+			),
+			array(
+				'1235135',
+				TRUE
+			),
+			array(
+				'123a23',
+				FALSE
+			),
+			array(
+				'123 23',
+				FALSE
+			),
+			array(
+				'12323,',
+				FALSE
+			),
+			array(
+				'12323²',
+				FALSE
+			),
+			array(
+				'3 ',
+				FALSE
+			)
+		);
+	}
+
+	/**
 	 * Test vor validateInt()
 	 *
+	 * @param string $value
+	 * @param bool $expectedResult
 	 * @return void
+	 * @dataProvider validateIntReturnsBoolDataProvider
 	 * @test
 	 */
-	public function validateIntReturnsBool() {
-		$value = '123a23';
-		$result = $this->generalValidatorMock->_callRef('validateInt', $value);
-		$this->assertFalse($result);
+	public function validateIntReturnsBool($value, $expectedResult) {
+		$this->assertSame(
+			$expectedResult,
+			$this->generalValidatorMock->_callRef('validateInt', $value)
+		);
+	}
 
-		$value = '1235135';
-		$result = $this->generalValidatorMock->_callRef('validateInt', $value);
-		$this->assertTrue($result);
+	/**
+	 * Dataprovider
+	 *
+	 * @return array
+	 */
+	public function validateLettersReturnsBoolDataProvider() {
+		return array(
+			array(
+				'abafdbadsf',
+				TRUE
+			),
+			array(
+				'a_-b',
+				TRUE
+			),
+			array(
+				'abafd3adsf',
+				FALSE
+			),
+			array(
+				'abä',
+				FALSE
+			),
+			array(
+				'ab:',
+				FALSE
+			),
+			array(
+				'ab cd',
+				FALSE
+			)
+		);
 	}
 
 	/**
 	 * Test vor validateLetters()
 	 *
+	 * @param string $value
+	 * @param bool $expectedResult
 	 * @return void
+	 * @dataProvider validateLettersReturnsBoolDataProvider
 	 * @test
 	 */
-	public function validateLettersReturnsBool() {
-		$value = 'abafd3adsf';
-		$result = $this->generalValidatorMock->_callRef('validateLetters', $value);
-		$this->assertFalse($result);
-
-		$value = 'abafdbadsf';
-		$result = $this->generalValidatorMock->_callRef('validateLetters', $value);
-		$this->assertTrue($result);
+	public function validateLettersReturnsBool($value, $expectedResult) {
+		$this->assertSame(
+			$expectedResult,
+			$this->generalValidatorMock->_callRef('validateLetters', $value)
+		);
 	}
 
 	/**
