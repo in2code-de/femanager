@@ -227,7 +227,7 @@ class NewController extends \In2\Femanager\Controller\AbstractController {
 						$user
 					);
 
-					$this->finalCreate($user, 'new', 'createStatus', FALSE);
+					$this->finalCreate($user, 'new', 'createStatus', FALSE, $status);
 
 				} else {
 					$this->flashMessageContainer->add(

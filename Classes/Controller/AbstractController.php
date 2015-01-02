@@ -420,9 +420,13 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			return;
 		}
 
-		$GLOBALS['TSFE']->fe_user->checkPid = '';
+		$GLOBALS['TSFE']->fe_user->checkPid = FALSE;
 		$info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
-		$user = $GLOBALS['TSFE']->fe_user->fetchUserRecord($info['db_user'], $user->getUsername());
+
+		$pids = $this->allConfig['persistence']['storagePid'];
+		$extraWhere = ' AND pid IN (' . $GLOBALS['TYPO3_DB']->cleanIntList($pids) . ')';
+		$user = $GLOBALS['TSFE']->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
+
 		$GLOBALS['TSFE']->fe_user->createUserSession($user);
 		$GLOBALS['TSFE']->fe_user->user = $GLOBALS['TSFE']->fe_user->fetchUserSession();
 

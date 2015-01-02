@@ -110,7 +110,7 @@ jQuery.fn.femanagerValidation = function() {
 				'&tx_femanager_pi1[value]=' + encodeURIComponent(elementValue) +
 				'&tx_femanager_pi1[field]=' + getFieldName(element) +
 				(user != undefined ? '&tx_femanager_pi1[user]=' + user : '') +
-				(additionalValue ? '&tx_femanager_pi1[additionalValue]=' + additionalValue : '') +
+				(additionalValue ? '&tx_femanager_pi1[additionalValue]=' + encodeURIComponent(additionalValue) : '') +
 				'&storagePid=' + $('#femanagerStoragePid').val() +
 				'&L=' + $('#femanagerLanguage').val() +
 				'&id=' + $('#femanagerPid').val(),

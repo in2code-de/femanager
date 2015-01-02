@@ -83,10 +83,10 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$and[] = $query->logicalOr($or);
 		}
 		if (!empty($filter['searchword'])) {
-			$or = array();
 			$searchwords = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
 			$fieldsToSearch = GeneralUtility::trimExplode(',', $settings['list']['filter']['searchword']['fieldsToSearch'], TRUE);
 			foreach ($searchwords as $searchword) {
+				$or = array();
 				foreach ($fieldsToSearch as $searchfield) {
 					$or[] = $query->like($searchfield, '%' . $searchword . '%');
 				}
@@ -195,9 +195,9 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$and[] = $query->equals('pid', $pid);
 		}
 		if (!empty($filter['searchword'])) {
-			$or = array();
 			$searchwords = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
 			foreach ($searchwords as $searchword) {
+				$or = array();
 				$or[] = $query->like('address', '%' . $searchword . '%');
 				$or[] = $query->like('city', '%' . $searchword . '%');
 				$or[] = $query->like('company', '%' . $searchword . '%');
