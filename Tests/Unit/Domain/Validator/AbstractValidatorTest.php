@@ -515,6 +515,128 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 
 	/**
+	 * Dataprovider for validateMustNotIncludeReturnsBool()
+	 *
+	 * @return array
+	 */
+	public function validateMustNotIncludeReturnsBoolDataProvider() {
+		return array(
+			array(
+				'in2code.de',
+				'number,letter,special',
+				FALSE
+			),
+			array(
+				'in2code.de ',
+				'number,letter,special,space',
+				FALSE
+			),
+			array(
+				'in2code.de',
+				'number,  special',
+				FALSE
+			),
+			array(
+				'in2code.de',
+				'   special  ,   letter ',
+				FALSE
+			),
+			array(
+				'in2code',
+				'number,letter',
+				FALSE
+			),
+			array(
+				'in2code',
+				'special,space',
+				TRUE
+			),
+			array(
+				'in2code#',
+				'special',
+				FALSE
+			),
+			array(
+				'in2co3de',
+				'special',
+				TRUE
+			),
+			array(
+				'in2code',
+				'number',
+				FALSE
+			),
+			array(
+				'incode.',
+				'number,letter',
+				FALSE
+			),
+			array(
+				'in2 code',
+				'number,letter',
+				FALSE
+			),
+			array(
+				'in code',
+				'letter',
+				FALSE
+			),
+			array(
+				'1 2',
+				'number',
+				FALSE
+			),
+			array(
+				'2',
+				'number',
+				FALSE
+			),
+			array(
+				'1 2',
+				'space',
+				FALSE
+			),
+			array(
+				'132',
+				'space',
+				TRUE
+			),
+			array(
+				'a;#/%äß´^á 3',
+				'space',
+				FALSE
+			),
+			array(
+				'a;#/%äß´^á 3',
+				'letter,number,special,space',
+				FALSE
+			),
+			array(
+				'a;#/%äß´^á 3',
+				'special,space',
+				FALSE
+			),
+		);
+	}
+
+	/**
+	 * Test for validateMustNotInclude()
+	 *
+	 * @param string $value
+	 * @param string $configuration
+	 * @param string $expectedResult
+	 * @return void
+	 * @dataProvider validateMustNotIncludeReturnsBoolDataProvider
+	 * @test
+	 */
+	public function validateMustNotIncludeReturnsBool($value, $configuration, $expectedResult) {
+		$this->assertSame(
+			$expectedResult,
+			$this->generalValidatorMock->_callRef('validateMustNotInclude', $value, $configuration)
+		);
+	}
+
+	/**
 	 * Dataprovider for validateInListReturnsBool()
 	 *
 	 * @return array

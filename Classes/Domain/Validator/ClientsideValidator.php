@@ -130,6 +130,13 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 					}
 					break;
 
+				case stristr($validationSetting, 'mustNotInclude('):
+					if ($this->getValue() && !$this->validateMustNotInclude($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
+						$this->addMessage('validationErrorMustNotInclude');
+						$this->isValid = FALSE;
+					}
+					break;
+
 				case stristr($validationSetting, 'inList('):
 					if (!$this->validateInList($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
 						$this->addMessage('validationErrorInList');

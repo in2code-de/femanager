@@ -1,6 +1,8 @@
 <?php
 namespace In2\Femanager\Domain\Validator;
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Class GeneralValidator
  */
@@ -157,7 +159,7 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	}
 
 	/**
-	 * Validation for "Must include some characters)
+	 * Validation for "Must include some characters"
 	 *
 	 * @param \string $value
 	 * @param \string $validationSettingList
@@ -165,7 +167,7 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	 */
 	protected function validateMustInclude($value, $validationSettingList) {
 		$isValid = TRUE;
-		$validationSettings = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $validationSettingList, 1);
+		$validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, 1);
 
 		foreach ($validationSettings as $validationSetting) {
 
@@ -195,6 +197,55 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 				// value must include space
 				case 'space':
 					if (!$this->stringContainsSpaceCharacter($value)) {
+						$isValid = FALSE;
+					}
+					break;
+
+				default:
+			}
+		}
+		return $isValid;
+	}
+
+	/**
+	 * Validation for "Must not include some characters"
+	 *
+	 * @param \string $value
+	 * @param \string $validationSettingList
+	 * @return \bool
+	 */
+	protected function validateMustNotInclude($value, $validationSettingList) {
+		$isValid = TRUE;
+		$validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, 1);
+
+		foreach ($validationSettings as $validationSetting) {
+
+			switch ($validationSetting) {
+
+				// value must not include numbers
+				case 'number':
+					if ($this->stringContainsNumber($value)) {
+						$isValid = FALSE;
+					}
+					break;
+
+				// value must not include letters
+				case 'letter':
+					if ($this->stringContainsLetter($value)) {
+						$isValid = FALSE;
+					}
+					break;
+
+				// value must not include special characters (like .:,&äö#*+)
+				case 'special':
+					if ($this->stringContainsSpecialCharacter($value)) {
+						$isValid = FALSE;
+					}
+					break;
+
+				// value must not include space
+				case 'space':
+					if ($this->stringContainsSpaceCharacter($value)) {
 						$isValid = FALSE;
 					}
 					break;
