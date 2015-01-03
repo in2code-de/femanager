@@ -22,6 +22,7 @@ Quick Guide
 - Make your configuration in the Constants Editor (e.g. include jQuery or Twitter Bootstrap)
 - Add a new page with the Frontend Plugin and make your settings (e.g. for Registration)
 - Don't forget to set the startpage in the Content Element (the page where the fe_users should be stored)
+- It's recommended to use https on the page with registration form, to secure registration and validation via AJAX
 - Done
 
 
