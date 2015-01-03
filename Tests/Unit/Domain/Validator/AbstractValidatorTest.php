@@ -405,6 +405,11 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 				TRUE
 			),
 			array(
+				'in2code.de ',
+				'number,letter,special,space',
+				TRUE
+			),
+			array(
 				'in2code.de',
 				'number,  special',
 				TRUE
@@ -457,6 +462,36 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			array(
 				'1 2',
 				'number',
+				TRUE
+			),
+			array(
+				'2',
+				'number',
+				TRUE
+			),
+			array(
+				'1 2',
+				'space',
+				TRUE
+			),
+			array(
+				'132',
+				'space',
+				FALSE
+			),
+			array(
+				'a;#/%äß´^á 3',
+				'space',
+				TRUE
+			),
+			array(
+				'a;#/%äß´^á 3',
+				'letter,number,special,space',
+				TRUE
+			),
+			array(
+				'a;#/%äß´^á 3',
+				'special,space',
 				TRUE
 			),
 		);
