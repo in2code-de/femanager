@@ -52,7 +52,7 @@ A: Have a look into TypoScript:
 			_enable.server = 2
 
 			# validation of user input values
-			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, mustInclude(number,letter,special), inList(1,2,3)
+			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space), mustNotInclude(number,letter,special,space), inList(1,2,3), captcha, sameAs(password)
 			# see manual for an example how to add custom serverside and clientside validation
 			validation {
 				# Enable clientside Formvalidation (JavaScript)
@@ -64,6 +64,7 @@ A: Have a look into TypoScript:
 				username {
 					required = 1
 					uniqueInDb = 1
+					mustNotInclude = special,space
 				}
 				email {
 					required = 1
@@ -81,6 +82,8 @@ A: Have a look into TypoScript:
 			}
 		}
 	}
+
+Note: If you use validation for passwords, values will be send via AJAX to server to check if all is right. It's recommended to use https connections for the registration form.
 
 
 Q: System should generate random passwords – possible?

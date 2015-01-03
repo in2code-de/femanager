@@ -104,6 +104,13 @@ class ServersideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 							}
 							break;
 
+						case 'mustNotInclude':
+							if (!empty($value) && !$this->validateMustNotInclude($value, $validationSetting)) {
+								$this->addError('validationErrorMustNotInclude', $field);
+								$this->isValid = FALSE;
+							}
+							break;
+
 						case 'inList':
 							if (!$this->validateInList($value, $validationSetting)) {
 								$this->addError('validationErrorInList', $field);
