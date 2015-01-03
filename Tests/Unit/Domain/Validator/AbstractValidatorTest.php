@@ -46,7 +46,8 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 */
 	public function setUp() {
 		$this->generalValidatorMock = $this->getAccessibleMock(
-			'\In2\Femanager\Domain\Validator\AbstractValidator', array('dummy')
+			'\In2\Femanager\Domain\Validator\AbstractValidator',
+			array('dummy')
 		);
 	}
 
@@ -59,64 +60,102 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 
 	/**
-	 * Test vor validateRequired()
-	 * @return void
-	 * @test
+	 * Dataprovider for validateRequiredReturnsBool()
+	 *
+	 * @return array
 	 */
-	public function validateRequiredReturnsBool() {
-		$empty = '';
-		$emptyResult = $this->generalValidatorMock->_callRef('validateRequired', $empty);
-		$this->assertFalse($emptyResult);
-
-		$filled = 'in2code.de';
-		$filledResult = $this->generalValidatorMock->_callRef('validateRequired', $filled);
-		$this->assertTrue($filledResult);
+	public function validateRequiredReturnsBoolDataProvider() {
+		return array(
+			array(
+				'in2code.de',
+				TRUE
+			),
+			array(
+				'.',
+				TRUE
+			),
+			array(
+				1234,
+				TRUE
+			),
+			array(
+				1234.56,
+				TRUE
+			),
+			array(
+				'',
+				FALSE
+			),
+			array(
+				array(),
+				FALSE
+			),
+			array(
+				'0',
+				FALSE
+			),
+			array(
+				0,
+				FALSE
+			),
+			array(
+				NULL,
+				FALSE
+			),
+			array(
+				FALSE,
+				FALSE
+			)
+		);
 	}
 
 	/**
-	 * Dataprovider
+	 * Test vor validateRequired()
+	 *
+	 * @param string $value
+	 * @param string $expectedResult
+	 * @return void
+	 * @dataProvider validateRequiredReturnsBoolDataProvider
+	 * @test
+	 */
+	public function validateRequiredReturnsBool($value, $expectedResult) {
+		$this->assertSame(
+			$expectedResult,
+			$this->generalValidatorMock->_callRef('validateRequired', $value)
+		);
+	}
+
+	/**
+	 * Dataprovider for validateEmailReturnsBool()
 	 *
 	 * @return array
 	 */
 	public function validateEmailReturnsBoolDataProvider() {
 		return array(
-			// #0
 			array(
 				'in2code.de',
 				FALSE
 			),
-
-			// #1
 			array(
 				'',
 				FALSE
 			),
-
-			// #2
 			array(
 				'alex@in2code.de',
 				TRUE
 			),
-
-			// #3
 			array(
 				'alex@in2code.',
 				FALSE
 			),
-
-			// #4
 			array(
 				'www.in2code.de',
 				FALSE
 			),
-
-			// #5
 			array(
 				'test@www.in2code.de',
 				TRUE
 			),
-
-			// #6
 			array(
 				'alex@test.test.in2code.de',
 				TRUE
@@ -127,54 +166,130 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for validateEmail()
 	 *
-	 * @param \string $value
-	 * @param \string $result
+	 * @param string $value
+	 * @param string $expectedResult
 	 * @return void
 	 * @dataProvider validateEmailReturnsBoolDataProvider
 	 * @test
 	 */
-	public function validateEmailReturnsBool($value, $result) {
-		$test = $this->generalValidatorMock->_callRef('validateEmail', $value);
+	public function validateEmailReturnsBool($value, $expectedResult) {
+		$this->assertSame(
+			$expectedResult,
+			$this->generalValidatorMock->_callRef('validateEmail', $value)
+		);
+	}
 
-		$this->assertSame($result, $test);
+	/**
+	 * Dataprovider for validateMinReturnsBool()
+	 *
+	 * @return array
+	 */
+	public function validateMinReturnsBoolDataProvider() {
+		return array(
+			array(
+				'in2code.de',
+				10,
+				TRUE
+			),
+			array(
+				'in2code.d',
+				10,
+				FALSE
+			),
+			array(
+				'i',
+				1,
+				TRUE
+			),
+			array(
+				'i',
+				2,
+				FALSE
+			),
+			array(
+				' i ',
+				2,
+				TRUE
+			)
+		);
 	}
 
 	/**
 	 * Test vor validateMin()
 	 *
+	 * @param string $value
+	 * @param int $allowedLength
+	 * @param string $expectedResult
 	 * @return void
+	 * @dataProvider validateMinReturnsBoolDataProvider
 	 * @test
 	 */
-	public function validateMinReturnsBool() {
-		$value = 'in2code.de';
-		$allowedLength = 10;
-		$result = $this->generalValidatorMock->_callRef('validateMin', $value, $allowedLength);
-		$this->assertTrue($result);
+	public function validateMinReturnsBool($value, $allowedLength, $expectedResult) {
+		$this->assertSame(
+			$expectedResult,
+			$this->generalValidatorMock->_callRef('validateMin', $value, $allowedLength)
+		);
+	}
 
-		$value = 'in2code.d';
-		$result = $this->generalValidatorMock->_callRef('validateMin', $value, $allowedLength);
-		$this->assertFalse($result);
+	/**
+	 * Dataprovider for validateMaxReturnsBool()
+	 *
+	 * @return array
+	 */
+	public function validateMaxReturnsBoolDataProvider() {
+		return array(
+			array(
+				'in2code.de',
+				10,
+				TRUE
+			),
+			array(
+				'in2code.de.',
+				10,
+				FALSE
+			),
+			array(
+				'i',
+				1,
+				TRUE
+			),
+			array(
+				'i',
+				2,
+				TRUE
+			),
+			array(
+				' i ',
+				2,
+				FALSE
+			),
+			array(
+				'i',
+				0,
+				FALSE
+			)
+		);
 	}
 
 	/**
 	 * Test vor validateMax()
 	 *
+	 * @param string $value
+	 * @param int $allowedLength
+	 * @param string $expectedResult
 	 * @return void
+	 * @dataProvider validateMaxReturnsBoolDataProvider
 	 * @test
 	 */
-	public function validateMaxReturnsBool() {
-		$value = 'in2code.de';
-		$allowedLength = 10;
-		$result = $this->generalValidatorMock->_callRef('validateMax', $value, $allowedLength);
-		$this->assertTrue($result);
-
-		$value = 'in2code.de.';
-		$result = $this->generalValidatorMock->_callRef('validateMax', $value, $allowedLength);
-		$this->assertFalse($result);
+	public function validateMaxReturnsBool($value, $allowedLength, $expectedResult) {
+		$this->assertSame(
+			$expectedResult,
+			$this->generalValidatorMock->_callRef('validateMax', $value, $allowedLength)
+		);
 	}
 
 	/**
-	 * Dataprovider
+	 * Dataprovider for validateIntReturnsBool()
 	 *
 	 * @return array
 	 */
@@ -228,7 +343,7 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 
 	/**
-	 * Dataprovider
+	 * Dataprovider for validateLettersReturnsBool()
 	 *
 	 * @return array
 	 */
@@ -278,59 +393,71 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 
 	/**
-	 * Dataprovider
+	 * Dataprovider for validateMustIncludeReturnsBool()
 	 *
 	 * @return array
 	 */
 	public function validateMustIncludeReturnsBoolDataProvider() {
 		return array(
-			// #0
 			array(
 				'in2code.de',
 				'number,letter,special',
 				TRUE
 			),
-
-			// #1
 			array(
 				'in2code.de',
 				'number,  special',
 				TRUE
 			),
-
-			// #2
 			array(
 				'in2code.de',
 				'   special  ,   letter ',
 				TRUE
 			),
-
-			// #3
 			array(
 				'in2code',
 				'number,letter',
 				TRUE
 			),
-
-			// #4
 			array(
 				'in2code',
 				'special,letter',
 				FALSE
 			),
-
-			// #5
+			array(
+				'in2code#',
+				'special',
+				TRUE
+			),
+			array(
+				'in2co de',
+				'special',
+				TRUE
+			),
 			array(
 				'in2code',
 				'number',
 				TRUE
 			),
-
-			// #6
 			array(
 				'incode.',
 				'number,letter',
 				FALSE
+			),
+			array(
+				'in2 code',
+				'number,letter',
+				TRUE
+			),
+			array(
+				'in code',
+				'letter',
+				TRUE
+			),
+			array(
+				'1 2',
+				'number',
+				TRUE
 			),
 		);
 	}
@@ -338,75 +465,138 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for validateMustInclude()
 	 *
-	 * @param \string $value
-	 * @param \string $configuration
-	 * @param \string $result
+	 * @param string $value
+	 * @param string $configuration
+	 * @param string $expectedResult
 	 * @return void
 	 * @dataProvider validateMustIncludeReturnsBoolDataProvider
 	 * @test
 	 */
-	public function validateMustIncludeReturnsBool($value, $configuration, $result) {
-		$test = $this->generalValidatorMock->_callRef('validateMustInclude', $value, $configuration);
+	public function validateMustIncludeReturnsBool($value, $configuration, $expectedResult) {
+		$this->assertSame(
+			$expectedResult,
+			$this->generalValidatorMock->_callRef('validateMustInclude', $value, $configuration)
+		);
+	}
 
-		$this->assertSame($result, $test);
+	/**
+	 * Dataprovider for validateInListReturnsBool()
+	 *
+	 * @return array
+	 */
+	public function validateInListReturnsBoolDataProvider() {
+		return array(
+			array(
+				'2',
+				'1,2,5,8',
+				TRUE
+			),
+			array(
+				'2',
+				'1,1,2',
+				TRUE
+			),
+			array(
+				'1',
+				'1,3,2',
+				TRUE
+			),
+			array(
+				'1',
+				'1,3,2',
+				TRUE
+			),
+			array(
+				'1',
+				1,
+				TRUE
+			),
+			array(
+				1,
+				'1,2',
+				TRUE
+			),
+			array(
+				'a',
+				'a',
+				TRUE
+			),
+			array(
+				'23',
+				'1,234,3',
+				FALSE
+			),
+			array(
+				'a',
+				'ab',
+				FALSE
+			),
+			array(
+				'a',
+				'ba',
+				FALSE
+			),
+			array(
+				'a',
+				'bac',
+				FALSE
+			),
+		);
 	}
 
 	/**
 	 * Test vor validateInList()
 	 *
+	 * @param string $value
+	 * @param string $configuration
+	 * @param string $expectedResult
 	 * @return void
+	 * @dataProvider validateInListReturnsBoolDataProvider
 	 * @test
 	 */
-	public function validateInListReturnsBool() {
-		$value = '2';
-		$configuration = '1,2,5,8';
-		$result = $this->generalValidatorMock->_callRef('validateInList', $value, $configuration);
-		$this->assertTrue($result);
-
-		$value = 'ghi';
-		$configuration = 'abc,def,ghi';
-		$result = $this->generalValidatorMock->_callRef('validateInList', $value, $configuration);
-		$this->assertTrue($result);
-
-		$value = '23';
-		$configuration = '1,2,3';
-		$result = $this->generalValidatorMock->_callRef('validateInList', $value, $configuration);
-		$this->assertFalse($result);
+	public function validateInListReturnsBool($value, $configuration, $expectedResult) {
+		$this->assertSame(
+			$expectedResult,
+			$this->generalValidatorMock->_callRef('validateInList', $value, $configuration)
+		);
 	}
 
 	/**
-	 * Dataprovider
+	 * Dataprovider for validateSameAsReturnsBool()
 	 *
 	 * @return array
 	 */
 	public function validateSameAsReturnsBoolDateProvider() {
 		return array(
-			// #0
 			array(
 				'abcd',
 				'abcd',
 				TRUE
 			),
-
-			// #1
 			array(
 				'a',
 				'b',
 				FALSE
 			),
-
-			// #2
 			array(
 				'a',
 				'',
 				FALSE
 			),
-
-			// #3
 			array(
 				'',
 				'',
 				TRUE
+			),
+			array(
+				0,
+				'0',
+				FALSE
+			),
+			array(
+				1,
+				'1',
+				FALSE
 			),
 		);
 	}
@@ -425,5 +615,4 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$test = $this->generalValidatorMock->_callRef('validateSameAs', $value, $value2);
 		$this->assertSame($result, $test);
 	}
-
 }
