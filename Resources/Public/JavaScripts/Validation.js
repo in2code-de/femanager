@@ -105,15 +105,17 @@ jQuery.fn.femanagerValidation = function() {
 
 		$.ajax({
 			url: url,
-			data:
-				'tx_femanager_pi1[validation]=' + element.data('validation') +
-				'&tx_femanager_pi1[value]=' + encodeURIComponent(elementValue) +
-				'&tx_femanager_pi1[field]=' + getFieldName(element) +
-				(user != undefined ? '&tx_femanager_pi1[user]=' + user : '') +
-				(additionalValue ? '&tx_femanager_pi1[additionalValue]=' + encodeURIComponent(additionalValue) : '') +
-				'&storagePid=' + $('#femanagerStoragePid').val() +
-				'&L=' + $('#femanagerLanguage').val() +
-				'&id=' + $('#femanagerPid').val(),
+			data: {
+				'tx_femanager_pi1[validation]': element.data('validation'),
+				'tx_femanager_pi1[value]': elementValue,
+				'tx_femanager_pi1[field]': getFieldName(element),
+				'tx_femanager_pi1[user]': (user != undefined ? user : ''),
+				'tx_femanager_pi1[additionalValue]=': (additionalValue ? additionalValue : ''),
+				'storagePid': $('#femanagerStoragePid').val(),
+				'L': $('#femanagerLanguage').val(),
+				'id': $('#femanagerPid').val()
+			},
+			type: 'POST',
 			cache: false,
 			success: function(data) { // return values
 				if (countForSubmit) {
