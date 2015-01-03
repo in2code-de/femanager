@@ -208,6 +208,9 @@
 			<trans-unit id="validationErrorMustInclude">
 				<source>Try another value for field %s</source>
 			</trans-unit>
+			<trans-unit id="validationErrorMustNotInclude">
+				<source>Not allowed signs in field %s</source>
+			</trans-unit>
 			<trans-unit id="validationErrorInList">
 				<source>This value is not allowed in field %s</source>
 			</trans-unit>
