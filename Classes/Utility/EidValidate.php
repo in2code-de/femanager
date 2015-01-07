@@ -86,7 +86,7 @@ class EidValidate {
 		$this->bootstrap = new \TYPO3\CMS\Extbase\Core\Bootstrap();
 
 		$userObj = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser();
-		$pid = (GeneralUtility::_GET('id') ? GeneralUtility::_GET('id') : 1);
+		$pid = (GeneralUtility::_GP('id') ? GeneralUtility::_GP('id') : 1);
 		$GLOBALS['TSFE'] = GeneralUtility::makeInstance(
 			'TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController',
 			$TYPO3_CONF_VARS,
