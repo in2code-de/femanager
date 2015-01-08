@@ -77,7 +77,7 @@ class EidValidate {
 			),
 			'settings' => array(),
 			'persistence' => array(
-				'storagePid' => GeneralUtility::_GET('storagePid')
+				'storagePid' => GeneralUtility::_GP('storagePid')
 			)
 		);
 		$_POST['tx_femanager_pi1']['action'] = 'validate';
