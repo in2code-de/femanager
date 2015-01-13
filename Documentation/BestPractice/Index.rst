@@ -63,17 +63,17 @@ After that, you should say femanager to use the old folders and merge them with 
 			templateRootPath >
 			templateRootPaths {
 				10 = EXT:femanager/Resources/Private/Templates/
-				20 = templateRootPath = fileadmin/templates/femanager/Templates/
+				20 = fileadmin/templates/femanager/Templates/
 			}
 			partialRootPath >
 			partialRootPaths {
 				10 = EXT:femanager/Resources/Private/Partials/
-				20 = templateRootPath = fileadmin/templates/femanager/Partials/
+				20 = fileadmin/templates/femanager/Partials/
 			}
 			layoutRootPath >
 			layoutRootPaths {
 				10 = EXT:femanager/Resources/Private/Layouts/
-				20 = templateRootPath = fileadmin/templates/femanager/Layouts/
+				20 = fileadmin/templates/femanager/Layouts/
 			}
 		}
 	}

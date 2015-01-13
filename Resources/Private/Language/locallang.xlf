@@ -12,6 +12,9 @@
 			<trans-unit id="tx_femanager_domain_model_user.password">
 				<source>Password</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.password_repeat">
+				<source>Repeat Password</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.usergroup">
 				<source>Usergroup</source>
 			</trans-unit>
