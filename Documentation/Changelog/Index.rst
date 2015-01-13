@@ -32,6 +32,15 @@ Changes
       Changes
 
  - :Version:
+      1.4.3
+   :State:
+      stable
+   :Date:
+      2015-01-13
+   :Changes:
+      Bugfixes #63714, #64164
+
+ - :Version:
       1.4.2
    :State:
       stable
