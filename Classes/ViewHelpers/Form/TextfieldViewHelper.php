@@ -1,6 +1,9 @@
 <?php
 namespace In2\Femanager\ViewHelpers\Form;
 
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldViewHelper as OriginalTextfieldViewHelper;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,8 +30,10 @@ namespace In2\Femanager\ViewHelpers\Form;
 
 /**
  * Class TextfieldViewHelper
+ *
+ * @package In2\Femanager\ViewHelpers\Form
  */
-class TextfieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldViewHelper {
+class TextfieldViewHelper extends OriginalTextfieldViewHelper {
 
 	/**
 	 * Get the value of this form element (changed to prefill from TypoScript)
@@ -51,13 +56,13 @@ class TextfieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldVie
 	/**
 	 * Read value from TypoScript
 	 *
-	 * @return \string Value from TypoScript
+	 * @return string Value from TypoScript
 	 */
 	protected function getValueFromTypoScript() {
 		$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
 		$cObj = $this->configurationManager->getContentObject();
 		$typoScript = $this->configurationManager->getConfiguration(
-			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+			ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 		);
 		$prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
 		$value = $cObj->cObjGetSingle(

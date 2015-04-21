@@ -1,7 +1,8 @@
 <?php
 namespace In2\Femanager\Controller;
 
-use \In2\Femanager\Domain\Model\User;
+use In2\Femanager\Domain\Model\User;
+use In2\Femanager\Domain\Validator\ClientsideValidator;
 
 /***************************************************************
  *  Copyright notice
@@ -34,7 +35,7 @@ use \In2\Femanager\Domain\Model\User;
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class UserController extends \In2\Femanager\Controller\AbstractController {
+class UserController extends AbstractController {
 
 	/**
 	 * ClientsideValidator
@@ -47,7 +48,7 @@ class UserController extends \In2\Femanager\Controller\AbstractController {
 	/**
 	 * action list
 	 *
-	 * @param \array $filter
+	 * @param array $filter
 	 * @return void
 	 */
 	public function listAction($filter = array()) {
@@ -64,7 +65,7 @@ class UserController extends \In2\Femanager\Controller\AbstractController {
 	/**
 	 * action show
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param User $user
 	 * @dontvalidate $user
 	 * @return void
 	 */
@@ -96,7 +97,7 @@ class UserController extends \In2\Femanager\Controller\AbstractController {
 	}
 
 	/**
-	 * Just for showing informations
+	 * Showing information
 	 *
 	 * @return void
 	 */
@@ -106,24 +107,24 @@ class UserController extends \In2\Femanager\Controller\AbstractController {
 	/**
 	 * Call this Action from eID to validate field values
 	 *
-	 * @param \string $validation Validation string like "required, email, min(10)"
-	 * @param \string $value Given Field value
-	 * @param \string $field Fieldname like "username" or "email"
-	 * @param \In2\Femanager\Domain\Model\User $user Existing User
-	 * @param \string $additionalValue Additional Values
+	 * @param string $validation Validation string like "required, email, min(10)"
+	 * @param string $value Given Field value
+	 * @param string $field Fieldname like "username" or "email"
+	 * @param User $user Existing User
+	 * @param string $additionalValue Additional Values
 	 * @return void
 	 */
 	public function validateAction($validation = NULL, $value = NULL, $field = NULL, User $user = NULL, $additionalValue = '') {
-		$this->clientsideValidator->setValidationSettingsString($validation);
-		$this->clientsideValidator->setValue($value);
-		$this->clientsideValidator->setFieldName($field);
-		$this->clientsideValidator->setUser($user);
-		$this->clientsideValidator->setAdditionalValue($additionalValue);
-		$isValid = $this->clientsideValidator->validateField();
-		$messages = $this->clientsideValidator->getMessages();
+		$result = $this->clientsideValidator
+			->setValidationSettingsString($validation)
+			->setValue($value)
+			->setFieldName($field)
+			->setUser($user)
+			->setAdditionalValue($additionalValue)
+			->validateField();
 
-		$this->view->assign('messages', $messages);
-		$this->view->assign('isValid', $isValid);
+		$this->view->assign('isValid', $result);
+		$this->view->assign('messages', $this->clientsideValidator->getMessages());
 		$this->view->assign('validation', $validation);
 		$this->view->assign('value', $value);
 		$this->view->assign('fieldname', $field);

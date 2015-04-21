@@ -1,10 +1,14 @@
 <?php
 namespace In2\Femanager\Controller;
 
-use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \In2\Femanager\Domain\Model\User;
-use \In2\Femanager\Utility\Div;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use In2\Femanager\Domain\Model\User;
+use In2\Femanager\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -37,7 +41,7 @@ use \In2\Femanager\Utility\Div;
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class AbstractController extends ActionController {
 
 	/**
 	 * userRepository
@@ -88,7 +92,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	/**
 	 * Content Object
 	 *
-	 * @var object
+	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
 	 */
 	public $cObj;
 
@@ -102,7 +106,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	/**
 	 * TypoScript
 	 *
-	 * @var object
+	 * @var array
 	 */
 	public $config;
 
@@ -116,7 +120,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	/**
 	 * Current logged in user object
 	 *
-	 * @var object
+	 * @var User
 	 */
 	public $user;
 
@@ -135,20 +139,21 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	public $controllerContext;
 
 	/**
+	 * @var \TYPO3\CMS\Core\Database\DatabaseConnection
+	 */
+	protected $databaseConnection = NULL;
+
+	/**
 	 * Prefix method to createAction()
 	 * 		Create Confirmation from Admin is not necessary
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param User $user
 	 * @return void
 	 */
 	public function createAllConfirmed(User $user) {
 		$this->userRepository->add($user);
 		$this->persistenceManager->persistAll();
-
-		$this->flashMessageContainer->add(
-			LocalizationUtility::translate('create', 'femanager')
-		);
-
+		$this->addFlashMessage(LocalizationUtility::translate('create', 'femanager'));
 		$this->div->log(
 			LocalizationUtility::translate('tx_femanager_domain_model_log.state.101', 'femanager'),
 			101,
@@ -160,7 +165,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	/**
 	 * Prefix method to createAction(): Create must be confirmed by Admin
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param User $user
 	 * @return void
 	 */
 	public function createRequest(User $user) {
@@ -200,18 +205,13 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$this->redirectByAction('new', 'requestRedirect');
 
 			// add flashmessage
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('createRequestWaitingForUserConfirm', 'femanager')
-			);
+			$this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm', 'femanager'));
 
 			// redirect
 			$this->redirect('new');
 		}
 		if (!empty($this->settings['new']['confirmByAdmin'])) {
-
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('createRequestWaitingForAdminConfirm', 'femanager')
-			);
+			$this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm', 'femanager'));
 
 			// send email to admin
 			$this->sendMail->send(
@@ -240,7 +240,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * Prefix method to updateAction()
 	 * 		Update Confirmation from Admin is not necessary
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param User $user
 	 * @return void
 	 */
 	public function updateAllConfirmed(User $user) {
@@ -281,16 +281,13 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		);
 
 		$this->redirectByAction('edit');
-
-		$this->flashMessageContainer->add(
-			LocalizationUtility::translate('update', 'femanager')
-		);
+		$this->addFlashMessage(LocalizationUtility::translate('update', 'femanager'));
 	}
 
 	/**
 	 * Prefix method to updateAction(): Update must be confirmed by Admin
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param User $user
 	 * @return void
 	 */
 	public function updateRequest($user) {
@@ -324,20 +321,15 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$user
 		);
 
-		// redirect if turned on in TypoScript
 		$this->redirectByAction('edit', 'requestRedirect');
-
-		// add flashmessage
-		$this->flashMessageContainer->add(
-			LocalizationUtility::translate('updateRequest', 'femanager')
-		);
+		$this->addFlashMessage(LocalizationUtility::translate('updateRequest', 'femanager'));
 	}
 
 	/**
 	 * Some additional actions after profile creation
 	 *
-	 * @param $user
-	 * @param $action
+	 * @param User $user
+	 * @param string $action
 	 * @param string $redirectByActionName Action to redirect
 	 * @param bool $login Login after creation
 	 * @param string $status
@@ -412,7 +404,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	/**
 	 * Login FE-User after creation
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param User $user
 	 * @return void
 	 */
 	protected function loginAfterCreate($user) {
@@ -424,25 +416,25 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
 
 		$pids = $this->allConfig['persistence']['storagePid'];
-		$extraWhere = ' AND pid IN (' . $GLOBALS['TYPO3_DB']->cleanIntList($pids) . ')';
+		$extraWhere = ' AND pid IN (' . $this->databaseConnection->cleanIntList($pids) . ')';
 		$user = $GLOBALS['TSFE']->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
 
 		$GLOBALS['TSFE']->fe_user->createUserSession($user);
 		$GLOBALS['TSFE']->fe_user->user = $GLOBALS['TSFE']->fe_user->fetchUserSession();
 
 		// add login flashmessage
-		$this->flashMessageContainer->add(
+		$this->addFlashMessage(
 			LocalizationUtility::translate('login', 'femanager'),
 			'',
-			\TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE
+			FlashMessage::NOTICE
 		);
 	}
 
 	/**
 	 * Redirect
 	 *
-	 * @param \string $action		"new", "edit"
-	 * @param \string $category		"redirect", "requestRedirect" value from TypoScript
+	 * @param string $action "new", "edit"
+	 * @param string $category "redirect", "requestRedirect" value from TypoScript
 	 * @return void
 	 */
 	protected function redirectByAction($action = 'new', $category = 'redirect') {
@@ -503,10 +495,10 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			);
 
 			// add flashmessage
-			$this->flashMessageContainer->add(
+			$this->addFlashMessage(
 				LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
 				'',
-				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+				FlashMessage::ERROR
 			);
 
 			$this->forward('edit');
@@ -536,15 +528,16 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function initializeAction() {
+		$this->databaseConnection = $GLOBALS['TYPO3_DB'];
 		$this->controllerContext = $this->buildControllerContext();
 		$this->user = $this->div->getCurrentUser();
 		$this->cObj = $this->configurationManager->getContentObject();
 		$this->pluginVariables = $this->request->getArguments();
 		$this->allConfig = $this->configurationManager->getConfiguration(
-			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+			ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
 		);
 		$this->config = $this->configurationManager->getConfiguration(
-			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+			ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 		);
 		$this->config = $this->config['plugin.']['tx_femanager.']['settings.'];
 		$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
@@ -557,25 +550,25 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				->forProperty('dateOfBirth')
 				->setTypeConverterOption(
 					'TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter',
-					\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+					DateTimeConverter::CONFIGURATION_DATE_FORMAT,
 					LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat', 'femanager')
 				);
 		}
 		// check if ts is included
 		if ($this->settings['_TypoScriptIncluded'] != 1 && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
-			$this->flashMessageContainer->add(
+			$this->addFlashMessage(
 				LocalizationUtility::translate('error_no_typoscript', 'femanager'),
 				'',
-				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+				FlashMessage::ERROR
 			);
 		}
 
 		// check if storage pid was set
 		if (intval($this->allConfig['persistence']['storagePid']) === 0 && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
-			$this->flashMessageContainer->add(
+			$this->addFlashMessage(
 				LocalizationUtility::translate('error_no_storagepid', 'femanager'),
 				'',
-				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+				FlashMessage::ERROR
 			);
 		}
 	}

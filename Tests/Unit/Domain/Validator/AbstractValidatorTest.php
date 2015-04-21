@@ -761,9 +761,9 @@ class AbstractValidatorTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for validateSameAs()
 	 *
-	 * @param \string $value
-	 * @param \string $value2
-	 * @param \string $result
+	 * @param string $value
+	 * @param string $value2
+	 * @param string $result
 	 * @return void
 	 * @dataProvider validateSameAsReturnsBoolDateProvider
 	 * @test

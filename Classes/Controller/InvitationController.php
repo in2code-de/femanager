@@ -1,10 +1,11 @@
 <?php
 namespace In2\Femanager\Controller;
 
-use \TYPO3\CMS\Extbase\Utility\LocalizationUtility,
-	\TYPO3\CMS\Core\Utility\GeneralUtility,
-	\In2\Femanager\Domain\Model\User,
-	\In2\Femanager\Utility\Div;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use In2\Femanager\Domain\Model\User;
+use In2\Femanager\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -37,7 +38,7 @@ use \TYPO3\CMS\Extbase\Utility\LocalizationUtility,
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class InvitationController extends \In2\Femanager\Controller\AbstractController {
+class InvitationController extends AbstractController {
 
 	/**
 	 * action new
@@ -83,11 +84,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	public function createAllConfirmed(User $user) {
 		$this->userRepository->add($user);
 		$this->persistenceManager->persistAll();
-
-		$this->flashMessageContainer->add(
-			LocalizationUtility::translate('createAndInvited', 'femanager')
-		);
-
+		$this->addFlashMessage(LocalizationUtility::translate('createAndInvited', 'femanager'));
 		$this->div->log(
 			LocalizationUtility::translate('tx_femanager_domain_model_log.state.401', 'femanager'),
 			401,
@@ -145,8 +142,8 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	/**
 	 * action edit
 	 *
-	 * @param \int $user User UID
-	 * @param \string $hash
+	 * @param int $user User UID
+	 * @param string $hash
 	 * @return void
 	 */
 	public function editAction($user, $hash = NULL) {
@@ -166,11 +163,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 				// delete user for security reasons
 				$this->userRepository->remove($user);
 			}
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('createFailedProfile', 'femanager'),
-				'',
-				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
-			);
+			$this->addFlashMessage(LocalizationUtility::translate('createFailedProfile', 'femanager'), '', FlashMessage::ERROR);
 			$this->forward('status');
 		}
 
@@ -186,10 +179,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	 * @return void
 	 */
 	public function updateAction($user) {
-		$this->flashMessageContainer->add(
-			LocalizationUtility::translate('createAndInvitedFinished', 'femanager')
-		);
-
+		$this->addFlashMessage(LocalizationUtility::translate('createAndInvitedFinished', 'femanager'));
 		$this->div->log(
 			LocalizationUtility::translate('tx_femanager_domain_model_log.state.405', 'femanager'),
 			401,
@@ -240,8 +230,8 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 	/**
 	 * action delete
 	 *
-	 * @param \int $user User UID
-	 * @param \string $hash
+	 * @param int $user User UID
+	 * @param string $hash
 	 * @return void
 	 */
 	public function deleteAction($user, $hash = NULL) {
@@ -257,9 +247,7 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 			);
 
 			// add flashmessage
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('tx_femanager_domain_model_log.state.402', 'femanager')
-			);
+			$this->addFlashMessage(LocalizationUtility::translate('tx_femanager_domain_model_log.state.402', 'femanager'));
 
 			// send notify email to admin
 			if ($this->settings['invitation']['notifyAdminStep1']) {
@@ -288,10 +276,10 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 			$this->redirectByAction('invitation', 'redirectDelete');
 			$this->redirect('status');
 		} else {
-			$this->flashMessageContainer->add(
+			$this->addFlashMessage(
 				LocalizationUtility::translate('tx_femanager_domain_model_log.state.403', 'femanager'),
 				'',
-				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+				FlashMessage::ERROR
 			);
 			$this->redirect('status');
 		}
@@ -323,10 +311,10 @@ class InvitationController extends \In2\Femanager\Controller\AbstractController 
 		}
 
 		// current user is not allowed
-		$this->flashMessageContainer->add(
+		$this->addFlashMessage(
 			LocalizationUtility::translate('tx_femanager_domain_model_log.state.404', 'femanager'),
 			'',
-			\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+			FlashMessage::ERROR
 		);
 		$this->forward('status');
 		return FALSE;

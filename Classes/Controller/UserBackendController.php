@@ -1,7 +1,9 @@
 <?php
 namespace In2\Femanager\Controller;
 
-use \In2\Femanager\Utility\Div;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use In2\Femanager\Domain\Model\User;
+use In2\Femanager\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -34,29 +36,29 @@ use \In2\Femanager\Utility\Div;
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class UserBackendController extends \In2\Femanager\Controller\AbstractController {
+class UserBackendController extends AbstractController {
 
 	/**
 	 * action list
 	 *
-	 * @param \array $filter Filter Array
+	 * @param array $filter Filter Array
 	 * @return void
 	 */
 	public function listAction($filter = array()) {
 		$users = $this->userRepository->findAllInBackend($filter);
 		$this->view->assign('users', $users);
-		$this->view->assign('token', \TYPO3\CMS\Backend\Utility\BackendUtility::getUrlToken('tceAction'));
+		$this->view->assign('token', BackendUtility::getUrlToken('tceAction'));
 	}
 
 	/**
 	 * action user logout
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param User $user
 	 * @return void
 	 */
-	public function userLogoutAction(\In2\Femanager\Domain\Model\User $user) {
+	public function userLogoutAction(User $user) {
 		Div::removeFrontendSessionToUser($user);
-		$this->flashMessageContainer->add('User successfully logged out');
+		$this->addFlashMessage('User successfully logged out');
 		$this->redirect('list');
 	}
 

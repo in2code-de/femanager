@@ -1,6 +1,9 @@
 <?php
 namespace In2\Femanager\ViewHelpers\Misc;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,28 +30,67 @@ namespace In2\Femanager\ViewHelpers\Misc;
 
 /**
  * Class RequestViewHelper
+ *
+ * @package In2\Femanager\ViewHelpers\Misc
  */
-class RequestViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class RequestViewHelper extends AbstractViewHelper {
+
+	/**
+	 * @var array|string
+	 */
+	protected $variable = array();
+
+	/**
+	 * @var int
+	 */
+	protected $depth = 1;
+
+	/**
+	 * @var array
+	 */
+	protected $testVariables = NULL;
 
 	/**
 	 * Get a GET or POST parameter
 	 *
-	 * @param \string $parameter			like tx_ext_pi1|list|field
-	 * @param \bool $htmlspecialchars		Enable/Disabe htmlspecialchars
-	 * @return \string
+	 * @param string $parameter like tx_ext_pi1|list|field
+	 * @param bool $htmlspecialchars Enable/Disable htmlspecialchars
+	 * @return string
 	 */
 	public function render($parameter, $htmlspecialchars = TRUE) {
-		// allow only normal characters
-		$parameter = preg_replace('/[^a-zA-Z0-9_-\|]/', '', $parameter);
-		// replace | with ][
-		$string = str_replace('|', '\'][\'', $parameter);
-		// create $_REQUEST string
-		$string = '$_REQUEST[\'' . $string . '\']';
-		// create variable
-		eval('$value = ' . $string . ';');
+		$parts = $this->init($parameter);
+		$result = $this->getVariableFromDepth($parts);
 		if ($htmlspecialchars) {
-			$value = htmlspecialchars($value);
+			$result = htmlspecialchars($result);
 		}
-		return $value;
+		return $result;
+	}
+
+	/**
+	 * @param array $param
+	 * @return array|string
+	 */
+	protected function getVariableFromDepth(array $param) {
+		if (is_array($this->variable)) {
+			$this->variable = $this->variable[$param[$this->depth]];
+			$this->depth++;
+			$this->getVariableFromDepth($param);
+		}
+		return $this->variable;
+	}
+
+	/**
+	 * Initially sets $this->variable
+	 *
+	 * @param $parameter
+	 * @return array
+	 */
+	protected function init($parameter) {
+		$parts = explode('|', $parameter);
+		$this->variable = GeneralUtility::_GP($parts[0]);
+		if ($this->testVariables) {
+			$this->variable = $this->testVariables[$parts[0]];
+		}
+		return $parts;
 	}
 }

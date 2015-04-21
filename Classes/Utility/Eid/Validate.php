@@ -1,6 +1,9 @@
 <?php
-namespace In2\Femanager\Utility;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+namespace In2\Femanager\Utility\Eid;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Core\Bootstrap;
+use TYPO3\CMS\Frontend\Utility\EidUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -33,26 +36,26 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * @package	TYPO3
  * @subpackage	EidValidate
  */
-class EidValidate {
+class Validate {
 
 	/**
 	 * configuration
 	 *
-	 * @var \array
+	 * @var array
 	 */
 	protected $configuration;
 
 	/**
 	 * bootstrap
 	 *
-	 * @var \array
+	 * @var array
 	 */
 	protected $bootstrap;
 
 	/**
 	 * Generates the output
 	 *
-	 * @return \string		from action
+	 * @return string		from action
 	 */
 	public function run() {
 		return $this->bootstrap->run('', $this->configuration);
@@ -61,7 +64,7 @@ class EidValidate {
 	/**
 	 * Initialize Extbase
 	 *
-	 * @param \array $TYPO3_CONF_VARS
+	 * @param array $TYPO3_CONF_VARS
 	 */
 	public function __construct($TYPO3_CONF_VARS) {
 		$this->configuration = array(
@@ -83,12 +86,12 @@ class EidValidate {
 		$_POST['tx_femanager_pi1']['action'] = 'validate';
 		$_POST['tx_femanager_pi1']['controller'] = 'User';
 
-		$this->bootstrap = new \TYPO3\CMS\Extbase\Core\Bootstrap();
+		$this->bootstrap = new Bootstrap();
 
-		$userObj = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser();
+		$userObj = EidUtility::initFeUser();
 		$pid = (GeneralUtility::_GP('id') ? GeneralUtility::_GP('id') : 1);
 		$GLOBALS['TSFE'] = GeneralUtility::makeInstance(
-			'TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController',
+			'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
 			$TYPO3_CONF_VARS,
 			$pid,
 			0,
@@ -98,12 +101,10 @@ class EidValidate {
 		$GLOBALS['TSFE']->fe_user = $userObj;
 		$GLOBALS['TSFE']->id = $pid;
 		$GLOBALS['TSFE']->determineId();
-		$GLOBALS['TSFE']->getCompressedTCarray();
 		$GLOBALS['TSFE']->initTemplate();
 		$GLOBALS['TSFE']->getConfigArray();
-		$GLOBALS['TSFE']->includeTCA();
 	}
 }
 
-$eid = GeneralUtility::makeInstance('In2\Femanager\Utility\EidValidate', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = GeneralUtility::makeInstance('In2\\Femanager\\Utility\\Eid\\Validate', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->run();

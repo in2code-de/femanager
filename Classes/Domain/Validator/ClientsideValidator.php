@@ -1,14 +1,17 @@
 <?php
 namespace In2\Femanager\Domain\Validator;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility,
-	\In2\Femanager\Utility\Div,
-	\TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use In2\Femanager\Domain\Model\User;
+use In2\Femanager\Utility\Div;
 
 /**
  * Class ClientsideValidator
+ *
+ * @package In2\Femanager\Domain\Validator
  */
-class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValidator {
+class ClientsideValidator extends AbstractValidator {
 
 	/**
 	 * Validation settings string
@@ -17,47 +20,49 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 	 * 			uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special),
 	 * 			inList(1,2,3)
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $validationSettingsString;
 
 	/**
 	 * Field Value
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $value;
 
 	/**
 	 * Field Name
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $fieldName;
 
 	/**
 	 * User
 	 *
-	 * @var \In2\Femanager\Domain\Model\User
+	 * @var User
 	 */
 	protected $user = NULL;
 
 	/**
 	 * Error message container
 	 *
-	 * @var \array
+	 * @var array
 	 */
 	protected $messages = array();
 
 	/**
 	 * Additional Values (for comparing a value with another)
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $additionalValue;
 
 	/**
 	 * Validate Field
+	 *
+	 * @return bool
 	 */
 	public function validateField() {
 		$validationSettings = GeneralUtility::trimExplode(',', $this->validationSettingsString, 1);
@@ -186,11 +191,12 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 	/**
 	 * Set validation
 	 *
-	 * @param \string $validationSettingsString
-	 * @return void
+	 * @param string $validationSettingsString
+	 * @return ClientsideValidator
 	 */
 	public function setValidationSettingsString($validationSettingsString) {
 		$this->validationSettingsString = $validationSettingsString;
+		return $this;
 	}
 
 	/**
@@ -204,10 +210,11 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 
 	/**
 	 * @param string $value
-	 * @return void
+	 * @return ClientsideValidator
 	 */
 	public function setValue($value) {
 		$this->value = $value;
+		return $this;
 	}
 
 	/**
@@ -220,7 +227,7 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 	/**
 	 * Add a message to the errormessage array
 	 *
-	 * @param \string $message
+	 * @param string $message
 	 * @return void
 	 */
 	public function addMessage($message) {
@@ -229,10 +236,11 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 
 	/**
 	 * @param array $messages
-	 * @return void
+	 * @return ClientsideValidator
 	 */
 	public function setMessages($messages) {
 		$this->messages = $messages;
+		return $this;
 	}
 
 	/**
@@ -244,10 +252,11 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 
 	/**
 	 * @param string $fieldName
-	 * @return void
+	 * @return ClientsideValidator
 	 */
 	public function setFieldName($fieldName) {
 		$this->fieldName = $fieldName;
+		return $this;
 	}
 
 	/**
@@ -258,15 +267,16 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 	}
 
 	/**
-	 * @param \In2\Femanager\Domain\Model\User $user
-	 * @return void
+	 * @param User $user
+	 * @return ClientsideValidator
 	 */
-	public function setUser($user) {
+	public function setUser(User $user = NULL) {
 		$this->user = $user;
+		return $this;
 	}
 
 	/**
-	 * @return \In2\Femanager\Domain\Model\User
+	 * @return User
 	 */
 	public function getUser() {
 		return $this->user;
@@ -274,9 +284,11 @@ class ClientsideValidator extends \In2\Femanager\Domain\Validator\AbstractValida
 
 	/**
 	 * @param string $additionalValue
+	 * @return ClientsideValidator
 	 */
 	public function setAdditionalValue($additionalValue) {
 		$this->additionalValue = $additionalValue;
+		return $this;
 	}
 
 	/**

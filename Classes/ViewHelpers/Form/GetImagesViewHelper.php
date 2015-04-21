@@ -1,7 +1,8 @@
 <?php
 namespace In2\Femanager\ViewHelpers\Form;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
 
 /***************************************************************
  *  Copyright notice
@@ -32,7 +33,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * Class GetImagesViewHelper
  */
-class GetImagesViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper {
+class GetImagesViewHelper extends AbstractFormFieldViewHelper {
 
 	/**
 	 * Initialize the arguments.

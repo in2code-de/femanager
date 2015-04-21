@@ -20,7 +20,7 @@ class CaptchaValidator extends \In2\Femanager\Domain\Validator\AbstractValidator
 		}
 		$captchaCode = $this->pluginVariables['captcha'];
 
-		$freecapCaptchaValidator = $this->objectManager->get('SJBR\SrFreecap\Validation\Validator\CaptchaValidator');
+		$freecapCaptchaValidator = $this->objectManager->get('SJBR\\SrFreecap\\Validation\\Validator\\CaptchaValidator');
 		if ($freecapCaptchaValidator->isValid($captchaCode)) {
 			return TRUE;
 		}

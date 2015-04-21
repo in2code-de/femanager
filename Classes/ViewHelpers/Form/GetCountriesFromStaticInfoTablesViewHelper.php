@@ -1,6 +1,9 @@
 <?php
 namespace In2\Femanager\ViewHelpers\Form;
 
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -30,7 +33,7 @@ namespace In2\Femanager\ViewHelpers\Form;
  *
  * Class GetCountriesFromStaticInfoTablesViewHelper
  */
-class GetCountriesFromStaticInfoTablesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper {
 
 	/**
 	 * countryRepository
@@ -43,24 +46,18 @@ class GetCountriesFromStaticInfoTablesViewHelper extends \TYPO3\CMS\Fluid\Core\V
 	/**
 	 * Build an country array
 	 *
-	 * @param \string $key
-	 * @param \string $value
-	 * @param \string $sortbyField
-	 * @param \string $sorting
-	 * @return \array
+	 * @param string $key
+	 * @param string $value
+	 * @param string $sortbyField
+	 * @param string $sorting
+	 * @return array
 	 */
 	public function render($key = 'isoCodeA3', $value = 'officialNameLocal', $sortbyField = 'isoCodeA3', $sorting = 'asc') {
 		$countries = $this->countryRepository->findAllOrderedBy($sortbyField, $sorting);
 		$countriesArray = array();
 		foreach ($countries as $country) {
-			if (
-				method_exists($country, 'get' . ucfirst($key)) &&
-				method_exists($country, 'get' . ucfirst($value))
-			) {
-				$countriesArray[$country->{'get' . ucfirst($key)}()] = $country->{'get' . ucfirst($value)}();
-			} else {
-				$countriesArray[$country->getIsoCodeA3()] = $country->getOfficialNameLocal();
-			}
+			/** @var $country \SJBR\StaticInfoTables\Domain\Model\Country */
+			$countriesArray[ObjectAccess::getProperty($country, $key)] = ObjectAccess::getProperty($country, $value);
 		}
 		return $countriesArray;
 	}

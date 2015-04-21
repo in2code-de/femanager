@@ -1,6 +1,9 @@
 <?php
 namespace In2\Femanager\ViewHelpers\Form;
 
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper as OriginalSelectViewHelper;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -30,7 +33,7 @@ namespace In2\Femanager\ViewHelpers\Form;
  *
  * Class SelectViewHelper
  */
-class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper {
+class SelectViewHelper extends OriginalSelectViewHelper {
 
 	/**
 	 * Initialize
@@ -68,7 +71,7 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
 			$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
 			$cObj = $this->configurationManager->getContentObject();
 			$typoScript = $this->configurationManager->getConfiguration(
-				\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+				ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 			);
 			$prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
 			if (!empty($prefillTypoScript[$this->getFieldName()])) {

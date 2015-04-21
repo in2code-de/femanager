@@ -40,7 +40,7 @@ class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Action Name
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $actionName;
 

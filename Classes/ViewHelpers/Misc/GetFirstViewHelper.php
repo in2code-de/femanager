@@ -1,13 +1,15 @@
 <?php
 namespace In2\Femanager\ViewHelpers\Misc;
 
+use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
+
 /**
  * View helper to get first subobject of objectstorage
  *
  * @package TYPO3
  * @subpackage Fluid
  */
-class GetFirstViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper {
+class GetFirstViewHelper extends AbstractFormFieldViewHelper {
 
 	/**
 	 * Initialize the arguments.

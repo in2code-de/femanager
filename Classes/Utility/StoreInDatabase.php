@@ -1,8 +1,6 @@
 <?php
 namespace In2\Femanager\Utility;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /***************************************************************
  *  Copyright notice
  *
@@ -51,13 +49,18 @@ class StoreInDatabase {
 	protected $properties = array();
 
 	/**
+	 * @var \TYPO3\CMS\Core\Database\DatabaseConnection
+	 */
+	protected $databaseConnection = NULL;
+
+	/**
 	 * Executes the storage
 	 *
 	 * @return int uid of inserted record
 	 */
 	public function execute() {
-		$GLOBALS['TYPO3_DB']->exec_INSERTquery($this->getTable(), $this->getProperties());
-		return $GLOBALS['TYPO3_DB']->sql_insert_id();
+		$this->databaseConnection->exec_INSERTquery($this->getTable(), $this->getProperties());
+		return $this->databaseConnection->sql_insert_id();
 	}
 
 	/**
@@ -109,5 +112,12 @@ class StoreInDatabase {
 	 */
 	public function removeProperty($propertyName) {
 		unset($this->properties[$propertyName]);
+	}
+
+	/**
+	 * Initialize
+	 */
+	public function __construct() {
+		$this->databaseConnection = $GLOBALS['TYPO3_DB'];
 	}
 }

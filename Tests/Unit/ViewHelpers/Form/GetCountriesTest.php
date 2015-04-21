@@ -1,6 +1,8 @@
 <?php
 namespace In2\Femanager\ViewHelpers\Form;
 
+use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,7 +34,7 @@ namespace In2\Femanager\ViewHelpers\Form;
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class GetCountriesTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+class GetCountriesTest extends BaseTestCase {
 
 	/**
 	 * @var \In2\Femanager\ViewHelpers\Form\GetCountriesViewHelper
@@ -64,8 +66,8 @@ class GetCountriesTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 */
 	public function renderReturnArray() {
 		$result = $this->generalValidatorMock->_call('render');
-		$this->assertTrue(array_key_exists('DEU' ,$result));
-		$this->assertTrue(array_key_exists('FRA' ,$result));
-		$this->assertTrue(array_key_exists('SWZ' ,$result));
+		$this->assertTrue(array_key_exists('DEU', $result));
+		$this->assertTrue(array_key_exists('FRA', $result));
+		$this->assertTrue(array_key_exists('SWZ', $result));
 	}
 }
