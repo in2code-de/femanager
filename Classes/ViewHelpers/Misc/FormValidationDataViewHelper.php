@@ -1,21 +1,23 @@
 <?php
 namespace In2\Femanager\ViewHelpers\Misc;
 
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /**
  * Set javascript validation data for input fields
  *
  * @package TYPO3
  * @subpackage Fluid
  */
-class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class FormValidationDataViewHelper extends AbstractViewHelper {
 
 	/**
 	 * Set javascript validation data for input fields
 	 *
-	 * @param \array $settings TypoScript
-	 * @param \string $fieldName Fieldname
-	 * @param \array $additionalAttributes AdditionalAttributes
-	 * @return \array
+	 * @param array $settings TypoScript
+	 * @param string $fieldName Fieldname
+	 * @param array $additionalAttributes AdditionalAttributes
+	 * @return array
 	 */
 	public function render($settings, $fieldName, $additionalAttributes = array()) {
 		$array = $additionalAttributes;
@@ -41,17 +43,14 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 	 * 		lettersOnly, uniqueInPage, uniqueInDb, date,
 	 * 		mustInclude(number|letter|special), inList(1|2|3)
 	 *
-	 * @param \array $settings Validation TypoScript
-	 * @param \string $fieldName Fieldname
-	 * @param \string $controllerName "new", "edit", "invitation"
-	 * @return \string
+	 * @param array $settings Validation TypoScript
+	 * @param string $fieldName Fieldname
+	 * @param string $controllerName "new", "edit", "invitation"
+	 * @return string
 	 */
 	protected function getValidationString($settings, $fieldName, $controllerName) {
 		$string = '';
-
-		// for each field
 		foreach ((array) $settings[$controllerName]['validation'][$fieldName] as $validation => $configuration) {
-
 			switch ($validation) {
 				case 'required':
 					// or
@@ -82,7 +81,6 @@ class FormValidationDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 					$string .= $validation;
 					$string .= '(' . str_replace(',', '|', $configuration) . ')';
 			}
-
 			$string .= ',';
 		}
 

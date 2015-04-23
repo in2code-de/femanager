@@ -1,6 +1,10 @@
 <?php
 namespace In2\Femanager\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,17 +36,16 @@ namespace In2\Femanager\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class UserGroupRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class UserGroupRepository extends Repository {
 
 	/**
 	 * Find all groups and respect exclude list
 	 *
-	 * @param \string $removeFromUserGroupSelection commaseparated list
-	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+	 * @param string $removeFromUserGroupSelection commaseparated list
+	 * @return QueryResult
 	 */
 	public function findAllForFrontendSelection($removeFromUserGroupSelection) {
 		$query = $this->createQuery();
-
 		if ($removeFromUserGroupSelection) {
 			$query->matching(
 				$query->logicalNot(
@@ -50,14 +53,7 @@ class UserGroupRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 				)
 			);
 		}
-
-
-		$query->setOrderings(
-			array(
-				'title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
-			)
-		);
-
+		$query->setOrderings(array('title' => QueryInterface::ORDER_ASCENDING));
 		return $query->execute();
 	}
 }

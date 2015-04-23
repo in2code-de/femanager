@@ -2,6 +2,9 @@
 namespace In2\Femanager\Domain\Repository;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use In2\Femanager\Domain\Model\User;
 
 /***************************************************************
  *  Copyright notice
@@ -34,13 +37,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class UserRepository extends Repository {
 
 	/**
 	 * Overload Find by UID to also get hidden records
 	 *
-	 * @param \int $uid fe_users UID
-	 * @return object
+	 * @param int $uid fe_users UID
+	 * @return User
 	 */
 	public function findByUid($uid) {
 		if ($this->identityMap->hasIdentifier($uid, $this->objectType)) {
@@ -62,9 +65,9 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Find users by commaseparated usergroup list
 	 *
-	 * @param \string $userGroupList 		commaseparated list of usergroup uids
-	 * @param \array $settings 				Flexform and TypoScript Settings
-	 * @param \array $filter 				Filter Array
+	 * @param string $userGroupList commaseparated list of usergroup uids
+	 * @param array $settings Flexform and TypoScript Settings
+	 * @param array $filter Filter Array
 	 * @return query object
 	 */
 	public function findByUsergroups($userGroupList, $settings, $filter) {
@@ -83,7 +86,7 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$and[] = $query->logicalOr($or);
 		}
 		if (!empty($filter['searchword'])) {
-			$searchwords = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
+			$searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
 			$fieldsToSearch = GeneralUtility::trimExplode(',', $settings['list']['filter']['searchword']['fieldsToSearch'], TRUE);
 			foreach ($searchwords as $searchword) {
 				$or = array();
@@ -96,9 +99,9 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$query->matching($query->logicalAnd($and));
 
 		// sorting
-		$sorting = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING;
+		$sorting = QueryInterface::ORDER_ASCENDING;
 		if ($settings['list']['sorting'] == 'desc') {
-			$sorting = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING;
+			$sorting = QueryInterface::ORDER_DESCENDING;
 		}
 		$field = preg_replace('/[^a-zA-Z0-9_-]/', '', $settings['list']['orderby']);
 		$query->setOrderings(
@@ -121,10 +124,10 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 *
 	 * @param $field
 	 * @param $value
-	 * @param \In2\Femanager\Domain\Model\User $user Existing User
+	 * @param User $user Existing User
 	 * @return query object
 	 */
-	public function checkUniqueDb($field, $value, \In2\Femanager\Domain\Model\User $user = NULL) {
+	public function checkUniqueDb($field, $value, User $user = NULL) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
@@ -154,7 +157,7 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @param \In2\Femanager\Domain\Model\User $user Existing User
 	 * @return query object
 	 */
-	public function checkUniquePage($field, $value, \In2\Femanager\Domain\Model\User $user = NULL) {
+	public function checkUniquePage($field, $value, User $user = NULL) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
 
@@ -178,11 +181,11 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Find All for Backend Actions
 	 *
-	 * @param \array $filter Filter Array
+	 * @param array $filter Filter Array
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
 	public function findAllInBackend($filter) {
-		$pid = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id');
+		$pid = GeneralUtility::_GET('id');
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
@@ -195,7 +198,7 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$and[] = $query->equals('pid', $pid);
 		}
 		if (!empty($filter['searchword'])) {
-			$searchwords = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
+			$searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
 			foreach ($searchwords as $searchword) {
 				$or = array();
 				$or[] = $query->like('address', '%' . $searchword . '%');
@@ -223,7 +226,7 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// Order
 		$query->setOrderings(
 			array(
-				'username' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+				'username' => QueryInterface::ORDER_ASCENDING
 			)
 		);
 		return $query->execute();

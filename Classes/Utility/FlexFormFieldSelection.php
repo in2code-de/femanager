@@ -1,7 +1,8 @@
 <?php
 namespace In2\Femanager\Utility;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
@@ -12,32 +13,45 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 class FlexFormFieldSelection {
 
 	/**
+	 * @var \TYPO3\CMS\Lang\LanguageService
+	 */
+	protected $languageService = NULL;
+
+	/**
 	 * Add options to FlexForm Selection - Options can be defined in TSConfig
 	 *
-	 * @param $params
-	 * @param $pObj
+	 * @param array $params
 	 * @return void
 	 */
-	public function addOptions(&$params, &$pObj) {
+	public function addOptions(&$params) {
+		$this->initialize();
 		$tSconfig = BackendUtility::getPagesTSconfig($this->getPid());
-
-		// add Captcha field
-		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('sr_freecap')) {
-			$params['items'][] = array(
-				$GLOBALS['LANG']->sL('LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.captcha'),
-				'captcha'
-			);
-		}
-
-		// add fields from TSconfig
+		$this->addCaptchaOption($params);
 		if (!empty($tSconfig['tx_femanager.']['flexForm.'][$params['config']['itemsProcFuncTab'] . '.']['addFieldOptions.'])) {
 			$options = $tSconfig['tx_femanager.']['flexForm.'][$params['config']['itemsProcFuncTab'] . '.']['addFieldOptions.'];
 			foreach ((array) $options as $value => $label) {
 				$params['items'][] = array(
-					GeneralUtility::isFirstPartOfStr($label, 'LLL:') ? $GLOBALS['LANG']->sL($label) : $label,
+					GeneralUtility::isFirstPartOfStr($label, 'LLL:') ? $this->languageService->sL($label) : $label,
 					$value
 				);
 			}
+		}
+	}
+
+	/**
+	 * Add captcha option
+	 *
+	 * @param array $params
+	 * @return void
+	 */
+	protected function addCaptchaOption(&$params) {
+		if (ExtensionManagementUtility::isLoaded('sr_freecap')) {
+			$params['items'][] = array(
+				$this->languageService->sL(
+					'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.captcha'
+				),
+				'captcha'
+			);
 		}
 	}
 
@@ -62,6 +76,15 @@ class FlexFormFieldSelection {
 		}
 
 		return intval($pid);
+	}
+
+	/**
+	 * Initialize
+	 *
+	 * @return void
+	 */
+	protected function initialize() {
+		$this->languageService = $GLOBALS['LANG'];
 	}
 
 }

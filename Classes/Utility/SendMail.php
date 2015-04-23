@@ -68,17 +68,17 @@ class SendMail {
 	/**
 	 * Generate and send Email
 	 *
-	 * @param \string $template					Template file in Templates/Email/
-	 * @param \array $receiver					Combination of Email => Name
-	 * @param \array $sender					Combination of Email => Name
-	 * @param \string $subject					Mail subject
-	 * @param \array $variables					Variables for assignMultiple
-	 * @param \array $typoScript				Add TypoScript to overwrite values
-	 * @return \bool							Mail was sent?
+	 * @param string $template Template file in Templates/Email/
+	 * @param array $receiver Combination of Email => Name
+	 * @param array $sender Combination of Email => Name
+	 * @param string $subject Mail subject
+	 * @param array $variables Variables for assignMultiple
+	 * @param array $typoScript Add TypoScript to overwrite values
+	 * @return bool mail was sent?
 	 */
 	public function send($template, $receiver, $sender, $subject, $variables = array(), $typoScript = array()) {
 		// config
-		$email = $this->objectManager->get('\TYPO3\CMS\Core\Mail\MailMessage');
+		$email = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
 		$this->cObj = $this->configurationManager->getContentObject();
 		if (!empty($variables['user']) && method_exists($variables['user'], '_getProperties')) {
 			$this->cObj->start($variables['user']->_getProperties());
@@ -175,13 +175,13 @@ class SendMail {
 	/**
 	 * Generate Email Body
 	 *
-	 * @param \string $template Template file in Templates/Email/
-	 * @param \array $variables Variables for assignMultiple
+	 * @param string $template Template file in Templates/Email/
+	 * @param array $variables Variables for assignMultiple
 	 * @return string
 	 */
 	protected function getMailBody($template, $variables) {
 		/** @var \In2\Femanager\Utility\StandaloneViewMultiplePaths $emailBodyObject */
-		$emailBodyObject = $this->objectManager->get('\In2\Femanager\Utility\StandaloneViewMultiplePaths');
+		$emailBodyObject = $this->objectManager->get('In2\\Femanager\\Utility\\StandaloneViewMultiplePaths');
 		$emailBodyObject->getRequest()->setControllerExtensionName('Femanager');
 		$emailBodyObject->getRequest()->setPluginName('Pi1');
 		$emailBodyObject->getRequest()->setControllerName('New');

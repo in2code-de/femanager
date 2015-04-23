@@ -1,6 +1,8 @@
 <?php
 namespace In2\Femanager\ViewHelpers\Repository;
 
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -28,13 +30,13 @@ namespace In2\Femanager\ViewHelpers\Repository;
 /**
  * Class GetFirstViewHelper
  */
-class GetFirstViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class GetFirstViewHelper extends AbstractViewHelper {
 
 	/**
 	 * Call getFirst() method of object storage
 	 *
-	 * @param \object $objects
-	 * @return \mixed
+	 * @param object $objects
+	 * @return mixed
 	 */
 	public function render($objects) {
 		if (method_exists($objects, 'getFirst')) {

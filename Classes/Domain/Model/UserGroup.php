@@ -1,6 +1,8 @@
 <?php
 namespace In2\Femanager\Domain\Model;
 
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,5 +34,5 @@ namespace In2\Femanager\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class UserGroup extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup {
+class UserGroup extends FrontendUserGroup {
 }

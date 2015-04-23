@@ -335,21 +335,21 @@ Example Model User.php which extends to the default femanager Model:
 		/**
 		 * twitterId
 		 *
-		 * @var \string
+		 * @var string
 		 */
 		protected $twitterId;
 
 		/**
 		 * skypeId
 		 *
-		 * @var \string
+		 * @var string
 		 */
 		protected $skypeId;
 
 		/**
 		 * Returns the twitterId
 		 *
-		 * @return \string $twitterId
+		 * @return string $twitterId
 		 */
 		public function getTwitterId() {
 				return $this->twitterId;
@@ -358,7 +358,7 @@ Example Model User.php which extends to the default femanager Model:
 		/**
 		 * Sets the twitterId
 		 *
-		 * @param \string $twitterId
+		 * @param string $twitterId
 		 * @return void
 		 */
 		public function setTwitterId($twitterId) {
@@ -368,7 +368,7 @@ Example Model User.php which extends to the default femanager Model:
 		/**
 		 * Returns the skypeId
 		 *
-		 * @return \string $skypeId
+		 * @return string $skypeId
 		 */
 		public function getSkypeId() {
 				return $this->skypeId;
@@ -377,7 +377,7 @@ Example Model User.php which extends to the default femanager Model:
 		/**
 		 * Sets the skypeId
 		 *
-		 * @param \string $skypeId
+		 * @param string $skypeId
 		 * @return void
 		 */
 		public function setSkypeId($skypeId) {
@@ -526,8 +526,8 @@ CustomClientsideValidator.php:
 		 * Custom Validator
 		 *              Activate via TypoScript - e.g. plugin.tx_femanager.settings.new.validation.username.custom = validationSetting
 		 *
-		 * @param \string $value Given value from input field
-		 * @param \string $validationSetting TypoScript Setting for this field
+		 * @param string $value Given value from input field
+		 * @param string $validationSetting TypoScript Setting for this field
 		 * @return bool
 		 */
 		protected function validateCustom($value, $validationSetting) {
@@ -552,8 +552,8 @@ CustomServersideValidator.php:
 		 * Custom Validator
 		 *              Activate via TypoScript - e.g. plugin.tx_femanager.settings.new.validation.username.custom = validationSetting
 		 *
-		 * @param \string $value Given value from input field
-		 * @param \string $validationSetting TypoScript Setting for this field
+		 * @param string $value Given value from input field
+		 * @param string $validationSetting TypoScript Setting for this field
 		 * @return bool
 		 */
 		protected function validateCustom($value, $validationSetting) {
@@ -791,7 +791,7 @@ This is an example how to use a signal from femanager – in this case we decide
 
 	<?php
 
-	$signalSlotDispatcher = t3lib_div::makeInstance('TYPO3\CMS\Extbase\SignalSlot\Dispatcher');
+	$signalSlotDispatcher = t3lib_div::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
 	$signalSlotDispatcher->connect(
 		'In2\Femanager\Controller\NewController',
 		'createActionBeforePersist',

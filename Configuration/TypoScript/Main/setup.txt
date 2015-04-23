@@ -115,7 +115,7 @@ plugin.tx_femanager {
 				username {
 					required = 1
 					uniqueInDb = 1
-					mustNotInclude = special,space
+					mustNotInclude = space
 				}
 				email {
 					required = 1
@@ -668,7 +668,7 @@ plugin.tx_femanager {
 
 				username {
 					required = 1
-					mustNotInclude = special,space
+					mustNotInclude = space
 				}
 				email {
 					required = 1
@@ -992,7 +992,7 @@ plugin.tx_femanager {
 				username {
 					required = 1
 					uniqueInDb = 1
-					mustNotInclude = special,space
+					mustNotInclude = space
 				}
 				email {
 					required = 1

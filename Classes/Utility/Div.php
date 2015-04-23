@@ -1,8 +1,20 @@
 <?php
 namespace In2\Femanager\Utility;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility,
-	\TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
+use TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility;
+use In2\Femanager\Domain\Model\User;
+use In2\Femanager\Domain\Model\Log;
 
 /***************************************************************
  *  Copyright notice
@@ -87,7 +99,7 @@ class Div {
 	/**
 	 * Return current logged in fe_user
 	 *
-	 * @return object
+	 * @return User
 	 */
 	public function getCurrentUser() {
 		if (!is_array($GLOBALS['TSFE']->fe_user->user)) {
@@ -99,7 +111,7 @@ class Div {
 	/**
 	 * Get Usergroups from current logged in user
 	 *
-	 * @return \array
+	 * @return array
 	 */
 	public function getCurrentUsergroupUids() {
 		$currentLoggedInUser = $this->getCurrentUser();
@@ -115,10 +127,10 @@ class Div {
 	/**
 	 * Set object properties from forceValues in TypoScript
 	 *
-	 * @param $object
-	 * @param $settings
-	 * @param $cObj
-	 * @return $object
+	 * @param object $object
+	 * @param array $settings
+	 * @param ContentObjectRenderer $cObj
+	 * @return object|User $object
 	 */
 	public function forceValues($object, $settings, $cObj) {
 		foreach ((array) $settings as $field => $config) {
@@ -130,7 +142,7 @@ class Div {
 			// value to set
 			$value = $cObj->cObjGetSingle($settings[$field], $settings[$field . '.']);
 
-			if ($field == 'usergroup') {
+			if ($field === 'usergroup') {
 				// need objectstorage for usergroup field
 				$object->removeAllUsergroups();
 				$values = GeneralUtility::trimExplode(',', $value, 1);
@@ -151,12 +163,12 @@ class Div {
 	/**
 	 * Autogenerate username and password if it's empty
 	 *
-	 * @param $user
-	 * @return $user
+	 * @param User $user
+	 * @return User $user
 	 */
-	public function fallbackUsernameAndPassword($user) {
+	public function fallbackUsernameAndPassword(User $user) {
 		$settings = $this->configurationManager->getConfiguration(
-			\TYPO3\CMS\Extbase\Configuration\ConfigurationManager::CONFIGURATION_TYPE_SETTINGS
+			ConfigurationManager::CONFIGURATION_TYPE_SETTINGS
 		);
 		if (!$user->getUsername()) {
 			$user->setUsername(
@@ -187,10 +199,10 @@ class Div {
 	/**
 	 * Overwrite usergroups from user by flexform settings
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $object
-	 * @param \array $settings
-	 * @param \string $controllerName
-	 * @return \In2\Femanager\Domain\Model\User $object
+	 * @param User $object
+	 * @param array $settings
+	 * @param string $controllerName
+	 * @return User $object
 	 */
 	public function overrideUserGroup($object, $settings, $controllerName = 'new') {
 		if (empty($settings[$controllerName]['overrideUserGroup'])) {
@@ -210,21 +222,18 @@ class Div {
 	/**
 	 * Upload file from $_FILES['qqfile']
 	 *
-	 * @return mixed	false or file.png
+	 * @return mixed false or filename like "file.png"
 	 */
 	public function uploadFile() {
-
 		if (!is_array($_FILES['qqfile'])) {
 			return FALSE;
 		}
-
-		// Check extension
 		if (empty($_FILES['qqfile']['name']) || !self::checkExtension($_FILES['qqfile']['name'])) {
 			return FALSE;
 		}
 
 		// create new filename and upload it
-		$basicFileFunctions = $this->objectManager->get('TYPO3\CMS\Core\Utility\File\BasicFileUtility');
+		$basicFileFunctions = $this->objectManager->get('TYPO3\\CMS\\Core\\Utility\\File\\BasicFileUtility');
 		$filename = $this->cleanFileName($_FILES['qqfile']['name']);
 		$newFile = $basicFileFunctions->getUniqueName(
 			$filename,
@@ -255,8 +264,8 @@ class Div {
 	/**
 	 * Check extension of given filename
 	 *
-	 * @param \string $filename Filename like (upload.png)
-	 * @return \bool If Extension is allowed
+	 * @param string $filename Filename like (upload.png)
+	 * @return bool If Extension is allowed
 	 */
 	public static function checkExtension($filename) {
 		$extensionList = 'jpg,jpeg,png,gif,bmp';
@@ -280,8 +289,8 @@ class Div {
 	/**
 	 * Hash a password from $user->getPassword()
 	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user
-	 * @param \string $method		"md5" or "sha1"
+	 * @param FrontendUser $user
+	 * @param string $method "md5" or "sha1"
 	 * @return void
 	 */
 	public static function hashPassword(&$user, $method) {
@@ -295,9 +304,9 @@ class Div {
 				break;
 
 			default:
-				if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('saltedpasswords')) {
-					if (\TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility::isUsageEnabled('FE')) {
-						$objInstanceSaltedPw = \TYPO3\CMS\Saltedpasswords\Salt\SaltFactory::getSaltingInstance();
+				if (ExtensionManagementUtility::isLoaded('saltedpasswords')) {
+					if (SaltedPasswordsUtility::isUsageEnabled('FE')) {
+						$objInstanceSaltedPw = SaltFactory::getSaltingInstance();
 						$user->setPassword($objInstanceSaltedPw->getHashedPassword($user->getPassword()));
 					}
 				}
@@ -308,13 +317,13 @@ class Div {
 	 * Checks if object was changed or not
 	 *
 	 * @param $object
-	 * @return \bool
+	 * @return bool
 	 */
 	public static function isDirtyObject($object) {
 		foreach (array_keys($object->_getProperties()) as $propertyName) {
 			try {
 				$property = ObjectAccess::getProperty($object, $propertyName);
-			} catch (\TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException $e) {
+			} catch (PropertyNotAccessibleException $e) {
 				// if property can not be accessed
 				continue;
 			}
@@ -324,7 +333,7 @@ class Div {
 			 * PHP-Objects (DateTime, RecursiveIterator, etc...),
 			 * TYPO3-Objects (user, page, etc...)
 			 */
-			if (!$property instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
+			if (!$property instanceof ObjectStorage) {
 				if ($object->_isDirty($propertyName)) {
 					return TRUE;
 				}
@@ -343,8 +352,8 @@ class Div {
 	/**
 	 * Get changed properties (compare two objects with same getter methods)
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $changedObject			Changed object
-	 * @return \array
+	 * @param User $changedObject
+	 * @return array
 	 * 			[firstName][old] = Alex
 	 * 			[firstName][new] = Alexander
 	 */
@@ -368,7 +377,7 @@ class Div {
 					$dirtyProperties[$propertyName]['new'] = $newPropertyValue;
 				}
 			} else {
-				if (get_class($oldPropertyValue) === DateTime) {
+				if (get_class($oldPropertyValue) === 'DateTime') {
 					if ($oldPropertyValue->getTimestamp() != $newPropertyValue->getTimestamp()) {
 						$dirtyProperties[$propertyName]['old'] = $oldPropertyValue->getTimestamp();
 						$dirtyProperties[$propertyName]['new'] = $newPropertyValue->getTimestamp();
@@ -389,9 +398,9 @@ class Div {
 	/**
 	 * overwrite user with old values and xml with new values
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
-	 * @param \array $dirtyProperties
-	 * @return \In2\Femanager\Domain\Model\User $user
+	 * @param User $user
+	 * @param array $dirtyProperties
+	 * @return User $user
 	 */
 	public static function rollbackUserWithChangeRequest($user, $dirtyProperties) {
 		$existingUserProperties = $user->_getCleanProperties();
@@ -414,10 +423,10 @@ class Div {
 	/**
 	 * Implode subjobjects on a property (example for usergroups: "ug1, ug2, ug3")
 	 *
-	 * @param \object $objectStorage
-	 * @param \string $property
-	 * @param \string $glue
-	 * @return \string
+	 * @param object $objectStorage
+	 * @param string $property
+	 * @param string $glue
+	 * @return string
 	 */
 	public static function implodeObjectStorageOnProperty($objectStorage, $property = 'uid', $glue = ', ') {
 		$value = '';
@@ -441,20 +450,20 @@ class Div {
 	}
 
 	/**
-	 * @param \string $title												Title to log
-	 * @param \int $state													State to log
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user			Related User
+	 * @param string $title Title to log
+	 * @param int $state State to log
+	 * @param User $user Related User
 	 * @return void
 	 */
-	public function log($title, $state, \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user) {
+	public function log($title, $state, User $user) {
 		// Disable Log
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager']);
 		if (!empty($confArr['disableLog'])) {
 			return;
 		}
 
-		/* @var $log \In2\Femanager\Domain\Model\Log */
-		$log = $this->objectManager->get('In2\Femanager\Domain\Model\Log');
+		/* @var $log Log */
+		$log = $this->objectManager->get('In2\\Femanager\\Domain\\Model\\Log');
 		$log->setTitle($title);
 		$log->setState($state);
 		$log->setUser($user);
@@ -464,9 +473,9 @@ class Div {
 	/**
 	 * Create Hash from String and TYPO3 Encryption Key (if available)
 	 *
-	 * @param \string $string			Any String to hash
-	 * @param \int $length				Hash Length
-	 * @return \string $hash			Hashed String
+	 * @param string $string Any String to hash
+	 * @param int $length Hash Length
+	 * @return string $hash Hashed String
 	 */
 	public static function createHash($string, $length = 10) {
 		if (!empty($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'])) {
@@ -481,9 +490,9 @@ class Div {
 	 * Create array for swiftmailer
 	 * 		sender and receiver mail/name combination with fallback
 	 *
-	 * @param \string $emailString String with separated emails (splitted by \n)
-	 * @param \string $name Name for every email name combination
-	 * @return \array $mailArray
+	 * @param string $emailString String with separated emails (splitted by \n)
+	 * @param string $name Name for every email name combination
+	 * @return array $mailArray
 	 */
 	public static function makeEmailArray($emailString, $name = 'femanager') {
 		$emails = GeneralUtility::trimExplode("\n", $emailString, 1);
@@ -500,8 +509,8 @@ class Div {
 	/**
 	 * Read values between brackets
 	 *
-	 * @param \string $value
-	 * @return \string
+	 * @param string $value
+	 * @return string
 	 */
 	public static function getValuesInBrackets($value = 'test(1,2,3)') {
 		preg_match_all( '/\(.*?\)/i', $value, $result);
@@ -511,8 +520,8 @@ class Div {
 	/**
 	 * Read values before brackets
 	 *
-	 * @param \string $value
-	 * @return \string
+	 * @param string $value
+	 * @return string
 	 */
 	public static function getValuesBeforeBrackets($value = 'test(1,2,3)') {
 		$valueParts = GeneralUtility::trimExplode('(', $value, 1);
@@ -522,9 +531,9 @@ class Div {
 	/**
 	 * SendPost - Send values via curl to target
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user User properties
+	 * @param User $user User properties
 	 * @param array $config TypoScript Settings
-	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject
+	 * @param ContentObjectRenderer $contentObject
 	 * @return void
 	 */
 	public static function sendPost($user, $config, $contentObject) {
@@ -558,10 +567,10 @@ class Div {
 	/**
 	 * Store user values in any database table
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user User properties
+	 * @param User $user User properties
 	 * @param array $config TypoScript Settings
-	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject
-	 * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+	 * @param ContentObjectRenderer $contentObject
+	 * @param ObjectManagerInterface $objectManager
 	 * @return void
 	 */
 	public static function storeInDatabasePreflight($user, $config, $contentObject, $objectManager) {
@@ -588,7 +597,7 @@ class Div {
 			/**
 			 * @var $storeInDatabase \In2\Femanager\Utility\StoreInDatabase
 			 */
-			$storeInDatabase = $objectManager->get('In2\Femanager\Utility\StoreInDatabase');
+			$storeInDatabase = $objectManager->get('In2\\Femanager\\Utility\\StoreInDatabase');
 			$storeInDatabase->setTable($table);
 			foreach ($config['new.']['storeInDatabase.'][$table] as $field => $value) {
 				if ($field[0] === '_' || stristr($field, '.')) {
@@ -607,20 +616,20 @@ class Div {
 	/**
 	 * Remove FE Session to a given user
 	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user
+	 * @param FrontendUser $user
 	 * @return void
 	 */
-	public static function removeFrontendSessionToUser(\TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user) {
+	public static function removeFrontendSessionToUser(FrontendUser $user) {
 		$GLOBALS['TYPO3_DB']->exec_DELETEquery('fe_sessions', 'ses_userid = ' . intval($user->getUid()));
 	}
 
 	/**
 	 * Check if FE Session exists
 	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user
+	 * @param FrontendUser $user
 	 * @return bool
 	 */
-	public static function checkFrontendSessionToUser(\TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user) {
+	public static function checkFrontendSessionToUser(FrontendUser $user) {
 		$select = 'ses_id';
 		$from = 'fe_sessions';
 		$where = 'ses_userid = ' . intval($user->getUid());
@@ -659,7 +668,7 @@ class Div {
 	/**
 	 * Read fe_users image uploadfolder from TCA
 	 *
-	 * @return \string path - standard "uploads/pics"
+	 * @return string path - standard "uploads/pics"
 	 */
 	public static function getUploadFolderFromTca() {
 		$path = $GLOBALS['TCA']['fe_users']['columns']['image']['config']['uploadfolder'];
@@ -697,7 +706,7 @@ class Div {
 	public function getTemplateFolders($part = 'template', $returnAllPaths = FALSE) {
 		$templatePaths = array();
 		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+			ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
 		);
 		if (!empty($extbaseFrameworkConfiguration['view'][$part . 'RootPaths'])) {
 			$templatePaths = $extbaseFrameworkConfiguration['view'][$part . 'RootPaths'];

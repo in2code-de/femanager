@@ -1,10 +1,11 @@
 <?php
 namespace In2\Femanager\Controller;
 
-use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \In2\Femanager\Domain\Model\User;
-use \In2\Femanager\Utility\Div;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use In2\Femanager\Domain\Model\User;
+use In2\Femanager\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -37,7 +38,7 @@ use \In2\Femanager\Utility\Div;
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
  */
-class EditController extends \In2\Femanager\Controller\AbstractController {
+class EditController extends AbstractController {
 
 	/**
 	 * action edit
@@ -82,7 +83,7 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 	/**
 	 * action update
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param User $user
 	 * @validate $user In2\Femanager\Domain\Validator\ServersideValidator
 	 * @validate $user In2\Femanager\Domain\Validator\PasswordValidator
 	 * @validate $user In2\Femanager\Domain\Validator\CaptchaValidator
@@ -91,20 +92,16 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 	public function updateAction(User $user) {
 		// check if there are no changes
 		if (!Div::isDirtyObject($user)) {
-			$this->flashMessageContainer->add(
+			$this->addFlashMessage(
 				LocalizationUtility::translate('noChanges', 'femanager'),
 				'',
-				\TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE
+				FlashMessage::NOTICE
 			);
 			$this->redirect('edit');
 		}
 
-		// overwrite values from TypoScript
-		$user = $this->div->forceValues(
-			$user,
-			$this->config['edit.']['forceValues.']['beforeAnyConfirmation.'],
-			$this->cObj
-		);
+		/** @var User $user */
+		$user = $this->div->forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.'], $this->cObj);
 		if ($this->settings['edit']['fillEmailWithUsername'] == 1) {
 			$user->setEmail($user->getUsername());
 		}
@@ -128,9 +125,9 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 	/**
 	 * Update if hash is ok
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user		User object
-	 * @param \string $hash									Given hash
-	 * @param \string $status								"confirm", "refuse", "silentRefuse"
+	 * @param User $user User object
+	 * @param string $hash
+	 * @param string $status could be "confirm", "refuse", "silentRefuse"
 	 * @return void
 	 */
 	public function confirmUpdateRequestAction(User $user, $hash, $status = 'confirm') {
@@ -138,10 +135,10 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 
 		// if wrong hash or if no update xml
 		if (Div::createHash($user->getUsername() . $user->getUid()) !== $hash || !$user->getTxFemanagerChangerequest()) {
-			$this->flashMessageContainer->add(
+			$this->addFlashMessage(
 				LocalizationUtility::translate('updateFailedProfile', 'femanager'),
 				'',
-				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+				FlashMessage::ERROR
 			);
 
 			return;
@@ -174,9 +171,7 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 					$user
 				);
 
-				$this->flashMessageContainer->add(
-					LocalizationUtility::translate('updateProfile', 'femanager')
-				);
+				$this->addFlashMessage(LocalizationUtility::translate('updateProfile', 'femanager'));
 				break;
 
 			case 'refuse':
@@ -202,9 +197,7 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 					$user
 				);
 
-				$this->flashMessageContainer->add(
-					LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager')
-				);
+				$this->addFlashMessage(LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'));
 				break;
 
 			case 'silentRefuse':
@@ -214,9 +207,7 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 					$user
 				);
 
-				$this->flashMessageContainer->add(
-					LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager')
-				);
+				$this->addFlashMessage(LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'));
 				break;
 
 			default:
@@ -231,26 +222,17 @@ class EditController extends \In2\Femanager\Controller\AbstractController {
 	/**
 	 * action delete
 	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
+	 * @param User $user
 	 * @return void
 	 */
 	public function deleteAction(User $user) {
-
-		// write log
 		$this->div->log(
 			LocalizationUtility::translate('tx_femanager_domain_model_log.state.301', 'femanager'),
 			300,
 			$user
 		);
-
-		// add flashmessage
-		$this->flashMessageContainer->add(
-			LocalizationUtility::translate('tx_femanager_domain_model_log.state.301', 'femanager')
-		);
-
-		// delete user
+		$this->addFlashMessage(LocalizationUtility::translate('tx_femanager_domain_model_log.state.301', 'femanager'));
 		$this->userRepository->remove($user);
-
 		$this->redirectByAction('delete');
 		$this->redirect('edit');
 	}

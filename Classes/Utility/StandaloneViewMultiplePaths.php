@@ -1,7 +1,9 @@
 <?php
 namespace In2\Femanager\Utility;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +33,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * Extends the regular standalone template view with
  * 		the possibilities to use multiple paths (like TemplateView is able to use).
  */
-class StandaloneViewMultiplePaths extends \TYPO3\CMS\Fluid\View\StandaloneView {
+class StandaloneViewMultiplePaths extends StandaloneView {
 
 	/**
 	 * Path(s) to the template root.
@@ -98,12 +100,12 @@ class StandaloneViewMultiplePaths extends \TYPO3\CMS\Fluid\View\StandaloneView {
 	 * Returns the absolute paths to the folders that contains Fluid layout files
 	 *
 	 * @return array Fluid layout root path(s)
-	 * @throws \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException
+	 * @throws InvalidTemplateResourceException
 	 * @api
 	 */
 	public function getLayoutRootPaths() {
 		if ($this->layoutRootPaths === NULL && $this->templatePathAndFilename === NULL) {
-			throw new \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException(
+			throw new InvalidTemplateResourceException(
 				'No layout root paths have been specified. Use setLayoutRootPaths().',
 				1410653161
 			);
@@ -154,13 +156,13 @@ class StandaloneViewMultiplePaths extends \TYPO3\CMS\Fluid\View\StandaloneView {
 	/**
 	 * Returns the absolute paths to the folders that contains Fluid partial files
 	 *
-	 * @throws \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException
+	 * @throws InvalidTemplateResourceException
 	 * @return array Fluid partial root paths
 	 * @api
 	 */
 	public function getPartialRootPaths() {
 		if ($this->partialRootPaths === NULL && $this->templatePathAndFilename === NULL) {
-			throw new \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException(
+			throw new InvalidTemplateResourceException(
 				'No partial root paths have been specified. Use setPartialRootPath().',
 				1410653162
 			);
@@ -181,7 +183,7 @@ class StandaloneViewMultiplePaths extends \TYPO3\CMS\Fluid\View\StandaloneView {
 	 *
 	 * @param string $layoutName Name of the layout to use. If none use "Default
 	 * @return string Path and filename of layout files
-	 * @throws \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException
+	 * @throws InvalidTemplateResourceException
 	 */
 	protected function getLayoutPathAndFilename($layoutName = 'Default') {
 		$layoutRootPaths = $this->getLayoutRootPaths();
@@ -191,25 +193,28 @@ class StandaloneViewMultiplePaths extends \TYPO3\CMS\Fluid\View\StandaloneView {
 			}
 		}
 		if (empty($layoutRootPaths)) {
-			throw new \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException(
+			throw new InvalidTemplateResourceException(
 				'Layout root paths do not exist.',
 				1410653917
 			);
 		}
 		$possibleLayoutPaths = array();
 		foreach ($layoutRootPaths as $layoutRootPath) {
-			$possibleLayoutPaths[] = GeneralUtility::fixWindowsFilePath($layoutRootPath . '/' . $layoutName . '.' . $this->getRequest()->getFormat());
+			$possibleLayoutPaths[] = GeneralUtility::fixWindowsFilePath(
+				$layoutRootPath . '/' . $layoutName . '.' . $this->getRequest()->getFormat()
+			);
 			$possibleLayoutPaths[] = GeneralUtility::fixWindowsFilePath($layoutRootPath . '/' . $layoutName);
 		}
-		foreach ($possibleLayoutPaths as $layoutPathAndFilename) {
-			if (is_file($layoutPathAndFilename)) {
-				return $layoutPathAndFilename;
+		foreach ($possibleLayoutPaths as $pathAndFilename) {
+			if (is_file($pathAndFilename)) {
+				return $pathAndFilename;
 			}
 		}
-		throw new \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException(
+		throw new InvalidTemplateResourceException(
 			'Could not load layout file. Tried following paths: "' . implode('", "', $possibleLayoutPaths) . '".',
 			1288092555
 		);
+		return '';
 	}
 
 
@@ -219,7 +224,7 @@ class StandaloneViewMultiplePaths extends \TYPO3\CMS\Fluid\View\StandaloneView {
 	 *
 	 * @param string $partialName The name of the partial
 	 * @return string the full path which should be used. The path definitely exists.
-	 * @throws \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException
+	 * @throws InvalidTemplateResourceException
 	 */
 	protected function getPartialPathAndFilename($partialName) {
 		$partialRootPaths = $this->getPartialRootPaths();
@@ -229,24 +234,27 @@ class StandaloneViewMultiplePaths extends \TYPO3\CMS\Fluid\View\StandaloneView {
 			}
 		}
 		if (empty($partialRootPaths)) {
-			throw new \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException(
+			throw new InvalidTemplateResourceException(
 				'Partial root paths do not exist.',
 				1410653918
 			);
 		}
 		$possiblePartialPaths = array();
 		foreach ($partialRootPaths as $partialRootPath) {
-			$possiblePartialPaths[] = GeneralUtility::fixWindowsFilePath($partialRootPath . '/' . $partialName . '.' . $this->getRequest()->getFormat());
+			$possiblePartialPaths[] = GeneralUtility::fixWindowsFilePath(
+				$partialRootPath . '/' . $partialName . '.' . $this->getRequest()->getFormat()
+			);
 			$possiblePartialPaths[] = GeneralUtility::fixWindowsFilePath($partialRootPath . '/' . $partialName);
 		}
-		foreach ($possiblePartialPaths as $partialPathAndFilename) {
-			if (is_file($partialPathAndFilename)) {
-				return $partialPathAndFilename;
+		foreach ($possiblePartialPaths as $pathAndFilename) {
+			if (is_file($pathAndFilename)) {
+				return $pathAndFilename;
 			}
 		}
-		throw new \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException(
+		throw new InvalidTemplateResourceException(
 			'Could not load partial file. Tried following paths: "' . implode('", "', $possiblePartialPaths) . '".',
 			1288092556
 		);
+		return '';
 	}
 }

@@ -59,7 +59,7 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for required
 	 *
-	 * @param \string $value
+	 * @param string $value
 	 * @return \bool
 	 */
 	protected function validateRequired($value) {
@@ -74,7 +74,7 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for email
 	 *
-	 * @param \string $value
+	 * @param string $value
 	 * @return \bool
 	 */
 	protected function validateEmail($value) {
@@ -84,8 +84,8 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for Minimum of characters
 	 *
-	 * @param \string $value
-	 * @param \string $validationSetting
+	 * @param string $value
+	 * @param string $validationSetting
 	 * @return \bool
 	 */
 	protected function validateMin($value, $validationSetting) {
@@ -98,8 +98,8 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for Maximum of characters
 	 *
-	 * @param \string $value
-	 * @param \string $validationSetting
+	 * @param string $value
+	 * @param string $validationSetting
 	 * @return \bool
 	 */
 	protected function validateMax($value, $validationSetting) {
@@ -112,7 +112,7 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for Numbers only
 	 *
-	 * @param \string $value
+	 * @param string $value
 	 * @return \bool
 	 */
 	protected function validateInt($value) {
@@ -122,7 +122,7 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for Letters only
 	 *
-	 * @param \string $value
+	 * @param string $value
 	 * @return \bool
 	 */
 	protected function validateLetters($value) {
@@ -135,8 +135,8 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for Unique in sysfolder
 	 *
-	 * @param \string $value
-	 * @param \string $field
+	 * @param string $value
+	 * @param string $field
 	 * @param \In2\Femanager\Domain\Model\User $user Existing User
 	 * @return \bool
 	 */
@@ -148,8 +148,8 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for Unique in the db
 	 *
-	 * @param \string $value
-	 * @param \string $field Fieldname like "username" or "email"
+	 * @param string $value
+	 * @param string $field Fieldname like "username" or "email"
 	 * @param \In2\Femanager\Domain\Model\User $user Existing User
 	 * @return \bool
 	 */
@@ -161,8 +161,8 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for "Must include some characters"
 	 *
-	 * @param \string $value
-	 * @param \string $validationSettingList
+	 * @param string $value
+	 * @param string $validationSettingList
 	 * @return \bool
 	 */
 	protected function validateMustInclude($value, $validationSettingList) {
@@ -210,8 +210,8 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for "Must not include some characters"
 	 *
-	 * @param \string $value
-	 * @param \string $validationSettingList
+	 * @param string $value
+	 * @param string $validationSettingList
 	 * @return \bool
 	 */
 	protected function validateMustNotInclude($value, $validationSettingList) {
@@ -299,8 +299,8 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for checking if values are in a given list
 	 *
-	 * @param \string $value
-	 * @param \string $validationSettingList
+	 * @param string $value
+	 * @param string $validationSettingList
 	 * @return \bool
 	 */
 	protected function validateInList($value, $validationSettingList) {
@@ -311,8 +311,8 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for comparing two fields
 	 *
-	 * @param \string $value
-	 * @param \string $value2
+	 * @param string $value
+	 * @param string $value2
 	 * @return \bool
 	 */
 	protected function validateSameAs($value, $value2) {
@@ -325,8 +325,8 @@ class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
 	/**
 	 * Validation for checking if values is in date format
 	 *
-	 * @param \string $value
-	 * @param \string $validationSetting
+	 * @param string $value
+	 * @param string $validationSetting
 	 * @return \bool
 	 */
 	protected function validateDate($value, $validationSetting) {

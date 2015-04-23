@@ -103,8 +103,8 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for checkExtension()
 	 *
-	 * @param \string $givenValue
-	 * @param \string $expectedResult
+	 * @param string $givenValue
+	 * @param string $expectedResult
 	 * @return void
 	 * @dataProvider checkExtensionReturnBoolDataProvider
 	 * @test
@@ -144,8 +144,8 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for isMd5()
 	 *
-	 * @param \string $givenValue
-	 * @param \string $expectedResult
+	 * @param string $givenValue
+	 * @param string $expectedResult
 	 * @return void
 	 * @dataProvider isMd5ReturnBoolDataProvider
 	 * @test
@@ -185,8 +185,8 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for getValuesInBrackets()
 	 *
-	 * @param \string $start
-	 * @param \string $expectedResult
+	 * @param string $start
+	 * @param string $expectedResult
 	 * @return void
 	 * @dataProvider getValuesInBracketsReturnsStringDataProvider
 	 * @test
@@ -226,8 +226,8 @@ class DivTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * Test for getValuesBeforeBrackets()
 	 *
-	 * @param \string $start
-	 * @param \string $expectedResult
+	 * @param string $start
+	 * @param string $expectedResult
 	 * @return void
 	 * @dataProvider getValuesBeforeBracketsDataProvider
 	 * @test

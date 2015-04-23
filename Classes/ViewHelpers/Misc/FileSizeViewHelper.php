@@ -1,6 +1,8 @@
 <?php
 namespace In2\Femanager\ViewHelpers\Misc;
 
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -30,14 +32,14 @@ namespace In2\Femanager\ViewHelpers\Misc;
  *
  * Class FileSizeViewHelper
  */
-class FileSizeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class FileSizeViewHelper extends AbstractViewHelper {
 
 	/**
 	 * A ViewHelper to get the Size of a File from a given $path
 	 *
-	 * @param \string $path			Filepath (like fileadmin/test.jpg)
-	 * @param \string $unit			Unit (b, k, m)
-	 * @return \string 				The result
+	 * @param string $path Filepath (like fileadmin/test.jpg)
+	 * @param string $unit Unit (b, k, m)
+	 * @return string The result
 	 */
 	public function render($path, $unit = 'k') {
 

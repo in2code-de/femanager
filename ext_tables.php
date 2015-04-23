@@ -162,7 +162,6 @@ $tempColumns['tx_femanager_changerequest'] = array (
 );
 $fields .= ', tx_femanager_changerequest';
 
-\TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('fe_users');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'gender, date_of_birth', '', 'after:name');
 if (version_compare(TYPO3_branch, '6.2', '<')) {
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns, 1);

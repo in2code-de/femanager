@@ -32,6 +32,15 @@ Changes
       Changes
 
  - :Version:
+      1.5.0
+   :State:
+      stable
+   :Date:
+      2015-04-23
+   :Changes:
+      Task: Make femanager ready for TYPO3 7.x
+
+ - :Version:
       1.4.3
    :State:
       stable
