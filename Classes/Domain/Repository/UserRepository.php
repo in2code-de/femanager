@@ -3,6 +3,7 @@ namespace In2\Femanager\Domain\Repository;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use In2\Femanager\Domain\Model\User;
 
@@ -46,19 +47,15 @@ class UserRepository extends Repository {
 	 * @return User
 	 */
 	public function findByUid($uid) {
-		if ($this->identityMap->hasIdentifier($uid, $this->objectType)) {
-			$object = $this->identityMap->getObjectByIdentifier($uid, $this->objectType);
-		} else {
-			$query = $this->createQuery();
-			$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
-			$query->getQuerySettings()->setRespectSysLanguage(FALSE);
-			$query->getQuerySettings()->setRespectStoragePage(FALSE);
-			$and = array(
-				$query->equals('uid', $uid),
-				$query->equals('deleted', 0)
-			);
-			$object = $query->matching($query->logicalAnd($and))->execute()->getFirst();
-		}
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
+		$query->getQuerySettings()->setRespectSysLanguage(FALSE);
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		$and = array(
+			$query->equals('uid', $uid),
+			$query->equals('deleted', 0)
+		);
+		$object = $query->matching($query->logicalAnd($and))->execute()->getFirst();
 		return $object;
 	}
 
@@ -68,7 +65,7 @@ class UserRepository extends Repository {
 	 * @param string $userGroupList commaseparated list of usergroup uids
 	 * @param array $settings Flexform and TypoScript Settings
 	 * @param array $filter Filter Array
-	 * @return query object
+	 * @return QueryResultInterface|array
 	 */
 	public function findByUsergroups($userGroupList, $settings, $filter) {
 		$query = $this->createQuery();
@@ -79,21 +76,21 @@ class UserRepository extends Repository {
 		);
 		if (!empty($userGroupList)) {
 			$selectedUsergroups = GeneralUtility::trimExplode(',', $userGroupList, TRUE);
-			$or = array();
+			$logicalOr = array();
 			foreach ($selectedUsergroups as $group) {
-				$or[] = $query->contains('usergroup', $group);
+				$logicalOr[] = $query->contains('usergroup', $group);
 			}
-			$and[] = $query->logicalOr($or);
+			$and[] = $query->logicalOr($logicalOr);
 		}
 		if (!empty($filter['searchword'])) {
 			$searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
 			$fieldsToSearch = GeneralUtility::trimExplode(',', $settings['list']['filter']['searchword']['fieldsToSearch'], TRUE);
 			foreach ($searchwords as $searchword) {
-				$or = array();
+				$logicalOr = array();
 				foreach ($fieldsToSearch as $searchfield) {
-					$or[] = $query->like($searchfield, '%' . $searchword . '%');
+					$logicalOr[] = $query->like($searchfield, '%' . $searchword . '%');
 				}
-				$and[] = $query->logicalOr($or);
+				$and[] = $query->logicalOr($logicalOr);
 			}
 		}
 		$query->matching($query->logicalAnd($and));
@@ -125,7 +122,7 @@ class UserRepository extends Repository {
 	 * @param $field
 	 * @param $value
 	 * @param User $user Existing User
-	 * @return query object
+	 * @return QueryResultInterface|array
 	 */
 	public function checkUniqueDb($field, $value, User $user = NULL) {
 		$query = $this->createQuery();
@@ -155,7 +152,7 @@ class UserRepository extends Repository {
 	 * @param $field
 	 * @param $value
 	 * @param \In2\Femanager\Domain\Model\User $user Existing User
-	 * @return query object
+	 * @return QueryResultInterface|array
 	 */
 	public function checkUniquePage($field, $value, User $user = NULL) {
 		$query = $this->createQuery();
@@ -182,7 +179,7 @@ class UserRepository extends Repository {
 	 * Find All for Backend Actions
 	 *
 	 * @param array $filter Filter Array
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 * @return QueryResultInterface|array
 	 */
 	public function findAllInBackend($filter) {
 		$pid = GeneralUtility::_GET('id');
