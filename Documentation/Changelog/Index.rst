@@ -32,6 +32,15 @@ Changes
       Changes
 
  - :Version:
+      1.5.1
+   :State:
+      stable
+   :Date:
+      2015-04-23
+   :Changes:
+      Task: Edit depends for Typo3
+
+ - :Version:
       1.5.0
    :State:
       stable
