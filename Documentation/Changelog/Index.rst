@@ -32,6 +32,25 @@ Changes
       Changes
 
  - :Version:
+      1.5.2
+   :State:
+      stable
+   :Date:
+      2015-10-09
+   :Changes:
+      Task: Added CSS classes for BE Module TYPO3 7.x
+      Bugfix: #70457 BE Module fix for TYPO3 7.x
+
+ - :Version:
+      1.5.1
+   :State:
+      stable
+   :Date:
+      2015-04-23
+   :Changes:
+      Task: Edit depends for Typo3
+
+ - :Version:
       1.5.0
    :State:
       stable
