@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\ViewHelpers\Form;
+namespace In2code\Femanager\ViewHelpers\Form;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
@@ -33,25 +33,28 @@ use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
  *
  * Class GetImagesViewHelper
  */
-class GetImagesViewHelper extends AbstractFormFieldViewHelper {
+class GetImagesViewHelper extends AbstractFormFieldViewHelper
+{
 
-	/**
-	 * Initialize the arguments.
-	 *
-	 * @return void
-	 * @api
-	 */
-	public function initializeArguments() {
-		parent::initializeArguments();
-		$this->registerUniversalTagAttributes();
-	}
+    /**
+     * Initialize the arguments.
+     *
+     * @return void
+     * @api
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerUniversalTagAttributes();
+    }
 
-	/**
-	 * Get Images from object or from originalRequest
-	 *
-	 * @return string
-	 */
-	public function render() {
-		return GeneralUtility::trimExplode(',', $this->getValue(), TRUE);
-	}
+    /**
+     * Get Images from object or from originalRequest
+     *
+     * @return string
+     */
+    public function render()
+    {
+        return GeneralUtility::trimExplode(',', $this->getValue(), true);
+    }
 }

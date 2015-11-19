@@ -1,13 +1,14 @@
 config.tx_extbase {
 	persistence {
 		classes {
-			In2\Femanager\Domain\Model\User {
+			In2code\Femanager\Domain\Model\User {
 				mapping {
 					tableName = fe_users
 					recordType =
 				}
 			}
-			In2\Femanager\Domain\Model\UserGroup {
+
+			In2code\Femanager\Domain\Model\UserGroup {
 				mapping {
 					tableName = fe_groups
 					recordType =
@@ -15,12 +16,12 @@ config.tx_extbase {
 			}
 		}
 	}
+
 	objects {
 		# Disable tx_extbase_type=xyz in where clause (fe_users, fe_groups)
-		TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap.className = In2\Femanager\Persistence\Generic\Mapper\DataMap
+		TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap.className = In2code\Femanager\Persistence\Generic\Mapper\DataMap
 	}
 }
-
 
 #################
 # Backend Module
@@ -31,6 +32,8 @@ module.tx_femanager {
 		partialRootPath = EXT:femanager/Resources/Private/Partials/
 		layoutRootPath = EXT:femanager/Resources/Private/Layouts/
 	}
+
 	settings {
+
 	}
 }

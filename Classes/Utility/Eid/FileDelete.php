@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\Utility\Eid;
+namespace In2code\Femanager\Utility\Eid;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Core\Bootstrap;
@@ -32,76 +32,80 @@ use TYPO3\CMS\Frontend\Utility\EidUtility;
 /**
  * This class could called with AJAX via eID
  *
- * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.de
- * @package	TYPO3
- * @subpackage	EidFileDelete
+ * @author Alex Kellner <alexander.kellner@in2code.de>, in2code.de
+ * @package TYPO3
+ * @subpackage EidFileDelete
  */
-class FileDelete {
+class FileDelete
+{
 
-	/**
-	 * configuration
-	 *
-	 * @var array
-	 */
-	protected $configuration;
+    /**
+     * configuration
+     *
+     * @var array
+     */
+    protected $configuration;
 
-	/**
-	 * bootstrap
-	 *
-	 * @var array
-	 */
-	protected $bootstrap;
+    /**
+     * bootstrap
+     *
+     * @var array
+     */
+    protected $bootstrap;
 
-	/**
-	 * Generates the output
-	 *
-	 * @return string		rendered action
-	 */
-	public function run() {
-		return $this->bootstrap->run('', $this->configuration);
-	}
+    /**
+     * Generates the output
+     *
+     * @return string        rendered action
+     */
+    public function run()
+    {
+        return $this->bootstrap->run('', $this->configuration);
+    }
 
-	/**
-	 * Initialize Extbase
-	 *
-	 * @param array $TYPO3_CONF_VARS
-	 */
-	public function __construct($TYPO3_CONF_VARS) {
-		$this->configuration = array(
-			'pluginName' => 'Pi1',
-			'vendorName' => 'In2',
-			'extensionName' => 'Femanager',
-			'controller' => 'User',
-			'action' => 'fileDelete',
-			'mvc' => array(
-				'requestHandlers' => array(
-					'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler' => 'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler'
-				)
-			),
-			'settings' => array()
-		);
-		$_POST['tx_femanager_pi1']['action'] = 'fileDelete';
-		$_POST['tx_femanager_pi1']['controller'] = 'User';
+    /**
+     * Initialize Extbase
+     *
+     * @param array $TYPO3_CONF_VARS
+     */
+    public function __construct($TYPO3_CONF_VARS)
+    {
+        $this->configuration = array(
+            'pluginName' => 'Pi1',
+            'vendorName' => 'In2code',
+            'extensionName' => 'Femanager',
+            'controller' => 'User',
+            'action' => 'fileDelete',
+            'mvc' => array(
+                'requestHandlers' => array(
+                    'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler' =>
+                        'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler'
+                )
+            ),
+            'settings' => array()
+        );
+        $_POST['tx_femanager_pi1']['action'] = 'fileDelete';
+        $_POST['tx_femanager_pi1']['controller'] = 'User';
 
-		$this->bootstrap = new Bootstrap();
+        $this->bootstrap = new Bootstrap();
 
-		$userObj = EidUtility::initFeUser();
-		$pid = (GeneralUtility::_GET('id') ? GeneralUtility::_GET('id') : 1);
-		$GLOBALS['TSFE'] = GeneralUtility::makeInstance(
-			'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
-			$TYPO3_CONF_VARS,
-			$pid,
-			0,
-			TRUE
-		);
-		$GLOBALS['TSFE']->connectToDB();
-		$GLOBALS['TSFE']->fe_user = $userObj;
-		$GLOBALS['TSFE']->id = $pid;
-		$GLOBALS['TSFE']->determineId();
-		$GLOBALS['TSFE']->initTemplate();
-		$GLOBALS['TSFE']->getConfigArray();
-	}
+        $userObj = EidUtility::initFeUser();
+        $pid = (GeneralUtility::_GET('id') ? GeneralUtility::_GET('id') : 1);
+        $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
+            'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
+            $TYPO3_CONF_VARS,
+            $pid,
+            0,
+            true
+        );
+        $GLOBALS['TSFE']->connectToDB();
+        $GLOBALS['TSFE']->fe_user = $userObj;
+        $GLOBALS['TSFE']->id = $pid;
+        $GLOBALS['TSFE']->determineId();
+        $GLOBALS['TSFE']->initTemplate();
+        $GLOBALS['TSFE']->getConfigArray();
+    }
 }
 
-$eid = GeneralUtility::makeInstance('In2\\Femanager\\Utility\\Eid\\FileDelete', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = GeneralUtility::makeInstance('In2code\\Femanager\\Utility\\Eid\\FileDelete', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->run();

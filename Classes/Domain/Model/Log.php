@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\Domain\Model;
+namespace In2code\Femanager\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
@@ -32,80 +32,87 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  *
  * @package femanager
  * @license http://www.gnu.org/licenses/gpl.html
- * 			GNU General Public License, version 3 or later
+ *          GNU General Public License, version 3 or later
  */
-class Log extends AbstractEntity {
+class Log extends AbstractEntity
+{
 
-	/**
-	 * title
-	 *
-	 * @var string
-	 */
-	protected $title;
+    /**
+     * title
+     *
+     * @var string
+     */
+    protected $title;
 
-	/**
-	 * state
-	 *
-	 * @var int
-	 */
-	protected $state;
+    /**
+     * state
+     *
+     * @var int
+     */
+    protected $state;
 
-	/**
-	 * user
-	 *
-	 * @var User
-	 */
-	protected $user;
+    /**
+     * user
+     *
+     * @var User
+     */
+    protected $user;
 
-	/**
-	 * Set user
-	 *
-	 * @param User $user
-	 * @return Log
-	 */
-	public function setUser(User $user) {
-		$this->user = $user;
-		return $this;
-	}
+    /**
+     * Set user
+     *
+     * @param User $user
+     * @return Log
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+        return $this;
+    }
 
-	/**
-	 * Get user
-	 *
-	 * @return User
-	 */
-	public function getUser() {
-		return $this->user;
-	}
+    /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 
-	/**
-	 * @param int $state
-	 * @return Log
-	 */
-	public function setState($state) {
-		$this->state = $state;
-		return $this;
-	}
+    /**
+     * @param int $state
+     * @return Log
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+        return $this;
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getState() {
-		return $this->state;
-	}
+    /**
+     * @return int
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
 
-	/**
-	 * @param string $title
-	 * @return Log
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-		return $this;
-	}
+    /**
+     * @param string $title
+     * @return Log
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 }

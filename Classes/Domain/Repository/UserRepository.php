@@ -1,11 +1,11 @@
 <?php
-namespace In2\Femanager\Domain\Repository;
+namespace In2code\Femanager\Domain\Repository;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
-use In2\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Model\User;
 
 /***************************************************************
  *  Copyright notice
@@ -36,196 +36,202 @@ use In2\Femanager\Domain\Model\User;
  *
  * @package femanager
  * @license http://www.gnu.org/licenses/gpl.html
- * 			GNU General Public License, version 3 or later
+ *          GNU General Public License, version 3 or later
  */
-class UserRepository extends Repository {
+class UserRepository extends Repository
+{
 
-	/**
-	 * Overload Find by UID to also get hidden records
-	 *
-	 * @param int $uid fe_users UID
-	 * @return User
-	 */
-	public function findByUid($uid) {
-		$query = $this->createQuery();
-		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
-		$query->getQuerySettings()->setRespectSysLanguage(FALSE);
-		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		$and = array(
-			$query->equals('uid', $uid),
-			$query->equals('deleted', 0)
-		);
-		$object = $query->matching($query->logicalAnd($and))->execute()->getFirst();
-		return $object;
-	}
+    /**
+     * Overload Find by UID to also get hidden records
+     *
+     * @param int $uid fe_users UID
+     * @return User
+     */
+    public function findByUid($uid)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setRespectSysLanguage(false);
+        $query->getQuerySettings()->setRespectStoragePage(false);
+        $and = array(
+            $query->equals('uid', $uid),
+            $query->equals('deleted', 0)
+        );
+        $object = $query->matching($query->logicalAnd($and))->execute()->getFirst();
+        return $object;
+    }
 
-	/**
-	 * Find users by commaseparated usergroup list
-	 *
-	 * @param string $userGroupList commaseparated list of usergroup uids
-	 * @param array $settings Flexform and TypoScript Settings
-	 * @param array $filter Filter Array
-	 * @return QueryResultInterface|array
-	 */
-	public function findByUsergroups($userGroupList, $settings, $filter) {
-		$query = $this->createQuery();
+    /**
+     * Find users by commaseparated usergroup list
+     *
+     * @param string $userGroupList commaseparated list of usergroup uids
+     * @param array $settings Flexform and TypoScript Settings
+     * @param array $filter Filter Array
+     * @return QueryResultInterface|array
+     */
+    public function findByUsergroups($userGroupList, $settings, $filter)
+    {
+        $query = $this->createQuery();
 
-		// where
-		$and = array(
-			$query->greaterThan('uid', 0)
-		);
-		if (!empty($userGroupList)) {
-			$selectedUsergroups = GeneralUtility::trimExplode(',', $userGroupList, TRUE);
-			$logicalOr = array();
-			foreach ($selectedUsergroups as $group) {
-				$logicalOr[] = $query->contains('usergroup', $group);
-			}
-			$and[] = $query->logicalOr($logicalOr);
-		}
-		if (!empty($filter['searchword'])) {
-			$searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
-			$fieldsToSearch = GeneralUtility::trimExplode(',', $settings['list']['filter']['searchword']['fieldsToSearch'], TRUE);
-			foreach ($searchwords as $searchword) {
-				$logicalOr = array();
-				foreach ($fieldsToSearch as $searchfield) {
-					$logicalOr[] = $query->like($searchfield, '%' . $searchword . '%');
-				}
-				$and[] = $query->logicalOr($logicalOr);
-			}
-		}
-		$query->matching($query->logicalAnd($and));
+        // where
+        $and = array(
+            $query->greaterThan('uid', 0)
+        );
+        if (!empty($userGroupList)) {
+            $selectedUsergroups = GeneralUtility::trimExplode(',', $userGroupList, true);
+            $logicalOr = array();
+            foreach ($selectedUsergroups as $group) {
+                $logicalOr[] = $query->contains('usergroup', $group);
+            }
+            $and[] = $query->logicalOr($logicalOr);
+        }
+        if (!empty($filter['searchword'])) {
+            $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
+            $fieldsToSearch = GeneralUtility::trimExplode(
+                ',',
+                $settings['list']['filter']['searchword']['fieldsToSearch'],
+                true
+            );
+            foreach ($searchwords as $searchword) {
+                $logicalOr = array();
+                foreach ($fieldsToSearch as $searchfield) {
+                    $logicalOr[] = $query->like($searchfield, '%' . $searchword . '%');
+                }
+                $and[] = $query->logicalOr($logicalOr);
+            }
+        }
+        $query->matching($query->logicalAnd($and));
 
-		// sorting
-		$sorting = QueryInterface::ORDER_ASCENDING;
-		if ($settings['list']['sorting'] == 'desc') {
-			$sorting = QueryInterface::ORDER_DESCENDING;
-		}
-		$field = preg_replace('/[^a-zA-Z0-9_-]/', '', $settings['list']['orderby']);
-		$query->setOrderings(
-			array(
-				$field => $sorting
-			)
-		);
+        // sorting
+        $sorting = QueryInterface::ORDER_ASCENDING;
+        if ($settings['list']['sorting'] == 'desc') {
+            $sorting = QueryInterface::ORDER_DESCENDING;
+        }
+        $field = preg_replace('/[^a-zA-Z0-9_-]/', '', $settings['list']['orderby']);
+        $query->setOrderings(
+            array(
+                $field => $sorting
+            )
+        );
 
-		// set limit
-		if (intval($settings['list']['limit']) > 0) {
-			$query->setLimit(intval($settings['list']['limit']));
-		}
+        // set limit
+        if (intval($settings['list']['limit']) > 0) {
+            $query->setLimit(intval($settings['list']['limit']));
+        }
 
-		$users = $query->execute();
-		return $users;
-	}
+        $users = $query->execute();
+        return $users;
+    }
 
-	/**
-	 * Check if there is already an entry in the table
-	 *
-	 * @param $field
-	 * @param $value
-	 * @param User $user Existing User
-	 * @return QueryResultInterface|array
-	 */
-	public function checkUniqueDb($field, $value, User $user = NULL) {
-		$query = $this->createQuery();
-		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
+    /**
+     * Check if there is already an entry in the table
+     *
+     * @param $field
+     * @param $value
+     * @param User $user Existing User
+     * @return QueryResultInterface|array
+     */
+    public function checkUniqueDb($field, $value, User $user = null)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
 
-		$and = array(
-			$query->equals($field, $value),
-			$query->equals('deleted', 0)
-		);
-		if (method_exists($user, 'getUid')) {
-			$and[] = $query->logicalNot(
-				$query->equals('uid', intval($user->getUid()))
-			);
-		}
-		$constraint = $query->logicalAnd($and);
+        $and = array(
+            $query->equals($field, $value),
+            $query->equals('deleted', 0)
+        );
+        if (method_exists($user, 'getUid')) {
+            $and[] = $query->logicalNot($query->equals('uid', intval($user->getUid())));
+        }
+        $constraint = $query->logicalAnd($and);
 
-		$query->matching($constraint);
+        $query->matching($constraint);
 
-		$users = $query->execute()->getFirst();
-		return $users;
-	}
+        $users = $query->execute()->getFirst();
+        return $users;
+    }
 
-	/**
-	 * Check if there is already an entry in the table on current page
-	 *
-	 * @param $field
-	 * @param $value
-	 * @param \In2\Femanager\Domain\Model\User $user Existing User
-	 * @return QueryResultInterface|array
-	 */
-	public function checkUniquePage($field, $value, User $user = NULL) {
-		$query = $this->createQuery();
-		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
+    /**
+     * Check if there is already an entry in the table on current page
+     *
+     * @param $field
+     * @param $value
+     * @param \In2code\Femanager\Domain\Model\User $user Existing User
+     * @return QueryResultInterface|array
+     */
+    public function checkUniquePage($field, $value, User $user = null)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
 
-		$and = array(
-			$query->equals($field, $value),
-			$query->equals('deleted', 0)
-		);
-		if (method_exists($user, 'getUid')) {
-			$and[] = $query->logicalNot(
-				$query->equals('uid', intval($user->getUid()))
-			);
-		}
-		$constraint = $query->logicalAnd($and);
+        $and = array(
+            $query->equals($field, $value),
+            $query->equals('deleted', 0)
+        );
+        if (method_exists($user, 'getUid')) {
+            $and[] = $query->logicalNot($query->equals('uid', intval($user->getUid())));
+        }
+        $constraint = $query->logicalAnd($and);
 
-		$query->matching($constraint);
+        $query->matching($constraint);
 
-		$users = $query->execute()->getFirst();
-		return $users;
-	}
+        $users = $query->execute()->getFirst();
+        return $users;
+    }
 
-	/**
-	 * Find All for Backend Actions
-	 *
-	 * @param array $filter Filter Array
-	 * @return QueryResultInterface|array
-	 */
-	public function findAllInBackend($filter) {
-		$pid = GeneralUtility::_GET('id');
-		$query = $this->createQuery();
-		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
+    /**
+     * Find All for Backend Actions
+     *
+     * @param array $filter Filter Array
+     * @return QueryResultInterface|array
+     */
+    public function findAllInBackend($filter)
+    {
+        $pid = GeneralUtility::_GET('id');
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
 
-		// Where
-		$and = array(
-			$query->equals('deleted', 0)
-		);
-		if (intval($pid) > 0) {
-			$and[] = $query->equals('pid', $pid);
-		}
-		if (!empty($filter['searchword'])) {
-			$searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
-			foreach ($searchwords as $searchword) {
-				$or = array();
-				$or[] = $query->like('address', '%' . $searchword . '%');
-				$or[] = $query->like('city', '%' . $searchword . '%');
-				$or[] = $query->like('company', '%' . $searchword . '%');
-				$or[] = $query->like('country', '%' . $searchword . '%');
-				$or[] = $query->like('email', '%' . $searchword . '%');
-				$or[] = $query->like('fax', '%' . $searchword . '%');
-				$or[] = $query->like('first_name', '%' . $searchword . '%');
-				$or[] = $query->like('image', '%' . $searchword . '%');
-				$or[] = $query->like('last_name', '%' . $searchword . '%');
-				$or[] = $query->like('middle_name', '%' . $searchword . '%');
-				$or[] = $query->like('name', '%' . $searchword . '%');
-				$or[] = $query->like('telephone', '%' . $searchword . '%');
-				$or[] = $query->like('title', '%' . $searchword . '%');
-				$or[] = $query->like('usergroup.title', '%' . $searchword . '%');
-				$or[] = $query->like('username', '%' . $searchword . '%');
-				$or[] = $query->like('www', '%' . $searchword . '%');
-				$or[] = $query->like('zip', '%' . $searchword . '%');
-				$and[] = $query->logicalOr($or);
-			}
-		}
-		$query->matching($query->logicalAnd($and));
+        // Where
+        $and = array(
+            $query->equals('deleted', 0)
+        );
+        if (intval($pid) > 0) {
+            $and[] = $query->equals('pid', $pid);
+        }
+        if (!empty($filter['searchword'])) {
+            $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
+            foreach ($searchwords as $searchword) {
+                $or = array();
+                $or[] = $query->like('address', '%' . $searchword . '%');
+                $or[] = $query->like('city', '%' . $searchword . '%');
+                $or[] = $query->like('company', '%' . $searchword . '%');
+                $or[] = $query->like('country', '%' . $searchword . '%');
+                $or[] = $query->like('email', '%' . $searchword . '%');
+                $or[] = $query->like('fax', '%' . $searchword . '%');
+                $or[] = $query->like('first_name', '%' . $searchword . '%');
+                $or[] = $query->like('image', '%' . $searchword . '%');
+                $or[] = $query->like('last_name', '%' . $searchword . '%');
+                $or[] = $query->like('middle_name', '%' . $searchword . '%');
+                $or[] = $query->like('name', '%' . $searchword . '%');
+                $or[] = $query->like('telephone', '%' . $searchword . '%');
+                $or[] = $query->like('title', '%' . $searchword . '%');
+                $or[] = $query->like('usergroup.title', '%' . $searchword . '%');
+                $or[] = $query->like('username', '%' . $searchword . '%');
+                $or[] = $query->like('www', '%' . $searchword . '%');
+                $or[] = $query->like('zip', '%' . $searchword . '%');
+                $and[] = $query->logicalOr($or);
+            }
+        }
+        $query->matching($query->logicalAnd($and));
 
-		// Order
-		$query->setOrderings(
-			array(
-				'username' => QueryInterface::ORDER_ASCENDING
-			)
-		);
-		return $query->execute();
-	}
+        // Order
+        $query->setOrderings(
+            array(
+                'username' => QueryInterface::ORDER_ASCENDING
+            )
+        );
+        return $query->execute();
+    }
 }

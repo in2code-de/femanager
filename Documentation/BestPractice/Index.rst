@@ -251,7 +251,7 @@ Example file fileadmin/Partials/Fields/TwitterId.html:
 
 .. code-block:: text
 
-	{namespace femanager=In2\Femanager\ViewHelpers}
+	{namespace femanager=In2code\Femanager\ViewHelpers}
 	<div class="femanager_fieldset control-group">
 			<label for="twitterId" class="control-label">
 					<f:translate key="tx_femanagerextended_domain_model_user.twitter_id" extensionName="femanagerextended">Twitter</f:translate>
@@ -328,9 +328,9 @@ Example Model User.php which extends to the default femanager Model:
 
 .. code-block:: text
 
-	namespace In2\Femanagerextended\Domain\Model;
+	namespace In2code\Femanagerextended\Domain\Model;
 
-	class User extends \In2\Femanager\Domain\Model\User {
+	class User extends \In2code\Femanager\Domain\Model\User {
 
 		/**
 		 * twitterId
@@ -402,12 +402,12 @@ TypoScript to include Model and override default controller
 	config.tx_extbase{
 		persistence{
 			classes{
-				In2\Femanager\Domain\Model\User {
+				In2code\Femanager\Domain\Model\User {
 					subclasses {
-						0 = In2\Femanagerextended\Domain\Model\User
+						0 = In2code\Femanagerextended\Domain\Model\User
 					}
 				}
-				In2\Femanagerextended\Domain\Model\User {
+				In2code\Femanagerextended\Domain\Model\User {
 					mapping {
 						tableName = fe_users
 						recordType = 0
@@ -416,8 +416,8 @@ TypoScript to include Model and override default controller
 			}
 		}
 		objects {
-			In2\Femanager\Controller\NewController.className = In2\Femanagerextended\Controller\NewController
-			In2\Femanager\Controller\EditController.className = In2\Femanagerextended\Controller\EditController
+			In2code\Femanager\Controller\NewController.className = In2code\Femanagerextended\Controller\NewController
+			In2code\Femanager\Controller\EditController.className = In2code\Femanagerextended\Controller\EditController
 		}
 	}
 
@@ -429,19 +429,19 @@ EditController.php:
 
 .. code-block:: text
 
-	namespace In2\Femanagerextended\Controller;
+	namespace In2code\Femanagerextended\Controller;
 
-	class EditController extends \In2\Femanager\Controller\EditController {
+	class EditController extends \In2code\Femanager\Controller\EditController {
 
 		/**
 		 * action update
 		 *
-		 * @param \In2\Femanagerextended\Domain\Model\User $user
-		 * @validate $user In2\Femanager\Domain\Validator\ServersideValidator
-		 * @validate $user In2\Femanager\Domain\Validator\PasswordValidator
+		 * @param \In2code\Femanagerextended\Domain\Model\User $user
+		 * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
+		 * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
 		 * @return void
 		 */
-		public function updateAction(\In2\Femanagerextended\Domain\Model\User $user) {
+		public function updateAction(\In2code\Femanagerextended\Domain\Model\User $user) {
 			parent::updateAction($user);
 		}
 	}
@@ -451,19 +451,19 @@ NewController.php:
 
 .. code-block:: text
 
-	namespace In2\Femanagerextended\Controller;
+	namespace In2code\Femanagerextended\Controller;
 
-	class NewController extends \In2\Femanager\Controller\NewController {
+	class NewController extends \In2code\Femanager\Controller\NewController {
 
 		/**
 		 * action create
 		 *
-		 * @param \In2\Femanagerextended\Domain\Model\User $user
-		 * @validate $user In2\Femanager\Domain\Validator\ServersideValidator
-		 * @validate $user In2\Femanager\Domain\Validator\PasswordValidator
+		 * @param \In2code\Femanagerextended\Domain\Model\User $user
+		 * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
+		 * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
 		 * @return void
 		 */
-		public function createAction(\In2\Femanagerextended\Domain\Model\User $user) {
+		public function createAction(\In2code\Femanagerextended\Domain\Model\User $user) {
 			parent::createAction($user);
 		}
 	}
@@ -506,8 +506,8 @@ Override Validation Classes with TypoScript
 
 	config.tx_extbase{
 		objects {
-			In2\Femanager\Domain\Validator\ServersideValidator.className = In2\Femanagerextended\Domain\Validator\CustomServersideValidator
-			In2\Femanager\Domain\Validator\ClientsideValidator.className = In2\Femanagerextended\Domain\Validator\CustomClientsideValidator
+			In2code\Femanager\Domain\Validator\ServersideValidator.className = In2code\Femanagerextended\Domain\Validator\CustomServersideValidator
+			In2code\Femanager\Domain\Validator\ClientsideValidator.className = In2code\Femanagerextended\Domain\Validator\CustomClientsideValidator
 		}
 	}
 
@@ -518,9 +518,9 @@ CustomClientsideValidator.php:
 
 .. code-block:: text
 
-	namespace In2\Femanagerextended\Domain\Validator;
+	namespace In2code\Femanagerextended\Domain\Validator;
 
-	class CustomClientsideValidator extends \In2\Femanager\Domain\Validator\ClientsideValidator {
+	class CustomClientsideValidator extends \In2code\Femanager\Domain\Validator\ClientsideValidator {
 
 		/**
 		 * Custom Validator
@@ -544,9 +544,9 @@ CustomServersideValidator.php:
 
 .. code-block:: text
 
-	namespace In2\Femanagerextended\Domain\Validator;
+	namespace In2code\Femanagerextended\Domain\Validator;
 
-	class CustomServersideValidator extends \In2\Femanager\Domain\Validator\ServersideValidator {
+	class CustomServersideValidator extends \In2code\Femanager\Domain\Validator\ServersideValidator {
 
 		/**
 		 * Custom Validator
@@ -793,9 +793,9 @@ This is an example how to use a signal from femanager – in this case we decide
 
 	$signalSlotDispatcher = t3lib_div::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
 	$signalSlotDispatcher->connect(
-		'In2\Femanager\Controller\NewController',
+		'In2code\Femanager\Controller\NewController',
 		'createActionBeforePersist',
-		'In2\Femanagersignalslot\Utility\SendMail',
+		'In2code\Femanagersignalslot\Utility\SendMail',
 		'send',
 		FALSE
 	);
@@ -807,15 +807,15 @@ This is our main class which is called every time a new registration process was
 .. code-block:: text
 
 	<?php
-	namespace In2\Femanagersignalslot\Utility;
+	namespace In2code\Femanagersignalslot\Utility;
 
 	class SendMail {
 
 		/**
 		 * Send mail about user information
 		 *
-		 * @param \In2\Femanager\Domain\Model\User $user
-		 * @param \In2\Femanager\Controller\NewController $pObj
+		 * @param \In2code\Femanager\Domain\Model\User $user
+		 * @param \In2code\Femanager\Controller\NewController $pObj
 		 * @return void
 		 */
 		public function send($user, $pObj) {

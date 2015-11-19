@@ -1,11 +1,11 @@
 <?php
-namespace In2\Femanager\Controller;
+namespace In2code\Femanager\Controller;
 
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use In2\Femanager\Domain\Model\User;
-use In2\Femanager\Utility\Div;
+use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -36,205 +36,219 @@ use In2\Femanager\Utility\Div;
  *
  * @package femanager
  * @license http://www.gnu.org/licenses/gpl.html
- * 			GNU General Public License, version 3 or later
+ *          GNU General Public License, version 3 or later
  */
-class EditController extends AbstractController {
+class EditController extends AbstractController
+{
 
-	/**
-	 * action edit
-	 *
-	 * @return void
-	 */
-	public function editAction() {
-		$this->view->assign('user', $this->user);
-		$this->view->assign('allUserGroups', $this->allUserGroups);
-		$this->assignForAll();
-	}
+    /**
+     * action edit
+     *
+     * @return void
+     */
+    public function editAction()
+    {
+        $this->view->assign('user', $this->user);
+        $this->view->assign('allUserGroups', $this->allUserGroups);
+        $this->assignForAll();
+    }
 
-	/**
-	 * Init for User creation
-	 *
-	 * @return void
-	 */
-	public function initializeUpdateAction() {
-		$user = $this->div->getCurrentUser();
-		$userValues = $this->request->getArgument('user');
-		$this->testSpoof($user, $userValues['__identity']);
+    /**
+     * Init for User creation
+     *
+     * @return void
+     */
+    public function initializeUpdateAction()
+    {
+        $user = $this->div->getCurrentUser();
+        $userValues = $this->request->getArgument('user');
+        $this->testSpoof($user, $userValues['__identity']);
 
-		// workarround for empty usergroups
-		if (intval($this->pluginVariables['user']['usergroup'][0]['__identity']) === 0) {
-			unset($this->pluginVariables['user']['usergroup']);
-		}
-		// keep password if empty
-		if (
-			isset($this->settings['edit']['misc']['keepPasswordIfEmpty']) &&
-			$this->settings['edit']['misc']['keepPasswordIfEmpty'] == '1' &&
-			isset($this->pluginVariables['user']['password']) &&
-			$this->pluginVariables['user']['password'] === '' &&
-			isset($this->pluginVariables['password_repeat']) &&
-			$this->pluginVariables['password_repeat'] === ''
-		) {
-			unset($this->pluginVariables['user']['password']);
-			unset($this->pluginVariables['password_repeat']);
-		}
-		$this->request->setArguments($this->pluginVariables);
-	}
+        // workarround for empty usergroups
+        if (intval($this->pluginVariables['user']['usergroup'][0]['__identity']) === 0) {
+            unset($this->pluginVariables['user']['usergroup']);
+        }
+        // keep password if empty
+        if (
+            isset($this->settings['edit']['misc']['keepPasswordIfEmpty']) &&
+            $this->settings['edit']['misc']['keepPasswordIfEmpty'] == '1' &&
+            isset($this->pluginVariables['user']['password']) &&
+            $this->pluginVariables['user']['password'] === '' &&
+            isset($this->pluginVariables['password_repeat']) &&
+            $this->pluginVariables['password_repeat'] === ''
+        ) {
+            unset($this->pluginVariables['user']['password']);
+            unset($this->pluginVariables['password_repeat']);
+        }
+        $this->request->setArguments($this->pluginVariables);
+    }
 
-	/**
-	 * action update
-	 *
-	 * @param User $user
-	 * @validate $user In2\Femanager\Domain\Validator\ServersideValidator
-	 * @validate $user In2\Femanager\Domain\Validator\PasswordValidator
-	 * @validate $user In2\Femanager\Domain\Validator\CaptchaValidator
-	 * @return void
-	 */
-	public function updateAction(User $user) {
-		// check if there are no changes
-		if (!Div::isDirtyObject($user)) {
-			$this->addFlashMessage(
-				LocalizationUtility::translate('noChanges', 'femanager'),
-				'',
-				FlashMessage::NOTICE
-			);
-			$this->redirect('edit');
-		}
+    /**
+     * action update
+     *
+     * @param User $user
+     * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
+     * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
+     * @validate $user In2code\Femanager\Domain\Validator\CaptchaValidator
+     * @return void
+     */
+    public function updateAction(User $user)
+    {
+        // check if there are no changes
+        if (!Div::isDirtyObject($user)) {
+            $this->addFlashMessage(LocalizationUtility::translate('noChanges', 'femanager'), '', FlashMessage::NOTICE);
+            $this->redirect('edit');
+        }
 
-		/** @var User $user */
-		$user = $this->div->forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.'], $this->cObj);
-		if ($this->settings['edit']['fillEmailWithUsername'] == 1) {
-			$user->setEmail($user->getUsername());
-		}
+        /** @var User $user */
+        $user = $this->div->forceValues(
+            $user,
+            $this->config['edit.']['forceValues.']['beforeAnyConfirmation.'],
+            $this->cObj
+        );
+        if ($this->settings['edit']['fillEmailWithUsername'] == 1) {
+            $user->setEmail($user->getUsername());
+        }
 
-		// convert password to md5 or sha1 hash
-		if (array_key_exists('password', Div::getDirtyPropertiesFromObject($user))) {
-			Div::hashPassword($user, $this->settings['edit']['misc']['passwordSave']);
-		}
+        // convert password to md5 or sha1 hash
+        if (array_key_exists('password', Div::getDirtyPropertiesFromObject($user))) {
+            Div::hashPassword($user, $this->settings['edit']['misc']['passwordSave']);
+        }
 
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
 
-		if (!empty($this->settings['edit']['confirmByAdmin'])) {
-			$this->updateRequest($user);
-		} else {
-			$this->updateAllConfirmed($user);
-		}
+        if (!empty($this->settings['edit']['confirmByAdmin'])) {
+            $this->updateRequest($user);
+        } else {
+            $this->updateAllConfirmed($user);
+        }
 
-		$this->redirect('edit');
-	}
+        $this->redirect('edit');
+    }
 
-	/**
-	 * Update if hash is ok
-	 *
-	 * @param User $user User object
-	 * @param string $hash
-	 * @param string $status could be "confirm", "refuse", "silentRefuse"
-	 * @return void
-	 */
-	public function confirmUpdateRequestAction(User $user, $hash, $status = 'confirm') {
-		$this->view->assign('user', $user);
+    /**
+     * Update if hash is ok
+     *
+     * @param User $user User object
+     * @param string $hash
+     * @param string $status could be "confirm", "refuse", "silentRefuse"
+     * @return void
+     */
+    public function confirmUpdateRequestAction(User $user, $hash, $status = 'confirm')
+    {
+        $this->view->assign('user', $user);
 
-		// if wrong hash or if no update xml
-		if (Div::createHash($user->getUsername() . $user->getUid()) !== $hash || !$user->getTxFemanagerChangerequest()) {
-			$this->addFlashMessage(
-				LocalizationUtility::translate('updateFailedProfile', 'femanager'),
-				'',
-				FlashMessage::ERROR
-			);
+        // if wrong hash or if no update xml
+        if (
+            Div::createHash($user->getUsername() . $user->getUid()) !== $hash ||
+            !$user->getTxFemanagerChangerequest()
+        ) {
+            $this->addFlashMessage(
+                LocalizationUtility::translate('updateFailedProfile', 'femanager'),
+                '',
+                FlashMessage::ERROR
+            );
 
-			return;
-		}
+            return;
+        }
 
-		switch ($status) {
-			case 'confirm':
-				// overwrite properties
-				$values = GeneralUtility::xml2array($user->getTxFemanagerChangerequest(), '', 0, 'changes');
-				foreach ((array) $values as $field => $value) {
-					if ($field != 'usergroup' && method_exists($user, 'set' . ucfirst($field))) {
-						$user->{'set' . ucfirst($field)}($value['new']);
-					} else {
-						$user->removeAllUsergroups();
-						$usergroupUids = GeneralUtility::trimExplode(',', $value['new'], 1);
-						foreach ($usergroupUids as $usergroupUid) {
-							$user->addUsergroup($this->userGroupRepository->findByUid($usergroupUid));
-						}
-					}
-				}
-				$user = $this->div->forceValues(
-					$user,
-					$this->config['edit.']['forceValues.']['onAdminConfirmation.'],
-					$this->cObj
-				);
+        switch ($status) {
+            case 'confirm':
+                // overwrite properties
+                $values = GeneralUtility::xml2array($user->getTxFemanagerChangerequest(), '', 0, 'changes');
+                foreach ((array) $values as $field => $value) {
+                    if ($field != 'usergroup' && method_exists($user, 'set' . ucfirst($field))) {
+                        $user->{'set' . ucfirst($field)}($value['new']);
+                    } else {
+                        $user->removeAllUsergroups();
+                        $usergroupUids = GeneralUtility::trimExplode(',', $value['new'], 1);
+                        foreach ($usergroupUids as $usergroupUid) {
+                            $user->addUsergroup($this->userGroupRepository->findByUid($usergroupUid));
+                        }
+                    }
+                }
+                $user = $this->div->forceValues(
+                    $user,
+                    $this->config['edit.']['forceValues.']['onAdminConfirmation.'],
+                    $this->cObj
+                );
 
-				$this->div->log(
-					LocalizationUtility::translate('tx_femanager_domain_model_log.state.202', 'femanager'),
-					202,
-					$user
-				);
+                $this->div->log(
+                    LocalizationUtility::translate('tx_femanager_domain_model_log.state.202', 'femanager'),
+                    202,
+                    $user
+                );
 
-				$this->addFlashMessage(LocalizationUtility::translate('updateProfile', 'femanager'));
-				break;
+                $this->addFlashMessage(LocalizationUtility::translate('updateProfile', 'femanager'));
+                break;
 
-			case 'refuse':
-				// send email to user
-				$this->sendMail->send(
-					'updateRequestRefused',
-					Div::makeEmailArray(
-						$user->getEmail(),
-						$user->getFirstName() . ' ' . $user->getLastName()
-					),
-					array('sender@femanager.org' => 'Sender Name'),
-					'Your change request was refused',
-					array(
-						'user' => $user,
-						'settings' => $this->settings
-					),
-					$this->config['edit.']['email.']['updateRequestRefused.']
-				);
+            case 'refuse':
+                // send email to user
+                $this->sendMail->send(
+                    'updateRequestRefused',
+                    Div::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
+                    array('sender@femanager.org' => 'Sender Name'),
+                    'Your change request was refused',
+                    array(
+                        'user' => $user,
+                        'settings' => $this->settings
+                    ),
+                    $this->config['edit.']['email.']['updateRequestRefused.']
+                );
 
-				$this->div->log(
-					LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'),
-					203,
-					$user
-				);
+                $this->div->log(
+                    LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'),
+                    203,
+                    $user
+                );
 
-				$this->addFlashMessage(LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'));
-				break;
+                $this->addFlashMessage(
+                    LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager')
+                );
+                break;
 
-			case 'silentRefuse':
-				$this->div->log(
-					LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'),
-					203,
-					$user
-				);
+            case 'silentRefuse':
+                $this->div->log(
+                    LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'),
+                    203,
+                    $user
+                );
 
-				$this->addFlashMessage(LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'));
-				break;
+                $this->addFlashMessage(
+                    LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager')
+                );
+                break;
 
-			default:
+            default:
 
-		}
+        }
 
-		$user->setTxFemanagerChangerequest('');
-		$this->userRepository->update($user);
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $hash, $status, $this));
-	}
+        $user->setTxFemanagerChangerequest('');
+        $this->userRepository->update($user);
+        $this->signalSlotDispatcher->dispatch(
+            __CLASS__,
+            __FUNCTION__ . 'AfterPersist',
+            array($user, $hash, $status, $this)
+        );
+    }
 
-	/**
-	 * action delete
-	 *
-	 * @param User $user
-	 * @return void
-	 */
-	public function deleteAction(User $user) {
-		$this->div->log(
-			LocalizationUtility::translate('tx_femanager_domain_model_log.state.301', 'femanager'),
-			300,
-			$user
-		);
-		$this->addFlashMessage(LocalizationUtility::translate('tx_femanager_domain_model_log.state.301', 'femanager'));
-		$this->userRepository->remove($user);
-		$this->redirectByAction('delete');
-		$this->redirect('edit');
-	}
+    /**
+     * action delete
+     *
+     * @param User $user
+     * @return void
+     */
+    public function deleteAction(User $user)
+    {
+        $this->div->log(
+            LocalizationUtility::translate('tx_femanager_domain_model_log.state.301', 'femanager'),
+            300,
+            $user
+        );
+        $this->addFlashMessage(LocalizationUtility::translate('tx_femanager_domain_model_log.state.301', 'femanager'));
+        $this->userRepository->remove($user);
+        $this->redirectByAction('delete');
+        $this->redirect('edit');
+    }
 
 }

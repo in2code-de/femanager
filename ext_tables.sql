@@ -2,19 +2,18 @@
 # Table structure for table 'fe_users'
 #
 CREATE TABLE fe_users (
-	gender int(11) unsigned DEFAULT '0' NOT NULL,
-	date_of_birth int(11) DEFAULT '0' NOT NULL,
+  gender int(11) unsigned DEFAULT '0' NOT NULL,
+  date_of_birth int(11) DEFAULT '0' NOT NULL,
   tx_femanager_confirmedbyuser tinyint(3) DEFAULT '0' NOT NULL,
   tx_femanager_confirmedbyadmin tinyint(3) DEFAULT '0' NOT NULL,
-	tx_femanager_log int(11) DEFAULT '0' NOT NULL,
-	tx_femanager_changerequest text
+  tx_femanager_log int(11) DEFAULT '0' NOT NULL,
+  tx_femanager_changerequest text
 );
 
 #
 # Table structure for table 'tx_femanager_domain_model_log'
 #
 CREATE TABLE tx_femanager_domain_model_log (
-
   uid int(11) NOT NULL auto_increment,
   pid int(11) DEFAULT '0' NOT NULL,
 
@@ -50,5 +49,4 @@ CREATE TABLE tx_femanager_domain_model_log (
   KEY parent (pid),
   KEY t3ver_oid (t3ver_oid,t3ver_wsid),
   KEY language (l10n_parent,sys_language_uid)
-
 );

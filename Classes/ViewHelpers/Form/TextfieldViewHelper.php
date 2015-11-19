@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\ViewHelpers\Form;
+namespace In2code\Femanager\ViewHelpers\Form;
 
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldViewHelper as OriginalTextfieldViewHelper;
@@ -31,44 +31,47 @@ use TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldViewHelper as OriginalTextfieldVie
 /**
  * Class TextfieldViewHelper
  *
- * @package In2\Femanager\ViewHelpers\Form
+ * @package In2code\Femanager\ViewHelpers\Form
  */
-class TextfieldViewHelper extends OriginalTextfieldViewHelper {
+class TextfieldViewHelper extends OriginalTextfieldViewHelper
+{
 
-	/**
-	 * Get the value of this form element (changed to prefill from TypoScript)
-	 * Either returns arguments['value'], or the correct value for Object Access.
-	 *
-	 * @param boolean $convertObjects whether to convert objects to identifiers
-	 * @return mixed Value
-	 */
-	protected function getValue($convertObjects = TRUE) {
-		$value = parent::getValue($convertObjects);
+    /**
+     * Get the value of this form element (changed to prefill from TypoScript)
+     * Either returns arguments['value'], or the correct value for Object Access.
+     *
+     * @param boolean $convertObjects whether to convert objects to identifiers
+     * @return mixed Value
+     */
+    protected function getValue($convertObjects = true)
+    {
+        $value = parent::getValue($convertObjects);
 
-		// prefill value from TypoScript
-		if (empty($value) && $this->getValueFromTypoScript()) {
-			$value = $this->getValueFromTypoScript();
-		}
+        // prefill value from TypoScript
+        if (empty($value) && $this->getValueFromTypoScript()) {
+            $value = $this->getValueFromTypoScript();
+        }
 
-		return $value;
-	}
+        return $value;
+    }
 
-	/**
-	 * Read value from TypoScript
-	 *
-	 * @return string Value from TypoScript
-	 */
-	protected function getValueFromTypoScript() {
-		$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-		$cObj = $this->configurationManager->getContentObject();
-		$typoScript = $this->configurationManager->getConfiguration(
-			ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-		);
-		$prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
-		$value = $cObj->cObjGetSingle(
-			$prefillTypoScript[$this->arguments['property']],
-			$prefillTypoScript[$this->arguments['property'] . '.']
-		);
-		return $value;
-	}
+    /**
+     * Read value from TypoScript
+     *
+     * @return string Value from TypoScript
+     */
+    protected function getValueFromTypoScript()
+    {
+        $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
+        $cObj = $this->configurationManager->getContentObject();
+        $typoScript = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+        );
+        $prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
+        $value = $cObj->cObjGetSingle(
+            $prefillTypoScript[$this->arguments['property']],
+            $prefillTypoScript[$this->arguments['property'] . '.']
+        );
+        return $value;
+    }
 }

@@ -323,7 +323,7 @@ A: You can change this via TypoScript:
 .. code-block:: text
 
 	config.tx_extbase.persistence.classes {
-		In2\Femanager\Domain\Model\User {
+		In2code\Femanager\Domain\Model\User {
 			mapping {
 				tableName = fe_users
 				RecordType = anyExtbaseType

@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\Controller;
+namespace In2code\Femanager\Controller;
 
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -7,8 +7,8 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use In2\Femanager\Domain\Model\User;
-use In2\Femanager\Utility\Div;
+use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -39,547 +39,548 @@ use In2\Femanager\Utility\Div;
  *
  * @package femanager
  * @license http://www.gnu.org/licenses/gpl.html
- * 			GNU General Public License, version 3 or later
+ *          GNU General Public License, version 3 or later
  */
-class AbstractController extends ActionController {
+class AbstractController extends ActionController
+{
 
-	/**
-	 * userRepository
-	 *
-	 * @var \In2\Femanager\Domain\Repository\UserRepository
-	 * @inject
-	 */
-	protected $userRepository;
+    /**
+     * @var \In2code\Femanager\Domain\Repository\UserRepository
+     * @inject
+     */
+    protected $userRepository;
 
-	/**
-	 * userGroupRepository
-	 *
-	 * @var \In2\Femanager\Domain\Repository\UserGroupRepository
-	 * @inject
-	 */
-	protected $userGroupRepository;
+    /**
+     * @var \In2code\Femanager\Domain\Repository\UserGroupRepository
+     * @inject
+     */
+    protected $userGroupRepository;
 
-	/**
-	 * persistenceManager
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-	 * @inject
-	 */
-	protected $persistenceManager;
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+     * @inject
+     */
+    protected $persistenceManager;
 
-	/**
-	 * SignalSlot Dispatcher
-	 *
-	 * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
-	 * @inject
-	 */
-	protected $signalSlotDispatcher;
+    /**
+     * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
+     * @inject
+     */
+    protected $signalSlotDispatcher;
 
-	/**
-	 * Misc Functions
-	 *
-	 * @var \In2\Femanager\Utility\Div
-	 * @inject
-	 */
-	protected $div;
+    /**
+     * @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext
+     */
+    public $controllerContext;
 
-	/**
-	 * @var \In2\Femanager\Utility\SendMail
-	 * @inject
-	 */
-	protected $sendMail;
+    /**
+     * @var \TYPO3\CMS\Core\Database\DatabaseConnection
+     */
+    protected $databaseConnection = null;
 
-	/**
-	 * Content Object
-	 *
-	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
-	 */
-	public $cObj;
+    /**
+     * @var \In2code\Femanager\Utility\Div
+     * @inject
+     */
+    protected $div;
 
-	/**
-	 * Former known as piVars
-	 *
-	 * @var array
-	 */
-	public $pluginVariables;
+    /**
+     * @var \In2code\Femanager\Utility\SendMail
+     * @inject
+     */
+    protected $sendMail;
 
-	/**
-	 * TypoScript
-	 *
-	 * @var array
-	 */
-	public $config;
+    /**
+     * Content Object
+     *
+     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     */
+    public $cObj;
 
-	/**
-	 * Complete Configuration
-	 *
-	 * @var array
-	 */
-	public $allConfig;
+    /**
+     * Former known as piVars
+     *
+     * @var array
+     */
+    public $pluginVariables;
 
-	/**
-	 * Current logged in user object
-	 *
-	 * @var User
-	 */
-	public $user;
+    /**
+     * TypoScript
+     *
+     * @var array
+     */
+    public $config;
 
-	/**
-	 * All available usergroups
-	 *
-	 * @var object
-	 */
-	public $allUserGroups;
+    /**
+     * Complete Configuration
+     *
+     * @var array
+     */
+    public $allConfig;
 
-	/**
-	 * controllerContext
-	 *
-	 * @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext
-	 */
-	public $controllerContext;
+    /**
+     * Current logged in user object
+     *
+     * @var User
+     */
+    public $user;
 
-	/**
-	 * @var \TYPO3\CMS\Core\Database\DatabaseConnection
-	 */
-	protected $databaseConnection = NULL;
+    /**
+     * All available usergroups
+     *
+     * @var object
+     */
+    public $allUserGroups;
 
-	/**
-	 * Prefix method to createAction()
-	 * 		Create Confirmation from Admin is not necessary
-	 *
-	 * @param User $user
-	 * @return void
-	 */
-	public function createAllConfirmed(User $user) {
-		$this->userRepository->add($user);
-		$this->persistenceManager->persistAll();
-		$this->addFlashMessage(LocalizationUtility::translate('create', 'femanager'));
-		$this->div->log(
-			LocalizationUtility::translate('tx_femanager_domain_model_log.state.101', 'femanager'),
-			101,
-			$user
-		);
-		$this->finalCreate($user, 'new', 'createStatus');
-	}
+    /**
+     * Prefix method to createAction()
+     *        Create Confirmation from Admin is not necessary
+     *
+     * @param User $user
+     * @return void
+     */
+    public function createAllConfirmed(User $user)
+    {
+        $this->userRepository->add($user);
+        $this->persistenceManager->persistAll();
+        $this->addFlashMessage(LocalizationUtility::translate('create', 'femanager'));
+        $this->div->log(
+            LocalizationUtility::translate('tx_femanager_domain_model_log.state.101', 'femanager'),
+            101,
+            $user
+        );
+        $this->finalCreate($user, 'new', 'createStatus');
+    }
 
-	/**
-	 * Prefix method to createAction(): Create must be confirmed by Admin
-	 *
-	 * @param User $user
-	 * @return void
-	 */
-	public function createRequest(User $user) {
-		// persist
-		$user->setDisable(TRUE);
-		$this->userRepository->add($user);
-		$this->persistenceManager->persistAll();
+    /**
+     * Prefix method to createAction(): Create must be confirmed by Admin
+     *
+     * @param User $user
+     * @return void
+     */
+    public function createRequest(User $user)
+    {
+        // persist
+        $user->setDisable(true);
+        $this->userRepository->add($user);
+        $this->persistenceManager->persistAll();
 
-		$this->div->log(
-			LocalizationUtility::translate('tx_femanager_domain_model_log.state.106', 'femanager'),
-			106,
-			$user
-		);
+        $this->div->log(
+            LocalizationUtility::translate('tx_femanager_domain_model_log.state.106', 'femanager'),
+            106,
+            $user
+        );
 
-		if (!empty($this->settings['new']['confirmByUser'])) {
+        if (!empty($this->settings['new']['confirmByUser'])) {
 
-			// send email to user for confirmation
-			$this->sendMail->send(
-				'createUserConfirmation',
-				Div::makeEmailArray(
-					$user->getEmail(),
-					$user->getUsername()
-				),
-				array(
-					$this->settings['new']['email']['createUserConfirmation']['sender']['email']['value']
-						=> $this->settings['settings']['new']['email']['createUserConfirmation']['sender']['name']['value']
-				),
-				'Confirm your profile creation request',
-				array(
-					'user' => $user,
-					'hash' => Div::createHash($user->getUsername())
-				),
-				$this->config['new.']['email.']['createUserConfirmation.']
-			);
+            // send email to user for confirmation
+            $this->sendMail->send(
+                'createUserConfirmation',
+                Div::makeEmailArray(
+                    $user->getEmail(),
+                    $user->getUsername()
+                ),
+                array(
+                    $this->settings['new']['email']['createUserConfirmation']['sender']['email']['value'] =>
+                        $this->settings['settings']['new']['email']['createUserConfirmation']['sender']['name']['value']
+                ),
+                'Confirm your profile creation request',
+                array(
+                    'user' => $user,
+                    'hash' => Div::createHash($user->getUsername())
+                ),
+                $this->config['new.']['email.']['createUserConfirmation.']
+            );
 
-			// redirect by TypoScript
-			$this->redirectByAction('new', 'requestRedirect');
+            // redirect by TypoScript
+            $this->redirectByAction('new', 'requestRedirect');
 
-			// add flashmessage
-			$this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm', 'femanager'));
+            // add flashmessage
+            $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm', 'femanager'));
 
-			// redirect
-			$this->redirect('new');
-		}
-		if (!empty($this->settings['new']['confirmByAdmin'])) {
-			$this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm', 'femanager'));
+            // redirect
+            $this->redirect('new');
+        }
+        if (!empty($this->settings['new']['confirmByAdmin'])) {
+            $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm', 'femanager'));
 
-			// send email to admin
-			$this->sendMail->send(
-				'createAdminConfirmation',
-				Div::makeEmailArray(
-					$this->settings['new']['confirmByAdmin'],
-					$this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
-				),
-				Div::makeEmailArray(
-					$user->getEmail(),
-					$user->getUsername()
-				),
-				'New Registration request',
-				array(
-					'user' => $user,
-					'hash' => Div::createHash($user->getUsername() . $user->getUid())
-				),
-				$this->config['new.']['email.']['createAdminConfirmation.']
-			);
+            // send email to admin
+            $this->sendMail->send(
+                'createAdminConfirmation',
+                Div::makeEmailArray(
+                    $this->settings['new']['confirmByAdmin'],
+                    $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
+                ),
+                Div::makeEmailArray(
+                    $user->getEmail(),
+                    $user->getUsername()
+                ),
+                'New Registration request',
+                array(
+                    'user' => $user,
+                    'hash' => Div::createHash($user->getUsername() . $user->getUid())
+                ),
+                $this->config['new.']['email.']['createAdminConfirmation.']
+            );
 
-			$this->redirect('new');
-		}
-	}
+            $this->redirect('new');
+        }
+    }
 
-	/**
-	 * Prefix method to updateAction()
-	 * 		Update Confirmation from Admin is not necessary
-	 *
-	 * @param User $user
-	 * @return void
-	 */
-	public function updateAllConfirmed(User $user) {
+    /**
+     * Prefix method to updateAction()
+     *        Update Confirmation from Admin is not necessary
+     *
+     * @param User $user
+     * @return void
+     */
+    public function updateAllConfirmed(User $user)
+    {
 
-		// send notify email to admin
-		if ($this->settings['edit']['notifyAdmin']) {
-			$existingUser = $this->userRepository->findByUid($user->getUid());
-			$dirtyProperties = Div::getDirtyPropertiesFromObject($existingUser, $user);
-			$this->sendMail->send(
-				'updateNotify',
-				Div::makeEmailArray(
-					$this->settings['edit']['notifyAdmin'],
-					$this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value']
-				),
-				Div::makeEmailArray(
-					$user->getEmail(),
-					$user->getUsername()
-				),
-				'Profile update',
-				array(
-					'user' => $user,
-					'changes' => $dirtyProperties,
-					'settings' => $this->settings
-				),
-				$this->config['edit.']['email.']['notifyAdmin.']
-			);
-		}
+        // send notify email to admin
+        if ($this->settings['edit']['notifyAdmin']) {
+            $existingUser = $this->userRepository->findByUid($user->getUid());
+            $dirtyProperties = Div::getDirtyPropertiesFromObject($existingUser, $user);
+            $this->sendMail->send(
+                'updateNotify',
+                Div::makeEmailArray(
+                    $this->settings['edit']['notifyAdmin'],
+                    $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value']
+                ),
+                Div::makeEmailArray(
+                    $user->getEmail(),
+                    $user->getUsername()
+                ),
+                'Profile update',
+                array(
+                    'user' => $user,
+                    'changes' => $dirtyProperties,
+                    'settings' => $this->settings
+                ),
+                $this->config['edit.']['email.']['notifyAdmin.']
+            );
+        }
 
-		// persist
-		$this->userRepository->update($user);
-		$this->persistenceManager->persistAll();
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
+        // persist
+        $this->userRepository->update($user);
+        $this->persistenceManager->persistAll();
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
 
-		$this->div->log(
-			LocalizationUtility::translate('tx_femanager_domain_model_log.state.201', 'femanager'),
-			201,
-			$user
-		);
+        $this->div->log(
+            LocalizationUtility::translate('tx_femanager_domain_model_log.state.201', 'femanager'),
+            201,
+            $user
+        );
 
-		$this->redirectByAction('edit');
-		$this->addFlashMessage(LocalizationUtility::translate('update', 'femanager'));
-	}
+        $this->redirectByAction('edit');
+        $this->addFlashMessage(LocalizationUtility::translate('update', 'femanager'));
+    }
 
-	/**
-	 * Prefix method to updateAction(): Update must be confirmed by Admin
-	 *
-	 * @param User $user
-	 * @return void
-	 */
-	public function updateRequest($user) {
-		$dirtyProperties = Div::getDirtyPropertiesFromObject($user);
-		$user = Div::rollbackUserWithChangeRequest($user, $dirtyProperties);
+    /**
+     * Prefix method to updateAction(): Update must be confirmed by Admin
+     *
+     * @param User $user
+     * @return void
+     */
+    public function updateRequest($user)
+    {
+        $dirtyProperties = Div::getDirtyPropertiesFromObject($user);
+        $user = Div::rollbackUserWithChangeRequest($user, $dirtyProperties);
 
-		// send email to admin
-		$this->sendMail->send(
-			'updateRequest',
-			array(
-				$this->settings['edit']['confirmByAdmin'] =>
-					$this->settings['edit']['email']['updateRequest']['sender']['name']['value']
-			),
-			Div::makeEmailArray(
-				$user->getEmail(),
-				$user->getUsername()
-			),
-			'New Profile change request',
-			array(
-				'user' => $user,
-				'changes' => $dirtyProperties,
-				'hash' => Div::createHash($user->getUsername() . $user->getUid())
-			),
-			$this->config['edit.']['email.']['updateRequest.']
-		);
+        // send email to admin
+        $this->sendMail->send(
+            'updateRequest',
+            array(
+                $this->settings['edit']['confirmByAdmin'] =>
+                    $this->settings['edit']['email']['updateRequest']['sender']['name']['value']
+            ),
+            Div::makeEmailArray($user->getEmail(), $user->getUsername()),
+            'New Profile change request',
+            array(
+                'user' => $user,
+                'changes' => $dirtyProperties,
+                'hash' => Div::createHash($user->getUsername() . $user->getUid())
+            ),
+            $this->config['edit.']['email.']['updateRequest.']
+        );
 
-		// write log
-		$this->div->log(
-			LocalizationUtility::translate('tx_femanager_domain_model_log.state.204', 'femanager'),
-			203,
-			$user
-		);
+        // write log
+        $this->div->log(
+            LocalizationUtility::translate('tx_femanager_domain_model_log.state.204', 'femanager'),
+            203,
+            $user
+        );
 
-		$this->redirectByAction('edit', 'requestRedirect');
-		$this->addFlashMessage(LocalizationUtility::translate('updateRequest', 'femanager'));
-	}
+        $this->redirectByAction('edit', 'requestRedirect');
+        $this->addFlashMessage(LocalizationUtility::translate('updateRequest', 'femanager'));
+    }
 
-	/**
-	 * Some additional actions after profile creation
-	 *
-	 * @param User $user
-	 * @param string $action
-	 * @param string $redirectByActionName Action to redirect
-	 * @param bool $login Login after creation
-	 * @param string $status
-	 * @return void
-	 */
-	public function finalCreate($user, $action, $redirectByActionName, $login = TRUE, $status = '') {
-		// persist user (otherwise login is not possible if user is still disabled)
-		$this->userRepository->update($user);
-		$this->persistenceManager->persistAll();
+    /**
+     * Some additional actions after profile creation
+     *
+     * @param User $user
+     * @param string $action
+     * @param string $redirectByActionName Action to redirect
+     * @param bool $login Login after creation
+     * @param string $status
+     * @return void
+     */
+    public function finalCreate($user, $action, $redirectByActionName, $login = true, $status = '')
+    {
+        // persist user (otherwise login is not possible if user is still disabled)
+        $this->userRepository->update($user);
+        $this->persistenceManager->persistAll();
 
-		// login user
-		if ($login) {
-			$this->loginAfterCreate($user);
-		}
+        // login user
+        if ($login) {
+            $this->loginAfterCreate($user);
+        }
 
-		// send notify email to user
-		$this->sendMail->send(
-			'createUserNotify',
-			Div::makeEmailArray(
-				$user->getEmail(),
-				$user->getFirstName() . ' ' . $user->getLastName()
-			),
-			array(
-				$this->settings['new']['email']['createUserNotify']['sender']['email']['value']
-					=> $this->settings['settings']['new']['email']['createUserNotify']['sender']['name']['value']
-			),
-			'Profile creation',
-			array(
-				'user' => $user,
-				'settings' => $this->settings
-			),
-			$this->config['new.']['email.']['createUserNotify.']
-		);
+        // send notify email to user
+        $this->sendMail->send(
+            'createUserNotify',
+            Div::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
+            array(
+                $this->settings['new']['email']['createUserNotify']['sender']['email']['value'] =>
+                    $this->settings['settings']['new']['email']['createUserNotify']['sender']['name']['value']
+            ),
+            'Profile creation',
+            array(
+                'user' => $user,
+                'settings' => $this->settings
+            ),
+            $this->config['new.']['email.']['createUserNotify.']
+        );
 
-		// send notify email to admin
-		if ($this->settings['new']['notifyAdmin']) {
-			$this->sendMail->send(
-				'createNotify',
-				Div::makeEmailArray(
-					$this->settings['new']['notifyAdmin'],
-					$this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
-				),
-				Div::makeEmailArray(
-					$user->getEmail(),
-					$user->getUsername()
-				),
-				'Profile creation',
-				array(
-					'user' => $user,
-					'settings' => $this->settings
-				),
-				$this->config['new.']['email.']['createAdminNotify.']
-			);
-		}
+        // send notify email to admin
+        if ($this->settings['new']['notifyAdmin']) {
+            $this->sendMail->send(
+                'createNotify',
+                Div::makeEmailArray(
+                    $this->settings['new']['notifyAdmin'],
+                    $this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
+                ),
+                Div::makeEmailArray($user->getEmail(), $user->getUsername()),
+                'Profile creation',
+                array(
+                    'user' => $user,
+                    'settings' => $this->settings
+                ),
+                $this->config['new.']['email.']['createAdminNotify.']
+            );
+        }
 
-		// sendpost: send values via POST to any target
-		Div::sendPost($user, $this->config, $this->cObj);
+        // sendpost: send values via POST to any target
+        Div::sendPost($user, $this->config, $this->cObj);
 
-		// store in database: store values in any wanted table
-		Div::storeInDatabasePreflight($user, $this->config, $this->cObj, $this->objectManager);
+        // store in database: store values in any wanted table
+        Div::storeInDatabasePreflight($user, $this->config, $this->cObj, $this->objectManager);
 
-		// add signal after user generation
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
+        // add signal after user generation
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
 
-		// frontend redirect (if activated via TypoScript)
-		$this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
+        // frontend redirect (if activated via TypoScript)
+        $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
 
-		// go to an action
-		$this->redirect($redirectByActionName);
-	}
+        // go to an action
+        $this->redirect($redirectByActionName);
+    }
 
-	/**
-	 * Login FE-User after creation
-	 *
-	 * @param User $user
-	 * @return void
-	 */
-	protected function loginAfterCreate($user) {
-		if ($this->config['new.']['login'] != 1) {
-			return;
-		}
+    /**
+     * Login FE-User after creation
+     *
+     * @param User $user
+     * @return void
+     */
+    protected function loginAfterCreate($user)
+    {
+        if ($this->config['new.']['login'] != 1) {
+            return;
+        }
 
-		$GLOBALS['TSFE']->fe_user->checkPid = FALSE;
-		$info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
+        $GLOBALS['TSFE']->fe_user->checkPid = false;
+        $info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
 
-		$pids = $this->allConfig['persistence']['storagePid'];
-		$extraWhere = ' AND pid IN (' . $this->databaseConnection->cleanIntList($pids) . ')';
-		$user = $GLOBALS['TSFE']->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
+        $pids = $this->allConfig['persistence']['storagePid'];
+        $extraWhere = ' AND pid IN (' . $this->databaseConnection->cleanIntList($pids) . ')';
+        $user = $GLOBALS['TSFE']->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
 
-		$GLOBALS['TSFE']->fe_user->createUserSession($user);
-		$GLOBALS['TSFE']->fe_user->user = $GLOBALS['TSFE']->fe_user->fetchUserSession();
+        $GLOBALS['TSFE']->fe_user->createUserSession($user);
+        $GLOBALS['TSFE']->fe_user->user = $GLOBALS['TSFE']->fe_user->fetchUserSession();
 
-		// add login flashmessage
-		$this->addFlashMessage(
-			LocalizationUtility::translate('login', 'femanager'),
-			'',
-			FlashMessage::NOTICE
-		);
-	}
+        // add login flashmessage
+        $this->addFlashMessage(LocalizationUtility::translate('login', 'femanager'), '', FlashMessage::NOTICE);
+    }
 
-	/**
-	 * Redirect
-	 *
-	 * @param string $action "new", "edit"
-	 * @param string $category "redirect", "requestRedirect" value from TypoScript
-	 * @return void
-	 */
-	protected function redirectByAction($action = 'new', $category = 'redirect') {
-		$target = NULL;
-		// redirect from TypoScript cObject
-		if ($this->cObj->cObjGetSingle($this->config[$action . '.'][$category], $this->config[$action . '.'][$category . '.'])) {
-			$target = $this->cObj->cObjGetSingle($this->config[$action . '.'][$category], $this->config[$action . '.'][$category . '.']);
-		}
+    /**
+     * Redirect
+     *
+     * @param string $action "new", "edit"
+     * @param string $category "redirect", "requestRedirect" value from TypoScript
+     * @return void
+     */
+    protected function redirectByAction($action = 'new', $category = 'redirect')
+    {
+        $target = null;
+        // redirect from TypoScript cObject
+        if (
+            $this->cObj->cObjGetSingle(
+                $this->config[$action . '.'][$category],
+                $this->config[$action . '.'][$category . '.']
+            )
+        ) {
+            $target = $this->cObj->cObjGetSingle(
+                $this->config[$action . '.'][$category],
+                $this->config[$action . '.'][$category . '.']
+            );
+        }
 
-		// if redirect target
-		if ($target) {
-			$this->uriBuilder->setTargetPageUid($target);
-			$this->uriBuilder->setLinkAccessRestrictedPages(TRUE);
-			$link = $this->uriBuilder->build();
-			$this->redirectToUri($link);
-		}
-	}
+        // if redirect target
+        if ($target) {
+            $this->uriBuilder->setTargetPageUid($target);
+            $this->uriBuilder->setLinkAccessRestrictedPages(true);
+            $link = $this->uriBuilder->build();
+            $this->redirectToUri($link);
+        }
+    }
 
-	/**
-	 * Init for User creation
-	 *
-	 * @return void
-	 */
-	public function initializeCreateAction() {
-		// workarround for empty usergroups
-		if (intval($this->pluginVariables['user']['usergroup'][0]) === 0) {
-			unset($this->pluginVariables['user']['usergroup']);
-		}
-		$this->request->setArguments($this->pluginVariables);
-	}
+    /**
+     * Init for User creation
+     *
+     * @return void
+     */
+    public function initializeCreateAction()
+    {
+        // workarround for empty usergroups
+        if (intval($this->pluginVariables['user']['usergroup'][0]) === 0) {
+            unset($this->pluginVariables['user']['usergroup']);
+        }
+        $this->request->setArguments($this->pluginVariables);
+    }
 
-	/**
-	 * Init for User delete action
-	 *
-	 * @return void
-	 */
-	protected function initializeDeleteAction() {
-		$user = $this->div->getCurrentUser();
-		$uid = $this->request->getArgument('user');
-		$this->testSpoof($user, $uid);
-	}
+    /**
+     * Init for User delete action
+     *
+     * @return void
+     */
+    protected function initializeDeleteAction()
+    {
+        $user = $this->div->getCurrentUser();
+        $uid = $this->request->getArgument('user');
+        $this->testSpoof($user, $uid);
+    }
 
-	/**
-	 * Check if user is authenticated
-	 *
-	 * @param \In2\Femanager\Domain\Model\User $user
-	 * @param int $uid Given fe_users uid
-	 * @return void
-	 */
-	protected function testSpoof($user, $uid) {
-		if ($user->getUid() != $uid && $uid > 0) {
+    /**
+     * Check if user is authenticated
+     *
+     * @param \In2code\Femanager\Domain\Model\User $user
+     * @param int $uid Given fe_users uid
+     * @return void
+     */
+    protected function testSpoof($user, $uid)
+    {
+        if ($user->getUid() != $uid && $uid > 0) {
 
-			// write log
-			$this->div->log(
-				LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
-				205,
-				$user
-			);
+            // write log
+            $this->div->log(
+                LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
+                205,
+                $user
+            );
 
-			// add flashmessage
-			$this->addFlashMessage(
-				LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
-				'',
-				FlashMessage::ERROR
-			);
+            // add flashmessage
+            $this->addFlashMessage(
+                LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
+                '',
+                FlashMessage::ERROR
+            );
 
-			$this->forward('edit');
-		}
-	}
+            $this->forward('edit');
+        }
+    }
 
-	/**
-	 * Assigns all values, which should be available in all views
-	 *
-	 * @return void
-	 */
-	public function assignForAll() {
-		$this->view->assign(
-			'languageUid',
-			($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ?
-				$GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0)
-		);
-		$this->view->assign('storagePid', $this->allConfig['persistence']['storagePid']);
-		$this->view->assign('Pid', $GLOBALS['TSFE']->id);
-		$this->view->assign('actionName', $this->actionMethodName);
-		$this->view->assign('uploadFolder', Div::getUploadFolderFromTca());
-	}
+    /**
+     * Assigns all values, which should be available in all views
+     *
+     * @return void
+     */
+    public function assignForAll()
+    {
+        $this->view->assign(
+            'languageUid',
+            ($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ?
+                $GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0)
+        );
+        $this->view->assign('storagePid', $this->allConfig['persistence']['storagePid']);
+        $this->view->assign('Pid', $GLOBALS['TSFE']->id);
+        $this->view->assign('actionName', $this->actionMethodName);
+        $this->view->assign('uploadFolder', Div::getUploadFolderFromTca());
+    }
 
-	/**
-	 * Init
-	 *
-	 * @return void
-	 */
-	public function initializeAction() {
-		$this->databaseConnection = $GLOBALS['TYPO3_DB'];
-		$this->controllerContext = $this->buildControllerContext();
-		$this->user = $this->div->getCurrentUser();
-		$this->cObj = $this->configurationManager->getContentObject();
-		$this->pluginVariables = $this->request->getArguments();
-		$this->allConfig = $this->configurationManager->getConfiguration(
-			ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
-		);
-		$this->config = $this->configurationManager->getConfiguration(
-			ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-		);
-		$this->config = $this->config['plugin.']['tx_femanager.']['settings.'];
-		$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-		$removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'];
-		$this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
+    /**
+     * Init
+     *
+     * @return void
+     */
+    public function initializeAction()
+    {
+        $this->databaseConnection = $GLOBALS['TYPO3_DB'];
+        $this->controllerContext = $this->buildControllerContext();
+        $this->user = $this->div->getCurrentUser();
+        $this->cObj = $this->configurationManager->getContentObject();
+        $this->pluginVariables = $this->request->getArguments();
+        $this->allConfig = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+        );
+        $this->config = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+        );
+        $this->config = $this->config['plugin.']['tx_femanager.']['settings.'];
+        $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
+        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'];
+        $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
 
-		if (isset($this->arguments['user'])) {
-			$this->arguments['user']
-				->getPropertyMappingConfiguration()
-				->forProperty('dateOfBirth')
-				->setTypeConverterOption(
-					'TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter',
-					DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-					LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat', 'femanager')
-				);
-		}
-		// check if ts is included
-		if ($this->settings['_TypoScriptIncluded'] != 1 && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
-			$this->addFlashMessage(
-				LocalizationUtility::translate('error_no_typoscript', 'femanager'),
-				'',
-				FlashMessage::ERROR
-			);
-		}
+        if (isset($this->arguments['user'])) {
+            $this->arguments['user']
+                ->getPropertyMappingConfiguration()
+                ->forProperty('dateOfBirth')
+                ->setTypeConverterOption(
+                    'TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter',
+                    DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+                    LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat', 'femanager')
+                );
+        }
+        // check if ts is included
+        if ($this->settings['_TypoScriptIncluded'] != 1 && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
+            $this->addFlashMessage(
+                LocalizationUtility::translate('error_no_typoscript', 'femanager'),
+                '',
+                FlashMessage::ERROR
+            );
+        }
 
-		// check if storage pid was set
-		if (intval($this->allConfig['persistence']['storagePid']) === 0 && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
-			$this->addFlashMessage(
-				LocalizationUtility::translate('error_no_storagepid', 'femanager'),
-				'',
-				FlashMessage::ERROR
-			);
-		}
-	}
+        // check if storage pid was set
+        if (
+            intval($this->allConfig['persistence']['storagePid']) === 0
+            && !GeneralUtility::_GP('eID')
+            && TYPO3_MODE !== 'BE'
+        ) {
+            $this->addFlashMessage(
+                LocalizationUtility::translate('error_no_storagepid', 'femanager'),
+                '',
+                FlashMessage::ERROR
+            );
+        }
+    }
 
-	/**
-	 * Deactivate errormessages in flashmessages
-	 *
-	 * @return bool
-	 */
-	protected function getErrorFlashMessage() {
-		return FALSE;
-	}
+    /**
+     * Deactivate errormessages in flashmessages
+     *
+     * @return bool
+     */
+    protected function getErrorFlashMessage()
+    {
+        return false;
+    }
 
 }

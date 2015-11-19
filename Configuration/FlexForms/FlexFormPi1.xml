@@ -150,7 +150,7 @@
 								<autoSizeMax>20</autoSizeMax>
 								<minitems>0</minitems>
 								<allowNonIdValues>1</allowNonIdValues>
-								<itemsProcFunc>In2\Femanager\Utility\FlexFormFieldSelection->addOptions</itemsProcFunc>
+								<itemsProcFunc>In2code\Femanager\Utility\FlexFormFieldSelection->addOptions</itemsProcFunc>
 								<itemsProcFuncTab>new</itemsProcFuncTab>
 							</config>
 						</TCEforms>
@@ -301,7 +301,7 @@
 								<autoSizeMax>20</autoSizeMax>
 								<minitems>0</minitems>
 								<allowNonIdValues>1</allowNonIdValues>
-								<itemsProcFunc>In2\Femanager\Utility\FlexFormFieldSelection->addOptions</itemsProcFunc>
+								<itemsProcFunc>In2code\Femanager\Utility\FlexFormFieldSelection->addOptions</itemsProcFunc>
 								<itemsProcFuncTab>edit</itemsProcFuncTab>
 							</config>
 						</TCEforms>
@@ -568,7 +568,7 @@
 								<autoSizeMax>20</autoSizeMax>
 								<minitems>0</minitems>
 								<allowNonIdValues>1</allowNonIdValues>
-								<itemsProcFunc>In2\Femanager\Utility\FlexFormFieldSelection->addOptions</itemsProcFunc>
+								<itemsProcFunc>In2code\Femanager\Utility\FlexFormFieldSelection->addOptions</itemsProcFunc>
 								<itemsProcFuncTab>new</itemsProcFuncTab>
 							</config>
 						</TCEforms>
