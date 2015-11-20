@@ -181,7 +181,7 @@ class AbstractValidator extends AbstractValidatorExtbase
     protected function validateMustInclude($value, $validationSettingList)
     {
         $isValid = true;
-        $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, 1);
+        $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
 
         foreach ($validationSettings as $validationSetting) {
 
@@ -231,7 +231,7 @@ class AbstractValidator extends AbstractValidatorExtbase
     protected function validateMustNotInclude($value, $validationSettingList)
     {
         $isValid = true;
-        $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, 1);
+        $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
 
         foreach ($validationSettings as $validationSetting) {
 
@@ -324,7 +324,7 @@ class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateInList($value, $validationSettingList)
     {
-        $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, 1);
+        $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
         return in_array($value, $validationSettings);
     }
 

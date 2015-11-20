@@ -1,9 +1,9 @@
 <?php
 namespace In2code\Femanager\Domain\Model;
 
+use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use In2code\Femanager\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -365,7 +365,7 @@ class User extends FrontendUser
         if (
             method_exists($this->getLastlogin(), 'getTimestamp')
             && $this->getLastlogin()->getTimestamp() > (time() - 2 * 60 * 60)
-            && Div::checkFrontendSessionToUser($this)
+            && UserUtility::checkFrontendSessionToUser($this)
         ) {
             return true;
         }

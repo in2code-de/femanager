@@ -1,5 +1,5 @@
 <?php
-namespace In2code\Femanager\Utility;
+namespace In2code\Femanager\Domain\Service;
 
 /***************************************************************
  *  Copyright notice
@@ -32,7 +32,7 @@ namespace In2code\Femanager\Utility;
  * @license http://www.gnu.org/licenses/gpl.html
  *          GNU General Public License, version 3 or later
  */
-class StoreInDatabase
+class StoreInDatabaseService
 {
 
     /**

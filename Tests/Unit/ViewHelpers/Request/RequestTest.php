@@ -1,7 +1,7 @@
 <?php
 namespace In2code\Femanager\ViewHelpers\Request;
 
-use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +31,7 @@ use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
  * Class RequestTest
  * @package In2code\Femanager\ViewHelpers\Request
  */
-class RequestTest extends BaseTestCase
+class RequestTest extends UnitTestCase
 {
 
     /**

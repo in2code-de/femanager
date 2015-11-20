@@ -1,10 +1,10 @@
 <?php
 namespace In2code\Femanager\Domain\Validator;
 
+use In2code\Femanager\Utility\StringUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use In2code\Femanager\Domain\Model\User;
-use In2code\Femanager\Utility\Div;
 
 /**
  * Class ClientsideValidator
@@ -67,7 +67,7 @@ class ClientsideValidator extends AbstractValidator
      */
     public function validateField()
     {
-        $validationSettings = GeneralUtility::trimExplode(',', $this->validationSettingsString, 1);
+        $validationSettings = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
         $validationSettings = str_replace('|', ',', $validationSettings);
 
         foreach ($validationSettings as $validationSetting) {
@@ -91,7 +91,7 @@ class ClientsideValidator extends AbstractValidator
                 case stristr($validationSetting, 'min('):
                     if (
                         $this->getValue() &&
-                        !$this->validateMin($this->getValue(), Div::getValuesInBrackets($validationSetting))
+                        !$this->validateMin($this->getValue(), StringUtility::getValuesInBrackets($validationSetting))
                     ) {
                         $this->addMessage('validationErrorMin');
                         $this->isValid = false;
@@ -101,7 +101,7 @@ class ClientsideValidator extends AbstractValidator
                 case stristr($validationSetting, 'max('):
                     if (
                         $this->getValue() &&
-                        !$this->validateMax($this->getValue(), Div::getValuesInBrackets($validationSetting))
+                        !$this->validateMax($this->getValue(), StringUtility::getValuesInBrackets($validationSetting))
                     ) {
                         $this->addMessage('validationErrorMax');
                         $this->isValid = false;
@@ -145,7 +145,10 @@ class ClientsideValidator extends AbstractValidator
                 case stristr($validationSetting, 'mustInclude('):
                     if (
                         $this->getValue() &&
-                        !$this->validateMustInclude($this->getValue(), Div::getValuesInBrackets($validationSetting))
+                        !$this->validateMustInclude(
+                            $this->getValue(),
+                            StringUtility::getValuesInBrackets($validationSetting)
+                        )
                     ) {
                         $this->addMessage('validationErrorMustInclude');
                         $this->isValid = false;
@@ -155,7 +158,10 @@ class ClientsideValidator extends AbstractValidator
                 case stristr($validationSetting, 'mustNotInclude('):
                     if (
                         $this->getValue() &&
-                        !$this->validateMustNotInclude($this->getValue(), Div::getValuesInBrackets($validationSetting))
+                        !$this->validateMustNotInclude(
+                            $this->getValue(),
+                            StringUtility::getValuesInBrackets($validationSetting)
+                        )
                     ) {
                         $this->addMessage('validationErrorMustNotInclude');
                         $this->isValid = false;
@@ -163,7 +169,12 @@ class ClientsideValidator extends AbstractValidator
                     break;
 
                 case stristr($validationSetting, 'inList('):
-                    if (!$this->validateInList($this->getValue(), Div::getValuesInBrackets($validationSetting))) {
+                    if (
+                        !$this->validateInList(
+                            $this->getValue(),
+                            StringUtility::getValuesInBrackets($validationSetting)
+                        )
+                    ) {
                         $this->addMessage('validationErrorInList');
                         $this->isValid = false;
                     }
@@ -191,14 +202,15 @@ class ClientsideValidator extends AbstractValidator
 
                 default:
                     // e.g. search for method validateCustom()
-                    if (method_exists($this, 'validate' . ucfirst(Div::getValuesBeforeBrackets($validationSetting)))) {
-                        if (!$this->{'validate' . ucfirst(Div::getValuesBeforeBrackets($validationSetting))}(
-                            $this->getValue(),
-                            Div::getValuesInBrackets($validationSetting))
+                    $mainSetting = StringUtility::getValuesBeforeBrackets($validationSetting);
+                    if (method_exists($this, 'validate' . ucfirst($mainSetting))) {
+                        if (
+                            !$this->{'validate' . ucfirst($mainSetting)}(
+                                $this->getValue(),
+                                StringUtility::getValuesInBrackets($validationSetting)
+                            )
                         ) {
-                            $this->addMessage(
-                                'validationError' . ucfirst(Div::getValuesBeforeBrackets($validationSetting))
-                            );
+                            $this->addMessage('validationError' . ucfirst($mainSetting));
                             $this->isValid = false;
                         }
                     }

@@ -4,11 +4,6 @@ if (!defined('TYPO3_MODE')) {
 }
 
 /**
- * Get configuration from extension manager
- */
-$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager']);
-
-/**
  * FE Plugin
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin('femanager', 'Pi1', 'FE_Manager');
@@ -16,7 +11,10 @@ $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager'
 /**
  * Include Backend Module
  */
-if (!$confArr['disableModule'] && !(TYPO3_REQUESTTYPE & TYPO3_REQUESTTYPE_INSTALL)) {
+if (
+    !\In2code\Femanager\Utility\ConfigurationUtility::isDisableModuleActive() &&
+    !(TYPO3_REQUESTTYPE & TYPO3_REQUESTTYPE_INSTALL)
+) {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
         'In2code.femanager',
         'web',
@@ -62,7 +60,7 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_
  */
 if (TYPO3_MODE == 'BE') {
     require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('femanager') .
-        'Classes/Utility/FlexFormFieldSelection.php');
+        'Classes/UserFunc/FlexFormFieldSelection.php');
 }
 
 /**
@@ -147,7 +145,7 @@ $tempColumns = array(
 );
 $fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin';
 
-if (empty($confArr['disableLog'])) {
+if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableLogActive()) {
     $tempColumns['tx_femanager_log'] = array(
         'exclude' => 1,
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.log',

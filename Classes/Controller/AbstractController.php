@@ -1,6 +1,13 @@
 <?php
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Service\SendParametersService;
+use In2code\Femanager\Domain\Service\StoreInDatabaseService;
+use In2code\Femanager\Utility\FileUtility;
+use In2code\Femanager\Utility\LogUtility;
+use In2code\Femanager\Utility\StringUtility;
+use In2code\Femanager\Utility\UserUtility;
+use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -8,7 +15,7 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use In2code\Femanager\Domain\Model\User;
-use In2code\Femanager\Utility\Div;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /***************************************************************
  *  Copyright notice
@@ -63,29 +70,12 @@ class AbstractController extends ActionController
     protected $persistenceManager;
 
     /**
-     * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
-     * @inject
-     */
-    protected $signalSlotDispatcher;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext
-     */
-    public $controllerContext;
-
-    /**
-     * @var \TYPO3\CMS\Core\Database\DatabaseConnection
+     * @var DatabaseConnection
      */
     protected $databaseConnection = null;
 
     /**
-     * @var \In2code\Femanager\Utility\Div
-     * @inject
-     */
-    protected $div;
-
-    /**
-     * @var \In2code\Femanager\Utility\SendMail
+     * @var \In2code\Femanager\Domain\Service\SendMailService
      * @inject
      */
     protected $sendMail;
@@ -93,7 +83,7 @@ class AbstractController extends ActionController
     /**
      * Content Object
      *
-     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @var ContentObjectRenderer
      */
     public $cObj;
 
@@ -144,7 +134,7 @@ class AbstractController extends ActionController
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
         $this->addFlashMessage(LocalizationUtility::translate('create', 'femanager'));
-        $this->div->log(
+        LogUtility::log(
             LocalizationUtility::translate('tx_femanager_domain_model_log.state.101', 'femanager'),
             101,
             $user
@@ -165,7 +155,7 @@ class AbstractController extends ActionController
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
 
-        $this->div->log(
+        LogUtility::log(
             LocalizationUtility::translate('tx_femanager_domain_model_log.state.106', 'femanager'),
             106,
             $user
@@ -176,7 +166,7 @@ class AbstractController extends ActionController
             // send email to user for confirmation
             $this->sendMail->send(
                 'createUserConfirmation',
-                Div::makeEmailArray(
+                StringUtility::makeEmailArray(
                     $user->getEmail(),
                     $user->getUsername()
                 ),
@@ -187,7 +177,7 @@ class AbstractController extends ActionController
                 'Confirm your profile creation request',
                 array(
                     'user' => $user,
-                    'hash' => Div::createHash($user->getUsername())
+                    'hash' => StringUtility::createHash($user->getUsername())
                 ),
                 $this->config['new.']['email.']['createUserConfirmation.']
             );
@@ -207,18 +197,18 @@ class AbstractController extends ActionController
             // send email to admin
             $this->sendMail->send(
                 'createAdminConfirmation',
-                Div::makeEmailArray(
+                StringUtility::makeEmailArray(
                     $this->settings['new']['confirmByAdmin'],
                     $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
                 ),
-                Div::makeEmailArray(
+                StringUtility::makeEmailArray(
                     $user->getEmail(),
                     $user->getUsername()
                 ),
                 'New Registration request',
                 array(
                     'user' => $user,
-                    'hash' => Div::createHash($user->getUsername() . $user->getUid())
+                    'hash' => StringUtility::createHash($user->getUsername() . $user->getUid())
                 ),
                 $this->config['new.']['email.']['createAdminConfirmation.']
             );
@@ -240,14 +230,14 @@ class AbstractController extends ActionController
         // send notify email to admin
         if ($this->settings['edit']['notifyAdmin']) {
             $existingUser = $this->userRepository->findByUid($user->getUid());
-            $dirtyProperties = Div::getDirtyPropertiesFromObject($existingUser, $user);
+            $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($existingUser);
             $this->sendMail->send(
                 'updateNotify',
-                Div::makeEmailArray(
+                StringUtility::makeEmailArray(
                     $this->settings['edit']['notifyAdmin'],
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value']
                 ),
-                Div::makeEmailArray(
+                StringUtility::makeEmailArray(
                     $user->getEmail(),
                     $user->getUsername()
                 ),
@@ -266,7 +256,7 @@ class AbstractController extends ActionController
         $this->persistenceManager->persistAll();
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
 
-        $this->div->log(
+        LogUtility::log(
             LocalizationUtility::translate('tx_femanager_domain_model_log.state.201', 'femanager'),
             201,
             $user
@@ -284,8 +274,8 @@ class AbstractController extends ActionController
      */
     public function updateRequest($user)
     {
-        $dirtyProperties = Div::getDirtyPropertiesFromObject($user);
-        $user = Div::rollbackUserWithChangeRequest($user, $dirtyProperties);
+        $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($user);
+        $user = UserUtility::rollbackUserWithChangeRequest($user, $dirtyProperties);
 
         // send email to admin
         $this->sendMail->send(
@@ -294,18 +284,18 @@ class AbstractController extends ActionController
                 $this->settings['edit']['confirmByAdmin'] =>
                     $this->settings['edit']['email']['updateRequest']['sender']['name']['value']
             ),
-            Div::makeEmailArray($user->getEmail(), $user->getUsername()),
+            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             'New Profile change request',
             array(
                 'user' => $user,
                 'changes' => $dirtyProperties,
-                'hash' => Div::createHash($user->getUsername() . $user->getUid())
+                'hash' => StringUtility::createHash($user->getUsername() . $user->getUid())
             ),
             $this->config['edit.']['email.']['updateRequest.']
         );
 
         // write log
-        $this->div->log(
+        LogUtility::log(
             LocalizationUtility::translate('tx_femanager_domain_model_log.state.204', 'femanager'),
             203,
             $user
@@ -339,7 +329,7 @@ class AbstractController extends ActionController
         // send notify email to user
         $this->sendMail->send(
             'createUserNotify',
-            Div::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
+            StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
             array(
                 $this->settings['new']['email']['createUserNotify']['sender']['email']['value'] =>
                     $this->settings['settings']['new']['email']['createUserNotify']['sender']['name']['value']
@@ -356,11 +346,11 @@ class AbstractController extends ActionController
         if ($this->settings['new']['notifyAdmin']) {
             $this->sendMail->send(
                 'createNotify',
-                Div::makeEmailArray(
+                StringUtility::makeEmailArray(
                     $this->settings['new']['notifyAdmin'],
                     $this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
                 ),
-                Div::makeEmailArray($user->getEmail(), $user->getUsername()),
+                StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile creation',
                 array(
                     'user' => $user,
@@ -371,10 +361,15 @@ class AbstractController extends ActionController
         }
 
         // sendpost: send values via POST to any target
-        Div::sendPost($user, $this->config, $this->cObj);
+        /** @var SendParametersService $sendParametersService */
+        $sendParametersService = $this->objectManager->get(
+            'In2code\\Femanager\\Domain\\Service\\SendParametersService',
+            $this->config['new.']['sendPost.']
+        );
+        $sendParametersService->send($user);
 
         // store in database: store values in any wanted table
-        Div::storeInDatabasePreflight($user, $this->config, $this->cObj, $this->objectManager);
+        $this->storeInDatabasePreflight($user);
 
         // add signal after user generation
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
@@ -452,7 +447,7 @@ class AbstractController extends ActionController
     public function initializeCreateAction()
     {
         // workarround for empty usergroups
-        if (intval($this->pluginVariables['user']['usergroup'][0]) === 0) {
+        if ((int) $this->pluginVariables['user']['usergroup'][0] === 0) {
             unset($this->pluginVariables['user']['usergroup']);
         }
         $this->request->setArguments($this->pluginVariables);
@@ -465,7 +460,7 @@ class AbstractController extends ActionController
      */
     protected function initializeDeleteAction()
     {
-        $user = $this->div->getCurrentUser();
+        $user = UserUtility::getCurrentUser();
         $uid = $this->request->getArgument('user');
         $this->testSpoof($user, $uid);
     }
@@ -482,7 +477,7 @@ class AbstractController extends ActionController
         if ($user->getUid() != $uid && $uid > 0) {
 
             // write log
-            $this->div->log(
+            LogUtility::log(
                 LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
                 205,
                 $user
@@ -514,7 +509,7 @@ class AbstractController extends ActionController
         $this->view->assign('storagePid', $this->allConfig['persistence']['storagePid']);
         $this->view->assign('Pid', $GLOBALS['TSFE']->id);
         $this->view->assign('actionName', $this->actionMethodName);
-        $this->view->assign('uploadFolder', Div::getUploadFolderFromTca());
+        $this->view->assign('uploadFolder', FileUtility::getUploadFolderFromTca());
     }
 
     /**
@@ -526,7 +521,7 @@ class AbstractController extends ActionController
     {
         $this->databaseConnection = $GLOBALS['TYPO3_DB'];
         $this->controllerContext = $this->buildControllerContext();
-        $this->user = $this->div->getCurrentUser();
+        $this->user = UserUtility::getCurrentUser();
         $this->cObj = $this->configurationManager->getContentObject();
         $this->pluginVariables = $this->request->getArguments();
         $this->allConfig = $this->configurationManager->getConfiguration(
@@ -561,7 +556,7 @@ class AbstractController extends ActionController
 
         // check if storage pid was set
         if (
-            intval($this->allConfig['persistence']['storagePid']) === 0
+            (int) $this->allConfig['persistence']['storagePid'] === 0
             && !GeneralUtility::_GP('eID')
             && TYPO3_MODE !== 'BE'
         ) {
@@ -570,6 +565,50 @@ class AbstractController extends ActionController
                 '',
                 FlashMessage::ERROR
             );
+        }
+    }
+
+    /**
+     * Store user values in any database table
+     *
+     * @param User $user User properties
+     * @return void
+     */
+    protected function storeInDatabasePreflight($user)
+    {
+        $uid = 0;
+        if (!empty($this->config['new.']['storeInDatabase.'])) {
+            // one loop for every table to store
+            foreach ((array) $this->config['new.']['storeInDatabase.'] as $table => $storeSettings) {
+                $storeSettings = null;
+                if (
+                    $this->cObj->cObjGetSingle(
+                        $this->config['new.']['storeInDatabase.'][$table]['_enable'],
+                        $this->config['new.']['storeInDatabase.'][$table]['_enable.']
+                    ) === '1'
+                ) {
+                    $this->cObj->start(
+                        array_merge($user->_getProperties(), array('lastGeneratedUid' => $uid))
+                    );
+
+                    /** @var StoreInDatabaseService $storeInDatabase */
+                    $storeInDatabase = $this->objectManager->get(
+                        'In2code\\Femanager\\Domain\\Service\\StoreInDatabaseService'
+                    );
+                    $storeInDatabase->setTable($table);
+                    foreach ($this->config['new.']['storeInDatabase.'][$table] as $field => $value) {
+                        if ($field[0] === '_' || stristr($field, '.')) {
+                            continue;
+                        }
+                        $value = $this->cObj->cObjGetSingle(
+                            $this->config['new.']['storeInDatabase.'][$table][$field],
+                            $this->config['new.']['storeInDatabase.'][$table][$field . '.']
+                        );
+                        $storeInDatabase->addProperty($field, $value);
+                    }
+                    $uid = $storeInDatabase->execute();
+                }
+            }
         }
     }
 

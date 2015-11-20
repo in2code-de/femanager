@@ -3,6 +3,7 @@ namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Validator\ClientsideValidator;
+use In2code\Femanager\Utility\FileUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -91,7 +92,7 @@ class UserController extends AbstractController
      */
     public function fileUploadAction()
     {
-        $fileName = $this->div->uploadFile();
+        $fileName = FileUtility::uploadFile();
         header('Content-Type: text/plain');
         $result = array(
             'success' => ($fileName ? true : false),

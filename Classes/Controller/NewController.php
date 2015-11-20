@@ -1,10 +1,13 @@
 <?php
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Utility\FrontendUtility;
+use In2code\Femanager\Utility\LogUtility;
+use In2code\Femanager\Utility\StringUtility;
+use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use In2code\Femanager\Domain\Model\User;
-use In2code\Femanager\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -65,17 +68,16 @@ class NewController extends AbstractController
      */
     public function createAction(User $user)
     {
-        $user = $this->div->overrideUserGroup($user, $this->settings);
-        $user = $this->div->forceValues(
+        $user = UserUtility::overrideUserGroup($user, $this->settings);
+        $user = FrontendUtility::forceValues(
             $user,
-            $this->config['new.']['forceValues.']['beforeAnyConfirmation.'],
-            $this->cObj
+            $this->config['new.']['forceValues.']['beforeAnyConfirmation.']
         );
-        $user = $this->div->fallbackUsernameAndPassword($user);
+        $user = UserUtility::fallbackUsernameAndPassword($user);
         if ($this->settings['new']['fillEmailWithUsername'] == 1) {
             $user->setEmail($user->getUsername());
         }
-        Div::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
+        UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
 
         if (!empty($this->settings['new']['confirmByUser']) || !empty($this->settings['new']['confirmByAdmin'])) {
@@ -116,7 +118,7 @@ class NewController extends AbstractController
 
             // registration confirmed by user
             case 'userConfirmation':
-                if (Div::createHash($user->getUsername()) === $hash) {
+                if (StringUtility::createHash($user->getUsername()) === $hash) {
 
                     // if user is already confirmed by himself
                     if ($user->getTxFemanagerConfirmedbyuser()) {
@@ -127,15 +129,14 @@ class NewController extends AbstractController
                         );
                         $this->redirect('new');
                     }
-                    $user = $this->div->forceValues(
+                    $user = FrontendUtility::forceValues(
                         $user,
-                        $this->config['new.']['forceValues.']['onUserConfirmation.'],
-                        $this->cObj
+                        $this->config['new.']['forceValues.']['onUserConfirmation.']
                     );
                     $user->setTxFemanagerConfirmedbyuser(true);
                     $this->userRepository->update($user);
                     $this->persistenceManager->persistAll();
-                    $this->div->log(
+                    LogUtility::log(
                         LocalizationUtility::translate('tx_femanager_domain_model_log.state.102', 'femanager'),
                         102,
                         $user
@@ -146,15 +147,15 @@ class NewController extends AbstractController
                         // send email to admin to get this confirmation
                         $this->sendMail->send(
                             'createAdminConfirmation',
-                            Div::makeEmailArray(
+                            StringUtility::makeEmailArray(
                                 $this->settings['new']['confirmByAdmin'],
                                 $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
                             ),
-                            Div::makeEmailArray($user->getEmail(), $user->getUsername()),
+                            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                             'New Registration request',
                             array(
                                 'user' => $user,
-                                'hash' => Div::createHash($user->getUsername() . $user->getUid())
+                                'hash' => StringUtility::createHash($user->getUsername() . $user->getUid())
                             ),
                             $this->config['new.']['email.']['createAdminConfirmation.']
                         );
@@ -166,7 +167,7 @@ class NewController extends AbstractController
                     } else {
                         $user->setDisable(false);
                         $this->addFlashMessage(LocalizationUtility::translate('create', 'femanager'));
-                        $this->div->log(
+                        LogUtility::log(
                             LocalizationUtility::translate('tx_femanager_domain_model_log.state.101', 'femanager'),
                             101,
                             $user
@@ -185,8 +186,8 @@ class NewController extends AbstractController
                 break;
 
             case 'userConfirmationRefused':
-                if (Div::createHash($user->getUsername()) === $hash) {
-                    $this->div->log(
+                if (StringUtility::createHash($user->getUsername()) === $hash) {
+                    LogUtility::log(
                         LocalizationUtility::translate('tx_femanager_domain_model_log.state.104', 'femanager'),
                         104,
                         $user
@@ -205,18 +206,17 @@ class NewController extends AbstractController
 
             case 'adminConfirmation':
                 // registration complete
-                if (Div::createHash($user->getUsername() . $user->getUid())) {
-                    $user = $this->div->forceValues(
+                if (StringUtility::createHash($user->getUsername() . $user->getUid())) {
+                    $user = FrontendUtility::forceValues(
                         $user,
-                        $this->config['new.']['forceValues.']['onAdminConfirmation.'],
-                        $this->cObj
+                        $this->config['new.']['forceValues.']['onAdminConfirmation.']
                     );
                     $user->setTxFemanagerConfirmedbyadmin(true);
                     if ($user->getTxFemanagerConfirmedbyuser() || empty($this->settings['new']['confirmByUser'])) {
                         $user->setDisable(false);
                     }
                     $this->addFlashMessage(LocalizationUtility::translate('create', 'femanager'));
-                    $this->div->log(
+                    LogUtility::log(
                         LocalizationUtility::translate('tx_femanager_domain_model_log.state.103', 'femanager'),
                         103,
                         $user
@@ -236,8 +236,8 @@ class NewController extends AbstractController
             case 'adminConfirmationRefused':
                 // Admin refuses profile
             case 'adminConfirmationRefusedSilent':
-                if (Div::createHash($user->getUsername() . $user->getUid())) {
-                    $this->div->log(
+                if (StringUtility::createHash($user->getUsername() . $user->getUid())) {
+                    LogUtility::log(
                         LocalizationUtility::translate('tx_femanager_domain_model_log.state.105', 'femanager'),
                         105,
                         $user
@@ -247,7 +247,7 @@ class NewController extends AbstractController
                         // send email to user to inform him about his profile confirmation
                         $this->sendMail->send(
                             'CreateUserNotifyRefused',
-                            Div::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
+                            StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
                             array('sender@femanager.org' => 'Sender Name'),
                             'Your profile was refused',
                             array('user' => $user),

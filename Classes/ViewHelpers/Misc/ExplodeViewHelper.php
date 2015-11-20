@@ -23,6 +23,6 @@ class ExplodeViewHelper extends AbstractViewHelper
      */
     public function render($string = '', $separator = ',', $trim = true)
     {
-        return $trim ? GeneralUtility::trimExplode($separator, $string, 1) : explode($separator, $string);
+        return $trim ? GeneralUtility::trimExplode($separator, $string, true) : explode($separator, $string);
     }
 }

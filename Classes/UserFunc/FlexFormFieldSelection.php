@@ -1,5 +1,5 @@
 <?php
-namespace In2code\Femanager\Utility;
+namespace In2code\Femanager\UserFunc;
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -76,14 +76,14 @@ class FlexFormFieldSelection
     {
         $pid = 0;
         $backUrl = str_replace('?', '&', GeneralUtility::_GP('returnUrl'));
-        $urlParts = GeneralUtility::trimExplode('&', $backUrl, 1);
+        $urlParts = GeneralUtility::trimExplode('&', $backUrl, true);
         foreach ($urlParts as $part) {
             if (stristr($part, 'id=')) {
                 $pid = str_replace('id=', '', $part);
             }
         }
 
-        return intval($pid);
+        return (int) $pid;
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
 namespace In2code\Femanager\Tests\Utility;
 
-use In2code\Femanager\Utility\Div;
-use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
+use In2code\Femanager\Utility\StringUtility;
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -29,134 +29,51 @@ use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
      ***************************************************************/
 
 /**
- * Class DivTest
+ * Class StringUtilityTest
  * @package In2code\Femanager\Tests\Utility
  */
-class DivTest extends BaseTestCase
+class StringUtilityTest extends UnitTestCase
 {
 
     /**
-     * @var
-     */
-    protected $fixture;
-
-    /**
-     * Make object available
-     *
-     * @return void
-     */
-    public function setUp()
-    {
-        $this->fixture = new Div();
-    }
-
-    /**
-     * Remove object
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-        unset($this->fixture);
-    }
-
-    /**
-     * Dataprovider for checkExtension()
+     * Dataprovider for cleanString()
      *
      * @return array
      */
-    public function checkExtensionReturnBoolDataProvider()
+    public function cleanStringReturnsStringDataProvider()
     {
         return array(
             array(
-                'theImage_dot.com',
-                false,
+                'This is a test',
+                'This_is_a_test',
             ),
             array(
-                'theImage_dot.com.jpg',
-                true,
+                'Heiße Liebe',
+                'Hei__e_Liebe',
             ),
             array(
-                'test.ImagetheImage_dot.com.JPEG',
-                true,
+                'this.is_a.test',
+                'this.is_a.test',
             ),
             array(
-                'test.png',
-                true,
-            ),
-            array(
-                'SoNenntEinRedakteurEineDätaei.PNG',
-                true,
-            ),
-            array(
-                'test.phx.bmp',
-                true,
-            ),
-            array(
-                'test.php.bmp',
-                false,
-            ),
-            array(
-                'test.phtml.bmp',
-                false,
+                '?ß#;,-&',
+                '______-_',
             ),
         );
     }
 
     /**
-     * Test for checkExtension()
+     * Test for cleanString()
      *
-     * @param string $givenValue
+     * @param string $string
      * @param string $expectedResult
      * @return void
-     * @dataProvider checkExtensionReturnBoolDataProvider
+     * @dataProvider cleanStringReturnsStringDataProvider
      * @test
      */
-    public function checkExtensionReturnBool($givenValue, $expectedResult)
+    public function cleanStringReturnsString($string, $expectedResult)
     {
-        $result = Div::checkExtension($givenValue);
-        $this->assertEquals($result, $expectedResult);
-    }
-
-    /**
-     * Dataprovider for isMd5()
-     *
-     * @return array
-     */
-    public function isMd5ReturnBoolDataProvider()
-    {
-        return array(
-            // #0
-            array(
-                md5('aeiou'),
-                true,
-            ),
-            // #1
-            array(
-                '409898rphfsdfapasdfu898weqr',
-                false,
-            ),
-            // #2
-            array(
-                1238097720989832023900,
-                false,
-            ),
-        );
-    }
-
-    /**
-     * Test for isMd5()
-     *
-     * @param string $givenValue
-     * @param string $expectedResult
-     * @return void
-     * @dataProvider isMd5ReturnBoolDataProvider
-     * @test
-     */
-    public function isMd5ReturnBool($givenValue, $expectedResult)
-    {
-        $result = Div::isMd5($givenValue);
-        $this->assertEquals($result, $expectedResult);
+        $this->assertEquals($expectedResult, StringUtility::cleanString($string));
     }
 
     /**
@@ -196,7 +113,7 @@ class DivTest extends BaseTestCase
      */
     public function getValuesInBracketsReturnsString($start, $expectedResult)
     {
-        $result = Div::getValuesInBrackets($start);
+        $result = StringUtility::getValuesInBrackets($start);
         $this->assertEquals($result, $expectedResult);
     }
 
@@ -237,7 +154,7 @@ class DivTest extends BaseTestCase
      */
     public function getValuesBeforeBracketsReturnsString($start, $expectedResult)
     {
-        $result = Div::getValuesBeforeBrackets($start);
+        $result = StringUtility::getValuesBeforeBrackets($start);
         $this->assertEquals($result, $expectedResult);
     }
 
@@ -285,7 +202,7 @@ class DivTest extends BaseTestCase
     public function getRandomStringAlwaysReturnsStringsOfGivenLength($length, $addUpperCase, $addSpecialCharacters)
     {
         for ($i = 0; $i < 100; $i++) {
-            $string = Div::getRandomString($length, $addUpperCase, $addSpecialCharacters);
+            $string = StringUtility::getRandomString($length, $addUpperCase, $addSpecialCharacters);
             if ($addUpperCase) {
                 $regex = '~[a-zA-Z0-9]{' . $length . '}~';
             } else {

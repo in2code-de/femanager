@@ -1,14 +1,13 @@
 <?php
-namespace In2code\Femanager\Controller;
+namespace In2code\Femanager\Utility;
 
-use In2code\Femanager\Utility\UserUtility;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
-use In2code\Femanager\Domain\Model\User;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
+ *  (c) 2015 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
  *
  *  All rights reserved
  *
@@ -30,39 +29,34 @@ use In2code\Femanager\Domain\Model\User;
  ***************************************************************/
 
 /**
- * User Backend Controller
+ * ConfigurationUtility class
  *
  * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html
- *          GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ *          GNU Lesser General Public License, version 3 or later
  */
-class UserBackendController extends AbstractController
+class ConfigurationUtility extends AbstractUtility
 {
 
     /**
-     * action list
+     * Check if disableModule is active
      *
-     * @param array $filter Filter Array
-     * @return void
+     * @return bool
      */
-    public function listAction($filter = array())
+    public static function isDisableModuleActive()
     {
-        $users = $this->userRepository->findAllInBackend($filter);
-        $this->view->assign('users', $users);
-        $this->view->assign('token', BackendUtility::getUrlToken('tceAction'));
+        $configuration = self::getExtensionConfiguration();
+        return $configuration['disableModule'] === '1';
     }
 
     /**
-     * action user logout
+     * Check if disableLog is active
      *
-     * @param User $user
-     * @return void
+     * @return bool
      */
-    public function userLogoutAction(User $user)
+    public static function isDisableLogActive()
     {
-        UserUtility::removeFrontendSessionToUser($user);
-        $this->addFlashMessage('User successfully logged out');
-        $this->redirect('list');
+        $configuration = self::getExtensionConfiguration();
+        return $configuration['disableLog'] === '1';
     }
-
 }

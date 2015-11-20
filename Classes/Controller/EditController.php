@@ -1,11 +1,15 @@
 <?php
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Utility\LogUtility;
+use In2code\Femanager\Utility\ObjectUtility;
+use In2code\Femanager\Utility\StringUtility;
+use In2code\Femanager\Utility\UserUtility;
+use In2code\Femanager\Utility\FrontendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use In2code\Femanager\Domain\Model\User;
-use In2code\Femanager\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -60,12 +64,12 @@ class EditController extends AbstractController
      */
     public function initializeUpdateAction()
     {
-        $user = $this->div->getCurrentUser();
+        $user = UserUtility::getCurrentUser();
         $userValues = $this->request->getArgument('user');
         $this->testSpoof($user, $userValues['__identity']);
 
         // workarround for empty usergroups
-        if (intval($this->pluginVariables['user']['usergroup'][0]['__identity']) === 0) {
+        if ((int) $this->pluginVariables['user']['usergroup'][0]['__identity'] === 0) {
             unset($this->pluginVariables['user']['usergroup']);
         }
         // keep password if empty
@@ -95,24 +99,23 @@ class EditController extends AbstractController
     public function updateAction(User $user)
     {
         // check if there are no changes
-        if (!Div::isDirtyObject($user)) {
+        if (!ObjectUtility::isDirtyObject($user)) {
             $this->addFlashMessage(LocalizationUtility::translate('noChanges', 'femanager'), '', FlashMessage::NOTICE);
             $this->redirect('edit');
         }
 
         /** @var User $user */
-        $user = $this->div->forceValues(
+        $user = FrontendUtility::forceValues(
             $user,
-            $this->config['edit.']['forceValues.']['beforeAnyConfirmation.'],
-            $this->cObj
+            $this->config['edit.']['forceValues.']['beforeAnyConfirmation.']
         );
-        if ($this->settings['edit']['fillEmailWithUsername'] == 1) {
+        if ($this->settings['edit']['fillEmailWithUsername'] === '1') {
             $user->setEmail($user->getUsername());
         }
 
         // convert password to md5 or sha1 hash
-        if (array_key_exists('password', Div::getDirtyPropertiesFromObject($user))) {
-            Div::hashPassword($user, $this->settings['edit']['misc']['passwordSave']);
+        if (array_key_exists('password', UserUtility::getDirtyPropertiesFromUser($user))) {
+            UserUtility::hashPassword($user, $this->settings['edit']['misc']['passwordSave']);
         }
 
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
@@ -140,7 +143,7 @@ class EditController extends AbstractController
 
         // if wrong hash or if no update xml
         if (
-            Div::createHash($user->getUsername() . $user->getUid()) !== $hash ||
+            StringUtility::createHash($user->getUsername() . $user->getUid()) !== $hash ||
             !$user->getTxFemanagerChangerequest()
         ) {
             $this->addFlashMessage(
@@ -161,19 +164,18 @@ class EditController extends AbstractController
                         $user->{'set' . ucfirst($field)}($value['new']);
                     } else {
                         $user->removeAllUsergroups();
-                        $usergroupUids = GeneralUtility::trimExplode(',', $value['new'], 1);
+                        $usergroupUids = GeneralUtility::trimExplode(',', $value['new'], true);
                         foreach ($usergroupUids as $usergroupUid) {
                             $user->addUsergroup($this->userGroupRepository->findByUid($usergroupUid));
                         }
                     }
                 }
-                $user = $this->div->forceValues(
+                $user = FrontendUtility::forceValues(
                     $user,
-                    $this->config['edit.']['forceValues.']['onAdminConfirmation.'],
-                    $this->cObj
+                    $this->config['edit.']['forceValues.']['onAdminConfirmation.']
                 );
 
-                $this->div->log(
+                LogUtility::log(
                     LocalizationUtility::translate('tx_femanager_domain_model_log.state.202', 'femanager'),
                     202,
                     $user
@@ -186,7 +188,10 @@ class EditController extends AbstractController
                 // send email to user
                 $this->sendMail->send(
                     'updateRequestRefused',
-                    Div::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
+                    StringUtility::makeEmailArray(
+                        $user->getEmail(),
+                        $user->getFirstName() . ' ' . $user->getLastName()
+                    ),
                     array('sender@femanager.org' => 'Sender Name'),
                     'Your change request was refused',
                     array(
@@ -196,7 +201,7 @@ class EditController extends AbstractController
                     $this->config['edit.']['email.']['updateRequestRefused.']
                 );
 
-                $this->div->log(
+                LogUtility::log(
                     LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'),
                     203,
                     $user
@@ -208,7 +213,7 @@ class EditController extends AbstractController
                 break;
 
             case 'silentRefuse':
-                $this->div->log(
+                LogUtility::log(
                     LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'),
                     203,
                     $user
@@ -240,7 +245,7 @@ class EditController extends AbstractController
      */
     public function deleteAction(User $user)
     {
-        $this->div->log(
+        LogUtility::log(
             LocalizationUtility::translate('tx_femanager_domain_model_log.state.301', 'femanager'),
             300,
             $user

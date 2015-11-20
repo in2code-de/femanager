@@ -1,6 +1,7 @@
 <?php
-namespace In2code\Femanager\Utility;
+namespace In2code\Femanager\Domain\Service;
 
+use In2code\Femanager\Utility\TemplateUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
@@ -34,7 +35,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * @license http://www.gnu.org/licenses/gpl.html
  *          GNU General Public License, version 3 or later
  */
-class SendMail
+class SendMailService
 {
 
     /**
@@ -52,12 +53,6 @@ class SendMail
      * @inject
      */
     protected $configurationManager;
-
-    /**
-     * @var \In2code\Femanager\Utility\Div
-     * @inject
-     */
-    public $div;
 
     /**
      * Content Object
@@ -94,7 +89,7 @@ class SendMail
             $images = GeneralUtility::trimExplode(
                 ',',
                 $this->cObj->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.']),
-                1
+                true
             );
             $imageVariables = array();
             foreach ($images as $image) {
@@ -182,7 +177,7 @@ class SendMail
             $files = GeneralUtility::trimExplode(
                 ',',
                 $this->cObj->cObjGetSingle($typoScript['attachments'], $typoScript['attachments.']),
-                1
+                true
             );
             foreach ($files as $file) {
                 $email->attach(\Swift_Attachment::fromPath($file));
@@ -203,17 +198,20 @@ class SendMail
      */
     protected function getMailBody($template, $variables)
     {
-        /** @var \In2code\Femanager\Utility\StandaloneViewMultiplePaths $emailBodyObject */
-        $emailBodyObject = $this->objectManager->get('In2code\\Femanager\\Utility\\StandaloneViewMultiplePaths');
-        $emailBodyObject->getRequest()->setControllerExtensionName('Femanager');
-        $emailBodyObject->getRequest()->setPluginName('Pi1');
-        $emailBodyObject->getRequest()->setControllerName('New');
-        $emailBodyObject->setTemplatePathAndFilename(
-            $this->div->getTemplatePath('Email/' . ucfirst($template) . '.html')
-        );
-        $emailBodyObject->setLayoutRootPaths($this->div->getTemplateFolders('layout'));
-        $emailBodyObject->setPartialRootPaths($this->div->getTemplateFolders('partial'));
-        $emailBodyObject->assignMultiple($variables);
-        return $emailBodyObject->render();
+        $standAloneView = TemplateUtility::getDefaultStandAloneView();
+        $standAloneView->setTemplatePathAndFilename($this->getRelativeEmailPathAndFilename($template));
+        $standAloneView->assignMultiple($variables);
+        return $standAloneView->render();
+    }
+
+    /**
+     * Get path and filename for mail template
+     *
+     * @param string $fileName
+     * @return string
+     */
+    protected function getRelativeEmailPathAndFilename($fileName)
+    {
+        return TemplateUtility::getTemplatePath('Email/' . ucfirst($fileName) . '.html');
     }
 }

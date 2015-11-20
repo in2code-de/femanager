@@ -2,7 +2,7 @@
 namespace In2code\Femanager\Tests\Domain\Model;
 
 use In2code\Femanager\Domain\Model\User;
-use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -32,7 +32,7 @@ use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
  * Class UserTest
  * @package In2code\Femanager\Tests\Domain\Model
  */
-class UserTest extends BaseTestCase
+class UserTest extends UnitTestCase
 {
 
     /**

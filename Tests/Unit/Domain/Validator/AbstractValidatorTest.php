@@ -1,7 +1,7 @@
 <?php
 namespace In2code\Femanager\Tests;
 
-use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +31,7 @@ use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
  * Class AbstractValidatorTest
  * @package In2code\Femanager\Tests
  */
-class AbstractValidatorTest extends BaseTestCase
+class AbstractValidatorTest extends UnitTestCase
 {
 
     /**

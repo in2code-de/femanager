@@ -86,7 +86,7 @@ class UserRepository extends Repository
             $and[] = $query->logicalOr($logicalOr);
         }
         if (!empty($filter['searchword'])) {
-            $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
+            $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], true);
             $fieldsToSearch = GeneralUtility::trimExplode(
                 ',',
                 $settings['list']['filter']['searchword']['fieldsToSearch'],
@@ -115,8 +115,8 @@ class UserRepository extends Repository
         );
 
         // set limit
-        if (intval($settings['list']['limit']) > 0) {
-            $query->setLimit(intval($settings['list']['limit']));
+        if ((int) $settings['list']['limit'] > 0) {
+            $query->setLimit((int) $settings['list']['limit']);
         }
 
         $users = $query->execute();
@@ -142,7 +142,7 @@ class UserRepository extends Repository
             $query->equals('deleted', 0)
         );
         if (method_exists($user, 'getUid')) {
-            $and[] = $query->logicalNot($query->equals('uid', intval($user->getUid())));
+            $and[] = $query->logicalNot($query->equals('uid', (int) $user->getUid()));
         }
         $constraint = $query->logicalAnd($and);
 
@@ -170,7 +170,7 @@ class UserRepository extends Repository
             $query->equals('deleted', 0)
         );
         if (method_exists($user, 'getUid')) {
-            $and[] = $query->logicalNot($query->equals('uid', intval($user->getUid())));
+            $and[] = $query->logicalNot($query->equals('uid', (int) $user->getUid()));
         }
         $constraint = $query->logicalAnd($and);
 
@@ -197,11 +197,11 @@ class UserRepository extends Repository
         $and = array(
             $query->equals('deleted', 0)
         );
-        if (intval($pid) > 0) {
+        if ((int) $pid > 0) {
             $and[] = $query->equals('pid', $pid);
         }
         if (!empty($filter['searchword'])) {
-            $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], 1);
+            $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], true);
             foreach ($searchwords as $searchword) {
                 $or = array();
                 $or[] = $query->like('address', '%' . $searchword . '%');

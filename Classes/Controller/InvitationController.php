@@ -1,11 +1,14 @@
 <?php
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Utility\LogUtility;
+use In2code\Femanager\Utility\StringUtility;
+use In2code\Femanager\Utility\UserUtility;
+use In2code\Femanager\Utility\FrontendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use In2code\Femanager\Domain\Model\User;
-use In2code\Femanager\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -66,16 +69,15 @@ class InvitationController extends AbstractController
     {
         $this->allowedUserForInvitationNewAndCreate();
         $user->setDisable(true);
-        $user = $this->div->forceValues(
+        $user = FrontendUtility::forceValues(
             $user,
-            $this->config['invitation.']['forceValues.']['beforeAnyConfirmation.'],
-            $this->cObj
+            $this->config['invitation.']['forceValues.']['beforeAnyConfirmation.']
         );
-        $user = $this->div->fallbackUsernameAndPassword($user);
+        $user = UserUtility::fallbackUsernameAndPassword($user);
         if ($this->settings['invitation']['fillEmailWithUsername'] == 1) {
             $user->setEmail($user->getUsername());
         }
-        Div::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
+        UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
 
         $this->createAllConfirmed($user);
@@ -93,7 +95,7 @@ class InvitationController extends AbstractController
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvited', 'femanager'));
-        $this->div->log(
+        LogUtility::log(
             LocalizationUtility::translate('tx_femanager_domain_model_log.state.401', 'femanager'),
             401,
             $user
@@ -102,13 +104,13 @@ class InvitationController extends AbstractController
         // send confirmation mail to user
         $this->sendMail->send(
             'invitation',
-            Div::makeEmailArray($user->getEmail(), $user->getUsername()),
-            Div::makeEmailArray($user->getEmail(), $user->getUsername()),
+            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
+            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             'Profile creation with invitation',
             array(
                 'user' => $user,
                 'settings' => $this->settings,
-                'hash' => Div::createHash($user->getUsername() . $user->getUid())
+                'hash' => StringUtility::createHash($user->getUsername() . $user->getUid())
             ),
             $this->config['invitation.']['email.']['invitation.']
         );
@@ -117,11 +119,11 @@ class InvitationController extends AbstractController
         if ($this->settings['invitation']['notifyAdminStep1']) {
             $this->sendMail->send(
                 'invitationNotifyStep1',
-                Div::makeEmailArray(
+                StringUtility::makeEmailArray(
                     $this->settings['invitation']['notifyAdminStep1'],
                     $this->settings['invitation']['email']['invitationAdminNotifyStep1']['receiver']['name']['value']
                 ),
-                Div::makeEmailArray($user->getEmail(), $user->getUsername()),
+                StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile creation with invitation - Step 1',
                 array(
                     'user' => $user,
@@ -158,7 +160,7 @@ class InvitationController extends AbstractController
         $this->view->assign('user', $user);
         $this->view->assign('hash', $hash);
 
-        if (Div::createHash($user->getUsername() . $user->getUid()) !== $hash) {
+        if (StringUtility::createHash($user->getUsername() . $user->getUid()) !== $hash) {
             if ($user !== null) {
                 // delete user for security reasons
                 $this->userRepository->remove($user);
@@ -185,7 +187,7 @@ class InvitationController extends AbstractController
     public function updateAction($user)
     {
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvitedFinished', 'femanager'));
-        $this->div->log(
+        LogUtility::log(
             LocalizationUtility::translate('tx_femanager_domain_model_log.state.405', 'femanager'),
             401,
             $user
@@ -195,11 +197,11 @@ class InvitationController extends AbstractController
         if ($this->settings['invitation']['notifyAdmin']) {
             $this->sendMail->send(
                 'invitationNotify',
-                Div::makeEmailArray(
+                StringUtility::makeEmailArray(
                     $this->settings['invitation']['notifyAdmin'],
                     $this->settings['invitation']['email']['invitationAdminNotify']['receiver']['name']['value']
                 ),
-                Div::makeEmailArray($user->getEmail(), $user->getUsername()),
+                StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile creation with invitation - Final',
                 array(
                     'user' => $user,
@@ -209,8 +211,8 @@ class InvitationController extends AbstractController
             );
         }
 
-        $user = $this->div->overrideUserGroup($user, $this->settings, 'invitation');
-        Div::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
+        $user = UserUtility::overrideUserGroup($user, $this->settings, 'invitation');
+        UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
 
@@ -241,10 +243,10 @@ class InvitationController extends AbstractController
     {
         $user = $this->userRepository->findByUid($user);
 
-        if (Div::createHash($user->getUsername() . $user->getUid()) === $hash) {
+        if (StringUtility::createHash($user->getUsername() . $user->getUid()) === $hash) {
 
             // write log
-            $this->div->log(
+            LogUtility::log(
                 LocalizationUtility::translate('tx_femanager_domain_model_log.state.402', 'femanager'),
                 300,
                 $user
@@ -259,11 +261,11 @@ class InvitationController extends AbstractController
             if ($this->settings['invitation']['notifyAdminStep1']) {
                 $this->sendMail->send(
                     'invitationRefused',
-                    Div::makeEmailArray(
+                    StringUtility::makeEmailArray(
                         $this->settings['invitation']['notifyAdminStep1'],
                         $this->settings['invitation']['email']['invitationRefused']['receiver']['name']['value']
                     ),
-                    Div::makeEmailArray($user->getEmail(), $user->getUsername()),
+                    StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                     'Profile deleted from User after invitation - Step 1',
                     array(
                         'user' => $user,
@@ -312,7 +314,7 @@ class InvitationController extends AbstractController
             $this->settings['invitation']['allowedUserGroups'],
             true
         );
-        $currentUsergroupUids = $this->div->getCurrentUsergroupUids();
+        $currentUsergroupUids = UserUtility::getCurrentUsergroupUids();
 
         // compare allowedUsergroups with currentUsergroups
         if (count(array_intersect($allowedUsergroupUids, $currentUsergroupUids))) {

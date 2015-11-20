@@ -785,7 +785,7 @@ This file is important to install your new extension – write something like:
 
 femanagersignalslot/ext_localconf.php:
 
-This is an example how to use a signal from femanager – in this case we decided to use the signal “createActionBeforePersist” in class “In2FemanagerControllerNewController” and want to call a slot in class “In2FemanagersignalslotUtilitySendMail” with methodname “send()”
+This is an example how to use a signal from femanager – in this case we decided to use the signal “createActionBeforePersist” in class “In2codeFemanagerControllerNewController” and want to call a slot in class “In2codeFemanagersignalslotDomainServiceSendMailService” with methodname “send()”
 
 .. code-block:: text
 
@@ -795,21 +795,21 @@ This is an example how to use a signal from femanager – in this case we decide
 	$signalSlotDispatcher->connect(
 		'In2code\Femanager\Controller\NewController',
 		'createActionBeforePersist',
-		'In2code\Femanagersignalslot\Utility\SendMail',
+		'In2code\Femanagersignalslot\Domain\Service\SendMailService',
 		'send',
 		FALSE
 	);
 
-femanagersignalslot/Classes/Utility/SendMail.php:
+femanagersignalslot/Classes/Domain/Service/SendMailService.php:
 
 This is our main class which is called every time a new registration process was initiated.
 
 .. code-block:: text
 
 	<?php
-	namespace In2code\Femanagersignalslot\Utility;
+	namespace In2code\Femanagersignalslot\Domain\Service;
 
-	class SendMail {
+	class SendMailService {
 
 		/**
 		 * Send mail about user information
