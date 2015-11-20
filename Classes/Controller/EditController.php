@@ -1,13 +1,15 @@
 <?php
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Model\Log;
+use In2code\Femanager\Domain\Model\UserGroup;
+use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use In2code\Femanager\Domain\Model\User;
 
@@ -100,7 +102,7 @@ class EditController extends AbstractController
     {
         // check if there are no changes
         if (!ObjectUtility::isDirtyObject($user)) {
-            $this->addFlashMessage(LocalizationUtility::translate('noChanges', 'femanager'), '', FlashMessage::NOTICE);
+            $this->addFlashMessage(LocalizationUtility::translate('noChanges'), '', FlashMessage::NOTICE);
             $this->redirect('edit');
         }
 
@@ -146,12 +148,7 @@ class EditController extends AbstractController
             StringUtility::createHash($user->getUsername() . $user->getUid()) !== $hash ||
             !$user->getTxFemanagerChangerequest()
         ) {
-            $this->addFlashMessage(
-                LocalizationUtility::translate('updateFailedProfile', 'femanager'),
-                '',
-                FlashMessage::ERROR
-            );
-
+            $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', FlashMessage::ERROR);
             return;
         }
 
@@ -166,7 +163,9 @@ class EditController extends AbstractController
                         $user->removeAllUsergroups();
                         $usergroupUids = GeneralUtility::trimExplode(',', $value['new'], true);
                         foreach ($usergroupUids as $usergroupUid) {
-                            $user->addUsergroup($this->userGroupRepository->findByUid($usergroupUid));
+                            /** @var UserGroup $usergroup */
+                            $usergroup = $this->userGroupRepository->findByUid($usergroupUid);
+                            $user->addUsergroup($usergroup);
                         }
                     }
                 }
@@ -174,18 +173,11 @@ class EditController extends AbstractController
                     $user,
                     $this->config['edit.']['forceValues.']['onAdminConfirmation.']
                 );
-
-                LogUtility::log(
-                    LocalizationUtility::translate('tx_femanager_domain_model_log.state.202', 'femanager'),
-                    202,
-                    $user
-                );
-
-                $this->addFlashMessage(LocalizationUtility::translate('updateProfile', 'femanager'));
+                LogUtility::log(Log::STATUS_PROFILEUPDATECONFIRMEDADMIN, $user);
+                $this->addFlashMessage(LocalizationUtility::translate('updateProfile'));
                 break;
 
             case 'refuse':
-                // send email to user
                 $this->sendMail->send(
                     'updateRequestRefused',
                     StringUtility::makeEmailArray(
@@ -200,28 +192,13 @@ class EditController extends AbstractController
                     ),
                     $this->config['edit.']['email.']['updateRequestRefused.']
                 );
-
-                LogUtility::log(
-                    LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'),
-                    203,
-                    $user
-                );
-
-                $this->addFlashMessage(
-                    LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager')
-                );
+                LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
+                $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDADMIN));
                 break;
 
             case 'silentRefuse':
-                LogUtility::log(
-                    LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager'),
-                    203,
-                    $user
-                );
-
-                $this->addFlashMessage(
-                    LocalizationUtility::translate('tx_femanager_domain_model_log.state.203', 'femanager')
-                );
+                LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
+                $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDADMIN));
                 break;
 
             default:
@@ -245,12 +222,8 @@ class EditController extends AbstractController
      */
     public function deleteAction(User $user)
     {
-        LogUtility::log(
-            LocalizationUtility::translate('tx_femanager_domain_model_log.state.301', 'femanager'),
-            300,
-            $user
-        );
-        $this->addFlashMessage(LocalizationUtility::translate('tx_femanager_domain_model_log.state.301', 'femanager'));
+        LogUtility::log(Log::STATUS_PROFILEDELETE, $user);
+        $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEDELETE));
         $this->userRepository->remove($user);
         $this->redirectByAction('delete');
         $this->redirect('edit');

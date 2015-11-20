@@ -39,6 +39,29 @@ class FrontendUtility extends AbstractUtility
 {
 
     /**
+     * Get current pid
+     *
+     * @return int
+     */
+    public static function getCurrentPid()
+    {
+        return (int) self::getTypoScriptFrontendController()->id;
+    }
+
+    /**
+     * Get frontend language uid
+     *
+     * @return int
+     */
+    public static function getFrontendLanguageUid()
+    {
+        if (!empty(self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'])) {
+            return (int) self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'];
+        }
+        return 0;
+    }
+
+    /**
      * Set object properties from forceValues in TypoScript
      *
      * @param User $user

@@ -1,12 +1,13 @@
 <?php
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Model\Log;
+use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use In2code\Femanager\Domain\Model\User;
 
@@ -94,12 +95,8 @@ class InvitationController extends AbstractController
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
-        $this->addFlashMessage(LocalizationUtility::translate('createAndInvited', 'femanager'));
-        LogUtility::log(
-            LocalizationUtility::translate('tx_femanager_domain_model_log.state.401', 'femanager'),
-            401,
-            $user
-        );
+        $this->addFlashMessage(LocalizationUtility::translate('createAndInvited'));
+        LogUtility::log(Log::STATUS_INVITATIONPROFILECREATED, $user);
 
         // send confirmation mail to user
         $this->sendMail->send(
@@ -166,7 +163,7 @@ class InvitationController extends AbstractController
                 $this->userRepository->remove($user);
             }
             $this->addFlashMessage(
-                LocalizationUtility::translate('createFailedProfile', 'femanager'),
+                LocalizationUtility::translate('createFailedProfile'),
                 '',
                 FlashMessage::ERROR
             );
@@ -186,12 +183,8 @@ class InvitationController extends AbstractController
      */
     public function updateAction($user)
     {
-        $this->addFlashMessage(LocalizationUtility::translate('createAndInvitedFinished', 'femanager'));
-        LogUtility::log(
-            LocalizationUtility::translate('tx_femanager_domain_model_log.state.405', 'femanager'),
-            401,
-            $user
-        );
+        $this->addFlashMessage(LocalizationUtility::translate('createAndInvitedFinished'));
+        LogUtility::log(Log::STATUS_INVITATIONPROFILEENABLED, $user);
 
         // send notify email to admin
         if ($this->settings['invitation']['notifyAdmin']) {
@@ -244,18 +237,8 @@ class InvitationController extends AbstractController
         $user = $this->userRepository->findByUid($user);
 
         if (StringUtility::createHash($user->getUsername() . $user->getUid()) === $hash) {
-
-            // write log
-            LogUtility::log(
-                LocalizationUtility::translate('tx_femanager_domain_model_log.state.402', 'femanager'),
-                300,
-                $user
-            );
-
-            // add flashmessage
-            $this->addFlashMessage(
-                LocalizationUtility::translate('tx_femanager_domain_model_log.state.402', 'femanager')
-            );
+            LogUtility::log(Log::STATUS_PROFILEDELETE, $user);
+            $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_INVITATIONPROFILEDELETEDUSER));
 
             // send notify email to admin
             if ($this->settings['invitation']['notifyAdminStep1']) {
@@ -275,14 +258,12 @@ class InvitationController extends AbstractController
                 );
             }
 
-            // delete user
             $this->userRepository->remove($user);
-
             $this->redirectByAction('invitation', 'redirectDelete');
             $this->redirect('status');
         } else {
             $this->addFlashMessage(
-                LocalizationUtility::translate('tx_femanager_domain_model_log.state.403', 'femanager'),
+                LocalizationUtility::translateByState(Log::STATUS_INVITATIONHASHERROR),
                 '',
                 FlashMessage::ERROR
             );
@@ -323,7 +304,7 @@ class InvitationController extends AbstractController
 
         // current user is not allowed
         $this->addFlashMessage(
-            LocalizationUtility::translate('tx_femanager_domain_model_log.state.404', 'femanager'),
+            LocalizationUtility::translateByState(Log::STATUS_INVITATIONRESTRICTEDPAGE),
             '',
             FlashMessage::ERROR
         );

@@ -8,7 +8,7 @@
 	{allUserGroups}
 
 	<f:section name="main">
-		<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+		<f:render partial="Misc/FlashMessages" arguments="{_all}" />
 		<f:render partial="Misc/FormErrors" arguments="{object:User}" />
 
 		<div class="femanager_new">

@@ -1,9 +1,12 @@
 <?php
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Service\SendParametersService;
 use In2code\Femanager\Domain\Service\StoreInDatabaseService;
 use In2code\Femanager\Utility\FileUtility;
+use In2code\Femanager\Utility\FrontendUtility;
+use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
@@ -12,7 +15,6 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -48,7 +50,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @license http://www.gnu.org/licenses/gpl.html
  *          GNU General Public License, version 3 or later
  */
-class AbstractController extends ActionController
+abstract class AbstractController extends ActionController
 {
 
     /**
@@ -133,12 +135,8 @@ class AbstractController extends ActionController
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
-        $this->addFlashMessage(LocalizationUtility::translate('create', 'femanager'));
-        LogUtility::log(
-            LocalizationUtility::translate('tx_femanager_domain_model_log.state.101', 'femanager'),
-            101,
-            $user
-        );
+        $this->addFlashMessage(LocalizationUtility::translate('create'));
+        LogUtility::log(Log::STATUS_NEWREGISTRATION, $user);
         $this->finalCreate($user, 'new', 'createStatus');
     }
 
@@ -154,12 +152,7 @@ class AbstractController extends ActionController
         $user->setDisable(true);
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
-
-        LogUtility::log(
-            LocalizationUtility::translate('tx_femanager_domain_model_log.state.106', 'femanager'),
-            106,
-            $user
-        );
+        LogUtility::log(Log::STATUS_PROFILECREATIONREQUEST, $user);
 
         if (!empty($this->settings['new']['confirmByUser'])) {
 
@@ -186,13 +179,13 @@ class AbstractController extends ActionController
             $this->redirectByAction('new', 'requestRedirect');
 
             // add flashmessage
-            $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm', 'femanager'));
+            $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
 
             // redirect
             $this->redirect('new');
         }
         if (!empty($this->settings['new']['confirmByAdmin'])) {
-            $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm', 'femanager'));
+            $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
 
             // send email to admin
             $this->sendMail->send(
@@ -251,19 +244,12 @@ class AbstractController extends ActionController
             );
         }
 
-        // persist
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
-
-        LogUtility::log(
-            LocalizationUtility::translate('tx_femanager_domain_model_log.state.201', 'femanager'),
-            201,
-            $user
-        );
-
+        LogUtility::log(Log::STATUS_PROFILEUPDATED, $user);
         $this->redirectByAction('edit');
-        $this->addFlashMessage(LocalizationUtility::translate('update', 'femanager'));
+        $this->addFlashMessage(LocalizationUtility::translate('update'));
     }
 
     /**
@@ -276,8 +262,6 @@ class AbstractController extends ActionController
     {
         $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($user);
         $user = UserUtility::rollbackUserWithChangeRequest($user, $dirtyProperties);
-
-        // send email to admin
         $this->sendMail->send(
             'updateRequest',
             array(
@@ -293,16 +277,9 @@ class AbstractController extends ActionController
             ),
             $this->config['edit.']['email.']['updateRequest.']
         );
-
-        // write log
-        LogUtility::log(
-            LocalizationUtility::translate('tx_femanager_domain_model_log.state.204', 'femanager'),
-            203,
-            $user
-        );
-
+        LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
         $this->redirectByAction('edit', 'requestRedirect');
-        $this->addFlashMessage(LocalizationUtility::translate('updateRequest', 'femanager'));
+        $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
     }
 
     /**
@@ -404,7 +381,7 @@ class AbstractController extends ActionController
         $GLOBALS['TSFE']->fe_user->user = $GLOBALS['TSFE']->fe_user->fetchUserSession();
 
         // add login flashmessage
-        $this->addFlashMessage(LocalizationUtility::translate('login', 'femanager'), '', FlashMessage::NOTICE);
+        $this->addFlashMessage(LocalizationUtility::translate('login'), '', FlashMessage::NOTICE);
     }
 
     /**
@@ -474,22 +451,13 @@ class AbstractController extends ActionController
      */
     protected function testSpoof($user, $uid)
     {
-        if ($user->getUid() != $uid && $uid > 0) {
-
-            // write log
-            LogUtility::log(
-                LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
-                205,
-                $user
-            );
-
-            // add flashmessage
+        if ($user->getUid() !== (int) $uid && $uid > 0) {
+            LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
             $this->addFlashMessage(
-                LocalizationUtility::translate('tx_femanager_domain_model_log.state.205', 'femanager'),
+                LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
                 '',
                 FlashMessage::ERROR
             );
-
             $this->forward('edit');
         }
     }
@@ -501,15 +469,15 @@ class AbstractController extends ActionController
      */
     public function assignForAll()
     {
-        $this->view->assign(
-            'languageUid',
-            ($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ?
-                $GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0)
+        $this->view->assignMultiple(
+            array(
+                'languageUid' => FrontendUtility::getFrontendLanguageUid(),
+                'storagePid' => $this->allConfig['persistence']['storagePid'],
+                'Pid' => FrontendUtility::getCurrentPid(),
+                'actionName' => $this->actionMethodName,
+                'uploadFolder' => FileUtility::getUploadFolderFromTca()
+            )
         );
-        $this->view->assign('storagePid', $this->allConfig['persistence']['storagePid']);
-        $this->view->assign('Pid', $GLOBALS['TSFE']->id);
-        $this->view->assign('actionName', $this->actionMethodName);
-        $this->view->assign('uploadFolder', FileUtility::getUploadFolderFromTca());
     }
 
     /**
@@ -542,16 +510,12 @@ class AbstractController extends ActionController
                 ->setTypeConverterOption(
                     'TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter',
                     DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-                    LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat', 'femanager')
+                    LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat')
                 );
         }
         // check if ts is included
-        if ($this->settings['_TypoScriptIncluded'] != 1 && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
-            $this->addFlashMessage(
-                LocalizationUtility::translate('error_no_typoscript', 'femanager'),
-                '',
-                FlashMessage::ERROR
-            );
+        if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
+            $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript'), '', FlashMessage::ERROR);
         }
 
         // check if storage pid was set
@@ -560,11 +524,7 @@ class AbstractController extends ActionController
             && !GeneralUtility::_GP('eID')
             && TYPO3_MODE !== 'BE'
         ) {
-            $this->addFlashMessage(
-                LocalizationUtility::translate('error_no_storagepid', 'femanager'),
-                '',
-                FlashMessage::ERROR
-            );
+            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', FlashMessage::ERROR);
         }
     }
 

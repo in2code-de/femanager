@@ -1,13 +1,16 @@
 <?php
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Utility\FrontendUtility;
+use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use In2code\Femanager\Domain\Model\User;
+use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 
 /***************************************************************
  *  Copyright notice
@@ -44,16 +47,19 @@ class NewController extends AbstractController
 {
 
     /**
-     * action new
+     * Render registration form
      *
      * @param User $user
-     * @dontvalidate $user
      * @return void
      */
     public function newAction(User $user = null)
     {
-        $this->view->assign('user', $user);
-        $this->view->assign('allUserGroups', $this->allUserGroups);
+        $this->view->assignMultiple(
+            array(
+                'user' => $user,
+                'allUserGroups' => $this->allUserGroups
+            )
+        );
         $this->assignForAll();
     }
 
@@ -74,21 +80,21 @@ class NewController extends AbstractController
             $this->config['new.']['forceValues.']['beforeAnyConfirmation.']
         );
         $user = UserUtility::fallbackUsernameAndPassword($user);
-        if ($this->settings['new']['fillEmailWithUsername'] == 1) {
+        if ($this->settings['new']['fillEmailWithUsername'] === '1') {
             $user->setEmail($user->getUsername());
         }
         UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
 
-        if (!empty($this->settings['new']['confirmByUser']) || !empty($this->settings['new']['confirmByAdmin'])) {
-            $this->createRequest($user);
-        } else {
+        if ($this->isAllConfirmed()) {
             $this->createAllConfirmed($user);
+        } else {
+            $this->createRequest($user);
         }
     }
 
     /**
-     * Update if hash is ok
+     * Dispatcher action for every request
      *
      * @param int $user User UID
      * @param string $hash Given hash
@@ -106,177 +112,182 @@ class NewController extends AbstractController
             array($user, $hash, $status, $this)
         );
         if ($user === null) {
-            $this->addFlashMessage(
-                LocalizationUtility::translate('missingUserInDatabase', 'femanager'),
-                '',
-                FlashMessage::ERROR
-            );
+            $this->addFlashMessage(LocalizationUtility::translate('missingUserInDatabase'), '', FlashMessage::ERROR);
             $this->redirect('new');
         }
 
         switch ($status) {
-
-            // registration confirmed by user
             case 'userConfirmation':
-                if (StringUtility::createHash($user->getUsername()) === $hash) {
-
-                    // if user is already confirmed by himself
-                    if ($user->getTxFemanagerConfirmedbyuser()) {
-                        $this->addFlashMessage(
-                            LocalizationUtility::translate('userAlreadyConfirmed', 'femanager'),
-                            '',
-                            FlashMessage::ERROR
-                        );
-                        $this->redirect('new');
-                    }
-                    $user = FrontendUtility::forceValues(
-                        $user,
-                        $this->config['new.']['forceValues.']['onUserConfirmation.']
-                    );
-                    $user->setTxFemanagerConfirmedbyuser(true);
-                    $this->userRepository->update($user);
-                    $this->persistenceManager->persistAll();
-                    LogUtility::log(
-                        LocalizationUtility::translate('tx_femanager_domain_model_log.state.102', 'femanager'),
-                        102,
-                        $user
-                    );
-
-                    // must be still confirmed from admin
-                    if (!empty($this->settings['new']['confirmByAdmin']) && !$user->getTxFemanagerConfirmedbyadmin()) {
-                        // send email to admin to get this confirmation
-                        $this->sendMail->send(
-                            'createAdminConfirmation',
-                            StringUtility::makeEmailArray(
-                                $this->settings['new']['confirmByAdmin'],
-                                $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
-                            ),
-                            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-                            'New Registration request',
-                            array(
-                                'user' => $user,
-                                'hash' => StringUtility::createHash($user->getUsername() . $user->getUid())
-                            ),
-                            $this->config['new.']['email.']['createAdminConfirmation.']
-                        );
-
-                        $this->addFlashMessage(
-                            LocalizationUtility::translate('createRequestWaitingForAdminConfirm', 'femanager')
-                        );
-
-                    } else {
-                        $user->setDisable(false);
-                        $this->addFlashMessage(LocalizationUtility::translate('create', 'femanager'));
-                        LogUtility::log(
-                            LocalizationUtility::translate('tx_femanager_domain_model_log.state.101', 'femanager'),
-                            101,
-                            $user
-                        );
-                        $this->finalCreate($user, 'new', 'createStatus', true, $status);
-                    }
-
-                } else {
-                    $this->addFlashMessage(
-                        LocalizationUtility::translate('createFailedProfile', 'femanager'),
-                        '',
-                        FlashMessage::ERROR
-                    );
-                    return;
-                }
+                $furtherFunctions = $this->statusUserConfirmation($user, $hash, $status);
                 break;
 
             case 'userConfirmationRefused':
-                if (StringUtility::createHash($user->getUsername()) === $hash) {
-                    LogUtility::log(
-                        LocalizationUtility::translate('tx_femanager_domain_model_log.state.104', 'femanager'),
-                        104,
-                        $user
-                    );
-                    $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted', 'femanager'));
-                    $this->userRepository->remove($user);
-                } else {
-                    $this->addFlashMessage(
-                        LocalizationUtility::translate('createFailedProfile', 'femanager'),
-                        '',
-                        FlashMessage::ERROR
-                    );
-                    return;
-                }
+                $furtherFunctions = $this->statusUserConfirmationRefused($user, $hash);
                 break;
 
             case 'adminConfirmation':
-                // registration complete
-                if (StringUtility::createHash($user->getUsername() . $user->getUid())) {
-                    $user = FrontendUtility::forceValues(
-                        $user,
-                        $this->config['new.']['forceValues.']['onAdminConfirmation.']
-                    );
-                    $user->setTxFemanagerConfirmedbyadmin(true);
-                    if ($user->getTxFemanagerConfirmedbyuser() || empty($this->settings['new']['confirmByUser'])) {
-                        $user->setDisable(false);
-                    }
-                    $this->addFlashMessage(LocalizationUtility::translate('create', 'femanager'));
-                    LogUtility::log(
-                        LocalizationUtility::translate('tx_femanager_domain_model_log.state.103', 'femanager'),
-                        103,
-                        $user
-                    );
-                    $this->finalCreate($user, 'new', 'createStatus', false, $status);
-
-                } else {
-                    $this->addFlashMessage(
-                        LocalizationUtility::translate('createFailedProfile', 'femanager'),
-                        '',
-                        FlashMessage::ERROR
-                    );
-                    return;
-                }
+                $furtherFunctions = $this->statusAdminConfirmation($user, $hash, $status);
                 break;
 
             case 'adminConfirmationRefused':
                 // Admin refuses profile
             case 'adminConfirmationRefusedSilent':
-                if (StringUtility::createHash($user->getUsername() . $user->getUid())) {
-                    LogUtility::log(
-                        LocalizationUtility::translate('tx_femanager_domain_model_log.state.105', 'femanager'),
-                        105,
-                        $user
-                    );
-                    $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted', 'femanager'));
-                    if (!stristr($status, 'silent')) {
-                        // send email to user to inform him about his profile confirmation
-                        $this->sendMail->send(
-                            'CreateUserNotifyRefused',
-                            StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
-                            array('sender@femanager.org' => 'Sender Name'),
-                            'Your profile was refused',
-                            array('user' => $user),
-                            $this->config['new.']['email.']['createUserNotifyRefused.']
-                        );
-                    }
-                    $this->userRepository->remove($user);
-
-                } else {
-                    $this->addFlashMessage(
-                        LocalizationUtility::translate('createFailedProfile', 'femanager'),
-                        '',
-                        FlashMessage::ERROR
-                    );
-                    return;
-                }
+                $furtherFunctions = $this->statusAdminConfirmationRefused($user, $hash, $status);
                 break;
 
             default:
+                $furtherFunctions = false;
 
         }
 
-        /**
-         * redirect by TypoScript setting
-         *        [userConfirmation|userConfirmationRefused|adminConfirmation|
-         *        adminConfirmationRefused|adminConfirmationRefusedSilent]Redirect
-         */
-        $this->redirectByAction('new', $status . 'Redirect');
-        $this->redirect('new');
+        if ($furtherFunctions) {
+            /**
+             * redirect by TypoScript setting
+             *        [userConfirmation|userConfirmationRefused|adminConfirmation|
+             *        adminConfirmationRefused|adminConfirmationRefusedSilent]Redirect
+             */
+            $this->redirectByAction('new', $status . 'Redirect');
+            $this->redirect('new');
+        }
+
+    }
+
+    /**
+     * Status action: User confirmation
+     *
+     * @param User $user
+     * @param string $hash
+     * @param string $status
+     * @return bool allow further functions
+     * @throws UnsupportedRequestTypeException
+     * @throws IllegalObjectTypeException
+     */
+    protected function statusUserConfirmation(User $user, $hash, $status)
+    {
+        if (StringUtility::createHash($user->getUsername()) === $hash) {
+            if ($user->getTxFemanagerConfirmedbyuser()) {
+                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', FlashMessage::ERROR);
+                $this->redirect('new');
+            }
+
+            $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onUserConfirmation.']);
+            $user->setTxFemanagerConfirmedbyuser(true);
+            $this->userRepository->update($user);
+            $this->persistenceManager->persistAll();
+            LogUtility::log(Log::STATUS_REGISTRATIONCONFIRMEDUSER, $user);
+
+            if ($this->isAdminConfirmationMissing($user)) {
+                $this->sendMail->send(
+                    'createAdminConfirmation',
+                    StringUtility::makeEmailArray(
+                        $this->settings['new']['confirmByAdmin'],
+                        $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
+                    ),
+                    StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
+                    'New Registration request',
+                    array(
+                        'user' => $user,
+                        'hash' => StringUtility::createHash($user->getUsername() . $user->getUid())
+                    ),
+                    $this->config['new.']['email.']['createAdminConfirmation.']
+                );
+                $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
+
+            } else {
+                $user->setDisable(false);
+                $this->addFlashMessage(LocalizationUtility::translate('create'));
+                LogUtility::log(Log::STATUS_NEWREGISTRATION, $user);
+                $this->finalCreate($user, 'new', 'createStatus', true, $status);
+            }
+
+        } else {
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Status action: User confirmation refused
+     *
+     * @param User $user
+     * @param string $hash
+     * @return bool allow further functions
+     * @throws IllegalObjectTypeException
+     */
+    protected function statusUserConfirmationRefused(User $user, $hash)
+    {
+        if (StringUtility::createHash($user->getUsername()) === $hash) {
+            LogUtility::log(Log::STATUS_REGISTRATIONREFUSEDUSER, $user);
+            $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
+            $this->userRepository->remove($user);
+        } else {
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param User $user
+     * @param string $hash
+     * @param string $status
+     * @return bool allow further functions
+     */
+    protected function statusAdminConfirmation(User $user, $hash, $status)
+    {
+        if (StringUtility::createHash($user->getUsername()) === $hash) {
+            $user = FrontendUtility::forceValues(
+                $user,
+                $this->config['new.']['forceValues.']['onAdminConfirmation.']
+            );
+            $user->setTxFemanagerConfirmedbyadmin(true);
+            if ($user->getTxFemanagerConfirmedbyuser() || empty($this->settings['new']['confirmByUser'])) {
+                $user->setDisable(false);
+            }
+            $this->addFlashMessage(LocalizationUtility::translate('create'));
+            LogUtility::log(Log::STATUS_REGISTRATIONCONFIRMEDADMIN, $user);
+            $this->finalCreate($user, 'new', 'createStatus', false, $status);
+        } else {
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Status action: Admin refused profile creation (normal or silent)
+     *
+     * @param User $user
+     * @param $hash
+     * @param $status
+     * @return bool allow further functions
+     * @throws IllegalObjectTypeException
+     */
+    protected function statusAdminConfirmationRefused(User $user, $hash, $status)
+    {
+        if (StringUtility::createHash($user->getUsername()) === $hash) {
+            LogUtility::log(Log::STATUS_REGISTRATIONREFUSEDADMIN, $user);
+            $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
+            if (!stristr($status, 'silent')) {
+                $this->sendMail->send(
+                    'CreateUserNotifyRefused',
+                    StringUtility::makeEmailArray(
+                        $user->getEmail(),
+                        $user->getFirstName() . ' ' . $user->getLastName()
+                    ),
+                    array('sender@femanager.org' => 'Sender Name'),
+                    'Your profile was refused',
+                    array('user' => $user),
+                    $this->config['new.']['email.']['createUserNotifyRefused.']
+                );
+            }
+            $this->userRepository->remove($user);
+        } else {
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -288,4 +299,20 @@ class NewController extends AbstractController
     {
     }
 
+    /**
+     * @return bool
+     */
+    protected function isAllConfirmed()
+    {
+        return empty($this->settings['new']['confirmByUser']) && empty($this->settings['new']['confirmByAdmin']);
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    protected function isAdminConfirmationMissing(User $user)
+    {
+        return !empty($this->settings['new']['confirmByAdmin']) && !$user->getTxFemanagerConfirmedbyadmin();
+    }
 }

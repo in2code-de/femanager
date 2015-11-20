@@ -8,7 +8,7 @@
 <f:section name="main">
 
 	<div class="femanager_list">
-		<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+		<f:render partial="Misc/FlashMessages" arguments="{_all}" />
 
 		<f:render partial="User/Searchform" arguments="{_all}" />
 
@@ -53,7 +53,7 @@
 <f:section name="main_old">
 
 	<div class="femanager_list">
-		<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+		<f:render partial="Misc/FlashMessages" arguments="{_all}" />
 
 		<f:if condition="{users}">
 			<f:then>

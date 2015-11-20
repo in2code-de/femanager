@@ -1,9 +1,7 @@
 <?php
 namespace In2code\Femanager\Utility;
 
-use In2code\Femanager\Domain\Model\Log;
-use In2code\Femanager\Domain\Model\User;
-use In2code\Femanager\Domain\Repository\LogRepository;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility as LocalizationUtilityExtbase;
 
 /***************************************************************
  *  Copyright notice
@@ -31,42 +29,34 @@ use In2code\Femanager\Domain\Repository\LogRepository;
  ***************************************************************/
 
 /**
- * Class LogUtility
+ * Class LocalizationUtility
  *
  * @package In2code\Femanager\Utility
  */
-class LogUtility extends AbstractUtility
+class LocalizationUtility extends LocalizationUtilityExtbase
 {
 
     /**
-     * @param int $state State to log
-     * @param User $user Related User
-     * @return void
+     * Returns the localized label of the LOCAL_LANG key, but prefill extensionName
+     *
+     * @param string $key The key from the LOCAL_LANG array for which to return the value.
+     * @param string $extensionName The name of the extension
+     * @param array $arguments the arguments of the extension, being passed over to vsprintf
+     * @return string|null
      */
-    public static function log($state, User $user)
+    public static function translate($key, $extensionName = 'femanager', $arguments = null)
     {
-        if (ConfigurationUtility::isDisableLogActive()) {
-            $log = self::getLog();
-            $log->setTitle(LocalizationUtility::translate('tx_femanager_domain_model_log.state.' . $state));
-            $log->setState($state);
-            $log->setUser($user);
-            self::getLogRepository()->add($log);
-        }
+        return parent::translate($key, $extensionName, $arguments);
     }
 
     /**
-     * @return Log
+     * Get locallang translation with key prefix tx_femanager_domain_model_log.state.
+     *
+     * @param int $state
+     * @return null|string
      */
-    protected function getLog()
+    public static function translateByState($state)
     {
-        return self::getObjectManager()->get('In2code\\Femanager\\Domain\\Model\\Log');
-    }
-
-    /**
-     * @return LogRepository
-     */
-    protected function getLogRepository()
-    {
-        return self::getObjectManager()->get('In2code\\Femanager\\Domain\\Repository\\LogRepository');
+        return self::translate('tx_femanager_domain_model_log.state.' . $state);
     }
 }

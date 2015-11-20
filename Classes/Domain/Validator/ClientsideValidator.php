@@ -1,9 +1,9 @@
 <?php
 namespace In2code\Femanager\Domain\Validator;
 
+use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use In2code\Femanager\Domain\Model\User;
 
 /**
@@ -192,7 +192,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->getValue() &&
                         !$this->validateDate(
                             $this->getValue(),
-                            LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat', 'femanager')
+                            LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat')
                         )
                     ) {
                         $this->addMessage('validationErrorDate');
