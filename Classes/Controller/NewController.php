@@ -2,13 +2,14 @@
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
+use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\FrontendUtility;
+use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
-use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 
@@ -94,9 +95,9 @@ class NewController extends AbstractController
     }
 
     /**
-     * Dispatcher action for every request
+     * Dispatcher action for every confirmation request
      *
-     * @param int $user User UID
+     * @param int $user User UID (user could be hidden)
      * @param string $hash Given hash
      * @param string $status
      *            "userConfirmation", "userConfirmationRefused", "adminConfirmation",
@@ -141,15 +142,9 @@ class NewController extends AbstractController
         }
 
         if ($furtherFunctions) {
-            /**
-             * redirect by TypoScript setting
-             *        [userConfirmation|userConfirmationRefused|adminConfirmation|
-             *        adminConfirmationRefused|adminConfirmationRefusedSilent]Redirect
-             */
             $this->redirectByAction('new', $status . 'Redirect');
-            $this->redirect('new');
         }
-
+        $this->redirect('new');
     }
 
     /**
@@ -164,7 +159,7 @@ class NewController extends AbstractController
      */
     protected function statusUserConfirmation(User $user, $hash, $status)
     {
-        if (StringUtility::createHash($user->getUsername()) === $hash) {
+        if (HashUtility::validHash($hash, $user)) {
             if ($user->getTxFemanagerConfirmedbyuser()) {
                 $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', FlashMessage::ERROR);
                 $this->redirect('new');
@@ -187,7 +182,7 @@ class NewController extends AbstractController
                     'New Registration request',
                     array(
                         'user' => $user,
-                        'hash' => StringUtility::createHash($user->getUsername() . $user->getUid())
+                        'hash' => HashUtility::createHashForUser($user)
                     ),
                     $this->config['new.']['email.']['createAdminConfirmation.']
                 );
@@ -217,7 +212,7 @@ class NewController extends AbstractController
      */
     protected function statusUserConfirmationRefused(User $user, $hash)
     {
-        if (StringUtility::createHash($user->getUsername()) === $hash) {
+        if (HashUtility::validHash($hash, $user)) {
             LogUtility::log(Log::STATUS_REGISTRATIONREFUSEDUSER, $user);
             $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
             $this->userRepository->remove($user);
@@ -236,7 +231,7 @@ class NewController extends AbstractController
      */
     protected function statusAdminConfirmation(User $user, $hash, $status)
     {
-        if (StringUtility::createHash($user->getUsername()) === $hash) {
+        if (HashUtility::validHash($hash, $user)) {
             $user = FrontendUtility::forceValues(
                 $user,
                 $this->config['new.']['forceValues.']['onAdminConfirmation.']
@@ -266,7 +261,7 @@ class NewController extends AbstractController
      */
     protected function statusAdminConfirmationRefused(User $user, $hash, $status)
     {
-        if (StringUtility::createHash($user->getUsername()) === $hash) {
+        if (HashUtility::validHash($hash, $user)) {
             LogUtility::log(Log::STATUS_REGISTRATIONREFUSEDADMIN, $user);
             $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
             if (!stristr($status, 'silent')) {

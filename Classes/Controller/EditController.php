@@ -3,6 +3,7 @@ namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\UserGroup;
+use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\ObjectUtility;
@@ -145,7 +146,7 @@ class EditController extends AbstractController
 
         // if wrong hash or if no update xml
         if (
-            StringUtility::createHash($user->getUsername() . $user->getUid()) !== $hash ||
+            !HashUtility::validHash($hash, $user) ||
             !$user->getTxFemanagerChangerequest()
         ) {
             $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', FlashMessage::ERROR);

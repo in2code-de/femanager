@@ -89,14 +89,17 @@ abstract class AbstractUtility
     }
 
     /**
+     * Get TYPO3 encryption key
+     *
      * @return string
+     * @throws \Exception
      */
     protected static function getEncryptionKey()
     {
-        if (!empty($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'])) {
-            return $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'];
+        if (empty($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'])) {
+            throw new \Exception('No encryption key found in this TYPO3 installation');
         }
-        return '';
+        return $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'];
     }
 
     /**

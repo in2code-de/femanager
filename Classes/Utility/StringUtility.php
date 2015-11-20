@@ -51,18 +51,6 @@ class StringUtility extends AbstractUtility
     }
 
     /**
-     * Create Hash from String and TYPO3 Encryption Key (if available)
-     *
-     * @param string $string Any String to hash
-     * @param int $length Hash Length
-     * @return string $hash Hashed String
-     */
-    public static function createHash($string, $length = 10)
-    {
-        return GeneralUtility::shortMD5($string . self::getEncryptionKey(), $length);
-    }
-
-    /**
      * Read values between brackets
      *
      *      test(1,2,3) => 1,2,3

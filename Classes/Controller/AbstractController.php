@@ -6,6 +6,7 @@ use In2code\Femanager\Domain\Service\SendParametersService;
 use In2code\Femanager\Domain\Service\StoreInDatabaseService;
 use In2code\Femanager\Utility\FileUtility;
 use In2code\Femanager\Utility\FrontendUtility;
+use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
@@ -14,6 +15,7 @@ use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use In2code\Femanager\Domain\Model\User;
@@ -148,66 +150,76 @@ abstract class AbstractController extends ActionController
      */
     public function createRequest(User $user)
     {
-        // persist
         $user->setDisable(true);
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
         LogUtility::log(Log::STATUS_PROFILECREATIONREQUEST, $user);
-
         if (!empty($this->settings['new']['confirmByUser'])) {
-
-            // send email to user for confirmation
-            $this->sendMail->send(
-                'createUserConfirmation',
-                StringUtility::makeEmailArray(
-                    $user->getEmail(),
-                    $user->getUsername()
-                ),
-                array(
-                    $this->settings['new']['email']['createUserConfirmation']['sender']['email']['value'] =>
-                        $this->settings['settings']['new']['email']['createUserConfirmation']['sender']['name']['value']
-                ),
-                'Confirm your profile creation request',
-                array(
-                    'user' => $user,
-                    'hash' => StringUtility::createHash($user->getUsername())
-                ),
-                $this->config['new.']['email.']['createUserConfirmation.']
-            );
-
-            // redirect by TypoScript
-            $this->redirectByAction('new', 'requestRedirect');
-
-            // add flashmessage
-            $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
-
-            // redirect
-            $this->redirect('new');
+            $this->createUserConfirmationRequest($user);
         }
         if (!empty($this->settings['new']['confirmByAdmin'])) {
-            $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
-
-            // send email to admin
-            $this->sendMail->send(
-                'createAdminConfirmation',
-                StringUtility::makeEmailArray(
-                    $this->settings['new']['confirmByAdmin'],
-                    $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
-                ),
-                StringUtility::makeEmailArray(
-                    $user->getEmail(),
-                    $user->getUsername()
-                ),
-                'New Registration request',
-                array(
-                    'user' => $user,
-                    'hash' => StringUtility::createHash($user->getUsername() . $user->getUid())
-                ),
-                $this->config['new.']['email.']['createAdminConfirmation.']
-            );
-
-            $this->redirect('new');
+            $this->createAdminConfirmationRequest($user);
         }
+    }
+
+    /**
+     * Send email to user for confirmation
+     *
+     * @param User $user
+     * @return void
+     * @throws UnsupportedRequestTypeException
+     */
+    protected function createUserConfirmationRequest(User $user)
+    {
+        $this->sendMail->send(
+            'createUserConfirmation',
+            StringUtility::makeEmailArray(
+                $user->getEmail(),
+                $user->getUsername()
+            ),
+            array(
+                $this->settings['new']['email']['createUserConfirmation']['sender']['email']['value'] =>
+                    $this->settings['settings']['new']['email']['createUserConfirmation']['sender']['name']['value']
+            ),
+            'Confirm your profile creation request',
+            array(
+                'user' => $user,
+                'hash' => HashUtility::createHashForUser($user)
+            ),
+            $this->config['new.']['email.']['createUserConfirmation.']
+        );
+        $this->redirectByAction('new', 'requestRedirect');
+        $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
+        $this->redirect('new');
+    }
+
+    /**
+     * Send email to admin for confirmation
+     *
+     * @param User $user
+     * @throws UnsupportedRequestTypeException
+     */
+    protected function createAdminConfirmationRequest(User $user)
+    {
+        $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
+        $this->sendMail->send(
+            'createAdminConfirmation',
+            StringUtility::makeEmailArray(
+                $this->settings['new']['confirmByAdmin'],
+                $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
+            ),
+            StringUtility::makeEmailArray(
+                $user->getEmail(),
+                $user->getUsername()
+            ),
+            'New Registration request',
+            array(
+                'user' => $user,
+                'hash' => HashUtility::createHashForUser($user)
+            ),
+            $this->config['new.']['email.']['createAdminConfirmation.']
+        );
+        $this->redirect('new');
     }
 
     /**
@@ -273,7 +285,7 @@ abstract class AbstractController extends ActionController
             array(
                 'user' => $user,
                 'changes' => $dirtyProperties,
-                'hash' => StringUtility::createHash($user->getUsername() . $user->getUid())
+                'hash' => HashUtility::createHashForUser($user)
             ),
             $this->config['edit.']['email.']['updateRequest.']
         );
@@ -385,7 +397,9 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * Redirect
+     * Redirect by TypoScript setting
+     *        [userConfirmation|userConfirmationRefused|adminConfirmation|
+     *        adminConfirmationRefused|adminConfirmationRefusedSilent]Redirect
      *
      * @param string $action "new", "edit"
      * @param string $category "redirect", "requestRedirect" value from TypoScript

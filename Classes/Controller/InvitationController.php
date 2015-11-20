@@ -2,6 +2,7 @@
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
+use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
@@ -107,7 +108,7 @@ class InvitationController extends AbstractController
             array(
                 'user' => $user,
                 'settings' => $this->settings,
-                'hash' => StringUtility::createHash($user->getUsername() . $user->getUid())
+                'hash' => HashUtility::createHashForUser($user)
             ),
             $this->config['invitation.']['email.']['invitation.']
         );
@@ -150,23 +151,20 @@ class InvitationController extends AbstractController
         $user->setDisable(false);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
-
-        // add signal on edit
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $hash, $this));
+        $this->view->assignMultiple(
+            array(
+                'user' => $user,
+                'hash' => $hash
+            )
+        );
 
-        $this->view->assign('user', $user);
-        $this->view->assign('hash', $hash);
-
-        if (StringUtility::createHash($user->getUsername() . $user->getUid()) !== $hash) {
+        if (!HashUtility::validHash($hash, $user)) {
             if ($user !== null) {
                 // delete user for security reasons
                 $this->userRepository->remove($user);
             }
-            $this->addFlashMessage(
-                LocalizationUtility::translate('createFailedProfile'),
-                '',
-                FlashMessage::ERROR
-            );
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
             $this->forward('status');
         }
 
@@ -236,7 +234,7 @@ class InvitationController extends AbstractController
     {
         $user = $this->userRepository->findByUid($user);
 
-        if (StringUtility::createHash($user->getUsername() . $user->getUid()) === $hash) {
+        if (HashUtility::validHash($hash, $user)) {
             LogUtility::log(Log::STATUS_PROFILEDELETE, $user);
             $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_INVITATIONPROFILEDELETEDUSER));
 

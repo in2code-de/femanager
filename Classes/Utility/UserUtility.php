@@ -36,7 +36,7 @@ use TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility;
  ***************************************************************/
 
 /**
- * Class FrontendUserUtility
+ * Class UserUtility
  *
  * @package In2code\Femanager\Utility
  */
