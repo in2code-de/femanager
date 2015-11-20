@@ -95,5 +95,4 @@ class FlexFormFieldSelection
     {
         $this->languageService = $GLOBALS['LANG'];
     }
-
 }

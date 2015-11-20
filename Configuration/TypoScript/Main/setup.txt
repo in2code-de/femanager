@@ -1,8 +1,17 @@
 plugin.tx_femanager {
 	view {
-		templateRootPath = {$plugin.tx_femanager.view.templateRootPath}
-		partialRootPath = {$plugin.tx_femanager.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_femanager.view.layoutRootPath}
+		templateRootPaths {
+			0 = EXT:femanager/Resources/Private/Templates/
+			1 = {$plugin.tx_femanager.view.templateRootPath}
+		}
+		partialRootPaths {
+			0 = EXT:femanager/Resources/Private/Partials/
+			1 = {$plugin.tx_femanager.view.partialRootPath}
+		}
+		layoutRootPaths {
+			0 = EXT:femanager/Resources/Private/Layouts/
+			1 = {$plugin.tx_femanager.view.layoutRootPath}
+		}
 	}
 	persistence {
 		storagePid = {$plugin.tx_femanager.persistence.storagePid}

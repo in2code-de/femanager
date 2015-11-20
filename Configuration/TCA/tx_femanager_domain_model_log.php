@@ -1,18 +1,37 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
-}
 
-$TCA['tx_femanager_domain_model_log'] = array(
-    'ctrl' => $TCA['tx_femanager_domain_model_log']['ctrl'],
+return array(
+    'ctrl' => array(
+        'title' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log',
+        'label' => 'title',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'cruser_id' => 'cruser_id',
+        'dividers2tabs' => true,
+        'versioningWS' => 2,
+        'versioning_followPages' => true,
+        'origUid' => 't3_origuid',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'delete' => 'deleted',
+        'default_sortby' => 'ORDER BY crdate DESC',
+        'enablecolumns' => array(
+            'disabled' => 'hidden',
+            'starttime' => 'starttime',
+            'endtime' => 'endtime',
+        ),
+        'searchFields' => 'title',
+        'iconfile' => 'EXT:femanager/Resources/Public/Icons/Log.gif'
+    ),
     'interface' => array(
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, crdate, state, user',
     ),
     'types' => array(
         '1' => array(
             'showitem' => 'title, crdate, state, user, ' .
-                '--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,sys_language_uid;;;;1-1-1, ' .
-                'l10n_parent, l10n_diffsource, hidden;;1, starttime, endtime'
+                '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,sys_language_uid, ' .
+                'l10n_parent, l10n_diffsource, hidden, starttime, endtime'
         ),
     ),
     'palettes' => array(
@@ -24,6 +43,7 @@ $TCA['tx_femanager_domain_model_log'] = array(
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items' => array(
@@ -38,6 +58,7 @@ $TCA['tx_femanager_domain_model_log'] = array(
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array(
                     array('', 0),
                 ),
@@ -125,6 +146,7 @@ $TCA['tx_femanager_domain_model_log'] = array(
                 'tx_femanager_domain_model_log.state',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array(
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .

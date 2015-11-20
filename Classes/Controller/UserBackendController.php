@@ -1,9 +1,9 @@
 <?php
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use In2code\Femanager\Domain\Model\User;
 
 /***************************************************************
  *  Copyright notice
@@ -48,8 +48,12 @@ class UserBackendController extends AbstractController
     public function listAction($filter = array())
     {
         $users = $this->userRepository->findAllInBackend($filter);
-        $this->view->assign('users', $users);
-        $this->view->assign('token', BackendUtility::getUrlToken('tceAction'));
+        $this->view->assignMultiple(
+            array(
+                'users' => $users,
+                'moduleUri' => BackendUtility::getModuleUrl('tce_db')
+            )
+        );
     }
 
     /**
