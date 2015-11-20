@@ -1,5 +1,5 @@
 <?php
-namespace In2code\Femanager\Utility\Eid;
+namespace In2code\Femanager\Eid;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Core\Bootstrap;
@@ -36,7 +36,7 @@ use TYPO3\CMS\Frontend\Utility\EidUtility;
  * @package TYPO3
  * @subpackage EidFileUpload
  */
-class FileUpload
+class FileUploadEid
 {
 
     /**
@@ -66,9 +66,9 @@ class FileUpload
     /**
      * Initialize Extbase
      *
-     * @param array $TYPO3_CONF_VARS
+     * @param array $typo3ConfVars
      */
-    public function __construct($TYPO3_CONF_VARS)
+    public function __construct($typo3ConfVars)
     {
         $this->configuration = array(
             'pluginName' => 'Pi1',
@@ -93,7 +93,7 @@ class FileUpload
         $pid = (GeneralUtility::_GET('id') ? GeneralUtility::_GET('id') : 1);
         $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
             'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
-            $TYPO3_CONF_VARS,
+            $typo3ConfVars,
             $pid,
             0,
             true
@@ -107,5 +107,5 @@ class FileUpload
     }
 }
 
-$eid = GeneralUtility::makeInstance('In2code\\Femanager\\Utility\\Eid\\FileUpload', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = GeneralUtility::makeInstance('In2code\\Femanager\\Eid\\FileUploadEid', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->run();

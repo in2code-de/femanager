@@ -1,5 +1,5 @@
 <?php
-namespace In2code\Femanager\Utility\Eid;
+namespace In2code\Femanager\Eid;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Core\Bootstrap;
@@ -34,9 +34,9 @@ use TYPO3\CMS\Frontend\Utility\EidUtility;
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>, in2code.de
  * @package TYPO3
- * @subpackage EidValidate
+ * @subpackage EidFileDelete
  */
-class Validate
+class FileDeleteEid
 {
 
     /**
@@ -56,7 +56,7 @@ class Validate
     /**
      * Generates the output
      *
-     * @return string from action
+     * @return string rendered action
      */
     public function run()
     {
@@ -66,37 +66,34 @@ class Validate
     /**
      * Initialize Extbase
      *
-     * @param array $TYPO3_CONF_VARS
+     * @param array $typo3ConfVars
      */
-    public function __construct($TYPO3_CONF_VARS)
+    public function __construct($typo3ConfVars)
     {
         $this->configuration = array(
             'pluginName' => 'Pi1',
             'vendorName' => 'In2code',
             'extensionName' => 'Femanager',
             'controller' => 'User',
-            'action' => 'validate',
+            'action' => 'fileDelete',
             'mvc' => array(
                 'requestHandlers' => array(
                     'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler' =>
                         'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler'
                 )
             ),
-            'settings' => array(),
-            'persistence' => array(
-                'storagePid' => GeneralUtility::_GP('storagePid')
-            )
+            'settings' => array()
         );
-        $_POST['tx_femanager_pi1']['action'] = 'validate';
+        $_POST['tx_femanager_pi1']['action'] = 'fileDelete';
         $_POST['tx_femanager_pi1']['controller'] = 'User';
 
         $this->bootstrap = new Bootstrap();
 
         $userObj = EidUtility::initFeUser();
-        $pid = (GeneralUtility::_GP('id') ? GeneralUtility::_GP('id') : 1);
+        $pid = (GeneralUtility::_GET('id') ? GeneralUtility::_GET('id') : 1);
         $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
             'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
-            $TYPO3_CONF_VARS,
+            $typo3ConfVars,
             $pid,
             0,
             true
@@ -110,5 +107,5 @@ class Validate
     }
 }
 
-$eid = GeneralUtility::makeInstance('In2code\\Femanager\\Utility\\Eid\\Validate', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = GeneralUtility::makeInstance('In2code\\Femanager\\Eid\\FileDeleteEid', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->run();

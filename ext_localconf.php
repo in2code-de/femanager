@@ -22,12 +22,12 @@ if (!defined('TYPO3_MODE')) {
 
 // eID for File Upload (FE)
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['femanagerFileUpload'] =
-    'EXT:femanager/Classes/Utility/Eid/FileUpload.php';
+    'EXT:femanager/Classes/Eid/FileUploadEid.php';
 
 // eID for File Delete (FE)
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['femanagerFileDelete'] =
-    'EXT:femanager/Classes/Utility/Eid/FileDelete.php';
+    'EXT:femanager/Classes/Eid/FileDeleteEid.php';
 
 // eID for Field Validation (FE)
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['femanagerValidate'] =
-    'EXT:femanager/Classes/Utility/Eid/Validate.php';
+    'EXT:femanager/Classes/Eid/ValidateEid.php';
