@@ -79,6 +79,30 @@ class StringUtility extends AbstractUtility
     }
 
     /**
+     * Check if string starts with another string
+     *
+     * @param string $haystack
+     * @param string $needle
+     * @return bool
+     */
+    public static function startsWith($haystack, $needle)
+    {
+        return stristr($haystack, $needle) && strrpos($haystack, $needle, -strlen($haystack)) !== false;
+    }
+
+    /**
+     * Check if string ends with another string
+     *
+     * @param string $haystack
+     * @param string $needle
+     * @return string
+     */
+    public static function endsWith($haystack, $needle)
+    {
+        return stristr($haystack, $needle) && strlen($haystack) - strlen($needle) === strpos($haystack, $needle);
+    }
+
+    /**
      * Create array for swiftmailer
      *        sender and receiver mail/name combination with fallback
      *

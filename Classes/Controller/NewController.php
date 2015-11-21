@@ -172,7 +172,7 @@ class NewController extends AbstractController
             LogUtility::log(Log::STATUS_REGISTRATIONCONFIRMEDUSER, $user);
 
             if ($this->isAdminConfirmationMissing($user)) {
-                $this->sendMail->send(
+                $this->sendMailService->send(
                     'createAdminConfirmation',
                     StringUtility::makeEmailArray(
                         $this->settings['new']['confirmByAdmin'],
@@ -224,6 +224,8 @@ class NewController extends AbstractController
     }
 
     /**
+     * Status action: Admin confirmation
+     *
      * @param User $user
      * @param string $hash
      * @param string $status
@@ -264,8 +266,8 @@ class NewController extends AbstractController
         if (HashUtility::validHash($hash, $user)) {
             LogUtility::log(Log::STATUS_REGISTRATIONREFUSEDADMIN, $user);
             $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
-            if (!stristr($status, 'silent')) {
-                $this->sendMail->send(
+            if ($status !== 'adminConfirmationRefusedSilent') {
+                $this->sendMailService->send(
                     'CreateUserNotifyRefused',
                     StringUtility::makeEmailArray(
                         $user->getEmail(),

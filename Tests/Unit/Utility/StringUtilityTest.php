@@ -159,6 +159,152 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
+     * Data Provider for startsWithReturnsString()
+     *
+     * @return array
+     */
+    public function startsWithReturnsStringDataProvider()
+    {
+        return array(
+            array(
+                'Finisherx',
+                'Finisher',
+                true
+            ),
+            array(
+                'inisher',
+                'Finisher',
+                false
+            ),
+            array(
+                'abc',
+                'a',
+                true
+            ),
+            array(
+                'abc',
+                'ab',
+                true
+            ),
+            array(
+                'abc',
+                'abc',
+                true
+            ),
+        );
+    }
+
+    /**
+     * startsWith Test
+     *
+     * @param string $haystack
+     * @param string $needle
+     * @param bool $expectedResult
+     * @dataProvider startsWithReturnsStringDataProvider
+     * @return void
+     * @test
+     */
+    public function startsWithReturnsString($haystack, $needle, $expectedResult)
+    {
+        $this->assertSame($expectedResult, StringUtility::startsWith($haystack, $needle));
+    }
+
+    /**
+     * Data Provider for endsWithReturnsString()
+     *
+     * @return array
+     */
+    public function endsWithReturnsStringDataProvider()
+    {
+        return array(
+            array(
+                'xFinisher',
+                'Finisher',
+                true
+            ),
+            array(
+                'inisher',
+                'Finisher',
+                false
+            ),
+            array(
+                'abc',
+                'c',
+                true
+            ),
+            array(
+                'abc',
+                'bc',
+                true
+            ),
+            array(
+                'abc',
+                'abc',
+                true
+            ),
+        );
+    }
+
+    /**
+     * endsWith Test
+     *
+     * @param string $haystack
+     * @param string $needle
+     * @param bool $expectedResult
+     * @dataProvider endsWithReturnsStringDataProvider
+     * @return void
+     * @test
+     */
+    public function endsWithReturnsString($haystack, $needle, $expectedResult)
+    {
+        $this->assertSame($expectedResult, StringUtility::endsWith($haystack, $needle));
+    }
+
+    /**
+     * Data Provider for emakeEmailArrayReturnsArray()
+     *
+     * @return array
+     */
+    public function emakeEmailArrayReturnsArrayDataProvider()
+    {
+        return array(
+            array(
+                'email1@mail.org' . PHP_EOL . 'email2@mail.org',
+                array(
+                    'email1@mail.org' => 'femanager',
+                    'email2@mail.org' => 'femanager'
+                )
+            ),
+            array(
+                'nomail.org' . PHP_EOL . 'email2@mail.org',
+                array(
+                    'email2@mail.org' => 'femanager'
+                )
+            ),
+            array(
+                'email2@mail.org',
+                array(
+                    'email2@mail.org' => 'femanager'
+                )
+            ),
+        );
+    }
+
+    /**
+     * emakeEmailArray Test
+     *
+     * @param string $haystack
+     * @param array $expectedResult
+     * @dataProvider emakeEmailArrayReturnsArrayDataProvider
+     * @return void
+     * @test
+     */
+    public function emakeEmailArrayReturnsArray($haystack, $expectedResult)
+    {
+        $this->assertSame($expectedResult, StringUtility::makeEmailArray($haystack));
+    }
+
+    /**
      * Data Provider for getRandomStringAlwaysReturnsStringsOfGivenLength
      *
      * @return array

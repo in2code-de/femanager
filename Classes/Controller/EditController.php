@@ -179,7 +179,7 @@ class EditController extends AbstractController
                 break;
 
             case 'refuse':
-                $this->sendMail->send(
+                $this->sendMailService->send(
                     'updateRequestRefused',
                     StringUtility::makeEmailArray(
                         $user->getEmail(),

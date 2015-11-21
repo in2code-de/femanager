@@ -100,7 +100,7 @@ class InvitationController extends AbstractController
         LogUtility::log(Log::STATUS_INVITATIONPROFILECREATED, $user);
 
         // send confirmation mail to user
-        $this->sendMail->send(
+        $this->sendMailService->send(
             'invitation',
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
@@ -115,7 +115,7 @@ class InvitationController extends AbstractController
 
         // send notify email to admin
         if ($this->settings['invitation']['notifyAdminStep1']) {
-            $this->sendMail->send(
+            $this->sendMailService->send(
                 'invitationNotifyStep1',
                 StringUtility::makeEmailArray(
                     $this->settings['invitation']['notifyAdminStep1'],
@@ -186,7 +186,7 @@ class InvitationController extends AbstractController
 
         // send notify email to admin
         if ($this->settings['invitation']['notifyAdmin']) {
-            $this->sendMail->send(
+            $this->sendMailService->send(
                 'invitationNotify',
                 StringUtility::makeEmailArray(
                     $this->settings['invitation']['notifyAdmin'],
@@ -240,7 +240,7 @@ class InvitationController extends AbstractController
 
             // send notify email to admin
             if ($this->settings['invitation']['notifyAdminStep1']) {
-                $this->sendMail->send(
+                $this->sendMailService->send(
                     'invitationRefused',
                     StringUtility::makeEmailArray(
                         $this->settings['invitation']['notifyAdminStep1'],

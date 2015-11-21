@@ -571,27 +571,27 @@ plugin.tx_femanager {
 
 			# Save user values to one or more other tables (e.g. tt_address or something else)
 			#       With .field=[fieldname] you have access to the user object
-			#       Possible values are: uid, username, address, city, company, country, email, fax, firstName, lastName, middleName, name, password, telephone, fax, title, www, zip and lastGeneratedUid (to have access to the uid of the last loop in the next loop)
+			#       Possible values are: uid, username, address, city, company, country, email, fax, firstName, lastName, middleName, name, password, telephone, fax, title, www, zip and uid_[tablename] (to have access to the uid of one of the last loop)
 			storeInDatabase {
-				tt_address {
-					_enable = TEXT
-					_enable.value = 0
+#				tt_address {
+#					_enable = TEXT
+#					_enable.value = 0
 
-					pid = TEXT
-					pid.value = 21
+#					pid = TEXT
+#					pid.value = 21
 
-					name = TEXT
-					name.field = username
+#					name = TEXT
+#					name.field = username
 
-					email = TEXT
-					email.field = email
+#					email = TEXT
+#					email.field = email
 
-					first_name = TEXT
-					first_name.field = firstName
+#					first_name = TEXT
+#					first_name.field = firstName
 
-					last_name = TEXT
-					last_name.field = lastName
-				}
+#					last_name = TEXT
+#					last_name.field = lastName
+#				}
 			}
 
 			misc {
@@ -1377,6 +1377,25 @@ plugin.tx_femanager {
 
 			# Width of the rendered image in FE
 			renderImageWidth = 250
+		}
+
+		# Add own finisher classes that will be called after registration, profile update, invitation or deletion (e.g. if you want to do something with form values by your own: Save into tables, call an API, etc...)
+		finishers {
+#			1 {
+ 				# Classname that should be called with method *Finisher()
+#				class = Vendor\Ext\Finisher\DoSomethingFinisher
+
+				# optional: Add configuration for your PHP
+#				config {
+#					foo = bar
+
+#					fooCObject = TEXT
+#					fooCObject.value = do something with this text
+#				}
+
+				# optional: If file will not be loaded from autoloader, add path and it will be called with require_once
+#				require = fileadmin/femanager/finisher/DoSomethingFinisher.php
+#			}
 		}
 
 		# Don't touch this - this is needed to let the plugin know if the main typoscript is included - otherwise an errormessage will be shown in the frontend
