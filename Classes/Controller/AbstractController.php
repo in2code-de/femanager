@@ -354,14 +354,6 @@ abstract class AbstractController extends ActionController
             );
         }
 
-        // sendpost: send values via POST to any target
-        /** @var SendParametersService $sendParametersService */
-        $sendParametersService = $this->objectManager->get(
-            'In2code\\Femanager\\Domain\\Service\\SendParametersService',
-            $this->config['new.']['sendPost.']
-        );
-        $sendParametersService->send($user);
-
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
 
         $this->finisherRunner->callFinishers(

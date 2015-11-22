@@ -68,7 +68,8 @@ class FinisherRunner
      * @var array
      */
     protected $ownFinisherClasses = array(
-        'SaveToAnyTableFinisher'
+        'SaveToAnyTableFinisher',
+        'SendParametersFinisher'
     );
 
     /**

@@ -533,40 +533,39 @@ plugin.tx_femanager {
 			# Send Form values via POST to another system (e.g. CRM like salesforce or eloqua)
 			sendPost {
 				# Activate sendPost (0/1)
-				_enable = TEXT
-				_enable.value = 0
+#				_enable = TEXT
+#				_enable.value = 0
 
 				# Target URL for POST values (like http://www.target.com/target.php)
-				targetUrl = https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8
-				#targetUrl = http://eloqua.com/e/f.aspx
+#				targetUrl = https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8
 
 				# build your post datas like &param1=value1&param2=value2
-				data = COA
-				data {
-					10 = TEXT
-					10 {
-						# value from field {username}
-						field = username
-						wrap = &username=|
-					}
+#				data = COA
+#				data {
+#					10 = TEXT
+#					10 {
+#						# value from field {username}
+#						field = username
+#						wrap = &username=|
+#					}
 
-					20 = TEXT
-					20 {
-						# value from field {email}
-						field = email
-						wrap = &email=|
-					}
+#					20 = TEXT
+#					20 {
+#						# value from field {email}
+#						field = email
+#						wrap = &email=|
+#					}
 
-					30 = TEXT
-					30 {
-						# value from field {title}
-						field = title
-						wrap = &title=|
-					}
-				}
+#					30 = TEXT
+#					30 {
+#						# value from field {title}
+#						field = title
+#						wrap = &title=|
+#					}
+#				}
 
 				# activate debug mode - shows all configuration from curl settings (needs extension devlog)
-				debug = 0
+#				debug = 0
 			}
 
 			# Save user values to one or more other tables (e.g. tt_address or something else)
