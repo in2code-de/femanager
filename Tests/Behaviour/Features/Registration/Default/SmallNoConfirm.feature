@@ -18,11 +18,6 @@ Feature: SmallNoConfirm
     Then I should see "[random:1]"
 
   # Clean up
-  Scenario: Delete all temporary tt_content entries
-    Given I am on "/index.php?id=27"
-    Then I should see "All content elements deleted with query"
-
-  # Clean up
   Scenario: Delete all temporary fe_users entries
     Given I am on "/index.php?id=31"
     Then I should see "All content elements deleted that have no in2code.de email address"

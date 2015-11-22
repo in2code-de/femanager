@@ -9,6 +9,15 @@
 	<div class="controls">
 		<label class="radio">
 			<f:form.radio
+					id="femanager_field_gender1"
+					property="gender"
+					value="1"
+					checked="{user.gender} == 1"
+					additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'gender')}" />
+			<f:translate key="tx_femanager_domain_model_user.gender.item1" />
+		</label>
+		<label class="radio">
+			<f:form.radio
 				id="femanager_field_gender0"
 				property="gender"
 				value="0"
@@ -16,14 +25,5 @@
 				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'gender')}" />
 			<f:translate key="tx_femanager_domain_model_user.gender.item0" />
 		</label>
-		<label class="radio">
-			<f:form.radio
-				id="femanager_field_gender1"
-				property="gender"
-				value="1"
-				checked="{user.gender} == 1"
-				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'gender')}" />
-			<f:translate key="tx_femanager_domain_model_user.gender.item1" />
-			</label>
 	</div>
 </div>
