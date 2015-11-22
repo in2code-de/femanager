@@ -156,6 +156,20 @@ class UserUtility extends AbstractUtility
     }
 
     /**
+     * Convert password to md5 or sha1 hash
+     *
+     * @param User $user
+     * @param string $method
+     * @return void
+     */
+    public static function convertPassword(User $user, $method)
+    {
+        if (array_key_exists('password', UserUtility::getDirtyPropertiesFromUser($user))) {
+            self::hashPassword($user, $method);
+        }
+    }
+
+    /**
      * Hash a password from $user->getPassword()
      *
      * @param User $user

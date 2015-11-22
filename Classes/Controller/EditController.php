@@ -2,17 +2,18 @@
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
+use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
+use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
-use In2code\Femanager\Utility\FrontendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use In2code\Femanager\Domain\Model\User;
+use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 
 /***************************************************************
  *  Copyright notice
@@ -55,8 +56,12 @@ class EditController extends AbstractController
      */
     public function editAction()
     {
-        $this->view->assign('user', $this->user);
-        $this->view->assign('allUserGroups', $this->allUserGroups);
+        $this->view->assignMultiple(
+            array(
+                'user' => $this->user,
+                'allUserGroups' => $this->allUserGroups
+            )
+        );
         $this->assignForAll();
     }
 
@@ -70,20 +75,10 @@ class EditController extends AbstractController
         $user = UserUtility::getCurrentUser();
         $userValues = $this->request->getArgument('user');
         $this->testSpoof($user, $userValues['__identity']);
-
-        // workarround for empty usergroups
         if ((int) $this->pluginVariables['user']['usergroup'][0]['__identity'] === 0) {
             unset($this->pluginVariables['user']['usergroup']);
         }
-        // keep password if empty
-        if (
-            isset($this->settings['edit']['misc']['keepPasswordIfEmpty']) &&
-            $this->settings['edit']['misc']['keepPasswordIfEmpty'] == '1' &&
-            isset($this->pluginVariables['user']['password']) &&
-            $this->pluginVariables['user']['password'] === '' &&
-            isset($this->pluginVariables['password_repeat']) &&
-            $this->pluginVariables['password_repeat'] === ''
-        ) {
+        if ($this->keepPassword()) {
             unset($this->pluginVariables['user']['password']);
             unset($this->pluginVariables['password_repeat']);
         }
@@ -101,34 +96,16 @@ class EditController extends AbstractController
      */
     public function updateAction(User $user)
     {
-        // check if there are no changes
-        if (!ObjectUtility::isDirtyObject($user)) {
-            $this->addFlashMessage(LocalizationUtility::translate('noChanges'), '', FlashMessage::NOTICE);
-            $this->redirect('edit');
-        }
-
-        /** @var User $user */
-        $user = FrontendUtility::forceValues(
-            $user,
-            $this->config['edit.']['forceValues.']['beforeAnyConfirmation.']
-        );
-        if ($this->settings['edit']['fillEmailWithUsername'] === '1') {
-            $user->setEmail($user->getUsername());
-        }
-
-        // convert password to md5 or sha1 hash
-        if (array_key_exists('password', UserUtility::getDirtyPropertiesFromUser($user))) {
-            UserUtility::hashPassword($user, $this->settings['edit']['misc']['passwordSave']);
-        }
-
+        $this->redirectIfDirtyObject($user);
+        $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.']);
+        $this->emailForUsername($user);
+        UserUtility::convertPassword($user, $this->settings['edit']['misc']['passwordSave']);
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
-
         if (!empty($this->settings['edit']['confirmByAdmin'])) {
             $this->updateRequest($user);
         } else {
             $this->updateAllConfirmed($user);
         }
-
         $this->redirect('edit');
     }
 
@@ -143,69 +120,23 @@ class EditController extends AbstractController
     public function confirmUpdateRequestAction(User $user, $hash, $status = 'confirm')
     {
         $this->view->assign('user', $user);
-
-        // if wrong hash or if no update xml
-        if (
-            !HashUtility::validHash($hash, $user) ||
-            !$user->getTxFemanagerChangerequest()
-        ) {
+        if (!HashUtility::validHash($hash, $user) || !$user->getTxFemanagerChangerequest()) {
             $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', FlashMessage::ERROR);
             return;
         }
-
         switch ($status) {
             case 'confirm':
-                // overwrite properties
-                $values = GeneralUtility::xml2array($user->getTxFemanagerChangerequest(), '', 0, 'changes');
-                foreach ((array) $values as $field => $value) {
-                    if ($field != 'usergroup' && method_exists($user, 'set' . ucfirst($field))) {
-                        $user->{'set' . ucfirst($field)}($value['new']);
-                    } else {
-                        $user->removeAllUsergroups();
-                        $usergroupUids = GeneralUtility::trimExplode(',', $value['new'], true);
-                        foreach ($usergroupUids as $usergroupUid) {
-                            /** @var UserGroup $usergroup */
-                            $usergroup = $this->userGroupRepository->findByUid($usergroupUid);
-                            $user->addUsergroup($usergroup);
-                        }
-                    }
-                }
-                $user = FrontendUtility::forceValues(
-                    $user,
-                    $this->config['edit.']['forceValues.']['onAdminConfirmation.']
-                );
-                LogUtility::log(Log::STATUS_PROFILEUPDATECONFIRMEDADMIN, $user);
-                $this->addFlashMessage(LocalizationUtility::translate('updateProfile'));
+                $this->statusConfirm($user);
                 break;
-
             case 'refuse':
-                $this->sendMailService->send(
-                    'updateRequestRefused',
-                    StringUtility::makeEmailArray(
-                        $user->getEmail(),
-                        $user->getFirstName() . ' ' . $user->getLastName()
-                    ),
-                    array('sender@femanager.org' => 'Sender Name'),
-                    'Your change request was refused',
-                    array(
-                        'user' => $user,
-                        'settings' => $this->settings
-                    ),
-                    $this->config['edit.']['email.']['updateRequestRefused.']
-                );
-                LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
-                $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDADMIN));
+                $this->statusRefuse($user);
                 break;
-
             case 'silentRefuse':
                 LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
                 $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDADMIN));
                 break;
-
             default:
-
         }
-
         $user->setTxFemanagerChangerequest('');
         $this->userRepository->update($user);
         $this->signalSlotDispatcher->dispatch(
@@ -213,6 +144,62 @@ class EditController extends AbstractController
             __FUNCTION__ . 'AfterPersist',
             array($user, $hash, $status, $this)
         );
+    }
+
+    /**
+     * Status update confirmation
+     *
+     * @param User $user
+     * @return void
+     */
+    protected function statusConfirm(User $user)
+    {
+        $values = GeneralUtility::xml2array($user->getTxFemanagerChangerequest());
+        foreach ((array) $values as $field => $value) {
+            if ($field !== 'usergroup' && method_exists($user, 'set' . ucfirst($field))) {
+                $user->{'set' . ucfirst($field)}($value['new']);
+            } else {
+                $user->removeAllUsergroups();
+                $usergroupUids = GeneralUtility::trimExplode(',', $value['new'], true);
+                foreach ($usergroupUids as $usergroupUid) {
+                    /** @var UserGroup $usergroup */
+                    $usergroup = $this->userGroupRepository->findByUid($usergroupUid);
+                    $user->addUsergroup($usergroup);
+                }
+            }
+        }
+        $user = FrontendUtility::forceValues(
+            $user,
+            $this->config['edit.']['forceValues.']['onAdminConfirmation.']
+        );
+        LogUtility::log(Log::STATUS_PROFILEUPDATECONFIRMEDADMIN, $user);
+        $this->addFlashMessage(LocalizationUtility::translate('updateProfile'));
+    }
+
+    /**
+     * Status update refused
+     *
+     * @param User $user
+     * @return void
+     */
+    protected function statusRefuse(User $user)
+    {
+        $this->sendMailService->send(
+            'updateRequestRefused',
+            StringUtility::makeEmailArray(
+                $user->getEmail(),
+                $user->getFirstName() . ' ' . $user->getLastName()
+            ),
+            array('sender@femanager.org' => 'Sender Name'),
+            'Your change request was refused',
+            array(
+                'user' => $user,
+                'settings' => $this->settings
+            ),
+            $this->config['edit.']['email.']['updateRequestRefused.']
+        );
+        LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
+        $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDADMIN));
     }
 
     /**
@@ -230,4 +217,46 @@ class EditController extends AbstractController
         $this->redirect('edit');
     }
 
+    /**
+     * Check if password should be kept
+     *
+     *      If password is empty
+     *      If password repeat is also empty
+     *      If keepPasswordIfEmpty configuration is turned on
+     *
+     * @return bool
+     */
+    protected function keepPassword()
+    {
+        return !empty($this->settings['edit']['misc']['keepPasswordIfEmpty']) &&
+        !empty($this->pluginVariables['user']['password']) &&
+        !empty($this->pluginVariables['password_repeat']);
+    }
+
+    /**
+     * Check: If there are no changes, simple redirect back
+     *
+     * @param User $user
+     * @return void
+     * @throws UnsupportedRequestTypeException
+     */
+    protected function redirectIfDirtyObject(User $user)
+    {
+        if (!ObjectUtility::isDirtyObject($user)) {
+            $this->addFlashMessage(LocalizationUtility::translate('noChanges'), '', FlashMessage::NOTICE);
+            $this->redirect('edit');
+        }
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return void
+     */
+    protected function emailForUsername(User $user)
+    {
+        if ($this->settings['edit']['fillEmailWithUsername'] === '1') {
+            $user->setEmail($user->getUsername());
+        }
+    }
 }
