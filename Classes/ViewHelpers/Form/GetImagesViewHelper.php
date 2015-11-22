@@ -55,6 +55,6 @@ class GetImagesViewHelper extends AbstractFormFieldViewHelper
      */
     public function render()
     {
-        return GeneralUtility::trimExplode(',', $this->getValue(), true);
+        return GeneralUtility::trimExplode(',', $this->getValueAttribute(), true);
     }
 }

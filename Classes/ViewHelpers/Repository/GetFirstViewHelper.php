@@ -42,8 +42,7 @@ class GetFirstViewHelper extends AbstractViewHelper
     public function render($objects)
     {
         if (method_exists($objects, 'getFirst')) {
-            $object = $objects->getFirst();
-            return $object;
+            return $objects->getFirst();
         }
         return false;
     }

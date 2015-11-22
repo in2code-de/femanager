@@ -298,4 +298,25 @@ class UserUtility extends AbstractUtility
         $row = self::getDatabaseConnection()->sql_fetch_assoc($res);
         return !empty($row['ses_id']);
     }
+
+    /**
+     * Login FE-User
+     *
+     * @param User $user
+     * @param string $storagePids
+     * @return void
+     */
+    public static function login(User $user, $storagePids)
+    {
+        $GLOBALS['TSFE']->fe_user->checkPid = false;
+        $info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
+        $extraWhere = ' AND pid IN (' . self::getDatabaseConnection()->cleanIntList($storagePids) . ')';
+        $user = $GLOBALS['TSFE']->fe_user->fetchUserRecord(
+            $info['db_user'],
+            $user->getUsername(),
+            $extraWhere
+        );
+        $GLOBALS['TSFE']->fe_user->createUserSession($user);
+        $GLOBALS['TSFE']->fe_user->user = $GLOBALS['TSFE']->fe_user->fetchUserSession();
+    }
 }

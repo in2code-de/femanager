@@ -2,8 +2,6 @@
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
-use In2code\Femanager\Domain\Service\SendParametersService;
-use In2code\Femanager\Domain\Service\StoreInDatabaseService;
 use In2code\Femanager\Utility\FileUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
@@ -16,6 +14,7 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use In2code\Femanager\Domain\Model\User;
@@ -312,15 +311,8 @@ abstract class AbstractController extends ActionController
      */
     public function finalCreate($user, $action, $redirectByActionName, $login = true, $status = '')
     {
-        // login user
-        if ($login) {
-            // persist user (otherwise login is not possible if user is still disabled)
-            $this->userRepository->update($user);
-            $this->persistenceManager->persistAll();
-            $this->loginAfterCreate($user);
-        }
-
-        // send notify email to user
+        $this->loginPreflight($user, $login);
+        $variables = array('user' => $user, 'settings' => $this->settings);
         $this->sendMailService->send(
             'createUserNotify',
             StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
@@ -329,10 +321,7 @@ abstract class AbstractController extends ActionController
                     $this->settings['settings']['new']['email']['createUserNotify']['sender']['name']['value']
             ),
             'Profile creation',
-            array(
-                'user' => $user,
-                'settings' => $this->settings
-            ),
+            $variables,
             $this->config['new.']['email.']['createUserNotify.']
         );
 
@@ -346,44 +335,33 @@ abstract class AbstractController extends ActionController
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile creation',
-                array(
-                    'user' => $user,
-                    'settings' => $this->settings
-                ),
+                $variables,
                 $this->config['new.']['email.']['createAdminNotify.']
             );
         }
-
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
-
-        $this->finisherRunner->callFinishers(
-            $user,
-            $this->actionMethodName,
-            $this->settings,
-            $this->contentObject
-        );
-
+        $this->finisherRunner->callFinishers($user, $this->actionMethodName, $this->settings, $this->contentObject);
         $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
         $this->redirect($redirectByActionName);
     }
 
     /**
-     * Login FE-User after creation
+     * Log user in
      *
      * @param User $user
-     * @return void
+     * @param $login
+     * @throws IllegalObjectTypeException
      */
-    protected function loginAfterCreate($user)
+    protected function loginPreflight(User $user, $login)
     {
-        if ($this->config['new.']['login'] === '1') {
-            $GLOBALS['TSFE']->fe_user->checkPid = false;
-            $info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
-            $pids = $this->allConfig['persistence']['storagePid'];
-            $extraWhere = ' AND pid IN (' . $this->databaseConnection->cleanIntList($pids) . ')';
-            $user = $GLOBALS['TSFE']->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
-            $GLOBALS['TSFE']->fe_user->createUserSession($user);
-            $GLOBALS['TSFE']->fe_user->user = $GLOBALS['TSFE']->fe_user->fetchUserSession();
-            $this->addFlashMessage(LocalizationUtility::translate('login'), '', FlashMessage::NOTICE);
+        if ($login) {
+            // persist user (otherwise login may not be possible)
+            $this->userRepository->update($user);
+            $this->persistenceManager->persistAll();
+            if ($this->config['new.']['login'] === '1') {
+                UserUtility::login($user, $this->allConfig['persistence']['storagePid']);
+                $this->addFlashMessage(LocalizationUtility::translate('login'), '', FlashMessage::NOTICE);
+            }
         }
     }
 
@@ -553,5 +531,4 @@ abstract class AbstractController extends ActionController
     {
         return false;
     }
-
 }

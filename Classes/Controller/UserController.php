@@ -2,7 +2,6 @@
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\User;
-use In2code\Femanager\Domain\Validator\ClientsideValidator;
 use In2code\Femanager\Utility\FileUtility;
 
 /***************************************************************
@@ -55,13 +54,16 @@ class UserController extends AbstractController
      */
     public function listAction($filter = array())
     {
-        $users = $this->userRepository->findByUsergroups(
-            $this->settings['list']['usergroup'],
-            $this->settings,
-            $filter
+        $this->view->assignMultiple(
+            array(
+                'users' => $this->userRepository->findByUsergroups(
+                    $this->settings['list']['usergroup'],
+                    $this->settings,
+                    $filter
+                ),
+                'filter' => $filter
+            )
         );
-        $this->view->assign('users', $users);
-        $this->view->assign('filter', $filter);
         $this->assignForAll();
     }
 
@@ -69,7 +71,6 @@ class UserController extends AbstractController
      * action show
      *
      * @param User $user
-     * @dontvalidate $user
      * @return void
      */
     public function showAction(User $user = null)
@@ -77,7 +78,7 @@ class UserController extends AbstractController
         if (!is_object($user)) {
             if (is_numeric($this->settings['show']['user'])) {
                 $user = $this->userRepository->findByUid($this->settings['show']['user']);
-            } elseif ($this->settings['show']['user'] == '[this]') {
+            } elseif ($this->settings['show']['user'] === '[this]') {
                 $user = $this->user;
             }
         }
@@ -135,11 +136,15 @@ class UserController extends AbstractController
             ->setAdditionalValue($additionalValue)
             ->validateField();
 
-        $this->view->assign('isValid', $result);
-        $this->view->assign('messages', $this->clientsideValidator->getMessages());
-        $this->view->assign('validation', $validation);
-        $this->view->assign('value', $value);
-        $this->view->assign('fieldname', $field);
-        $this->view->assign('user', $user);
+        $this->view->assignMultiple(
+            array(
+                'isValid' => $result,
+                'messages' => $this->clientsideValidator->getMessages(),
+                'validation' => $validation,
+                'value' => $value,
+                'fieldname' => $field,
+                'user' => $user
+            )
+        );
     }
 }

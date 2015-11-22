@@ -137,7 +137,7 @@ class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateLetters($value)
     {
-        if (preg_replace('/[^a-zA-Z_-]/', '', $value) == $value) {
+        if (preg_replace('/[^a-zA-Z_-]/', '', $value) === $value) {
             return true;
         }
         return false;

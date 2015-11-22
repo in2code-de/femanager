@@ -1,4 +1,5 @@
 <?php
+use In2code\Femanager\Domain\Model\Log;
 
 return array(
     'ctrl' => array(
@@ -156,32 +157,32 @@ return array(
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.101',
-                        '101'
+                        Log::STATUS_NEWREGISTRATION
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.102',
-                        '102'
+                        Log::STATUS_REGISTRATIONCONFIRMEDUSER
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.103',
-                        '103'
+                        Log::STATUS_REGISTRATIONCONFIRMEDADMIN
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.104',
-                        '104'
+                        Log::STATUS_REGISTRATIONREFUSEDUSER
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.105',
-                        '105'
+                        Log::STATUS_REGISTRATIONREFUSEDADMIN
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.106',
-                        '106'
+                        Log::STATUS_PROFILECREATIONREQUEST
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
@@ -191,27 +192,27 @@ return array(
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.201',
-                        '201'
+                        Log::STATUS_PROFILEUPDATED
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.202',
-                        '202'
+                        Log::STATUS_PROFILEUPDATECONFIRMEDADMIN
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.203',
-                        '203'
+                        Log::STATUS_PROFILEUPDATEREFUSEDADMIN
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.204',
-                        '204'
+                        Log::STATUS_PROFILEUPDATEREQUEST
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.205',
-                        '205'
+                        Log::STATUS_PROFILEUPDATEREFUSEDSECURITY
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
@@ -221,7 +222,7 @@ return array(
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.301',
-                        '301'
+                        Log::STATUS_PROFILEDELETE
                     ),
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
@@ -231,7 +232,27 @@ return array(
                     array(
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.401',
-                        '401'
+                        Log::STATUS_INVITATIONPROFILECREATED
+                    ),
+                    array(
+                        'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+                        'tx_femanager_domain_model_log.state.402',
+                        Log::STATUS_INVITATIONPROFILEDELETEDUSER
+                    ),
+                    array(
+                        'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+                        'tx_femanager_domain_model_log.state.403',
+                        Log::STATUS_INVITATIONHASHERROR
+                    ),
+                    array(
+                        'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+                        'tx_femanager_domain_model_log.state.404',
+                        Log::STATUS_INVITATIONRESTRICTEDPAGE
+                    ),
+                    array(
+                        'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+                        'tx_femanager_domain_model_log.state.405',
+                        Log::STATUS_INVITATIONPROFILEENABLED
                     ),
                 ),
                 'size' => 1,

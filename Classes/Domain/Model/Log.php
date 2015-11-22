@@ -36,6 +36,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Log extends AbstractEntity
 {
+
     const STATUS_NEWREGISTRATION = 101;
     const STATUS_REGISTRATIONCONFIRMEDUSER = 102;
     const STATUS_REGISTRATIONCONFIRMEDADMIN = 103;
@@ -45,8 +46,9 @@ class Log extends AbstractEntity
     const STATUS_PROFILEUPDATED = 201;
     const STATUS_PROFILEUPDATECONFIRMEDADMIN = 202;
     const STATUS_PROFILEUPDATEREFUSEDADMIN = 203;
+    const STATUS_PROFILEUPDATEREQUEST = 204;
     const STATUS_PROFILEUPDATEREFUSEDSECURITY = 205;
-    const STATUS_PROFILEDELETE = 300;
+    const STATUS_PROFILEDELETE = 301;
     const STATUS_INVITATIONPROFILECREATED = 401;
     const STATUS_INVITATIONPROFILEDELETEDUSER = 402;
     const STATUS_INVITATIONHASHERROR = 403;
@@ -75,25 +77,21 @@ class Log extends AbstractEntity
     protected $user;
 
     /**
-     * Set user
-     *
-     * @param User $user
+     * @param string $title
      * @return Log
      */
-    public function setUser(User $user)
+    public function setTitle($title)
     {
-        $this->user = $user;
+        $this->title = $title;
         return $this;
     }
 
     /**
-     * Get user
-     *
-     * @return User
+     * @return string
      */
-    public function getUser()
+    public function getTitle()
     {
-        return $this->user;
+        return $this->title;
     }
 
     /**
@@ -115,20 +113,24 @@ class Log extends AbstractEntity
     }
 
     /**
-     * @param string $title
+     * Set user
+     *
+     * @param User $user
      * @return Log
      */
-    public function setTitle($title)
+    public function setUser(User $user)
     {
-        $this->title = $title;
+        $this->user = $user;
         return $this;
     }
 
     /**
-     * @return string
+     * Get user
+     *
+     * @return User
      */
-    public function getTitle()
+    public function getUser()
     {
-        return $this->title;
+        return $this->user;
     }
 }

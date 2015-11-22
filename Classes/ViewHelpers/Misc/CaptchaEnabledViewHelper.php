@@ -21,17 +21,8 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
      */
     public function render($settings)
     {
-        // if sr_freecap is not loaded
-        if (!ExtensionManagementUtility::isLoaded('sr_freecap')) {
-            return false;
-        }
-
-        // is captcha enabled in TypoScript
         $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-        if (empty($settings[$controllerName]['validation']['captcha']['captcha'])) {
-            return false;
-        }
-
-        return true;
+        return ExtensionManagementUtility::isLoaded('sr_freecap')
+            && !empty($settings[$controllerName]['validation']['captcha']['captcha']);
     }
 }

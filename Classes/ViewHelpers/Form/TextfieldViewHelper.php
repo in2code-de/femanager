@@ -40,7 +40,6 @@ class TextfieldViewHelper extends OriginalTextfieldViewHelper
      * Get the value of this form element (changed to prefill from TypoScript)
      * Either returns arguments['value'], or the correct value for Object Access.
      *
-     * @param boolean $convertObjects whether to convert objects to identifiers
      * @return mixed Value
      */
     protected function getValue($convertObjects = true)
@@ -63,12 +62,12 @@ class TextfieldViewHelper extends OriginalTextfieldViewHelper
     protected function getValueFromTypoScript()
     {
         $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-        $cObj = $this->configurationManager->getContentObject();
+        $contentObject = $this->configurationManager->getContentObject();
         $typoScript = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
         $prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
-        $value = $cObj->cObjGetSingle(
+        $value = $contentObject->cObjGetSingle(
             $prefillTypoScript[$this->arguments['property']],
             $prefillTypoScript[$this->arguments['property'] . '.']
         );

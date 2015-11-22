@@ -22,21 +22,18 @@ class FormValidationDataViewHelper extends AbstractViewHelper
      */
     public function render($settings, $fieldName, $additionalAttributes = array())
     {
-        $array = $additionalAttributes;
-
         $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-        if ($settings[$controllerName]['validation']['_enable']['client'] !== '1') {
-            return $array;
-        }
-
-        $validationString = $this->getValidationString($settings, $fieldName, $controllerName);
-        if (!empty($validationString)) {
-            $array['data-validation'] = $validationString;
-            if (!empty($additionalAttributes['data-validation'])) {
-                $array['data-validation'] .= ',' . $additionalAttributes['data-validation'];
+        if ($settings[$controllerName]['validation']['_enable']['client'] === '1') {
+            $validationString = $this->getValidationString($settings, $fieldName, $controllerName);
+            if (!empty($validationString)) {
+                if (!empty($additionalAttributes['data-validation'])) {
+                    $additionalAttributes['data-validation'] .= ',' . $validationString;
+                } else {
+                    $additionalAttributes['data-validation'] = $validationString;
+                }
             }
         }
-        return $array;
+        return $additionalAttributes;
     }
 
     /**
@@ -54,39 +51,51 @@ class FormValidationDataViewHelper extends AbstractViewHelper
     {
         $string = '';
         foreach ((array) $settings[$controllerName]['validation'][$fieldName] as $validation => $configuration) {
-            switch ($validation) {
-                case 'required':
-                    // or
-                case 'email':
-                    // or
-                case 'intOnly':
-                    // or
-                case 'lettersOnly':
-                    // or
-                case 'uniqueInPage':
-                    // or
-                case 'uniqueInDb':
-                    // or
-                case 'date':
-                    if ($configuration == 1) {
-                        $string .= $validation;
-                    }
-                    break;
-
-                case 'min':
-                    // or
-                case 'max':
-                    // or
-                case 'mustInclude':
-                    // or
-                case 'inList':
-                default:
-                    $string .= $validation;
-                    $string .= '(' . str_replace(',', '|', $configuration) . ')';
+            if (!empty($string)) {
+                $string .= ',';
             }
-            $string .= ',';
+            $string .= $this->getSingleValidationString($validation, $configuration);
         }
+        return $string;
+    }
 
-        return substr($string, 0, -1);
+    /**
+     * @param string $validation
+     * @param string $configuration
+     * @return string
+     */
+    protected function getSingleValidationString($validation, $configuration)
+    {
+        $string = '';
+        if ($this->getSingleValidationMode($validation) === 'easy' && $configuration === '1') {
+            $string = $validation;
+        }
+        if ($this->getSingleValidationMode($validation) === 'extended') {
+            $string = $validation;
+            $string .= '(' . str_replace(',', '|', $configuration) . ')';
+        }
+        return $string;
+    }
+
+    /**
+     * @param string $validation
+     * @return string
+     */
+    protected function getSingleValidationMode($validation)
+    {
+        switch ($validation) {
+            case 'min':
+                // or
+            case 'max':
+                // or
+            case 'mustInclude':
+                // or
+            case 'inList':
+                $mode = 'extended';
+                break;
+            default:
+                $mode = 'easy';
+        }
+        return $mode;
     }
 }

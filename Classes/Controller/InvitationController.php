@@ -2,15 +2,15 @@
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
+use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
-use In2code\Femanager\Utility\FrontendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use In2code\Femanager\Domain\Model\User;
 
 /***************************************************************
  *  Copyright notice
@@ -61,7 +61,7 @@ class InvitationController extends AbstractController
     /**
      * action create
      *
-     * @param \In2code\Femanager\Domain\Model\User $user
+     * @param User $user
      * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
      * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
      * @validate $user In2code\Femanager\Domain\Validator\CaptchaValidator
@@ -76,12 +76,11 @@ class InvitationController extends AbstractController
             $this->config['invitation.']['forceValues.']['beforeAnyConfirmation.']
         );
         $user = UserUtility::fallbackUsernameAndPassword($user);
-        if ($this->settings['invitation']['fillEmailWithUsername'] == 1) {
+        if ($this->settings['invitation']['fillEmailWithUsername'] === '1') {
             $user->setEmail($user->getUsername());
         }
         UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
-
         $this->createAllConfirmed($user);
     }
 
@@ -89,7 +88,7 @@ class InvitationController extends AbstractController
      * Prefix method to createAction()
      *        Create Confirmation from Admin is not necessary
      *
-     * @param \In2code\Femanager\Domain\Model\User $user
+     * @param User $user
      * @return void
      */
     public function createAllConfirmed(User $user)
@@ -130,10 +129,7 @@ class InvitationController extends AbstractController
                 $this->config['invitation.']['email.']['invitationAdminNotifyStep1.']
             );
         }
-
-        // add signal after user generation
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
-
         $this->redirectByAction('redirectStep1');
         $this->redirect('new');
     }
@@ -183,8 +179,6 @@ class InvitationController extends AbstractController
     {
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvitedFinished'));
         LogUtility::log(Log::STATUS_INVITATIONPROFILEENABLED, $user);
-
-        // send notify email to admin
         if ($this->settings['invitation']['notifyAdmin']) {
             $this->sendMailService->send(
                 'invitationNotify',
@@ -201,15 +195,11 @@ class InvitationController extends AbstractController
                 $this->config['invitation.']['email.']['invitationAdminNotify.']
             );
         }
-
         $user = UserUtility::overrideUserGroup($user, $this->settings, 'invitation');
         UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
-
-        // add signal after user generation
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
-
         $this->redirectByAction('invitation', 'redirectPasswordChanged');
         $this->redirect('status');
     }

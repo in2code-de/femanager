@@ -1,11 +1,11 @@
 <?php
 namespace In2code\Femanager\Domain\Repository;
 
+use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
-use In2code\Femanager\Domain\Model\User;
 
 /***************************************************************
  *  Copyright notice
@@ -104,7 +104,7 @@ class UserRepository extends Repository
 
         // sorting
         $sorting = QueryInterface::ORDER_ASCENDING;
-        if ($settings['list']['sorting'] == 'desc') {
+        if ($settings['list']['sorting'] === 'desc') {
             $sorting = QueryInterface::ORDER_DESCENDING;
         }
         $field = preg_replace('/[^a-zA-Z0-9_-]/', '', $settings['list']['orderby']);
@@ -142,7 +142,7 @@ class UserRepository extends Repository
             $query->equals('deleted', 0)
         );
         if (method_exists($user, 'getUid')) {
-            $and[] = $query->logicalNot($query->equals('uid', (int) $user->getUid()));
+            $and[] = $query->logicalNot($query->equals('uid', $user->getUid()));
         }
         $constraint = $query->logicalAnd($and);
 

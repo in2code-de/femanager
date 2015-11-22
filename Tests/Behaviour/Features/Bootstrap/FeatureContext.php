@@ -62,7 +62,7 @@ class FeatureContext extends MinkContext
                 break;
             }
             $name = substr($argument, $start + 1, $end - $start - 1);
-            if ($name == 'random') {
+            if ($name === 'random') {
                 $this->variables[$name] = $this->createRandomString(12);
                 $random[] = $this->variables[$name];
             } elseif (substr($name, 0, 7) === 'random:') {

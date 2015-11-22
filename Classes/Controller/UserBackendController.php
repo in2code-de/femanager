@@ -47,10 +47,9 @@ class UserBackendController extends AbstractController
      */
     public function listAction($filter = array())
     {
-        $users = $this->userRepository->findAllInBackend($filter);
         $this->view->assignMultiple(
             array(
-                'users' => $users,
+                'users' => $this->userRepository->findAllInBackend($filter),
                 'moduleUri' => BackendUtility::getModuleUrl('tce_db')
             )
         );
@@ -68,5 +67,4 @@ class UserBackendController extends AbstractController
         $this->addFlashMessage('User successfully logged out');
         $this->redirect('list');
     }
-
 }

@@ -1,9 +1,10 @@
 <?php
 namespace In2code\Femanager\UserFunc;
 
+use In2code\Femanager\Utility\StringUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
  * Field Selection for FlexForm
@@ -30,13 +31,11 @@ class FlexFormFieldSelection
         $tSconfig = BackendUtility::getPagesTSconfig($this->getPid());
         $this->addCaptchaOption($params);
         $tab = $params['config']['itemsProcFuncTab'] . '.';
-        if (
-            !empty($tSconfig['tx_femanager.']['flexForm.'][$tab]['addFieldOptions.'])
-        ) {
+        if (!empty($tSconfig['tx_femanager.']['flexForm.'][$tab]['addFieldOptions.'])) {
             $options = $tSconfig['tx_femanager.']['flexForm.'][$tab]['addFieldOptions.'];
             foreach ((array) $options as $value => $label) {
                 $params['items'][] = array(
-                    GeneralUtility::isFirstPartOfStr($label, 'LLL:') ? $this->languageService->sL($label) : $label,
+                    StringUtility::startsWith($label, 'LLL:') ? $this->languageService->sL($label) : $label,
                     $value
                 );
             }

@@ -42,14 +42,14 @@ class UserGroupRepository extends Repository
     /**
      * Find all groups and respect exclude list
      *
-     * @param string $removeFromUserGroupSelection commaseparated list
+     * @param string $removeList commaseparated list
      * @return QueryResult
      */
-    public function findAllForFrontendSelection($removeFromUserGroupSelection)
+    public function findAllForFrontendSelection($removeList)
     {
         $query = $this->createQuery();
-        if ($removeFromUserGroupSelection) {
-            $query->matching($query->logicalNot($query->in('uid', explode(',', $removeFromUserGroupSelection))));
+        if ($removeList) {
+            $query->matching($query->logicalNot($query->in('uid', explode(',', $removeList))));
         }
         $query->setOrderings(array('title' => QueryInterface::ORDER_ASCENDING));
         return $query->execute();

@@ -81,7 +81,7 @@ class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
     {
         if (
             isset($this->configuration['settings']['edit']['misc']['keepPasswordIfEmpty']) &&
-            $this->configuration['settings']['edit']['misc']['keepPasswordIfEmpty'] == 1 &&
+            $this->configuration['settings']['edit']['misc']['keepPasswordIfEmpty'] === '1' &&
             isset($this->piVars['user']['password']) && $this->piVars['user']['password'] === '' &&
             isset($this->piVars['password_repeat']) && $this->piVars['password_repeat'] === ''
         ) {

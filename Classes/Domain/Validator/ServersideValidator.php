@@ -17,7 +17,7 @@ class ServersideValidator extends \In2code\Femanager\Domain\Validator\AbstractVa
     {
         $this->init();
 
-        if ($this->validationSettings['_enable']['server'] != 1) {
+        if ($this->validationSettings['_enable']['server'] !== '1') {
             return $this->isValid;
         }
 
@@ -44,14 +44,14 @@ class ServersideValidator extends \In2code\Femanager\Domain\Validator\AbstractVa
                     switch ($validation) {
 
                         case 'required':
-                            if ($validationSetting == 1 && !$this->validateRequired($value)) {
+                            if ($validationSetting === '1' && !$this->validateRequired($value)) {
                                 $this->addError('validationErrorRequired', $field);
                                 $this->isValid = false;
                             }
                             break;
 
                         case 'email':
-                            if (!empty($value) && $validationSetting == 1 && !$this->validateEmail($value)) {
+                            if (!empty($value) && $validationSetting === '1' && !$this->validateEmail($value)) {
                                 $this->addError('validationErrorEmail', $field);
                                 $this->isValid = false;
                             }
@@ -72,14 +72,14 @@ class ServersideValidator extends \In2code\Femanager\Domain\Validator\AbstractVa
                             break;
 
                         case 'intOnly':
-                            if (!empty($value) && $validationSetting == 1 && !$this->validateInt($value)) {
+                            if (!empty($value) && $validationSetting === '1' && !$this->validateInt($value)) {
                                 $this->addError('validationErrorInt', $field);
                                 $this->isValid = false;
                             }
                             break;
 
                         case 'lettersOnly':
-                            if (!empty($value) && $validationSetting == 1 && !$this->validateLetters($value)) {
+                            if (!empty($value) && $validationSetting === '1' && !$this->validateLetters($value)) {
                                 $this->addError('validationErrorLetters', $field);
                                 $this->isValid = false;
                             }
@@ -88,7 +88,7 @@ class ServersideValidator extends \In2code\Femanager\Domain\Validator\AbstractVa
                         case 'uniqueInPage':
                             if (
                                 !empty($value) &&
-                                $validationSetting == 1 &&
+                                $validationSetting === '1' &&
                                 !$this->validateUniquePage($value, $field, $user)
                             ) {
                                 $this->addError('validationErrorUniquePage', $field);
@@ -99,7 +99,7 @@ class ServersideValidator extends \In2code\Femanager\Domain\Validator\AbstractVa
                         case 'uniqueInDb':
                             if (
                                 !empty($value) &&
-                                $validationSetting == 1 &&
+                                $validationSetting === '1' &&
                                 !$this->validateUniqueDb($value, $field, $user)
                             ) {
                                 $this->addError('validationErrorUniqueDb', $field);

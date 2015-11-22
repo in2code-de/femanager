@@ -32,12 +32,6 @@ class IsRequiredFieldViewHelper extends AbstractViewHelper
         $configuration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
         );
-        if (
-            isset($configuration['settings'][$action]['validation'][$fieldName]['required']) &&
-            $configuration['settings'][$action]['validation'][$fieldName]['required'] === '1'
-        ) {
-            return true;
-        }
-        return false;
+        return !empty($configuration['settings'][$action]['validation'][$fieldName]['required']);
     }
 }

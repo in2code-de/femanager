@@ -46,7 +46,7 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
                 (method_exists($this, 'hasMappingErrorOccured') && $this->hasMappingErrorOccured()) ||
                 (method_exists($this, 'hasMappingErrorOccurred') && $this->hasMappingErrorOccurred())
             ) {
-                return $this->getValue();
+                return $this->getValueAttribute();
             }
         }
 
