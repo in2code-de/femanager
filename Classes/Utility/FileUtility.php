@@ -82,15 +82,10 @@ class FileUtility extends AbstractUtility
         }
         $fileInfo = pathinfo($filename);
 
-        if (
-            !empty($fileInfo['extension']) &&
+        return !empty($fileInfo['extension']) &&
             GeneralUtility::inList($extensionList, strtolower($fileInfo['extension'])) &&
             GeneralUtility::verifyFilenameAgainstDenyPattern($filename) &&
-            GeneralUtility::validPathStr($filename)
-        ) {
-            return true;
-        }
-        return false;
+            GeneralUtility::validPathStr($filename);
     }
 
     /**

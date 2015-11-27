@@ -132,9 +132,9 @@ class StringUtility extends AbstractUtility
      */
     public static function getRandomString($length = 32, $addUpperCase = true, $addSpecialCharacters = true)
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+        $characters = self::getNumbersString() . self::getCharactersString();
         if ($addUpperCase) {
-            $characters .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $characters .= self::getUpperCharactersString();
         }
         if ($addSpecialCharacters) {
             $characters .= '#+*&%$§()[]{}!.:-_,;';
@@ -145,5 +145,29 @@ class StringUtility extends AbstractUtility
             $string .= $characters[$key];
         }
         return $string;
+    }
+
+    /**
+     * @return string "0123456789"
+     */
+    public static function getNumbersString()
+    {
+        return implode('', range(0, 9));
+    }
+
+    /**
+     * @return string "abcdefghijklmnopqrstuvwxyz"
+     */
+    public static function getCharactersString()
+    {
+        return implode('', range('a', 'z'));
+    }
+
+    /**
+     * @return string "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+     */
+    public static function getUpperCharactersString()
+    {
+        return implode('', range('A', 'Z'));
     }
 }

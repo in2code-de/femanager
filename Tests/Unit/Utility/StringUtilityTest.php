@@ -357,4 +357,37 @@ class StringUtilityTest extends UnitTestCase
             $this->assertSame(1, preg_match($regex, $string));
         }
     }
+
+    /**
+     * getNumbersString Test
+     *
+     * @return void
+     * @test
+     */
+    public function getNumbersStringReturnsStrings()
+    {
+        $this->assertSame('0123456789', StringUtility::getNumbersString());
+    }
+
+    /**
+     * getCharactersString Test
+     *
+     * @return void
+     * @test
+     */
+    public function getCharactersStringReturnsStrings()
+    {
+        $this->assertSame('abcdefghijklmnopqrstuvwxyz', StringUtility::getCharactersString());
+    }
+
+    /**
+     * getUpperCharactersString Test
+     *
+     * @return void
+     * @test
+     */
+    public function getUpperCharactersStringReturnsStrings()
+    {
+        $this->assertSame('ABCDEFGHIJKLMNOPQRSTUVWXYZ', StringUtility::getUpperCharactersString());
+    }
 }

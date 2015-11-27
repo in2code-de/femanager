@@ -1,5 +1,5 @@
 # Features/Registration/Default/SmallNoConfirm.feature
-@Registration @RegistrationDefault @RegistrationDefaultSmallNoConfirm
+@Registration @RegistrationDefault @RegistrationDefaultSmallNoConfirmLogin
 Feature: SmallNoConfirm
 
   Scenario: Check if a small registration is possible
