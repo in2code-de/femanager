@@ -50,7 +50,6 @@ jQuery.fn.femanagerValidation = function() {
 	});
 
 	// form submit
-//	$(document).on('submit', '.feManagerValidation', function(e) {
 	element.submit(function(e) {
 		$('body').css('cursor', 'wait');
 		if (!submitFormAllowed) {

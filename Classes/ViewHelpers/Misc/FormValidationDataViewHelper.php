@@ -13,6 +13,20 @@ class FormValidationDataViewHelper extends AbstractViewHelper
 {
 
     /**
+     * Validation names with extended configuration
+     *
+     * @var array
+     */
+    protected $extendedValidations = array(
+        'min',
+        'max',
+        'mustInclude',
+        'mustNotInclude',
+        'inList',
+        'sameAs'
+    );
+
+    /**
      * Set javascript validation data for input fields
      *
      * @param array $settings TypoScript
@@ -22,9 +36,8 @@ class FormValidationDataViewHelper extends AbstractViewHelper
      */
     public function render($settings, $fieldName, $additionalAttributes = array())
     {
-        $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-        if ($settings[$controllerName]['validation']['_enable']['client'] === '1') {
-            $validationString = $this->getValidationString($settings, $fieldName, $controllerName);
+        if ($settings[$this->getControllerName()]['validation']['_enable']['client'] === '1') {
+            $validationString = $this->getValidationString($settings, $fieldName);
             if (!empty($validationString)) {
                 if (!empty($additionalAttributes['data-validation'])) {
                     $additionalAttributes['data-validation'] .= ',' . $validationString;
@@ -44,13 +57,13 @@ class FormValidationDataViewHelper extends AbstractViewHelper
      *
      * @param array $settings Validation TypoScript
      * @param string $fieldName Fieldname
-     * @param string $controllerName "new", "edit", "invitation"
      * @return string
      */
-    protected function getValidationString($settings, $fieldName, $controllerName)
+    protected function getValidationString($settings, $fieldName)
     {
         $string = '';
-        foreach ((array) $settings[$controllerName]['validation'][$fieldName] as $validation => $configuration) {
+        $validationSettings = (array) $settings[$this->getControllerName()]['validation'][$fieldName];
+        foreach ($validationSettings as $validation => $configuration) {
             if (!empty($string)) {
                 $string .= ',';
             }
@@ -67,10 +80,10 @@ class FormValidationDataViewHelper extends AbstractViewHelper
     protected function getSingleValidationString($validation, $configuration)
     {
         $string = '';
-        if ($this->getSingleValidationMode($validation) === 'easy' && $configuration === '1') {
+        if ($this->isSimpleValidation($validation) && $configuration === '1') {
             $string = $validation;
         }
-        if ($this->getSingleValidationMode($validation) === 'extended') {
+        if (!$this->isSimpleValidation($validation)) {
             $string = $validation;
             $string .= '(' . str_replace(',', '|', $configuration) . ')';
         }
@@ -78,24 +91,24 @@ class FormValidationDataViewHelper extends AbstractViewHelper
     }
 
     /**
+     * Check if validation is simple or extended
+     *
      * @param string $validation
-     * @return string
+     * @return bool
      */
-    protected function getSingleValidationMode($validation)
+    protected function isSimpleValidation($validation)
     {
-        switch ($validation) {
-            case 'min':
-                // or
-            case 'max':
-                // or
-            case 'mustInclude':
-                // or
-            case 'inList':
-                $mode = 'extended';
-                break;
-            default:
-                $mode = 'easy';
+        if (in_array($validation, $this->extendedValidations)) {
+            return false;
         }
-        return $mode;
+        return true;
+    }
+
+    /**
+     * @return string "new", "edit", "invitation"
+     */
+    protected function getControllerName()
+    {
+        return strtolower($this->controllerContext->getRequest()->getControllerName());
     }
 }

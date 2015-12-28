@@ -2,7 +2,7 @@
 <div class="femanager_fieldset femanager_email control-group">
 	<label for="femanager_field_email" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.email" />
-		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'email', actionName: actionName)}">
+		<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'email',actionName:actionName)}">
 			<span>*</span>
 		</f:if>
 	</label>
@@ -11,6 +11,6 @@
 				id="femanager_field_email"
 				property="email"
 				class="input-block-level"
-				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'email')}" />
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:settings,fieldName:'email')}" />
 	</div>
 </div>
