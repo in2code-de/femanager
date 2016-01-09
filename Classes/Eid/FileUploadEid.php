@@ -70,20 +70,20 @@ class FileUploadEid
      */
     public function __construct($typo3ConfVars)
     {
-        $this->configuration = array(
+        $this->configuration = [
             'pluginName' => 'Pi1',
             'vendorName' => 'In2code',
             'extensionName' => 'Femanager',
             'controller' => 'User',
             'action' => 'fileUpload',
-            'mvc' => array(
-                'requestHandlers' => array(
+            'mvc' => [
+                'requestHandlers' => [
                     'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler' =>
                         'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler'
-                )
-            ),
-            'settings' => array()
-        );
+                ]
+            ],
+            'settings' => []
+        ];
         $_POST['tx_femanager_pi1']['action'] = 'fileUpload';
         $_POST['tx_femanager_pi1']['controller'] = 'User';
 

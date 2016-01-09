@@ -53,7 +53,7 @@ abstract class AbstractUtility
         if (!empty($GLOBALS['TCA'][$table])) {
             return $GLOBALS['TCA'][$table];
         }
-        return array();
+        return [];
     }
 
     /**

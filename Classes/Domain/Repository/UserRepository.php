@@ -53,10 +53,10 @@ class UserRepository extends Repository
         $query->getQuerySettings()->setIgnoreEnableFields(true);
         $query->getQuerySettings()->setRespectSysLanguage(false);
         $query->getQuerySettings()->setRespectStoragePage(false);
-        $and = array(
+        $and = [
             $query->equals('uid', $uid),
             $query->equals('deleted', 0)
-        );
+        ];
         $object = $query->matching($query->logicalAnd($and))->execute()->getFirst();
         return $object;
     }
@@ -74,12 +74,12 @@ class UserRepository extends Repository
         $query = $this->createQuery();
 
         // where
-        $and = array(
+        $and = [
             $query->greaterThan('uid', 0)
-        );
+        ];
         if (!empty($userGroupList)) {
             $selectedUsergroups = GeneralUtility::trimExplode(',', $userGroupList, true);
-            $logicalOr = array();
+            $logicalOr = [];
             foreach ($selectedUsergroups as $group) {
                 $logicalOr[] = $query->contains('usergroup', $group);
             }
@@ -93,7 +93,7 @@ class UserRepository extends Repository
                 true
             );
             foreach ($searchwords as $searchword) {
-                $logicalOr = array();
+                $logicalOr = [];
                 foreach ($fieldsToSearch as $searchfield) {
                     $logicalOr[] = $query->like($searchfield, '%' . $searchword . '%');
                 }
@@ -108,11 +108,7 @@ class UserRepository extends Repository
             $sorting = QueryInterface::ORDER_DESCENDING;
         }
         $field = preg_replace('/[^a-zA-Z0-9_-]/', '', $settings['list']['orderby']);
-        $query->setOrderings(
-            array(
-                $field => $sorting
-            )
-        );
+        $query->setOrderings([$field => $sorting]);
 
         // set limit
         if ((int) $settings['list']['limit'] > 0) {
@@ -137,10 +133,10 @@ class UserRepository extends Repository
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->getQuerySettings()->setIgnoreEnableFields(true);
 
-        $and = array(
+        $and = [
             $query->equals($field, $value),
             $query->equals('deleted', 0)
-        );
+        ];
         if (method_exists($user, 'getUid')) {
             $and[] = $query->logicalNot($query->equals('uid', $user->getUid()));
         }
@@ -165,10 +161,10 @@ class UserRepository extends Repository
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
 
-        $and = array(
+        $and = [
             $query->equals($field, $value),
             $query->equals('deleted', 0)
-        );
+        ];
         if (method_exists($user, 'getUid')) {
             $and[] = $query->logicalNot($query->equals('uid', (int) $user->getUid()));
         }
@@ -194,16 +190,16 @@ class UserRepository extends Repository
         $query->getQuerySettings()->setIgnoreEnableFields(true);
 
         // Where
-        $and = array(
+        $and = [
             $query->equals('deleted', 0)
-        );
+        ];
         if ((int) $pid > 0) {
             $and[] = $query->equals('pid', $pid);
         }
         if (!empty($filter['searchword'])) {
             $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], true);
             foreach ($searchwords as $searchword) {
-                $or = array();
+                $or = [];
                 $or[] = $query->like('address', '%' . $searchword . '%');
                 $or[] = $query->like('city', '%' . $searchword . '%');
                 $or[] = $query->like('company', '%' . $searchword . '%');
@@ -227,11 +223,9 @@ class UserRepository extends Repository
         $query->matching($query->logicalAnd($and));
 
         // Order
-        $query->setOrderings(
-            array(
+        $query->setOrderings([
                 'username' => QueryInterface::ORDER_ASCENDING
-            )
-        );
+            ]);
         return $query->execute();
     }
 }

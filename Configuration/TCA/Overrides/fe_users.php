@@ -3,115 +3,115 @@
 /**
  * Table configuration fe_users
  */
-$feUsersColumns = array(
-    'gender' => array(
+$feUsersColumns = [
+    'gender' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
             'tx_femanager_domain_model_user.gender',
-        'config' => array(
+        'config' => [
             'type' => 'radio',
-            'items' => array(
-                array(
+            'items' => [
+                [
                     'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                     'tx_femanager_domain_model_user.gender.item0',
                     '0'
-                ),
-                array(
+                ],
+                [
                     'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                     'tx_femanager_domain_model_user.gender.item1',
                     '1'
-                )
-            ),
-        )
-    ),
-    'date_of_birth' => array(
+                ]
+            ],
+        ]
+    ],
+    'date_of_birth' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
             'tx_femanager_domain_model_user.dateOfBirth',
-        'config' => array(
+        'config' => [
             'type' => 'input',
             'size' => 10,
             'max' => 20,
             'eval' => 'date',
             'checkbox' => '0',
             'default' => ''
-        )
-    ),
-    'crdate' => array(
+        ]
+    ],
+    'crdate' => [
         'exclude' => 1,
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
             'fe_users.crdate',
-        'config' => array(
+        'config' => [
             'type' => 'input',
             'size' => 30,
             'eval' => 'datetime',
             'readOnly' => 1,
             'default' => time()
-        )
-    ),
-    'tstamp' => array(
+        ]
+    ],
+    'tstamp' => [
         'exclude' => 1,
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
             'fe_users.tstamp',
-        'config' => array(
+        'config' => [
             'type' => 'input',
             'size' => 30,
             'eval' => 'datetime',
             'readOnly' => 1,
             'default' => time()
-        )
-    ),
-    'tx_femanager_confirmedbyuser' => array(
+        ]
+    ],
+    'tx_femanager_confirmedbyuser' => [
         'exclude' => 1,
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
             'fe_users.registrationconfirmedbyuser',
-        'config' => array(
+        'config' => [
             'type' => 'check',
             'default' => 0,
-        )
-    ),
-    'tx_femanager_confirmedbyadmin' => array(
+        ]
+    ],
+    'tx_femanager_confirmedbyadmin' => [
         'exclude' => 1,
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
             'fe_users.registrationconfirmedbyadmin',
-        'config' => array(
+        'config' => [
             'type' => 'check',
             'default' => 0,
-        )
-    ),
-);
+        ]
+    ],
+];
 $fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin';
 
 if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableLogActive()) {
-    $feUsersColumns['tx_femanager_log'] = array(
+    $feUsersColumns['tx_femanager_log'] = [
         'exclude' => 1,
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.log',
-        'config' => array(
+        'config' => [
             'type' => 'inline',
             'foreign_table' => 'tx_femanager_domain_model_log',
             'foreign_field' => 'user',
             'maxitems' => 1000,
             'minitems' => 0,
-            'appearance' => array(
+            'appearance' => [
                 'collapseAll' => 1,
                 'expandSingle' => 1,
-            ),
-        )
-    );
+            ],
+        ]
+    ];
     $fields .= ', tx_femanager_log';
 }
 
-$feUsersColumns['tx_femanager_changerequest'] = array(
+$feUsersColumns['tx_femanager_changerequest'] = [
     'exclude' => 1,
     'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.changerequest',
-    'config' => array(
+    'config' => [
         'type' => 'text',
         'cols' => '40',
         'rows' => '15',
         'wrap' => 'off',
         'readOnly' => 1
-    )
-);
+    ]
+];
 $fields .= ', tx_femanager_changerequest';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(

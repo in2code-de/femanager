@@ -60,17 +60,17 @@ class FinisherRunner
      *
      * @var array
      */
-    protected $settings = array();
+    protected $settings = [];
 
     /**
      * Own finisher classnames - ordering will be respected
      *
      * @var array
      */
-    protected $ownFinisherClasses = array(
+    protected $ownFinisherClasses = [
         'SaveToAnyTableFinisher',
         'SendParametersFinisher'
-    );
+    ];
 
     /**
      * Call finisher classes after submit
@@ -112,7 +112,7 @@ class FinisherRunner
             );
             $finisherService->setClass(__NAMESPACE__ . '\\' . $className);
             $finisherService->setRequirePath(null);
-            $finisherService->setConfiguration(array());
+            $finisherService->setConfiguration([]);
             $finisherService->setActionMethodName($actionMethodName);
             $finisherService->start();
         }

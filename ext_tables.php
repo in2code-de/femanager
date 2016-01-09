@@ -11,23 +11,21 @@ if (!defined('TYPO3_MODE')) {
 /**
  * Include Backend Module
  */
-if (
-    !\In2code\Femanager\Utility\ConfigurationUtility::isDisableModuleActive() &&
-    !(TYPO3_REQUESTTYPE & TYPO3_REQUESTTYPE_INSTALL)
-) {
+if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableModuleActive() &&
+    !(TYPO3_REQUESTTYPE & TYPO3_REQUESTTYPE_INSTALL)) {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
         'In2code.femanager',
         'web',
         'm1',
         '',
-        array(
+        [
             'UserBackend' => 'list,userLogout'
-        ),
-        array(
+        ],
+        [
             'access' => 'user,group',
             'icon' => 'EXT:femanager/ext_icon.gif',
             'labels' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf',
-        )
+        ]
     );
 }
 

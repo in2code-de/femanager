@@ -56,7 +56,7 @@ class SelectViewHelper extends OriginalSelectViewHelper
     {
         $options = parent::getOptions();
         if (!empty($this->arguments['defaultOption'])) {
-            $options = array('' => $this->arguments['defaultOption']) + $options;
+            $options = ['' => $this->arguments['defaultOption']] + $options;
         }
         return $options;
     }
@@ -98,6 +98,6 @@ class SelectViewHelper extends OriginalSelectViewHelper
     protected function getFieldName()
     {
         preg_match_all('/\[.*?\]/i', $this->getNameWithoutPrefix(), $name);
-        return str_replace(array('[', ']'), '', $name[0][0]);
+        return str_replace(['[', ']'], '', $name[0][0]);
     }
 }

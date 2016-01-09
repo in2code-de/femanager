@@ -51,7 +51,7 @@ class ClientsideValidator extends AbstractValidator
      *
      * @var array
      */
-    protected $messages = array();
+    protected $messages = [];
 
     /**
      * Additional Values (for comparing a value with another)
@@ -268,7 +268,7 @@ class ClientsideValidator extends AbstractValidator
      */
     public function addMessage($message)
     {
-        $this->messages = array_merge($this->messages, array($message));
+        $this->messages = array_merge($this->messages, [$message]);
     }
 
     /**

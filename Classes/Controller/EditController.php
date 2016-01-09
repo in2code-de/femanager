@@ -56,12 +56,10 @@ class EditController extends AbstractController
      */
     public function editAction()
     {
-        $this->view->assignMultiple(
-            array(
+        $this->view->assignMultiple([
                 'user' => $this->user,
                 'allUserGroups' => $this->allUserGroups
-            )
-        );
+            ]);
         $this->assignForAll();
     }
 
@@ -100,7 +98,7 @@ class EditController extends AbstractController
         $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.']);
         $this->emailForUsername($user);
         UserUtility::convertPassword($user, $this->settings['edit']['misc']['passwordSave']);
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', [$user, $this]);
         if (!empty($this->settings['edit']['confirmByAdmin'])) {
             $this->updateRequest($user);
         } else {
@@ -139,11 +137,7 @@ class EditController extends AbstractController
         }
         $user->setTxFemanagerChangerequest('');
         $this->userRepository->update($user);
-        $this->signalSlotDispatcher->dispatch(
-            __CLASS__,
-            __FUNCTION__ . 'AfterPersist',
-            array($user, $hash, $status, $this)
-        );
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $hash, $status, $this]);
     }
 
     /**
@@ -168,10 +162,7 @@ class EditController extends AbstractController
                 }
             }
         }
-        $user = FrontendUtility::forceValues(
-            $user,
-            $this->config['edit.']['forceValues.']['onAdminConfirmation.']
-        );
+        $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['onAdminConfirmation.']);
         LogUtility::log(Log::STATUS_PROFILEUPDATECONFIRMEDADMIN, $user);
         $this->addFlashMessage(LocalizationUtility::translate('updateProfile'));
     }
@@ -186,16 +177,13 @@ class EditController extends AbstractController
     {
         $this->sendMailService->send(
             'updateRequestRefused',
-            StringUtility::makeEmailArray(
-                $user->getEmail(),
-                $user->getFirstName() . ' ' . $user->getLastName()
-            ),
-            array('sender@femanager.org' => 'Sender Name'),
+            StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
+            ['sender@femanager.org' => 'Sender Name'],
             'Your change request was refused',
-            array(
+            [
                 'user' => $user,
                 'settings' => $this->settings
-            ),
+            ],
             $this->config['edit.']['email.']['updateRequestRefused.']
         );
         LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);

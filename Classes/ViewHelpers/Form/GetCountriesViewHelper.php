@@ -38,7 +38,7 @@ class GetCountriesViewHelper extends AbstractViewHelper
     /**
      * @var array
      */
-    protected $countries = array(
+    protected $countries = [
         'AND' => 'Andorra',
         'ARE' => 'الإمارات العربيّة المتّحدة',
         'AFG' => 'افغانستان',
@@ -290,7 +290,7 @@ class GetCountriesViewHelper extends AbstractViewHelper
         'CUW' => 'Curaçao',
         'SXM' => 'Sint Maarten',
         'SSD' => 'South Sudan'
-    );
+    ];
 
     /**
      * Build an country array

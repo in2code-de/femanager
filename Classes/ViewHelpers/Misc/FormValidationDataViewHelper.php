@@ -17,14 +17,14 @@ class FormValidationDataViewHelper extends AbstractViewHelper
      *
      * @var array
      */
-    protected $extendedValidations = array(
+    protected $extendedValidations = [
         'min',
         'max',
         'mustInclude',
         'mustNotInclude',
         'inList',
         'sameAs'
-    );
+    ];
 
     /**
      * Set javascript validation data for input fields
@@ -34,7 +34,7 @@ class FormValidationDataViewHelper extends AbstractViewHelper
      * @param array $additionalAttributes AdditionalAttributes
      * @return array
      */
-    public function render($settings, $fieldName, $additionalAttributes = array())
+    public function render($settings, $fieldName, $additionalAttributes = [])
     {
         if ($settings[$this->getControllerName()]['validation']['_enable']['client'] === '1') {
             $validationString = $this->getValidationString($settings, $fieldName);

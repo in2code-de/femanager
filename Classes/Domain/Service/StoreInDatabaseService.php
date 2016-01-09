@@ -47,7 +47,7 @@ class StoreInDatabaseService
      *
      * @var array
      */
-    protected $properties = array();
+    protected $properties = [];
 
     /**
      * @var \TYPO3\CMS\Core\Database\DatabaseConnection

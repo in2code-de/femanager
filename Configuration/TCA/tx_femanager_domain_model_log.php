@@ -1,8 +1,8 @@
 <?php
 use In2code\Femanager\Domain\Model\Log;
 
-return array(
-    'ctrl' => array(
+return [
+    'ctrl' => [
         'title' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log',
         'label' => 'title',
         'tstamp' => 'tstamp',
@@ -17,252 +17,251 @@ return array(
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
         'default_sortby' => 'ORDER BY crdate DESC',
-        'enablecolumns' => array(
+        'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
             'endtime' => 'endtime',
-        ),
+        ],
         'searchFields' => 'title',
         'iconfile' => 'EXT:femanager/Resources/Public/Icons/Log.gif'
-    ),
-    'interface' => array(
+    ],
+    'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, crdate, state, user',
-    ),
-    'types' => array(
-        '1' => array(
+    ],
+    'types' => [
+        '1' => [
             'showitem' => 'title, crdate, state, user, ' .
                 '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,sys_language_uid, ' .
                 'l10n_parent, l10n_diffsource, hidden, starttime, endtime'
-        ),
-    ),
-    'palettes' => array(
-        '1' => array('showitem' => ''),
-    ),
-    'columns' => array(
-        'sys_language_uid' => array(
+        ],
+    ],
+    'palettes' => [
+        '1' => ['showitem' => ''],
+    ],
+    'columns' => [
+        'sys_language_uid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items' => array(
-                    array('LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages', -1),
-                    array('LLL:EXT:lang/locallang_general.xlf:LGL.default_value', 0)
-                ),
-            ),
-        ),
-        'l10n_parent' => array(
+                'items' => [
+                    ['LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages', -1],
+                    ['LLL:EXT:lang/locallang_general.xlf:LGL.default_value', 0]
+                ],
+            ],
+        ],
+        'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array(
-                    array('', 0),
-                ),
+                'items' => [
+                    ['', 0],
+                ],
                 'foreign_table' => 'tx_femanager_domain_model_log',
-                'foreign_table_where' =>
-                    'AND tx_femanager_domain_model_log.pid = ###CURRENT_PID### AND ' .
+                'foreign_table_where' => 'AND tx_femanager_domain_model_log.pid = ###CURRENT_PID### AND ' .
                     'tx_femanager_domain_model_log.sys_language_uid IN (-1,0)',
-            ),
-        ),
-        'l10n_diffsource' => array(
-            'config' => array(
+            ],
+        ],
+        'l10n_diffsource' => [
+            'config' => [
                 'type' => 'passthrough',
-            ),
-        ),
-        't3ver_label' => array(
+            ],
+        ],
+        't3ver_label' => [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            )
-        ),
-        'hidden' => array(
+            ]
+        ],
+        'hidden' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'starttime' => array(
+            ],
+        ],
+        'starttime' => [
             'exclude' => 1,
             'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
-                'range' => array(
+                'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ),
-            ),
-        ),
-        'endtime' => array(
+                ],
+            ],
+        ],
+        'endtime' => [
             'exclude' => 1,
             'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
-                'range' => array(
+                'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ),
-            ),
-        ),
-        'title' => array(
+                ],
+            ],
+        ],
+        'title' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                 'tx_femanager_domain_model_log.title',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'crdate' => array(
+            ],
+        ],
+        'crdate' => [
             'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                 'tx_femanager_domain_model_log.crdate',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'datetime',
                 'readOnly' => 1
-            ),
-        ),
-        'state' => array(
+            ],
+        ],
+        'state' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                 'tx_femanager_domain_model_log.state',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array(
-                    array(
+                'items' => [
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.100',
                         '--div--'
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.101',
                         Log::STATUS_NEWREGISTRATION
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.102',
                         Log::STATUS_REGISTRATIONCONFIRMEDUSER
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.103',
                         Log::STATUS_REGISTRATIONCONFIRMEDADMIN
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.104',
                         Log::STATUS_REGISTRATIONREFUSEDUSER
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.105',
                         Log::STATUS_REGISTRATIONREFUSEDADMIN
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.106',
                         Log::STATUS_PROFILECREATIONREQUEST
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.200',
                         '--div--'
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.201',
                         Log::STATUS_PROFILEUPDATED
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.202',
                         Log::STATUS_PROFILEUPDATECONFIRMEDADMIN
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.203',
                         Log::STATUS_PROFILEUPDATEREFUSEDADMIN
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.204',
                         Log::STATUS_PROFILEUPDATEREQUEST
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.205',
                         Log::STATUS_PROFILEUPDATEREFUSEDSECURITY
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.300',
                         '--div--'
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.301',
                         Log::STATUS_PROFILEDELETE
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.400',
                         '--div--'
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.401',
                         Log::STATUS_INVITATIONPROFILECREATED
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.402',
                         Log::STATUS_INVITATIONPROFILEDELETEDUSER
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.403',
                         Log::STATUS_INVITATIONHASHERROR
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.404',
                         Log::STATUS_INVITATIONRESTRICTEDPAGE
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.405',
                         Log::STATUS_INVITATIONPROFILEENABLED
-                    ),
-                ),
+                    ],
+                ],
                 'size' => 1,
                 'maxitems' => 1
-            ),
-        ),
-        'user' => array(
-            'config' => array(
+            ],
+        ],
+        'user' => [
+            'config' => [
                 'type' => 'passthrough',
-            ),
-        ),
-    ),
-);
+            ],
+        ],
+    ],
+];

@@ -61,7 +61,7 @@ class StringUtility extends AbstractUtility
     public static function getValuesInBrackets($value)
     {
         preg_match_all('/\(.*?\)/i', $value, $result);
-        return str_replace(array('(', ')'), '', $result[0][0]);
+        return str_replace(['(', ')'], '', $result[0][0]);
     }
 
     /**
@@ -113,7 +113,7 @@ class StringUtility extends AbstractUtility
     public static function makeEmailArray($emailString, $name = 'femanager')
     {
         $emails = GeneralUtility::trimExplode(PHP_EOL, $emailString, true);
-        $mailArray = array();
+        $mailArray = [];
         foreach ($emails as $email) {
             if (GeneralUtility::validEmail($email)) {
                 $mailArray[$email] = $name;

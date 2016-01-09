@@ -26,7 +26,7 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
-     ***************************************************************/
+ ***************************************************************/
 
 /**
  * Class StringUtilityTest
@@ -42,24 +42,24 @@ class StringUtilityTest extends UnitTestCase
      */
     public function cleanStringReturnsStringDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'This is a test',
                 'This_is_a_test',
-            ),
-            array(
+            ],
+            [
                 'Heiße Liebe',
                 'Hei__e_Liebe',
-            ),
-            array(
+            ],
+            [
                 'this.is_a.test',
                 'this.is_a.test',
-            ),
-            array(
+            ],
+            [
                 '?ß#;,-&',
                 '______-_',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -83,23 +83,23 @@ class StringUtilityTest extends UnitTestCase
      */
     public function getValuesInBracketsReturnsStringDataProvider()
     {
-        return array(
+        return [
             // #0
-            array(
+            [
                 'lala(1,2,3,5)test',
                 '1,2,3,5',
-            ),
+            ],
             // #1
-            array(
+            [
                 '(1,2,3,5)',
                 '1,2,3,5',
-            ),
+            ],
             // #2
-            array(
+            [
                 'min(10)',
                 '10',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -124,23 +124,23 @@ class StringUtilityTest extends UnitTestCase
      */
     public function getValuesBeforeBracketsDataProvider()
     {
-        return array(
+        return [
             // #0
-            array(
+            [
                 'lala(1,2,3,5)test',
                 'lala',
-            ),
+            ],
             // #1
-            array(
+            [
                 '.()',
                 '.',
-            ),
+            ],
             // #2
-            array(
+            [
                 'min(10)',
                 'min',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -165,33 +165,33 @@ class StringUtilityTest extends UnitTestCase
      */
     public function startsWithReturnsStringDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'Finisherx',
                 'Finisher',
                 true
-            ),
-            array(
+            ],
+            [
                 'inisher',
                 'Finisher',
                 false
-            ),
-            array(
+            ],
+            [
                 'abc',
                 'a',
                 true
-            ),
-            array(
+            ],
+            [
                 'abc',
                 'ab',
                 true
-            ),
-            array(
+            ],
+            [
                 'abc',
                 'abc',
                 true
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -216,33 +216,33 @@ class StringUtilityTest extends UnitTestCase
      */
     public function endsWithReturnsStringDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'xFinisher',
                 'Finisher',
                 true
-            ),
-            array(
+            ],
+            [
                 'inisher',
                 'Finisher',
                 false
-            ),
-            array(
+            ],
+            [
                 'abc',
                 'c',
                 true
-            ),
-            array(
+            ],
+            [
                 'abc',
                 'bc',
                 true
-            ),
-            array(
+            ],
+            [
                 'abc',
                 'abc',
                 true
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -267,27 +267,27 @@ class StringUtilityTest extends UnitTestCase
      */
     public function emakeEmailArrayReturnsArrayDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'email1@mail.org' . PHP_EOL . 'email2@mail.org',
-                array(
+                [
                     'email1@mail.org' => 'femanager',
                     'email2@mail.org' => 'femanager'
-                )
-            ),
-            array(
+                ]
+            ],
+            [
                 'nomail.org' . PHP_EOL . 'email2@mail.org',
-                array(
+                [
                     'email2@mail.org' => 'femanager'
-                )
-            ),
-            array(
+                ]
+            ],
+            [
                 'email2@mail.org',
-                array(
+                [
                     'email2@mail.org' => 'femanager'
-                )
-            ),
-        );
+                ]
+            ],
+        ];
     }
 
     /**
@@ -311,28 +311,28 @@ class StringUtilityTest extends UnitTestCase
      */
     public function getRandomStringAlwaysReturnsStringsOfGivenLengthDateProvider()
     {
-        return array(
-            'default params' => array(
+        return [
+            'default params' => [
                 32,
                 true,
                 false
-            ),
-            'default length lowercase' => array(
+            ],
+            'default length lowercase' => [
                 32,
                 false,
                 false
-            ),
-            '60 length' => array(
+            ],
+            '60 length' => [
                 60,
                 true,
                 false
-            ),
-            '60 length lowercase' => array(
+            ],
+            '60 length lowercase' => [
                 60,
                 false,
                 false
-            ),
-        );
+            ],
+        ];
     }
 
     /**

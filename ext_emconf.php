@@ -4,7 +4,7 @@
  * Extension Manager/Repository config file for ext: "femanager"
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
     'title' => 'femanager',
     'description' => 'TYPO3 Frontend User Registration and Management based on
         Extbase and Fluid and on TYPO3 7.6 and the possibility to extend it.
@@ -24,16 +24,17 @@ $EM_CONF[$_EXTKEY] = array(
     'clearCacheOnLoad' => 0,
     'lockType' => '',
     'version' => '2.0.0',
-    'constraints' => array(
-        'depends' => array(
+    'constraints' => [
+        'depends' => [
             'extbase' => '7.6.0-7.99.99',
             'fluid' => '7.6.0-7.99.99',
             'typo3' => '7.6.0-7.99.99',
-        ),
-        'conflicts' => array(),
-        'suggests' => array(
+            'php' => '5.5.0-0.0.0',
+        ],
+        'conflicts' => [],
+        'suggests' => [
             'sr_freecap' => '2.0.4-2.99.99',
             'static_info_tables' => '6.0.0-6.99.99'
-        ),
-    ),
-);
+        ],
+    ],
+];

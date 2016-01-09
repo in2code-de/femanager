@@ -20,6 +20,11 @@ class FlexFormFieldSelection
     protected $languageService = null;
 
     /**
+     * @var string
+     */
+    protected $localLangPrefix = 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:';
+
+    /**
      * Add options to FlexForm Selection - Options can be defined in TSConfig
      *
      * @param array $params
@@ -34,10 +39,10 @@ class FlexFormFieldSelection
         if (!empty($tSconfig['tx_femanager.']['flexForm.'][$tab]['addFieldOptions.'])) {
             $options = $tSconfig['tx_femanager.']['flexForm.'][$tab]['addFieldOptions.'];
             foreach ((array) $options as $value => $label) {
-                $params['items'][] = array(
+                $params['items'][] = [
                     StringUtility::startsWith($label, 'LLL:') ? $this->languageService->sL($label) : $label,
                     $value
-                );
+                ];
             }
         }
     }
@@ -51,13 +56,10 @@ class FlexFormFieldSelection
     protected function addCaptchaOption(&$params)
     {
         if (ExtensionManagementUtility::isLoaded('sr_freecap')) {
-            $params['items'][] = array(
-                $this->languageService->sL(
-                    'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
-                    'tx_femanager_domain_model_user.captcha'
-                ),
+            $params['items'][] = [
+                $this->languageService->sL($this->localLangPrefix . 'tx_femanager_domain_model_user.captcha'),
                 'captcha'
-            );
+            ];
         }
     }
 

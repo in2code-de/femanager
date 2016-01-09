@@ -46,7 +46,7 @@ class GetCountriesTest extends UnitTestCase
     {
         $this->generalValidatorMock = $this->getAccessibleMock(
             '\In2code\Femanager\ViewHelpers\Form\GetCountriesViewHelper',
-            array('dummy')
+            ['dummy']
         );
     }
 

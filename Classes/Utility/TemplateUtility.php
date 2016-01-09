@@ -66,10 +66,9 @@ class TemplateUtility extends AbstractUtility
      */
     public static function getTemplateFolders($part = 'template', $returnAllPaths = false)
     {
-        $templatePaths = array();
-        $configuration = self::getConfigurationManager()->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
-        );
+        $templatePaths = [];
+        $configuration = self::getConfigurationManager()
+            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         if (!empty($configuration['view'][$part . 'RootPaths'])) {
             $templatePaths = $configuration['view'][$part . 'RootPaths'];
             $templatePaths = array_values($templatePaths);
@@ -84,7 +83,7 @@ class TemplateUtility extends AbstractUtility
             $templatePaths[] = 'EXT:femanager/Resources/Private/' . ucfirst($part) . 's/';
         }
         $templatePaths = array_unique($templatePaths);
-        $absolutePaths = array();
+        $absolutePaths = [];
         foreach ($templatePaths as $templatePath) {
             $absolutePaths[] = GeneralUtility::getFileAbsFileName($templatePath);
         }
@@ -117,7 +116,7 @@ class TemplateUtility extends AbstractUtility
      */
     public static function getTemplatePaths($pathAndFilename, $part = 'template')
     {
-        $pathAndFilenames = array();
+        $pathAndFilenames = [];
         $absolutePaths = self::getTemplateFolders($part, true);
         foreach ($absolutePaths as $absolutePath) {
             if (file_exists($absolutePath . $pathAndFilename)) {

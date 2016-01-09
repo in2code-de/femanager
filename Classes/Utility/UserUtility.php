@@ -87,7 +87,7 @@ class UserUtility extends AbstractUtility
     public static function getCurrentUsergroupUids()
     {
         $currentLoggedInUser = self::getCurrentUser();
-        $usergroupUids = array();
+        $usergroupUids = [];
         if ($currentLoggedInUser !== null) {
             foreach ($currentLoggedInUser->getUsergroup() as $usergroup) {
                 $usergroupUids[] = $usergroup->getUid();
@@ -207,13 +207,13 @@ class UserUtility extends AbstractUtility
      */
     public static function getDirtyPropertiesFromUser(User $changedObject)
     {
-        $dirtyProperties = array();
-        $ignoreProperties = array(
+        $dirtyProperties = [];
+        $ignoreProperties = [
             'txFemanagerChangerequest',
             'ignoreDirty',
             'isOnline',
             'lastlogin'
-        );
+        ];
 
         foreach ($changedObject->_getCleanProperties() as $propertyName => $oldPropertyValue) {
             if (
@@ -311,11 +311,7 @@ class UserUtility extends AbstractUtility
         $GLOBALS['TSFE']->fe_user->checkPid = false;
         $info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
         $extraWhere = ' AND pid IN (' . self::getDatabaseConnection()->cleanIntList($storagePids) . ')';
-        $user = $GLOBALS['TSFE']->fe_user->fetchUserRecord(
-            $info['db_user'],
-            $user->getUsername(),
-            $extraWhere
-        );
+        $user = $GLOBALS['TSFE']->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
         $GLOBALS['TSFE']->fe_user->createUserSession($user);
         $GLOBALS['TSFE']->fe_user->user = $GLOBALS['TSFE']->fe_user->fetchUserSession();
     }

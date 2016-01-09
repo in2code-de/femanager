@@ -70,23 +70,23 @@ class ValidateEid
      */
     public function __construct($typo3ConfVars)
     {
-        $this->configuration = array(
+        $this->configuration = [
             'pluginName' => 'Pi1',
             'vendorName' => 'In2code',
             'extensionName' => 'Femanager',
             'controller' => 'User',
             'action' => 'validate',
-            'mvc' => array(
-                'requestHandlers' => array(
+            'mvc' => [
+                'requestHandlers' => [
                     'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler' =>
                         'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler'
-                )
-            ),
-            'settings' => array(),
-            'persistence' => array(
+                ]
+            ],
+            'settings' => [],
+            'persistence' => [
                 'storagePid' => GeneralUtility::_GP('storagePid')
-            )
-        );
+            ]
+        ];
         $_POST['tx_femanager_pi1']['action'] = 'validate';
         $_POST['tx_femanager_pi1']['controller'] = 'User';
 

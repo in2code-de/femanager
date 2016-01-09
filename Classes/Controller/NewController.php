@@ -55,12 +55,10 @@ class NewController extends AbstractController
      */
     public function newAction(User $user = null)
     {
-        $this->view->assignMultiple(
-            array(
+        $this->view->assignMultiple([
                 'user' => $user,
                 'allUserGroups' => $this->allUserGroups
-            )
-        );
+            ]);
         $this->assignForAll();
     }
 
@@ -76,16 +74,13 @@ class NewController extends AbstractController
     public function createAction(User $user)
     {
         $user = UserUtility::overrideUserGroup($user, $this->settings);
-        $user = FrontendUtility::forceValues(
-            $user,
-            $this->config['new.']['forceValues.']['beforeAnyConfirmation.']
-        );
+        $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
         $user = UserUtility::fallbackUsernameAndPassword($user);
         if ($this->settings['new']['fillEmailWithUsername'] === '1') {
             $user->setEmail($user->getUsername());
         }
         UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', [$user, $this]);
 
         if ($this->isAllConfirmed()) {
             $this->createAllConfirmed($user);
@@ -110,7 +105,7 @@ class NewController extends AbstractController
         $this->signalSlotDispatcher->dispatch(
             __CLASS__,
             __FUNCTION__ . 'BeforePersist',
-            array($user, $hash, $status, $this)
+            [$user, $hash, $status, $this]
         );
         if ($user === null) {
             $this->addFlashMessage(LocalizationUtility::translate('missingUserInDatabase'), '', FlashMessage::ERROR);
@@ -180,10 +175,10 @@ class NewController extends AbstractController
                     ),
                     StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                     'New Registration request',
-                    array(
+                    [
                         'user' => $user,
                         'hash' => HashUtility::createHashForUser($user)
-                    ),
+                    ],
                     $this->config['new.']['email.']['createAdminConfirmation.']
                 );
                 $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
@@ -234,10 +229,7 @@ class NewController extends AbstractController
     protected function statusAdminConfirmation(User $user, $hash, $status)
     {
         if (HashUtility::validHash($hash, $user)) {
-            $user = FrontendUtility::forceValues(
-                $user,
-                $this->config['new.']['forceValues.']['onAdminConfirmation.']
-            );
+            $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onAdminConfirmation.']);
             $user->setTxFemanagerConfirmedbyadmin(true);
             if ($user->getTxFemanagerConfirmedbyuser() || empty($this->settings['new']['confirmByUser'])) {
                 $user->setDisable(false);
@@ -273,9 +265,9 @@ class NewController extends AbstractController
                         $user->getEmail(),
                         $user->getFirstName() . ' ' . $user->getLastName()
                     ),
-                    array('sender@femanager.org' => 'Sender Name'),
+                    ['sender@femanager.org' => 'Sender Name'],
                     'Your profile was refused',
-                    array('user' => $user),
+                    ['user' => $user],
                     $this->config['new.']['email.']['createUserNotifyRefused.']
                 );
             }

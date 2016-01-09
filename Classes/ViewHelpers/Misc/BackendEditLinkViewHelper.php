@@ -24,18 +24,16 @@ class BackendEditLinkViewHelper extends AbstractViewHelper
      */
     public function render($tableName, $identifier, $addReturnUrl = true)
     {
-        $uriParameters = array(
-            'edit' => array(
-                $tableName => array(
+        $uriParameters = [
+            'edit' => [
+                $tableName => [
                     $identifier => 'edit'
-                )
-            )
-        );
+                ]
+            ]
+        ];
         if ($addReturnUrl) {
-            $uriParameters['returnUrl'] = BackendUtility::getModuleUrl(
-                GeneralUtility::_GET('M'),
-                $this->getCurrentParameters()
-            );
+            $uriParameters['returnUrl'] =
+                BackendUtility::getModuleUrl(GeneralUtility::_GET('M'), $this->getCurrentParameters());
         }
         return BackendUtility::getModuleUrl('record_edit', $uriParameters);
     }
@@ -47,11 +45,11 @@ class BackendEditLinkViewHelper extends AbstractViewHelper
      */
     protected function getCurrentParameters()
     {
-        $parameters = array();
-        $ignoreKeys = array(
+        $parameters = [];
+        $ignoreKeys = [
             'M',
             'moduleToken'
-        );
+        ];
         foreach ((array) GeneralUtility::_GET() as $key => $value) {
             if (in_array($key, $ignoreKeys)) {
                 continue;

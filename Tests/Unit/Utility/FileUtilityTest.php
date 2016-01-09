@@ -26,7 +26,7 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
-     ***************************************************************/
+ ***************************************************************/
 
 /**
  * Class FileUtilityTest
@@ -42,40 +42,40 @@ class FileUtilityTest extends UnitTestCase
      */
     public function checkExtensionReturnBoolDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'theImage_dot.com',
                 false,
-            ),
-            array(
+            ],
+            [
                 'theImage_dot.com.jpg',
                 true,
-            ),
-            array(
+            ],
+            [
                 'test.ImagetheImage_dot.com.JPEG',
                 true,
-            ),
-            array(
+            ],
+            [
                 'test.png',
                 true,
-            ),
-            array(
+            ],
+            [
                 'SoNenntEinRedakteurEineDätaei.PNG',
                 true,
-            ),
-            array(
+            ],
+            [
                 'test.phx.bmp',
                 true,
-            ),
-            array(
+            ],
+            [
                 'test.php.bmp',
                 false,
-            ),
-            array(
+            ],
+            [
                 'test.phtml.bmp',
                 false,
-            ),
-        );
+            ],
+        ];
     }
 
     /**

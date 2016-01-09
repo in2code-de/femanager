@@ -39,7 +39,7 @@ class RequestViewHelper extends AbstractViewHelper
     /**
      * @var array|string
      */
-    protected $variable = array();
+    protected $variable = [];
 
     /**
      * @var int

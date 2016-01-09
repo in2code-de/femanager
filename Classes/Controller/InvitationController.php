@@ -80,7 +80,7 @@ class InvitationController extends AbstractController
             $user->setEmail($user->getUsername());
         }
         UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', array($user, $this));
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', [$user, $this]);
         $this->createAllConfirmed($user);
     }
 
@@ -104,11 +104,11 @@ class InvitationController extends AbstractController
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             'Profile creation with invitation',
-            array(
+            [
                 'user' => $user,
                 'settings' => $this->settings,
                 'hash' => HashUtility::createHashForUser($user)
-            ),
+            ],
             $this->config['invitation.']['email.']['invitation.']
         );
 
@@ -122,14 +122,14 @@ class InvitationController extends AbstractController
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile creation with invitation - Step 1',
-                array(
+                [
                     'user' => $user,
                     'settings' => $this->settings
-                ),
+                ],
                 $this->config['invitation.']['email.']['invitationAdminNotifyStep1.']
             );
         }
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $this]);
         $this->redirectByAction('redirectStep1');
         $this->redirect('new');
     }
@@ -147,12 +147,12 @@ class InvitationController extends AbstractController
         $user->setDisable(false);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $hash, $this));
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $hash, $this]);
         $this->view->assignMultiple(
-            array(
+            [
                 'user' => $user,
                 'hash' => $hash
-            )
+            ]
         );
 
         if (!HashUtility::validHash($hash, $user)) {
@@ -188,10 +188,10 @@ class InvitationController extends AbstractController
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile creation with invitation - Final',
-                array(
+                [
                     'user' => $user,
                     'settings' => $this->settings
-                ),
+                ],
                 $this->config['invitation.']['email.']['invitationAdminNotify.']
             );
         }
@@ -199,7 +199,7 @@ class InvitationController extends AbstractController
         UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $this]);
         $this->redirectByAction('invitation', 'redirectPasswordChanged');
         $this->redirect('status');
     }
@@ -238,10 +238,10 @@ class InvitationController extends AbstractController
                     ),
                     StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                     'Profile deleted from User after invitation - Step 1',
-                    array(
+                    [
                         'user' => $user,
                         'settings' => $this->settings
-                    ),
+                    ],
                     $this->config['invitation.']['email.']['invitationRefused.']
                 );
             }

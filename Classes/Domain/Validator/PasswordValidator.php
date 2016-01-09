@@ -30,14 +30,14 @@ class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstract
      *
      * @var array
      */
-    public $piVars = array();
+    public $piVars = [];
 
     /**
      * TypoScript Configuration
      *
      * @var array
      */
-    public $configuration = array();
+    public $configuration = [];
 
     /**
      * Action Name

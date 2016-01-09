@@ -46,7 +46,7 @@ class AbstractValidator extends AbstractValidatorExtbase
     /**
      * Validationsettings
      */
-    public $validationSettings = array();
+    public $validationSettings = [];
 
     /**
      * Is Valid
@@ -352,7 +352,7 @@ class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateDate($value, $validationSetting)
     {
-        $dateParts = array();
+        $dateParts = [];
         switch ($validationSetting) {
             case 'd.m.Y':
                 if (preg_match('/^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$/', $value, $dateParts)) {

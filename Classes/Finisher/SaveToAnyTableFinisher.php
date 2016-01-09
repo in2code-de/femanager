@@ -60,7 +60,7 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     /**
      * @var array
      */
-    protected $configuration = array();
+    protected $configuration = [];
 
     /**
      * @var int
@@ -70,7 +70,7 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     /**
      * @var array
      */
-    protected $dataArray = array();
+    protected $dataArray = [];
 
     /**
      * Overwrite configuration with
@@ -115,7 +115,7 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
             $storeInDatabase = $this->objectManager->get('In2code\\Femanager\\Domain\\Service\\StoreInDatabaseService');
             $storeInDatabase->setTable($table);
             $this->setPropertiesForTable($table, $storeInDatabase);
-            $this->addArrayToDataArray(array('uid_' . $table => $storeInDatabase->execute()));
+            $this->addArrayToDataArray(['uid_' . $table => $storeInDatabase->execute()]);
         }
     }
 

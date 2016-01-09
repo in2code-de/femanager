@@ -45,7 +45,7 @@ class FileSizeViewHelper extends AbstractViewHelper
     public function render($path, $unit = 'k')
     {
 
-        $filesize = array();
+        $filesize = [];
         $filesize['b'] = filesize($path);
         $filesize['k'] = round(($filesize['b'] / 1024), 0);
         $filesize['m'] = round(($filesize['k'] / 1024), 0);

@@ -55,7 +55,7 @@ class FeatureContext extends MinkContext
         $argument = str_replace('\"', '"', $argument);
 
         // Token replace the argument.
-        static $random = array();
+        static $random = [];
         for ($start = 0; ($start = strpos($argument, '[', $start)) !== false;) {
             $end = strpos($argument, ']', $start);
             if ($end === false) {

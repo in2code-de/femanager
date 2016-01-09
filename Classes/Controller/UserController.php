@@ -52,17 +52,17 @@ class UserController extends AbstractController
      * @param array $filter
      * @return void
      */
-    public function listAction($filter = array())
+    public function listAction($filter = [])
     {
         $this->view->assignMultiple(
-            array(
+            [
                 'users' => $this->userRepository->findByUsergroups(
                     $this->settings['list']['usergroup'],
                     $this->settings,
                     $filter
                 ),
                 'filter' => $filter
-            )
+            ]
         );
         $this->assignForAll();
     }
@@ -95,10 +95,10 @@ class UserController extends AbstractController
     {
         $fileName = FileUtility::uploadFile();
         header('Content-Type: text/plain');
-        $result = array(
+        $result = [
             'success' => ($fileName ? true : false),
             'uploadName' => $fileName
-        );
+        ];
         echo json_encode($result);
     }
 
@@ -137,14 +137,14 @@ class UserController extends AbstractController
             ->validateField();
 
         $this->view->assignMultiple(
-            array(
+            [
                 'isValid' => $result,
                 'messages' => $this->clientsideValidator->getMessages(),
                 'validation' => $validation,
                 'value' => $value,
                 'fieldname' => $field,
                 'user' => $user
-            )
+            ]
         );
     }
 }

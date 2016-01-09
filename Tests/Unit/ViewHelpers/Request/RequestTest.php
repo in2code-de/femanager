@@ -46,7 +46,7 @@ class RequestTest extends UnitTestCase
     {
         $this->generalValidatorMock = $this->getAccessibleMock(
             '\In2code\Femanager\ViewHelpers\Misc\RequestViewHelper',
-            array('dummy')
+            ['dummy']
         );
     }
 
@@ -65,66 +65,66 @@ class RequestTest extends UnitTestCase
      */
     public function renderReturnsStringDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'L',
                 true,
-                array(
+                [
                     'L' => '123'
-                ),
+                ],
                 '123'
-            ),
-            array(
+            ],
+            [
                 'test',
                 true,
-                array(
+                [
                     'test' => '>'
-                ),
+                ],
                 '&gt;'
-            ),
-            array(
+            ],
+            [
                 'tx_test|sword',
                 true,
-                array(
-                    'tx_test' => array(
+                [
+                    'tx_test' => [
                         'sword' => 'abc'
-                    )
-                ),
+                    ]
+                ],
                 'abc'
-            ),
-            array(
+            ],
+            [
                 'tx_test_pi1|abc|def',
                 true,
-                array(
-                    'tx_test_pi1' => array(
-                        'abc' => array(
+                [
+                    'tx_test_pi1' => [
+                        'abc' => [
                             'def' => 'xyz'
-                        )
-                    )
-                ),
+                        ]
+                    ]
+                ],
                 'xyz'
-            ),
-            array(
+            ],
+            [
                 'asfd|abc|def|ghi',
                 true,
-                array(
-                    'asfd' => array(
-                        'abc' => array(
-                            'def' => array(
+                [
+                    'asfd' => [
+                        'abc' => [
+                            'def' => [
                                 'ghi' => '7x'
-                            )
-                        )
-                    )
-                ),
+                            ]
+                        ]
+                    ]
+                ],
                 '7x'
-            ),
-            array(
+            ],
+            [
                 'abc',
                 true,
-                array(),
+                [],
                 ''
-            ),
-        );
+            ],
+        ];
     }
 
     /**

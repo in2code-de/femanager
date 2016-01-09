@@ -70,20 +70,20 @@ class FileDeleteEid
      */
     public function __construct($typo3ConfVars)
     {
-        $this->configuration = array(
+        $this->configuration = [
             'pluginName' => 'Pi1',
             'vendorName' => 'In2code',
             'extensionName' => 'Femanager',
             'controller' => 'User',
             'action' => 'fileDelete',
-            'mvc' => array(
-                'requestHandlers' => array(
+            'mvc' => [
+                'requestHandlers' => [
                     'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler' =>
                         'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler'
-                )
-            ),
-            'settings' => array()
-        );
+                ]
+            ],
+            'settings' => []
+        ];
         $_POST['tx_femanager_pi1']['action'] = 'fileDelete';
         $_POST['tx_femanager_pi1']['controller'] = 'User';
 

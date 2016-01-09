@@ -53,12 +53,12 @@ class SendParametersService
     /**
      * @var array
      */
-    protected $configuration = array();
+    protected $configuration = [];
 
     /**
      * @var array
      */
-    protected $properties = array();
+    protected $properties = [];
 
     /**
      * Constructor
@@ -107,10 +107,7 @@ class SendParametersService
      */
     protected function getData()
     {
-        return $this->contentObject->cObjGetSingle(
-            $this->configuration['data'],
-            $this->configuration['data.']
-        );
+        return $this->contentObject->cObjGetSingle($this->configuration['data'], $this->configuration['data.']);
     }
 
     /**
@@ -125,11 +122,11 @@ class SendParametersService
                 'femanager sendpost values',
                 'femanager',
                 0,
-                array(
+                [
                     'url' => $this->getUri(),
                     'data' => $this->getData(),
                     'properties' => $this->properties
-                )
+                ]
             );
         }
     }
@@ -139,10 +136,8 @@ class SendParametersService
      */
     protected function isTurnedOn()
     {
-        return $this->contentObject->cObjGetSingle(
-            $this->configuration['_enable'],
-            $this->configuration['_enable.']
-        ) === '1';
+        return $this->contentObject->cObjGetSingle($this->configuration['_enable'], $this->configuration['_enable.'])
+        === '1';
     }
 
     /**

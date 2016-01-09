@@ -47,7 +47,7 @@ class AbstractValidatorTest extends UnitTestCase
     {
         $this->generalValidatorMock = $this->getAccessibleMock(
             '\In2code\Femanager\Domain\Validator\AbstractValidator',
-            array('dummy')
+            ['dummy']
         );
     }
 
@@ -67,48 +67,48 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function validateRequiredReturnsBoolDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'in2code.de',
                 true
-            ),
-            array(
+            ],
+            [
                 '.',
                 true
-            ),
-            array(
+            ],
+            [
                 1234,
                 true
-            ),
-            array(
+            ],
+            [
                 1234.56,
                 true
-            ),
-            array(
+            ],
+            [
                 '',
                 false
-            ),
-            array(
-                array(),
+            ],
+            [
+                [],
                 false
-            ),
-            array(
+            ],
+            [
                 '0',
                 false
-            ),
-            array(
+            ],
+            [
                 0,
                 false
-            ),
-            array(
+            ],
+            [
                 null,
                 false
-            ),
-            array(
+            ],
+            [
                 false,
                 false
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -132,36 +132,36 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function validateEmailReturnsBoolDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'in2code.de',
                 false
-            ),
-            array(
+            ],
+            [
                 '',
                 false
-            ),
-            array(
+            ],
+            [
                 'alex@in2code.de',
                 true
-            ),
-            array(
+            ],
+            [
                 'alex@in2code.',
                 false
-            ),
-            array(
+            ],
+            [
                 'www.in2code.de',
                 false
-            ),
-            array(
+            ],
+            [
                 'test@www.in2code.de',
                 true
-            ),
-            array(
+            ],
+            [
                 'alex@test.test.in2code.de',
                 true
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -185,33 +185,33 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function validateMinReturnsBoolDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'in2code.de',
                 10,
                 true
-            ),
-            array(
+            ],
+            [
                 'in2code.d',
                 10,
                 false
-            ),
-            array(
+            ],
+            [
                 'i',
                 1,
                 true
-            ),
-            array(
+            ],
+            [
                 'i',
                 2,
                 false
-            ),
-            array(
+            ],
+            [
                 ' i ',
                 2,
                 true
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -239,38 +239,38 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function validateMaxReturnsBoolDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'in2code.de',
                 10,
                 true
-            ),
-            array(
+            ],
+            [
                 'in2code.de.',
                 10,
                 false
-            ),
-            array(
+            ],
+            [
                 'i',
                 1,
                 true
-            ),
-            array(
+            ],
+            [
                 'i',
                 2,
                 true
-            ),
-            array(
+            ],
+            [
                 ' i ',
                 2,
                 false
-            ),
-            array(
+            ],
+            [
                 'i',
                 0,
                 false
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -298,36 +298,36 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function validateIntReturnsBoolDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 '123',
                 true
-            ),
-            array(
+            ],
+            [
                 '1235135',
                 true
-            ),
-            array(
+            ],
+            [
                 '123a23',
                 false
-            ),
-            array(
+            ],
+            [
                 '123 23',
                 false
-            ),
-            array(
+            ],
+            [
                 '12323,',
                 false
-            ),
-            array(
+            ],
+            [
                 '12323²',
                 false
-            ),
-            array(
+            ],
+            [
                 '3 ',
                 false
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -351,32 +351,32 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function validateLettersReturnsBoolDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'abafdbadsf',
                 true
-            ),
-            array(
+            ],
+            [
                 'a_-b',
                 true
-            ),
-            array(
+            ],
+            [
                 'abafd3adsf',
                 false
-            ),
-            array(
+            ],
+            [
                 'abä',
                 false
-            ),
-            array(
+            ],
+            [
                 'ab:',
                 false
-            ),
-            array(
+            ],
+            [
                 'ab cd',
                 false
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -400,103 +400,103 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function validateMustIncludeReturnsBoolDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'in2code.de',
                 'number,letter,special',
                 true
-            ),
-            array(
+            ],
+            [
                 'in2code.de ',
                 'number,letter,special,space',
                 true
-            ),
-            array(
+            ],
+            [
                 'in2code.de',
                 'number,  special',
                 true
-            ),
-            array(
+            ],
+            [
                 'in2code.de',
                 '   special  ,   letter ',
                 true
-            ),
-            array(
+            ],
+            [
                 'in2code',
                 'number,letter',
                 true
-            ),
-            array(
+            ],
+            [
                 'in2code',
                 'special,letter',
                 false
-            ),
-            array(
+            ],
+            [
                 'in2code#',
                 'special',
                 true
-            ),
-            array(
+            ],
+            [
                 'in2co de',
                 'special',
                 true
-            ),
-            array(
+            ],
+            [
                 'in2code',
                 'number',
                 true
-            ),
-            array(
+            ],
+            [
                 'incode.',
                 'number,letter',
                 false
-            ),
-            array(
+            ],
+            [
                 'in2 code',
                 'number,letter',
                 true
-            ),
-            array(
+            ],
+            [
                 'in code',
                 'letter',
                 true
-            ),
-            array(
+            ],
+            [
                 '1 2',
                 'number',
                 true
-            ),
-            array(
+            ],
+            [
                 '2',
                 'number',
                 true
-            ),
-            array(
+            ],
+            [
                 '1 2',
                 'space',
                 true
-            ),
-            array(
+            ],
+            [
                 '132',
                 'space',
                 false
-            ),
-            array(
+            ],
+            [
                 'a;#/%äß´^á 3',
                 'space',
                 true
-            ),
-            array(
+            ],
+            [
                 'a;#/%äß´^á 3',
                 'letter,number,special,space',
                 true
-            ),
-            array(
+            ],
+            [
                 'a;#/%äß´^á 3',
                 'special,space',
                 true
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -524,103 +524,103 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function validateMustNotIncludeReturnsBoolDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'in2code.de',
                 'number,letter,special',
                 false
-            ),
-            array(
+            ],
+            [
                 'in2code.de ',
                 'number,letter,special,space',
                 false
-            ),
-            array(
+            ],
+            [
                 'in2code.de',
                 'number,  special',
                 false
-            ),
-            array(
+            ],
+            [
                 'in2code.de',
                 '   special  ,   letter ',
                 false
-            ),
-            array(
+            ],
+            [
                 'in2code',
                 'number,letter',
                 false
-            ),
-            array(
+            ],
+            [
                 'in2code',
                 'special,space',
                 true
-            ),
-            array(
+            ],
+            [
                 'in2code#',
                 'special',
                 false
-            ),
-            array(
+            ],
+            [
                 'in2co3de',
                 'special',
                 true
-            ),
-            array(
+            ],
+            [
                 'in2code',
                 'number',
                 false
-            ),
-            array(
+            ],
+            [
                 'incode.',
                 'number,letter',
                 false
-            ),
-            array(
+            ],
+            [
                 'in2 code',
                 'number,letter',
                 false
-            ),
-            array(
+            ],
+            [
                 'in code',
                 'letter',
                 false
-            ),
-            array(
+            ],
+            [
                 '1 2',
                 'number',
                 false
-            ),
-            array(
+            ],
+            [
                 '2',
                 'number',
                 false
-            ),
-            array(
+            ],
+            [
                 '1 2',
                 'space',
                 false
-            ),
-            array(
+            ],
+            [
                 '132',
                 'space',
                 true
-            ),
-            array(
+            ],
+            [
                 'a;#/%äß´^á 3',
                 'space',
                 false
-            ),
-            array(
+            ],
+            [
                 'a;#/%äß´^á 3',
                 'letter,number,special,space',
                 false
-            ),
-            array(
+            ],
+            [
                 'a;#/%äß´^á 3',
                 'special,space',
                 false
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -648,63 +648,63 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function validateInListReturnsBoolDataProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 '2',
                 '1,2,5,8',
                 true
-            ),
-            array(
+            ],
+            [
                 '2',
                 '1,1,2',
                 true
-            ),
-            array(
+            ],
+            [
                 '1',
                 '1,3,2',
                 true
-            ),
-            array(
+            ],
+            [
                 '1',
                 '1,3,2',
                 true
-            ),
-            array(
+            ],
+            [
                 '1',
                 1,
                 true
-            ),
-            array(
+            ],
+            [
                 1,
                 '1,2',
                 true
-            ),
-            array(
+            ],
+            [
                 'a',
                 'a',
                 true
-            ),
-            array(
+            ],
+            [
                 '23',
                 '1,234,3',
                 false
-            ),
-            array(
+            ],
+            [
                 'a',
                 'ab',
                 false
-            ),
-            array(
+            ],
+            [
                 'a',
                 'ba',
                 false
-            ),
-            array(
+            ],
+            [
                 'a',
                 'bac',
                 false
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -732,38 +732,38 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function validateSameAsReturnsBoolDateProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'abcd',
                 'abcd',
                 true
-            ),
-            array(
+            ],
+            [
                 'a',
                 'b',
                 false
-            ),
-            array(
+            ],
+            [
                 'a',
                 '',
                 false
-            ),
-            array(
+            ],
+            [
                 '',
                 '',
                 true
-            ),
-            array(
+            ],
+            [
                 0,
                 '0',
                 false
-            ),
-            array(
+            ],
+            [
                 1,
                 '1',
                 false
-            ),
-        );
+            ],
+        ];
     }
 
     /**

@@ -45,13 +45,13 @@ class UserBackendController extends AbstractController
      * @param array $filter Filter Array
      * @return void
      */
-    public function listAction($filter = array())
+    public function listAction($filter = [])
     {
         $this->view->assignMultiple(
-            array(
+            [
                 'users' => $this->userRepository->findAllInBackend($filter),
                 'moduleUri' => BackendUtility::getModuleUrl('tce_db')
-            )
+            ]
         );
     }
 

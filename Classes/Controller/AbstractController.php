@@ -178,19 +178,16 @@ abstract class AbstractController extends ActionController
     {
         $this->sendMailService->send(
             'createUserConfirmation',
-            StringUtility::makeEmailArray(
-                $user->getEmail(),
-                $user->getUsername()
-            ),
-            array(
+            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
+            [
                 $this->settings['new']['email']['createUserConfirmation']['sender']['email']['value'] =>
                     $this->settings['settings']['new']['email']['createUserConfirmation']['sender']['name']['value']
-            ),
+            ],
             'Confirm your profile creation request',
-            array(
+            [
                 'user' => $user,
                 'hash' => HashUtility::createHashForUser($user)
-            ),
+            ],
             $this->config['new.']['email.']['createUserConfirmation.']
         );
         $this->redirectByAction('new', 'requestRedirect');
@@ -213,15 +210,12 @@ abstract class AbstractController extends ActionController
                 $this->settings['new']['confirmByAdmin'],
                 $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
             ),
-            StringUtility::makeEmailArray(
-                $user->getEmail(),
-                $user->getUsername()
-            ),
+            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             'New Registration request',
-            array(
+            [
                 'user' => $user,
                 'hash' => HashUtility::createHashForUser($user)
-            ),
+            ],
             $this->config['new.']['email.']['createAdminConfirmation.']
         );
         $this->redirect('new');
@@ -247,23 +241,20 @@ abstract class AbstractController extends ActionController
                     $this->settings['edit']['notifyAdmin'],
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value']
                 ),
-                StringUtility::makeEmailArray(
-                    $user->getEmail(),
-                    $user->getUsername()
-                ),
+                StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile update',
-                array(
+                [
                     'user' => $user,
                     'changes' => $dirtyProperties,
                     'settings' => $this->settings
-                ),
+                ],
                 $this->config['edit.']['email.']['notifyAdmin.']
             );
         }
 
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $this));
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $this]);
         LogUtility::log(Log::STATUS_PROFILEUPDATED, $user);
         $this->redirectByAction('edit');
         $this->addFlashMessage(LocalizationUtility::translate('update'));
@@ -281,17 +272,17 @@ abstract class AbstractController extends ActionController
         $user = UserUtility::rollbackUserWithChangeRequest($user, $dirtyProperties);
         $this->sendMailService->send(
             'updateRequest',
-            array(
+            [
                 $this->settings['edit']['confirmByAdmin'] =>
                     $this->settings['edit']['email']['updateRequest']['sender']['name']['value']
-            ),
+            ],
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             'New Profile change request',
-            array(
+            [
                 'user' => $user,
                 'changes' => $dirtyProperties,
                 'hash' => HashUtility::createHashForUser($user)
-            ),
+            ],
             $this->config['edit.']['email.']['updateRequest.']
         );
         LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
@@ -312,14 +303,14 @@ abstract class AbstractController extends ActionController
     public function finalCreate($user, $action, $redirectByActionName, $login = true, $status = '')
     {
         $this->loginPreflight($user, $login);
-        $variables = array('user' => $user, 'settings' => $this->settings);
+        $variables = ['user' => $user, 'settings' => $this->settings];
         $this->sendMailService->send(
             'createUserNotify',
             StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
-            array(
+            [
                 $this->settings['new']['email']['createUserNotify']['sender']['email']['value'] =>
                     $this->settings['settings']['new']['email']['createUserNotify']['sender']['name']['value']
-            ),
+            ],
             'Profile creation',
             $variables,
             $this->config['new.']['email.']['createUserNotify.']
@@ -339,7 +330,7 @@ abstract class AbstractController extends ActionController
                 $this->config['new.']['email.']['createAdminNotify.']
             );
         }
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', array($user, $action, $this));
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $action, $this]);
         $this->finisherRunner->callFinishers($user, $this->actionMethodName, $this->settings, $this->contentObject);
         $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
         $this->redirect($redirectByActionName);
@@ -453,13 +444,13 @@ abstract class AbstractController extends ActionController
     public function assignForAll()
     {
         $this->view->assignMultiple(
-            array(
+            [
                 'languageUid' => FrontendUtility::getFrontendLanguageUid(),
                 'storagePid' => $this->allConfig['persistence']['storagePid'],
                 'Pid' => FrontendUtility::getCurrentPid(),
                 'actionName' => $this->actionMethodName,
                 'uploadFolder' => FileUtility::getUploadFolderFromTca()
-            )
+            ]
         );
     }
 
