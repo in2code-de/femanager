@@ -138,7 +138,7 @@ function getValueFromField(selector, fallback, mode) {
 	if ($(selector).length) {
 		value = $(selector).val();
 	}
-	if (mode != undefined) {
+	if (mode !== undefined) {
 		if (mode === 'int') {
 			value = parseInt(value);
 		} else if (mode === 'array') {
@@ -166,7 +166,7 @@ window.Femanager.getBaseUrl = function() {
 		if (window.location.port.length > 0) {
 			port = ':' + window.location.port;
 		}
-		if (window.location.protocol != "https:") {
+		if (window.location.protocol !== "https:") {
 			baseurl = 'http://' + window.location.hostname + port + '/';
 		} else {
 			baseurl = 'https://' + window.location.hostname + port + '/';

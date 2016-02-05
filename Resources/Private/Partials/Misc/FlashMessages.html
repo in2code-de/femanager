@@ -1,0 +1,11 @@
+<f:flashMessages as="flashMessages">
+	<div class="femanager_status">
+		<div class="femanager_flashmessages">
+			<f:for each="{flashMessages}" as="flashMessage">
+				<div class="typo3-message message-{flashMessage.severity}">
+					<div class="message-body">{flashMessage.message}</div>
+				</div>
+			</f:for>
+		</div>
+	</div>
+</f:flashMessages>

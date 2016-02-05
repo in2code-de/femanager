@@ -33,7 +33,7 @@
 @mixin message_ok {
   background: {
     color: $okSoft2;
-    image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/ok.png");
+    image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/notice.png");
   }
   border: 1px solid $okSoft;
   color: $ok;

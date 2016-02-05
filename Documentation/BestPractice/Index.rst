@@ -8,7 +8,7 @@ Best Practice
 
 .. only:: html
 
-	:ref:`changetemplates` | :ref:`countryselect` | :ref:`newfields` | :ref:`extendvalidators` | :ref:`signalslots` |
+	:ref:`changetemplates` | :ref:`countryselect` | :ref:`newfields` | :ref:`extendvalidators` | :ref:`finishers` | :ref:`signalslots` |
 
 
 .. _changetemplates:
@@ -251,7 +251,7 @@ Example file fileadmin/Partials/Fields/TwitterId.html:
 
 .. code-block:: text
 
-	{namespace femanager=In2\Femanager\ViewHelpers}
+	{namespace femanager=In2code\Femanager\ViewHelpers}
 	<div class="femanager_fieldset control-group">
 			<label for="twitterId" class="control-label">
 					<f:translate key="tx_femanagerextended_domain_model_user.twitter_id" extensionName="femanagerextended">Twitter</f:translate>
@@ -328,9 +328,9 @@ Example Model User.php which extends to the default femanager Model:
 
 .. code-block:: text
 
-	namespace In2\Femanagerextended\Domain\Model;
+	namespace In2code\Femanagerextended\Domain\Model;
 
-	class User extends \In2\Femanager\Domain\Model\User {
+	class User extends \In2code\Femanager\Domain\Model\User {
 
 		/**
 		 * twitterId
@@ -402,12 +402,12 @@ TypoScript to include Model and override default controller
 	config.tx_extbase{
 		persistence{
 			classes{
-				In2\Femanager\Domain\Model\User {
+				In2code\Femanager\Domain\Model\User {
 					subclasses {
-						0 = In2\Femanagerextended\Domain\Model\User
+						0 = In2code\Femanagerextended\Domain\Model\User
 					}
 				}
-				In2\Femanagerextended\Domain\Model\User {
+				In2code\Femanagerextended\Domain\Model\User {
 					mapping {
 						tableName = fe_users
 						recordType = 0
@@ -416,8 +416,8 @@ TypoScript to include Model and override default controller
 			}
 		}
 		objects {
-			In2\Femanager\Controller\NewController.className = In2\Femanagerextended\Controller\NewController
-			In2\Femanager\Controller\EditController.className = In2\Femanagerextended\Controller\EditController
+			In2code\Femanager\Controller\NewController.className = In2code\Femanagerextended\Controller\NewController
+			In2code\Femanager\Controller\EditController.className = In2code\Femanagerextended\Controller\EditController
 		}
 	}
 
@@ -429,19 +429,19 @@ EditController.php:
 
 .. code-block:: text
 
-	namespace In2\Femanagerextended\Controller;
+	namespace In2code\Femanagerextended\Controller;
 
-	class EditController extends \In2\Femanager\Controller\EditController {
+	class EditController extends \In2code\Femanager\Controller\EditController {
 
 		/**
 		 * action update
 		 *
-		 * @param \In2\Femanagerextended\Domain\Model\User $user
-		 * @validate $user In2\Femanager\Domain\Validator\ServersideValidator
-		 * @validate $user In2\Femanager\Domain\Validator\PasswordValidator
+		 * @param \In2code\Femanagerextended\Domain\Model\User $user
+		 * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
+		 * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
 		 * @return void
 		 */
-		public function updateAction(\In2\Femanagerextended\Domain\Model\User $user) {
+		public function updateAction(\In2code\Femanagerextended\Domain\Model\User $user) {
 			parent::updateAction($user);
 		}
 	}
@@ -451,19 +451,19 @@ NewController.php:
 
 .. code-block:: text
 
-	namespace In2\Femanagerextended\Controller;
+	namespace In2code\Femanagerextended\Controller;
 
-	class NewController extends \In2\Femanager\Controller\NewController {
+	class NewController extends \In2code\Femanager\Controller\NewController {
 
 		/**
 		 * action create
 		 *
-		 * @param \In2\Femanagerextended\Domain\Model\User $user
-		 * @validate $user In2\Femanager\Domain\Validator\ServersideValidator
-		 * @validate $user In2\Femanager\Domain\Validator\PasswordValidator
+		 * @param \In2code\Femanagerextended\Domain\Model\User $user
+		 * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
+		 * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
 		 * @return void
 		 */
-		public function createAction(\In2\Femanagerextended\Domain\Model\User $user) {
+		public function createAction(\In2code\Femanagerextended\Domain\Model\User $user) {
 			parent::createAction($user);
 		}
 	}
@@ -506,8 +506,8 @@ Override Validation Classes with TypoScript
 
 	config.tx_extbase{
 		objects {
-			In2\Femanager\Domain\Validator\ServersideValidator.className = In2\Femanagerextended\Domain\Validator\CustomServersideValidator
-			In2\Femanager\Domain\Validator\ClientsideValidator.className = In2\Femanagerextended\Domain\Validator\CustomClientsideValidator
+			In2code\Femanager\Domain\Validator\ServersideValidator.className = In2code\Femanagerextended\Domain\Validator\CustomServersideValidator
+			In2code\Femanager\Domain\Validator\ClientsideValidator.className = In2code\Femanagerextended\Domain\Validator\CustomClientsideValidator
 		}
 	}
 
@@ -518,9 +518,9 @@ CustomClientsideValidator.php:
 
 .. code-block:: text
 
-	namespace In2\Femanagerextended\Domain\Validator;
+	namespace In2code\Femanagerextended\Domain\Validator;
 
-	class CustomClientsideValidator extends \In2\Femanager\Domain\Validator\ClientsideValidator {
+	class CustomClientsideValidator extends \In2code\Femanager\Domain\Validator\ClientsideValidator {
 
 		/**
 		 * Custom Validator
@@ -544,9 +544,9 @@ CustomServersideValidator.php:
 
 .. code-block:: text
 
-	namespace In2\Femanagerextended\Domain\Validator;
+	namespace In2code\Femanagerextended\Domain\Validator;
 
-	class CustomServersideValidator extends \In2\Femanager\Domain\Validator\ServersideValidator {
+	class CustomServersideValidator extends \In2code\Femanager\Domain\Validator\ServersideValidator {
 
 		/**
 		 * Custom Validator
@@ -588,6 +588,173 @@ TypoScript to enable new validation and set labels
 	}
 
 
+
+
+.. _finishers:
+
+Add own Finisher classes
+------------------------
+
+Introduction
+^^^^^^^^^^^^
+
+Let's say you want to easily add some own php functions,
+that should be called after a user registered.
+Maybe you want to handle the user input with:
+
+* Send it to an API
+* Store it in a logfile
+* Save it into a table
+* Something else...
+
+Small example
+^^^^^^^^^^^^^
+
+Just define which classes should be used. Every method like \*Finisher() will be called - e.g. myFinisher():
+
+::
+
+   plugin.tx_femanager.settings {
+       finishers {
+           1 {
+               class = Vendor\Ext\Finisher\DoSomethingFinisher
+           }
+       }
+   }
+
+
+Add a php-file and extend your class with the AbstractFinisher from femanager:
+::
+
+   <?php
+   namespace Vendor\Ext\Finisher;
+
+   use In2code\Femanager\Finisher\AbstractFinisher;
+
+   /**
+    * Class DoSomethingFinisher
+    *
+    * @package Vendor\Ext\Finisher
+    */
+   class DoSomethingFinisher extends AbstractFinisher {
+
+       /**
+        * MyFinisher
+        *
+        * @return void
+        */
+       public function myFinisher() {
+           // ...
+       }
+   }
+
+Extended example
+^^^^^^^^^^^^^^^^
+
+See the advanced example with some configuration
+in TypoScript and with the possibility to load the file
+(useful if file could not be loaded from autoloader
+because it's stored in fileadmin or elsewhere)
+
+::
+
+   plugin.tx_femanager.settings {
+       finishers {
+           1 {
+               # Classname that should be called with method *Finisher()
+               class = Vendor\Ext\Finisher\DoSomethingFinisher
+
+               # optional: Add configuration for your PHP
+               config {
+                   foo = bar
+
+                   fooCObject = TEXT
+                   fooCObject.value = do something with this text
+               }
+
+               # optional: If file will not be loaded from autoloader, add path and it will be called with require_once
+               require = fileadmin/femanager/finisher/DoSomethingFinisher.php
+           }
+       }
+   }
+
+
+
+Add your php-file again and extend your class with the AbstractFinisher from femanager:
+
+::
+
+   <?php
+   namespace Vendor\Ext\Finisher;
+
+   use In2code\Femanager\Domain\Model\User;
+   use In2code\Femanager\Finisher\AbstractFinisher;
+
+   /**
+    * Class DoSomethingFinisher
+    *
+    * @package Vendor\Ext\Finisher
+    */
+   class DoSomethingFinisher extends AbstractFinisher {
+
+       /**
+        * @var User
+        */
+       protected $user;
+
+       /**
+        * @var array
+        */
+       protected $configuration;
+
+       /**
+        * @var array
+        */
+       protected $settings;
+
+       /**
+        * Will be called always at first
+        *
+        * @return void
+        */
+       public function initializeFinisher() {
+       }
+
+       /**
+        * Will be called before myFinisher()
+        *
+        * @return void
+        */
+       public function initializeMyFinisher() {
+       }
+
+       /**
+        * MyFinisher
+        *
+        * @return void
+        */
+       public function myFinisher() {
+           // get value from configuration
+           $foo = $this->configuration['foo'];
+
+           // get subject
+           $subject = $this->getMail()->getSubject();
+
+           // ...
+       }
+   }
+
+Some notices
+^^^^^^^^^^^^
+
+* All methods which are ending with "finisher" will be called - e.g. saveFinisher()
+* The method initializeFinisher() will always be called at first
+* Every finisher method could have its own initialize method, which will be called before. Like initializeMyFinisher() before myFinisher()
+* Classes in extensions (if namespace and filename fits) will be automaticly included from TYPO3 autoloader. If you place a single file in fileadmin, use "require" in TypoScript
+* Per default 10 and 20 is already in use from femanager itself (SaveToAnyTableFinisher, SendParametersFinisher) since version 2.0
+
+
+
 .. _signalslots:
 
 Using SignalSlots (Hook pendant) to extend femanager
@@ -597,9 +764,6 @@ Introduction
 ^^^^^^^^^^^^
 
 SignalSlots (former Hooks) are the possibility for other developer to extend the runtime of a femanager process with their own code.
-
-Introduction
-^^^^^^^^^^^^
 
 As an example let's build an extension which sends username and email address of a new registered user to a defined email address.
 
@@ -785,7 +949,7 @@ This file is important to install your new extension – write something like:
 
 femanagersignalslot/ext_localconf.php:
 
-This is an example how to use a signal from femanager – in this case we decided to use the signal “createActionBeforePersist” in class “In2FemanagerControllerNewController” and want to call a slot in class “In2FemanagersignalslotUtilitySendMail” with methodname “send()”
+This is an example how to use a signal from femanager – in this case we decided to use the signal “createActionBeforePersist” in class “In2codeFemanagerControllerNewController” and want to call a slot in class “In2codeFemanagersignalslotDomainServiceSendMailService” with methodname “send()”
 
 .. code-block:: text
 
@@ -793,29 +957,29 @@ This is an example how to use a signal from femanager – in this case we decide
 
 	$signalSlotDispatcher = t3lib_div::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
 	$signalSlotDispatcher->connect(
-		'In2\Femanager\Controller\NewController',
+		'In2code\Femanager\Controller\NewController',
 		'createActionBeforePersist',
-		'In2\Femanagersignalslot\Utility\SendMail',
+		'In2code\Femanagersignalslot\Domain\Service\SendMailService',
 		'send',
 		FALSE
 	);
 
-femanagersignalslot/Classes/Utility/SendMail.php:
+femanagersignalslot/Classes/Domain/Service/SendMailService.php:
 
 This is our main class which is called every time a new registration process was initiated.
 
 .. code-block:: text
 
 	<?php
-	namespace In2\Femanagersignalslot\Utility;
+	namespace In2code\Femanagersignalslot\Domain\Service;
 
-	class SendMail {
+	class SendMailService {
 
 		/**
 		 * Send mail about user information
 		 *
-		 * @param \In2\Femanager\Domain\Model\User $user
-		 * @param \In2\Femanager\Controller\NewController $pObj
+		 * @param \In2code\Femanager\Domain\Model\User $user
+		 * @param \In2code\Femanager\Controller\NewController $pObj
 		 * @return void
 		 */
 		public function send($user, $pObj) {

@@ -2,19 +2,19 @@
   > div {
     @include message;
   }
-  > .message-error {
+  > .message-2 {
     @include message_error;
   }
-  > .message-warning {
+  > .message-1 {
     @include message_warning;
   }
-  > .message-ok {
+  > .message-0 {
     @include message_ok;
   }
-  > .message-information {
+  > .message--1 {
     @include message_information;
   }
-  > .message-notice {
+  > .message--2 {
     @include message_note;
   }
 }

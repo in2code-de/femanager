@@ -1,4 +1,4 @@
-{namespace femanager=In2\Femanager\ViewHelpers}
+{namespace femanager=In2code\Femanager\ViewHelpers}
 <f:layout name="Backend" />
 
 UserBackend / List
@@ -6,7 +6,7 @@ UserBackend / List
 <f:section name="main">
 
 	<div class="femanager_list">
-		<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+		<f:render partial="Misc/FlashMessages" arguments="{_all}" />
 
 		<f:render partial="Backend/Searchform" />
 
@@ -122,7 +122,7 @@ UserBackend / List
 										<f:comment>
 											Edit Icon
 										</f:comment>
-										<a title="Edit" onclick="window.location.href = 'alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[fe_users][{user.uid}]=edit'; return false;" href="#">
+										<a title="Edit" href="{femanager:Misc.BackendEditLink(tableName:'fe_users',identifier:user.uid)}">
 											<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-open">&nbsp;</span>
 										</a>
 
@@ -151,7 +151,7 @@ UserBackend / List
 										</f:link.action>
 
 										<input type="hidden" class="container_uid" name="container_uid" value="{user.uid}" />
-										<input type="hidden" class="container_formtoken" name="container_formtoken" value="{token}" />
+										<input type="hidden" class="container_module_uri" name="container_module_uri" value="{moduleUri}" />
 										<input type="hidden" class="container_table" name="container_table" value="fe_users" />
 										<input type="hidden" class="container_label_delete_confirmation" name="container_label_delete_confirmation" value="{f:translate(key:'BackendListUserDeleteConfirmation')}" />
 									</td>

@@ -1,7 +1,7 @@
 <?php
-namespace In2\Femanager\ViewHelpers\Request;
+namespace In2code\Femanager\ViewHelpers\Request;
 
-use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -29,115 +29,119 @@ use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
 
 /**
  * Class RequestTest
- *
- * @package In2\Femanager\ViewHelpers\Form
+ * @package In2code\Femanager\ViewHelpers\Request
  */
-class RequestTest extends BaseTestCase {
+class RequestTest extends UnitTestCase
+{
 
-	/**
-	 * @var \In2\Femanager\ViewHelpers\Misc\RequestViewHelper
-	 */
-	protected $generalValidatorMock;
+    /**
+     * @var \In2code\Femanager\ViewHelpers\Misc\RequestViewHelper
+     */
+    protected $generalValidatorMock;
 
-	/**
-	 * @return void
-	 */
-	public function setUp() {
-		$this->generalValidatorMock = $this->getAccessibleMock(
-			'\In2\Femanager\ViewHelpers\Misc\RequestViewHelper',
-			array('dummy')
-		);
-	}
+    /**
+     * @return void
+     */
+    public function setUp()
+    {
+        $this->generalValidatorMock = $this->getAccessibleMock(
+            '\In2code\Femanager\ViewHelpers\Misc\RequestViewHelper',
+            ['dummy']
+        );
+    }
 
-	/**
-	 * @return void
-	 */
-	public function tearDown() {
-		unset($this->generalValidatorMock);
-	}
+    /**
+     * @return void
+     */
+    public function tearDown()
+    {
+        unset($this->generalValidatorMock);
+    }
 
-	/**
-	 * Data Provider for renderReturnsString()
-	 *
-	 * @return array
-	 */
-	public function renderReturnsStringDataProvider() {
-		return array(
-			array(
-				'L',
-				TRUE,
-				array(
-					'L' => '123'
-				),
-				'123'
-			),
-			array(
-				'test',
-				TRUE,
-				array(
-					'test' => '>'
-				),
-				'&gt;'
-			),
-			array(
-				'tx_test|sword',
-				TRUE,
-				array(
-					'tx_test' => array(
-						'sword' => 'abc'
-					)
-				),
-				'abc'
-			),
-			array(
-				'tx_test_pi1|abc|def',
-				TRUE,
-				array(
-					'tx_test_pi1' => array(
-						'abc' => array(
-							'def' => 'xyz'
-						)
-					)
-				),
-				'xyz'
-			),
-			array(
-				'asfd|abc|def|ghi',
-				TRUE,
-				array(
-					'asfd' => array(
-						'abc' => array(
-							'def' => array(
-								'ghi' => '7x'
-							)
-						)
-					)
-				),
-				'7x'
-			),
-			array(
-				'abc',
-				TRUE,
-				array(),
-				''
-			),
-		);
-	}
+    /**
+     * Data Provider for renderReturnsString()
+     *
+     * @return array
+     */
+    public function renderReturnsStringDataProvider()
+    {
+        return [
+            [
+                'L',
+                true,
+                [
+                    'L' => '123'
+                ],
+                '123'
+            ],
+            [
+                'test',
+                true,
+                [
+                    'test' => '>'
+                ],
+                '&gt;'
+            ],
+            [
+                'tx_test|sword',
+                true,
+                [
+                    'tx_test' => [
+                        'sword' => 'abc'
+                    ]
+                ],
+                'abc'
+            ],
+            [
+                'tx_test_pi1|abc|def',
+                true,
+                [
+                    'tx_test_pi1' => [
+                        'abc' => [
+                            'def' => 'xyz'
+                        ]
+                    ]
+                ],
+                'xyz'
+            ],
+            [
+                'asfd|abc|def|ghi',
+                true,
+                [
+                    'asfd' => [
+                        'abc' => [
+                            'def' => [
+                                'ghi' => '7x'
+                            ]
+                        ]
+                    ]
+                ],
+                '7x'
+            ],
+            [
+                'abc',
+                true,
+                [],
+                ''
+            ],
+        ];
+    }
 
-	/**
-	 * Test for render()
-	 *
-	 * @param string $parameter
-	 * @param bool $htmlSpecialChars
-	 * @param array $parametersToSet
-	 * @param string $expectedResult
-	 * @dataProvider renderReturnsStringDataProvider
-	 * @return void
-	 * @test
-	 */
-	public function renderReturnsString($parameter, $htmlSpecialChars, $parametersToSet, $expectedResult) {
-		$this->generalValidatorMock->_set('testVariables', $parametersToSet);
-		$result = $this->generalValidatorMock->_call('render', $parameter, $htmlSpecialChars);
-		$this->assertSame($expectedResult, $result);
-	}
+    /**
+     * Test for render()
+     *
+     * @param string $parameter
+     * @param bool $htmlSpecialChars
+     * @param array $parametersToSet
+     * @param string $expectedResult
+     * @dataProvider renderReturnsStringDataProvider
+     * @return void
+     * @test
+     */
+    public function renderReturnsString($parameter, $htmlSpecialChars, $parametersToSet, $expectedResult)
+    {
+        $this->generalValidatorMock->_set('testVariables', $parametersToSet);
+        $result = $this->generalValidatorMock->_call('render', $parameter, $htmlSpecialChars);
+        $this->assertSame($expectedResult, $result);
+    }
 }

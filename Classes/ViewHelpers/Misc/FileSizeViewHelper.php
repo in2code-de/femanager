@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\ViewHelpers\Misc;
+namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -32,22 +32,24 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  *
  * Class FileSizeViewHelper
  */
-class FileSizeViewHelper extends AbstractViewHelper {
+class FileSizeViewHelper extends AbstractViewHelper
+{
 
-	/**
-	 * A ViewHelper to get the Size of a File from a given $path
-	 *
-	 * @param string $path Filepath (like fileadmin/test.jpg)
-	 * @param string $unit Unit (b, k, m)
-	 * @return string The result
-	 */
-	public function render($path, $unit = 'k') {
+    /**
+     * A ViewHelper to get the Size of a File from a given $path
+     *
+     * @param string $path Filepath (like fileadmin/test.jpg)
+     * @param string $unit Unit (b, k, m)
+     * @return string The result
+     */
+    public function render($path, $unit = 'k')
+    {
 
-		$filesize = array();
-		$filesize['b'] = filesize($path);
-		$filesize['k'] = round(($filesize['b'] / 1024), 0);
-		$filesize['m'] = round(($filesize['k'] / 1024), 0);
+        $filesize = [];
+        $filesize['b'] = filesize($path);
+        $filesize['k'] = round(($filesize['b'] / 1024), 0);
+        $filesize['m'] = round(($filesize['k'] / 1024), 0);
 
-		return $filesize[$unit];
-	}
+        return $filesize[$unit];
+    }
 }

@@ -1,0 +1,10 @@
+default:
+    paths:
+      features: Features
+      bootstrap: %behat.paths.features%/Bootstrap
+    extensions:
+        Behat\MinkExtension\Extension:
+            base_url: http://femanager.localhost.de
+            files_path: /var/www/html/femanagerShared/fileadmin/user_upload
+            goutte: ~
+            selenium2: ~

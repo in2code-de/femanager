@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\Domain\Model;
+namespace In2code\Femanager\Domain\Model;
 
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 
@@ -32,7 +32,8 @@ use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
  *
  * @package femanager
  * @license http://www.gnu.org/licenses/gpl.html
- * 			GNU General Public License, version 3 or later
+ *          GNU General Public License, version 3 or later
  */
-class UserGroup extends FrontendUserGroup {
+class UserGroup extends FrontendUserGroup
+{
 }

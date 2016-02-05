@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\Domain\Repository;
+namespace In2code\Femanager\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
@@ -32,7 +32,8 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  *
  * @package femanager
  * @license http://www.gnu.org/licenses/gpl.html
- * 			GNU General Public License, version 3 or later
+ *          GNU General Public License, version 3 or later
  */
-class LogRepository extends Repository {
+class LogRepository extends Repository
+{
 }

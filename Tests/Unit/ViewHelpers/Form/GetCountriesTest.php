@@ -1,7 +1,7 @@
 <?php
-namespace In2\Femanager\ViewHelpers\Form;
+namespace In2code\Femanager\ViewHelpers\Form;
 
-use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -28,46 +28,47 @@ use TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase;
  ***************************************************************/
 
 /**
- * Test case for class \In2\Femanager\ViewHelpers\Form\GetCountriesViewHelper
- *
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html
- * 			GNU General Public License, version 3 or later
+ * Class GetCountriesTest
+ * @package In2code\Femanager\ViewHelpers\Form
  */
-class GetCountriesTest extends BaseTestCase {
+class GetCountriesTest extends UnitTestCase
+{
 
-	/**
-	 * @var \In2\Femanager\ViewHelpers\Form\GetCountriesViewHelper
-	 */
-	protected $generalValidatorMock;
+    /**
+     * @var \In2code\Femanager\ViewHelpers\Form\GetCountriesViewHelper
+     */
+    protected $generalValidatorMock;
 
-	/**
-	 * @return void
-	 */
-	public function setUp() {
-		$this->generalValidatorMock = $this->getAccessibleMock(
-			'\In2\Femanager\ViewHelpers\Form\GetCountriesViewHelper',
-			array('dummy')
-		);
-	}
+    /**
+     * @return void
+     */
+    public function setUp()
+    {
+        $this->generalValidatorMock = $this->getAccessibleMock(
+            '\In2code\Femanager\ViewHelpers\Form\GetCountriesViewHelper',
+            ['dummy']
+        );
+    }
 
-	/**
-	 * @return void
-	 */
-	public function tearDown() {
-		unset($this->generalValidatorMock);
-	}
+    /**
+     * @return void
+     */
+    public function tearDown()
+    {
+        unset($this->generalValidatorMock);
+    }
 
-	/**
-	 * Test for render()
-	 *
-	 * @return void
-	 * @test
-	 */
-	public function renderReturnArray() {
-		$result = $this->generalValidatorMock->_call('render');
-		$this->assertTrue(array_key_exists('DEU', $result));
-		$this->assertTrue(array_key_exists('FRA', $result));
-		$this->assertTrue(array_key_exists('SWZ', $result));
-	}
+    /**
+     * Test for render()
+     *
+     * @return void
+     * @test
+     */
+    public function renderReturnArray()
+    {
+        $result = $this->generalValidatorMock->_call('render');
+        $this->assertTrue(array_key_exists('DEU', $result));
+        $this->assertTrue(array_key_exists('FRA', $result));
+        $this->assertTrue(array_key_exists('SWZ', $result));
+    }
 }

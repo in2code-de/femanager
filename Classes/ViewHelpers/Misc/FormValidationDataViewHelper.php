@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\ViewHelpers\Misc;
+namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -9,81 +9,106 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @package TYPO3
  * @subpackage Fluid
  */
-class FormValidationDataViewHelper extends AbstractViewHelper {
+class FormValidationDataViewHelper extends AbstractViewHelper
+{
 
-	/**
-	 * Set javascript validation data for input fields
-	 *
-	 * @param array $settings TypoScript
-	 * @param string $fieldName Fieldname
-	 * @param array $additionalAttributes AdditionalAttributes
-	 * @return array
-	 */
-	public function render($settings, $fieldName, $additionalAttributes = array()) {
-		$array = $additionalAttributes;
+    /**
+     * Validation names with extended configuration
+     *
+     * @var array
+     */
+    protected $extendedValidations = [
+        'min',
+        'max',
+        'mustInclude',
+        'mustNotInclude',
+        'inList',
+        'sameAs'
+    ];
 
-		$controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-		if ($settings[$controllerName]['validation']['_enable']['client'] !== '1') {
-			return $array;
-		}
+    /**
+     * Set javascript validation data for input fields
+     *
+     * @param array $settings TypoScript
+     * @param string $fieldName Fieldname
+     * @param array $additionalAttributes AdditionalAttributes
+     * @return array
+     */
+    public function render($settings, $fieldName, $additionalAttributes = [])
+    {
+        if ($settings[$this->getControllerName()]['validation']['_enable']['client'] === '1') {
+            $validationString = $this->getValidationString($settings, $fieldName);
+            if (!empty($validationString)) {
+                if (!empty($additionalAttributes['data-validation'])) {
+                    $additionalAttributes['data-validation'] .= ',' . $validationString;
+                } else {
+                    $additionalAttributes['data-validation'] = $validationString;
+                }
+            }
+        }
+        return $additionalAttributes;
+    }
 
-		$validationString = $this->getValidationString($settings, $fieldName, $controllerName);
-		if (!empty($validationString)) {
-			$array['data-validation'] = $validationString;
-			if (!empty($additionalAttributes['data-validation'])) {
-				$array['data-validation'] .= ',' . $additionalAttributes['data-validation'];
-			}
-		}
-		return $array;
-	}
+    /**
+     * Get validation string like
+     *        required, email, min(10), max(10), intOnly,
+     *        lettersOnly, uniqueInPage, uniqueInDb, date,
+     *        mustInclude(number|letter|special), inList(1|2|3)
+     *
+     * @param array $settings Validation TypoScript
+     * @param string $fieldName Fieldname
+     * @return string
+     */
+    protected function getValidationString($settings, $fieldName)
+    {
+        $string = '';
+        $validationSettings = (array) $settings[$this->getControllerName()]['validation'][$fieldName];
+        foreach ($validationSettings as $validation => $configuration) {
+            if (!empty($string)) {
+                $string .= ',';
+            }
+            $string .= $this->getSingleValidationString($validation, $configuration);
+        }
+        return $string;
+    }
 
-	/**
-	 * Get validation string like
-	 * 		required, email, min(10), max(10), intOnly,
-	 * 		lettersOnly, uniqueInPage, uniqueInDb, date,
-	 * 		mustInclude(number|letter|special), inList(1|2|3)
-	 *
-	 * @param array $settings Validation TypoScript
-	 * @param string $fieldName Fieldname
-	 * @param string $controllerName "new", "edit", "invitation"
-	 * @return string
-	 */
-	protected function getValidationString($settings, $fieldName, $controllerName) {
-		$string = '';
-		foreach ((array) $settings[$controllerName]['validation'][$fieldName] as $validation => $configuration) {
-			switch ($validation) {
-				case 'required':
-					// or
-				case 'email':
-					// or
-				case 'intOnly':
-					// or
-				case 'lettersOnly':
-				// or
-				case 'uniqueInPage':
-				// or
-				case 'uniqueInDb':
-				// or
-				case 'date':
-					if ($configuration == 1) {
-						$string .= $validation;
-					}
-					break;
+    /**
+     * @param string $validation
+     * @param string $configuration
+     * @return string
+     */
+    protected function getSingleValidationString($validation, $configuration)
+    {
+        $string = '';
+        if ($this->isSimpleValidation($validation) && $configuration === '1') {
+            $string = $validation;
+        }
+        if (!$this->isSimpleValidation($validation)) {
+            $string = $validation;
+            $string .= '(' . str_replace(',', '|', $configuration) . ')';
+        }
+        return $string;
+    }
 
-				case 'min':
-					// or
-				case 'max':
-					// or
-				case 'mustInclude':
-					// or
-				case 'inList':
-				default:
-					$string .= $validation;
-					$string .= '(' . str_replace(',', '|', $configuration) . ')';
-			}
-			$string .= ',';
-		}
+    /**
+     * Check if validation is simple or extended
+     *
+     * @param string $validation
+     * @return bool
+     */
+    protected function isSimpleValidation($validation)
+    {
+        if (in_array($validation, $this->extendedValidations)) {
+            return false;
+        }
+        return true;
+    }
 
-		return substr($string, 0, -1);
-	}
+    /**
+     * @return string "new", "edit", "invitation"
+     */
+    protected function getControllerName()
+    {
+        return strtolower($this->controllerContext->getRequest()->getControllerName());
+    }
 }

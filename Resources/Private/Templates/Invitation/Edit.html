@@ -1,4 +1,4 @@
-{namespace femanager=In2\Femanager\ViewHelpers}
+{namespace femanager=In2code\Femanager\ViewHelpers}
 <f:layout name="Default" />
 
 Invitation / Edit
@@ -7,7 +7,7 @@ Available variables:
 {hash}
 
 <f:section name="main">
-	<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+	<f:render partial="Misc/FlashMessages" arguments="{_all}" />
 	<f:render partial="Misc/FormErrors" arguments="{object:User}" />
 
 	<div class="femanager_invitation_edit">

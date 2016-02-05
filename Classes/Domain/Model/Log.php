@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\Domain\Model;
+namespace In2code\Femanager\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
@@ -32,80 +32,105 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  *
  * @package femanager
  * @license http://www.gnu.org/licenses/gpl.html
- * 			GNU General Public License, version 3 or later
+ *          GNU General Public License, version 3 or later
  */
-class Log extends AbstractEntity {
+class Log extends AbstractEntity
+{
 
-	/**
-	 * title
-	 *
-	 * @var string
-	 */
-	protected $title;
+    const STATUS_NEWREGISTRATION = 101;
+    const STATUS_REGISTRATIONCONFIRMEDUSER = 102;
+    const STATUS_REGISTRATIONCONFIRMEDADMIN = 103;
+    const STATUS_REGISTRATIONREFUSEDUSER = 104;
+    const STATUS_REGISTRATIONREFUSEDADMIN = 105;
+    const STATUS_PROFILECREATIONREQUEST = 106;
+    const STATUS_PROFILEUPDATED = 201;
+    const STATUS_PROFILEUPDATECONFIRMEDADMIN = 202;
+    const STATUS_PROFILEUPDATEREFUSEDADMIN = 203;
+    const STATUS_PROFILEUPDATEREQUEST = 204;
+    const STATUS_PROFILEUPDATEREFUSEDSECURITY = 205;
+    const STATUS_PROFILEDELETE = 301;
+    const STATUS_INVITATIONPROFILECREATED = 401;
+    const STATUS_INVITATIONPROFILEDELETEDUSER = 402;
+    const STATUS_INVITATIONHASHERROR = 403;
+    const STATUS_INVITATIONRESTRICTEDPAGE = 404;
+    const STATUS_INVITATIONPROFILEENABLED = 405;
 
-	/**
-	 * state
-	 *
-	 * @var int
-	 */
-	protected $state;
+    /**
+     * title
+     *
+     * @var string
+     */
+    protected $title;
 
-	/**
-	 * user
-	 *
-	 * @var User
-	 */
-	protected $user;
+    /**
+     * state
+     *
+     * @var int
+     */
+    protected $state;
 
-	/**
-	 * Set user
-	 *
-	 * @param User $user
-	 * @return Log
-	 */
-	public function setUser(User $user) {
-		$this->user = $user;
-		return $this;
-	}
+    /**
+     * user
+     *
+     * @var User
+     */
+    protected $user;
 
-	/**
-	 * Get user
-	 *
-	 * @return User
-	 */
-	public function getUser() {
-		return $this->user;
-	}
+    /**
+     * @param string $title
+     * @return Log
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
 
-	/**
-	 * @param int $state
-	 * @return Log
-	 */
-	public function setState($state) {
-		$this->state = $state;
-		return $this;
-	}
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getState() {
-		return $this->state;
-	}
+    /**
+     * @param int $state
+     * @return Log
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+        return $this;
+    }
 
-	/**
-	 * @param string $title
-	 * @return Log
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-		return $this;
-	}
+    /**
+     * @return int
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * Set user
+     *
+     * @param User $user
+     * @return Log
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
