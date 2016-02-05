@@ -7,13 +7,13 @@ femanager
 .. only:: html
 
 	:Copyright:
-			2013 - 2014
+		2013 - 2016
 
 	:Classification:
 		femanager
 
 	:Version:
-		1.4
+		2.0
 
 	:Language:
 		en

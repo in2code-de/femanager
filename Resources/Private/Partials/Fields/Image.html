@@ -1,8 +1,8 @@
-{namespace femanager=In2\Femanager\ViewHelpers}
+{namespace femanager=In2code\Femanager\ViewHelpers}
 <div class="femanager_fieldset femanager_image control-group">
 	<label class="control-label" for="femanager_field_image">
 		<f:translate key="tx_femanager_domain_model_user.image" />
-		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'image', actionName: actionName)}">
+		<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'image',actionName:actionName)}">
 			<span>*</span>
 		</f:if>
 	</label>
@@ -12,7 +12,7 @@
 		</div>
 		<div id="femanager_field_preview-image">
 			<ul class="qq-upload-list">
-				<f:for each="{femanager:Form.GetImages(property: 'image')}" as="image">
+				<f:for each="{femanager:Form.GetImages(property:'image')}" as="image">
 					<li class="alert alert-success">
 						<span class="qq-upload-file">{image}</span>
 						<span class="qq-upload-size"><femanager:Misc.FileSize path="{uploadFolder}/{image}" />kB</span>

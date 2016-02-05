@@ -1,5 +1,8 @@
 <?php
-namespace In2\Femanager\Tests\Domain\Model;
+namespace In2code\Femanager\Tests\Domain\Model;
+
+use In2code\Femanager\Domain\Model\User;
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -26,52 +29,49 @@ namespace In2\Femanager\Tests\Domain\Model;
  ***************************************************************/
 
 /**
- * Test case for class \In2\Femanager\Domain\Model\User.
- *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html
- * 			GNU General Public License, version 3 or later
+ * Class UserTest
+ * @package In2code\Femanager\Tests\Domain\Model
  */
-class UserTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+class UserTest extends UnitTestCase
+{
 
-	/**
-	 * @var \In2\Femanager\Domain\Model\User
-	 */
-	protected $fixture;
+    /**
+     * @var User
+     */
+    protected $fixture;
 
-	/**
-	 * @return void
-	 */
-	public function setUp() {
-		$this->fixture = new \In2\Femanager\Domain\Model\User();
-	}
+    /**
+     * @return void
+     */
+    public function setUp()
+    {
+        $this->fixture = new User();
+    }
 
-	/**
-	 * @return void
-	 */
-	public function tearDown() {
-		unset($this->fixture);
-	}
+    /**
+     * @return void
+     */
+    public function tearDown()
+    {
+        unset($this->fixture);
+    }
 
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function getUsernameReturnsInitialValueForString() {
-	}
+    /**
+     * @test
+     * @return void
+     */
+    public function getUsernameReturnsInitialValueForString()
+    {
+    }
 
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function setUsernameForStringSetsUsername() {
-		$this->fixture->setUsername('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getUsername()
-		);
-	}
+    /**
+     * @test
+     * @return void
+     */
+    public function setUsernameForStringSetsUsername()
+    {
+        $this->fixture->setUsername('Conceived at T3CON10');
+        $this->assertSame('Conceived at T3CON10', $this->fixture->getUsername());
+    }
 
 }

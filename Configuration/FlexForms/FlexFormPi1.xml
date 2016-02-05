@@ -16,6 +16,7 @@
 							<onChange>reload</onChange>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose</numIndex>
@@ -63,6 +64,7 @@
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.new.fields</label>
 							<config>
 								<type>select</type>
+								<renderType>selectMultipleSideBySide</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.username</numIndex>
@@ -150,7 +152,7 @@
 								<autoSizeMax>20</autoSizeMax>
 								<minitems>0</minitems>
 								<allowNonIdValues>1</allowNonIdValues>
-								<itemsProcFunc>In2\Femanager\Utility\FlexFormFieldSelection->addOptions</itemsProcFunc>
+								<itemsProcFunc>In2code\Femanager\UserFunc\FlexFormFieldSelection->addOptions</itemsProcFunc>
 								<itemsProcFuncTab>new</itemsProcFuncTab>
 							</config>
 						</TCEforms>
@@ -214,6 +216,7 @@
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.edit.fields</label>
 							<config>
 								<type>select</type>
+								<renderType>selectMultipleSideBySide</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.username</numIndex>
@@ -301,7 +304,7 @@
 								<autoSizeMax>20</autoSizeMax>
 								<minitems>0</minitems>
 								<allowNonIdValues>1</allowNonIdValues>
-								<itemsProcFunc>In2\Femanager\Utility\FlexFormFieldSelection->addOptions</itemsProcFunc>
+								<itemsProcFunc>In2code\Femanager\UserFunc\FlexFormFieldSelection->addOptions</itemsProcFunc>
 								<itemsProcFuncTab>edit</itemsProcFuncTab>
 							</config>
 						</TCEforms>
@@ -370,6 +373,7 @@
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.orderby</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.orderby.0</numIndex>
@@ -394,6 +398,7 @@
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.sorting</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.sorting.0</numIndex>
@@ -414,6 +419,7 @@
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.usergroup</label>
 							<config>
 								<type>select</type>
+								<renderType>selectMultipleSideBySide</renderType>
 								<maxitems>100</maxitems>
 								<size>4</size>
 								<autoSizeMax>20</autoSizeMax>
@@ -440,6 +446,7 @@
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.show.user</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose</numIndex>
@@ -489,6 +496,7 @@
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.invitation.fields</label>
 							<config>
 								<type>select</type>
+								<renderType>selectMultipleSideBySide</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.username</numIndex>
@@ -568,7 +576,7 @@
 								<autoSizeMax>20</autoSizeMax>
 								<minitems>0</minitems>
 								<allowNonIdValues>1</allowNonIdValues>
-								<itemsProcFunc>In2\Femanager\Utility\FlexFormFieldSelection->addOptions</itemsProcFunc>
+								<itemsProcFunc>In2code\Femanager\UserFunc\FlexFormFieldSelection->addOptions</itemsProcFunc>
 								<itemsProcFuncTab>new</itemsProcFuncTab>
 							</config>
 						</TCEforms>

@@ -1,9 +1,9 @@
 <?php
-namespace In2\Femanager\Controller;
+namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use In2\Femanager\Domain\Model\User;
-use In2\Femanager\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -34,32 +34,37 @@ use In2\Femanager\Utility\Div;
  *
  * @package femanager
  * @license http://www.gnu.org/licenses/gpl.html
- * 			GNU General Public License, version 3 or later
+ *          GNU General Public License, version 3 or later
  */
-class UserBackendController extends AbstractController {
+class UserBackendController extends AbstractController
+{
 
-	/**
-	 * action list
-	 *
-	 * @param array $filter Filter Array
-	 * @return void
-	 */
-	public function listAction($filter = array()) {
-		$users = $this->userRepository->findAllInBackend($filter);
-		$this->view->assign('users', $users);
-		$this->view->assign('token', BackendUtility::getUrlToken('tceAction'));
-	}
+    /**
+     * action list
+     *
+     * @param array $filter Filter Array
+     * @return void
+     */
+    public function listAction($filter = [])
+    {
+        $this->view->assignMultiple(
+            [
+                'users' => $this->userRepository->findAllInBackend($filter),
+                'moduleUri' => BackendUtility::getModuleUrl('tce_db')
+            ]
+        );
+    }
 
-	/**
-	 * action user logout
-	 *
-	 * @param User $user
-	 * @return void
-	 */
-	public function userLogoutAction(User $user) {
-		Div::removeFrontendSessionToUser($user);
-		$this->addFlashMessage('User successfully logged out');
-		$this->redirect('list');
-	}
-
+    /**
+     * action user logout
+     *
+     * @param User $user
+     * @return void
+     */
+    public function userLogoutAction(User $user)
+    {
+        UserUtility::removeFrontendSessionToUser($user);
+        $this->addFlashMessage('User successfully logged out');
+        $this->redirect('list');
+    }
 }

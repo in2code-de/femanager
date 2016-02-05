@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\ViewHelpers\Misc;
+namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -9,15 +9,17 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @package TYPO3
  * @subpackage Fluid
  */
-class UpperViewHelper extends AbstractViewHelper {
+class UpperViewHelper extends AbstractViewHelper
+{
 
-	/**
-	 * View helper like ucfirst()
-	 *
-	 * @param string $string
-	 * @return string
-	 */
-	public function render($string = '') {
-		return ucfirst($string);
-	}
+    /**
+     * View helper like ucfirst()
+     *
+     * @param string $string
+     * @return string
+     */
+    public function render($string = '')
+    {
+        return ucfirst($string);
+    }
 }

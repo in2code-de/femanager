@@ -1,8 +1,8 @@
-{namespace femanager=In2\Femanager\ViewHelpers}
+{namespace femanager=In2code\Femanager\ViewHelpers}
 <div class="femanager_fieldset femanager_name control-group">
 	<label for="femanager_field_name" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.name" />
-		<f:if condition="{femanager:Misc.IsRequiredField(fieldName: 'name', actionName: actionName)}">
+		<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'name',actionName:actionName)}">
 			<span>*</span>
 		</f:if>
 	</label>
@@ -11,6 +11,6 @@
 				id="femanager_field_name"
 				property="name"
 				class="input-block-level"
-				additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'name')}" />
+				additionalAttributes="{femanager:Misc.FormValidationData(settings:settings,fieldName:'name')}" />
 	</div>
 </div>

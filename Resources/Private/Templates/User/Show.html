@@ -1,4 +1,4 @@
-{namespace femanager=In2\Femanager\ViewHelpers}
+{namespace femanager=In2code\Femanager\ViewHelpers}
 <f:layout name="Default" />
 
 	User / Show
@@ -6,7 +6,7 @@
 <f:section name="main">
 
 	<div class="femanager_show">
-		<f:flashMessages class="femanager_flashmessages" renderMode="div" />
+		<f:render partial="Misc/FlashMessages" arguments="{_all}" />
 
 		<f:if condition="{user}">
 			<f:then>

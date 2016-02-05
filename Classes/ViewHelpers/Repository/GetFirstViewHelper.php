@@ -1,5 +1,5 @@
 <?php
-namespace In2\Femanager\ViewHelpers\Repository;
+namespace In2code\Femanager\ViewHelpers\Repository;
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -30,19 +30,20 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 /**
  * Class GetFirstViewHelper
  */
-class GetFirstViewHelper extends AbstractViewHelper {
+class GetFirstViewHelper extends AbstractViewHelper
+{
 
-	/**
-	 * Call getFirst() method of object storage
-	 *
-	 * @param object $objects
-	 * @return mixed
-	 */
-	public function render($objects) {
-		if (method_exists($objects, 'getFirst')) {
-			$object = $objects->getFirst();
-			return $object;
-		}
-		return FALSE;
-	}
+    /**
+     * Call getFirst() method of object storage
+     *
+     * @param object $objects
+     * @return mixed
+     */
+    public function render($objects)
+    {
+        if (method_exists($objects, 'getFirst')) {
+            return $objects->getFirst();
+        }
+        return false;
+    }
 }
