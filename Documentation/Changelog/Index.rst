@@ -32,6 +32,16 @@ Changes
       Changes
 
  - :Version:
+      2.0.0
+   :State:
+      stable
+   :Date:
+      2016-01-05
+   :Changes:
+      Refactored version of femanager
+      Added Finisher implementation
+
+ - :Version:
       1.5.2
    :State:
       stable

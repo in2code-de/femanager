@@ -66,7 +66,9 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
     public function initializeFinisher()
     {
         $this->contentObject->start($this->user->_getProperties());
-        $typoScript = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+        $typoScript = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+        );
         $this->configuration = $typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.'];
     }
 
@@ -143,7 +145,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected function isEnabled()
     {
-        return $this->contentObject->cObjGetSingle($this->configuration['_enable'],
-            $this->configuration['_enable.']) === '1';
+        return $this->contentObject->cObjGetSingle($this->configuration['_enable'], $this->configuration['_enable.'])
+            === '1';
     }
 }
