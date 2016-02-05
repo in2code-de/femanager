@@ -112,7 +112,7 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
         if ($this->isTableEnabled($table)) {
             $this->contentObject->start($this->getDataArray());
             /** @var StoreInDatabaseService $storeInDatabase */
-            $storeInDatabase = $this->objectManager->get('In2code\\Femanager\\Domain\\Service\\StoreInDatabaseService');
+            $storeInDatabase = $this->objectManager->get(StoreInDatabaseService::class);
             $storeInDatabase->setTable($table);
             $this->setPropertiesForTable($table, $storeInDatabase);
             $this->addArrayToDataArray(['uid_' . $table => $storeInDatabase->execute()]);

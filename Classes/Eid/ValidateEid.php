@@ -3,6 +3,7 @@ namespace In2code\Femanager\Eid;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Core\Bootstrap;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Frontend\Utility\EidUtility;
 
 /***************************************************************
@@ -95,7 +96,7 @@ class ValidateEid
         $userObj = EidUtility::initFeUser();
         $pid = (GeneralUtility::_GP('id') ? GeneralUtility::_GP('id') : 1);
         $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
-            'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController',
+            TypoScriptFrontendController::class,
             $typo3ConfVars,
             $pid,
             0,
@@ -110,5 +111,5 @@ class ValidateEid
     }
 }
 
-$eid = GeneralUtility::makeInstance('In2code\\Femanager\\Eid\\ValidateEid', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = GeneralUtility::makeInstance(ValidateEid::class, $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->run();

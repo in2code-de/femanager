@@ -2,6 +2,7 @@
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Utility\TemplateUtility;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
@@ -75,7 +76,7 @@ class SendMailService
     public function send($template, $receiver, $sender, $subject, $variables = [], $typoScript = [])
     {
         // config
-        $email = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+        $email = $this->objectManager->get(MailMessage::class);
         $this->cObj = $this->configurationManager->getContentObject();
         if (!empty($variables['user']) && method_exists($variables['user'], '_getProperties')) {
             $this->cObj->start($variables['user']->_getProperties());

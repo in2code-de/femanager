@@ -1,6 +1,7 @@
 <?php
 namespace In2code\Femanager\Domain\Validator;
 
+use SJBR\SrFreecap\Validation\Validator\CaptchaValidator as FreecapCaptchaValidator;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
@@ -24,10 +25,8 @@ class CaptchaValidator extends AbstractValidator
         }
         $captchaCode = $this->pluginVariables['captcha'];
 
-        $freecapCaptchaValidator = $this->objectManager->get(
-            'SJBR\\SrFreecap\\Validation\\Validator\\CaptchaValidator'
-        );
-        if ($freecapCaptchaValidator->isValid($captchaCode)) {
+        $freecapValidator = $this->objectManager->get(FreecapCaptchaValidator::class);
+        if ($freecapValidator->isValid($captchaCode)) {
             return true;
         }
 

@@ -5,6 +5,7 @@ use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -77,7 +78,7 @@ abstract class AbstractUtility
      */
     protected static function getUserGroupRepository()
     {
-        return self::getObjectManager()->get('In2code\\Femanager\\Domain\\Repository\\UserGroupRepository');
+        return self::getObjectManager()->get(UserGroupRepository::class);
     }
 
     /**
@@ -117,7 +118,7 @@ abstract class AbstractUtility
      */
     protected static function getContentObject()
     {
-        return self::getObjectManager()->get('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
+        return self::getObjectManager()->get(ContentObjectRenderer::class);
     }
 
     /**
@@ -125,7 +126,7 @@ abstract class AbstractUtility
      */
     protected static function getConfigurationManager()
     {
-        return self::getObjectManager()->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
+        return self::getObjectManager()->get(ConfigurationManager::class);
     }
 
     /**
@@ -133,6 +134,6 @@ abstract class AbstractUtility
      */
     protected static function getObjectManager()
     {
-        return GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        return GeneralUtility::makeInstance(ObjectManager::class);
     }
 }

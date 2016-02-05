@@ -142,7 +142,7 @@ class TemplateUtility extends AbstractUtility
         $format = 'html'
     ) {
         /** @var StandaloneView $standAloneView */
-        $standAloneView = self::getObjectManager()->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+        $standAloneView = self::getObjectManager()->get(StandaloneView::class);
         $standAloneView->getRequest()->setControllerExtensionName($extensionName);
         $standAloneView->getRequest()->setPluginName($pluginName);
         $standAloneView->getRequest()->setControllerName($controllerName);

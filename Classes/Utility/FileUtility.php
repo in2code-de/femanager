@@ -1,6 +1,7 @@
 <?php
 namespace In2code\Femanager\Utility;
 
+use TYPO3\CMS\Core\Utility\File\BasicFileUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
@@ -52,7 +53,7 @@ class FileUtility extends AbstractUtility
         }
 
         // create new filename and upload it
-        $basicFileFunctions = self::getObjectManager()->get('TYPO3\\CMS\\Core\\Utility\\File\\BasicFileUtility');
+        $basicFileFunctions = self::getObjectManager()->get(BasicFileUtility::class);
         $filename = StringUtility::cleanString($files['qqfile']['name']);
         $newFile = $basicFileFunctions->getUniqueName(
             $filename,

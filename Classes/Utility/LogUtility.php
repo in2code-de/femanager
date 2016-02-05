@@ -59,7 +59,7 @@ class LogUtility extends AbstractUtility
      */
     protected function getLog()
     {
-        return self::getObjectManager()->get('In2code\\Femanager\\Domain\\Model\\Log');
+        return self::getObjectManager()->get(Log::class);
     }
 
     /**
@@ -67,6 +67,6 @@ class LogUtility extends AbstractUtility
      */
     protected function getLogRepository()
     {
-        return self::getObjectManager()->get('In2code\\Femanager\\Domain\\Repository\\LogRepository');
+        return self::getObjectManager()->get(LogRepository::class);
     }
 }

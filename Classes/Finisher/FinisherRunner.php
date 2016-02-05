@@ -63,16 +63,6 @@ class FinisherRunner
     protected $settings = [];
 
     /**
-     * Own finisher classnames - ordering will be respected
-     *
-     * @var array
-     */
-    protected $ownFinisherClasses = [
-        'SaveToAnyTableFinisher',
-        'SendParametersFinisher'
-    ];
-
-    /**
      * Call finisher classes after submit
      *
      * @param User $user
@@ -87,84 +77,27 @@ class FinisherRunner
         $settings,
         ContentObjectRenderer $contentObject
     ) {
-        $this->initialize($settings, $contentObject);
-        $this->callLocalFinishers($user, $actionMethodName);
-        $this->callForeignFinishers($user, $actionMethodName);
-    }
-
-    /**
-     * Call own finisher classes after submit
-     *
-     * @param User $user
-     * @param string $actionMethodName
-     * @return void
-     */
-    protected function callLocalFinishers(User $user, $actionMethodName = null)
-    {
-        $ownClasses = $this->getOwnFinisherClasses();
-        foreach ($ownClasses as $className) {
+        foreach ($this->getFinisherClasses($settings) as $finisherSettings) {
             /** @var FinisherService $finisherService */
-            $finisherService = $this->objectManager->get(
-                'In2code\\Femanager\\Domain\\Service\\FinisherService',
-                $user,
-                $this->settings,
-                $this->contentObject
-            );
-            $finisherService->setClass(__NAMESPACE__ . '\\' . $className);
-            $finisherService->setRequirePath(null);
-            $finisherService->setConfiguration([]);
+            $finisherService = $this->objectManager->get(FinisherService::class, $user, $settings, $contentObject);
+            $finisherService->setClass($finisherSettings['class']);
+            $finisherService->setRequirePath((string) $finisherSettings['require']);
+            $finisherService->setConfiguration((array) $finisherSettings['config']);
             $finisherService->setActionMethodName($actionMethodName);
             $finisherService->start();
         }
     }
 
     /**
-     * Call foreign finisher classes after submit
-     *
-     * @param User $user
-     * @param string $actionMethodName
-     * @return void
-     */
-    protected function callForeignFinishers(User $user, $actionMethodName = null)
-    {
-        if (is_array($this->settings['finishers'])) {
-            foreach ($this->settings['finishers'] as $finisherSettings) {
-                /** @var FinisherService $finisherService */
-                $finisherService = $this->objectManager->get(
-                    'In2code\\Femanager\\Domain\\Service\\FinisherService',
-                    $user,
-                    $this->settings,
-                    $this->contentObject
-                );
-                $finisherService->setClass($finisherSettings['class']);
-                $finisherService->setRequirePath((string) $finisherSettings['require']);
-                $finisherService->setConfiguration((array) $finisherSettings['config']);
-                $finisherService->setActionMethodName($actionMethodName);
-                $finisherService->start();
-            }
-        }
-    }
-
-    /**
-     * Get all finisher classes in same directory
-     *
-     * @return array
-     */
-    public function getOwnFinisherClasses()
-    {
-        return $this->ownFinisherClasses;
-    }
-
-    /**
-     * Initialize
+     * Get all finisher classes from typoscript and sort them
      *
      * @param array $settings
-     * @param ContentObjectRenderer $contentObject
-     * @return void
+     * @return array
      */
-    public function initialize(array $settings, ContentObjectRenderer $contentObject)
+    protected function getFinisherClasses($settings)
     {
-        $this->settings = $settings;
-        $this->contentObject = $contentObject;
+        $finishers = (array) $settings['finishers'];
+        ksort($finishers);
+        return $finishers;
     }
 }

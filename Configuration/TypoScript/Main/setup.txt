@@ -1380,7 +1380,11 @@ plugin.tx_femanager {
 
 		# Add own finisher classes that will be called after registration, profile update, invitation or deletion (e.g. if you want to do something with form values by your own: Save into tables, call an API, etc...)
 		finishers {
-#			1 {
+			# Femanager finishers
+			10.class = In2code\Femanager\Finisher\SaveToAnyTableFinisher
+			20.class = In2code\Femanager\Finisher\SendParametersFinisher
+
+#			100 {
  				# Classname that should be called with method *Finisher()
 #				class = Vendor\Ext\Finisher\DoSomethingFinisher
 

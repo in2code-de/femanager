@@ -7,6 +7,7 @@ use In2code\Femanager\Domain\Repository\UserRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
 use TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility;
 
@@ -52,8 +53,7 @@ class UserUtility extends AbstractUtility
     {
         if (self::getPropertyFromUser() !== null) {
             /** @var UserRepository $userRepository */
-            $userRepository = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager')
-                ->get('In2code\\Femanager\\Domain\\Repository\\UserRepository');
+            $userRepository = GeneralUtility::makeInstance(ObjectManager::class)->get(UserRepository::class);
             return $userRepository->findByUid((int) self::getPropertyFromUser());
         }
         return null;
