@@ -503,17 +503,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * Store user values in any database table
-     *
-     * @param User $user User properties
-     * @return void
-     */
-    protected function storeInDatabasePreflight($user)
-    {
-
-    }
-
-    /**
      * Deactivate errormessages in flashmessages
      *
      * @return bool
