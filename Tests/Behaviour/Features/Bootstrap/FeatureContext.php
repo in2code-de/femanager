@@ -43,6 +43,20 @@ class FeatureContext extends MinkContext
     }
 
     /**
+     * Search for this string in html sourcecode
+     *
+     * @Then /^the sourcecode should not contain \'([^\']*)\'$/
+     *
+     * @param string $html
+     * @return void
+     */
+    public function theSourcecodeShouldNotContain($html)
+    {
+        $html = str_replace('\n', PHP_EOL, $html);
+        $this->assertSession()->responseNotContains($this->fixStepArgument($html));
+    }
+
+    /**
      * Override MinkContext::fixStepArgument().
      *      Make it possible to use [random].
      *      If you want to use the previous random value [random:1].
