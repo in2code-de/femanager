@@ -231,9 +231,8 @@ class NewController extends AbstractController
         if (HashUtility::validHash($hash, $user)) {
             $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onAdminConfirmation.']);
             $user->setTxFemanagerConfirmedbyadmin(true);
-            if ($user->getTxFemanagerConfirmedbyuser() || empty($this->settings['new']['confirmByUser'])) {
-                $user->setDisable(false);
-            }
+            $user->setDisable(false);
+            $this->userRepository->update($user);
             $this->addFlashMessage(LocalizationUtility::translate('create'));
             LogUtility::log(Log::STATUS_REGISTRATIONCONFIRMEDADMIN, $user);
             $this->finalCreate($user, 'new', 'createStatus', false, $status);
