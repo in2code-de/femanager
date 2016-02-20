@@ -386,7 +386,7 @@ abstract class AbstractController extends ActionController
             $this->uriBuilder->setTargetPageUid($target);
             $this->uriBuilder->setLinkAccessRestrictedPages(true);
             $link = $this->uriBuilder->build();
-            $this->redirectToUri($link);
+            $this->redirectToUri(StringUtility::removeDoubleSlashes($link));
         }
     }
 
@@ -419,7 +419,7 @@ abstract class AbstractController extends ActionController
     /**
      * Check if user is authenticated
      *
-     * @param \In2code\Femanager\Domain\Model\User $user
+     * @param User $user
      * @param int $uid Given fe_users uid
      * @return void
      */
@@ -500,17 +500,6 @@ abstract class AbstractController extends ActionController
         ) {
             $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', FlashMessage::ERROR);
         }
-    }
-
-    /**
-     * Store user values in any database table
-     *
-     * @param User $user User properties
-     * @return void
-     */
-    protected function storeInDatabasePreflight($user)
-    {
-
     }
 
     /**

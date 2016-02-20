@@ -32,6 +32,19 @@ Changes
       Changes
 
  - :Version:
+      2.0.1
+   :State:
+      stable
+   :Date:
+      2016-02-20
+   :Changes:
+
+      * Bugfix _`#73527`: https://forge.typo3.org/issues/73527 Own mm relations throws exception
+      * Bugfix _`#73492`: https://forge.typo3.org/issues/73492 Userdata not updated after Confirmation
+      * Bugfix _`#73440`: https://forge.typo3.org/issues/73440 Searchform condition broken
+      * Bugfix _`#70830`: https://forge.typo3.org/issues/70830 \In2\Femanager\Controller\NewController::redirectByAction: Wrong URLs
+
+ - :Version:
       2.0.0
    :State:
       stable

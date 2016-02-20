@@ -133,6 +133,19 @@ class UserUtility extends AbstractUtility
     }
 
     /**
+     * @param User $user
+     * @param array $settings
+     * @return User
+     */
+    public static function takeEmailAsUsername(User $user, array $settings)
+    {
+        if ($settings['new']['fillEmailWithUsername'] === '1') {
+            $user->setEmail($user->getUsername());
+        }
+        return $user;
+    }
+
+    /**
      * Overwrite usergroups from user by flexform settings
      *
      * @param User $user

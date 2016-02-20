@@ -349,7 +349,7 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
-					<settings.list.filter>
+					<settings.list.filterActivate>
 						<TCEforms>
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.filter</label>
 							<config>
@@ -357,7 +357,7 @@
 								<default>0</default>
 							</config>
 						</TCEforms>
-					</settings.list.filter>
+					</settings.list.filterActivate>
 					<settings.list.limit>
 						<TCEforms>
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.limit</label>

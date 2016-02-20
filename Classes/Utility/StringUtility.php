@@ -170,4 +170,13 @@ class StringUtility extends AbstractUtility
     {
         return implode('', range('A', 'Z'));
     }
+
+    /**
+     * @param string $string
+     * @return string
+     */
+    public static function removeDoubleSlashes($string)
+    {
+        return str_replace('//', '/', $string);
+    }
 }

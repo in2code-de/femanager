@@ -125,6 +125,7 @@ class User extends FrontendUser
 
     /**
      * Created Password in Cleartext (if generated Password)
+     * will of course not be persistent and lives until runtime end
      *
      * @var string
      */
