@@ -55,10 +55,12 @@ class NewController extends AbstractController
      */
     public function newAction(User $user = null)
     {
-        $this->view->assignMultiple([
+        $this->view->assignMultiple(
+            [
                 'user' => $user,
                 'allUserGroups' => $this->allUserGroups
-            ]);
+            ]
+        );
         $this->assignForAll();
     }
 
@@ -76,9 +78,7 @@ class NewController extends AbstractController
         $user = UserUtility::overrideUserGroup($user, $this->settings);
         $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
         $user = UserUtility::fallbackUsernameAndPassword($user);
-        if ($this->settings['new']['fillEmailWithUsername'] === '1') {
-            $user->setEmail($user->getUsername());
-        }
+        $user = UserUtility::takeEmailAsUsername($user, $this->settings);
         UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', [$user, $this]);
 
