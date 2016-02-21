@@ -186,12 +186,15 @@ class UserUtility extends AbstractUtility
      * Hash a password from $user->getPassword()
      *
      * @param User $user
-     * @param string $method "md5" or "sha1"
+     * @param string $method "md5", "sha1" or "none"
      * @return void
      */
     public static function hashPassword(User &$user, $method)
     {
         switch ($method) {
+            case 'none':
+                break;
+
             case 'md5':
                 $user->setPassword(md5($user->getPassword()));
                 break;
