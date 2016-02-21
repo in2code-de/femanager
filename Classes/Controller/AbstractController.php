@@ -234,7 +234,6 @@ abstract class AbstractController extends ActionController
         // send notify email to admin
         if ($this->settings['edit']['notifyAdmin']) {
             $existingUser = $this->userRepository->findByUid($user->getUid());
-            $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($existingUser);
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
@@ -245,7 +244,7 @@ abstract class AbstractController extends ActionController
                 'Profile update',
                 [
                     'user' => $user,
-                    'changes' => $dirtyProperties,
+                    'changes' => UserUtility::getDirtyPropertiesFromUser($existingUser),
                     'settings' => $this->settings
                 ],
                 $this->config['edit.']['email.']['notifyAdmin.']
