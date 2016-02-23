@@ -45,7 +45,7 @@ class LogUtility extends AbstractUtility
      */
     public static function log($state, User $user)
     {
-        if (ConfigurationUtility::isDisableLogActive()) {
+        if (!ConfigurationUtility::isDisableLogActive()) {
             $log = self::getLog();
             $log->setTitle(LocalizationUtility::translate('tx_femanager_domain_model_log.state.' . $state));
             $log->setState($state);
