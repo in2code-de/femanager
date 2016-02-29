@@ -2,6 +2,7 @@
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Repository\UserGroupRepository;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -135,5 +136,13 @@ abstract class AbstractUtility
     protected static function getObjectManager()
     {
         return GeneralUtility::makeInstance(ObjectManager::class);
+    }
+
+    /**
+     * @return BackendUserAuthentication
+     */
+    protected static function getBackendUserAuthentication()
+    {
+        return $GLOBALS['BE_USER'];
     }
 }

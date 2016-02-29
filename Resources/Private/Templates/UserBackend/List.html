@@ -1,4 +1,5 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
+{namespace core=TYPO3\CMS\Core\ViewHelpers}
 <f:layout name="Backend" />
 
 UserBackend / List
@@ -15,7 +16,7 @@ UserBackend / List
 
 				<f:widget.paginate objects="{users}" as="usersPage" configuration="{itemsPerPage: 100, insertBelow: 1}">
 					<table cellspacing="0" cellpadding="0" border="0" class="{f:if(condition:'{femanager:Condition.IsCompatVersion(versionNumber:\'7.0\')}', then: 'table table-striped table-hover', else: 'typo3-dblist')}">
-						<tbody><f:comment></f:comment>
+						<tbody>
 
 							<tr class="t3-row-header">
 								<td nowrap="nowrap" class="col-icon">&nbsp;</td>
@@ -141,6 +142,15 @@ UserBackend / List
 											<f:else>
 												<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-hide hideUser cursorpointer">&nbsp;</span>
 											</f:else>
+										</f:if>
+
+										<f:comment>
+											Login as Icon
+										</f:comment>
+										<f:if condition="{femanager:Condition.IsBackendAdministratorAuthentication()}">
+											<a href="/?eID=femanagerLoginAs&user={user.uid}" title="{f:translate(key: 'BackendListLoginAs')}" target="_blank">
+												<core:icon identifier="actions-system-backend-user-switch" />
+											</a>
 										</f:if>
 
 										<f:comment>

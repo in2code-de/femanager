@@ -1931,6 +1931,18 @@ Plain Text
                 }
             }
 
+            loginAs {
+                # redirect when simulate a frontenduser login from administrator
+    #			redirect = TEXT
+    #			redirect {
+    #				 typolink {
+    #					 parameter = 1
+    #					 returnLast = url
+    #					 #linkAccessRestrictedPages = 1
+    #				 }
+    #			}
+            }
+
             misc {
                 # Number of allowed images to upload
                 uploadAmount = 3
