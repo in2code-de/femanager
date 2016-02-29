@@ -159,7 +159,7 @@ class User extends FrontendUser
      * @param UserGroup $usergroup
      * @return void
      */
-    public function addUsergroup(UserGroup $usergroup)
+    public function addUsergroup($usergroup)
     {
         $this->usergroup->attach($usergroup);
     }
@@ -170,7 +170,7 @@ class User extends FrontendUser
      * @param UserGroup $usergroup
      * @return void
      */
-    public function removeUsergroup(UserGroup $usergroup)
+    public function removeUsergroup($usergroup)
     {
         $this->usergroup->detach($usergroup);
     }
