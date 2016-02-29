@@ -2,7 +2,11 @@
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\BackendUserUtility;
 use In2code\Femanager\Utility\FileUtility;
+use In2code\Femanager\Utility\LocalizationUtility;
+use In2code\Femanager\Utility\UserUtility;
+use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
 
 /***************************************************************
  *  Copyright notice
@@ -146,5 +150,22 @@ class UserController extends AbstractController
                 'user' => $user
             ]
         );
+    }
+
+    /**
+     * Simulate frontenduser login for backend adminstrators only
+     *
+     * @param User $user
+     * @throws UnauthorizedException
+     * @return void
+     */
+    public function loginAsAction(User $user)
+    {
+        if (!BackendUserUtility::isAdminAuthentication()) {
+            throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'));
+        }
+        UserUtility::login($user);
+        $this->redirectByAction('loginAs', 'redirect');
+        $this->redirectToUri('/');
     }
 }

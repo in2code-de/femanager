@@ -217,8 +217,8 @@ class EditController extends AbstractController
     protected function keepPassword()
     {
         return !empty($this->settings['edit']['misc']['keepPasswordIfEmpty']) &&
-        !empty($this->pluginVariables['user']['password']) &&
-        !empty($this->pluginVariables['password_repeat']);
+        empty($this->pluginVariables['user']['password']) &&
+        empty($this->pluginVariables['password_repeat']);
     }
 
     /**

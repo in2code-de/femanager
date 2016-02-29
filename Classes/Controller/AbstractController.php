@@ -232,9 +232,8 @@ abstract class AbstractController extends ActionController
     {
 
         // send notify email to admin
+        $existingUser = $this->userRepository->findByUid($user->getUid());
         if ($this->settings['edit']['notifyAdmin']) {
-            $existingUser = $this->userRepository->findByUid($user->getUid());
-            $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($existingUser);
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
@@ -245,7 +244,7 @@ abstract class AbstractController extends ActionController
                 'Profile update',
                 [
                     'user' => $user,
-                    'changes' => $dirtyProperties,
+                    'changes' => UserUtility::getDirtyPropertiesFromUser($existingUser),
                     'settings' => $this->settings
                 ],
                 $this->config['edit.']['email.']['notifyAdmin.']
@@ -255,7 +254,7 @@ abstract class AbstractController extends ActionController
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $this]);
-        LogUtility::log(Log::STATUS_PROFILEUPDATED, $user);
+        LogUtility::log(Log::STATUS_PROFILEUPDATED, $user, ['existingUser' => $existingUser]);
         $this->redirectByAction('edit');
         $this->addFlashMessage(LocalizationUtility::translate('update'));
     }
@@ -285,7 +284,7 @@ abstract class AbstractController extends ActionController
             ],
             $this->config['edit.']['email.']['updateRequest.']
         );
-        LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
+        LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user, ['dirtyProperties' => $dirtyProperties]);
         $this->redirectByAction('edit', 'requestRedirect');
         $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
     }

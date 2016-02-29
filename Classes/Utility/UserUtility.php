@@ -186,12 +186,15 @@ class UserUtility extends AbstractUtility
      * Hash a password from $user->getPassword()
      *
      * @param User $user
-     * @param string $method "md5" or "sha1"
+     * @param string $method "md5", "sha1" or "none"
      * @return void
      */
     public static function hashPassword(User &$user, $method)
     {
         switch ($method) {
+            case 'none':
+                break;
+
             case 'md5':
                 $user->setPassword(md5($user->getPassword()));
                 break;
@@ -316,16 +319,22 @@ class UserUtility extends AbstractUtility
      * Login FE-User
      *
      * @param User $user
-     * @param string $storagePids
+     * @param null|string $storagePids
      * @return void
      */
-    public static function login(User $user, $storagePids)
+    public static function login(User $user, $storagePids = null)
     {
-        $GLOBALS['TSFE']->fe_user->checkPid = false;
-        $info = $GLOBALS['TSFE']->fe_user->getAuthInfoArray();
-        $extraWhere = ' AND pid IN (' . self::getDatabaseConnection()->cleanIntList($storagePids) . ')';
-        $user = $GLOBALS['TSFE']->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
-        $GLOBALS['TSFE']->fe_user->createUserSession($user);
-        $GLOBALS['TSFE']->fe_user->user = $GLOBALS['TSFE']->fe_user->fetchUserSession();
+        $tsfe = self::getTypoScriptFrontendController();
+        $tsfe->fe_user->checkPid = false;
+        $info = $tsfe->fe_user->getAuthInfoArray();
+
+        $extraWhere = '';
+        if (!empty($storagePids)) {
+            $extraWhere = ' AND pid IN (' . self::getDatabaseConnection()->cleanIntList($storagePids) . ')';
+        }
+        $user = $tsfe->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
+        $tsfe->fe_user->createUserSession($user);
+        $tsfe->fe_user->user = $tsfe->fe_user->fetchUserSession();
+        $tsfe->fe_user->setAndSaveSessionData('ses', true);
     }
 }

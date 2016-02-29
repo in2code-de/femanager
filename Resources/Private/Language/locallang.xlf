@@ -175,6 +175,9 @@
 			<trans-unit id="error_no_storagepid">
 				<source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
 			</trans-unit>
+			<trans-unit id="error_not_authorized">
+				<source>You are not authorized for this action</source>
+			</trans-unit>
 			<trans-unit id="validationError">
 				<source>Error</source>
 			</trans-unit>
@@ -544,6 +547,9 @@
 			</trans-unit>
 			<trans-unit id="BackendListFilterLabel">
 				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="BackendListLoginAs">
+				<source>Login as</source>
 			</trans-unit>
 		</body>
 	</file>

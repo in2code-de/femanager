@@ -32,6 +32,21 @@ Changes
       Changes
 
  - :Version:
+      2.1.0
+   :State:
+      stable
+   :Date:
+      2016-02-29
+   :Changes:
+
+      * Feature _`#73583`: https://forge.typo3.org/issues/73583 New hashing option "none"
+      * Feature _`#73634`: https://forge.typo3.org/issues/73634 Log changes more detailed
+      * Feature _`#73708`: https://forge.typo3.org/issues/73708 "Login As" Feature in Backend
+      * Bugfix _`#73632`: https://forge.typo3.org/issues/73632 LogUtility::log is not working
+      * Bugfix _`#73678`: https://forge.typo3.org/issues/73678 New password not saved
+      * Bugfix _`#73689`: https://forge.typo3.org/issues/73689 PHP Warning: Declaration of In2code\Femanager\Domain\Model\User::addUsergroup( ...
+
+ - :Version:
       2.0.1
    :State:
       stable
