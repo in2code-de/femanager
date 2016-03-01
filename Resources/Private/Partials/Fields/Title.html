@@ -2,7 +2,7 @@
 <div class="femanager_fieldset femanager_title control-group">
 	<label for="femanager_field_title" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.title" />
-		<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'title')}">
+		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'title')}">
 			<span>*</span>
 		</f:if>
 	</label>
@@ -11,6 +11,6 @@
 				id="femanager_field_title"
 				property="title"
 				class="input-block-level"
-				additionalAttributes="{femanager:Misc.FormValidationData(settings:settings,fieldName:'title')}" />
+				additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'title')}" />
 	</div>
 </div>

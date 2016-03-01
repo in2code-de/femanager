@@ -2,7 +2,7 @@
 <div class="femanager_fieldset femanager_username control-group">
 	<label for="femanager_field_username" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.username" />
-		<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'username')}">
+		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'username')}">
 			<span>*</span>
 		</f:if>
 	</label>
@@ -11,6 +11,6 @@
 				id="femanager_field_username"
 				property="username"
 				class="input-block-level"
-				additionalAttributes="{femanager:Misc.FormValidationData(settings:settings,fieldName:'username')}" />
+				additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'username')}" />
 	</div>
 </div>

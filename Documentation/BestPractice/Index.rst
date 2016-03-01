@@ -110,7 +110,7 @@ The idea is very simple. You can change the “options Attribute” of the form.
 		options="{femanager:Form.GetCountriesFromStaticInfoTables()}"
 		defaultOption="{f:translate(key:'pleaseChoose')}"
 		class="input-block-level"
-		additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'country')}" />
+		additionalAttributes="{femanager:Validation.FormValidationData(settings:'{settings}',fieldName:'country')}" />
 
 The GetCountriesFromStaticInfoTables-ViewHelper
 
@@ -261,7 +261,7 @@ Example file fileadmin/Partials/Fields/TwitterId.html:
 									id="twitterId"
 									property="twitterId"
 									class="input-block-level"
-									additionalAttributes="{femanager:Misc.FormValidationData(settings:'{settings}',fieldName:'twitterId')}" />
+									additionalAttributes="{femanager:Validation.FormValidationData(settings:'{settings}',fieldName:'twitterId')}" />
 			</div>
 	</div>
 

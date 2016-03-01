@@ -2,7 +2,7 @@
 <div class="femanager_fieldset femanager_gender control-group">
 	<label class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.gender" />
-		<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'gender')}">
+		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'gender')}">
 			<span>*</span>
 		</f:if>
 	</label>
@@ -13,7 +13,7 @@
 					property="gender"
 					value="1"
 					checked="{user.gender} == 1"
-					additionalAttributes="{femanager:Misc.FormValidationData(settings:settings,fieldName:'gender')}" />
+					additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'gender')}" />
 			<f:translate key="tx_femanager_domain_model_user.gender.item1" />
 		</label>
 		<label class="radio">
@@ -22,7 +22,7 @@
 				property="gender"
 				value="0"
 				checked="{user.gender} == 0"
-				additionalAttributes="{femanager:Misc.FormValidationData(settings:settings,fieldName:'gender')}" />
+				additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'gender')}" />
 			<f:translate key="tx_femanager_domain_model_user.gender.item0" />
 		</label>
 	</div>

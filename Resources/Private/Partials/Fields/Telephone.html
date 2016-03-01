@@ -2,7 +2,7 @@
 <div class="femanager_fieldset femanager_telephone control-group">
 	<label for="femanager_field_telephone" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.telephone" />
-		<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'telephone')}">
+		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'telephone')}">
 			<span>*</span>
 		</f:if>
 	</label>
@@ -11,6 +11,6 @@
 				id="femanager_field_telephone"
 				property="telephone"
 				class="input-block-level"
-				additionalAttributes="{femanager:Misc.FormValidationData(settings:settings,fieldName:'telephone')}" />
+				additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'telephone')}" />
 	</div>
 </div>
