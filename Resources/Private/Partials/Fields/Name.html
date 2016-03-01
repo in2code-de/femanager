@@ -2,7 +2,7 @@
 <div class="femanager_fieldset femanager_name control-group">
 	<label for="femanager_field_name" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.name" />
-		<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'name',actionName:actionName)}">
+		<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'name',controllerName:controllerName)}">
 			<span>*</span>
 		</f:if>
 	</label>
