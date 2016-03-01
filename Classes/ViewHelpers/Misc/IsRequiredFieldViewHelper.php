@@ -21,7 +21,9 @@ class IsRequiredFieldViewHelper extends AbstractViewHelper
     protected $configurationManager;
 
     /**
-     * Initialize arguments.
+     * Register argument "actionName" for older Partials
+     *
+     * Todo: Remove this function in one of the next minor versions
      *
      * @return void
      * @api
@@ -29,9 +31,6 @@ class IsRequiredFieldViewHelper extends AbstractViewHelper
     public function initializeArguments()
     {
         parent::initializeArguments();
-        $this->registerArgument('controllerName', 'string', 'Controller name');
-
-        // Todo: Remove deprecated call of actionName in one of the next minor versions
         $this->registerArgument('actionName', 'string', 'Action name');
     }
 
@@ -48,24 +47,13 @@ class IsRequiredFieldViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @return mixed
+     * Get lowercase controller name
+     *
+     * @return string
      */
     protected function getControllerName()
     {
-        if ($this->arguments['controllerName'] !== null) {
-            $controllerName = strtolower($this->arguments['controllerName']);
-        }
-
-        // Todo: Remove deprecated call of actionName in one of the next minor versions
-        if (empty($controllerName) && $this->arguments['actionName'] !== null) {
-            $controllerName = str_replace('Action', '', $this->arguments['actionName']);
-            GeneralUtility::deprecationLog(
-                'Extension femanager: The call of IsRequiredFieldViewHelper with argument actionName is deprecated. ' .
-                'Please use controllerName or the original Templates and Partials of the extension.'
-            );
-        }
-
-        return $controllerName;
+        return strtolower($this->controllerContext->getRequest()->getControllerName());
     }
 
     /**
@@ -77,5 +65,31 @@ class IsRequiredFieldViewHelper extends AbstractViewHelper
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
         );
         return (array) $configuration['settings'];
+    }
+
+    /**
+     * Register a new argument. Call this method from your ViewHelper subclass
+     * inside the initializeArguments() method.
+     *
+     * Todo: Remove this function in one of the next minor versions
+     *
+     * @param string $name Name of the argument
+     * @param string $type Type of the argument
+     * @param string $description Description of the argument
+     * @param bool $required If TRUE, argument is required. Defaults to FALSE.
+     * @param mixed $defaultValue Default value of argument
+     * @return \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper $this, to allow chaining.
+     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+     * @api
+     */
+    protected function registerArgument($name, $type, $description, $required = false, $defaultValue = null)
+    {
+        if ($name === 'actionName') {
+            GeneralUtility::deprecationLog(
+                'Extension femanager: The call of IsRequiredFieldViewHelper with argument actionName is deprecated. ' .
+                'Please remove this parameter or use original Templates and Partials of the extension.'
+            );
+        }
+        return parent::registerArgument($name, $type, $description, $required, $defaultValue);
     }
 }
