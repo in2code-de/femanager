@@ -8,10 +8,6 @@ Changelog
 Introduction
 ------------
 
-Do you want to know what #12345 means?
-This is an issue on forge.typo3.org.
-Try to open the issue 12345 with a prefixing URL https://forge.typo3.org/issues/12345 to get more information about that bugfix or feature.
-
 Older versions of femanager, even those which are probably not downloadable through TER, are available at
 git://git.typo3.org/TYPO3CMS/Extensions/femanager.git or
 https://forge.typo3.org/projects/extension-femanager/repository
@@ -30,6 +26,16 @@ Changes
       Date
    :Changes:
       Changes
+
+ - :Version:
+      2.2.0
+   :State:
+      stable
+   :Date:
+      2016-03-08
+   :Changes:
+
+      * Feature _`#73796`: https://forge.typo3.org/issues/73796 IsRequiredFieldViewHelper uses wrong validation settings for invitation actions. ATTENTION Breaking change in HTML-Partials!
 
  - :Version:
       2.1.0

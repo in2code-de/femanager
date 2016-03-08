@@ -7,7 +7,7 @@
 	<div class="femanager_fieldset femanager_usergroup control-group">
 		<label for="femanager_field_usergroup" class="control-label">
 			<f:translate key="tx_femanager_domain_model_user.usergroup" />
-			<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'usergroup',actionName:actionName)}">
+			<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'usergroup')}">
 				<span>*</span>
 			</f:if>
 		</label>
@@ -22,7 +22,7 @@
 					defaultOption="{f:translate(key:'pleaseChoose')}"
 					class="input-block-level"
 					value="{femanager:Misc.GetFirst(objectStorage:user.usergroup)}"
-					additionalAttributes="{femanager:Misc.FormValidationData(settings:settings,fieldName:'usergroup')}" />
+					additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'usergroup')}" />
 		</div>
 	</div>
 </f:section>
@@ -38,7 +38,7 @@
 		<div class="femanager_fieldset femanager_usergroup control-group">
 			<label for="femanager_field_usergroup" class="control-label">
 				<f:translate key="tx_femanager_domain_model_user.usergroup" />
-				<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'usergroup',actionName:actionName)}">
+				<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'usergroup')}">
 					<span>*</span>
 				</f:if>
 			</label>
@@ -53,7 +53,7 @@
 						sortByOptionLabel="1"
 						class="input-block-level"
 						value="{femanager:Misc.GetFirst(objectStorage:user.usergroup)}"
-						additionalAttributes="{femanager:Misc.FormValidationData(settings:settings,fieldName:'usergroup')}" />
+						additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'usergroup')}" />
 			</div>
 		</div>
 

@@ -1,7 +1,5 @@
 <?php
-namespace In2code\Femanager\ViewHelpers\Misc;
-
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+namespace In2code\Femanager\ViewHelpers\Validation;
 
 /**
  * Set javascript validation data for input fields
@@ -9,7 +7,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @package TYPO3
  * @subpackage Fluid
  */
-class FormValidationDataViewHelper extends AbstractViewHelper
+class FormValidationDataViewHelper extends AbstractValidationViewHelper
 {
 
     /**
@@ -62,7 +60,7 @@ class FormValidationDataViewHelper extends AbstractViewHelper
     protected function getValidationString($settings, $fieldName)
     {
         $string = '';
-        $validationSettings = (array) $settings[$this->getControllerName()]['validation'][$fieldName];
+        $validationSettings = (array) $settings[$this->getControllerName()][$this->getValidationName()][$fieldName];
         foreach ($validationSettings as $validation => $configuration) {
             if (!empty($string)) {
                 $string .= ',';
@@ -102,13 +100,5 @@ class FormValidationDataViewHelper extends AbstractViewHelper
             return false;
         }
         return true;
-    }
-
-    /**
-     * @return string "new", "edit", "invitation"
-     */
-    protected function getControllerName()
-    {
-        return strtolower($this->controllerContext->getRequest()->getControllerName());
     }
 }

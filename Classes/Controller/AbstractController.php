@@ -447,7 +447,6 @@ abstract class AbstractController extends ActionController
                 'languageUid' => FrontendUtility::getFrontendLanguageUid(),
                 'storagePid' => $this->allConfig['persistence']['storagePid'],
                 'Pid' => FrontendUtility::getCurrentPid(),
-                'actionName' => $this->actionMethodName,
                 'uploadFolder' => FileUtility::getUploadFolderFromTca()
             ]
         );

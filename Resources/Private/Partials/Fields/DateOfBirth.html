@@ -2,7 +2,7 @@
 <div class="femanager_fieldset femanager_dateOfBirth control-group">
 	<label for="femanager_field_dateOfBirth" class="control-label">
 		<f:translate key="tx_femanager_domain_model_user.dateOfBirth" />
-		<f:if condition="{femanager:Misc.IsRequiredField(fieldName:'dateOfBirth',actionName:actionName)}">
+		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'dateOfBirth')}">
 			<span>*</span>
 		</f:if>
 	</label>
@@ -14,6 +14,6 @@
 			placeholder="{f:translate(key:'tx_femanager_domain_model_user.dateOfBirth.placeholder')}"
 			title="{f:translate(key:'tx_femanager_domain_model_user.dateOfBirth.hint')}"
 			value="{user.dateOfBirth -> f:format.date(format:'{f:translate(key:\'tx_femanager_domain_model_user.dateFormat\')}')}"
-			additionalAttributes="{femanager:Misc.FormValidationData(settings:settings,fieldName:'dateOfBirth')}" />
+			additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'dateOfBirth')}" />
 	</div>
 </div>

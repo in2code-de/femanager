@@ -1,8 +1,7 @@
 <?php
-namespace In2code\Femanager\ViewHelpers\Misc;
+namespace In2code\Femanager\ViewHelpers\Validation;
 
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Check if this field is a required field
@@ -10,7 +9,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @package TYPO3
  * @subpackage Fluid
  */
-class IsRequiredFieldViewHelper extends AbstractViewHelper
+class IsRequiredFieldViewHelper extends AbstractValidationViewHelper
 {
 
     /**
@@ -23,15 +22,22 @@ class IsRequiredFieldViewHelper extends AbstractViewHelper
      * Check if this field is a required field
      *
      * @param string $fieldName
-     * @param string $actionName
      * @return bool
      */
-    public function render($fieldName, $actionName = 'editAction')
+    public function render($fieldName)
     {
-        $action = str_replace('Action', '', $actionName);
+        $settings = $this->getSettingsConfiguration();
+        return !empty($settings[$this->getControllerName()][$this->getValidationName()][$fieldName]['required']);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getSettingsConfiguration()
+    {
         $configuration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
         );
-        return !empty($configuration['settings'][$action]['validation'][$fieldName]['required']);
+        return (array) $configuration['settings'];
     }
 }
