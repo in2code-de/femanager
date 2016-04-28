@@ -230,9 +230,8 @@ abstract class AbstractController extends ActionController
      */
     public function updateAllConfirmed(User $user)
     {
-
         // send notify email to admin
-        $existingUser = $this->userRepository->findByUid($user->getUid());
+        $existingUser = clone $this->userRepository->findByUid($user->getUid());
         if ($this->settings['edit']['notifyAdmin']) {
             $this->sendMailService->send(
                 'updateNotify',
