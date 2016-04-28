@@ -28,6 +28,19 @@ Changes
       Changes
 
  - :Version:
+      2.3.0
+   :State:
+      stable
+   :Date:
+      2016-04-28
+   :Changes:
+
+      * Task Replace outdated icon with a new one
+      * Task Small HTML markup refactoring of the filter mask in backend module
+      * Bugfix _`#75560`: https://forge.typo3.org/issues/75560 storage PID is not handled correct
+      * Bugfix _`#75418`: https://forge.typo3.org/issues/75418 AdditionalProperties 'existingUser' forwarded to SignalSlot inside LogUtility do not contain changes anymore
+
+ - :Version:
       2.2.0
    :State:
       stable
