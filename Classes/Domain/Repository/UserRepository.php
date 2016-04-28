@@ -2,6 +2,7 @@
 namespace In2code\Femanager\Domain\Repository;
 
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\BackendUserUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -184,7 +185,6 @@ class UserRepository extends Repository
      */
     public function findAllInBackend($filter)
     {
-        $pid = GeneralUtility::_GET('id');
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->getQuerySettings()->setIgnoreEnableFields(true);
@@ -193,9 +193,7 @@ class UserRepository extends Repository
         $and = [
             $query->equals('deleted', 0)
         ];
-        if ((int) $pid > 0) {
-            $and[] = $query->equals('pid', $pid);
-        }
+        $this->filterByPage($and, $query);
         if (!empty($filter['searchword'])) {
             $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], true);
             foreach ($searchwords as $searchword) {
@@ -223,9 +221,52 @@ class UserRepository extends Repository
         $query->matching($query->logicalAnd($and));
 
         // Order
-        $query->setOrderings([
+        $query->setOrderings(
+            [
                 'username' => QueryInterface::ORDER_ASCENDING
-            ]);
+            ]
+        );
         return $query->execute();
+    }
+
+    /**
+     * Find all users from current page or from any subpage
+     * If no page id given or if on rootpage (pid 0):
+     *      - Don't show any users for editors
+     *      - Show all users for admins
+     *
+     * @param array $and
+     * @param QueryInterface $query
+     */
+    protected function filterByPage(array &$and, QueryInterface $query)
+    {
+        if ($this->getPageIdentifier() > 0) {
+            $and[] = $query->in('pid', $this->getTreeList($this->getPageIdentifier()));
+        } else {
+            if (!BackendUserUtility::isAdminAuthentication()) {
+                $and[] = $query->equals('uid', 0);
+            }
+        }
+    }
+
+    /**
+     * Get all children pids of a start pid
+     *
+     * @param int $pageIdentifier
+     * @return array
+     */
+    protected function getTreeList($pageIdentifier)
+    {
+        $queryGenerator = $this->objectManager->get('TYPO3\\CMS\\Core\\Database\\QueryGenerator');
+        $treeList = $queryGenerator->getTreeList($pageIdentifier, 99, 0, '1');
+        return GeneralUtility::trimExplode(',', $treeList, true);
+    }
+
+    /**
+     * @return int
+     */
+    protected function getPageIdentifier()
+    {
+        return (int)GeneralUtility::_GET('id');
     }
 }

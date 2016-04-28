@@ -7,27 +7,6 @@
   .cursorpointer {
     cursor: pointer;
   }
-  .femanager_list_searchform {
-    width: 98.2%;
-    background: white;
-    padding: 10px;
-    border: 1px solid #A2AAB8;
-    margin: 10px 0;
-    label {
-      font-weight: bold;
-      display: inline-block;
-      width: 10%;
-    }
-    input {
-      padding: 5px;
-      width: 35%;
-
-      &[type="submit"] {
-        padding: 4px;
-        width: 15%;
-      }
-    }
-  }
   .f3-widget-paginator {
     li {
       display: inline-block;
