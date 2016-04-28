@@ -435,7 +435,7 @@
 				<source>Clean filter.</source>
 			</trans-unit>
 			<trans-unit id="noRecordsFoundGoToPage0">
-				<source>Show all users from all pages.</source>
+				<source>Show all users from all pages (for administrators only).</source>
 			</trans-unit>
 			<trans-unit id="noRecordFoundShow">
 				<source>No FE_User given or not logged in</source>

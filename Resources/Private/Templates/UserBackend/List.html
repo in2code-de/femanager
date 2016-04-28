@@ -180,13 +180,15 @@ UserBackend / List
 					<f:if condition="{femanager:Misc.Request(parameter:'tx_femanager_web_femanagerm1|filter|searchword')}">
 						<f:then>
 							<f:link.action>
-								<f:translate key="noRecordsFoundClearFilter" />
+								<f:translate key="noRecordsFoundClearFilter">Clean filter.</f:translate>
 							</f:link.action>
 						</f:then>
 						<f:else>
-							<f:link.action class="underline" additionalParams="{id:0}">
-								<f:translate key="noRecordsFoundGoToPage0" />
-							</f:link.action>
+							<f:if condition="{femanager:Condition.IsBackendAdministratorAuthentication()}">
+								<f:link.action class="underline" additionalParams="{id:0}">
+									<f:translate key="noRecordsFoundGoToPage0">Show all users from all pages (for admins only).</f:translate>
+								</f:link.action>
+							</f:if>
 						</f:else>
 					</f:if>
 				</div>
