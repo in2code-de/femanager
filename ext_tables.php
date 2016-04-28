@@ -23,7 +23,7 @@ if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableModuleActive() &&
         ],
         [
             'access' => 'user,group',
-            'icon' => 'EXT:femanager/ext_icon.gif',
+            'icon' => 'EXT:femanager/ext_icon.svg',
             'labels' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf',
         ]
     );
