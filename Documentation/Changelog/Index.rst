@@ -28,6 +28,18 @@ Changes
       Changes
 
  - :Version:
+      2.4.0
+   :State:
+      stable
+   :Date:
+      2016-05-14
+   :Changes:
+
+      * Task Replace outdated icon with a new one
+      * Bugfix _`#76140`: https://forge.typo3.org/issues/76140 PHP Warning: #1: PHP Runtime Deprecation Notice: Non-static method
+      * Bugfix _`#76074`: https://forge.typo3.org/issues/76074 PHP Warning: Declaration of In2code\Femanager\Domain\Model\User::addUsergroup($usergroup) should be compatible ...
+
+ - :Version:
       2.3.0
    :State:
       stable
