@@ -23,7 +23,7 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title',
-        'iconfile' => 'EXT:femanager/Resources/Public/Icons/Log.gif'
+        'iconfile' => 'EXT:femanager/Resources/Public/Icons/Log.png'
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, crdate, state, user',

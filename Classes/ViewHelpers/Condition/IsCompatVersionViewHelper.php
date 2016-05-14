@@ -24,5 +24,4 @@ class IsCompatVersionViewHelper extends AbstractViewHelper
     {
         return GeneralUtility::compat_version($versionNumber);
     }
-
 }
