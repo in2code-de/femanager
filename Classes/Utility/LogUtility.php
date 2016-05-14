@@ -60,7 +60,7 @@ class LogUtility extends AbstractUtility
     /**
      * @return Dispatcher
      */
-    protected function getDispatcher()
+    protected static function getDispatcher()
     {
         return self::getObjectManager()->get(Dispatcher::class);
     }
@@ -68,7 +68,7 @@ class LogUtility extends AbstractUtility
     /**
      * @return Log
      */
-    protected function getLog()
+    protected static function getLog()
     {
         return self::getObjectManager()->get(Log::class);
     }
@@ -76,7 +76,7 @@ class LogUtility extends AbstractUtility
     /**
      * @return LogRepository
      */
-    protected function getLogRepository()
+    protected static function getLogRepository()
     {
         return self::getObjectManager()->get(LogRepository::class);
     }
