@@ -3,7 +3,7 @@ namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Utility\TemplateUtility;
 use TYPO3\CMS\Core\Mail\MailMessage;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice

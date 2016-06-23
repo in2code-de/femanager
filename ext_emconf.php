@@ -33,7 +33,7 @@ $EM_CONF[$_EXTKEY] = [
         ],
         'conflicts' => [],
         'suggests' => [
-            'sr_freecap' => '2.0.4-2.99.99',
+            'sr_freecap' => '2.3.0-2.99.99',
             'static_info_tables' => '6.0.0-6.99.99'
         ],
     ],
