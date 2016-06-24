@@ -436,7 +436,7 @@ EditController.php:
 		/**
 		 * action update
 		 *
-		 * @param \In2code\Femanagerextended\Domain\Model\User $user
+		 * @param In2code\Femanagerextended\Domain\Model\User $user
 		 * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
 		 * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
 		 * @return void
@@ -458,7 +458,7 @@ NewController.php:
 		/**
 		 * action create
 		 *
-		 * @param \In2code\Femanagerextended\Domain\Model\User $user
+		 * @param In2code\Femanagerextended\Domain\Model\User $user
 		 * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
 		 * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
 		 * @return void
@@ -493,7 +493,8 @@ Basics
 - Config the new validation methods via TypoScript
 - Add translation labels via TypoScript
 
-See EXT:femanager/Resources/Private/Software/femanagerextended_0.1.0.zip for an example extension how to extend femanager with new fields and validation methods
+See https://github.com/einpraegsam/femanagerextended for an example extension how to extend femanager
+with new fields and validation methods
 
 
 Step by Step
