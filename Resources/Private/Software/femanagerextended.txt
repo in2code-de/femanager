@@ -1,3 +1,0 @@
-This is an example extension which shows how femanager can be extended with
-- New Fields
-- New Validators

@@ -436,7 +436,7 @@ EditController.php:
 		/**
 		 * action update
 		 *
-		 * @param \In2code\Femanagerextended\Domain\Model\User $user
+		 * @param In2code\Femanagerextended\Domain\Model\User $user
 		 * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
 		 * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
 		 * @return void
@@ -458,7 +458,7 @@ NewController.php:
 		/**
 		 * action create
 		 *
-		 * @param \In2code\Femanagerextended\Domain\Model\User $user
+		 * @param In2code\Femanagerextended\Domain\Model\User $user
 		 * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
 		 * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
 		 * @return void
@@ -493,7 +493,8 @@ Basics
 - Config the new validation methods via TypoScript
 - Add translation labels via TypoScript
 
-See EXT:femanager/Resources/Private/Software/femanagerextended_0.1.0.zip for an example extension how to extend femanager with new fields and validation methods
+See https://github.com/einpraegsam/femanagerextended for an example extension how to extend femanager
+with new fields and validation methods
 
 
 Step by Step
@@ -520,7 +521,8 @@ CustomClientsideValidator.php:
 
 	namespace In2code\Femanagerextended\Domain\Validator;
 
-	class CustomClientsideValidator extends \In2code\Femanager\Domain\Validator\ClientsideValidator {
+	class CustomClientsideValidator extends \In2code\Femanager\Domain\Validator\ClientsideValidator
+	{
 
 		/**
 		 * Custom Validator
@@ -530,8 +532,8 @@ CustomClientsideValidator.php:
 		 * @param string $validationSetting TypoScript Setting for this field
 		 * @return bool
 		 */
-		protected function validateCustom($value, $validationSetting) {
-
+		protected function validateCustom($value, $validationSetting)
+		{
 			// check if string has string inside
 			if (stristr($value, $validationSetting)) {
 				return TRUE;
@@ -546,7 +548,8 @@ CustomServersideValidator.php:
 
 	namespace In2code\Femanagerextended\Domain\Validator;
 
-	class CustomServersideValidator extends \In2code\Femanager\Domain\Validator\ServersideValidator {
+	class CustomServersideValidator extends \In2code\Femanager\Domain\Validator\ServersideValidator
+	{
 
 		/**
 		 * Custom Validator
@@ -556,8 +559,8 @@ CustomServersideValidator.php:
 		 * @param string $validationSetting TypoScript Setting for this field
 		 * @return bool
 		 */
-		protected function validateCustom($value, $validationSetting) {
-
+		protected function validateCustom($value, $validationSetting)
+		{
 			// check if string has string inside
 			if (stristr($value, $validationSetting)) {
 				return TRUE;
@@ -636,14 +639,16 @@ Add a php-file and extend your class with the AbstractFinisher from femanager:
     *
     * @package Vendor\Ext\Finisher
     */
-   class DoSomethingFinisher extends AbstractFinisher {
+   class DoSomethingFinisher extends AbstractFinisher
+   {
 
        /**
         * MyFinisher
         *
         * @return void
         */
-       public function myFinisher() {
+       public function myFinisher()
+       {
            // ...
        }
    }
@@ -695,7 +700,8 @@ Add your php-file again and extend your class with the AbstractFinisher from fem
     *
     * @package Vendor\Ext\Finisher
     */
-   class DoSomethingFinisher extends AbstractFinisher {
+   class DoSomethingFinisher extends AbstractFinisher
+   {
 
        /**
         * @var User
@@ -717,7 +723,8 @@ Add your php-file again and extend your class with the AbstractFinisher from fem
         *
         * @return void
         */
-       public function initializeFinisher() {
+       public function initializeFinisher()
+       {
        }
 
        /**
@@ -725,7 +732,8 @@ Add your php-file again and extend your class with the AbstractFinisher from fem
         *
         * @return void
         */
-       public function initializeMyFinisher() {
+       public function initializeMyFinisher()
+       {
        }
 
        /**
@@ -733,7 +741,8 @@ Add your php-file again and extend your class with the AbstractFinisher from fem
         *
         * @return void
         */
-       public function myFinisher() {
+       public function myFinisher()
+       {
            // get value from configuration
            $foo = $this->configuration['foo'];
 
@@ -973,7 +982,8 @@ This is our main class which is called every time a new registration process was
 	<?php
 	namespace In2code\Femanagersignalslot\Domain\Service;
 
-	class SendMailService {
+	class SendMailService
+	{
 
 		/**
 		 * Send mail about user information
@@ -982,7 +992,8 @@ This is our main class which is called every time a new registration process was
 		 * @param \In2code\Femanager\Controller\NewController $pObj
 		 * @return void
 		 */
-		public function send($user, $pObj) {
+		public function send($user, $pObj)
+		{
 			$message = '
 				New user registered
 				Username: ' . $user->getUsername() . '

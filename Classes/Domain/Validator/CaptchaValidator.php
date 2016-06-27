@@ -1,11 +1,13 @@
 <?php
 namespace In2code\Femanager\Domain\Validator;
 
-use SJBR\SrFreecap\Validation\Validator\CaptchaValidator as FreecapCaptchaValidator;
+use In2code\Femanager\Utility\ObjectUtility;
+use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * Class CaptchaValidator
+ * @package In2code\Femanager\Domain\Validator
  */
 class CaptchaValidator extends AbstractValidator
 {
@@ -19,19 +21,33 @@ class CaptchaValidator extends AbstractValidator
     public function isValid($user)
     {
         $this->init();
-
-        if (!$this->captchaEnabled()) {
+        if (!$this->captchaEnabled() || $this->validCaptcha()) {
             return true;
         }
-        $captchaCode = $this->pluginVariables['captcha'];
-
-        $freecapValidator = $this->objectManager->get(FreecapCaptchaValidator::class);
-        if ($freecapValidator->isValid($captchaCode)) {
-            return true;
-        }
-
         $this->addError('validationErrorCaptcha', 'captcha');
         return false;
+    }
+
+    /**
+     * Check if captcha is valid
+     *
+     * @return bool
+     */
+    protected function validCaptcha()
+    {
+        $isValid = false;
+        $wordRepository = ObjectUtility::getObjectManager()->get(WordRepository::class);
+        $wordObject = $wordRepository->getWord();
+        $wordHash = $wordObject->getWordHash();
+        if (!empty($wordHash) && !empty($this->pluginVariables['captcha'])) {
+            if ($wordObject->getHashFunction() == 'md5') {
+                if (md5(strtolower(utf8_decode($this->pluginVariables['captcha']))) == $wordHash) {
+                    $wordRepository->cleanUpWord();
+                    $isValid = true;
+                }
+            }
+        }
+        return $isValid;
     }
 
     /**
@@ -41,16 +57,7 @@ class CaptchaValidator extends AbstractValidator
      */
     protected function captchaEnabled()
     {
-        // if sr_freecap is not loaded
-        if (!ExtensionManagementUtility::isLoaded('sr_freecap')) {
-            return false;
-        }
-
-        // if not enabled via TypoScript
-        if (empty($this->validationSettings['captcha']['captcha'])) {
-            return false;
-        }
-
-        return true;
+        return (ExtensionManagementUtility::isLoaded('sr_freecap')
+            && !empty($this->validationSettings['captcha']['captcha']));
     }
 }

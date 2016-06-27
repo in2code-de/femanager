@@ -94,4 +94,12 @@ class ObjectUtility extends AbstractUtility
         }
         return substr($value, 0, (strlen($glue) * -1));
     }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     */
+    public static function getObjectManager()
+    {
+        return parent::getObjectManager();
+    }
 }

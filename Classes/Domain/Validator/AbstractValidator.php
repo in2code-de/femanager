@@ -9,7 +9,7 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidato
 /**
  * Class GeneralValidator
  */
-class AbstractValidator extends AbstractValidatorExtbase
+abstract class AbstractValidator extends AbstractValidatorExtbase
 {
 
     /**
@@ -52,14 +52,6 @@ class AbstractValidator extends AbstractValidatorExtbase
      * Is Valid
      */
     protected $isValid = true;
-
-    /**
-     * Must be there
-     */
-    public function isValid($value)
-    {
-        return parent::isValid($value);
-    }
 
     /**
      * Validation for required

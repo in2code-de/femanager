@@ -1,13 +1,14 @@
 <?php
 namespace In2code\Femanager\Domain\Validator;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
 
 /**
  * Class PasswordValidator
  */
-class PasswordValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+class PasswordValidator extends AbstractValidatorExtbase
 {
 
     /**

@@ -1,10 +1,10 @@
 <?php
 namespace In2code\Femanager\Domain\Validator;
 
+use In2code\Femanager\Domain\Model\User;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use In2code\Femanager\Domain\Model\User;
 
 /**
  * Class ClientsideValidator
@@ -341,5 +341,12 @@ class ClientsideValidator extends AbstractValidator
     public function getAdditionalValue()
     {
         return $this->additionalValue;
+    }
+
+    /**
+     * @param mixed $value
+     */
+    protected function isValid($value)
+    {
     }
 }

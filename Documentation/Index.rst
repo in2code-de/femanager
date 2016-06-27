@@ -13,7 +13,7 @@ femanager
 		femanager
 
 	:Version:
-		2.2
+		2.5
 
 	:Language:
 		en

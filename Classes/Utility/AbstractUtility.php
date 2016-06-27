@@ -49,6 +49,7 @@ abstract class AbstractUtility
      *
      * @param string $table
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getTcaFromTable($table = 'fe_users')
     {
@@ -60,6 +61,7 @@ abstract class AbstractUtility
 
     /**
      * @return DatabaseConnection
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getDatabaseConnection()
     {
@@ -68,6 +70,7 @@ abstract class AbstractUtility
 
     /**
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getFilesArray()
     {
@@ -84,6 +87,7 @@ abstract class AbstractUtility
 
     /**
      * @return TypoScriptFrontendController
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getTypoScriptFrontendController()
     {
@@ -95,6 +99,7 @@ abstract class AbstractUtility
      *
      * @return string
      * @throws \Exception
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getEncryptionKey()
     {
@@ -108,6 +113,7 @@ abstract class AbstractUtility
      * Get extension configuration from LocalConfiguration.php
      *
      * @return array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getExtensionConfiguration()
     {
@@ -140,6 +146,7 @@ abstract class AbstractUtility
 
     /**
      * @return BackendUserAuthentication
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getBackendUserAuthentication()
     {

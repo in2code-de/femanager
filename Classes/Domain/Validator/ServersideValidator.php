@@ -4,7 +4,7 @@ namespace In2code\Femanager\Domain\Validator;
 /**
  * Class ServersideValidator
  */
-class ServersideValidator extends \In2code\Femanager\Domain\Validator\AbstractValidator
+class ServersideValidator extends AbstractValidator
 {
 
     /**
