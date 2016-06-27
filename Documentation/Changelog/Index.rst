@@ -28,6 +28,20 @@ Changes
       Changes
 
  - :Version:
+      2.5.0
+   :State:
+      stable
+   :Date:
+      2016-06-27
+   :Changes:
+
+      * Bugfix _`#76615`: https://forge.typo3.org/issues/76615 Missing captcha validation
+      * Task: Added composer.json and readme.md for github mirror
+      * Task: Updated behat configuration
+      * Task: Removed femanagerextended from extension (now located on github)
+      * Task: Some PHP cleanup
+
+ - :Version:
       2.4.0
    :State:
       stable
