@@ -205,7 +205,8 @@ Basics
 - Use TypoScript to include your model
 - Override the createAction and updateAction to manipulte the object type
 
-See EXT:femanager/Resources/Private/Software/femanagerextended_0.1.0.zip for an example extension how to extend femanager with new fields and validation methods (or see http://forge.typo3.org/projects/extension- femanager/repository/revisions/master/show/Resources/Private/Software )
+See https://github.com/einpraegsam/femanagerextended for an example extension how to extend femanager with new fields
+and validation methods
 
 
 Step by Step
