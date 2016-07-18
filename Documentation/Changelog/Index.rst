@@ -28,6 +28,16 @@ Changes
       Changes
 
  - :Version:
+      2.5.1
+   :State:
+      stable
+   :Date:
+      2016-07-18
+   :Changes:
+
+      * Bugfix: Correction of copy/paste failure in composer.json
+
+ - :Version:
       2.5.0
    :State:
       stable
