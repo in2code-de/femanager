@@ -1,7 +1,6 @@
 {
   "name": "in2code/femanager",
   "description": "Modern TYPO3 Frontend User Registration.",
-  "version": "2.5.1",
   "keywords": ["typo3", "form", "registration", "sr_feuser_register", "fe_users"],
   "homepage": "https://forge.typo3.org/projects/extension-femanager",
   "authors": [
@@ -13,11 +12,15 @@
   "type": "typo3-cms-extension",
   "license": "GPL-3.0",
   "require": {
-    "typo3/cms": ">=7.6.0 <9.0.0"
+    "typo3/cms-core": ">=7.6.0 <9.0.0"
+  },
+  "replace": {
+    "femanager": "self.version",
+    "typo3-ter/femanager": "self.version"
   },
   "autoload": {
     "psr-4": {
-      "In2code\\Femanager\\": "Classes"
+      "In2code\\Femanager\\": "Classes/"
     }
   }
 }
