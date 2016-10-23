@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	// javascript validation
 	$('.feManagerValidation').femanagerValidation();
 

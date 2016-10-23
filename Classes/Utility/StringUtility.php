@@ -171,11 +171,13 @@ class StringUtility extends AbstractUtility
     }
 
     /**
+     * Remove double slashes from URI but don't touch the protocol (http:// e.g.)
+     * 
      * @param string $string
      * @return string
      */
-    public static function removeDoubleSlashes($string)
+    public static function removeDoubleSlashesFromUri($string)
     {
-        return str_replace('//', '/', $string);
+        return preg_replace('~([^:]|^)(/{2,})~', '$1/', $string);
     }
 }

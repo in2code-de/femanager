@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 
 	// Hide/Unhide User
 	$('.hideUser, .unhideUser').click(function() {

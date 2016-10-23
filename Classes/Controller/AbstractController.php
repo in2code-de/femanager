@@ -270,10 +270,10 @@ abstract class AbstractController extends ActionController
         $user = UserUtility::rollbackUserWithChangeRequest($user, $dirtyProperties);
         $this->sendMailService->send(
             'updateRequest',
-            [
-                $this->settings['edit']['confirmByAdmin'] =>
-                    $this->settings['edit']['email']['updateRequest']['sender']['name']['value']
-            ],
+            StringUtility::makeEmailArray(
+                $this->settings['edit']['confirmByAdmin'],
+                $this->settings['edit']['email']['updateRequest']['sender']['name']['value']
+            ),
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             'New Profile change request',
             [
@@ -305,10 +305,10 @@ abstract class AbstractController extends ActionController
         $this->sendMailService->send(
             'createUserNotify',
             StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
-            [
-                $this->settings['new']['email']['createUserNotify']['sender']['email']['value'] =>
-                    $this->settings['settings']['new']['email']['createUserNotify']['sender']['name']['value']
-            ],
+            StringUtility::makeEmailArray(
+                $this->settings['new']['email']['createUserNotify']['sender']['email']['value'],
+                $this->settings['settings']['new']['email']['createUserNotify']['sender']['name']['value']
+            ),
             'Profile creation',
             $variables,
             $this->config['new.']['email.']['createUserNotify.']
@@ -384,7 +384,7 @@ abstract class AbstractController extends ActionController
             $this->uriBuilder->setTargetPageUid($target);
             $this->uriBuilder->setLinkAccessRestrictedPages(true);
             $link = $this->uriBuilder->build();
-            $this->redirectToUri(StringUtility::removeDoubleSlashes($link));
+            $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($link));
         }
     }
 
