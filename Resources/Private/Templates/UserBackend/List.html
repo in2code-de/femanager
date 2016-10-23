@@ -14,7 +14,7 @@ UserBackend / List
 		<f:if condition="{users}">
 			<f:then>
 
-				<f:widget.paginate objects="{users}" as="usersPage" configuration="{itemsPerPage: 100, insertBelow: 1}">
+				<f:be.widget.paginate objects="{users}" as="usersPage" configuration="{itemsPerPage: 100, insertBelow: 1}">
 					<table cellspacing="0" cellpadding="0" border="0" class="{f:if(condition:'{femanager:Condition.IsCompatVersion(versionNumber:\'7.0\')}', then: 'table table-striped table-hover', else: 'typo3-dblist')}">
 						<tbody>
 
@@ -170,7 +170,7 @@ UserBackend / List
 
 						</tbody>
 					</table>
-				</f:widget.paginate>
+				</f:be.widget.paginate>
 
 			</f:then>
 			<f:else>
