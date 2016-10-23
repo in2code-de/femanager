@@ -270,10 +270,10 @@ abstract class AbstractController extends ActionController
         $user = UserUtility::rollbackUserWithChangeRequest($user, $dirtyProperties);
         $this->sendMailService->send(
             'updateRequest',
-            [
-                $this->settings['edit']['confirmByAdmin'] =>
-                    $this->settings['edit']['email']['updateRequest']['sender']['name']['value']
-            ],
+            StringUtility::makeEmailArray(
+                $this->settings['edit']['confirmByAdmin'],
+                $this->settings['edit']['email']['updateRequest']['sender']['name']['value']
+            ),
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             'New Profile change request',
             [
