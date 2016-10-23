@@ -161,6 +161,7 @@ class UserController extends AbstractController
      */
     public function loginAsAction(User $user)
     {
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__, [$user, $this]);
         if (!BackendUserUtility::isAdminAuthentication()) {
             throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'));
         }

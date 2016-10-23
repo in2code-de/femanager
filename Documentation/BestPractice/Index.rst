@@ -919,6 +919,17 @@ SignalSlots List
       Use this signal if you want to hook into the process after a user adds a new password (step 2)
 
  - :File:
+      UserController.php
+   :Located:
+      loginAsAction()
+   :Signal:
+      loginAsAction
+   :Parameters:
+      $user, $this
+   :Description:
+      Use this signal if you want to hook into the process after you simulate a frontend user login
+
+ - :File:
       ?
    :Located:
       ?
