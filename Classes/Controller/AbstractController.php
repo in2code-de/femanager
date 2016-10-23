@@ -305,10 +305,10 @@ abstract class AbstractController extends ActionController
         $this->sendMailService->send(
             'createUserNotify',
             StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
-            [
-                $this->settings['new']['email']['createUserNotify']['sender']['email']['value'] =>
-                    $this->settings['settings']['new']['email']['createUserNotify']['sender']['name']['value']
-            ],
+            StringUtility::makeEmailArray(
+                $this->settings['new']['email']['createUserNotify']['sender']['email']['value'],
+                $this->settings['settings']['new']['email']['createUserNotify']['sender']['name']['value']
+            ),
             'Profile creation',
             $variables,
             $this->config['new.']['email.']['createUserNotify.']
