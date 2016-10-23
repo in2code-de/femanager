@@ -309,7 +309,7 @@ class StringUtilityTest extends UnitTestCase
      *
      * @return array
      */
-    public function getRandomStringAlwaysReturnsStringsOfGivenLengthDateProvider()
+    public function getRandomStringAlwaysReturnsStringsOfGivenLengthDataProvider()
     {
         return [
             'default params' => [
@@ -341,7 +341,7 @@ class StringUtilityTest extends UnitTestCase
      * @param int $length
      * @param bool $addUpperCase
      * @param bool $addSpecialCharacters
-     * @dataProvider getRandomStringAlwaysReturnsStringsOfGivenLengthDateProvider
+     * @dataProvider getRandomStringAlwaysReturnsStringsOfGivenLengthDataProvider
      * @return void
      * @test
      */
@@ -389,5 +389,67 @@ class StringUtilityTest extends UnitTestCase
     public function getUpperCharactersStringReturnsStrings()
     {
         $this->assertSame('ABCDEFGHIJKLMNOPQRSTUVWXYZ', StringUtility::getUpperCharactersString());
+    }
+
+    /**
+     * Data Provider for removeDoubleSlashesReturnsString
+     *
+     * @return array
+     */
+    public function removeDoubleSlashesReturnsStringDataProvider()
+    {
+        return [
+            [
+                '/folder1/page.html',
+                '/folder1/page.html'
+            ],
+            [
+                '/folder1//page.html',
+                '/folder1/page.html'
+            ],
+            [
+                '/folder1///page.html',
+                '/folder1/page.html'
+            ],
+            [
+                '//folder1//folder2//',
+                '/folder1/folder2/'
+            ],
+            [
+                'index.php?id=123&param[xx]=yyy',
+                'index.php?id=123&param[xx]=yyy'
+            ],
+            [
+                'https://www.test.org/folder/page.html',
+                'https://www.test.org/folder/page.html'
+            ],
+            [
+                'https://www.test.org//folder///page.html',
+                'https://www.test.org/folder/page.html'
+            ],
+            [
+                'http://www.test.org//folder///page.html',
+                'http://www.test.org/folder/page.html'
+            ],
+            [
+                'www.test.org//folder///page.html',
+                'www.test.org/folder/page.html'
+            ]
+        ];
+    }
+
+    /**
+     * removeDoubleSlashes Test
+     *
+     * @param string $uri
+     * @param string $expectedResult
+     * @dataProvider removeDoubleSlashesReturnsStringDataProvider
+     * @return void
+     * @test
+     */
+    public function removeDoubleSlashesReturnsString($uri, $expectedResult)
+    {
+        $newUri = StringUtility::removeDoubleSlashesFromUri($uri);
+        $this->assertSame($expectedResult, $newUri);
     }
 }

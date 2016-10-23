@@ -384,7 +384,7 @@ abstract class AbstractController extends ActionController
             $this->uriBuilder->setTargetPageUid($target);
             $this->uriBuilder->setLinkAccessRestrictedPages(true);
             $link = $this->uriBuilder->build();
-            $this->redirectToUri(StringUtility::removeDoubleSlashes($link));
+            $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($link));
         }
     }
 
