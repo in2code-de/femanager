@@ -28,6 +28,24 @@ Changes
       Changes
 
  - :Version:
+      2.6.0
+   :State:
+      stable
+   :Date:
+      2016-10-23
+   :Changes:
+
+      * Feature use backend pagination widget instead of fe pagination for backend module
+      * Feature _`#77425`: https://forge.typo3.org/issues/77425 Add another signal to the deleteAction()
+      * Feature _`#78154`: https://forge.typo3.org/issues/78154 Hook for LoginAs
+      * Bugfix _`#77240`: https://forge.typo3.org/issues/77240 Backend-Entry in Plugin cause error
+      * Bugfix _`#77244`: https://forge.typo3.org/issues/77244 Javascript does not work with config.javascriptLibs.jQuery.noConflict = 1
+      * Bugfix _`#77402`: https://forge.typo3.org/issues/77402 \In2code\Femanager\Controller\NewController::redirectByAction: Wrong URLs
+      * Bugfix _`#77697`: https://forge.typo3.org/issues/77697 Swift Mailer Exception when using multiple confirm/notify adresses
+      * Bugfix _`#78119`: https://forge.typo3.org/issues/78119 Wrong CSS class for edit form
+      * Task cleaned up composer.json
+
+ - :Version:
       2.5.1
    :State:
       stable
