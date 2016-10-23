@@ -864,6 +864,17 @@ SignalSlots List
       Use this signal if you want to hook into the process before the user- profile was updated
 
  - :File:
+      EditController.php
+   :Located:
+      deleteAction()
+   :Signal:
+      deleteAction
+   :Parameters:
+      $user, $this
+   :Description:
+      Use this signal if you want to hook into the process before the user- profile will be deleted
+
+ - :File:
       InvitationController.php
    :Located:
       createAction()

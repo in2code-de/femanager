@@ -198,6 +198,7 @@ class EditController extends AbstractController
      */
     public function deleteAction(User $user)
     {
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__, [$user, $this]);
         LogUtility::log(Log::STATUS_PROFILEDELETE, $user);
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEDELETE));
         $this->userRepository->remove($user);
