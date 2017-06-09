@@ -28,7 +28,7 @@ In addition femanager was developed to be very flexible and to bring a lot of fe
 Requirements of femanager
 -------------------------
 
-- TYPO3 6.2 / 7.6 / 7.x
+- TYPO3 7.6 or higher
 - Extbase / Fluid
 - Best use with jQuery
 
@@ -187,4 +187,4 @@ Backend: Manage Frontend-Users
 
 |backend3|
 
-A small backend module helps to manage the Frontend-Users
+A small backend module helps to manage the Frontend-Users (TYPO3 7.6 screenshot)
