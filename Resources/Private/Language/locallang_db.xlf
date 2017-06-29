@@ -211,6 +211,9 @@
 			<trans-unit id="flexform.new.confirmByUser">
 				<source>Registration must be confirmed from sender</source>
 			</trans-unit>
+			<trans-unit id="flexform.new.showTermsAndConditions">
+				<source>User must accept terms and conditions</source>
+			</trans-unit>
 			<trans-unit id="flexform.new.confirmByAdmin">
 				<source>Registration must be confirmed from an admin (add one or more emails)</source>
 			</trans-unit>
