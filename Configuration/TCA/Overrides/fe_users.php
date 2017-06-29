@@ -79,8 +79,17 @@ $feUsersColumns = [
             'default' => 0,
         ]
     ],
+    'tx_femanager_terms' => [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+            'fe_users.terms',
+        'config' => [
+            'type' => 'check',
+            'default' => 0,
+        ]
+    ],
 ];
-$fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin';
+$fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin, tx_femanager_terms';
 
 if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableLogActive()) {
     $feUsersColumns['tx_femanager_log'] = [
@@ -116,7 +125,7 @@ $fields .= ', tx_femanager_changerequest';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'fe_users',
-    'gender, date_of_birth',
+    'gender, date_of_birth, ',
     '',
     'after:name'
 );

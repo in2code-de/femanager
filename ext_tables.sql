@@ -6,6 +6,7 @@ CREATE TABLE fe_users (
   date_of_birth int(11) DEFAULT '0' NOT NULL,
   tx_femanager_confirmedbyuser tinyint(3) DEFAULT '0' NOT NULL,
   tx_femanager_confirmedbyadmin tinyint(3) DEFAULT '0' NOT NULL,
+  tx_femanager_terms tinyint(3) DEFAULT '0' NOT NULL,
   tx_femanager_log int(11) DEFAULT '0' NOT NULL,
   tx_femanager_changerequest text
 );

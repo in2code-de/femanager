@@ -110,6 +110,13 @@ class User extends FrontendUser
     protected $dateOfBirth;
 
     /**
+     * termsAndConditions
+     *
+     * @var bool
+     */
+    protected $terms;
+
+    /**
      * txExtbaseType
      *
      * @var string
@@ -303,6 +310,28 @@ class User extends FrontendUser
             $dateOfBirth->setTime(0, 0, 0);
         }
         $this->dateOfBirth = $dateOfBirth;
+        return $this;
+    }
+
+    /**
+     *  Returns, whether the user has accepted terms and conditions
+     *
+     * @return boolean
+     */
+    public function getTerms()
+    {
+        return $this->terms;
+    }
+
+    /**
+     * Set whether the user has accepted terms and conditions
+     *
+     * @param $terms
+     * @return User
+     */
+    public function setTerms($terms)
+    {
+        $this->terms = $terms;
         return $this;
     }
 
