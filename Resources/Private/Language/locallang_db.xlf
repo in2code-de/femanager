@@ -78,6 +78,9 @@
 			<trans-unit id="tx_femanager_domain_model_user.captcha">
 				<source>Captcha</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.terms">
+				<source>Terms and conditions</source>
+			</trans-unit>
 			<trans-unit id="fe_users.crdate">
 				<source>Creation Time</source>
 			</trans-unit>
@@ -95,6 +98,9 @@
 			</trans-unit>
 			<trans-unit id="fe_users.log">
 				<source>FE_user Log</source>
+			</trans-unit>
+			<trans-unit id="fe_users.terms">
+				<source>User accepted terms and conditions</source>
 			</trans-unit>
 			<trans-unit id="fe_users.changerequest">
 				<source>Change Request</source>
@@ -181,6 +187,9 @@
 			<trans-unit id="flexform.main.title">
 				<source>Main Settings</source>
 			</trans-unit>
+			<trans-unit id="flexform.main.termsUrl">
+				<source>Page with terms and conditions</source>
+			</trans-unit>
 			<trans-unit id="flexform.main.view">
 				<source>Choose View</source>
 			</trans-unit>
@@ -210,6 +219,9 @@
 			</trans-unit>
 			<trans-unit id="flexform.new.confirmByUser">
 				<source>Registration must be confirmed from sender</source>
+			</trans-unit>
+			<trans-unit id="flexform.new.showTermsAndConditions">
+				<source>User must accept terms and conditions</source>
 			</trans-unit>
 			<trans-unit id="flexform.new.confirmByAdmin">
 				<source>Registration must be confirmed from an admin (add one or more emails)</source>

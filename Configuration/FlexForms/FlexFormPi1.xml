@@ -48,6 +48,19 @@
 							</config>
 						</TCEforms>
 					</switchableControllerActions>
+					<settings.main.termsUrl>
+						<TCEforms>
+							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.termsUrl</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+							</config>
+						</TCEforms>
+					</settings.main.termsUrl>
 				</el>
 			</ROOT>
 		</main>
@@ -145,6 +158,10 @@
 									<numIndex index="19" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.dateOfBirth</numIndex>
 										<numIndex index="1">dateOfBirth</numIndex>
+									</numIndex>
+									<numIndex index="20" type="array">
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.terms</numIndex>
+										<numIndex index="1">terms</numIndex>
 									</numIndex>
 								</items>
 								<maxitems>100</maxitems>
