@@ -479,7 +479,7 @@ abstract class AbstractController extends ActionController
                 ->getPropertyMappingConfiguration()
                 ->forProperty('dateOfBirth')
                 ->setTypeConverterOption(
-                    'TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter',
+                    DateTimeConverter::class,
                     DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                     LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat')
                 );
