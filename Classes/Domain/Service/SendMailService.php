@@ -1,9 +1,11 @@
+
 <?php
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Utility\TemplateUtility;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /***************************************************************
  *  Copyright notice
@@ -78,6 +80,9 @@ class SendMailService
         // config
         $email = $this->objectManager->get(MailMessage::class);
         $this->cObj = $this->configurationManager->getContentObject();
+        if($this->cObj == null) {
+            $this->cObj = $this->objectManager->get(ContentObjectRenderer::class);
+        }
         if (!empty($variables['user']) && method_exists($variables['user'], '_getProperties')) {
             $this->cObj->start($variables['user']->_getProperties());
         }
