@@ -68,7 +68,7 @@ class TemplateUtility extends AbstractUtility
     {
         $templatePaths = [];
         $configuration = self::getConfigurationManager()
-            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'femanager');
         if (!empty($configuration['view'][$part . 'RootPaths'])) {
             $templatePaths = $configuration['view'][$part . 'RootPaths'];
             $templatePaths = array_values($templatePaths);
