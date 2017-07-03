@@ -1,4 +1,3 @@
-
 <?php
 namespace In2code\Femanager\Domain\Service;
 
