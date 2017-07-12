@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
 /***************************************************************
@@ -26,32 +28,24 @@ namespace In2code\Femanager\Utility;
  ***************************************************************/
 
 /**
- * ConfigurationUtility class
- *
- * @package femanager
- * @license http://www.gnu.org/licenses/lgpl.html
- *          GNU Lesser General Public License, version 3 or later
+ * Class ConfigurationUtility
  */
 class ConfigurationUtility extends AbstractUtility
 {
 
     /**
-     * Check if disableModule is active
-     *
      * @return bool
      */
-    public static function isDisableModuleActive()
+    public static function isDisableModuleActive(): bool
     {
         $configuration = self::getExtensionConfiguration();
         return $configuration['disableModule'] === '1';
     }
 
     /**
-     * Check if disableLog is active
-     *
      * @return bool
      */
-    public static function isDisableLogActive()
+    public static function isDisableLogActive(): bool
     {
         $configuration = self::getExtensionConfiguration();
         return $configuration['disableLog'] === '1';
