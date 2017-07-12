@@ -17,7 +17,8 @@ plugin.tx_femanager {
 		storagePid = {$plugin.tx_femanager.persistence.storagePid}
 	}
 	features {
-		rewrittenPropertyMapper = 1
+		skipDefaultArguments = 1
+		requireCHashArgumentForActionArguments = 0
 	}
 
 	settings {
