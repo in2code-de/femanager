@@ -1,24 +1,25 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * View helper like json_encode()
- *
- * @package TYPO3
- * @subpackage Fluid
+ * Class JsonEncodeViewHelper
  */
 class JsonEncodeViewHelper extends AbstractViewHelper
 {
 
     /**
-     * View helper like json_encode()
-     *
+     * @var null
+     */
+    protected $escapeOutput = false;
+
+    /**
      * @param array $array
      * @return string
      */
-    public function render($array)
+    public function render(array $array): string
     {
         return json_encode($array);
     }
