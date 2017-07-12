@@ -1,16 +1,16 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
-<div class="femanager_fieldset femanager_dateOfBirth control-group">
-	<label for="femanager_field_dateOfBirth" class="control-label">
+<div class="femanager_fieldset femanager_dateOfBirth form-group">
+	<label for="femanager_field_dateOfBirth" class="col-sm-2 control-label">
 		<f:translate key="tx_femanager_domain_model_user.dateOfBirth" />
 		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'dateOfBirth')}">
 			<span>*</span>
 		</f:if>
 	</label>
-	<div class="controls">
+	<div class="col-sm-10">
 		<femanager:form.textfield
 			id="femanager_field_dateOfBirth"
 			property="dateOfBirth"
-			class="input-block-level"
+			class="form-control"
 			placeholder="{f:translate(key:'tx_femanager_domain_model_user.dateOfBirth.placeholder')}"
 			title="{f:translate(key:'tx_femanager_domain_model_user.dateOfBirth.hint')}"
 			value="{user.dateOfBirth -> f:format.date(format:'{f:translate(key:\'tx_femanager_domain_model_user.dateFormat\')}')}"

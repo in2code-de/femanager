@@ -6,20 +6,20 @@
 
 
 <f:section name="default">
-	<div class="femanager_fieldset femanager_country control-group">
-		<label for="femanager_field_country" class="control-label">
+	<div class="femanager_fieldset femanager_country form-group">
+		<label for="femanager_field_country" class="col-sm-2 control-label">
 			<f:translate key="tx_femanager_domain_model_user.country" />
 			<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'country')}">
 				<span>*</span>
 			</f:if>
 		</label>
-		<div class="controls">
+		<div class="col-sm-10">
 			<femanager:form.select
 					id="femanager_field_country"
 					property="country"
 					options="{femanager:Form.GetCountries()}"
 					defaultOption="{f:translate(key:'pleaseChoose')}"
-					class="input-block-level"
+					class="form-control"
 					additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'country')}" />
 		</div>
 	</div>
@@ -47,7 +47,7 @@
 				property="country"
 				options="{femanager:Form.GetCountriesFromStaticInfoTables()}"
 				defaultOption="{f:translate(key:'pleaseChoose')}"
-				class="input-block-level"
+				class="form-control"
 				additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'country')}" />
 
 	]]></f:comment>

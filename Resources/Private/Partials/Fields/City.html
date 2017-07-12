@@ -1,16 +1,16 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
-<div class="femanager_fieldset femanager_city control-group">
-	<label for="femanager_field_city" class="control-label">
+<div class="femanager_fieldset femanager_city form-group">
+	<label for="femanager_field_city" class="col-sm-2 control-label">
 		<f:translate key="tx_femanager_domain_model_user.city" />
 		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'city')}">
 			<span>*</span>
 		</f:if>
 	</label>
-	<div class="controls">
+	<div class="col-sm-10">
 		<femanager:form.textfield
 				id="femanager_field_city"
 				property="city"
-				class="input-block-level"
+				class="form-control"
 				additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'city')}" />
 	</div>
 </div>
