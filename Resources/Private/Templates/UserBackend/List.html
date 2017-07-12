@@ -15,7 +15,7 @@ UserBackend / List
 			<f:then>
 
 				<f:be.widget.paginate objects="{users}" as="usersPage" configuration="{itemsPerPage: 100, insertBelow: 1}">
-					<table cellspacing="0" cellpadding="0" border="0" class="{f:if(condition:'{femanager:Condition.IsCompatVersion(versionNumber:\'7.0\')}', then: 'table table-striped table-hover', else: 'typo3-dblist')}">
+					<table cellspacing="0" cellpadding="0" border="0" class="table table-striped table-hover">
 						<tbody>
 
 							<tr class="t3-row-header">
