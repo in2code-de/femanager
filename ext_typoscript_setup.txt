@@ -1,3 +1,4 @@
+# Mapping
 config.tx_extbase {
 	persistence {
 		classes {
@@ -23,9 +24,7 @@ config.tx_extbase {
 	}
 }
 
-#################
 # Backend Module
-#################
 module.tx_femanager {
 	view {
 		templateRootPath = EXT:femanager/Resources/Private/Templates/

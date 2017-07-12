@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\User;
@@ -33,30 +34,22 @@ use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
  ***************************************************************/
 
 /**
- * User Controller
- *
- * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html
- *          GNU General Public License, version 3 or later
+ * Class UserController
  */
 class UserController extends AbstractController
 {
 
     /**
-     * ClientsideValidator
-     *
      * @var \In2code\Femanager\Domain\Validator\ClientsideValidator
      * @inject
      */
     protected $clientsideValidator;
 
     /**
-     * action list
-     *
      * @param array $filter
      * @return void
      */
-    public function listAction($filter = [])
+    public function listAction(array $filter = [])
     {
         $this->view->assignMultiple(
             [
@@ -72,8 +65,6 @@ class UserController extends AbstractController
     }
 
     /**
-     * action show
-     *
      * @param User $user
      * @return void
      */
@@ -91,11 +82,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * File Uploader
-     *
-     * @return void
+     * @return string
      */
-    public function fileUploadAction()
+    public function fileUploadAction(): string
     {
         $fileName = FileUtility::uploadFile();
         header('Content-Type: text/plain');
@@ -103,12 +92,10 @@ class UserController extends AbstractController
             'success' => ($fileName ? true : false),
             'uploadName' => $fileName
         ];
-        echo json_encode($result);
+        return json_encode($result);
     }
 
     /**
-     * Showing information
-     *
      * @return void
      */
     public function fileDeleteAction()
