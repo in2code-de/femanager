@@ -26,9 +26,7 @@ $EM_CONF[$_EXTKEY] = [
     'version' => '2.6.0',
     'constraints' => [
         'depends' => [
-            'extbase' => '7.6.0-7.99.99',
-            'fluid' => '7.6.0-7.99.99',
-            'typo3' => '7.6.0-7.99.99',
+            'typo3' => '7.6.0-8.99.99',
             'php' => '5.5.0-7.99.99',
         ],
         'conflicts' => [],
