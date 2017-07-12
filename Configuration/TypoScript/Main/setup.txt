@@ -1427,13 +1427,13 @@ plugin.tx_femanager {
 #########################
 # add jQuery if it was turned on in the constants
 [globalVar = LIT:0 < {$plugin.tx_femanager.settings.jQuery}]
-page.includeJSFooterlibs.femanagerJQuery = //ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+page.includeJSFooterlibs.femanagerJQuery = //ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js
 page.includeJSFooterlibs.femanagerJQuery.external = 1
 [end]
 
 # add twitter bootstrap JS if it was turned on in the constants
 [globalVar = LIT:0 < {$plugin.tx_femanager.settings.bootstrap}]
-page.includeJSFooterlibs.femanangerBootstrap = //netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js
+page.includeJSFooterlibs.femanangerBootstrap = //maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
 page.includeJSFooterlibs.femanangerBootstrap.external = 1
 [end]
 
@@ -1447,7 +1447,7 @@ page.includeJSFooterlibs.femanangerFineuploader = EXT:femanager/Resources/Public
 #########################
 # add twitter bootstrap CSS if it was turned on in the constants
 [globalVar = LIT:0 < {$plugin.tx_femanager.settings.bootstrapCSS}]
-page.includeCSS.femanangerBootstrap = //netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css
+page.includeCSS.femanangerBootstrap = //maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
 page.includeCSS.femanangerBootstrap.external = 1
 [end]
 

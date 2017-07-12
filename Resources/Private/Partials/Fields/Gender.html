@@ -1,29 +1,33 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
-<div class="femanager_fieldset femanager_gender control-group">
-	<label class="control-label">
+<div class="femanager_fieldset femanager_gender form-group">
+	<label class="col-sm-2 control-label">
 		<f:translate key="tx_femanager_domain_model_user.gender" />
 		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'gender')}">
 			<span>*</span>
 		</f:if>
 	</label>
-	<div class="controls">
-		<label class="radio">
-			<f:form.radio
-					id="femanager_field_gender1"
+	<div class="col-sm-10">
+		<div class="radio">
+			<label>
+				<f:form.radio
+						id="femanager_field_gender1"
+						property="gender"
+						value="1"
+						checked="{user.gender} == 1"
+						additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'gender')}" />
+				<f:translate key="tx_femanager_domain_model_user.gender.item1" />
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+				<f:form.radio
+					id="femanager_field_gender0"
 					property="gender"
-					value="1"
-					checked="{user.gender} == 1"
+					value="0"
+					checked="{user.gender} == 0"
 					additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'gender')}" />
-			<f:translate key="tx_femanager_domain_model_user.gender.item1" />
-		</label>
-		<label class="radio">
-			<f:form.radio
-				id="femanager_field_gender0"
-				property="gender"
-				value="0"
-				checked="{user.gender} == 0"
-				additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'gender')}" />
-			<f:translate key="tx_femanager_domain_model_user.gender.item0" />
-		</label>
+				<f:translate key="tx_femanager_domain_model_user.gender.item0" />
+			</label>
+		</div>
 	</div>
 </div>

@@ -1,16 +1,16 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
-<div class="femanager_fieldset femanager_zip control-group">
-	<label for="femanager_field_zip" class="control-label">
+<div class="femanager_fieldset femanager_zip form-group">
+	<label for="femanager_field_zip" class="col-sm-2 control-label">
 		<f:translate key="tx_femanager_domain_model_user.zip" />
 		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'zip')}">
 			<span>*</span>
 		</f:if>
 	</label>
-	<div class="controls">
+	<div class="col-sm-10">
 		<femanager:form.textfield
 				id="femanager_field_zip"
 				property="zip"
-				class="input-block-level"
+				class="form-control"
 				additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'zip')}" />
 	</div>
 </div>

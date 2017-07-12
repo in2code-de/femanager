@@ -1,16 +1,16 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
-<div class="femanager_fieldset femanager_middlename control-group">
-	<label for="femanager_field_middleName" class="control-label">
+<div class="femanager_fieldset femanager_middlename form-group">
+	<label for="femanager_field_middleName" class="col-sm-2 control-label">
 		<f:translate key="tx_femanager_domain_model_user.middleName" />
 		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'middleName')}">
 			<span>*</span>
 		</f:if>
 	</label>
-	<div class="controls">
+	<div class="col-sm-10">
 		<femanager:form.textfield
 				id="femanager_field_middleName"
 				property="middleName"
-				class="input-block-level"
+				class="form-control"
 				additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'middleName')}" />
 	</div>
 </div>
