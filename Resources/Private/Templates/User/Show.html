@@ -83,8 +83,8 @@
 						</li>
 					</f:if>
 				</ul>
-				<f:for each="{femanager:Misc.Explode(string:'{user.image}')}" as="image">
-					<f:image src="{uploadFolder}/{image}" alt="{user.firstName} {user.lastName}" width="250" />
+				<f:for each="{user.image}" as="image">
+					<f:image image="{image}" width="250" />
 				</f:for>
 			</f:then>
 			<f:else>
