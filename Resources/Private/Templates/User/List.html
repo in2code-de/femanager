@@ -17,9 +17,9 @@
 				<ul class="media-list">
 					<f:for each="{users}" as="user">
 						<li class="media list-group-item">
-							<f:for each="{femanager:Misc.Explode(string:'{user.image}')}" as="image">
+							<f:for each="{user.image}" as="image">
 								<f:link.action action="show" arguments="{user:user}" class="pull-left">
-									<f:image src="{uploadFolder}/{image}" alt="{user.firstName} {user.lastName}" width="80c" height="80c" class="media-object" />
+									<f:image image="{image}" width="80c" height="80c" class="media-object" />
 								</f:link.action>
 							</f:for>
 							<div class="media-body">
@@ -28,7 +28,8 @@
 										{user.username}
 									</f:link.action>
 								</h4>
-								{user.firstName} {user.lastName} <f:if condition="{user.email}"><f:link.email email="{user.email}">{user.email}</f:link.email></f:if>
+								{user.firstName} {user.lastName}
+								<f:if condition="{user.email}"><f:link.email email="{user.email}">{user.email}</f:link.email></f:if>
 							</div>
 						</li>
 					</f:for>
