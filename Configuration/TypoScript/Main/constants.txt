@@ -28,8 +28,5 @@ plugin.tx_femanager {
 
 		# cat=plugin.tx_femanager//0920; type=boolean; label= Include Twitter Bootstrap CSS: Load and implement Twitter Bootstrap CSS from external source (bootstrapcdn.com)
 		bootstrapCSS = 0
-
-		# cat=plugin.tx_femanager//0930; type=boolean; label= Include Fineuploader JS: Load and implement Fineuploader JavaScript from internal source
-		fineuploader = 1
 	}
 }
