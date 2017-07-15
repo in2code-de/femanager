@@ -8,13 +8,13 @@ if (!defined('TYPO3_MODE')) {
     'Pi1',
     [
         'User' => 'list, show, fileUpload, fileDelete, validate, loginAs',
-        'New' => 'create, new, confirmCreateRequest, createStatus',
+        'New' => 'new, create, confirmCreateRequest, createStatus',
         'Edit' => 'edit, update, delete, confirmUpdateRequest',
         'Invitation' => 'new, create, edit, update, delete, status'
     ],
     [
         'User' => 'list, fileUpload, fileDelete, validate, loginAs',
-        'New' => 'create, new, confirmCreateRequest, createStatus',
+        'New' => 'new, create, confirmCreateRequest, createStatus',
         'Edit' => 'edit, update, delete, confirmUpdateRequest',
         'Invitation' => 'new, create, edit, update, delete'
     ]
