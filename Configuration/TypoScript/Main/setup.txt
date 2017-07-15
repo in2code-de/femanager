@@ -1437,11 +1437,6 @@ page.includeJSFooterlibs.femanangerBootstrap = //maxcdn.bootstrapcdn.com/bootstr
 page.includeJSFooterlibs.femanangerBootstrap.external = 1
 [end]
 
-# add fineuploader JS if it was turned on in the constants
-[globalVar = LIT:0 < {$plugin.tx_femanager.settings.fineuploader}]
-page.includeJSFooterlibs.femanangerFineuploader = EXT:femanager/Resources/Public/JavaScripts/jquery.fineuploader-3.5.0.min.js
-[end]
-
 #########################
 # Inlude CSS files
 #########################
