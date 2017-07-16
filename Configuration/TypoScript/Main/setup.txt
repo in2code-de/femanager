@@ -1378,6 +1378,9 @@ plugin.tx_femanager {
 		}
 
 		misc {
+			# Where to save new image files
+			uploadFolder = fileadmin/users/
+
 			# Number of allowed images to upload
 			uploadAmount = 3
 
@@ -1385,7 +1388,7 @@ plugin.tx_femanager {
 			uploadSize = 25000000
 
 			# Number of allowed images to upload
-			uploadFileExtension = jpeg, jpg, gif, png, bmp
+			uploadFileExtension = jpeg, jpg, gif, png, bmp, svg, tif, tiff
 
 			# Width of the rendered image in FE
 			renderImageWidth = 250
@@ -1411,6 +1414,39 @@ plugin.tx_femanager {
 
 				# optional: If file will not be loaded from autoloader, add path and it will be called with require_once
 #				require = fileadmin/femanager/finisher/DoSomethingFinisher.php
+#			}
+		}
+
+		# Add own dataProcessor classes that will be called just before the action will be rendered
+		dataProcessors {
+			10 {
+				class = In2code\Femanager\DataProcessor\ImageManipulation
+
+				config {
+					propertyNamesForUpload = image
+				}
+
+				events {
+					New = create
+				}
+			}
+
+#			100 {
+ 				# Classname that should be called with an existing method process()
+#				class = Vendor\Ext\DataProcessor\DoSomethingDataProcessor
+
+				# optional: Add configuration for your PHP
+#				config {
+#					foo = bar
+
+#					fooCObject = TEXT
+#					fooCObject.value = do something with this text
+#				}
+
+				# call this class just before this actions will be opened
+#				events {
+#					New = create,createStatus
+#				}
 #			}
 		}
 

@@ -38,11 +38,7 @@ use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
  ***************************************************************/
 
 /**
- * New Controller
- *
- * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html
- *          GNU General Public License, version 3 or later
+ * Class NewController
  */
 class NewController extends AbstractController
 {
@@ -65,6 +61,21 @@ class NewController extends AbstractController
     }
 
     /**
+     * Init for User creation
+     *
+     * @return void
+     */
+    public function initializeCreateAction()
+    {
+        // workarround for empty usergroups
+        if ((int)$this->pluginVariables['user']['usergroup'][0] === 0) {
+            unset($this->pluginVariables['user']['usergroup']);
+        }
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->pluginVariables, 'in2code: ' . __CLASS__ . ':' . __LINE__);
+        $this->request->setArguments($this->pluginVariables);
+    }
+
+    /**
      * action create
      *
      * @param User $user
@@ -75,6 +86,7 @@ class NewController extends AbstractController
      */
     public function createAction(User $user)
     {
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($user, 'in2code: ' . __CLASS__ . ':' . __LINE__);die('hard');
         $user = UserUtility::overrideUserGroup($user, $this->settings);
         $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
         $user = UserUtility::fallbackUsernameAndPassword($user);
