@@ -1,6 +1,7 @@
 <?php
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\DataProcessor\DataProcessorRunner;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\FileUtility;
@@ -8,6 +9,7 @@ use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
+use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
@@ -45,11 +47,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  ***************************************************************/
 
 /**
- * Abstract Controller
- *
- * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html
- *          GNU General Public License, version 3 or later
+ * Class AbstractController
  */
 abstract class AbstractController extends ActionController
 {
@@ -389,20 +387,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * Init for User creation
-     *
-     * @return void
-     */
-    public function initializeCreateAction()
-    {
-        // workarround for empty usergroups
-        if ((int) $this->pluginVariables['user']['usergroup'][0] === 0) {
-            unset($this->pluginVariables['user']['usergroup']);
-        }
-        $this->request->setArguments($this->pluginVariables);
-    }
-
-    /**
      * Init for User delete action
      *
      * @return void
@@ -458,7 +442,6 @@ abstract class AbstractController extends ActionController
      */
     public function initializeAction()
     {
-        $this->databaseConnection = $GLOBALS['TYPO3_DB'];
         $this->controllerContext = $this->buildControllerContext();
         $this->user = UserUtility::getCurrentUser();
         $this->contentObject = $this->configurationManager->getContentObject();
@@ -497,6 +480,10 @@ abstract class AbstractController extends ActionController
         ) {
             $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', FlashMessage::ERROR);
         }
+
+        $dataProcessorRunner = $this->objectManager->get(DataProcessorRunner::class);
+        $this->pluginVariables = $dataProcessorRunner->callClasses($this->request->getArguments(), $this->settings, $this->contentObject);
+        $this->request->setArguments($this->pluginVariables);
     }
 
     /**

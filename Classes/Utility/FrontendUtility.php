@@ -32,11 +32,17 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class FrontendUtility
- *
- * @package In2code\Femanager\Utility
  */
 class FrontendUtility extends AbstractUtility
 {
+
+    /**
+     * @var array
+     */
+    protected static $pluginNames = [
+        'tx_femanager_pi1',
+        'tx_femanager_pi2'
+    ];
 
     /**
      * Get current pid
@@ -96,5 +102,33 @@ class FrontendUtility extends AbstractUtility
             }
         }
         return $user;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getControllerName(): string
+    {
+        foreach (self::$pluginNames as $pluginName) {
+            $variables = GeneralUtility::_GPmerged($pluginName);
+            if (!empty($variables['controller'])) {
+                return $variables['controller'];
+            }
+        }
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public static function getActionName(): string
+    {
+        foreach (self::$pluginNames as $pluginName) {
+            $variables = GeneralUtility::_GPmerged($pluginName);
+            if (!empty($variables['action'])) {
+                return $variables['action'];
+            }
+        }
+        return '';
     }
 }

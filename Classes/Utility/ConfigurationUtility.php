@@ -26,6 +26,8 @@ namespace In2code\Femanager\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * Class ConfigurationUtility
@@ -49,5 +51,25 @@ class ConfigurationUtility extends AbstractUtility
     {
         $configuration = self::getExtensionConfiguration();
         return $configuration['disableLog'] === '1';
+    }
+
+    /**
+     * Get complete Typoscript or only a special value by a given path
+     *
+     * @param string $path "misc.uploadFolder" or empty for complete TypoScript array
+     * @return string
+     */
+    public static function getConfiguration(string $path = '')
+    {
+        $configurationManager = ObjectUtility::getObjectManager()->get(ConfigurationManagerInterface::class);
+        $typoscript = $configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            'Femanager',
+            'Pi1'
+        );
+        if (!empty($path)) {
+            $typoscript = ArrayUtility::getValueByPath($typoscript, $path, '.');
+        }
+        return $typoscript;
     }
 }
