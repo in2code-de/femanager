@@ -71,7 +71,6 @@ class NewController extends AbstractController
         if ((int)$this->pluginVariables['user']['usergroup'][0] === 0) {
             unset($this->pluginVariables['user']['usergroup']);
         }
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->pluginVariables, 'in2code: ' . __CLASS__ . ':' . __LINE__);
         $this->request->setArguments($this->pluginVariables);
     }
 
@@ -86,7 +85,6 @@ class NewController extends AbstractController
      */
     public function createAction(User $user)
     {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($user, 'in2code: ' . __CLASS__ . ':' . __LINE__);die('hard');
         $user = UserUtility::overrideUserGroup($user, $this->settings);
         $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
         $user = UserUtility::fallbackUsernameAndPassword($user);
