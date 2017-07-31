@@ -5,6 +5,7 @@ namespace In2code\Femanager\DataProcessor;
 use In2code\Femanager\Domain\Service\FileService;
 use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FileUtility;
+use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
 use TYPO3\CMS\Core\Utility\File\BasicFileUtility;
@@ -31,7 +32,10 @@ class ImageManipulation extends AbstractDataProcessor
             );
             if ($fileService->isEverythingValid()) {
                 FileUtility::createFolderIfNotExists($this->getUploadFolder());
-                $arguments['user'][$property] = $this->upload($arguments, $property);
+                $pathAndFilename = $this->upload($arguments, $property);
+                $fileIdentifier = $fileService->indexFile($pathAndFilename);
+                $identifier = $this->createSysFileRelation($fileIdentifier);
+                $arguments['user'][$property] = [$identifier];
             }
         }
 
@@ -39,9 +43,28 @@ class ImageManipulation extends AbstractDataProcessor
     }
 
     /**
+     * @param int $fileIdentifier
+     * @return int
+     */
+    protected function createSysFileRelation(int $fileIdentifier): int
+    {
+        $properties = [
+            'pid' => FrontendUtility::getCurrentPid(),
+            'uid_local' => $fileIdentifier,
+            'tablenames' => 'fe_users',
+            'fieldname' => 'image',
+            'table_local' => 'sys_file',
+            'tstamp' => time(),
+            'crdate' => time()
+        ];
+        ObjectUtility::getDatabaseConnection()->exec_INSERTquery('sys_file_reference', $properties);
+        return (int)ObjectUtility::getDatabaseConnection()->sql_insert_id();
+    }
+
+    /**
      * @param array $arguments
      * @param string $property
-     * @return string New filename (without path)
+     * @return string New filename (absolute with path)
      * @throws \Exception
      */
     protected function upload(array $arguments, string $property): string
@@ -52,8 +75,7 @@ class ImageManipulation extends AbstractDataProcessor
             $this->getUploadFolder()
         );
         if (GeneralUtility::upload_copy_move($arguments['user'][$property]['tmp_name'], $uniqueFileName)) {
-            $fileInfo = pathinfo($uniqueFileName);
-            return $fileInfo['basename'];
+            return $uniqueFileName;
         } else {
             throw new \Exception('File for property "' . $property . '" could not be uploaded!');
         }
