@@ -428,8 +428,7 @@ abstract class AbstractController extends ActionController
             [
                 'languageUid' => FrontendUtility::getFrontendLanguageUid(),
                 'storagePid' => $this->allConfig['persistence']['storagePid'],
-                'Pid' => FrontendUtility::getCurrentPid(),
-                'uploadFolder' => FileUtility::getUploadFolderFromTca()
+                'Pid' => FrontendUtility::getCurrentPid()
             ]
         );
     }
@@ -482,6 +481,7 @@ abstract class AbstractController extends ActionController
 
         $dataProcessorRunner = $this->objectManager->get(DataProcessorRunner::class);
         $this->pluginVariables = $dataProcessorRunner->callClasses($this->request->getArguments(), $this->settings, $this->contentObject);
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->pluginVariables, 'in2code: ' . __CLASS__ . ':' . __LINE__);die('hard');
         $this->request->setArguments($this->pluginVariables);
     }
 
