@@ -1,6 +1,8 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
+use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
@@ -32,11 +34,17 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * Class ObjectUtility
- *
- * @package In2code\Femanager\Utility
  */
 class ObjectUtility extends AbstractUtility
 {
+
+    /**
+     * @return DatabaseConnection
+     */
+    public static function getDatabaseConnection(): DatabaseConnection
+    {
+        return parent::getDatabaseConnection();
+    }
 
     /**
      * Checks if object was changed or not

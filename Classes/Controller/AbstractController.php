@@ -464,6 +464,7 @@ abstract class AbstractController extends ActionController
                     DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                     LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat')
                 );
+            $this->arguments['user']->getPropertyMappingConfiguration()->forProperty('image')->allowProperties(0);
         }
         // check if ts is included
         if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
@@ -471,8 +472,7 @@ abstract class AbstractController extends ActionController
         }
 
         // check if storage pid was set
-        if (
-            (int) $this->allConfig['persistence']['storagePid'] === 0
+        if ((int) $this->allConfig['persistence']['storagePid'] === 0
             && !GeneralUtility::_GP('eID')
             && TYPO3_MODE !== 'BE'
         ) {
@@ -480,8 +480,11 @@ abstract class AbstractController extends ActionController
         }
 
         $dataProcessorRunner = $this->objectManager->get(DataProcessorRunner::class);
-        $this->pluginVariables = $dataProcessorRunner->callClasses($this->request->getArguments(), $this->settings, $this->contentObject);
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->pluginVariables, 'in2code: ' . __CLASS__ . ':' . __LINE__);die('hard');
+        $this->pluginVariables = $dataProcessorRunner->callClasses(
+            $this->request->getArguments(),
+            $this->settings,
+            $this->contentObject
+        );
         $this->request->setArguments($this->pluginVariables);
     }
 
