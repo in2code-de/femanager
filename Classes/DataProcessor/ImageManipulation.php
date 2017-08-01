@@ -24,21 +24,25 @@ class ImageManipulation extends AbstractDataProcessor
     public function process(array $arguments): array
     {
         foreach ($this->getPropertiesForUpload() as $property) {
-            foreach ((array)$arguments['user'][$property] as $fileItem) {
-                /** @noinspection PhpMethodParametersCountMismatchInspection */
-                $fileService = ObjectUtility::getObjectManager()->get(
-                    FileService::class,
-                    $this->getNewImageName($fileItem, $property),
-                    $fileItem
-                );
-                if ($fileService->isEverythingValid()) {
-                    FileUtility::createFolderIfNotExists($this->getUploadFolder());
-                    $pathAndFilename = $this->upload($fileItem);
-                    $fileIdentifier = $fileService->indexFile($pathAndFilename);
-                    $identifier = $this->createSysFileRelation($fileIdentifier);
-                    $arguments['user'][$property] = [$identifier];
-                } else {
-                    $arguments['user'][$property] = [];
+            if (!empty($arguments['user'][$property][0]['__identity'])) {
+                // existing filereference given
+                unset($arguments['user'][$property]);
+            } else {
+                // file upload given
+                foreach ((array)$arguments['user'][$property] as $fileItem) {
+                    /** @noinspection PhpMethodParametersCountMismatchInspection */
+                    $fileService = ObjectUtility::getObjectManager()->get(
+                        FileService::class,
+                        $this->getNewImageName($fileItem, $property),
+                        $fileItem
+                    );
+                    if ($fileService->isEverythingValid()) {
+                        FileUtility::createFolderIfNotExists($this->getUploadFolder());
+                        $pathAndFilename = $this->upload($fileItem);
+                        $fileIdentifier = $fileService->indexFile($pathAndFilename);
+                        $identifier = $this->createSysFileRelation($fileIdentifier);
+                        $arguments['user'][$property] = [$identifier];
+                    }
                 }
             }
         }
