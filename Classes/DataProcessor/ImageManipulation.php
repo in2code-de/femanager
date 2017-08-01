@@ -51,12 +51,12 @@ class ImageManipulation extends AbstractDataProcessor
         $properties = [
             'pid' => FrontendUtility::getCurrentPid(),
             'uid_local' => $fileIdentifier,
-            'tablenames' => 'fe_users',
-            'fieldname' => 'image',
-            'table_local' => 'sys_file',
             'tstamp' => time(),
             'crdate' => time()
         ];
+        foreach ($this->getConfiguration('sysFileRelation') as $field => $value) {
+            $properties[$field] = $value;
+        }
         ObjectUtility::getDatabaseConnection()->exec_INSERTquery('sys_file_reference', $properties);
         return (int)ObjectUtility::getDatabaseConnection()->sql_insert_id();
     }
