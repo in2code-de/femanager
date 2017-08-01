@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Repository;
 
 use In2code\Femanager\Domain\Model\User;
@@ -8,36 +9,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
-
 /**
- * User Repository
- *
- * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html
- *          GNU General Public License, version 3 or later
+ * Class UserRepository
  */
 class UserRepository extends Repository
 {
@@ -51,15 +24,13 @@ class UserRepository extends Repository
     public function findByUid($uid)
     {
         $query = $this->createQuery();
-        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $this->ignoreEnableFieldsAndStoragePage($query);
         $query->getQuerySettings()->setRespectSysLanguage(false);
-        $query->getQuerySettings()->setRespectStoragePage(false);
-        $and = [
-            $query->equals('uid', $uid),
-            $query->equals('deleted', 0)
-        ];
-        $object = $query->matching($query->logicalAnd($and))->execute()->getFirst();
-        return $object;
+        $and = [$query->equals('uid', $uid)];
+
+        /** @var User $user */
+        $user = $query->matching($query->logicalAnd($and))->execute()->getFirst();
+        return $user;
     }
 
     /**
@@ -126,18 +97,14 @@ class UserRepository extends Repository
      * @param $field
      * @param $value
      * @param User $user Existing User
-     * @return QueryResultInterface|array
+     * @return null|User
      */
     public function checkUniqueDb($field, $value, User $user = null)
     {
         $query = $this->createQuery();
-        $query->getQuerySettings()->setRespectStoragePage(false);
-        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $this->ignoreEnableFieldsAndStoragePage($query);
 
-        $and = [
-            $query->equals($field, $value),
-            $query->equals('deleted', 0)
-        ];
+        $and = [$query->equals($field, $value)];
         if (method_exists($user, 'getUid')) {
             $and[] = $query->logicalNot($query->equals('uid', $user->getUid()));
         }
@@ -145,8 +112,9 @@ class UserRepository extends Repository
 
         $query->matching($constraint);
 
-        $users = $query->execute()->getFirst();
-        return $users;
+        /** @var User $user */
+        $user = $query->execute()->getFirst();
+        return $user;
     }
 
     /**
@@ -155,7 +123,7 @@ class UserRepository extends Repository
      * @param $field
      * @param $value
      * @param \In2code\Femanager\Domain\Model\User $user Existing User
-     * @return QueryResultInterface|array
+     * @return null|User
      */
     public function checkUniquePage($field, $value, User $user = null)
     {
@@ -173,8 +141,9 @@ class UserRepository extends Repository
 
         $query->matching($constraint);
 
-        $users = $query->execute()->getFirst();
-        return $users;
+        /** @var User $user */
+        $user = $query->execute()->getFirst();
+        return $user;
     }
 
     /**
@@ -183,17 +152,48 @@ class UserRepository extends Repository
      * @param array $filter Filter Array
      * @return QueryResultInterface|array
      */
-    public function findAllInBackend($filter)
+    public function findAllInBackend(array $filter)
     {
         $query = $this->createQuery();
-        $query->getQuerySettings()->setRespectStoragePage(false);
-        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $this->ignoreEnableFieldsAndStoragePage($query);
+        $and = [$query->greaterThan('uid', 0)];
+        $and = $this->filterByPage($and, $query);
+        $and = $this->filterBySearchword($filter, $query, $and);
+        $query->matching($query->logicalAnd($and));
+        $query->setOrderings(['username' => QueryInterface::ORDER_ASCENDING]);
+        return $query->execute();
+    }
 
-        // Where
-        $and = [
-            $query->equals('deleted', 0)
-        ];
-        $this->filterByPage($and, $query);
+    /**
+     * Find all users from current page or from any subpage
+     * If no page id given or if on rootpage (pid 0):
+     *      - Don't show any users for editors
+     *      - Show all users for admins
+     *
+     * @param array $and
+     * @param QueryInterface $query
+     * @return array
+     */
+    protected function filterByPage(array $and, QueryInterface $query): array
+    {
+        if ($this->getPageIdentifier() > 0) {
+            $and[] = $query->in('pid', $this->getTreeList($this->getPageIdentifier()));
+        } else {
+            if (!BackendUserUtility::isAdminAuthentication()) {
+                $and[] = $query->equals('uid', 0);
+            }
+        }
+        return $and;
+    }
+
+    /**
+     * @param array $filter
+     * @param QueryInterface $query
+     * @param array $and
+     * @return array
+     */
+    protected function filterBySearchword(array $filter, QueryInterface $query, array $and): array
+    {
         if (!empty($filter['searchword'])) {
             $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], true);
             foreach ($searchwords as $searchword) {
@@ -218,35 +218,7 @@ class UserRepository extends Repository
                 $and[] = $query->logicalOr($or);
             }
         }
-        $query->matching($query->logicalAnd($and));
-
-        // Order
-        $query->setOrderings(
-            [
-                'username' => QueryInterface::ORDER_ASCENDING
-            ]
-        );
-        return $query->execute();
-    }
-
-    /**
-     * Find all users from current page or from any subpage
-     * If no page id given or if on rootpage (pid 0):
-     *      - Don't show any users for editors
-     *      - Show all users for admins
-     *
-     * @param array $and
-     * @param QueryInterface $query
-     */
-    protected function filterByPage(array &$and, QueryInterface $query)
-    {
-        if ($this->getPageIdentifier() > 0) {
-            $and[] = $query->in('pid', $this->getTreeList($this->getPageIdentifier()));
-        } else {
-            if (!BackendUserUtility::isAdminAuthentication()) {
-                $and[] = $query->equals('uid', 0);
-            }
-        }
+        return $and;
     }
 
     /**
@@ -268,5 +240,16 @@ class UserRepository extends Repository
     protected function getPageIdentifier()
     {
         return (int)GeneralUtility::_GET('id');
+    }
+
+    /**
+     * @param QueryInterface $query
+     * @return void
+     */
+    protected function ignoreEnableFieldsAndStoragePage(QueryInterface $query)
+    {
+        $query->getQuerySettings()->setRespectStoragePage(false);
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled']);
     }
 }
