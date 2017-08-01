@@ -4,6 +4,7 @@ namespace In2code\Femanager\Domain\Repository;
 
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\BackendUserUtility;
+use In2code\Femanager\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -161,7 +162,8 @@ class UserRepository extends Repository
         $and = $this->filterBySearchword($filter, $query, $and);
         $query->matching($query->logicalAnd($and));
         $query->setOrderings(['username' => QueryInterface::ORDER_ASCENDING]);
-        return $query->execute();
+        $records = $query->execute();
+        return $records;
     }
 
     /**
@@ -176,8 +178,8 @@ class UserRepository extends Repository
      */
     protected function filterByPage(array $and, QueryInterface $query): array
     {
-        if ($this->getPageIdentifier() > 0) {
-            $and[] = $query->in('pid', $this->getTreeList($this->getPageIdentifier()));
+        if (BackendUtility::getPageIdentifier() > 0) {
+            $and[] = $query->in('pid', $this->getTreeList(BackendUtility::getPageIdentifier()));
         } else {
             if (!BackendUserUtility::isAdminAuthentication()) {
                 $and[] = $query->equals('uid', 0);
@@ -232,14 +234,6 @@ class UserRepository extends Repository
         $queryGenerator = $this->objectManager->get('TYPO3\\CMS\\Core\\Database\\QueryGenerator');
         $treeList = $queryGenerator->getTreeList($pageIdentifier, 99, 0, '1');
         return GeneralUtility::trimExplode(',', $treeList, true);
-    }
-
-    /**
-     * @return int
-     */
-    protected function getPageIdentifier()
-    {
-        return (int)GeneralUtility::_GET('id');
     }
 
     /**
