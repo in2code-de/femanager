@@ -1424,6 +1424,11 @@ plugin.tx_femanager {
 
 				config {
 					propertyNamesForUpload = image
+					sysFileRelation {
+						tablenames = fe_users
+						fieldname = image
+						table_local = sys_file
+					}
 				}
 
 				events {
