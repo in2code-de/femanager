@@ -24,21 +24,24 @@ class ImageManipulation extends AbstractDataProcessor
     public function process(array $arguments): array
     {
         foreach ($this->getPropertiesForUpload() as $property) {
-            /** @noinspection PhpMethodParametersCountMismatchInspection */
-            $fileService = ObjectUtility::getObjectManager()->get(
-                FileService::class,
-                $this->getNewImageName($arguments, $property),
-                $arguments['user'][$property]
-            );
-            if ($fileService->isEverythingValid()) {
-                FileUtility::createFolderIfNotExists($this->getUploadFolder());
-                $pathAndFilename = $this->upload($arguments, $property);
-                $fileIdentifier = $fileService->indexFile($pathAndFilename);
-                $identifier = $this->createSysFileRelation($fileIdentifier);
-                $arguments['user'][$property] = [$identifier];
+            foreach ((array)$arguments['user'][$property] as $fileItem) {
+                /** @noinspection PhpMethodParametersCountMismatchInspection */
+                $fileService = ObjectUtility::getObjectManager()->get(
+                    FileService::class,
+                    $this->getNewImageName($fileItem, $property),
+                    $fileItem
+                );
+                if ($fileService->isEverythingValid()) {
+                    FileUtility::createFolderIfNotExists($this->getUploadFolder());
+                    $pathAndFilename = $this->upload($fileItem);
+                    $fileIdentifier = $fileService->indexFile($pathAndFilename);
+                    $identifier = $this->createSysFileRelation($fileIdentifier);
+                    $arguments['user'][$property] = [$identifier];
+                } else {
+                    $arguments['user'][$property] = [];
+                }
             }
         }
-
         return $arguments;
     }
 
@@ -62,22 +65,21 @@ class ImageManipulation extends AbstractDataProcessor
     }
 
     /**
-     * @param array $arguments
-     * @param string $property
+     * @param array $fileItem
      * @return string New filename (absolute with path)
      * @throws \Exception
      */
-    protected function upload(array $arguments, string $property): string
+    protected function upload(array $fileItem): string
     {
         $basicFileFunctions = ObjectUtility::getObjectManager()->get(BasicFileUtility::class);
         $uniqueFileName = $basicFileFunctions->getUniqueName(
-            $this->getNewImageName($arguments, $property),
+            $this->getNewImageName($fileItem),
             $this->getUploadFolder()
         );
-        if (GeneralUtility::upload_copy_move($arguments['user'][$property]['tmp_name'], $uniqueFileName)) {
+        if (GeneralUtility::upload_copy_move($fileItem['tmp_name'], $uniqueFileName)) {
             return $uniqueFileName;
         } else {
-            throw new \Exception('File for property "' . $property . '" could not be uploaded!');
+            throw new \Exception('File "' . $this->getNewImageName($fileItem) . '" could not be uploaded!');
         }
     }
 
@@ -91,15 +93,14 @@ class ImageManipulation extends AbstractDataProcessor
     }
 
     /**
-     * @param array $arguments
-     * @param string $property
+     * @param array $fileItem
      * @return string
      */
-    protected function getNewImageName(array $arguments, string $property): string
+    protected function getNewImageName(array $fileItem): string
     {
         $imageName = '';
-        if (!empty($arguments['user'][$property]['name'])) {
-            $imageName = $arguments['user'][$property]['name'];
+        if (!empty($fileItem['name'])) {
+            $imageName = $fileItem['name'];
         }
         $imageName = StringUtility::cleanString($imageName);
         return $imageName;

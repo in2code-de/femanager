@@ -43,6 +43,7 @@ class FileService
 
     /**
      * @return bool
+     * @todo add filesize check
      */
     public function isEverythingValid(): bool
     {
@@ -54,7 +55,7 @@ class FileService
      *
      * @return bool If Extension is allowed
      */
-    public function validFileExtension(): bool
+    protected function validFileExtension(): bool
     {
         $extensionList = ConfigurationUtility::getConfiguration('misc.uploadFileExtension');
         if (!empty($extensionList)) {

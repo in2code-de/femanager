@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Model;
 
 use In2code\Femanager\Utility\UserUtility;
@@ -280,14 +281,21 @@ class User extends FrontendUser
     }
 
     /**
-     * Check if last FE login was within the last 2h
-     * 
-     * @return boolean
+     * @return bool
      */
-    public function isOnline()
+    public function getIsOnline(): bool
     {
-        if (
-            method_exists($this->getLastlogin(), 'getTimestamp')
+        return $this->isOnline();
+    }
+
+    /**
+     * Check if last FE login was within the last 2h
+     *
+     * @return bool
+     */
+    public function isOnline(): bool
+    {
+        if (method_exists($this->getLastlogin(), 'getTimestamp')
             && $this->getLastlogin()->getTimestamp() > (time() - 2 * 60 * 60)
             && UserUtility::checkFrontendSessionToUser($this)
         ) {
@@ -312,6 +320,18 @@ class User extends FrontendUser
     public function getTxExtbaseType()
     {
         return $this->txExtbaseType;
+    }
+
+    /**
+     * @return null
+     */
+    public function getFirstImage()
+    {
+        $images = $this->getImage();
+        foreach ($images as $image) {
+            return $image;
+        }
+        return null;
     }
 
     /**

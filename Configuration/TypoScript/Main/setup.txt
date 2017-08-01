@@ -1433,6 +1433,7 @@ plugin.tx_femanager {
 
 				events {
 					New = create
+					Edit = update
 				}
 			}
 
