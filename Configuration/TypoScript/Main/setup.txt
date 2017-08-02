@@ -207,17 +207,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 #					embedImage = COA
 #					embedImage {
-#						10 = IMG_RESOURCE
+#						10 = FILES
 #						10 {
-#							wrap = |,
-#							file.import = uploads/pics/
-#							file.import.field = image
-#							file.import.listNum = 0
-#							file.maxW = 120
-#							file.maxH = 120
+#							references {
+#								table = fe_users
+#								fieldName = image
+#								uid.field = uid
+#							}
+
+#							begin = 0
+#							maxItems = 1
+
+#							renderObj = IMG_RESOURCE
+#							renderObj {
+#								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+#								file.maxW = 120
+#								file.maxH = 120
+#							}
 #						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 #					}
 				}
@@ -275,17 +285,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 					embedImage = COA
 					embedImage {
-						10 = IMG_RESOURCE
+						10 = FILES
 						10 {
-							wrap = |,
-							file.import = uploads/pics/
-							file.import.field = image
-							file.import.listNum = 0
-							file.maxW = 120
-							file.maxH = 120
+							references {
+								table = fe_users
+								fieldName = image
+								uid.field = uid
+							}
+
+							begin = 0
+							maxItems = 1
+
+							renderObj = IMG_RESOURCE
+							renderObj {
+								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+								file.maxW = 120
+								file.maxH = 120
+							}
 						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 					}
 				}
@@ -298,7 +318,7 @@ plugin.tx_femanager {
 
 					# (de)activate email completely
 					_enable = TEXT
-					_enable.value = 1
+					_enable.value = 0
 
 					# Overwrite Receivers (please fill both)
 					receiver {
@@ -343,17 +363,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 #					embedImage = COA
 #					embedImage {
-#						10 = IMG_RESOURCE
+#						10 = FILES
 #						10 {
-#							wrap = |,
-#							file.import = uploads/pics/
-#							file.import.field = image
-#							file.import.listNum = 0
-#							file.maxW = 120
-#							file.maxH = 120
+#							references {
+#								table = fe_users
+#								fieldName = image
+#								uid.field = uid
+#							}
+
+#							begin = 0
+#							maxItems = 1
+
+#							renderObj = IMG_RESOURCE
+#							renderObj {
+#								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+#								file.maxW = 120
+#								file.maxH = 120
+#							}
 #						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 #					}
 				}
@@ -411,17 +441,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 #					embedImage = COA
 #					embedImage {
-#						10 = IMG_RESOURCE
+#						10 = FILES
 #						10 {
-#							wrap = |,
-#							file.import = uploads/pics/
-#							file.import.field = image
-#							file.import.listNum = 0
-#							file.maxW = 120
-#							file.maxH = 120
+#							references {
+#								table = fe_users
+#								fieldName = image
+#								uid.field = uid
+#							}
+
+#							begin = 0
+#							maxItems = 1
+
+#							renderObj = IMG_RESOURCE
+#							renderObj {
+#								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+#								file.maxW = 120
+#								file.maxH = 120
+#							}
 #						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 #					}
 				}
@@ -479,17 +519,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 					embedImage = COA
 					embedImage {
-						10 = IMG_RESOURCE
+						10 = FILES
 						10 {
-							wrap = |,
-							file.import = uploads/pics/
-							file.import.field = image
-							file.import.listNum = 0
-							file.maxW = 120
-							file.maxH = 120
+							references {
+								table = fe_users
+								fieldName = image
+								uid.field = uid
+							}
+
+							begin = 0
+							maxItems = 1
+
+							renderObj = IMG_RESOURCE
+							renderObj {
+								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+								file.maxW = 120
+								file.maxH = 120
+							}
 						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 					}
 				}
@@ -757,17 +807,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 #					embedImage = COA
 #					embedImage {
-#						10 = IMG_RESOURCE
+#						10 = FILES
 #						10 {
-#							wrap = |,
-#							file.import = uploads/pics/
-#							file.import.field = image
-#							file.import.listNum = 0
-#							file.maxW = 120
-#							file.maxH = 120
+#							references {
+#								table = fe_users
+#								fieldName = image
+#								uid.field = uid
+#							}
+
+#							begin = 0
+#							maxItems = 1
+
+#							renderObj = IMG_RESOURCE
+#							renderObj {
+#								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+#								file.maxW = 120
+#								file.maxH = 120
+#							}
 #						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 #					}
 				}
@@ -825,17 +885,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 #					embedImage = COA
 #					embedImage {
-#						10 = IMG_RESOURCE
+#						10 = FILES
 #						10 {
-#							wrap = |,
-#							file.import = uploads/pics/
-#							file.import.field = image
-#							file.import.listNum = 0
-#							file.maxW = 120
-#							file.maxH = 120
+#							references {
+#								table = fe_users
+#								fieldName = image
+#								uid.field = uid
+#							}
+
+#							begin = 0
+#							maxItems = 1
+
+#							renderObj = IMG_RESOURCE
+#							renderObj {
+#								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+#								file.maxW = 120
+#								file.maxH = 120
+#							}
 #						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 #					}
 				}
@@ -893,17 +963,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 #					embedImage = COA
 #					embedImage {
-#						10 = IMG_RESOURCE
+#						10 = FILES
 #						10 {
-#							wrap = |,
-#							file.import = uploads/pics/
-#							file.import.field = image
-#							file.import.listNum = 0
-#							file.maxW = 120
-#							file.maxH = 120
+#							references {
+#								table = fe_users
+#								fieldName = image
+#								uid.field = uid
+#							}
+
+#							begin = 0
+#							maxItems = 1
+
+#							renderObj = IMG_RESOURCE
+#							renderObj {
+#								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+#								file.maxW = 120
+#								file.maxH = 120
+#							}
 #						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 #					}
 				}
@@ -1090,17 +1170,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 #					embedImage = COA
 #					embedImage {
-#						10 = IMG_RESOURCE
+#						10 = FILES
 #						10 {
-#							wrap = |,
-#							file.import = uploads/pics/
-#							file.import.field = image
-#							file.import.listNum = 0
-#							file.maxW = 120
-#							file.maxH = 120
+#							references {
+#								table = fe_users
+#								fieldName = image
+#								uid.field = uid
+#							}
+
+#							begin = 0
+#							maxItems = 1
+
+#							renderObj = IMG_RESOURCE
+#							renderObj {
+#								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+#								file.maxW = 120
+#								file.maxH = 120
+#							}
 #						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 #					}
 				}
@@ -1158,17 +1248,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 #					embedImage = COA
 #					embedImage {
-#						10 = IMG_RESOURCE
+#						10 = FILES
 #						10 {
-#							wrap = |,
-#							file.import = uploads/pics/
-#							file.import.field = image
-#							file.import.listNum = 0
-#							file.maxW = 120
-#							file.maxH = 120
+#							references {
+#								table = fe_users
+#								fieldName = image
+#								uid.field = uid
+#							}
+
+#							begin = 0
+#							maxItems = 1
+
+#							renderObj = IMG_RESOURCE
+#							renderObj {
+#								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+#								file.maxW = 120
+#								file.maxH = 120
+#							}
 #						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 #					}
 				}
@@ -1226,17 +1326,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 #					embedImage = COA
 #					embedImage {
-#						10 = IMG_RESOURCE
+#						10 = FILES
 #						10 {
-#							wrap = |,
-#							file.import = uploads/pics/
-#							file.import.field = image
-#							file.import.listNum = 0
-#							file.maxW = 120
-#							file.maxH = 120
+#							references {
+#								table = fe_users
+#								fieldName = image
+#								uid.field = uid
+#							}
+
+#							begin = 0
+#							maxItems = 1
+
+#							renderObj = IMG_RESOURCE
+#							renderObj {
+#								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+#								file.maxW = 120
+#								file.maxH = 120
+#							}
 #						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 #					}
 				}
@@ -1294,17 +1404,27 @@ plugin.tx_femanager {
 					# Add Embed Images (separate each with comma) - can be used in mail with <img src="{embedImages.0}" /> and so on...
 #					embedImage = COA
 #					embedImage {
-#						10 = IMG_RESOURCE
+#						10 = FILES
 #						10 {
-#							wrap = |,
-#							file.import = uploads/pics/
-#							file.import.field = image
-#							file.import.listNum = 0
-#							file.maxW = 120
-#							file.maxH = 120
+#							references {
+#								table = fe_users
+#								fieldName = image
+#								uid.field = uid
+#							}
+
+#							begin = 0
+#							maxItems = 1
+
+#							renderObj = IMG_RESOURCE
+#							renderObj {
+#								file.import.dataWrap = {file:current:storage}:{file:current:identifier}
+#								file.maxW = 120
+#								file.maxH = 120
+#							}
 #						}
 
 #						20 = TEXT
+#						20.wrap = ,|
 #						20.value = fileadmin/image.jpg
 #					}
 				}
@@ -1379,7 +1499,7 @@ plugin.tx_femanager {
 
 		misc {
 			# Where to save new image files
-			uploadFolder = fileadmin/users/
+			uploadFolder = {$plugin.tx_femanager.settings.uploadFolder}
 
 			# Number of allowed images to upload
 			uploadAmount = 3
