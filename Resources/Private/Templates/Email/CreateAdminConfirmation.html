@@ -16,7 +16,7 @@
 	<f:render partial="Mail/UserProperties" arguments="{_all}" />
 
 	<p>
-		<f:format.printf arguments="{0: '{user.username}'}">
+		<f:format.printf arguments="{0:user.username}">
 			<f:translate key="emailCreateAdminConfirmationText1" />
 		</f:format.printf>
 		<br>
