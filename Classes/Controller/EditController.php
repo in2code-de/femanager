@@ -42,9 +42,6 @@ class EditController extends AbstractController
         $user = UserUtility::getCurrentUser();
         $userValues = $this->request->getArgument('user');
         $this->testSpoof($user, $userValues['__identity']);
-        if ((int)$this->pluginVariables['user']['usergroup'][0]['__identity'] === 0) {
-            unset($this->pluginVariables['user']['usergroup']);
-        }
         if ($this->keepPassword()) {
             unset($this->pluginVariables['user']['password']);
             unset($this->pluginVariables['password_repeat']);
