@@ -33,12 +33,14 @@ class RequestViewHelper extends AbstractViewHelper
      * @param bool $htmlspecialchars Enable/Disable htmlspecialchars
      * @return string
      */
-    public function render($parameter, $htmlspecialchars = true)
+    public function render(string $parameter = '', bool $htmlspecialchars = true)
     {
         $parts = $this->init($parameter);
         $result = $this->getVariableFromDepth($parts);
-        if ($htmlspecialchars) {
-            $result = htmlspecialchars($result);
+        if ($htmlspecialchars === true) {
+            if (is_string($result)) {
+                $result = htmlspecialchars($result);
+            }
         }
         return $result;
     }
