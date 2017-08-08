@@ -469,6 +469,9 @@ NewController.php:
 		}
 	}
 
+**Note:** If there are PHP warnings like “…should be compatible with…“ for PHP7, see discusion and solution:
+https://stackoverflow.com/questions/45563671/how-to-extend-femanager-controller-under-php-7/45564378
+
 
 .. _extendvalidators:
 
