@@ -113,7 +113,6 @@ abstract class AbstractController extends ActionController
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
-        $this->addFlashMessage(LocalizationUtility::translate('create'));
         LogUtility::log(Log::STATUS_NEWREGISTRATION, $user);
         $this->finalCreate($user, 'new', 'createStatus');
     }
@@ -302,6 +301,7 @@ abstract class AbstractController extends ActionController
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $action, $this]);
         $this->finisherRunner->callFinishers($user, $this->actionMethodName, $this->settings, $this->contentObject);
         $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
+        $this->addFlashMessage(LocalizationUtility::translate('create'));
         $this->redirect($redirectByActionName);
     }
 

@@ -158,7 +158,6 @@ class NewController extends AbstractController
 
             } else {
                 $user->setDisable(false);
-                $this->addFlashMessage(LocalizationUtility::translate('create'));
                 LogUtility::log(Log::STATUS_NEWREGISTRATION, $user);
                 $this->finalCreate($user, 'new', 'createStatus', true, $status);
             }
@@ -206,7 +205,6 @@ class NewController extends AbstractController
             $user->setTxFemanagerConfirmedbyadmin(true);
             $user->setDisable(false);
             $this->userRepository->update($user);
-            $this->addFlashMessage(LocalizationUtility::translate('create'));
             LogUtility::log(Log::STATUS_REGISTRATIONCONFIRMEDADMIN, $user);
             $this->finalCreate($user, 'new', 'createStatus', false, $status);
         } else {
