@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace In2code\Femanager\DataProcessor;
 
 use In2code\Femanager\Domain\Service\FileService;
@@ -23,6 +24,7 @@ class ImageManipulation extends AbstractDataProcessor
      */
     public function process(array $arguments): array
     {
+        $arguments = $this->allowImageProperties($arguments);
         foreach ($this->getPropertiesForUpload() as $property) {
             if (!empty($arguments['user'][$property][0]['__identity'])) {
                 // existing filereference given
@@ -121,5 +123,19 @@ class ImageManipulation extends AbstractDataProcessor
             $path = GeneralUtility::getFileAbsFileName($path);
         }
         return $path;
+    }
+
+    /**
+     * @param array $arguments
+     * @return array
+     */
+    protected function allowImageProperties(array $arguments): array
+    {
+        if (!empty($this->controllerArguments['user'])) {
+            $this->controllerArguments['user']->getPropertyMappingConfiguration()->forProperty(
+                'image'
+            )->allowProperties(0);
+        }
+        return $arguments;
     }
 }

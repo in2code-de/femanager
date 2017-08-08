@@ -6,6 +6,7 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /***************************************************************
@@ -60,11 +61,16 @@ class DataProcessorRunner
      * @param array $arguments
      * @param array $settings
      * @param ContentObjectRenderer $contentObject
+     * @param Arguments $controllerArguments
      * @return array
      * @throws \Exception
      */
-    public function callClasses(array $arguments, array $settings, ContentObjectRenderer $contentObject): array
-    {
+    public function callClasses(
+        array $arguments,
+        array $settings,
+        ContentObjectRenderer $contentObject,
+        Arguments $controllerArguments
+    ): array {
         foreach ($this->getClasses($settings) as $configuration) {
             $class = $configuration['class'];
             if (!class_exists($class)) {
@@ -79,7 +85,8 @@ class DataProcessorRunner
                     $class,
                     (array)$configuration['config'],
                     $settings,
-                    $contentObject
+                    $contentObject,
+                    $controllerArguments
                 );
                 $dataProcessor->initializeDataProcessor();
                 $arguments = $dataProcessor->process($arguments);

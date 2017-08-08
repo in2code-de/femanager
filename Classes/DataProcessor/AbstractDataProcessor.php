@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
+
 namespace In2code\Femanager\DataProcessor;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -22,9 +24,14 @@ abstract class AbstractDataProcessor implements DataProcessorInterface
     protected $settings = [];
 
     /**
-     * @var null
+     * @var ContentObjectRenderer|null
      */
     protected $contentObject = null;
+
+    /**
+     * @var Arguments|null
+     */
+    protected $controllerArguments = null;
 
     /**
      * AbstractDataProcessor constructor.
@@ -32,12 +39,18 @@ abstract class AbstractDataProcessor implements DataProcessorInterface
      * @param array $configuration
      * @param array $settings
      * @param ContentObjectRenderer $contentObject
+     * @param Arguments $controllerArguments
      */
-    public function __construct(array $configuration, array $settings, ContentObjectRenderer $contentObject)
-    {
+    public function __construct(
+        array $configuration,
+        array $settings,
+        ContentObjectRenderer $contentObject,
+        Arguments $controllerArguments
+    ) {
         $this->configuration = $configuration;
         $this->settings = $settings;
         $this->contentObject = $contentObject;
+        $this->controllerArguments = $controllerArguments;
     }
 
     /**

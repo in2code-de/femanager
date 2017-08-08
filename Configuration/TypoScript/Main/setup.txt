@@ -1569,6 +1569,20 @@ plugin.tx_femanager {
 				}
 			}
 
+			# Birthdate converter
+			30 {
+				class = In2code\Femanager\DataProcessor\DateConverter
+
+				config {
+					fieldNames = dateOfBirth
+				}
+
+				events {
+					New = create
+					Edit = update
+				}
+			}
+
 #			100 {
  				# Classname that should be called with an existing method process()
 #				class = Vendor\Ext\DataProcessor\DoSomethingDataProcessor

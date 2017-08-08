@@ -17,32 +17,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
-use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
 
 /**
  * Class AbstractController
@@ -363,11 +338,10 @@ abstract class AbstractController extends ActionController
     {
         $target = null;
         // redirect from TypoScript cObject
-        if (
-            $this->contentObject->cObjGetSingle(
-                $this->config[$action . '.'][$category],
-                $this->config[$action . '.'][$category . '.']
-            )
+        if ($this->contentObject->cObjGetSingle(
+            $this->config[$action . '.'][$category],
+            $this->config[$action . '.'][$category . '.']
+        )
         ) {
             $target = $this->contentObject->cObjGetSingle(
                 $this->config[$action . '.'][$category],
@@ -450,39 +424,17 @@ abstract class AbstractController extends ActionController
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
         $this->config = $this->config['plugin.']['tx_femanager.']['settings.'];
-        $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'];
-        $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
 
-        if (isset($this->arguments['user'])) {
-            $this->arguments['user']
-                ->getPropertyMappingConfiguration()
-                ->forProperty('dateOfBirth')
-                ->setTypeConverterOption(
-                    DateTimeConverter::class,
-                    DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-                    LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat')
-                );
-            $this->arguments['user']->getPropertyMappingConfiguration()->forProperty('image')->allowProperties(0);
-        }
-        // check if ts is included
-        if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
-            $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript'), '', FlashMessage::ERROR);
-        }
-
-        // check if storage pid was set
-        if ((int) $this->allConfig['persistence']['storagePid'] === 0
-            && !GeneralUtility::_GP('eID')
-            && TYPO3_MODE !== 'BE'
-        ) {
-            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', FlashMessage::ERROR);
-        }
+        $this->setAllUserGroups();
+        $this->checkTypoScript();
+        $this->checkStoragePid();
 
         $dataProcessorRunner = $this->objectManager->get(DataProcessorRunner::class);
         $this->pluginVariables = $dataProcessorRunner->callClasses(
             $this->request->getArguments(),
             $this->settings,
-            $this->contentObject
+            $this->contentObject,
+            $this->arguments
         );
         $this->request->setArguments($this->pluginVariables);
     }
@@ -495,5 +447,38 @@ abstract class AbstractController extends ActionController
     protected function getErrorFlashMessage()
     {
         return false;
+    }
+
+    /**
+     * @return void
+     */
+    protected function checkStoragePid()
+    {
+        if ((int)$this->allConfig['persistence']['storagePid'] === 0
+            && !GeneralUtility::_GP('eID')
+            && TYPO3_MODE !== 'BE'
+        ) {
+            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', FlashMessage::ERROR);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    protected function checkTypoScript()
+    {
+        if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
+            $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript'), '', FlashMessage::ERROR);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    protected function setAllUserGroups()
+    {
+        $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
+        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'];
+        $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
     }
 }
