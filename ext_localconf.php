@@ -9,13 +9,13 @@ call_user_func(function () {
         'In2code.femanager',
         'Pi1',
         [
-            'User' => 'list, show, validate, loginAs',
+            'User' => 'list, show, validate, loginAs, imageDelete',
             'New' => 'new, create, confirmCreateRequest, createStatus',
             'Edit' => 'edit, update, delete, confirmUpdateRequest',
             'Invitation' => 'new, create, edit, update, delete, status'
         ],
         [
-            'User' => 'list, validate, loginAs',
+            'User' => 'list, validate, loginAs, imageDelete',
             'New' => 'new, create, confirmCreateRequest, createStatus',
             'Edit' => 'edit, update, delete, confirmUpdateRequest',
             'Invitation' => 'new, create, edit, update, delete'

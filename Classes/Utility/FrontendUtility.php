@@ -25,7 +25,7 @@ class FrontendUtility extends AbstractUtility
      *
      * @return int
      */
-    public static function getCurrentPid()
+    public static function getCurrentPid(): int
     {
         return (int)self::getTypoScriptFrontendController()->id;
     }
@@ -35,7 +35,7 @@ class FrontendUtility extends AbstractUtility
      *
      * @return int
      */
-    public static function getFrontendLanguageUid()
+    public static function getFrontendLanguageUid(): int
     {
         if (!empty(self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'])) {
             return (int)self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'];
@@ -49,6 +49,18 @@ class FrontendUtility extends AbstractUtility
     public static function getCharset(): string
     {
         return self::getTypoScriptFrontendController()->metaCharset;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getUriToCurrentPage(): string
+    {
+        $contentObject = ObjectUtility::getContentObject();
+        $configuration = [
+            'parameter' => self::getCurrentPid()
+        ];
+        return $contentObject->typoLink_URL($configuration);
     }
 
     /**

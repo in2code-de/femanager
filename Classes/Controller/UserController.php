@@ -2,24 +2,22 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Validator\ClientsideValidator;
 use In2code\Femanager\Utility\BackendUserUtility;
-use In2code\Femanager\Utility\FileUtility;
+use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
+use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class UserController
  */
 class UserController extends AbstractController
 {
-
-    /**
-     * @var \In2code\Femanager\Domain\Validator\ClientsideValidator
-     * @inject
-     */
-    protected $clientsideValidator;
 
     /**
      * @param array $filter
@@ -58,24 +56,20 @@ class UserController extends AbstractController
     }
 
     /**
-     * @return string
-     */
-    public function fileUploadAction(): string
-    {
-        $fileName = FileUtility::uploadFile();
-        header('Content-Type: text/plain');
-        $result = [
-            'success' => ($fileName ? true : false),
-            'uploadName' => $fileName
-        ];
-        return json_encode($result);
-    }
-
-    /**
+     * @param User $user
      * @return void
+     * @throws \Exception
      */
-    public function fileDeleteAction()
+    public function imageDeleteAction(User $user)
     {
+        if (UserUtility::getCurrentUser() !== $user) {
+            throw new \Exception('You are not allowed to delete this image');
+        }
+        $user->setImage($this->objectManager->get(ObjectStorage::class));
+        $this->userRepository->update($user);
+        LogUtility::log(Log::STATUS_PROFILEUPDATEIMAGEDELETE, $user);
+        $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEIMAGEDELETE));
+        $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
     }
 
     /**
@@ -95,7 +89,8 @@ class UserController extends AbstractController
         User $user = null,
         $additionalValue = ''
     ) {
-        $result = $this->clientsideValidator
+        $clientsideValidator = $this->objectManager->get(ClientsideValidator::class);
+        $result = $clientsideValidator
             ->setValidationSettingsString($validation)
             ->setValue($value)
             ->setFieldName($field)
@@ -106,7 +101,7 @@ class UserController extends AbstractController
         $this->view->assignMultiple(
             [
                 'isValid' => $result,
-                'messages' => $this->clientsideValidator->getMessages(),
+                'messages' => $clientsideValidator->getMessages(),
                 'validation' => $validation,
                 'value' => $value,
                 'fieldname' => $field,

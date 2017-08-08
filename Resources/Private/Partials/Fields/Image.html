@@ -15,8 +15,14 @@
 						class="custom-file-input" />
 			</f:else>
 			<f:then>
-				<f:image image="{user.firstImage}" maxWidth="800" />
+				<div><f:image image="{user.firstImage}" maxWidth="800"/></div>
 				<f:form.hidden property="image.0" value="{user.firstImage}" />
+
+				<f:link.action
+						class="btn btn-danger"
+						action="imageDelete"
+						controller="User"
+						arguments="{user:user}">Delete image</f:link.action>
 			</f:then>
 		</f:if>
 	</div>

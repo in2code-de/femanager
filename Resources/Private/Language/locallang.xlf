@@ -141,6 +141,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.205">
 				<source>Profile update security failure</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.206">
+				<source>Image deleted</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.300">
 				<source>Delete</source>
 			</trans-unit>
