@@ -24,10 +24,9 @@ class ImageManipulation extends AbstractDataProcessor
      */
     public function process(array $arguments): array
     {
-        $arguments = $this->allowImageProperties($arguments);
+        $this->allowImageProperties();
         foreach ($this->getPropertiesForUpload() as $property) {
-            if (!empty($arguments['user'][$property][0]['__identity'])) {
-                // existing filereference given
+            if ($this->isFileIdentifierGiven($arguments, $property) || $this->isUploadError($arguments, $property)) {
                 unset($arguments['user'][$property]);
             } else {
                 // file upload given
@@ -126,16 +125,34 @@ class ImageManipulation extends AbstractDataProcessor
     }
 
     /**
-     * @param array $arguments
-     * @return array
+     * @return void
      */
-    protected function allowImageProperties(array $arguments): array
+    protected function allowImageProperties()
     {
         if (!empty($this->controllerArguments['user'])) {
             $this->controllerArguments['user']->getPropertyMappingConfiguration()->forProperty(
                 'image'
             )->allowProperties(0);
         }
-        return $arguments;
+    }
+
+    /**
+     * @param array $arguments
+     * @param $property
+     * @return bool
+     */
+    protected function isFileIdentifierGiven(array $arguments, $property): bool
+    {
+        return !empty($arguments['user'][$property][0]['__identity']);
+    }
+
+    /**
+     * @param array $arguments
+     * @param $property
+     * @return bool
+     */
+    protected function isUploadError(array $arguments, $property): bool
+    {
+        return !empty($arguments['user'][$property][0]['error']);
     }
 }
