@@ -105,7 +105,7 @@ jQuery.fn.femanagerValidation = function() {
 		$.ajax({
 			url: url,
 			data: {
-				'tx_femanager_pi1[validation]': element.data('validation'),
+				'tx_femanager_pi1[validation]': element.attr('data-validation'),
 				'tx_femanager_pi1[value]': elementValue,
 				'tx_femanager_pi1[field]': getFieldName(element),
 				'tx_femanager_pi1[user]': (user !== undefined ? user : ''),
@@ -220,7 +220,7 @@ jQuery.fn.femanagerValidation = function() {
 	 * @return array
 	 */
 	function getValidations(element) {
-		return element.data('validation').split(',');
+		return element.attr('data-validation').split(',');
 	}
 
 	/**
