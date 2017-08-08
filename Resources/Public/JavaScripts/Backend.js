@@ -9,19 +9,43 @@ jQuery(document).ready(function($) {
 
 		if ($this.hasClass('hideUser')) {
 			$this
-				.removeClass('t3-icon-edit-hide')
-				.removeClass('hideUser')
-				.addClass('t3-icon-edit-unhide')
-				.addClass('unhideUser');
+				.closest('tr')
+				.find('.tx-feusermanager-icon-status-user-frontend').hide();
 			$this
-				.closest('.femanager_list_line')
-				.children('.col-icon')
-				.children(':first')
-				.html('<span class="t3-icon t3-icon-status t3-icon-status-overlay t3-icon-overlay-hidden t3-icon-overlay">&nbsp;</span>');
+				.closest('tr')
+				.find('.tx-feusermanager-icon-status-user-frontend-disabled').show();
+			$this
+				.closest('tr')
+				.find('.tx-feusermanager-icon-actions-edit-hide').hide();
+			$this
+				.closest('tr')
+				.find('.tx-feusermanager-icon-actions-edit-unhide').show();
+			$this
+				.closest('tr')
+				.find('.tx-feusermanager-icon-actions-system-backend-user-switch').hide();
+			$this
+				.closest('tr')
+				.find('.tx-feusermanager-icon-actions-system-backend-user-switch-disabled').show();
 			var hidden = 1;
 		} else {
-			$this.removeClass('t3-icon-edit-unhide').removeClass('unhideUser').addClass('t3-icon-edit-hide').addClass('hideUser');
-			$this.closest('.femanager_list_line').children('.col-icon').children(':first').html('');
+			$this
+				.closest('tr')
+				.find('.tx-feusermanager-icon-status-user-frontend').show();
+			$this
+				.closest('tr')
+				.find('.tx-feusermanager-icon-status-user-frontend-disabled').hide();
+			$this
+				.closest('tr')
+				.find('.tx-feusermanager-icon-actions-edit-hide').show();
+			$this
+				.closest('tr')
+				.find('.tx-feusermanager-icon-actions-edit-unhide').hide();
+			$this
+				.closest('tr')
+				.find('.tx-feusermanager-icon-actions-system-backend-user-switch').show();
+			$this
+				.closest('tr')
+				.find('.tx-feusermanager-icon-actions-system-backend-user-switch-disabled').hide();
 			var hidden = 0;
 		}
 		url = moduleUri + '&data[' + table + '][' + uid + '][disable]=' + hidden + '&redirect=' + T3_THIS_LOCATION;
@@ -49,14 +73,27 @@ jQuery(document).ready(function($) {
 
 	// User Logout
 	$('.logoutUser').click(function(e) {
+		console.log('#1');
 		e.preventDefault();
 		var $this = $(this);
 		$this
 			.closest('tr')
-			.find('.t3-icon-status-permission-granted')
-			.removeClass('t3-icon-status-permission-granted')
-			.addClass('t3-icon-status-permission-denied');
-
+			.find('.tx-feusermanager-icon-status-status-permission-granted').hide();
+		$this
+			.closest('tr')
+			.find('.tx-feusermanager-icon-status-status-permission-denied').show();
+		$this
+			.closest('tr')
+			.find('.tx-feusermanager-icon-actions-system-backend-user-switch-disabled').hide();
+		$this
+			.closest('tr')
+			.find('.tx-feusermanager-icon-actions-system-backend-user-switch').show();
+		$this
+			.closest('tr')
+			.find('.tx-feusermanager-icon-apps-pagetree-drag-place-denied').hide();
+		$this
+			.closest('tr')
+			.find('.tx-feusermanager-icon-apps-pagetree-drag-place-denied-disabled').show();
 		var url = $this.prop('href');
 		$.ajax({
 			url: url

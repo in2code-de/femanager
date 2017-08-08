@@ -15,7 +15,7 @@ UserBackend / List
 			<f:then>
 
 				<f:be.widget.paginate objects="{users}" as="usersPage" configuration="{itemsPerPage: 100, insertBelow: 1}">
-					<table cellspacing="0" cellpadding="0" border="0" class="{f:if(condition:'{femanager:Condition.IsCompatVersion(versionNumber:\'7.0\')}', then: 'table table-striped table-hover', else: 'typo3-dblist')}">
+					<table cellspacing="0" cellpadding="0" border="0" class="table table-striped table-hover">
 						<tbody>
 
 							<tr class="t3-row-header">
@@ -31,7 +31,7 @@ UserBackend / List
 							<tr class="c-headLine">
 								<td nowrap="nowrap" class="col-icon">
 									<a title="Create New User" onclick="window.location.href='alt_doc.php?returnUrl=' + T3_THIS_LOCATION + '&amp;edit[fe_users][{femanager:Misc.Request(parameter:'id')}]=new'; return false;" href="#">
-										<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-new">&nbsp;</span>
+										<core:icon identifier="actions-document-new" />
 									</a>
 								</td>
 								<td nowrap="nowrap" class="col-icon">
@@ -67,26 +67,28 @@ UserBackend / List
 							<f:for each="{usersPage}" as="user">
 								<tr class="db_list_normal firstcol femanager_list_line">
 									<td nowrap="nowrap" class="col-icon">
-										<f:if condition="{user.disable}">
-											<f:then>
-												<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-user-frontend" style="" title="id={user.uid} - Hidden">
-													<span class="t3-icon t3-icon-status t3-icon-status-overlay t3-icon-overlay-hidden t3-icon-overlay">&nbsp;</span>
-												</span>
-											</f:then>
-											<f:else>
-												<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-user-frontend" title="id={user.uid}">&nbsp;</span>
-											</f:else>
-										</f:if>
+										<span title="id={user.uid}"
+											  class="tx-feusermanager-icon-status-user-frontend"
+											  style="{f:if(condition:'{user.disable}', then:'display:none', else:'')}">
+											<core:icon identifier="status-user-frontend" />
+										</span>
+										<span title="id={user.uid} - {f:translate(key:'BackendListUserVisibilityHidden')}"
+											  class="tx-feusermanager-icon-status-user-frontend-disabled"
+											  style="{f:if(condition:'{user.disable}', then:'', else:'display:none')}">
+											<core:icon identifier="status-user-frontend" state="disabled" />
+										</span>
 									</td>
 									<td nowrap="nowrap" class="col-icon">
-										<f:if condition="{user.online}">
-											<f:then>
-												<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-granted" title="Online">&nbsp;</span>
-											</f:then>
-											<f:else>
-												<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-status-permission-denied" title="Offline">&nbsp;</span>
-											</f:else>
-										</f:if>
+										<span title="{f:translate(key:'BackendListUserStatusOnline')}"
+											  class="tx-feusermanager-icon-status-status-permission-granted"
+											  style="{f:if(condition:'{user.online}', then:'', else:'display:none')}">
+											<core:icon identifier="status-status-permission-granted" />
+										</span>
+										<span title="{f:translate(key:'BackendListUserStatusOffline')}"
+											  class="tx-feusermanager-icon-status-status-permission-denied"
+											  style="{f:if(condition:'{user.online}', then:'display:none', else:'')}">
+											<core:icon identifier="status-status-permission-denied" />
+										</span>
 									</td>
 									<td nowrap="nowrap" class="col-title">
 										{user.username}
@@ -123,42 +125,62 @@ UserBackend / List
 										<f:comment>
 											Edit Icon
 										</f:comment>
-										<a title="Edit" href="{femanager:Misc.BackendEditLink(tableName:'fe_users',identifier:user.uid)}">
-											<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-open">&nbsp;</span>
+										<a title="{f:translate(key:'BackendListUserEdit')}" href="{femanager:Misc.BackendEditLink(tableName:'fe_users',identifier:user.uid)}">
+											<core:icon identifier="actions-document-open" />
 										</a>
 
 										<f:comment>
 											Delete Icon
 										</f:comment>
-										<span class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-delete deleteUser cursorpointer" title="{f:translate(key:'BackendListMailDelete')}">&nbsp;</span>
+										<span class="deleteUser cursorpointer" title="{f:translate(key:'BackendListUserDelete')}">
+											<core:icon identifier="actions-edit-delete" />
+										</span>
 
 										<f:comment>
 											Enable/Disable Icon
 										</f:comment>
-										<f:if condition="{user.disable} == 1">
-											<f:then>
-												<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-unhide unhideUser cursorpointer">&nbsp;</span>
-											</f:then>
-											<f:else>
-												<span title="{f:translate(key: 'BackendListHelpUnhide')}" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-hide hideUser cursorpointer">&nbsp;</span>
-											</f:else>
-										</f:if>
+										<span title="{f:translate(key: 'BackendListUserVisibilityUnhide')}"
+											  class="unhideUser cursorpointer tx-feusermanager-icon-actions-edit-unhide"
+											  style="{f:if(condition:'{user.disable} == 1', then:'', else:'display:none')}">
+											<core:icon identifier="actions-edit-unhide" />
+										</span>
+										<span title="{f:translate(key: 'BackendListUserVisibilityHide')}"
+											  class="hideUser cursorpointer tx-feusermanager-icon-actions-edit-hide"
+											  style="{f:if(condition:'{user.disable} == 1', then:'display:none', else:'')}">
+											<core:icon identifier="actions-edit-hide" />
+										</span>
 
 										<f:comment>
 											Login as Icon
 										</f:comment>
-										<f:if condition="{femanager:Condition.IsBackendAdministratorAuthentication()}">
+										<span title="{f:translate(key:'BackendListLoginAs')}"
+											  class="tx-feusermanager-icon-actions-system-backend-user-switch"
+											  style="{f:if(condition:'{user.online} == 1', then:'display:none', else:'{f:if(condition:\'{user.disable}\', then:\'display:none\', else:\'\')}')}">
 											<a href="/?eID=femanagerLoginAs&user={user.uid}" title="{f:translate(key: 'BackendListLoginAs')}" target="_blank">
 												<core:icon identifier="actions-system-backend-user-switch" />
 											</a>
-										</f:if>
+										</span>
+										<span title="{f:translate(key:'BackendListLoginAs')}"
+											  class="tx-feusermanager-icon-actions-system-backend-user-switch-disabled"
+											  style="{f:if(condition:'{user.online} == 1', then:'', else:'{f:if(condition:\'{user.disable}\', then:\'\', else:\'display:none\')}')}">
+											<core:icon identifier="actions-system-backend-user-switch" state="disabled" />
+										</span>
 
 										<f:comment>
 											Logout Icon
 										</f:comment>
-										<f:link.action action="userLogout" arguments="{user:user}" class="logoutUser">
-											<span class="t3-icon t3-icon-status t3-icon-status-user t3-icon-pagetree-drag-place-denied cursorpointer" title="Logout">&nbsp;</span>
-										</f:link.action>
+										<span title="{f:translate(key:'BackendListUserLogout')}"
+											  class="tx-feusermanager-icon-apps-pagetree-drag-place-denied"
+											  style="{f:if(condition:'{user.online}', then:'', else:'display:none')}">
+											<f:link.action action="userLogout" arguments="{user:user}" class="logoutUser" title="{f:translate(key:'BackendListUserLogout')}">
+												<core:icon identifier="apps-pagetree-drag-place-denied" />
+											</f:link.action>
+										</span>
+										<span title="{f:translate(key:'BackendListUserLogout')}"
+											  class="tx-feusermanager-icon-apps-pagetree-drag-place-denied-disabled"
+											  style="{f:if(condition:'{user.online}', then:'display:none', else:'')}">
+											<core:icon identifier="apps-pagetree-drag-place-denied" state="disabled" />
+										</span>
 
 										<input type="hidden" class="container_uid" name="container_uid" value="{user.uid}" />
 										<input type="hidden" class="container_module_uri" name="container_module_uri" value="{moduleUri}" />

@@ -8,9 +8,11 @@ Changelog
 Introduction
 ------------
 
-Older versions of femanager, even those which are probably not downloadable through TER, are available at
-git://git.typo3.org/TYPO3CMS/Extensions/femanager.git or
-https://forge.typo3.org/projects/extension-femanager/repository
+This changelog is outdated and only for version < 3 of femanager. Pls look at https://github.com/einpraegsam/femanager
+for a newer changelog.
+
+Older versions of femanager, even those which are probably not downloadable through TER, are available on github:
+https://github.com/einpraegsam/femanager
 
 Changes
 -------

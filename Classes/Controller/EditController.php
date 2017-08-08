@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
@@ -15,57 +16,25 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
-
 /**
- * Edit Controller
- *
- * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html
- *          GNU General Public License, version 3 or later
+ * Class EditController
  */
 class EditController extends AbstractController
 {
 
     /**
-     * action edit
-     *
      * @return void
      */
     public function editAction()
     {
         $this->view->assignMultiple([
-                'user' => $this->user,
-                'allUserGroups' => $this->allUserGroups
-            ]);
+            'user' => $this->user,
+            'allUserGroups' => $this->allUserGroups
+        ]);
         $this->assignForAll();
     }
 
     /**
-     * Init for User creation
-     *
      * @return void
      */
     public function initializeUpdateAction()
@@ -73,9 +42,6 @@ class EditController extends AbstractController
         $user = UserUtility::getCurrentUser();
         $userValues = $this->request->getArgument('user');
         $this->testSpoof($user, $userValues['__identity']);
-        if ((int) $this->pluginVariables['user']['usergroup'][0]['__identity'] === 0) {
-            unset($this->pluginVariables['user']['usergroup']);
-        }
         if ($this->keepPassword()) {
             unset($this->pluginVariables['user']['password']);
             unset($this->pluginVariables['password_repeat']);
@@ -84,8 +50,6 @@ class EditController extends AbstractController
     }
 
     /**
-     * action update
-     *
      * @param User $user
      * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
      * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
@@ -108,8 +72,6 @@ class EditController extends AbstractController
     }
 
     /**
-     * Update if hash is ok
-     *
      * @param User $user User object
      * @param string $hash
      * @param string $status could be "confirm", "refuse", "silentRefuse"
@@ -149,7 +111,7 @@ class EditController extends AbstractController
     protected function statusConfirm(User $user)
     {
         $values = GeneralUtility::xml2array($user->getTxFemanagerChangerequest());
-        foreach ((array) $values as $field => $value) {
+        foreach ((array)$values as $field => $value) {
             if ($field !== 'usergroup' && method_exists($user, 'set' . ucfirst($field))) {
                 $user->{'set' . ucfirst($field)}($value['new']);
             } else {

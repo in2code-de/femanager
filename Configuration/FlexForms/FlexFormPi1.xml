@@ -28,7 +28,7 @@
 									</numIndex>
 									<numIndex index="2" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.1</numIndex>
-										<numIndex index="1">Edit->edit;Edit->update;Edit->delete;Edit->confirmUpdateRequest;</numIndex>
+										<numIndex index="1">Edit->edit;Edit->update;Edit->delete;Edit->confirmUpdateRequest;User->imageDelete;</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.2</numIndex>
@@ -207,7 +207,7 @@
 			<ROOT>
 				<TCEforms>
 					<sheetTitle>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.edit.title</sheetTitle>
-					<displayCond><![CDATA[FIELD:main.switchableControllerActions:=:Edit->edit;Edit->update;Edit->delete;Edit->confirmUpdateRequest;]]></displayCond>
+					<displayCond><![CDATA[FIELD:main.switchableControllerActions:=:Edit->edit;Edit->update;Edit->delete;Edit->confirmUpdateRequest;User->imageDelete;]]></displayCond>
 				</TCEforms>
 				<type>array</type>
 				<el>

@@ -1,9 +1,49 @@
 # TYPO3 Extension femanager
 
 TYPO3 Frontend User Registration and Management based on
-Extbase and Fluid and on TYPO3 7.6 and the possibility to extend it.
-Extension basicly works like sr_feuser_register
+a very flexible configuration and on TYPO3 8.7 LTS with the possibility to extend it.
+Extension basicly works like sr_feuser_register or any other frontend user registration.
 
-# Documentation
+## Quick installation
 
-- https://docs.typo3.org/typo3cms/extensions/femanager/
+Please look at the manual for a big documentation at 
+https://docs.typo3.org/typo3cms/extensions/femanager/
+
+Quick guide:
+- Just install this extension - e.g. `composer require in2code/femanager` or download it 
+  or install it with the classic way (Extension Manager)
+- Clear caches
+- Add a sysfolder for your Frontend-Users and Usergroups (or separate it)
+- Add a new page content of type plugin and choose femanager
+- Set the storage page to the new sysfolder
+
+## Supported version
+
+| Software    | Versions   |
+| ----------- | ---------- |
+| TYPO3       | 8.7        |
+| PHP         | 7.0 - 7.2  |
+
+## Changelog
+
+| Version    | Date       | State      | Description                                                                  |
+| ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 3.0.0      | 2017-08-08 | Major update | Refactored version for TYPO3 8.7                                           |
+
+## Screenshots
+
+<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_create1.png" width="500" />
+
+<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_create2.png" width="500" />
+
+<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_create3.png" width="500" />
+
+<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_edit1.png" width="500" />
+
+<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_edit21.png" width="500" />
+
+<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_backend1.png" width="500" />
+
+<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_backend2.png" width="500" />
+
+<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_backend3.png" width="500" />

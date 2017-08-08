@@ -1,51 +1,33 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2015 in2code.de
- *  Alex Kellner <alexander.kellner@in2code.de>
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
-
 /**
  * Class FrontendUtility
- *
- * @package In2code\Femanager\Utility
  */
 class FrontendUtility extends AbstractUtility
 {
+
+    /**
+     * @var array
+     */
+    protected static $pluginNames = [
+        'tx_femanager_pi1',
+        'tx_femanager_pi2'
+    ];
 
     /**
      * Get current pid
      *
      * @return int
      */
-    public static function getCurrentPid()
+    public static function getCurrentPid(): int
     {
-        return (int) self::getTypoScriptFrontendController()->id;
+        return (int)self::getTypoScriptFrontendController()->id;
     }
 
     /**
@@ -53,12 +35,32 @@ class FrontendUtility extends AbstractUtility
      *
      * @return int
      */
-    public static function getFrontendLanguageUid()
+    public static function getFrontendLanguageUid(): int
     {
         if (!empty(self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'])) {
-            return (int) self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'];
+            return (int)self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'];
         }
         return 0;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getCharset(): string
+    {
+        return self::getTypoScriptFrontendController()->metaCharset;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getUriToCurrentPage(): string
+    {
+        $contentObject = ObjectUtility::getContentObject();
+        $configuration = [
+            'parameter' => self::getCurrentPid()
+        ];
+        return $contentObject->typoLink_URL($configuration);
     }
 
     /**
@@ -70,7 +72,7 @@ class FrontendUtility extends AbstractUtility
      */
     public static function forceValues(User $user, array $settings)
     {
-        foreach ((array) $settings as $field => $config) {
+        foreach ((array)$settings as $field => $config) {
             $config = null;
             if (stristr($field, '.')) {
                 continue;
@@ -96,5 +98,33 @@ class FrontendUtility extends AbstractUtility
             }
         }
         return $user;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getControllerName(): string
+    {
+        foreach (self::$pluginNames as $pluginName) {
+            $variables = GeneralUtility::_GPmerged($pluginName);
+            if (!empty($variables['controller'])) {
+                return $variables['controller'];
+            }
+        }
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public static function getActionName(): string
+    {
+        foreach (self::$pluginNames as $pluginName) {
+            $variables = GeneralUtility::_GPmerged($pluginName);
+            if (!empty($variables['action'])) {
+                return $variables['action'];
+            }
+        }
+        return '';
     }
 }

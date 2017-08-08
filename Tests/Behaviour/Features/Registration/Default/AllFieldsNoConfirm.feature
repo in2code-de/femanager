@@ -27,7 +27,7 @@ Feature: AllFieldsNoConfirm
     And I select "Deutschland" from "tx_femanager_pi1[user][country]"
     And I press "Create Profile Now"
 
-    Then I should see "Profile successfully created"
+    Then I should see "User registration"
 
     Given I am on "/index.php?id=33"
     Then I should see "[random:1]"

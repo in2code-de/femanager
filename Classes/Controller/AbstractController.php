@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\DataProcessor\DataProcessorRunner;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
-use In2code\Femanager\Utility\FileUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -17,39 +18,10 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
-use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
-
 /**
- * Abstract Controller
- *
- * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html
- *          GNU General Public License, version 3 or later
+ * Class AbstractController
  */
 abstract class AbstractController extends ActionController
 {
@@ -142,7 +114,6 @@ abstract class AbstractController extends ActionController
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
-        $this->addFlashMessage(LocalizationUtility::translate('create'));
         LogUtility::log(Log::STATUS_NEWREGISTRATION, $user);
         $this->finalCreate($user, 'new', 'createStatus');
     }
@@ -331,6 +302,7 @@ abstract class AbstractController extends ActionController
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $action, $this]);
         $this->finisherRunner->callFinishers($user, $this->actionMethodName, $this->settings, $this->contentObject);
         $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
+        $this->addFlashMessage(LocalizationUtility::translate('create'));
         $this->redirect($redirectByActionName);
     }
 
@@ -367,11 +339,10 @@ abstract class AbstractController extends ActionController
     {
         $target = null;
         // redirect from TypoScript cObject
-        if (
-            $this->contentObject->cObjGetSingle(
-                $this->config[$action . '.'][$category],
-                $this->config[$action . '.'][$category . '.']
-            )
+        if ($this->contentObject->cObjGetSingle(
+            $this->config[$action . '.'][$category],
+            $this->config[$action . '.'][$category . '.']
+        )
         ) {
             $target = $this->contentObject->cObjGetSingle(
                 $this->config[$action . '.'][$category],
@@ -386,20 +357,6 @@ abstract class AbstractController extends ActionController
             $link = $this->uriBuilder->build();
             $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($link));
         }
-    }
-
-    /**
-     * Init for User creation
-     *
-     * @return void
-     */
-    public function initializeCreateAction()
-    {
-        // workarround for empty usergroups
-        if ((int) $this->pluginVariables['user']['usergroup'][0] === 0) {
-            unset($this->pluginVariables['user']['usergroup']);
-        }
-        $this->request->setArguments($this->pluginVariables);
     }
 
     /**
@@ -423,7 +380,7 @@ abstract class AbstractController extends ActionController
      */
     protected function testSpoof($user, $uid)
     {
-        if ($user->getUid() !== (int) $uid && $uid > 0) {
+        if ($user->getUid() !== (int)$uid && $uid > 0) {
             LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
@@ -445,8 +402,7 @@ abstract class AbstractController extends ActionController
             [
                 'languageUid' => FrontendUtility::getFrontendLanguageUid(),
                 'storagePid' => $this->allConfig['persistence']['storagePid'],
-                'Pid' => FrontendUtility::getCurrentPid(),
-                'uploadFolder' => FileUtility::getUploadFolderFromTca()
+                'Pid' => FrontendUtility::getCurrentPid()
             ]
         );
     }
@@ -458,7 +414,6 @@ abstract class AbstractController extends ActionController
      */
     public function initializeAction()
     {
-        $this->databaseConnection = $GLOBALS['TYPO3_DB'];
         $this->controllerContext = $this->buildControllerContext();
         $this->user = UserUtility::getCurrentUser();
         $this->contentObject = $this->configurationManager->getContentObject();
@@ -470,33 +425,19 @@ abstract class AbstractController extends ActionController
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
         $this->config = $this->config['plugin.']['tx_femanager.']['settings.'];
-        $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'];
-        $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
 
-        if (isset($this->arguments['user'])) {
-            $this->arguments['user']
-                ->getPropertyMappingConfiguration()
-                ->forProperty('dateOfBirth')
-                ->setTypeConverterOption(
-                    'TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter',
-                    DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-                    LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat')
-                );
-        }
-        // check if ts is included
-        if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
-            $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript'), '', FlashMessage::ERROR);
-        }
+        $this->setAllUserGroups();
+        $this->checkTypoScript();
+        $this->checkStoragePid();
 
-        // check if storage pid was set
-        if (
-            (int) $this->allConfig['persistence']['storagePid'] === 0
-            && !GeneralUtility::_GP('eID')
-            && TYPO3_MODE !== 'BE'
-        ) {
-            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', FlashMessage::ERROR);
-        }
+        $dataProcessorRunner = $this->objectManager->get(DataProcessorRunner::class);
+        $this->pluginVariables = $dataProcessorRunner->callClasses(
+            $this->request->getArguments(),
+            $this->settings,
+            $this->contentObject,
+            $this->arguments
+        );
+        $this->request->setArguments($this->pluginVariables);
     }
 
     /**
@@ -507,5 +448,38 @@ abstract class AbstractController extends ActionController
     protected function getErrorFlashMessage()
     {
         return false;
+    }
+
+    /**
+     * @return void
+     */
+    protected function checkStoragePid()
+    {
+        if ((int)$this->allConfig['persistence']['storagePid'] === 0
+            && !GeneralUtility::_GP('eID')
+            && TYPO3_MODE !== 'BE'
+        ) {
+            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', FlashMessage::ERROR);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    protected function checkTypoScript()
+    {
+        if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
+            $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript'), '', FlashMessage::ERROR);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    protected function setAllUserGroups()
+    {
+        $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
+        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'];
+        $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
     }
 }

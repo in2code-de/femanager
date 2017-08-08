@@ -161,9 +161,9 @@ jQuery.fn.femanagerValidation = function() {
 	 */
 	function writeErrorMessage(element, message) {
 		cleanErrorMessage(element); // remove all errors to this field at the beginning
-		var errorMessage = $('.femanager_validation_container').html().replace('{messages}', message); // get html for error
+		var errorMessage = $('.femanager_validation_container').html().replace('###messages###', message); // get html for error
 		element.before(errorMessage); // add message
-		element.closest('.control-group').addClass('error');
+		element.closest('.form-group').addClass('has-error');
 		element.addClass('error');
 	}
 
@@ -173,7 +173,7 @@ jQuery.fn.femanagerValidation = function() {
 	 * @param element
 	 */
 	function cleanErrorMessage(element) {
-		element.closest('.control-group').removeClass('error');
+		element.closest('.form-group').removeClass('has-error');
 		element.siblings('.alert').remove(); // hide message to this field
 		element.removeClass('error');
 	}

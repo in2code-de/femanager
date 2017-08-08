@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -6,10 +7,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * BackendEditLinkViewHelper
- *
- * @package TYPO3
- * @subpackage Fluid
+ * Class BackendEditLinkViewHelper
  */
 class BackendEditLinkViewHelper extends AbstractViewHelper
 {
@@ -50,7 +48,7 @@ class BackendEditLinkViewHelper extends AbstractViewHelper
             'M',
             'moduleToken'
         ];
-        foreach ((array) GeneralUtility::_GET() as $key => $value) {
+        foreach ((array)GeneralUtility::_GET() as $key => $value) {
             if (in_array($key, $ignoreKeys)) {
                 continue;
             }

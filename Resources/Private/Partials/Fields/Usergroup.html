@@ -4,14 +4,14 @@
 
 
 <f:section name="default">
-	<div class="femanager_fieldset femanager_usergroup control-group">
-		<label for="femanager_field_usergroup" class="control-label">
+	<div class="femanager_fieldset femanager_usergroup form-group">
+		<label for="femanager_field_usergroup" class="col-sm-2 control-label">
 			<f:translate key="tx_femanager_domain_model_user.usergroup" />
 			<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'usergroup')}">
 				<span>*</span>
 			</f:if>
 		</label>
-		<div class="controls">
+		<div class="col-sm-10">
 			<femanager:form.select
 					id="femanager_field_usergroup"
 					name="user[usergroup][0]"
@@ -20,7 +20,7 @@
 					optionLabelField="title"
 					sortByOptionLabel="1"
 					defaultOption="{f:translate(key:'pleaseChoose')}"
-					class="input-block-level"
+					class="form-control"
 					value="{femanager:Misc.GetFirst(objectStorage:user.usergroup)}"
 					additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'usergroup')}" />
 		</div>
@@ -35,14 +35,14 @@
 		// Example how to add a multiselect field
 		/////////////////////////////////////////
 
-		<div class="femanager_fieldset femanager_usergroup control-group">
-			<label for="femanager_field_usergroup" class="control-label">
+		<div class="femanager_fieldset femanager_usergroup form-group">
+			<label for="femanager_field_usergroup" class="col-sm-2 control-label">
 				<f:translate key="tx_femanager_domain_model_user.usergroup" />
 				<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'usergroup')}">
 					<span>*</span>
 				</f:if>
 			</label>
-			<div class="controls">
+			<div class="col-sm-10">
 				<femanager:form.select
 						id="femanager_field_usergroup"
 						property="usergroup"
@@ -51,7 +51,7 @@
 						optionValueField="uid"
 						optionLabelField="title"
 						sortByOptionLabel="1"
-						class="input-block-level"
+						class="form-control"
 						value="{femanager:Misc.GetFirst(objectStorage:user.usergroup)}"
 						additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'usergroup')}" />
 			</div>

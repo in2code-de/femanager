@@ -1,14 +1,12 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * View helper to explode a list
- *
- * @package TYPO3
- * @subpackage Fluid
+ * Class ExplodeViewHelper
  */
 class ExplodeViewHelper extends AbstractViewHelper
 {

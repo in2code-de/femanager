@@ -15,33 +15,13 @@
 	<input type="hidden" id="femanagerPid" value="{Pid}" />
 
 	<f:comment>
-		Path to the upload folder for images - only relevant to show an image that was uploaded in frontend
-	</f:comment>
-	<input type="hidden" id="uploadFolder" value="{uploadFolder}" />
-
-	<f:comment>
-		Maximum numbers of images that could be uploaded
-	</f:comment>
-	<input type="hidden" id="uploadAmount" value="{settings.misc.uploadAmount}" />
-
-	<f:comment>
-		Maximum filesize for image upload
-	</f:comment>
-	<input type="hidden" id="uploadSize" value="{settings.misc.uploadSize}" />
-
-	<f:comment>
-		Allowed file extension for image upload
-	</f:comment>
-	<input type="hidden" id="uploadFileExtension" value="{settings.misc.uploadFileExtension}" />
-
-	<f:comment>
 		Container for javascript validation messages above the fields
 	</f:comment>
 	<div class="femanager_validation_container">
-		<div class="alert alert-error">
+		<div class="alert bg-danger">
 			<button type="button" class="close" data-dismiss="alert">&#x00D7;</button>
-			<h4><f:translate key="validationError" /></h4>
-			<![CDATA[{messages}]]>
+			<h4><f:translate key="validationError" extensionName="Femanager" /></h4>
+			###messages###
 		</div>
 	</div>
 </div>

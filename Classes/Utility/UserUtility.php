@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\User;
@@ -11,35 +12,8 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
 use TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2015 in2code.de
- *  Alex Kellner <alexander.kellner@in2code.de>
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
-
 /**
  * Class UserUtility
- *
- * @package In2code\Femanager\Utility
  */
 class UserUtility extends AbstractUtility
 {
@@ -54,7 +28,7 @@ class UserUtility extends AbstractUtility
         if (self::getPropertyFromUser() !== null) {
             /** @var UserRepository $userRepository */
             $userRepository = GeneralUtility::makeInstance(ObjectManager::class)->get(UserRepository::class);
-            return $userRepository->findByUid((int) self::getPropertyFromUser());
+            return $userRepository->findByUid((int)self::getPropertyFromUser());
         }
         return null;
     }
@@ -232,8 +206,7 @@ class UserUtility extends AbstractUtility
         ];
 
         foreach ($changedObject->_getCleanProperties() as $propertyName => $oldPropertyValue) {
-            if (
-                method_exists($changedObject, 'get' . ucfirst($propertyName))
+            if (method_exists($changedObject, 'get' . ucfirst($propertyName))
                 && !in_array($propertyName, $ignoreProperties)
             ) {
                 $newPropertyValue = $changedObject->{'get' . ucfirst($propertyName)}();
@@ -296,7 +269,7 @@ class UserUtility extends AbstractUtility
      */
     public static function removeFrontendSessionToUser(User $user)
     {
-        self::getDatabaseConnection()->exec_DELETEquery('fe_sessions', 'ses_userid = ' . (int) $user->getUid());
+        self::getDatabaseConnection()->exec_DELETEquery('fe_sessions', 'ses_userid = ' . (int)$user->getUid());
     }
 
     /**
@@ -309,7 +282,7 @@ class UserUtility extends AbstractUtility
     {
         $select = 'ses_id';
         $from = 'fe_sessions';
-        $where = 'ses_userid = ' . (int) $user->getUid();
+        $where = 'ses_userid = ' . (int)$user->getUid();
         $res = self::getDatabaseConnection()->exec_SELECTquery($select, $from, $where);
         $row = self::getDatabaseConnection()->sql_fetch_assoc($res);
         return !empty($row['ses_id']);

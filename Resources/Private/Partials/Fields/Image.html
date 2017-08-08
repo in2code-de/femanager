@@ -1,61 +1,29 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
-<div class="femanager_fieldset femanager_image control-group">
-	<label class="control-label" for="femanager_field_image">
+<div class="femanager_fieldset femanager_image form-group">
+	<label for="femanager_field_image" class="col-sm-2 control-label">
 		<f:translate key="tx_femanager_domain_model_user.image" />
 		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'image')}">
 			<span>*</span>
 		</f:if>
 	</label>
-	<div class="controls">
-		<div id="femanager_field_fine-uploader">
-			<f:translate key="field_image_fineuploader" />
-		</div>
-		<div id="femanager_field_preview-image">
-			<ul class="qq-upload-list">
-				<f:for each="{femanager:Form.GetImages(property:'image')}" as="image">
-					<li class="alert alert-success">
-						<span class="qq-upload-file">{image}</span>
-						<span class="qq-upload-size"><femanager:Misc.FileSize path="{uploadFolder}/{image}" />kB</span>
-						<a href="#" class="qq-upload-delete icon-trash">Delete</a>
-						<f:image
-								src="{uploadFolder}/{image}"
-								alt="{user.firstName} {user.lastName}"
-								width="{settings.misc.renderImageWidth}"
-								class="fileupload_image" />
-					</li>
-				</f:for>
-			</ul>
-		</div>
-		<f:form.hidden id="femanager_field_image" property="image" class="fine_uploader_image" value="{user.image}" />
-	</div>
-	<div class="hidden" style="display: none;">
-		<div class="image_container_template">
-			<div class="qq-uploader">
-				<pre class="qq-upload-drop-area">
-					<span><f:translate key="field_image_drag" /></span>
-				</pre>
-				<div class="qq-upload-button btn btn-block btn-success">
-					<f:translate key="field_image_upload" />
-				</div>
-				<span class="qq-drop-processing">
-					<span><f:translate key="field_image_drag_processing" /></span>
-					<span class="qq-drop-processing-spinner"></span>
-				</span>
-				<ul class="qq-upload-list"></ul>
-			</div>
-		</div>
-		<div class="image_container_filetemplate">
-			<li>
-				<div class="qq-progress-bar"></div>
-				<span class="qq-upload-spinner"></span>
-				<span class="qq-upload-finished"></span>
-				<span class="qq-upload-file"></span>
-				<span class="qq-upload-size"></span>
-				<a class="qq-upload-cancel" href="#">Cancel</a>
-				<a class="qq-upload-retry" href="#">Retry</a>
-				<a class="qq-upload-delete" href="#">Del</a>
-				<span class="qq-upload-status-text">Status</span>
-			</li>
-		</div>
+	<div class="col-sm-10">
+		<f:if condition="{user.image}">
+			<f:else>
+				<f:form.upload
+						id="femanager_field_image"
+						property="image.0"
+						class="custom-file-input" />
+			</f:else>
+			<f:then>
+				<div><f:image image="{user.firstImage}" maxWidth="800"/></div>
+				<f:form.hidden property="image.0" value="{user.firstImage}" />
+
+				<f:link.action
+						class="btn btn-danger"
+						action="imageDelete"
+						controller="User"
+						arguments="{user:user}">Delete image</f:link.action>
+			</f:then>
+		</f:if>
 	</div>
 </div>

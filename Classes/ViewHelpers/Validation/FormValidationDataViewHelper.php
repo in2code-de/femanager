@@ -1,11 +1,9 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Validation;
 
 /**
- * Set javascript validation data for input fields
- *
- * @package TYPO3
- * @subpackage Fluid
+ * Class FormValidationDataViewHelper
  */
 class FormValidationDataViewHelper extends AbstractValidationViewHelper
 {
@@ -60,7 +58,7 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper
     protected function getValidationString($settings, $fieldName)
     {
         $string = '';
-        $validationSettings = (array) $settings[$this->getControllerName()][$this->getValidationName()][$fieldName];
+        $validationSettings = (array)$settings[$this->getControllerName()][$this->getValidationName()][$fieldName];
         foreach ($validationSettings as $validation => $configuration) {
             if (!empty($string)) {
                 $string .= ',';

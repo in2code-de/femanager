@@ -1,5 +1,8 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
+
+use In2code\Femanager\Domain\Model\User;
 
 /**
  * Class ServersideValidator
@@ -10,153 +13,313 @@ class ServersideValidator extends AbstractValidator
     /**
      * Validation of given Params
      *
-     * @param $user
+     * @param User $user
      * @return bool
      */
-    public function isValid($user)
+    public function isValid($user): bool
     {
         $this->init();
+        if ($this->validationSettings['_enable']['server'] === '1') {
+            foreach ($this->validationSettings as $fieldName => $validations) {
+                if ($this->processValidation($user, $fieldName)) {
+                    $value = $this->getValue($user, $fieldName);
 
-        if ($this->validationSettings['_enable']['server'] !== '1') {
-            return $this->isValid;
-        }
+                    foreach ($validations as $validation => $validationSetting) {
+                        switch ($validation) {
+                            case 'required':
+                                $this->checkRequiredValidation($validationSetting, $value, $fieldName);
+                                break;
 
-        foreach ($this->validationSettings as $field => $validations) {
-            if (is_object($user) && method_exists($user, 'get' . ucfirst($field))) {
+                            case 'email':
+                                $this->checkEmailValidation($value, $validationSetting, $fieldName);
+                                break;
 
-                $value = $user->{'get' . ucfirst($field)}();
-                if (is_object($value)) {
-                    if (method_exists($value, 'getUid')) {
-                        $value = $value->getUid();
-                    }
-                    if (method_exists($value, 'getFirst')) {
-                        $value = $value->getFirst()->getUid();
-                    }
-                    if (method_exists($value, 'current')) {
-                        $current = $value->current();
-                        if (method_exists($current, 'getUid')) {
-                            $value = $current->getUid();
+                            case 'min':
+                                $this->checkMinValidation($value, $validationSetting, $fieldName);
+                                break;
+
+                            case 'max':
+                                $this->checkMaxValidation($value, $validationSetting, $fieldName);
+                                break;
+
+                            case 'intOnly':
+                                $this->checkIntOnlyValidation($value, $validationSetting, $fieldName);
+                                break;
+
+                            case 'lettersOnly':
+                                $this->checkLetterOnlyValidation($value, $validationSetting, $fieldName);
+                                break;
+
+                            case 'uniqueInPage':
+                                $this->checkUniqueInPageValidation($user, $value, $validationSetting, $fieldName);
+                                break;
+
+                            case 'uniqueInDb':
+                                $this->checkUniqueInDbValidation($user, $value, $validationSetting, $fieldName);
+                                break;
+
+                            case 'mustInclude':
+                                $this->checkMustIncludeValidation($value, $validationSetting, $fieldName);
+                                break;
+
+                            case 'mustNotInclude':
+                                $this->checkMustNotIncludeValidation($value, $validationSetting, $fieldName);
+                                break;
+
+                            case 'inList':
+                                $this->checkInListValidation($value, $validationSetting, $fieldName);
+                                break;
+
+                            case 'sameAs':
+                                $this->checkSameAsValidation($user, $validationSetting, $value, $fieldName);
+                                break;
+
+                            case 'date':
+                                // Nothing to do. ServersideValidator runs after converter
+                                // If dateTimeConverter exception $value is the old DateTime Object => True
+                                // If dateTimeConverter runs well we have an DateTime Object => True
+                                break;
+
+                            default:
+                                // e.g. search for method validateCustom()
+                                $this->checkAnyValidation($validation, $value, $validationSetting, $fieldName);
                         }
-                    }
-                }
-
-                foreach ($validations as $validation => $validationSetting) {
-                    switch ($validation) {
-
-                        case 'required':
-                            if ($validationSetting === '1' && !$this->validateRequired($value)) {
-                                $this->addError('validationErrorRequired', $field);
-                                $this->isValid = false;
-                            }
-                            break;
-
-                        case 'email':
-                            if (!empty($value) && $validationSetting === '1' && !$this->validateEmail($value)) {
-                                $this->addError('validationErrorEmail', $field);
-                                $this->isValid = false;
-                            }
-                            break;
-
-                        case 'min':
-                            if (!empty($value) && !$this->validateMin($value, $validationSetting)) {
-                                $this->addError('validationErrorMin', $field);
-                                $this->isValid = false;
-                            }
-                            break;
-
-                        case 'max':
-                            if (!empty($value) && !$this->validateMax($value, $validationSetting)) {
-                                $this->addError('validationErrorMax', $field);
-                                $this->isValid = false;
-                            }
-                            break;
-
-                        case 'intOnly':
-                            if (!empty($value) && $validationSetting === '1' && !$this->validateInt($value)) {
-                                $this->addError('validationErrorInt', $field);
-                                $this->isValid = false;
-                            }
-                            break;
-
-                        case 'lettersOnly':
-                            if (!empty($value) && $validationSetting === '1' && !$this->validateLetters($value)) {
-                                $this->addError('validationErrorLetters', $field);
-                                $this->isValid = false;
-                            }
-                            break;
-
-                        case 'uniqueInPage':
-                            if (
-                                !empty($value) &&
-                                $validationSetting === '1' &&
-                                !$this->validateUniquePage($value, $field, $user)
-                            ) {
-                                $this->addError('validationErrorUniquePage', $field);
-                                $this->isValid = false;
-                            }
-                            break;
-
-                        case 'uniqueInDb':
-                            if (
-                                !empty($value) &&
-                                $validationSetting === '1' &&
-                                !$this->validateUniqueDb($value, $field, $user)
-                            ) {
-                                $this->addError('validationErrorUniqueDb', $field);
-                                $this->isValid = false;
-                            }
-                            break;
-
-                        case 'mustInclude':
-                            if (!empty($value) && !$this->validateMustInclude($value, $validationSetting)) {
-                                $this->addError('validationErrorMustInclude', $field);
-                                $this->isValid = false;
-                            }
-                            break;
-
-                        case 'mustNotInclude':
-                            if (!empty($value) && !$this->validateMustNotInclude($value, $validationSetting)) {
-                                $this->addError('validationErrorMustNotInclude', $field);
-                                $this->isValid = false;
-                            }
-                            break;
-
-                        case 'inList':
-                            if (!$this->validateInList($value, $validationSetting)) {
-                                $this->addError('validationErrorInList', $field);
-                                $this->isValid = false;
-                            }
-                            break;
-
-                        case 'sameAs':
-                            if (method_exists($user, 'get' . ucfirst($validationSetting))) {
-                                $valueToCompare = $user->{'get' . ucfirst($validationSetting)}();
-                                if (!$this->validateSameAs($value, $valueToCompare)) {
-                                    $this->addError('validationErrorSameAs', $field);
-                                    $this->isValid = false;
-                                }
-                            }
-                            break;
-
-                        case 'date':
-                            // Nothing to do. ServersideValidator runs after converter
-                            // If dateTimeConverter exception $value is the old DateTime Object => True
-                            // If dateTimeConverter runs well we have an DateTime Object => True
-                            break;
-
-                        default:
-                            // e.g. search for method validateCustom()
-                            if (method_exists($this, 'validate' . ucfirst($validation))) {
-                                if (!$this->{'validate' . ucfirst($validation)}($value, $validationSetting)) {
-                                    $this->addError('validationError' . ucfirst($validation), $field);
-                                    $this->isValid = false;
-                                }
-                            }
                     }
                 }
             }
         }
-
         return $this->isValid;
+    }
+
+    /**
+     * @param $validationSetting
+     * @param $value
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkRequiredValidation($validationSetting, $value, $fieldName)
+    {
+        if ($validationSetting === '1' && !$this->validateRequired($value)) {
+            $this->addError('validationErrorRequired', $fieldName);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkEmailValidation($value, $validationSetting, $fieldName)
+    {
+        if (!empty($value) && $validationSetting === '1' && !$this->validateEmail($value)) {
+            $this->addError('validationErrorEmail', $fieldName);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkMinValidation($value, $validationSetting, $fieldName)
+    {
+        if (!empty($value) && !$this->validateMin($value, $validationSetting)) {
+            $this->addError('validationErrorMin', $fieldName);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkMaxValidation($value, $validationSetting, $fieldName)
+    {
+        if (!empty($value) && !$this->validateMax($value, $validationSetting)) {
+            $this->addError('validationErrorMax', $fieldName);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkIntOnlyValidation($value, $validationSetting, $fieldName)
+    {
+        if (!empty($value) && $validationSetting === '1' && !$this->validateInt($value)) {
+            $this->addError('validationErrorInt', $fieldName);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkLetterOnlyValidation($value, $validationSetting, $fieldName)
+    {
+        if (!empty($value) && $validationSetting === '1' && !$this->validateLetters($value)) {
+            $this->addError('validationErrorLetters', $fieldName);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $user
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkUniqueInPageValidation($user, $value, $validationSetting, $fieldName)
+    {
+        if (!empty($value) &&
+            $validationSetting === '1' &&
+            !$this->validateUniquePage($value, $fieldName, $user)
+        ) {
+            $this->addError('validationErrorUniquePage', $fieldName);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $user
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkUniqueInDbValidation($user, $value, $validationSetting, $fieldName)
+    {
+        if (!empty($value) &&
+            $validationSetting === '1' &&
+            !$this->validateUniqueDb($value, $fieldName, $user)
+        ) {
+            $this->addError('validationErrorUniqueDb', $fieldName);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkMustIncludeValidation($value, $validationSetting, $fieldName)
+    {
+        if (!empty($value) && !$this->validateMustInclude($value, $validationSetting)) {
+            $this->addError('validationErrorMustInclude', $fieldName);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkMustNotIncludeValidation($value, $validationSetting, $fieldName)
+    {
+        if (!empty($value) && !$this->validateMustNotInclude($value, $validationSetting)) {
+            $this->addError('validationErrorMustNotInclude', $fieldName);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkInListValidation($value, $validationSetting, $fieldName)
+    {
+        if (!$this->validateInList($value, $validationSetting)) {
+            $this->addError('validationErrorInList', $fieldName);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $user
+     * @param $validationSetting
+     * @param $value
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkSameAsValidation($user, $validationSetting, $value, $fieldName)
+    {
+        if (method_exists($user, 'get' . ucfirst($validationSetting))) {
+            $valueToCompare = $user->{'get' . ucfirst($validationSetting)}();
+            if (!$this->validateSameAs($value, $valueToCompare)) {
+                $this->addError('validationErrorSameAs', $fieldName);
+                $this->isValid = false;
+            }
+        }
+    }
+
+    /**
+     * @param $validation
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkAnyValidation($validation, $value, $validationSetting, $fieldName)
+    {
+        if (method_exists($this, 'validate' . ucfirst($validation))) {
+            if (!$this->{'validate' . ucfirst($validation)}($value, $validationSetting)) {
+                $this->addError('validationError' . ucfirst($validation), $fieldName);
+                $this->isValid = false;
+            }
+        }
+    }
+
+    /**
+     * @param User $user
+     * @param string $fieldName
+     * @return string
+     */
+    protected function getValue($user, $fieldName)
+    {
+        $value = $user->{'get' . ucfirst($fieldName)}();
+        if (is_object($value)) {
+            if (method_exists($value, 'getUid')) {
+                $value = $value->getUid();
+            }
+            if (method_exists($value, 'getFirst')) {
+                $value = $value->getFirst()->getUid();
+            }
+            if (method_exists($value, 'current')) {
+                $current = $value->current();
+                if (method_exists($current, 'getUid')) {
+                    $value = $current->getUid();
+                }
+            }
+        }
+        return $value;
+    }
+
+    /**
+     * @param $user
+     * @param $fieldName
+     * @return bool
+     */
+    protected function processValidation($user, $fieldName): bool
+    {
+        return is_object($user) && method_exists($user, 'get' . ucfirst($fieldName));
     }
 }

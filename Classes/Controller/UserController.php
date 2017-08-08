@@ -1,62 +1,29 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Validator\ClientsideValidator;
 use In2code\Femanager\Utility\BackendUserUtility;
-use In2code\Femanager\Utility\FileUtility;
+use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
+use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
-
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
- * User Controller
- *
- * @package femanager
- * @license http://www.gnu.org/licenses/gpl.html
- *          GNU General Public License, version 3 or later
+ * Class UserController
  */
 class UserController extends AbstractController
 {
 
     /**
-     * ClientsideValidator
-     *
-     * @var \In2code\Femanager\Domain\Validator\ClientsideValidator
-     * @inject
-     */
-    protected $clientsideValidator;
-
-    /**
-     * action list
-     *
      * @param array $filter
      * @return void
      */
-    public function listAction($filter = [])
+    public function listAction(array $filter = [])
     {
         $this->view->assignMultiple(
             [
@@ -72,8 +39,6 @@ class UserController extends AbstractController
     }
 
     /**
-     * action show
-     *
      * @param User $user
      * @return void
      */
@@ -91,28 +56,20 @@ class UserController extends AbstractController
     }
 
     /**
-     * File Uploader
-     *
+     * @param User $user
      * @return void
+     * @throws \Exception
      */
-    public function fileUploadAction()
+    public function imageDeleteAction(User $user)
     {
-        $fileName = FileUtility::uploadFile();
-        header('Content-Type: text/plain');
-        $result = [
-            'success' => ($fileName ? true : false),
-            'uploadName' => $fileName
-        ];
-        echo json_encode($result);
-    }
-
-    /**
-     * Showing information
-     *
-     * @return void
-     */
-    public function fileDeleteAction()
-    {
+        if (UserUtility::getCurrentUser() !== $user) {
+            throw new \Exception('You are not allowed to delete this image');
+        }
+        $user->setImage($this->objectManager->get(ObjectStorage::class));
+        $this->userRepository->update($user);
+        LogUtility::log(Log::STATUS_PROFILEUPDATEIMAGEDELETE, $user);
+        $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEIMAGEDELETE));
+        $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
     }
 
     /**
@@ -132,7 +89,8 @@ class UserController extends AbstractController
         User $user = null,
         $additionalValue = ''
     ) {
-        $result = $this->clientsideValidator
+        $clientsideValidator = $this->objectManager->get(ClientsideValidator::class);
+        $result = $clientsideValidator
             ->setValidationSettingsString($validation)
             ->setValue($value)
             ->setFieldName($field)
@@ -143,7 +101,7 @@ class UserController extends AbstractController
         $this->view->assignMultiple(
             [
                 'isValid' => $result,
-                'messages' => $this->clientsideValidator->getMessages(),
+                'messages' => $clientsideValidator->getMessages(),
                 'validation' => $validation,
                 'value' => $value,
                 'fieldname' => $field,

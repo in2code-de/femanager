@@ -469,6 +469,9 @@ NewController.php:
 		}
 	}
 
+**Note:** If there are PHP warnings like “…should be compatible with…“ for PHP7, see discusion and solution:
+https://stackoverflow.com/questions/45563671/how-to-extend-femanager-controller-under-php-7/45564378
+
 
 .. _extendvalidators:
 
@@ -938,7 +941,7 @@ SignalSlots List
    :Parameters:
       ?
    :Description:
-      Do you need a new Signal in femanager? Just request one on forge.typo3.org
+      Do you need a new Signal in femanager? Just request one on https://github.com/einpraegsam/femanager
 
 
 Use a SignalSlot

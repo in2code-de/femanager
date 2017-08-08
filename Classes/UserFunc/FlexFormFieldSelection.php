@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\UserFunc;
 
 use In2code\Femanager\Utility\StringUtility;
@@ -7,8 +8,6 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Field Selection for FlexForm
- *
  * Class FlexFormFieldSelection
  */
 class FlexFormFieldSelection
@@ -38,7 +37,7 @@ class FlexFormFieldSelection
         $tab = $params['config']['itemsProcFuncTab'] . '.';
         if (!empty($tSconfig['tx_femanager.']['flexForm.'][$tab]['addFieldOptions.'])) {
             $options = $tSconfig['tx_femanager.']['flexForm.'][$tab]['addFieldOptions.'];
-            foreach ((array) $options as $value => $label) {
+            foreach ((array)$options as $value => $label) {
                 $params['items'][] = [
                     StringUtility::startsWith($label, 'LLL:') ? $this->languageService->sL($label) : $label,
                     $value
@@ -84,13 +83,14 @@ class FlexFormFieldSelection
             }
         }
 
-        return (int) $pid;
+        return (int)$pid;
     }
 
     /**
      * Initialize
      *
      * @return void
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected function initialize()
     {

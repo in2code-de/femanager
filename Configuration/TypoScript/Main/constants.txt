@@ -20,6 +20,9 @@ plugin.tx_femanager {
 		# cat=plugin.tx_femanager//0101; type=text; label= Admin Email: Default admin email for all emails to the user
 		adminEmail = Femanager@domain.org
 
+		# cat=plugin.tx_femanager//0200; type=text; label= Upload folder: Define where to save images of the users
+		uploadFolder = fileadmin/users/
+
 		# cat=plugin.tx_femanager//0900; type=boolean; label= Include jQuery: Load and implement jQuery from external source (googleapis.com)
 		jQuery = 0
 
@@ -28,8 +31,5 @@ plugin.tx_femanager {
 
 		# cat=plugin.tx_femanager//0920; type=boolean; label= Include Twitter Bootstrap CSS: Load and implement Twitter Bootstrap CSS from external source (bootstrapcdn.com)
 		bootstrapCSS = 0
-
-		# cat=plugin.tx_femanager//0930; type=boolean; label= Include Fineuploader JS: Load and implement Fineuploader JavaScript from internal source
-		fineuploader = 1
 	}
 }

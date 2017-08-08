@@ -11,7 +11,12 @@
 	<f:render partial="Misc/FormErrors" arguments="{object:User}" />
 
 	<div class="femanager_new">
-		<f:form name="user" object="{user}" action="create" class="form-horizontal {f:if(condition:'{settings.new.validation._enable.client}',then:'feManagerValidation',else:'')}">
+		<f:form
+				name="user"
+				object="{user}"
+				action="create"
+				enctype="multipart/form-data"
+				class="form-horizontal {f:if(condition:'{settings.new.validation._enable.client}',then:'feManagerValidation',else:'')}">
 			<fieldset>
 				<legend>
 					<f:translate key="titleCreateProfile" />
