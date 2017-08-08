@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Model\User;

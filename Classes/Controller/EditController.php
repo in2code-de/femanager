@@ -111,7 +111,7 @@ class EditController extends AbstractController
     protected function statusConfirm(User $user)
     {
         $values = GeneralUtility::xml2array($user->getTxFemanagerChangerequest());
-        foreach ((array) $values as $field => $value) {
+        foreach ((array)$values as $field => $value) {
             if ($field !== 'usergroup' && method_exists($user, 'set' . ucfirst($field))) {
                 $user->{'set' . ucfirst($field)}($value['new']);
             } else {

@@ -27,7 +27,7 @@ class FrontendUtility extends AbstractUtility
      */
     public static function getCurrentPid()
     {
-        return (int) self::getTypoScriptFrontendController()->id;
+        return (int)self::getTypoScriptFrontendController()->id;
     }
 
     /**
@@ -38,7 +38,7 @@ class FrontendUtility extends AbstractUtility
     public static function getFrontendLanguageUid()
     {
         if (!empty(self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'])) {
-            return (int) self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'];
+            return (int)self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'];
         }
         return 0;
     }
@@ -60,7 +60,7 @@ class FrontendUtility extends AbstractUtility
      */
     public static function forceValues(User $user, array $settings)
     {
-        foreach ((array) $settings as $field => $config) {
+        foreach ((array)$settings as $field => $config) {
             $config = null;
             if (stristr($field, '.')) {
                 continue;

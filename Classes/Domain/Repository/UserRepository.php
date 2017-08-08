@@ -84,8 +84,8 @@ class UserRepository extends Repository
         $query->setOrderings([$field => $sorting]);
 
         // set limit
-        if ((int) $settings['list']['limit'] > 0) {
-            $query->setLimit((int) $settings['list']['limit']);
+        if ((int)$settings['list']['limit'] > 0) {
+            $query->setLimit((int)$settings['list']['limit']);
         }
 
         $users = $query->execute();
@@ -136,7 +136,7 @@ class UserRepository extends Repository
             $query->equals('deleted', 0)
         ];
         if (method_exists($user, 'getUid')) {
-            $and[] = $query->logicalNot($query->equals('uid', (int) $user->getUid()));
+            $and[] = $query->logicalNot($query->equals('uid', (int)$user->getUid()));
         }
         $constraint = $query->logicalAnd($and);
 

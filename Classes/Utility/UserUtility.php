@@ -28,7 +28,7 @@ class UserUtility extends AbstractUtility
         if (self::getPropertyFromUser() !== null) {
             /** @var UserRepository $userRepository */
             $userRepository = GeneralUtility::makeInstance(ObjectManager::class)->get(UserRepository::class);
-            return $userRepository->findByUid((int) self::getPropertyFromUser());
+            return $userRepository->findByUid((int)self::getPropertyFromUser());
         }
         return null;
     }
@@ -269,7 +269,7 @@ class UserUtility extends AbstractUtility
      */
     public static function removeFrontendSessionToUser(User $user)
     {
-        self::getDatabaseConnection()->exec_DELETEquery('fe_sessions', 'ses_userid = ' . (int) $user->getUid());
+        self::getDatabaseConnection()->exec_DELETEquery('fe_sessions', 'ses_userid = ' . (int)$user->getUid());
     }
 
     /**
@@ -282,7 +282,7 @@ class UserUtility extends AbstractUtility
     {
         $select = 'ses_id';
         $from = 'fe_sessions';
-        $where = 'ses_userid = ' . (int) $user->getUid();
+        $where = 'ses_userid = ' . (int)$user->getUid();
         $res = self::getDatabaseConnection()->exec_SELECTquery($select, $from, $where);
         $row = self::getDatabaseConnection()->sql_fetch_assoc($res);
         return !empty($row['ses_id']);

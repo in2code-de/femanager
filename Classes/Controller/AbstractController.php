@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\DataProcessor\DataProcessorRunner;
@@ -379,7 +380,7 @@ abstract class AbstractController extends ActionController
      */
     protected function testSpoof($user, $uid)
     {
-        if ($user->getUid() !== (int) $uid && $uid > 0) {
+        if ($user->getUid() !== (int)$uid && $uid > 0) {
             LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),

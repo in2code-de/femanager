@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -19,7 +20,7 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
      * @param array $settings TypoScript
      * @return bool
      */
-    public function render($settings)
+    public function render($settings): bool
     {
         $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
         return ExtensionManagementUtility::isLoaded('sr_freecap')

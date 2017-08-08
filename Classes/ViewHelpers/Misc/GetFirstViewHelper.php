@@ -1,13 +1,11 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
 
 /**
- * View helper to get first subobject of objectstorage
- *
- * @package TYPO3
- * @subpackage Fluid
+ * Class GetFirstViewHelper
  */
 class GetFirstViewHelper extends AbstractFormFieldViewHelper
 {
@@ -42,8 +40,7 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
         // try to get value from originalRequest
         if ($this->configurationManager->isFeatureEnabled('rewrittenPropertyMapper')) {
             // seperate if version is 6.2 or lower
-            if (
-                (method_exists($this, 'hasMappingErrorOccured') && $this->hasMappingErrorOccured()) ||
+            if ((method_exists($this, 'hasMappingErrorOccured') && $this->hasMappingErrorOccured()) ||
                 (method_exists($this, 'hasMappingErrorOccurred') && $this->hasMappingErrorOccurred())
             ) {
                 return $this->getValueAttribute();

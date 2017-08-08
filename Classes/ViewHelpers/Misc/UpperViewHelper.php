@@ -1,24 +1,20 @@
 <?php
+declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * View helper like ucfirst()
- *
- * @package TYPO3
- * @subpackage Fluid
+ * Class UpperViewHelper
  */
 class UpperViewHelper extends AbstractViewHelper
 {
 
     /**
-     * View helper like ucfirst()
-     *
      * @param string $string
      * @return string
      */
-    public function render($string = '')
+    public function render(string $string = ''): string
     {
         return ucfirst($string);
     }
