@@ -575,6 +575,9 @@
 			<trans-unit id="BackendListLoginAs">
 				<source>Login as</source>
 			</trans-unit>
+			<trans-unit id="createStatus">
+				<source>User registration</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

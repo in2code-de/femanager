@@ -12,12 +12,7 @@ Feature: SmallNoConfirm
       | Email | alex@einpraegsam.net |
     And I press "Create Profile Now"
 
-    Then I should see "Profile successfully created"
-    Then I should see "You're successfully logged in now"
-
-    Given I am on "/index.php?id=2"
-    Then I should see "[random:1]"
-    Then I should see "You are logged in as frontend user"
+    Then I should see "User registration"
 
   # Clean up
   Scenario: Delete all temporary fe_users entries
