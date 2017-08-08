@@ -28,9 +28,9 @@ In addition femanager was developed to be very flexible and to bring a lot of fe
 Requirements of femanager
 -------------------------
 
-- TYPO3 6.2 / 7.6 / 7.x
+- TYPO3 8.7
 - Extbase / Fluid
-- Best use with jQuery
+- Best use with jQuery and bootstrap
 
 
 .. _suggests:
