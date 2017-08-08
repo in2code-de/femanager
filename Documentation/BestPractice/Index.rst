@@ -941,7 +941,7 @@ SignalSlots List
    :Parameters:
       ?
    :Description:
-      Do you need a new Signal in femanager? Just request one on forge.typo3.org
+      Do you need a new Signal in femanager? Just request one on https://github.com/einpraegsam/femanager
 
 
 Use a SignalSlot
