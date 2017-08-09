@@ -28,7 +28,7 @@ jQuery(document).ready(function($) {
 
 	// confirmation
 	$('*[data-confirm]').click(function(e) {
-		var message = $(this).data('confirm');
+		var message = $(this).attr('data-confirm');
 		if (!confirm(message)) {
 			e.preventDefault();
 		}
