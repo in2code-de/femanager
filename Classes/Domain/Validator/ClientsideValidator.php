@@ -9,8 +9,6 @@ use In2code\Femanager\Utility\StringUtility;
 
 /**
  * Class ClientsideValidator
- *
- * @package In2code\Femanager\Domain\Validator
  */
 class ClientsideValidator extends AbstractValidator
 {
@@ -72,9 +70,7 @@ class ClientsideValidator extends AbstractValidator
         $validationSettings = str_replace('|', ',', $validationSettings);
 
         foreach ($validationSettings as $validationSetting) {
-
             switch ($validationSetting) {
-
                 case 'required':
                     if (!$this->validateRequired($this->getValue())) {
                         $this->addMessage('validationErrorRequired');
@@ -90,8 +86,7 @@ class ClientsideValidator extends AbstractValidator
                     break;
 
                 case stristr($validationSetting, 'min('):
-                    if (
-                        $this->getValue() &&
+                    if ($this->getValue() &&
                         !$this->validateMin($this->getValue(), StringUtility::getValuesInBrackets($validationSetting))
                     ) {
                         $this->addMessage('validationErrorMin');
@@ -100,8 +95,7 @@ class ClientsideValidator extends AbstractValidator
                     break;
 
                 case stristr($validationSetting, 'max('):
-                    if (
-                        $this->getValue() &&
+                    if ($this->getValue() &&
                         !$this->validateMax($this->getValue(), StringUtility::getValuesInBrackets($validationSetting))
                     ) {
                         $this->addMessage('validationErrorMax');
@@ -124,8 +118,7 @@ class ClientsideValidator extends AbstractValidator
                     break;
 
                 case 'uniqueInPage':
-                    if (
-                        $this->getValue() &&
+                    if ($this->getValue() &&
                         !$this->validateUniquePage($this->getValue(), $this->getFieldName(), $this->getUser())
                     ) {
                         $this->addMessage('validationErrorUniquePage');
@@ -134,8 +127,7 @@ class ClientsideValidator extends AbstractValidator
                     break;
 
                 case 'uniqueInDb':
-                    if (
-                        $this->getValue() &&
+                    if ($this->getValue() &&
                         !$this->validateUniqueDb($this->getValue(), $this->getFieldName(), $this->getUser())
                     ) {
                         $this->addMessage('validationErrorUniqueDb');
@@ -144,8 +136,7 @@ class ClientsideValidator extends AbstractValidator
                     break;
 
                 case stristr($validationSetting, 'mustInclude('):
-                    if (
-                        $this->getValue() &&
+                    if ($this->getValue() &&
                         !$this->validateMustInclude(
                             $this->getValue(),
                             StringUtility::getValuesInBrackets($validationSetting)
@@ -157,8 +148,7 @@ class ClientsideValidator extends AbstractValidator
                     break;
 
                 case stristr($validationSetting, 'mustNotInclude('):
-                    if (
-                        $this->getValue() &&
+                    if ($this->getValue() &&
                         !$this->validateMustNotInclude(
                             $this->getValue(),
                             StringUtility::getValuesInBrackets($validationSetting)
@@ -170,12 +160,10 @@ class ClientsideValidator extends AbstractValidator
                     break;
 
                 case stristr($validationSetting, 'inList('):
-                    if (
-                        !$this->validateInList(
-                            $this->getValue(),
-                            StringUtility::getValuesInBrackets($validationSetting)
-                        )
-                    ) {
+                    if (!$this->validateInList(
+                        $this->getValue(),
+                        StringUtility::getValuesInBrackets($validationSetting)
+                    )) {
                         $this->addMessage('validationErrorInList');
                         $this->isValid = false;
                     }
@@ -189,8 +177,7 @@ class ClientsideValidator extends AbstractValidator
                     break;
 
                 case 'date':
-                    if (
-                        $this->getValue() &&
+                    if ($this->getValue() &&
                         !$this->validateDate(
                             $this->getValue(),
                             LocalizationUtility::translate('tx_femanager_domain_model_user.dateFormat')
@@ -205,8 +192,7 @@ class ClientsideValidator extends AbstractValidator
                     // e.g. search for method validateCustom()
                     $mainSetting = StringUtility::getValuesBeforeBrackets($validationSetting);
                     if (method_exists($this, 'validate' . ucfirst($mainSetting))) {
-                        if (
-                            !$this->{'validate' . ucfirst($mainSetting)}(
+                        if (!$this->{'validate' . ucfirst($mainSetting)}(
                                 $this->getValue(),
                                 StringUtility::getValuesInBrackets($validationSetting)
                             )
