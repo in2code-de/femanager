@@ -82,7 +82,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateMin($value, $validationSetting)
     {
-        if (strlen($value) < $validationSetting) {
+        if (mb_strlen($value) < $validationSetting) {
             return false;
         }
         return true;
@@ -97,7 +97,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateMax($value, $validationSetting)
     {
-        if (strlen($value) > $validationSetting) {
+        if (mb_strlen($value) > $validationSetting) {
             return false;
         }
         return true;
