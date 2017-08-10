@@ -35,9 +35,4 @@ $EM_CONF[$_EXTKEY] = [
             'static_info_tables' => '6.0.0-6.99.99'
         ],
     ],
-    'autoload' => [
-        'psr-4' => [
-            'In2code\\Femanager\\' => 'Classes'
-        ]
-    ],
 ];
