@@ -26,9 +26,10 @@ Quick guide:
 
 ## Changelog
 
-| Version    | Date       | State      | Description                                                                  |
-| ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
-| 3.0.0      | 2017-08-08 | Major update | Refactored version for TYPO3 8.7                                           |
+| Version    | Date       | State        | Description                                                                  |
+| ---------- | ---------- | ------------ | ---------------------------------------------------------------------------- |
+| 3.0.1      | 2017-08-11 | Bugfix       | Enfore user for showAction, Autoload in ext_emconf, JavaScript fix, cleanup  |
+| 3.0.0      | 2017-08-08 | Major update | Refactored version for TYPO3 8.7                                             |
 
 ## Screenshots
 
