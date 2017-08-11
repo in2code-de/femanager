@@ -39,19 +39,26 @@ class UserController extends AbstractController
     }
 
     /**
+     * Enforce user setting from FlexForm and ignore &tx_femanager_pi1[user]=421
+     *
+     * @return void
+     */
+    public function initializeShowAction()
+    {
+        $arguments = $this->request->getArguments();
+        if (!empty($this->settings['show']['user'])) {
+            unset($arguments['user']);
+        }
+        $this->request->setArguments($arguments);
+    }
+
+    /**
      * @param User $user
      * @return void
      */
     public function showAction(User $user = null)
     {
-        if (!is_object($user)) {
-            if (is_numeric($this->settings['show']['user'])) {
-                $user = $this->userRepository->findByUid($this->settings['show']['user']);
-            } elseif ($this->settings['show']['user'] === '[this]') {
-                $user = $this->user;
-            }
-        }
-        $this->view->assign('user', $user);
+        $this->view->assign('user', $this->getUser($user));
         $this->assignForAll();
     }
 
@@ -126,5 +133,21 @@ class UserController extends AbstractController
         UserUtility::login($user);
         $this->redirectByAction('loginAs', 'redirect');
         $this->redirectToUri('/');
+    }
+
+    /**
+     * @param User $user
+     * @return User
+     */
+    protected function getUser(User $user = null)
+    {
+        if ($user === null) {
+            if (is_numeric($this->settings['show']['user'])) {
+                $user = $this->userRepository->findByUid($this->settings['show']['user']);
+            } elseif ($this->settings['show']['user'] === '[this]') {
+                $user = $this->user;
+            }
+        }
+        return $user;
     }
 }

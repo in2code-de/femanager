@@ -14,14 +14,6 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 {
 
     /**
-     * objectManager
-     *
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @inject
-     */
-    protected $objectManager;
-
-    /**
      * userRepository
      *
      * @var \In2code\Femanager\Domain\Repository\UserRepository
@@ -90,7 +82,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateMin($value, $validationSetting)
     {
-        if (strlen($value) < $validationSetting) {
+        if (mb_strlen($value) < $validationSetting) {
             return false;
         }
         return true;
@@ -105,7 +97,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateMax($value, $validationSetting)
     {
-        if (strlen($value) > $validationSetting) {
+        if (mb_strlen($value) > $validationSetting) {
             return false;
         }
         return true;
@@ -175,39 +167,28 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     {
         $isValid = true;
         $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
-
         foreach ($validationSettings as $validationSetting) {
-
             switch ($validationSetting) {
-
-                // value must include numbers
                 case 'number':
                     if (!$this->stringContainsNumber($value)) {
                         $isValid = false;
                     }
                     break;
-
-                // value must include letters
                 case 'letter':
                     if (!$this->stringContainsLetter($value)) {
                         $isValid = false;
                     }
                     break;
-
-                // value must include special characters (like .:,&äö#*+)
                 case 'special':
                     if (!$this->stringContainsSpecialCharacter($value)) {
                         $isValid = false;
                     }
                     break;
-
-                // value must include space
                 case 'space':
                     if (!$this->stringContainsSpaceCharacter($value)) {
                         $isValid = false;
                     }
                     break;
-
                 default:
             }
         }
@@ -225,39 +206,28 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     {
         $isValid = true;
         $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
-
         foreach ($validationSettings as $validationSetting) {
-
             switch ($validationSetting) {
-
-                // value must not include numbers
                 case 'number':
                     if ($this->stringContainsNumber($value)) {
                         $isValid = false;
                     }
                     break;
-
-                // value must not include letters
                 case 'letter':
                     if ($this->stringContainsLetter($value)) {
                         $isValid = false;
                     }
                     break;
-
-                // value must not include special characters (like .:,&äö#*+)
                 case 'special':
                     if ($this->stringContainsSpecialCharacter($value)) {
                         $isValid = false;
                     }
                     break;
-
-                // value must not include space
                 case 'space':
                     if ($this->stringContainsSpaceCharacter($value)) {
                         $isValid = false;
                     }
                     break;
-
                 default:
             }
         }
