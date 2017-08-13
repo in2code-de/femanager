@@ -89,9 +89,13 @@ abstract class AbstractUtility
      * @return array
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    protected static function getExtensionConfiguration()
+    protected static function getExtensionConfiguration(): array
     {
-        return unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager']);
+        $configuration = [];
+        if (!empty($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager'])) {
+            $configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager']);
+        }
+        return $configuration;
     }
 
     /**
