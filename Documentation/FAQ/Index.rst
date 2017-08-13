@@ -24,6 +24,25 @@ Q: How to add my own field validation?
 A: See code in best practice section
 
 
+Q: Class 'In2code\Femanager\Domain\Model\Log' not found - what can I do?
+------------------------------------------------------------------------
+
+A: This problem normally occurs only if you have installed femanager without composer (btw: it's time for composer :),
+so your instance is running in *classic mode*.
+It's possible that you have added femanager via Extension Manager. Please go into the install tool by opening the URL
+www.yourdomain.org/typo3/install (of course you have to add a file named *ENABLE_INSTALL_TOOL* to typo3conf/ folder
+first) and click on *Create autoload information for extensions* in section *Dump Autoload Information*.
+That will create a new autoload file.
+
+
+Q: An exception occurred while executing 'SELECT `uid` FROM `tx_femanager_domain_model_log` WHERE ... doesn't exist
+-------------------------------------------------------------------------------------------------------------------
+
+A: There are some tables missing in your database. Please open the install tool under
+www.yourdomain.org/typo3/install (of course you have to add a file named *ENABLE_INSTALL_TOOL* to typo3conf/ folder
+first) and click on Compare current database with specification.
+
+
 Q: How can I disable the clientside/serverside validation?
 ----------------------------------------------------------
 
