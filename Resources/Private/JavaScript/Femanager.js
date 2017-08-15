@@ -1,9 +1,9 @@
 jQuery(document).ready(function($) {
 	// javascript validation
-	$('.feManagerValidation').femanagerValidation();
+	$('.feManagerValidation').femanagerValidation($);
 
 	// ajax uploader
-	var images = createUploader();
+	var images = createUploader($);
 	// Store initially present filenames from hidden #image input in data structure
 	if ($('#femanager_field_image').length > 0) {
 		$.each($('#femanager_field_image').val().split(','), function(index, filename) {
@@ -40,7 +40,8 @@ jQuery(document).ready(function($) {
  *
  * @return object
  */
-function createUploader() {
+function createUploader($) {
+
 	if ($('#femanager_field_fine-uploader').length == 0) {
 		return;
 	}

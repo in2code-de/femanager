@@ -2096,11 +2096,11 @@ Plain Text
 
     page {
         includeCSS {
-            femanagerMain = EXT:femanager/Resources/Public/Css/Main.css
+            femanagerMain = EXT:femanager/Resources/Public/Css/Main.min.css
         }
         includeJSFooter {
-            femanagerValidation = EXT:femanager/Resources/Public/JavaScripts/Validation.js
-            femanager = EXT:femanager/Resources/Public/JavaScripts/Femanager.js
+            femanagerValidation = EXT:femanager/Resources/Public/JavaScript/Validation.min.js
+            femanager = EXT:femanager/Resources/Public/JavaScript/Femanager.min.js
         }
     }
 

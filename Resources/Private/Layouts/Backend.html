@@ -1,10 +1,13 @@
 <f:be.container
-		includeCssFiles="{0: '{f:uri.resource(path:\'Css/Backend.css\')}'}"
+		includeCssFiles="{0: '{f:uri.resource(path:\'Css/Backend.min.css\')}'}"
+		includeJsFiles="{0: '{f:uri.resource(path:\'JavaScript/Backend.min.js\')}'}"
 		enableClickMenu="false"
 		loadExtJs="false"
 		loadExtJsTheme="false"
 		enableExtJsDebug="false"
-		loadJQuery="true">
+		loadJQuery="true"
+		jQueryNamespace="defaultNoConflict"
+		pageTitle="femanager">
 
 	<div class="overlay"></div>
 
@@ -40,7 +43,4 @@
 			</div>
 		</div>
 	</div>
-
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="../typo3conf/ext/femanager/Resources/Public/JavaScripts/Backend.js"></script>
 </f:be.container>
