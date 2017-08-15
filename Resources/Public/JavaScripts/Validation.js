@@ -1,4 +1,4 @@
-jQuery.fn.femanagerValidation = function() {
+jQuery.fn.femanagerValidation = function($) {
 	var element = $(this);
 	var requestCallback;
 	var submitFormAllowed = false;
