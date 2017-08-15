@@ -301,7 +301,7 @@ class UserUtility extends AbstractUtility
         $tsfe->fe_user->checkPid = false;
         $info = $tsfe->fe_user->getAuthInfoArray();
 
-        $extraWhere = '';
+        $extraWhere = ' AND uid = ' . (int)$user->getUid();
         if (!empty($storagePids)) {
             $extraWhere = ' AND pid IN (' . self::getDatabaseConnection()->cleanIntList($storagePids) . ')';
         }
