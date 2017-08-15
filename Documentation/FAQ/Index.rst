@@ -156,19 +156,18 @@ A: Check if all needed JavaScript files are loaded (see frontend html- source). 
 
 .. code-block:: text
 
-	plugin.tx_femanager.settings.jQuery = 1
-	plugin.tx_femanager.settings.bootstrap = 1
-	plugin.tx_femanager.settings.bootstrapCSS = 1
+    plugin.tx_femanager.settings.jQuery = 1
+    plugin.tx_femanager.settings.bootstrap = 1
+    plugin.tx_femanager.settings.bootstrapCSS = 1
 
 Example ordering and needed JavaScripts:
 
 .. code-block:: text
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="typo3conf/ext/femanager/Resources/Public/JavaScripts/jquery.fineuploader-3.5.0.min.js?1372500875" type="text/javascript"></script>
-	<script src="typo3conf/ext/femanager/Resources/Public/JavaScripts/Validation.js?1372620303" type="text/javascript"></script>
-	<script src="typo3conf/ext/femanager/Resources/Public/JavaScripts/Femanager.js?1372513534" type="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/typo3conf/ext/femanager/Resources/Public/JavaScript/Validation.min.js?1502824793" type="text/javascript"></script>
+    <script src="/typo3conf/ext/femanager/Resources/Public/JavaScript/Femanager.min.js?1502824793" type="text/javascript"></script>
 
 
 Q: How can I send user values to a third-party-software like a CRM?
