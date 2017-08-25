@@ -154,7 +154,7 @@ abstract class AbstractController extends ActionController
                 $this->settings['new']['email']['createUserConfirmation']['sender']['email']['value'] =>
                     $this->settings['settings']['new']['email']['createUserConfirmation']['sender']['name']['value']
             ],
-            'Confirm your profile creation request',
+            LocalizationUtility::translate('emailCreateUserConfirmationSubject'),
             [
                 'user' => $user,
                 'hash' => HashUtility::createHashForUser($user)
