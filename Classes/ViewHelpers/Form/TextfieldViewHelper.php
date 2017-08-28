@@ -17,9 +17,9 @@ class TextfieldViewHelper extends OriginalTextfieldViewHelper
      *
      * @return mixed Value
      */
-    protected function getValue($convertObjects = true)
+    protected function getValueAttribute()
     {
-        $value = parent::getValue($convertObjects);
+        $value = parent::getValueAttribute();
 
         // prefill value from TypoScript
         if (empty($value) && $this->getValueFromTypoScript()) {
