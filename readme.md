@@ -28,6 +28,7 @@ Quick guide:
 
 | Version    | Date       | State        | Description                                                                  |
 | ---------- | ---------- | ------------ | ---------------------------------------------------------------------------- |
+| 3.1.1      | 2017-08-28 | Bugfix       | Small fixes in code to prevent errors with extension   Flux                  |
 | 3.1.0      | 2017-08-15 | Task         | Minimize JavaScripts, Fix new button in module, Small fixes                  |
 | 3.0.2      | 2017-08-13 | Bugfix       | Fix unserialize() exception if config is missing, add help to FAQ section    |
 | 3.0.1      | 2017-08-11 | Bugfix       | Enfore user for showAction, Autoload in ext_emconf, JavaScript fix, cleanup  |
