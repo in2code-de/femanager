@@ -26,13 +26,14 @@ Quick guide:
 
 ## Changelog
 
-| Version    | Date       | State        | Description                                                                  |
-| ---------- | ---------- | ------------ | ---------------------------------------------------------------------------- |
-| 3.1.1      | 2017-08-28 | Bugfix       | Small fixes in code to prevent errors with extension   Flux                  |
-| 3.1.0      | 2017-08-15 | Task         | Minimize JavaScripts, Fix new button in module, Small fixes                  |
-| 3.0.2      | 2017-08-13 | Bugfix       | Fix unserialize() exception if config is missing, add help to FAQ section    |
-| 3.0.1      | 2017-08-11 | Bugfix       | Enfore user for showAction, Autoload in ext_emconf, JavaScript fix, cleanup  |
-| 3.0.0      | 2017-08-08 | Major update | Refactored version for TYPO3 8.7                                             |
+| Version    | Date       | State        | Description                                                                                                                |
+| ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 3.1.2      | 2017-09-06 | Task         | New version due to TER security incident. See https://typo3.org/teams/security/security-bulletins/psa/typo3-psa-2017-001/  |
+| 3.1.1      | 2017-08-28 | Bugfix       | Small fixes in code to prevent errors with extension   Flux                                                                |
+| 3.1.0      | 2017-08-15 | Task         | Minimize JavaScripts, Fix new button in module, Small fixes                                                                |
+| 3.0.2      | 2017-08-13 | Bugfix       | Fix unserialize() exception if config is missing, add help to FAQ section                                                  |
+| 3.0.1      | 2017-08-11 | Bugfix       | Enfore user for showAction, Autoload in ext_emconf, JavaScript fix, cleanup                                                |
+| 3.0.0      | 2017-08-08 | Major update | Refactored version for TYPO3 8.7                                                                                           |
 
 ## Screenshots
 
