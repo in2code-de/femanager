@@ -34,7 +34,9 @@ class IsRequiredFieldViewHelper extends AbstractValidationViewHelper
     protected function getSettingsConfiguration()
     {
         return (array)$this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            'Femanager',
+            'Pi1'
         );
     }
 }
