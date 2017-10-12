@@ -79,7 +79,9 @@ class UserUtility extends AbstractUtility
     public static function fallbackUsernameAndPassword(User $user)
     {
         $settings = self::getConfigurationManager()->getConfiguration(
-            ConfigurationManager::CONFIGURATION_TYPE_SETTINGS
+            ConfigurationManager::CONFIGURATION_TYPE_SETTINGS,
+            'Femanager',
+            'Pi1'
         );
         $autogenerateSettings = $settings['new']['misc']['autogenerate'];
         if (!$user->getUsername()) {

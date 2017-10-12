@@ -120,7 +120,9 @@ class PasswordValidator extends AbstractValidatorExtbase
     protected function init()
     {
         $this->configuration = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            'Femanager',
+            'Pi1'
         );
         $this->cObj = $this->configurationManager->getContentObject();
         $this->piVars = GeneralUtility::_GP('tx_femanager_pi1');

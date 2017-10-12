@@ -346,7 +346,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     protected function init()
     {
         $config = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            'Femanager',
+            'Pi1'
         );
         $this->pluginVariables = GeneralUtility::_GP('tx_femanager_pi1');
         $controllerName = 'new';
