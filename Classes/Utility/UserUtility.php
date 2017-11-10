@@ -9,6 +9,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
 use TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility;
 
@@ -309,7 +310,25 @@ class UserUtility extends AbstractUtility
         }
         $user = $tsfe->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
         $tsfe->fe_user->createUserSession($user);
+        self::loginAlternative($tsfe);
         $tsfe->fe_user->user = $tsfe->fe_user->fetchUserSession();
         $tsfe->fe_user->setAndSaveSessionData('ses', true);
+    }
+
+    /**
+     * This is a dirty solution to get autologin to work see https://github.com/einpraegsam/femanager/issues/27 for
+     * details on this issue
+     *
+     * @param TypoScriptFrontendController $tsfe
+     * @return void
+     */
+    protected static function loginAlternative(TypoScriptFrontendController $tsfe)
+    {
+        if (ConfigurationUtility::isSetCookieOnLoginActive()) {
+            $reflection = new \ReflectionClass($tsfe->fe_user);
+            $setSessionCookie = $reflection->getMethod('setSessionCookie');
+            $setSessionCookie->setAccessible(true);
+            $setSessionCookie->invoke($tsfe->fe_user);
+        }
     }
 }
