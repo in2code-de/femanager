@@ -9,7 +9,7 @@
 @mixin message_error {
   background: {
     color: $errorSoft2;
-    image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/error.png");
+    //image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/error.png");
   }
   border: 1px solid $errorSoft;
   color: $error;
@@ -17,7 +17,7 @@
 @mixin message_warning {
   background: {
     color: $warningSoft2;
-    image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/warning.png");
+    //image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/warning.png");
   }
   border: 1px solid $warningSoft;
   color: $warning;
@@ -25,7 +25,7 @@
 @mixin message_note {
   background: {
     color: $noteSoft2;
-    image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/notice.png");
+    //image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/notice.png");
   }
   border: 1px solid $noteSoft;
   color: $note;
@@ -33,7 +33,7 @@
 @mixin message_ok {
   background: {
     color: $okSoft2;
-    image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/notice.png");
+    //image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/notice.png");
   }
   border: 1px solid $okSoft;
   color: $ok;
@@ -41,7 +41,7 @@
 @mixin message_information {
   background: {
     color: $informationSoft2;
-    image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/information.png");
+    //image: url("../../../../../../typo3/sysext/t3skin/icons/gfx/information.png");
   }
   border: 1px solid $informationSoft;
   color: $information;
