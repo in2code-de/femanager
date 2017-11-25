@@ -21,7 +21,11 @@ class UserOptions
     public function addOptions(&$params)
     {
         if ($this->getPages($params) !== []) {
-            $params['items'] = [];
+            $params['items'] = [
+                $params['items'][0], // please choose
+                $params['items'][1] // currently logged in user
+            ];
+
             foreach ($this->getUsers($params) as $user) {
                 $params['items'][] = [$user['username'], $user['uid']];
             }
