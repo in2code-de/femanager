@@ -11,6 +11,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class User extends FrontendUser
 {
+    const TABLE_NAME = 'fe_users';
 
     /**
      * @var string

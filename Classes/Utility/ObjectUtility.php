@@ -2,7 +2,10 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException;
@@ -21,6 +24,15 @@ class ObjectUtility extends AbstractUtility
     public static function getDatabaseConnection(): DatabaseConnection
     {
         return parent::getDatabaseConnection();
+    }
+
+    /**
+     * @param string $tableName
+     * @return QueryBuilder
+     */
+    public static function getQueryBuilder(string $tableName): QueryBuilder
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
     }
 
     /**
