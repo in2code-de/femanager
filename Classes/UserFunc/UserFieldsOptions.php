@@ -8,9 +8,9 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Class FlexFormFieldSelection
+ * Class UserFieldsOptions
  */
-class FlexFormFieldSelection
+class UserFieldsOptions
 {
 
     /**
