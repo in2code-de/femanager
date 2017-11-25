@@ -28,6 +28,7 @@ Quick guide:
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 3.3.0      | 2017-11-25 | Feature      | Show only relevant users in FlexForm, some small bugfixes                                                                  |
 | 3.2.0      | 2017-11-10 | Task         | Add alternative login function https://github.com/einpraegsam/femanager/issues/27                                          |
 | 3.1.3      | 2017-10-12 | Bugfix       | Allow the usage in special contexts like with Flux. See https://github.com/einpraegsam/femanager/issues/17                 |
 | 3.1.2      | 2017-09-06 | Task         | New version due to TER security incident. See https://typo3.org/teams/security/security-bulletins/psa/typo3-psa-2017-001/  |
