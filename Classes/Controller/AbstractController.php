@@ -5,6 +5,7 @@ namespace In2code\Femanager\Controller;
 use In2code\Femanager\DataProcessor\DataProcessorRunner;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\BackendUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -267,10 +268,17 @@ abstract class AbstractController extends ActionController
      * @param string $redirectByActionName Action to redirect
      * @param bool $login Login after creation
      * @param string $status
+     * @param bool $backend Don't redirect if called from backend action
      * @return void
      */
-    public function finalCreate($user, $action, $redirectByActionName, $login = true, $status = '')
-    {
+    public function finalCreate(
+        $user,
+        string $action,
+        string $redirectByActionName,
+        bool $login = true,
+        string $status = '',
+        bool $backend = false
+    ) {
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings];
         $this->sendMailService->send(
@@ -301,9 +309,12 @@ abstract class AbstractController extends ActionController
         }
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $action, $this]);
         $this->finisherRunner->callFinishers($user, $this->actionMethodName, $this->settings, $this->contentObject);
-        $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
-        $this->addFlashMessage(LocalizationUtility::translate('create'));
-        $this->redirect($redirectByActionName);
+
+        if ($backend === false) {
+            $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
+            $this->addFlashMessage(LocalizationUtility::translate('create'));
+            $this->redirect($redirectByActionName);
+        }
     }
 
     /**
@@ -408,8 +419,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * Init
-     *
      * @return void
      */
     public function initializeAction()
@@ -424,7 +433,7 @@ abstract class AbstractController extends ActionController
         $this->config = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        $this->config = $this->config['plugin.']['tx_femanager.']['settings.'];
+        $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'];
 
         $this->setAllUserGroups();
         $this->checkTypoScript();

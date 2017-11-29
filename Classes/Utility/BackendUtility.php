@@ -3,7 +3,9 @@ declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
+use TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class BackendUtility
@@ -65,6 +67,51 @@ class BackendUtility
                 BackendUtilityCore::getModuleUrl(GeneralUtility::_GET('M'), self::getCurrentParameters());
         }
         return BackendUtilityCore::getModuleUrl('record_edit', $uriParameters);
+    }
+
+    /**
+     * @return string "plugin" or "module"
+     */
+    public static function getPluginOrModuleString(): string
+    {
+        $string = 'plugin';
+        if (TYPO3_MODE === 'BE') {
+            $string = 'module';
+        }
+        return $string;
+    }
+
+    /**
+     * @param int $pageIdentifier
+     * @param int $typeNum
+     * @return void
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+    public static function initializeTsFe(int $pageIdentifier = 1, int $typeNum = 0)
+    {
+        if (TYPO3_MODE === 'BE') {
+            if (!empty(GeneralUtility::_GP('id'))) {
+                $pageIdentifier = (int)GeneralUtility::_GP('id');
+            }
+            if (!empty(GeneralUtility::_GP('type'))) {
+                $typeNum = (int)GeneralUtility::_GP('type');
+            }
+            if (!is_object($GLOBALS['TT'])) {
+                $GLOBALS['TT'] = new NullTimeTracker;
+                $GLOBALS['TT']->start();
+            }
+            $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
+                TypoScriptFrontendController::class,
+                $GLOBALS['TYPO3_CONF_VARS'],
+                $pageIdentifier,
+                $typeNum
+            );
+            $GLOBALS['TSFE']->connectToDB();
+            $GLOBALS['TSFE']->initFEuser();
+            $GLOBALS['TSFE']->determineId();
+            $GLOBALS['TSFE']->initTemplate();
+            $GLOBALS['TSFE']->getConfigArray();
+        }
     }
 
     /**

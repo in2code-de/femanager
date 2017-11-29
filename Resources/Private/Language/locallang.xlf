@@ -584,8 +584,26 @@
 			<trans-unit id="BackendListLoginAs">
 				<source>Login as</source>
 			</trans-unit>
-			<trans-unit id="createStatus">
-				<source>User registration</source>
+			<trans-unit id="BackendConfirmationNoteTitle">
+				<source>Possible action:</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationNoteText">
+				<source>%s approval(s) available</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationColumnAction">
+				<source>Actions</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationColumnAction">
+				<source>Actions</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationColumnUid">
+				<source>UID</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationFlashMessageConfirmed">
+				<source>%s was successfully approved</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationFlashMessageRefused">
+				<source>%s was refused</source>
 			</trans-unit>
 		</body>
 	</file>

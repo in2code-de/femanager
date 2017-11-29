@@ -1,0 +1,108 @@
+{namespace femanager=In2code\Femanager\ViewHelpers}
+{namespace core=TYPO3\CMS\Core\ViewHelpers}
+<f:layout name="Backend" />
+
+UserBackend / List
+
+<f:section name="main">
+
+	<div class="femanager_list">
+		<f:render partial="Misc/FlashMessages" arguments="{_all}" />
+
+		<f:render partial="Backend/Searchform" arguments="{_all}" />
+
+		<f:if condition="{users}">
+			<f:then>
+				<div class="alert alert-info">
+					<strong><f:translate key="BackendConfirmationNoteTitle">Action:</f:translate></strong>
+					<f:translate key="BackendConfirmationNoteText" arguments="{0:'{f:count(subject:users)}'}"><f:count subject="{users}" /> approval(s)</f:translate>
+				</div>
+
+				<f:be.widget.paginate objects="{users}" as="usersPage" configuration="{itemsPerPage: 100, insertBelow: 1}">
+					<table cellspacing="0" cellpadding="0" border="0" class="table table-striped table-hover">
+						<tbody>
+							<tr class="c-headLine">
+								<td nowrap="nowrap">
+									<f:translate key="BackendConfirmationColumnAction">Actions</f:translate>
+								</td>
+								<td nowrap="nowrap">
+									<f:translate key="BackendConfirmationColumnUid">UID</f:translate>
+								</td>
+								<td nowrap="nowrap">
+									<f:translate key="tx_femanager_domain_model_user.crdate" />
+								</td>
+								<td nowrap="nowrap">
+									<f:translate key="tx_femanager_domain_model_user.username" />
+								</td>
+								<td nowrap="nowrap">
+									<f:translate key="tx_femanager_domain_model_user.country" />
+								</td>
+								<td nowrap="nowrap">
+									<f:translate key="tx_femanager_domain_model_user.email" />
+								</td>
+								<td nowrap="nowrap">
+									<f:translate key="tx_femanager_domain_model_user.name" />
+								</td>
+							</tr>
+
+							<f:for each="{usersPage}" as="user">
+								<tr class="db_list_normal firstcol femanager_list_line">
+									<td nowrap="nowrap">
+										<f:link.action action="confirmUser" arguments="{userIdentifier:user.uid}">
+											<core:icon identifier="actions-check" />
+										</f:link.action>
+										<f:link.action action="refuseUser" arguments="{userIdentifier:user.uid}">
+											<core:icon identifier="actions-close" />
+										</f:link.action>
+									</td>
+									<td nowrap="nowrap">
+										{user.uid}
+									</td>
+									<td nowrap="nowrap">
+										<f:format.date format="d.m.Y H:i">{user.crdate}</f:format.date>
+									</td>
+									<td nowrap="nowrap">
+										{user.username}
+									</td>
+									<td nowrap="nowrap">
+										{user.country}
+									</td>
+									<td nowrap="nowrap">
+										<f:if condition="{user.email}">
+											<f:link.email email="{user.email}">{user.email}</f:link.email>
+										</f:if>
+									</td>
+									<td nowrap="nowrap">
+										{user.lastName}<f:if condition="{user.lastName}">,</f:if> {user.firstName}
+									</td>
+								</tr>
+							</f:for>
+
+						</tbody>
+					</table>
+				</f:be.widget.paginate>
+
+			</f:then>
+			<f:else>
+				<div class="femanager_note">
+					<f:translate key="noRecordsFound" />
+					<br />
+					<f:if condition="{femanager:Misc.Request(parameter:'tx_femanager_web_femanagerm1|filter|searchword')}">
+						<f:then>
+							<f:link.action>
+								<f:translate key="noRecordsFoundClearFilter">Clean filter.</f:translate>
+							</f:link.action>
+						</f:then>
+						<f:else>
+							<f:if condition="{femanager:Condition.IsBackendAdministratorAuthentication()}">
+								<f:link.action action="confirmation" class="underline" additionalParams="{id:0}">
+									<f:translate key="noRecordsFoundGoToPage0">Show all users from all pages (for admins only).</f:translate>
+								</f:link.action>
+							</f:if>
+						</f:else>
+					</f:if>
+				</div>
+			</f:else>
+		</f:if>
+	</div>
+</f:section>

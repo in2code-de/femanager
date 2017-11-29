@@ -167,6 +167,27 @@ class UserRepository extends Repository
     }
 
     /**
+     * Find All for Backend Actions
+     *
+     * @param array $filter Filter Array
+     * @param bool $userConfirmation Show only fe_users which are confirmed by the user?
+     * @return QueryResultInterface|array
+     */
+    public function findAllInBackendForConfirmation(array $filter, bool $userConfirmation = false)
+    {
+        $query = $this->createQuery();
+        $this->ignoreEnableFieldsAndStoragePage($query);
+        $and = [$query->equals('disable', true)];
+        $and = $this->filterByPage($and, $query);
+        $and = $this->filterBySearchword($filter, $query, $and);
+        $and = $this->filterByUserConfirmation($and, $query, $userConfirmation);
+        $query->matching($query->logicalAnd($and));
+        $query->setOrderings(['username' => QueryInterface::ORDER_ASCENDING]);
+        $records = $query->execute();
+        return $records;
+    }
+
+    /**
      * Find all users from current page or from any subpage
      * If no page id given or if on rootpage (pid 0):
      *      - Don't show any users for editors
@@ -219,6 +240,20 @@ class UserRepository extends Repository
                 $or[] = $query->like('zip', '%' . $searchword . '%');
                 $and[] = $query->logicalOr($or);
             }
+        }
+        return $and;
+    }
+
+    /**
+     * @param array $and
+     * @param QueryInterface $query
+     * @param bool $userConfirmation
+     * @return array
+     */
+    protected function filterByUserConfirmation(array $and, QueryInterface $query, bool $userConfirmation): array
+    {
+        if ($userConfirmation === true) {
+            $and[] = $query->equals('txFemanagerConfirmedbyuser', true);
         }
         return $and;
     }

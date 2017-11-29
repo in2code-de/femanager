@@ -1,0 +1,2 @@
+# User must confirm their profile - only in this case they are shown in Backend Module "Confirmation"
+tx_femanager.UserBackend.confirmation.filter.userConfirmation = 1
