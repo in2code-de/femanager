@@ -84,6 +84,12 @@
 			<trans-unit id="tx_femanager_domain_model_user.image">
 				<source>Image</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.terms">
+				<source>I accept the terms and conditions</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.termslinktext">
+				<source>Click here for terms and conditions</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.lastlogin">
 				<source>Last login</source>
 			</trans-unit>

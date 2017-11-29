@@ -1,0 +1,24 @@
+{namespace femanager=In2code\Femanager\ViewHelpers}
+<div class="femanager_fieldset femanager_terms form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+            <label class="checkbox">
+                <f:form.checkbox
+                        id="femanager_field_terms"
+                        property="terms"
+                        value="Terms and conditions"
+                        checked="false"
+                        additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'terms')}" />
+                <f:translate key="tx_femanager_domain_model_user.terms" />
+                <f:if condition="{femanager:Validation.IsRequiredField(fieldName:'terms')}">
+                    <span>*</span>
+                </f:if>
+                <f:if condition="{settings.misc.termsUrl}">
+                    <f:then>
+                        (<f:link.page pageUid="{settings.misc.termsUrl}"><f:translate key="tx_femanager_domain_model_user.termslinktext" /></f:link.page>)
+                    </f:then>
+                </f:if>
+            </label>
+        </div>
+    </div>
+</div>

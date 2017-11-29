@@ -6,6 +6,11 @@ config.tx_extbase {
 				mapping {
 					tableName = fe_users
 					recordType =
+
+					columns {
+						tx_femanager_terms.mapOnProperty = terms
+						tx_femanager_terms_date_of_acceptance.mapOnProperty = termsDateOfAcceptance
+					}
 				}
 			}
 
