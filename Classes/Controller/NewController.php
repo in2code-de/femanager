@@ -4,6 +4,7 @@ namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Service\AutoAdminConfirmationService;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -300,22 +301,32 @@ class NewController extends AbstractController
      */
     protected function createAdminConfirmationRequest(User $user)
     {
-        die('freigabe jetzt');
-        $this->sendMailService->send(
-            'createAdminConfirmation',
-            StringUtility::makeEmailArray(
-                $this->settings['new']['confirmByAdmin'],
-                $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
-            ),
-            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-            'New Registration request',
-            [
-                'user' => $user,
-                'hash' => HashUtility::createHashForUser($user)
-            ],
-            $this->config['new.']['email.']['createAdminConfirmation.']
+        $aacService = $this->objectManager->get(
+            AutoAdminConfirmationService::class,
+            $user,
+            $this->settings,
+            $this->contentObject
         );
-        $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
+        if ($aacService->isAutoAdminConfirmationFullfilled()) {
+            $user->setDisable(false);
+            $this->createAllConfirmed($user);
+        } else {
+            $this->sendMailService->send(
+                'createAdminConfirmation',
+                StringUtility::makeEmailArray(
+                    $this->settings['new']['confirmByAdmin'],
+                    $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
+                ),
+                StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
+                'New Registration request',
+                [
+                    'user' => $user,
+                    'hash' => HashUtility::createHashForUser($user)
+                ],
+                $this->config['new.']['email.']['createAdminConfirmation.']
+            );
+            $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
+        }
     }
 
     /**
