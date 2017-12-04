@@ -149,8 +149,11 @@ jQuery.fn.femanagerValidation = function($) {
 	 * @return string
 	 */
 	function getFieldName(element) {
+		var name = '';
 		var nameParts = element.prop('name').split('[');
-		var name = nameParts[nameParts.length-1].replace(']', '');
+		if (nameParts[2] !== undefined) {
+			name = nameParts[2].replace(']', '');
+		}
 		return name;
 	}
 
