@@ -34,7 +34,7 @@ $feUsersColumns = [
             'max' => 20,
             'eval' => 'date',
             'checkbox' => '0',
-            'default' => ''
+            'default' => 0
         ]
     ],
     'crdate' => [
