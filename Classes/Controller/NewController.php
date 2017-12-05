@@ -309,8 +309,10 @@ class NewController extends AbstractController
         );
         if ($aacService->isAutoAdminConfirmationFullfilled()) {
             $user->setDisable(false);
+            $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AutoConfirmation', [$user, $this]);
             $this->createAllConfirmed($user);
         } else {
+            $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'ManualConfirmation', [$user, $this]);
             $this->sendMailService->send(
                 'createAdminConfirmation',
                 StringUtility::makeEmailArray(
