@@ -315,27 +315,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateDate($value, $validationSetting)
     {
-        $dateParts = [];
-        switch ($validationSetting) {
-            case 'd.m.Y':
-                if (preg_match('/^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$/', $value, $dateParts)) {
-                    if (checkdate($dateParts[2], $dateParts[1], $dateParts[3])) {
-                        return true;
-                    }
-                }
-                break;
-
-            case 'm/d/Y':
-                if (preg_match('/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/', $value, $dateParts)) {
-                    if (checkdate($dateParts[1], $dateParts[2], $dateParts[3])) {
-                        return true;
-                    }
-                }
-                break;
-
-            default:
-        }
-        return false;
+        $date = \DateTime::createFromFormat($validationSetting, $value);
+	    return $date && $date->format($validationSetting) == $value;
     }
 
     /**
