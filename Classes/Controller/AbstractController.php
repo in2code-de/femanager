@@ -206,7 +206,7 @@ abstract class AbstractController extends ActionController
         bool $backend = false
     ) {
         $this->loginPreflight($user, $login);
-        $variables = ['user' => $user, 'settings' => $this->settings];
+        $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         $this->sendMailService->send(
             'createUserNotify',
             StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
