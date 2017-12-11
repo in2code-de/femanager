@@ -130,11 +130,11 @@ abstract class AbstractController extends ActionController
     {
         // send notify email to admin
         $existingUser = clone $this->userRepository->findByUid($user->getUid());
-        if ($this->settings['edit']['notifyAdmin']) {
+        if ($this->settings['edit']['notifyAdmin'] || $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value']) {
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
-                    $this->settings['edit']['notifyAdmin'],
+                    $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value'] ?? $this->settings['edit']['notifyAdmin'],
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value']
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
@@ -220,11 +220,11 @@ abstract class AbstractController extends ActionController
         );
 
         // send notify email to admin
-        if ($this->settings['new']['notifyAdmin']) {
+        if ($this->settings['new']['notifyAdmin'] || $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']) {
             $this->sendMailService->send(
                 'createNotify',
                 StringUtility::makeEmailArray(
-                    $this->settings['new']['notifyAdmin'],
+                    $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value'] ?? $this->settings['new']['notifyAdmin'],
                     $this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
