@@ -20,4 +20,20 @@
 
 	<p><f:translate key="emailCreateNotifyUserProperties" /></p>
 	<f:render partial="Mail/UserProperties" arguments="{_all}" />
+
+	<p>
+		<f:translate key="emailCreateAdminConfirmationText2" />
+		<br>
+		<f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'adminConfirmationRefused'}">
+			<f:translate key="emailCreateAdminConfirmationLinkConfirmRefused" />
+		</f:link.action>
+	</p>
+
+	<p>
+		<f:translate key="emailCreateAdminConfirmationText3" />
+		<br>
+		<f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'adminConfirmationRefusedSilent'}">
+			<f:translate key="emailCreateAdminConfirmationLinkConfirmRefusedSilent" />
+		</f:link.action>
+	</p>
 </f:section>
