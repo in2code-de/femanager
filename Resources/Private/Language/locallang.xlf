@@ -477,7 +477,7 @@
 				<source>Thank you for your request. Please check your mail account to confirm the profile.</source>
 			</trans-unit>
 			<trans-unit id="createRequestWaitingForAdminConfirm">
-				<source>Thank you for your confirmation. You're profile will be available as soon as the admin confirms your request.</source>
+				<source>Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</source>
 			</trans-unit>
 			<trans-unit id="createFailedProfile">
 				<source>Profile creation failed</source>
