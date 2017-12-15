@@ -7,19 +7,19 @@ femanager
 .. only:: html
 
 	:Copyright:
-		2013 - 2017
+		2013 - 2018
 
 	:Classification:
 		femanager
 
 	:Version:
-		3.2
+		4.0
 
 	:Language:
 		en
 
 	:Keywords:
-		TYPO3 frontend user registration, sr_feuser_register
+		frontend, user, registration, frontend, profile, sr_feuser_register
 
 	:Author:
 		Alex Kellner
@@ -37,9 +37,7 @@ femanager
 
 	Introduction/Index
 	Installation/Index
-	BestPractice/Index
+	Features/Index
 	FAQ/Index
-	KnownProblems/Index
-	Todos/Index
 	Changelog/Index
 	Links/Index

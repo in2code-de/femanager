@@ -1,0 +1,11 @@
+.. |newField1|      image:: ../../Images/femanager_newfield1.png
+.. :align: left
+.. :border: 0
+.. :name: newField1
+.. :vspace: 20
+
+.. |newField2|      image:: ../../Images/femanager_newfield2.png
+.. :align: left
+.. :border: 0
+.. :name: newField2
+.. :vspace: 20

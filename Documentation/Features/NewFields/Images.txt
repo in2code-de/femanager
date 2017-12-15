@@ -1,0 +1,11 @@
+.. |extendFields|      image:: ../../Images/femanager_edit2.png
+.. :align: left
+.. :border: 0
+.. :name: extendFields
+.. :vspace: 20
+
+.. |newFields|      image:: ../../Images/femanager_flexform_newfields.png
+.. :align: left
+.. :border: 0
+.. :name: newFields
+.. :vspace: 20
