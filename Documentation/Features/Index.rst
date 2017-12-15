@@ -16,5 +16,6 @@ See some features or best practice parts of the extension femanager.
 	Countryselect/Index
 	NewFields/Index
 	NewValidators/Index
+	AutoConfirmation/Index
 	Finishers/Index
 	Signals/Index
