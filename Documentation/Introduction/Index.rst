@@ -22,6 +22,8 @@ Maybe you know sr_feuser_register but you want to use a more modern extension, g
 This extension basicly brings an easy-to-use frontend-user-registration with a profile manager to your system.
 In addition femanager was developed to be very flexible and to bring a lot of features out of the box.
 
+Note: Login and a *I forgot my password* function is part of the core and not part of femanager.
+
 
 .. _requirements:
 
