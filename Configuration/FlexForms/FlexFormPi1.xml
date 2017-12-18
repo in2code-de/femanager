@@ -146,6 +146,10 @@
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.dateOfBirth</numIndex>
 										<numIndex index="1">dateOfBirth</numIndex>
 									</numIndex>
+									<numIndex index="20" type="array">
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.terms</numIndex>
+										<numIndex index="1">terms</numIndex>
+									</numIndex>
 								</items>
 								<maxitems>100</maxitems>
 								<size>10</size>
@@ -619,5 +623,34 @@
 				</el>
 			</ROOT>
 		</invitation>
+		<misc>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.misc.title</sheetTitle>
+					<displayCond>
+						<OR>
+							<numIndex index="0"><![CDATA[FIELD:main.switchableControllerActions:=:New->new;New->create;New->createStatus;New->confirmCreateRequest;]]></numIndex>
+							<numIndex index="1"><![CDATA[FIELD:main.switchableControllerActions:=:Invitation->new;Invitation->create;Invitation->edit;Invitation->update;Invitation->delete;Invitation->status;]]></numIndex>
+						</OR>
+					</displayCond>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.misc.termsUrl>
+						<TCEforms>
+							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.misc.termsUrl</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+							</config>
+						</TCEforms>
+					</settings.misc.termsUrl>
+				</el>
+			</ROOT>
+		</misc>
 	</sheets>
 </T3DataStructure>

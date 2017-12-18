@@ -64,6 +64,20 @@ class User extends FrontendUser
     protected $dateOfBirth;
 
     /**
+     * termsAndConditions
+     *
+     * @var bool
+     */
+    protected $terms = false;
+
+    /**
+     * the datetime the user accepted the terms
+     *
+     * @var \DateTime
+     */
+    protected $termsDateOfAcceptance = null;
+
+    /**
      * @var string
      */
     protected $txExtbaseType;
@@ -254,6 +268,51 @@ class User extends FrontendUser
             $dateOfBirth->setTime(0, 0, 0);
         }
         $this->dateOfBirth = $dateOfBirth;
+        return $this;
+    }
+
+    /**
+     * Returns, whether the user has accepted terms and conditions
+     *
+     * @return bool
+     */
+    public function isTerms(): bool
+    {
+        return $this->terms;
+    }
+
+    /**
+     * Set whether the user has accepted terms and conditions
+     *
+     * @param bool $terms
+     * @return User
+     */
+    public function setTerms(bool $terms)
+    {
+        $this->terms = $terms;
+        $this->setTermsDateOfAcceptance();
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getTermsDateOfAcceptance()
+    {
+        return $this->termsDateOfAcceptance;
+    }
+
+    /**
+     * set terms date to now if it's not set yet
+     *
+     * @return User
+     */
+    protected function setTermsDateOfAcceptance()
+    {
+        if ($this->termsDateOfAcceptance === null) {
+            $now = new \DateTime();
+            $this->termsDateOfAcceptance = $now;
+        }
         return $this;
     }
 

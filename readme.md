@@ -28,6 +28,7 @@ Quick guide:
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 4.0.0      | 2017-12-18 | Task         | - Add new field "accept terms and conditions"<br />- Add a new backend module view "accept/decline users"<br />- Implement AutoAdminConfirmation feature<br />- Add some new signals<br />- Add link to delete account in admin notivication mail<br />- Admin notification settings via TypoScript |
 | 3.3.0      | 2017-11-25 | Feature      | Show only relevant users in FlexForm, some small bugfixes                                                                  |
 | 3.2.0      | 2017-11-10 | Task         | Add alternative login function https://github.com/einpraegsam/femanager/issues/27                                          |
 | 3.1.3      | 2017-10-12 | Bugfix       | Allow the usage in special contexts like with Flux. See https://github.com/einpraegsam/femanager/issues/17                 |
@@ -54,4 +55,6 @@ Quick guide:
 
 <img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_backend2.png" width="500" />
 
-<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_backend3.png" width="500" />
+<img src="https://s.nimbus.everhelper.me/attachment/1317619/v5ea61f9y80o3utaf1lv/262407-HlClHQYRv0uU0oRE/screen.png" width="500" />
+
+<img src="https://s.nimbus.everhelper.me/attachment/1317613/kway0rezl7cmockn03xm/262407-pFkmYEVCHkLZLUHv/screen.png" width="500" />

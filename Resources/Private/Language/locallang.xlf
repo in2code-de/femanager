@@ -84,6 +84,12 @@
 			<trans-unit id="tx_femanager_domain_model_user.image">
 				<source>Image</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.terms">
+				<source>I accept the terms and conditions</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.termslinktext">
+				<source>Click here for terms and conditions</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.lastlogin">
 				<source>Last login</source>
 			</trans-unit>
@@ -471,7 +477,7 @@
 				<source>Thank you for your request. Please check your mail account to confirm the profile.</source>
 			</trans-unit>
 			<trans-unit id="createRequestWaitingForAdminConfirm">
-				<source>Thank you for your confirmation. You're profile will be available as soon as the admin confirms your request.</source>
+				<source>Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</source>
 			</trans-unit>
 			<trans-unit id="createFailedProfile">
 				<source>Profile creation failed</source>
@@ -578,8 +584,26 @@
 			<trans-unit id="BackendListLoginAs">
 				<source>Login as</source>
 			</trans-unit>
-			<trans-unit id="createStatus">
-				<source>User registration</source>
+			<trans-unit id="BackendConfirmationNoteTitle">
+				<source>Possible action:</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationNoteText">
+				<source>%s approval(s) available</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationColumnAction">
+				<source>Actions</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationColumnAction">
+				<source>Actions</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationColumnUid">
+				<source>UID</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationFlashMessageConfirmed">
+				<source>%s was successfully approved</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationFlashMessageRefused">
+				<source>%s was refused</source>
 			</trans-unit>
 		</body>
 	</file>

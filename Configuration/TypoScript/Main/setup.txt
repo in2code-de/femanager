@@ -1602,6 +1602,32 @@ plugin.tx_femanager {
 #			}
 		}
 
+		# Add own autoAdminConfirmation classes that can decide if confirmation by admin (only if activated) can be skipped. E.g. if an Email domain fits to a given list.
+		autoAdminConfirmation {
+			# Femanager autoAdminConfirmation classes
+#			10 {
+#				class = In2code\Femanager\Domain\Service\AutoAdminConfirmation\EmailDomainConfirmation
+#				config {
+					# Just look at the domains of the given Email-Addresses
+#					confirmByEmailDomains = .de, .it, .ch, .at
+#					confirmByEmailDomainsExceptions = gmail.de, gmx.de
+#				}
+#			}
+
+#			100 {
+				# Classname that should be called with method isAutoAdminConfirmationFullfilled()
+#				class = In2code\FemanagerExtended\Domain\Service\AutoAdminConfirmation\IpAddressConfirmation
+
+				# optional: Add configuration for your PHP
+#				config {
+#					foo = bar
+
+#					fooCObject = TEXT
+#					fooCObject.value = do something with this text
+#				}
+#			}
+		}
+
 		# Don't touch this - this is needed to let the plugin know if the main typoscript is included - otherwise an errormessage will be shown in the frontend
 		_TypoScriptIncluded = 1
 	}

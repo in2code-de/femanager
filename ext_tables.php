@@ -21,7 +21,7 @@ call_user_func(function () {
             'm1',
             '',
             [
-                'UserBackend' => 'list,userLogout'
+                'UserBackend' => 'list,confirmation,userLogout,confirmUser,refuseUser'
             ],
             [
                 'access' => 'user,group',
@@ -43,6 +43,13 @@ call_user_func(function () {
         'femanager',
         'Configuration/TypoScript/Layout',
         'Add Layout CSS'
+    );
+
+    /**
+     * Add user TSConfig
+     */
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
+        '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:femanager/Configuration/UserTsConfig/BackendModule.typoscript">'
     );
 
     /**

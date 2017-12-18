@@ -4,6 +4,7 @@ namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Service\AutoAdminConfirmationService;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -140,22 +141,7 @@ class NewController extends AbstractController
             LogUtility::log(Log::STATUS_REGISTRATIONCONFIRMEDUSER, $user);
 
             if ($this->isAdminConfirmationMissing($user)) {
-                $this->sendMailService->send(
-                    'createAdminConfirmation',
-                    StringUtility::makeEmailArray(
-                        $this->settings['new']['confirmByAdmin'],
-                        $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
-                    ),
-                    StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-                    'New Registration request',
-                    [
-                        'user' => $user,
-                        'hash' => HashUtility::createHashForUser($user)
-                    ],
-                    $this->config['new.']['email.']['createAdminConfirmation.']
-                );
-                $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
-
+                $this->createAdminConfirmationRequest($user);
             } else {
                 $user->setDisable(false);
                 LogUtility::log(Log::STATUS_NEWREGISTRATION, $user);
@@ -256,6 +242,93 @@ class NewController extends AbstractController
      */
     public function createStatusAction()
     {
+    }
+
+    /**
+     * Postfix method to createAction(): Create must be confirmed by Admin or User
+     *
+     * @param User $user
+     * @return void
+     */
+    protected function createRequest(User $user)
+    {
+        $user->setDisable(true);
+        $this->userRepository->add($user);
+        $this->persistenceManager->persistAll();
+        LogUtility::log(Log::STATUS_PROFILECREATIONREQUEST, $user);
+        if (!empty($this->settings['new']['confirmByUser'])) {
+            $this->createUserConfirmationRequest($user);
+            $this->redirect('new');
+        }
+        if (!empty($this->settings['new']['confirmByAdmin'])) {
+            $this->createAdminConfirmationRequest($user);
+            $this->redirect('new');
+        }
+    }
+
+    /**
+     * Send email to user for confirmation
+     *
+     * @param User $user
+     * @return void
+     * @throws UnsupportedRequestTypeException
+     */
+    protected function createUserConfirmationRequest(User $user)
+    {
+        $this->sendMailService->send(
+            'createUserConfirmation',
+            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
+            [
+                $this->settings['new']['email']['createUserConfirmation']['sender']['email']['value'] =>
+                    $this->settings['new']['email']['createUserConfirmation']['sender']['name']['value']
+            ],
+            'Confirm your profile creation request',
+            [
+                'user' => $user,
+                'hash' => HashUtility::createHashForUser($user)
+            ],
+            $this->config['new.']['email.']['createUserConfirmation.']
+        );
+        $this->redirectByAction('new', 'requestRedirect');
+        $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
+    }
+
+    /**
+     * Send email to admin for confirmation
+     *
+     * @param User $user
+     * @throws UnsupportedRequestTypeException
+     */
+    protected function createAdminConfirmationRequest(User $user)
+    {
+        $aacService = $this->objectManager->get(
+            AutoAdminConfirmationService::class,
+            $user,
+            $this->settings,
+            $this->contentObject
+        );
+        if ($aacService->isAutoAdminConfirmationFullfilled()) {
+            $user->setDisable(false);
+            $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AutoConfirmation', [$user, $this]);
+            $this->createAllConfirmed($user);
+        } else {
+            $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'ManualConfirmation', [$user, $this]);
+            $this->sendMailService->send(
+                'createAdminConfirmation',
+                StringUtility::makeEmailArray(
+                    $this->settings['new']['confirmByAdmin'],
+                    $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
+                ),
+                StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
+                'New Registration request',
+                [
+                    'user' => $user,
+                    'hash' => HashUtility::createHashForUser($user)
+                ],
+                $this->config['new.']['email.']['createAdminConfirmation.']
+            );
+            $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
+        }
     }
 
     /**

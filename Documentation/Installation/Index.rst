@@ -71,6 +71,15 @@ Settings
       0
 
  - :Property:
+      enableConfirmationModule
+   :Datatype:
+      boolean
+   :Description:
+      Enable confirmation view: Enable a special confirmation view in Backend Module
+   :Default:
+      0
+
+ - :Property:
       disableLog
    :Datatype:
       boolean
@@ -306,6 +315,15 @@ Explanation Plugin Settings
    :Default:
       [empty]
 
+ - :Tab:
+      Additional Settings
+   :Field:
+      Add an internal link to a page with terms and conditions
+   :Description:
+      Will be used for rendering the checkbox that asks the visitor to check that he/she accepted the terms for the registration
+   :Default:
+      [empty]
+
 FE Users Record
 ^^^^^^^^^^^^^^^
 
@@ -410,7 +428,7 @@ Plain Text
 
 .. code-block:: text
 
-	plugin.tx_femanager {
+    plugin.tx_femanager {
         view {
             # cat=plugin.tx_femanager/file; type=string; label= Path to template root (FE)
             templateRootPath = EXT:femanager/Resources/Private/Templates/
@@ -2071,6 +2089,32 @@ Plain Text
     #			}
             }
 
+            # Add own autoAdminConfirmation classes that can decide if confirmation by admin (only if activated) can be skipped. E.g. if an Email domain fits to a given list.
+            autoAdminConfirmation {
+                # Femanager autoAdminConfirmation classes
+    #			10 {
+    #				class = In2code\Femanager\Domain\Service\AutoAdminConfirmation\EmailDomainConfirmation
+    #				config {
+                        # Just look at the domains of the given Email-Addresses
+    #					confirmByEmailDomains = .de, .it, .ch, .at
+    #					confirmByEmailDomainsExceptions = gmail.de, gmx.de
+    #				}
+    #			}
+
+    #			100 {
+                    # Classname that should be called with method isAutoAdminConfirmationFullfilled()
+    #				class = In2code\FemanagerExtended\Domain\Service\AutoAdminConfirmation\IpAddressConfirmation
+
+                    # optional: Add configuration for your PHP
+    #				config {
+    #					foo = bar
+
+    #					fooCObject = TEXT
+    #					fooCObject.value = do something with this text
+    #				}
+    #			}
+            }
+
             # Don't touch this - this is needed to let the plugin know if the main typoscript is included - otherwise an errormessage will be shown in the frontend
             _TypoScriptIncluded = 1
         }
@@ -2123,13 +2167,34 @@ Images
 
 |backendmodule|
 
-Backend Module
+Backend Module (List)
+
+|backendmodule2|
+
+Backend Module (Confirmation)
 
 Explanation
 """""""""""
 
-The Femanager-Backend-Module is only a small module to search for some frontend users via fulltext.
+**List Module**
 
-Some AJAX-requests will help you and your editors to delete or hide and unhide users very fast. The edit icons works in the same way as in the list module. The logout icons allows you to logout a currently logged in frontend user.
+The Femanager-Backend-Module List is only a small module to search and list some frontend users.
 
-In addition you can see who's only in this moment (If fe_users session exists and is not older than 2h).
+Some AJAX-requests will help you and your editors to delete or hide and unhide users very fast.
+The edit icons works in the same way as in the list module.
+
+In addition you can see who's only in this moment (If fe_users session exists and is not older than 2h) and you can
+logout your fe-users with just one click.
+
+A new feature called **log in as** allows you to open a new window where your frontend is shown and you are already
+logged in as the chosen user (admin only feature)
+
+**Confirmation Module**
+
+The confirmation module can be activated via Extension Manager because it's still in the beta phase. Nevertheless you
+will see a list of not-yet-confirmed fe-users that can be confirmed (or refused) by just one click.
+
+Per default only disabled users are listed that have a user confirmation.
+If all disabled users should be shown, even if they have no user confirmation (because your plugin is configured, that
+only admins should confirm the requests), **User TSConfig** can be used like (to list those users):
+*tx_femanager.UserBackend.confirmation.filter.userConfirmation=0*

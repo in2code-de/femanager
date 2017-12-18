@@ -5,6 +5,7 @@ namespace In2code\Femanager\Controller;
 use In2code\Femanager\DataProcessor\DataProcessorRunner;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\BackendUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -119,80 +120,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * Prefix method to createAction(): Create must be confirmed by Admin or User
-     *
-     * @param User $user
-     * @return void
-     */
-    public function createRequest(User $user)
-    {
-        $user->setDisable(true);
-        $this->userRepository->add($user);
-        $this->persistenceManager->persistAll();
-        LogUtility::log(Log::STATUS_PROFILECREATIONREQUEST, $user);
-        if (!empty($this->settings['new']['confirmByUser'])) {
-            $this->createUserConfirmationRequest($user);
-        }
-        if (!empty($this->settings['new']['confirmByAdmin'])) {
-            $this->createAdminConfirmationRequest($user);
-        }
-    }
-
-    /**
-     * Send email to user for confirmation
-     *
-     * @param User $user
-     * @return void
-     * @throws UnsupportedRequestTypeException
-     */
-    protected function createUserConfirmationRequest(User $user)
-    {
-        $this->sendMailService->send(
-            'createUserConfirmation',
-            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-            [
-                $this->settings['new']['email']['createUserConfirmation']['sender']['email']['value'] =>
-                    $this->settings['new']['email']['createUserConfirmation']['sender']['name']['value']
-            ],
-            'Confirm your profile creation request',
-            [
-                'user' => $user,
-                'hash' => HashUtility::createHashForUser($user)
-            ],
-            $this->config['new.']['email.']['createUserConfirmation.']
-        );
-        $this->redirectByAction('new', 'requestRedirect');
-        $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
-        $this->redirect('new');
-    }
-
-    /**
-     * Send email to admin for confirmation
-     *
-     * @param User $user
-     * @throws UnsupportedRequestTypeException
-     */
-    protected function createAdminConfirmationRequest(User $user)
-    {
-        $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
-        $this->sendMailService->send(
-            'createAdminConfirmation',
-            StringUtility::makeEmailArray(
-                $this->settings['new']['confirmByAdmin'],
-                $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
-            ),
-            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-            'New Registration request',
-            [
-                'user' => $user,
-                'hash' => HashUtility::createHashForUser($user)
-            ],
-            $this->config['new.']['email.']['createAdminConfirmation.']
-        );
-        $this->redirect('new');
-    }
-
-    /**
      * Prefix method to updateAction()
      *        Update Confirmation from Admin is not necessary
      *
@@ -203,11 +130,13 @@ abstract class AbstractController extends ActionController
     {
         // send notify email to admin
         $existingUser = clone $this->userRepository->findByUid($user->getUid());
-        if ($this->settings['edit']['notifyAdmin']) {
+        if ($this->settings['edit']['notifyAdmin']
+            || $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value']) {
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
-                    $this->settings['edit']['notifyAdmin'],
+                    $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value']
+                        ?? $this->settings['edit']['notifyAdmin'],
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value']
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
@@ -267,12 +196,19 @@ abstract class AbstractController extends ActionController
      * @param string $redirectByActionName Action to redirect
      * @param bool $login Login after creation
      * @param string $status
+     * @param bool $backend Don't redirect if called from backend action
      * @return void
      */
-    public function finalCreate($user, $action, $redirectByActionName, $login = true, $status = '')
-    {
+    public function finalCreate(
+        $user,
+        string $action,
+        string $redirectByActionName,
+        bool $login = true,
+        string $status = '',
+        bool $backend = false
+    ) {
         $this->loginPreflight($user, $login);
-        $variables = ['user' => $user, 'settings' => $this->settings];
+        $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         $this->sendMailService->send(
             'createUserNotify',
             StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
@@ -286,11 +222,13 @@ abstract class AbstractController extends ActionController
         );
 
         // send notify email to admin
-        if ($this->settings['new']['notifyAdmin']) {
+        if ($this->settings['new']['notifyAdmin'] ||
+            $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']) {
             $this->sendMailService->send(
                 'createNotify',
                 StringUtility::makeEmailArray(
-                    $this->settings['new']['notifyAdmin'],
+                    $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']
+                        ?? $this->settings['new']['notifyAdmin'],
                     $this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
@@ -301,9 +239,12 @@ abstract class AbstractController extends ActionController
         }
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $action, $this]);
         $this->finisherRunner->callFinishers($user, $this->actionMethodName, $this->settings, $this->contentObject);
-        $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
-        $this->addFlashMessage(LocalizationUtility::translate('create'));
-        $this->redirect($redirectByActionName);
+
+        if ($backend === false) {
+            $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
+            $this->addFlashMessage(LocalizationUtility::translate('create'));
+            $this->redirect($redirectByActionName);
+        }
     }
 
     /**
@@ -408,8 +349,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * Init
-     *
      * @return void
      */
     public function initializeAction()
@@ -424,7 +363,7 @@ abstract class AbstractController extends ActionController
         $this->config = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        $this->config = $this->config['plugin.']['tx_femanager.']['settings.'];
+        $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'];
 
         $this->setAllUserGroups();
         $this->checkTypoScript();

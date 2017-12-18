@@ -24,6 +24,15 @@ class ConfigurationUtility extends AbstractUtility
     /**
      * @return bool
      */
+    public static function isConfirmationModuleActive(): bool
+    {
+        $configuration = self::getExtensionConfiguration();
+        return $configuration['enableConfirmationModule'] === '1';
+    }
+
+    /**
+     * @return bool
+     */
     public static function isDisableLogActive(): bool
     {
         $configuration = self::getExtensionConfiguration();
@@ -57,5 +66,15 @@ class ConfigurationUtility extends AbstractUtility
             $typoscript = ArrayUtility::getValueByPath($typoscript, $path, '.');
         }
         return $typoscript;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isBackendModuleFilterUserConfirmation(): bool
+    {
+        return BackendUserUtility::getBackendUserAuthentication()->getTSConfigVal(
+            'tx_femanager.UserBackend.confirmation.filter.userConfirmation'
+        ) === '1';
     }
 }

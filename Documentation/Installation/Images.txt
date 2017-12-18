@@ -16,6 +16,12 @@
 .. :name: backendmodule
 .. :vspace: 20
 
+.. |backendmodule2|      image:: ../Images/femanager_backendmodule2.png
+.. :align: left
+.. :border: 0
+.. :name: backendmodule
+.. :vspace: 20
+
 .. |constants|      image:: ../Images/femanager_constants.png
 .. :align: left
 .. :border: 0

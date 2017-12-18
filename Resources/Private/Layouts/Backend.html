@@ -1,3 +1,4 @@
+{namespace femanager=In2code\Femanager\ViewHelpers}
 <f:be.container
 		includeCssFiles="{0: '{f:uri.resource(path:\'Css/Backend.min.css\')}'}"
 		includeJsFiles="{0: '{f:uri.resource(path:\'JavaScript/Backend.min.js\')}'}"
@@ -9,38 +10,46 @@
 		jQueryNamespace="defaultNoConflict"
 		pageTitle="femanager">
 
-	<div class="overlay"></div>
-
-	<div class="typo3-fullDoc">
-		<div id="typo3-docheader">
-			<div id="typo3-docheader-row1">
-				<div class="buttonsleft">
+	<div class="module">
+		<div class="module-docheader">
+			<div class="typo3-docheader-functions">
+				<div class="module-docheader-bar module-docheader-bar-navigation">
+					<div class="module-docheader-bar-column-left">
+						<f:if condition="{femanager:be.isConfirmationModuleActivated()}">
+							<div class="btn-group btn-group-xs" role="group">
+								<f:link.action action="list" class="btn btn-default{femanager:Be.GetClassNameOnAction(actionName:'list')}">
+									<f:translate key="BackendSelectionList">List</f:translate>
+								</f:link.action>
+								<f:link.action action="confirmation" class="btn btn-default{femanager:Be.GetClassNameOnAction(actionName:'confirmation')}">
+									<f:translate key="BackendSelectionList">Confirmation</f:translate>
+								</f:link.action>
+							</div>
+						</f:if>
+					</div>
+					<div class="module-docheader-bar-column-right">
+						<f:be.pagePath />
+					</div>
+				</div>
+			</div>
+			<div class="module-docheader-bar module-docheader-bar-buttons">
+				<div class="module-docheader-bar-column-left">
 					&nbsp;
 				</div>
-				<div class="buttonsright">
+				<div class="module-docheader-bar-column-right">
 					<f:be.buttons.shortcut />
 				</div>
 			</div>
-			<div id="typo3-docheader-row2">
-				<f:comment>
-				<div class="docheader-row2-left">
-					<f:be.menus.actionMenu>
-						<f:be.menus.actionMenuItem label="{f:translate(key: 'BackendSelectionList')}" controller="Module" action="listBe" />
-						<f:be.menus.actionMenuItem label="{f:translate(key: 'BackendSelectionReporting')}" controller="Module" action="reportingBe" />
-						<f:be.menus.actionMenuItem label="{f:translate(key: 'BackendSelectionCheck')}" controller="Module" action="checkBe" />
-					</f:be.menus.actionMenu>
-				</div>
-				</f:comment>
-				<div class="docheader-row2-right">
-					<f:be.pagePath />
-				</div>
-			</div>
 		</div>
-		<div id="typo3-docbody">
-			<div id="typo3-inner-docbody">
-				<f:render partial="Misc/FlashMessages" arguments="{_all}" />
-				<f:render section="main" />
-			</div>
+		<div class="module-body powermail-backend">
+			<f:flashMessages as="flashMessages">
+				<div class="alert alert-warning">
+					<f:for each="{flashMessages}" as="flashMessage">
+						<div class="message-body">{flashMessage.message}</div>
+					</f:for>
+				</div>
+			</f:flashMessages>
+
+			<f:render section="main" />
 		</div>
 	</div>
 </f:be.container>

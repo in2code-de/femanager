@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
+use In2code\Femanager\Utility\BackendUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\TemplateUtility;
@@ -19,13 +20,14 @@ class SendMailService
      *
      * @var object
      */
-    public $contentObject;
+    public $contentObject = null;
 
     /**
      * SendMailService constructor.
      */
     public function __construct()
     {
+        BackendUtility::initializeTsFe();
         $this->contentObject = ObjectUtility::getContentObject();
     }
 
