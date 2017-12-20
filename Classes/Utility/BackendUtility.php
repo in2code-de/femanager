@@ -84,34 +84,44 @@ class BackendUtility
     /**
      * @param int $pageIdentifier
      * @param int $typeNum
-     * @return void
+     * @return bool
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public static function initializeTsFe(int $pageIdentifier = 1, int $typeNum = 0)
+    public static function initializeTsFe(int $pageIdentifier = 1, int $typeNum = 0): bool
     {
         if (TYPO3_MODE === 'BE') {
-            if (!empty(GeneralUtility::_GP('id'))) {
-                $pageIdentifier = (int)GeneralUtility::_GP('id');
+            try {
+                if (!empty(GeneralUtility::_GP('id'))) {
+                    $pageIdentifier = (int)GeneralUtility::_GP('id');
+                }
+                if (!empty(GeneralUtility::_GP('type'))) {
+                    $typeNum = (int)GeneralUtility::_GP('type');
+                }
+                if (!is_object($GLOBALS['TT'])) {
+                    $GLOBALS['TT'] = new NullTimeTracker;
+                    $GLOBALS['TT']->start();
+                }
+                $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
+                    TypoScriptFrontendController::class,
+                    $GLOBALS['TYPO3_CONF_VARS'],
+                    $pageIdentifier,
+                    $typeNum
+                );
+                $GLOBALS['TSFE']->connectToDB();
+                $GLOBALS['TSFE']->initFEuser();
+                $GLOBALS['TSFE']->determineId();
+                $GLOBALS['TSFE']->initTemplate();
+                $GLOBALS['TSFE']->getConfigArray();
+                return true;
+            } catch (\Exception $exception) {
+                /**
+                 * Normally happens if $_GET['id'] points to a sysfolder on root
+                 * In this case: Simply do not initialize TsFe
+                 */
+                return false;
             }
-            if (!empty(GeneralUtility::_GP('type'))) {
-                $typeNum = (int)GeneralUtility::_GP('type');
-            }
-            if (!is_object($GLOBALS['TT'])) {
-                $GLOBALS['TT'] = new NullTimeTracker;
-                $GLOBALS['TT']->start();
-            }
-            $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
-                TypoScriptFrontendController::class,
-                $GLOBALS['TYPO3_CONF_VARS'],
-                $pageIdentifier,
-                $typeNum
-            );
-            $GLOBALS['TSFE']->connectToDB();
-            $GLOBALS['TSFE']->initFEuser();
-            $GLOBALS['TSFE']->determineId();
-            $GLOBALS['TSFE']->initTemplate();
-            $GLOBALS['TSFE']->getConfigArray();
         }
+        return false;
     }
 
     /**
