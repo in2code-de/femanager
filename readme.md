@@ -28,6 +28,7 @@ Quick guide:
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 4.0.1      | 2017-12-20 | Bugfix       | Prevent exception in backend module in some special cases                                                                  |
 | 4.0.0      | 2017-12-18 | Task         | - Add new field "accept terms and conditions"<br />- Add a new backend module view "accept/decline users"<br />- Implement AutoAdminConfirmation feature<br />- Add some new signals<br />- Add link to delete account in admin notivication mail<br />- Admin notification settings via TypoScript |
 | 3.3.0      | 2017-11-25 | Feature      | Show only relevant users in FlexForm, some small bugfixes                                                                  |
 | 3.2.0      | 2017-11-10 | Task         | Add alternative login function https://github.com/einpraegsam/femanager/issues/27                                          |
