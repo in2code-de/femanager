@@ -217,7 +217,7 @@ SignalSlots List
       :Parameters:
          ?
       :Description:
-         Do you need a new Signal in femanager? Just request one on https://github.com/einpraegsam/femanager
+         Do you need a new Signal in femanager? Just request one on https://github.com/in2code-de/femanager
 
 
 Use a SignalSlot

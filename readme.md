@@ -31,8 +31,8 @@ Quick guide:
 | 4.0.1      | 2017-12-20 | Bugfix       | Prevent exception in backend module in some special cases                                                                  |
 | 4.0.0      | 2017-12-18 | Task         | - Add new field "accept terms and conditions"<br />- Add a new backend module view "accept/decline users"<br />- Implement AutoAdminConfirmation feature<br />- Add some new signals<br />- Add link to delete account in admin notivication mail<br />- Admin notification settings via TypoScript |
 | 3.3.0      | 2017-11-25 | Feature      | Show only relevant users in FlexForm, some small bugfixes                                                                  |
-| 3.2.0      | 2017-11-10 | Task         | Add alternative login function https://github.com/einpraegsam/femanager/issues/27                                          |
-| 3.1.3      | 2017-10-12 | Bugfix       | Allow the usage in special contexts like with Flux. See https://github.com/einpraegsam/femanager/issues/17                 |
+| 3.2.0      | 2017-11-10 | Task         | Add alternative login function https://github.com/in2code-de/femanager/issues/27                                           |
+| 3.1.3      | 2017-10-12 | Bugfix       | Allow the usage in special contexts like with Flux. https://github.com/in2code-de/femanager/issues/17                      |
 | 3.1.2      | 2017-09-06 | Task         | New version due to TER security incident. See https://typo3.org/teams/security/security-bulletins/psa/typo3-psa-2017-001/  |
 | 3.1.1      | 2017-08-28 | Bugfix       | Small fixes in code to prevent errors with extension   Flux                                                                |
 | 3.1.0      | 2017-08-15 | Task         | Minimize JavaScripts, Fix new button in module, Small fixes                                                                |

@@ -316,7 +316,7 @@ class UserUtility extends AbstractUtility
     }
 
     /**
-     * This is a dirty solution to get autologin to work see https://github.com/einpraegsam/femanager/issues/27 for
+     * This is a dirty solution to get autologin to work see https://github.com/in2code-de/femanager/issues/27 for
      * details on this issue
      *
      * @param TypoScriptFrontendController $tsfe

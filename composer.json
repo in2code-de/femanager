@@ -2,7 +2,7 @@
   "name": "in2code/femanager",
   "description": "Modern TYPO3 Frontend User Registration.",
   "keywords": ["typo3", "form", "frontend", "registration", "profile", "sr_feuser_register", "fe_users"],
-  "homepage": "https://github.com/einpraegsam/femanager",
+  "homepage": "https://github.com/in2code-de/femanager",
   "authors": [
     {
       "name": "Alex Kellner",
