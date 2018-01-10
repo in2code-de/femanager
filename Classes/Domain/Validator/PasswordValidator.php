@@ -15,7 +15,7 @@ class PasswordValidator extends AbstractValidatorExtbase
     /**
      * configurationManager
      *
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
      * @inject
      */
     public $configurationManager;
