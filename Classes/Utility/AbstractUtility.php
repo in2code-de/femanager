@@ -119,7 +119,7 @@ abstract class AbstractUtility
      */
     protected static function getObjectManager()
     {
-        return GeneralUtility::makeInstance(ObjectManagerInterface::class);
+        return GeneralUtility::makeInstance(ObjectManager::class);
     }
 
     /**
