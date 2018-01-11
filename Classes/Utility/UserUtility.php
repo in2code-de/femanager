@@ -7,7 +7,7 @@ use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Repository\UserRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
@@ -80,7 +80,7 @@ class UserUtility extends AbstractUtility
     public static function fallbackUsernameAndPassword(User $user)
     {
         $settings = self::getConfigurationManager()->getConfiguration(
-            ConfigurationManager::CONFIGURATION_TYPE_SETTINGS,
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'Femanager',
             'Pi1'
         );
