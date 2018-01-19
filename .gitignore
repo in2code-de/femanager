@@ -11,3 +11,5 @@ ehthumbs.db
 Thumbs.db
 .svn
 .sass-cache
+.Build
+composer.lock
