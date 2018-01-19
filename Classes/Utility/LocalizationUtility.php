@@ -6,6 +6,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility as LocalizationUtilityExtbase;
 
 /**
  * Class LocalizationUtility
+ * @codeCoverageIgnore
  */
 class LocalizationUtility extends LocalizationUtilityExtbase
 {

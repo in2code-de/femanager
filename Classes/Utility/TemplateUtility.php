@@ -8,6 +8,7 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * Class TemplateUtility
+ * @codeCoverageIgnore
  */
 class TemplateUtility extends AbstractUtility
 {

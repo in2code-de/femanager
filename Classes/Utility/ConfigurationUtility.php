@@ -53,6 +53,7 @@ class ConfigurationUtility extends AbstractUtility
      *
      * @param string $path "misc.uploadFolder" or empty for complete TypoScript array
      * @return string
+     * @codeCoverageIgnore
      */
     public static function getConfiguration(string $path = '')
     {
@@ -70,6 +71,7 @@ class ConfigurationUtility extends AbstractUtility
 
     /**
      * @return bool
+     * @codeCoverageIgnore
      */
     public static function isBackendModuleFilterUserConfirmation(): bool
     {

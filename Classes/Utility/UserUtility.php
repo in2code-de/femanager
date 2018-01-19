@@ -15,6 +15,7 @@ use TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility;
 
 /**
  * Class UserUtility
+ * @codeCoverageIgnore
  */
 class UserUtility extends AbstractUtility
 {
