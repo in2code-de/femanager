@@ -81,13 +81,15 @@ class AutoAdminConfirmationService
             foreach ($this->settings['autoAdminConfirmation'] as $configuration) {
                 $className = $configuration['class'];
                 if (!class_exists($className)) {
-                    throw new \Exception(
-                        'Class ' . $className . ' does not exists - check if file was loaded with autoloader'
+                    throw new \UnexpectedValueException(
+                        'Class ' . $className . ' does not exists - check if file was loaded with autoloader',
+                        1516373867533
                     );
                 }
                 if (!is_subclass_of($className, $this->confirmInterface)) {
-                    throw new \Exception(
-                        'Class ' . $className . ' does not implement interface ' . $this->confirmInterface
+                    throw new \UnexpectedValueException(
+                        'Class ' . $className . ' does not implement interface ' . $this->confirmInterface,
+                        1516373878882
                     );
                 }
                 $classes[] = $configuration;

@@ -74,8 +74,9 @@ class DataProcessorRunner
         foreach ($this->getClasses($settings) as $configuration) {
             $class = $configuration['class'];
             if (!class_exists($class)) {
-                throw new \Exception(
-                    'DataProcessor class ' . $class . ' does not exists - check if file is loaded correctly'
+                throw new \UnexpectedValueException(
+                    'DataProcessor class ' . $class . ' does not exists - check if file is loaded correctly',
+                    1516373818752
                 );
             }
             if (is_subclass_of($class, $this->interface)) {
@@ -91,7 +92,7 @@ class DataProcessorRunner
                 $dataProcessor->initializeDataProcessor();
                 $arguments = $dataProcessor->process($arguments);
             } else {
-                throw new \Exception('Finisher does not implement ' . $this->interface);
+                throw new \UnexpectedValueException('Finisher does not implement ' . $this->interface, 1516373829946);
             }
         }
         return $arguments;

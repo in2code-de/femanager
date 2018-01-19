@@ -84,7 +84,10 @@ class ImageManipulation extends AbstractDataProcessor
         if (GeneralUtility::upload_copy_move($fileItem['tmp_name'], $uniqueFileName)) {
             return $uniqueFileName;
         } else {
-            throw new \Exception('File "' . $this->getNewImageName($fileItem) . '" could not be uploaded!');
+            throw new \UnexpectedValueException(
+                'File "' . $this->getNewImageName($fileItem) . '" could not be uploaded!',
+                1516373841798
+            );
         }
     }
 

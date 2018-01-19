@@ -70,7 +70,7 @@ class UserController extends AbstractController
     public function imageDeleteAction(User $user)
     {
         if (UserUtility::getCurrentUser() !== $user) {
-            throw new \Exception('You are not allowed to delete this image');
+            throw new UnauthorizedException('You are not allowed to delete this image', 1516373759972);
         }
         $user->setImage($this->objectManager->get(ObjectStorage::class));
         $this->userRepository->update($user);
@@ -128,7 +128,7 @@ class UserController extends AbstractController
     {
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__, [$user, $this]);
         if (!BackendUserUtility::isAdminAuthentication()) {
-            throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'));
+            throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'), 1516373787864);
         }
         UserUtility::login($user);
         $this->redirectByAction('loginAs', 'redirect');
