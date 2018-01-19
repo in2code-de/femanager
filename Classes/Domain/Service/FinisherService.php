@@ -189,8 +189,9 @@ class FinisherService
     public function start()
     {
         if (!class_exists($this->getClass())) {
-            throw new \Exception(
-                'Class ' . $this->getClass() . ' does not exists - check if file was loaded with autoloader'
+            throw new \UnexpectedValueException(
+                'Class ' . $this->getClass() . ' does not exists - check if file was loaded with autoloader',
+                1516373888508
             );
         }
         if (is_subclass_of($this->getClass(), $this->finisherInterface)) {
@@ -206,7 +207,10 @@ class FinisherService
             $finisher->initializeFinisher();
             $this->callFinisherMethods($finisher);
         } else {
-            throw new \Exception('Finisher does not implement ' . $this->finisherInterface);
+            throw new \UnexpectedValueException(
+                'Finisher does not implement ' . $this->finisherInterface,
+                1516373899775
+            );
         }
     }
 

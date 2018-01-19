@@ -6,7 +6,7 @@ use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -78,7 +78,7 @@ abstract class AbstractUtility
     protected static function getEncryptionKey()
     {
         if (empty($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'])) {
-            throw new \Exception('No encryption key found in this TYPO3 installation');
+            throw new \UnexpectedValueException('No encryption key found in this TYPO3 installation', 1516373945265);
         }
         return $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'];
     }
@@ -107,11 +107,11 @@ abstract class AbstractUtility
     }
 
     /**
-     * @return ConfigurationManager
+     * @return ConfigurationManagerInterface
      */
     protected static function getConfigurationManager()
     {
-        return self::getObjectManager()->get(ConfigurationManager::class);
+        return self::getObjectManager()->get(ConfigurationManagerInterface::class);
     }
 
     /**

@@ -148,6 +148,10 @@ plugin.tx_femanager {
 					# requires installation of sr_freecap
 #					captcha = 1
 				}
+				terms {
+					# requires to check terms and conditions checkbox
+#					required = 1
+				}
 			}
 
 

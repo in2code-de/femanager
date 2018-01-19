@@ -19,8 +19,9 @@ class FileUtility extends AbstractUtility
     public static function createFolderIfNotExists(string $path)
     {
         if (!is_dir($path) && !GeneralUtility::mkdir($path)) {
-            throw new \Exception(
-                'Folder ' . self::getRelativeFolderFromAbsolutePath($path) . ' does not exists and can not be created!'
+            throw new \UnexpectedValueException(
+                'Folder ' . self::getRelativeFolderFromAbsolutePath($path) . ' does not exists and can not be created!',
+                1516373962125
             );
         }
     }

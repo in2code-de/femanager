@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Model\User;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * Class ServersideValidator
@@ -21,7 +22,7 @@ class ServersideValidator extends AbstractValidator
         $this->init();
         if ($this->validationSettings['_enable']['server'] === '1') {
             foreach ($this->validationSettings as $fieldName => $validations) {
-                if ($this->processValidation($user, $fieldName)) {
+                if ($this->shouldBeValidated($user, $fieldName)) {
                     $value = $this->getValue($user, $fieldName);
 
                     foreach ($validations as $validation => $validationSetting) {
@@ -295,7 +296,7 @@ class ServersideValidator extends AbstractValidator
      */
     protected function getValue($user, $fieldName)
     {
-        $value = $user->{'get' . ucfirst($fieldName)}();
+        $value = $this->getValueFromProperty($user, $fieldName);
         if (is_object($value)) {
             if (method_exists($value, 'getUid')) {
                 $value = $value->getUid();
@@ -318,8 +319,39 @@ class ServersideValidator extends AbstractValidator
      * @param $fieldName
      * @return bool
      */
-    protected function processValidation($user, $fieldName): bool
+    protected function shouldBeValidated($user, $fieldName): bool
     {
-        return is_object($user) && method_exists($user, 'get' . ucfirst($fieldName));
+        return is_object($user) && $this->propertyHasGetterMethod($user, $fieldName);
+    }
+
+    /**
+     * @param $user
+     * @param $fieldName
+     * @return mixed
+     */
+    protected function getValueFromProperty($user, $fieldName)
+    {
+        $value = '';
+        try {
+            $value = ObjectAccess::getProperty($user, $fieldName);
+        } catch (\Exception $exception) {
+            unset($exception);
+        }
+        return $value;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function propertyHasGetterMethod($user, $fieldName): bool
+    {
+        try {
+            ObjectAccess::getProperty($user, $fieldName);
+            $getterExists = true;
+        } catch (\Exception $exception) {
+            unset($exception);
+            $getterExists = false;
+        }
+        return $getterExists === true;
     }
 }
