@@ -1,4 +1,4 @@
-# How to start unit tests for powermail?
+# How to start unit tests for femanager?
 
 ## On command line
 
