@@ -18,6 +18,7 @@ class LogUtility extends AbstractUtility
      * @param User $user Related User
      * @param array $additionalProperties for individual logging
      * @return void
+     * @codeCoverageIgnore
      */
     public static function log($state, User $user, array $additionalProperties = [])
     {

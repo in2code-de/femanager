@@ -63,8 +63,10 @@ class BackendUtility
             ]
         ];
         if ($addReturnUrl) {
+            // @codeCoverageIgnoreStart
             $uriParameters['returnUrl'] =
                 BackendUtilityCore::getModuleUrl(GeneralUtility::_GET('M'), self::getCurrentParameters());
+            // @codeCoverageIgnoreEnd
         }
         return BackendUtilityCore::getModuleUrl('record_edit', $uriParameters);
     }
@@ -86,6 +88,7 @@ class BackendUtility
      * @param int $typeNum
      * @return bool
      * @SuppressWarnings(PHPMD.Superglobals)
+     * @codeCoverageIgnore
      */
     public static function initializeTsFe(int $pageIdentifier = 1, int $typeNum = 0): bool
     {

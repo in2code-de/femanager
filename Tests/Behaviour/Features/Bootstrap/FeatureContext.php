@@ -22,7 +22,7 @@ class FeatureContext extends MinkContext
      */
     public function iWaitSeconds($seconds)
     {
-        if (!is_numeric($seconds)) {
+        if ($seconds === 'a few') {
             $seconds = 10;
         }
         sleep($seconds);

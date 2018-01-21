@@ -27,15 +27,17 @@ abstract class AbstractUtility
      */
     protected static function getTcaFromTable($table = 'fe_users')
     {
+        $tca = [];
         if (!empty($GLOBALS['TCA'][$table])) {
-            return $GLOBALS['TCA'][$table];
+            $tca = $GLOBALS['TCA'][$table];
         }
-        return [];
+        return $tca;
     }
 
     /**
      * @return DatabaseConnection
      * @SuppressWarnings(PHPMD.Superglobals)
+     * @codeCoverageIgnore
      */
     protected static function getDatabaseConnection()
     {

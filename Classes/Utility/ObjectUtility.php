@@ -20,6 +20,7 @@ class ObjectUtility extends AbstractUtility
 
     /**
      * @return DatabaseConnection
+     * @codeCoverageIgnore
      */
     public static function getDatabaseConnection(): DatabaseConnection
     {
@@ -56,6 +57,7 @@ class ObjectUtility extends AbstractUtility
      *
      * @param object $object
      * @return bool
+     * @codeCoverageIgnore
      */
     public static function isDirtyObject($object): bool
     {
@@ -104,6 +106,7 @@ class ObjectUtility extends AbstractUtility
                 try {
                     $values[] = ObjectAccess::getProperty($object, $property);
                 } catch (\Exception $exception) {
+                    unset($exception);
                 }
             }
         }

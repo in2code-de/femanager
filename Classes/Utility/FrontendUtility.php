@@ -37,10 +37,11 @@ class FrontendUtility extends AbstractUtility
      */
     public static function getFrontendLanguageUid(): int
     {
+        $languageUid = 0;
         if (!empty(self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'])) {
-            return (int)self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'];
+            $languageUid = (int)self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'];
         }
-        return 0;
+        return $languageUid;
     }
 
     /**
@@ -53,6 +54,7 @@ class FrontendUtility extends AbstractUtility
 
     /**
      * @return string
+     * @codeCoverageIgnore
      */
     public static function getUriToCurrentPage(): string
     {
@@ -69,6 +71,7 @@ class FrontendUtility extends AbstractUtility
      * @param User $user
      * @param array $settings
      * @return User $object
+     * @codeCoverageIgnore
      */
     public static function forceValues(User $user, array $settings)
     {
@@ -105,13 +108,14 @@ class FrontendUtility extends AbstractUtility
      */
     public static function getControllerName(): string
     {
+        $controllerName = '';
         foreach (self::$pluginNames as $pluginName) {
             $variables = GeneralUtility::_GPmerged($pluginName);
             if (!empty($variables['controller'])) {
-                return $variables['controller'];
+                $controllerName = $variables['controller'];
             }
         }
-        return '';
+        return $controllerName;
     }
 
     /**
@@ -119,12 +123,13 @@ class FrontendUtility extends AbstractUtility
      */
     public static function getActionName(): string
     {
+        $actionName = '';
         foreach (self::$pluginNames as $pluginName) {
             $variables = GeneralUtility::_GPmerged($pluginName);
             if (!empty($variables['action'])) {
-                return $variables['action'];
+                $actionName = $variables['action'];
             }
         }
-        return '';
+        return $actionName;
     }
 }
