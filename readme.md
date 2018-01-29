@@ -30,6 +30,7 @@ Quick guide:
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 4.1.1      | 2018-01-29 | Task         | Update license information in composer.json                                                                                |
 | 4.1.0      | 2018-01-21 | Task         | Testing update: Re-include unit test and make behaviour tests more transparent                                             |
 | 4.0.2      | 2018-01-19 | Bugfix       | Fix required settings for terms                                                                                            |
 | 4.0.1      | 2017-12-20 | Bugfix       | Prevent exception in backend module in some special cases                                                                  |
