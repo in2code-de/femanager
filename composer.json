@@ -10,7 +10,7 @@
     }
   ],
   "type": "typo3-cms-extension",
-  "license": "GPL-3.0",
+  "license": "GPL-2.0-or-later",
   "require": {
     "typo3/cms": ">=8.7.0 <9.0.0"
   },
