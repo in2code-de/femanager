@@ -6,8 +6,6 @@ use In2code\Femanager\Domain\Model\User;
 
 /**
  * Interface FinisherInterface
- *
- * @package In2code\Femanager\Finisher
  */
 interface FinisherInterface
 {

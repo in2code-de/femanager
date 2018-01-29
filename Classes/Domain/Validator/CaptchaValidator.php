@@ -8,7 +8,6 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * Class CaptchaValidator
- * @package In2code\Femanager\Domain\Validator
  */
 class CaptchaValidator extends AbstractValidator
 {

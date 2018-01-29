@@ -4,8 +4,6 @@ namespace In2code\Femanager\DataProcessor;
 
 /**
  * Interface DataProcessorInterface
- *
- * @package In2code\Femanager\Finisher
  */
 interface DataProcessorInterface
 {
