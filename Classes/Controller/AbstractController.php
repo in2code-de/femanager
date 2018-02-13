@@ -227,8 +227,7 @@ abstract class AbstractController extends ActionController
             $this->sendMailService->send(
                 'createNotify',
                 StringUtility::makeEmailArray(
-                    $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']
-                        ?? $this->settings['new']['notifyAdmin'],
+                    !empty($this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']) ? $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value'] : $this->settings['new']['notifyAdmin'],
                     $this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
