@@ -34,7 +34,7 @@ Quick guide:
 | 4.1.0      | 2018-01-21 | Task         | Testing update: Re-include unit test and make behaviour tests more transparent                                             |
 | 4.0.2      | 2018-01-19 | Bugfix       | Fix required settings for terms                                                                                            |
 | 4.0.1      | 2017-12-20 | Bugfix       | Prevent exception in backend module in some special cases                                                                  |
-| 4.0.0      | 2017-12-18 | Task         | - Add new field "accept terms and conditions"<br />- Add a new backend module view "accept/decline users"<br />- Implement AutoAdminConfirmation feature<br />- Add some new signals<br />- Add link to delete account in admin notivication mail<br />- Admin notification settings via TypoScript |
+| 4.0.0      | 2017-12-18 | Task         | - Add new field "accept terms and conditions"<br />- Add a new backend module view "accept/decline users"<br />- Implement AutoAdminConfirmation feature<br />- Add some new signals<br />- Add link to delete account in admin notification mail<br />- Admin notification settings via TypoScript |
 | 3.3.0      | 2017-11-25 | Feature      | Show only relevant users in FlexForm, some small bugfixes                                                                  |
 | 3.2.0      | 2017-11-10 | Task         | Add alternative login function https://github.com/in2code-de/femanager/issues/27                                           |
 | 3.1.3      | 2017-10-12 | Bugfix       | Allow the usage in special contexts like with Flux. https://github.com/in2code-de/femanager/issues/17                      |
