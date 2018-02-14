@@ -4,6 +4,7 @@ namespace In2code\Femanager\Utility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /***************************************************************
  *  Copyright notice
@@ -101,5 +102,13 @@ class ObjectUtility extends AbstractUtility
     public static function getObjectManager()
     {
         return parent::getObjectManager();
+    }
+
+    /**
+     * @return ContentObjectRenderer
+     */
+    public static function getContentObject(): ContentObjectRenderer
+    {
+        return self::getObjectManager()->get(ContentObjectRenderer::class);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace In2code\Femanager\Domain\Service;
 
+use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\TemplateUtility;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -63,6 +64,25 @@ class SendMailService
     public $cObj;
 
     /**
+     * SendMailService constructor.
+     */
+    public function __construct()
+    {
+        $this->cObj = ObjectUtility::getContentObject();
+    }
+
+    /**
+     * @param array $variables
+     * @return void
+     */
+    protected function contentObjectStart(array $variables)
+    {
+        if (!empty($variables['user']) && method_exists($variables['user'], '_getProperties')) {
+            $this->cObj->start($variables['user']->_getProperties());
+        }
+    }
+
+    /**
      * Generate and send Email
      *
      * @param string $template Template file in Templates/Email/
@@ -77,10 +97,7 @@ class SendMailService
     {
         // config
         $email = $this->objectManager->get(MailMessage::class);
-        $this->cObj = $this->configurationManager->getContentObject();
-        if (!empty($variables['user']) && method_exists($variables['user'], '_getProperties')) {
-            $this->cObj->start($variables['user']->_getProperties());
-        }
+        $this->contentObjectStart($variables);
         if (!$this->cObj->cObjGetSingle($typoScript['_enable'], $typoScript['_enable.']) || count($receiver) === 0) {
             return false;
         }
