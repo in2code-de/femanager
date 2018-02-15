@@ -28,6 +28,16 @@ Changes
       Changes
 
  - :Version:
+      2.6.1
+   :State:
+      stable
+   :Date:
+      2018-02-15
+   :Changes:
+
+      * Bugfix: Preven exception "Call to a member function start() on null"
+
+ - :Version:
       2.6.0
    :State:
       stable
