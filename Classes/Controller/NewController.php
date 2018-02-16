@@ -275,20 +275,7 @@ class NewController extends AbstractController
      */
     protected function createUserConfirmationRequest(User $user)
     {
-        $this->sendMailService->send(
-            'createUserConfirmation',
-            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-            [
-                $this->settings['new']['email']['createUserConfirmation']['sender']['email']['value'] =>
-                    $this->settings['new']['email']['createUserConfirmation']['sender']['name']['value']
-            ],
-            'Confirm your profile creation request',
-            [
-                'user' => $user,
-                'hash' => HashUtility::createHashForUser($user)
-            ],
-            $this->config['new.']['email.']['createUserConfirmation.']
-        );
+        $this->sendCreateUserConfirmationMail($user);
         $this->redirectByAction('new', 'requestRedirect');
         $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
     }
