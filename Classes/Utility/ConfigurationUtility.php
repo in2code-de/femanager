@@ -79,4 +79,15 @@ class ConfigurationUtility extends AbstractUtility
             'tx_femanager.UserBackend.confirmation.filter.userConfirmation'
         ) === '1';
     }
+
+    /**
+     * @return bool
+     * @codeCoverageIgnore
+     */
+    public static function IsResendUserConfirmationRequestActive(): bool
+    {
+        return BackendUserUtility::getBackendUserAuthentication()->getTSConfigVal(
+            'tx_femanager.UserBackend.confirmation.ResendUserConfirmationRequest'
+        ) === '1';
+    }
 }

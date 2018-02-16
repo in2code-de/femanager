@@ -9,7 +9,6 @@
 		loadJQuery="true"
 		jQueryNamespace="defaultNoConflict"
 		pageTitle="femanager">
-
 	<div class="module">
 		<div class="module-docheader">
 			<div class="typo3-docheader-functions">
@@ -21,8 +20,13 @@
 									<f:translate key="BackendSelectionList">List</f:translate>
 								</f:link.action>
 								<f:link.action action="confirmation" class="btn btn-default{femanager:Be.GetClassNameOnAction(actionName:'confirmation')}">
-									<f:translate key="BackendSelectionList">Confirmation</f:translate>
+									<f:translate key="BackendSelectionList">Admin Confirmation</f:translate>
 								</f:link.action>
+								<f:if condition="{femanager:be.IsResendUserConfirmationRequestActivated()}">
+									<f:link.action action="listOpenUserConfirmations" class="btn btn-default{femanager:Be.GetClassNameOnAction(actionName:'listOpenUserConfirmations')}">
+										<f:translate key="BackendSelectionList">Open User Confirmtions</f:translate>
+									</f:link.action>
+								</f:if>
 							</div>
 						</f:if>
 					</div>
