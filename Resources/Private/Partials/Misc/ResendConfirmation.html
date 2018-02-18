@@ -1,7 +1,5 @@
 <f:form.validationResults>
-	<f:debug>{_all}</f:debug>
 	<f:if condition="{validationResults.flattenedErrors} && {settings.showResendUserConfirmationRequestView} > 0">
-		<f:debug>{validationResults.flattenedErrors.user}</f:debug>
 		<f:for each="{validationResults.flattenedErrors.user}" as="error">
 			<f:if condition="{error.code} =='username' && {error.message}=='validationErrorUniqueDb'">
 				<div class="femanager_status">
