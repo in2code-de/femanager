@@ -1,0 +1,20 @@
+<f:form.validationResults>
+	<f:debug>{_all}</f:debug>
+	<f:if condition="{validationResults.flattenedErrors} && {settings.showResendUserConfirmationRequestView} > 0">
+		<f:debug>{validationResults.flattenedErrors.user}</f:debug>
+		<f:for each="{validationResults.flattenedErrors.user}" as="error">
+			<f:if condition="{error.code} =='username' && {error.message}=='validationErrorUniqueDb'">
+				<div class="femanager_status">
+					<div class="femanager_flashmessages">
+						<div class="typo3-message message-info">
+							<div class="message-body">
+								<f:translate key="resendConfirmationDialogueMessage"/>&nbsp;
+								<f:link.action action="resendConfirmationDialogue" pageUid="{settings.showResendUserConfirmationRequestView}"> <f:translate key="resendConfirmationDialogueLink"/>  </f:link.action>
+							</div>
+						</div>
+					</div>
+				</div>
+			</f:if>
+		</f:for>
+	</f:if>
+</f:form.validationResults>

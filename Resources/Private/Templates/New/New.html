@@ -9,7 +9,7 @@
 <f:section name="main">
 	<f:render partial="Misc/FlashMessages" arguments="{_all}" />
 	<f:render partial="Misc/FormErrors" arguments="{object:User}" />
-
+	<f:render partial="Misc/ResendConfirmation" arguments="{_all}" />
 	<div class="femanager_new">
 		<f:form
 				name="user"
@@ -62,16 +62,7 @@
 						<f:if condition="{femanager:Misc.CaptchaEnabled(settings:'{settings}')}">
 							<f:render partial="Fields/Captcha" arguments="{_all}" />
 						</f:if>
-
-						<div class="femanager_fieldset femanager_submit form-group">
-							<div class="col-sm-10 col-sm-offset-2">
-								<f:form.submit
-										value="{f:translate(key:'submitResend')}"
-										id="femanager_field_submit"
-										class="btn btn-primary btn-large" />
-							</div>
-						</div>
-
+						<f:render partial="Fields/SubmitCreate" arguments="{_all}"/>
 					</f:else>
 
 				</f:if>

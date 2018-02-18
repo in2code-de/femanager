@@ -455,7 +455,7 @@
 			<trans-unit id="submitNew">
 				<source>Create Profile Now</source>
 			</trans-unit>
-			<trans-unit id="submitNew">
+			<trans-unit id="submitResend">
 				<source>Resend now</source>
 			</trans-unit>
 			<trans-unit id="passwordRepeat">
@@ -629,6 +629,12 @@
 			</trans-unit>
 			<trans-unit id="BackendConfirmationFlashMessageReSend">
 				<source>%s confirmation mail resend</source>
+			</trans-unit>
+			<trans-unit id="resendConfirmationDialogueMessage">
+				<source>Your userprofile is not confirmed yet.</source>
+			</trans-unit>
+			<trans-unit id="resendConfirmationDialogueLink">
+				<source>Resend confirmation email?</source>
 			</trans-unit>
 		</body>
 	</file>
