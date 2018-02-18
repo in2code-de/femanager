@@ -290,4 +290,24 @@ class UserRepository extends Repository
         $query->getQuerySettings()->setIgnoreEnableFields(true);
         $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled']);
     }
+
+    /**
+     * Find All
+     *
+     * @param string $mail
+     * @return QueryResultInterface|array
+     */
+    public function findFirstByEmail(string $mail)
+    {
+        $query = $this->createQuery();
+        $this->ignoreEnableFieldsAndStoragePage($query);
+        $and = [$query->equals('txFemanagerConfirmedbyuser', false)];
+        $and[] = $query->like('email', '%' . $mail . '%');
+        $query->matching($query->logicalAnd($and));
+
+        $query->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING]);
+
+        return $query->execute()->getFirst();
+    }
+
 }

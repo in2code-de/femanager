@@ -455,11 +455,20 @@
 			<trans-unit id="submitNew">
 				<source>Create Profile Now</source>
 			</trans-unit>
+			<trans-unit id="submitNew">
+				<source>Resend now</source>
+			</trans-unit>
 			<trans-unit id="passwordRepeat">
 				<source>Repeat Password</source>
 			</trans-unit>
 			<trans-unit id="titleCreateProfile">
 				<source>Create a new user-profile</source>
+			</trans-unit>
+			<trans-unit id="resendConfirmationMailTitle">
+				<source>Resend confirmation mail</source>
+			</trans-unit>
+			<trans-unit id="resendConfirmationMailFieldsetLegend">
+				<source>Please enter your email address</source>
 			</trans-unit>
 			<trans-unit id="submitEdit">
 				<source>Update Profile</source>
@@ -479,6 +488,13 @@
 			<trans-unit id="createRequestWaitingForAdminConfirm">
 				<source>Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</source>
 			</trans-unit>
+			<trans-unit id="resendConfirmationMailSend">
+				<source>An Email was send to your account. Please check your inbox.</source>
+			</trans-unit>
+			<trans-unit id="resendConfirmationMailFail">
+				<source>We received no valid mail.</source>
+			</trans-unit>
+
 			<trans-unit id="createFailedProfile">
 				<source>Profile creation failed</source>
 			</trans-unit>

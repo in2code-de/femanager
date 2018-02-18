@@ -42,6 +42,10 @@
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.4</numIndex>
 										<numIndex index="1">Invitation->new;Invitation->create;Invitation->edit;Invitation->update;Invitation->delete;Invitation->status;</numIndex>
 									</numIndex>
+									<numIndex index="6" type="array">
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.5</numIndex>
+										<numIndex index="1">New->resendConfirmationDialogue;New->resendConfirmationMail;</numIndex>
+									</numIndex>
 								</items>
 								<maxitems>1</maxitems>
 								<size>1</size>
