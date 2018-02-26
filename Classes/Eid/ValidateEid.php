@@ -68,7 +68,7 @@ class ValidateEid
         $this->bootstrap = new Bootstrap();
 
         $userObj = EidUtility::initFeUser();
-        $pid = (GeneralUtility::_GP('id') ? GeneralUtility::_GP('id') : 1);
+        $pid = (GeneralUtility::_GP('id') ? GeneralUtility::_GP('id') : 0);
         $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
             TypoScriptFrontendController::class,
             $typo3ConfVars,
