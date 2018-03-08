@@ -293,6 +293,25 @@ class UserUtility extends AbstractUtility
     }
 
     /**
+     * Get fe_sessions timestamps for user as csv string
+     *
+     * @param User $user
+     * @return string
+     */
+    public static function getFrontendSessionsTstampsForUser(User $user)
+    {
+        $resultArray = [];
+        $select = 'ses_tstamp';
+        $from = 'fe_sessions';
+        $where = 'ses_userid = ' . (int)$user->getUid();
+        $res = self::getDatabaseConnection()->exec_SELECTquery($select, $from, $where);
+        while($row = self::getDatabaseConnection()->sql_fetch_assoc($res)) {
+            $resultArray[] = (int)$row[$select];
+        }
+        return implode(',', $resultArray);
+    }
+
+    /**
      * Login FE-User
      *
      * @param User $user

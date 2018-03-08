@@ -23,9 +23,26 @@ class UserBackendController extends AbstractController
      */
     public function listAction(array $filter = [])
     {
+        $users = $this->userRepository->findAllInBackend($filter);
+        $nowtime = time();
+        $inactiveSince = [];
+
+        /** @var User $user */
+        foreach ($users as $user) {
+            $k = $user->getUid();
+            $v = [];
+            if ($user->getIsOnline()) {
+                $tstamps = UserUtility::getFrontendSessionsTstampsForUser($user);
+                foreach (explode(',', $tstamps) as $stamp) {
+                    $v[] = $nowtime - intval($stamp);
+                }
+            }
+            $inactiveSince[$k] = implode(',', $v);
+        }
         $this->view->assignMultiple(
             [
-                'users' => $this->userRepository->findAllInBackend($filter),
+                'users' => $users,
+                'inactiveSince' => $inactiveSince,
                 'moduleUri' => BackendUtility::getModuleUrl('tce_db'),
                 'action' => 'list'
             ]
