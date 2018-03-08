@@ -30,7 +30,8 @@ plugin.tx_femanager {
 			# take username and copy it to the email field (so email field is not necessary in FE)
 #			fillEmailWithUsername = 1
 
-			# login after profile creation (don't work if admin confirmation is turned on)
+			# login after profile creation (don't work if admin confirmation is turned on). The experimental
+			# feature "Set cookie on login" in EM may help in case of login problems
 			login = 1
 
 			# prefilling (empty) input fields with values from TypoScript
