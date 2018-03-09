@@ -107,7 +107,7 @@ class ObjectUtility extends AbstractUtility
     /**
      * @return ContentObjectRenderer
      */
-    public static function getContentObject(): ContentObjectRenderer
+    public static function getContentObject()
     {
         return self::getObjectManager()->get(ContentObjectRenderer::class);
     }
