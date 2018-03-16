@@ -61,6 +61,7 @@ class EditController extends AbstractController
         $this->redirectIfDirtyObject($user);
         $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.']);
         $this->emailForUsername($user);
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePasswordConvert', [$user, $this]);
         UserUtility::convertPassword($user, $this->settings['edit']['misc']['passwordSave']);
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', [$user, $this]);
         if (!empty($this->settings['edit']['confirmByAdmin'])) {
