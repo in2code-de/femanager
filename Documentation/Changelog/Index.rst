@@ -28,6 +28,16 @@ Changes
       Changes
 
  - :Version:
+      2.6.2
+   :State:
+      stable
+   :Date:
+      2018-04-03
+   :Changes:
+
+      * Bugfix: Fix PHP parse error in backend module
+
+ - :Version:
       2.6.1
    :State:
       stable
@@ -35,7 +45,7 @@ Changes
       2018-02-15
    :Changes:
 
-      * Bugfix: Preven exception "Call to a member function start() on null"
+      * Bugfix: Prevent exception "Call to a member function start() on null"
 
  - :Version:
       2.6.0
