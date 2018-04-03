@@ -30,7 +30,6 @@ config.tx_extbase {
 }
 
 # Backend Module
-module.tx_femanager < plugin.tx_femanager
 module.tx_femanager {
 	view {
 		templateRootPath = EXT:femanager/Resources/Private/Templates/
@@ -38,9 +37,6 @@ module.tx_femanager {
 		layoutRootPath = EXT:femanager/Resources/Private/Layouts/
 	}
 	settings {
-		new.email.createUserNotify {
-			_enable = TEXT
-			_enable.value = 1
-		}
+		configPID = 1
 	}
 }

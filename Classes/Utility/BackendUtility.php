@@ -90,7 +90,7 @@ class BackendUtility
      * @SuppressWarnings(PHPMD.Superglobals)
      * @codeCoverageIgnore
      */
-    public static function initializeTsFe(int $pageIdentifier = 1, int $typeNum = 0): bool
+    public static function initializeTsFe(int $pageIdentifier = 0, int $typeNum = 0): bool
     {
         if (TYPO3_MODE === 'BE') {
             try {
@@ -147,4 +147,23 @@ class BackendUtility
         }
         return $parameters;
     }
+
+
+    /**
+     * @param int $pageUid [optional] the current pageuid
+     * @return type
+     */
+    public static function loadTS($pageUid = null)
+    {
+        $pageUid = ($pageUid && \TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($pageUid)) ? $pageUid : \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('id');
+        $sysPageObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
+        $TSObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\TemplateService');
+        $TSObj->tt_track = 0;
+        $TSObj->init();
+        $TSObj->runThroughTemplates($sysPageObj->getRootLine($pageUid));
+        $TSObj->generateConfig();
+
+        return $TSObj->setup;
+    }
 }
+

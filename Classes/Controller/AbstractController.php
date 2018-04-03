@@ -364,7 +364,12 @@ abstract class AbstractController extends ActionController
         $this->config = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
+        
         $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'];
+        if (TYPO3_MODE=='BE') {
+            $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
+            $this->config = $config['plugin.']['tx_femanager.']['settings.'];
+        }
 
         $this->setAllUserGroups();
         $this->checkTypoScript();
@@ -408,8 +413,14 @@ abstract class AbstractController extends ActionController
      */
     protected function checkTypoScript()
     {
-        if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
-            $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript'), '', FlashMessage::ERROR);
+        if (TYPO3_MODE == 'BE') {
+            if ($this->config['_TypoScriptIncluded'] !== '1') {
+                $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript_be'), '', FlashMessage::ERROR);
+            }
+        } else {
+            if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
+                $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript'), '', FlashMessage::ERROR);
+            }
         }
     }
 
@@ -437,8 +448,8 @@ abstract class AbstractController extends ActionController
             'createUserConfirmation',
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             [
-                $this->settings['new']['email']['createUserConfirmation']['sender']['email']['value'] =>
-                    $this->settings['new']['email']['createUserConfirmation']['sender']['name']['value']
+                $this->config['new.']['email.']['createUserConfirmation.']['sender.']['email.']['value'] =>
+                    $this->config['new.']['email.']['createUserConfirmation.']['sender.']['name.']['value']
             ],
             'Confirm your profile creation request',
             [
