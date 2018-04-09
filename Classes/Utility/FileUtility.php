@@ -39,4 +39,22 @@ class FileUtility extends AbstractUtility
         }
         return $path;
     }
+
+    /**
+     * "fileadmin/downloads/test.pdf" => "/downloads/test.pdf"
+     *
+     * @param string $pathAndName
+     * @return string
+     */
+    public function substituteFileadminFromPathAndName(string $pathAndName): string
+    {
+        $substituteString = 'fileadmin/';
+        if (substr($pathAndName, 0, strlen($substituteString)) === $substituteString) {
+            $pathAndName = str_replace($substituteString, '', $pathAndName);
+        }
+        if (substr($pathAndName, 0, 1) !== '/') {
+            $pathAndName = '/' . $pathAndName;
+        }
+        return $pathAndName;
+    }
 }

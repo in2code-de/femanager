@@ -9,7 +9,11 @@ use In2code\Femanager\Utility\FileUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
-use TYPO3\CMS\Core\Utility\File\BasicFileUtility;
+use TYPO3\CMS\Core\Resource\DuplicationBehavior;
+use TYPO3\CMS\Core\Resource\Exception\FolderDoesNotExistException;
+use TYPO3\CMS\Core\Resource\File;
+use TYPO3\CMS\Core\Resource\Folder;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -38,10 +42,8 @@ class ImageManipulation extends AbstractDataProcessor
                         $fileItem
                     );
                     if ($fileService->isEverythingValid()) {
-                        FileUtility::createFolderIfNotExists($this->getUploadFolder());
-                        $pathAndFilename = $this->upload($fileItem);
-                        $fileIdentifier = $fileService->indexFile($pathAndFilename);
-                        $identifier = $this->createSysFileRelation($fileIdentifier);
+                        $file = $this->upload($fileItem);
+                        $identifier = $this->createSysFileRelation($file->getUid());
                         $arguments['user'][$property] = [$identifier];
                     }
                 }
@@ -77,24 +79,15 @@ class ImageManipulation extends AbstractDataProcessor
 
     /**
      * @param array $fileItem
-     * @return string New filename (absolute with path)
+     * @return File
      * @throws \Exception
      */
-    protected function upload(array $fileItem): string
+    protected function upload(array $fileItem): File
     {
-        $basicFileFunctions = ObjectUtility::getObjectManager()->get(BasicFileUtility::class);
-        $uniqueFileName = $basicFileFunctions->getUniqueName(
-            $this->getNewImageName($fileItem),
-            $this->getUploadFolder()
-        );
-        if (GeneralUtility::upload_copy_move($fileItem['tmp_name'], $uniqueFileName)) {
-            return $uniqueFileName;
-        } else {
-            throw new \UnexpectedValueException(
-                'File "' . $this->getNewImageName($fileItem) . '" could not be uploaded!',
-                1516373841798
-            );
-        }
+        $uploadFolder = $this->getUploadFolder();
+        $uploadedFile = $uploadFolder->addFile($fileItem['tmp_name'],
+            $this->getNewImageName($fileItem), DuplicationBehavior::RENAME);
+        return $uploadedFile;
     }
 
     /**
@@ -122,15 +115,26 @@ class ImageManipulation extends AbstractDataProcessor
 
     /**
      * @param bool $absolute
-     * @return string
+     * @return Folder
      */
-    protected function getUploadFolder(bool $absolute = true): string
+    protected function getUploadFolder(bool $absolute = true): Folder
     {
-        $path = (string)ConfigurationUtility::getConfiguration('misc.uploadFolder');
-        if ($absolute === true) {
-            $path = GeneralUtility::getFileAbsFileName($path);
+        $resourceFactory = ResourceFactory::getInstance();
+        $uploadFolderIdentifier = (string)ConfigurationUtility::getConfiguration('misc.uploadFolder');
+        if (StringUtility::startsWith($uploadFolderIdentifier, 'fileadmin')) {
+            // Fall back to legacy configuration without fal usage, create fal-identifer for fileadmin path
+            $fileUtility = ObjectUtility::getObjectManager()->get(FileUtility::class);
+            $uploadFolderIdentifier = $fileUtility->substituteFileadminFromPathAndName($uploadFolderIdentifier);
         }
-        return $path;
+
+        try {
+            return $resourceFactory->getFolderObjectFromCombinedIdentifier($uploadFolderIdentifier);
+        } catch (FolderDoesNotExistException $e) {
+            $storage = $resourceFactory->getStorageObjectFromCombinedIdentifier($uploadFolderIdentifier);
+            list($storageId, $folderPath) = GeneralUtility::trimExplode(':', $uploadFolderIdentifier);
+            $storage->createFolder($folderPath);
+            return $resourceFactory->getFolderObjectFromCombinedIdentifier($uploadFolderIdentifier);
+        }
     }
 
     /**
