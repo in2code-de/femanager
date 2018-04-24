@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
@@ -11,7 +12,9 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 
@@ -150,8 +153,10 @@ class NewController extends AbstractController
 
         } else {
             $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+
             return false;
         }
+
         return true;
     }
 
@@ -171,8 +176,10 @@ class NewController extends AbstractController
             $this->userRepository->remove($user);
         } else {
             $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+
             return false;
         }
+
         return true;
     }
 
@@ -195,8 +202,10 @@ class NewController extends AbstractController
             $this->finalCreate($user, 'new', 'createStatus', false, $status);
         } else {
             $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+
             return false;
         }
+
         return true;
     }
 
@@ -230,8 +239,10 @@ class NewController extends AbstractController
             $this->userRepository->remove($user);
         } else {
             $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+
             return false;
         }
+
         return true;
     }
 
@@ -275,20 +286,7 @@ class NewController extends AbstractController
      */
     protected function createUserConfirmationRequest(User $user)
     {
-        $this->sendMailService->send(
-            'createUserConfirmation',
-            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-            [
-                $this->settings['new']['email']['createUserConfirmation']['sender']['email']['value'] =>
-                    $this->settings['new']['email']['createUserConfirmation']['sender']['name']['value']
-            ],
-            'Confirm your profile creation request',
-            [
-                'user' => $user,
-                'hash' => HashUtility::createHashForUser($user)
-            ],
-            $this->config['new.']['email.']['createUserConfirmation.']
-        );
+        $this->sendCreateUserConfirmationMail($user);
         $this->redirectByAction('new', 'requestRedirect');
         $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
     }
@@ -346,5 +344,42 @@ class NewController extends AbstractController
     protected function isAdminConfirmationMissing(User $user)
     {
         return !empty($this->settings['new']['confirmByAdmin']) && !$user->getTxFemanagerConfirmedbyadmin();
+    }
+
+    /**
+     * Just for showing empty dialogue to resend confirmation mail
+     *
+     * @return void
+     */
+    public function resendConfirmationDialogueAction()
+    {
+
+    }
+
+    /**
+     * re-sends a confirmation email if given mail is valid
+     *
+     * @return void
+     * @throws UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     */
+    public function resendConfirmationMailAction()
+    {
+        // @todo find a better way to fetch the data
+        $result = GeneralUtility::_GP('tx_femanager_pi1');
+        if (is_array($result)) {
+            if (GeneralUtility::validEmail($result['user']['email'])) {
+                $user = $this->userRepository->findFirstByEmail($result['user']['email']);
+                if (is_a($user, User::class)) {
+                    $this->sendCreateUserConfirmationMail($user);
+                    $this->addFlashMessage(LocalizationUtility::translate('resendConfirmationMailSend'),
+                        '', AbstractMessage::INFO);
+                    $this->redirect('resendConfirmationDialogue');
+                }
+            }
+        }
+        $this->addFlashMessage(LocalizationUtility::translate('resendConfirmationMailFail')
+            , LocalizationUtility::translate('validationError'), AbstractMessage::ERROR);
+        $this->redirect('resendConfirmationDialogue');
     }
 }

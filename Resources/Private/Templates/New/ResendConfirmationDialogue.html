@@ -1,0 +1,35 @@
+<f:layout name="Default"/>
+
+User / Status
+
+<f:section name="main">
+	<f:render partial="Misc/FlashMessages" arguments="{_all}"/>
+	<f:render partial="Misc/FormErrors" arguments="{object:User}"/>
+	<div class="femanager_new">
+		<h3>
+			<f:translate key="resendConfirmationMailTitle">Resend confirmation mail</f:translate>
+		</h3>
+		<f:form
+				name="user"
+				object="{user}"
+				action="resendConfirmationMail"
+				enctype="multipart/form-data"
+				class="form-horizontal {f:if(condition:'{settings.new.validation._enable.client}',then:'feManagerValidation',else:'')}">
+			<fieldset>
+				<legend>
+					<f:translate key="resendConfirmationMailFieldsetLegend"/>
+				</legend>
+
+				<f:render partial="Fields/Email" arguments="{_all}"/>
+				<div class="femanager_fieldset femanager_submit form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						<f:form.submit
+								value="{f:translate(key:'submitResend')}"
+								id="femanager_field_submit"
+								class="btn btn-primary btn-large" />
+					</div>
+				</div>
+			</fieldset>
+		</f:form>
+	</div>
+</f:section>

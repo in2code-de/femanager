@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace In2code\Femanager\Domain\Repository;
 
 use In2code\Femanager\Domain\Model\User;
@@ -31,6 +32,7 @@ class UserRepository extends Repository
 
         /** @var User $user */
         $user = $query->matching($query->logicalAnd($and))->execute()->getFirst();
+
         return $user;
     }
 
@@ -89,6 +91,7 @@ class UserRepository extends Repository
         }
 
         $users = $query->execute();
+
         return $users;
     }
 
@@ -115,6 +118,7 @@ class UserRepository extends Repository
 
         /** @var User $user */
         $user = $query->execute()->getFirst();
+
         return $user;
     }
 
@@ -144,6 +148,7 @@ class UserRepository extends Repository
 
         /** @var User $user */
         $user = $query->execute()->getFirst();
+
         return $user;
     }
 
@@ -163,6 +168,7 @@ class UserRepository extends Repository
         $query->matching($query->logicalAnd($and));
         $query->setOrderings(['username' => QueryInterface::ORDER_ASCENDING]);
         $records = $query->execute();
+
         return $records;
     }
 
@@ -184,6 +190,7 @@ class UserRepository extends Repository
         $query->matching($query->logicalAnd($and));
         $query->setOrderings(['username' => QueryInterface::ORDER_ASCENDING]);
         $records = $query->execute();
+
         return $records;
     }
 
@@ -206,6 +213,7 @@ class UserRepository extends Repository
                 $and[] = $query->equals('uid', 0);
             }
         }
+
         return $and;
     }
 
@@ -241,6 +249,7 @@ class UserRepository extends Repository
                 $and[] = $query->logicalOr($or);
             }
         }
+
         return $and;
     }
 
@@ -252,9 +261,8 @@ class UserRepository extends Repository
      */
     protected function filterByUserConfirmation(array $and, QueryInterface $query, bool $userConfirmation): array
     {
-        if ($userConfirmation === true) {
-            $and[] = $query->equals('txFemanagerConfirmedbyuser', true);
-        }
+        $and[] = $query->equals('txFemanagerConfirmedbyuser', $userConfirmation);
+
         return $and;
     }
 
@@ -268,6 +276,7 @@ class UserRepository extends Repository
     {
         $queryGenerator = $this->objectManager->get('TYPO3\\CMS\\Core\\Database\\QueryGenerator');
         $treeList = $queryGenerator->getTreeList($pageIdentifier, 99, 0, '1');
+
         return GeneralUtility::trimExplode(',', $treeList, true);
     }
 
@@ -281,4 +290,24 @@ class UserRepository extends Repository
         $query->getQuerySettings()->setIgnoreEnableFields(true);
         $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled']);
     }
+
+    /**
+     * Find All
+     *
+     * @param string $mail
+     * @return QueryResultInterface|array
+     */
+    public function findFirstByEmail(string $mail)
+    {
+        $query = $this->createQuery();
+        $this->ignoreEnableFieldsAndStoragePage($query);
+        $and = [$query->equals('txFemanagerConfirmedbyuser', false)];
+        $and[] = $query->like('email', '%' . $mail . '%');
+        $query->matching($query->logicalAnd($and));
+
+        $query->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING]);
+
+        return $query->execute()->getFirst();
+    }
+
 }

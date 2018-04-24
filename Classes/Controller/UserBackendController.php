@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
@@ -103,4 +104,41 @@ class UserBackendController extends AbstractController
         );
         $this->redirect('confirmation');
     }
+
+    /**
+     * @param array $filter
+     * @return void
+     */
+    public function listOpenUserConfirmationsAction(array $filter = [])
+    {
+        $this->view->assignMultiple(
+            [
+                'users' => $this->userRepository->findAllInBackendForConfirmation(
+                    $filter,
+                    false
+                ),
+                'moduleUri' => BackendUtility::getModuleUrl('tce_db'),
+                'action' => 'confirmation'
+            ]
+        );
+    }
+
+    /**
+     * @param int $userIdentifier
+     * @return void
+     */
+    public function resendUserConfirmationRequestAction(int $userIdentifier)
+    {
+        $user = $this->userRepository->findByUid($userIdentifier);
+        $this->sendCreateUserConfirmationMail($user);
+        $this->addFlashMessage(
+            LocalizationUtility::translate(
+                'BackendConfirmationFlashMessageReSend',
+                'femanager',
+                [$user->getUsername()]
+            ),'', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
+        );
+        $this->redirect('listOpenUserConfirmations');
+    }
+
 }

@@ -214,6 +214,9 @@
 			<trans-unit id="flexform.main.view.4">
 				<source>Invitation</source>
 			</trans-unit>
+			<trans-unit id="flexform.main.view.5">
+				<source>Resend confirmation mail</source>
+			</trans-unit>
 			<trans-unit id="flexform.new.title">
 				<source>Registration</source>
 			</trans-unit>
