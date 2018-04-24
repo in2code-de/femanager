@@ -2198,3 +2198,32 @@ Per default only disabled users are listed that have a user confirmation.
 If all disabled users should be shown, even if they have no user confirmation (because your plugin is configured, that
 only admins should confirm the requests), **User TSConfig** can be used like (to list those users):
 *tx_femanager.UserBackend.confirmation.filter.userConfirmation=0*
+
+Configuration
+"""""""""""""
+
+All settings for the backend module are done in ext_typoscript_setup.txt in the key module.tx_femanager.
+
+You can overwrite these settings in your page TS.
+
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Tab:
+      Tab
+   :Field:
+         Field Name
+      :Description:
+         Description
+      :Default:
+         Default Value
+ - :Tab:
+      	settings.configPID
+   :Field:
+      typoscript main template storage
+   :Description:
+      You need to specify the pid, where your main typoscript settings (frontend) is stored. Usually you will take the
+       root page of your installation.
+   :Default:
+      1

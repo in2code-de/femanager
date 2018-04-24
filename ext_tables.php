@@ -21,7 +21,7 @@ call_user_func(function () {
             'm1',
             '',
             [
-                'UserBackend' => 'list,confirmation,userLogout,confirmUser,refuseUser'
+                'UserBackend' => 'list,confirmation,userLogout,confirmUser,refuseUser,listOpenUserConfirmations,resendUserConfirmationRequest'
             ],
             [
                 'access' => 'user,group',

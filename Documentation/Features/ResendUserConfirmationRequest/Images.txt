@@ -1,0 +1,12 @@
+.. |backend4|      image:: ../Images/femanager_backend4.png
+.. :align: left
+.. :border: 0
+.. :name: backend3
+.. :vspace: 20
+
+
+.. |femanager_plugin3|      image:: ../Images/femanager_plugin3.png
+.. :align: left
+.. :border: 0
+.. :name: backend3
+.. :vspace: 20

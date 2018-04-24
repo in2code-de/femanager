@@ -181,6 +181,10 @@
 			<trans-unit id="error_no_typoscript">
 				<source>No TypoScript found. Did you already include the static Template?</source>
 			</trans-unit>
+			<trans-unit id="error_no_typoscript_be">
+				<source>No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</source>
+			</trans-unit>
+
 			<trans-unit id="error_no_storagepid">
 				<source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
 			</trans-unit>
@@ -455,11 +459,20 @@
 			<trans-unit id="submitNew">
 				<source>Create Profile Now</source>
 			</trans-unit>
+			<trans-unit id="submitResend">
+				<source>Resend now</source>
+			</trans-unit>
 			<trans-unit id="passwordRepeat">
 				<source>Repeat Password</source>
 			</trans-unit>
 			<trans-unit id="titleCreateProfile">
 				<source>Create a new user-profile</source>
+			</trans-unit>
+			<trans-unit id="resendConfirmationMailTitle">
+				<source>Resend confirmation mail</source>
+			</trans-unit>
+			<trans-unit id="resendConfirmationMailFieldsetLegend">
+				<source>Please enter your email address</source>
 			</trans-unit>
 			<trans-unit id="submitEdit">
 				<source>Update Profile</source>
@@ -479,6 +492,13 @@
 			<trans-unit id="createRequestWaitingForAdminConfirm">
 				<source>Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</source>
 			</trans-unit>
+			<trans-unit id="resendConfirmationMailSend">
+				<source>An Email was send to your account. Please check your inbox.</source>
+			</trans-unit>
+			<trans-unit id="resendConfirmationMailFail">
+				<source>We received no valid mail.</source>
+			</trans-unit>
+
 			<trans-unit id="createFailedProfile">
 				<source>Profile creation failed</source>
 			</trans-unit>
@@ -590,6 +610,9 @@
 			<trans-unit id="BackendConfirmationNoteText">
 				<source>%s approval(s) available</source>
 			</trans-unit>
+			<trans-unit id="BackendConfirmationNoteText">
+				<source>%s missing user confirmation(s) available</source>
+			</trans-unit>
 			<trans-unit id="BackendConfirmationColumnAction">
 				<source>Actions</source>
 			</trans-unit>
@@ -604,6 +627,18 @@
 			</trans-unit>
 			<trans-unit id="BackendConfirmationFlashMessageRefused">
 				<source>%s was refused</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationResendUserConfirmationRequest">
+				<source>resend user confirmation e-mail</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationFlashMessageReSend">
+				<source>%s confirmation mail was resend</source>
+			</trans-unit>
+			<trans-unit id="resendConfirmationDialogueMessage">
+				<source>Your userprofile is not confirmed yet.</source>
+			</trans-unit>
+			<trans-unit id="resendConfirmationDialogueLink">
+				<source>Resend confirmation email?</source>
 			</trans-unit>
 		</body>
 	</file>
