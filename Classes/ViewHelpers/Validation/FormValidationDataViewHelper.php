@@ -9,17 +9,18 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper
 {
 
     /**
-     * Validation names with extended configuration
+     * Validation names with simple configuration
      *
      * @var array
      */
-    protected $extendedValidations = [
-        'min',
-        'max',
-        'mustInclude',
-        'mustNotInclude',
-        'inList',
-        'sameAs'
+    protected $simpleValidations = [
+		'date',
+		'email',
+		'intOnly',
+		'lettersOnly',
+		'required',
+		'uniqueInDb',
+		'uniqueInPage'
     ];
 
     /**
@@ -94,9 +95,9 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper
      */
     protected function isSimpleValidation($validation)
     {
-        if (in_array($validation, $this->extendedValidations)) {
-            return false;
+        if (in_array($validation, $this->simpleValidations)) {
+            return true;
         }
-        return true;
+        return false;
     }
 }

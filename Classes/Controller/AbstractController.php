@@ -228,8 +228,7 @@ abstract class AbstractController extends ActionController
             $this->sendMailService->send(
                 'createNotify',
                 StringUtility::makeEmailArray(
-                    $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']
-                    ?? $this->settings['new']['notifyAdmin'],
+                    !empty($this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']) ? $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value'] : $this->settings['new']['notifyAdmin'],
                     $this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
@@ -369,6 +368,7 @@ abstract class AbstractController extends ActionController
         if (TYPO3_MODE=='BE') {
             $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
             $this->config = $config['plugin.']['tx_femanager.']['settings.'];
+            $this->settings =  $this->config;
         }
 
         $this->setAllUserGroups();
