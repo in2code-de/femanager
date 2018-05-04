@@ -43,7 +43,6 @@ Table of Contents
 	Features/Index
 	FAQ/Index
 
-
 Changelog
 =========
 

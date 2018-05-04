@@ -58,7 +58,7 @@ A: Enable/Disable Validation via TypoScript – disable example:
 	}
 
 
-Q: How can I configure the validationof my fields?
+Q: How can I configure the validation of my fields?
 --------------------------------------------------
 
 A: Have a look into TypoScript:
@@ -66,9 +66,7 @@ A: Have a look into TypoScript:
 .. code-block:: text
 
 	plugin.tx_femanager {
-		settings.new.validation {
-			_enable.client = 1
-			_enable.server = 2
+		settings.new {
 
 			# validation of user input values
 			# possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space), mustNotInclude(number,letter,special,space), inList(1,2,3), captcha, sameAs(password)

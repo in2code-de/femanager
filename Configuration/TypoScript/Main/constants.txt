@@ -31,5 +31,8 @@ plugin.tx_femanager {
 
 		# cat=plugin.tx_femanager//0920; type=boolean; label= Include Twitter Bootstrap CSS: Load and implement Twitter Bootstrap CSS from external source (bootstrapcdn.com)
 		bootstrapCSS = 0
+
+		# cat=plugin.tx_femanager//0930; type=int+; label= Page ID for the resend email confirmation view
+		showResendUserConfirmationRequestView = 0
 	}
 }

@@ -30,6 +30,7 @@ Quick guide:
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 4.2.0      | 2018-01-29 | Task         | Allow to resend confirmation mail via Backend or Frontend - sponsored by Constructiva Solutions GmbH and in2code GmbH      |
 | 4.1.1      | 2018-01-29 | Task         | Update license information in composer.json                                                                                |
 | 4.1.0      | 2018-01-21 | Task         | Testing update: Re-include unit test and make behaviour tests more transparent                                             |
 | 4.0.2      | 2018-01-19 | Bugfix       | Fix required settings for terms                                                                                            |

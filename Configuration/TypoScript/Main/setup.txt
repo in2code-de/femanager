@@ -30,7 +30,8 @@ plugin.tx_femanager {
 			# take username and copy it to the email field (so email field is not necessary in FE)
 #			fillEmailWithUsername = 1
 
-			# login after profile creation (don't work if admin confirmation is turned on)
+			# login after profile creation (don't work if admin confirmation is turned on). The experimental
+			# feature "Set cookie on login" in EM may help in case of login problems
 			login = 1
 
 			# prefilling (empty) input fields with values from TypoScript
@@ -1631,6 +1632,8 @@ plugin.tx_femanager {
 #				}
 #			}
 		}
+
+		showResendUserConfirmationRequestView = {$plugin.tx_femanager.settings.showResendUserConfirmationRequestView}
 
 		# Don't touch this - this is needed to let the plugin know if the main typoscript is included - otherwise an errormessage will be shown in the frontend
 		_TypoScriptIncluded = 1
