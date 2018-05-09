@@ -29,6 +29,14 @@ usage of this views.
 
 |femanager_plugin3|
 
+Sometimes users try to register again with the same email in order to trigger the confirmation mail again. They get an error message saying that the username/email is alredy existing (if it is also confirmed or not is not taken into account).
+
+To to make sure the users don't get stuck at this point, an additional message is displayed if the existing user has not yet confirmed his registration. For this message to be displayed in that case, you need to have the following typoscript setting configured with the pid where your "resend confirmation mail" plugin resides.
+
+::
+settings.showResendUserConfirmationRequestView = {your pid}
+::
+
 
 
 Backend View
