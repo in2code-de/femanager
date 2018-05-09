@@ -29,6 +29,17 @@ usage of this views.
 
 |femanager_plugin3|
 
+Sometimes unconfirmed users are trying to trigger the confirmation mail again by registering again with the same email or username. They get an error "username / email already existing". Since 4.2, an additional message with a "resend confirmation mail" link is displayed in those cases where the existing user has not yet confirmed his registration. 
+
+For this message to be displayed, you need to have the following typoscript setting configured:
+
+::
+
+   settings.showResendUserConfirmationRequestView = {your pid}
+  
+::
+
+The pid is the page uid where your "resend confirmation mail" plugin resides.
 
 
 Backend View
