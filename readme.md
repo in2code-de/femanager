@@ -30,6 +30,7 @@ Quick guide:
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 4.2.2      | 2018-05-11 | Bugfix       | Allow filtering in OpenConfirmationView (BE), Fix case sensitive filename for OpenConfirmationView, Support TYPO3 CMS Subtree packages, update documentaion |
 | 4.2.1      | 2018-05-04 | Task         | Update documenation, fix broken custom validators, enable TS for BE Module, check if admin receive is not empty            |
 | 4.2.0      | 2018-04-24 | Task         | Allow to resend confirmation mail via Backend or Frontend - sponsored by Constructiva Solutions GmbH and in2code GmbH      |
 | 4.1.1      | 2018-01-29 | Task         | Update license information in composer.json                                                                                |
