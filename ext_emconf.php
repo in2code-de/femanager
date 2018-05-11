@@ -10,7 +10,7 @@ $EM_CONF[$_EXTKEY] = [
         Extbase and Fluid and on TYPO3 8 and the possibility to extend it.
         Extension basicly works like sr_feuser_register',
     'category' => 'plugin',
-    'author' => 'femanager dev team',
+    'author' => 'Alexander Kellner, Stefan Busemann',
     'author_email' => 'info@in2code.de',
     'author_company' => 'in2code.de - Wir leben TYPO3',
     'shy' => '',
@@ -23,7 +23,7 @@ $EM_CONF[$_EXTKEY] = [
     'modify_tables' => '',
     'clearCacheOnLoad' => 0,
     'lockType' => '',
-    'version' => '4.2.1',
+    'version' => '4.2.2',
     'constraints' => [
         'depends' => [
             'typo3' => '8.7.0-8.7.99',

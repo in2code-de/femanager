@@ -44,7 +44,7 @@
 									</numIndex>
 									<numIndex index="6" type="array">
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.5</numIndex>
-										<numIndex index="1">New->resendConfirmationDialogue;New->resendConfirmationMail;</numIndex>
+										<numIndex index="1">New->resendConfirmationDialogue;New->resendConfirmationMail;New->confirmCreateRequest;</numIndex>
 									</numIndex>
 								</items>
 								<maxitems>1</maxitems>
