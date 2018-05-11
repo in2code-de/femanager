@@ -118,7 +118,7 @@ class UserBackendController extends AbstractController
                     false
                 ),
                 'moduleUri' => BackendUtility::getModuleUrl('tce_db'),
-                'action' => 'confirmation'
+                'action' => 'listOpenUserConfirmations'
             ]
         );
     }
