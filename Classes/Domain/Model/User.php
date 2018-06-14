@@ -398,4 +398,50 @@ class User extends FrontendUser
     {
         return $this->getIgnoreDirty() ? false : parent::_isDirty($propertyName);
     }
+
+    /**
+     * Returns the moduleSysDmailNewsletter
+     *
+     * @return integer $moduleSysDmailNewsletter
+     */
+    public function getModuleSysDmailNewsletter()
+    {
+        return $this->moduleSysDmailNewsletter;
+    }
+
+    /**
+     * Sets the moduleSysDmailNewsletter. Die beiden Felder sind synchron.
+     *
+     * @param integer $moduleSysDmailNewsletter
+     * @return User
+     */
+    public function setModuleSysDmailNewsletter($moduleSysDmailNewsletter)
+    {
+        $this->moduleSysDmailNewsletter = $moduleSysDmailNewsletter;
+        $this->moduleSysDmailHtml = $moduleSysDmailNewsletter;
+        return $this;
+    }
+
+    /**
+     * Returns the moduleSysDmailHtml
+     *
+     * @return integer $moduleSysDmailHtml
+     */
+    public function getModuleSysDmailHtml()
+    {
+        return $this->moduleSysDmailHtml ;
+    }
+
+    /**
+     * Sets the moduleSysDmailHtml. Die beiden Felder sind synchron.
+     *
+     * @param integer $moduleSysDmailHtml
+     * @return User
+     */
+    public function setModuleSysDmailHtml($moduleSysDmailHtml)
+    {
+        $this->moduleSysDmailNewsletter = $moduleSysDmailHtml;
+        $this->moduleSysDmailHtml = $moduleSysDmailHtml;
+        return $this;
+    }
 }

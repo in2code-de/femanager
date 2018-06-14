@@ -640,6 +640,21 @@
 			<trans-unit id="resendConfirmationDialogueLink">
 				<source>Resend confirmation email?</source>
 			</trans-unit>
+			<trans-unit id="newsletterUnsubscribed">
+				<source>Newsletter unsubscribed</source>
+			</trans-unit>
+			<trans-unit id="newsletterUnsubscribeFail">
+				<source>The link or the email address was not correct.</source>
+			</trans-unit>
+			<trans-unit id="unsubscribeTitle">
+				<source>Newsletter unsubscribe</source>
+			</trans-unit>
+			<trans-unit id="unsubscribeFieldsetLegend">
+				<source>For unsubscription please enter your emailaddress below</source>
+			</trans-unit>
+			<trans-unit id="submitUnsubscribe">
+				<source>Unsubscribe</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

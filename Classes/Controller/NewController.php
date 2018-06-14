@@ -382,4 +382,88 @@ class NewController extends AbstractController
             , LocalizationUtility::translate('validationError'), AbstractMessage::ERROR);
         $this->redirect('resendConfirmationDialogue');
     }
+
+    /**
+     * Empty Dialog. Access with:  https://<mydomain>/<mypage>/unsubscribe/?key=12345
+     * The get Parameter key is required for unsubscribe to work.
+     * Key is composed of these 2 Direct Mail tokens: ###USER_uid######SYS_AUTHCODE###
+     * @return void
+     */
+    public function newsletterUnsubscribeDialogueAction()
+    {
+      // htmlspecialchars gegen XSS
+      $key = htmlspecialchars(GeneralUtility::_GP('key'));
+      $this->view->assign('key', $key);
+    }
+    /**
+     * Requires tx_femanager_pi1[directMailKey]=123… as post parameter
+     * @return void
+     * @throws UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     */
+    public function unsubscribeAction()
+    {
+        // @todo find a better way to fetch the data
+        $result = GeneralUtility::_GP('tx_femanager_pi1');
+        if (is_array($result)) {
+            $checker = new Checker($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'], $result['directMailKey']);
+            $uid = $checker->getValidUserId();
+            if (GeneralUtility::validEmail($result['user']['email']) && $uid > -1) {
+                $user = $this->userRepository->findFirstByUidAndEmail($uid, $result['user']['email']);
+
+                if (is_a($user, User::class)) {
+                    $user->setModuleSysDmailNewsletter(0);
+                    $this->userRepository->update($user);
+                    $this->addFlashMessage(LocalizationUtility::translate('newsletterUnsubscribed', 'cs_fe_manager_extension'),
+                        '', AbstractMessage::INFO);
+                    $this->redirect('newsletterUnsubscribeDialogue');
+                }
+            }
+        }
+        $this->addFlashMessage(LocalizationUtility::translate('newsletterUnsubscribeFail', 'cs_fe_manager_extension')
+            , LocalizationUtility::translate('validationError'), AbstractMessage::ERROR);
+        $this->redirect('newsletterUnsubscribeDialogue');
+    }
+}
+
+// Mimics the DirectMail Token handling. And validates the key.
+class Checker {
+
+    private $encryptionKey;
+    private $code;
+    private $uid;
+    private $hash;
+
+
+    function __construct($encryptionKey, $code) {
+        $this->encryptionKey = $encryptionKey;
+        $this->code = $code;
+    }
+
+    public function getValidUserId() {
+        if ($this->checkParams() && $this->checkHash()) {
+            return $this->uid;
+        }
+        return -1;
+    }
+
+    private function checkParams() {
+        if (!isset($this->code) || strlen($this->code <= 8)) {
+            echo 'isset';
+            return false;
+        }
+        $this->uid = substr($this->code, 0, strlen($this->code) - 8);
+        $this->hash = substr($this->code, strlen($this->uid));
+        if(!is_numeric($this->uid)) {
+            echo 'is_numeric';
+           return false;
+        }
+        return true;
+    }
+
+    private function checkHash() {
+        $md5Test = substr(md5($this->uid . '||' . $this->encryptionKey), 0, 8);
+        return $md5Test === $this->hash;
+    }
+
 }

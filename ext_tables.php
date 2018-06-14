@@ -21,7 +21,7 @@ call_user_func(function () {
             'm1',
             '',
             [
-                'UserBackend' => 'list,confirmation,userLogout,confirmUser,refuseUser,listOpenUserConfirmations,resendUserConfirmationRequest'
+                'UserBackend' => 'list,confirmation,userLogout,confirmUser,refuseUser,listOpenUserConfirmations,resendUserConfirmationRequest,unsubscribe'
             ],
             [
                 'access' => 'user,group',
@@ -66,4 +66,5 @@ call_user_func(function () {
      * Disable non needed fields in tt_content
      */
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['femanager_pi1'] = 'select_key';
+
 });

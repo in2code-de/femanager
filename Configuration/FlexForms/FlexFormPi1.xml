@@ -46,6 +46,10 @@
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view.5</numIndex>
 										<numIndex index="1">New->resendConfirmationDialogue;New->resendConfirmationMail;New->confirmCreateRequest;</numIndex>
 									</numIndex>
+									<numIndex index="7" type="array">
+										<numIndex index="0">LLL:EXT:cs_fe_manager_extension/Resources/Private/Language/locallang_db.xlf:flexform.main.view.6</numIndex>
+										<numIndex index="1">New->newsletterUnsubscribeDialogue;New->unsubscribe;New->confirmCreateRequest;</numIndex>
+									</numIndex>
 								</items>
 								<maxitems>1</maxitems>
 								<size>1</size>

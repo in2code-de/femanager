@@ -292,7 +292,7 @@ class UserRepository extends Repository
     }
 
     /**
-     * Find All
+     * Find First unconfirmed! User.
      *
      * @param string $mail
      * @return QueryResultInterface|array
@@ -308,6 +308,27 @@ class UserRepository extends Repository
         $query->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING]);
 
         return $query->execute()->getFirst();
+    }
+
+    /**
+     * Find First with matching uid and email
+     *
+     * @param int $uid fe_users UID
+     * @param string $email fe_users email address
+     * @return User
+     */
+    public function findFirstByUidAndEmail($uid, $email)
+    {
+        $query = $this->createQuery();
+        $this->ignoreEnableFieldsAndStoragePage($query);
+        $query->getQuerySettings()->setRespectSysLanguage(false);
+        $and = [$query->equals('uid', $uid)];
+        $and[] = $query->equals('email', $email);
+
+        /** @var User $user */
+        $user = $query->matching($query->logicalAnd($and))->execute()->getFirst();
+
+        return $user;
     }
 
 }
