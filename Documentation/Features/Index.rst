@@ -19,4 +19,4 @@ See some features or best practice parts of the extension femanager.
 	AutoConfirmation/Index
 	Finishers/Index
 	Signals/Index
-   ResendUserConfirmationRequest/Index
+	ResendUserConfirmationRequest/Index
