@@ -103,7 +103,7 @@ class InvitationController extends AbstractController
             );
         }
         $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $this]);
-        $this->redirectByAction('redirectStep1');
+        $this->redirectByAction('invitation','redirectStep1');
         $this->redirect('new');
     }
 
