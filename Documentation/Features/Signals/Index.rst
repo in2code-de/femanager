@@ -266,7 +266,7 @@ This is an example how to use a signal from femanager – in this case we decide
 
 	<?php
 
-	$signalSlotDispatcher = t3lib_div::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
+	$signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
 	$signalSlotDispatcher->connect(
 		'In2code\Femanager\Controller\NewController',
 		'createActionBeforePersist',
