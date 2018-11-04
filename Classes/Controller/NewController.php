@@ -269,6 +269,7 @@ class NewController extends AbstractController
         LogUtility::log(Log::STATUS_PROFILECREATIONREQUEST, $user);
         if (!empty($this->settings['new']['confirmByUser'])) {
             $this->createUserConfirmationRequest($user);
+            $this->createUserConfirmationPending($user,time());
             $this->redirect('new');
         }
         if (!empty($this->settings['new']['confirmByAdmin'])) {
@@ -290,6 +291,21 @@ class NewController extends AbstractController
         $this->redirectByAction('new', 'requestRedirect');
         $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
     }
+
+    /**
+     * Sets time on which a user was asked to confirm their registration
+     *
+     * @param User $user
+     * @param integer $now
+     * @return void
+     */
+    protected function createUserConfirmationPending($user,$now)
+    {
+        $user->setTxFemanagerUnconfirmedSince((int)$now);
+        $this->userRepository->update($user);
+        $this->persistenceManager->persistAll();
+    }
+
 
     /**
      * Send email to admin for confirmation

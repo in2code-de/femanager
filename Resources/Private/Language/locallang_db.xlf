@@ -108,6 +108,9 @@
 			<trans-unit id="fe_users.terms_date_of_acceptance">
 				<source>Accepted datetime of terms and conditions</source>
 			</trans-unit>
+            <trans-unit id="fe_users.unconfirmedsince">
+                <source>User did not confirm their registration since</source>
+            </trans-unit>
 			<trans-unit id="fe_users.changerequest">
 				<source>Change Request</source>
 			</trans-unit>

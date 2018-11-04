@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <fe_users>
+        <uid>1</uid>
+        <name>Not unconfirmed and not disabled user</name>
+        <disable>0</disable>
+        <tx_femanager_unconfirmed_since>0</tx_femanager_unconfirmed_since>
+    </fe_users>
+    <fe_users>
+        <uid>2</uid>
+        <name>Not unconfirmed and disabled user</name>
+        <disable>1</disable>
+        <tx_femanager_unconfirmed_since>0</tx_femanager_unconfirmed_since>
+    </fe_users>
+    <fe_users>
+        <uid>3</uid>
+        <name>Unconfirmed long ago but not disabled user</name>
+        <disable>0</disable>
+        <tx_femanager_unconfirmed_since>1500000000</tx_femanager_unconfirmed_since>
+    </fe_users>
+    <fe_users>
+        <uid>4</uid>
+        <name>Unconfirmed lately (less than 1 day before server time) and disabled user</name>
+        <disable>1</disable>
+        <tx_femanager_unconfirmed_since>1540720000</tx_femanager_unconfirmed_since>
+    </fe_users>
+    <fe_users>
+        <uid>5</uid>
+        <name>Unconfirmed some days ago and disabled user</name>
+        <disable>1</disable>
+        <tx_femanager_unconfirmed_since>1540460800</tx_femanager_unconfirmed_since>
+    </fe_users>
+    <fe_users>
+        <uid>6</uid>
+        <name>Unconfirmed long ago and disabled user</name>
+        <disable>1</disable>
+        <tx_femanager_unconfirmed_since>1500000000</tx_femanager_unconfirmed_since>
+    </fe_users>
+</dataset>

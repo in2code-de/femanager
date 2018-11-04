@@ -44,6 +44,12 @@ class User extends FrontendUser
     protected $txFemanagerConfirmedbyadmin;
 
     /**
+     *
+     * @var integer
+     */
+    protected $txFemanagerUnconfirmedSince;
+
+    /**
      * @var bool
      */
     protected $isOnline = false;
@@ -204,6 +210,28 @@ class User extends FrontendUser
     public function getTxFemanagerConfirmedbyuser()
     {
         return $this->txFemanagerConfirmedbyuser;
+    }
+
+    /**
+     * Returns the txFemanagerUnconfirmedSince
+     *
+     * @return integer $txFemanagerUnconfirmedSince
+     */
+    public function getTxFemanagerUnconfirmedSince()
+    {
+        return $this->txFemanagerUnconfirmedSince;
+    }
+
+    /**
+     * Sets the txFemanagerUnconfirmedSince
+     *
+     * @param integer $txFemanagerUnconfirmedSince
+     * @return User
+     */
+    public function setTxFemanagerUnconfirmedSince($txFemanagerUnconfirmedSince)
+    {
+        $this->txFemanagerUnconfirmedSince = $txFemanagerUnconfirmedSince;
+        return $this;
     }
 
     /**
