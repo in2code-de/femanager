@@ -99,4 +99,9 @@ class CommandControllerTest extends \Nimut\TestingFramework\TestCase\FunctionalT
         }
         return $finalUsers;
     }
+
+    public function tearDown()
+    {
+        unset($this->commandControllerMock);
+    }
 }

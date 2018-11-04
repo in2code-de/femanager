@@ -269,7 +269,7 @@ class NewController extends AbstractController
         LogUtility::log(Log::STATUS_PROFILECREATIONREQUEST, $user);
         if (!empty($this->settings['new']['confirmByUser'])) {
             $this->createUserConfirmationRequest($user);
-            $this->createUserConfirmationPending($user,time());
+            $this->createUserConfirmationPending($user, time());
             $this->redirect('new');
         }
         if (!empty($this->settings['new']['confirmByAdmin'])) {
@@ -299,7 +299,7 @@ class NewController extends AbstractController
      * @param integer $now
      * @return void
      */
-    protected function createUserConfirmationPending($user,$now)
+    protected function createUserConfirmationPending($user, $now)
     {
         $user->setTxFemanagerUnconfirmedSince((int)$now);
         $this->userRepository->update($user);
