@@ -32,20 +32,6 @@ call_user_func(function () {
     }
 
     /**
-     * Static TypoScript
-     */
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-        'femanager',
-        'Configuration/TypoScript/Main',
-        'Main Settings'
-    );
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-        'femanager',
-        'Configuration/TypoScript/Layout',
-        'Add Layout CSS'
-    );
-
-    /**
      * Add user TSConfig
      */
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
