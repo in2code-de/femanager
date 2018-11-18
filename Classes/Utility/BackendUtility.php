@@ -3,7 +3,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
-use TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
+use TYPO3\CMS\Core\TimeTracker\TimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -101,7 +101,7 @@ class BackendUtility
                     $typeNum = (int)GeneralUtility::_GP('type');
                 }
                 if (!is_object($GLOBALS['TT'])) {
-                    $GLOBALS['TT'] = new NullTimeTracker;
+                    $GLOBALS['TT'] = new TimeTracker(false);
                     $GLOBALS['TT']->start();
                 }
                 $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
