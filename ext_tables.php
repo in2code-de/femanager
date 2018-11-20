@@ -25,7 +25,7 @@ call_user_func(function () {
             ],
             [
                 'access' => 'user,group',
-                'icon' => 'EXT:femanager/ext_icon.svg',
+                'icon' => 'EXT:femanager/Resources/Public/Icons/Extension.svg',
                 'labels' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf',
             ]
         );
