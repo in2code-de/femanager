@@ -12,13 +12,21 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
 {
 
     /**
-     * Check if captcha is enabled
      *
-     * @param array $settings TypoScript
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('settings', 'bool','array $settings TypoScript',true);
+    }
+
+    /**
+     * Check if captcha is enabled
      * @return bool
      */
-    public function render($settings): bool
+    public function render()
     {
+        $settings = $this->arguments['settings'];
         $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
         return ExtensionManagementUtility::isLoaded('sr_freecap')
             && !empty($settings[$controllerName]['validation']['captcha']['captcha']);
