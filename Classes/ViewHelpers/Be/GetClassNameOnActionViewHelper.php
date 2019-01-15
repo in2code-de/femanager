@@ -35,7 +35,7 @@ class GetClassNameOnActionViewHelper extends AbstractViewHelper
      */
     protected function getCurrentActionName(): string
     {
-        return $this->controllerContext->getRequest()->getControllerActionName();
+        return $this->renderingContext->getControllerContext()->getRequest()->getControllerActionName();
     }
 
     /**

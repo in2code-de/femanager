@@ -18,7 +18,7 @@ class ExplodeViewHelper extends AbstractViewHelper
     {
         parent::initializeArguments();
         $this->registerArgument('string', 'string','Any list (e.g. "a,b,c,d")', false);
-        $this->registerArgument('seperator', 'string','Separator sign (e.g. ",")', false, '\',\'');
+        $this->registerArgument('seperator', 'string','Separator sign (e.g. ",")', false, ',');
         $this->registerArgument('trim', 'bool','Should be trimmed?', false, true);
    }
 

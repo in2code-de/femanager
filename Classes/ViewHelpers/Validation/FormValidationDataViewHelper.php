@@ -26,13 +26,14 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper
     /**
      * Set javascript validation data for input fields
      *
-     * @param array $settings TypoScript
-     * @param string $fieldName Fieldname
-     * @param array $additionalAttributes AdditionalAttributes
      * @return array
      */
-    public function render($settings, $fieldName, $additionalAttributes = [])
+    public function render()
     {
+        $settings = $this->arguments['settings'];
+        $fieldName = $this->arguments['fieldName'];
+        $additionalAttributes = $this->arguments['additionalAttributes'];
+
         if ($settings[$this->getControllerName()]['validation']['_enable']['client'] === '1') {
             $validationString = $this->getValidationString($settings, $fieldName);
             if (!empty($validationString)) {
@@ -99,5 +100,19 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper
             return true;
         }
         return false;
+    }
+
+    /**
+     * Initialize the arguments.
+     *
+     * @return void
+     * @api
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('settings', 'array ', 'all TypoScript settings for this form', true);
+        $this->registerArgument('fieldName', 'string ', 'Fieldname which should get validated', true);
+        $this->registerArgument('additionalAttributes', 'array ', '$additionalAttributes for this field', false);
     }
 }
