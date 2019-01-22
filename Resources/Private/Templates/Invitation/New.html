@@ -14,7 +14,12 @@ Invitation / New
 	<f:render partial="Misc/FormErrors" arguments="{object:User}" />
 
 	<div class="femanager_invitation_new">
-		<f:form name="user" object="{user}" action="create" class="form-horizontal {f:if(condition:'{settings.invitation.validation._enable.client}',then:'feManagerValidation',else:'')}">
+		<f:form
+				name="user"
+				object="{user}"
+				action="create"
+				additionalAttributes="{data-femanager-plugin:data.uid}"
+				class="form-horizontal {f:if(condition:'{settings.invitation.validation._enable.client}',then:'feManagerValidation',else:'')}">
 			<fieldset>
 				<legend>
 					<f:translate key="titleInvitationProfile" />

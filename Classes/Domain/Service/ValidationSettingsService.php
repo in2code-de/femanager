@@ -63,11 +63,13 @@ class ValidationSettingsService
     {
         $string = '';
         $validationSettings = $this->getSettings()[$this->controllerName][$this->validationName][$fieldName];
-        foreach ($validationSettings as $validation => $configuration) {
-            if (!empty($string)) {
-                $string .= ',';
+        if (is_array($validationSettings)) {
+            foreach ($validationSettings as $validation => $configuration) {
+                if (!empty($string)) {
+                    $string .= ',';
+                }
+                $string .= $this->getSingleValidationString($validation, $configuration);
             }
-            $string .= $this->getSingleValidationString($validation, $configuration);
         }
         return $string;
     }
@@ -105,7 +107,7 @@ class ValidationSettingsService
      * @param string $validation
      * @return bool
      */
-    protected function isSimpleValidation($validation)
+    protected function isSimpleValidation($validation): bool
     {
         if (in_array($validation, $this->simpleValidations)) {
             return true;

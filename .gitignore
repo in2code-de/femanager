@@ -13,3 +13,4 @@ Thumbs.db
 .sass-cache
 .Build
 composer.lock
+package-lock.json

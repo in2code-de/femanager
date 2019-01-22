@@ -245,6 +245,9 @@
 			<trans-unit id="validationErrorCaptcha">
 				<source>Wrong Captcha code</source>
 			</trans-unit>
+			<trans-unit id="validationErrorGeneral">
+				<source>Field could not be validated</source>
+			</trans-unit>
 
 			<trans-unit id="emailCreateAdminConfirmationSubject">
 				<source>Please confirm a new registration</source>
