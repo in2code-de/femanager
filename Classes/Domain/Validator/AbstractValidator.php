@@ -1,8 +1,11 @@
 <?php
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
+use In2code\Femanager\Domain\Repository\PluginRepository;
 use In2code\Femanager\Signal\SignalTrait;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\FrontendUtility;
+use In2code\Femanager\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
@@ -411,7 +414,20 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         } elseif ($this->pluginVariables['__referrer']['@controller'] === 'Invitation') {
             $controllerName = 'invitation';
         }
-        // todo: check if controller is set on current page
+        $this->checkAllowedControllerName($controllerName);
         return $controllerName;
+    }
+
+    /**
+     * @param string $controllerName
+     * @return void
+     */
+    protected function checkAllowedControllerName(string $controllerName)
+    {
+        $pluginRepository = ObjectUtility::getObjectManager()->get(PluginRepository::class);
+        $pageIdentifier = FrontendUtility::getCurrentPid();
+        if ($pluginRepository->isPluginWithViewOnGivenPage($controllerName, $pageIdentifier) === false) {
+            throw new \LogicException('ControllerName is not allowed', 1541506524);
+        }
     }
 }
