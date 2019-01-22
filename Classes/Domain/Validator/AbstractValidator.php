@@ -1,8 +1,11 @@
 <?php
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
+use In2code\Femanager\Domain\Repository\PluginRepository;
 use In2code\Femanager\Signal\SignalTrait;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\FrontendUtility;
+use In2code\Femanager\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
@@ -349,26 +352,82 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     }
 
     /**
-     * Initialize Method
-     *
      * @return void
      */
     protected function init()
+    {
+        $this->setPluginVariables();
+        $this->setValidationSettings();
+    }
+
+    /**
+     * @return void
+     */
+    protected function setPluginVariables()
+    {
+        $this->pluginVariables = GeneralUtility::_GP('tx_femanager_pi1');
+    }
+
+    /**
+     * @return void
+     */
+    protected function setValidationSettings()
     {
         $config = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'Femanager',
             'Pi1'
         );
-        $this->pluginVariables = GeneralUtility::_GP('tx_femanager_pi1');
-        $controllerName = 'new';
+        $this->validationSettings = $config[$this->getControllerName()][$this->getValidationName()];
+    }
+
+    /**
+     * @return string
+     */
+    protected function getValidationName(): string
+    {
         $validationName = 'validation';
-        if ($this->pluginVariables['__referrer']['@controller'] !== 'New') {
-            $controllerName = strtolower($this->pluginVariables['__referrer']['@controller']);
-            if ($controllerName === 'invitation' && $this->pluginVariables['__referrer']['@action'] === 'edit') {
-                $validationName = 'validationEdit';
-            }
+        if ($this->getControllerName() === 'invitation' && $this->getActionName() === 'edit') {
+            $validationName = 'validationEdit';
         }
-        $this->validationSettings = $config[$controllerName][$validationName];
+        return $validationName;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getActionName(): string
+    {
+        return $this->pluginVariables['__referrer']['@action'];
+    }
+
+    /**
+     * Get controller name in lowercase
+     *
+     * @return string
+     */
+    protected function getControllerName(): string
+    {
+        $controllerName = 'new';
+        if ($this->pluginVariables['__referrer']['@controller'] === 'Edit') {
+            $controllerName = 'edit';
+        } elseif ($this->pluginVariables['__referrer']['@controller'] === 'Invitation') {
+            $controllerName = 'invitation';
+        }
+        $this->checkAllowedControllerName($controllerName);
+        return $controllerName;
+    }
+
+    /**
+     * @param string $controllerName
+     * @return void
+     */
+    protected function checkAllowedControllerName(string $controllerName)
+    {
+        $pluginRepository = ObjectUtility::getObjectManager()->get(PluginRepository::class);
+        $pageIdentifier = FrontendUtility::getCurrentPid();
+        if ($pluginRepository->isPluginWithViewOnGivenPage($controllerName, $pageIdentifier) === false) {
+            throw new \LogicException('ControllerName is not allowed', 1541506524);
+        }
     }
 }

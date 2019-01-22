@@ -3,6 +3,9 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Repository\PluginRepository;
+use In2code\Femanager\Domain\Service\ValidationSettingsService;
+use In2code\Femanager\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
@@ -60,16 +63,28 @@ class ClientsideValidator extends AbstractValidator
     protected $additionalValue;
 
     /**
+     * @var int
+     */
+    protected $plugin = 0;
+
+    /**
+     * @var string
+     */
+    protected $actionName = '';
+
+    /**
      * Validate Field
      *
      * @return bool
      */
     public function validateField()
     {
-        $validationSettings = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
-        $validationSettings = str_replace('|', ',', $validationSettings);
+        if ($this->isValidationSettingsDifferentToGlobalSettings()) {
+            $this->addMessage('validationErrorGeneral');
+            return false;
+        }
 
-        foreach ($validationSettings as $validationSetting) {
+        foreach ($this->getValidationSettings() as $validationSetting) {
             switch ($validationSetting) {
                 case 'required':
                     if (!$this->validateRequired($this->getValue())) {
@@ -193,10 +208,9 @@ class ClientsideValidator extends AbstractValidator
                     $mainSetting = StringUtility::getValuesBeforeBrackets($validationSetting);
                     if (method_exists($this, 'validate' . ucfirst($mainSetting))) {
                         if (!$this->{'validate' . ucfirst($mainSetting)}(
-                                $this->getValue(),
-                                StringUtility::getValuesInBrackets($validationSetting)
-                            )
-                        ) {
+                            $this->getValue(),
+                            StringUtility::getValuesInBrackets($validationSetting)
+                        )) {
                             $this->addMessage('validationError' . ucfirst($mainSetting));
                             $this->isValid = false;
                         }
@@ -205,6 +219,18 @@ class ClientsideValidator extends AbstractValidator
         }
 
         return $this->isValid;
+    }
+
+    /**
+     * This function checks the given validation string from user input against settings in TypoScript. If both strings
+     * do not match, it could be possible that there is a manipulation. In this case, we stop validation and return a
+     * global error message
+     *
+     * @return bool
+     */
+    protected function isValidationSettingsDifferentToGlobalSettings(): bool
+    {
+        return $this->getValidationSettingsString() !== $this->getValidationSettingsFromTypoScript();
     }
 
     /**
@@ -220,13 +246,35 @@ class ClientsideValidator extends AbstractValidator
     }
 
     /**
-     * Get validation
-     *
      * @return string
      */
     public function getValidationSettingsString()
     {
         return $this->validationSettingsString;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValidationSettingsFromTypoScript(): string
+    {
+        $controllerName = $this->getControllerName();
+        $validationService = ObjectUtility::getObjectManager()->get(
+            ValidationSettingsService::class,
+            $controllerName,
+            $this->getValidationName()
+        );
+        return $validationService->getValidationStringForField($this->fieldName);
+    }
+
+    /**
+     * @return array
+     */
+    protected function getValidationSettings(): array
+    {
+        $validationSettings = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
+        $validationSettings = str_replace('|', ',', $validationSettings);
+        return $validationSettings;
     }
 
     /**
@@ -328,6 +376,64 @@ class ClientsideValidator extends AbstractValidator
     public function getAdditionalValue()
     {
         return $this->additionalValue;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPlugin(): int
+    {
+        return $this->plugin;
+    }
+
+    /**
+     * @param int $plugin
+     * @return ClientsideValidator
+     */
+    public function setPlugin(int $plugin)
+    {
+        $this->plugin = $plugin;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getActionName(): string
+    {
+        return $this->actionName;
+    }
+
+    /**
+     * @param string $actionName
+     * @return ClientsideValidator
+     */
+    public function setActionName(string $actionName)
+    {
+        $this->actionName = $actionName;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getValidationName(): string
+    {
+        $validationName = 'validation';
+        if ($this->getControllerName() === 'invitation' && $this->getActionName() === 'edit') {
+            $validationName = 'validationEdit';
+        }
+        return $validationName;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getControllerName(): string
+    {
+        $pluginRepository = ObjectUtility::getObjectManager()->get(PluginRepository::class);
+        $controllerName = $pluginRepository->getControllerNameByPluginSettings($this->getPlugin());
+        return $controllerName;
     }
 
     /**
