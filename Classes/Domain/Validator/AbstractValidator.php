@@ -349,26 +349,69 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     }
 
     /**
-     * Initialize Method
-     *
      * @return void
      */
     protected function init()
+    {
+        $this->setPluginVariables();
+        $this->setValidationSettings();
+    }
+
+    /**
+     * @return void
+     */
+    protected function setPluginVariables()
+    {
+        $this->pluginVariables = GeneralUtility::_GP('tx_femanager_pi1');
+    }
+
+    /**
+     * @return void
+     */
+    protected function setValidationSettings()
     {
         $config = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'Femanager',
             'Pi1'
         );
-        $this->pluginVariables = GeneralUtility::_GP('tx_femanager_pi1');
-        $controllerName = 'new';
+        $this->validationSettings = $config[$this->getControllerName()][$this->getValidationName()];
+    }
+
+    /**
+     * @return string
+     */
+    protected function getValidationName(): string
+    {
         $validationName = 'validation';
-        if ($this->pluginVariables['__referrer']['@controller'] !== 'New') {
-            $controllerName = strtolower($this->pluginVariables['__referrer']['@controller']);
-            if ($controllerName === 'invitation' && $this->pluginVariables['__referrer']['@action'] === 'edit') {
-                $validationName = 'validationEdit';
-            }
+        if ($this->getControllerName() === 'invitation' && $this->getActionName() === 'edit') {
+            $validationName = 'validationEdit';
         }
-        $this->validationSettings = $config[$controllerName][$validationName];
+        return $validationName;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getActionName(): string
+    {
+        return $this->pluginVariables['__referrer']['@action'];
+    }
+
+    /**
+     * Get controller name in lowercase
+     *
+     * @return string
+     */
+    protected function getControllerName(): string
+    {
+        $controllerName = 'new';
+        if ($this->pluginVariables['__referrer']['@controller'] === 'Edit') {
+            $controllerName = 'edit';
+        } elseif ($this->pluginVariables['__referrer']['@controller'] === 'Invitation') {
+            $controllerName = 'invitation';
+        }
+        // todo: check if controller is set on current page
+        return $controllerName;
     }
 }
