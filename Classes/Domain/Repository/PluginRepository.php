@@ -49,11 +49,15 @@ class PluginRepository
         $pluginConfigurations = $queryBuilder
             ->select('pi_flexform')
             ->from(self::TABLE_NAME)
-            ->where('pid=' . (int)$pageIdentifier)
+            ->where(
+                $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageIdentifier, \PDO::PARAM_INT)),
+                $queryBuilder->expr()->eq('CType', $queryBuilder->createNamedParameter('list')),
+                $queryBuilder->expr()->eq('list_type', $queryBuilder->createNamedParameter('femanager_pi1'))
+            )
             ->execute()
             ->fetchAll();
         foreach ($pluginConfigurations as $pluginConfiguration) {
-            if ($this->isViewInPluginConfiguration($view, $pluginConfiguration['pi_flexform'])) {
+            if ($this->isViewInPluginConfiguration($view, (string) $pluginConfiguration['pi_flexform'])) {
                 return true;
             }
         }
