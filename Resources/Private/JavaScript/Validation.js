@@ -157,6 +157,8 @@ jQuery.fn.femanagerValidation = function($) {
 		var nameParts = element.prop('name').split('[');
 		if (nameParts[2] !== undefined) {
 			name = nameParts[2].replace(']', '');
+		} else {
+			name = nameParts[1].replace(']', '');
 		}
 		return name;
 	}
