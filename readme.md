@@ -21,16 +21,20 @@ Quick guide:
 
 | Femanager   | TYPO3      | PHP       | Support/Development                     |
 | ----------- | ---------- | ----------|---------------------------------------- |
-| 4.x         | 8.7        | 7.0 - 7.2 | Features, Bugfixes, Security Updates    |
-| 3.x         | 8.7        | 7.0 - 7.2 | Security Updates                        |
-| 2.x         | 7.6        | 5.5 - 7.0 | Security Updates                        |
-| 1.x         | 6.2 - 7.6  | 5.5 - 7.0 | Security Updates                        |
+| 5.x         | 8.7 - 9.5  | 7.2 - 7.3 | In Development - Features, Bugfixes, Security Updates|
+| 4.x         | 8.7        | 7.0 - 7.2 | Security Updates|
+| 3.x         | 8.7        | 7.0 - 7.2 | Security Updates on demand (ask for an offer)|
+| 2.x         | 7.6        | 5.5 - 7.0 | Security Updates on demand (ask for an offer)|
+| 1.x         | 6.2 - 7.6  | 5.5 - 7.0 | Security Updates on demand (ask for an offer)|
+
+Offical support (fee-based) via https://www.in2code.de/kontakt 
 
 ## Changelog
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| 4.2.3      | 2019-01-22 | Security     | Don't allow a complete bypass of the validation
+| 4.2.4      | 2019-01-24 | Bugfix       | Validation failed, if more then one content element was besides femanager plugin |
+| 4.2.3      | 2019-01-22 | Security     | Don't allow a complete bypass of the validation|
 | 4.2.2      | 2018-05-11 | Bugfix       | Allow filtering in OpenConfirmationView (BE), Fix case sensitive filename for OpenConfirmationView, Support TYPO3 CMS Subtree packages, update documentaion |
 | 4.2.1      | 2018-05-04 | Task         | Update documenation, fix broken custom validators, enable TS for BE Module, check if admin receive is not empty            |
 | 4.2.0      | 2018-04-24 | Task         | Allow to resend confirmation mail via Backend or Frontend - sponsored by Constructiva Solutions GmbH and in2code GmbH      |
