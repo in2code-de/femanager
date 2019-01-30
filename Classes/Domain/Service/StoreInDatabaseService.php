@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class StoreInDatabaseService
@@ -36,8 +37,6 @@ class StoreInDatabaseService
      */
     public function execute()
     {
-        $this->databaseConnection->exec_INSERTquery($this->getTable(), $this->getProperties());
-
         $insertTable = $this->databaseConnection->getConnectionForTable($this->getTable());
         $insertTable->insert(
             $this->getTable(),
