@@ -39,8 +39,7 @@ class BackendUtility
             ]
         ];
         if ($addReturnUrl) {
-            $uriParameters['returnUrl'] =
-                BackendUtilityCore::getModuleUrl(GeneralUtility::_GET('M'), self::getCurrentParameters());
+            $uriParameters['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
         }
         return BackendUtilityCore::getModuleUrl('record_edit', $uriParameters);
     }
@@ -64,8 +63,7 @@ class BackendUtility
         ];
         if ($addReturnUrl) {
             // @codeCoverageIgnoreStart
-            $uriParameters['returnUrl'] =
-                BackendUtilityCore::getModuleUrl(GeneralUtility::_GET('M'), self::getCurrentParameters());
+            $uriParameters['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
             // @codeCoverageIgnoreEnd
         }
         return BackendUtilityCore::getModuleUrl('record_edit', $uriParameters);
