@@ -85,7 +85,7 @@ jQuery.fn.femanagerValidation = function($) {
 	 */
 	function validateField(element, countForSubmit) {
 		var user = element.closest('form').find('div:first').find('input[name="tx_femanager_pi1[user][__identity]"]').val();
-		var url = Femanager.getBaseUrl() + 'index.php' + '?eID=' + 'femanagerValidate';
+		var url = Femanager.getBaseUrl() + 'index.php' + '?type=1548935210';
 		var validations = getValidations(element);
 		var elementValue = element.val();
 		if ((element.prop('type') == 'checkbox') && (element.prop('checked') == false)) {
@@ -116,13 +116,12 @@ jQuery.fn.femanagerValidation = function($) {
 			},
 			type: 'POST',
 			cache: false,
-			success: function(data) { // return values
+			success: function(json) { // return values
 				if (countForSubmit) {
 					requestCallback.addCallbackToQueue(true);
 				}
-				if (data) {
+				if (json) {
 					try {
-						var json = $.parseJSON(data);
 						if (!json.validate) {
 							writeErrorMessage(element, json.message)
 						} else {
