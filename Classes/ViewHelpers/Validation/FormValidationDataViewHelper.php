@@ -2,26 +2,15 @@
 declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Validation;
 
+use In2code\Femanager\Domain\Service\ValidationSettingsService;
+use In2code\Femanager\Utility\ObjectUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Class FormValidationDataViewHelper
  */
 class FormValidationDataViewHelper extends AbstractValidationViewHelper
 {
-
-    /**
-     * Validation names with simple configuration
-     *
-     * @var array
-     */
-    protected $simpleValidations = [
-		'date',
-		'email',
-		'intOnly',
-		'lettersOnly',
-		'required',
-		'uniqueInDb',
-		'uniqueInPage'
-    ];
 
     /**
      * Set javascript validation data for input fields
@@ -34,8 +23,18 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper
         $fieldName = $this->arguments['fieldName'];
         $additionalAttributes = $this->arguments['additionalAttributes'];
 
-        if ($settings[$this->getControllerName()]['validation']['_enable']['client'] === '1') {
-            $validationString = $this->getValidationString($settings, $fieldName);
+        if ($settings !== []) {
+            GeneralUtility::deprecationLog(
+                'Settings should not be filled any more in field partials. Pls update your femanager partial files.'
+            );
+        }
+        $validationService = ObjectUtility::getObjectManager()->get(
+            ValidationSettingsService::class,
+            $this->getControllerName(),
+            $this->getValidationName()
+        );
+        if ($validationService->isValidationEnabled('client')) {
+            $validationString = $validationService->getValidationStringForField($fieldName);
             if (!empty($validationString)) {
                 if (!empty($additionalAttributes['data-validation'])) {
                     $additionalAttributes['data-validation'] .= ',' . $validationString;
@@ -45,61 +44,6 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper
             }
         }
         return $additionalAttributes;
-    }
-
-    /**
-     * Get validation string like
-     *        required, email, min(10), max(10), intOnly,
-     *        lettersOnly, uniqueInPage, uniqueInDb, date,
-     *        mustInclude(number|letter|special), inList(1|2|3)
-     *
-     * @param array $settings Validation TypoScript
-     * @param string $fieldName Fieldname
-     * @return string
-     */
-    protected function getValidationString($settings, $fieldName)
-    {
-        $string = '';
-        $validationSettings = (array)$settings[$this->getControllerName()][$this->getValidationName()][$fieldName];
-        foreach ($validationSettings as $validation => $configuration) {
-            if (!empty($string)) {
-                $string .= ',';
-            }
-            $string .= $this->getSingleValidationString($validation, $configuration);
-        }
-        return $string;
-    }
-
-    /**
-     * @param string $validation
-     * @param string $configuration
-     * @return string
-     */
-    protected function getSingleValidationString($validation, $configuration)
-    {
-        $string = '';
-        if ($this->isSimpleValidation($validation) && $configuration === '1') {
-            $string = $validation;
-        }
-        if (!$this->isSimpleValidation($validation)) {
-            $string = $validation;
-            $string .= '(' . str_replace(',', '|', $configuration) . ')';
-        }
-        return $string;
-    }
-
-    /**
-     * Check if validation is simple or extended
-     *
-     * @param string $validation
-     * @return bool
-     */
-    protected function isSimpleValidation($validation)
-    {
-        if (in_array($validation, $this->simpleValidations)) {
-            return true;
-        }
-        return false;
     }
 
     /**

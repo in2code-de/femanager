@@ -343,7 +343,8 @@ abstract class AbstractController extends ActionController
             [
                 'languageUid' => FrontendUtility::getFrontendLanguageUid(),
                 'storagePid' => $this->allConfig['persistence']['storagePid'],
-                'Pid' => FrontendUtility::getCurrentPid()
+                'Pid' => FrontendUtility::getCurrentPid(),
+                'data' => $this->contentObject->data
             ]
         );
     }
