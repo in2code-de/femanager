@@ -84,7 +84,9 @@ jQuery.fn.femanagerValidation = function($) {
 	 * @return void
 	 */
 	function validateField(element, countForSubmit) {
-		var user = element.closest('form').find('div:first').find('input[name="tx_femanager_pi1[user][__identity]"]').val();
+		var $form = element.closest('form');
+		var user = $form.find('div:first').find('input[name="tx_femanager_pi1[user][__identity]"]').val();
+		var action = $form.find('div:first').find('input[name="tx_femanager_pi1[__referrer][@action]"]').val();
 		var url = Femanager.getBaseUrl() + 'index.php' + '?type=1548935210';
 		var validations = getValidations(element);
 		var elementValue = element.val();
@@ -110,6 +112,8 @@ jQuery.fn.femanagerValidation = function($) {
 				'tx_femanager_pi1[field]': getFieldName(element),
 				'tx_femanager_pi1[user]': (user !== undefined ? user : ''),
 				'tx_femanager_pi1[additionalValue]=': (additionalValue ? additionalValue : ''),
+				'tx_femanager_pi1[plugin]=': $form.data('femanager-plugin'),
+				'tx_femanager_pi1[action1]=': action,
 				'storagePid': $('#femanagerStoragePid').val(),
 				'L': $('#femanagerLanguage').val(),
 				'id': $('#femanagerPid').val()
@@ -152,6 +156,8 @@ jQuery.fn.femanagerValidation = function($) {
 		var nameParts = element.prop('name').split('[');
 		if (nameParts[2] !== undefined) {
 			name = nameParts[2].replace(']', '');
+		} else {
+			name = nameParts[1].replace(']', '');
 		}
 		return name;
 	}
