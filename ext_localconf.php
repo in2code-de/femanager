@@ -21,7 +21,4 @@ call_user_func(function () {
             'Invitation' => 'new, create, edit, update, delete'
         ]
     );
-
-    // eID for FeUser simulation (FE)
-    $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['femanagerLoginAs'] = 'EXT:femanager/Classes/Eid/LoginAsEid.php';
 });
