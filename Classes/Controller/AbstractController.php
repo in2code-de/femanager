@@ -404,7 +404,7 @@ abstract class AbstractController extends ActionController
     protected function checkStoragePid()
     {
         if ((int)$this->allConfig['persistence']['storagePid'] === 0
-            && !GeneralUtility::_GP('eID')
+            && GeneralUtility::_GP('type') !== '1548935210'
             && TYPO3_MODE !== 'BE'
         ) {
             $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', FlashMessage::ERROR);

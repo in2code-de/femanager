@@ -3,7 +3,6 @@ declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
@@ -19,10 +18,10 @@ class ObjectUtility extends AbstractUtility
 {
 
     /**
-     * @return DatabaseConnection
+     * @return ConnectionPool
      * @codeCoverageIgnore
      */
-    public static function getDatabaseConnection(): DatabaseConnection
+    public static function getDatabaseConnection(): ConnectionPool
     {
         return parent::getDatabaseConnection();
     }

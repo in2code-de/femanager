@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -24,23 +25,28 @@ class RequestViewHelper extends AbstractViewHelper
     /**
      * @var array
      */
-    protected $testVariables = null;
+    protected $testVariables;
 
     /**
      * Get a GET or POST parameter
      *
-     * @param string $parameter like tx_ext_pi1|list|field
-     * @param bool $htmlspecialchars Enable/Disable htmlspecialchars
      * @return string
      */
-    public function render(string $parameter = '', bool $htmlspecialchars = true)
+    public function render(): string
     {
+        $parameter = $this->arguments['parameter'];
+        $htmlspecialchars = $this->arguments['htmlspecialchars'];
+
         $parts = $this->init($parameter);
         $result = $this->getVariableFromDepth($parts);
         if ($htmlspecialchars === true) {
             if (is_string($result)) {
                 $result = htmlspecialchars($result);
             }
+        }
+        if (is_array($result) or $result === null) {
+            // ensure that the return value is always as string
+            $result='';
         }
         return $result;
     }
@@ -56,6 +62,7 @@ class RequestViewHelper extends AbstractViewHelper
             $this->depth++;
             $this->getVariableFromDepth($param);
         }
+
         return $this->variable;
     }
 
@@ -72,6 +79,19 @@ class RequestViewHelper extends AbstractViewHelper
         if ($this->testVariables) {
             $this->variable = $this->testVariables[$parts[0]];
         }
+
         return $parts;
+    }
+
+    /**
+     * Register all arguments for this viewhelper
+     *
+     * @return void
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('parameter', 'string', 'like tx_ext_pi1|list|field', false, '');
+        $this->registerArgument('htmlspecialchars', 'bool', 'Enable/Disable htmlspecialchars', false, true);
     }
 }

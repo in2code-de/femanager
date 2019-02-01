@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Validation;
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Class AbstractValidationViewHelper
@@ -21,7 +21,7 @@ abstract class AbstractValidationViewHelper extends AbstractViewHelper
 
         // special case for second step in invitation
         if ($this->getControllerName() === 'invitation' &&
-            $this->controllerContext->getRequest()->getControllerActionName() === 'edit') {
+            $this->renderingContext->getControllerContext()->getRequest()->getControllerActionName() === 'edit') {
             $validationName = 'validationEdit';
         }
 
@@ -35,6 +35,6 @@ abstract class AbstractValidationViewHelper extends AbstractViewHelper
      */
     protected function getControllerName()
     {
-        return strtolower($this->controllerContext->getRequest()->getControllerName());
+        return strtolower($this->renderingContext->getControllerContext()->getRequest()->getControllerName());
     }
 }

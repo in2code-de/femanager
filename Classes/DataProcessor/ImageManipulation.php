@@ -65,8 +65,14 @@ class ImageManipulation extends AbstractDataProcessor
         foreach ($this->getConfiguration('sysFileRelation') as $field => $value) {
             $properties[$field] = $value;
         }
-        ObjectUtility::getDatabaseConnection()->exec_INSERTquery('sys_file_reference', $properties);
-        return (int)ObjectUtility::getDatabaseConnection()->sql_insert_id();
+
+        $databaseConnectionForPages = ObjectUtility::getDatabaseConnection()->getConnectionForTable('sys_file_reference');
+        $databaseConnectionForPages->insert(
+            'sys_file_reference',
+            $properties
+        );
+
+        return (int)$databaseConnectionForPages->lastInsertId('sys_file_reference');
     }
 
     /**

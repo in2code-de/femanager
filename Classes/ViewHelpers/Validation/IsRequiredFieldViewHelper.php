@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Validation;
 
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -19,12 +20,13 @@ class IsRequiredFieldViewHelper extends AbstractValidationViewHelper
     /**
      * Check if this field is a required field
      *
-     * @param string $fieldName
      * @return bool
      */
-    public function render($fieldName)
+    public function render()
     {
+        $fieldName = $this->arguments['fieldName'];
         $settings = $this->getSettingsConfiguration();
+
         return !empty($settings[$this->getControllerName()][$this->getValidationName()][$fieldName]['required']);
     }
 
@@ -38,5 +40,17 @@ class IsRequiredFieldViewHelper extends AbstractValidationViewHelper
             'Femanager',
             'Pi1'
         );
+    }
+
+    /**
+     * Initialize the arguments.
+     *
+     * @return void
+     * @api
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('fieldName', 'string ', 'Check if this field is a required field', true);
     }
 }

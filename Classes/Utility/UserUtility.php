@@ -305,9 +305,11 @@ class UserUtility extends AbstractUtility
         $tsfe->fe_user->checkPid = false;
         $info = $tsfe->fe_user->getAuthInfoArray();
 
+        $cleanIntList = implode(',', GeneralUtility::intExplode(',', $storagePids));
+
         $extraWhere = ' AND uid = ' . (int)$user->getUid();
         if (!empty($storagePids)) {
-            $extraWhere = ' AND pid IN (' . self::getDatabaseConnection()->cleanIntList($storagePids) . ')';
+            $extraWhere = ' AND pid IN (' . $cleanIntList . ')';
         }
         $user = $tsfe->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
         $tsfe->fe_user->createUserSession($user);
