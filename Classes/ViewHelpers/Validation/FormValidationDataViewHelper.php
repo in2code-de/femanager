@@ -15,13 +15,14 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper
     /**
      * Set javascript validation data for input fields
      *
-     * @param string $fieldName Fieldname
-     * @param array $settings TypoScript
-     * @param array $additionalAttributes AdditionalAttributes
      * @return array
      */
-    public function render($fieldName, $settings = [], $additionalAttributes = [])
+    public function render()
     {
+        $settings = $this->arguments['settings'];
+        $fieldName = $this->arguments['fieldName'];
+        $additionalAttributes = $this->arguments['additionalAttributes'];
+
         if ($settings !== []) {
             GeneralUtility::deprecationLog(
                 'Settings should not be filled any more in field partials. Pls update your femanager partial files.'
@@ -43,5 +44,19 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper
             }
         }
         return $additionalAttributes;
+    }
+
+    /**
+     * Initialize the arguments.
+     *
+     * @return void
+     * @api
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('settings', 'array ', 'all TypoScript settings for this form', true);
+        $this->registerArgument('fieldName', 'string ', 'Fieldname which should get validated', true);
+        $this->registerArgument('additionalAttributes', 'array ', '$additionalAttributes for this field', false);
     }
 }

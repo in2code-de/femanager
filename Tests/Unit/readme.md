@@ -2,7 +2,7 @@
 
 ## On command line
 
-* First of all go to extension folder in console
+* First of all, go to extension folder in console
 * Then do a `composer update`
 * After that you can call `/usr/bin/php .Build/vendor/phpunit/phpunit/phpunit --configuration phpunit.xml.dist`
 

@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -16,11 +17,23 @@ class JsonEncodeViewHelper extends AbstractViewHelper
     protected $escapeOutput = false;
 
     /**
-     * @param array $array
      * @return string
      */
-    public function render(array $array): string
+    public function render(): string
     {
+        $array = $this->arguments['array'];
+
         return json_encode($array);
+    }
+
+    /**
+     * Initialize the arguments.
+     *
+     * @return void
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('array', 'array ', 'Json array', false);
     }
 }

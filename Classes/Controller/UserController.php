@@ -88,7 +88,7 @@ class UserController extends AbstractController
      * @param User $user Existing User
      * @param string $additionalValue Additional Values
      * @param int $plugin tt_content.uid of the femanager plugin
-     * @param string $action current action name
+     * @param string $referrerAction current action name
      * @return void
      */
     public function validateAction(
@@ -98,7 +98,7 @@ class UserController extends AbstractController
         User $user = null,
         $additionalValue = '',
         int $plugin = 0,
-        string $action = ''
+        string $referrerAction = ''
     ) {
         $clientsideValidator = $this->objectManager->get(ClientsideValidator::class);
         $result = $clientsideValidator
@@ -108,7 +108,7 @@ class UserController extends AbstractController
             ->setUser($user)
             ->setAdditionalValue($additionalValue)
             ->setPlugin($plugin)
-            ->setActionName($action)
+            ->setActionName($referrerAction)
             ->validateField();
 
         $this->view->assignMultiple(

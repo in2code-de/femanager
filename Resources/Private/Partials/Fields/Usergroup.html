@@ -22,7 +22,7 @@
 					defaultOption="{f:translate(key:'pleaseChoose')}"
 					class="form-control"
 					value="{femanager:Misc.GetFirst(objectStorage:user.usergroup)}"
-					additionalAttributes="{femanager:Validation.FormValidationData(fieldName:'usergroup')}" />
+					additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'usergroup')}" />
 		</div>
 	</div>
 </f:section>
@@ -53,7 +53,7 @@
 						sortByOptionLabel="1"
 						class="form-control"
 						value="{femanager:Misc.GetFirst(objectStorage:user.usergroup)}"
-						additionalAttributes="{femanager:Validation.FormValidationData(fieldName:'usergroup')}" />
+						additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'usergroup')}" />
 			</div>
 		</div>
 

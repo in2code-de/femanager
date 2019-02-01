@@ -1,13 +1,7 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
 <f:be.container
 		includeCssFiles="{0: '{f:uri.resource(path:\'Css/Backend.min.css\')}'}"
-		includeJsFiles="{0: '{f:uri.resource(path:\'JavaScript/Backend.min.js\')}'}"
-		enableClickMenu="false"
-		loadExtJs="false"
-		loadExtJsTheme="false"
-		enableExtJsDebug="false"
-		loadJQuery="true"
-		jQueryNamespace="defaultNoConflict"
+		includeRequireJsModules="{0: 'TYPO3/CMS/Femanager/Backend.min'}"
 		pageTitle="femanager">
 	<div class="module">
 		<div class="module-docheader">
