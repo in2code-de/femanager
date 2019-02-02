@@ -13,10 +13,20 @@ Upgrade
 
 .. _guide:
 
+to version 4.2.3 / 4.2.4 / 4.2.5
+------------
+
+If you use your own HTML templates of new/edit/invitation-templates you should compare them with the one from
+EXT:femanager. There is a new additional attribute inside the form viewhelper: data-femanager-plugin, which contains
+the content element id.
+
+If you use a modified version of the Validation.js, there are also changes: plugin and action parameter is send to
+the eID-Script now
+
 to version 5
 ------------
 
-There are no big breaking changes include. Main change is, that all eid scripts were replace, by a page num approach.
+There are minor breaking changes include. Main change is, that all eid scripts were replace, by a page num approach.
 
 In order that the js validation works, you need to take care, that you these page typenums are available:
 
