@@ -35,7 +35,7 @@ class PluginRepository
             ->where('uid=' . (int)$contentIdentifier)
             ->execute()
             ->fetchColumn(0);
-        return $this->getViewFromFlexForm($flexForm);
+        return $this->getViewFromFlexForm((string)$flexForm);
     }
 
     /**
@@ -57,7 +57,7 @@ class PluginRepository
             ->execute()
             ->fetchAll();
         foreach ($pluginConfigurations as $pluginConfiguration) {
-            if ($this->isViewInPluginConfiguration($view, (string) $pluginConfiguration['pi_flexform'])) {
+            if ($this->isViewInPluginConfiguration($view, (string)$pluginConfiguration['pi_flexform'])) {
                 return true;
             }
         }

@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Be;
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -9,28 +10,44 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class GetClassNameOnActionViewHelper extends AbstractViewHelper
 {
-
     /**
      * Return className if actionName fits to current action
      *
-     * @param string $actionName action name to compare with current action
-     * @param string $className classname that should be returned if action fits
-     * @param string $fallbackClassName fallback classname if action does not fit
      * @return string
      */
-    public function render($actionName, $className = ' btn-info', $fallbackClassName = '')
+    public function render(): string
     {
+        $actionName = $this->arguments['actionName'];
+        $className = $this->arguments['className'];
+        $fallbackClassName = $this->arguments['fallbackClassName'];
+
         if ($this->getCurrentActionName() === $actionName) {
             return $className;
         }
+
         return $fallbackClassName;
     }
 
     /**
+     * Return the current action name from the controller context
+     *
      * @return string
      */
-    protected function getCurrentActionName()
+    protected function getCurrentActionName(): string
     {
-        return $this->controllerContext->getRequest()->getControllerActionName();
+        return $this->renderingContext->getControllerContext()->getRequest()->getControllerActionName();
+    }
+
+    /**
+     * Register all arguments for this viewhelper
+     *
+     * @return void
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('actionName', 'string', 'action name to compare with current action', true);
+        $this->registerArgument('className', 'string', 'classname that should be returned if action fits', false, ' btn-info');
+        $this->registerArgument('fallbackClassName', 'string', 'fallback classname if action does not fit', false, '');
     }
 }

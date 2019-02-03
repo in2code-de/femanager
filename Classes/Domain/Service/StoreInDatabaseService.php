@@ -2,6 +2,9 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Class StoreInDatabaseService
  */
@@ -23,7 +26,7 @@ class StoreInDatabaseService
     protected $properties = [];
 
     /**
-     * @var \TYPO3\CMS\Core\Database\DatabaseConnection
+     * @var \TYPO3\CMS\CORE\Database\ConnectionPool
      */
     protected $databaseConnection = null;
 
@@ -34,8 +37,13 @@ class StoreInDatabaseService
      */
     public function execute()
     {
-        $this->databaseConnection->exec_INSERTquery($this->getTable(), $this->getProperties());
-        return $this->databaseConnection->sql_insert_id();
+        $insertTable = $this->databaseConnection->getConnectionForTable($this->getTable());
+        $insertTable->insert(
+            $this->getTable(),
+            $this->getProperties()
+        );
+
+        return (int)$insertTable->lastInsertId($this->getTable());
     }
 
     /**
@@ -99,6 +107,6 @@ class StoreInDatabaseService
      */
     public function __construct()
     {
-        $this->databaseConnection = $GLOBALS['TYPO3_DB'];
+        $this->databaseConnection = GeneralUtility::makeInstance(ConnectionPool::class);
     }
 }

@@ -53,14 +53,16 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     /**
      * Validation for required
      *
-     * @param string $value
+     * @param mixed $value
      * @return \bool
      */
     protected function validateRequired($value)
     {
         if (!is_object($value)) {
             return !empty($value);
-        } elseif (count($value)) {
+        } elseif ((is_array($value) || $value instanceof \Countable) && count($value) > 0) {
+            return true;
+        } elseif ($value instanceof \DateTime) {
             return true;
         }
         return false;

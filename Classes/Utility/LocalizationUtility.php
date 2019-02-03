@@ -2,15 +2,14 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility as LocalizationUtilityExtbase;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility as ExtbaseLocalizationUtility;
 
 /**
  * Class LocalizationUtility
  * @codeCoverageIgnore
  */
-class LocalizationUtility extends LocalizationUtilityExtbase
+class LocalizationUtility
 {
-
     /**
      * Returns the localized label of the LOCAL_LANG key, but prefill extensionName
      *
@@ -21,7 +20,7 @@ class LocalizationUtility extends LocalizationUtilityExtbase
      */
     public static function translate($key, $extensionName = 'femanager', $arguments = null)
     {
-        return parent::translate($key, $extensionName, $arguments);
+        return ExtbaseLocalizationUtility::translate($key, $extensionName, $arguments);
     }
 
     /**

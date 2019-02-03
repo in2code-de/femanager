@@ -1,15 +1,15 @@
 default:
   autoload:
-    '': %paths.base%/Features/Bootstrap
+    '': '%paths.base%/Features/Bootstrap'
   suites:
     default:
       paths:
-        features: %paths.base%/Features
-        bootstrap: %paths.base%/Features/Bootstrap
+        features: '%paths.base%/Features'
+        bootstrap: '%paths.base%/Features/Bootstrap'
       contexts: [FeatureContext]
   extensions:
     Behat\MinkExtension:
-      base_url: http://femanager.localhost.de
+      base_url: http://femanager.ddev.local
       files_path: /var/www/html/femanagerShared/fileadmin/user_upload
       goutte: ~
       selenium2: ~
