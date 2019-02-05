@@ -84,8 +84,10 @@ jQuery.fn.femanagerValidation = function($) {
 	 * @return void
 	 */
 	function validateField(element, countForSubmit) {
-		var user = element.closest('form').find('div:first').find('input[name="tx_femanager_pi1[user][__identity]"]').val();
-		var url = Femanager.getBaseUrl() + 'index.php' + '?eID=' + 'femanagerValidate';
+		var $form = element.closest('form');
+		var user = $form.find('div:first').find('input[name="tx_femanager_pi1[user][__identity]"]').val();
+		var action = $form.find('div:first').find('input[name="tx_femanager_pi1[__referrer][@action]"]').val();
+		var url = Femanager.getBaseUrl() + 'index.php' + '?type=1548935210';
 		var validations = getValidations(element);
 		var elementValue = element.val();
 		if ((element.prop('type') == 'checkbox') && (element.prop('checked') == false)) {
@@ -109,20 +111,21 @@ jQuery.fn.femanagerValidation = function($) {
 				'tx_femanager_pi1[value]': elementValue,
 				'tx_femanager_pi1[field]': getFieldName(element),
 				'tx_femanager_pi1[user]': (user !== undefined ? user : ''),
-				'tx_femanager_pi1[additionalValue]=': (additionalValue ? additionalValue : ''),
+				'tx_femanager_pi1[additionalValue]': (additionalValue ? additionalValue : ''),
+				'tx_femanager_pi1[plugin]': $form.data('femanager-plugin'),
+				'tx_femanager_pi1[referrerAction]': action,
 				'storagePid': $('#femanagerStoragePid').val(),
 				'L': $('#femanagerLanguage').val(),
 				'id': $('#femanagerPid').val()
 			},
 			type: 'POST',
 			cache: false,
-			success: function(data) { // return values
+			success: function(json) { // return values
 				if (countForSubmit) {
 					requestCallback.addCallbackToQueue(true);
 				}
-				if (data) {
+				if (json) {
 					try {
-						var json = $.parseJSON(data);
 						if (!json.validate) {
 							writeErrorMessage(element, json.message)
 						} else {
@@ -153,6 +156,8 @@ jQuery.fn.femanagerValidation = function($) {
 		var nameParts = element.prop('name').split('[');
 		if (nameParts[2] !== undefined) {
 			name = nameParts[2].replace(']', '');
+		} else {
+			name = nameParts[1].replace(']', '');
 		}
 		return name;
 	}

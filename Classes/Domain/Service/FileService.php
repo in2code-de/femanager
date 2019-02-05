@@ -93,12 +93,12 @@ class FileService
      * build combined identifier from absolute filename:
      *      "/var/www/fileadmin/folder/test.pdf" => "1:folder/test.pdf"
      *
-     * @Todo Make it a bit less ugly
      * @param string $file relative path and filename
      * @return string
      */
     protected function getCombinedIdentifier(string $file): string
     {
+        //  @Todo Make it a bit less ugly
         $file = PathUtility::getRelativePathTo($file);
         $identifier = $this->substituteFileadminFromPathAndName($file);
         return '1:' . $identifier;

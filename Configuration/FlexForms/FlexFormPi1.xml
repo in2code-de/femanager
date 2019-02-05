@@ -10,6 +10,7 @@
 				</TCEforms>
 				<type>array</type>
 				<el>
+					<!-- Also set allowed controller actions in \In2code\Femanager\Domain\Repository\PluginRepository::$scaString -->
 					<switchableControllerActions>
 						<TCEforms>
 							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.main.view</label>

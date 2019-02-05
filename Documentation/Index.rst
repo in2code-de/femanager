@@ -9,13 +9,13 @@ Femanager is a TYPO3 extension for a modern Frontend-User registration and profi
 .. only:: html
 
 	:Copyright:
-		2013 - 2018
+		2013 - 2019
 
 	:Classification:
 		femanager
 
 	:Version:
-		4.1
+		5.0
 
 	:Language:
 		en
@@ -24,10 +24,10 @@ Femanager is a TYPO3 extension for a modern Frontend-User registration and profi
 		frontend, user, registration, frontend, profile, sr_feuser_register
 
 	:Author:
-		Alex Kellner
+		Alex Kellner, Stefan Busemann
 
 	:Email:
-		alexander.kellner@in2code.de
+		service@in2code.de
 
 
 Table of Contents
@@ -40,6 +40,7 @@ Table of Contents
 
 	Introduction/Index
 	Installation/Index
+   Upgrade/Index
 	Features/Index
 	FAQ/Index
 

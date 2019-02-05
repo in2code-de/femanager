@@ -4,7 +4,7 @@ namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -35,13 +35,13 @@ abstract class AbstractUtility
     }
 
     /**
-     * @return DatabaseConnection
+     * @return ConnectionPool
      * @SuppressWarnings(PHPMD.Superglobals)
      * @codeCoverageIgnore
      */
     protected static function getDatabaseConnection()
     {
-        return $GLOBALS['TYPO3_DB'];
+        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     /**
