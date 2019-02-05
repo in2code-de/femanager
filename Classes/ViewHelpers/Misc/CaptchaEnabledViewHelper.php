@@ -17,7 +17,7 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
     public function initializeArguments()
     {
         parent::initializeArguments();
-        $this->registerArgument('settings', 'bool','array $settings TypoScript',true);
+        $this->registerArgument('settings', 'array','array $settings TypoScript',true);
     }
 
     /**
