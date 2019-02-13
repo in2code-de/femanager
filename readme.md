@@ -33,7 +33,7 @@ Offical support (fee-based) via https://www.in2code.de/kontakt
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| 5.0.0      | 2018-05-11 | Major update | Refactored version for TYPO3 9 LTS  
+| 5.0.0      | 2019-02-01 | Major update | Refactored version for TYPO3 9 LTS  
 | 4.2.5      | 2019-01-30 | Bugfix       | Validation failed for date and some other datetypes                                                                        |
 | 4.2.4      | 2019-01-24 | Bugfix       | Validation failed, if more then one content element was besides femanager plugin                                           |
 | 4.2.3      | 2019-01-22 | Security     | Don't allow a complete bypass of the validation                                                                            |
