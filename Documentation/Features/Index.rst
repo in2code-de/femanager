@@ -1,7 +1,5 @@
 .. include:: ../Includes.txt
 
-.. _features:
-
 Features
 ========
 

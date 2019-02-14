@@ -2208,22 +2208,22 @@ You can overwrite these settings in your page TS.
 
 
 .. t3-field-list-table::
- :header-rows: 1
+   :header-rows: 1
 
- - :Tab:
-      Tab
-   :Field:
+   -  :Tab:
+         Tab
+      :Field:
          Field Name
       :Description:
          Description
       :Default:
          Default Value
- - :Tab:
-      	settings.configPID
-   :Field:
-      typoscript main template storage
-   :Description:
-      You need to specify the pid, where your main typoscript settings (frontend) is stored. Usually you will take the
-       root page of your installation.
-   :Default:
-      1
+   -  :Tab:
+         settings.configPID
+      :Field:
+         typoscript main template storage
+      :Description:
+         You need to specify the pid, where your main typoscript settings (frontend) is stored. Usually you will take the
+          root page of your installation.
+      :Default:
+         1

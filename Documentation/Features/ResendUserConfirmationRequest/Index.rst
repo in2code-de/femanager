@@ -27,7 +27,7 @@ Configuration. Add the plugin "Femanager" to a page and select "resend confirmat
 IMPORTANT: If you want to use these new views and you did use femanager version 4.1 or older, you need open existing plugins and save them again, in order to allow the
 usage of this views.
 
-|femanager_plugin3|
+|plugin3|
 
 Sometimes unconfirmed users are trying to trigger the confirmation mail again by registering again with the same email or username. They get an error "username / email already existing". Since 4.2, an additional message with a "resend confirmation mail" link is displayed in those cases where the existing user has not yet confirmed his registration. 
 
@@ -35,9 +35,7 @@ For this message to be displayed, you need to have the following typoscript sett
 
 ::
 
-   settings.showResendUserConfirmationRequestView = {your pid}
-  
-::
+    settings.showResendUserConfirmationRequestView = {your pid}
 
 The pid is the page uid where your "resend confirmation mail" plugin resides.
 
@@ -48,11 +46,10 @@ Backend View
 Lists all frontend users, which did not confirm their email so far. An admin is able, to decline (delete) users or
 resend an email with a confirmation link.
 
-|backend3|
+|backend4|
 
 To activate the feature add the userTSConfig:
 
 ::
 
-   tx_femanager.UserBackend.confirmation.ResendUserConfirmationRequest = 1
-
+    tx_femanager.UserBackend.confirmation.ResendUserConfirmationRequest = 1
