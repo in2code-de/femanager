@@ -19,11 +19,11 @@ SignalSlots List
 
 
 .. t3-field-list-table::
- :header-rows: 1
+   :header-rows: 1
 
- - :File:
-      File
-   :Located:
+   -  :File:
+         File
+      :Located:
          Located in
       :Signal:
          Signal Name
@@ -32,7 +32,7 @@ SignalSlots List
       :Description:
          Description
 
-    - :File:
+   -  :File:
          NewController.php
       :Located:
          createAction()
@@ -43,7 +43,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook into the process before the new user was persisted
 
-    - :File:
+   -  :File:
          NewController.php
       :Located:
          confirmCreateRequestAction()
@@ -54,7 +54,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook into the confirmation process
 
-    - :File:
+   -  :File:
          NewController.php
       :Located:
          createAdminConfirmationRequest()
@@ -65,7 +65,7 @@ SignalSlots List
       :Description:
          Signal if a user was auto-confirmed
 
-    - :File:
+   -  :File:
          NewController.php
       :Located:
          createAdminConfirmationRequest()
@@ -76,7 +76,7 @@ SignalSlots List
       :Description:
          Signal if a user was not auto-confirmed and must be confirmed manually
 
-    - :File:
+   -  :File:
          EditController.php
       :Located:
          updateAction()
@@ -87,7 +87,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook into the process before the user- profile was updated
 
-    - :File:
+   -  :File:
          EditController.php
       :Located:
          confirmUpdateRequestAction()
@@ -98,7 +98,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook after a profile was accepted or refused
 
-    - :File:
+   -  :File:
          EditController.php
       :Located:
          deleteAction()
@@ -109,7 +109,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook into the process before the user- profile will be deleted
 
-    - :File:
+   -  :File:
          InvitationController.php
       :Located:
          createAction()
@@ -120,7 +120,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook into the process before a new user was persisted
 
-    - :File:
+   -  :File:
          InvitationController.php
       :Located:
          createAllConfirmed()
@@ -131,7 +131,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook into the process after a new user was persisted
 
-    - :File:
+   -  :File:
          InvitationController.php
       :Located:
          editAction()
@@ -142,7 +142,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook into the process before a user adds a new password (step 1)
 
-    - :File:
+   -  :File:
          InvitationController.php
       :Located:
          updateAction()
@@ -153,7 +153,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook into the process after a user adds a new password (step 2)
 
-    - :File:
+   -  :File:
          UserController.php
       :Located:
          loginAsAction()
@@ -164,7 +164,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook into the process after you simulate a frontend user login
 
-    - :File:
+   -  :File:
          UserBackendController.php
       :Located:
          confirmUserAction()
@@ -175,7 +175,7 @@ SignalSlots List
       :Description:
          Signal if a user profile was confirmed in backend module
 
-    - :File:
+   -  :File:
          UserBackendController.php
       :Located:
          refuseUserAction()
@@ -186,7 +186,7 @@ SignalSlots List
       :Description:
          Signal if a user profile was refused in backend module
 
-    - :File:
+   -  :File:
          AbstractController.php
       :Located:
          finalCreate()
@@ -197,7 +197,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook into the process after the new user was persisted
 
-    - :File:
+   -  :File:
          AbstractController.php
       :Located:
          updateAllConfirmed()
@@ -208,7 +208,7 @@ SignalSlots List
       :Description:
          Use this signal if you want to hook into the process after the new user was persisted
 
-    - :File:
+   -  :File:
          ?
       :Located:
          ?

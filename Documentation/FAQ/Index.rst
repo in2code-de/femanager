@@ -59,7 +59,7 @@ A: Enable/Disable Validation via TypoScript – disable example:
 
 
 Q: How can I configure the validation of my fields?
---------------------------------------------------
+---------------------------------------------------
 
 A: Have a look into TypoScript:
 
