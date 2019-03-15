@@ -10,8 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
-use TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
 
 /**
  * Class UserUtility
@@ -182,12 +181,8 @@ class UserUtility extends AbstractUtility
                 break;
 
             default:
-                if (ExtensionManagementUtility::isLoaded('saltedpasswords')) {
-                    if (SaltedPasswordsUtility::isUsageEnabled('FE')) {
-                        $objInstanceSaltedPw = SaltFactory::getSaltingInstance();
-                        $user->setPassword($objInstanceSaltedPw->getHashedPassword($user->getPassword()));
-                    }
-                }
+                $hashInstance = GeneralUtility::makeInstance(PasswordHashFactory::class)->getDefaultHashInstance('FE');
+                $user->setPassword($hashInstance->getHashedPassword($user->getPassword()));
         }
     }
 
