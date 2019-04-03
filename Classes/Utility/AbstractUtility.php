@@ -36,10 +36,9 @@ abstract class AbstractUtility
 
     /**
      * @return ConnectionPool
-     * @SuppressWarnings(PHPMD.Superglobals)
      * @codeCoverageIgnore
      */
-    protected static function getDatabaseConnection()
+    public static function getConnectionPool()
     {
         return GeneralUtility::makeInstance(ConnectionPool::class);
     }
