@@ -58,9 +58,10 @@ class NewController extends AbstractController
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
     
         $usernameValidation = $this->settings['new']['validation']['username'];
-        if($usernameValidation['uniqueInDb'] || $usernameValidation['uniqueInPage']) {
-            if(!is_null($this->userRepository->findByUsername($user->getUsername()))) {
-                $this->addFlashMessage(LocalizationUtility::translate('validationErrorUniquePage', $this->extensionName, ['username']));
+        if ($usernameValidation['uniqueInDb'] || $usernameValidation['uniqueInPage']) {
+            if (count($this->userRepository->findByUsername($user->getUsername())) > 0) {
+                $this->addFlashMessage(LocalizationUtility::translate('validationErrorUniquePage', $this->extensionName,
+                    ['username']), '', AbstractMessage::ERROR);
                 $this->forwardToReferringRequest();
             }
         }
