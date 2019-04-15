@@ -206,11 +206,7 @@ class UserUtility extends AbstractUtility
                 break;
 
             default:
-                if (ExtensionManagementUtility::isLoaded('saltedpasswords') && SaltedPasswordsUtility::isUsageEnabled('FE')) {
-                    $hashInstance = SaltFactory::getSaltingInstance();
-                } else {
-                    $hashInstance = $passwordHashFactory->getDefaultHashInstance(TYPO3_MODE);
-                }
+                $hashInstance = $passwordHashFactory->getDefaultHashInstance(TYPO3_MODE);
         }
 
         $saltedHashPassword = $hashInstance->getHashedPassword($user->getPassword());
