@@ -12,6 +12,13 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
 use TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\Argon2iPasswordHash;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\BcryptPasswordHash;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\Pbkdf2PasswordHash;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\BlowfishPasswordHash;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\Md5PasswordHash;
 
 /**
  * Class UserUtility
@@ -147,11 +154,12 @@ class UserUtility extends AbstractUtility
     }
 
     /**
-     * Convert password to md5 or sha1 hash
+     * Convert password to Argon2i, Bcrypt, Pbkdf2, Phpass, Blowfish or Md5 hash
      *
      * @param User $user
      * @param string $method
      * @return void
+     * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
      */
     public static function convertPassword(User $user, $method)
     {
@@ -164,31 +172,46 @@ class UserUtility extends AbstractUtility
      * Hash a password from $user->getPassword()
      *
      * @param User $user
-     * @param string $method "md5", "sha1" or "none"
+     * @param string $method "Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", or "Md5"
      * @return void
+     * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
      */
     public static function hashPassword(User &$user, $method)
     {
+        /** @var PasswordHashFactory $passwordHashFactory */
+        $passwordHashFactory = GeneralUtility::makeInstance(PasswordHashFactory::class);
         switch ($method) {
-            case 'none':
+            case 'Argon2i':
+                $hashInstance = GeneralUtility::makeInstance(Argon2iPasswordHash::class);
                 break;
 
-            case 'md5':
-                $user->setPassword(md5($user->getPassword()));
+            case 'Bcrypt':
+                $hashInstance = GeneralUtility::makeInstance(BcryptPasswordHash::class);
                 break;
 
-            case 'sha1':
-                $user->setPassword(sha1($user->getPassword()));
+            case 'Pbkdf2':
+                $hashInstance = GeneralUtility::makeInstance(Pbkdf2PasswordHash::class);
+                break;
+
+            case 'Phpass':
+                $hashInstance = GeneralUtility::makeInstance(PhpassPasswordHash::class);
+                break;
+
+            case 'Blowfish':
+                $hashInstance = GeneralUtility::makeInstance(BlowfishPasswordHash::class);
+                break;
+
+            case 'Md5':
+                $hashInstance = GeneralUtility::makeInstance(Md5PasswordHash::class);
                 break;
 
             default:
-                if (ExtensionManagementUtility::isLoaded('saltedpasswords')) {
-                    if (SaltedPasswordsUtility::isUsageEnabled('FE')) {
-                        $objInstanceSaltedPw = SaltFactory::getSaltingInstance();
-                        $user->setPassword($objInstanceSaltedPw->getHashedPassword($user->getPassword()));
-                    }
-                }
+                $hashInstance = $passwordHashFactory->getDefaultHashInstance(TYPO3_MODE);
         }
+
+        $saltedHashPassword = $hashInstance->getHashedPassword($user->getPassword());
+        $user->setPassword($saltedHashPassword);
+
     }
 
     /**
