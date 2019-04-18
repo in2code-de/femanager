@@ -342,7 +342,7 @@ A: You can change this via TypoScript:
 		In2code\Femanager\Domain\Model\User {
 			mapping {
 				tableName = fe_users
-				RecordType = anyExtbaseType
+				recordType = anyExtbaseType
 			}
 		}
 	}
