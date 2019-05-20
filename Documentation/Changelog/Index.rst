@@ -43,7 +43,7 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
  - :Version:
       5.0.0 (!!!)
    :Date:
-      2018-10-25
+      2019-02-01
    :Changes:
 
       * Feature: Support for TYPO3 version 9
