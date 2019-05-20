@@ -20,7 +20,7 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
-        $this->registerArgument('objectStorage', 'object ','first subobject of objectstorage', false);
+        $this->registerArgument('objectStorage', 'object','first subobject of objectstorage', false);
     }
 
     /**
