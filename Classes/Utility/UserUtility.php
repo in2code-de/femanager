@@ -273,7 +273,7 @@ class UserUtility extends AbstractUtility
      */
     public static function removeFrontendSessionToUser(User $user)
     {
-        self::getDatabaseConnection()->getConnectionForTable('fe_sessions')->delete(
+        self::getConnectionPool()->getConnectionForTable('fe_sessions')->delete(
             'fe_sessions', ['ses_userid' => (int)$user->getUid()]
         );
     }
@@ -286,7 +286,7 @@ class UserUtility extends AbstractUtility
      */
     public static function checkFrontendSessionToUser(User $user)
     {
-        $queryBuilder = self::getDatabaseConnection()->getQueryBuilderForTable('fe_sessions');
+        $queryBuilder = self::getConnectionPool()->getQueryBuilderForTable('fe_sessions');
 
         $row = $queryBuilder->select('ses_id')
             ->from('fe_sessions')

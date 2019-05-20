@@ -66,7 +66,7 @@ class ImageManipulation extends AbstractDataProcessor
             $properties[$field] = $value;
         }
 
-        $databaseConnectionForPages = ObjectUtility::getDatabaseConnection()->getConnectionForTable('sys_file_reference');
+        $databaseConnectionForPages = ObjectUtility::getConnectionPool()->getConnectionForTable('sys_file_reference');
         $databaseConnectionForPages->insert(
             'sys_file_reference',
             $properties
