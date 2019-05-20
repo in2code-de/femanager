@@ -376,7 +376,7 @@ class UserUtility extends AbstractUtility
      * @return string
      * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
      */
-    protected function hashPasswordV9($password, $method): string
+    protected static function hashPasswordV9($password, $method): string
     {
         /** @var PasswordHashFactory $passwordHashFactory */
         $passwordHashFactory = GeneralUtility::makeInstance(PasswordHashFactory::class);
