@@ -43,15 +43,7 @@ Table of Contents
 	Upgrade/Index
 	Features/Index
 	FAQ/Index
-
-Changelog
-=========
-
-Pls look at https://github.com/in2code-de/femanager for a changelog and a small overview over the extension.
-
-Older versions of femanager, even those which are probably not downloadable through TER, are available on github:
-https://github.com/in2code-de/femanager
-
+   Changelog/Index
 
 Additional Links
 ================
