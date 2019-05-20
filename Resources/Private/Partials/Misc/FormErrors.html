@@ -28,7 +28,7 @@
 										<f:comment>
 											If a validator check (see TypoScript) failed
 										</f:comment>
-										<femanager:misc.upper string="{error.code}" />:
+										<f:translate key="tx_femanager_domain_model_user.{error.code}" />:
 										<f:format.printf arguments="{0: '{fieldname -> f:translate(key:\'tx_femanager_domain_model_user.{error.code}\')}'}">
 											<f:translate key="{error.message}">{error.message}</f:translate>
 										</f:format.printf>
