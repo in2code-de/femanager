@@ -23,6 +23,7 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       not released yet
    :Changes:
 
+      * [BUGFIX] Invitation: Peform expected redirect (thanks to Footrotflat)
       * [BUGFIX] Use HashFactory of V9 and fallback for V8
       * [BUGFIX] use hash password methods (thanks to Lex Frolenko)
       * [BUGFIX] Fix JS validation URL (thanks to Daniel Haupt)
