@@ -59,7 +59,7 @@ A: Enable/Disable Validation via TypoScript – disable example:
 
 
 Q: How can I configure the validation of my fields?
---------------------------------------------------
+---------------------------------------------------
 
 A: Have a look into TypoScript:
 
@@ -342,7 +342,7 @@ A: You can change this via TypoScript:
 		In2code\Femanager\Domain\Model\User {
 			mapping {
 				tableName = fe_users
-				RecordType = anyExtbaseType
+				recordType = anyExtbaseType
 			}
 		}
 	}

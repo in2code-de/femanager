@@ -49,7 +49,11 @@ class PluginRepository
         $pluginConfigurations = $queryBuilder
             ->select('pi_flexform')
             ->from(self::TABLE_NAME)
-            ->where('pid=' . (int)$pageIdentifier . ' and list_type="femanager_pi1" and CType="list"')
+            ->where(
+                $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageIdentifier, \PDO::PARAM_INT)),
+                $queryBuilder->expr()->eq('CType', $queryBuilder->createNamedParameter('list')),
+                $queryBuilder->expr()->eq('list_type', $queryBuilder->createNamedParameter('femanager_pi1'))
+            )
             ->execute()
             ->fetchAll();
         foreach ($pluginConfigurations as $pluginConfiguration) {

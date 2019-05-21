@@ -18,15 +18,6 @@ class ObjectUtility extends AbstractUtility
 {
 
     /**
-     * @return ConnectionPool
-     * @codeCoverageIgnore
-     */
-    public static function getDatabaseConnection(): ConnectionPool
-    {
-        return parent::getDatabaseConnection();
-    }
-
-    /**
      * @param string $tableName
      * @return QueryBuilder
      */

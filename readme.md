@@ -21,7 +21,7 @@ Quick guide:
 
 | Femanager   | TYPO3      | PHP       | Support/Development                     |
 | ----------- | ---------- | ----------|---------------------------------------- |
-| 5.x         | 9 LTS      | 7.2 - 7.3 | Features, Bugfixes, Security Updates    |
+| 5.x         | 8, 9 LTS   | 7.2 - 7.3 | Features, Bugfixes, Security Updates    |
 | 4.x         | 8.7        | 7.0 - 7.2 | Security Updates|
 | 3.x         | 8.7        | 7.0 - 7.2 | Security Updates on demand (ask for an offer)|
 | 2.x         | 7.6        | 5.5 - 7.0 | Security Updates on demand (ask for an offer)|
@@ -33,7 +33,8 @@ Offical support (fee-based) via https://www.in2code.de/kontakt
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| 5.0.0      | 2018-05-11 | Major update | Refactored version for TYPO3 9 LTS  
+| 5.1.0      | 2019-05-21 | Minor update | Allow PHP 7.3, Allow TYPO3 8.7, many bugfixes 
+| 5.0.0      | 2019-02-01 | Major update | Refactored version for TYPO3 9 LTS  
 | 4.2.5      | 2019-01-30 | Bugfix       | Validation failed for date and some other datetypes                                                                        |
 | 4.2.4      | 2019-01-24 | Bugfix       | Validation failed, if more then one content element was besides femanager plugin                                           |
 | 4.2.3      | 2019-01-22 | Security     | Don't allow a complete bypass of the validation                                                                            |

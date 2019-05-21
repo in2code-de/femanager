@@ -23,6 +23,14 @@ class SendMailService
     public $contentObject = null;
 
     /**
+     * SignalSlot Dispatcher
+     *
+     * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
+     * @inject
+     */
+    protected $signalSlotDispatcher;
+
+    /**
      * SendMailService constructor.
      */
     public function __construct()
@@ -72,7 +80,9 @@ class SendMailService
             $this->setCc($typoScript, $email);
             $this->setPriority($typoScript, $email);
             $this->setAttachments($typoScript, $email);
+            $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeSend', [$email, $variables, $this]);
             $email->send();
+            $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterSend', [$email, $variables, $this]);
             return $email->isSent();
         }
         return false;

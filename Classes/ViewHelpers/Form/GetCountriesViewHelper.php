@@ -193,7 +193,7 @@ class GetCountriesViewHelper extends AbstractViewHelper
         'QAT' => 'قطر',
         'REU' => 'Réunion',
         'ROU' => 'România',
-        'RUS' => 'Росси́я',
+        'RUS' => 'Россия',
         'RWA' => 'Rwanda',
         'SAU' => 'السعودية',
         'SLB' => 'Solomon Islands',
