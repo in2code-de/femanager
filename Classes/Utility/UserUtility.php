@@ -179,7 +179,7 @@ class UserUtility extends AbstractUtility
      * Hash a password from $user->getPassword()
      *
      * @param User $user
-     * @param string $method "Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", or "Md5", "sha1"
+     * @param string $method "Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", "md5" or "none" ("sha1" for TYPO3 V8)
      * @return void
      * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
      */
@@ -372,7 +372,7 @@ class UserUtility extends AbstractUtility
      * Password Hashing für TYPO3 Version 9 or newer
      *
      * @param User $user
-     * @param string $method "Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", or "Md5", "sha1"
+     * @param string $method "Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", "Md5" or "none"
      * @return string
      * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
      */
@@ -401,9 +401,11 @@ class UserUtility extends AbstractUtility
                 $hashInstance = GeneralUtility::makeInstance(BlowfishPasswordHash::class);
                 break;
 
-            case 'Md5':
+            case 'md5':
                 $hashInstance = GeneralUtility::makeInstance(Md5PasswordHash::class);
                 break;
+            case 'none':
+                return $password;
 
             default:
                 $hashInstance = $passwordHashFactory->getDefaultHashInstance(TYPO3_MODE);
