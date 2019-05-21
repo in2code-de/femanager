@@ -18,11 +18,12 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       Release Description
 
  - :Version:
-      5.0.1
+      5.1.0
    :Date:
-      not released yet
+      2019-05-21
    :Changes:
-
+      * [FEATURE] Allow TYPO3 Version 8, allow PHP 7.3
+      * [BUGFIX] Allow password hashing none for TYPO3 V9
       * [BUGFIX] Invitation: Peform expected redirect (thanks to Footrotflat)
       * [BUGFIX] Use HashFactory of V9 and fallback for V8
       * [BUGFIX] use hash password methods (thanks to Lex Frolenko)
@@ -32,7 +33,6 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       * [BUGFIX] Update russian lang label
       * [BUGFIX] Update GetFirstViewHelper (thanks to Oliver Beck)
       * [BUGFIX] Fix translation of field names in form errors (thanks to Daniel Haupt)
-      * [TASK] Allow TYPO3 Version 8, allow PHP 7.3
       * [TASK] Add signal beforeSend (thanks to Michael Bakonyi)
       * [TASK] Updated 5.0.0 release date (thanks to Stephan Großberndt)
       * [TASK] Consistent naming for ConnectionPool method (thanks to Stephan Großberndt)
