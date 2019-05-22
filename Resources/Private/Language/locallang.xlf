@@ -399,6 +399,15 @@
 			<trans-unit id="emailUpdateRequestRefusedSignature">
 				<source>Your website team.</source>
 			</trans-unit>
+			<trans-unit id="emailChangeEmailRequestSalutation">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="emailChangeEmailRequestText1">
+				<source>Email changed from %s to %s.</source>
+			</trans-unit>
+			<trans-unit id="emailChangeEmailRequestText2">
+				<source>Please confirm the change to the new email address.</source>
+			</trans-unit>
 			<trans-unit id="emailInvitationSubject">
 				<source>Confirm your profile</source>
 			</trans-unit>

@@ -10,6 +10,7 @@ config.tx_extbase {
 					columns {
 						tx_femanager_terms.mapOnProperty = terms
 						tx_femanager_terms_date_of_acceptance.mapOnProperty = termsDateOfAcceptance
+						tx_femanager_newemail.mapOnProperty = newEmail
 					}
 				}
 			}

@@ -58,6 +58,12 @@ class EditController extends AbstractController
      */
     public function updateAction(User $user)
     {
+        $emailChanged = $user->_isDirty('email');
+        if ($emailChanged) {
+            $user->setNewEmail($user->getEmail());
+            $user->setEmail($user->_getCleanProperty('email'));
+
+        }
         $this->redirectIfDirtyObject($user);
         $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.']);
         $this->emailForUsername($user);
@@ -69,6 +75,78 @@ class EditController extends AbstractController
             $this->updateAllConfirmed($user);
         }
         $this->redirect('edit');
+    }
+
+    /**
+     * Prefix method to updateAction(): Update must be confirmed by Admin
+     *
+     * @param User $user
+     * @return void
+     */
+    public function changedEmailRequest($user)
+    {
+        $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($user);
+        $user = UserUtility::rollbackUserWithChangeRequest($user, $dirtyProperties);
+        $this->sendMailService->send(
+            'changeEmailRequest',
+            StringUtility::makeEmailArray(
+                $user->getNewEmail(),
+                $user->getUsername()
+            ),
+            StringUtility::makeEmailArray(
+                $this->settings['edit']['confirmByAdmin'],
+                $this->settings['edit']['email']['changeEmailRequest']['sender']['name']['value']
+            ),
+            'Email changed',
+            [
+                'user' => $user,
+                'hash' => HashUtility::createHashForUser($user)
+            ],
+            $this->config['edit.']['email.']['changeEmailRequest.']
+        );
+        $this->sendMailService->send(
+            'changeEmailInfo',
+            StringUtility::makeEmailArray(
+                $user->getEmail(),
+                $user->getUsername()
+            ),
+            StringUtility::makeEmailArray(
+                $this->settings['edit']['confirmByAdmin'],
+                $this->settings['edit']['email']['changeEmailInfo']['sender']['name']['value']
+            ),
+            'Email changed',
+            [
+                'user' => $user
+            ],
+            $this->config['edit.']['email.']['changeEmailInfo.']
+        );
+        LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user, ['dirtyProperties' => $dirtyProperties]);
+        $this->redirectByAction('edit', 'requestRedirect');
+        $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
+        $this->addFlashMessage(LocalizationUtility::translate('changeEmailRequest'));
+    }
+
+    public function confirmChangeEmailRequestAction(User $user, $hash, $status = 'confirm')
+    {
+        $this->view->assign('user', $user);
+        if (!HashUtility::validHash($hash, $user) || !$user->getTxFemanagerChangerequest()) {
+            $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', FlashMessage::ERROR);
+
+            return;
+        }
+        switch ($status) {
+            case 'confirm':
+                $user->setEmail($user->getNewEmail());
+                $user->setNewEmail('');
+                break;
+            case 'refuse':
+                $user->setNewEmail('');
+                break;
+            default:
+        }
+        $user->setTxFemanagerChangerequest('');
+        $this->userRepository->update($user);
+        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $hash, $status, $this]);
     }
 
     /**

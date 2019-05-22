@@ -1,0 +1,34 @@
+<f:layout name="Email" />
+
+	Email / ChangeEmailRequest
+
+	This mail will be send to the user, to get a confirmation about an email update.
+	It's only activated, if there is min. one email in the flexform setting.
+
+	Available variables:
+		{user} User Object
+
+<f:section name="main">
+	<p><f:translate key="emailChangeEmailRequestSalutation" /> {user.username},</p>
+
+	<p>
+		<f:format.printf arguments="{0:user.email, 1:user.newEmail}">
+			<f:translate key="emailUpdateRequestText1" />
+		</f:format.printf>
+	</p>
+
+	<p><f:translate key="emailUpdateRequestText2" /></p>
+
+	<ul>
+		<li>
+			<f:link.action action="confirmChangeEmailRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash}">
+				<f:translate key="emailChangeEmailRequestLinkConfirm" />
+			</f:link.action>
+		</li>
+		<li>
+			<f:link.action action="confirmChangeEmailRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash, status:'refuse'}">
+				<f:translate key="emailChangeEmailRequestLinkRefuse" />
+			</f:link.action>
+		</li>
+	</ul>
+</f:section>

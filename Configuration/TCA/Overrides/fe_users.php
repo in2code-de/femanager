@@ -99,10 +99,18 @@ $feUsersColumns = [
             'eval' => 'datetime',
             'readOnly' => true,
         ]
+    ],
+    'tx_femanager_newwmail' => [
+        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' . 'fe_users.newemail',
+        'exclude' => true,
+        'config' => [
+            'type' => 'input',
+            'readOnly' => true
+        ]
     ]
 ];
 $fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin, tx_femanager_terms, ' .
-    'tx_femanager_terms_date_of_acceptance';
+    'tx_femanager_terms_date_of_acceptance, tx_femanager_newemail';
 
 if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableLogActive()) {
     $feUsersColumns['tx_femanager_log'] = [
