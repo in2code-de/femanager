@@ -13,22 +13,10 @@
 
 	<p>
 		<f:format.printf arguments="{0:user.email, 1:user.newEmail}">
-			<f:translate key="emailUpdateRequestText1" />
+			<f:translate key="emailChangeEmailInfoText1" />
 		</f:format.printf>
 	</p>
 
-	<p><f:translate key="emailUpdateRequestText2" /></p>
-
-	<ul>
-		<li>
-			<f:link.action action="confirmChangeEmailRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash}">
-				<f:translate key="emailChangeEmailRequestLinkConfirm" />
-			</f:link.action>
-		</li>
-		<li>
-			<f:link.action action="confirmChangeEmailRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash, status:'refuse'}">
-				<f:translate key="emailChangeEmailRequestLinkRefuse" />
-			</f:link.action>
-		</li>
-	</ul>
+	<p><f:translate key="emailChangeEmailInfoText2" /></p>
+	<p><f:translate key="emailChangeEmailInfoText3" /></p>
 </f:section>

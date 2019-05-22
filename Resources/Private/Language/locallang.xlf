@@ -408,6 +408,15 @@
 			<trans-unit id="emailChangeEmailRequestText2">
 				<source>Please confirm the change to the new email address.</source>
 			</trans-unit>
+			<trans-unit id="emailChangeEmailInfoText1">
+				<source>Your email address was changed from %s to %s.</source>
+			</trans-unit>
+			<trans-unit id="emailChangeEmailInfoText2">
+				<source>If you did not change the email, your account was captured. Please login and change your password.</source>
+			</trans-unit>
+			<trans-unit id="emailChangeEmailInfoText3">
+				<source>If you changed the email, you need to do nothing.</source>
+			</trans-unit>
 			<trans-unit id="emailInvitationSubject">
 				<source>Confirm your profile</source>
 			</trans-unit>
