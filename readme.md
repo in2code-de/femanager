@@ -1,7 +1,7 @@
 # TYPO3 Extension femanager
 
 TYPO3 Frontend User Registration and Management based on
-a very flexible configuration and on TYPO3 8.7 LTS with the possibility to extend it.
+a very flexible configuration and on TYPO3 8.7 LTS and newer with the possibility to extend it.
 Extension basicly works like sr_feuser_register or any other frontend user registration.
 
 ## Quick installation
@@ -27,12 +27,13 @@ Quick guide:
 | 2.x         | 7.6        | 5.5 - 7.0 | Security Updates on demand (ask for an offer)|
 | 1.x         | 6.2 - 7.6  | 5.5 - 7.0 | Security Updates on demand (ask for an offer)|
 
-Offical support (fee-based) via https://www.in2code.de/kontakt 
+Official support (fee-based) via https://www.in2code.de/kontakt 
 
 ## Changelog
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 5.1.1      | 2019-05-26 | Bugfix       | Repair Admin Confirmation for TYPO3 9 
 | 5.1.0      | 2019-05-21 | Minor update | Allow PHP 7.3, Allow TYPO3 8.7, many bugfixes 
 | 5.0.0      | 2019-02-01 | Major update | Refactored version for TYPO3 9 LTS  
 | 4.2.5      | 2019-01-30 | Bugfix       | Validation failed for date and some other datetypes                                                                        |
