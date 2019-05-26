@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
+use TYPO3\CMS\Backend\Routing\Router;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Core\TimeTracker\TimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -39,7 +40,7 @@ class BackendUtility
             ]
         ];
         if ($addReturnUrl) {
-            $uriParameters['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
+            $uriParameters['returnUrl'] = self::getReturnUrl();
         }
         return BackendUtilityCore::getModuleUrl('record_edit', $uriParameters);
     }
@@ -63,10 +64,58 @@ class BackendUtility
         ];
         if ($addReturnUrl) {
             // @codeCoverageIgnoreStart
-            $uriParameters['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
+            $uriParameters['returnUrl'] = self::getReturnUrl();
             // @codeCoverageIgnoreEnd
         }
         return BackendUtilityCore::getModuleUrl('record_edit', $uriParameters);
+    }
+
+    /**
+     * Get return URL from current request
+     *
+     * @return string
+     */
+    protected static function getReturnUrl()
+    {
+        return self::getModuleUrl(self::getModuleName(), self::getCurrentParameters());
+    }
+
+    /**
+     * Get module name or route as fallback
+     *
+     * @return string
+     */
+    protected static function getModuleName()
+    {
+        $moduleName = 'web_layout';
+        if (GeneralUtility::_GET('M') !== null) {
+            $moduleName = (string)GeneralUtility::_GET('M');
+        }
+        if (GeneralUtility::_GET('route') !== null) {
+            $routePath = (string)GeneralUtility::_GET('route');
+            $router = GeneralUtility::makeInstance(Router::class);
+            try {
+                $route = $router->match($routePath);
+                $moduleName = $route->getOption('_identifier');
+            } catch (ResourceNotFoundException $exception) {
+                unset($exception);
+            }
+        }
+        return $moduleName;
+    }
+
+    /**
+     * Returns the URL to a given module
+     *      mainly used for visibility settings or deleting
+     *      a record via AJAX
+     *
+     * @param string $moduleName Name of the module
+     * @param array $urlParameters URL parameters that should be added as key value pairs
+     * @return string Calculated URL
+     */
+    public static function getModuleUrl($moduleName, $urlParameters = [])
+    {
+        return BackendUtilityCore::getModuleUrl($moduleName, $urlParameters);
     }
 
     /**
@@ -128,16 +177,22 @@ class BackendUtility
     /**
      * Get all GET/POST params without module name and token
      *
+     * @param array $getParameters
      * @return array
      */
-    protected static function getCurrentParameters(): array
+    public static function getCurrentParameters($getParameters = [])
     {
+        if (empty($getParameters)) {
+            $getParameters = GeneralUtility::_GET();
+        }
         $parameters = [];
         $ignoreKeys = [
             'M',
-            'moduleToken'
+            'moduleToken',
+            'route',
+            'token'
         ];
-        foreach ((array)GeneralUtility::_GET() as $key => $value) {
+        foreach ($getParameters as $key => $value) {
             if (in_array($key, $ignoreKeys)) {
                 continue;
             }
@@ -145,7 +200,6 @@ class BackendUtility
         }
         return $parameters;
     }
-
 
     /**
      * @param int $pageUid [optional] the current pageuid

@@ -45,7 +45,6 @@ class BackendUtilityTest extends UnitTestCase
      */
     public function testGetBackendEditUri()
     {
-        $_GET['M'] = '';
         $result = '/typo3/index.php?M=record_edit&moduleToken=dummyToken&edit%5Btt_content%5D%5B123%5D=edit' .
             '&returnUrl=%2Ftypo3%2Findex.php%3FM%3D%26moduleToken%3DdummyToken';
         $this->assertSame($result, BackendUtility::getBackendEditUri('tt_content', 123));
