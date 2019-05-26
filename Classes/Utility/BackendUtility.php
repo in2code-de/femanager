@@ -113,6 +113,7 @@ class BackendUtility
                 $GLOBALS['TSFE']->determineId();
                 $GLOBALS['TSFE']->initTemplate();
                 $GLOBALS['TSFE']->getConfigArray();
+                $GLOBALS['TSFE']->settingLanguage();
                 return true;
             } catch (\Exception $exception) {
                 /**
