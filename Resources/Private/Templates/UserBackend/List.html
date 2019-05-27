@@ -150,21 +150,23 @@ UserBackend / List
 											<core:icon identifier="actions-edit-hide" />
 										</span>
 
-										<f:comment>
-											Login as Icon
-										</f:comment>
-										<span title="{f:translate(key:'BackendListLoginAs')}"
-											  class="tx-feusermanager-icon-actions-system-backend-user-switch"
-											  style="{f:if(condition:'{user.online} == 1', then:'display:none', else:'{f:if(condition:\'{user.disable}\', then:\'display:none\', else:\'\')}')}">
+										<f:if condition="{loginAsEnabled}">
+											<f:comment>
+												Login as Icon
+											</f:comment>
+											<span title="{f:translate(key:'BackendListLoginAs')}"
+													class="tx-feusermanager-icon-actions-system-backend-user-switch"
+													style="{f:if(condition:'{user.online} == 1', then:'display:none', else:'{f:if(condition:\'{user.disable}\', then:\'display:none\', else:\'\')}')}">
 											<a href="/?type=1548943013&tx_femanager_pi1[user]={user.uid}" title="{f:translate(key: 'BackendListLoginAs')}" target="_blank">
 												<core:icon identifier="actions-system-backend-user-switch" />
 											</a>
 										</span>
-										<span title="{f:translate(key:'BackendListLoginAs')}"
-											  class="tx-feusermanager-icon-actions-system-backend-user-switch-disabled"
-											  style="{f:if(condition:'{user.online} == 1', then:'', else:'{f:if(condition:\'{user.disable}\', then:\'\', else:\'display:none\')}')}">
+											<span title="{f:translate(key:'BackendListLoginAs')}"
+													class="tx-feusermanager-icon-actions-system-backend-user-switch-disabled"
+													style="{f:if(condition:'{user.online} == 1', then:'', else:'{f:if(condition:\'{user.disable}\', then:\'\', else:\'display:none\')}')}">
 											<core:icon identifier="actions-system-backend-user-switch" state="disabled" />
 										</span>
+										</f:if>
 
 										<f:comment>
 											Logout Icon
