@@ -68,11 +68,11 @@ class AbstractValidatorTest extends UnitTestCase
             ],
             [
                 '0',
-                false
+                true
             ],
             [
                 0,
-                false
+                true
             ],
             [
                 null,
