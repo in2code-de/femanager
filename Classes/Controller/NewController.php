@@ -287,8 +287,8 @@ class NewController extends AbstractController
     protected function createUserConfirmationRequest(User $user)
     {
         $this->sendCreateUserConfirmationMail($user);
-        $this->redirectByAction('new', 'requestRedirect');
         $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
+        $this->redirectByAction('new', 'requestRedirect');
     }
 
     /**
