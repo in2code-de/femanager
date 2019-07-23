@@ -269,11 +269,11 @@ class NewController extends AbstractController
         LogUtility::log(Log::STATUS_PROFILECREATIONREQUEST, $user);
         if (!empty($this->settings['new']['confirmByUser'])) {
             $this->createUserConfirmationRequest($user);
-            $this->redirect('new');
+            $this->redirectByAction('new', 'requestRedirect');
         }
         if (!empty($this->settings['new']['confirmByAdmin'])) {
             $this->createAdminConfirmationRequest($user);
-            $this->redirect('new');
+            $this->redirectByAction('new', 'requestRedirect');
         }
     }
 
