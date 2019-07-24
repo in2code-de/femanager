@@ -288,6 +288,7 @@ class NewController extends AbstractController
     {
         $this->sendCreateUserConfirmationMail($user);
         $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
+        $this->redirectByAction('new', 'requestRedirect');
     }
 
     /**
