@@ -458,6 +458,36 @@ class AbstractValidatorTest extends UnitTestCase
                 'special,space',
                 true
             ],
+            [
+                'in2code',
+                'uppercase',
+                false
+            ],
+            [
+                'In2code',
+                'uppercase',
+                true
+            ],
+            [
+                'in2Code',
+                'uppercase',
+                true
+            ],
+            [
+                'in2codE',
+                'uppercase',
+                true
+            ],
+            [
+                'In2code',
+                'number,uppercase',
+                true
+            ],
+            [
+                'I n2code',
+                'number,uppercase,space',
+                true
+            ],
         ];
     }
 
@@ -578,6 +608,26 @@ class AbstractValidatorTest extends UnitTestCase
             [
                 'a;#/%äß´^á 3',
                 'special,space',
+                false
+            ],
+            [
+                'in2code',
+                'uppercase',
+                true
+            ],
+            [
+                'In2code',
+                'uppercase',
+                false
+            ],
+            [
+                'in2codE',
+                'uppercase',
+                false
+            ],
+            [
+                'in2Code',
+                'uppercase',
                 false
             ],
         ];

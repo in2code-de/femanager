@@ -194,6 +194,11 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                         $isValid = false;
                     }
                     break;
+                case 'uppercase':
+                    if (!$this->stringContainsUppercase($value)) {
+                        $isValid = false;
+                    }
+                    break;
                 case 'special':
                     if (!$this->stringContainsSpecialCharacter($value)) {
                         $isValid = false;
@@ -233,6 +238,11 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                         $isValid = false;
                     }
                     break;
+                case 'uppercase':
+                    if ($this->stringContainsUppercase($value)) {
+                        $isValid = false;
+                    }
+                    break;
                 case 'special':
                     if ($this->stringContainsSpecialCharacter($value)) {
                         $isValid = false;
@@ -269,6 +279,17 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     protected function stringContainsLetter($value)
     {
         return (strlen(preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0);
+    }
+
+    /**
+     * String contains uppercase letter?
+     *
+     * @param string $value
+     * @return bool
+     */
+    protected function stringContainsUppercase($value)
+    {
+        return (strlen(preg_replace('/[^A-Z]/', '', $value)) > 0);
     }
 
     /**
