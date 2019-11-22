@@ -859,7 +859,7 @@ Plain Text
     #								uid.field = uid
     #							}
 
-    #							begin = 0
+    #							begin = otsbu 
     #							maxItems = 1
 
     #							renderObj = IMG_RESOURCE
