@@ -308,20 +308,35 @@ abstract class AbstractController extends ActionController
     protected function initializeDeleteAction()
     {
         $user = UserUtility::getCurrentUser();
+        $token = $this->request->getArgument('token');
         $uid = $this->request->getArgument('user');
-        $this->testSpoof($user, $uid);
+        $this->testSpoof($user, $uid, $token);
     }
 
     /**
-     * Check if user is authenticated
+     * Check if user is authenticated and params are valid
      *
      * @param User $user
      * @param int $uid Given fe_users uid
+     * @param String $receivedToken Token
      * @return void
      */
-    protected function testSpoof($user, $uid)
+    protected function testSpoof($user, $uid, $receivedToken)
     {
+        $errorOnProfileUpdate = false;
+        $knowToken = GeneralUtility::hmac($user->getUid());
+
+        //check if the params are valid
+        if (!hash_equals($knowToken, $receivedToken)) {
+            $errorOnProfileUpdate = true;
+        }
+
+        //check if the logged user is allowed to edit / delete this record
         if ($user->getUid() !== (int)$uid && $uid > 0) {
+            $errorOnProfileUpdate = true;
+        }
+
+        if ($errorOnProfileUpdate === true) {
             LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
@@ -364,13 +379,13 @@ abstract class AbstractController extends ActionController
         $this->config = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        
+
         $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'];
-        if (TYPO3_MODE=='BE') {
+        if (TYPO3_MODE == 'BE') {
             $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
             if (is_array($config['plugin.']['tx_femanager.']['settings.'])) {
                 $this->config = $config['plugin.']['tx_femanager.']['settings.'];
-                $this->settings =  $this->config;
+                $this->settings = $this->config;
             }
         }
 
@@ -418,7 +433,8 @@ abstract class AbstractController extends ActionController
     {
         if (TYPO3_MODE == 'BE') {
             if ($this->config['_TypoScriptIncluded'] !== '1') {
-                $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript_be'), '', FlashMessage::ERROR);
+                $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript_be'), '',
+                    FlashMessage::ERROR);
             }
         } else {
             if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
