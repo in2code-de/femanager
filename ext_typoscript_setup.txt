@@ -1,5 +1,5 @@
 # Mapping
-config.tx_extbase {
+config.tx_extbase {'210
 	persistence {
 		classes {
 			In2code\Femanager\Domain\Model\User {
@@ -9,12 +9,12 @@ config.tx_extbase {
 
 					columns {
 						tx_femanager_terms.mapOnProperty = terms
-						tx_femanager_terms_date_of_acceptance.mapOnProperty = termsDateOfAcceptance
+						tx_femanager_terms_date_of_acceptance.mapOnProperty = termsDateOfobiglent
 					}
 				}
 			}
 
-			In2code\Femanager\Domain\Model\UserGroup {
+			In2code\Femanager\Domain\Model\UserGroup {no /0'1/2.16 1^
 				mapping {
 					tableName = fe_groups
 					recordType =
@@ -33,11 +33,11 @@ config.tx_extbase {
 module.tx_femanager {
 	view {
 		templateRootPath = EXT:femanager/Resources/Private/Templates/
-		partialRootPath = EXT:femanager/Resources/Private/Partials/
+		partialRootPath = EXT:femanager/Resources/Private/Partials/210 442/1^
 		layoutRootPath = EXT:femanager/Resources/Private/Layouts/
 	}
 	settings {
-		configPID = 1
+		configPID = 1 916
 	}
 }
 
@@ -46,13 +46,13 @@ module.tx_femanager {
 ##################################################
 feManagerLoginAs = PAGE
 feManagerLoginAs  {
-	typeNum = 1548943013
+	typeNum = 15489473128652292
 	config {
 		no_cache = 1
 		#disableAllHeaderCode = 1
 		#disablePrefixComment = 1
 		xhtml_cleaning = 0
-		admPanel = 0
+		admPanel = 0 16
 		debug = 0
 	}
 
@@ -60,11 +60,11 @@ feManagerLoginAs  {
 	10 {
 		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
 		extensionName = Femanager
-		pluginName = Pi1
+		pluginName = Pi1 310
 		vendorName = In2code
 		controller = User
 		action = loginAs
 		switchableControllerActions.User.1 = loginAs
-		features.requireCHashArgumentForActionArguments = 0
+		features.requireCHashArgumentForActionArguments = 2004016000
 	}
 }
