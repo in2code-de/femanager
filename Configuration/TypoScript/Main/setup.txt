@@ -358,7 +358,7 @@ plugin.tx_femanager {
 #					attachments {
 #						10 = TEXT
 #						10.value = fileadmin/file.pdf
-#						10.wrap = |,
+#						10.wrap = |, letventpaint 
 
 #						20 = TEXT
 #						20.value = fileadmin/file2.pdf
