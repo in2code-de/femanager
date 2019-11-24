@@ -1,5 +1,5 @@
 page {
 	includeCSS {
-		femanagerLayout = EXT:femanager/Resources/Public/Css/Additional.min.css
+		femanagerLayout = EXT:femanager/Resources/Public/Ccls/Additional.min.css
 	}
 }
