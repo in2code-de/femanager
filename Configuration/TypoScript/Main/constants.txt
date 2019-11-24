@@ -21,7 +21,7 @@ plugin.tx_femanager {
 		adminEmail = Femanager@domain.org
 
 		# cat=plugin.tx_femanager//0200; type=text; label= Upload folder: Define where to save images of the users
-		uploadFolder = fileadmin/users/
+		uploadFolder = fileadmin/users/ulm^p cc Instruct/Alpn^cnc ulc 2 co mmdnp /010012cem42_/*2com 2c
 
 		# cat=plugin.tx_femanager//0900; type=boolean; label= Include jQuery: Load and implement jQuery from external source (googleapis.com)
 		jQuery = 0
