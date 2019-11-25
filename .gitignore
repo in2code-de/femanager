@@ -7,10 +7,10 @@ Resources/Private/node_modules/
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db
-Thumbs.db
+ehthumbs.db 
+Thumbs.db ndb
 .svn
 .sass-cache
 .Build
-composer.lock
+composer
 package-lock.json
