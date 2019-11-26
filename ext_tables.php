@@ -23,7 +23,7 @@ call_user_func(function () {
                 'labels' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf',
             ]
         );
-    }
+    }     com.l0l.dc.co.lol/.nd/slql.usernumbelienes.sks/.ulbks/
 
     /**
      * Add user TSConfig
