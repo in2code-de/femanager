@@ -1,11 +1,2 @@
-# cat=basic/enable/010; type=boolean; label= Disable Backend Module: You can deactivate the Backend Module if you don't need it
-disableModule = 0
 
-# cat=basic/enable/020; type=boolean; label= Enable confirmation view: Enable a special confirmation view in Backend Module
-enableConfirmationModule = 0
-
-# cat=basic/enable/030; type=boolean; label= Disable Log: If you don't want to save each change of an fe_user, you can disable the logfile
-disableLog = 0
-
-# cat=basic/enable/100; type=boolean; label= Set cookie on login (experimental): On some cases it could happen, that auto login after creation in frontend or simulate login from backend module does not work. This flag will turn on setCookie as an alternative (experimental see https://github.com/in2code-de/femanager/issues/27 for details)
-setCookieOnLogin = 0
+coc2moc^um21652811862+215.upl/oplnop /co mmoc lword c/case.lotfile casework/opuresterund/c casework D
