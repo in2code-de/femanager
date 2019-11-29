@@ -26,9 +26,12 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
      */
     public function render()
     {
-        $settings = $this->arguments['settings'];
+        // $settings = $this->arguments['settings'];
         $controllerName = strtolower($this->renderingContext->getControllerContext()->getRequest()->getControllerName());
+
+        // return ExtensionManagementUtility::isLoaded('sr_freecap')
+        //     && !empty($settings[$controllerName]['validation']['captcha']['captcha']);
         return ExtensionManagementUtility::isLoaded('sr_freecap')
-            && !empty($settings[$controllerName]['validation']['captcha']['captcha']);
+            && $this->templateVariableContainer->getByPath('settings.' . $controllerName . '.validation.captcha.captcha');
     }
 }

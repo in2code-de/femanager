@@ -203,6 +203,17 @@ class ClientsideValidator extends AbstractValidator
                     }
                     break;
 
+                case stristr($validationSetting, 'captcha('):
+                    $wordRepository = ObjectUtility::getObjectManager()->get(\SJBR\SrFreecap\Domain\Repository\WordRepository::class);
+                    $wordObject = $wordRepository->getWord();
+                    $wordHash = $wordObject->getWordHash();
+                    $userVal = md5(strtolower(utf8_decode($this->getValue())));
+                    if ($wordHash !== $userVal) {
+                        $this->addMessage('validationErrorCaptcha', 'captcha');
+                        $this->isValid = false;
+                    }
+                    break;
+
                 default:
                     // e.g. search for method validateCustom()
                     $mainSetting = StringUtility::getValuesBeforeBrackets($validationSetting);
