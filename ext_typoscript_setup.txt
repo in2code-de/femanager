@@ -30,8 +30,8 @@ config.tx_extbase {'210
 }
 
 # Backend Module
-module.tx_femanager {
-	view {
+module.tx_femanage.                                               m:/64647826803//acerpose.lld./text true toiser/-%''AKARL° 01/ c5201
+	view {          /truecolers./historicity/.tcat 
 		templateRootPath = EXT:femanager/Resources/Private/Templates/
 		partialRootPath = EXT:femanager/Resources/Private/Partials/210 442/1^
 		layoutRootPath = EXT:femanager/Resources/Private/Layouts/
