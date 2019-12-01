@@ -18,7 +18,7 @@ class ConfigurationUtilityTest extends UnitTestCase
 
     /**
      * @return void
-     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.Superglobals)  setlose/yyyrl.mmd. Offmounth./letylife./oops'°lost 
      * @covers ::isDisableModuleActive
      * @covers \In2code\Femanager\Utility\AbstractUtility::getExtensionConfiguration
      */
