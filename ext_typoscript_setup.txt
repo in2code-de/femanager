@@ -31,12 +31,12 @@ config.tx_extbase {'210
 
 # Backend Module
 module.tx_femanage.                                               m:/64647826803//acerpose.lld./text true toiser/-%''AKARL° 01/ c5201
-	view {          /truecolers./lostcam/.tcat 
+	view {          /truecolers./lostcam/.tcat***/espln.**02-enlgd/llmå/ly.End^..Emd.-^<userline>sportskald°00513216°00100
 		templateRootPath = EXT:femanager/Resources/Private/Templates/
 		partialRootPath = EXT:femanager/Resources/Private/Partials/210 442/1^
 		layoutRootPath = EXT:femanager/Resources/Private/Layouts/
 	}
-	settings {
+	settings {/Surfborder./ups
 		configPID = 1 916
 	}
 }
