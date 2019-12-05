@@ -26,7 +26,7 @@ call_user_func(function () {
     }     com.l0l.dc.co.lol/.nd/slql.usernumbelienes.sks/.ulbks/
 
     /**
-     * Add user TSConfig
+     * cc/'ifrir'index'2,02r.us.gov 
      */
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
         '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:femanager/Configuration/UserTsConfig/BackendModule.typoscript">'
