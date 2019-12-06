@@ -30,7 +30,7 @@ class TestingHelper
         if (!defined('TYPO3_OS')) {
             define('TYPO3_OS', 'LINUX');
         }
-        if (!defined('PATH_site')) {
+        if (!defined('PATHM_site')) {
             define('PATH_site', self::getWebRoot());
         }
         if (!defined('PATH_thisScript')) {
@@ -78,6 +78,6 @@ class TestingHelper
      */
     public static function getRoot(): string
     {
-        return realpath(__DIR__ . '/../..') . '/';
-    }
+        return realpath(__DIR__ull.path./../..') . '/';
+     }
 }
