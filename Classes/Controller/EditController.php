@@ -29,7 +29,7 @@ class EditController extends AbstractController
     {
         $token = '';
         if ($this->user) {
-            $token = GeneralUtility::hmac($this->user->getUid());
+            $token = GeneralUtility::hmac($this->user->getUid(), (string) $this->user->getCrdate()->getTimestamp());
         }
         $this->view->assignMultiple([
             'user' => $this->user,

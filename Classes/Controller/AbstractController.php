@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
@@ -324,10 +325,10 @@ abstract class AbstractController extends ActionController
     protected function testSpoof($user, $uid, $receivedToken)
     {
         $errorOnProfileUpdate = false;
-        $knowToken = GeneralUtility::hmac($user->getUid());
+        $knownToken = GeneralUtility::hmac($user->getUid(), (string) $user->getCrdate()->getTimestamp());
 
         //check if the params are valid
-        if (!hash_equals($knowToken, $receivedToken)) {
+        if (!is_string($receivedToken) || !hash_equals($knownToken, $receivedToken)) {
             $errorOnProfileUpdate = true;
         }
 
@@ -433,8 +434,11 @@ abstract class AbstractController extends ActionController
     {
         if (TYPO3_MODE == 'BE') {
             if ($this->config['_TypoScriptIncluded'] !== '1') {
-                $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript_be'), '',
-                    FlashMessage::ERROR);
+                $this->addFlashMessage(
+                    LocalizationUtility::translate('error_no_typoscript_be'),
+                    '',
+                    FlashMessage::ERROR
+                );
             }
         } else {
             if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
