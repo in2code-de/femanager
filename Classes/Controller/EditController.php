@@ -27,9 +27,14 @@ class EditController extends AbstractController
      */
     public function editAction()
     {
+        $token = '';
+        if ($this->user) {
+            $token = GeneralUtility::hmac($this->user->getUid(), (string) $this->user->getCrdate()->getTimestamp());
+        }
         $this->view->assignMultiple([
             'user' => $this->user,
-            'allUserGroups' => $this->allUserGroups
+            'allUserGroups' => $this->allUserGroups,
+            'token' => $token
         ]);
         $this->assignForAll();
     }
@@ -41,7 +46,9 @@ class EditController extends AbstractController
     {
         $user = UserUtility::getCurrentUser();
         $userValues = $this->request->getArgument('user');
-        $this->testSpoof($user, $userValues['__identity']);
+        $token = $this->request->getArgument('token');
+
+        $this->testSpoof($user, $userValues['__identity'], $token);
         if ($this->keepPassword()) {
             unset($this->pluginVariables['user']['password']);
             unset($this->pluginVariables['password_repeat']);
