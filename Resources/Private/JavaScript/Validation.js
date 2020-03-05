@@ -87,7 +87,7 @@ jQuery.fn.femanagerValidation = function($) {
 		var $form = element.closest('form');
 		var user = $form.find('div:first').find('input[name="tx_femanager_pi1[user][__identity]"]').val();
 		var action = $form.find('div:first').find('input[name="tx_femanager_pi1[__referrer][@action]"]').val();
-		var url = Femanager.getBaseUrl() + '?type=1548935210';
+		var url = Femanager.getBaseUrl() + '?id=' + $('#femanagerPid').val() + '&type=1548935210';
 		var validations = getValidations(element);
 		var elementValue = element.val();
 		if ((element.prop('type') == 'checkbox') && (element.prop('checked') == false)) {
