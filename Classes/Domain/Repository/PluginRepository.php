@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Repository;
 
 use In2code\Femanager\Utility\ObjectUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Service\FlexFormService;
 
 /**
@@ -88,14 +89,8 @@ class PluginRepository
     protected function isViewInPluginConfiguration(string $view, string $pluginConfiguration): bool
     {
         if (array_key_exists($view, $this->scaString)) {
-            $viewString = $this->scaString[$view];
-            preg_match(
-                '~<field index="switchableControllerActions">\s+<value index="vDEF">'
-                    . htmlspecialchars($viewString) . '~',
-                $pluginConfiguration,
-                $result
-            );
-            return $result !== [];
+            $viewFromConfig = $this->getViewFromFlexForm($pluginConfiguration);
+            return $viewFromConfig === $view;
         } else {
             throw new \LogicException('Given view is not allowed', 1541506310);
         }
