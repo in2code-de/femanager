@@ -6,8 +6,10 @@ use In2code\Femanager\Utility\BackendUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\TemplateUtility;
+use Symfony\Component\Mime\Part\TextPart;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Class SendMailService
@@ -143,12 +145,13 @@ class SendMailService
         array $variables,
         MailMessage $email
     ) {
+        $body = GeneralUtility::makeInstance(ObjectManager::class)->get(TextPart::class, $this->getMailBody($template, $variables), 'utf-8', 'html');
         $email
             ->setTo($receiver)
             ->setFrom($sender)
             ->setSubject($subject)
-            ->setCharset(FrontendUtility::getCharset())
-            ->setBody($this->getMailBody($template, $variables), 'text/html');
+            ->setBody($body)
+            ->html($body);
     }
 
     /**
