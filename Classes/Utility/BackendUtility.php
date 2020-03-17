@@ -85,51 +85,6 @@ class BackendUtility
     }
 
     /**
-     * @param int $pageIdentifier
-     * @param int $typeNum
-     * @return bool
-     * @SuppressWarnings(PHPMD.Superglobals)
-     * @codeCoverageIgnore
-     */
-    public static function initializeTsFe(int $pageIdentifier = 0, int $typeNum = 0): bool
-    {
-        if (TYPO3_MODE === 'BE') {
-            try {
-                if (!empty(GeneralUtility::_GP('id'))) {
-                    $pageIdentifier = (int)GeneralUtility::_GP('id');
-                }
-                if (!empty(GeneralUtility::_GP('type'))) {
-                    $typeNum = (int)GeneralUtility::_GP('type');
-                }
-                if (!is_object($GLOBALS['TT'])) {
-                    $GLOBALS['TT'] = new TimeTracker(false);
-                    $GLOBALS['TT']->start();
-                }
-                $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
-                    TypoScriptFrontendController::class,
-                    $GLOBALS['TYPO3_CONF_VARS'],
-                    $pageIdentifier,
-                    $typeNum
-                );
-                $GLOBALS['TSFE']->connectToDB();
-                $GLOBALS['TSFE']->initFEuser();
-                $GLOBALS['TSFE']->determineId();
-                $GLOBALS['TSFE']->initTemplate();
-                $GLOBALS['TSFE']->getConfigArray();
-                $GLOBALS['TSFE']->settingLanguage();
-                return true;
-            } catch (\Exception $exception) {
-                /**
-                 * Normally happens if $_GET['id'] points to a sysfolder on root
-                 * In this case: Simply do not initialize TsFe
-                 */
-                return false;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Get all GET/POST params without module name and token
      *
      * @return array
