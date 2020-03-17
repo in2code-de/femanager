@@ -24,7 +24,7 @@
   "type": "typo3-cms-extension",
   "license": "GPL-2.0-or-later",
   "require": {
-    "typo3/cms-core": ">=8.7.0 <9.6.0"
+    "typo3/cms-core": "~10"
   },
   "replace": {
     "femanager": "self.version",
