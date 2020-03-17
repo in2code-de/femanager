@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
-use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\TimeTracker\TimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -41,7 +41,8 @@ class BackendUtility
         if ($addReturnUrl) {
             $uriParameters['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
         }
-        return BackendUtilityCore::getModuleUrl('record_edit', $uriParameters);
+        return (string)GeneralUtility::makeInstance(UriBuilder::class)
+            ->buildUriFromRoute('record_edit', $uriParameters);
     }
 
     /**
@@ -66,7 +67,8 @@ class BackendUtility
             $uriParameters['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
             // @codeCoverageIgnoreEnd
         }
-        return BackendUtilityCore::getModuleUrl('record_edit', $uriParameters);
+        return (string)GeneralUtility::makeInstance(UriBuilder::class)
+            ->buildUriFromRoute('record_edit', $uriParameters);
     }
 
     /**
