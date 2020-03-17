@@ -15,13 +15,13 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      * Inject a complete new content object
      *
      * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $contentObject;
 
     /**
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $configurationManager;
 

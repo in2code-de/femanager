@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Repository;
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Class GetFirstViewHelper

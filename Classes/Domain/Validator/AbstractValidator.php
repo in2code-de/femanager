@@ -21,7 +21,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * userRepository
      *
      * @var \In2code\Femanager\Domain\Repository\UserRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $userRepository;
 
@@ -29,7 +29,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * configurationManager
      *
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     public $configurationManager;
 
