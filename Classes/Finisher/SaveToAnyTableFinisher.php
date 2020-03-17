@@ -15,19 +15,19 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      * Inject a complete new content object
      *
      * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $contentObject;
 
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $objectManager;
 
     /**
      * @var \TYPO3\CMS\Extbase\Service\TypoScriptService
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $typoScriptService;
 

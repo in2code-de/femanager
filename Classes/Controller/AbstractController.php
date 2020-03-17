@@ -31,31 +31,31 @@ abstract class AbstractController extends ActionController
 
     /**
      * @var \In2code\Femanager\Domain\Repository\UserRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $userRepository;
 
     /**
      * @var \In2code\Femanager\Domain\Repository\UserGroupRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $userGroupRepository;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $persistenceManager;
 
     /**
      * @var \In2code\Femanager\Domain\Service\SendMailService
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $sendMailService;
 
     /**
      * @var \In2code\Femanager\Finisher\FinisherRunner
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $finisherRunner;
 

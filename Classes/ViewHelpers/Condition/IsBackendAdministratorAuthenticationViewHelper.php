@@ -3,7 +3,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Condition;
 
 use In2code\Femanager\Utility\BackendUserUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Class IsBackendAdministratorAuthenticationViewHelper
