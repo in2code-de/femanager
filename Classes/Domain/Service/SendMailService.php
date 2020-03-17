@@ -2,8 +2,6 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
-use In2code\Femanager\Utility\BackendUtility;
-use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\TemplateUtility;
 use Symfony\Component\Mime\Part\TextPart;
@@ -37,7 +35,6 @@ class SendMailService
      */
     public function __construct()
     {
-        BackendUtility::initializeTsFe();
         $this->contentObject = ObjectUtility::getContentObject();
     }
 
