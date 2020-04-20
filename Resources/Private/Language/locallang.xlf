@@ -544,6 +544,9 @@
 			<trans-unit id="updateRequest">
 				<source>Your change request was transmitted to the administrator. After a confirmation, your profile will be up-to-date.</source>
 			</trans-unit>
+			<trans-unit id="changeEmailRequest">
+				<source>Your e-mail change.</source>
+			</trans-unit>
 			<trans-unit id="login">
 				<source>You're successfully logged in now</source>
 			</trans-unit>

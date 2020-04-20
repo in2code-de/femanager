@@ -62,7 +62,7 @@ class EditController extends AbstractController
         if ($emailChanged) {
             $user->setNewEmail($user->getEmail());
             $user->setEmail($user->_getCleanProperty('email'));
-
+            $this->changedEmailRequest($user);
         }
         $this->redirectIfDirtyObject($user);
         $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.']);
