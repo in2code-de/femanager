@@ -4,13 +4,16 @@ namespace In2code\Femanager\ViewHelpers\Validation;
 
 use In2code\Femanager\Domain\Service\ValidationSettingsService;
 use In2code\Femanager\Utility\ObjectUtility;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class FormValidationDataViewHelper
  */
-class FormValidationDataViewHelper extends AbstractValidationViewHelper
+class FormValidationDataViewHelper extends AbstractValidationViewHelper implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
 
     /**
      * Set javascript validation data for input fields
@@ -24,7 +27,7 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper
         $additionalAttributes = $this->arguments['additionalAttributes'];
 
         if ($settings !== []) {
-            GeneralUtility::deprecationLog(
+            $this->logger->debug(
                 'Settings should not be filled any more in field partials. Pls update your femanager partial files.'
             );
         }
