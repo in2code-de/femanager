@@ -2,10 +2,11 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
 use In2code\Femanager\Domain\Repository\PluginRepository;
-use In2code\Femanager\Signal\SignalTrait;
+use In2code\Femanager\Event\UniqueUserEvent;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\ObjectUtility;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
@@ -15,8 +16,6 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidato
  */
 abstract class AbstractValidator extends AbstractValidatorExtbase
 {
-    use SignalTrait;
-
     /**
      * userRepository
      *
@@ -32,6 +31,12 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     public $configurationManager;
+
+    /**
+     * @var EventDispatcherInterface
+     * @TYPO3\CMS\Extbase\Annotation\Inject
+     */
+    protected $eventDispatcher;
 
     /**
      * Former known as piVars
@@ -165,13 +170,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
         $uniqueDb = !is_object($foundUser);
 
-        $result = $this->signalDispatch(__CLASS__, __FUNCTION__ , [$value, $field, $user, $uniqueDb]);
-        // this signal can be used, to look in external sources, f.e. LDAP and check if a user exists
-        if ($result) {
-            $uniqueDb = $result[3];
-        }
         //  return false, if is not unique
-        return $uniqueDb;
+        return $this->eventDispatcher->dispatch(new UniqueUserEvent($value, $field, $user, $uniqueDb))->isUnique();
     }
 
     /**

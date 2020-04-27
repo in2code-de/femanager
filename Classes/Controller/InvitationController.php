@@ -4,6 +4,10 @@ namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Event\InviteUserConfirmedEvent;
+use In2code\Femanager\Event\InviteUserCreateEvent;
+use In2code\Femanager\Event\InviteUserEditEvent;
+use In2code\Femanager\Event\InviteUserUpdateEvent;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -53,7 +57,7 @@ class InvitationController extends AbstractController
             $user->setEmail($user->getUsername());
         }
         UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', [$user, $this]);
+        $this->eventDispatcher->dispatch(new InviteUserCreateEvent($user));
         $this->createAllConfirmed($user);
     }
 
@@ -102,7 +106,9 @@ class InvitationController extends AbstractController
                 $this->config['invitation.']['email.']['invitationAdminNotifyStep1.']
             );
         }
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $this]);
+
+        $this->eventDispatcher->dispatch(new InviteUserConfirmedEvent($user));
+
         $this->redirectByAction('invitation','redirectStep1');
         $this->redirect('new');
     }
@@ -120,7 +126,9 @@ class InvitationController extends AbstractController
         $user->setDisable(false);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $hash, $this]);
+
+        $this->eventDispatcher->dispatch(new InviteUserEditEvent($user, $hash));
+
         $this->view->assignMultiple(
             [
                 'user' => $user,
@@ -172,7 +180,7 @@ class InvitationController extends AbstractController
         UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $this]);
+        $this->eventDispatcher->dispatch(new InviteUserUpdateEvent($user));
         $this->redirectByAction('invitation', 'redirectPasswordChanged');
         $this->redirect('status');
     }

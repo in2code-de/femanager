@@ -5,6 +5,7 @@ namespace In2code\Femanager\Controller;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Validator\ClientsideValidator;
+use In2code\Femanager\Event\ImpersonateEvent;
 use In2code\Femanager\Utility\BackendUserUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -74,7 +75,7 @@ class UserController extends AbstractController
         }
         $user->setImage($this->objectManager->get(ObjectStorage::class));
         $this->userRepository->update($user);
-        LogUtility::log(Log::STATUS_PROFILEUPDATEIMAGEDELETE, $user);
+        $this->logUtility->log(Log::STATUS_PROFILEUPDATEIMAGEDELETE, $user);
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEIMAGEDELETE));
         $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
     }
@@ -132,7 +133,8 @@ class UserController extends AbstractController
      */
     public function loginAsAction(User $user)
     {
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__, [$user, $this]);
+        $this->eventDispatcher->dispatch(new ImpersonateEvent($user));
+
         if (!BackendUserUtility::isAdminAuthentication()) {
             throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'), 1516373787864);
         }

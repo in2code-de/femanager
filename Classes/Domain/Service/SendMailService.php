@@ -2,9 +2,13 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
+use In2code\Femanager\Event\AfterMailSendEvent;
+use In2code\Femanager\Event\BeforeMailSendEvent;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\TemplateUtility;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Mime\Part\TextPart;
+use TYPO3\CMS\Core\Mail\Mailer;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -29,13 +33,23 @@ class SendMailService
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $signalSlotDispatcher;
+    /**
+     * @var Mailer
+     */
+    private $mailer;
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
 
     /**
      * SendMailService constructor.
      */
-    public function __construct()
+    public function __construct(Mailer $mailer, EventDispatcherInterface $dispatcher)
     {
         $this->contentObject = ObjectUtility::getContentObject();
+        $this->mailer = $mailer;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -68,23 +82,26 @@ class SendMailService
         array $variables = [],
         array $typoScript = []
     ): bool {
-        if ($this->isMailEnabled($typoScript, $receiver)) {
-            $this->contentObjectStart($variables);
-            $email = ObjectUtility::getObjectManager()->get(MailMessage::class);
-            $variables = $this->embedImages($variables, $typoScript, $email);
-            $this->prepareMailObject($template, $receiver, $sender, $subject, $variables, $email);
-            $this->overwriteEmailReceiver($typoScript, $email);
-            $this->overwriteEmailSender($typoScript, $email);
-            $this->setSubject($typoScript, $email);
-            $this->setCc($typoScript, $email);
-            $this->setPriority($typoScript, $email);
-            $this->setAttachments($typoScript, $email);
-            $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeSend', [$email, $variables, $this]);
-            $email->send();
-            $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterSend', [$email, $variables, $this]);
-            return $email->isSent();
+        if (false === $this->isMailEnabled($typoScript, $receiver)) {
+            return false;
         }
-        return false;
+
+        $this->contentObjectStart($variables);
+        $email = GeneralUtility::makeInstance(MailMessage::class);
+        $variables = $this->embedImages($variables, $typoScript, $email);
+        $this->prepareMailObject($template, $receiver, $sender, $subject, $variables, $email);
+        $this->overwriteEmailReceiver($typoScript, $email);
+        $this->overwriteEmailSender($typoScript, $email);
+        $this->setSubject($typoScript, $email);
+        $this->setCc($typoScript, $email);
+        $this->setPriority($typoScript, $email);
+        $this->setAttachments($typoScript, $email);
+
+        $this->dispatcher->dispatch(new BeforeMailSendEvent($email, $variables, $this));
+        $email->send();
+        $this->dispatcher->dispatch(new AfterMailSendEvent($email, $variables, $this));
+
+        return $email->isSent();
     }
 
     /**
@@ -118,7 +135,7 @@ class SendMailService
             );
             $imageVariables = [];
             foreach ($images as $image) {
-                $imageVariables[] = $email->embed(\Swift_Image::fromPath($image));
+                $imageVariables[] = $email->embedFromPath($image);
             }
             $variables = array_merge($variables, ['embedImages' => $imageVariables]);
         }
@@ -245,7 +262,7 @@ class SendMailService
                 true
             );
             foreach ($files as $file) {
-                $email->attach(\Swift_Attachment::fromPath($file));
+                $email->attachFromPath($file);
             }
         }
     }
