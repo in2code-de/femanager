@@ -5,6 +5,8 @@ namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Event\AdminConfirmationUserEvent;
+use In2code\Femanager\Event\RefuseUserEvent;
 use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -26,7 +28,7 @@ class UserBackendController extends AbstractController
     public function listAction(array $filter = [])
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->userTS['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
+        $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
 
         $this->view->assignMultiple(
             [
@@ -76,11 +78,12 @@ class UserBackendController extends AbstractController
     public function confirmUserAction(int $userIdentifier)
     {
         $user = $this->userRepository->findByUid($userIdentifier);
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__, [$user, $this]);
+        $this->eventDispatcher->dispatch(new AdminConfirmationUserEvent($user));
+
         $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onAdminConfirmation.']);
         $user->setTxFemanagerConfirmedbyadmin(true);
         $user->setDisable(false);
-        LogUtility::log(Log::STATUS_REGISTRATIONCONFIRMEDADMIN, $user);
+        $this->logUtility->log(Log::STATUS_REGISTRATIONCONFIRMEDADMIN, $user);
         $this->userRepository->update($user);
         $this->addFlashMessage(
             LocalizationUtility::translate(
@@ -100,7 +103,7 @@ class UserBackendController extends AbstractController
     public function refuseUserAction(int $userIdentifier)
     {
         $user = $this->userRepository->findByUid($userIdentifier);
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__, [$user, $this]);
+        $this->eventDispatcher->dispatch(new RefuseUserEvent($user));
         $this->userRepository->remove($user);
         $this->addFlashMessage(
             LocalizationUtility::translate(

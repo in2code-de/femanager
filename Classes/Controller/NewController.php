@@ -6,6 +6,9 @@ namespace In2code\Femanager\Controller;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Service\AutoAdminConfirmationService;
+use In2code\Femanager\Event\BeforeUserConfirmEvent;
+use In2code\Femanager\Event\BeforeUserCreateEvent;
+use In2code\Femanager\Event\CreateConfirmationRequestEvent;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -57,7 +60,8 @@ class NewController extends AbstractController
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
         UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', [$user, $this]);
+
+        $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
 
         if ($this->isAllConfirmed()) {
             $this->createAllConfirmed($user);
@@ -79,11 +83,9 @@ class NewController extends AbstractController
     public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation')
     {
         $user = $this->userRepository->findByUid($user);
-        $this->signalSlotDispatcher->dispatch(
-            __CLASS__,
-            __FUNCTION__ . 'BeforePersist',
-            [$user, $hash, $status, $this]
-        );
+
+        $this->eventDispatcher->dispatch(new BeforeUserConfirmEvent($user, $hash, $status));
+
         if ($user === null) {
             $this->addFlashMessage(LocalizationUtility::translate('missingUserInDatabase'), '', FlashMessage::ERROR);
             $this->redirect('new');
@@ -141,13 +143,13 @@ class NewController extends AbstractController
             $user->setTxFemanagerConfirmedbyuser(true);
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
-            LogUtility::log(Log::STATUS_REGISTRATIONCONFIRMEDUSER, $user);
+            $this->logUtility->log(Log::STATUS_REGISTRATIONCONFIRMEDUSER, $user);
 
             if ($this->isAdminConfirmationMissing($user)) {
                 $this->createAdminConfirmationRequest($user);
             } else {
                 $user->setDisable(false);
-                LogUtility::log(Log::STATUS_NEWREGISTRATION, $user);
+                $this->logUtility->log(Log::STATUS_NEWREGISTRATION, $user);
                 $this->finalCreate($user, 'new', 'createStatus', true, $status);
             }
 
@@ -171,7 +173,7 @@ class NewController extends AbstractController
     protected function statusUserConfirmationRefused(User $user, $hash)
     {
         if (HashUtility::validHash($hash, $user)) {
-            LogUtility::log(Log::STATUS_REGISTRATIONREFUSEDUSER, $user);
+            $this->logUtility->log(Log::STATUS_REGISTRATIONREFUSEDUSER, $user);
             $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
             $this->userRepository->remove($user);
         } else {
@@ -198,7 +200,7 @@ class NewController extends AbstractController
             $user->setTxFemanagerConfirmedbyadmin(true);
             $user->setDisable(false);
             $this->userRepository->update($user);
-            LogUtility::log(Log::STATUS_REGISTRATIONCONFIRMEDADMIN, $user);
+            $this->logUtility->log(Log::STATUS_REGISTRATIONCONFIRMEDADMIN, $user);
             $this->finalCreate($user, 'new', 'createStatus', false, $status);
         } else {
             $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
@@ -221,7 +223,7 @@ class NewController extends AbstractController
     protected function statusAdminConfirmationRefused(User $user, $hash, $status)
     {
         if (HashUtility::validHash($hash, $user)) {
-            LogUtility::log(Log::STATUS_REGISTRATIONREFUSEDADMIN, $user);
+            $this->logUtility->log(Log::STATUS_REGISTRATIONREFUSEDADMIN, $user);
             $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
             if ($status !== 'adminConfirmationRefusedSilent') {
                 $this->sendMailService->send(
@@ -266,7 +268,7 @@ class NewController extends AbstractController
         $user->setDisable(true);
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
-        LogUtility::log(Log::STATUS_PROFILECREATIONREQUEST, $user);
+        $this->logUtility->log(Log::STATUS_PROFILECREATIONREQUEST, $user);
         if (!empty($this->settings['new']['confirmByUser'])) {
             $this->createUserConfirmationRequest($user);
             $this->redirectByAction('new', 'requestRedirect');
@@ -307,10 +309,10 @@ class NewController extends AbstractController
         );
         if ($aacService->isAutoAdminConfirmationFullfilled()) {
             $user->setDisable(false);
-            $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AutoConfirmation', [$user, $this]);
+            $this->eventDispatcher->dispatch(new CreateConfirmationRequestEvent($user, CreateConfirmationRequestEvent::MODE_AUTOMATIC));
             $this->createAllConfirmed($user);
         } else {
-            $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'ManualConfirmation', [$user, $this]);
+            $this->eventDispatcher->dispatch(new CreateConfirmationRequestEvent($user, CreateConfirmationRequestEvent::MODE_MANUAL));
             $this->sendMailService->send(
                 'createAdminConfirmation',
                 StringUtility::makeEmailArray(
