@@ -435,14 +435,14 @@ abstract class AbstractController extends ActionController
         if (TYPO3_MODE == 'BE') {
             if ($this->config['_TypoScriptIncluded'] !== '1') {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('error_no_typoscript_be'),
+                    (string) LocalizationUtility::translate('error_no_typoscript_be'),
                     '',
                     FlashMessage::ERROR
                 );
             }
         } else {
             if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
-                $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript'), '', FlashMessage::ERROR);
+                $this->addFlashMessage((string) LocalizationUtility::translate('error_no_typoscript'), '', FlashMessage::ERROR);
             }
         }
     }
