@@ -1,34 +1,3 @@
-# Mapping
-config.tx_extbase {
-	persistence {
-		classes {
-			In2code\Femanager\Domain\Model\User {
-				mapping {
-					tableName = fe_users
-					recordType =
-
-					columns {
-						tx_femanager_terms.mapOnProperty = terms
-						tx_femanager_terms_date_of_acceptance.mapOnProperty = termsDateOfAcceptance
-					}
-				}
-			}
-
-			In2code\Femanager\Domain\Model\UserGroup {
-				mapping {
-					tableName = fe_groups
-					recordType =
-				}
-			}
-		}
-	}
-
-	objects {
-		# Disable tx_extbase_type=xyz in where clause (fe_users, fe_groups)
-		TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap.className = In2code\Femanager\Persistence\Generic\Mapper\DataMap
-	}
-}
-
 # Backend Module
 module.tx_femanager {
 	view {
