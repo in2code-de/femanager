@@ -95,6 +95,7 @@ $feUsersColumns = [
         'exclude' => true,
         'config' => [
             'type' => 'input',
+            'renderType' => 'inputDateTime',
             'size' => 30,
             'eval' => 'datetime',
             'readOnly' => true,
