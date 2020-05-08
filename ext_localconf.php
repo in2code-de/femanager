@@ -23,5 +23,5 @@ call_user_func(function () {
     );
 
     $container = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class);
-    $container->registerImplementation(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper::class, \In2code\Femanager\Persistence\Generic\Mapper\DataMap::class);
+    // $container->registerImplementation(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper::class, \In2code\Femanager\Persistence\Generic\Mapper\DataMap::class);
 });
