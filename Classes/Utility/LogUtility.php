@@ -43,7 +43,7 @@ class LogUtility
             $log->setTitle(LocalizationUtility::translateByState($state));
             $log->setState($state);
             $log->setUser($user);
-            self::getLogRepository()->add($log);
+            $this->logRepository->add($log);
         }
 
         $this->eventDispatcher->dispatch(new UserLogEvent($user, $state, $additionalProperties));
