@@ -4,6 +4,7 @@ namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Service\StoreInDatabaseService;
 use In2code\Femanager\Utility\StringUtility;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 
 /**
  * Class SaveToAnyTableFinisher
@@ -26,7 +27,7 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     protected $objectManager;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Service\TypoScriptService
+     * @var \TYPO3\CMS\Core\TypoScript\TypoScriptService
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $typoScriptService;
