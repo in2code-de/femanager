@@ -90,8 +90,8 @@ class PluginRepository
         if (array_key_exists($view, $this->scaString)) {
             $viewString = $this->scaString[$view];
             preg_match(
-                '~<field index="switchableControllerActions">\s+<value index="vDEF">'
-                    . htmlspecialchars($viewString) . '~',
+                '~<field index="switchableControllerActions">\s+<value index="vDEF"><!\[CDATA\['
+                    . $viewString . '~',
                 $pluginConfiguration,
                 $result
             );

@@ -53,7 +53,7 @@ class NewController extends AbstractController
     public function createAction(User $user)
     {
         $user = UserUtility::overrideUserGroup($user, $this->settings);
-        $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
+        $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.'] ?? []);
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
         UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);

@@ -220,7 +220,7 @@ abstract class AbstractController extends ActionController
             ),
             'Profile creation',
             $variables,
-            $this->config['new.']['email.']['createUserNotify.']
+            $this->config['new.']['email.']['createUserNotify.'] ?? []
         );
 
         // send notify email to admin
