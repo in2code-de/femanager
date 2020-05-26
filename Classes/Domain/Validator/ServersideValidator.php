@@ -101,7 +101,7 @@ class ServersideValidator extends AbstractValidator
     protected function checkRequiredValidation($validationSetting, $value, $fieldName)
     {
         if ($validationSetting === '1' && !$this->validateRequired($value)) {
-            $this->addError('validationErrorRequired', $fieldName);
+            $this->addError('validationErrorRequired', 0, ['code' => $fieldName]);
             $this->isValid = false;
         }
     }
@@ -115,7 +115,7 @@ class ServersideValidator extends AbstractValidator
     protected function checkEmailValidation($value, $validationSetting, $fieldName)
     {
         if (!empty($value) && $validationSetting === '1' && !$this->validateEmail($value)) {
-            $this->addError('validationErrorEmail', $fieldName);
+            $this->addError('validationErrorEmail', 0, ['code' => $fieldName]);
             $this->isValid = false;
         }
     }
@@ -129,7 +129,7 @@ class ServersideValidator extends AbstractValidator
     protected function checkMinValidation($value, $validationSetting, $fieldName)
     {
         if (!empty($value) && !$this->validateMin($value, $validationSetting)) {
-            $this->addError('validationErrorMin', $fieldName);
+            $this->addError('validationErrorMin', 0, ['code' => $fieldName]);
             $this->isValid = false;
         }
     }
@@ -143,7 +143,7 @@ class ServersideValidator extends AbstractValidator
     protected function checkMaxValidation($value, $validationSetting, $fieldName)
     {
         if (!empty($value) && !$this->validateMax($value, $validationSetting)) {
-            $this->addError('validationErrorMax', $fieldName);
+            $this->addError('validationErrorMax', 0, ['code' => $fieldName]);
             $this->isValid = false;
         }
     }
@@ -157,7 +157,7 @@ class ServersideValidator extends AbstractValidator
     protected function checkIntOnlyValidation($value, $validationSetting, $fieldName)
     {
         if (!empty($value) && $validationSetting === '1' && !$this->validateInt($value)) {
-            $this->addError('validationErrorInt', $fieldName);
+            $this->addError('validationErrorInt', 0, ['code' => $fieldName]);
             $this->isValid = false;
         }
     }
@@ -171,7 +171,7 @@ class ServersideValidator extends AbstractValidator
     protected function checkLetterOnlyValidation($value, $validationSetting, $fieldName)
     {
         if (!empty($value) && $validationSetting === '1' && !$this->validateLetters($value)) {
-            $this->addError('validationErrorLetters', $fieldName);
+            $this->addError('validationErrorLetters', 0, ['code' => $fieldName]);
             $this->isValid = false;
         }
     }
@@ -189,7 +189,7 @@ class ServersideValidator extends AbstractValidator
             $validationSetting === '1' &&
             !$this->validateUniquePage($value, $fieldName, $user)
         ) {
-            $this->addError('validationErrorUniquePage', $fieldName);
+            $this->addError('validationErrorUniquePage', 0, ['code' => $fieldName]);
             $this->isValid = false;
         }
     }
