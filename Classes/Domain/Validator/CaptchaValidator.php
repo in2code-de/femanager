@@ -24,7 +24,7 @@ class CaptchaValidator extends AbstractValidator
         if (!$this->captchaEnabled() || $this->validCaptcha()) {
             return true;
         }
-        $this->addError('validationErrorCaptcha', 'captcha');
+        $this->addError('validationErrorCaptcha', 0, ['fieldName' => 'captcha']);
         return false;
     }
 
