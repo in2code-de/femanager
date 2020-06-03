@@ -153,6 +153,10 @@ plugin.tx_femanager {
 					# requires to check terms and conditions checkbox
 #					required = 1
 				}
+				dsgvo {
+				    # requires to check dsgvo
+				    # required = 1
+				}
 			}
 
 

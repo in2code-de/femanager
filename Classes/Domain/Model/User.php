@@ -76,6 +76,19 @@ class User extends FrontendUser
      * @var \DateTime
      */
     protected $termsDateOfAcceptance = null;
+    /**
+     * Dsgvo approval
+     *
+     * @var bool
+     */
+    protected $dsgvo = false;
+
+    /**
+     * the datetime the user accepted the dsgvo
+     *
+     * @var \DateTime
+     */
+    protected $dsgvoDateOfAcceptance = null;
 
     /**
      * @var string
@@ -397,5 +410,46 @@ class User extends FrontendUser
     public function _isDirty($propertyName = null)
     {
         return $this->getIgnoreDirty() ? false : parent::_isDirty($propertyName);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDsgvo()
+    {
+        return $this->dsgvo;
+    }
+
+    /**
+     * @param bool $dsgvo
+     */
+    public function setDsgvo($dsgvo)
+    {
+        $this->dsgvo = $dsgvo;
+        $this->setDsgvoDateOfAcceptance();
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDsgvoDateOfAcceptance()
+    {
+        return $this->dsgvoDateOfAcceptance;
+    }
+
+    /**
+     *
+     * @return User
+     * @throws \Exception
+     */
+    public function setDsgvoDateOfAcceptance()
+    {
+        if ($this->dsgvoDateOfAcceptance === null) {
+            $now = new \DateTime();
+            $this->dsgvoDateOfAcceptance= $now;
+        }
+        return $this;
     }
 }

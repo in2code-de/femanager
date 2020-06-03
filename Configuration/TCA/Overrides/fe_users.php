@@ -99,10 +99,31 @@ $feUsersColumns = [
             'eval' => 'datetime',
             'readOnly' => true,
         ]
+    ],
+    'tx_femanager_dsgvo' => [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+            'fe_users.dsgvo',
+        'config' => [
+            'type' => 'check',
+            'default' => 0,
+        ]
+    ],
+    'tx_femanager_dsgvo_date_of_acceptance' => [
+        'displayCond' => 'FIELD:tx_femanager_dsgvo:REQ:TRUE',
+        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+            'fe_users.dsgvo_date_of_acceptance',
+        'exclude' => true,
+        'config' => [
+            'type' => 'input',
+            'size' => 30,
+            'eval' => 'datetime',
+            'readOnly' => true,
+        ]
     ]
 ];
 $fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin, tx_femanager_terms, ' .
-    'tx_femanager_terms_date_of_acceptance';
+    'tx_femanager_terms_date_of_acceptance, tx_femanager_dsgvo, tx_femanager_dsgvo_date_of_acceptance';
 
 if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableLogActive()) {
     $feUsersColumns['tx_femanager_log'] = [

@@ -155,6 +155,10 @@
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.terms</numIndex>
 										<numIndex index="1">terms</numIndex>
 									</numIndex>
+									<numIndex index="21" type="array">
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.dsgvo</numIndex>
+										<numIndex index="1">dsgvo</numIndex>
+									</numIndex>
 								</items>
 								<maxitems>100</maxitems>
 								<size>10</size>
@@ -654,6 +658,19 @@
 							</config>
 						</TCEforms>
 					</settings.misc.termsUrl>
+					<settings.misc.dsgvoUrl>
+						<TCEforms>
+							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.misc.dsgvoUrl</label>
+							<config>
+								<type>group</type>
+								<internal_type>db</internal_type>
+								<allowed>pages</allowed>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<minitems>0</minitems>
+							</config>
+						</TCEforms>
+					</settings.misc.dsgvoUrl>
 				</el>
 			</ROOT>
 		</misc>
