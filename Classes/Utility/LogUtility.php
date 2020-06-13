@@ -5,13 +5,29 @@ namespace In2code\Femanager\Utility;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\LogRepository;
-use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
+use In2code\Femanager\Event\UserLogEvent;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class LogUtility
  */
-class LogUtility extends AbstractUtility
+class LogUtility
 {
+    /**
+     * @var LogRepository
+     */
+    private $logRepository;
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    public function __construct(LogRepository $logRepository, EventDispatcherInterface $eventDispatcher)
+    {
+        $this->logRepository = $logRepository;
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @param int $state State to log
@@ -20,39 +36,16 @@ class LogUtility extends AbstractUtility
      * @return void
      * @codeCoverageIgnore
      */
-    public static function log($state, User $user, array $additionalProperties = [])
+    public function log($state, User $user, array $additionalProperties = [])
     {
         if (!ConfigurationUtility::isDisableLogActive()) {
-            $log = self::getLog();
+            $log = GeneralUtility::makeInstance(Log::class);
             $log->setTitle(LocalizationUtility::translateByState($state));
             $log->setState($state);
             $log->setUser($user);
-            self::getLogRepository()->add($log);
+            $this->logRepository->add($log);
         }
-        self::getDispatcher()->dispatch(__CLASS__, __FUNCTION__ . 'Custom', [$state, $user, $additionalProperties]);
-    }
 
-    /**
-     * @return Dispatcher
-     */
-    protected static function getDispatcher()
-    {
-        return self::getObjectManager()->get(Dispatcher::class);
-    }
-
-    /**
-     * @return Log
-     */
-    protected static function getLog()
-    {
-        return self::getObjectManager()->get(Log::class);
-    }
-
-    /**
-     * @return LogRepository
-     */
-    protected static function getLogRepository()
-    {
-        return self::getObjectManager()->get(LogRepository::class);
+        $this->eventDispatcher->dispatch(new UserLogEvent($user, $state, $additionalProperties));
     }
 }

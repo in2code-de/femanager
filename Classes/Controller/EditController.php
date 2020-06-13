@@ -5,6 +5,9 @@ namespace In2code\Femanager\Controller;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
+use In2code\Femanager\Event\AfterUserUpdateEvent;
+use In2code\Femanager\Event\BeforeUpdateUserEvent;
+use In2code\Femanager\Event\DeleteUserEvent;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -58,9 +61,9 @@ class EditController extends AbstractController
 
     /**
      * @param User $user
-     * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
-     * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
-     * @validate $user In2code\Femanager\Domain\Validator\CaptchaValidator
+     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
      * @return void
      */
     public function updateAction(User $user)
@@ -69,7 +72,7 @@ class EditController extends AbstractController
         $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.']);
         $this->emailForUsername($user);
         UserUtility::convertPassword($user, $this->settings['edit']['misc']['passwordSave']);
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforePersist', [$user, $this]);
+        $this->eventDispatcher->dispatch(new BeforeUpdateUserEvent($user));
         if (!empty($this->settings['edit']['confirmByAdmin'])) {
             $this->updateRequest($user);
         } else {
@@ -99,14 +102,15 @@ class EditController extends AbstractController
                 $this->statusRefuse($user);
                 break;
             case 'silentRefuse':
-                LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
+                $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
                 $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDADMIN));
                 break;
             default:
         }
         $user->setTxFemanagerChangerequest('');
         $this->userRepository->update($user);
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $hash, $status, $this]);
+
+        $this->eventDispatcher->dispatch(new AfterUserUpdateEvent($user, $hash, $status));
     }
 
     /**
@@ -132,7 +136,7 @@ class EditController extends AbstractController
             }
         }
         $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['onAdminConfirmation.']);
-        LogUtility::log(Log::STATUS_PROFILEUPDATECONFIRMEDADMIN, $user);
+        $this->logUtility->log(Log::STATUS_PROFILEUPDATECONFIRMEDADMIN, $user);
         $this->addFlashMessage(LocalizationUtility::translate('updateProfile'));
     }
 
@@ -155,7 +159,7 @@ class EditController extends AbstractController
             ],
             $this->config['edit.']['email.']['updateRequestRefused.']
         );
-        LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
+        $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDADMIN));
     }
 
@@ -167,8 +171,8 @@ class EditController extends AbstractController
      */
     public function deleteAction(User $user)
     {
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__, [$user, $this]);
-        LogUtility::log(Log::STATUS_PROFILEDELETE, $user);
+        $this->eventDispatcher->dispatch(new DeleteUserEvent($user));
+        $this->logUtility->log(Log::STATUS_PROFILEDELETE, $user);
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEDELETE));
         $this->userRepository->remove($user);
         $this->redirectByAction('delete');

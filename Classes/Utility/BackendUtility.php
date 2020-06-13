@@ -2,9 +2,10 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
-use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\TimeTracker\TimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -41,7 +42,8 @@ class BackendUtility
         if ($addReturnUrl) {
             $uriParameters['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
         }
-        return BackendUtilityCore::getModuleUrl('record_edit', $uriParameters);
+        return (string)GeneralUtility::makeInstance(UriBuilder::class)
+            ->buildUriFromRoute('record_edit', $uriParameters);
     }
 
     /**
@@ -66,7 +68,8 @@ class BackendUtility
             $uriParameters['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
             // @codeCoverageIgnoreEnd
         }
-        return BackendUtilityCore::getModuleUrl('record_edit', $uriParameters);
+        return (string)GeneralUtility::makeInstance(UriBuilder::class)
+            ->buildUriFromRoute('record_edit', $uriParameters);
     }
 
     /**
@@ -79,51 +82,6 @@ class BackendUtility
             $string = 'module';
         }
         return $string;
-    }
-
-    /**
-     * @param int $pageIdentifier
-     * @param int $typeNum
-     * @return bool
-     * @SuppressWarnings(PHPMD.Superglobals)
-     * @codeCoverageIgnore
-     */
-    public static function initializeTsFe(int $pageIdentifier = 0, int $typeNum = 0): bool
-    {
-        if (TYPO3_MODE === 'BE') {
-            try {
-                if (!empty(GeneralUtility::_GP('id'))) {
-                    $pageIdentifier = (int)GeneralUtility::_GP('id');
-                }
-                if (!empty(GeneralUtility::_GP('type'))) {
-                    $typeNum = (int)GeneralUtility::_GP('type');
-                }
-                if (!is_object($GLOBALS['TT'])) {
-                    $GLOBALS['TT'] = new TimeTracker(false);
-                    $GLOBALS['TT']->start();
-                }
-                $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
-                    TypoScriptFrontendController::class,
-                    $GLOBALS['TYPO3_CONF_VARS'],
-                    $pageIdentifier,
-                    $typeNum
-                );
-                $GLOBALS['TSFE']->connectToDB();
-                $GLOBALS['TSFE']->initFEuser();
-                $GLOBALS['TSFE']->determineId();
-                $GLOBALS['TSFE']->initTemplate();
-                $GLOBALS['TSFE']->getConfigArray();
-                $GLOBALS['TSFE']->settingLanguage();
-                return true;
-            } catch (\Exception $exception) {
-                /**
-                 * Normally happens if $_GET['id'] points to a sysfolder on root
-                 * In this case: Simply do not initialize TsFe
-                 */
-                return false;
-            }
-        }
-        return false;
     }
 
     /**
@@ -155,11 +113,9 @@ class BackendUtility
     public static function loadTS($pageUid = null)
     {
         $pageUid = ($pageUid && \TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($pageUid)) ? $pageUid : \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('id');
-        $sysPageObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
         $TSObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\TemplateService');
         $TSObj->tt_track = 0;
-        $TSObj->init();
-        $TSObj->runThroughTemplates($sysPageObj->getRootLine($pageUid));
+        $TSObj->runThroughTemplates(GeneralUtility::makeInstance(RootlineUtility::class, $pageUid, '')->get());
         $TSObj->generateConfig();
 
         return $TSObj->setup;

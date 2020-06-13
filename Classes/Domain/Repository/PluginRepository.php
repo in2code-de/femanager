@@ -3,7 +3,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Repository;
 
 use In2code\Femanager\Utility\ObjectUtility;
-use TYPO3\CMS\Extbase\Service\FlexFormService;
+use TYPO3\CMS\Core\Service\FlexFormService;
 
 /**
  * Class PluginRepository
