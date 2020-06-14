@@ -3,7 +3,7 @@ namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\ObjectUtility;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
