@@ -2,7 +2,7 @@
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Utility\StringUtility;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Class StringUtilityTest

@@ -2,7 +2,7 @@
 namespace In2code\Femanager\ViewHelpers\Request;
 
 use In2code\Femanager\ViewHelpers\Misc\RequestViewHelper;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Class RequestTest
