@@ -77,18 +77,18 @@ class User extends FrontendUser
      */
     protected $termsDateOfAcceptance = null;
     /**
-     * Dsgvo approval
+     * Gdpr approval
      *
      * @var bool
      */
-    protected $dsgvo = false;
+    protected $gdpr = false;
 
     /**
-     * the datetime the user accepted the dsgvo
+     * the datetime the user accepted the gdpr
      *
      * @var \DateTime
      */
-    protected $dsgvoDateOfAcceptance = null;
+    protected $gdprDateOfAcceptance = null;
 
     /**
      * @var string
@@ -415,18 +415,18 @@ class User extends FrontendUser
     /**
      * @return bool
      */
-    public function isDsgvo()
+    public function isGdpr()
     {
-        return $this->dsgvo;
+        return $this->gdpr;
     }
 
     /**
-     * @param bool $dsgvo
+     * @param bool $gdpr
      */
-    public function setDsgvo($dsgvo)
+    public function setGdpr($gdpr)
     {
-        $this->dsgvo = $dsgvo;
-        $this->setDsgvoDateOfAcceptance();
+        $this->gdpr = $gdpr;
+        $this->setGdprDateOfAcceptance();
 
         return $this;
     }
@@ -434,9 +434,9 @@ class User extends FrontendUser
     /**
      * @return \DateTime
      */
-    public function getDsgvoDateOfAcceptance()
+    public function getGdprDateOfAcceptance()
     {
-        return $this->dsgvoDateOfAcceptance;
+        return $this->gdprDateOfAcceptance;
     }
 
     /**
@@ -444,11 +444,11 @@ class User extends FrontendUser
      * @return User
      * @throws \Exception
      */
-    public function setDsgvoDateOfAcceptance()
+    public function setGdprDateOfAcceptance()
     {
-        if ($this->dsgvoDateOfAcceptance === null) {
+        if ($this->gdprDateOfAcceptance === null) {
             $now = new \DateTime();
-            $this->dsgvoDateOfAcceptance= $now;
+            $this->gdprDateOfAcceptance= $now;
         }
         return $this;
     }

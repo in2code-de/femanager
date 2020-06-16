@@ -100,19 +100,19 @@ $feUsersColumns = [
             'readOnly' => true,
         ]
     ],
-    'tx_femanager_dsgvo' => [
+    'tx_femanager_gdpr' => [
         'exclude' => 1,
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
-            'fe_users.dsgvo',
+            'fe_users.gdpr',
         'config' => [
             'type' => 'check',
             'default' => 0,
         ]
     ],
-    'tx_femanager_dsgvo_date_of_acceptance' => [
-        'displayCond' => 'FIELD:tx_femanager_dsgvo:REQ:TRUE',
+    'tx_femanager_gdpr_date_of_acceptance' => [
+        'displayCond' => 'FIELD:tx_femanager_gdpr:REQ:TRUE',
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
-            'fe_users.dsgvo_date_of_acceptance',
+            'fe_users.gdpr_date_of_acceptance',
         'exclude' => true,
         'config' => [
             'type' => 'input',
@@ -123,7 +123,7 @@ $feUsersColumns = [
     ]
 ];
 $fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin, tx_femanager_terms, ' .
-    'tx_femanager_terms_date_of_acceptance, tx_femanager_dsgvo, tx_femanager_dsgvo_date_of_acceptance';
+    'tx_femanager_terms_date_of_acceptance, tx_femanager_gdpr, tx_femanager_gdpr_date_of_acceptance';
 
 if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableLogActive()) {
     $feUsersColumns['tx_femanager_log'] = [
