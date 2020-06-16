@@ -120,6 +120,14 @@ $feUsersColumns = [
             'eval' => 'datetime',
             'readOnly' => true,
         ]
+    ],
+    'tx_femanager_house_number' => [
+        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+            'tx_femanager_domain_model_user.houseNumber',
+        'config' => [
+            'type' => 'input',
+            'size' => 10,
+        ]
     ]
 ];
 $fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin, tx_femanager_terms, ' .
@@ -162,6 +170,12 @@ $fields .= ', tx_femanager_changerequest';
     'gender, date_of_birth',
     '',
     'after:name'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+    'fe_users',
+    'tx_femanager_house_number',
+    '',
+    'after:address'
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $feUsersColumns);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(

@@ -54,6 +54,9 @@
 			<trans-unit id="tx_femanager_domain_model_user.address">
 				<source>Address</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.zip">
+				<source>House number</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.telephone">
 				<source>Telephone</source>
 			</trans-unit>
