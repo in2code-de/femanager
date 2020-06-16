@@ -116,6 +116,14 @@
 			</td>
 		</tr>
 	</f:if>
+	<f:if condition="{user.houseNumber}">
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.houseNumber" /></td>
+			<td>
+				{user.address}
+			</td>
+		</tr>
+	</f:if>
 	<f:if condition="{user.zip}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.zip" /></td>

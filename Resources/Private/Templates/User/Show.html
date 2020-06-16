@@ -64,6 +64,12 @@
 							{user.address}
 						</li>
 					</f:if>
+					<f:if condition="{user.houseNumber}">
+						<li>
+							<f:translate key="tx_femanager_domain_model_user.houseNumber" />:
+							{user.houseNumber}
+						</li>
+					</f:if>
 					<f:if condition="{user.zip}">
 						<li>
 							<f:translate key="tx_femanager_domain_model_user.zip" />:

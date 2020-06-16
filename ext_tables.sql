@@ -11,7 +11,8 @@ CREATE TABLE fe_users (
   tx_femanager_terms tinyint(3) DEFAULT '0' NOT NULL,
   tx_femanager_terms_date_of_acceptance INT(11) DEFAULT '0' NOT NULL,
   tx_femanager_gdpr tinyint(3) DEFAULT '0' NOT NULL,
-  tx_femanager_gdpr_date_of_acceptance INT(11) DEFAULT '0' NOT NULL
+  tx_femanager_gdpr_date_of_acceptance INT(11) DEFAULT '0' NOT NULL,
+  tx_femanager_house_number varchar(10) DEFAULT '' NOT NULL
 );
 
 #

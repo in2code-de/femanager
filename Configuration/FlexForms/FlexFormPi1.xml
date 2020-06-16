@@ -159,6 +159,10 @@
 										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gdpr</numIndex>
 										<numIndex index="1">gdpr</numIndex>
 									</numIndex>
+									<numIndex index="22" type="array">
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.houseNumber</numIndex>
+										<numIndex index="1">houseNumber</numIndex>
+									</numIndex>
 								</items>
 								<maxitems>100</maxitems>
 								<size>10</size>
