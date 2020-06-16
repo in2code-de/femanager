@@ -1,0 +1,24 @@
+{namespace femanager=In2code\Femanager\ViewHelpers}
+<div class="femanager_fieldset femanager_gdpr form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+            <label class="checkbox">
+                <f:form.checkbox
+                        id="femanager_field_gdpr"
+                        property="gdpr"
+                        value="gdpr and conditions"
+                        checked="false"
+                        additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'gdpr')}" />
+                <f:translate key="tx_femanager_domain_model_user.gdpr" />
+                <f:if condition="{femanager:Validation.IsRequiredField(fieldName:'gdpr')}">
+                    <span>*</span>
+                </f:if>
+                <f:if condition="{settings.misc.gdprUrl}">
+                    <f:then>
+                        (<f:link.page pageUid="{settings.misc.gdprUrl}"><f:translate key="tx_femanager_domain_model_user.gdprlinktext" /></f:link.page>)
+                    </f:then>
+                </f:if>
+            </label>
+        </div>
+    </div>
+</div>

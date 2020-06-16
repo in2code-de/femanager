@@ -10,8 +10,8 @@ CREATE TABLE fe_users (
   tx_femanager_changerequest text,
   tx_femanager_terms tinyint(3) DEFAULT '0' NOT NULL,
   tx_femanager_terms_date_of_acceptance INT(11) DEFAULT '0' NOT NULL,
-  tx_femanager_dsgvo tinyint(3) DEFAULT '0' NOT NULL,
-  tx_femanager_dsgvo_date_of_acceptance INT(11) DEFAULT '0' NOT NULL
+  tx_femanager_gdpr tinyint(3) DEFAULT '0' NOT NULL,
+  tx_femanager_gdpr_date_of_acceptance INT(11) DEFAULT '0' NOT NULL
 );
 
 #
