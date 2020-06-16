@@ -87,14 +87,14 @@
 			<trans-unit id="tx_femanager_domain_model_user.terms">
 				<source>I accept the terms and conditions</source>
 			</trans-unit>
-			<trans-unit id="tx_femanager_domain_model_user.dsgvo">
-				<source>I accept the dsgvo conditions</source>
+			<trans-unit id="tx_femanager_domain_model_user.gdpr">
+				<source>I accept the gdpr conditions</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.termslinktext">
 				<source>Click here for terms and conditions</source>
 			</trans-unit>
-			<trans-unit id="tx_femanager_domain_model_user.dsgvolinktext">
-				<source>Click here for dsgvo conditions</source>
+			<trans-unit id="tx_femanager_domain_model_user.gdprlinktext">
+				<source>Click here for gdpr conditions</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.lastlogin">
 				<source>Last login</source>

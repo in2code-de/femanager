@@ -156,8 +156,8 @@
 										<numIndex index="1">terms</numIndex>
 									</numIndex>
 									<numIndex index="21" type="array">
-										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.dsgvo</numIndex>
-										<numIndex index="1">dsgvo</numIndex>
+										<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gdpr</numIndex>
+										<numIndex index="1">gdpr</numIndex>
 									</numIndex>
 								</items>
 								<maxitems>100</maxitems>
@@ -658,9 +658,9 @@
 							</config>
 						</TCEforms>
 					</settings.misc.termsUrl>
-					<settings.misc.dsgvoUrl>
+					<settings.misc.gdprUrl>
 						<TCEforms>
-							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.misc.dsgvoUrl</label>
+							<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.misc.gdprUrl</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -670,7 +670,7 @@
 								<minitems>0</minitems>
 							</config>
 						</TCEforms>
-					</settings.misc.dsgvoUrl>
+					</settings.misc.gdprUrl>
 				</el>
 			</ROOT>
 		</misc>

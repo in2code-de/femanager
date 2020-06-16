@@ -81,8 +81,8 @@
 			<trans-unit id="tx_femanager_domain_model_user.terms">
 				<source>Terms and conditions</source>
 			</trans-unit>
-			<trans-unit id="tx_femanager_domain_model_user.dsgvo">
-				<source>Dsgvo conditions</source>
+			<trans-unit id="tx_femanager_domain_model_user.gdpr">
+				<source>Gdpr conditions</source>
 			</trans-unit>
 			<trans-unit id="fe_users.crdate">
 				<source>Creation Time</source>
@@ -105,20 +105,20 @@
 			<trans-unit id="fe_users.terms">
 				<source>User accepted terms and conditions</source>
 			</trans-unit>
-			<trans-unit id="fe_users.dsgvo">
-				<source>User accepted dsgvo conditions</source>
+			<trans-unit id="fe_users.gdpr">
+				<source>User accepted gdpr conditions</source>
 			</trans-unit>
 			<trans-unit id="fe_users.terms_version">
 				<source>Accepted version of terms and conditions</source>
 			</trans-unit>
-			<trans-unit id="fe_users.dsgvo_version">
-				<source>Accepted version of dsgvo conditions</source>
+			<trans-unit id="fe_users.gdpr_version">
+				<source>Accepted version of gdpr conditions</source>
 			</trans-unit>
 			<trans-unit id="fe_users.terms_date_of_acceptance">
 				<source>Accepted datetime of terms and conditions</source>
 			</trans-unit>
-			<trans-unit id="fe_users.dsgvo_date_of_acceptance">
-				<source>Accepted datetime of dsgvo conditions</source>
+			<trans-unit id="fe_users.gdpr_date_of_acceptance">
+				<source>Accepted datetime of gdpr conditions</source>
 			</trans-unit>
 			<trans-unit id="fe_users.changerequest">
 				<source>Change Request</source>
@@ -244,8 +244,8 @@
 			<trans-unit id="flexform.new.showTermsAndConditions">
 				<source>User must accept terms and conditions</source>
 			</trans-unit>
-			<trans-unit id="flexform.new.showDsgvoConditions">
-				<source>User must accept dsgvo conditions</source>
+			<trans-unit id="flexform.new.showGdprConditions">
+				<source>User must accept gdpr conditions</source>
 			</trans-unit>
 			<trans-unit id="flexform.new.confirmByAdmin">
 				<source>Registration must be confirmed from an admin (add one or more emails)</source>
@@ -337,8 +337,8 @@
 			<trans-unit id="flexform.misc.termsUrl">
 				<source>Page with terms and conditions</source>
 			</trans-unit>
-			<trans-unit id="flexform.misc.dsgvoUrl">
-				<source>Page with dsgvo conditions</source>
+			<trans-unit id="flexform.misc.gdprUrl">
+				<source>Page with gdpr conditions</source>
 			</trans-unit>
 
 			<trans-unit id="pleaseChoose">
