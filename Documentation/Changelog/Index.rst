@@ -22,9 +22,9 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
    :Date:
       2020-06-xx
    :Changes:
-      * [TASK] Provide basic TYPO3 V10 Support - thanks to https://github.com/Baachi
       * [TASK] Update Behaviour test for TYPO3
       * [BUGFIX] TCA migrations for TYPO3 v9.5 - thanks to https://github.com/TrueType
+      * [BUGFIX] Make ajax validation URL more robusthttps://github.com/baschny
       * [DOCS] Add info about PHP7 and extending femanager - thanks to https://github.com/uwejakobs
 
 - :Version:
