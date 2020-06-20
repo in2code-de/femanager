@@ -1,12 +1,15 @@
 <?php
-namespace In2code\Functions;
+
+namespace In2code\Femanager\Tests\Scripts;
+
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class ResetFeusers
  */
 class ResetFeusers
 {
-
     /**
      * Values to insert
      *
@@ -29,12 +32,26 @@ class ResetFeusers
     /**
      * @return string
      */
-    public function reset()
+    public function delete()
     {
-        /** @var $databaseconnection \TYPO3\CMS\Core\Database\DatabaseConnection */
-        $databaseconnection = $GLOBALS['TYPO3_DB'];
-        $databaseconnection->exec_DELETEquery('fe_users', 'username = "' . $this->userValues['username'] . '"');
-        $databaseconnection->exec_INSERTquery('fe_users', $this->userValues);
-        return 'FE Users reset successfully';
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
+        $queryBuilder2 = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
+        $queryBuilder
+            ->delete('fe_users')
+            ->where(
+                $queryBuilder->expr()->eq('username',$queryBuilder->createNamedParameter($this->userValues['username']))
+            );
+        $queryBuilder2->insert('fe_users')->values($this->userValues);
+
+        try {
+            $queryBuilder->execute();
+            $queryBuilder2->execute();
+
+            return 'FE Users reset successfully';
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            $errorMsg = $e->getMessage();
+        }
+
+        return 'Could not delete fe_users. ' . $errorMsg;
     }
 }
