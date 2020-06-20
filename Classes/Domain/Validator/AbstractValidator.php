@@ -59,6 +59,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     protected function validateRequired($value)
     {
         if (!is_object($value)) {
+            if (is_numeric($value)) {
+                return true;
+            }
             return !empty($value);
         } elseif ((is_array($value) || $value instanceof \Countable) && count($value) > 0) {
             return true;
