@@ -25,6 +25,7 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       * [BUGFIX] Use FlexFormService to validate allowed views (https://github.com/in2code-de/femanager/issues/177) - thanks to https://github.com/nigelmann
       * [BUGFIX] TCA migrations for TYPO3 v9.5 - thanks to https://github.com/TrueType
       * [BUGFIX] Make ajax validation URL more robust - thanks to https://github.com/baschny
+      * [BUGFIX] Allow '0' if field is required (https://github.com/in2code-de/femanager/issues/52) - thanks to https://github.com/DanielSiepmann
       * [DOCS] Add info about PHP7 and extending femanager - thanks to https://github.com/uwejakobs
 
 - :Version:
