@@ -17,7 +17,17 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
    :Changes:
       Release Description
 
- - :Version:
+- :Version:
+      @dev
+   :Date:
+      2020-06-xx
+   :Changes:
+      * [TASK] Provide basic TYPO3 V10 Support - thanks to https://github.com/Baachi
+      * [TASK] Update Behaviour test for TYPO3
+      * [BUGFIX] TCA migrations for TYPO3 v9.5 - thanks to https://github.com/TrueType
+      * [DOCS] Add info about PHP7 and extending femanager - thanks to https://github.com/uwejakobs
+
+- :Version:
       5.2.0 (!!!)
    :Date:
       2019-11-26
