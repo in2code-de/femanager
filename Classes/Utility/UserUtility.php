@@ -333,21 +333,14 @@ class UserUtility extends AbstractUtility
      */
     public static function login(User $user, $storagePids = null)
     {
-        $tsfe = self::getTypoScriptFrontendController();
-        $tsfe->fe_user->checkPid = false;
-        $info = $tsfe->fe_user->getAuthInfoArray();
-
-        $cleanIntList = implode(',', GeneralUtility::intExplode(',', $storagePids));
-
-        $extraWhere = ' AND uid = ' . (int)$user->getUid();
-        if (!empty($storagePids)) {
-            $extraWhere = ' AND pid IN (' . $cleanIntList . ')';
-        }
-        $user = $tsfe->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
-        $tsfe->fe_user->createUserSession($user);
-        self::loginAlternative($tsfe);
-        $tsfe->fe_user->user = $tsfe->fe_user->fetchUserSession();
-        $tsfe->fe_user->setAndSaveSessionData('ses', true);
+        #Log in user
+        $GLOBALS['TSFE']->fe_user->createUserSession(['uid' => (int)$user->getUid()]);
+        $GLOBALS['TSFE']->fe_user->loginSessionStarted = 1;
+        $GLOBALS['TSFE']->fe_user->forceSetCookie = TRUE;
+        $GLOBALS['TSFE']->fe_user->dontSetCookie = false;
+        $GLOBALS['TSFE']->fe_user->start();
+        $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('dummy', TRUE);
+        $GLOBALS['TSFE']->fe_user->loginUser = 1;
     }
 
     /**
