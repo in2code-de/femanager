@@ -24,11 +24,14 @@ class ListUsers
     public function listUsers()
     {
         $content = '<h2>List FE_Users</h2>';
-
+        $username = GeneralUtility::_GET('username');
+        if (!$username) {
+            $username = 'akellner';
+        }
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
         $queryBuilder->select('*')->from('fe_users')
             ->where(
-                $queryBuilder->expr()->eq('username',$queryBuilder->createNamedParameter('akellner'))
+                $queryBuilder->expr()->eq('username',$queryBuilder->createNamedParameter($username))
             );
 
         try {
