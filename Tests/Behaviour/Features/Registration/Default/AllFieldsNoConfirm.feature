@@ -29,7 +29,7 @@ Feature: AllFieldsNoConfirm
 
     Then I should see "User registration"
 
-    Given I am on "/index.php?id=33"
+    Given I am on "/index.php?id=33&username=[random:1]"
     Then I should see "[random:1]"
     Then I should see "Alexander Markus Kellner"
     Then I should see "Randy"
