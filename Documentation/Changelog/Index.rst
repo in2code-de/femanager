@@ -22,6 +22,7 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
    :Date:
       2020-06-xx
    :Changes:
+      * [FEATURE] Adds uppercase validation for password (https://github.com/in2code-de/femanager/issues/91) - thanks to https://github.com/alexkue7911
       * [BUGFIX] Use FlexFormService to validate allowed views (https://github.com/in2code-de/femanager/issues/177) - thanks to https://github.com/nigelmann
       * [BUGFIX] TCA migrations for TYPO3 v9.5 - thanks to https://github.com/TrueType
       * [BUGFIX] Make ajax validation URL more robust - thanks to https://github.com/baschny
