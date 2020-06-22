@@ -68,6 +68,8 @@ class NewController extends AbstractController
         } else {
             $this->createRequest($user);
         }
+
+        $this->forward('createStatus');
     }
 
     /**
