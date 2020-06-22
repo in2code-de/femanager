@@ -12,7 +12,7 @@ Feature: SmallAdminConfirm
       | Email | alex@einpraegsam.net |
     And I press "Create Profile Now"
 
-    Then I should see "profile will be available as soon as the admin confirms"
+    Then I should see "Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request."
 
     # Check if user is disabled
     Given I am on "/index.php?id=48&pid=25"

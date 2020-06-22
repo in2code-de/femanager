@@ -43,7 +43,7 @@ Feature: SmallNoConfirm
 
     Then I should see "Profile successfully changed"
 
-    Given I am on "/index.php?id=33"
+    Given I am on "/index.php?id=89"
     Then I should see "[random:1]"
     Then I should see "[random:2]"
     Then I should see "[random:3]"
