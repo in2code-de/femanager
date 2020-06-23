@@ -18,7 +18,7 @@ class ListUsers
      *  in web/typo3conf/ext/femanager/Tests/Behaviour/Features/Edit/Default/SmallNoConfirm.feature
      *  Scenario: Login as frontend user and test profile update
      *  Given I am on "/index.php?id=33" ==> list random values
-     * 
+     *
      * @return string
      */
     public function listUsers()
@@ -31,7 +31,7 @@ class ListUsers
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
         $queryBuilder->select('*')->from('fe_users')
             ->where(
-                $queryBuilder->expr()->eq('username',$queryBuilder->createNamedParameter($username))
+                $queryBuilder->expr()->eq('username', $queryBuilder->createNamedParameter($username))
             );
 
         try {
@@ -41,9 +41,36 @@ class ListUsers
                     DebuggerUtility::var_dump($row, 'in2code: ' . __CLASS__ . ':' . __LINE__);
                 }
             }
-
         } catch (\Doctrine\DBAL\DBALException $e) {
-            $content = 'error: ' .  $e->getMessage();
+            $content = 'error: ' . $e->getMessage();
+        }
+
+        return $content;
+    }
+
+    /**
+     *
+     *  This is a test function for a behat test
+     *  in web/typo3conf/ext/femanager/Tests/Behaviour/Features/Edit/Default/SmallNoConfirm.feature
+     *  Scenario: Login as frontend user and test profile update
+     *  Given I am on "/index.php?id=33" ==> list random values
+     *
+     * @return string
+     */
+    public function listLastestUser()
+    {
+        $content = '<h2>List latest FE_Users</h2>';
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
+        $queryBuilder->select('*')->from('fe_users')->orderBy('uid', 'desc');
+
+        try {
+            $res = $queryBuilder->execute();
+            if ($res) {
+                $row = $res->fetch();
+                DebuggerUtility::var_dump($row, 'in2code: ' . __CLASS__ . ':' . __LINE__);
+            }
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            $content = 'error: ' . $e->getMessage();
         }
 
         return $content;
