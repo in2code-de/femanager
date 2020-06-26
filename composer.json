@@ -27,7 +27,6 @@
     "typo3/cms-core": ">=9.5.0 <11.0.0"
   },
   "replace": {
-    "femanager": "self.version",
     "typo3-ter/femanager": "self.version"
   },
   "require-dev": {
