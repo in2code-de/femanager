@@ -13,14 +13,13 @@ use In2code\Femanager\Utility\BackendUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
-use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation\Inject;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -211,7 +210,7 @@ abstract class AbstractController extends ActionController
         bool $login = true,
         string $status = '',
         bool $backend = false
-    ) {
+    ): void {
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         $this->sendMailService->send(
@@ -248,7 +247,7 @@ abstract class AbstractController extends ActionController
         if ($backend === false) {
             $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
             $this->addFlashMessage(LocalizationUtility::translate('create'));
-            $this->redirect($redirectByActionName);
+            $this->forward($redirectByActionName);
         }
     }
 
@@ -298,7 +297,7 @@ abstract class AbstractController extends ActionController
 
         // if redirect target
         if ($target) {
-            $this->uriBuilder->setTargetPageUid((int) $target);
+            $this->uriBuilder->setTargetPageUid((int)$target);
             $this->uriBuilder->setLinkAccessRestrictedPages(true);
             $link = $this->uriBuilder->build();
             $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($link));
@@ -329,7 +328,7 @@ abstract class AbstractController extends ActionController
     protected function testSpoof($user, $uid, $receivedToken)
     {
         $errorOnProfileUpdate = false;
-        $knownToken = GeneralUtility::hmac($user->getUid(), (string) $user->getCrdate()->getTimestamp());
+        $knownToken = GeneralUtility::hmac($user->getUid(), (string)$user->getCrdate()->getTimestamp());
 
         //check if the params are valid
         if (!is_string($receivedToken) || !hash_equals($knownToken, $receivedToken)) {
@@ -439,14 +438,18 @@ abstract class AbstractController extends ActionController
         if (TYPO3_MODE == 'BE') {
             if ($this->config['_TypoScriptIncluded'] !== '1') {
                 $this->addFlashMessage(
-                    (string) LocalizationUtility::translate('error_no_typoscript_be'),
+                    (string)LocalizationUtility::translate('error_no_typoscript_be'),
                     '',
                     FlashMessage::ERROR
                 );
             }
         } else {
             if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
-                $this->addFlashMessage((string) LocalizationUtility::translate('error_no_typoscript'), '', FlashMessage::ERROR);
+                $this->addFlashMessage(
+                    (string)LocalizationUtility::translate('error_no_typoscript'),
+                    '',
+                    FlashMessage::ERROR
+                );
             }
         }
     }
