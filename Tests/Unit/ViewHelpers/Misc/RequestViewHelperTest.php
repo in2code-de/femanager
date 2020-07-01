@@ -12,16 +12,17 @@ class RequestTest extends UnitTestCase
 {
 
     /**
-     * @var RequestViewHelper
+     * @var \TYPO3\CMS\Core\Tests\AccessibleObjectInterface
      */
-    protected $generalValidatorMock;
+    protected $abstractValidationViewHelperMock;
+
 
     /**
      * @return void
      */
     public function setUp()
     {
-        $this->generalValidatorMock = $this->getAccessibleMock(RequestViewHelper::class, ['dummy']);
+        $this->abstractValidationViewHelperMock = $this->getAccessibleMock(RequestViewHelper::class, ['dummy']);
     }
 
     /**
@@ -29,7 +30,7 @@ class RequestTest extends UnitTestCase
      */
     public function tearDown()
     {
-        unset($this->generalValidatorMock);
+        unset($this->abstractValidationViewHelperMock);
     }
 
     /**
@@ -94,7 +95,7 @@ class RequestTest extends UnitTestCase
                 'abc',
                 true,
                 [],
-                null
+                ''
             ],
         ];
     }
@@ -110,8 +111,16 @@ class RequestTest extends UnitTestCase
      */
     public function testRenderReturnsString($parameter, $htmlSpecialChars, $parametersToSet, $expectedResult)
     {
-        $this->generalValidatorMock->_set('testVariables', $parametersToSet);
-        $result = $this->generalValidatorMock->_call('render', $parameter, $htmlSpecialChars);
+        $arguments = [
+            'parameter' => $parameter,
+            'htmlspecialchars' => $htmlSpecialChars,
+            'parametersToSet' => $parametersToSet
+        ];
+
+        $this->abstractValidationViewHelperMock->_set('arguments', $arguments);
+        $this->abstractValidationViewHelperMock->_set('testVariables', $parametersToSet);
+
+        $result = $this->abstractValidationViewHelperMock->_call('render', $parameter, $htmlSpecialChars);
         $this->assertSame($expectedResult, $result);
     }
 }
