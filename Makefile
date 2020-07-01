@@ -86,7 +86,7 @@ init-docker: create-dirs create-certificate
 typo3-add-dockerconfig:
 	echo "$(EMOJI_plug) Copying the docker specific configuration for TYPO3"
 	mkdir -p $(WEBROOT)/typo3conf/AdditionalConfiguration
-	cp -f .docker/TYPO3/DockerConfiguration.php $(WEBROOT)/typo3conf/AdditionalConfiguration/DockerConfiguration.php
+	cp -f .project/TYPO3/DockerConfiguration.php $(WEBROOT)/typo3conf/AdditionalConfiguration/DockerConfiguration.php
 
 ## Starts the TYPO3 Databasecompare
 typo3-comparedb:
