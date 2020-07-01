@@ -38,6 +38,13 @@ services:
     ports:
       - ${SQLPORT}:3306
 
+  chrome:
+    image: selenium/standalone-chrome-debug:3.141
+    volumes:
+      - /dev/shm:/dev/shm
+    ports:
+      - ${CHROMEPORT}:5900
+
   mail:
     image: mailhog/mailhog
     environment:

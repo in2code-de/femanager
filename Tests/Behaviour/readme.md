@@ -1,12 +1,20 @@
 # How to start behavior tests for femanager?
 
-## Preperations
+## Docker
+
+1. Import the test database dump; you can get if from stefan ;)
+1. `make install-project`
+1. `make login-php` -> `cd Tests/Behaviour` -> `bash behat.docker.sh`
+
+Wanna watch chrome? Open a VNC to `127.0.0.1:15722`. The PW is `secret`
+
+## Command line
+
+### Preperations
 
 * First of all, do a `composer install` in extension root folder
 * You have to install a local TYPO3-instance (8.7) next and it should be available under `femanager.localhost.de`
 * A dump is available under http://powermail.in2code.ws/fileadmin/behat/femanager.sql.gz
-
-## Command line
 
 ### Start Selenium
 
