@@ -16,3 +16,4 @@ composer.lock
 package-lock.json
 var
 /config/
+dynamicReturnTypeMeta.json
