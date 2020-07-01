@@ -17,7 +17,9 @@ services:
           - ${HOST}
 
   php:
-    image: in2code/php-dev:7.2-fpm
+    build:
+      context: ./.project/docker/php/
+      dockerfile: Dockerfile
     volumes:
       - ./:/app/:cached
       - typo3var:/app/${TYPO3_CACHE_DIR}/:nocopy
