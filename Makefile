@@ -39,6 +39,11 @@ start:
 	docker-compose up -d --build
 	make urls
 
+## Restores the database from the backup file defined in .env
+mysql-restore:
+	echo "$(EMOJI_robot) Restoring the database"
+	docker-compose exec mysql bash -c 'DUMPFILE="/$(SQLDUMPSDIR)/$(SQLDUMPFILE)"; if [[ "$${DUMPFILE##*.}" == "sql" ]]; then cat $$DUMPFILE; else zcat $$DUMPFILE; fi | mysql --default-character-set=utf8 -u$(MYSQL_USER) -p$(MYSQL_PASSWORD) $(MYSQL_DATABASE)'
+
 ## Starts composer-install
 composer-install:
 	echo "$(EMOJI_package) Installing composer dependencies"

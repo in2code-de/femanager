@@ -17,7 +17,7 @@ services:
           - ${HOST}
 
   php:
-    image: in2code/php:7.2-fpm
+    image: in2code/php-dev:7.2-fpm
     volumes:
       - ./:/app/:cached
       - typo3var:/app/${TYPO3_CACHE_DIR}/:nocopy
@@ -32,6 +32,7 @@ services:
       - .env
     volumes:
       - mysql:/var/lib/mysql/
+      - ${SQLDUMPSDIR}:/${SQLDUMPSDIR}
     ports:
       - ${SQLPORT}:3306
 
