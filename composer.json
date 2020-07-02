@@ -47,6 +47,7 @@
     "typo3/cms-setup": "^10.4",
     "typo3/cms-t3editor": "^10.4",
     "typo3/cms-tstemplate": "^10.4",
+    "typo3/cms-lowlevel": "^10.4",
     "nimut/testing-framework": "^5.0",
     "mikey179/vfsstream": "^1.6",
     "phpunit/phpunit": "^6.0",
@@ -58,7 +59,8 @@
     "squizlabs/php_codesniffer": "^3.5",
     "phpmd/phpmd": "^2.8",
     "helhum/typo3-console": "^6.3",
-    "sjbr/static-info-tables": "^6.9"
+    "sjbr/static-info-tables": "^6.9",
+    "typo3/cms-belog": "^10.4"
   },
   "autoload": {
     "psr-4": {
