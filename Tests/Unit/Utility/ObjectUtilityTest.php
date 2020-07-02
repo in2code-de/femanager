@@ -28,27 +28,7 @@ class ObjectUtilityTest extends UnitTestCase
         $this->expectExceptionCode(1459422492);
         ObjectUtility::getQueryBuilder('tt_content');
     }
-
-    /**
-     * @return void
-     * @covers ::getObjectManager
-     * @covers \In2code\Femanager\Utility\AbstractUtility::getObjectManager
-     */
-    public function testGetObjectManager()
-    {
-        $this->assertInstanceOf(ObjectManagerInterface::class, ObjectUtility::getObjectManager());
-    }
-
-    /**
-     * @return void
-     * @covers ::getContentObject
-     */
-    public function testGetContentObject()
-    {
-        $this->expectExceptionCode(1459422492);
-        ObjectUtility::getContentObject();
-    }
-
+    
     /**
      * @return void
      * @covers ::implodeObjectStorageOnProperty
