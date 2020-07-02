@@ -41,17 +41,6 @@ class FileUtilityTest extends UnitTestCase
 
     /**
      * @return void
-     * @covers ::createFolderIfNotExists
-     */
-    public function testCreateFolderIfNotExistsNotCreated()
-    {
-        $testpath = TestingHelper::getWebRoot() . 'fileadmin/(ßü_$test/';
-        $this->expectExceptionCode(1516373962125);
-        FileUtility::createFolderIfNotExists($testpath);
-    }
-
-    /**
-     * @return void
      * @covers ::getRelativeFolderFromAbsolutePath
      */
     public function testGetRelativeFolderFromAbsolutePath()
