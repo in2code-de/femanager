@@ -79,6 +79,7 @@ create-certificate: install-mkcert
 	PROJECT=$$(echo "$${PWD##*/}" | tr -d '.'); \
 	if [[ ! -f $(HOME)/.dinghy/certs/$$PROJECT.docker.key ]]; then mkcert -cert-file $(HOME)/.dinghy/certs/$$PROJECT.docker.crt -key-file $(HOME)/.dinghy/certs/$$PROJECT.docker.key "*.$$PROJECT.docker"; fi;
 	if [[ ! -f $(HOME)/.dinghy/certs/${HOST}.key ]]; then mkcert -cert-file $(HOME)/.dinghy/certs/${HOST}.crt -key-file $(HOME)/.dinghy/certs/${HOST}.key ${HOST}; fi;
+	if [[ ! -f $(HOME)/.dinghy/certs/${MAIL}.key ]]; then mkcert -cert-file $(HOME)/.dinghy/certs/${MAIL}.crt -key-file $(HOME)/.dinghy/certs/${MAIL}.key ${MAIL}; fi;
 
 ## Initialize the docker setup
 init-docker: create-dirs create-certificate
@@ -144,6 +145,7 @@ urls:
 	echo ''; \
 	printf "  %-$${LONGEST}s %s\n" "Frontend:" "https://$(HOST)/"; \
 	printf "  %-$${LONGEST}s %s\n" "Backend:" "https://$(HOST)/typo3/"; \
+	printf "  %-$${LONGEST}s %s\n" "Mail:" "https://$(MAIL)/"; \
 	for service in $$SERVICES; do \
 		printf "  %-$${LONGEST}s %s\n" "$$service:" "https://$$service.$$PROJECT.docker/"; \
 	done;
@@ -152,7 +154,8 @@ urls:
 add-hosts-entry:
 	echo "$(EMOJI_monkey) Creating Hosts Entry (if not set yet)"
 	SERVICES=$$(command -v getent > /dev/null && echo "getent ahostsv4" || echo "dscacheutil -q host -a name"); \
-	if [ ! "$$($$SERVICES $(HOST) | grep 127.0.0.1 > /dev/null; echo $$?)" -eq 0 ]; then sudo bash -c 'echo "127.0.0.1 $(HOST)" >> /etc/hosts; echo "Entry was added"'; else echo 'Entry already exists'; fi;
+	if [ ! "$$($$SERVICES $(HOST) | grep 127.0.0.1 > /dev/null; echo $$?)" -eq 0 ]; then sudo bash -c 'echo "127.0.0.1 $(HOST)" >> /etc/hosts; echo "Entry was added"'; else echo 'Entry already exists'; fi;\
+	if [ ! "$$($$SERVICES $(MAIL) | grep 127.0.0.1 > /dev/null; echo $$?)" -eq 0 ]; then sudo bash -c 'echo "127.0.0.1 $(MAIL)" >> /etc/hosts; echo "Entry was added"'; else echo 'Entry already exists'; fi;
 
 ## Log into the PHP container
 login-php:
