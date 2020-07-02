@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Unnamed" type="PhpBehatConfigurationType" nameIsGenerated="true">
+    <BehatRunner configuration_file="$PROJECT_DIR$/Tests/Behaviour/behat.docker.yml" directory="$PROJECT_DIR$/Tests/Behaviour" scenario="" use_alternative_configuration_file="true" />
+    <CommandLine workingDirectory="$PROJECT_DIR$/Tests/Behaviour" />
+    <method v="2" />
+  </configuration>
+</component>
