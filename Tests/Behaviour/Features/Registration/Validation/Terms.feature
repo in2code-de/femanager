@@ -23,5 +23,5 @@ Feature: Terms
       | Email | info@in2code.ws |
     And I press "Create Profile Now"
 
-    Then I wait "2" seconds
+    Then I wait "4" seconds
     Then I should see "Field I accept the terms and conditions is required"

@@ -44,7 +44,6 @@ Feature: AllFieldsNoConfirm
     Then I should see "Rosenheim"
     Then I should see "www.in2code.de"
     Then I should see "in2code GmbH"
-    Then I should see "333928800"
 
   # Clean up
   Scenario: Delete all temporary fe_users entries

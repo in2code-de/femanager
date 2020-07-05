@@ -16,6 +16,7 @@ Feature: SmallAdminConfirm
 
     # Check if user is disabled
     Given I am on "/index.php?id=48&pid=25"
+    Then I wait "4" seconds
     Then I should see "[random:1]"
     Then I should see "status: disabled"
 

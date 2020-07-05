@@ -1,5 +1,11 @@
 <?php
-namespace In2code\Functions;
+
+namespace In2code\Femanager\Tests\Scripts;
+
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class UserLinks
@@ -51,6 +57,7 @@ class UserLinks
         $content .= 'status: ' . ($row['disable'] === '0' ? 'enabled' : 'disabled') . '<br />';
         $content .= '<a href="' . $this->getAdminConfirmationUri($row) . '">Admin confirmation link</a><br />';
         $content .= '<a href="' . $this->getUserConfirmationUri($row) . '">User confirmation link</a><br />';
+
         return $content;
     }
 
@@ -70,12 +77,13 @@ class UserLinks
         $params .= '&tx_femanager_pi1[action]=confirmCreateRequest';
         $params .= '&tx_femanager_pi1[controller]=New';
         $configuration = [
-            'parameter' => (int) $this->pid,
+            'parameter' => (int)$this->pid,
             'additionalParams' => $params,
             'returnLast' => 'url',
             'useCacheHash' => '1'
         ];
         $uri = $this->cObj->typoLink_URL($configuration);
+
         return $uri;
     }
 
@@ -95,12 +103,13 @@ class UserLinks
         $params .= '&tx_femanager_pi1[action]=confirmCreateRequest';
         $params .= '&tx_femanager_pi1[controller]=New';
         $configuration = [
-            'parameter' => (int) $this->pid,
+            'parameter' => (int)$this->pid,
             'additionalParams' => $params,
             'returnLast' => 'url',
             'useCacheHash' => '1'
         ];
         $uri = $this->cObj->typoLink_URL($configuration);
+
         return $uri;
     }
 
@@ -112,6 +121,7 @@ class UserLinks
     {
         $user = new \In2code\Femanager\Domain\Model\User();
         $user->setUsername($row['username']);
+
         return \In2code\Femanager\Utility\HashUtility::createHashForUser($user);
     }
 
@@ -121,13 +131,23 @@ class UserLinks
      */
     protected function getUserData($username)
     {
-        /** @var $databaseconnection \TYPO3\CMS\Core\Database\DatabaseConnection */
-        $databaseconnection = $GLOBALS['TYPO3_DB'];
-        $select = 'fe_users.*';
-        $from = 'fe_users';
-        $where = 'fe_users.deleted = 0 and fe_users.pid = 5' .
-            ' and fe_users.username = "' . $databaseconnection->quoteStr($username, $from) . '"';
-        return $databaseconnection->exec_SELECTgetSingleRow($select, $from, $where);
+        /** @var QueryBuilder $queryBuilder */
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
+        $queryBuilder->getRestrictions()->removeAll();
+        $queryBuilder
+            ->select('*')
+            ->from('fe_users')
+            ->where(
+                $queryBuilder->expr()->eq('username', $queryBuilder->createNamedParameter($username)),
+                $queryBuilder->expr()->eq('pid', 5)
+            );
+        try {
+            return $queryBuilder->execute()->fetch();
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            $errorMsg = $e->getMessage();
+
+            return 'Could not fetch fe_users. ' . $errorMsg;
+        }
     }
 
     /**
@@ -135,12 +155,26 @@ class UserLinks
      */
     protected function getLastUsername()
     {
-        /** @var $databaseconnection \TYPO3\CMS\Core\Database\DatabaseConnection */
-        $databaseconnection = $GLOBALS['TYPO3_DB'];
-        $select = 'fe_users.username';
-        $from = 'fe_users';
-        $where = 'fe_users.deleted = 0 and fe_users.pid = 5';
-        $row = $databaseconnection->exec_SELECTgetSingleRow($select, $from, $where, '', 'uid desc');
-        return $row['username'];
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
+        $queryBuilder->getRestrictions()->removeAll();
+        $queryBuilder
+            ->select('*')
+            ->from('fe_users')
+            ->where(
+                $queryBuilder->expr()->eq('pid', 5)
+            )
+            ->orderBy('uid', 'desc');
+
+        try {
+            $res = $queryBuilder->execute();
+            if ($res) {
+                $row = $res->fetch();
+                $content = $row['username'];
+            }
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            $content = 'error: ' . $e->getMessage();
+        }
+
+        return $content;
     }
 }

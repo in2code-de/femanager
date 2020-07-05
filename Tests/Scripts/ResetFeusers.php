@@ -32,7 +32,7 @@ class ResetFeusers
     /**
      * @return string
      */
-    public function delete()
+    public function reset()
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
         $queryBuilder2 = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
