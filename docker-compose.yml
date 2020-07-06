@@ -38,6 +38,13 @@ services:
     ports:
       - ${SQLPORT}:3306
 
+  node:
+    image: node:10
+    command: "npm run all"
+    volumes:
+      - ./:/home/node/app/
+    working_dir: /home/node/app/Resources/Private
+
   chrome:
     image: selenium/standalone-chrome-debug:3.141
     volumes:
