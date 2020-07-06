@@ -54,7 +54,7 @@ class UserLinks
         $content .= 'username: ' . $row['username'] . '<br />';
         $content .= 'email: ' . $row['email'] . '<br />';
         $content .= 'uid: ' . $row['uid'] . '<br />';
-        $content .= 'status: ' . ($row['disable'] === '0' ? 'enabled' : 'disabled') . '<br />';
+        $content .= 'status: ' . ($row['disable'] === 0 ? 'enabled' : 'disabled') . '<br />';
         $content .= '<a href="' . $this->getAdminConfirmationUri($row) . '">Admin confirmation link</a><br />';
         $content .= '<a href="' . $this->getUserConfirmationUri($row) . '">User confirmation link</a><br />';
 
