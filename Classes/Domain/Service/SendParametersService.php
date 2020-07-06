@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Domain\Model\User;
@@ -57,6 +59,10 @@ class SendParametersService
             curl_setopt($curlObject, CURLOPT_POST, 1);
             curl_setopt($curlObject, CURLOPT_POSTFIELDS, $this->getData());
             curl_setopt($curlObject, CURLOPT_RETURNTRANSFER, true);
+            if ($GLOBALS['FE']['debug'] === 1) {
+                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            }
             curl_exec($curlObject);
             curl_close($curlObject);
             $this->log();
@@ -110,7 +116,7 @@ class SendParametersService
     protected function isTurnedOn()
     {
         return $this->contentObject->cObjGetSingle($this->configuration['_enable'], $this->configuration['_enable.'])
-        === '1';
+            === '1';
     }
 
     /**
