@@ -8,10 +8,30 @@ Upgrade
 
 .. only:: html
 
-	:ref:`v4` | :ref:`v5` | :ref:`v5.2.0`
+	:ref:`v6.0` |:ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+
+.. _v6.0:
+
+to version 6.0.0
+----------------
+
+Version 6.0 support TYPO3 9 LTS and 10 LTS. The support for TYPO3 8 was dropped. No changes on Templates are needed.
+
+**Backend Module "Frontend User" - View User Confirmation**
+
+If you want to use the Backend Module to confirm or refuse Frontend User, you need to setup the configPID. The extension
+uses now a frontend call out of the backend, to organise these actions.
+
+.. code-block:: text
+
+    module.tx_femanager {
+        settings {
+            configPID = 1
+        }
+    }
 
 
-.. _v5.2.0:
+.. _v5.2:
 
 to version 5.2.0
 ----------------
@@ -76,7 +96,7 @@ Example:
 
 	</f:form>
 
-.. _v5:
+.. _v5.0:
 
 to version 5
 ------------
@@ -102,7 +122,7 @@ see the complete config in file ext_typoscript_setup.txt
 
 see the complete config in file Configuration/TypoScript/setup.ext
 
-.. _v4:
+.. _v4.0:
 
 to version 4.2.3 / 4.2.4 / 4.2.5
 --------------------------------
