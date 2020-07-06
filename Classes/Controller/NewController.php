@@ -269,11 +269,11 @@ class NewController extends AbstractController
         LogUtility::log(Log::STATUS_PROFILECREATIONREQUEST, $user);
         if (!empty($this->settings['new']['confirmByUser'])) {
             $this->createUserConfirmationRequest($user);
-            $this->redirect('new');
+            $this->redirectByAction('new', 'requestRedirect');
         }
         if (!empty($this->settings['new']['confirmByAdmin'])) {
             $this->createAdminConfirmationRequest($user);
-            $this->redirect('new');
+            $this->redirectByAction('new', 'requestRedirect');
         }
     }
 
@@ -287,8 +287,8 @@ class NewController extends AbstractController
     protected function createUserConfirmationRequest(User $user)
     {
         $this->sendCreateUserConfirmationMail($user);
-        $this->redirectByAction('new', 'requestRedirect');
         $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
+        $this->redirectByAction('new', 'requestRedirect');
     }
 
     /**

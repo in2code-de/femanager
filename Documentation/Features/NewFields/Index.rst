@@ -288,5 +288,55 @@ NewController.php:
 		}
 	}
 
-**Note:** If there are PHP warnings like “…should be compatible with…“ for PHP7, see discusion and solution:
+**Note:** If there are PHP warnings like “…should be compatible with…“ for PHP7, see discussion and solution:
 https://stackoverflow.com/questions/45563671/how-to-extend-femanager-controller-under-php-7/45564378
+
+**or try to change the Controller Files to:**
+
+Own Controller Files with PHP 7.2 / TYPO3 9.5.x
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+EditController.php:
+
+.. code-block:: text
+
+	namespace In2code\Femanagerextended\Controller;
+
+	class EditController extends \In2code\Femanager\Controller\EditController {
+
+		/**
+		 * action update
+		 *
+		 * @param In2code\Femanagerextended\Domain\Model\User $user
+		 * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
+		 * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
+		 * @return void
+		 */
+		public function updateAction($user) {
+			parent::updateAction($user);
+		}
+	}
+
+
+NewController.php:
+
+.. code-block:: text
+
+	namespace In2code\Femanagerextended\Controller;
+
+	class NewController extends \In2code\Femanager\Controller\NewController {
+
+		/**
+		 * action create
+		 *
+		 * @param In2code\Femanagerextended\Domain\Model\User $user
+		 * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
+		 * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
+		 * @return void
+		 */
+		public function createAction($user) {
+			parent::createAction($user);
+		}
+	}
+
+

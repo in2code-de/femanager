@@ -30,8 +30,8 @@ $feUsersColumns = [
             'tx_femanager_domain_model_user.dateOfBirth',
         'config' => [
             'type' => 'input',
+            'renderType' => 'inputDateTime',
             'size' => 10,
-            'max' => 20,
             'eval' => 'date',
             'checkbox' => '0',
             'default' => 0
@@ -43,6 +43,7 @@ $feUsersColumns = [
             'fe_users.crdate',
         'config' => [
             'type' => 'input',
+            'renderType' => 'inputDateTime',
             'size' => 30,
             'eval' => 'datetime',
             'readOnly' => true,
@@ -55,6 +56,7 @@ $feUsersColumns = [
             'fe_users.tstamp',
         'config' => [
             'type' => 'input',
+            'renderType' => 'inputDateTime',
             'size' => 30,
             'eval' => 'datetime',
             'readOnly' => true,
@@ -95,6 +97,7 @@ $feUsersColumns = [
         'exclude' => true,
         'config' => [
             'type' => 'input',
+            'renderType' => 'inputDateTime',
             'size' => 30,
             'eval' => 'datetime',
             'readOnly' => true,

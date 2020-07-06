@@ -26,12 +26,14 @@ class UserBackendController extends AbstractController
     public function listAction(array $filter = [])
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->userTS['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
 
         $this->view->assignMultiple(
             [
                 'users' => $this->userRepository->findAllInBackend($filter),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
-                'action' => 'list'
+                'action' => 'list',
+                'loginAsEnabled' => $loginAsEnabled
             ]
         );
     }

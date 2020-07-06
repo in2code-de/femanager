@@ -87,15 +87,10 @@ class PluginRepository
      */
     protected function isViewInPluginConfiguration(string $view, string $pluginConfiguration): bool
     {
+        $flexFormService = ObjectUtility::getObjectManager()->get(FlexFormService::class);
+        $flexFormArray = $flexFormService->convertFlexFormContentToArray($pluginConfiguration);
         if (array_key_exists($view, $this->scaString)) {
-            $viewString = $this->scaString[$view];
-            preg_match(
-                '~<field index="switchableControllerActions">\s+<value index="vDEF">'
-                    . htmlspecialchars($viewString) . '~',
-                $pluginConfiguration,
-                $result
-            );
-            return $result !== [];
+            return $this->scaString[$view] === $flexFormArray['switchableControllerActions'];
         } else {
             throw new \LogicException('Given view is not allowed', 1541506310);
         }
