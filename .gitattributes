@@ -36,3 +36,5 @@
 *.sql  text eol=lf
 *.t3s  text eol=lf
 *.txt  text eol=lf
+
+.project/data/db.sql.gz filter=lfs diff=lfs merge=lfs -text

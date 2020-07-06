@@ -17,5 +17,4 @@ package-lock.json
 var
 /config/
 dynamicReturnTypeMeta.json
-db.sql.gz
 /Documentation-GENERATED-temp/
