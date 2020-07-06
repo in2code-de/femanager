@@ -108,7 +108,7 @@ class BackendUtility
 
     /**
      * @param int $pageUid [optional] the current pageuid
-     * @return type
+     * @return array
      */
     public static function loadTS($pageUid = null)
     {

@@ -10,6 +10,7 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
 use In2code\Femanager\Utility\BackendUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -92,6 +93,14 @@ abstract class AbstractController extends ActionController
      * @var array
      */
     public $allConfig;
+
+    /**
+     * Module Configuration for Backend
+     * this is a merge configuration -> TypoScript -> PageTSConfig -> UserTSConfig
+     *
+     * @var array
+     */
+    public $moduleConfig;
 
     /**
      * Current logged in user object
@@ -377,6 +386,7 @@ abstract class AbstractController extends ActionController
         $this->user = UserUtility::getCurrentUser();
         $this->contentObject = $this->configurationManager->getContentObject();
         $this->pluginVariables = $this->request->getArguments();
+        $this->moduleConfig = [];
         $this->allConfig = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
         );
@@ -390,6 +400,20 @@ abstract class AbstractController extends ActionController
             if (is_array($config['plugin.']['tx_femanager.']['settings.'])) {
                 $this->config = $config['plugin.']['tx_femanager.']['settings.'];
                 $this->settings = $this->config;
+            }
+
+            $this->moduleConfig = $config['module.']['tx_femanager.'];
+
+            // Retrieve page TSconfig of the current page
+            $pageTsConfig = BackendUtilityCore::getPagesTSconfig(BackendUtility::getPageIdentifier((int)GeneralUtility::_GET('id')));
+            if (is_array($pageTsConfig['module.']['tx_femanager.'])) {
+                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.']);
+            }
+
+            // Retrieve user TSconfig of currently logged in user
+            $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
+            if (is_array($userTsConfig['tx_femanager.'])) {
+                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.']);
             }
         }
 
