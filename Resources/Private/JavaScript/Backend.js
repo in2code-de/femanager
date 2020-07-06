@@ -68,7 +68,7 @@ define(
 
                 if (confirm(confirmationMessage)) {
                     $this.closest('tr').fadeOut('fast');
-                    var url = moduleUri + '&cmd[' + table + '][' + uid + '][delete]=1&redirect=' + T3_THIS_LOCATION
+                    var url = moduleUri + '&cmd[' + table + '][' + uid + '][delete]=1'
                     $.ajax({
                         url: url
                     });
