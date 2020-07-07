@@ -5,9 +5,9 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "all": "npm-run-all install watch",
-    "install": "npm install",
-    "watch": "gulp watch"
+    "run-all": "npm-run-all run-install run-watch",
+    "run-install": "npm install",
+    "run-watch": "gulp watch"
   },
   "author": "in2code.de",
   "license": "GPL2",
