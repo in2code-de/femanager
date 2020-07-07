@@ -2,7 +2,7 @@
 namespace In2code\Femanager\Tests\Unit\Domain\Validator;
 
 use In2code\Femanager\Tests\Unit\Fixture\Domain\Validator\AbstractValidator;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Class AbstractValidatorTest

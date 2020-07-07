@@ -12,7 +12,7 @@ Feature: SmallUserConfirm
       | Email | alex@einpraegsam.net |
     And I press "Create Profile Now"
 
-    Then I should see "Please check your mail account to confirm the profile"
+    Then I should see "Thank you for your request. Please check your mail account to confirm the profile."
 
     # Check if user is disabled
     Given I am on "/index.php?id=48&pid=46"

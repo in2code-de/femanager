@@ -7,18 +7,20 @@ namespace In2code\Femanager\Controller;
 use In2code\Femanager\DataProcessor\DataProcessorRunner;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Event\FinalCreateEvent;
+use In2code\Femanager\Event\FinalUpdateEvent;
 use In2code\Femanager\Utility\BackendUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
-use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
-use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -28,41 +30,41 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 abstract class AbstractController extends ActionController
 {
-
     /**
      * @var \In2code\Femanager\Domain\Repository\UserRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $userRepository;
 
     /**
      * @var \In2code\Femanager\Domain\Repository\UserGroupRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $userGroupRepository;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $persistenceManager;
 
     /**
      * @var \In2code\Femanager\Domain\Service\SendMailService
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $sendMailService;
 
     /**
      * @var \In2code\Femanager\Finisher\FinisherRunner
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $finisherRunner;
 
     /**
-     * @var DatabaseConnection
+     * @var \In2code\Femanager\Utility\LogUtility
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $databaseConnection = null;
+    protected $logUtility;
 
     /**
      * Content Object
@@ -93,6 +95,14 @@ abstract class AbstractController extends ActionController
     public $allConfig;
 
     /**
+     * Module Configuration for Backend
+     * this is a merge configuration -> TypoScript -> PageTSConfig -> UserTSConfig
+     *
+     * @var array
+     */
+    public $moduleConfig;
+
+    /**
      * Current logged in user object
      *
      * @var User
@@ -117,7 +127,7 @@ abstract class AbstractController extends ActionController
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
-        LogUtility::log(Log::STATUS_NEWREGISTRATION, $user);
+        $this->logUtility->log(Log::STATUS_NEWREGISTRATION, $user);
         $this->finalCreate($user, 'new', 'createStatus');
     }
 
@@ -154,8 +164,9 @@ abstract class AbstractController extends ActionController
 
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $this]);
-        LogUtility::log(Log::STATUS_PROFILEUPDATED, $user, ['existingUser' => $existingUser]);
+
+        $this->eventDispatcher->dispatch(new FinalUpdateEvent($user));
+        $this->logUtility->log(Log::STATUS_PROFILEUPDATED, $user, ['existingUser' => $existingUser]);
         $this->redirectByAction('edit');
         $this->addFlashMessage(LocalizationUtility::translate('update'));
     }
@@ -185,7 +196,7 @@ abstract class AbstractController extends ActionController
             ],
             $this->config['edit.']['email.']['updateRequest.']
         );
-        LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user, ['dirtyProperties' => $dirtyProperties]);
+        $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user, ['dirtyProperties' => $dirtyProperties]);
         $this->redirectByAction('edit', 'requestRedirect');
         $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
     }
@@ -208,7 +219,7 @@ abstract class AbstractController extends ActionController
         bool $login = true,
         string $status = '',
         bool $backend = false
-    ) {
+    ): void {
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         $this->sendMailService->send(
@@ -238,13 +249,14 @@ abstract class AbstractController extends ActionController
                 $this->config['new.']['email.']['createAdminNotify.']
             );
         }
-        $this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersist', [$user, $action, $this]);
+
+        $this->eventDispatcher->dispatch(new FinalCreateEvent($user, $action));
         $this->finisherRunner->callFinishers($user, $this->actionMethodName, $this->settings, $this->contentObject);
 
         if ($backend === false) {
             $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
             $this->addFlashMessage(LocalizationUtility::translate('create'));
-            $this->redirect($redirectByActionName);
+            $this->forward($redirectByActionName);
         }
     }
 
@@ -294,7 +306,7 @@ abstract class AbstractController extends ActionController
 
         // if redirect target
         if ($target) {
-            $this->uriBuilder->setTargetPageUid($target);
+            $this->uriBuilder->setTargetPageUid((int)$target);
             $this->uriBuilder->setLinkAccessRestrictedPages(true);
             $link = $this->uriBuilder->build();
             $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($link));
@@ -325,7 +337,7 @@ abstract class AbstractController extends ActionController
     protected function testSpoof($user, $uid, $receivedToken)
     {
         $errorOnProfileUpdate = false;
-        $knownToken = GeneralUtility::hmac($user->getUid(), (string) $user->getCrdate()->getTimestamp());
+        $knownToken = GeneralUtility::hmac($user->getUid(), (string)$user->getCrdate()->getTimestamp());
 
         //check if the params are valid
         if (!is_string($receivedToken) || !hash_equals($knownToken, $receivedToken)) {
@@ -338,7 +350,7 @@ abstract class AbstractController extends ActionController
         }
 
         if ($errorOnProfileUpdate === true) {
-            LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
+            $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
                 '',
@@ -374,6 +386,7 @@ abstract class AbstractController extends ActionController
         $this->user = UserUtility::getCurrentUser();
         $this->contentObject = $this->configurationManager->getContentObject();
         $this->pluginVariables = $this->request->getArguments();
+        $this->moduleConfig = [];
         $this->allConfig = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
         );
@@ -387,6 +400,20 @@ abstract class AbstractController extends ActionController
             if (is_array($config['plugin.']['tx_femanager.']['settings.'])) {
                 $this->config = $config['plugin.']['tx_femanager.']['settings.'];
                 $this->settings = $this->config;
+            }
+
+            $this->moduleConfig = $config['module.']['tx_femanager.'];
+
+            // Retrieve page TSconfig of the current page
+            $pageTsConfig = BackendUtilityCore::getPagesTSconfig(BackendUtility::getPageIdentifier((int)GeneralUtility::_GET('id')));
+            if (is_array($pageTsConfig['module.']['tx_femanager.'])) {
+                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.']);
+            }
+
+            // Retrieve user TSconfig of currently logged in user
+            $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
+            if (is_array($userTsConfig['tx_femanager.'])) {
+                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.']);
             }
         }
 
@@ -435,14 +462,18 @@ abstract class AbstractController extends ActionController
         if (TYPO3_MODE == 'BE') {
             if ($this->config['_TypoScriptIncluded'] !== '1') {
                 $this->addFlashMessage(
-                    LocalizationUtility::translate('error_no_typoscript_be'),
+                    (string)LocalizationUtility::translate('error_no_typoscript_be'),
                     '',
                     FlashMessage::ERROR
                 );
             }
         } else {
             if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
-                $this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript'), '', FlashMessage::ERROR);
+                $this->addFlashMessage(
+                    (string)LocalizationUtility::translate('error_no_typoscript'),
+                    '',
+                    FlashMessage::ERROR
+                );
             }
         }
     }

@@ -14,3 +14,7 @@ Thumbs.db
 .Build
 composer.lock
 package-lock.json
+var
+/config/
+dynamicReturnTypeMeta.json
+/Documentation-GENERATED-temp/

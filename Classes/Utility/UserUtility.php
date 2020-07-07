@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace In2code\Femanager\Utility;
@@ -6,20 +7,17 @@ namespace In2code\Femanager\Utility;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Repository\UserRepository;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\Argon2iPasswordHash;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\BcryptPasswordHash;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\BlowfishPasswordHash;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\Md5PasswordHash;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\Pbkdf2PasswordHash;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
-use TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility;
-use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
-use TYPO3\CMS\Core\Crypto\PasswordHashing\Argon2iPasswordHash;
-use TYPO3\CMS\Core\Crypto\PasswordHashing\BcryptPasswordHash;
-use TYPO3\CMS\Core\Crypto\PasswordHashing\Pbkdf2PasswordHash;
-use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
-use TYPO3\CMS\Core\Crypto\PasswordHashing\BlowfishPasswordHash;
-use TYPO3\CMS\Core\Crypto\PasswordHashing\Md5PasswordHash;
 
 /**
  * Class UserUtility
@@ -185,34 +183,46 @@ class UserUtility extends AbstractUtility
      */
     public static function hashPassword(User &$user, $method)
     {
+        $hashInstance = false;
         $saltedHashPassword = $user->getPassword();
-        if (version_compare(TYPO3_version, '9.5', '>=')) {
-            $saltedHashPassword = self::hashPasswordV9($user->getPassword(), $method);
-        } else {
-            switch ($method) {
-                case 'none':
-                    break;
+        /** @var PasswordHashFactory $passwordHashFactory */
+        $passwordHashFactory = GeneralUtility::makeInstance(PasswordHashFactory::class);
+        switch ($method) {
+            case 'Argon2i':
+                $hashInstance = GeneralUtility::makeInstance(Argon2iPasswordHash::class);
+                break;
 
-                case 'md5':
-                    $saltedHashPassword = md5($user->getPassword());
-                    break;
+            case 'Bcrypt':
+                $hashInstance = GeneralUtility::makeInstance(BcryptPasswordHash::class);
+                break;
 
-                case 'sha1':
-                    $saltedHashPassword = sha1($user->getPassword());
-                    break;
+            case 'Pbkdf2':
+                $hashInstance = GeneralUtility::makeInstance(Pbkdf2PasswordHash::class);
+                break;
 
-                default:
-                    if (ExtensionManagementUtility::isLoaded('saltedpasswords')) {
-                        if (SaltedPasswordsUtility::isUsageEnabled('FE')) {
-                            $objInstanceSaltedPw = SaltFactory::getSaltingInstance();
-                            $saltedHashPassword = $objInstanceSaltedPw->getHashedPassword($user->getPassword());
-                        }
-                    }
-            }
+            case 'Phpass':
+                $hashInstance = GeneralUtility::makeInstance(PhpassPasswordHash::class);
+                break;
+
+            case 'Blowfish':
+                $hashInstance = GeneralUtility::makeInstance(BlowfishPasswordHash::class);
+                break;
+
+            case 'md5':
+                $hashInstance = GeneralUtility::makeInstance(Md5PasswordHash::class);
+                break;
+            case 'none':
+                break;
+
+            default:
+                $hashInstance = $passwordHashFactory->getDefaultHashInstance(TYPO3_MODE);
         }
 
-        $user->setPassword($saltedHashPassword);
-
+        if ($hashInstance === false) {
+            $user->setPassword($saltedHashPassword);
+        } else {
+            $user->setPassword($hashInstance->getHashedPassword($saltedHashPassword));
+        }
     }
 
     /**
@@ -299,7 +309,8 @@ class UserUtility extends AbstractUtility
     public static function removeFrontendSessionToUser(User $user)
     {
         self::getConnectionPool()->getConnectionForTable('fe_sessions')->delete(
-            'fe_sessions', ['ses_userid' => (int)$user->getUid()]
+            'fe_sessions',
+            ['ses_userid' => (int)$user->getUid()]
         );
     }
 
@@ -333,21 +344,14 @@ class UserUtility extends AbstractUtility
      */
     public static function login(User $user, $storagePids = null)
     {
-        $tsfe = self::getTypoScriptFrontendController();
-        $tsfe->fe_user->checkPid = false;
-        $info = $tsfe->fe_user->getAuthInfoArray();
-
-        $cleanIntList = implode(',', GeneralUtility::intExplode(',', $storagePids));
-
-        $extraWhere = ' AND uid = ' . (int)$user->getUid();
-        if (!empty($storagePids)) {
-            $extraWhere = ' AND pid IN (' . $cleanIntList . ')';
-        }
-        $user = $tsfe->fe_user->fetchUserRecord($info['db_user'], $user->getUsername(), $extraWhere);
-        $tsfe->fe_user->createUserSession($user);
-        self::loginAlternative($tsfe);
-        $tsfe->fe_user->user = $tsfe->fe_user->fetchUserSession();
-        $tsfe->fe_user->setAndSaveSessionData('ses', true);
+        #Log in user
+        $GLOBALS['TSFE']->fe_user->createUserSession(['uid' => (int)$user->getUid()]);
+        $GLOBALS['TSFE']->fe_user->loginSessionStarted = 1;
+        $GLOBALS['TSFE']->fe_user->forceSetCookie = true;
+        $GLOBALS['TSFE']->fe_user->dontSetCookie = false;
+        $GLOBALS['TSFE']->fe_user->start();
+        $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('dummy', true);
+        $GLOBALS['TSFE']->fe_user->loginUser = 1;
     }
 
     /**
@@ -365,52 +369,5 @@ class UserUtility extends AbstractUtility
             $setSessionCookie->setAccessible(true);
             $setSessionCookie->invoke($tsfe->fe_user);
         }
-    }
-
-    /**
-     *
-     * Password Hashing für TYPO3 Version 9 or newer
-     *
-     * @param User $user
-     * @param string $method "Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", "Md5" or "none"
-     * @return string
-     * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
-     */
-    protected static function hashPasswordV9($password, $method): string
-    {
-        /** @var PasswordHashFactory $passwordHashFactory */
-        $passwordHashFactory = GeneralUtility::makeInstance(PasswordHashFactory::class);
-        switch ($method) {
-            case 'Argon2i':
-                $hashInstance = GeneralUtility::makeInstance(Argon2iPasswordHash::class);
-                break;
-
-            case 'Bcrypt':
-                $hashInstance = GeneralUtility::makeInstance(BcryptPasswordHash::class);
-                break;
-
-            case 'Pbkdf2':
-                $hashInstance = GeneralUtility::makeInstance(Pbkdf2PasswordHash::class);
-                break;
-
-            case 'Phpass':
-                $hashInstance = GeneralUtility::makeInstance(PhpassPasswordHash::class);
-                break;
-
-            case 'Blowfish':
-                $hashInstance = GeneralUtility::makeInstance(BlowfishPasswordHash::class);
-                break;
-
-            case 'md5':
-                $hashInstance = GeneralUtility::makeInstance(Md5PasswordHash::class);
-                break;
-            case 'none':
-                return $password;
-
-            default:
-                $hashInstance = $passwordHashFactory->getDefaultHashInstance(TYPO3_MODE);
-        }
-
-        return $hashInstance->getHashedPassword($password);
     }
 }

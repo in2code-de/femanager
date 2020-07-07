@@ -18,11 +18,26 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       Release Description
 
 - :Version:
+      6.0.0 (!!!)
+   :Date:
+      2020-07-06
+   :Changes:
+      * [FEATURE] Add Support for TYPO3 10 LTS - Sponsored by inixmedia and in2code, Thanks to Markus Bachmann, Filar
+      * [FEATURE] Add support for PageTS and UserTS configuration for femanager backend module - Sponsored by in2code
+      * [FEATURE] Change user confirmation process to frontend requests - Sponsored by in2code
+      * [TASK] (!!!) Remove Support for TYPO3 8.7 and PHP < 7.2
+      * [TASK] Add docker based development env - Sponsored by in2code
+      * [TASK] Update Unit and Behaviour Tests - Sponsored by inixmedia and in2code
+      * [TASK] Remove legacy password hashing code - Sponsored by in2code
+
+- :Version:
       5.3.0
    :Date:
       2020-07-06
    :Changes:
       * [FEATURE] Adds uppercase validation for password (https://github.com/in2code-de/femanager/issues/91) - thanks to https://github.com/alexkue7911
+      * [FEATURE] Add support for PageTS and UserTS configuration for femanager backend module - Sponsored by in2code
+      * [FEATURE] Change user confirmation process to frontend requests - Sponsored by in2code
       * [BUGFIX] Use FlexFormService to validate allowed views (https://github.com/in2code-de/femanager/issues/177) - thanks to https://github.com/nigelmann
       * [BUGFIX] TCA migrations for TYPO3 v9.5 - thanks to https://github.com/TrueType
       * [BUGFIX] Make ajax validation URL more robust - thanks to https://github.com/baschny

@@ -15,13 +15,13 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      * Inject a complete new content object
      *
      * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $contentObject;
 
     /**
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $configurationManager;
 
@@ -60,6 +60,10 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
             curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $curlSettings['params']);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            if ($GLOBALS['FE']['debug'] === 1) {
+                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            }
             curl_exec($curl);
             curl_close($curl);
             $this->writeToDevelopmentLog();

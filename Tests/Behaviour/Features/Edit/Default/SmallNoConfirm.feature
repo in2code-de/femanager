@@ -31,7 +31,7 @@ Feature: SmallNoConfirm
     Then I should see "Lastname"
     Then I should see "Email"
     And I press "Update Profile"
-    And I wait "2" seconds
+    And I wait "4" seconds
 
     Then I should see "No changes detected, nothing to update"
     And I fill in the following:
@@ -39,7 +39,7 @@ Feature: SmallNoConfirm
       | Lastname | [random] |
       | Email | [random]@in2code.de |
     And I press "Update Profile"
-    And I wait "2" seconds
+    And I wait "4" seconds
 
     Then I should see "Profile successfully changed"
 

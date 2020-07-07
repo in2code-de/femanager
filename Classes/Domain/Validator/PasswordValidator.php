@@ -16,7 +16,7 @@ class PasswordValidator extends AbstractValidatorExtbase
      * configurationManager
      *
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     public $configurationManager;
 
@@ -67,7 +67,7 @@ class PasswordValidator extends AbstractValidatorExtbase
         $passwordRepeat = isset($this->piVars['password_repeat']) ? $this->piVars['password_repeat'] : '';
 
         if ($password !== $passwordRepeat) {
-            $this->addError('validationErrorPasswordRepeat', 'password');
+            $this->addError('validationErrorPasswordRepeat', 0, ['code' => 'password']);
             return false;
         }
 

@@ -2,7 +2,7 @@
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Utility\ConfigurationUtility;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Class ConfigurationUtilityTest
@@ -28,7 +28,7 @@ class ConfigurationUtilityTest extends UnitTestCase
             'disableModule' => '1'
         ];
         // @extensionScannerIgnoreLine
-        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager'] = serialize($configuration);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;
         $this->assertTrue(ConfigurationUtility::isDisableModuleActive());
     }
 
@@ -44,7 +44,7 @@ class ConfigurationUtilityTest extends UnitTestCase
             'enableConfirmationModule' => '1'
         ];
         // @extensionScannerIgnoreLine
-        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager'] = serialize($configuration);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;
         $this->assertTrue(ConfigurationUtility::isConfirmationModuleActive());
     }
 
@@ -60,7 +60,7 @@ class ConfigurationUtilityTest extends UnitTestCase
             'disableLog' => '1'
         ];
         // @extensionScannerIgnoreLine
-        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager'] = serialize($configuration);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;
         $this->assertTrue(ConfigurationUtility::isDisableLogActive());
     }
 
@@ -76,7 +76,7 @@ class ConfigurationUtilityTest extends UnitTestCase
             'setCookieOnLogin' => '1'
         ];
         // @extensionScannerIgnoreLine
-        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager'] = serialize($configuration);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;
         $this->assertTrue(ConfigurationUtility::isSetCookieOnLoginActive());
     }
 }

@@ -12,6 +12,7 @@ Feature: SendPost
       | Email | alex@einpraegsam.net |
     And I press "Create Profile Now"
 
+    Then I wait "4" seconds
     Then the sourcecode should contain '[email] =&gt; alex@einpraegsam.net'
     Then the sourcecode should contain '[username] =&gt; [random:1]'
 

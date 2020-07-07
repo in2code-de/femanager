@@ -3,7 +3,7 @@ namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Tests\Helper\TestingHelper;
 use In2code\Femanager\Utility\FileUtility;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -37,17 +37,6 @@ class FileUtilityTest extends UnitTestCase
         FileUtility::createFolderIfNotExists($testpath);
         $this->assertDirectoryExists($testpath);
         GeneralUtility::rmdir($testpath);
-    }
-
-    /**
-     * @return void
-     * @covers ::createFolderIfNotExists
-     */
-    public function testCreateFolderIfNotExistsNotCreated()
-    {
-        $testpath = TestingHelper::getWebRoot() . 'fileadmin/(ßü_$test/';
-        $this->expectExceptionCode(1516373962125);
-        FileUtility::createFolderIfNotExists($testpath);
     }
 
     /**

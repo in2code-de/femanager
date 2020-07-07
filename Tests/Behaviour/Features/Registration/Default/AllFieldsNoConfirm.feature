@@ -29,7 +29,7 @@ Feature: AllFieldsNoConfirm
 
     Then I should see "User registration"
 
-    Given I am on "/index.php?id=33"
+    Given I am on "/index.php?id=89"
     Then I should see "[random:1]"
     Then I should see "Alexander Markus Kellner"
     Then I should see "Randy"
@@ -44,7 +44,6 @@ Feature: AllFieldsNoConfirm
     Then I should see "Rosenheim"
     Then I should see "www.in2code.de"
     Then I should see "in2code GmbH"
-    Then I should see "333928800"
 
   # Clean up
   Scenario: Delete all temporary fe_users entries

@@ -619,14 +619,17 @@
 			<trans-unit id="BackendConfirmationColumnAction">
 				<source>Actions</source>
 			</trans-unit>
-			<trans-unit id="BackendConfirmationColumnAction">
-				<source>Actions</source>
+			<trans-unit id="BackendMissingConfigPID">
+				<source>The config PID is missing!</source>
 			</trans-unit>
 			<trans-unit id="BackendConfirmationColumnUid">
 				<source>UID</source>
 			</trans-unit>
 			<trans-unit id="BackendConfirmationFlashMessageConfirmed">
 				<source>%s was successfully approved</source>
+			</trans-unit>
+			<trans-unit id="BackendConfirmationFlashMessageFailed">
+				<source>The user confirmation failed, please check your system log or check your config</source>
 			</trans-unit>
 			<trans-unit id="BackendConfirmationFlashMessageRefused">
 				<source>%s was refused</source>

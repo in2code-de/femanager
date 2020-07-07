@@ -3,7 +3,7 @@
 Feature: StoreInDatabase
 
   Scenario: Check if it's possible to create tt_content elements
-    Given I am on "/index.php?id=26"
+    Given I am on "/index.php?id=26&no_cache=1"
     Then I should see "Create a new tt_content with this registration"
     And I fill in the following:
       | Username | [random] |
@@ -14,6 +14,7 @@ Feature: StoreInDatabase
       | Email | alex@einpraegsam.net |
     And I press "Create Profile Now"
 
+    Then I wait "4" seconds
     Then I should see "tt_content_lastname"
     Then the sourcecode should contain 'Firstname: rand[random:1]'
 
