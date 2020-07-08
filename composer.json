@@ -24,6 +24,7 @@
   "type": "typo3-cms-extension",
   "license": "GPL-2.0-or-later",
   "require": {
+    "ext-json": "*",
     "typo3/cms-core": ">=9.5.0 <11.0.0"
   },
   "replace": {

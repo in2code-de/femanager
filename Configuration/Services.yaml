@@ -3,3 +3,10 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+
+    In2code\Femanager\DataProvider\CountryZonesDataProvider:
+      public: true
+    In2code\Femanager\DataProvider\CountryDataProvider:
+      public: true
+    In2code\Femanager\Domain\Validator\ShouldValidateStateCondition:
+      public: true

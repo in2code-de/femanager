@@ -84,6 +84,15 @@ jQuery.fn.femanagerValidation = function($) {
 	 * @return void
 	 */
 	function validateField(element, countForSubmit) {
+	    console.log('Validation:', element, element.prop('disabled'));
+	    if (element.prop('disabled')) {
+            console.log(' - Skipping validation, element is disabled');
+            if (countForSubmit) {
+                requestCallback.addCallbackToQueue(true);
+            }
+            return;
+
+        }
 		var $form = element.closest('form');
 		var user = $form.find('div:first').find('input[name="tx_femanager_pi1[user][__identity]"]').val();
 		var action = $form.find('div:first').find('input[name="tx_femanager_pi1[__referrer][@action]"]').val();
@@ -121,6 +130,7 @@ jQuery.fn.femanagerValidation = function($) {
 			type: 'POST',
 			cache: false,
 			success: function(json) { // return values
+                console.log('Validation response', element, json);
 				if (countForSubmit) {
 					requestCallback.addCallbackToQueue(true);
 				}

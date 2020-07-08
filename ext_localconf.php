@@ -12,13 +12,15 @@ call_user_func(function () {
             'User' => 'list, show, validate, loginAs, imageDelete',
             'New' => 'new, create, confirmCreateRequest, createStatus, resendConfirmationMail, resendConfirmationDialogue',
             'Edit' => 'edit, update, delete, confirmUpdateRequest',
-            'Invitation' => 'new, create, edit, update, delete, status'
+            'Invitation' => 'new, create, edit, update, delete, status',
+            'Data' => 'getStatesForCountry'
         ],
         [
             'User' => 'list, show, validate, loginAs, imageDelete',
             'New' => 'new, create, confirmCreateRequest, createStatus, resendConfirmationMail, resendConfirmationDialogue',
             'Edit' => 'edit, update, delete, confirmUpdateRequest',
-            'Invitation' => 'new, create, edit, update, delete'
+            'Invitation' => 'new, create, edit, update, delete',
+            'Data' => 'getStatesForCountry'
         ]
     );
 

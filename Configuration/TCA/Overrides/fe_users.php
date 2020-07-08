@@ -102,8 +102,38 @@ $feUsersColumns = [
             'eval' => 'datetime',
             'readOnly' => true,
         ]
-    ]
+    ],
 ];
+
+$staticInfoTablesIsLoaded = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_tables');
+if ($staticInfoTablesIsLoaded) {
+    $feUsersColumns['state'] = [
+        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+            'tx_femanager_domain_model_user.state',
+        'exclude' => true,
+        'config' => [
+            'type' => 'select',
+            'renderType' => 'selectSingle',
+            'itemsProcFunc' => 'In2code\\Femanager\\UserFunc\\StaticInfoTables->getStatesOptions',
+            'maxitems' => 1,
+        ]
+    ];
+}
+$extConf = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+    \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+);
+if ($extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect')) {
+    $GLOBALS['TCA']['fe_users']['columns']['country']['config'] = [
+        'type' => 'select',
+        'renderType' => 'selectSingle',
+        'itemsProcFunc' => 'In2code\\Femanager\\UserFunc\\StaticInfoTables->getCountryOptions',
+        'items' => [
+            ['', '--- Please Select ---']
+        ],
+        'maxitems' => 1,
+    ];
+}
+
 $fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin, tx_femanager_terms, ' .
     'tx_femanager_terms_date_of_acceptance';
 
@@ -145,6 +175,16 @@ $fields .= ', tx_femanager_changerequest';
     '',
     'after:name'
 );
+if ($staticInfoTablesIsLoaded) {
+    $GLOBALS['TCA']['fe_users']['columns']['country']['onChange'] = 'reload';
+    $fields .= ',state';
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+        'fe_users',
+        'state',
+        '',
+        'after:country'
+    );
+}
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $feUsersColumns);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'fe_users',
