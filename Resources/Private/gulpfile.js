@@ -7,7 +7,6 @@ var uglify = require('gulp-uglify');
 var plumber = require('gulp-plumber');
 var debug = getArg('--debug');
 var rename = require('gulp-rename');
-var stripDebug = require('gulp-strip-debug');
 
 // SCSS zu css
 gulp.task('css', function() {
@@ -30,8 +29,7 @@ gulp.task('css', function() {
 gulp.task('js', function() {
 	gulp.src('JavaScript/**/*.js')
 			.pipe(plumber())
-			// .pipe(uglify())
-			// .pipe(stripDebug())
+			.pipe(uglify())
 			.pipe(rename({
 				suffix: '.min'
 			}))

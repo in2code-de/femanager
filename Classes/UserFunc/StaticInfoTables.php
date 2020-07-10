@@ -13,7 +13,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 use function array_values;
 use function count;
-use function is_a;
 use function is_array;
 
 class StaticInfoTables
@@ -35,7 +34,14 @@ class StaticInfoTables
                     $country = null;
                 }
             }
-            if (!empty($country)) {
+            if (empty($country)) {
+                $data['items'] = [
+                    [
+                        'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChooseCountry',
+                        ''
+                    ]
+                ];
+            } else {
                 $countryZones = $countryZonesDataProvider->getCountryZonesForCountryIso3($country);
 
                 foreach ($countryZones as $countryZone) {
@@ -43,7 +49,7 @@ class StaticInfoTables
                 }
             }
         } else {
-            $data['items'][] = ['', 'Error: static_info_tables is not installed'];
+            $data['items'][] = ['Error: static_info_tables is not installed', ''];
         }
     }
 

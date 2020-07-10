@@ -84,9 +84,7 @@ jQuery.fn.femanagerValidation = function($) {
 	 * @return void
 	 */
 	function validateField(element, countForSubmit) {
-	    console.log('Validation:', element, element.prop('disabled'));
 	    if (element.prop('disabled')) {
-            console.log(' - Skipping validation, element is disabled');
             if (countForSubmit) {
                 requestCallback.addCallbackToQueue(true);
             }
@@ -130,7 +128,6 @@ jQuery.fn.femanagerValidation = function($) {
 			type: 'POST',
 			cache: false,
 			success: function(json) { // return values
-                console.log('Validation response', element, json);
 				if (countForSubmit) {
 					requestCallback.addCallbackToQueue(true);
 				}

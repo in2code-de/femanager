@@ -372,6 +372,7 @@ abstract class AbstractController extends ActionController
     {
         $jsLabels = [
             'loading_states' => LocalizationUtility::translate('js.loading_states'),
+            'please_choose' => LocalizationUtility::translate('pleaseChoose'),
         ];
         $this->view->assignMultiple(
             [

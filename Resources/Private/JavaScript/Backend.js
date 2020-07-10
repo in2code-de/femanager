@@ -77,7 +77,6 @@ define(
 
             // User Logout
             $('.logoutUser').click(function (e) {
-                console.log('#1');
                 e.preventDefault();
                 var $this = $(this);
                 $this

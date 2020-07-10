@@ -114,6 +114,9 @@ if ($staticInfoTablesIsLoaded) {
         'config' => [
             'type' => 'select',
             'renderType' => 'selectSingle',
+            'items' => [
+                ['LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose', '']
+            ],
             'itemsProcFunc' => 'In2code\\Femanager\\UserFunc\\StaticInfoTables->getStatesOptions',
             'maxitems' => 1,
         ]
@@ -128,7 +131,7 @@ if ($extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect')) {
         'renderType' => 'selectSingle',
         'itemsProcFunc' => 'In2code\\Femanager\\UserFunc\\StaticInfoTables->getCountryOptions',
         'items' => [
-            ['', '--- Please Select ---']
+            ['LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose', '']
         ],
         'maxitems' => 1,
     ];
