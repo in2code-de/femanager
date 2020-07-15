@@ -71,7 +71,7 @@ class NewController extends AbstractController
             $this->createRequest($user);
         }
 
-        $this->forward('createStatus');
+        $this->redirect('createStatus');
     }
 
     /**

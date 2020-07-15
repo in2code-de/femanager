@@ -256,7 +256,7 @@ abstract class AbstractController extends ActionController
         if ($backend === false) {
             $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
             $this->addFlashMessage(LocalizationUtility::translate('create'));
-            $this->forward($redirectByActionName);
+            $this->redirect($redirectByActionName);
         }
     }
 

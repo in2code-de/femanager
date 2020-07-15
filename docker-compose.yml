@@ -40,7 +40,8 @@ services:
 
   node:
     image: node:10
-    command: "npm run all"
+    user: node
+    command: "npm run run-all"
     volumes:
       - ./:/home/node/app/
     working_dir: /home/node/app/Resources/Private

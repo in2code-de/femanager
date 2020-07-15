@@ -21,8 +21,9 @@ Quick guide:
 
 | Femanager   | TYPO3      | PHP       | Support/Development                     |
 | ----------- | ---------- | ----------|---------------------------------------- |
-| 5.x         | 8, 9 LTS   | 7.2 - 7.3 | Features, Bugfixes, Security Updates    |
-| 4.x         | 8.7        | 7.0 - 7.2 | Security Updates|
+| 6.x         | 10 LTS     | 7.2 - 7.3 | Features, Bugfixes, Security Updates    |
+| 5.x         | 8, 9 LTS   | 7.2 - 7.3 | Security Updates. If you want feature backports ask for an offer   |
+| 4.x         | 8.7        | 7.0 - 7.2 | Security Updates on demand (ask for an offer)   |
 | 3.x         | 8.7        | 7.0 - 7.2 | Security Updates on demand (ask for an offer)|
 | 2.x         | 7.6        | 5.5 - 7.0 | Security Updates on demand (ask for an offer)|
 | 1.x         | 6.2 - 7.6  | 5.5 - 7.0 | Security Updates on demand (ask for an offer)|
@@ -33,6 +34,8 @@ Official support (fee-based) via https://www.in2code.de/kontakt
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 6.0.1      | 2020-05-26 | Major        | Drop false declared support for TYPO3 9 in V6 Branch
+| 6.0.0      | 2020-05-26 | Major        | !!!Support TYPO3 10 LTS only   
 | 5.2.0      | 2019-05-26 | Security     | !!!Implement CSFR Protection - please check upgrade instructions                                                           |
 | 5.1.1      | 2019-05-26 | Bugfix       | Repair Admin Confirmation for TYPO3 9                                                                                      |
 | 5.1.0      | 2019-05-21 | Minor update | Allow PHP 7.3, Allow TYPO3 8.7, many bugfixes                                                                              | 

@@ -1,9 +1,14 @@
 <?php
+
 declare(strict_types=1);
+
 namespace In2code\Femanager\Finisher;
 
+use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+
+use function parse_str;
 
 /**
  * Class SendParametersFinisher
@@ -55,17 +60,13 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
     {
         if ($this->isEnabled()) {
             $curlSettings = $this->getCurlSettings();
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, $curlSettings['url']);
-            curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $curlSettings['params']);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            if ($GLOBALS['FE']['debug'] === 1) {
-                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            }
-            curl_exec($curl);
-            curl_close($curl);
+
+            /** @var RequestFactory $requestFactory */
+            $requestFactory = GeneralUtility::makeInstance(RequestFactory::class);
+            $params = $curlSettings['params'];
+            $parsedParams = [];
+            parse_str($params, $parsedParams);
+            $requestFactory->request($curlSettings['url'], 'POST', ['form_params' => $parsedParams]);
             $this->writeToDevelopmentLog();
         }
     }
