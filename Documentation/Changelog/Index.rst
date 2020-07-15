@@ -18,6 +18,13 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       Release Description
 
 - :Version:
+      6.0.1 (!!!)
+   :Date:
+      2020-07-15
+   :Changes:
+      * [TASK] Remove falsly declarated support for TYPO3 V9 in femanager 6 branch
+
+- :Version:
       6.0.0 (!!!)
    :Date:
       2020-07-06
