@@ -33,7 +33,6 @@
   "require-dev": {
     "typo3/cms-adminpanel": "^9.5",
     "typo3/cms-beuser": "^9.5",
-    "typo3/cms-dashboard": "^9.5",
     "typo3/cms-extbase": "^9.5",
     "typo3/cms-extensionmanager": "^9.5",
     "typo3/cms-felogin": "^9.5",
@@ -59,7 +58,7 @@
     "se/selenium-server-standalone": "^3",
     "squizlabs/php_codesniffer": "^3.5",
     "phpmd/phpmd": "^2.8",
-    "helhum/typo3-console": "^6.3",
+    "helhum/typo3-console": "^5.0",
     "sjbr/static-info-tables": "^6.9",
     "typo3/cms-belog": "^9.5"
   },
