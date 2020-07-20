@@ -1,4 +1,6 @@
 jQuery(document).ready(function($) {
+    var labels = JSON.parse(document.querySelector('.tx-femanager[data-labels]').dataset['labels']);
+
 	// javascript validation
 	$('.feManagerValidation').femanagerValidation($);
 
@@ -33,6 +35,91 @@ jQuery(document).ready(function($) {
 			e.preventDefault();
 		}
 	});
+
+    function lcfirst (str) {
+        //  discuss at: https://locutus.io/php/lcfirst/
+        // original by: Brett Zamir (https://brett-zamir.me)
+        //   example 1: lcfirst('Kevin Van Zonneveld')
+        //   returns 1: 'kevin Van Zonneveld'
+
+        str += ''
+        var f = str.charAt(0).toLowerCase()
+        return f + str.substr(1)
+    }
+
+	// data fields
+    document.querySelectorAll('[data-data-endpoint]').forEach(function (nodeElement) {
+        var triggerCallback = function (event) {
+            var endpoint = nodeElement.dataset['dataEndpoint'];
+
+            var data = {
+                'tx_femanager_pi1[action]': endpoint,
+                'tx_femanager_pi1[controller]': 'Data',
+            };
+
+            // Convert DOMStringMap to object. https://stackoverflow.com/a/48235245/2025722
+            // According to Mozilla this should work all the way back to IE 8 without a polyfill.
+            arguments = JSON.parse(JSON.stringify(nodeElement.dataset));
+            for (var argument in arguments) {
+                if (arguments.hasOwnProperty(argument)) {
+                    if (argument.match('arguments')) {
+                        var sourceField = document.getElementById(arguments[argument]);
+                        if (sourceField) {
+                            var argumentName = lcfirst(argument.substr(9));
+                            data['tx_femanager_pi1[' + argumentName + ']'] = sourceField.value;
+                        }
+                    }
+                }
+            }
+
+            var url = Femanager.getBaseUrl() + 'index.php?id=' + $('#femanagerPid').val() + '&type=1594138042';
+
+            $.ajax({
+                url: url,
+                data: data,
+                type: 'POST',
+                cache: false,
+                beforeSend: function () {
+                    nodeElement.disabled = 1;
+                    nodeElement.options.length = 0
+                    nodeElement.options[0] = new Option(labels.loading_states);
+                },
+                success: function(options) {
+                    nodeElement.options.length = 0
+                    for (var option in options) {
+                        nodeElement.options[nodeElement.options.length] = new Option(labels.please_choose);
+                        break;
+                    }
+                    for (var option in options) {
+                        if (options.hasOwnProperty(option)) {
+                            nodeElement.options[nodeElement.options.length] = new Option(options[option], option);
+                        }
+                    }
+                    if (nodeElement.options.length === 0) {
+                        nodeElement.disabled = 1;
+                    } else {
+                        nodeElement.disabled = 0;
+                    }
+
+                },
+                error: function() {
+                    console.log('Error: The called url is not available - if you use TYPO3 in a subfolder, please use config.baseURL in TypoScript');
+                }
+            });
+        };
+        var triggerFieldsString = nodeElement.dataset['triggerFields']
+        if (undefined !== triggerFieldsString) {
+            triggerFieldsString.split(',').forEach(function(element) {
+                var triggerElement = document.getElementById(element);
+                if (undefined !== triggerElement) {
+                    triggerElement.addEventListener('change', triggerCallback);
+                }
+            });
+        } else {
+            nodeElement.addEventListener('change', triggerCallback);
+        }
+        triggerCallback();
+    });
 });
 
 /**

@@ -1,0 +1,19 @@
+{namespace femanager=In2code\Femanager\ViewHelpers}
+
+<div class="femanager_fieldset femanager_state form-group">
+	<label for="femanager_field_state" class="col-sm-2 control-label">
+		<f:translate key="tx_femanager_domain_model_user.state"/>
+		<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'state')}">
+			<span>*</span>
+		</f:if>
+	</label>
+	<div class="col-sm-10">
+		<femanager:form.select
+				id="femanager_field_state"
+				property="state"
+				defaultOption="{f:translate(key:'pleaseChooseCountry')}"
+				class="form-control"
+				additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'state')}"
+				data="{trigger-fields: 'femanager_field_country', data-endpoint: 'getStatesForCountry', arguments-country: 'femanager_field_country'}"/>
+	</div>
+</div>

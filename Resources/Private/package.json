@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "run-all": "npm-run-all run-install run-watch",
     "run-install": "npm install",
-    "run-watch": "gulp watch"
+    "run-watch": "gulp default"
   },
   "author": "in2code.de",
   "license": "GPL2",

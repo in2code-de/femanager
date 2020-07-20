@@ -34,6 +34,7 @@ Official support (fee-based) via https://www.in2code.de/kontakt
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| 6.1.0      | 2020-xx-xx | Minor        | Add Support for country select options
 | 6.0.1      | 2020-05-26 | Major        | Drop false declared support for TYPO3 9 in V6 Branch
 | 6.0.0      | 2020-05-26 | Major        | !!!Support TYPO3 10 LTS only   
 | 5.2.0      | 2019-05-26 | Security     | !!!Implement CSFR Protection - please check upgrade instructions                                                           |

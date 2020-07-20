@@ -2,6 +2,7 @@
 
 .gitkeep                         export-ignore
 /.env                            export-ignore
+/.editorconfig                   export-ignore
 /.gitattributes                  export-ignore
 /.gitignore                      export-ignore
 /docker-compose.yml              export-ignore
