@@ -33,6 +33,7 @@ destroy: stop
 	echo "$(EMOJI_litter) Removing the project"
 	docker-compose down -v --remove-orphans
 	git clean -dfx
+	make link-compose-file
 
 ## Starts docker-compose up -d
 start:
@@ -125,7 +126,7 @@ typo3-install-autocomplete:
 	curl -sLO https://raw.githubusercontent.com/TYPO3/TYPO3.CMS/master/dynamicReturnTypeMeta.json
 
 ## To start an existing project incl. rsync from fileadmin, uploads and database dump
-install-project: destroy link-compose-file add-hosts-entry init-docker composer-install typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall mysql-restore typo3-clearcache typo3-comparedb
+install-project: link-compose-file destroy add-hosts-entry init-docker composer-install typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall mysql-restore typo3-clearcache typo3-comparedb
 	echo "---------------------"
 	echo ""
 	echo "The project is online $(EMOJI_thumbsup)"
