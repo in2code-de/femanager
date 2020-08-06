@@ -1,4 +1,4 @@
-base: 'https://femanager.ddev.site/'
+base: 'https://local.femanager.de/'
 baseVariants: {  }
 errorHandling: {  }
 languages:
