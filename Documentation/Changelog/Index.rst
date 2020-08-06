@@ -18,6 +18,13 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       Release Description
 
 - :Version:
+      5.3.1
+   :Date:
+      2020-08-06
+   :Changes:
+      * [Bugfix] Allow validation via captcha - thanks to Germar https://github.com/Germar and dnozdrin https://github.com/dnozdrin
+
+- :Version:
       5.3.0
    :Date:
       2020-07-06
