@@ -60,7 +60,8 @@
     "phpmd/phpmd": "^2.8",
     "helhum/typo3-console": "^5.0",
     "sjbr/static-info-tables": "^6.9",
-    "typo3/cms-belog": "^9.5"
+    "typo3/cms-belog": "^9.5",
+    "sjbr/sr-freecap": "^2.5"
   },
   "autoload": {
     "psr-4": {
