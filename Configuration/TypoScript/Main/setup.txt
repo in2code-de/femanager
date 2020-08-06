@@ -154,7 +154,7 @@ plugin.tx_femanager {
 #					required = 1
 				}
 				state {
-					required = 1
+					required = 0
 					if = In2code\Femanager\Domain\Validator\ShouldValidateStateCondition
 				}
 			}
