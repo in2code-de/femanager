@@ -131,7 +131,8 @@ typo3-install-autocomplete:
 	echo "$(EMOJI_crystal_ball) Installing TYPO3 autocompletion"
 	curl -sLO https://raw.githubusercontent.com/TYPO3/TYPO3.CMS/master/dynamicReturnTypeMeta.json
 
-lsf-fetch:
+## Checkout LFS files
+lfs-fetch:
 	echo "$(EMOJI_milky_way) Fetching git LFS content"
 	git lfs fetch
 	git lfs checkout
