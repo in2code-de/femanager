@@ -1,14 +1,17 @@
 <?php
+
 declare(strict_types=1);
+
 namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\PluginRepository;
 use In2code\Femanager\Domain\Service\ValidationSettingsService;
-use In2code\Femanager\Utility\ObjectUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
+use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class ClientsideValidator
@@ -81,6 +84,7 @@ class ClientsideValidator extends AbstractValidator
     {
         if ($this->isValidationSettingsDifferentToGlobalSettings()) {
             $this->addMessage('validationErrorGeneral');
+
             return false;
         }
 
@@ -204,14 +208,19 @@ class ClientsideValidator extends AbstractValidator
                     break;
 
                 case stristr($validationSetting, 'captcha('):
-                    $wordRepository = ObjectUtility::getObjectManager()->get(\SJBR\SrFreecap\Domain\Repository\WordRepository::class);
-                    $wordObject = $wordRepository->getWord();
-                    $wordHash = $wordObject->getWordHash();
-                    $userVal = md5(strtolower(utf8_decode($this->getValue())));
-                    if ($wordHash !== $userVal) {
-                        $this->addMessage('validationErrorCaptcha', 'captcha');
-                        $this->isValid = false;
+                    if (ExtensionManagementUtility::isLoaded('sr_freecap')) {
+                        $wordRepository = ObjectUtility::getObjectManager()->get(
+                            \SJBR\SrFreecap\Domain\Repository\WordRepository::class
+                        );
+                        $wordObject = $wordRepository->getWord();
+                        $wordHash = $wordObject->getWordHash();
+                        $userVal = md5(strtolower(utf8_decode($this->getValue())));
+                        if ($wordHash !== $userVal) {
+                            $this->addMessage('validationErrorCaptcha', 'captcha');
+                            $this->isValid = false;
+                        }
                     }
+
                     break;
 
                 default:
@@ -253,6 +262,7 @@ class ClientsideValidator extends AbstractValidator
     public function setValidationSettingsString($validationSettingsString)
     {
         $this->validationSettingsString = $validationSettingsString;
+
         return $this;
     }
 
@@ -275,6 +285,7 @@ class ClientsideValidator extends AbstractValidator
             $controllerName,
             $this->getValidationName()
         );
+
         return $validationService->getValidationStringForField($this->fieldName);
     }
 
@@ -285,6 +296,7 @@ class ClientsideValidator extends AbstractValidator
     {
         $validationSettings = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
         $validationSettings = str_replace('|', ',', $validationSettings);
+
         return $validationSettings;
     }
 
@@ -295,6 +307,7 @@ class ClientsideValidator extends AbstractValidator
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 
@@ -324,6 +337,7 @@ class ClientsideValidator extends AbstractValidator
     public function setMessages($messages)
     {
         $this->messages = $messages;
+
         return $this;
     }
 
@@ -342,6 +356,7 @@ class ClientsideValidator extends AbstractValidator
     public function setFieldName($fieldName)
     {
         $this->fieldName = $fieldName;
+
         return $this;
     }
 
@@ -360,6 +375,7 @@ class ClientsideValidator extends AbstractValidator
     public function setUser(User $user = null)
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -378,6 +394,7 @@ class ClientsideValidator extends AbstractValidator
     public function setAdditionalValue($additionalValue)
     {
         $this->additionalValue = $additionalValue;
+
         return $this;
     }
 
@@ -404,6 +421,7 @@ class ClientsideValidator extends AbstractValidator
     public function setPlugin(int $plugin)
     {
         $this->plugin = $plugin;
+
         return $this;
     }
 
@@ -422,6 +440,7 @@ class ClientsideValidator extends AbstractValidator
     public function setActionName(string $actionName)
     {
         $this->actionName = $actionName;
+
         return $this;
     }
 
@@ -434,6 +453,7 @@ class ClientsideValidator extends AbstractValidator
         if ($this->getControllerName() === 'invitation' && $this->getActionName() === 'edit') {
             $validationName = 'validationEdit';
         }
+
         return $validationName;
     }
 
@@ -444,6 +464,7 @@ class ClientsideValidator extends AbstractValidator
     {
         $pluginRepository = ObjectUtility::getObjectManager()->get(PluginRepository::class);
         $controllerName = $pluginRepository->getControllerNameByPluginSettings($this->getPlugin());
+
         return $controllerName;
     }
 
