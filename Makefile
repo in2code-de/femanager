@@ -99,6 +99,12 @@ init-docker: create-dirs create-certificate
 	docker-compose up -d --build
 	docker-compose exec -u root php chown -R app:app /app/$(TYPO3_CACHE_DIR)/;
 
+## Copies the TYPO3 site configuration
+typo3-add-site:
+	echo "$(EMOJI_triangular_flag) Copying the TYPO3 site configuration"
+	mkdir -p $(WEBROOT)/config/sites/main/
+	cp -f .project/TYPO3/config.yaml $(WEBROOT)/config/sites/main/config.yaml
+
 ## Copies the Additional/DockerConfiguration.php to the correct directory
 typo3-add-dockerconfig:
 	echo "$(EMOJI_plug) Copying the docker specific configuration for TYPO3"
@@ -131,7 +137,7 @@ lsf-fetch:
 	git lfs checkout
 
 ## To start an existing project incl. rsync from fileadmin, uploads and database dump
-install-project: lfs-fetch link-compose-file destroy add-hosts-entry init-docker composer-install typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall mysql-restore typo3-clearcache typo3-comparedb
+install-project: lfs-fetch link-compose-file destroy add-hosts-entry init-docker composer-install typo3-add-site typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall mysql-restore typo3-clearcache typo3-comparedb
 	echo "---------------------"
 	echo ""
 	echo "The project is online $(EMOJI_thumbsup)"
@@ -142,7 +148,7 @@ install-project: lfs-fetch link-compose-file destroy add-hosts-entry init-docker
 	make urls
 
 ## To start an new project
-new-project: destroy add-hosts-entry init-docker composer-install typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall typo3-comparedb
+new-project: destroy add-hosts-entry init-docker composer-install typo3-add-site typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall typo3-comparedb
 	echo "---------------------"
 	echo ""
 	echo "The project is online $(EMOJI_thumbsup)"
@@ -225,3 +231,4 @@ EMOJI_nutandbolt := "🔩"
 EMOJI_crystal_ball := "🔮"
 EMOJI_triangular_ruler := "📐"
 EMOJI_milky_way := "🌌"
+EMOJI_triangular_flag := "🚩"
