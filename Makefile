@@ -125,8 +125,13 @@ typo3-install-autocomplete:
 	echo "$(EMOJI_crystal_ball) Installing TYPO3 autocompletion"
 	curl -sLO https://raw.githubusercontent.com/TYPO3/TYPO3.CMS/master/dynamicReturnTypeMeta.json
 
+lsf-fetch:
+	echo "$(EMOJI_milky_way) Fetching git LFS content"
+	git lfs fetch
+	git lfs checkout
+
 ## To start an existing project incl. rsync from fileadmin, uploads and database dump
-install-project: link-compose-file destroy add-hosts-entry init-docker composer-install typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall mysql-restore typo3-clearcache typo3-comparedb
+install-project: lfs-fetch link-compose-file destroy add-hosts-entry init-docker composer-install typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall mysql-restore typo3-clearcache typo3-comparedb
 	echo "---------------------"
 	echo ""
 	echo "The project is online $(EMOJI_thumbsup)"
@@ -219,3 +224,4 @@ EMOJI_broom := "🧹"
 EMOJI_nutandbolt := "🔩"
 EMOJI_crystal_ball := "🔮"
 EMOJI_triangular_ruler := "📐"
+EMOJI_milky_way := "🌌"
