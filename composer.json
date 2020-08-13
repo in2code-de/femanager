@@ -24,6 +24,7 @@
   "type": "typo3-cms-extension",
   "license": "GPL-2.0-or-later",
   "require": {
+    "ext-json": "*",
     "typo3/cms-core": ">=10.0.0 <11.0.0"
   },
   "replace": {
@@ -60,7 +61,8 @@
     "phpmd/phpmd": "^2.8",
     "helhum/typo3-console": "^6.3",
     "sjbr/static-info-tables": "^6.9",
-    "typo3/cms-belog": "^10.4"
+    "typo3/cms-belog": "^10.4",
+    "sjbr/sr-freecap": "^2.6"
   },
   "autoload": {
     "psr-4": {

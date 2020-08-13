@@ -17,6 +17,7 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -24,6 +25,8 @@ use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+
+use function json_encode;
 
 /**
  * Class AbstractController
@@ -367,12 +370,18 @@ abstract class AbstractController extends ActionController
      */
     public function assignForAll()
     {
+        $jsLabels = [
+            'loading_states' => LocalizationUtility::translate('js.loading_states'),
+            'please_choose' => LocalizationUtility::translate('pleaseChoose'),
+        ];
         $this->view->assignMultiple(
             [
                 'languageUid' => FrontendUtility::getFrontendLanguageUid(),
                 'storagePid' => $this->allConfig['persistence']['storagePid'],
                 'Pid' => FrontendUtility::getCurrentPid(),
-                'data' => $this->contentObject->data
+                'data' => $this->contentObject->data,
+                'useStaticInfoTables' => ExtensionManagementUtility::isLoaded('static_info_tables'),
+                'jsLabels' => json_encode($jsLabels),
             ]
         );
     }

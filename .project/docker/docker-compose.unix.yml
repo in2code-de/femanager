@@ -10,19 +10,15 @@ services:
       VIRTUAL_PROTO: https
     volumes:
       - ./:/app/:cached
-      - typo3var:/app/${TYPO3_CACHE_DIR}/:nocopy
     networks:
       default:
         aliases:
           - ${HOST}
 
   php:
-    build:
-      context: ./.project/docker/php/
-      dockerfile: Dockerfile
+    image: in2code/php-dev:7.2-fpm
     volumes:
       - ./:/app/:cached
-      - typo3var:/app/${TYPO3_CACHE_DIR}/:nocopy
       - $HOME/.composer/auth.json:/tmp/composer/auth.json
       - $HOME/.composer/cache/:/tmp/composer/cache/
     env_file:

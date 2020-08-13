@@ -31,8 +31,9 @@ stop:
 ## Removes all containers and volumes
 destroy: stop
 	echo "$(EMOJI_litter) Removing the project"
-	git clean -dfx
 	docker-compose down -v --remove-orphans
+	git clean -dfx
+	make link-compose-file
 
 ## Starts docker-compose up -d
 start:
@@ -82,12 +83,27 @@ create-certificate: install-mkcert
 	if [[ ! -f $(HOME)/.dinghy/certs/${HOST}.key ]]; then mkcert -cert-file $(HOME)/.dinghy/certs/${HOST}.crt -key-file $(HOME)/.dinghy/certs/${HOST}.key ${HOST}; fi;
 	if [[ ! -f $(HOME)/.dinghy/certs/${MAIL}.key ]]; then mkcert -cert-file $(HOME)/.dinghy/certs/${MAIL}.crt -key-file $(HOME)/.dinghy/certs/${MAIL}.key ${MAIL}; fi;
 
+## Choose the right docker-compose file for your environment
+link-compose-file:
+	echo "$(EMOJI_triangular_ruler) Linking the OS specific compose file"
+ifeq ($(shell uname -s), Darwin)
+	ln -snf .project/docker/docker-compose.darwin.yml docker-compose.yml
+else
+	ln -snf .project/docker/docker-compose.unix.yml docker-compose.yml
+endif
+
 ## Initialize the docker setup
 init-docker: create-dirs create-certificate
 	echo "$(EMOJI_rocket) Initializing docker environment"
 	docker-compose pull
 	docker-compose up -d --build
 	docker-compose exec -u root php chown -R app:app /app/$(TYPO3_CACHE_DIR)/;
+
+## Copies the TYPO3 site configuration
+typo3-add-site:
+	echo "$(EMOJI_triangular_flag) Copying the TYPO3 site configuration"
+	mkdir -p $(WEBROOT)/config/sites/main/
+	cp -f .project/TYPO3/config.yaml $(WEBROOT)/config/sites/main/config.yaml
 
 ## Copies the Additional/DockerConfiguration.php to the correct directory
 typo3-add-dockerconfig:
@@ -115,8 +131,14 @@ typo3-install-autocomplete:
 	echo "$(EMOJI_crystal_ball) Installing TYPO3 autocompletion"
 	curl -sLO https://raw.githubusercontent.com/TYPO3/TYPO3.CMS/master/dynamicReturnTypeMeta.json
 
+## Checkout LFS files
+lfs-fetch:
+	echo "$(EMOJI_milky_way) Fetching git LFS content"
+	git lfs fetch
+	git lfs checkout
+
 ## To start an existing project incl. rsync from fileadmin, uploads and database dump
-install-project: destroy add-hosts-entry init-docker composer-install typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall mysql-restore typo3-clearcache typo3-comparedb
+install-project: lfs-fetch link-compose-file destroy add-hosts-entry init-docker composer-install typo3-add-site typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall mysql-restore typo3-clearcache typo3-comparedb
 	echo "---------------------"
 	echo ""
 	echo "The project is online $(EMOJI_thumbsup)"
@@ -127,7 +149,7 @@ install-project: destroy add-hosts-entry init-docker composer-install typo3-add-
 	make urls
 
 ## To start an new project
-new-project: destroy add-hosts-entry init-docker composer-install typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall typo3-comparedb
+new-project: destroy add-hosts-entry init-docker composer-install typo3-add-site typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall typo3-comparedb
 	echo "---------------------"
 	echo ""
 	echo "The project is online $(EMOJI_thumbsup)"
@@ -208,3 +230,6 @@ EMOJI_helicopter := "🚁️"
 EMOJI_broom := "🧹"
 EMOJI_nutandbolt := "🔩"
 EMOJI_crystal_ball := "🔮"
+EMOJI_triangular_ruler := "📐"
+EMOJI_milky_way := "🌌"
+EMOJI_triangular_flag := "🚩"

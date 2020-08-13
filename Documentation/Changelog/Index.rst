@@ -18,6 +18,14 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       Release Description
 
 - :Version:
+      6.1.0
+   :Date:
+      2020-08-13
+   :Changes:
+      * [FEATURE] Add support for country selection options - :ref:`see documentation <countryselect>`
+      * [BUGFIX] Allow validation via captcha - thanks to Germar https://github.com/Germar and dnozdrin https://github.com/dnozdrin
+
+- :Version:
       6.0.1 (!!!)
    :Date:
       2020-07-15
@@ -36,6 +44,13 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       * [TASK] Add docker based development env - Sponsored by in2code
       * [TASK] Update Unit and Behaviour Tests - Sponsored by inixmedia and in2code
       * [TASK] Remove legacy password hashing code - Sponsored by in2code
+
+- :Version:
+      5.3.1
+   :Date:
+      2020-08-06
+   :Changes:
+      * [BUGFIX] Allow validation via captcha - thanks to Germar https://github.com/Germar and dnozdrin https://github.com/dnozdrin
 
 - :Version:
       5.3.0

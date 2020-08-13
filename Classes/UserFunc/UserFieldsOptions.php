@@ -34,6 +34,7 @@ class UserFieldsOptions
         $this->initialize();
         $tSconfig = BackendUtility::getPagesTSconfig($this->getPid());
         $this->addCaptchaOption($params);
+        $this->addStateOption($params);
         $tab = $params['config']['itemsProcFuncTab'] . '.';
         if (!empty($tSconfig['tx_femanager.']['flexForm.'][$tab]['addFieldOptions.'])) {
             $options = $tSconfig['tx_femanager.']['flexForm.'][$tab]['addFieldOptions.'];
@@ -58,6 +59,22 @@ class UserFieldsOptions
             $params['items'][] = [
                 $this->languageService->sL($this->localLangPrefix . 'tx_femanager_domain_model_user.captcha'),
                 'captcha'
+            ];
+        }
+    }
+
+    /**
+     * Add captcha option
+     *
+     * @param array $params
+     * @return void
+     */
+    protected function addStateOption(&$params)
+    {
+        if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
+            $params['items'][] = [
+                $this->languageService->sL($this->localLangPrefix . 'tx_femanager_domain_model_user.state'),
+                'state'
             ];
         }
     }

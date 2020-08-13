@@ -75,6 +75,9 @@
 			<trans-unit id="tx_femanager_domain_model_user.country">
 				<source>Country</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.state">
+				<source>State</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.www">
 				<source>Website</source>
 			</trans-unit>
@@ -83,6 +86,9 @@
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.image">
 				<source>Image</source>
+			</trans-unit>
+            <trans-unit id="tx_femanager_domain_model_user.captcha">
+				<source>Captcha</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.terms">
 				<source>I accept the terms and conditions</source>
@@ -556,6 +562,9 @@
 			<trans-unit id="pleaseChoose">
 				<source>Please choose ...</source>
 			</trans-unit>
+			<trans-unit id="pleaseChooseCountry">
+				<source>Please choose a country ...</source>
+			</trans-unit>
 			<trans-unit id="FilterLabel">
 				<source>Search</source>
 			</trans-unit>
@@ -645,6 +654,10 @@
 			</trans-unit>
 			<trans-unit id="resendConfirmationDialogueLink">
 				<source>Resend confirmation email?</source>
+			</trans-unit>
+
+			<trans-unit id="js.loading_states">
+				<source>Loading states ...</source>
 			</trans-unit>
 		</body>
 	</file>

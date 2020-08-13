@@ -84,6 +84,13 @@ jQuery.fn.femanagerValidation = function($) {
 	 * @return void
 	 */
 	function validateField(element, countForSubmit) {
+	    if (element.prop('disabled')) {
+            if (countForSubmit) {
+                requestCallback.addCallbackToQueue(true);
+            }
+            return;
+
+        }
 		var $form = element.closest('form');
 		var user = $form.find('div:first').find('input[name="tx_femanager_pi1[user][__identity]"]').val();
 		var action = $form.find('div:first').find('input[name="tx_femanager_pi1[__referrer][@action]"]').val();

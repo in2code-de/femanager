@@ -140,6 +140,15 @@
 			</td>
 		</tr>
 	</f:if>
+	<f:if condition="{user.state}">
+		<tr>
+			<td><f:translate key="tx_femanager_domain_model_user.state" /></td>
+			<td>
+				<!-- // TODO: Check me if i was displayed -->
+				{user.state}
+			</td>
+		</tr>
+	</f:if>
 	<f:if condition="{user.image}">
 		<tr>
 			<td><f:translate key="tx_femanager_domain_model_user.image" /></td>
