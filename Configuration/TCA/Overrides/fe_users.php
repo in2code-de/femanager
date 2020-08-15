@@ -122,10 +122,16 @@ if ($staticInfoTablesIsLoaded) {
         ]
     ];
 }
-$extConf = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-    \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
-);
-if ($extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect')) {
+if (version_compare(TYPO3_version, '9.0.0', '<')) {
+    $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['femanager']);
+    $overrideFeUserCountryFieldWithSelect = $extConf['overrideFeUserCountryFieldWithSelect'];
+} else {
+    $extConf = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+    );
+    $overrideFeUserCountryFieldWithSelect = $extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect');
+}
+if ($overrideFeUserCountryFieldWithSelect) {
     $GLOBALS['TCA']['fe_users']['columns']['country']['config'] = [
         'type' => 'select',
         'renderType' => 'selectSingle',
@@ -136,7 +142,6 @@ if ($extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect')) {
         'maxitems' => 1,
     ];
 }
-
 $fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin, tx_femanager_terms, ' .
     'tx_femanager_terms_date_of_acceptance';
 

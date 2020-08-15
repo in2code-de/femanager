@@ -22,6 +22,10 @@ class DataController extends ActionController
     }
 
 
+    /**
+     * @param string $country
+     * @return string
+     */
     public function getStatesForCountryAction(string $country): string
     {
         $countryZones = $this->countryZonesDataProvider->getCountryZonesForCountryIso3($country);
