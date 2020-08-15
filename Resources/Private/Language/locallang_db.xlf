@@ -63,6 +63,9 @@
 			<trans-unit id="tx_femanager_domain_model_user.country">
 				<source>Country</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.state">
+				<source>State</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.www">
 				<source>Website</source>
 			</trans-unit>
@@ -77,6 +80,9 @@
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.captcha">
 				<source>Captcha</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.state">
+				<source>State</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.terms">
 				<source>Terms and conditions</source>
@@ -325,6 +331,9 @@
 
 			<trans-unit id="pleaseChoose">
 				<source>Please choose...</source>
+			</trans-unit>
+			<trans-unit id="pleaseChooseCountry">
+				<source>Please choose a country...</source>
 			</trans-unit>
 		</body>
 	</file>

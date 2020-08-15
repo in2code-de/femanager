@@ -1,0 +1,82 @@
+#
+# This file is part of in2code/cms-boilerplate
+#
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# HTML-Files
+[*.html]
+indent_style = tab
+
+# PUG-Files
+[*.pug]
+indent_style = space
+indent_size = 2
+
+# TMPL-Files
+[*.tmpl]
+indent_style = tab
+
+# STYLE-Files
+[{*.css, *.scss, *.sass, *.less}]
+indent_style = space
+indent_size = 2
+
+# JS-Files
+[*.{js,ts}]
+indent_style = space
+indent_size = 4
+
+# JSON-Files
+[*.json]
+indent_style = space
+indent_size = 2
+
+# PHP-Files
+[*.php]
+indent_style = space
+indent_size = 4
+
+# ReST-Files
+[*.rst]
+indent_style = space
+indent_size = 3
+
+# MD-Files
+[*.md]
+indent_style = space
+indent_size = 4
+
+# YAML-Files
+[{*.yaml, *.yml}]
+indent_style = space
+indent_size = 2
+
+# package.json
+# .travis.yml
+# bower.json
+[{package.json, .travis.yml, bower.json}]
+indent_style = space
+indent_size = 2
+
+# TypoScript
+[*.{typoscript,tsconfig}]
+indent_style = space
+indent_size = 2
+
+# XLF-Files
+[*.xlf]
+indent_style = tab
+
+# SQL-Files
+[*.sql]
+indent_style = tab
+indent_size = 2

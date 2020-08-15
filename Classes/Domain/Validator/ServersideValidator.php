@@ -1,9 +1,17 @@
 <?php
+
 declare(strict_types=1);
+
 namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Model\User;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+
+use function array_key_exists;
+use function class_exists;
+use function method_exists;
+use function ucfirst;
 
 /**
  * Class ServersideValidator
@@ -22,7 +30,7 @@ class ServersideValidator extends AbstractValidator
         $this->init();
         if ($this->validationSettings['_enable']['server'] === '1') {
             foreach ($this->validationSettings as $fieldName => $validations) {
-                if ($this->shouldBeValidated($user, $fieldName)) {
+                if ($this->shouldBeValidated($user, $fieldName, $validations)) {
                     $value = $this->getValue($user, $fieldName);
 
                     foreach ($validations as $validation => $validationSetting) {
@@ -185,7 +193,8 @@ class ServersideValidator extends AbstractValidator
      */
     protected function checkUniqueInPageValidation($user, $value, $validationSetting, $fieldName)
     {
-        if (!empty($value) &&
+        if (
+            !empty($value) &&
             $validationSetting === '1' &&
             !$this->validateUniquePage($value, $fieldName, $user)
         ) {
@@ -203,7 +212,8 @@ class ServersideValidator extends AbstractValidator
      */
     protected function checkUniqueInDbValidation($user, $value, $validationSetting, $fieldName)
     {
-        if (!empty($value) &&
+        if (
+            !empty($value) &&
             $validationSetting === '1' &&
             !$this->validateUniqueDb($value, $fieldName, $user)
         ) {
@@ -317,11 +327,25 @@ class ServersideValidator extends AbstractValidator
     /**
      * @param $user
      * @param $fieldName
+     * @param array $validationSettings
      * @return bool
      */
-    protected function shouldBeValidated($user, $fieldName): bool
+    protected function shouldBeValidated($user, $fieldName, array $validationSettings): bool
     {
-        return is_object($user) && $this->propertyHasGetterMethod($user, $fieldName);
+        return is_object($user)
+            && $this->propertyHasGetterMethod($user, $fieldName)
+            && $this->evaluateConditions($user, $fieldName, $validationSettings);
+    }
+
+    protected function evaluateConditions(User $user, string $fieldName, array $validationSettings)
+    {
+        if (array_key_exists('if', $validationSettings) && class_exists($validationSettings['if'])) {
+            $object = GeneralUtility::makeInstance($validationSettings['if']);
+            if ($object instanceof ValidationConditionInterface) {
+                return $object->shouldValidate($user, $fieldName, $validationSettings);
+            }
+        }
+        return true;
     }
 
     /**
