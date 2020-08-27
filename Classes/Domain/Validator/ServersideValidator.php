@@ -6,6 +6,7 @@ namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 use function array_key_exists;
@@ -316,6 +317,11 @@ class ServersideValidator extends AbstractValidator
             }
             if (method_exists($value, 'current')) {
                 $current = $value->current();
+
+                if ($current instanceof FileReference){
+                    return true;
+                }
+
                 if (method_exists($current, 'getUid')) {
                     $value = $current->getUid();
                 }
