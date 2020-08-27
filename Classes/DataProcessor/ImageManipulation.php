@@ -43,6 +43,8 @@ class ImageManipulation extends AbstractDataProcessor
                         $fileIdentifier = $fileService->indexFile($pathAndFilename);
                         $identifier = $this->createSysFileRelation($fileIdentifier);
                         $arguments['user'][$property] = [$identifier];
+                    } else {
+                        unset($arguments['user'][$property]);
                     }
                 }
             }
