@@ -22,7 +22,8 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
    :Date:
       2020-08-13
    :Changes:
-      * [FEATURE] Add support for country selection options
+      * [FEATURE] Add support for country selection options - :ref:`see documentation <countryselect>` - Sponsored by Resultify.se
+      * [BUGFIX] Allow validation via captcha - thanks to Germar https://github.com/Germar and dnozdrin https://github.com/dnozdrin
 
 - :Version:
       6.0.1 (!!!)
@@ -30,6 +31,13 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       2020-07-15
    :Changes:
       * [TASK] Remove falsly declarated support for TYPO3 V9 in femanager 6 branch
+
+- :Version:
+      5.4.0
+   :Date:
+      2020-08-30
+   :Changes:
+      * [FEATURE] Add support for country selection options (for TYPO3 V8 / V9) - :ref:`see documentation <countryselect>`- Sponsored by Resultify.se
 
 - :Version:
       5.3.1
