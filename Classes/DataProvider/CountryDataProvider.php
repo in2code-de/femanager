@@ -19,6 +19,6 @@ class CountryDataProvider
     /** @return Country[] */
     public function getCountries(): array
     {
-        return $this->countryRepository->findAllOrderedBy('officialNameEn')->toArray();
+        return $this->countryRepository->findAllOrderedBy('shortNameLocal')->toArray();
     }
 }

@@ -59,7 +59,7 @@ class StaticInfoTables
             $countryDataProvider = GeneralUtility::makeInstance(CountryDataProvider::class);
             $countries = $countryDataProvider->getCountries();
             foreach ($countries as $country) {
-                $data['items'][] = [$country->getOfficialNameEn(), $country->getIsoCodeA3()];
+                $data['items'][] = [$country->getShortNameEn(), $country->getIsoCodeA3()];
             }
         } else {
             $fallbackCountryDataProvider = GeneralUtility::makeInstance(FallbackCountryDataProvider::class);

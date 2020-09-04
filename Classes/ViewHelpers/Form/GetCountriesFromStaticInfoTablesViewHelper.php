@@ -52,8 +52,8 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
     {
         parent::initializeArguments();
         $this->registerArgument('key', 'string', 'country isoCode', false, 'isoCodeA3');
-        $this->registerArgument('value', 'string', 'officialNameLocal', false, 'officialNameLocal');
-        $this->registerArgument('sortbyField', 'string', 'isoCodeA3', false, 'isoCodeA3');
+        $this->registerArgument('value', 'string', 'shortNameLocal', false, 'shortNameLocal');
+        $this->registerArgument('sortbyField', 'string', 'shortNameLocal', false, 'shortNameLocal');
         $this->registerArgument('sorting', 'string', 'value to prepend', false, 'asc');
     }
 }
