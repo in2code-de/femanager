@@ -66,7 +66,10 @@ class PasswordValidator extends AbstractValidatorExtbase
         $password = $user->getPassword();
         $passwordRepeat = isset($this->piVars['password_repeat']) ? $this->piVars['password_repeat'] : '';
 
-        if ($password !== $passwordRepeat) {
+        if (
+            $this->configuration[$this->actionName]['validation']['password_repeat']['sameAs'] === 'password' &&
+            $password !== $passwordRepeat
+        ) {
             $this->addError('validationErrorPasswordRepeat', 0, ['code' => 'password']);
             return false;
         }
