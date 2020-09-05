@@ -89,15 +89,6 @@ Settings
    :Default:
       0
 
- - :Property:
-      setCookieOnLogin
-   :Datatype:
-      boolean
-   :Description:
-      Set cookie on login (experimental): On some cases it could happen, that auto login after creation in frontend or simulate login from backend module does not work. This flag will turn on setCookie as an alternative (experimental see https://github.com/in2code-de/femanager/issues/27 for details)
-   :Default:
-      0
-
 Plugin Configuration
 ^^^^^^^^^^^^^^^^^^^^
 
