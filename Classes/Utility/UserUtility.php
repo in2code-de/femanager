@@ -344,30 +344,11 @@ class UserUtility extends AbstractUtility
      */
     public static function login(User $user, $storagePids = null)
     {
-        #Log in user
-        $GLOBALS['TSFE']->fe_user->createUserSession(['uid' => (int)$user->getUid()]);
-        $GLOBALS['TSFE']->fe_user->loginSessionStarted = 1;
-        $GLOBALS['TSFE']->fe_user->forceSetCookie = true;
-        $GLOBALS['TSFE']->fe_user->dontSetCookie = false;
-        $GLOBALS['TSFE']->fe_user->start();
+        // ensure a session cookie is set (in case there is no session yet)
         $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('dummy', true);
-        $GLOBALS['TSFE']->fe_user->loginUser = 1;
-    }
-
-    /**
-     * This is a dirty solution to get autologin to work see https://github.com/in2code-de/femanager/issues/27 for
-     * details on this issue
-     *
-     * @param TypoScriptFrontendController $tsfe
-     * @return void
-     */
-    protected static function loginAlternative(TypoScriptFrontendController $tsfe)
-    {
-        if (ConfigurationUtility::isSetCookieOnLoginActive()) {
-            $reflection = new \ReflectionClass($tsfe->fe_user);
-            $setSessionCookie = $reflection->getMethod('setSessionCookie');
-            $setSessionCookie->setAccessible(true);
-            $setSessionCookie->invoke($tsfe->fe_user);
-        }
+        // create the session (destroys all existing session data in the session backend!)
+        $GLOBALS['TSFE']->fe_user->createUserSession(['uid' => (int)$user->getUid()]);
+        // write the session data again to the session backend; preserves what was there before!!
+        $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('dummy', true);
     }
 }

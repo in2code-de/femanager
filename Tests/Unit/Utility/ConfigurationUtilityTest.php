@@ -63,20 +63,4 @@ class ConfigurationUtilityTest extends UnitTestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;
         $this->assertTrue(ConfigurationUtility::isDisableLogActive());
     }
-
-    /**
-     * @return void
-     * @SuppressWarnings(PHPMD.Superglobals)
-     * @covers ::isSetCookieOnLoginActive
-     * @covers \In2code\Femanager\Utility\AbstractUtility::getExtensionConfiguration
-     */
-    public function testIsSetCookieOnLoginActive()
-    {
-        $configuration = [
-            'setCookieOnLogin' => '1'
-        ];
-        // @extensionScannerIgnoreLine
-        $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;
-        $this->assertTrue(ConfigurationUtility::isSetCookieOnLoginActive());
-    }
 }

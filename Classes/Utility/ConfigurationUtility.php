@@ -44,16 +44,6 @@ class ConfigurationUtility extends AbstractUtility
     }
 
     /**
-     * @return bool
-     */
-    public static function isSetCookieOnLoginActive(): bool
-    {
-        $configuration = self::getExtensionConfiguration();
-
-        return $configuration['setCookieOnLogin'] === '1';
-    }
-
-    /**
      * Get complete Typoscript or only a special value by a given path
      *
      * @param string $path "misc.uploadFolder" or empty for complete TypoScript array
