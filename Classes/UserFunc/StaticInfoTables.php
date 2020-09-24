@@ -10,6 +10,7 @@ use In2code\Femanager\DataProvider\FallbackCountryDataProvider;
 use TYPO3\CMS\Backend\Form\FormDataProvider\TcaSelectItems;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 use function array_values;
 use function count;
@@ -25,7 +26,8 @@ class StaticInfoTables
     public function getStatesOptions(array $data, TcaSelectItems $tcaSelectItems)
     {
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
-            $countryZonesDataProvider = GeneralUtility::makeInstance(CountryZonesDataProvider::class);
+            $countryZonesDataProvider = GeneralUtility::makeInstance(ObjectManager::class)
+                ->get(CountryZonesDataProvider::class);
             $country = $data['row']['country'] ?? null;
             if (is_array($country)) {
                 if (count($country) > 0) {
