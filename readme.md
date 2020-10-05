@@ -38,6 +38,7 @@ Official support (fee-based) via https://www.in2code.de/kontakt
 | 6.1.0      | 2020-08-13 | Minor        | Add Support for country select options                                                                                     |
 | 6.0.1      | 2020-05-26 | Major        | Drop false declared support for TYPO3 9 in V6 Branch                                                                       |
 | 6.0.0      | 2020-05-26 | Major        | !!!Support TYPO3 10 LTS only                                                                                               |
+| 5.4.0      | 2020-08-30 | Minor update | New validation option for countries with state subselection (TYPO3 V8/V9)                                                  |
 | 5.3.1      | 2020-08-06 | Bugfix       | Allow validation with captcha                                                                                              |
 | 5.2.0      | 2019-05-26 | Security     | !!!Implement CSFR Protection - please check upgrade instructions                                                           |
 | 5.1.1      | 2019-05-26 | Bugfix       | Repair Admin Confirmation for TYPO3 9                                                                                      |
@@ -66,12 +67,15 @@ Official support (fee-based) via https://www.in2code.de/kontakt
 
 ## Your Contribution
 
-**Pull requests** are welcome in general! Nevertheless please don't forget to add a description to your pull requests. This
-is very helpful to understand what kind of issue the **PR** is going to solve.
+**Pull requests** are welcome in general! Please note these requirements:
+* Unit Tests must still work
+* Behaviour Tests must still work
+* Describe how to test your pull request
+* TYPO3 coding guidelines must be respected
 
-- Bugfixes: Please describe what kind of bug your fix solve and give us feedback how to reproduce the issue. We're going
+- **Bugfixes**: Please describe what kind of bug your fix solve and give us feedback how to reproduce the issue. We're going
 to accept only bugfixes that can be reproduced.
-- Features: Not every feature is relevant for the bulk of the users. In addition: We don't want to make the extension
+- **Features**: Not every feature is relevant for the bulk of the users. In addition: We don't want to make the extension
 even more complicated in usability for an edge case feature. Please discuss a new feature before.
 
 ## Screenshots
