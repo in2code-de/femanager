@@ -17,7 +17,7 @@ class BackendUserUtility extends AbstractUtility
     {
         $userAuthentication = self::getBackendUserAuthentication();
 
-        return $userAuthentication->user['admin'] === 1 || (int)$userAuthentication->userTS['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
+        return $userAuthentication->user['admin'] === 1 || (int)$userAuthentication->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
     }
 
     /**
