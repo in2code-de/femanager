@@ -28,11 +28,11 @@ $EM_CONF[$_EXTKEY] = [
         'depends' => [
             'typo3' => '10.0.0-10.4.99',
             'php' => '7.2.0-7.3.99',
+            'static_info_tables' => '6.0.0-7.99.99',
         ],
         'conflicts' => [],
         'suggests' => [
             'sr_freecap' => '2.3.0-2.99.99',
-            'static_info_tables' => '6.0.0-7.99.99'
         ],
     ],
     'autoload' => [
