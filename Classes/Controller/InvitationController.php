@@ -73,7 +73,7 @@ class InvitationController extends AbstractController
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvited'));
-        LogUtility::log(Log::STATUS_INVITATIONPROFILECREATED, $user);
+        $this->logUtility->log(Log::STATUS_INVITATIONPROFILECREATED, $user);
 
         // send confirmation mail to user
         $this->sendMailService->send(
@@ -159,7 +159,7 @@ class InvitationController extends AbstractController
     public function updateAction($user)
     {
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvitedFinished'));
-        LogUtility::log(Log::STATUS_INVITATIONPROFILEENABLED, $user);
+        $this->logUtility->log(Log::STATUS_INVITATIONPROFILEENABLED, $user);
         if ($this->settings['invitation']['notifyAdmin']) {
             $this->sendMailService->send(
                 'invitationNotify',
@@ -206,7 +206,7 @@ class InvitationController extends AbstractController
         $user = $this->userRepository->findByUid($user);
 
         if (HashUtility::validHash($hash, $user)) {
-            LogUtility::log(Log::STATUS_PROFILEDELETE, $user);
+            $this->logUtility->log(Log::STATUS_PROFILEDELETE, $user);
             $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_INVITATIONPROFILEDELETEDUSER));
 
             // send notify email to admin
