@@ -5,6 +5,7 @@
 /.editorconfig                   export-ignore
 /.gitattributes                  export-ignore
 /.gitignore                      export-ignore
+/config                          export-ignore
 /docker-compose.yml              export-ignore
 /dynamicReturnTypeMeta.json      export-ignore
 /Makefile                        export-ignore

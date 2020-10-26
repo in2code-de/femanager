@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\ViewHelpers\Form;
 
+use SJBR\StaticInfoTables\Domain\Repository\CountryRepository;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -11,14 +14,16 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
 {
-
     /**
-     * countryRepository
-     *
-     * @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var CountryRepository
      */
-    protected $countryRepository;
+    protected $countryRepository = null;
+
+    public function __construct() {
+        if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
+            $this->countryRepository = GeneralUtility::makeInstance(CountryRepository::class);
+        }
+    }
 
     /**
      * Build an country array
@@ -28,6 +33,9 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
      */
     public function render(): array
     {
+        if (null === $this->countryRepository) {
+            return ['ERROR: static_info_tables is not loaded'];
+        }
         $key = $this->arguments['key'];
         $value = $this->arguments['value'];
         $sortbyField = $this->arguments['sortbyField'];

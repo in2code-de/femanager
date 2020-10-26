@@ -60,9 +60,9 @@
     "squizlabs/php_codesniffer": "^3.5",
     "phpmd/phpmd": "^2.8",
     "helhum/typo3-console": "^6.3",
-    "sjbr/static-info-tables": "^6.9",
     "typo3/cms-belog": "^10.4",
-    "sjbr/sr-freecap": "^2.6"
+    "sjbr/sr-freecap": "^2.6",
+    "sjbr/static-info-tables": "^6.9"
   },
   "autoload": {
     "psr-4": {

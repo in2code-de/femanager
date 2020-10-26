@@ -17,10 +17,8 @@ $GLOBALS['TYPO3_CONF_VARS']['GFX']['processor'] = 'ImageMagick';
 $GLOBALS['TYPO3_CONF_VARS']['GFX']['processor_path'] = '/usr/bin/';
 $GLOBALS['TYPO3_CONF_VARS']['GFX']['processor_path_lzw'] = '/usr/bin/';
 
-$hashInstance = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-    \TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory::class
-)->getDefaultHashInstance('BE');
-$GLOBALS['TYPO3_CONF_VARS']['BE']['installToolPassword'] = $hashInstance->getHashedPassword('joh316');
+// joh316
+$GLOBALS['TYPO3_CONF_VARS']['BE']['installToolPassword'] = '$argon2i$v=19$m=65536,t=16,p=1$RmZtaE5LQU1rSGw2NUZiWQ$YdU5on+xJ4lI6Gwd4LWpbddeAEu88cctS2dnO+r9ty0';
 
 $GLOBALS['TYPO3_CONF_VARS']['BE']['lockSSL'] = '0';
 $GLOBALS['TYPO3_CONF_VARS']['BE']['compressionLevel'] = '0';

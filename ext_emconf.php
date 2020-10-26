@@ -23,7 +23,7 @@ $EM_CONF[$_EXTKEY] = [
     'modify_tables' => '',
     'clearCacheOnLoad' => 0,
     'lockType' => '',
-    'version' => '6.1.0',
+    'version' => '6.1.1',
     'constraints' => [
         'depends' => [
             'typo3' => '10.0.0-10.4.99',
@@ -32,7 +32,7 @@ $EM_CONF[$_EXTKEY] = [
         'conflicts' => [],
         'suggests' => [
             'sr_freecap' => '2.3.0-2.99.99',
-            'static_info_tables' => '6.0.0-7.99.99'
+            'static_info_tables' => '6.9.0-6.99.99',
         ],
     ],
     'autoload' => [
