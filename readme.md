@@ -6,11 +6,11 @@ Extension basicly works like sr_feuser_register or any other frontend user regis
 
 ## Quick installation
 
-Please look at the manual for a big documentation at 
+Please look at the manual for a big documentation at
 https://docs.typo3.org/typo3cms/extensions/femanager/
 
 Quick guide:
-- Just install this extension - e.g. `composer require in2code/femanager` or download it 
+- Just install this extension - e.g. `composer require in2code/femanager` or download it
   or install it with the classic way (Extension Manager)
 - Clear caches
 - Add a sysfolder for your Frontend-Users and Usergroups (or separate it)
@@ -28,19 +28,20 @@ Quick guide:
 | 2.x         | 7.6        | 5.5 - 7.0 | Security Updates on demand (ask for an offer)|
 | 1.x         | 6.2 - 7.6  | 5.5 - 7.0 | Security Updates on demand (ask for an offer)|
 
-Official support (fee-based) via https://www.in2code.de/kontakt 
+Official support (fee-based) via https://www.in2code.de/kontakt
 
 ## Changelog
 
 | Version    | Date       | State        | Description                                                                                                                |
 | ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| 6.1.0      | 2020-08-13 | Minor        | Add Support for country select options
-| 6.0.1      | 2020-05-26 | Major        | Drop false declared support for TYPO3 9 in V6 Branch
-| 6.0.0      | 2020-05-26 | Major        | !!!Support TYPO3 10 LTS only   
-| 5.3.1      | 2020-08-06 | Bugfix       | Allow validation with captcha                                                                                               |
+| 6.1.1      | 2020-08-13 | Bugfix       | Prevent some notices and errors, exception during file upload and changed method call                                      |
+| 6.1.0      | 2020-08-13 | Minor        | Add Support for country select options                                                                                     |
+| 6.0.1      | 2020-05-26 | Major        | Drop false declared support for TYPO3 9 in V6 Branch                                                                       |
+| 6.0.0      | 2020-05-26 | Major        | !!!Support TYPO3 10 LTS only                                                                                               |
+| 5.3.1      | 2020-08-06 | Bugfix       | Allow validation with captcha                                                                                              |
 | 5.2.0      | 2019-05-26 | Security     | !!!Implement CSFR Protection - please check upgrade instructions                                                           |
 | 5.1.1      | 2019-05-26 | Bugfix       | Repair Admin Confirmation for TYPO3 9                                                                                      |
-| 5.1.0      | 2019-05-21 | Minor update | Allow PHP 7.3, Allow TYPO3 8.7, many bugfixes                                                                              | 
+| 5.1.0      | 2019-05-21 | Minor update | Allow PHP 7.3, Allow TYPO3 8.7, many bugfixes                                                                              |
 | 5.0.0      | 2019-02-01 | Major update | Refactored version for TYPO3 9 LTS                                                                                         |
 | 4.2.5      | 2019-01-30 | Bugfix       | Validation failed for date and some other datetypes                                                                        |
 | 4.2.4      | 2019-01-24 | Bugfix       | Validation failed, if more then one content element was besides femanager plugin                                           |
