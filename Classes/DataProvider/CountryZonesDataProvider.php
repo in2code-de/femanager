@@ -9,6 +9,8 @@ use SJBR\StaticInfoTables\Domain\Model\CountryZone;
 use SJBR\StaticInfoTables\Domain\Repository\CountryRepository;
 use SJBR\StaticInfoTables\Domain\Repository\CountryZoneRepository;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 use function array_values;
 use function count;
 use function strcasecmp;
@@ -20,10 +22,11 @@ class CountryZonesDataProvider
 
     private $countryRepository;
 
-    public function __construct(CountryZoneRepository $countryZoneRepository, CountryRepository $countryRepository)
+    public function __construct()
     {
-        $this->countryZoneRepository = $countryZoneRepository;
-        $this->countryRepository = $countryRepository;
+        // Can not autowire optional dependencies
+        $this->countryZoneRepository = GeneralUtility::makeInstance(CountryZoneRepository::class);
+        $this->countryRepository = GeneralUtility::makeInstance(CountryRepository::class);
     }
 
     /** @return CountryZone[] */

@@ -6,14 +6,15 @@ namespace In2code\Femanager\DataProvider;
 
 use SJBR\StaticInfoTables\Domain\Model\Country;
 use SJBR\StaticInfoTables\Domain\Repository\CountryRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CountryDataProvider
 {
     protected $countryRepository;
 
-    public function __construct(CountryRepository $countryRepository)
+    public function __construct()
     {
-        $this->countryRepository = $countryRepository;
+        $this->countryRepository = GeneralUtility::makeInstance(CountryRepository::class);
     }
 
     /** @return Country[] */
