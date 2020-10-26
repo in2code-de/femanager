@@ -1,6 +1,7 @@
 # .gitattributes
 
 .gitkeep                         export-ignore
+/.project                        export-ignore
 /.env                            export-ignore
 /.editorconfig                   export-ignore
 /.gitattributes                  export-ignore
