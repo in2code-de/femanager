@@ -33,6 +33,13 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       * [TASK] Remove falsly declarated support for TYPO3 V9 in femanager 6 branch
 
 - :Version:
+      5.4.1
+   :Date:
+      2020-10-26
+   :Changes:
+      * [BUGFIX] Prevent Exceptions on wrong file upload - thanks to https://github.com/in2code-de/femanager/pull/262
+
+- :Version:
       5.4.0
    :Date:
       2020-08-30
