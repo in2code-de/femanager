@@ -18,6 +18,17 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       Release Description
 
 - :Version:
+      6.1.1
+   :Date:
+      2020-10-26
+   :Changes:
+      * [TASK] Set fixed install tool password for dev env (better dev env performance)
+      * [BUGFIX] Prevent warning in UpperViewHelper - thanks to christophlehmann's PR https://github.com/in2code-de/femanager/pull/289
+      * [BUGFIX] Use getter for userTS - thanks to siwa-pparzer's PR https://github.com/in2code-de/femanager/pull/287
+      * [BUGFIX] fix statically called non-static method calls in InvitationController - thanks to ewokhias's PR https://github.com/in2code-de/femanager/pull/294
+      * [BUGFIX] Fix Exception in wrong file upload - thanks to marclindemann's PR https://github.com/in2code-de/femanager/pull/262
+
+- :Version:
       6.1.0
    :Date:
       2020-08-13
