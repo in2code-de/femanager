@@ -58,7 +58,8 @@ class StaticInfoTables
     public function getCountryOptions(array $data, TcaSelectItems $tcaSelectItems)
     {
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
-            $countryDataProvider = GeneralUtility::makeInstance(CountryDataProvider::class);
+            $countryDataProvider = GeneralUtility::makeInstance(ObjectManager::class)
+                ->get(CountryDataProvider::class);
             $countries = $countryDataProvider->getCountries();
             foreach ($countries as $country) {
                 $data['items'][] = [$country->getOfficialNameEn(), $country->getIsoCodeA3()];
