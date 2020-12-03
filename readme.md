@@ -37,6 +37,7 @@ Official support (fee-based) via https://www.in2code.de/kontakt
 | 6.1.0      | 2020-08-13 | Minor        | Add Support for country select options                                                                                     |
 | 6.0.1      | 2020-05-26 | Major        | Drop false declared support for TYPO3 9 in V6 Branch                                                                       |
 | 6.0.0      | 2020-05-26 | Major        | !!!Support TYPO3 10 LTS only                                                                                               |
+| 5.4.2      | 2020-12-03 | Bugfix       | Prevent JS Validation error |
 | 5.4.1      | 2020-10-26 | Bugfix       | Prevents Exception when uploading a file which is not allowed                                                              |
 | 5.4.0      | 2020-08-30 | Minor update | New validation option for countries with state subselection (TYPO3 V8/V9)                                                  |
 | 5.3.1      | 2020-08-06 | Bugfix       | Allow validation with captch                                                                                               |
