@@ -27,7 +27,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function() {
-	gulp.src('JavaScript/**/*.js')
+	return gulp.src('JavaScript/**/*.js')
 			.pipe(plumber())
 			.pipe(uglify())
 			.pipe(rename({
@@ -43,11 +43,11 @@ gulp.task('js', function() {
  *********************************/
 
 gulp.task('watch', function() {
-	gulp.watch('Sass/**/*.scss', ['css']);
-	gulp.watch('JavaScript/**/*.js', ['js']);
+	gulp.watch('Sass/**/*.scss', gulp.task('css'));
+	gulp.watch('JavaScript/**/*.js', gulp.task('js'));
 });
 
-gulp.task('default', ['css', 'js', 'watch']);
+gulp.task('default', gulp.series('css', 'js', 'watch'));
 
 /**
  * Get arguments from commandline

@@ -1,5 +1,11 @@
 jQuery(document).ready(function($) {
-    var labels = JSON.parse(document.querySelector('.tx-femanager[data-labels]').dataset['labels']);
+	var labels;
+
+	if (document.querySelector(".tx-femanager[data-labels]") != null) {
+		labels = JSON.parse(document.querySelector('.tx-femanager[data-labels]').dataset['labels']);
+	} else {
+		labels = [];
+	}
 
 	// javascript validation
 	$('.feManagerValidation').femanagerValidation($);

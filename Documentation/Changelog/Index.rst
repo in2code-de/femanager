@@ -18,6 +18,13 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       Release Description
 
 - :Version:
+      6.1.2
+   :Date:
+      2020-12-03
+   :Changes:
+      * [BUGFIX] JavaScript error in FeManager.js - thanks to https://github.com/grischpel
+
+- :Version:
       6.1.1
    :Date:
       2020-10-26
@@ -55,6 +62,27 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       * [TASK] Add docker based development env - Sponsored by in2code
       * [TASK] Update Unit and Behaviour Tests - Sponsored by inixmedia and in2code
       * [TASK] Remove legacy password hashing code - Sponsored by in2code
+
+- :Version:
+      5.4.2
+   :Date:
+      2020-12-03
+   :Changes:
+      * [BUGFIX] JavaScript error in FeManager.js - thanks to https://github.com/grischpel
+
+- :Version:
+      5.4.1
+   :Date:
+      2020-10-26
+   :Changes:
+      * [BUGFIX] Prevent Exceptions on wrong file upload - thanks to https://github.com/in2code-de/femanager/pull/262
+
+- :Version:
+      5.4.0
+   :Date:
+      2020-08-30
+   :Changes:
+      * [FEATURE] Add support for country selection options (for TYPO3 V8 / V9) - :ref:`see documentation <countryselect>`- Sponsored by Resultify.se
 
 - :Version:
       5.3.1
