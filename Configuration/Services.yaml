@@ -10,3 +10,15 @@ services:
       public: true
     In2code\Femanager\Domain\Validator\ShouldValidateStateCondition:
       public: true
+    In2code\Femanager\Domain\Repository\UserRepository:
+      public: true
+    In2code\Femanager\Domain\Repository\UserGroupRepository:
+      public: true
+    In2code\Femanager\Domain\Service\SendMailService:
+      public: true
+    In2code\Femanager\Utility\LogUtility:
+      public: true
+    In2code\Femanager\Domain\Repository\LogRepository:
+      public: true
+    In2code\Femanager\Finisher\FinisherRunner:
+      public: true
