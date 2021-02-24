@@ -80,6 +80,8 @@ jQuery(document).ready(function($) {
 
             var url = Femanager.getBaseUrl() + 'index.php?id=' + $('#femanagerPid').val() + '&type=1594138042';
 
+            var selectedValue = nodeElement.dataset['selectedValue'];
+
             $.ajax({
                 url: url,
                 data: data,
@@ -92,13 +94,13 @@ jQuery(document).ready(function($) {
                 },
                 success: function(options) {
                     nodeElement.options.length = 0
-                    for (var option in options) {
+                    if (!options.hasOwnProperty(selectedValue)) {
                         nodeElement.options[nodeElement.options.length] = new Option(labels.please_choose);
-                        break;
                     }
                     for (var option in options) {
                         if (options.hasOwnProperty(option)) {
-                            nodeElement.options[nodeElement.options.length] = new Option(options[option], option);
+                            var isSelected = option === selectedValue;
+                            nodeElement.options[nodeElement.options.length] = new Option(options[option], option, isSelected, isSelected);
                         }
                     }
                     if (nodeElement.options.length === 0) {
