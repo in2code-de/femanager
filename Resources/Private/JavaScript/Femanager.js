@@ -93,22 +93,18 @@ jQuery(document).ready(function($) {
                     nodeElement.options[0] = new Option(labels.loading_states);
                 },
                 success: function(options) {
-                    nodeElement.options.length = 0
-                    if (!options.hasOwnProperty(selectedValue)) {
+                    nodeElement.disabled = 1;
+                    nodeElement.options.length = 0;
+                    if (selectedValue !== '' && !options.hasOwnProperty(selectedValue)) {
                         nodeElement.options[nodeElement.options.length] = new Option(labels.please_choose);
                     }
                     for (var option in options) {
                         if (options.hasOwnProperty(option)) {
                             var isSelected = option === selectedValue;
                             nodeElement.options[nodeElement.options.length] = new Option(options[option], option, isSelected, isSelected);
+                            nodeElement.disabled = 0;
                         }
                     }
-                    if (nodeElement.options.length === 0) {
-                        nodeElement.disabled = 1;
-                    } else {
-                        nodeElement.disabled = 0;
-                    }
-
                 },
                 error: function() {
                     console.log('Error: The called url is not available - if you use TYPO3 in a subfolder, please use config.baseURL in TypoScript');
