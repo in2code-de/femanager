@@ -150,7 +150,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateUnicodeLetters($value)
     {
-        return preg_match('/^[\pL_-]+$/u', $value);
+        return (bool)preg_match('/^[\pL_-]+$/u', $value);
     }
 
     /**
