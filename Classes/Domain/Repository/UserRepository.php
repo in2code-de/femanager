@@ -106,7 +106,7 @@ class UserRepository extends Repository
     public function checkUniqueDb($field, $value, User $user = null)
     {
         $query = $this->createQuery();
-        $this->ignoreEnableFieldsAndStoragePage($query);
+        $this->ignoreEnableFieldsAndStoragePageAndStarttime($query);
 
         $and = [$query->equals($field, $value)];
         if (method_exists($user, 'getUid')) {
@@ -289,6 +289,16 @@ class UserRepository extends Repository
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->getQuerySettings()->setIgnoreEnableFields(true);
         $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled']);
+    }
+
+    /**
+     * @param QueryInterface $query
+     * @return void
+     */
+    protected function ignoreEnableFieldsAndStoragePageAndStarttime(QueryInterface $query)
+    {
+        $this->ignoreEnableFieldsAndStoragePage($query);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled','starttime','endtime']);
     }
 
     /**
