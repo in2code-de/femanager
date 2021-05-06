@@ -344,15 +344,66 @@ class AbstractValidatorTest extends UnitTestCase
     }
 
     /**
+     * Dataprovider for validateUnicodeLettersReturnsBool()
+     *
+     * @return array
+     */
+    public function validateUnicodeLettersReturnsBoolDataProvider()
+    {
+        return [
+            [
+                'abafdbadsf',
+                true
+            ],
+            [
+                'aeÈ-',
+                true
+            ],
+            [
+                'a_-b',
+                true
+            ],
+            [
+                'abafd3adsf',
+                false
+            ],
+            [
+                'abäÜÄ',
+                true
+            ],
+            [
+                'ab:',
+                false
+            ],
+            [
+                'ab cd',
+                false
+            ]
+        ];
+    }
+
+    /**
      * @param string $value
      * @param bool $expectedResult
      * @return void
      * @dataProvider validateLettersReturnsBoolDataProvider
-     * @covers ::validateLetters
+     * @covers ::validateUnicodeLetters
      */
     public function testValidateLettersReturnsBool($value, $expectedResult)
     {
         $this->assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateLetters', $value));
+    }
+
+    /**
+     * @param string $value
+     * @param bool $expectedResult
+     * @return void
+     * @dataProvider validateUnicodeLettersReturnsBoolDataProvider
+     * @covers ::validateLetters
+     */
+    public function testUnicodeValidateLettersReturnsBool($value, $expectedResult)
+    {
+        $this->assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateUnicodeLetters', $value));
     }
 
     /**
