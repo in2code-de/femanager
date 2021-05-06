@@ -64,6 +64,9 @@ class NewController extends AbstractController
         } else {
             $this->createRequest($user);
         }
+
+        // Redirect as fallback for there's no Templates/New/Create.html
+        $this->redirect('createStatus');
     }
 
     /**
