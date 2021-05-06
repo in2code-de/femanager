@@ -60,7 +60,7 @@ Frontend-User Registration
 - Fill email field with username (optional)
 - Redirect with TypoScript standardWrap (optional)
 - Prefill Formfields via TypoScript standardWrap (optional)
-- Multiple Validation Possibilities (JavaScript and PHP) (required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, mustInclude(number,letter,special), inList(1,2,3))
+- Multiple Validation Possibilities (JavaScript and PHP) (required, email, min, max, intOnly, lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, mustInclude(number,letter,special), inList(1,2,3))
 - Same PHP Methods for JavaScript and PHP Validation
 - Simply extend validation methods with your extension
 - Override a lot of Email settings with TypoScript if needed
@@ -79,7 +79,7 @@ Edit Profile
 - Refuse and Silent Refuse
 - Fill email field with username (optional)
 - Prefill Formfields via TypoScript standardWrap (optional)
-- Multiple Validation Possibilities (JavaScript and PHP) (required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, mustInclude(number,letter,special), inList(1,2,3))
+- Multiple Validation Possibilities (JavaScript and PHP) (required, email, min, max, intOnly, lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, mustInclude(number,letter,special), inList(1,2,3))
 - Same PHP Methods for JavaScript and PHP Validation
 - Simply extend validation methods with your extension
 - Override a lot of Email settings with TypoScript if needed
