@@ -18,6 +18,14 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       Release Description
 
 - :Version:
+      6.1.3
+   :Date:
+      2021-xx-xx
+   :Changes:
+      * [BUGFIX]
+
+
+- :Version:
       6.1.2
    :Date:
       2020-12-03
