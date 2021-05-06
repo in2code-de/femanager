@@ -129,7 +129,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     }
 
     /**
-     * Validation for Letters only
+     * Validation for Letters (a-zA-Z), hyphen and underscore
      *
      * @param string $value
      * @return \bool
@@ -140,6 +140,17 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
             return true;
         }
         return false;
+    }
+
+    /**
+     * Validation for all Unicode letters, hyphen and underscore
+     *
+     * @param string $value
+     * @return \bool
+     */
+    protected function validateUnicodeLetters($value)
+    {
+        return (bool)preg_match('/^[\pL_-]+$/u', $value);
     }
 
     /**

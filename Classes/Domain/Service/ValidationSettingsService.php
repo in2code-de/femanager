@@ -35,6 +35,7 @@ class ValidationSettingsService
         'email',
         'intOnly',
         'lettersOnly',
+        'unicodeLettersOnly',
         'required',
         'uniqueInDb',
         'uniqueInPage'
@@ -53,7 +54,7 @@ class ValidationSettingsService
     /**
      * Get validation string like
      *        required, email, min(10), max(10), intOnly,
-     *        lettersOnly, uniqueInPage, uniqueInDb, date,
+     *        lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, date,
      *        mustInclude(number|letter|special), inList(1|2|3)
      *
      * @param string $fieldName Fieldname

@@ -60,6 +60,10 @@ class ServersideValidator extends AbstractValidator
                                 $this->checkLetterOnlyValidation($value, $validationSetting, $fieldName);
                                 break;
 
+                            case 'unicodeLettersOnly':
+                                $this->checkUnicodeLetterOnlyValidation($value, $validationSetting, $fieldName);
+                                break;
+
                             case 'uniqueInPage':
                                 $this->checkUniqueInPageValidation($user, $value, $validationSetting, $fieldName);
                                 break;
@@ -180,6 +184,20 @@ class ServersideValidator extends AbstractValidator
     protected function checkLetterOnlyValidation($value, $validationSetting, $fieldName)
     {
         if (!empty($value) && $validationSetting === '1' && !$this->validateLetters($value)) {
+            $this->addError('validationErrorLetters', 0, ['code' => $fieldName]);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkUnicodeLetterOnlyValidation($value, $validationSetting, $fieldName)
+    {
+        if (!empty($value) && $validationSetting === '1' && !$this->validateUnicodeLetters($value)) {
             $this->addError('validationErrorLetters', 0, ['code' => $fieldName]);
             $this->isValid = false;
         }
