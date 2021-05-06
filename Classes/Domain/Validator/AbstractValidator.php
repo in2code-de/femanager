@@ -369,7 +369,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         switch ($validationSetting) {
             case 'd.m.Y':
                 if (preg_match('/^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$/', $value, $dateParts)) {
-                    if (checkdate($dateParts[2], $dateParts[1], $dateParts[3])) {
+                    if (checkdate((int)$dateParts[2], (int)$dateParts[1], (int)$dateParts[3])) {
                         return true;
                     }
                 }
@@ -377,7 +377,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
             case 'm/d/Y':
                 if (preg_match('/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/', $value, $dateParts)) {
-                    if (checkdate($dateParts[1], $dateParts[2], $dateParts[3])) {
+                    if (checkdate((int)$dateParts[1], (int)$dateParts[2], (int)$dateParts[3])) {
                         return true;
                     }
                 }
