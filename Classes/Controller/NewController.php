@@ -218,6 +218,11 @@ class NewController extends AbstractController
     protected function statusAdminConfirmation(User $user, $hash, $status, $backend = false)
     {
         if (HashUtility::validHash($hash, $user)) {
+            if ($user->getTxFemanagerConfirmedbyadmin()) {
+                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', FlashMessage::ERROR);
+                $this->redirect('new');
+            }
+            
             $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onAdminConfirmation.']);
             $user->setTxFemanagerConfirmedbyadmin(true);
             $user->setDisable(false);
