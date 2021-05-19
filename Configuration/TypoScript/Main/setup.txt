@@ -1523,6 +1523,11 @@ plugin.tx_femanager {
 			renderImageWidth = 250
 		}
 
+		# configuration for rate limiter
+		ratelimiter {
+			timeframe = {$plugin.tx_femanager.settings.ratelimiter.timeframe}
+			limit = {$plugin.tx_femanager.settings.ratelimiter.limit}
+		}
 		# Add own finisher classes that will be called after registration, profile update, invitation or deletion (e.g. if you want to do something with form values by your own: Save into tables, call an API, etc...)
 		finishers {
 			# Femanager finishers

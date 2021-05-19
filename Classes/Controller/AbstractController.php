@@ -58,6 +58,12 @@ abstract class AbstractController extends ActionController
     protected $sendMailService;
 
     /**
+     * @var \In2code\Femanager\Domain\Service\RatelimiterService
+     * @TYPO3\CMS\Extbase\Annotation\Inject
+     */
+    protected $ratelimiterService;
+
+    /**
      * @var \In2code\Femanager\Finisher\FinisherRunner
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */

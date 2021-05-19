@@ -57,13 +57,21 @@ class NewController extends AbstractController
      */
     public function createAction(User $user)
     {
+        if ($this->ratelimiterService->isLimited()) {
+            $this->addFlashMessage(
+                LocalizationUtility::translate('ratelimiter_too_many_attempts'),
+                '',
+                FlashMessage::ERROR
+            );
+            $this->redirect('createStatus');
+        }
         $user = UserUtility::overrideUserGroup($user, $this->settings);
         $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
         UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
 
-        $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
+        $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user, $this->ratelimiterService));
 
         if ($this->isAllConfirmed()) {
             $this->createAllConfirmed($user);

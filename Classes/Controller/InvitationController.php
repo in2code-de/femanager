@@ -46,6 +46,11 @@ class InvitationController extends AbstractController
      */
     public function createAction(User $user)
     {
+        if ($this->ratelimiterService->isLimited()) {
+            $this->addFlashMessage(LocalizationUtility::translate('ratelimiter_too_many_attempts'), '', FlashMessage::ERROR);
+            $this->redirect('status');
+        }
+        
         $this->allowedUserForInvitationNewAndCreate();
         $user->setDisable(true);
         $user = FrontendUtility::forceValues(
@@ -57,7 +62,7 @@ class InvitationController extends AbstractController
             $user->setEmail($user->getUsername());
         }
         UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
-        $this->eventDispatcher->dispatch(new InviteUserCreateEvent($user));
+        $this->eventDispatcher->dispatch(new InviteUserCreateEvent($user, $this->ratelimiterService));
         $this->createAllConfirmed($user);
     }
 
