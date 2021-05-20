@@ -23,4 +23,9 @@ call_user_func(function () {
             'Data' => 'getStatesForCountry'
         ]
     );
+
+    if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['femanager_ratelimiter'])) {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['femanager_ratelimiter'] = array();
+    }
+
 });

@@ -508,6 +508,10 @@
 				<source>We received no valid mail.</source>
 			</trans-unit>
 
+			<trans-unit id="ratelimiter_too_many_attempts">
+				<source>Too many attempts from this IP address. Try again later.</source>
+			</trans-unit>
+
 			<trans-unit id="createFailedProfile">
 				<source>Profile creation failed</source>
 			</trans-unit>
