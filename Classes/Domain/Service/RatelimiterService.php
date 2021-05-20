@@ -43,18 +43,22 @@ class RatelimiterService implements SingletonInterface
 
     public function isLimited(): bool
     {
-        $userIp = GeneralUtility::getIndpEnv('REMOTE_ADDR');
 
-        $userIpAccess = $this->getToken(self::LIMIT_IP, $userIp);
+        if ($this->limit > 0) {
+            $userIp = GeneralUtility::getIndpEnv('REMOTE_ADDR');
+            $userIpAccess = $this->getToken(self::LIMIT_IP, $userIp);
 
-        return count($userIpAccess) >= $this->limit;
+            return count($userIpAccess) >= $this->limit;
+        }
+        return false;
     }
 
     public function consumeSlot()
     {
-        $userIp = GeneralUtility::getIndpEnv('REMOTE_ADDR');
-
-        $this->consumeToken(self::LIMIT_IP, $userIp);
+        if ($this->limit > 0) {
+            $userIp = GeneralUtility::getIndpEnv('REMOTE_ADDR');
+            $this->consumeToken(self::LIMIT_IP, $userIp);
+        }
     }
 
     protected function getCookie()

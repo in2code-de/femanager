@@ -71,7 +71,8 @@ class NewController extends AbstractController
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
         UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
 
-        $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user, $this->ratelimiterService));
+        $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
+        $this->ratelimiterService->consumeSlot();
 
         if ($this->isAllConfirmed()) {
             $this->createAllConfirmed($user);

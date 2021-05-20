@@ -10,13 +10,3 @@ services:
       public: true
     In2code\Femanager\Domain\Validator\ShouldValidateStateCondition:
       public: true
-    In2code\Femanager\EventListener\CreateUserSlotConsumer:
-      tags:
-        - name: event.listener
-          identifier: 'createUserSlotConsumer'
-          event: In2code\Femanager\Event\BeforeUserCreateEvent
-    In2code\Femanager\EventListener\InviteUserSlotConsumer:
-      tags:
-        - name: event.listener
-          identifier: 'inviteUserSlotConsumer'
-          event: In2code\Femanager\Event\InviteUserCreateEvent
