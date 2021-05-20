@@ -37,10 +37,10 @@ plugin.tx_femanager {
 
 		ratelimiter {
 			# cat=plugin.tx_femanager//0980; type=int+; label=Number of seconds for the sliding window rate limiter
-			timeframe = 60
+			timeframe = 3600
 
-			# cat=plugin.tx_femanager//0990; type=int+; label=Request count. How many requests are allowed in the last <timeframe> seconds.
-			limit = 3
+			# cat=plugin.tx_femanager//0990; type=int+; label=Request count. How many requests are allowed in the last <timeframe> seconds. Set to 0 to disable rate limiter.
+			limit = 10
 		}
 	}
 }
