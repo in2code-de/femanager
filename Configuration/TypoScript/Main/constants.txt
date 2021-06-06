@@ -34,5 +34,13 @@ plugin.tx_femanager {
 
 		# cat=plugin.tx_femanager//0930; type=int+; label= Page ID for the resend email confirmation view
 		showResendUserConfirmationRequestView = 0
+
+		ratelimiter {
+			# cat=plugin.tx_femanager//0980; type=int+; label=Number of seconds for the sliding window rate limiter
+			timeframe = 3600
+
+			# cat=plugin.tx_femanager//0990; type=int+; label=Request count. How many requests are allowed in the last <timeframe> seconds. Set to 0 to disable rate limiter.
+			limit = 10
+		}
 	}
 }

@@ -18,11 +18,12 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       Release Description
 
 - :Version:
-      6.1.3
+      6.2.0
    :Date:
-      2021-xx-xx
+      2021-06-06
    :Changes:
-      * [BUGFIX]
+      * [FEATURE] Add RateLimiter for registration form
+
 
 
 - :Version:
