@@ -18,3 +18,4 @@ See some features or best practice parts of the extension femanager.
 	Finishers/Index
 	Signals/Index
 	ResendUserConfirmationRequest/Index
+	RateLimiter/Index
