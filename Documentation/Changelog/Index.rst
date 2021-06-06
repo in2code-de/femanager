@@ -18,19 +18,12 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       Release Description
 
 - :Version:
-      6.1.0
+      5.5.0
    :Date:
-      2020-08-13
+      2021-06-07
    :Changes:
-      * [FEATURE] Add support for country selection options - :ref:`see documentation <countryselect>` - Sponsored by Resultify.se
-      * [BUGFIX] Allow validation via captcha - thanks to Germar https://github.com/Germar and dnozdrin https://github.com/dnozdrin
-
-- :Version:
-      6.0.1 (!!!)
-   :Date:
-      2020-07-15
-   :Changes:
-      * [TASK] Remove falsly declarated support for TYPO3 V9 in femanager 6 branch
+      * [FEATURE] Add RateLimiter for registration form - :ref:`see documentation <countryselect>`
+      * [BUGFIX] Template missing for New->create - https://github.com/kitzberger
 
 - :Version:
       5.4.2
