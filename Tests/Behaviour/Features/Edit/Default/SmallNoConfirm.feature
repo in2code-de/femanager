@@ -20,11 +20,11 @@ Feature: SmallNoConfirm
     Then I fill in "Username" with "akellner"
     Then I fill in "Password" with "akellner"
     Then I press "Login"
-    Then I wait "2" seconds
+    Then I wait "4" seconds
     Then I should see "You are logged in as frontend user"
 
     # Test
-    Given I am on "/index.php?id=36"
+    Given I am on "/edit/small/no-confirm"
     Then I should see "deutsch"
     Then I should not see "Please log in before"
     Then I should see "Firstname"

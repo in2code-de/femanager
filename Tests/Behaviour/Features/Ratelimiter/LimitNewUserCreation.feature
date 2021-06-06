@@ -7,7 +7,7 @@ Feature: RateLimitNewUserCreation
     Given I am on "/index.php?id=31"
     Then I should see "All content elements deleted that have no in2code.de email address"
 
-    Given I am on "/index.php?id=132"
+    Given I am on "/index.php?id=133"
     Then I should see "Rate limiter cache has been reset"
 
   Scenario: Check if registration for single user is possible
@@ -27,10 +27,10 @@ Feature: RateLimitNewUserCreation
     Given I am on "/index.php?id=31"
     Then I should see "All content elements deleted that have no in2code.de email address"
 
-    Given I am on "/index.php?id=132"
+    Given I am on "/index.php?id=133"
     Then I should see "Rate limiter cache has been reset"
 
-    Given I am on "/index.php?id=4"
+    Given I am on "/index.php?id=134"
     Then I should see "Create a new user-profile"
     And I fill in the following:
       | Username | seconduser |
@@ -41,7 +41,7 @@ Feature: RateLimitNewUserCreation
 
     Then I should see "User registration"
 
-    Given I am on "/index.php?id=4"
+    Given I am on "/index.php?id=134"
     Then I should see "Create a new user-profile"
     And I fill in the following:
       | Username | thirduser |
@@ -50,7 +50,7 @@ Feature: RateLimitNewUserCreation
       | Email | thirduser@test.de |
     And I press "Create Profile Now"
 
-    Given I am on "/index.php?id=4"
+    Given I am on "/index.php?id=134"
     Then I should see "Create a new user-profile"
     And I fill in the following:
       | Username | fourthuser |
@@ -59,7 +59,7 @@ Feature: RateLimitNewUserCreation
       | Email | fourthuser@test.de |
     And I press "Create Profile Now"
 
-    Given I am on "/index.php?id=4"
+    Given I am on "/index.php?id=134"
     Then I should see "Create a new user-profile"
     And I fill in the following:
       | Username | fifthuser |
@@ -78,5 +78,5 @@ Feature: RateLimitNewUserCreation
     Given I am on "/index.php?id=39"
     Then I should see "FE Users reset successfully"
 
-    Given I am on "/index.php?id=132"
+    Given I am on "/index.php?id=133"
     Then I should see "Rate limiter cache has been reset"
