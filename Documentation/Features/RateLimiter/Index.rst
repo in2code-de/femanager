@@ -1,6 +1,6 @@
 .. include:: ../../Includes.txt
 
-.. _changetemplates:
+.. _countryselect:
 
 Rate Limiter
 ------------

@@ -28,45 +28,7 @@ Quick guide:
 | 2.x         | 7.6        | 5.5 - 7.0 | Security Updates on demand (ask for an offer)|
 | 1.x         | 6.2 - 7.6  | 5.5 - 7.0 | Security Updates on demand (ask for an offer)|
 
-Official support (fee-based) via https://www.in2code.de/kontakt
-
-## Changelog
-
-| Version    | Date       | State        | Description                                                                                                                |
-| ---------- | ---------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| 6.1.2      | 2020-12-03 | Bugfix       | Prevent JS Validation error |
-| 6.1.1      | 2020-08-13 | Bugfix       | Prevent some notices and errors, exception during file upload and changed method call                                      |
-| 6.1.0      | 2020-08-13 | Minor        | Add Support for country select options                                                                                     |
-| 6.0.1      | 2020-05-26 | Major        | Drop false declared support for TYPO3 9 in V6 Branch                                                                       |
-| 6.0.0      | 2020-05-26 | Major        | !!!Support TYPO3 10 LTS only                                                                                               |
-| 5.4.2      | 2020-12-03 | Bugfix       | Prevent JS Validation error |
-| 5.4.1      | 2020-10-26 | Bugfix       | Prevents Exception when uploading a file which is not allowed                                                              |
-| 5.4.0      | 2020-08-30 | Minor update | New validation option for countries with state subselection (TYPO3 V8/V9)                                                  |
-| 5.3.1      | 2020-08-06 | Bugfix       | Allow validation with captcha                                                                                              |
-| 5.2.0      | 2019-05-26 | Security     | !!!Implement CSFR Protection - please check upgrade instructions                                                           |
-| 5.1.1      | 2019-05-26 | Bugfix       | Repair Admin Confirmation for TYPO3 9                                                                                      |
-| 5.1.0      | 2019-05-21 | Minor update | Allow PHP 7.3, Allow TYPO3 8.7, many bugfixes                                                                              |
-| 5.0.0      | 2019-02-01 | Major update | Refactored version for TYPO3 9 LTS                                                                                         |
-| 4.2.5      | 2019-01-30 | Bugfix       | Validation failed for date and some other datetypes                                                                        |
-| 4.2.4      | 2019-01-24 | Bugfix       | Validation failed, if more then one content element was besides femanager plugin                                           |
-| 4.2.3      | 2019-01-22 | Security     | Don't allow a complete bypass of the validation                                                                            |
-| 4.2.2      | 2018-05-11 | Bugfix       | Allow filtering in OpenConfirmationView (BE), Fix case sensitive filename for OpenConfirmationView, Support TYPO3 CMS Subtree packages, update documentaion |
-| 4.2.1      | 2018-05-04 | Task         | Update documenation, fix broken custom validators, enable TS for BE Module, check if admin receive is not empty            |
-| 4.2.0      | 2018-04-24 | Task         | Allow to resend confirmation mail via Backend or Frontend - sponsored by Constructiva Solutions GmbH and in2code GmbH      |
-| 4.1.1      | 2018-01-29 | Task         | Update license information in composer.json                                                                                |
-| 4.1.0      | 2018-01-21 | Task         | Testing update: Re-include unit test and make behaviour tests more transparent                                             |
-| 4.0.2      | 2018-01-19 | Bugfix       | Fix required settings for terms                                                                                            |
-| 4.0.1      | 2017-12-20 | Bugfix       | Prevent exception in backend module in some special cases                                                                  |
-| 4.0.0      | 2017-12-18 | Task         | - Add new field "accept terms and conditions"<br />- Add a new backend module view "accept/decline users"<br />- Implement AutoAdminConfirmation feature<br />- Add some new signals<br />- Add link to delete account in admin notification mail<br />- Admin notification settings via TypoScript |
-| 3.3.0      | 2017-11-25 | Feature      | Show only relevant users in FlexForm, some small bugfixes                                                                  |
-| 3.2.0      | 2017-11-10 | Task         | Add alternative login function https://github.com/in2code-de/femanager/issues/27                                           |
-| 3.1.3      | 2017-10-12 | Bugfix       | Allow the usage in special contexts like with Flux. https://github.com/in2code-de/femanager/issues/17                      |
-| 3.1.2      | 2017-09-06 | Task         | New version due to TER security incident. See https://typo3.org/teams/security/security-bulletins/psa/typo3-psa-2017-001/  |
-| 3.1.1      | 2017-08-28 | Bugfix       | Small fixes in code to prevent errors with extension   Flux                                                                |
-| 3.1.0      | 2017-08-15 | Task         | Minimize JavaScripts, Fix new button in module, Small fixes                                                                |
-| 3.0.2      | 2017-08-13 | Bugfix       | Fix unserialize() exception if config is missing, add help to FAQ section                                                  |
-| 3.0.1      | 2017-08-11 | Bugfix       | Enfore user for showAction, Autoload in ext_emconf, JavaScript fix, cleanup                                                |
-| 3.0.0      | 2017-08-08 | Major update | Refactored version for TYPO3 8.7                                                                                           |
+Official support (fee-based) via https://www.in2code.de/kontakt |
 
 ## Your Contribution
 
