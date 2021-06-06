@@ -10,6 +10,17 @@ use TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper as OriginalSelectViewHelpe
  */
 class SelectViewHelper extends OriginalSelectViewHelper
 {
+    /**
+     * Initialize
+     *
+     * @return void
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->tag->addAttribute('data-selected-value', $this->getSelectedValue());
+    }
 
     /**
      * Initialize

@@ -52,7 +52,7 @@ define(
                         .find('.tx-feusermanager-icon-actions-system-backend-user-switch-disabled').hide();
                     var hidden = 0;
                 }
-                url = moduleUri + '&data[' + table + '][' + uid + '][disable]=' + hidden + '&redirect=' + T3_THIS_LOCATION;
+                url = moduleUri + '&data[' + table + '][' + uid + '][disable]=' + hidden;
                 $.ajax({
                     url: url
                 });

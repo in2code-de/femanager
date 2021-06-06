@@ -11,7 +11,7 @@ Feature: SmallNoConfirm
       | Repeat Password | test |
       | Email | alex@einpraegsam.net |
     And I press "Create Profile Now"
-
+    Then I wait "4" seconds
     Then I should see "User registration"
 
     Given I am on "/index.php?id=89"

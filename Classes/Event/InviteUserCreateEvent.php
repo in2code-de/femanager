@@ -6,5 +6,4 @@ namespace In2code\Femanager\Event;
 
 class InviteUserCreateEvent extends UserEvent
 {
-
 }

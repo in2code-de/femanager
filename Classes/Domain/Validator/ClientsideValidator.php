@@ -22,7 +22,7 @@ class ClientsideValidator extends AbstractValidator
     /**
      * Validation settings string
      *        possible validations for each field are:
-     *            required, email, min(12), max(13), intOnly, lettersOnly,
+     *            required, email, min(12), max(13), intOnly, lettersOnly,unicodeLettersOnly
      *            uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special),
      *            inList(1,2,3)
      *
@@ -131,6 +131,13 @@ class ClientsideValidator extends AbstractValidator
 
                 case 'lettersOnly':
                     if ($this->getValue() && !$this->validateLetters($this->getValue())) {
+                        $this->addMessage('validationErrorLetters');
+                        $this->isValid = false;
+                    }
+                    break;
+
+                case 'unicodeLettersOnly':
+                    if ($this->getValue() && !$this->validateUnicodeLetters($this->getValue())) {
                         $this->addMessage('validationErrorLetters');
                         $this->isValid = false;
                     }

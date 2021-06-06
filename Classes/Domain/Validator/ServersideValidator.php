@@ -6,6 +6,7 @@ namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 use function array_key_exists;
@@ -57,6 +58,10 @@ class ServersideValidator extends AbstractValidator
 
                             case 'lettersOnly':
                                 $this->checkLetterOnlyValidation($value, $validationSetting, $fieldName);
+                                break;
+
+                            case 'unicodeLettersOnly':
+                                $this->checkUnicodeLetterOnlyValidation($value, $validationSetting, $fieldName);
                                 break;
 
                             case 'uniqueInPage':
@@ -179,6 +184,20 @@ class ServersideValidator extends AbstractValidator
     protected function checkLetterOnlyValidation($value, $validationSetting, $fieldName)
     {
         if (!empty($value) && $validationSetting === '1' && !$this->validateLetters($value)) {
+            $this->addError('validationErrorLetters', 0, ['code' => $fieldName]);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $value
+     * @param $validationSetting
+     * @param $fieldName
+     * @return void
+     */
+    protected function checkUnicodeLetterOnlyValidation($value, $validationSetting, $fieldName)
+    {
+        if (!empty($value) && $validationSetting === '1' && !$this->validateUnicodeLetters($value)) {
             $this->addError('validationErrorLetters', 0, ['code' => $fieldName]);
             $this->isValid = false;
         }
@@ -316,6 +335,11 @@ class ServersideValidator extends AbstractValidator
             }
             if (method_exists($value, 'current')) {
                 $current = $value->current();
+
+                if ($current instanceof FileReference){
+                    return true;
+                }
+
                 if (method_exists($current, 'getUid')) {
                     $value = $current->getUid();
                 }

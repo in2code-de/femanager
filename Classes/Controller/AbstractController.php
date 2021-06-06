@@ -58,6 +58,12 @@ abstract class AbstractController extends ActionController
     protected $sendMailService;
 
     /**
+     * @var \In2code\Femanager\Domain\Service\RatelimiterService
+     * @TYPO3\CMS\Extbase\Annotation\Inject
+     */
+    protected $ratelimiterService;
+
+    /**
      * @var \In2code\Femanager\Finisher\FinisherRunner
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
@@ -232,7 +238,7 @@ abstract class AbstractController extends ActionController
                 $this->settings['new']['email']['createUserNotify']['sender']['email']['value'],
                 $this->settings['new']['email']['createUserNotify']['sender']['name']['value']
             ),
-            'Profile creation',
+            $this->settings['new']['email']['createUserNotify']['subject']['data'],
             $variables,
             $this->config['new.']['email.']['createUserNotify.']
         );
@@ -247,7 +253,7 @@ abstract class AbstractController extends ActionController
                     $this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-                'Profile creation',
+                $this->settings['new']['email']['createAdminNotify']['subject']['data'],
                 $variables,
                 $this->config['new.']['email.']['createAdminNotify.']
             );

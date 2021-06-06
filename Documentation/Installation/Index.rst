@@ -601,7 +601,7 @@ Plain Text
     #			}
 
                 # validation of user input values
-                # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space,uppercase), mustNotInclude(number,letter,uppercase,special,space), inList(1,2,3), captcha, sameAs(password)
+                # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space,uppercase), mustNotInclude(number,letter,uppercase,special,space), inList(1,2,3), captcha, sameAs(password)
                 # see manual for an example how to add custom serverside and clientside validation
                 validation {
                     # Enable clientside Formvalidation (JavaScript)
@@ -1205,7 +1205,7 @@ Plain Text
                 }
 
                 # validation of user input values
-                # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space), mustNotInclude(number,letter,special,space), inList(1,2,3), captcha, sameAs(password)
+                # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space), mustNotInclude(number,letter,special,space), inList(1,2,3), captcha, sameAs(password)
                 validation {
                     # Enable clientside Formvalidation (JavaScript)
                     _enable.client = 1
@@ -1557,7 +1557,7 @@ Plain Text
     #			}
 
                 # validation of user input values
-                # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space), mustNotInclude(number,letter,special,space), inList(1,2,3), captcha, sameAs(password)
+                # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space), mustNotInclude(number,letter,special,space), inList(1,2,3), captcha, sameAs(password)
                 # Validation for first Step (Create)
                 validation {
                     # Enable clientside Formvalidation (JavaScript)
