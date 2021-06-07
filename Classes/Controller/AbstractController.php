@@ -10,6 +10,7 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use In2code\Femanager\Domain\Service\SendMailService;
+use In2code\Femanager\Domain\Service\RatelimiterService;
 use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
 use In2code\Femanager\Finisher\FinisherRunner;
@@ -61,7 +62,6 @@ abstract class AbstractController extends ActionController
 
     /**
      * @var \In2code\Femanager\Domain\Service\RatelimiterService
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $ratelimiterService;
 
@@ -131,6 +131,7 @@ abstract class AbstractController extends ActionController
      * @param \In2code\Femanager\Domain\Repository\UserGroupRepository $userGroupRepository
      * @param \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager
      * @param \In2code\Femanager\Domain\Service\SendMailService $sendMailService
+     * @param \In2code\Femanager\Domain\Service\RatelimiterService $ratelimiterService
      * @param \In2code\Femanager\Finisher\FinisherRunner $finisherRunner
      * @param \In2code\Femanager\Utility\LogUtility $logUtility
      */
@@ -139,6 +140,7 @@ abstract class AbstractController extends ActionController
         UserGroupRepository $userGroupRepository,
         PersistenceManager $persistenceManager,
         SendMailService $sendMailService,
+        RatelimiterService $ratelimiterService,
         FinisherRunner $finisherRunner,
         LogUtility $logUtility
     ) {
@@ -146,6 +148,7 @@ abstract class AbstractController extends ActionController
         $this->userGroupRepository = $userGroupRepository;
         $this->persistenceManager = $persistenceManager;
         $this->sendMailService = $sendMailService;
+        $this->ratelimiterService = $ratelimiterService;
         $this->finisherRunner = $finisherRunner;
         $this->logUtility = $logUtility;
     }
