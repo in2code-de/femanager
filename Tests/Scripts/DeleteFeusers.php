@@ -19,7 +19,10 @@ class DeleteFeusers
         $queryBuilder
             ->delete('fe_users')
             ->where(
-                $queryBuilder->expr()->notLike('email', '@in2code.de')
+                $queryBuilder->expr()->notLike('email',
+                    $queryBuilder->createNamedParameter(
+                        '%' . $queryBuilder->escapeLikeWildcards('@in2code.de') . '%')
+                )
             );
 
         try {
