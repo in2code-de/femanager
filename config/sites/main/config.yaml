@@ -15,6 +15,21 @@ languages:
     direction: ltr
     flag: en-us-gb
     languageId: '0'
+  -
+    title: deutsch
+    enabled: true
+    base: /de/
+    typo3Language: de
+    locale: de_DE
+    iso-639-1: de
+    websiteTitle: FEmanager
+    navigationTitle: Deutsch
+    hreflang: de-DE
+    direction: ''
+    fallbackType: strict
+    fallbacks: ''
+    flag: de
+    languageId: '1'
 rootPageId: 1
 routes: {  }
 websiteTitle: ''

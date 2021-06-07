@@ -25,6 +25,9 @@ Basics
 - Config the new validation methods via TypoScript
 - Add translation labels via TypoScript
 
+.. attention::
+   The following example works only until TYPO3 Version 9.5 LTS
+
 See https://github.com/einpraegsam/femanagerextended for an example extension how to extend femanager
 with new fields and validation methods
 

@@ -38,9 +38,8 @@ class FrontendUtility extends AbstractUtility
     public static function getFrontendLanguageUid(): int
     {
         $languageUid = 0;
-        if (!empty(self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'])) {
-            $languageUid = (int)self::getTypoScriptFrontendController()->tmpl->setup['config.']['sys_language_uid'];
-        }
+        $languageAspect = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class)->getAspect('language');
+        $languageUid = $languageAspect->getId();
         return $languageUid;
     }
 

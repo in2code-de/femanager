@@ -22,7 +22,7 @@ Basics
 - Create a new extension with ext_tables.sql and ext_tables.php for adding one or more new fields to fe_users
 - Create your own user model with getter/setter for your new fields that extends the user model from femanager
 - Use TypoScript to include your model
-- Override the createAction and updateAction to manipulte the object type
+- Override the createAction and updateAction to manipulate the object type
 
 See https://github.com/einpraegsam/femanagerextended for an example extension how to extend femanager with new fields
 and validation methods

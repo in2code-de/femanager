@@ -14,7 +14,7 @@ Feature: Terms
     Then I wait "4" seconds
     Then I should see "I accept the terms and conditions: Field I accept the terms and conditions is required"
 
-  @javascript
+@javascript
   Scenario: Check if validation for terms work as expected for clientside validation
     Given I am on "/index.php?id=86"
     And I fill in the following:
@@ -25,4 +25,7 @@ Feature: Terms
     And I press "Create Profile Now"
 
     Then I wait "4" seconds
-    Then I should see "I accept the terms and conditions: Field I accept the terms and conditions is required"
+    And I fill in the following:
+      | Email | info@in2code.ws |
+    Then I wait "4" seconds
+    Then I should see "Field I accept the terms and conditions is required"
