@@ -85,7 +85,10 @@
     "post-autoload-dump": [
       "mkdir -p .Build/Web/typo3conf/ext/",
       "[ -L .Build/Web/typo3conf/ext/femanager ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/femanager"
-    ]
+    ],
+    "test:unit": ".Build/bin/phpunit -c phpunit.xml.dist",
+    "test:behaviour:docker": ".Build/bin/behat --config Tests/Behaviour/behat.docker.yml",
+    "test:behaviour:ddev": ".Build/bin/behat --config Tests/Behaviour/behat.ddev.yml"
   },
   "extra": {
     "typo3/cms": {

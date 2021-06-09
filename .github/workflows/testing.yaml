@@ -1,0 +1,28 @@
+name: testing
+on: [push, pull_request]
+
+jobs:
+  unit-tests:
+    name: "PHP Unit Tests"
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          coverage: none
+          tools: composer:v2
+      - name: "Composer Install"
+        run: "composer install"
+      - name: "Run Unit Tests"
+        run: "composer test:unit"
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - 7.2
+          - 7.3
+          - 7.4
+
