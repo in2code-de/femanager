@@ -63,7 +63,8 @@
     "helhum/typo3-console": "^6.3",
     "typo3/cms-belog": "^10.4",
     "sjbr/sr-freecap": "^2.6",
-    "sjbr/static-info-tables": "^6.9"
+    "sjbr/static-info-tables": "^6.9",
+    "helmich/typo3-typoscript-lint": "^2.5"
   },
   "autoload": {
     "psr-4": {
@@ -88,7 +89,9 @@
     ],
     "test:unit": ".Build/bin/phpunit -c phpunit.xml.dist",
     "test:behaviour:docker": ".Build/bin/behat --config Tests/Behaviour/behat.docker.yml",
-    "test:behaviour:ddev": ".Build/bin/behat --config Tests/Behaviour/behat.ddev.yml"
+    "test:behaviour:ddev": ".Build/bin/behat --config Tests/Behaviour/behat.ddev.yml",
+    "test:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+    "test:ts:lint": ".Build/bin/typoscript-lint -c .project/tests/typoscript-lint.yml --fail-on-warnings"
   },
   "extra": {
     "typo3/cms": {

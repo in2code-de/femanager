@@ -1,0 +1,36 @@
+name: linting
+on: [push, pull_request]
+
+jobs:
+  php-lint:
+    name: "PHP linter"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          coverage: none
+          tools: composer:v2
+      - name: "Run PHP lint"
+        run: "composer test:php:lint"
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - 7.2
+          - 7.3
+          - 7.4
+  typoscript-lint:
+    name: "TypoScript linter"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+      - name: "Run TypoScript lint"
+        uses: TYPO3-Continuous-Integration/TYPO3-CI-Typoscript-Lint@v1
+        with:
+          config-file: ".project/tests/typoscript-lint.yml"
+
