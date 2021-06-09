@@ -65,7 +65,9 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v2
+      - name: "Composer Install"
+        run: "composer install"
       - name: "Run PHP CS Fixer"
-        uses: TYPO3-Continuous-Integration/TYPO3-CI-PHP-CS-Fixer@v1
+        run: "composer test:php:cs"
 
 
