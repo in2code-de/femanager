@@ -57,9 +57,9 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v2
       - name: "Install PHP"
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: 7.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.2
       - name: "Composer Install"
         run: "composer install"
       - name: "Run PHP CS Fixer"
