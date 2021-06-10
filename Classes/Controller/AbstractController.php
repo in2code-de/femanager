@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Controller;
 
@@ -10,23 +10,21 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
 use In2code\Femanager\Utility\BackendUtility;
-use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
-use function json_encode;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Class AbstractController
@@ -130,7 +128,6 @@ abstract class AbstractController extends ActionController
      *        Create Confirmation from Admin is not necessary
      *
      * @param User $user
-     * @return void
      */
     public function createAllConfirmed(User $user)
     {
@@ -145,7 +142,6 @@ abstract class AbstractController extends ActionController
      *        Update Confirmation from Admin is not necessary
      *
      * @param User $user
-     * @return void
      */
     public function updateAllConfirmed(User $user)
     {
@@ -184,7 +180,6 @@ abstract class AbstractController extends ActionController
      * Prefix method to updateAction(): Update must be confirmed by Admin
      *
      * @param User $user
-     * @return void
      */
     public function updateRequest($user)
     {
@@ -219,7 +214,6 @@ abstract class AbstractController extends ActionController
      * @param bool $login Login after creation
      * @param string $status
      * @param bool $backend Don't redirect if called from backend action
-     * @return void
      */
     public function finalCreate(
         $user,
@@ -296,7 +290,6 @@ abstract class AbstractController extends ActionController
      *
      * @param string $action "new", "edit"
      * @param string $category "redirect", "requestRedirect" value from TypoScript
-     * @return void
      */
     protected function redirectByAction($action = 'new', $category = 'redirect')
     {
@@ -324,8 +317,6 @@ abstract class AbstractController extends ActionController
 
     /**
      * Init for User delete action
-     *
-     * @return void
      */
     protected function initializeDeleteAction()
     {
@@ -340,8 +331,7 @@ abstract class AbstractController extends ActionController
      *
      * @param User $user
      * @param int $uid Given fe_users uid
-     * @param String $receivedToken Token
-     * @return void
+     * @param string $receivedToken Token
      */
     protected function testSpoof($user, $uid, $receivedToken)
     {
@@ -371,8 +361,6 @@ abstract class AbstractController extends ActionController
 
     /**
      * Assigns all values, which should be available in all views
-     *
-     * @return void
      */
     public function assignForAll()
     {
@@ -393,7 +381,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * @return void
      */
     public function initializeAction()
     {
@@ -457,7 +444,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * @return void
      */
     protected function checkStoragePid()
     {
@@ -470,7 +456,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * @return void
      */
     protected function checkTypoScript()
     {
@@ -494,7 +479,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * @return void
      */
     protected function setAllUserGroups()
     {
@@ -503,12 +487,10 @@ abstract class AbstractController extends ActionController
         $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
     }
 
-
     /**
      * Send email to user for confirmation
      *
      * @param User $user
-     * @return void
      * @throws UnsupportedRequestTypeException
      */
     public function sendCreateUserConfirmationMail(User $user)

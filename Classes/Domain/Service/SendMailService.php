@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Event\AfterMailSendEvent;
@@ -54,7 +54,6 @@ class SendMailService
 
     /**
      * @param array $variables
-     * @return void
      */
     protected function contentObjectStart(array $variables)
     {
@@ -149,7 +148,6 @@ class SendMailService
      * @param string $subject
      * @param array $variables
      * @param MailMessage $email
-     * @return void
      */
     protected function prepareMailObject(
         string $template,
@@ -171,7 +169,6 @@ class SendMailService
     /**
      * @param array $typoScript
      * @param MailMessage $email
-     * @return void
      */
     protected function overwriteEmailReceiver(array $typoScript, MailMessage $email)
     {
@@ -193,7 +190,6 @@ class SendMailService
     /**
      * @param array $typoScript
      * @param MailMessage $email
-     * @return void
      */
     protected function overwriteEmailSender(array $typoScript, MailMessage $email)
     {
@@ -215,7 +211,6 @@ class SendMailService
     /**
      * @param array $typoScript
      * @param MailMessage $email
-     * @return void
      */
     protected function setSubject(array $typoScript, MailMessage $email)
     {
@@ -227,7 +222,6 @@ class SendMailService
     /**
      * @param array $typoScript
      * @param MailMessage $email
-     * @return void
      */
     protected function setCc(array $typoScript, MailMessage $email)
     {
@@ -239,7 +233,6 @@ class SendMailService
     /**
      * @param array $typoScript
      * @param MailMessage $email
-     * @return void
      */
     protected function setPriority(array $typoScript, MailMessage $email)
     {
@@ -251,7 +244,6 @@ class SendMailService
     /**
      * @param array $typoScript
      * @param MailMessage $email
-     * @return void
      */
     protected function setAttachments(array $typoScript, MailMessage $email)
     {

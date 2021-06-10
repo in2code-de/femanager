@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Controller;
 
@@ -33,7 +33,6 @@ class NewController extends AbstractController
      * Render registration form
      *
      * @param User $user
-     * @return void
      */
     public function newAction(User $user = null)
     {
@@ -53,7 +52,6 @@ class NewController extends AbstractController
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
-     * @return void
      */
     public function createAction(User $user)
     {
@@ -91,7 +89,6 @@ class NewController extends AbstractController
      * @param string $status
      *            "userConfirmation", "userConfirmationRefused", "adminConfirmation",
      *            "adminConfirmationRefused", "adminConfirmationRefusedSilent"
-     * @return void
      */
     public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation')
     {
@@ -281,8 +278,6 @@ class NewController extends AbstractController
 
     /**
      * Just for showing informations after user creation
-     *
-     * @return void
      */
     public function createStatusAction()
     {
@@ -292,7 +287,6 @@ class NewController extends AbstractController
      * Postfix method to createAction(): Create must be confirmed by Admin or User
      *
      * @param User $user
-     * @return void
      */
     protected function createRequest(User $user)
     {
@@ -314,7 +308,6 @@ class NewController extends AbstractController
      * Send email to user for confirmation
      *
      * @param User $user
-     * @return void
      * @throws UnsupportedRequestTypeException
      */
     protected function createUserConfirmationRequest(User $user)
@@ -385,8 +378,6 @@ class NewController extends AbstractController
 
     /**
      * Just for showing empty dialogue to resend confirmation mail
-     *
-     * @return void
      */
     public function resendConfirmationDialogueAction()
     {
@@ -395,7 +386,6 @@ class NewController extends AbstractController
     /**
      * re-sends a confirmation email if given mail is valid
      *
-     * @return void
      * @throws UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      */
@@ -418,8 +408,7 @@ class NewController extends AbstractController
             }
         }
         $this->addFlashMessage(
-            LocalizationUtility::translate('resendConfirmationMailFail')
-            ,
+            LocalizationUtility::translate('resendConfirmationMailFail'),
             LocalizationUtility::translate('validationError'),
             AbstractMessage::ERROR
         );

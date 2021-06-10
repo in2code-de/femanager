@@ -18,16 +18,12 @@ class FileUtilityTest extends UnitTestCase
      */
     protected $testFilesToDelete = [];
 
-    /**
-     * @return void
-     */
     public function setUp()
     {
         TestingHelper::setDefaultConstants();
     }
 
     /**
-     * @return void
      * @covers ::createFolderIfNotExists
      */
     public function testCreateFolderIfNotExists()
@@ -40,7 +36,6 @@ class FileUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @covers ::getRelativeFolderFromAbsolutePath
      */
     public function testGetRelativeFolderFromAbsolutePath()

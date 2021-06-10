@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\UserFunc;
 
@@ -10,10 +10,6 @@ use In2code\Femanager\DataProvider\FallbackCountryDataProvider;
 use TYPO3\CMS\Backend\Form\FormDataProvider\TcaSelectItems;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-
-use function array_values;
-use function count;
-use function is_array;
 
 class StaticInfoTables
 {

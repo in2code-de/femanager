@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Domain\Service;
 
@@ -43,7 +43,6 @@ class RatelimiterService implements SingletonInterface
 
     public function isLimited(): bool
     {
-
         if ($this->limit > 0) {
             $userIp = GeneralUtility::getIndpEnv('REMOTE_ADDR');
             $userIpAccess = $this->getToken(self::LIMIT_IP, $userIp);
@@ -92,7 +91,7 @@ class RatelimiterService implements SingletonInterface
 
     protected function getCacheID(string $tokenName, string $value): string
     {
-        return $tokenName.hash('sha1', $value);
+        return $tokenName . hash('sha1', $value);
     }
 
     protected function retrieveToken(string $cacheID): array

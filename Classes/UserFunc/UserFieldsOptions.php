@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\UserFunc;
 
 use In2code\Femanager\Utility\StringUtility;
@@ -27,7 +27,6 @@ class UserFieldsOptions
      * Add options to FlexForm Selection - Options can be defined in TSConfig
      *
      * @param array $params
-     * @return void
      */
     public function addOptions(&$params)
     {
@@ -51,7 +50,6 @@ class UserFieldsOptions
      * Add captcha option
      *
      * @param array $params
-     * @return void
      */
     protected function addCaptchaOption(&$params)
     {
@@ -67,7 +65,6 @@ class UserFieldsOptions
      * Add captcha option
      *
      * @param array $params
-     * @return void
      */
     protected function addStateOption(&$params)
     {
@@ -106,7 +103,6 @@ class UserFieldsOptions
     /**
      * Initialize
      *
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected function initialize()

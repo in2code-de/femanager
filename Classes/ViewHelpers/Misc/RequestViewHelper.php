@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\ViewHelpers\Misc;
 
@@ -85,8 +85,6 @@ class RequestViewHelper extends AbstractViewHelper
 
     /**
      * Register all arguments for this viewhelper
-     *
-     * @return void
      */
     public function initializeArguments()
     {

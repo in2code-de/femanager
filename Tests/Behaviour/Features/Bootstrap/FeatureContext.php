@@ -18,7 +18,6 @@ class FeatureContext extends MinkContext
      * @Given /^I wait "([^"]*)" seconds$/
      *
      * @param string|int $seconds
-     * @return void
      */
     public function iWaitSeconds($seconds)
     {
@@ -34,7 +33,6 @@ class FeatureContext extends MinkContext
      * @Then /^the sourcecode should contain \'([^\']*)\'$/
      *
      * @param string $html
-     * @return void
      */
     public function theSourcecodeShouldContain($html)
     {
@@ -48,7 +46,6 @@ class FeatureContext extends MinkContext
      * @Then /^the sourcecode should not contain \'([^\']*)\'$/
      *
      * @param string $html
-     * @return void
      */
     public function theSourcecodeShouldNotContain($html)
     {

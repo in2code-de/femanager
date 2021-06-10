@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Model\User;
@@ -43,7 +43,6 @@ class FinisherRunner
      * @param string $actionMethodName
      * @param array $settings
      * @param ContentObjectRenderer $contentObject
-     * @return void
      */
     public function callFinishers(
         User $user,

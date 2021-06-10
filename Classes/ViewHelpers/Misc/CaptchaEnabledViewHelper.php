@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -17,7 +17,7 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
     public function initializeArguments()
     {
         parent::initializeArguments();
-        $this->registerArgument('settings', 'bool','array $settings TypoScript',true);
+        $this->registerArgument('settings', 'bool', 'array $settings TypoScript', true);
     }
 
     /**

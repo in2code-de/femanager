@@ -8,7 +8,6 @@ class TestingHelper
 {
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     public static function setDefaultConstants()

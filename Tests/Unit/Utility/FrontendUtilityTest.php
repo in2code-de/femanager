@@ -4,8 +4,6 @@ namespace In2code\Femanager\Tests\Unit\Utility;
 use In2code\Femanager\Tests\Helper\TestingHelper;
 use In2code\Femanager\Utility\FrontendUtility;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class FrontendUtilityTest
@@ -19,16 +17,12 @@ class FrontendUtilityTest extends UnitTestCase
      */
     protected $testFilesToDelete = [];
 
-    /**
-     * @return void
-     */
     public function setUp()
     {
         TestingHelper::setDefaultConstants();
     }
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getControllerName
      */
@@ -39,7 +33,6 @@ class FrontendUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getActionName
      */

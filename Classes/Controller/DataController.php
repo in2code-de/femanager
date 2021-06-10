@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\DataProvider\CountryZonesDataProvider;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-
-use function json_encode;
 
 class DataController extends ActionController
 {

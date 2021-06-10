@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Domain\Repository;
 
 use In2code\Femanager\Utility\ObjectUtility;
@@ -91,8 +91,7 @@ class PluginRepository
         $flexFormArray = $flexFormService->convertFlexFormContentToArray($pluginConfiguration);
         if (array_key_exists($view, $this->scaString)) {
             return $this->scaString[$view] === $flexFormArray['switchableControllerActions'];
-        } else {
-            throw new \LogicException('Given view is not allowed', 1541506310);
         }
+        throw new \LogicException('Given view is not allowed', 1541506310);
     }
 }

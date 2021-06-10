@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Finisher;
 
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-
-use function parse_str;
 
 /**
  * Class SendParametersFinisher
@@ -39,8 +37,6 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
 
     /**
      * Initialize
-     *
-     * @return void
      */
     public function initializeFinisher()
     {
@@ -53,8 +49,6 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
 
     /**
      * Send values via curl to a third party software
-     *
-     * @return void
      */
     public function sendFinisher()
     {
@@ -73,8 +67,6 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
 
     /**
      * Write devlog entry
-     *
-     * @return void
      */
     protected function writeToDevelopmentLog()
     {
@@ -87,7 +79,6 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      * CURL settings
      *
      * @return array
-     * @return void
      */
     protected function getCurlSettings()
     {

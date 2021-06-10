@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\ViewHelpers\Misc;
 
@@ -28,8 +28,6 @@ class JsonEncodeViewHelper extends AbstractViewHelper
 
     /**
      * Initialize the arguments.
-     *
-     * @return void
      */
     public function initializeArguments()
     {

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\ViewHelpers\Be;
 
@@ -40,8 +40,6 @@ class GetClassNameOnActionViewHelper extends AbstractViewHelper
 
     /**
      * Register all arguments for this viewhelper
-     *
-     * @return void
      */
     public function initializeArguments()
     {

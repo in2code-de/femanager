@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Domain\Service;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -50,7 +50,6 @@ class StoreInDatabaseService
      * Set TableName
      *
      * @param string $table
-     * @return void
      */
     public function setTable($table)
     {
@@ -83,7 +82,6 @@ class StoreInDatabaseService
      *
      * @param $propertyName
      * @param $value
-     * @return void
      */
     public function addProperty($propertyName, $value)
     {
@@ -95,7 +93,6 @@ class StoreInDatabaseService
      * Remove property/value pair form array by its key
      *
      * @param $propertyName
-     * @return void
      */
     public function removeProperty($propertyName)
     {

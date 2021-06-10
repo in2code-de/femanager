@@ -1,9 +1,10 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Domain\Validator;
+
+use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\PluginRepository;
 use In2code\Femanager\Event\UniqueUserEvent;
-use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -68,9 +69,11 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                 return true;
             }
             return !empty($value);
-        } elseif ((is_array($value) || $value instanceof \Countable) && count($value) > 0) {
+        }
+        if ((is_array($value) || $value instanceof \Countable) && count($value) > 0) {
             return true;
-        } elseif ($value instanceof \DateTime) {
+        }
+        if ($value instanceof \DateTime) {
             return true;
         }
         return false;
@@ -281,7 +284,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsNumber($value)
     {
-        return (strlen(preg_replace('/[^0-9]/', '', $value)) > 0);
+        return strlen(preg_replace('/[^0-9]/', '', $value)) > 0;
     }
 
     /**
@@ -292,7 +295,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsLetter($value)
     {
-        return (strlen(preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0);
+        return strlen(preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0;
     }
 
     /**
@@ -303,7 +306,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsUppercase($value)
     {
-        return (strlen(preg_replace('/[^A-Z]/', '', $value)) > 0);
+        return strlen(preg_replace('/[^A-Z]/', '', $value)) > 0;
     }
 
     /**
@@ -314,7 +317,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsSpecialCharacter($value)
     {
-        return (strlen(preg_replace('/[^a-zA-Z0-9]/', '', $value)) !== strlen($value));
+        return strlen(preg_replace('/[^a-zA-Z0-9]/', '', $value)) !== strlen($value);
     }
 
     /**
@@ -325,7 +328,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsSpaceCharacter($value)
     {
-        return (strpos($value, ' ') !== false);
+        return strpos($value, ' ') !== false;
     }
 
     /**
@@ -388,26 +391,17 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         return false;
     }
 
-    /**
-     * @return void
-     */
     protected function init()
     {
         $this->setPluginVariables();
         $this->setValidationSettings();
     }
 
-    /**
-     * @return void
-     */
     protected function setPluginVariables()
     {
         $this->pluginVariables = GeneralUtility::_GP('tx_femanager_pi1');
     }
 
-    /**
-     * @return void
-     */
     protected function setValidationSettings()
     {
         $config = $this->configurationManager->getConfiguration(
@@ -457,7 +451,6 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     /**
      * @param string $controllerName
-     * @return void
      */
     protected function checkAllowedControllerName(string $controllerName)
     {
