@@ -131,6 +131,11 @@ jobs:
         run: "composer install"
       - name: "Get database dump"
         run: "git lfs pull"
+      - name: "Verify MariaDB connection"
+        run: |
+          while ! mysqladmin ping -h"127.0.0.1" -P"3306" --silent; do
+            sleep 1
+          done
       - name: "Import database to mariadb container"
         run: "mysql -uroot -proot -h 127.0.0.1 typo3 < .project/data/db.sql.gz"
       - name: "Set configuration"
