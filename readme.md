@@ -43,6 +43,19 @@ to accept only bugfixes that can be reproduced.
 - **Features**: Not every feature is relevant for the bulk of the users. In addition: We don't want to make the extension
 even more complicated in usability for an edge case feature. Please discuss a new feature before.
 
+### Contribution with ddev
+
+#### Requirements
+
+1. Install ddev, see: https://ddev.readthedocs.io/en/stable/#installation
+2. Install git-lfs, see: https://git-lfs.github.com/
+
+#### Installation
+
+1. Clone this repository
+2. Run `ddev start`
+3. Run `ddev initialize` to setup configurations and test database
+
 ## Screenshots
 
 <img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_create1.png" width="500" />
