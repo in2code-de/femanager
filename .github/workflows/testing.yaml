@@ -115,7 +115,7 @@ jobs:
       - name: "Initialize TYPO3 in ddev"
         run: "ddev initialize"
       - name: "Run Behat Tests"
-        run: "ddev composer test:behaviour:docker"
+        run: "ddev composer test:behaviour:ddev"
     strategy:
       fail-fast: false
       matrix:
