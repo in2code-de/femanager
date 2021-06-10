@@ -109,54 +109,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: "Install PHP"
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "${{ matrix.php-version }}"
-          coverage: none
-          tools: composer:v2
+      - uses: jonaseberle/github-action-setup-ddev@v1
       - name: "Composer Install"
-        run: "composer install"
-      - name: "Get database dump"
-        run: "git lfs pull"
-      - name: "Verify MariaDB connection"
-        env:
-          PORT: ${{ job.services.mariadb.ports[3306] }}
-        run: |
-          while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
-            sleep 1
-          done
-      - name: "Unzip db dump"
-        run: "gzip -d .project/data/db.sql.gz"
-      - name: "Import database to mariadb container"
-        env:
-          PORT: ${{ job.services.mariadb.ports[3306] }}
-        run: "mysql -uroot -proot -P\"$PORT\" -h 127.0.0.1 typo3 < .project/data/db.sql"
-      - name: "Install TYPO3"
-        env:
-          TYPO3_INSTALL_DB_DRIVER: mysqli
-          TYPO3_INSTALL_DB_USER: app
-          TYPO3_INSTALL_DB_PASSWORD: app
-          TYPO3_INSTALL_DB_HOST: 127.0.0.1
-          TYPO3_INSTALL_DB_PORT: ${{ job.services.mariadb.ports[3306] }}
-          TYPO3_INSTALL_DB_UNIX_SOCKET: ""
-          TYPO3_INSTALL_DB_USE_EXISTING: 1
-          TYPO3_INSTALL_DB_DBNAME: typo3
-          TYPO3_INSTALL_ADMIN_USER: admin
-          TYPO3_INSTALL_ADMIN_PASSWORD: password
-          TYPO3_INSTALL_SITE_NAME: "FE Manager"
-          TYPO3_INSTALL_SITE_SETUP_TYPE: no
-          TYPO3_INSTALL_WEB_SERVER_CONFIG: apache
-        run: "php .Build/bin/typo3cms install:setup --use-existing-database -vvv"
-      - name: "Set configuration"
-        run: "cp .project/TYPO3/DockerConfiguration.php .Build/Web/typo3conf/AdditionalConfiguration.php"
+        run: "ddev composer install"
+      - name: "Initialize TYPO3 in ddev"
+        run: "ddev initialize"
       - name: "Run Behat Tests"
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: typo3
-          MYSQL_PASSWORD: app
-          MYSQL_USER: app
-        run: "composer test:behaviour:docker"
+        run: "ddev composer test:behaviour:docker"
     strategy:
       fail-fast: false
       matrix:
