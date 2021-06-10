@@ -52,7 +52,6 @@ class StaticInfoTables
                         $data['items'][] = [$countryZone->getLocalName(), $countryZone->getIsoCode()];
                     }
                 }
-
             }
         } else {
             $data['items'][] = ['Error: static_info_tables is not installed', ''];
