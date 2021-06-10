@@ -228,7 +228,7 @@ class NewController extends AbstractController
                 $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', FlashMessage::ERROR);
                 $this->redirect('new');
             }
-            
+
             $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onAdminConfirmation.']);
             $user->setTxFemanagerConfirmedbyadmin(true);
             $user->setDisable(false);
