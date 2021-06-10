@@ -403,7 +403,7 @@ abstract class AbstractController extends ActionController
             // Retrieve page TSconfig of the current page
             $pageTsConfig = BackendUtilityCore::getPagesTSconfig(BackendUtility::getPageIdentifier((int)GeneralUtility::_GET('id')));
             if (is_array($pageTsConfig['module.']['tx_femanager.'])) {
-                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.']);
+                $this->moduleConfig = array_merge($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.']);
             }
 
             // Retrieve user TSconfig of currently logged in user
