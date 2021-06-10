@@ -338,6 +338,9 @@
 			<trans-unit id="pleaseChooseCountry">
 				<source>Please choose a country...</source>
 			</trans-unit>
+			<trans-unit id="noZonesForThisCountry">
+				<source>No zones available for the chosen country</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
