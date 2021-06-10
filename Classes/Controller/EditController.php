@@ -23,7 +23,6 @@ use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
  */
 class EditController extends AbstractController
 {
-
     public function editAction()
     {
         $token = '';

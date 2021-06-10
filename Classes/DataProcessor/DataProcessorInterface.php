@@ -7,7 +7,6 @@ namespace In2code\Femanager\DataProcessor;
  */
 interface DataProcessorInterface
 {
-
     public function initializeDataProcessor();
 
     /**
