@@ -3,7 +3,6 @@ paths:
 filePatterns:
   - "*.tsconfig"
   - "*.typoscript"
-  - "ext_typoscript_*.txt"
 sniffs:
   - class: Indentation
     parameters:
@@ -11,6 +10,7 @@ sniffs:
       indentPerLevel: 2
       indentConditions: false
   - class: DeadCode
+    disabled: true
   - class: OperatorWhitespace
   - class: RepeatingRValue
     disabled: true
