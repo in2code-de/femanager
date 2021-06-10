@@ -147,7 +147,7 @@ jobs:
           TYPO3_INSTALL_SITE_NAME: "FE Manager"
           TYPO3_INSTALL_SITE_SETUP_TYPE: no
           TYPO3_INSTALL_WEB_SERVER_CONFIG: apache
-        run: "php .Build/bin/typo3cms install:setup --use-existing-database"
+        run: "php .Build/bin/typo3cms install:setup --use-existing-database -vvv"
       - name: "Set configuration"
         run: "cp .project/TYPO3/DockerConfiguration.php .Build/Web/typo3conf/AdditionalConfiguration.php"
       - name: "Run Behat Tests"
