@@ -95,8 +95,8 @@ jobs:
     needs: php-lint
     env:
       TYPO3_INSTALL_DB_DRIVER: mysqli
-      TYPO3_INSTALL_DB_USER: app
-      TYPO3_INSTALL_DB_PASSWORD: app
+      TYPO3_INSTALL_DB_USER: root
+      TYPO3_INSTALL_DB_PASSWORD: root
       TYPO3_INSTALL_DB_HOST: 127.0.0.1
       TYPO3_INSTALL_DB_PORT: 3306
       TYPO3_INSTALL_DB_UNIX_SOCKET: ""
