@@ -93,20 +93,6 @@ jobs:
     name: "PHP Behat Tests"
     runs-on: ubuntu-20.04
     needs: php-lint
-    env:
-      TYPO3_INSTALL_DB_DRIVER: mysqli
-      TYPO3_INSTALL_DB_USER: root
-      TYPO3_INSTALL_DB_PASSWORD: root
-      TYPO3_INSTALL_DB_HOST: 127.0.0.1
-      TYPO3_INSTALL_DB_PORT: 3306
-      TYPO3_INSTALL_DB_UNIX_SOCKET: ""
-      TYPO3_INSTALL_DB_USE_EXISTING: y
-      TYPO3_INSTALL_DB_DBNAME: typo3
-      TYPO3_INSTALL_ADMIN_USER: admin
-      TYPO3_INSTALL_ADMIN_PASSWORD: password
-      TYPO3_INSTALL_SITE_NAME: "FE Manager"
-      TYPO3_INSTALL_SITE_SETUP_TYPE: no
-      TYPO3_INSTALL_WEB_SERVER_CONFIG: apache
     services:
       chrome:
         image: selenium/standalone-chrome-debug
@@ -150,7 +136,19 @@ jobs:
         run: "cp .project/TYPO3/DockerConfiguration.php .Build/Web/typo3conf/AdditionalConfiguration.php"
       - name: "Install TYPO3"
         env:
+          TYPO3_INSTALL_DB_DRIVER: mysqli
+          TYPO3_INSTALL_DB_USER: app
+          TYPO3_INSTALL_DB_PASSWORD: app
+          TYPO3_INSTALL_DB_HOST: 127.0.0.1
           TYPO3_INSTALL_DB_PORT: ${{ job.services.mariadb.ports[3306] }}
+          TYPO3_INSTALL_DB_UNIX_SOCKET: ""
+          TYPO3_INSTALL_DB_USE_EXISTING: y
+          TYPO3_INSTALL_DB_DBNAME: typo3
+          TYPO3_INSTALL_ADMIN_USER: admin
+          TYPO3_INSTALL_ADMIN_PASSWORD: password
+          TYPO3_INSTALL_SITE_NAME: "FE Manager"
+          TYPO3_INSTALL_SITE_SETUP_TYPE: no
+          TYPO3_INSTALL_WEB_SERVER_CONFIG: apache
         run: "php .Build/bin/typo3cms install:setup"
       - name: "Run Behat Tests"
         run: "composer test:behaviour:docker"
