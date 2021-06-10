@@ -16,7 +16,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * Class UserController
  */
-class UserController extends AbstractController
+class UserController extends AbstractFrontendController
 {
 
     /**

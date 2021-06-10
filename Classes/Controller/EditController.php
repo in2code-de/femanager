@@ -21,7 +21,7 @@ use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 /**
  * Class EditController
  */
-class EditController extends AbstractController
+class EditController extends AbstractFrontendController
 {
     public function editAction()
     {

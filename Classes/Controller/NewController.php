@@ -26,7 +26,7 @@ use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 /**
  * Class NewController
  */
-class NewController extends AbstractController
+class NewController extends AbstractFrontendController
 {
 
     /**
