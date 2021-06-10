@@ -40,9 +40,19 @@ class StaticInfoTables
             } else {
                 $countryZones = $countryZonesDataProvider->getCountryZonesForCountryIso3($country);
 
-                foreach ($countryZones as $countryZone) {
-                    $data['items'][] = [$countryZone->getLocalName(), $countryZone->getIsoCode()];
+                if (empty($countryZones)) {
+                    $data['items'] = [
+                        [
+                            'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:noZonesForThisCountry',
+                            ''
+                        ]
+                    ];
+                } else {
+                    foreach ($countryZones as $countryZone) {
+                        $data['items'][] = [$countryZone->getLocalName(), $countryZone->getIsoCode()];
+                    }
                 }
+
             }
         } else {
             $data['items'][] = ['Error: static_info_tables is not installed', ''];
