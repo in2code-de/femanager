@@ -91,7 +91,7 @@
     ],
     "test:unit": "phpunit -c phpunit.xml.dist",
     "test:behaviour:docker": "behat --config Tests/Behaviour/behat.docker.yml",
-    "test:behaviour:ddev": "behat --config Tests/Behaviour/behat.ddev.yml",
+    "test:behaviour:ddev": "behat --config Tests/Behaviour/behat.ddev.yml --tags '~@javascript'",
     "test:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
     "test:php:cs": "php-cs-fixer fix --dry-run --config=.project/tests/.php-cs-fixer.php --diff",
     "test:ts:lint": "typoscript-lint -c .project/tests/typoscript-lint.yml --fail-on-warnings"
