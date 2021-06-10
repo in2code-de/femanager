@@ -96,16 +96,6 @@ jobs:
     services:
       chrome:
         image: selenium/standalone-chrome-debug
-      mariadb:
-        image: mariadb:10.3
-        ports:
-          - 3306
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: typo3
-          MYSQL_PASSWORD: app
-          MYSQL_USER: app
-        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
     steps:
       - name: Checkout
         uses: actions/checkout@v2
