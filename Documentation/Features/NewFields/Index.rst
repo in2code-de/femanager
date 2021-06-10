@@ -214,8 +214,8 @@ Example Model User.php which extends to the default femanager Model:
 	}
 
 
-TypoScript to include Model and override default controller
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+TypoScript to include Model and override default controller with TYPO3 9.5.x
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 .. code-block:: text
 
@@ -240,6 +240,41 @@ TypoScript to include Model and override default controller
 			In2code\Femanager\Controller\EditController.className = In2code\Femanagerextended\Controller\EditController
 		}
 	}
+   
+   
+   
+Include model and override default controller with TYPO3 10.4.x
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Configuration/Extbase/Persistence/Classes.php:
+
+.. code-block:: text
+
+   return [
+       \In2code\Femanager\Domain\Model\User::class => [
+           'subclasses' => [
+               \In2code\Femanagerextended\Domain\Model\User::class
+           ]
+       ],
+       \In2code\Femanagerextended\Domain\Model\User::class => [
+           'tableName' => 'fe_users',
+           'recordType' => 0,
+       ]
+   ];
+   
+ext_localconf.php:
+
+.. code-block:: text
+  
+   $extbaseObjectContainer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class);
+   $extbaseObjectContainer->registerImplementation(
+       \In2code\Femanager\Controller\NewController::class,
+       \In2code\Femanagerextended\Controller\NewController::class
+   );
+   $extbaseObjectContainer->registerImplementation(
+       \In2code\Femanager\Controller\EditController::class,
+       \In2code\Femanagerextended\Controller\EditController::class
+   );
 
 
 Own Controller Files
@@ -339,4 +374,53 @@ NewController.php:
 		}
 	}
 
+Own Controller Files with PHP 7.4 / TYPO3 10.4.x
+"""""""""""""""""""""""""""""""""""""""""""""""
 
+EditController.php:
+
+.. code-block:: text
+
+   namespace In2code\Femanagerextended\Controller;
+
+   use In2code\Femanager\Controller\EditController as FemanagerEditController;
+
+   class EditController extends FemanagerEditController
+   {
+       /**
+        * action update
+        *
+        * @param In2code\Femanagerextended\Domain\Model\User $user
+        * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
+        * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
+        */
+       public function updateAction($user): void
+       {
+           parent::updateAction($user);
+       }
+   }
+
+
+NewController.php:
+
+.. code-block:: text
+
+   namespace In2code\Femanagerextended\Controller;
+
+   use In2code\Femanager\Controller\NewController as FemanagerNewController;
+
+   class NewController extends FemanagerNewController
+   {
+
+       /**
+       * action create
+       *
+       * @param In2code\Femanagerextended\Domain\Model\User $user
+       * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
+       * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
+       */
+       public function createAction($user): void
+       {
+           parent::createAction($user);
+       }
+   }
