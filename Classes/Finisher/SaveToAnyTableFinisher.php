@@ -1,10 +1,9 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Service\StoreInDatabaseService;
 use In2code\Femanager\Utility\StringUtility;
-use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 
 /**
  * Class SaveToAnyTableFinisher
@@ -50,8 +49,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     /**
      * Overwrite configuration with
      *      plugin.tx_femanager.settings.new.storeInDatabase
-     *
-     * @return void
      */
     public function initializeFinisher()
     {
@@ -63,8 +60,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
 
     /**
      * Store to any table
-     *
-     * @return void
      */
     public function storeFinisher()
     {
@@ -80,7 +75,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      * Store for a given table
      *
      * @param string $table
-     * @return void
      */
     protected function storeForTable($table)
     {
@@ -99,7 +93,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      *
      * @param string $table
      * @param StoreInDatabaseService $storeInDatabase
-     * @return void
      */
     protected function setPropertiesForTable($table, StoreInDatabaseService $storeInDatabase)
     {
@@ -143,7 +136,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      * Add array to dataArray
      *
      * @param array $array
-     * @return void
      */
     protected function addArrayToDataArray(array $array)
     {

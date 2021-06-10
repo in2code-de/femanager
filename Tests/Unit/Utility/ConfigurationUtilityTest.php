@@ -17,7 +17,6 @@ class ConfigurationUtilityTest extends UnitTestCase
     protected $testFilesToDelete = [];
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::isDisableModuleActive
      * @covers \In2code\Femanager\Utility\AbstractUtility::getExtensionConfiguration
@@ -33,7 +32,6 @@ class ConfigurationUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::isConfirmationModuleActive
      * @covers \In2code\Femanager\Utility\AbstractUtility::getExtensionConfiguration
@@ -49,7 +47,6 @@ class ConfigurationUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::isDisableLogActive
      * @covers \In2code\Femanager\Utility\AbstractUtility::getExtensionConfiguration
@@ -65,7 +62,6 @@ class ConfigurationUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::isSetCookieOnLoginActive
      * @covers \In2code\Femanager\Utility\AbstractUtility::getExtensionConfiguration

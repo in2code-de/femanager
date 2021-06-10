@@ -5,7 +5,6 @@ namespace In2code\Femanager\Tests\Scripts;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class UserLinks
@@ -127,7 +126,7 @@ class UserLinks
 
     /**
      * @param $username
-     * @return array|FALSE|NULL
+     * @return array|false|null
      */
     protected function getUserData($username)
     {
@@ -151,7 +150,7 @@ class UserLinks
     }
 
     /**
-     * @return array|FALSE|NULL
+     * @return array|false|null
      */
     protected function getLastUsername()
     {

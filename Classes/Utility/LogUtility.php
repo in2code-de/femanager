@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\Log;
@@ -33,7 +33,6 @@ class LogUtility
      * @param int $state State to log
      * @param User $user Related User
      * @param array $additionalProperties for individual logging
-     * @return void
      * @codeCoverageIgnore
      */
     public function log($state, User $user, array $additionalProperties = [])

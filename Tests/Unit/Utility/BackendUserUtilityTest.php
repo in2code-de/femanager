@@ -17,7 +17,6 @@ class BackendUserUtilityTest extends UnitTestCase
     protected $testFilesToDelete = [];
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::isAdminAuthentication
      * @covers \In2code\Femanager\Utility\AbstractUtility::getBackendUserAuthentication
@@ -29,7 +28,6 @@ class BackendUserUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getBackendUserAuthentication
      * @covers \In2code\Femanager\Utility\AbstractUtility::getBackendUserAuthentication

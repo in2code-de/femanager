@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Persistence\Generic\Mapper;
 
 use In2code\Femanager\Domain\Model\User;
@@ -16,7 +16,6 @@ class DataMap extends DataMapExtbase
      * Disable record type for femanager
      *
      * @param string $recordType The record type
-     * @return void
      */
     public function setRecordType($recordType)
     {

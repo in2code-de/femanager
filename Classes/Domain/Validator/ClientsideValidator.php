@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Domain\Validator;
 
@@ -330,7 +330,6 @@ class ClientsideValidator extends AbstractValidator
      * Add a message to the errormessage array
      *
      * @param string $message
-     * @return void
      */
     public function addMessage($message)
     {

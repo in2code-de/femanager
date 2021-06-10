@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\ViewHelpers\Misc;
 
@@ -17,10 +17,10 @@ class ExplodeViewHelper extends AbstractViewHelper
     public function initializeArguments()
     {
         parent::initializeArguments();
-        $this->registerArgument('string', 'string','Any list (e.g. "a,b,c,d")', false);
-        $this->registerArgument('seperator', 'string','Separator sign (e.g. ",")', false, ',');
-        $this->registerArgument('trim', 'bool','Should be trimmed?', false, true);
-   }
+        $this->registerArgument('string', 'string', 'Any list (e.g. "a,b,c,d")', false);
+        $this->registerArgument('seperator', 'string', 'Separator sign (e.g. ",")', false, ',');
+        $this->registerArgument('trim', 'bool', 'Should be trimmed?', false, true);
+    }
 
     /**
      * View helper to explode a list

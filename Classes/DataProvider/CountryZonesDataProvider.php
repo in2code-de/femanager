@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\DataProvider;
 
@@ -8,13 +8,7 @@ use SJBR\StaticInfoTables\Domain\Model\Country;
 use SJBR\StaticInfoTables\Domain\Model\CountryZone;
 use SJBR\StaticInfoTables\Domain\Repository\CountryRepository;
 use SJBR\StaticInfoTables\Domain\Repository\CountryZoneRepository;
-
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-
-use function array_values;
-use function count;
-use function strcasecmp;
-use function usort;
 
 class CountryZonesDataProvider
 {

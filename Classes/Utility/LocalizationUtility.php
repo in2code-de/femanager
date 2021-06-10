@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility as ExtbaseLocalizationUtility;
@@ -27,7 +27,7 @@ class LocalizationUtility
      * Get locallang translation with key prefix tx_femanager_domain_model_log.state.
      *
      * @param int $state
-     * @return null|string
+     * @return string|null
      */
     public static function translateByState($state)
     {

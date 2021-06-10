@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\DataProcessor;
 
@@ -53,9 +53,6 @@ abstract class AbstractDataProcessor implements DataProcessorInterface
         $this->controllerArguments = $controllerArguments;
     }
 
-    /**
-     * @return void
-     */
     public function initializeDataProcessor()
     {
     }

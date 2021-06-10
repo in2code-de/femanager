@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -13,7 +13,6 @@ class FileUtility extends AbstractUtility
 
     /**
      * @param string $path Absolute path
-     * @return void
      * @throws \Exception
      */
     public static function createFolderIfNotExists(string $path)

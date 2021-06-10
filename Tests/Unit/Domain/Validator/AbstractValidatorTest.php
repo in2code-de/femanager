@@ -18,7 +18,6 @@ class AbstractValidatorTest extends UnitTestCase
 
     /**
      * Make object available
-     * @return void
      */
     public function setUp()
     {
@@ -27,7 +26,6 @@ class AbstractValidatorTest extends UnitTestCase
 
     /**
      * Remove object
-     * @return void
      */
     public function tearDown()
     {
@@ -88,7 +86,6 @@ class AbstractValidatorTest extends UnitTestCase
     /**
      * @param string $value
      * @param string $expectedResult
-     * @return void
      * @dataProvider validateRequiredReturnsBoolDataProvider
      * @covers ::validateRequired
      */
@@ -139,7 +136,6 @@ class AbstractValidatorTest extends UnitTestCase
     /**
      * @param string $value
      * @param string $expectedResult
-     * @return void
      * @dataProvider validateEmailReturnsBoolDataProvider
      * @covers ::validateEmail
      */
@@ -188,7 +184,6 @@ class AbstractValidatorTest extends UnitTestCase
      * @param string $value
      * @param int $allowedLength
      * @param string $expectedResult
-     * @return void
      * @dataProvider validateMinReturnsBoolDataProvider
      * @covers ::validateMin
      */
@@ -245,7 +240,6 @@ class AbstractValidatorTest extends UnitTestCase
      * @param string $value
      * @param int $allowedLength
      * @param string $expectedResult
-     * @return void
      * @dataProvider validateMaxReturnsBoolDataProvider
      * @covers ::validateMax
      */
@@ -299,7 +293,6 @@ class AbstractValidatorTest extends UnitTestCase
     /**
      * @param string $value
      * @param bool $expectedResult
-     * @return void
      * @dataProvider validateIntReturnsBoolDataProvider
      * @covers ::validateInt
      */
@@ -385,7 +378,6 @@ class AbstractValidatorTest extends UnitTestCase
     /**
      * @param string $value
      * @param bool $expectedResult
-     * @return void
      * @dataProvider validateLettersReturnsBoolDataProvider
      * @covers ::validateUnicodeLetters
      */
@@ -397,7 +389,6 @@ class AbstractValidatorTest extends UnitTestCase
     /**
      * @param string $value
      * @param bool $expectedResult
-     * @return void
      * @dataProvider validateUnicodeLettersReturnsBoolDataProvider
      * @covers ::validateLetters
      */
@@ -546,7 +537,6 @@ class AbstractValidatorTest extends UnitTestCase
      * @param string $value
      * @param string $configuration
      * @param string $expectedResult
-     * @return void
      * @dataProvider validateMustIncludeReturnsBoolDataProvider
      * @covers ::validateMustInclude
      */
@@ -688,7 +678,6 @@ class AbstractValidatorTest extends UnitTestCase
      * @param string $value
      * @param string $configuration
      * @param string $expectedResult
-     * @return void
      * @dataProvider validateMustNotIncludeReturnsBoolDataProvider
      * @covers ::validateMustNotInclude
      */
@@ -770,7 +759,6 @@ class AbstractValidatorTest extends UnitTestCase
      * @param string $value
      * @param string $configuration
      * @param string $expectedResult
-     * @return void
      * @dataProvider validateInListReturnsBoolDataProvider
      * @covers ::validateInList
      */
@@ -827,7 +815,6 @@ class AbstractValidatorTest extends UnitTestCase
      * @param string $value
      * @param string $value2
      * @param string $result
-     * @return void
      * @dataProvider validateSameAsReturnsBoolDateProvider
      * @covers ::validateSameAs
      */

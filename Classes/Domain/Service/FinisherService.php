@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Domain\Model\User;
@@ -28,7 +28,7 @@ class FinisherService
     /**
      * Path that should be required
      *
-     * @var null|string
+     * @var string|null
      */
     protected $requirePath = null;
 
@@ -86,7 +86,7 @@ class FinisherService
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getRequirePath()
     {
@@ -96,7 +96,7 @@ class FinisherService
     /**
      * Set require path and do a require_once
      *
-     * @param null|string $requirePath
+     * @param string|null $requirePath
      * @return FinisherService
      */
     public function setRequirePath($requirePath)
@@ -162,9 +162,6 @@ class FinisherService
         return $this;
     }
 
-    /**
-     * @return null
-     */
     public function getActionMethodName()
     {
         return $this->actionMethodName;
@@ -184,7 +181,6 @@ class FinisherService
      * Start implementation
      *
      * @throws \Exception
-     * @return void
      */
     public function start()
     {
@@ -218,7 +214,6 @@ class FinisherService
      * Call methods in finisher class
      *
      * @param AbstractFinisher $finisher
-     * @return void
      */
     protected function callFinisherMethods(AbstractFinisher $finisher)
     {
@@ -236,12 +231,11 @@ class FinisherService
      *
      * @param AbstractFinisher $finisher
      * @param string $finisherMethod
-     * @return void
      */
     protected function callInitializeFinisherMethod(AbstractFinisher $finisher, $finisherMethod)
     {
-        if (method_exists($finisher, 'initialize' . ucFirst($finisherMethod))) {
-            $finisher->{'initialize' . ucFirst($finisherMethod)}();
+        if (method_exists($finisher, 'initialize' . ucfirst($finisherMethod))) {
+            $finisher->{'initialize' . ucfirst($finisherMethod)}();
         }
     }
 

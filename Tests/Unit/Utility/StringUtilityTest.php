@@ -44,7 +44,6 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @param string $string
      * @param string $expectedResult
-     * @return void
      * @dataProvider cleanStringReturnsStringDataProvider
      * @covers ::cleanString
      */
@@ -80,7 +79,6 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @param string $start
      * @param string $expectedResult
-     * @return void
      * @dataProvider getValuesInBracketsReturnsStringDataProvider
      * @covers ::getValuesInBrackets
      */
@@ -117,7 +115,6 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @param string $start
      * @param string $expectedResult
-     * @return void
      * @dataProvider getValuesBeforeBracketsDataProvider
      * @covers ::getValuesBeforeBrackets
      */
@@ -166,7 +163,6 @@ class StringUtilityTest extends UnitTestCase
      * @param string $needle
      * @param bool $expectedResult
      * @dataProvider startsWithReturnsStringDataProvider
-     * @return void
      * @covers ::startsWith
      */
     public function testStartsWithReturnsString($haystack, $needle, $expectedResult)
@@ -213,7 +209,6 @@ class StringUtilityTest extends UnitTestCase
      * @param string $needle
      * @param bool $expectedResult
      * @dataProvider endsWithReturnsStringDataProvider
-     * @return void
      * @covers ::endsWith
      */
     public function testEndsWithReturnsString($haystack, $needle, $expectedResult)
@@ -253,7 +248,6 @@ class StringUtilityTest extends UnitTestCase
      * @param string $haystack
      * @param array $expectedResult
      * @dataProvider makeEmailArrayReturnsArrayDataProvider
-     * @return void
      * @covers ::makeEmailArray
      */
     public function testMakelEmailArrayReturnsArray($haystack, $expectedResult)
@@ -300,7 +294,6 @@ class StringUtilityTest extends UnitTestCase
      * @param bool $addUpperCase
      * @param bool $addSpecialCharacters
      * @dataProvider getRandomStringAlwaysReturnsStringsOfGivenLengthDataProvider
-     * @return void
      * @covers ::getRandomString
      */
     public function testGetRandomStringAlwaysReturnsStringsOfGivenLength($length, $addUpperCase, $addSpecialCharacters)
@@ -321,7 +314,6 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @covers ::getNumbersString
      */
     public function testGetNumbersStringReturnsStrings()
@@ -330,7 +322,6 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @covers ::getCharactersString
      */
     public function testGetCharactersStringReturnsStrings()
@@ -339,7 +330,6 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @covers ::getUpperCharactersString
      */
     public function testGetUpperCharactersStringReturnsStrings()
@@ -396,7 +386,6 @@ class StringUtilityTest extends UnitTestCase
      * @param string $uri
      * @param string $expectedResult
      * @dataProvider removeDoubleSlashesReturnsStringDataProvider
-     * @return void
      * @covers ::removeDoubleSlashesFromUri
      */
     public function testRemoveDoubleSlashesReturnsString($uri, $expectedResult)

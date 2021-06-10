@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
@@ -13,14 +13,13 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
     /**
      * Initialize the arguments.
      *
-     * @return void
      * @api
      */
     public function initializeArguments()
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
-        $this->registerArgument('objectStorage', 'object','first subobject of objectstorage', false);
+        $this->registerArgument('objectStorage', 'object', 'first subobject of objectstorage', false);
     }
 
     /**

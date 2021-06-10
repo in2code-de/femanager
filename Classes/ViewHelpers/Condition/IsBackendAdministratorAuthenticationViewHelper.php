@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\ViewHelpers\Condition;
 
 use In2code\Femanager\Utility\BackendUserUtility;
@@ -20,5 +20,4 @@ class IsBackendAdministratorAuthenticationViewHelper extends AbstractViewHelper
     {
         return BackendUserUtility::isAdminAuthentication();
     }
-
 }

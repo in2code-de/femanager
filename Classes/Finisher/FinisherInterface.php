@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Model\User;
@@ -36,9 +36,6 @@ interface FinisherInterface
      */
     public function setSettings($settings);
 
-    /**
-     * @return null
-     */
     public function getActionMethodName();
 
     /**
@@ -47,8 +44,5 @@ interface FinisherInterface
      */
     public function setActionMethodName($actionMethodName);
 
-    /**
-     * @return void
-     */
     public function initializeFinisher();
 }

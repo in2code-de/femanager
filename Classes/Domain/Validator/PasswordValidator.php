@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Domain\Validator;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -114,8 +114,6 @@ class PasswordValidator extends AbstractValidatorExtbase
 
     /**
      * Initialize Validator Function
-     *
-     * @return void
      */
     protected function init()
     {

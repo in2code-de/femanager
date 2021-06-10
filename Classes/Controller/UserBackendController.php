@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Controller;
 
@@ -21,12 +21,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class UserBackendController extends AbstractController
 {
-
     protected $configPID;
 
     /**
      * @param array $filter
-     * @return void
      */
     public function listAction(array $filter = [])
     {
@@ -45,7 +43,6 @@ class UserBackendController extends AbstractController
 
     /**
      * @param array $filter
-     * @return void
      */
     public function confirmationAction(array $filter = [])
     {
@@ -67,7 +64,6 @@ class UserBackendController extends AbstractController
 
     /**
      * @param User $user
-     * @return void
      */
     public function userLogoutAction(User $user)
     {
@@ -78,7 +74,6 @@ class UserBackendController extends AbstractController
 
     /**
      * @param int $userIdentifier
-     * @return void
      */
     public function confirmUserAction(int $userIdentifier)
     {
@@ -115,7 +110,6 @@ class UserBackendController extends AbstractController
 
     /**
      * @param int $userIdentifier
-     * @return void
      */
     public function refuseUserAction(int $userIdentifier)
     {
@@ -147,13 +141,11 @@ class UserBackendController extends AbstractController
             );
         }
 
-
         $this->redirect('confirmation');
     }
 
     /**
      * @param array $filter
-     * @return void
      */
     public function listOpenUserConfirmationsAction(array $filter = [])
     {
@@ -173,7 +165,6 @@ class UserBackendController extends AbstractController
 
     /**
      * @param int $userIdentifier
-     * @return void
      */
     public function resendUserConfirmationRequestAction(int $userIdentifier)
     {

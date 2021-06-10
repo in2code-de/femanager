@@ -16,18 +16,11 @@ class RequestTest extends UnitTestCase
      */
     protected $abstractValidationViewHelperMock;
 
-
-    /**
-     * @return void
-     */
     public function setUp()
     {
         $this->abstractValidationViewHelperMock = $this->getAccessibleMock(RequestViewHelper::class, ['dummy']);
     }
 
-    /**
-     * @return void
-     */
     public function tearDown()
     {
         unset($this->abstractValidationViewHelperMock);
@@ -106,7 +99,6 @@ class RequestTest extends UnitTestCase
      * @param array $parametersToSet
      * @param string $expectedResult
      * @dataProvider renderReturnsStringDataProvider
-     * @return void
      * @covers ::render
      */
     public function testRenderReturnsString($parameter, $htmlSpecialChars, $parametersToSet, $expectedResult)

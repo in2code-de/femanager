@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Model\User;
@@ -96,9 +96,6 @@ abstract class AbstractFinisher implements FinisherInterface
         return $this;
     }
 
-    /**
-     * @return null
-     */
     public function getActionMethodName()
     {
         return $this->actionMethodName;
@@ -114,9 +111,6 @@ abstract class AbstractFinisher implements FinisherInterface
         return $this;
     }
 
-    /**
-     * @return void
-     */
     public function initializeFinisher()
     {
     }

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
@@ -9,7 +9,6 @@ use In2code\Femanager\Event\ImpersonateEvent;
 use In2code\Femanager\Utility\BackendUserUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
-use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -22,7 +21,6 @@ class UserController extends AbstractController
 
     /**
      * @param array $filter
-     * @return void
      */
     public function listAction(array $filter = [])
     {
@@ -41,8 +39,6 @@ class UserController extends AbstractController
 
     /**
      * Enforce user setting from FlexForm and ignore &tx_femanager_pi1[user]=421
-     *
-     * @return void
      */
     public function initializeShowAction()
     {
@@ -55,7 +51,6 @@ class UserController extends AbstractController
 
     /**
      * @param User $user
-     * @return void
      */
     public function showAction(User $user = null)
     {
@@ -65,7 +60,6 @@ class UserController extends AbstractController
 
     /**
      * @param User $user
-     * @return void
      * @throws \Exception
      */
     public function imageDeleteAction(User $user)
@@ -90,7 +84,6 @@ class UserController extends AbstractController
      * @param string $additionalValue Additional Values
      * @param int $plugin tt_content.uid of the femanager plugin
      * @param string $referrerAction current action name
-     * @return void
      */
     public function validateAction(
         $validation = null,
@@ -129,7 +122,6 @@ class UserController extends AbstractController
      *
      * @param User $user
      * @throws UnauthorizedException
-     * @return void
      */
     public function loginAsAction(User $user)
     {

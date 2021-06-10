@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -34,7 +34,7 @@ class TemplateUtility extends AbstractUtility
      *        paths pointing to the EXT:femanager-resources.
      *
      * @param string $part "template", "partial", "layout"
-     * @param boolean $returnAllPaths Default: FALSE, If FALSE only paths
+     * @param bool $returnAllPaths Default: FALSE, If FALSE only paths
      *        for the first configuration (Paths, Path, hardcoded)
      *        will be returned. If TRUE all (possible) paths will be returned.
      * @return array

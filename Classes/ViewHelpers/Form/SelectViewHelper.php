@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\ViewHelpers\Form;
 
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -12,8 +12,6 @@ class SelectViewHelper extends OriginalSelectViewHelper
 {
     /**
      * Initialize
-     *
-     * @return void
      */
     public function initialize()
     {
@@ -24,8 +22,6 @@ class SelectViewHelper extends OriginalSelectViewHelper
 
     /**
      * Initialize
-     *
-     * @return void
      */
     public function initializeArguments()
     {

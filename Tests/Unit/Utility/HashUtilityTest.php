@@ -22,9 +22,6 @@ class HashUtilityTest extends UnitTestCase
      */
     protected $user = null;
 
-    /**
-     * @return void
-     */
     public function setUp()
     {
         $this->user = new User();
@@ -32,7 +29,6 @@ class HashUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @covers \In2code\Femanager\Utility\AbstractUtility::getEncryptionKey
      */
     public function testEncryptionKey()
@@ -42,7 +38,6 @@ class HashUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::validHash
      */
@@ -53,7 +48,6 @@ class HashUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::createHashForUser
      * @covers ::hashString
