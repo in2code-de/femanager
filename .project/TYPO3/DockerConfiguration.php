@@ -4,7 +4,7 @@ $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default'] = [
     'charset' => 'utf8',
     'driver' => 'mysqli',
     'dbname' => getenv('MYSQL_DATABASE'),
-    'host' => 'mysql',
+    'host' => getenv('MYSQL_HOST'),
     'user' => getenv('MYSQL_USER'),
     'password' => getenv('MYSQL_PASSWORD'),
 ];
