@@ -140,10 +140,12 @@ jobs:
           while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
             sleep 1
           done
+      - name: "Unzip db dump"
+        run: "gzip -d .project/data/db.sql.gz"
       - name: "Import database to mariadb container"
         env:
           PORT: ${{ job.services.mariadb.ports[3306] }}
-        run: "mysql -uroot -proot -P\"$PORT\" -h 127.0.0.1 typo3 < .project/data/db.sql.gz"
+        run: "mysql -uroot -proot -P\"$PORT\" -h 127.0.0.1 typo3 < .project/data/db.sql"
       - name: "Set configuration"
         run: "cp .project/TYPO3/DockerConfiguration.php .Build/Web/typo3conf/AdditionalConfiguration.php"
       - name: "Install TYPO3"
