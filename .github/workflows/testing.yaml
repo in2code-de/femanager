@@ -98,7 +98,7 @@ jobs:
       TYPO3_INSTALL_DB_USER: app
       TYPO3_INSTALL_DB_PASSWORD: app
       TYPO3_INSTALL_DB_HOST: 127.0.0.1
-      TYPO3_INSTALL_DB_PORT: ${{ job.services.mariadb.ports[3306] }}
+      TYPO3_INSTALL_DB_PORT: 3306
       TYPO3_INSTALL_DB_UNIX_SOCKET: ""
       TYPO3_INSTALL_DB_USE_EXISTING: y
       TYPO3_INSTALL_DB_DBNAME: typo3
@@ -147,6 +147,8 @@ jobs:
       - name: "Set configuration"
         run: "cp .project/TYPO3/DockerConfiguration.php .Build/Web/typo3conf/AdditionalConfiguration.php"
       - name: "Install TYPO3"
+        env:
+          TYPO3_INSTALL_DB_PORT: ${{ job.services.mariadb.ports[3306] }}
         run: "php .Build/bin/typo3cms install:setup"
       - name: "Run Behat Tests"
         run: "composer test:behaviour:docker"
