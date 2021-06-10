@@ -1,0 +1,48 @@
+plugin.tx_femanager {
+  view {
+    # cat=plugin.tx_femanager/file; type=string; label= Path to template root (FE)
+    templateRootPath = EXT:femanager/Resources/Private/Templates/
+
+    # cat=plugin.tx_femanager/file; type=string; label= Path to template partials (FE)
+    partialRootPath = EXT:femanager/Resources/Private/Partials/
+
+    # cat=plugin.tx_femanager/file; type=string; label= Path to template layouts (FE)
+    layoutRootPath = EXT:femanager/Resources/Private/Layouts/
+  }
+
+  persistence {
+    # cat=plugin.tx_femanager//a; type=int+; label= Default storage PID
+    storagePid =
+  }
+
+  settings {
+    # cat=plugin.tx_femanager//0100; type=text; label= Admin Name: Default admin name for all emails to the user
+    adminName = Femanager
+
+    # cat=plugin.tx_femanager//0101; type=text; label= Admin Email: Default admin email for all emails to the user
+    adminEmail = Femanager@domain.org
+
+    # cat=plugin.tx_femanager//0200; type=text; label= Upload folder: Define where to save images of the users
+    uploadFolder = fileadmin/users/
+
+    # cat=plugin.tx_femanager//0900; type=boolean; label= Include jQuery: Load and implement jQuery from external source (googleapis.com)
+    jQuery = 0
+
+    # cat=plugin.tx_femanager//0910; type=boolean; label= Include Twitter Bootstrap JS: Load and implement Twitter Bootstrap JavaScript from external source (bootstrapcdn.com)
+    bootstrap = 0
+
+    # cat=plugin.tx_femanager//0920; type=boolean; label= Include Twitter Bootstrap CSS: Load and implement Twitter Bootstrap CSS from external source (bootstrapcdn.com)
+    bootstrapCSS = 0
+
+    # cat=plugin.tx_femanager//0930; type=int+; label= Page ID for the resend email confirmation view
+    showResendUserConfirmationRequestView = 0
+
+    ratelimiter {
+      # cat=plugin.tx_femanager//0980; type=int+; label=Number of seconds for the sliding window rate limiter
+      timeframe = 3600
+
+      # cat=plugin.tx_femanager//0990; type=int+; label=Request count. How many requests are allowed in the last <timeframe> seconds. Set to 0 to disable rate limiter.
+      limit = 10
+    }
+  }
+}
