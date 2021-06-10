@@ -93,6 +93,20 @@ jobs:
     name: "PHP Behat Tests"
     runs-on: ubuntu-20.04
     needs: php-lint
+    env:
+      TYPO3_INSTALL_DB_DRIVER: mysqli
+      TYPO3_INSTALL_DB_USER: app
+      TYPO3_INSTALL_DB_PASSWORD: app
+      TYPO3_INSTALL_DB_HOST: mariadb
+      TYPO3_INSTALL_DB_PORT: 3306
+      TYPO3_INSTALL_DB_UNIX_SOCKET: ""
+      TYPO3_INSTALL_DB_USE_EXISTING: y
+      TYPO3_INSTALL_DB_DBNAME: typo3
+      TYPO3_INSTALL_ADMIN_USER: admin
+      TYPO3_INSTALL_ADMIN_PASSWORD: password
+      TYPO3_INSTALL_SITE_NAME: "FE Manager"
+      TYPO3_INSTALL_SITE_SETUP_TYPE: no
+      TYPO3_INSTALL_WEB_SERVER_CONFIG: apache
     services:
       chrome:
         image: selenium/standalone-chrome-debug
@@ -103,19 +117,7 @@ jobs:
           MYSQL_DATABASE: typo3
           MYSQL_PASSWORD: app
           MYSQL_USER: app
-          TYPO3_INSTALL_DB_DRIVER: mysqli
-          TYPO3_INSTALL_DB_USER: app
-          TYPO3_INSTALL_DB_PASSWORD: app
-          TYPO3_INSTALL_DB_HOST: mysql
-          TYPO3_INSTALL_DB_PORT: 3306
-          TYPO3_INSTALL_DB_UNIX_SOCKET: ""
-          TYPO3_INSTALL_DB_USE_EXISTING: y
-          TYPO3_INSTALL_DB_DBNAME: typo3
-          TYPO3_INSTALL_ADMIN_USER: admin
-          TYPO3_INSTALL_ADMIN_PASSWORD: password
-          TYPO3_INSTALL_SITE_NAME: "Fe Manager"
-          TYPO3_INSTALL_SITE_SETUP_TYPE: no
-          TYPO3_INSTALL_WEB_SERVER_CONFIG: apache
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -130,7 +132,7 @@ jobs:
       - name: "Get database dump"
         run: "git lfs pull"
       - name: "Import database to mariadb container"
-        run: "mysql -uroot -papp -h mariadb typo3 < .project/data/db.sql.gz"
+        run: "mysql -uroot -proot typo3 < .project/data/db.sql.gz"
       - name: "Set configuration"
         run: "cp .project/TYPO3/DockerConfiguration.php .Build/Web/typo3conf/AdditionalConfiguration.php"
       - name: "Install TYPO3"
