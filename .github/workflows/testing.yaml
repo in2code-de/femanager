@@ -132,8 +132,6 @@ jobs:
         env:
           PORT: ${{ job.services.mariadb.ports[3306] }}
         run: "mysql -uroot -proot -P\"$PORT\" -h 127.0.0.1 typo3 < .project/data/db.sql"
-      - name: "Set configuration"
-        run: "cp .project/TYPO3/DockerConfiguration.php .Build/Web/typo3conf/AdditionalConfiguration.php"
       - name: "Install TYPO3"
         env:
           TYPO3_INSTALL_DB_DRIVER: mysqli
@@ -150,7 +148,14 @@ jobs:
           TYPO3_INSTALL_SITE_SETUP_TYPE: no
           TYPO3_INSTALL_WEB_SERVER_CONFIG: apache
         run: "php .Build/bin/typo3cms install:setup"
+      - name: "Set configuration"
+        run: "cp .project/TYPO3/DockerConfiguration.php .Build/Web/typo3conf/AdditionalConfiguration.php"
       - name: "Run Behat Tests"
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: typo3
+          MYSQL_PASSWORD: app
+          MYSQL_USER: app
         run: "composer test:behaviour:docker"
     strategy:
       fail-fast: false
