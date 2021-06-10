@@ -65,7 +65,8 @@
     "sjbr/sr-freecap": "^2.6",
     "sjbr/static-info-tables": "^6.9",
     "helmich/typo3-typoscript-lint": "^2.5",
-    "friendsofphp/php-cs-fixer": "^2.19"
+    "friendsofphp/php-cs-fixer": "^2.19",
+    "genesis/behat-fail-aid": "^3.7"
   },
   "autoload": {
     "psr-4": {

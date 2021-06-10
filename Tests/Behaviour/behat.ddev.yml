@@ -6,8 +6,11 @@ default:
       paths:
         features: '%paths.base%/Features'
         bootstrap: '%paths.base%/Features/Bootstrap'
-      contexts: [FeatureContext]
+      contexts:
+        - FeatureContext
+        - FailAid\Context\FailureContext
   extensions:
+    FailAid\Extension: ~
     Behat\MinkExtension:
       base_url: https://femanager.ddev.site/
       files_path: /var/www/html/.Build/Web/fileadmin/user_upload
@@ -21,7 +24,7 @@ default:
           selenium2:
             capabilities:
               acceptSslCerts: true
-              browser:              chrome
+              browser: chrome
               extra_capabilities:
                 acceptInsecureCerts: true
             wd_host: 'http://chrome:4444/wd/hub'
