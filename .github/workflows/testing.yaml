@@ -97,8 +97,8 @@ jobs:
       TYPO3_INSTALL_DB_DRIVER: mysqli
       TYPO3_INSTALL_DB_USER: app
       TYPO3_INSTALL_DB_PASSWORD: app
-      TYPO3_INSTALL_DB_HOST: mariadb
-      TYPO3_INSTALL_DB_PORT: 3306
+      TYPO3_INSTALL_DB_HOST: 127.0.0.1
+      TYPO3_INSTALL_DB_PORT: ${{ job.services.mariadb.ports[3306] }}
       TYPO3_INSTALL_DB_UNIX_SOCKET: ""
       TYPO3_INSTALL_DB_USE_EXISTING: y
       TYPO3_INSTALL_DB_DBNAME: typo3
@@ -137,11 +137,13 @@ jobs:
         env:
           PORT: ${{ job.services.mariadb.ports[3306] }}
         run: |
-          while ! mysqladmin ping -h"127.0.0.1" -P"3306" --silent; do
+          while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
             sleep 1
           done
       - name: "Import database to mariadb container"
-        run: "mysql -uroot -proot -h 127.0.0.1 typo3 < .project/data/db.sql.gz"
+        env:
+          PORT: ${{ job.services.mariadb.ports[3306] }}
+        run: "mysql -uroot -proot -P"$PORT" -h 127.0.0.1 typo3 < .project/data/db.sql.gz"
       - name: "Set configuration"
         run: "cp .project/TYPO3/DockerConfiguration.php .Build/Web/typo3conf/AdditionalConfiguration.php"
       - name: "Install TYPO3"
