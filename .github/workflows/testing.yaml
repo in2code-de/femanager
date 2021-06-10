@@ -132,7 +132,7 @@ jobs:
       - name: "Get database dump"
         run: "git lfs pull"
       - name: "Import database to mariadb container"
-        run: "mysql -uroot -proot typo3 < .project/data/db.sql.gz"
+        run: "mysql -uroot -proot -h 127.0.0.1 typo3 < .project/data/db.sql.gz"
       - name: "Set configuration"
         run: "cp .project/TYPO3/DockerConfiguration.php .Build/Web/typo3conf/AdditionalConfiguration.php"
       - name: "Install TYPO3"
