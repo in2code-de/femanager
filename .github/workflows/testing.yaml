@@ -112,6 +112,8 @@ jobs:
         image: selenium/standalone-chrome-debug
       mariadb:
         image: mariadb:10.3
+        ports:
+          - 3306
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: typo3
@@ -132,6 +134,8 @@ jobs:
       - name: "Get database dump"
         run: "git lfs pull"
       - name: "Verify MariaDB connection"
+        env:
+          PORT: ${{ job.services.mariadb.ports[3306] }}
         run: |
           while ! mysqladmin ping -h"127.0.0.1" -P"3306" --silent; do
             sleep 1
