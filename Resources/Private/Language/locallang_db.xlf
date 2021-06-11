@@ -280,6 +280,9 @@
 			<trans-unit id="flexform.list.orderby.2">
 				<source>Company</source>
 			</trans-unit>
+			<trans-unit id="flexform.list.orderby.3">
+				<source>Username</source>
+			</trans-unit>
 			<trans-unit id="flexform.list.sorting">
 				<source>Sorting</source>
 			</trans-unit>
