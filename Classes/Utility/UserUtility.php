@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Utility;
 
@@ -163,7 +163,6 @@ class UserUtility extends AbstractUtility
      *
      * @param User $user
      * @param string $method
-     * @return void
      * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
      */
     public static function convertPassword(User $user, $method)
@@ -178,7 +177,6 @@ class UserUtility extends AbstractUtility
      *
      * @param User $user
      * @param string $method "Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", "md5" or "none" ("sha1" for TYPO3 V8)
-     * @return void
      * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
      */
     public static function hashPassword(User &$user, $method)
@@ -304,7 +302,6 @@ class UserUtility extends AbstractUtility
      * Remove FE Session to a given user
      *
      * @param User $user
-     * @return void
      */
     public static function removeFrontendSessionToUser(User $user)
     {
@@ -339,12 +336,11 @@ class UserUtility extends AbstractUtility
      * Login FE-User
      *
      * @param User $user
-     * @param null|string $storagePids
-     * @return void
+     * @param string|null $storagePids
      */
     public static function login(User $user, $storagePids = null)
     {
-        #Log in user
+        //Log in user
         $GLOBALS['TSFE']->fe_user->createUserSession(['uid' => (int)$user->getUid()]);
         $GLOBALS['TSFE']->fe_user->loginSessionStarted = 1;
         $GLOBALS['TSFE']->fe_user->forceSetCookie = true;
@@ -359,7 +355,6 @@ class UserUtility extends AbstractUtility
      * details on this issue
      *
      * @param TypoScriptFrontendController $tsfe
-     * @return void
      */
     protected static function loginAlternative(TypoScriptFrontendController $tsfe)
     {

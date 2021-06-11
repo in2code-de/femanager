@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
@@ -11,7 +11,6 @@ use In2code\Femanager\Event\InviteUserUpdateEvent;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
-use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -20,13 +19,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class InvitationController
  */
-class InvitationController extends AbstractController
+class InvitationController extends AbstractFrontendController
 {
 
     /**
      * action new
-     *
-     * @return void
      */
     public function newAction()
     {
@@ -42,7 +39,6 @@ class InvitationController extends AbstractController
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
-     * @return void
      */
     public function createAction(User $user)
     {
@@ -76,7 +72,6 @@ class InvitationController extends AbstractController
      *        Create Confirmation from Admin is not necessary
      *
      * @param User $user
-     * @return void
      */
     public function createAllConfirmed(User $user)
     {
@@ -119,7 +114,7 @@ class InvitationController extends AbstractController
 
         $this->eventDispatcher->dispatch(new InviteUserConfirmedEvent($user));
 
-        $this->redirectByAction('invitation','redirectStep1');
+        $this->redirectByAction('invitation', 'redirectStep1');
         $this->redirect('new');
     }
 
@@ -128,7 +123,6 @@ class InvitationController extends AbstractController
      *
      * @param int $user User UID
      * @param string $hash
-     * @return void
      */
     public function editAction($user, $hash = null)
     {
@@ -164,7 +158,6 @@ class InvitationController extends AbstractController
      * @param \In2code\Femanager\Domain\Model\User $user
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
-     * @return void
      */
     public function updateAction($user)
     {
@@ -197,8 +190,6 @@ class InvitationController extends AbstractController
 
     /**
      * Init for delete
-     *
-     * @return void
      */
     protected function initializeDeleteAction()
     {
@@ -209,7 +200,6 @@ class InvitationController extends AbstractController
      *
      * @param int $user User UID
      * @param string $hash
-     * @return void
      */
     public function deleteAction($user, $hash = null)
     {
@@ -252,8 +242,6 @@ class InvitationController extends AbstractController
 
     /**
      * Restricted Action to show messages
-     *
-     * @return void
      */
     public function statusAction()
     {

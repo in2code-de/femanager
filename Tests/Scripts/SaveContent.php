@@ -5,8 +5,6 @@ namespace In2code\Femanager\Tests\Scripts;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-use function print_r;
-
 /**
  * Class SaveContent
  */

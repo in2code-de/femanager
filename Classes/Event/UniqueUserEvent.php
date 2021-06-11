@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Event;
 
@@ -30,8 +30,7 @@ class UniqueUserEvent
         string $fieldName,
         ?User $user,
         bool $unique
-    )
-    {
+    ) {
         $this->emailOrUsername = $emailOrUsername;
         $this->fieldName = $fieldName;
         $this->user = $user;

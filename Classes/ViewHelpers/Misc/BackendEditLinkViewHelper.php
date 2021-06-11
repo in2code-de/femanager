@@ -1,10 +1,10 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use In2code\Femanager\Utility\BackendUtility;
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
@@ -36,7 +36,7 @@ class BackendEditLinkViewHelper extends AbstractViewHelper
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
-    ):string {
+    ): string {
         return BackendUtility::getBackendEditUri($arguments['tableName'], $arguments['identifier'], $arguments['addReturnUrl']);
     }
 }

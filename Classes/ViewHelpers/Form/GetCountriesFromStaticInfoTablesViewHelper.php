@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\ViewHelpers\Form;
 
@@ -19,7 +19,8 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
      */
     protected $countryRepository = null;
 
-    public function __construct() {
+    public function __construct()
+    {
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
             $this->countryRepository = GeneralUtility::makeInstance(CountryRepository::class);
         }
@@ -53,15 +54,13 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
 
     /**
      * Initialize
-     *
-     * @return void
      */
     public function initializeArguments()
     {
         parent::initializeArguments();
         $this->registerArgument('key', 'string', 'country isoCode', false, 'isoCodeA3');
-        $this->registerArgument('value', 'string', 'officialNameLocal', false, 'officialNameLocal');
-        $this->registerArgument('sortbyField', 'string', 'isoCodeA3', false, 'isoCodeA3');
+        $this->registerArgument('value', 'string', 'shortNameLocal', false, 'shortNameLocal');
+        $this->registerArgument('sortbyField', 'string', 'shortNameLocal', false, 'shortNameLocal');
         $this->registerArgument('sorting', 'string', 'value to prepend', false, 'asc');
     }
 }

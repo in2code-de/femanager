@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
@@ -11,7 +11,6 @@ use In2code\Femanager\Event\DeleteUserEvent;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
-use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
@@ -22,17 +21,13 @@ use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 /**
  * Class EditController
  */
-class EditController extends AbstractController
+class EditController extends AbstractFrontendController
 {
-
-    /**
-     * @return void
-     */
     public function editAction()
     {
         $token = '';
         if ($this->user) {
-            $token = GeneralUtility::hmac($this->user->getUid(), (string) $this->user->getCrdate()->getTimestamp());
+            $token = GeneralUtility::hmac($this->user->getUid(), (string)$this->user->getCrdate()->getTimestamp());
         }
         $this->view->assignMultiple([
             'user' => $this->user,
@@ -42,9 +37,6 @@ class EditController extends AbstractController
         $this->assignForAll();
     }
 
-    /**
-     * @return void
-     */
     public function initializeUpdateAction()
     {
         $user = UserUtility::getCurrentUser();
@@ -64,7 +56,6 @@ class EditController extends AbstractController
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
-     * @return void
      */
     public function updateAction(User $user)
     {
@@ -85,7 +76,6 @@ class EditController extends AbstractController
      * @param User $user User object
      * @param string $hash
      * @param string $status could be "confirm", "refuse", "silentRefuse"
-     * @return void
      */
     public function confirmUpdateRequestAction(User $user, $hash, $status = 'confirm')
     {
@@ -117,7 +107,6 @@ class EditController extends AbstractController
      * Status update confirmation
      *
      * @param User $user
-     * @return void
      */
     protected function statusConfirm(User $user)
     {
@@ -144,7 +133,6 @@ class EditController extends AbstractController
      * Status update refused
      *
      * @param User $user
-     * @return void
      */
     protected function statusRefuse(User $user)
     {
@@ -167,7 +155,6 @@ class EditController extends AbstractController
      * action delete
      *
      * @param User $user
-     * @return void
      */
     public function deleteAction(User $user)
     {
@@ -199,7 +186,6 @@ class EditController extends AbstractController
      * Check: If there are no changes, simple redirect back
      *
      * @param User $user
-     * @return void
      * @throws UnsupportedRequestTypeException
      */
     protected function redirectIfDirtyObject(User $user)
@@ -212,8 +198,6 @@ class EditController extends AbstractController
 
     /**
      * @param User $user
-     *
-     * @return void
      */
     protected function emailForUsername(User $user)
     {

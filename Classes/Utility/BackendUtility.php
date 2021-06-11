@@ -1,12 +1,10 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Backend\Routing\UriBuilder;
-use TYPO3\CMS\Core\TimeTracker\TimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class BackendUtility
@@ -105,7 +103,6 @@ class BackendUtility
         return $parameters;
     }
 
-
     /**
      * @param int $pageUid [optional] the current pageuid
      * @return array
@@ -121,4 +118,3 @@ class BackendUtility
         return $TSObj->setup;
     }
 }
-

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\DataProcessor;
 
 /**
@@ -7,10 +7,6 @@ namespace In2code\Femanager\DataProcessor;
  */
 interface DataProcessorInterface
 {
-
-    /**
-     * @return void
-     */
     public function initializeDataProcessor();
 
     /**

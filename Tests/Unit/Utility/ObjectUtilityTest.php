@@ -4,7 +4,6 @@ namespace In2code\Femanager\Tests\Unit\Utility;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\ObjectUtility;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -20,7 +19,6 @@ class ObjectUtilityTest extends UnitTestCase
     protected $testFilesToDelete = [];
 
     /**
-     * @return void
      * @covers ::getQueryBuilder
      */
     public function testGetQueryBuilder()
@@ -28,9 +26,8 @@ class ObjectUtilityTest extends UnitTestCase
         $this->expectExceptionCode(1459422492);
         ObjectUtility::getQueryBuilder('tt_content');
     }
-    
+
     /**
-     * @return void
      * @covers ::implodeObjectStorageOnProperty
      */
     public function testImplodeObjectStorageOnProperty()

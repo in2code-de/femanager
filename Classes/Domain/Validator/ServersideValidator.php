@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Domain\Validator;
 
@@ -8,11 +8,6 @@ use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-
-use function array_key_exists;
-use function class_exists;
-use function method_exists;
-use function ucfirst;
 
 /**
  * Class ServersideValidator
@@ -109,7 +104,6 @@ class ServersideValidator extends AbstractValidator
      * @param $validationSetting
      * @param $value
      * @param $fieldName
-     * @return void
      */
     protected function checkRequiredValidation($validationSetting, $value, $fieldName)
     {
@@ -123,7 +117,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkEmailValidation($value, $validationSetting, $fieldName)
     {
@@ -137,7 +130,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkMinValidation($value, $validationSetting, $fieldName)
     {
@@ -151,7 +143,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkMaxValidation($value, $validationSetting, $fieldName)
     {
@@ -165,7 +156,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkIntOnlyValidation($value, $validationSetting, $fieldName)
     {
@@ -179,7 +169,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkLetterOnlyValidation($value, $validationSetting, $fieldName)
     {
@@ -193,7 +182,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkUnicodeLetterOnlyValidation($value, $validationSetting, $fieldName)
     {
@@ -208,7 +196,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkUniqueInPageValidation($user, $value, $validationSetting, $fieldName)
     {
@@ -227,7 +214,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkUniqueInDbValidation($user, $value, $validationSetting, $fieldName)
     {
@@ -245,7 +231,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkMustIncludeValidation($value, $validationSetting, $fieldName)
     {
@@ -259,7 +244,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkMustNotIncludeValidation($value, $validationSetting, $fieldName)
     {
@@ -273,7 +257,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkInListValidation($value, $validationSetting, $fieldName)
     {
@@ -288,7 +271,6 @@ class ServersideValidator extends AbstractValidator
      * @param $validationSetting
      * @param $value
      * @param $fieldName
-     * @return void
      */
     protected function checkSameAsValidation($user, $validationSetting, $value, $fieldName)
     {
@@ -306,7 +288,6 @@ class ServersideValidator extends AbstractValidator
      * @param $value
      * @param $validationSetting
      * @param $fieldName
-     * @return void
      */
     protected function checkAnyValidation($validation, $value, $validationSetting, $fieldName)
     {
@@ -336,7 +317,7 @@ class ServersideValidator extends AbstractValidator
             if (method_exists($value, 'current')) {
                 $current = $value->current();
 
-                if ($current instanceof FileReference){
+                if ($current instanceof FileReference) {
                     return true;
                 }
 

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Utility\ConfigurationUtility;
@@ -70,7 +70,6 @@ class FileService
             GeneralUtility::verifyFilenameAgainstDenyPattern($this->fileName) &&
             GeneralUtility::validPathStr($this->fileName);
     }
-
 
     /**
      * Create sys_file entry for given filename and return uid

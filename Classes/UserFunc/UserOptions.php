@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\UserFunc;
 
 use In2code\Femanager\Domain\Model\User;
@@ -16,7 +16,6 @@ class UserOptions
      * Just add users from start point to selection
      *
      * @param array $params
-     * @return void
      */
     public function addOptions(&$params)
     {

@@ -1,11 +1,8 @@
 <?php
 namespace In2code\Femanager\Tests\Unit\Utility;
 
-use In2code\Femanager\Tests\Helper\TestingHelper;
 use In2code\Femanager\Tests\Unit\Fixture\Utility\AbstractUtility;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class AbstractUtilityTest
@@ -20,7 +17,6 @@ class AbstractUtilityTest extends UnitTestCase
     protected $testFilesToDelete = [];
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getTcaFromTable
      */
@@ -37,7 +33,6 @@ class AbstractUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @covers ::getFilesArray
      */
     public function testGetFilesArray()

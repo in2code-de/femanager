@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Controller;
 
@@ -10,30 +10,26 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use In2code\Femanager\Domain\Service\SendMailService;
-use In2code\Femanager\Domain\Service\RatelimiterService;
 use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
 use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\BackendUtility;
-use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-
-use function json_encode;
 
 /**
  * Class AbstractController
@@ -59,11 +55,6 @@ abstract class AbstractController extends ActionController
      * @var \In2code\Femanager\Domain\Service\SendMailService
      */
     protected $sendMailService;
-
-    /**
-     * @var \In2code\Femanager\Domain\Service\RatelimiterService
-     */
-    protected $ratelimiterService;
 
     /**
      * @var \In2code\Femanager\Finisher\FinisherRunner
@@ -131,7 +122,6 @@ abstract class AbstractController extends ActionController
      * @param \In2code\Femanager\Domain\Repository\UserGroupRepository $userGroupRepository
      * @param \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager
      * @param \In2code\Femanager\Domain\Service\SendMailService $sendMailService
-     * @param \In2code\Femanager\Domain\Service\RatelimiterService $ratelimiterService
      * @param \In2code\Femanager\Finisher\FinisherRunner $finisherRunner
      * @param \In2code\Femanager\Utility\LogUtility $logUtility
      */
@@ -140,7 +130,6 @@ abstract class AbstractController extends ActionController
         UserGroupRepository $userGroupRepository,
         PersistenceManager $persistenceManager,
         SendMailService $sendMailService,
-        RatelimiterService $ratelimiterService,
         FinisherRunner $finisherRunner,
         LogUtility $logUtility
     ) {
@@ -148,7 +137,6 @@ abstract class AbstractController extends ActionController
         $this->userGroupRepository = $userGroupRepository;
         $this->persistenceManager = $persistenceManager;
         $this->sendMailService = $sendMailService;
-        $this->ratelimiterService = $ratelimiterService;
         $this->finisherRunner = $finisherRunner;
         $this->logUtility = $logUtility;
     }
@@ -158,7 +146,6 @@ abstract class AbstractController extends ActionController
      *        Create Confirmation from Admin is not necessary
      *
      * @param User $user
-     * @return void
      */
     public function createAllConfirmed(User $user)
     {
@@ -173,7 +160,6 @@ abstract class AbstractController extends ActionController
      *        Update Confirmation from Admin is not necessary
      *
      * @param User $user
-     * @return void
      */
     public function updateAllConfirmed(User $user)
     {
@@ -212,7 +198,6 @@ abstract class AbstractController extends ActionController
      * Prefix method to updateAction(): Update must be confirmed by Admin
      *
      * @param User $user
-     * @return void
      */
     public function updateRequest($user)
     {
@@ -247,7 +232,6 @@ abstract class AbstractController extends ActionController
      * @param bool $login Login after creation
      * @param string $status
      * @param bool $backend Don't redirect if called from backend action
-     * @return void
      */
     public function finalCreate(
         $user,
@@ -324,7 +308,6 @@ abstract class AbstractController extends ActionController
      *
      * @param string $action "new", "edit"
      * @param string $category "redirect", "requestRedirect" value from TypoScript
-     * @return void
      */
     protected function redirectByAction($action = 'new', $category = 'redirect')
     {
@@ -352,8 +335,6 @@ abstract class AbstractController extends ActionController
 
     /**
      * Init for User delete action
-     *
-     * @return void
      */
     protected function initializeDeleteAction()
     {
@@ -368,8 +349,7 @@ abstract class AbstractController extends ActionController
      *
      * @param User $user
      * @param int $uid Given fe_users uid
-     * @param String $receivedToken Token
-     * @return void
+     * @param string $receivedToken Token
      */
     protected function testSpoof($user, $uid, $receivedToken)
     {
@@ -399,8 +379,6 @@ abstract class AbstractController extends ActionController
 
     /**
      * Assigns all values, which should be available in all views
-     *
-     * @return void
      */
     public function assignForAll()
     {
@@ -421,7 +399,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * @return void
      */
     public function initializeAction()
     {
@@ -450,7 +427,7 @@ abstract class AbstractController extends ActionController
             // Retrieve page TSconfig of the current page
             $pageTsConfig = BackendUtilityCore::getPagesTSconfig(BackendUtility::getPageIdentifier((int)GeneralUtility::_GET('id')));
             if (is_array($pageTsConfig['module.']['tx_femanager.'])) {
-                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.']);
+                $this->moduleConfig = array_merge($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.']);
             }
 
             // Retrieve user TSconfig of currently logged in user
@@ -485,7 +462,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * @return void
      */
     protected function checkStoragePid()
     {
@@ -498,7 +474,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * @return void
      */
     protected function checkTypoScript()
     {
@@ -522,7 +497,6 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * @return void
      */
     protected function setAllUserGroups()
     {
@@ -531,12 +505,10 @@ abstract class AbstractController extends ActionController
         $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
     }
 
-
     /**
      * Send email to user for confirmation
      *
      * @param User $user
-     * @return void
      * @throws UnsupportedRequestTypeException
      */
     public function sendCreateUserConfirmationMail(User $user)
