@@ -14,6 +14,13 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       :Date: 2021-06-06
       :Changes:
 
+      * [BUGFIX] Use ratelimiter service only in FE context - thx to Thomas Löffler
+
+-
+      :Version: 6.2.0
+      :Date: 2021-06-06
+      :Changes:
+
       * [FEATURE] Add RateLimiter for registration form - :ref:`see documentation <countryselect>`
       * [BUGFIX] Improve date validation - thx to https://github.com/pfuju
       * [BUGFIX] Validation for checkUniqueDb ignores starttime/endtime - thx to in2code

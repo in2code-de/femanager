@@ -20,7 +20,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class InvitationController
  */
-class InvitationController extends AbstractController
+class InvitationController extends AbstractFrontendController
 {
 
     /**
