@@ -7,7 +7,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'femanager',
     'description' => 'TYPO3 Frontend User Registration and Management based on
-        Extbase and Fluid and on TYPO3 8 and the possibility to extend it.
+        Extbase and Fluid and on TYPO3 10 and the possibility to extend it.
         Extension basicly works like sr_feuser_register',
     'category' => 'plugin',
     'author' => 'Alexander Kellner, Stefan Busemann',
@@ -23,7 +23,7 @@ $EM_CONF[$_EXTKEY] = [
     'modify_tables' => '',
     'clearCacheOnLoad' => 0,
     'lockType' => '',
-    'version' => '6.2.0',
+    'version' => '6.2.1',
     'constraints' => [
         'depends' => [
             'typo3' => '10.0.0-10.4.99',
