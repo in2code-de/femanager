@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="af">
+    <header/>
+    <body>
+      <trans-unit id="mlang_tabs_tab">
+        <source>Frontend Users</source>
+        <target state="needs-translation">Frontend Users</target>
+      </trans-unit>
+      <trans-unit id="mlang_labels_tabdescr">
+        <source>FE Manager allows you to see a list of Frontend Users and filter them. Show Users from a usergroup or from a searchword or simply show users which are online</source>
+        <target state="needs-translation">FE Manager allows you to see a list of Frontend Users and filter them. Show Users from a usergroup or from a searchword or simply show users which are online</target>
+      </trans-unit>
+      <trans-unit id="mlang_labels_tablabel">
+        <source>FE Manager</source>
+        <target state="needs-translation">FE Manager</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
