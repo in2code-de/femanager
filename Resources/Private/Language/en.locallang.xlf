@@ -1,0 +1,880 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="en">
+    <header/>
+    <body>
+      <trans-unit id="tx_femanager_domain_model_user">
+        <source>User</source>
+        <target state="needs-translation">User</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.username">
+        <source>Username</source>
+        <target state="needs-translation">Username</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password">
+        <source>Password</source>
+        <target state="needs-translation">Password</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password_repeat">
+        <source>Repeat Password</source>
+        <target state="needs-translation">Repeat Password</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.usergroup">
+        <source>Usergroup</source>
+        <target state="needs-translation">Usergroup</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.name">
+        <source>Full Name</source>
+        <target state="needs-translation">Full Name</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.firstName">
+        <source>Firstname</source>
+        <target state="needs-translation">Firstname</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.middleName">
+        <source>Middlename</source>
+        <target state="needs-translation">Middlename</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastName">
+        <source>Lastname</source>
+        <target state="needs-translation">Lastname</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
+        <source>Birthdate</source>
+        <target state="needs-translation">Birthdate</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint">
+        <source>Please type your birthdate as MM/DD/YYYY</source>
+        <target state="needs-translation">Please type your birthdate as MM/DD/YYYY</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.placeholder">
+        <source>MM/DD/YYYY</source>
+        <target state="needs-translation">MM/DD/YYYY</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateFormat">
+        <source>m/d/Y</source>
+        <target state="needs-translation">m/d/Y</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender">
+        <source>Gender</source>
+        <target state="needs-translation">Gender</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item0">
+        <source>Male</source>
+        <target state="needs-translation">Male</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item1">
+        <source>Female</source>
+        <target state="needs-translation">Female</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.address">
+        <source>Address</source>
+        <target state="needs-translation">Address</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.telephone">
+        <source>Telephone</source>
+        <target state="needs-translation">Telephone</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.fax">
+        <source>Fax</source>
+        <target state="needs-translation">Fax</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.email">
+        <source>Email</source>
+        <target state="needs-translation">Email</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.title">
+        <source>Title</source>
+        <target state="needs-translation">Title</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.zip">
+        <source>ZIP</source>
+        <target state="needs-translation">ZIP</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.city">
+        <source>City</source>
+        <target state="needs-translation">City</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.country">
+        <source>Country</source>
+        <target state="needs-translation">Country</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.www">
+        <source>Website</source>
+        <target state="needs-translation">Website</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.company">
+        <source>Company</source>
+        <target state="needs-translation">Company</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.image">
+        <source>Image</source>
+        <target state="needs-translation">Image</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.captcha">
+        <source>Captcha</source>
+        <target state="needs-translation">Captcha</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.terms">
+        <source>I accept the terms and conditions</source>
+        <target state="needs-translation">I accept the terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.termslinktext">
+        <source>Click here for terms and conditions</source>
+        <target state="needs-translation">Click here for terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastlogin">
+        <source>Last login</source>
+        <target state="needs-translation">Last login</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.crdate">
+        <source>Creation Time</source>
+        <target state="needs-translation">Creation Time</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log">
+        <source>User Log</source>
+        <target state="needs-translation">User Log</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.title">
+        <source>Title</source>
+        <target state="needs-translation">Title</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.crdate">
+        <source>Time</source>
+        <target state="needs-translation">Time</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.100">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.101">
+        <source>New Registration</source>
+        <target state="needs-translation">New Registration</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.102">
+        <source>Registration confirmed by user</source>
+        <target state="needs-translation">Registration confirmed by user</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.103">
+        <source>Registration confirmed by admin</source>
+        <target state="needs-translation">Registration confirmed by admin</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.104">
+        <source>Registration refused by user</source>
+        <target state="needs-translation">Registration refused by user</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.105">
+        <source>Registration refused by admin</source>
+        <target state="needs-translation">Registration refused by admin</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.106">
+        <source>Profile creation request</source>
+        <target state="needs-translation">Profile creation request</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.200">
+        <source>Update</source>
+        <target state="needs-translation">Update</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.201">
+        <source>Profile updated</source>
+        <target state="needs-translation">Profile updated</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.202">
+        <source>Profile update confirmed by admin</source>
+        <target state="needs-translation">Profile update confirmed by admin</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.203">
+        <source>Profile update refused by admin</source>
+        <target state="needs-translation">Profile update refused by admin</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.204">
+        <source>Profile update request</source>
+        <target state="needs-translation">Profile update request</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.205">
+        <source>Profile update security failure</source>
+        <target state="needs-translation">Profile update security failure</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.206">
+        <source>Image deleted</source>
+        <target state="needs-translation">Image deleted</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.300">
+        <source>Delete</source>
+        <target state="needs-translation">Delete</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.301">
+        <source>Profile deleted</source>
+        <target state="needs-translation">Profile deleted</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.400">
+        <source>Invitation</source>
+        <target state="needs-translation">Invitation</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.401">
+        <source>Profile created and user invited</source>
+        <target state="needs-translation">Profile created and user invited</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.402">
+        <source>Profile deleted by user</source>
+        <target state="needs-translation">Profile deleted by user</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.403">
+        <source>Wrong hash</source>
+        <target state="needs-translation">Wrong hash</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.404">
+        <source>You tried to open a restricted page</source>
+        <target state="needs-translation">You tried to open a restricted page</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.405">
+        <source>Password changed and profile activated</source>
+        <target state="needs-translation">Password changed and profile activated</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.user">
+        <source>User</source>
+        <target state="needs-translation">User</target>
+      </trans-unit>
+      <trans-unit id="error_no_typoscript">
+        <source>No TypoScript found. Did you already include the static Template?</source>
+        <target state="needs-translation">No TypoScript found. Did you already include the static Template?</target>
+      </trans-unit>
+      <trans-unit id="error_no_typoscript_be">
+        <source>No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</source>
+        <target state="needs-translation">No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</target>
+      </trans-unit>
+      <trans-unit id="error_no_storagepid">
+        <source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
+        <target state="needs-translation">No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</target>
+      </trans-unit>
+      <trans-unit id="error_not_authorized">
+        <source>You are not authorized for this action</source>
+        <target state="needs-translation">You are not authorized for this action</target>
+      </trans-unit>
+      <trans-unit id="validationError">
+        <source>Error</source>
+        <target state="needs-translation">Error</target>
+      </trans-unit>
+      <trans-unit id="validationErrorRequiredModel">
+        <source>Username and password must be filled</source>
+        <target state="needs-translation">Username and password must be filled</target>
+      </trans-unit>
+      <trans-unit id="validationErrorWrongDateFormat">
+        <source>Given date format is wrong</source>
+        <target state="needs-translation">Given date format is wrong</target>
+      </trans-unit>
+      <trans-unit id="validationErrorRequired">
+        <source>Field %s is required</source>
+        <target state="needs-translation">Field %s is required</target>
+      </trans-unit>
+      <trans-unit id="validationErrorEmail">
+        <source>Field %s is not a valid email address</source>
+        <target state="needs-translation">Field %s is not a valid email address</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMin">
+        <source>Please add more characters to field %s</source>
+        <target state="needs-translation">Please add more characters to field %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMax">
+        <source>Please add less characters to field %s</source>
+        <target state="needs-translation">Please add less characters to field %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorInt">
+        <source>Only numbers are allowed in field %s</source>
+        <target state="needs-translation">Only numbers are allowed in field %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorLetters">
+        <source>Only letters are allowed in field %s</source>
+        <target state="needs-translation">Only letters are allowed in field %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorUniquePage">
+        <source>Value of field %s is already in use</source>
+        <target state="needs-translation">Value of field %s is already in use</target>
+      </trans-unit>
+      <trans-unit id="validationErrorUniqueDb">
+        <source>Value of field %s is already in use</source>
+        <target state="needs-translation">Value of field %s is already in use</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMustInclude">
+        <source>Try another value for field %s</source>
+        <target state="needs-translation">Try another value for field %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMustNotInclude">
+        <source>Not allowed signs in field %s</source>
+        <target state="needs-translation">Not allowed signs in field %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorInList">
+        <source>This value is not allowed in field %s</source>
+        <target state="needs-translation">This value is not allowed in field %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorSameAs">
+        <source>Please check your value</source>
+        <target state="needs-translation">Please check your value</target>
+      </trans-unit>
+      <trans-unit id="validationErrorPasswordRepeat">
+        <source>Both passwords do not fit</source>
+        <target state="needs-translation">Both passwords do not fit</target>
+      </trans-unit>
+      <trans-unit id="validationErrorDate">
+        <source>Date has the wrong format</source>
+        <target state="needs-translation">Date has the wrong format</target>
+      </trans-unit>
+      <trans-unit id="validationErrorCaptcha">
+        <source>Wrong Captcha code</source>
+        <target state="needs-translation">Wrong Captcha code</target>
+      </trans-unit>
+      <trans-unit id="validationErrorGeneral">
+        <source>Field could not be validated</source>
+        <target state="needs-translation">Field could not be validated</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationSubject">
+        <source>Please confirm a new registration</source>
+        <target state="needs-translation">Please confirm a new registration</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationSalutation">
+        <source>Dear Admin,</source>
+        <target state="needs-translation">Dear Admin,</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationUserProperties">
+        <source>User properties:</source>
+        <target state="needs-translation">User properties:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationText1">
+        <source>Please confirm registration of %s by clicking the following link:</source>
+        <target state="needs-translation">Please confirm registration of %s by clicking the following link:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirm">
+        <source>Confirm registration</source>
+        <target state="needs-translation">Confirm registration</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationText2">
+        <source>If you want to delete the registration, click this link:</source>
+        <target state="needs-translation">If you want to delete the registration, click this link:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefused">
+        <source>Delete profile</source>
+        <target state="needs-translation">Delete profile</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationText3">
+        <source>If you want to delete the registration, without sending an email to the user, click this link:</source>
+        <target state="needs-translation">If you want to delete the registration, without sending an email to the user, click this link:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent">
+        <source>Silently delete profile</source>
+        <target state="needs-translation">Silently delete profile</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationSubject">
+        <source>Please confirm your profile creation request</source>
+        <target state="needs-translation">Please confirm your profile creation request</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationSalutation">
+        <source>Dear</source>
+        <target state="needs-translation">Dear</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationText1">
+        <source>Please confirm your profile registration on our server by clicking the following link:</source>
+        <target state="needs-translation">Please confirm your profile registration on our server by clicking the following link:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationLinkConfirm">
+        <source>Confirm profile</source>
+        <target state="needs-translation">Confirm profile</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationText2">
+        <source>If you don't want to be registered on our system, click this link:</source>
+        <target state="needs-translation">If you don't want to be registered on our system, click this link:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationLinkConfirmRefused">
+        <source>Delete profile</source>
+        <target state="needs-translation">Delete profile</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationSignature">
+        <source>Your website team.</source>
+        <target state="needs-translation">Your website team.</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifySubject">
+        <source>Your registration was confirmed</source>
+        <target state="needs-translation">Your registration was confirmed</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifySalutation">
+        <source>Dear</source>
+        <target state="needs-translation">Dear</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyText1">
+        <source>Your profile was confirmed and successfully created.</source>
+        <target state="needs-translation">Your profile was confirmed and successfully created.</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifySignature">
+        <source>Your website team.</source>
+        <target state="needs-translation">Your website team.</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedSubject">
+        <source>Dear</source>
+        <target state="needs-translation">Dear</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedSalutation">
+        <source>Dear</source>
+        <target state="needs-translation">Dear</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedText1">
+        <source>Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</source>
+        <target state="needs-translation">Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedSignature">
+        <source>Your website team.</source>
+        <target state="needs-translation">Your website team.</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifySubject">
+        <source>New profile registration</source>
+        <target state="needs-translation">New profile registration</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifySalutation">
+        <source>Dear Admin,</source>
+        <target state="needs-translation">Dear Admin,</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifyText1">
+        <source>Profile creation - User %s</source>
+        <target state="needs-translation">Profile creation - User %s</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifyText2">
+        <source>Profile creation - User %s set a new password and profile was enabled</source>
+        <target state="needs-translation">Profile creation - User %s set a new password and profile was enabled</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifyUserProperties">
+        <source>Profile properties:</source>
+        <target state="needs-translation">Profile properties:</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifySubject">
+        <source>Profile update</source>
+        <target state="needs-translation">Profile update</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifySalutation">
+        <source>Dear Admin,</source>
+        <target state="needs-translation">Dear Admin,</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyText1">
+        <source>Profile change by user %s</source>
+        <target state="needs-translation">Profile change by user %s</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyField">
+        <source>Fieldname</source>
+        <target state="needs-translation">Fieldname</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyOld">
+        <source>Old value</source>
+        <target state="needs-translation">Old value</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyNew">
+        <source>New value</source>
+        <target state="needs-translation">New value</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestSubject">
+        <source>New profile change request</source>
+        <target state="needs-translation">New profile change request</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestSalutation">
+        <source>Dear Admin,</source>
+        <target state="needs-translation">Dear Admin,</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestText1">
+        <source>Profile change request from %s</source>
+        <target state="needs-translation">Profile change request from %s</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestText2">
+        <source>All changes:</source>
+        <target state="needs-translation">All changes:</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestField">
+        <source>Fieldname</source>
+        <target state="needs-translation">Fieldname</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestOld">
+        <source>Old value</source>
+        <target state="needs-translation">Old value</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestNew">
+        <source>New value</source>
+        <target state="needs-translation">New value</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestLinkConfirm">
+        <source>Confirm changes</source>
+        <target state="needs-translation">Confirm changes</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestLinkRefuse">
+        <source>Refuse changes and notify user</source>
+        <target state="needs-translation">Refuse changes and notify user</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestLinkSiltentRefuse">
+        <source>Refuse changes and do not notify user</source>
+        <target state="needs-translation">Refuse changes and do not notify user</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedSubject">
+        <source>Your update request was refused</source>
+        <target state="needs-translation">Your update request was refused</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedSalutation">
+        <source>Dear</source>
+        <target state="needs-translation">Dear</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedText1">
+        <source>Thank you for your update request. We're sorry to tell you, that we had to refuse your request.</source>
+        <target state="needs-translation">Thank you for your update request. We're sorry to tell you, that we had to refuse your request.</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedText2">
+        <source>Please contact %s for further information.</source>
+        <target state="needs-translation">Please contact %s for further information.</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedSignature">
+        <source>Your website team.</source>
+        <target state="needs-translation">Your website team.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationSubject">
+        <source>Confirm your profile</source>
+        <target state="needs-translation">Confirm your profile</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationSalutation">
+        <source>Dear</source>
+        <target state="needs-translation">Dear</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationText1">
+        <source>Your new profile was just created.</source>
+        <target state="needs-translation">Your new profile was just created.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationText2">
+        <source>Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</source>
+        <target state="needs-translation">Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationLinkConfirm">
+        <source>Confirm Profile</source>
+        <target state="needs-translation">Confirm Profile</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationText3">
+        <source>If you don't want to be registered on our system, click this link.</source>
+        <target state="needs-translation">If you don't want to be registered on our system, click this link.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationLinkConfirmRefused">
+        <source>Delete Profile</source>
+        <target state="needs-translation">Delete Profile</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationSignature">
+        <source>Your website team.</source>
+        <target state="needs-translation">Your website team.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationAdminNotifiyStep1Subject">
+        <source>User was invited</source>
+        <target state="needs-translation">User was invited</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationAdminNotifiySubject">
+        <source>User invitation - Profile finally created</source>
+        <target state="needs-translation">User invitation - Profile finally created</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyStep1Subject">
+        <source>User refused invitation</source>
+        <target state="needs-translation">User refused invitation</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiySalutation">
+        <source>Dear Admin,</source>
+        <target state="needs-translation">Dear Admin,</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyText1">
+        <source>Profile invitation of %s</source>
+        <target state="needs-translation">Profile invitation of %s</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyText2">
+        <source>Profile invitation - User %s refused to set a new password. The profile was deleted.</source>
+        <target state="needs-translation">Profile invitation - User %s refused to set a new password. The profile was deleted.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyUserProperties">
+        <source>Profile properties:</source>
+        <target state="needs-translation">Profile properties:</target>
+      </trans-unit>
+      <trans-unit id="noRecordsFound">
+        <source>No records found.</source>
+        <target state="needs-translation">No records found.</target>
+      </trans-unit>
+      <trans-unit id="noRecordsFoundClearFilter">
+        <source>Clean filter.</source>
+        <target state="needs-translation">Clean filter.</target>
+      </trans-unit>
+      <trans-unit id="noRecordsFoundGoToPage0">
+        <source>Show all users from all pages (for administrators only).</source>
+        <target state="needs-translation">Show all users from all pages (for administrators only).</target>
+      </trans-unit>
+      <trans-unit id="noRecordFoundShow">
+        <source>No FE_User given or not logged in</source>
+        <target state="needs-translation">No FE_User given or not logged in</target>
+      </trans-unit>
+      <trans-unit id="notLoggedIn">
+        <source>Please log in before</source>
+        <target state="needs-translation">Please log in before</target>
+      </trans-unit>
+      <trans-unit id="submitNew">
+        <source>Create Profile Now</source>
+        <target state="needs-translation">Create Profile Now</target>
+      </trans-unit>
+      <trans-unit id="submitResend">
+        <source>Resend now</source>
+        <target state="needs-translation">Resend now</target>
+      </trans-unit>
+      <trans-unit id="passwordRepeat">
+        <source>Repeat Password</source>
+        <target state="needs-translation">Repeat Password</target>
+      </trans-unit>
+      <trans-unit id="titleCreateProfile">
+        <source>Create a new user-profile</source>
+        <target state="needs-translation">Create a new user-profile</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailTitle">
+        <source>Resend confirmation mail</source>
+        <target state="needs-translation">Resend confirmation mail</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailFieldsetLegend">
+        <source>Please enter your email address</source>
+        <target state="needs-translation">Please enter your email address</target>
+      </trans-unit>
+      <trans-unit id="submitEdit">
+        <source>Update Profile</source>
+        <target state="needs-translation">Update Profile</target>
+      </trans-unit>
+      <trans-unit id="create">
+        <source>Profile successfully created</source>
+        <target state="needs-translation">Profile successfully created</target>
+      </trans-unit>
+      <trans-unit id="createAndInvited">
+        <source>Profile successfully created and user informed</source>
+        <target state="needs-translation">Profile successfully created and user informed</target>
+      </trans-unit>
+      <trans-unit id="createAndInvitedFinished">
+        <source>Profile successfully changed and enabled</source>
+        <target state="needs-translation">Profile successfully changed and enabled</target>
+      </trans-unit>
+      <trans-unit id="createRequestWaitingForUserConfirm">
+        <source>Thank you for your request. Please check your mail account to confirm the profile.</source>
+        <target state="needs-translation">Thank you for your request. Please check your mail account to confirm the profile.</target>
+      </trans-unit>
+      <trans-unit id="createRequestWaitingForAdminConfirm">
+        <source>Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</source>
+        <target state="needs-translation">Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailSend">
+        <source>An Email was send to your account. Please check your inbox.</source>
+        <target state="needs-translation">An Email was send to your account. Please check your inbox.</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailFail">
+        <source>We received no valid mail.</source>
+        <target state="needs-translation">We received no valid mail.</target>
+      </trans-unit>
+      <trans-unit id="ratelimiter_too_many_attempts">
+        <source>Too many attempts from this IP address. Try again later.</source>
+        <target state="needs-translation">Too many attempts from this IP address. Try again later.</target>
+      </trans-unit>
+      <trans-unit id="createFailedProfile">
+        <source>Profile creation failed</source>
+        <target state="needs-translation">Profile creation failed</target>
+      </trans-unit>
+      <trans-unit id="userAlreadyConfirmed">
+        <source>Profile is already confirmed</source>
+        <target state="needs-translation">Profile is already confirmed</target>
+      </trans-unit>
+      <trans-unit id="missingUserInDatabase">
+        <source>No Profile found in database. Maybe it was deleted before.</source>
+        <target state="needs-translation">No Profile found in database. Maybe it was deleted before.</target>
+      </trans-unit>
+      <trans-unit id="createProfileDeleted">
+        <source>Profile successfully deleted</source>
+        <target state="needs-translation">Profile successfully deleted</target>
+      </trans-unit>
+      <trans-unit id="titleUpdateProfile">
+        <source>Update your user-profile</source>
+        <target state="needs-translation">Update your user-profile</target>
+      </trans-unit>
+      <trans-unit id="update">
+        <source>Profile successfully changed</source>
+        <target state="needs-translation">Profile successfully changed</target>
+      </trans-unit>
+      <trans-unit id="noChanges">
+        <source>No changes detected, nothing to update</source>
+        <target state="needs-translation">No changes detected, nothing to update</target>
+      </trans-unit>
+      <trans-unit id="updateRequest">
+        <source>Your change request was transmitted to the administrator. After a confirmation, your profile will be up-to-date.</source>
+        <target state="needs-translation">Your change request was transmitted to the administrator. After a confirmation, your profile will be up-to-date.</target>
+      </trans-unit>
+      <trans-unit id="login">
+        <source>You're successfully logged in now</source>
+        <target state="needs-translation">You're successfully logged in now</target>
+      </trans-unit>
+      <trans-unit id="deleteProfile">
+        <source>Delete Profile</source>
+        <target state="needs-translation">Delete Profile</target>
+      </trans-unit>
+      <trans-unit id="updateProfile">
+        <source>Profile successfully updated</source>
+        <target state="needs-translation">Profile successfully updated</target>
+      </trans-unit>
+      <trans-unit id="updateFailedProfile">
+        <source>Profile update failed</source>
+        <target state="needs-translation">Profile update failed</target>
+      </trans-unit>
+      <trans-unit id="field_image_fineuploader">
+        <source>Please enable fineUploader plugin</source>
+        <target state="needs-translation">Please enable fineUploader plugin</target>
+      </trans-unit>
+      <trans-unit id="field_image_drag">
+        <source>Drag file</source>
+        <target state="needs-translation">Drag file</target>
+      </trans-unit>
+      <trans-unit id="field_image_drag_processing">
+        <source>Drag in progress ...</source>
+        <target state="needs-translation">Drag in progress ...</target>
+      </trans-unit>
+      <trans-unit id="field_image_upload">
+        <source>Upload</source>
+        <target state="needs-translation">Upload</target>
+      </trans-unit>
+      <trans-unit id="empty">
+        <source>empty</source>
+        <target state="needs-translation">empty</target>
+      </trans-unit>
+      <trans-unit id="pleaseChoose">
+        <source>Please choose ...</source>
+        <target state="needs-translation">Please choose ...</target>
+      </trans-unit>
+      <trans-unit id="pleaseChooseCountry">
+        <source>Please choose a country ...</source>
+        <target state="needs-translation">Please choose a country ...</target>
+      </trans-unit>
+      <trans-unit id="FilterLabel">
+        <source>Search</source>
+        <target state="needs-translation">Search</target>
+      </trans-unit>
+      <trans-unit id="FilterPlaceholder">
+        <source>Search ...</source>
+        <target state="needs-translation">Search ...</target>
+      </trans-unit>
+      <trans-unit id="FilterSubmit">
+        <source>Filter now</source>
+        <target state="needs-translation">Filter now</target>
+      </trans-unit>
+      <trans-unit id="UserDeleteConfirmation">
+        <source>Are you sure to delete your profile?</source>
+        <target state="needs-translation">Are you sure to delete your profile?</target>
+      </trans-unit>
+      <trans-unit id="titleInvitationProfile">
+        <source>Invite a new user</source>
+        <target state="needs-translation">Invite a new user</target>
+      </trans-unit>
+      <trans-unit id="titleInvitationSetPassword">
+        <source>Please set a new password</source>
+        <target state="needs-translation">Please set a new password</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserDelete">
+        <source>Delete</source>
+        <target state="needs-translation">Delete</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserDeleteConfirmation">
+        <source>Are you sure to delete this User?</source>
+        <target state="needs-translation">Are you sure to delete this User?</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserEdit">
+        <source>Edit</source>
+        <target state="needs-translation">Edit</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserLogout">
+        <source>Logout</source>
+        <target state="needs-translation">Logout</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserStatusOffline">
+        <source>Offline</source>
+        <target state="needs-translation">Offline</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserStatusOnline">
+        <source>Online</source>
+        <target state="needs-translation">Online</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserVisibilityHide">
+        <source>Disable</source>
+        <target state="needs-translation">Disable</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserVisibilityHidden">
+        <source>Hidden</source>
+        <target state="needs-translation">Hidden</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserVisibilityUnhide">
+        <source>Enable</source>
+        <target state="needs-translation">Enable</target>
+      </trans-unit>
+      <trans-unit id="BackendListFilterLabel">
+        <source>Search</source>
+        <target state="needs-translation">Search</target>
+      </trans-unit>
+      <trans-unit id="BackendListLoginAs">
+        <source>Login as</source>
+        <target state="needs-translation">Login as</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationNoteTitle">
+        <source>Possible action:</source>
+        <target state="needs-translation">Possible action:</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationNoteText">
+        <source>%s approval(s) available</source>
+        <target state="needs-translation">%s approval(s) available</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationNoteText">
+        <source>%s missing user confirmation(s) available</source>
+        <target state="needs-translation">%s approval(s) available</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationColumnAction">
+        <source>Actions</source>
+        <target state="needs-translation">Actions</target>
+      </trans-unit>
+      <trans-unit id="BackendMissingConfigPID">
+        <source>The config PID is missing!</source>
+        <target state="needs-translation">The config PID is missing!</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationColumnUid">
+        <source>UID</source>
+        <target state="needs-translation">UID</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageConfirmed">
+        <source>%s was successfully approved</source>
+        <target state="needs-translation">%s was successfully approved</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageFailed">
+        <source>The user confirmation failed, please check your system log or check your config</source>
+        <target state="needs-translation">The user confirmation failed, please check your system log or check your config</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageRefused">
+        <source>%s was refused</source>
+        <target state="needs-translation">%s was refused</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationResendUserConfirmationRequest">
+        <source>resend user confirmation e-mail</source>
+        <target state="needs-translation">resend user confirmation e-mail</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageReSend">
+        <source>%s confirmation mail was resend</source>
+        <target state="needs-translation">%s confirmation mail was resend</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationDialogueMessage">
+        <source>Your userprofile is not confirmed yet.</source>
+        <target state="needs-translation">Your userprofile is not confirmed yet.</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationDialogueLink">
+        <source>Resend confirmation email?</source>
+        <target state="needs-translation">Resend confirmation email?</target>
+      </trans-unit>
+      <trans-unit id="js.loading_states">
+        <source>Loading states ...</source>
+        <target state="needs-translation">Loading states ...</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
