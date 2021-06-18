@@ -69,7 +69,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address">
         <source>Address</source>
-        <target state="needs-translation">Address</target>
+        <target state="translated">Adresse</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.telephone">
         <source>Telephone</source>
