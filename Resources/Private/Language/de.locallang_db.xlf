@@ -5,191 +5,191 @@
     <body>
       <trans-unit id="tx_femanager_domain_model_user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Benutzer</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.username">
         <source>Username</source>
-        <target state="needs-translation">Username</target>
+        <target state="translated">Benutzername</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.password">
         <source>Password</source>
-        <target state="needs-translation">Password</target>
+        <target state="translated">Passwort</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.usergroup">
         <source>Usergroup</source>
-        <target state="needs-translation">Usergroup</target>
+        <target state="translated">Benutzergruppe</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.name">
         <source>Name</source>
-        <target state="needs-translation">Name</target>
+        <target state="translated">Name</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.firstName">
         <source>Firstname</source>
-        <target state="needs-translation">Firstname</target>
+        <target state="translated">Vorname</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.middleName">
         <source>Middlename</source>
-        <target state="needs-translation">Middlename</target>
+        <target state="translated">Mittelname</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastName">
         <source>Lastname</source>
-        <target state="needs-translation">Lastname</target>
+        <target state="translated">Nachname</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
         <source>Birthdate</source>
-        <target state="needs-translation">Birthdate</target>
+        <target state="translated">Geburtsdatum</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender">
         <source>Gender</source>
-        <target state="needs-translation">Gender</target>
+        <target state="translated">Geschlecht</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item0">
         <source>male</source>
-        <target state="needs-translation">male</target>
+        <target state="translated">männlich</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item1">
         <source>female</source>
-        <target state="needs-translation">female</target>
+        <target state="translated">weiblich</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address">
         <source>Address</source>
-        <target state="needs-translation">Address</target>
+        <target state="translated">Adresse</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.telephone">
         <source>Telephone</source>
-        <target state="needs-translation">Telephone</target>
+        <target state="translated">Telefon</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.fax">
         <source>Fax</source>
-        <target state="needs-translation">Fax</target>
+        <target state="translated">Fax</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.email">
         <source>Email</source>
-        <target state="needs-translation">Email</target>
+        <target state="translated">E-Mail</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.title">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="translated">Titel</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.zip">
         <source>ZIP</source>
-        <target state="needs-translation">ZIP</target>
+        <target state="translated">PLZ</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.city">
         <source>City</source>
-        <target state="needs-translation">City</target>
+        <target state="translated">Stadt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.country">
         <source>Country</source>
-        <target state="needs-translation">Country</target>
+        <target state="translated">Land</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Status</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.www">
         <source>Website</source>
-        <target state="needs-translation">Website</target>
+        <target state="translated">Webseite</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.company">
         <source>Company</source>
-        <target state="needs-translation">Company</target>
+        <target state="translated">Firma</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.image">
         <source>Image</source>
-        <target state="needs-translation">Image</target>
+        <target state="translated">Bild</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastlogin">
         <source>Last login</source>
-        <target state="needs-translation">Last login</target>
+        <target state="translated">Letzte Anmeldung</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.captcha">
         <source>Captcha</source>
-        <target state="needs-translation">Captcha</target>
+        <target state="translated">Captcha</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Status</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.terms">
         <source>Terms and conditions</source>
-        <target state="needs-translation">Terms and conditions</target>
+        <target state="translated">Nutzungsbedingungen</target>
       </trans-unit>
       <trans-unit id="fe_users.crdate">
         <source>Creation Time</source>
-        <target state="needs-translation">Creation Time</target>
+        <target state="translated">Erstellungszeit</target>
       </trans-unit>
       <trans-unit id="fe_users.tstamp">
         <source>Last profile change at</source>
-        <target state="needs-translation">Last profile change at</target>
+        <target state="translated">Letzte Profiländerung am</target>
       </trans-unit>
       <trans-unit id="fe_users.registrationconfirmedbyuser">
         <source>Registration confirmed by user</source>
-        <target state="needs-translation">Registration confirmed by user</target>
+        <target state="translated">Registrierung durch Benutzer bestätigt</target>
       </trans-unit>
       <trans-unit id="fe_users.registrationconfirmedbyadmin">
         <source>Registration confirmed by admin</source>
-        <target state="needs-translation">Registration confirmed by admin</target>
+        <target state="translated">Registrierung durch Admin bestätigt</target>
       </trans-unit>
       <trans-unit id="fe_users.tab">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Anmeldungen</target>
       </trans-unit>
       <trans-unit id="fe_users.log">
         <source>FE_user Log</source>
-        <target state="needs-translation">FE_user Log</target>
+        <target state="translated">Benutzerprotokoll</target>
       </trans-unit>
       <trans-unit id="fe_users.terms">
         <source>User accepted terms and conditions</source>
-        <target state="needs-translation">User accepted terms and conditions</target>
+        <target state="translated">Benutzer akzeptierte Nutzungsbedingungen</target>
       </trans-unit>
       <trans-unit id="fe_users.terms_version">
         <source>Accepted version of terms and conditions</source>
-        <target state="needs-translation">Accepted version of terms and conditions</target>
+        <target state="translated">Akzeptierte Version der Nutzungsbedingungen</target>
       </trans-unit>
       <trans-unit id="fe_users.terms_date_of_acceptance">
         <source>Accepted datetime of terms and conditions</source>
-        <target state="needs-translation">Accepted datetime of terms and conditions</target>
+        <target state="translated">Akzeptierte Datumszeit der Nutzungsbedingungen</target>
       </trans-unit>
       <trans-unit id="fe_users.changerequest">
         <source>Change Request</source>
-        <target state="needs-translation">Change Request</target>
+        <target state="translated">Änderungsanfrage</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log">
         <source>User Log</source>
-        <target state="needs-translation">User Log</target>
+        <target state="translated">Benutzerprotokoll</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.title">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="translated">Titel</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.crdate">
         <source>Time</source>
-        <target state="needs-translation">Time</target>
+        <target state="translated">Uhrzeit</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Status</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.100">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Anmeldung</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.101">
         <source>New Registration</source>
-        <target state="needs-translation">New Registration</target>
+        <target state="translated">Neue Registrierung</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.102">
         <source>Registration confirmed by user</source>
-        <target state="needs-translation">Registration confirmed by user</target>
+        <target state="translated">Registrierung durch Benutzer bestätigt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.103">
         <source>Registration confirmed by admin</source>
-        <target state="needs-translation">Registration confirmed by admin</target>
+        <target state="translated">Registrierung durch Admin bestätigt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.104">
         <source>Registration refused by user</source>
-        <target state="needs-translation">Registration refused by user</target>
+        <target state="translated">Registrierung vom Benutzer abgelehnt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.105">
         <source>Registration refused by admin</source>
