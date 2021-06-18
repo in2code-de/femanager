@@ -193,255 +193,255 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.105">
         <source>Registration refused by admin</source>
-        <target state="needs-translation">Registration refused by admin</target>
+        <target state="translated">Registrierung von Admin abgelehnt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.106">
         <source>Profile creation request</source>
-        <target state="needs-translation">Profile creation request</target>
+        <target state="translated">Profilerstellungsanfrage</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.200">
         <source>Update</source>
-        <target state="needs-translation">Update</target>
+        <target state="translated">Aktualisierung</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.201">
         <source>Profile updated</source>
-        <target state="needs-translation">Profile updated</target>
+        <target state="translated">Profil Änderung</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.202">
         <source>Profile update confirmed by admin</source>
-        <target state="needs-translation">Profile update confirmed by admin</target>
+        <target state="translated">Profil Änderung durch Admin bestätigt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.203">
         <source>Profile update refused by admin</source>
-        <target state="needs-translation">Profile update refused by admin</target>
+        <target state="translated">Profil Änderung durch Admin abgelehnt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.204">
         <source>Profile update request</source>
-        <target state="needs-translation">Profile update request</target>
+        <target state="translated">Profil Änderung angefragt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.205">
         <source>Profile update security failure</source>
-        <target state="needs-translation">Profile update security failure</target>
+        <target state="translated">Profil Änderung aus Sicherheitsgründen abgelehnt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.206">
         <source>Image deleted</source>
-        <target state="needs-translation">Image deleted</target>
+        <target state="translated">Bild gelöscht</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="translated">Löschen</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.301">
         <source>Profile deleted</source>
-        <target state="needs-translation">Profile deleted</target>
+        <target state="translated">Profil gelöscht</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.400">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Einladung</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.401">
         <source>Profile created and User invited</source>
-        <target state="needs-translation">Profile created and User invited</target>
+        <target state="translated">Profil erstellt und Benutzer eingeladen</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.402">
         <source>Profile deleted from User</source>
-        <target state="needs-translation">Profile deleted from User</target>
+        <target state="translated">Profil gelöscht durch den Benutzer</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.403">
         <source>Wrong Hash</source>
-        <target state="needs-translation">Wrong Hash</target>
+        <target state="translated">Falsche Prüfsumme</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.404">
         <source>You tried to open a restricted page</source>
-        <target state="needs-translation">You tried to open a restricted page</target>
+        <target state="translated">Sie haben versucht, eine eingeschränkte Seite zu öffnen</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.405">
         <source>Password changed and Profile activated</source>
-        <target state="needs-translation">Password changed and Profile activated</target>
+        <target state="translated">Passwort geändert und Profil aktiviert</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Benutzer</target>
       </trans-unit>
       <trans-unit id="flexform.main.title">
         <source>Main Settings</source>
-        <target state="needs-translation">Main Settings</target>
+        <target state="translated">Haupteinstellungen</target>
       </trans-unit>
       <trans-unit id="flexform.main.view">
         <source>Choose View</source>
-        <target state="needs-translation">Choose View</target>
+        <target state="translated">Ansichten auswählen</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.0">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Registrierung</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.1">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Bearbeiten</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.2">
         <source>List</source>
-        <target state="needs-translation">List</target>
+        <target state="translated">Liste</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.3">
         <source>Detail</source>
-        <target state="needs-translation">Detail</target>
+        <target state="translated">Detailansicht</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.4">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Einladung</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.5">
         <source>Resend confirmation mail</source>
-        <target state="needs-translation">Resend confirmation mail</target>
+        <target state="translated">Bestätigungs-E-Mail erneut versenden</target>
       </trans-unit>
       <trans-unit id="flexform.new.title">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Registrierung</target>
       </trans-unit>
       <trans-unit id="flexform.new.fields">
         <source>Select Fields for New-Form (empty = all fields)</source>
-        <target state="needs-translation">Select Fields for New-Form (empty = all fields)</target>
+        <target state="translated">Felder für Formular wählen (keine = alle Felder)</target>
       </trans-unit>
       <trans-unit id="flexform.new.overrideUserGroup">
         <source>Select Usergroups for new Users</source>
-        <target state="needs-translation">Select Usergroups for new Users</target>
+        <target state="translated">Zugewiesene Benutzergruppen für neue Benutzer</target>
       </trans-unit>
       <trans-unit id="flexform.new.confirmByUser">
         <source>Registration must be confirmed from sender</source>
-        <target state="needs-translation">Registration must be confirmed from sender</target>
+        <target state="translated">Registrierung muss vom Benutzer bestätigt werden</target>
       </trans-unit>
       <trans-unit id="flexform.new.showTermsAndConditions">
         <source>User must accept terms and conditions</source>
-        <target state="needs-translation">User must accept terms and conditions</target>
+        <target state="translated">Benutzer muss Nutzungsbedingungen aktzeptieren</target>
       </trans-unit>
       <trans-unit id="flexform.new.confirmByAdmin">
         <source>Registration must be confirmed from an admin (add one or more emails)</source>
-        <target state="needs-translation">Registration must be confirmed from an admin (add one or more emails)</target>
+        <target state="translated">Registrierung muss vom Admin bestätigt werden (eine oder mehrere E-Mails eintragen)</target>
       </trans-unit>
       <trans-unit id="flexform.new.notifyAdmin">
         <source>Notify admin on registration (add one or more emails)</source>
-        <target state="needs-translation">Notify admin on registration (add one or more emails)</target>
+        <target state="translated">Hinweis-E-Mail an Admin (eine oder mehrere E-Mails eintragen)</target>
       </trans-unit>
       <trans-unit id="flexform.edit.title">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Bearbeiten</target>
       </trans-unit>
       <trans-unit id="flexform.edit.fields">
         <source>Select Fields for Edit-Form (empty = all fields)</source>
-        <target state="needs-translation">Select Fields for Edit-Form (empty = all fields)</target>
+        <target state="translated">Felder für Formular wählen (keine = alle Felder)</target>
       </trans-unit>
       <trans-unit id="flexform.edit.showDeleteLink">
         <source>Show Delete Button in Edit Form</source>
-        <target state="needs-translation">Show Delete Button in Edit Form</target>
+        <target state="translated">Zeige Löschen-Schaltfläche im Bearbeiten-Formular</target>
       </trans-unit>
       <trans-unit id="flexform.edit.confirmByAdmin">
         <source>Profile update must be confirmed from an admin (add one or more emails)</source>
-        <target state="needs-translation">Profile update must be confirmed from an admin (add one or more emails)</target>
+        <target state="translated">Profiländerung muss vom Admin bestätigt werden (eine oder mehrere E-Mails eintragen)</target>
       </trans-unit>
       <trans-unit id="flexform.edit.notifyAdmin">
         <source>Notify admin on Profile update (add one or more emails)</source>
-        <target state="needs-translation">Notify admin on Profile update (add one or more emails)</target>
+        <target state="translated">Hinweis-E-Mail bei Änderung an Admin (eine oder mehrere E-Mails eintragen)</target>
       </trans-unit>
       <trans-unit id="flexform.list.title">
         <source>Listview</source>
-        <target state="needs-translation">Listview</target>
+        <target state="translated">Listenansicht</target>
       </trans-unit>
       <trans-unit id="flexform.list.filter">
         <source>Show Searchfield</source>
-        <target state="needs-translation">Show Searchfield</target>
+        <target state="translated">Suchfeld anzeigen</target>
       </trans-unit>
       <trans-unit id="flexform.list.limit">
         <source>Limit</source>
-        <target state="needs-translation">Limit</target>
+        <target state="translated">Limit</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby">
         <source>Order by</source>
-        <target state="needs-translation">Order by</target>
+        <target state="translated">Sortieren nach</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby.0">
         <source>Lastname</source>
-        <target state="needs-translation">Lastname</target>
+        <target state="translated">Nachname</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby.1">
         <source>Firstname</source>
-        <target state="needs-translation">Firstname</target>
+        <target state="translated">Vorname</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby.2">
         <source>Company</source>
-        <target state="needs-translation">Company</target>
+        <target state="translated">Firma</target>
       </trans-unit>
       <trans-unit id="flexform.list.sorting">
         <source>Sorting</source>
-        <target state="needs-translation">Sorting</target>
+        <target state="translated">Sortierung</target>
       </trans-unit>
       <trans-unit id="flexform.list.sorting.0">
         <source>Ascending</source>
-        <target state="needs-translation">Ascending</target>
+        <target state="translated">aufsteigend</target>
       </trans-unit>
       <trans-unit id="flexform.list.sorting.1">
         <source>Descending</source>
-        <target state="needs-translation">Descending</target>
+        <target state="translated">absteigend</target>
       </trans-unit>
       <trans-unit id="flexform.list.usergroup">
         <source>Show from usergroup (empty = show all)</source>
-        <target state="needs-translation">Show from usergroup (empty = show all)</target>
+        <target state="translated">Zeige Benutzer von Benutzergruppen (leer = zeige alle)</target>
       </trans-unit>
       <trans-unit id="flexform.show.title">
         <source>Detailview</source>
-        <target state="needs-translation">Detailview</target>
+        <target state="translated">Detailansicht</target>
       </trans-unit>
       <trans-unit id="flexform.show.user">
         <source>User to show</source>
-        <target state="needs-translation">User to show</target>
+        <target state="translated">Zu zeigender Benutzer</target>
       </trans-unit>
       <trans-unit id="flexform.show.user.1">
         <source>[Logged in FE User]</source>
-        <target state="needs-translation">[Logged in FE User]</target>
+        <target state="translated">[Eingeloggter Benutzer]</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.title">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Einladung</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.allowedUserGroups">
         <source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
-        <target state="needs-translation">Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</target>
+        <target state="translated">Einschränken von "Einladung hinzufügen" auf eine oder mehrere Benutzergruppen (leer = Keine Einschränkung)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.fields">
         <source>Select Fields for invitation-Form (empty = all fields)</source>
-        <target state="needs-translation">Select Fields for invitation-Form (empty = all fields)</target>
+        <target state="translated">Select Fields for invitation-Form (empty = all fields)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.overrideUserGroup">
         <source>Select Usergroups for new Users</source>
-        <target state="needs-translation">Select Usergroups for new Users</target>
+        <target state="translated">Select Usergroups for new Users</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.confirmByAdmin">
         <source>Registration must be confirmed from an admin (add one or more emails)</source>
-        <target state="needs-translation">Registration must be confirmed from an admin (add one or more emails)</target>
+        <target state="translated">Registration must be confirmed from an admin (add one or more emails)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.notifyAdminStep1">
         <source>Notify admin on step 1 (add one or more emails)</source>
-        <target state="needs-translation">Notify admin on step 1 (add one or more emails)</target>
+        <target state="translated">Notify admin on step 1 (add one or more emails)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.notifyAdmin">
         <source>Notify admin if user sets a password (add one or more emails)</source>
-        <target state="needs-translation">Notify admin if user sets a password (add one or more emails)</target>
+        <target state="translated">Notify admin if user sets a password (add one or more emails)</target>
       </trans-unit>
       <trans-unit id="flexform.misc.title">
         <source>Additional Settings</source>
-        <target state="needs-translation">Additional Settings</target>
+        <target state="translated">Weitere Einstellungen</target>
       </trans-unit>
       <trans-unit id="flexform.misc.termsUrl">
         <source>Page with terms and conditions</source>
-        <target state="needs-translation">Page with terms and conditions</target>
+        <target state="translated">Seite mit Nutzungsbedingungen</target>
       </trans-unit>
       <trans-unit id="pleaseChoose">
         <source>Please choose...</source>
-        <target state="needs-translation">Please choose...</target>
+        <target state="translated">Bitte auswählen...</target>
       </trans-unit>
       <trans-unit id="pleaseChooseCountry">
         <source>Please choose a country...</source>
-        <target state="needs-translation">Please choose a country...</target>
+        <target state="translated">Bitte Land auswählen...</target>
       </trans-unit>
     </body>
   </file>
