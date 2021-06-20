@@ -7,12 +7,17 @@ namespace In2code\Femanager\Controller;
 use In2code\Femanager\DataProcessor\DataProcessorRunner;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Repository\UserGroupRepository;
+use In2code\Femanager\Domain\Repository\UserRepository;
+use In2code\Femanager\Domain\Service\SendMailService;
 use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
+use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\BackendUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
+use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
@@ -23,7 +28,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
-
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -33,37 +38,31 @@ abstract class AbstractController extends ActionController
 {
     /**
      * @var \In2code\Femanager\Domain\Repository\UserRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $userRepository;
 
     /**
      * @var \In2code\Femanager\Domain\Repository\UserGroupRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $userGroupRepository;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $persistenceManager;
 
     /**
      * @var \In2code\Femanager\Domain\Service\SendMailService
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $sendMailService;
 
     /**
      * @var \In2code\Femanager\Finisher\FinisherRunner
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $finisherRunner;
 
     /**
      * @var \In2code\Femanager\Utility\LogUtility
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $logUtility;
 
@@ -116,6 +115,31 @@ abstract class AbstractController extends ActionController
      * @var object
      */
     public $allUserGroups;
+
+    /**
+     * AbstractController constructor.
+     * @param \In2code\Femanager\Domain\Repository\UserRepository $userRepository
+     * @param \In2code\Femanager\Domain\Repository\UserGroupRepository $userGroupRepository
+     * @param \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager
+     * @param \In2code\Femanager\Domain\Service\SendMailService $sendMailService
+     * @param \In2code\Femanager\Finisher\FinisherRunner $finisherRunner
+     * @param \In2code\Femanager\Utility\LogUtility $logUtility
+     */
+    public function __construct(
+        UserRepository $userRepository,
+        UserGroupRepository $userGroupRepository,
+        PersistenceManager $persistenceManager,
+        SendMailService $sendMailService,
+        FinisherRunner $finisherRunner,
+        LogUtility $logUtility
+    ) {
+        $this->userRepository = $userRepository;
+        $this->userGroupRepository = $userGroupRepository;
+        $this->persistenceManager = $persistenceManager;
+        $this->sendMailService = $sendMailService;
+        $this->finisherRunner = $finisherRunner;
+        $this->logUtility = $logUtility;
+    }
 
     /**
      * Prefix method to createAction()
