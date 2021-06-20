@@ -673,7 +673,7 @@
       </trans-unit>
       <trans-unit id="ratelimiter_too_many_attempts">
         <source>Too many attempts from this IP address. Try again later.</source>
-        <target state="needs-translation">Too many attempts from this IP address. Try again later.</target>
+        <target state="translated">Zu viele Versuche von dieser IP-Adresse. Versuchen Sie es später erneut.</target>
       </trans-unit>
       <trans-unit id="createFailedProfile" approved="yes">
         <source>Profile creation failed</source>
@@ -749,7 +749,7 @@
       </trans-unit>
       <trans-unit id="pleaseChooseCountry">
         <source>Please choose a country ...</source>
-        <target state="needs-translation">Please choose a country ...</target>
+        <target state="translated">Bitte Land auswählen ...</target>
       </trans-unit>
       <trans-unit id="FilterLabel" approved="yes">
         <source>Search</source>
@@ -825,11 +825,11 @@
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteText">
         <source>%s approval(s) available</source>
-        <target state="needs-translation">%s approval(s) available</target>
+        <target state="translated">%s Genehmigung(en) verfügbar</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteText">
         <source>%s missing user confirmation(s) available</source>
-        <target state="needs-translation">%s approval(s) available</target>
+        <target state="translated">%s Genehmigung(en) verfügbar</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnAction" approved="yes">
         <source>Actions</source>
@@ -837,7 +837,7 @@
       </trans-unit>
       <trans-unit id="BackendMissingConfigPID">
         <source>The config PID is missing!</source>
-        <target state="needs-translation">The config PID is missing!</target>
+        <target state="translated">Die Konfigurations-PID fehlt!</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnUid" approved="yes">
         <source>UID</source>
@@ -849,7 +849,7 @@
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageFailed">
         <source>The user confirmation failed, please check your system log or check your config</source>
-        <target state="needs-translation">The user confirmation failed, please check your system log or check your config</target>
+        <target state="translated">Die Benutzerbestätigung ist fehlgeschlagen, bitte überprüfen Sie Ihr Systemprotokoll oder überprüfen Sie Ihre Konfiguration</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageRefused" approved="yes">
         <source>%s was refused</source>
@@ -857,23 +857,23 @@
       </trans-unit>
       <trans-unit id="BackendConfirmationResendUserConfirmationRequest">
         <source>resend user confirmation e-mail</source>
-        <target state="needs-translation">resend user confirmation e-mail</target>
+        <target state="translated">E-Mail-Bestätigung erneut senden</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageReSend">
         <source>%s confirmation mail was resend</source>
-        <target state="needs-translation">%s confirmation mail was resend</target>
+        <target state="translated">%s Bestätigungsmail wurde erneut gesendet</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueMessage">
         <source>Your userprofile is not confirmed yet.</source>
-        <target state="needs-translation">Your userprofile is not confirmed yet.</target>
+        <target state="translated">Ihr Benutzerprofil ist noch nicht bestätigt.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueLink">
         <source>Resend confirmation email?</source>
-        <target state="needs-translation">Resend confirmation email?</target>
+        <target state="translated">Bestätigungsemail erneut senden?</target>
       </trans-unit>
       <trans-unit id="js.loading_states">
         <source>Loading states ...</source>
-        <target state="needs-translation">Loading states ...</target>
+        <target state="translated">Lade Bundesländer ...</target>
       </trans-unit>
     </body>
   </file>
