@@ -1,7 +1,7 @@
 <f:form.validationResults>
 	<f:if condition="{validationResults.flattenedErrors} && {settings.showResendUserConfirmationRequestView} > 0">
 		<f:for each="{validationResults.flattenedErrors.user}" as="error">
-			<f:if condition="{error.code} =='username' && {error.message}=='validationErrorUniqueDb'">
+			<f:if condition="{error.arguments.field} =='username' && {error.message}=='validationErrorUniqueDb'">
 				<ul class="femanager_note">
 					<li>
 						<f:translate key="resendConfirmationDialogueMessage"/>&nbsp;
