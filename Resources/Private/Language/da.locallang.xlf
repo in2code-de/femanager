@@ -99,9 +99,9 @@
         <source>Country</source>
         <target state="final">Land</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.state">
+      <trans-unit id="tx_femanager_domain_model_user.state" approved="yes">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="final">Tilstand</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.www" approved="yes">
         <source>Website</source>
@@ -115,9 +115,9 @@
         <source>Image</source>
         <target state="final">Billede</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.captcha">
+      <trans-unit id="tx_femanager_domain_model_user.captcha" approved="yes">
         <source>Captcha</source>
-        <target state="needs-translation">Captcha</target>
+        <target state="final">Captcha</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.terms" approved="yes">
         <source>I accept the terms and conditions</source>
@@ -671,9 +671,9 @@
         <source>We received no valid mail.</source>
         <target state="final">Vi modtog ingen gyldig e-mail.</target>
       </trans-unit>
-      <trans-unit id="ratelimiter_too_many_attempts">
+      <trans-unit id="ratelimiter_too_many_attempts" approved="yes">
         <source>Too many attempts from this IP address. Try again later.</source>
-        <target state="needs-translation">Too many attempts from this IP address. Try again later.</target>
+        <target state="final">For mange forsøg fra denne IP-adresse. Prøv igen senere.</target>
       </trans-unit>
       <trans-unit id="createFailedProfile" approved="yes">
         <source>Profile creation failed</source>
@@ -747,9 +747,9 @@
         <source>Please choose ...</source>
         <target state="final">Vælg venligst ...</target>
       </trans-unit>
-      <trans-unit id="pleaseChooseCountry">
+      <trans-unit id="pleaseChooseCountry" approved="yes">
         <source>Please choose a country ...</source>
-        <target state="needs-translation">Please choose a country ...</target>
+        <target state="final">Vælg venligst et land ...</target>
       </trans-unit>
       <trans-unit id="FilterLabel" approved="yes">
         <source>Search</source>
@@ -835,9 +835,9 @@
         <source>Actions</source>
         <target state="final">Handlinger</target>
       </trans-unit>
-      <trans-unit id="BackendMissingConfigPID">
+      <trans-unit id="BackendMissingConfigPID" approved="yes">
         <source>The config PID is missing!</source>
-        <target state="needs-translation">The config PID is missing!</target>
+        <target state="final">Konfigurations PID mangler!</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnUid" approved="yes">
         <source>UID</source>
@@ -847,9 +847,9 @@
         <source>%s was successfully approved</source>
         <target state="final">%s blev godkendt med succes</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationFlashMessageFailed">
+      <trans-unit id="BackendConfirmationFlashMessageFailed" approved="yes">
         <source>The user confirmation failed, please check your system log or check your config</source>
-        <target state="needs-translation">The user confirmation failed, please check your system log or check your config</target>
+        <target state="final">Brugerbekræftelse mislykkedes, tjek din systemlog eller tjek din konfiguration</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageRefused" approved="yes">
         <source>%s was refused</source>
@@ -871,9 +871,9 @@
         <source>Resend confirmation email?</source>
         <target state="final">Gensend konfirmering e-mail?</target>
       </trans-unit>
-      <trans-unit id="js.loading_states">
+      <trans-unit id="js.loading_states" approved="yes">
         <source>Loading states ...</source>
-        <target state="needs-translation">Loading states ...</target>
+        <target state="final">Indlæser tilstande ...</target>
       </trans-unit>
     </body>
   </file>
