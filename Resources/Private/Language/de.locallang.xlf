@@ -871,9 +871,9 @@
         <source>Resend confirmation email?</source>
         <target state="translated">Bestätigungsemail erneut senden?</target>
       </trans-unit>
-      <trans-unit id="js.loading_states">
+      <trans-unit id="js.loading_states" approved="yes">
         <source>Loading states ...</source>
-        <target state="translated">Lade Bundesländer ...</target>
+        <target state="final">Lade Bundesländer ...</target>
       </trans-unit>
     </body>
   </file>
