@@ -3,49 +3,49 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="fi">
     <header/>
     <body>
-      <trans-unit id="tx_femanager_domain_model_user">
+      <trans-unit id="tx_femanager_domain_model_user" approved="yes">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="final">Käyttäjä</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.username">
+      <trans-unit id="tx_femanager_domain_model_user.username" approved="yes">
         <source>Username</source>
-        <target state="needs-translation">Username</target>
+        <target state="final">Käyttäjänimi</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.password">
+      <trans-unit id="tx_femanager_domain_model_user.password" approved="yes">
         <source>Password</source>
-        <target state="needs-translation">Password</target>
+        <target state="final">Salasana</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.password_repeat">
+      <trans-unit id="tx_femanager_domain_model_user.password_repeat" approved="yes">
         <source>Repeat Password</source>
-        <target state="needs-translation">Repeat Password</target>
+        <target state="final">Toista salasana</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.usergroup">
+      <trans-unit id="tx_femanager_domain_model_user.usergroup" approved="yes">
         <source>Usergroup</source>
-        <target state="needs-translation">Usergroup</target>
+        <target state="final">Käyttäjäryhmä</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.name">
+      <trans-unit id="tx_femanager_domain_model_user.name" approved="yes">
         <source>Full Name</source>
-        <target state="needs-translation">Full Name</target>
+        <target state="final">Koko nimi</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.firstName">
+      <trans-unit id="tx_femanager_domain_model_user.firstName" approved="yes">
         <source>Firstname</source>
-        <target state="needs-translation">Firstname</target>
+        <target state="final">Etunimi</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.middleName">
+      <trans-unit id="tx_femanager_domain_model_user.middleName" approved="yes">
         <source>Middlename</source>
-        <target state="needs-translation">Middlename</target>
+        <target state="final">Toinen nimi</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.lastName">
+      <trans-unit id="tx_femanager_domain_model_user.lastName" approved="yes">
         <source>Lastname</source>
-        <target state="needs-translation">Lastname</target>
+        <target state="final">Sukunimi</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth" approved="yes">
         <source>Birthdate</source>
-        <target state="needs-translation">Birthdate</target>
+        <target state="final">Syntymäpäivä</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint">
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint" approved="yes">
         <source>Please type your birthdate as MM/DD/YYYY</source>
-        <target state="needs-translation">Please type your birthdate as MM/DD/YYYY</target>
+        <target state="final">Anna syntymäpäivä muodossa KK/PP/VVVV</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.placeholder">
         <source>MM/DD/YYYY</source>
@@ -55,65 +55,65 @@
         <source>m/d/Y</source>
         <target state="needs-translation">m/d/Y</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender">
+      <trans-unit id="tx_femanager_domain_model_user.gender" approved="yes">
         <source>Gender</source>
-        <target state="needs-translation">Gender</target>
+        <target state="final">Sukupuoli</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender.item0">
+      <trans-unit id="tx_femanager_domain_model_user.gender.item0" approved="yes">
         <source>Male</source>
-        <target state="needs-translation">Male</target>
+        <target state="final">mies</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender.item1">
+      <trans-unit id="tx_femanager_domain_model_user.gender.item1" approved="yes">
         <source>Female</source>
-        <target state="needs-translation">Female</target>
+        <target state="final">nainen</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.address">
+      <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
-        <target state="needs-translation">Address</target>
+        <target state="final">Osoite</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.telephone">
+      <trans-unit id="tx_femanager_domain_model_user.telephone" approved="yes">
         <source>Telephone</source>
-        <target state="needs-translation">Telephone</target>
+        <target state="final">Puhelin</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.fax">
         <source>Fax</source>
         <target state="needs-translation">Fax</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.email">
+      <trans-unit id="tx_femanager_domain_model_user.email" approved="yes">
         <source>Email</source>
-        <target state="needs-translation">Email</target>
+        <target state="final">Sähköposti</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.title">
+      <trans-unit id="tx_femanager_domain_model_user.title" approved="yes">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="final">Titteli</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.zip">
+      <trans-unit id="tx_femanager_domain_model_user.zip" approved="yes">
         <source>ZIP</source>
-        <target state="needs-translation">ZIP</target>
+        <target state="final">Postinro</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.city">
+      <trans-unit id="tx_femanager_domain_model_user.city" approved="yes">
         <source>City</source>
-        <target state="needs-translation">City</target>
+        <target state="final">Postitoimipaikka</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.country">
+      <trans-unit id="tx_femanager_domain_model_user.country" approved="yes">
         <source>Country</source>
-        <target state="needs-translation">Country</target>
+        <target state="final">Maa</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.state">
         <source>State</source>
         <target state="needs-translation">State</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.www">
+      <trans-unit id="tx_femanager_domain_model_user.www" approved="yes">
         <source>Website</source>
-        <target state="needs-translation">Website</target>
+        <target state="final">Kotisivut</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.company">
+      <trans-unit id="tx_femanager_domain_model_user.company" approved="yes">
         <source>Company</source>
-        <target state="needs-translation">Company</target>
+        <target state="final">Yritys</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.image">
+      <trans-unit id="tx_femanager_domain_model_user.image" approved="yes">
         <source>Image</source>
-        <target state="needs-translation">Image</target>
+        <target state="final">Kuva</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.captcha">
         <source>Captcha</source>
@@ -127,25 +127,25 @@
         <source>Click here for terms and conditions</source>
         <target state="needs-translation">Click here for terms and conditions</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.lastlogin">
+      <trans-unit id="tx_femanager_domain_model_user.lastlogin" approved="yes">
         <source>Last login</source>
-        <target state="needs-translation">Last login</target>
+        <target state="final">Kirjautunut viimeksi</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.crdate">
+      <trans-unit id="tx_femanager_domain_model_user.crdate" approved="yes">
         <source>Creation Time</source>
-        <target state="needs-translation">Creation Time</target>
+        <target state="final">Luotu</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log">
+      <trans-unit id="tx_femanager_domain_model_log" approved="yes">
         <source>User Log</source>
-        <target state="needs-translation">User Log</target>
+        <target state="final">Käyttäjäloki</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.title">
+      <trans-unit id="tx_femanager_domain_model_log.title" approved="yes">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="final">Titteli</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.crdate">
+      <trans-unit id="tx_femanager_domain_model_log.crdate" approved="yes">
         <source>Time</source>
-        <target state="needs-translation">Time</target>
+        <target state="final">Aika</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state">
         <source>State</source>
@@ -179,13 +179,13 @@
         <source>Profile creation request</source>
         <target state="needs-translation">Profile creation request</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.200">
+      <trans-unit id="tx_femanager_domain_model_log.state.200" approved="yes">
         <source>Update</source>
-        <target state="needs-translation">Update</target>
+        <target state="final">Päivitys</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.201">
+      <trans-unit id="tx_femanager_domain_model_log.state.201" approved="yes">
         <source>Profile updated</source>
-        <target state="needs-translation">Profile updated</target>
+        <target state="final">Profiili päivitetty</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.202">
         <source>Profile update confirmed by admin</source>
@@ -207,13 +207,13 @@
         <source>Image deleted</source>
         <target state="needs-translation">Image deleted</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.300">
+      <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="final">Poista</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.301">
+      <trans-unit id="tx_femanager_domain_model_log.state.301" approved="yes">
         <source>Profile deleted</source>
-        <target state="needs-translation">Profile deleted</target>
+        <target state="final">Profiili poistettu</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.400">
         <source>Invitation</source>
@@ -239,9 +239,9 @@
         <source>Password changed and profile activated</source>
         <target state="needs-translation">Password changed and profile activated</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.user">
+      <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="final">Käyttäjä</target>
       </trans-unit>
       <trans-unit id="error_no_typoscript">
         <source>No TypoScript found. Did you already include the static Template?</source>
@@ -259,77 +259,77 @@
         <source>You are not authorized for this action</source>
         <target state="needs-translation">You are not authorized for this action</target>
       </trans-unit>
-      <trans-unit id="validationError">
+      <trans-unit id="validationError" approved="yes">
         <source>Error</source>
-        <target state="needs-translation">Error</target>
+        <target state="final">Virhe</target>
       </trans-unit>
-      <trans-unit id="validationErrorRequiredModel">
+      <trans-unit id="validationErrorRequiredModel" approved="yes">
         <source>Username and password must be filled</source>
-        <target state="needs-translation">Username and password must be filled</target>
+        <target state="final">Käyttäjänimi ja salasana ovat pakollisia kenttiä</target>
       </trans-unit>
-      <trans-unit id="validationErrorWrongDateFormat">
+      <trans-unit id="validationErrorWrongDateFormat" approved="yes">
         <source>Given date format is wrong</source>
-        <target state="needs-translation">Given date format is wrong</target>
+        <target state="final">Annettu päivämäärä on väärässä muodossa</target>
       </trans-unit>
-      <trans-unit id="validationErrorRequired">
+      <trans-unit id="validationErrorRequired" approved="yes">
         <source>Field %s is required</source>
-        <target state="needs-translation">Field %s is required</target>
+        <target state="final">Kenttä %s on vaadittu</target>
       </trans-unit>
-      <trans-unit id="validationErrorEmail">
+      <trans-unit id="validationErrorEmail" approved="yes">
         <source>Field %s is not a valid email address</source>
-        <target state="needs-translation">Field %s is not a valid email address</target>
+        <target state="final">Kentässä %s ei ole oikeanlainen sähköpostiosoite.</target>
       </trans-unit>
-      <trans-unit id="validationErrorMin">
+      <trans-unit id="validationErrorMin" approved="yes">
         <source>Please add more characters to field %s</source>
-        <target state="needs-translation">Please add more characters to field %s</target>
+        <target state="final">Kentässä %s on liian vähän merkkejä.</target>
       </trans-unit>
-      <trans-unit id="validationErrorMax">
+      <trans-unit id="validationErrorMax" approved="yes">
         <source>Please add less characters to field %s</source>
-        <target state="needs-translation">Please add less characters to field %s</target>
+        <target state="final">Kentässä %s on liikaa merkkejä.</target>
       </trans-unit>
-      <trans-unit id="validationErrorInt">
+      <trans-unit id="validationErrorInt" approved="yes">
         <source>Only numbers are allowed in field %s</source>
-        <target state="needs-translation">Only numbers are allowed in field %s</target>
+        <target state="final">Vain numerot sallittuja kentässä %s</target>
       </trans-unit>
-      <trans-unit id="validationErrorLetters">
+      <trans-unit id="validationErrorLetters" approved="yes">
         <source>Only letters are allowed in field %s</source>
-        <target state="needs-translation">Only letters are allowed in field %s</target>
+        <target state="final">Vain kirjaimet sallittuja kentässä %s</target>
       </trans-unit>
-      <trans-unit id="validationErrorUniquePage">
+      <trans-unit id="validationErrorUniquePage" approved="yes">
         <source>Value of field %s is already in use</source>
-        <target state="needs-translation">Value of field %s is already in use</target>
+        <target state="final">Kentän %s arvo on jo käytössä toisaalla.</target>
       </trans-unit>
-      <trans-unit id="validationErrorUniqueDb">
+      <trans-unit id="validationErrorUniqueDb" approved="yes">
         <source>Value of field %s is already in use</source>
-        <target state="needs-translation">Value of field %s is already in use</target>
+        <target state="final">Kentän %s arvo on jo käytössä toisaalla.</target>
       </trans-unit>
-      <trans-unit id="validationErrorMustInclude">
+      <trans-unit id="validationErrorMustInclude" approved="yes">
         <source>Try another value for field %s</source>
-        <target state="needs-translation">Try another value for field %s</target>
+        <target state="final">Kokeile toista arvoa kenttään %s.</target>
       </trans-unit>
       <trans-unit id="validationErrorMustNotInclude">
         <source>Not allowed signs in field %s</source>
         <target state="needs-translation">Not allowed signs in field %s</target>
       </trans-unit>
-      <trans-unit id="validationErrorInList">
+      <trans-unit id="validationErrorInList" approved="yes">
         <source>This value is not allowed in field %s</source>
-        <target state="needs-translation">This value is not allowed in field %s</target>
+        <target state="final">Kentän %s arvo ei ole sallittu.</target>
       </trans-unit>
-      <trans-unit id="validationErrorSameAs">
+      <trans-unit id="validationErrorSameAs" approved="yes">
         <source>Please check your value</source>
-        <target state="needs-translation">Please check your value</target>
+        <target state="final">Ole hyvä ja tarkista arvo</target>
       </trans-unit>
-      <trans-unit id="validationErrorPasswordRepeat">
+      <trans-unit id="validationErrorPasswordRepeat" approved="yes">
         <source>Both passwords do not fit</source>
-        <target state="needs-translation">Both passwords do not fit</target>
+        <target state="final">Salasanat eivät ole yhtenevät.</target>
       </trans-unit>
-      <trans-unit id="validationErrorDate">
+      <trans-unit id="validationErrorDate" approved="yes">
         <source>Date has the wrong format</source>
-        <target state="needs-translation">Date has the wrong format</target>
+        <target state="final">Vääränlainen pvm</target>
       </trans-unit>
-      <trans-unit id="validationErrorCaptcha">
+      <trans-unit id="validationErrorCaptcha" approved="yes">
         <source>Wrong Captcha code</source>
-        <target state="needs-translation">Wrong Captcha code</target>
+        <target state="final">Väärä roskapostikoodi</target>
       </trans-unit>
       <trans-unit id="validationErrorGeneral">
         <source>Field could not be validated</source>
@@ -339,105 +339,105 @@
         <source>Please confirm a new registration</source>
         <target state="needs-translation">Please confirm a new registration</target>
       </trans-unit>
-      <trans-unit id="emailCreateAdminConfirmationSalutation">
+      <trans-unit id="emailCreateAdminConfirmationSalutation" approved="yes">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="final">Hyvä hallinnoija,</target>
       </trans-unit>
-      <trans-unit id="emailCreateAdminConfirmationUserProperties">
+      <trans-unit id="emailCreateAdminConfirmationUserProperties" approved="yes">
         <source>User properties:</source>
-        <target state="needs-translation">User properties:</target>
+        <target state="final">Käyttäjän ominaisuudet</target>
       </trans-unit>
-      <trans-unit id="emailCreateAdminConfirmationText1">
+      <trans-unit id="emailCreateAdminConfirmationText1" approved="yes">
         <source>Please confirm registration of %s by clicking the following link:</source>
-        <target state="needs-translation">Please confirm registration of %s by clicking the following link:</target>
+        <target state="final">Ole hyvä ja varmista rekisteröinti %s klikkaamalla linkkiä:</target>
       </trans-unit>
-      <trans-unit id="emailCreateAdminConfirmationLinkConfirm">
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirm" approved="yes">
         <source>Confirm registration</source>
-        <target state="needs-translation">Confirm registration</target>
+        <target state="final">Varmista rekisteröinti</target>
       </trans-unit>
-      <trans-unit id="emailCreateAdminConfirmationText2">
+      <trans-unit id="emailCreateAdminConfirmationText2" approved="yes">
         <source>If you want to delete the registration, click this link:</source>
-        <target state="needs-translation">If you want to delete the registration, click this link:</target>
+        <target state="final">Jos haluat poistaa rekisteröinnin, klikkaa:</target>
       </trans-unit>
-      <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefused">
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefused" approved="yes">
         <source>Delete profile</source>
-        <target state="needs-translation">Delete profile</target>
+        <target state="final">Poista profiili</target>
       </trans-unit>
-      <trans-unit id="emailCreateAdminConfirmationText3">
+      <trans-unit id="emailCreateAdminConfirmationText3" approved="yes">
         <source>If you want to delete the registration, without sending an email to the user, click this link:</source>
-        <target state="needs-translation">If you want to delete the registration, without sending an email to the user, click this link:</target>
+        <target state="final">Jos haluat poistaa rekisteröinnin ilman sähköpostiilmoitusta käyttäjälle, klikkaa linkkiä:</target>
       </trans-unit>
-      <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent">
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent" approved="yes">
         <source>Silently delete profile</source>
-        <target state="needs-translation">Silently delete profile</target>
+        <target state="final">Hiljainen profiilin poisto</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationSubject">
         <source>Please confirm your profile creation request</source>
         <target state="needs-translation">Please confirm your profile creation request</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserConfirmationSalutation">
+      <trans-unit id="emailCreateUserConfirmationSalutation" approved="yes">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="final">Hyvä</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserConfirmationText1">
+      <trans-unit id="emailCreateUserConfirmationText1" approved="yes">
         <source>Please confirm your profile registration on our server by clicking the following link:</source>
-        <target state="needs-translation">Please confirm your profile registration on our server by clicking the following link:</target>
+        <target state="final">Ole hyvä ja varmista profiilisi rekisteröinti klikkaamalla linkkiä:</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserConfirmationLinkConfirm">
+      <trans-unit id="emailCreateUserConfirmationLinkConfirm" approved="yes">
         <source>Confirm profile</source>
-        <target state="needs-translation">Confirm profile</target>
+        <target state="final">Varmista profiili</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserConfirmationText2">
+      <trans-unit id="emailCreateUserConfirmationText2" approved="yes">
         <source>If you don't want to be registered on our system, click this link:</source>
-        <target state="needs-translation">If you don't want to be registered on our system, click this link:</target>
+        <target state="final">Jos et halua rekisteröintiä systeemissämme, klikkaa:</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserConfirmationLinkConfirmRefused">
+      <trans-unit id="emailCreateUserConfirmationLinkConfirmRefused" approved="yes">
         <source>Delete profile</source>
-        <target state="needs-translation">Delete profile</target>
+        <target state="final">Poista profiili</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserConfirmationSignature">
+      <trans-unit id="emailCreateUserConfirmationSignature" approved="yes">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="final">Kotisivutiimi</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifySubject">
         <source>Your registration was confirmed</source>
         <target state="needs-translation">Your registration was confirmed</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifySalutation">
+      <trans-unit id="emailCreateUserNotifySalutation" approved="yes">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="final">Hyvä</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifyText1">
+      <trans-unit id="emailCreateUserNotifyText1" approved="yes">
         <source>Your profile was confirmed and successfully created.</source>
-        <target state="needs-translation">Your profile was confirmed and successfully created.</target>
+        <target state="final">Profiilisi on varmistettu ja luotu onnistuneesti.</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifySignature">
+      <trans-unit id="emailCreateUserNotifySignature" approved="yes">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="final">Kotisivutiimi</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifyRefusedSubject">
+      <trans-unit id="emailCreateUserNotifyRefusedSubject" approved="yes">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="final">Hyvä</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifyRefusedSalutation">
+      <trans-unit id="emailCreateUserNotifyRefusedSalutation" approved="yes">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="final">Hyvä</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifyRefusedText1">
+      <trans-unit id="emailCreateUserNotifyRefusedText1" approved="yes">
         <source>Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</source>
-        <target state="needs-translation">Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</target>
+        <target state="final">Kiitos kiinnostuksestasi. Valitettavasti emme voi luoda sinulle käyttäjäprofiilia.</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifyRefusedSignature">
+      <trans-unit id="emailCreateUserNotifyRefusedSignature" approved="yes">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="final">Kotisivutiimi</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifySubject">
         <source>New profile registration</source>
         <target state="needs-translation">New profile registration</target>
       </trans-unit>
-      <trans-unit id="emailCreateNotifySalutation">
+      <trans-unit id="emailCreateNotifySalutation" approved="yes">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="final">Hyvä hallinnoija,</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifyText1">
         <source>Profile creation - User %s</source>
@@ -455,9 +455,9 @@
         <source>Profile update</source>
         <target state="needs-translation">Profile update</target>
       </trans-unit>
-      <trans-unit id="emailUpdateNotifySalutation">
+      <trans-unit id="emailUpdateNotifySalutation" approved="yes">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="final">Hyvä hallinnoija,</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifyText1">
         <source>Profile change by user %s</source>
@@ -479,9 +479,9 @@
         <source>New profile change request</source>
         <target state="needs-translation">New profile change request</target>
       </trans-unit>
-      <trans-unit id="emailUpdateRequestSalutation">
+      <trans-unit id="emailUpdateRequestSalutation" approved="yes">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="final">Hyvä hallinnoija,</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestText1">
         <source>Profile change request from %s</source>
@@ -519,9 +519,9 @@
         <source>Your update request was refused</source>
         <target state="needs-translation">Your update request was refused</target>
       </trans-unit>
-      <trans-unit id="emailUpdateRequestRefusedSalutation">
+      <trans-unit id="emailUpdateRequestRefusedSalutation" approved="yes">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="final">Hyvä</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedText1">
         <source>Thank you for your update request. We're sorry to tell you, that we had to refuse your request.</source>
@@ -531,17 +531,17 @@
         <source>Please contact %s for further information.</source>
         <target state="needs-translation">Please contact %s for further information.</target>
       </trans-unit>
-      <trans-unit id="emailUpdateRequestRefusedSignature">
+      <trans-unit id="emailUpdateRequestRefusedSignature" approved="yes">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="final">Kotisivutiimi</target>
       </trans-unit>
       <trans-unit id="emailInvitationSubject">
         <source>Confirm your profile</source>
         <target state="needs-translation">Confirm your profile</target>
       </trans-unit>
-      <trans-unit id="emailInvitationSalutation">
+      <trans-unit id="emailInvitationSalutation" approved="yes">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="final">Hyvä</target>
       </trans-unit>
       <trans-unit id="emailInvitationText1">
         <source>Your new profile was just created.</source>
@@ -551,21 +551,21 @@
         <source>Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</source>
         <target state="needs-translation">Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</target>
       </trans-unit>
-      <trans-unit id="emailInvitationLinkConfirm">
+      <trans-unit id="emailInvitationLinkConfirm" approved="yes">
         <source>Confirm Profile</source>
-        <target state="needs-translation">Confirm Profile</target>
+        <target state="final">Varmista profiili</target>
       </trans-unit>
       <trans-unit id="emailInvitationText3">
         <source>If you don't want to be registered on our system, click this link.</source>
         <target state="needs-translation">If you don't want to be registered on our system, click this link.</target>
       </trans-unit>
-      <trans-unit id="emailInvitationLinkConfirmRefused">
+      <trans-unit id="emailInvitationLinkConfirmRefused" approved="yes">
         <source>Delete Profile</source>
-        <target state="needs-translation">Delete Profile</target>
+        <target state="final">Poista profiili</target>
       </trans-unit>
-      <trans-unit id="emailInvitationSignature">
+      <trans-unit id="emailInvitationSignature" approved="yes">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="final">Kotisivutiimi</target>
       </trans-unit>
       <trans-unit id="emailInvitationAdminNotifiyStep1Subject">
         <source>User was invited</source>
@@ -579,9 +579,9 @@
         <source>User refused invitation</source>
         <target state="needs-translation">User refused invitation</target>
       </trans-unit>
-      <trans-unit id="emailInvitationUserRefusedAdminNotifiySalutation">
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiySalutation" approved="yes">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="final">Hyvä hallinnoija,</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyText1">
         <source>Profile invitation of %s</source>
@@ -623,9 +623,9 @@
         <source>Resend now</source>
         <target state="needs-translation">Resend now</target>
       </trans-unit>
-      <trans-unit id="passwordRepeat">
+      <trans-unit id="passwordRepeat" approved="yes">
         <source>Repeat Password</source>
-        <target state="needs-translation">Repeat Password</target>
+        <target state="final">Toista salasana</target>
       </trans-unit>
       <trans-unit id="titleCreateProfile">
         <source>Create a new user-profile</source>
@@ -639,9 +639,9 @@
         <source>Please enter your email address</source>
         <target state="needs-translation">Please enter your email address</target>
       </trans-unit>
-      <trans-unit id="submitEdit">
+      <trans-unit id="submitEdit" approved="yes">
         <source>Update Profile</source>
-        <target state="needs-translation">Update Profile</target>
+        <target state="final">Profiilipäivitys</target>
       </trans-unit>
       <trans-unit id="create">
         <source>Profile successfully created</source>
@@ -691,17 +691,17 @@
         <source>Profile successfully deleted</source>
         <target state="needs-translation">Profile successfully deleted</target>
       </trans-unit>
-      <trans-unit id="titleUpdateProfile">
+      <trans-unit id="titleUpdateProfile" approved="yes">
         <source>Update your user-profile</source>
-        <target state="needs-translation">Update your user-profile</target>
+        <target state="final">Päivitä käyttäjäprofiiliasi</target>
       </trans-unit>
-      <trans-unit id="update">
+      <trans-unit id="update" approved="yes">
         <source>Profile successfully changed</source>
-        <target state="needs-translation">Profile successfully changed</target>
+        <target state="final">Käyttäjäprofiilin tiedot päivitetty</target>
       </trans-unit>
-      <trans-unit id="noChanges">
+      <trans-unit id="noChanges" approved="yes">
         <source>No changes detected, nothing to update</source>
-        <target state="needs-translation">No changes detected, nothing to update</target>
+        <target state="final">Ei muutoksia, ei päivitystä.</target>
       </trans-unit>
       <trans-unit id="updateRequest">
         <source>Your change request was transmitted to the administrator. After a confirmation, your profile will be up-to-date.</source>
@@ -711,9 +711,9 @@
         <source>You're successfully logged in now</source>
         <target state="needs-translation">You're successfully logged in now</target>
       </trans-unit>
-      <trans-unit id="deleteProfile">
+      <trans-unit id="deleteProfile" approved="yes">
         <source>Delete Profile</source>
-        <target state="needs-translation">Delete Profile</target>
+        <target state="final">Poista profiili</target>
       </trans-unit>
       <trans-unit id="updateProfile">
         <source>Profile successfully updated</source>
@@ -775,9 +775,9 @@
         <source>Please set a new password</source>
         <target state="needs-translation">Please set a new password</target>
       </trans-unit>
-      <trans-unit id="BackendListUserDelete">
+      <trans-unit id="BackendListUserDelete" approved="yes">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="final">Poista</target>
       </trans-unit>
       <trans-unit id="BackendListUserDeleteConfirmation">
         <source>Are you sure to delete this User?</source>
