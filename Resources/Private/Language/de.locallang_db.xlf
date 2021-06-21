@@ -3,9 +3,9 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="de">
     <header/>
     <body>
-      <trans-unit id="tx_femanager_domain_model_user">
+      <trans-unit id="tx_femanager_domain_model_user" approved="yes">
         <source>User</source>
-        <target state="translated">Benutzer</target>
+        <target state="final">Benutzer</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.username">
         <source>Username</source>
@@ -203,245 +203,245 @@
         <source>Update</source>
         <target state="translated">Aktualisierung</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.201">
+      <trans-unit id="tx_femanager_domain_model_log.state.201" approved="yes">
         <source>Profile updated</source>
-        <target state="translated">Profil Änderung</target>
+        <target state="final">Profil Änderung</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.202">
         <source>Profile update confirmed by admin</source>
         <target state="translated">Profil Änderung durch Admin bestätigt</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.203">
+      <trans-unit id="tx_femanager_domain_model_log.state.203" approved="yes">
         <source>Profile update refused by admin</source>
-        <target state="translated">Profil Änderung durch Admin abgelehnt</target>
+        <target state="final">Profil Änderung durch Admin abgelehnt</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.204">
+      <trans-unit id="tx_femanager_domain_model_log.state.204" approved="yes">
         <source>Profile update request</source>
-        <target state="translated">Profil Änderung angefragt</target>
+        <target state="final">Profil Änderung angefragt</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.205">
+      <trans-unit id="tx_femanager_domain_model_log.state.205" approved="yes">
         <source>Profile update security failure</source>
-        <target state="translated">Profil Änderung aus Sicherheitsgründen abgelehnt</target>
+        <target state="final">Profil Änderung aus Sicherheitsgründen abgelehnt</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.206">
+      <trans-unit id="tx_femanager_domain_model_log.state.206" approved="yes">
         <source>Image deleted</source>
-        <target state="translated">Bild gelöscht</target>
+        <target state="final">Bild gelöscht</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.300">
+      <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
         <source>Delete</source>
-        <target state="translated">Löschen</target>
+        <target state="final">Löschen</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.301">
+      <trans-unit id="tx_femanager_domain_model_log.state.301" approved="yes">
         <source>Profile deleted</source>
-        <target state="translated">Profil gelöscht</target>
+        <target state="final">Profil gelöscht</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.400">
+      <trans-unit id="tx_femanager_domain_model_log.state.400" approved="yes">
         <source>Invitation</source>
-        <target state="translated">Einladung</target>
+        <target state="final">Einladung</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.401">
+      <trans-unit id="tx_femanager_domain_model_log.state.401" approved="yes">
         <source>Profile created and User invited</source>
-        <target state="translated">Profil erstellt und Benutzer eingeladen</target>
+        <target state="final">Profil erstellt und Benutzer eingeladen</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.402">
+      <trans-unit id="tx_femanager_domain_model_log.state.402" approved="yes">
         <source>Profile deleted from User</source>
-        <target state="translated">Profil gelöscht durch den Benutzer</target>
+        <target state="final">Profil gelöscht durch den Benutzer</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.403">
+      <trans-unit id="tx_femanager_domain_model_log.state.403" approved="yes">
         <source>Wrong Hash</source>
-        <target state="translated">Falsche Prüfsumme</target>
+        <target state="final">Falsche Prüfsumme</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.404">
+      <trans-unit id="tx_femanager_domain_model_log.state.404" approved="yes">
         <source>You tried to open a restricted page</source>
-        <target state="translated">Sie haben versucht, eine eingeschränkte Seite zu öffnen</target>
+        <target state="final">Sie haben versucht, eine eingeschränkte Seite zu öffnen</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.405">
+      <trans-unit id="tx_femanager_domain_model_log.state.405" approved="yes">
         <source>Password changed and Profile activated</source>
-        <target state="translated">Passwort geändert und Profil aktiviert</target>
+        <target state="final">Passwort geändert und Profil aktiviert</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.user">
+      <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
         <source>User</source>
-        <target state="translated">Benutzer</target>
+        <target state="final">Benutzer</target>
       </trans-unit>
-      <trans-unit id="flexform.main.title">
+      <trans-unit id="flexform.main.title" approved="yes">
         <source>Main Settings</source>
-        <target state="translated">Haupteinstellungen</target>
+        <target state="final">Haupteinstellungen</target>
       </trans-unit>
-      <trans-unit id="flexform.main.view">
+      <trans-unit id="flexform.main.view" approved="yes">
         <source>Choose View</source>
-        <target state="translated">Ansichten auswählen</target>
+        <target state="final">Ansichten auswählen</target>
       </trans-unit>
-      <trans-unit id="flexform.main.view.0">
+      <trans-unit id="flexform.main.view.0" approved="yes">
         <source>Registration</source>
-        <target state="translated">Registrierung</target>
+        <target state="final">Registrierung</target>
       </trans-unit>
-      <trans-unit id="flexform.main.view.1">
+      <trans-unit id="flexform.main.view.1" approved="yes">
         <source>Edit</source>
-        <target state="translated">Bearbeiten</target>
+        <target state="final">Bearbeiten</target>
       </trans-unit>
-      <trans-unit id="flexform.main.view.2">
+      <trans-unit id="flexform.main.view.2" approved="yes">
         <source>List</source>
-        <target state="translated">Liste</target>
+        <target state="final">Liste</target>
       </trans-unit>
-      <trans-unit id="flexform.main.view.3">
+      <trans-unit id="flexform.main.view.3" approved="yes">
         <source>Detail</source>
-        <target state="translated">Detailansicht</target>
+        <target state="final">Detailansicht</target>
       </trans-unit>
-      <trans-unit id="flexform.main.view.4">
+      <trans-unit id="flexform.main.view.4" approved="yes">
         <source>Invitation</source>
-        <target state="translated">Einladung</target>
+        <target state="final">Einladung</target>
       </trans-unit>
-      <trans-unit id="flexform.main.view.5">
+      <trans-unit id="flexform.main.view.5" approved="yes">
         <source>Resend confirmation mail</source>
-        <target state="translated">Bestätigungs-E-Mail erneut versenden</target>
+        <target state="final">Bestätigungs-E-Mail erneut versenden</target>
       </trans-unit>
-      <trans-unit id="flexform.new.title">
+      <trans-unit id="flexform.new.title" approved="yes">
         <source>Registration</source>
-        <target state="translated">Registrierung</target>
+        <target state="final">Registrierung</target>
       </trans-unit>
-      <trans-unit id="flexform.new.fields">
+      <trans-unit id="flexform.new.fields" approved="yes">
         <source>Select Fields for New-Form (empty = all fields)</source>
-        <target state="translated">Felder für Formular wählen (keine = alle Felder)</target>
+        <target state="final">Felder für Formular wählen (keine = alle Felder)</target>
       </trans-unit>
-      <trans-unit id="flexform.new.overrideUserGroup">
+      <trans-unit id="flexform.new.overrideUserGroup" approved="yes">
         <source>Select Usergroups for new Users</source>
-        <target state="translated">Zugewiesene Benutzergruppen für neue Benutzer</target>
+        <target state="final">Zugewiesene Benutzergruppen für neue Benutzer</target>
       </trans-unit>
-      <trans-unit id="flexform.new.confirmByUser">
+      <trans-unit id="flexform.new.confirmByUser" approved="yes">
         <source>Registration must be confirmed from sender</source>
-        <target state="translated">Registrierung muss vom Benutzer bestätigt werden</target>
+        <target state="final">Registrierung muss vom Benutzer bestätigt werden</target>
       </trans-unit>
-      <trans-unit id="flexform.new.showTermsAndConditions">
+      <trans-unit id="flexform.new.showTermsAndConditions" approved="yes">
         <source>User must accept terms and conditions</source>
-        <target state="translated">Benutzer muss Nutzungsbedingungen aktzeptieren</target>
+        <target state="final">Benutzer muss Nutzungsbedingungen aktzeptieren</target>
       </trans-unit>
-      <trans-unit id="flexform.new.confirmByAdmin">
+      <trans-unit id="flexform.new.confirmByAdmin" approved="yes">
         <source>Registration must be confirmed from an admin (add one or more emails)</source>
-        <target state="translated">Registrierung muss vom Admin bestätigt werden (eine oder mehrere E-Mails eintragen)</target>
+        <target state="final">Registrierung muss vom Admin bestätigt werden (eine oder mehrere E-Mails eintragen)</target>
       </trans-unit>
-      <trans-unit id="flexform.new.notifyAdmin">
+      <trans-unit id="flexform.new.notifyAdmin" approved="yes">
         <source>Notify admin on registration (add one or more emails)</source>
-        <target state="translated">Hinweis-E-Mail an Admin (eine oder mehrere E-Mails eintragen)</target>
+        <target state="final">Hinweis-E-Mail an Admin (eine oder mehrere E-Mails eintragen)</target>
       </trans-unit>
-      <trans-unit id="flexform.edit.title">
+      <trans-unit id="flexform.edit.title" approved="yes">
         <source>Edit</source>
-        <target state="translated">Bearbeiten</target>
+        <target state="final">Bearbeiten</target>
       </trans-unit>
-      <trans-unit id="flexform.edit.fields">
+      <trans-unit id="flexform.edit.fields" approved="yes">
         <source>Select Fields for Edit-Form (empty = all fields)</source>
-        <target state="translated">Felder für Formular wählen (keine = alle Felder)</target>
+        <target state="final">Felder für Formular wählen (keine = alle Felder)</target>
       </trans-unit>
-      <trans-unit id="flexform.edit.showDeleteLink">
+      <trans-unit id="flexform.edit.showDeleteLink" approved="yes">
         <source>Show Delete Button in Edit Form</source>
-        <target state="translated">Zeige Löschen-Schaltfläche im Bearbeiten-Formular</target>
+        <target state="final">Zeige Löschen-Schaltfläche im Bearbeiten-Formular</target>
       </trans-unit>
-      <trans-unit id="flexform.edit.confirmByAdmin">
+      <trans-unit id="flexform.edit.confirmByAdmin" approved="yes">
         <source>Profile update must be confirmed from an admin (add one or more emails)</source>
-        <target state="translated">Profiländerung muss vom Admin bestätigt werden (eine oder mehrere E-Mails eintragen)</target>
+        <target state="final">Profiländerung muss vom Admin bestätigt werden (eine oder mehrere E-Mails eintragen)</target>
       </trans-unit>
-      <trans-unit id="flexform.edit.notifyAdmin">
+      <trans-unit id="flexform.edit.notifyAdmin" approved="yes">
         <source>Notify admin on Profile update (add one or more emails)</source>
-        <target state="translated">Hinweis-E-Mail bei Änderung an Admin (eine oder mehrere E-Mails eintragen)</target>
+        <target state="final">Hinweis-E-Mail bei Änderung an Admin (eine oder mehrere E-Mails eintragen)</target>
       </trans-unit>
-      <trans-unit id="flexform.list.title">
+      <trans-unit id="flexform.list.title" approved="yes">
         <source>Listview</source>
-        <target state="translated">Listenansicht</target>
+        <target state="final">Listenansicht</target>
       </trans-unit>
-      <trans-unit id="flexform.list.filter">
+      <trans-unit id="flexform.list.filter" approved="yes">
         <source>Show Searchfield</source>
-        <target state="translated">Suchfeld anzeigen</target>
+        <target state="final">Suchfeld anzeigen</target>
       </trans-unit>
-      <trans-unit id="flexform.list.limit">
+      <trans-unit id="flexform.list.limit" approved="yes">
         <source>Limit</source>
-        <target state="translated">Limit</target>
+        <target state="final">Limit</target>
       </trans-unit>
-      <trans-unit id="flexform.list.orderby">
+      <trans-unit id="flexform.list.orderby" approved="yes">
         <source>Order by</source>
-        <target state="translated">Sortieren nach</target>
+        <target state="final">Sortieren nach</target>
       </trans-unit>
-      <trans-unit id="flexform.list.orderby.0">
+      <trans-unit id="flexform.list.orderby.0" approved="yes">
         <source>Lastname</source>
-        <target state="translated">Nachname</target>
+        <target state="final">Nachname</target>
       </trans-unit>
-      <trans-unit id="flexform.list.orderby.1">
+      <trans-unit id="flexform.list.orderby.1" approved="yes">
         <source>Firstname</source>
-        <target state="translated">Vorname</target>
+        <target state="final">Vorname</target>
       </trans-unit>
-      <trans-unit id="flexform.list.orderby.2">
+      <trans-unit id="flexform.list.orderby.2" approved="yes">
         <source>Company</source>
-        <target state="translated">Firma</target>
+        <target state="final">Firma</target>
       </trans-unit>
-      <trans-unit id="flexform.list.sorting">
+      <trans-unit id="flexform.list.sorting" approved="yes">
         <source>Sorting</source>
-        <target state="translated">Sortierung</target>
+        <target state="final">Sortierung</target>
       </trans-unit>
-      <trans-unit id="flexform.list.sorting.0">
+      <trans-unit id="flexform.list.sorting.0" approved="yes">
         <source>Ascending</source>
-        <target state="translated">aufsteigend</target>
+        <target state="final">aufsteigend</target>
       </trans-unit>
-      <trans-unit id="flexform.list.sorting.1">
+      <trans-unit id="flexform.list.sorting.1" approved="yes">
         <source>Descending</source>
-        <target state="translated">absteigend</target>
+        <target state="final">absteigend</target>
       </trans-unit>
-      <trans-unit id="flexform.list.usergroup">
+      <trans-unit id="flexform.list.usergroup" approved="yes">
         <source>Show from usergroup (empty = show all)</source>
-        <target state="translated">Zeige Benutzer von Benutzergruppen (leer = zeige alle)</target>
+        <target state="final">Zeige Benutzer von Benutzergruppen (leer = zeige alle)</target>
       </trans-unit>
-      <trans-unit id="flexform.show.title">
+      <trans-unit id="flexform.show.title" approved="yes">
         <source>Detailview</source>
-        <target state="translated">Detailansicht</target>
+        <target state="final">Detailansicht</target>
       </trans-unit>
-      <trans-unit id="flexform.show.user">
+      <trans-unit id="flexform.show.user" approved="yes">
         <source>User to show</source>
-        <target state="translated">Zu zeigender Benutzer</target>
+        <target state="final">Zu zeigender Benutzer</target>
       </trans-unit>
-      <trans-unit id="flexform.show.user.1">
+      <trans-unit id="flexform.show.user.1" approved="yes">
         <source>[Logged in FE User]</source>
-        <target state="translated">[Eingeloggter Benutzer]</target>
+        <target state="final">[Eingeloggter Benutzer]</target>
       </trans-unit>
-      <trans-unit id="flexform.invitation.title">
+      <trans-unit id="flexform.invitation.title" approved="yes">
         <source>Invitation</source>
-        <target state="translated">Einladung</target>
+        <target state="final">Einladung</target>
       </trans-unit>
-      <trans-unit id="flexform.invitation.allowedUserGroups">
+      <trans-unit id="flexform.invitation.allowedUserGroups" approved="yes">
         <source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
-        <target state="translated">Einschränken von "Einladung hinzufügen" auf eine oder mehrere Benutzergruppen (leer = Keine Einschränkung)</target>
+        <target state="final">Einschränken von "Einladung hinzufügen" auf eine oder mehrere Benutzergruppen (leer = Keine Einschränkung)</target>
       </trans-unit>
-      <trans-unit id="flexform.invitation.fields">
+      <trans-unit id="flexform.invitation.fields" approved="yes">
         <source>Select Fields for invitation-Form (empty = all fields)</source>
-        <target state="translated">Select Fields for invitation-Form (empty = all fields)</target>
+        <target state="final">Select Fields for invitation-Form (empty = all fields)</target>
       </trans-unit>
-      <trans-unit id="flexform.invitation.overrideUserGroup">
+      <trans-unit id="flexform.invitation.overrideUserGroup" approved="yes">
         <source>Select Usergroups for new Users</source>
-        <target state="translated">Select Usergroups for new Users</target>
+        <target state="final">Select Usergroups for new Users</target>
       </trans-unit>
-      <trans-unit id="flexform.invitation.confirmByAdmin">
+      <trans-unit id="flexform.invitation.confirmByAdmin" approved="yes">
         <source>Registration must be confirmed from an admin (add one or more emails)</source>
-        <target state="translated">Registration must be confirmed from an admin (add one or more emails)</target>
+        <target state="final">Registration must be confirmed from an admin (add one or more emails)</target>
       </trans-unit>
-      <trans-unit id="flexform.invitation.notifyAdminStep1">
+      <trans-unit id="flexform.invitation.notifyAdminStep1" approved="yes">
         <source>Notify admin on step 1 (add one or more emails)</source>
-        <target state="translated">Notify admin on step 1 (add one or more emails)</target>
+        <target state="final">Notify admin on step 1 (add one or more emails)</target>
       </trans-unit>
-      <trans-unit id="flexform.invitation.notifyAdmin">
+      <trans-unit id="flexform.invitation.notifyAdmin" approved="yes">
         <source>Notify admin if user sets a password (add one or more emails)</source>
-        <target state="translated">Notify admin if user sets a password (add one or more emails)</target>
+        <target state="final">Notify admin if user sets a password (add one or more emails)</target>
       </trans-unit>
-      <trans-unit id="flexform.misc.title">
+      <trans-unit id="flexform.misc.title" approved="yes">
         <source>Additional Settings</source>
-        <target state="translated">Weitere Einstellungen</target>
+        <target state="final">Weitere Einstellungen</target>
       </trans-unit>
-      <trans-unit id="flexform.misc.termsUrl">
+      <trans-unit id="flexform.misc.termsUrl" approved="yes">
         <source>Page with terms and conditions</source>
-        <target state="translated">Seite mit Nutzungsbedingungen</target>
+        <target state="final">Seite mit Nutzungsbedingungen</target>
       </trans-unit>
-      <trans-unit id="pleaseChoose">
+      <trans-unit id="pleaseChoose" approved="yes">
         <source>Please choose...</source>
-        <target state="translated">Bitte auswählen...</target>
+        <target state="final">Bitte auswählen...</target>
       </trans-unit>
-      <trans-unit id="pleaseChooseCountry">
+      <trans-unit id="pleaseChooseCountry" approved="yes">
         <source>Please choose a country...</source>
-        <target state="translated">Bitte Land auswählen...</target>
+        <target state="final">Bitte Land auswählen...</target>
       </trans-unit>
     </body>
   </file>
