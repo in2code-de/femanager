@@ -9,15 +9,15 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.username">
         <source>Username</source>
-        <target state="needs-translation">Username</target>
+        <target state="translated">Brugernavn</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.password">
         <source>Password</source>
-        <target state="needs-translation">Password</target>
+        <target state="translated">Adgangskode</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.usergroup">
         <source>Usergroup</source>
-        <target state="needs-translation">Usergroup</target>
+        <target state="translated">Brugergruppe</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.name">
         <source>Name</source>
