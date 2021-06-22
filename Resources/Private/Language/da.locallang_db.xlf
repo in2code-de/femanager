@@ -5,7 +5,7 @@
     <body>
       <trans-unit id="tx_femanager_domain_model_user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Bruger</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.username">
         <source>Username</source>
