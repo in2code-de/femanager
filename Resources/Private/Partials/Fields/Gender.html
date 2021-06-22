@@ -29,5 +29,16 @@
 				<f:translate key="tx_femanager_domain_model_user.gender.item0" />
 			</label>
 		</div>
+		<div class="radio">
+			<label>
+				<f:form.radio
+					id="femanager_field_gender2"
+					property="gender"
+					value="2"
+					checked="{user.gender} == 2"
+					additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'gender')}" />
+				<f:translate key="tx_femanager_domain_model_user.gender.item2" />
+			</label>
+		</div>
 	</div>
 </div>
