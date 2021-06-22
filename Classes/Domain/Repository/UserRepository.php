@@ -309,8 +309,10 @@ class UserRepository extends Repository
     {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);
-        $and = [$query->equals('txFemanagerConfirmedbyuser', false)];
-        $and[] = $query->like('email', '%' . $mail . '%');
+        $and = [
+            $query->equals('txFemanagerConfirmedbyuser', false),
+            $query->equals('email', $mail)
+        ];
         $query->matching($query->logicalAnd($and));
 
         $query->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING]);
