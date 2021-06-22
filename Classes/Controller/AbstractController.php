@@ -320,16 +320,18 @@ abstract class AbstractController extends ActionController
         ) {
             $target = $this->contentObject->cObjGetSingle(
                 $this->config[$action . '.'][$category],
-                $this->config[$action . '.'][$category . '.']
+                array_merge_recursive(
+                    $this->config[$action . '.'][$category . '.'],
+                    [
+                        'linkAccessRestrictedPages' => 1
+                    ]
+                )
             );
         }
 
         // if redirect target
         if ($target) {
-            $this->uriBuilder->setTargetPageUid((int)$target);
-            $this->uriBuilder->setLinkAccessRestrictedPages(true);
-            $link = $this->uriBuilder->build();
-            $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($link));
+            $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
         }
     }
 
