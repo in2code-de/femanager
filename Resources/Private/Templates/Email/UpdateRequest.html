@@ -37,14 +37,7 @@
 								<f:then>
 									<f:if condition="{0:property} == {0:'gender'}">
 										<f:then>
-											<f:if condition="{change.old} == 0">
-												<f:then>
-													<f:translate key="tx_femanager_domain_model_user.gender.item0" />
-												</f:then>
-												<f:else>
-													<f:translate key="tx_femanager_domain_model_user.gender.item1" />
-												</f:else>
-											</f:if>
+											<f:translate key="tx_femanager_domain_model_user.gender.item{change.old}" />
 										</f:then>
 										<f:else>
 											<f:if condition="{0:property} == {0:'dateOfBirth'}">
@@ -73,14 +66,7 @@
 						<f:else>
 							<f:if condition="{0:property} == {0:'gender'}">
 								<f:then>
-									<f:if condition="{change.new} == 0">
-										<f:then>
-											<f:translate key="tx_femanager_domain_model_user.gender.item0" />
-										</f:then>
-										<f:else>
-											<f:translate key="tx_femanager_domain_model_user.gender.item1" />
-										</f:else>
-									</f:if>
+									<f:translate key="tx_femanager_domain_model_user.gender.item{change.new}" />
 								</f:then>
 								<f:else>
 									<f:if condition="{0:property} == {0:'dateOfBirth'}">
