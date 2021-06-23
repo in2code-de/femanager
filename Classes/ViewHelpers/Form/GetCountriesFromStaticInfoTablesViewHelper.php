@@ -44,6 +44,21 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
 
         $countries = $this->countryRepository->findAllOrderedBy($sortbyField, $sorting);
         $countriesArray = [];
+        if ($this->arguments['preferredCountries']) {
+            foreach ($this->countryRepository->findAllowedByIsoCodeA3($this->arguments['preferredCountries']) as $country) {
+                $countriesArray[ObjectAccess::getProperty($country, $key)] = ObjectAccess::getProperty($country, $value);
+            }
+            $countriesArray['---'] = '---';
+        }
+
+        if ($this->arguments['limitCountries']) {
+            foreach ($this->countryRepository->findAllowedByIsoCodeA3($this->arguments['limitCountries']) as $country) {
+                $countriesArray[ObjectAccess::getProperty($country, $key)] = ObjectAccess::getProperty($country, $value);
+            }
+
+            return $countriesArray;
+        }
+
         foreach ($countries as $country) {
             /** @var $country \SJBR\StaticInfoTables\Domain\Model\Country */
             $countriesArray[ObjectAccess::getProperty($country, $key)] = ObjectAccess::getProperty($country, $value);
@@ -62,5 +77,7 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
         $this->registerArgument('value', 'string', 'shortNameLocal', false, 'shortNameLocal');
         $this->registerArgument('sortbyField', 'string', 'shortNameLocal', false, 'shortNameLocal');
         $this->registerArgument('sorting', 'string', 'value to prepend', false, 'asc');
+        $this->registerArgument('preferredCountries', 'string', 'comma separated list of countries (iso3 code) to show on top of select', false, '');
+        $this->registerArgument('limitCountries', 'string', 'comma separated list of countries (iso3 code) to show only in select', false, '');
     }
 }
