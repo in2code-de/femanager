@@ -302,8 +302,7 @@ class NewController extends AbstractFrontendController
         if (!empty($this->settings['new']['confirmByUser'])) {
             $this->createUserConfirmationRequest($user);
             $this->redirectByAction('new', 'requestRedirect');
-        }
-        if (!empty($this->settings['new']['confirmByAdmin'])) {
+        } elseif (!empty($this->settings['new']['confirmByAdmin'])) {
             $this->createAdminConfirmationRequest($user);
             $this->redirectByAction('new', 'requestRedirect');
         }
