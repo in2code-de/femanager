@@ -21,7 +21,7 @@ Quick guide:
 
 | Femanager   | TYPO3      | PHP       | Support/Development                     |
 | ----------- | ---------- | ----------|---------------------------------------- |
-| 6.x         | 10 LTS     | 7.2 - 7.3 | Features, Bugfixes, Security Updates    |
+| 6.x         | 10 LTS     | 7.2 - 7.4 | Features, Bugfixes, Security Updates    |
 | 5.x         | 8, 9 LTS   | 7.2 - 7.3 | Security Updates. If you want feature backports ask for an offer   |
 | 4.x         | 8.7        | 7.0 - 7.2 | Security Updates on demand (ask for an offer)   |
 | 3.x         | 8.7        | 7.0 - 7.2 | Security Updates on demand (ask for an offer)|
@@ -42,6 +42,19 @@ Official support (fee-based) via https://www.in2code.de/kontakt |
 to accept only bugfixes that can be reproduced.
 - **Features**: Not every feature is relevant for the bulk of the users. In addition: We don't want to make the extension
 even more complicated in usability for an edge case feature. Please discuss a new feature before.
+
+### Contribution with ddev
+
+#### Requirements
+
+1. Install ddev, see: https://ddev.readthedocs.io/en/stable/#installation
+2. Install git-lfs, see: https://git-lfs.github.com/
+
+#### Installation
+
+1. Clone this repository
+2. Run `ddev start`
+3. Run `ddev initialize` to setup configurations and test database
 
 ## Screenshots
 

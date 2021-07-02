@@ -20,6 +20,11 @@ $feUsersColumns = [
                     'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                     'tx_femanager_domain_model_user.gender.item1',
                     '1'
+                ],
+                [
+                    'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+                    'tx_femanager_domain_model_user.gender.item2',
+                    '2'
                 ]
             ],
         ]

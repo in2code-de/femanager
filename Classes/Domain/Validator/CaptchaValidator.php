@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Utility\ObjectUtility;
@@ -57,7 +57,7 @@ class CaptchaValidator extends AbstractValidator
      */
     protected function captchaEnabled()
     {
-        return (ExtensionManagementUtility::isLoaded('sr_freecap')
-            && !empty($this->validationSettings['captcha']['captcha']));
+        return ExtensionManagementUtility::isLoaded('sr_freecap')
+            && !empty($this->validationSettings['captcha']['captcha']);
     }
 }

@@ -1,9 +1,11 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Service\FinisherService;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -14,13 +16,11 @@ class FinisherRunner
 
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $objectManager;
 
     /**
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $configurationManager;
 
@@ -37,13 +37,25 @@ class FinisherRunner
     protected $settings = [];
 
     /**
+     * FinisherRunner constructor.
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+     */
+    public function __construct(
+        ObjectManagerInterface $objectManager,
+        ConfigurationManagerInterface $configurationManager
+    ) {
+        $this->objectManager = $objectManager;
+        $this->configurationManager = $configurationManager;
+    }
+
+    /**
      * Call finisher classes after submit
      *
      * @param User $user
      * @param string $actionMethodName
      * @param array $settings
      * @param ContentObjectRenderer $contentObject
-     * @return void
      */
     public function callFinishers(
         User $user,

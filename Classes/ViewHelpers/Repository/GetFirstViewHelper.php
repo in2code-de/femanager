@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\ViewHelpers\Repository;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -24,17 +24,15 @@ class GetFirstViewHelper extends AbstractViewHelper
         return null;
     }
 
-
     /**
      * Initialize the arguments.
      *
-     * @return void
      * @api
      */
     public function initializeArguments()
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
-        $this->registerArgument('objects', 'object ','Call getFirst() method of object storage', true);
+        $this->registerArgument('objects', 'object ', 'Call getFirst() method of object storage', true);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Domain\Repository;
 
@@ -101,7 +101,7 @@ class UserRepository extends Repository
      * @param $field
      * @param $value
      * @param User $user Existing User
-     * @return null|User
+     * @return User|null
      */
     public function checkUniqueDb($field, $value, User $user = null)
     {
@@ -128,7 +128,7 @@ class UserRepository extends Repository
      * @param $field
      * @param $value
      * @param \In2code\Femanager\Domain\Model\User $user Existing User
-     * @return null|User
+     * @return User|null
      */
     public function checkUniquePage($field, $value, User $user = null)
     {
@@ -282,7 +282,6 @@ class UserRepository extends Repository
 
     /**
      * @param QueryInterface $query
-     * @return void
      */
     protected function ignoreEnableFieldsAndStoragePage(QueryInterface $query)
     {
@@ -293,12 +292,11 @@ class UserRepository extends Repository
 
     /**
      * @param QueryInterface $query
-     * @return void
      */
     protected function ignoreEnableFieldsAndStoragePageAndStarttime(QueryInterface $query)
     {
         $this->ignoreEnableFieldsAndStoragePage($query);
-        $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled','starttime','endtime']);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled', 'starttime', 'endtime']);
     }
 
     /**
@@ -311,13 +309,14 @@ class UserRepository extends Repository
     {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);
-        $and = [$query->equals('txFemanagerConfirmedbyuser', false)];
-        $and[] = $query->like('email', '%' . $mail . '%');
+        $and = [
+            $query->equals('txFemanagerConfirmedbyuser', false),
+            $query->equals('email', $mail)
+        ];
         $query->matching($query->logicalAnd($and));
 
         $query->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING]);
 
         return $query->execute()->getFirst();
     }
-
 }

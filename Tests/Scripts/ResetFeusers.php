@@ -15,7 +15,7 @@ class ResetFeusers
      *
      * @var array
      */
-    protected $userValues = array(
+    protected $userValues = [
         'pid' => 5,
         'tstamp' => 1448210411,
         'crdate' => 1448210411,
@@ -27,7 +27,7 @@ class ResetFeusers
         'last_name' => 'Kellner',
         'email' => 'alex@in2code.de',
         'tx_femanager_log' => '1'
-    );
+    ];
 
     /**
      * @return string
@@ -39,7 +39,7 @@ class ResetFeusers
         $queryBuilder
             ->delete('fe_users')
             ->where(
-                $queryBuilder->expr()->eq('username',$queryBuilder->createNamedParameter($this->userValues['username']))
+                $queryBuilder->expr()->eq('username', $queryBuilder->createNamedParameter($this->userValues['username']))
             );
         $queryBuilder2->insert('fe_users')->values($this->userValues);
 

@@ -2225,6 +2225,8 @@ You can overwrite these settings in your page TS.
          typoscript main template storage
       :Description:
          You need to specify the pid, where your main typoscript settings (frontend) is stored. Usually you will take the
-          root page of your installation.
+          root page of your installation. This is needed to perform actions like confirm users via Backend or resend
+          confirmation mails. If you have a multidomain system, you can overwrite config in your typoScript Tempplate for
+          each domain.
       :Default:
          1

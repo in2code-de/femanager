@@ -13,7 +13,6 @@ class ListUsers
 {
 
     /**
-     *
      *  This is a test function for a behat test
      *  in web/typo3conf/ext/femanager/Tests/Behaviour/Features/Edit/Default/SmallNoConfirm.feature
      *  Scenario: Login as frontend user and test profile update
@@ -49,7 +48,6 @@ class ListUsers
     }
 
     /**
-     *
      *  This is a test function for a behat test
      *  in web/typo3conf/ext/femanager/Tests/Behaviour/Features/Edit/Default/SmallNoConfirm.feature
      *  Scenario: Login as frontend user and test profile update

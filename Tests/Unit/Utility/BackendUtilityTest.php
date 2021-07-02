@@ -18,16 +18,12 @@ class BackendUtilityTest extends UnitTestCase
      */
     protected $testFilesToDelete = [];
 
-    /**
-     * @return void
-     */
     public function setUp()
     {
         TestingHelper::setDefaultConstants();
     }
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getPageIdentifier
      */
@@ -38,7 +34,6 @@ class BackendUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @covers ::getPluginOrModuleString
      */
     public function testGetPluginOrModuleString()
@@ -48,7 +43,6 @@ class BackendUtilityTest extends UnitTestCase
     }
 
     /**
-     * @return void
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getCurrentParameters
      */

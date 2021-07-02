@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\DataProcessor;
 
@@ -91,12 +91,11 @@ class ImageManipulation extends AbstractDataProcessor
         );
         if (GeneralUtility::upload_copy_move($fileItem['tmp_name'], $uniqueFileName)) {
             return $uniqueFileName;
-        } else {
-            throw new \UnexpectedValueException(
-                'File "' . $this->getNewImageName($fileItem) . '" could not be uploaded!',
-                1516373841798
-            );
         }
+        throw new \UnexpectedValueException(
+            'File "' . $this->getNewImageName($fileItem) . '" could not be uploaded!',
+            1516373841798
+        );
     }
 
     /**
@@ -135,9 +134,6 @@ class ImageManipulation extends AbstractDataProcessor
         return $path;
     }
 
-    /**
-     * @return void
-     */
     protected function allowImageProperties()
     {
         if (!empty($this->controllerArguments['user'])) {

@@ -1,6 +1,6 @@
 # Features/Registration/Validation/Terms.feature
-@Registration @RegistrationValidation @RegistrationValidationTerms
 Feature: Terms
+  @Registration @RegistrationValidation @RegistrationValidationTerms
 
   Scenario: Check if validation for terms work as expected for serverside validation
     Given I am on "/index.php?id=84"

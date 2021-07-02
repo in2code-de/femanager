@@ -28,8 +28,8 @@
 										<f:comment>
 											If a validator check (see TypoScript) failed
 										</f:comment>
-										<f:translate key="tx_femanager_domain_model_user.{error.arguments.code}" />:
-										<f:format.printf arguments="{0: '{fieldname -> f:translate(key:\'tx_femanager_domain_model_user.{error.arguments.code}\')}'}">
+										<f:translate key="tx_femanager_domain_model_user.{error.arguments.field}" />:
+										<f:format.printf arguments="{0: '{fieldname -> f:translate(key:\'tx_femanager_domain_model_user.{error.arguments.field}\')}'}">
 											<f:translate key="{error.message}">{error.message}</f:translate>
 										</f:format.printf>
 									</f:else>

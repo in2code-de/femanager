@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Controller;
 
@@ -33,7 +33,6 @@ class NewController extends AbstractFrontendController
      * Render registration form
      *
      * @param User $user
-     * @return void
      */
     public function newAction(User $user = null)
     {
@@ -53,7 +52,6 @@ class NewController extends AbstractFrontendController
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
-     * @return void
      */
     public function createAction(User $user)
     {
@@ -91,7 +89,6 @@ class NewController extends AbstractFrontendController
      * @param string $status
      *            "userConfirmation", "userConfirmationRefused", "adminConfirmation",
      *            "adminConfirmationRefused", "adminConfirmationRefusedSilent"
-     * @return void
      */
     public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation')
     {
@@ -227,6 +224,11 @@ class NewController extends AbstractFrontendController
     protected function statusAdminConfirmation(User $user, $hash, $status, $backend = false)
     {
         if (HashUtility::validHash($hash, $user)) {
+            if ($user->getTxFemanagerConfirmedbyadmin()) {
+                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', FlashMessage::ERROR);
+                $this->redirect('new');
+            }
+
             $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onAdminConfirmation.']);
             $user->setTxFemanagerConfirmedbyadmin(true);
             $user->setDisable(false);
@@ -281,8 +283,6 @@ class NewController extends AbstractFrontendController
 
     /**
      * Just for showing informations after user creation
-     *
-     * @return void
      */
     public function createStatusAction()
     {
@@ -292,7 +292,6 @@ class NewController extends AbstractFrontendController
      * Postfix method to createAction(): Create must be confirmed by Admin or User
      *
      * @param User $user
-     * @return void
      */
     protected function createRequest(User $user)
     {
@@ -303,8 +302,7 @@ class NewController extends AbstractFrontendController
         if (!empty($this->settings['new']['confirmByUser'])) {
             $this->createUserConfirmationRequest($user);
             $this->redirectByAction('new', 'requestRedirect');
-        }
-        if (!empty($this->settings['new']['confirmByAdmin'])) {
+        } elseif (!empty($this->settings['new']['confirmByAdmin'])) {
             $this->createAdminConfirmationRequest($user);
             $this->redirectByAction('new', 'requestRedirect');
         }
@@ -314,7 +312,6 @@ class NewController extends AbstractFrontendController
      * Send email to user for confirmation
      *
      * @param User $user
-     * @return void
      * @throws UnsupportedRequestTypeException
      */
     protected function createUserConfirmationRequest(User $user)
@@ -385,8 +382,6 @@ class NewController extends AbstractFrontendController
 
     /**
      * Just for showing empty dialogue to resend confirmation mail
-     *
-     * @return void
      */
     public function resendConfirmationDialogueAction()
     {
@@ -395,7 +390,6 @@ class NewController extends AbstractFrontendController
     /**
      * re-sends a confirmation email if given mail is valid
      *
-     * @return void
      * @throws UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      */
@@ -418,8 +412,7 @@ class NewController extends AbstractFrontendController
             }
         }
         $this->addFlashMessage(
-            LocalizationUtility::translate('resendConfirmationMailFail')
-            ,
+            LocalizationUtility::translate('resendConfirmationMailFail'),
             LocalizationUtility::translate('validationError'),
             AbstractMessage::ERROR
         );

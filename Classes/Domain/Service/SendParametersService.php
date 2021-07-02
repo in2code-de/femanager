@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace In2code\Femanager\Domain\Service;
 
@@ -47,7 +47,6 @@ class SendParametersService
      * SendPost - Send values via curl to target
      *
      * @param User $user User properties
-     * @return void
      */
     public function send(User $user)
     {
@@ -123,7 +122,6 @@ class SendParametersService
      * Initialize
      *
      * @param User $user
-     * @return void
      */
     protected function initialize(User $user)
     {

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace In2code\Femanager\Domain\Model;
 
 use In2code\Femanager\Utility\UserUtility;
@@ -54,7 +54,7 @@ class User extends FrontendUser
     protected $ignoreDirty = false;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $gender;
 
@@ -95,9 +95,6 @@ class User extends FrontendUser
      */
     protected $state = '';
 
-    /**
-     * @return void
-     */
     public function removeAllUsergroups()
     {
         $this->usergroup = new ObjectStorage();
@@ -136,6 +133,10 @@ class User extends FrontendUser
      */
     public function getCrdate()
     {
+        if ($this->crdate === null) {
+            // timestamp is zero
+            $this->crdate = new \DateTime('01.01.1970');
+        }
         return $this->crdate;
     }
 
@@ -158,7 +159,7 @@ class User extends FrontendUser
     }
 
     /**
-     * @param boolean $disable
+     * @param bool $disable
      * @return User
      */
     public function setDisable($disable)
@@ -168,7 +169,7 @@ class User extends FrontendUser
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getDisable()
     {
@@ -212,7 +213,7 @@ class User extends FrontendUser
     }
 
     /**
-     * @param boolean $ignoreDirty
+     * @param bool $ignoreDirty
      * @return User
      */
     public function setIgnoreDirty($ignoreDirty)
@@ -222,7 +223,7 @@ class User extends FrontendUser
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIgnoreDirty()
     {
@@ -232,7 +233,7 @@ class User extends FrontendUser
     /**
      * Returns the gender
      *
-     * @return integer $gender
+     * @return int $gender
      */
     public function getGender()
     {
@@ -242,7 +243,7 @@ class User extends FrontendUser
     /**
      * Sets the gender
      *
-     * @param integer $gender
+     * @param int $gender
      * @return User
      */
     public function setGender($gender)
@@ -363,9 +364,6 @@ class User extends FrontendUser
         return $this->txExtbaseType;
     }
 
-    /**
-     * @return null
-     */
     public function getFirstImage()
     {
         $images = $this->getImage();
