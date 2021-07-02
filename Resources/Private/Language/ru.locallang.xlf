@@ -67,6 +67,10 @@
         <source>Female</source>
         <target state="final">Женщина</target>
       </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+        <source>Divers</source>
+        <target state="needs-translation">Divers</target>
+      </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
         <target state="final">Почтовый адрес</target>
