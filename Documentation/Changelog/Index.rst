@@ -4,14 +4,29 @@
 Changelog
 =========
 
-All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanager/Changelog/
-
 .. t3-field-list-table::
    :header-rows: 1
 
 -
-      :Version: 6.2.0
-      :Date: 2021-06-06
+      :Version: 6.3.0
+      :Date: 2021-07-02
+      :Changes:
+
+      * [FEATURE] Add divers as gender - thx to spoonerWeb
+      * [FEATURE] Add possibility to set preferred or limited countries to selector - thx to spoonerWeb
+      * [TASK] Use USER_INT instead of no_cache for better performance - thx to
+      * [TASK] Update Behat Tests and Test Environment - thx to in2code
+      * [TASK] Add option to run single behat test - thx to in2code
+      * [TASK] Add terupload via Github Action - thx to in2code
+      * [BUGIFX] subject translation for createUserConfirmationMail - thx to https://github.com/martinschoene
+      * [BUGFIX] Fix field validation messages - thx to https://github.com/dahaupt
+      * [BUGFIX] Fix link generation in general redirect method - thx to Andre Spindler
+      * [BUGFIX] If user confirmation sent, do not send admin confirmation - thx to SpoonerWeb
+      * [BUGFIX] Use exact email to check for resending confirmation mail - thx to SpoonerWeb
+
+
+      :Version: 6.2.1
+      :Date: 2021-14-06
       :Changes:
 
       * [BUGFIX] Use ratelimiter service only in FE context - thx to Thomas Löffler
