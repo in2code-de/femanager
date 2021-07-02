@@ -51,6 +51,10 @@
         <source>female</source>
         <target state="final">женский</target>
       </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+        <source>divers</source>
+        <target state="needs-translation">divers</target>
+      </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
         <target state="final">Почтовый адрес</target>
@@ -371,6 +375,10 @@
         <source>Company</source>
         <target state="final">Организация</target>
       </trans-unit>
+      <trans-unit id="flexform.list.orderby.3">
+        <source>Username</source>
+        <target state="needs-translation">Username</target>
+      </trans-unit>
       <trans-unit id="flexform.list.sorting" approved="yes">
         <source>Sorting</source>
         <target state="final">Сортировка</target>
@@ -442,6 +450,10 @@
       <trans-unit id="pleaseChooseCountry">
         <source>Please choose a country...</source>
         <target state="needs-translation">Please choose a country...</target>
+      </trans-unit>
+      <trans-unit id="noZonesForThisCountry">
+        <source>No zones available for the chosen country</source>
+        <target state="needs-translation">No zones available for the chosen country</target>
       </trans-unit>
     </body>
   </file>
