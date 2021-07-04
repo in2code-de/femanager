@@ -51,9 +51,9 @@
         <source>female</source>
         <target state="final">kvinde</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2" approved="yes">
         <source>divers</source>
-        <target state="needs-translation">divers</target>
+        <target state="final">forskellig</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
@@ -375,9 +375,9 @@
         <source>Company</source>
         <target state="final">Virksomhed</target>
       </trans-unit>
-      <trans-unit id="flexform.list.orderby.3">
+      <trans-unit id="flexform.list.orderby.3" approved="yes">
         <source>Username</source>
-        <target state="needs-translation">Username</target>
+        <target state="final">Brugernavn</target>
       </trans-unit>
       <trans-unit id="flexform.list.sorting" approved="yes">
         <source>Sorting</source>
@@ -451,9 +451,9 @@
         <source>Please choose a country...</source>
         <target state="final">Vælg venligst et land...</target>
       </trans-unit>
-      <trans-unit id="noZonesForThisCountry">
+      <trans-unit id="noZonesForThisCountry" approved="yes">
         <source>No zones available for the chosen country</source>
-        <target state="needs-translation">No zones available for the chosen country</target>
+        <target state="final">Ingen zoner tilgængelige for det valgte land</target>
       </trans-unit>
     </body>
   </file>
