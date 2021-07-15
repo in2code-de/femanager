@@ -11,6 +11,7 @@ See some features or best practice parts of the extension femanager.
 	:glob:
 
 	Templates/Index
+	ShowListUsers/Index
 	Countryselect/Index
 	NewFields/Index
 	NewValidators/Index
