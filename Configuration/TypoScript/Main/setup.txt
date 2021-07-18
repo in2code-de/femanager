@@ -1517,7 +1517,7 @@ plugin.tx_femanager {
 			uploadSize = 25000000
 
 			# Number of allowed images to upload
-			uploadFileExtension = jpeg, jpg, gif, png, bmp, svg, tif, tiff
+			uploadFileExtension = jpeg, jpg, gif, png, bmp, tif, tiff
 
 			# Width of the rendered image in FE
 			renderImageWidth = 250

@@ -27,7 +27,7 @@ class FileService
     /**
      * @var string
      */
-    protected $fallbackExtensions = 'jpg,jpeg,png,gif,bmp,svg,tif,tiff';
+    protected $fallbackExtensions = 'jpg,jpeg,png,gif,bmp,tif,tiff';
 
     /**
      * FileService constructor.
