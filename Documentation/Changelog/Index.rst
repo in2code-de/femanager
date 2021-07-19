@@ -17,6 +17,13 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
    :Changes:
       Release Description
 
+-
+      :Version: 5.5.1
+      :Date: 2021-07-19
+      :Changes:
+
+      * [BUGFIX] Security: Disallow SVG as Filetype
+
 - :Version:
       5.5.0
    :Date:
