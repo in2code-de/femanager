@@ -252,12 +252,12 @@ class UserUtility extends AbstractUtility
                         $dirtyProperties[$propertyName]['new'] = $newPropertyValue;
                     }
                 } else {
-                    if (($oldPropertyValue != null && get_class($oldPropertyValue) === 'DateTime') || ($newPropertyValue != null && get_class($newPropertyValue) === 'DateTime')) {
+                    if (($oldPropertyValue !== null && $oldPropertyValue instanceof \DateTime) || ($newPropertyValue !== null && $newPropertyValue instanceof \DateTime)) {
                         /** @var $oldPropertyValue \DateTime */
                         /** @var $newPropertyValue \DateTime */
 
-                        $oldTimestamp = $oldPropertyValue != null ? $oldPropertyValue->getTimestamp() : 0;
-                        $newTimestamp = $newPropertyValue != null ? $newPropertyValue->getTimestamp() : 0;
+                        $oldTimestamp = $oldPropertyValue !== null ? $oldPropertyValue->getTimestamp() : 0;
+                        $newTimestamp = $newPropertyValue !== null ? $newPropertyValue->getTimestamp() : 0;
 
                         if ($oldTimestamp !== $newTimestamp) {
                             $dirtyProperties[$propertyName]['old'] = $oldTimestamp;
