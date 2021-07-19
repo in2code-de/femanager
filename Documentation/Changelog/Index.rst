@@ -8,6 +8,13 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 6.3.1
+      :Date: 2021-07-19
+      :Changes:
+
+      * [BUGFIX] Security: Disallow SVG as Filetype
+
+-
       :Version: 6.3.0
       :Date: 2021-07-02
       :Changes:
