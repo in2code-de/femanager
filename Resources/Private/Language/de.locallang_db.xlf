@@ -53,7 +53,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
         <source>divers</source>
-        <target state="needs-translation">divers</target>
+        <target state="translated">divers</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address">
         <source>Address</source>
@@ -377,7 +377,7 @@
       </trans-unit>
       <trans-unit id="flexform.list.orderby.3">
         <source>Username</source>
-        <target state="needs-translation">Username</target>
+        <target state="translated">Benutzername</target>
       </trans-unit>
       <trans-unit id="flexform.list.sorting" approved="yes">
         <source>Sorting</source>
