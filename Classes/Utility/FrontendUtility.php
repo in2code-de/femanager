@@ -94,7 +94,7 @@ class FrontendUtility extends AbstractUtility
                 }
             } else {
                 // set value
-                $setterMethod = str_replace(' ', '', ucwords(str_replace('_', ' ', $field)));
+                $setterMethod = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $field)));
                 if (method_exists($user, $setterMethod)) {
                     $user->{$setterMethod}($value);
                 }
