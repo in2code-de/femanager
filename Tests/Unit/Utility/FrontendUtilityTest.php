@@ -1,6 +1,7 @@
 <?php
 namespace In2code\Femanager\Tests\Unit\Utility;
 
+use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Tests\Helper\TestingHelper;
 use In2code\Femanager\Utility\FrontendUtility;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -28,7 +29,7 @@ class FrontendUtilityTest extends UnitTestCase
      */
     public function testForceValues()
     {
-        $user = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\In2code\Femanager\Domain\Model\User::class);
+        $user = new User();
         
         $settings = [];
         $settings['usergroup'] = 'TEXT';
