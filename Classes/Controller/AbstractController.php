@@ -522,7 +522,10 @@ abstract class AbstractController extends ActionController
                 $this->config['new.']['email.']['createUserConfirmation.']['sender.']['email.']['value'] =>
                     $this->config['new.']['email.']['createUserConfirmation.']['sender.']['name.']['value']
             ],
-            $this->settings['new']['email']['createUserConfirmation']['subject']['data'],
+            $this->contentObject->cObjGetSingle(
+                $this->config['new.']['email.']['createUserConfirmation.']['subject'],
+                $this->config['new.']['email.']['createUserConfirmation.']['subject.']
+            ),
             [
                 'user' => $user,
                 'hash' => HashUtility::createHashForUser($user)
