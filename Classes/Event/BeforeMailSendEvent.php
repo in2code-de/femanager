@@ -52,4 +52,12 @@ class BeforeMailSendEvent
     {
         return $this->variables;
     }
+
+    /**
+     * @param Email $email
+     */
+    public function setEmail(Email $email): void
+    {
+        $this->email = $email;
+    }
 }
