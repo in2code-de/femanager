@@ -7,11 +7,10 @@ use In2code\Femanager\Event\BeforeMailSendEvent;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\TemplateUtility;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Mime\Part\TextPart;
+use Symfony\Component\Mime\Part\DataPart;
 use TYPO3\CMS\Core\Mail\Mailer;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Class SendMailService
@@ -126,19 +125,24 @@ class SendMailService
      */
     protected function embedImages(array $variables, array $typoScript, MailMessage $email): array
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.'])) {
-            $images = GeneralUtility::trimExplode(
-                ',',
-                $this->contentObject->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.']),
-                true
-            );
-            $imageVariables = [];
-            foreach ($images as $image) {
-                $imageVariables[] = $email->embedFromPath($image);
-            }
-            $variables = array_merge($variables, ['embedImages' => $imageVariables]);
+        $images = $this->contentObject->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.']);
+
+        if (!$images) {
+            return $variables;
         }
-        return $variables;
+
+        $images = GeneralUtility::trimExplode(',', $images, true);
+        $imageVariables = [];
+
+        foreach ($images as $path) {
+            $name = basename($path);
+            $imagePart = DataPart::fromPath($path);
+            $contentType = $imagePart->getMediaType() . '/' . $imagePart->getMediaSubtype();
+            $email->embedFromPath($path, $name, $contentType);
+            $imageVariables[] = 'cid:' . $name;
+        }
+
+        return array_merge($variables, ['embedImages' => $imageVariables]);
     }
 
     /**
@@ -157,13 +161,12 @@ class SendMailService
         array $variables,
         MailMessage $email
     ) {
-        $body = GeneralUtility::makeInstance(ObjectManager::class)->get(TextPart::class, $this->getMailBody($template, $variables), 'utf-8', 'html');
+        $html = $this->getMailBody($template, $variables);
         $email
             ->setTo($receiver)
             ->setFrom($sender)
             ->setSubject($subject)
-            ->setBody($body)
-            ->html($body);
+            ->html($html);
     }
 
     /**
