@@ -261,11 +261,11 @@ Configuration/Extbase/Persistence/Classes.php:
            'recordType' => 0,
            'properties' => [
                // add your added properties
-               'allowContact' => [
-                   'skypeId' => 'skype_id',
+               'skypeId' => [
+                   'fieldName' => 'skype_id',
                ],
-               'ownedPlanes' => [
-                   'twitterId' => 'twitter_id',
+               'twitterId' => [
+                   'fieldName' => 'twitter_id',
                ],
            ],
        ]
