@@ -23,13 +23,13 @@ class FrontendUtilityTest extends UnitTestCase
         TestingHelper::setDefaultConstants();
     }
 
-	/**
+    /**
      * @covers ::forceValue
      */
     public function testForceValue()
     {
         $user = new User();
-        
+
         $properties = [];
         $properties['gender'] = 2;
         $properties['first_name'] = 'Kaspar';
@@ -39,12 +39,12 @@ class FrontendUtilityTest extends UnitTestCase
             // set value
             FrontendUtility::forceValue($user, $field, $value);
         }
-        
+
         $this->assertSame(2, $user->getGender());
         $this->assertSame('Kaspar', $user->getFirstName());
         $this->assertSame('Tx_Extbase_Domain_Model_FrontendUser', $user->getTxExtbaseType());
     }
-    
+
     /**
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::forceValues
@@ -52,7 +52,7 @@ class FrontendUtilityTest extends UnitTestCase
     public function testForceValues()
     {
         $user = new User();
-        
+
         $settings = [];
         $settings['usergroup'] = 'TEXT';
         $settings['usergroup.'] = ['value' => '1,2,3'];
@@ -62,15 +62,15 @@ class FrontendUtilityTest extends UnitTestCase
         $settings['first_name.'] = ['value' => 'Kaspar'];
         $settings['tx_extbase_type'] = 'TEXT';
         $settings['tx_extbase_type.'] = ['value' => 'Tx_Extbase_Domain_Model_FrontendUser'];
-    
+
         FrontendUtility::forceValues($user, $settings);
-        
+
         $this->assertSame(2, $user->getGender());
         $this->assertSame('1,2,3', $user->getUsergroups());
         $this->assertSame('Kaspar', $user->getFirstName());
         $this->assertSame('Tx_Extbase_Domain_Model_FrontendUser', $user->getTxExtbaseType());
     }
-    
+
     /**
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getControllerName
