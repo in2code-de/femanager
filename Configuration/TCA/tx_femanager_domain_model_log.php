@@ -24,9 +24,6 @@ return [
         'searchFields' => 'title',
         'iconfile' => 'EXT:femanager/Resources/Public/Icons/Log.png'
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, crdate, state, user',
-    ],
     'types' => [
         '1' => [
             'showitem' => 'title, crdate, state, user, ' .
