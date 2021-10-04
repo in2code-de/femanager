@@ -93,7 +93,7 @@ class FrontendUtility extends AbstractUtility
      * @param string $field
      * @param any $value
      */
-    public static function forceValue(User $user, string $field, $value):void
+    public static function forceValue(User $user, string $field, $value): void
     {
         if ($field === 'usergroup') {
             // need objectstorage for usergroup field
