@@ -259,6 +259,15 @@ Configuration/Extbase/Persistence/Classes.php:
        \In2code\Femanagerextended\Domain\Model\User::class => [
            'tableName' => 'fe_users',
            'recordType' => 0,
+           'properties' => [
+               // add your added properties
+               'skypeId' => [
+                   'fieldName' => 'skype_id',
+               ],
+               'twitterId' => [
+                   'fieldName' => 'twitter_id',
+               ],
+           ],
        ]
    ];
    

@@ -117,9 +117,8 @@ class UserBackendController extends AbstractController
 
         $user = $this->userRepository->findByUid($userIdentifier);
         $this->eventDispatcher->dispatch(new RefuseUserEvent($user));
-        $this->userRepository->remove($user);
 
-        $jsonResult = $this->getFrontendRequestResult('adminConfirmationRefused');
+        $jsonResult = $this->getFrontendRequestResult('adminConfirmationRefused', $userIdentifier, $user);
 
         if ($jsonResult['status'] ?? false) {
             $this->addFlashMessage(

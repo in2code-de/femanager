@@ -81,25 +81,38 @@ class FrontendUtility extends AbstractUtility
             }
             // value to set
             $value = self::getContentObject()->cObjGetSingle($settings[$field], $settings[$field . '.']);
-            if ($field === 'usergroup') {
-                // need objectstorage for usergroup field
-                $user->removeAllUsergroups();
-                $values = GeneralUtility::trimExplode(',', $value, true);
-                $userGroupRepository = self::getUserGroupRepository();
-
-                foreach ($values as $usergroupUid) {
-                    /** @var UserGroup $usergroup */
-                    $usergroup = $userGroupRepository->findByUid($usergroupUid);
-                    $user->addUsergroup($usergroup);
-                }
-            } else {
-                // set value
-                if (method_exists($user, 'set' . ucfirst($field))) {
-                    $user->{'set' . ucfirst($field)}($value);
-                }
-            }
+            self::forceValue($user, $field, $value);
         }
         return $user;
+    }
+
+    /**
+     * Set single object property from forceValues in TypoScript
+     *
+     * @param User $user
+     * @param string $field
+     * @param any $value
+     */
+    public static function forceValue(User $user, string $field, $value): void
+    {
+        if ($field === 'usergroup') {
+            // need objectstorage for usergroup field
+            $user->removeAllUsergroups();
+            $values = GeneralUtility::trimExplode(',', $value, true);
+            $userGroupRepository = self::getUserGroupRepository();
+
+            foreach ($values as $usergroupUid) {
+                /** @var UserGroup $usergroup */
+                $usergroup = $userGroupRepository->findByUid($usergroupUid);
+                $user->addUsergroup($usergroup);
+            }
+        } else {
+            // set value
+            $setterMethod = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $field)));
+            if (method_exists($user, $setterMethod)) {
+                $user->{$setterMethod}($value);
+            }
+        }
     }
 
     /**

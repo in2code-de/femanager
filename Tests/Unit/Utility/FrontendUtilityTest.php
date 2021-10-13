@@ -1,6 +1,7 @@
 <?php
 namespace In2code\Femanager\Tests\Unit\Utility;
 
+use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Tests\Helper\TestingHelper;
 use In2code\Femanager\Utility\FrontendUtility;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -20,6 +21,28 @@ class FrontendUtilityTest extends UnitTestCase
     public function setUp()
     {
         TestingHelper::setDefaultConstants();
+    }
+
+    /**
+     * @covers ::forceValue
+     */
+    public function testForceValue()
+    {
+        $user = new User();
+
+        $properties = [];
+        $properties['gender'] = 2;
+        $properties['first_name'] = 'Kaspar';
+        $properties['tx_extbase_type'] = 'Tx_Extbase_Domain_Model_FrontendUser';
+
+        foreach ($properties as $field => $value) {
+            // set value
+            FrontendUtility::forceValue($user, $field, $value);
+        }
+
+        $this->assertSame(2, $user->getGender());
+        $this->assertSame('Kaspar', $user->getFirstName());
+        $this->assertSame('Tx_Extbase_Domain_Model_FrontendUser', $user->getTxExtbaseType());
     }
 
     /**
