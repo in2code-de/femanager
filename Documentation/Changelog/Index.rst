@@ -8,6 +8,23 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 6.3.2
+      :Date: 2021-10-13
+      :Changes:
+
+      * [TASK] Add setter to allow modification of email object inside event listeners - thx to https://github.com/mediaessenz
+      * [TASK] Refactor forceValues to FrontendUtility and add a test - thx to https://github.com/ute-arbeit
+      * [TASK] Remove TCA configuration showRecordFieldList - thx to https://github.com/Patta
+      * [BUGFIX] Make forceValues work for field names with underscores  - thx to https://github.com/ute-arbeit
+      * [BUGFIX] Allow frontend user login via EXT:femanager - thx to https://github.com/webian
+      * [BUGFIX] repairs confirmation view due to missing state column - thx to in2code / Bastien Lutz
+      * [BUGFIX] refusing users from the admin confirmation backend list - Thx to https://github.com/fwg
+      * [BUGFIX] correct v10 Extbase persistence config - thx to jonaseberle
+      * [BUGFIX] add missing field mapping for custom properties for TYPO3v10+ - thx to jonaseberle
+      * [BUGFIX] embedded images in emails - thx to https://github.com/fwg
+      * [BUGFIX] Email subject for sendCreateUserConfirmationMail - thx to Pixelant
+
+-
       :Version: 6.3.1
       :Date: 2021-07-19
       :Changes:
