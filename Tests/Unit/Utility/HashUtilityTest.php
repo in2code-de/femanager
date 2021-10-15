@@ -22,7 +22,7 @@ class HashUtilityTest extends UnitTestCase
      */
     protected $user = null;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->user = new User();
         $this->user->setUsername('foo');

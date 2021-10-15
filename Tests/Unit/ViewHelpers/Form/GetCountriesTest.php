@@ -16,12 +16,12 @@ class GetCountriesViewHelperTest extends UnitTestCase
      */
     protected $generalValidatorMock;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->generalValidatorMock = $this->getAccessibleMock(GetCountriesViewHelper::class, ['dummy']);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->generalValidatorMock);
     }

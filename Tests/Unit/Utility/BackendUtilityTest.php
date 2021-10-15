@@ -18,7 +18,7 @@ class BackendUtilityTest extends UnitTestCase
      */
     protected $testFilesToDelete = [];
 
-    public function setUp()
+    public function setUp(): void
     {
         TestingHelper::setDefaultConstants();
     }

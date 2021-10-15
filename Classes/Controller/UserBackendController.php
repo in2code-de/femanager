@@ -11,6 +11,7 @@ use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
+use Psr\Http\Message\RequestFactoryInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Site\SiteFinder;
@@ -224,11 +225,11 @@ class UserBackendController extends AbstractController
                 ]
             ]
         );
-        $report = [];
-        $result = GeneralUtility::getUrl((string)$url, 0, ['accept' => 'application/json'], $report);
-        if (!is_string($result)) {
-            $GLOBALS['BE_USER']->writelog(4, 0, 1, 0, 'femanager: Frontend request failed.', $report);
-            // @todo
+
+        $response = GeneralUtility::makeInstance(RequestFactory::class)->request((string)$url, 'GET', ['headers' => ['accept' => 'application/json']]);
+        if ($response->getStatusCode() >= 300) {
+            $content = $response->getReasonPhrase();
+            $GLOBALS['BE_USER']->writelog(4, 0, 1, 0, 'femanager: Frontend request failed.', $content);
             $this->addFlashMessage(
                 LocalizationUtility::translate(
                     'BackendConfirmationFlashMessageFailed',
@@ -237,8 +238,9 @@ class UserBackendController extends AbstractController
                 'User Confirmation',
                 AbstractMessage::ERROR
             );
+        } else {
+            $content = $response->getBody()->getContents();
+            return json_decode($content, true);
         }
-
-        return json_decode($result, true);
     }
 }

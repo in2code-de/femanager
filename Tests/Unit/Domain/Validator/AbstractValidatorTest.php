@@ -19,7 +19,7 @@ class AbstractValidatorTest extends UnitTestCase
     /**
      * Make object available
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->generalValidatorMock = $this->getAccessibleMock(AbstractValidator::class, ['dummy']);
     }
@@ -27,7 +27,7 @@ class AbstractValidatorTest extends UnitTestCase
     /**
      * Remove object
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->generalValidatorMock);
     }

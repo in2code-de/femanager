@@ -16,12 +16,12 @@ class RequestTest extends UnitTestCase
      */
     protected $abstractValidationViewHelperMock;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->abstractValidationViewHelperMock = $this->getAccessibleMock(RequestViewHelper::class, ['dummy']);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->abstractValidationViewHelperMock);
     }
