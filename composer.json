@@ -62,7 +62,8 @@
     "behat/behat": "^3.8",
     "friends-of-behat/mink-extension": "^2.5",
     "behat/mink-selenium2-driver": "^1.5",
-    "genesis/behat-fail-aid": "^3.7"
+    "genesis/behat-fail-aid": "^3.7",
+    "nimut/testing-framework": "6.x-dev"
 
   },
   "autoload": {
