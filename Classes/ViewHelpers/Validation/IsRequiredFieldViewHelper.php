@@ -11,11 +11,15 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 class IsRequiredFieldViewHelper extends AbstractValidationViewHelper
 {
 
+    protected ConfigurationManagerInterface $configurationManager;
+
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @param ConfigurationManagerInterface $configurationManager
      */
-    protected $configurationManager;
+    public function __construct(ConfigurationManagerInterface $configurationManager)
+    {
+        $this->configurationManager = $configurationManager;
+    }
 
     /**
      * Check if this field is a required field
