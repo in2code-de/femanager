@@ -2,6 +2,7 @@
 
 namespace In2code\Femanager\Tests\Scripts;
 
+use Doctrine\DBAL\DBALException;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -31,7 +32,7 @@ class DeleteFeusers
             $queryBuilder->execute();
 
             return 'All content elements deleted that have no in2code.de email address';
-        } catch (\Doctrine\DBAL\DBALException $e) {
+        } catch (DBALException $e) {
             $errorMsg = $e->getMessage();
         }
         return 'Could not delete fe_users. ' . $errorMsg;

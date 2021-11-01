@@ -2,6 +2,7 @@
 declare(strict_types = 1);
 namespace In2code\Femanager\Domain\Service;
 
+use TYPO3\CMS\Core\Resource\Security\FileNameValidator;
 use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
@@ -67,7 +68,7 @@ class FileService
 
         return !empty($fileInfo['extension']) &&
             GeneralUtility::inList($extensionList, strtolower($fileInfo['extension'])) &&
-            GeneralUtility::verifyFilenameAgainstDenyPattern($this->fileName) &&
+            GeneralUtility::makeInstance(FileNameValidator::class)->isValid($this->fileName) &&
             GeneralUtility::validPathStr($this->fileName);
     }
 

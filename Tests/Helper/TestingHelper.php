@@ -50,8 +50,8 @@ class TestingHelper
         if (!defined('TYPO3_REQUESTTYPE_INSTALL')) {
             define('TYPO3_REQUESTTYPE_INSTALL', '');
         }
-        if (!defined('TYPO3_MODE')) {
-            define('TYPO3_MODE', 'BE');
+        if (!defined('TYPO3')) {
+            define('TYPO3', true);
         }
         if (!defined('PATH_typo3')) {
             define('PATH_typo3', self::getWebRoot());

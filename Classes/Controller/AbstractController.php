@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace In2code\Femanager\Controller;
 
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Core\Http\ApplicationType;
 use In2code\Femanager\DataProcessor\DataProcessorRunner;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
@@ -375,7 +377,7 @@ abstract class AbstractController extends ActionController
                 '',
                 FlashMessage::ERROR
             );
-            $this->forward('edit');
+            return new ForwardResponse('edit');
         }
     }
 
@@ -417,7 +419,7 @@ abstract class AbstractController extends ActionController
         );
 
         $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'];
-        if (TYPO3_MODE == 'BE') {
+        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
             $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
             if (is_array($config['plugin.']['tx_femanager.']['settings.'])) {
                 $this->config = $config['plugin.']['tx_femanager.']['settings.'];
@@ -479,7 +481,7 @@ abstract class AbstractController extends ActionController
      */
     protected function checkTypoScript()
     {
-        if (TYPO3_MODE == 'BE') {
+        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
             if ($this->config['_TypoScriptIncluded'] !== '1') {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript_be'),

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace In2code\Femanager\Domain\Validator;
 
+use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\PluginRepository;
 use In2code\Femanager\Domain\Service\ValidationSettingsService;
@@ -217,7 +218,7 @@ class ClientsideValidator extends AbstractValidator
                 case stristr($validationSetting, 'captcha('):
                     if (ExtensionManagementUtility::isLoaded('sr_freecap')) {
                         $wordRepository = ObjectUtility::getObjectManager()->get(
-                            \SJBR\SrFreecap\Domain\Repository\WordRepository::class
+                            WordRepository::class
                         );
                         $wordObject = $wordRepository->getWord();
                         $wordHash = $wordObject->getWordHash();

@@ -2,6 +2,7 @@
 
 namespace In2code\Femanager\Tests\Scripts;
 
+use Doctrine\DBAL\DBALException;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -40,7 +41,7 @@ class ListUsers
                     DebuggerUtility::var_dump($row, 'in2code: ' . __CLASS__ . ':' . __LINE__);
                 }
             }
-        } catch (\Doctrine\DBAL\DBALException $e) {
+        } catch (DBALException $e) {
             $content = 'error: ' . $e->getMessage();
         }
 
@@ -67,7 +68,7 @@ class ListUsers
                 $row = $res->fetch();
                 DebuggerUtility::var_dump($row, 'in2code: ' . __CLASS__ . ':' . __LINE__);
             }
-        } catch (\Doctrine\DBAL\DBALException $e) {
+        } catch (DBALException $e) {
             $content = 'error: ' . $e->getMessage();
         }
 

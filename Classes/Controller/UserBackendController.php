@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace In2code\Femanager\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Event\AdminConfirmationUserEvent;
 use In2code\Femanager\Event\RefuseUserEvent;
@@ -27,7 +28,7 @@ class UserBackendController extends AbstractController
     /**
      * @param array $filter
      */
-    public function listAction(array $filter = [])
+    public function listAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->getTSConfig(
@@ -40,12 +41,13 @@ class UserBackendController extends AbstractController
                 'loginAsEnabled' => $loginAsEnabled
             ]
         );
+        return $this->htmlResponse();
     }
 
     /**
      * @param array $filter
      */
-    public function confirmationAction(array $filter = [])
+    public function confirmationAction(array $filter = []): ResponseInterface
     {
         $this->configPID = $this->getConfigPID();
 
@@ -61,6 +63,7 @@ class UserBackendController extends AbstractController
                 'action' => 'confirmation'
             ]
         );
+        return $this->htmlResponse();
     }
 
     /**
@@ -147,7 +150,7 @@ class UserBackendController extends AbstractController
     /**
      * @param array $filter
      */
-    public function listOpenUserConfirmationsAction(array $filter = [])
+    public function listOpenUserConfirmationsAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
@@ -161,6 +164,7 @@ class UserBackendController extends AbstractController
                 'action' => 'listOpenUserConfirmations'
             ]
         );
+        return $this->htmlResponse();
     }
 
     /**
@@ -177,7 +181,7 @@ class UserBackendController extends AbstractController
                 [$user->getUsername()]
             ),
             '',
-            \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
+            AbstractMessage::OK
         );
         $this->redirect('listOpenUserConfirmations');
     }

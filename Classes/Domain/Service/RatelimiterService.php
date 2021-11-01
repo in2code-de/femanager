@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace In2code\Femanager\Domain\Service;
 
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Crypto\Random;
@@ -83,7 +84,7 @@ class RatelimiterService implements SingletonInterface
         $cacheID = $this->getCacheID($tokenName, $value);
 
         $token = $this->retrieveToken($cacheID);
-        $token[] = $GLOBALS['EXEC_TIME'];
+        $token[] = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         $this->cache->set($cacheID, $token, [], $this->timeframe);
 
         return $token;
@@ -107,7 +108,7 @@ class RatelimiterService implements SingletonInterface
 
     protected function filterExpiredToken(array $token): array
     {
-        $slidingWindowStartTime = $GLOBALS['EXEC_TIME'] - $this->timeframe;
+        $slidingWindowStartTime = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp') - $this->timeframe;
         foreach ($token as $idx => $accessTime) {
             if ($accessTime < $slidingWindowStartTime) {
                 unset($token[$idx]);

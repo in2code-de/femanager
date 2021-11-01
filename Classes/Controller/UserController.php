@@ -2,6 +2,7 @@
 declare(strict_types = 1);
 namespace In2code\Femanager\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Validator\ClientsideValidator;
@@ -22,7 +23,7 @@ class UserController extends AbstractFrontendController
     /**
      * @param array $filter
      */
-    public function listAction(array $filter = [])
+    public function listAction(array $filter = []): ResponseInterface
     {
         $this->view->assignMultiple(
             [
@@ -35,6 +36,7 @@ class UserController extends AbstractFrontendController
             ]
         );
         $this->assignForAll();
+        return $this->htmlResponse();
     }
 
     /**
@@ -52,10 +54,11 @@ class UserController extends AbstractFrontendController
     /**
      * @param User $user
      */
-    public function showAction(User $user = null)
+    public function showAction(User $user = null): ResponseInterface
     {
         $this->view->assign('user', $this->getUser($user));
         $this->assignForAll();
+        return $this->htmlResponse();
     }
 
     /**
@@ -93,7 +96,7 @@ class UserController extends AbstractFrontendController
         $additionalValue = '',
         int $plugin = 0,
         string $referrerAction = ''
-    ) {
+    ): ResponseInterface {
         $clientsideValidator = $this->objectManager->get(ClientsideValidator::class);
         $result = $clientsideValidator
             ->setValidationSettingsString($validation)
@@ -115,6 +118,7 @@ class UserController extends AbstractFrontendController
                 'user' => $user
             ]
         );
+        return $this->htmlResponse();
     }
 
     /**

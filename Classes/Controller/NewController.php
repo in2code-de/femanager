@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace In2code\Femanager\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Service\AutoAdminConfirmationService;
@@ -34,7 +35,7 @@ class NewController extends AbstractFrontendController
      *
      * @param User $user
      */
-    public function newAction(User $user = null)
+    public function newAction(User $user = null): ResponseInterface
     {
         $this->view->assignMultiple(
             [
@@ -43,6 +44,7 @@ class NewController extends AbstractFrontendController
             ]
         );
         $this->assignForAll();
+        return $this->htmlResponse();
     }
 
     /**
@@ -284,8 +286,9 @@ class NewController extends AbstractFrontendController
     /**
      * Just for showing informations after user creation
      */
-    public function createStatusAction()
+    public function createStatusAction(): ResponseInterface
     {
+        return $this->htmlResponse();
     }
 
     /**
@@ -383,8 +386,9 @@ class NewController extends AbstractFrontendController
     /**
      * Just for showing empty dialogue to resend confirmation mail
      */
-    public function resendConfirmationDialogueAction()
+    public function resendConfirmationDialogueAction(): ResponseInterface
     {
+        return $this->htmlResponse();
     }
 
     /**

@@ -2,6 +2,9 @@
 
 namespace In2code\Femanager\Tests\Scripts;
 
+use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\HashUtility;
+use Doctrine\DBAL\DBALException;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -32,11 +35,11 @@ class UserLinks
      */
     public function __construct()
     {
-        $this->username = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('username');
+        $this->username = GeneralUtility::_GET('username');
         if ($this->username === null) {
             $this->username = $this->getLastUsername();
         }
-        $this->pid = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('pid');
+        $this->pid = GeneralUtility::_GET('pid');
         if ($this->pid === null) {
             throw new \Exception('pid missing like ?pid=123');
         }
@@ -118,10 +121,10 @@ class UserLinks
      */
     protected function getHash(array $row)
     {
-        $user = new \In2code\Femanager\Domain\Model\User();
+        $user = new User();
         $user->setUsername($row['username']);
 
-        return \In2code\Femanager\Utility\HashUtility::createHashForUser($user);
+        return HashUtility::createHashForUser($user);
     }
 
     /**
@@ -142,7 +145,7 @@ class UserLinks
             );
         try {
             return $queryBuilder->execute()->fetch();
-        } catch (\Doctrine\DBAL\DBALException $e) {
+        } catch (DBALException $e) {
             $errorMsg = $e->getMessage();
 
             return 'Could not fetch fe_users. ' . $errorMsg;
@@ -170,7 +173,7 @@ class UserLinks
                 $row = $res->fetch();
                 $content = $row['username'];
             }
-        } catch (\Doctrine\DBAL\DBALException $e) {
+        } catch (DBALException $e) {
             $content = 'error: ' . $e->getMessage();
         }
 
