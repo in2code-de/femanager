@@ -4,10 +4,12 @@ namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\PluginRepository;
+use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Event\UniqueUserEvent;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
@@ -17,27 +19,11 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidato
  */
 abstract class AbstractValidator extends AbstractValidatorExtbase
 {
-    /**
-     * userRepository
-     *
-     * @var \In2code\Femanager\Domain\Repository\UserRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected $userRepository;
+    protected ?UserRepository $userRepository = null;
 
-    /**
-     * configurationManager
-     *
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    public $configurationManager;
+    public ?ConfigurationManagerInterface $configurationManager = null;
 
-    /**
-     * @var EventDispatcherInterface
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected $eventDispatcher;
+    protected ?EventDispatcherInterface $eventDispatcher = null;
 
     /**
      * Former known as piVars
@@ -55,6 +41,43 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * Is Valid
      */
     protected $isValid = true;
+
+    /**
+     * @param UserRepository $userRepository
+     */
+    public function injectUserRepository (UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
+    /**
+     * @param ConfigurationManagerInterface $configurationManager
+     */
+    public function injectConfigurationManagerInterface (ConfigurationManagerInterface $configurationManager)
+    {
+        $this->configurationManager = $configurationManager;
+    }
+
+    /**
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function injectEventDispatcherInterface (EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    public function initializeObject(): void
+    {
+        if ($this->configurationManager === null) {
+            $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+        }
+        if ($this->eventDispatcher === null) {
+            $this->eventDispatcher = GeneralUtility::makeInstance(EventDispatcher::class);
+        }
+        if ($this->userRepository === null) {
+            $this->userRepository = GeneralUtility::makeInstance(UserRepository::class);
+        }
+    }
 
     /**
      * Validation for required
@@ -393,6 +416,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     protected function init()
     {
+        $this->initializeObject();
         $this->setPluginVariables();
         $this->setValidationSettings();
     }

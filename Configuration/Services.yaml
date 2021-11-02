@@ -4,6 +4,12 @@ services:
         autoconfigure: true
         public: false
 
+    In2code\Femanager\:
+      resource: '../Classes/*'
+      exclude: '../Classes/Domain/Model/*'
+
+    In2code\Femanager\Domain\Validator\AbstractValidator:
+      public: true
     In2code\Femanager\DataProvider\CountryDataProvider:
       public: true
     In2code\Femanager\DataProvider\CountryZonesDataProvider:

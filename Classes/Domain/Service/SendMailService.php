@@ -26,13 +26,6 @@ class SendMailService
     public $contentObject = null;
 
     /**
-     * SignalSlot Dispatcher
-     *
-     * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected $signalSlotDispatcher;
-    /**
      * @var Mailer
      */
     private $mailer;

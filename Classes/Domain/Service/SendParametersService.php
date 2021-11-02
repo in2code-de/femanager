@@ -6,6 +6,7 @@ namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -15,8 +16,7 @@ class SendParametersService
 {
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
 
@@ -41,6 +41,14 @@ class SendParametersService
     public function __construct($configuration)
     {
         $this->configuration = $configuration;
+    }
+
+    /**
+     * @param ConfigurationManagerInterface $configurationManager
+     */
+    public function injectConfigurationManagerInterface (ConfigurationManagerInterface $configurationManager)
+    {
+        $this->configurationManager = $configurationManager;
     }
 
     /**
