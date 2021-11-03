@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Utility\ConfigurationUtility;
@@ -28,7 +29,7 @@ class ConfigurationUtilityTest extends UnitTestCase
         ];
         // @extensionScannerIgnoreLine
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;
-        $this->assertTrue(ConfigurationUtility::isDisableModuleActive());
+        self::assertTrue(ConfigurationUtility::isDisableModuleActive());
     }
 
     /**
@@ -43,7 +44,7 @@ class ConfigurationUtilityTest extends UnitTestCase
         ];
         // @extensionScannerIgnoreLine
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;
-        $this->assertTrue(ConfigurationUtility::isConfirmationModuleActive());
+        self::assertTrue(ConfigurationUtility::isConfirmationModuleActive());
     }
 
     /**
@@ -58,6 +59,6 @@ class ConfigurationUtilityTest extends UnitTestCase
         ];
         // @extensionScannerIgnoreLine
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;
-        $this->assertTrue(ConfigurationUtility::isDisableLogActive());
+        self::assertTrue(ConfigurationUtility::isDisableLogActive());
     }
 }

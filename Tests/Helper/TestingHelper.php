@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Helper;
 
 /**

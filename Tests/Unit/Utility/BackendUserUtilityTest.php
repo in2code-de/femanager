@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Utility\BackendUserUtility;
@@ -24,7 +25,7 @@ class BackendUserUtilityTest extends UnitTestCase
     public function testIsAdminAuthentication()
     {
         $GLOBALS['BE_USER']->user['admin'] = 1;
-        $this->assertTrue(BackendUserUtility::isAdminAuthentication());
+        self::assertTrue(BackendUserUtility::isAdminAuthentication());
     }
 
     /**
@@ -36,6 +37,6 @@ class BackendUserUtilityTest extends UnitTestCase
     {
         $GLOBALS['BE_USER']->user['admin'] = 1;
         $user = BackendUserUtility::getBackendUserAuthentication();
-        $this->assertSame(1, $user->user['admin']);
+        self::assertSame(1, $user->user['admin']);
     }
 }

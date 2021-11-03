@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Validator;
 
@@ -14,7 +14,7 @@ class ShouldValidateStateCondition implements ValidationConditionInterface
 {
     protected $isStaticInfoTablesLoaded;
 
-    protected $countryZonesDataProvider = null;
+    protected $countryZonesDataProvider;
 
     public function __construct()
     {

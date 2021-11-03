@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace In2code\Femanager\ViewHelpers\Form;
 
@@ -17,7 +18,7 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
     /**
      * @var CountryRepository
      */
-    protected $countryRepository = null;
+    protected $countryRepository;
 
     public function __construct()
     {

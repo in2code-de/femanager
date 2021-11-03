@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Tests\Helper\TestingHelper;
@@ -31,7 +32,7 @@ class FileUtilityTest extends UnitTestCase
         $testpath = TestingHelper::getWebRoot() . 'fileadmin/';
 
         FileUtility::createFolderIfNotExists($testpath);
-        $this->assertDirectoryExists($testpath);
+        self::assertDirectoryExists($testpath);
         GeneralUtility::rmdir($testpath);
     }
 
@@ -48,7 +49,7 @@ class FileUtilityTest extends UnitTestCase
         ];
         foreach ($paths as $given => $expected) {
             $path = str_replace('../', '', FileUtility::getRelativeFolderFromAbsolutePath($given));
-            $this->assertSame($expected, $path);
+            self::assertSame($expected, $path);
         }
     }
 }

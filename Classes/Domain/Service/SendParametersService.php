@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Service;
 
@@ -46,7 +46,7 @@ class SendParametersService
     /**
      * @param ConfigurationManagerInterface $configurationManager
      */
-    public function injectConfigurationManagerInterface (ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
     }

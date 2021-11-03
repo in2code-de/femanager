@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace In2code\Femanager\ViewHelpers\Validation;
 
@@ -10,7 +11,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class IsRequiredFieldViewHelper extends AbstractValidationViewHelper
 {
-
     protected ConfigurationManagerInterface $configurationManager;
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 use In2code\Femanager\Domain\Model\Log;
 
 return [

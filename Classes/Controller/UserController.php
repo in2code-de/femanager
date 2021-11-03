@@ -1,8 +1,8 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
-use Psr\Http\Message\ResponseInterface;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Validator\ClientsideValidator;
@@ -11,6 +11,7 @@ use In2code\Femanager\Utility\BackendUserUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 

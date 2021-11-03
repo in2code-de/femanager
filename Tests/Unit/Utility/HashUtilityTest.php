@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Domain\Model\User;
@@ -20,7 +21,7 @@ class HashUtilityTest extends UnitTestCase
     /**
      * @var User
      */
-    protected $user = null;
+    protected $user;
 
     public function setUp(): void
     {
@@ -44,7 +45,7 @@ class HashUtilityTest extends UnitTestCase
     public function testValidHash()
     {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'] = 'abc';
-        $this->assertTrue(HashUtility::validHash('715e5634c193bbe4', $this->user));
+        self::assertTrue(HashUtility::validHash('715e5634c193bbe4', $this->user));
     }
 
     /**
@@ -57,6 +58,6 @@ class HashUtilityTest extends UnitTestCase
     {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'] = 'abc';
         $hash = HashUtility::createHashForUser($this->user);
-        $this->assertSame('715e5634c193bbe4', $hash);
+        self::assertSame('715e5634c193bbe4', $hash);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace In2code\Femanager\Finisher;
 
@@ -37,7 +37,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
     /**
      * @param ConfigurationManagerInterface $configurationManager
      */
-    public function injectConfigurationManagerInterface (ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
     }
@@ -49,7 +49,6 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
     {
         $this->contentObject = $contentObject;
     }
-
 
     /**
      * Initialize

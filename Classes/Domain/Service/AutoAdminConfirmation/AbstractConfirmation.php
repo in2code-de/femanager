@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service\AutoAdminConfirmation;
 
 use In2code\Femanager\Domain\Model\User;
@@ -18,7 +19,7 @@ abstract class AbstractConfirmation implements ConfirmationInterface
     /**
      * @var User
      */
-    protected $user = null;
+    protected $user;
 
     /**
      * @var array
@@ -28,7 +29,7 @@ abstract class AbstractConfirmation implements ConfirmationInterface
     /**
      * @var ContentObjectRenderer
      */
-    protected $contentObject = null;
+    protected $contentObject;
 
     /**
      * AbstractConfirmation constructor.

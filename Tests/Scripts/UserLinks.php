@@ -2,9 +2,9 @@
 
 namespace In2code\Femanager\Tests\Scripts;
 
+use Doctrine\DBAL\DBALException;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\HashUtility;
-use Doctrine\DBAL\DBALException;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

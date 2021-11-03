@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Model\User;
@@ -45,7 +46,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     /**
      * @param UserRepository $userRepository
      */
-    public function injectUserRepository (UserRepository $userRepository)
+    public function injectUserRepository(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -53,7 +54,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     /**
      * @param ConfigurationManagerInterface $configurationManager
      */
-    public function injectConfigurationManagerInterface (ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
     }
@@ -61,7 +62,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     /**
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function injectEventDispatcherInterface (EventDispatcherInterface $eventDispatcher)
+    public function injectEventDispatcherInterface(EventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
     }

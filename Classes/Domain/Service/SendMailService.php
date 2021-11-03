@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Event\AfterMailSendEvent;
@@ -23,7 +24,7 @@ class SendMailService
      *
      * @var object
      */
-    public $contentObject = null;
+    public $contentObject;
 
     /**
      * @var Mailer

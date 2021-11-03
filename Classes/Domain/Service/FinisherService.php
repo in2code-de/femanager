@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Domain\Model\User;
@@ -31,7 +32,7 @@ class FinisherService
      *
      * @var string|null
      */
-    protected $requirePath = null;
+    protected $requirePath;
 
     /**
      * Finisher Configuration
@@ -55,7 +56,7 @@ class FinisherService
      *
      * @var null
      */
-    protected $actionMethodName = null;
+    protected $actionMethodName;
 
     /**
      * @var string
@@ -65,14 +66,12 @@ class FinisherService
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
-    protected $objectManager = null;
+    protected $objectManager;
 
-
-    public function injectObjectManager (ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
-
 
     /**
      * @return string
