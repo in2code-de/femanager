@@ -6,6 +6,8 @@ use In2code\Femanager\Tests\Helper\TestingHelper;
 use In2code\Femanager\Tests\Unit\Fixture\Utility\BackendUtility as BackendUtilityFixture;
 use In2code\Femanager\Utility\BackendUtility;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 
 /**
  * Class BackendUtilityTest
@@ -22,6 +24,12 @@ class BackendUtilityTest extends UnitTestCase
     public function setUp(): void
     {
         TestingHelper::setDefaultConstants();
+
+        // ApplicationType needs to be faked to represent backend-mode here
+        $request = new ServerRequest();
+        $applicationType = SystemEnvironmentBuilder::REQUESTTYPE_BE;
+        $request = $request->withAttribute('applicationType', $applicationType);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
     /**

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -79,7 +80,9 @@ class BackendUtility
     public static function getPluginOrModuleString(): string
     {
         $string = 'plugin';
-        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
+        if (($GLOBALS['TYPO3_REQUEST'] ?? null) instanceof ServerRequestInterface
+            && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
+        ) {
             $string = 'module';
         }
         return $string;
