@@ -45,12 +45,12 @@ jQuery.fn.femanagerValidation = function($) {
 	})();
 
 	// on field blur
-	$('*[data-validation]').blur(function() {
+    $('*[data-validation]').on('blur', function () {
 		validateField($(this), false); // validate this field only
 	});
 
 	// form submit
-	element.submit(function(e) {
+    element.on('submit', function (e) {
 		$('body').css('cursor', 'wait');
 		if (!submitFormAllowed) {
 			e.preventDefault();
@@ -202,7 +202,7 @@ jQuery.fn.femanagerValidation = function($) {
 		// submit form if there are no errors
 		if (element.find('.error').length == 0) {
 			submitFormAllowed = true;
-			element.submit();
+            element.trigger('submit');
 		} else {
 			$('html,body').animate({
 				scrollTop: element.find('.error:first').offset().top
