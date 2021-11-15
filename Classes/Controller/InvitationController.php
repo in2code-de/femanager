@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
@@ -13,8 +14,10 @@ use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 
 /**
  * Class InvitationController
@@ -25,11 +28,12 @@ class InvitationController extends AbstractFrontendController
     /**
      * action new
      */
-    public function newAction()
+    public function newAction(): ResponseInterface
     {
         $this->allowedUserForInvitationNewAndCreate();
         $this->view->assign('allUserGroups', $this->allUserGroups);
         $this->assignForAll();
+        return $this->htmlResponse();
     }
 
     /**
@@ -124,7 +128,7 @@ class InvitationController extends AbstractFrontendController
      * @param int $user User UID
      * @param string $hash
      */
-    public function editAction($user, $hash = null)
+    public function editAction($user, $hash = null): ResponseInterface
     {
         $user = $this->userRepository->findByUid($user);
         $user->setDisable(false);
@@ -146,10 +150,11 @@ class InvitationController extends AbstractFrontendController
                 $this->userRepository->remove($user);
             }
             $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
-            $this->forward('status');
+            return new ForwardResponse('status');
         }
 
         $this->assignForAll();
+        return $this->htmlResponse();
     }
 
     /**
@@ -243,8 +248,9 @@ class InvitationController extends AbstractFrontendController
     /**
      * Restricted Action to show messages
      */
-    public function statusAction()
+    public function statusAction(): ResponseInterface
     {
+        return $this->htmlResponse();
     }
 
     /**
@@ -275,7 +281,7 @@ class InvitationController extends AbstractFrontendController
             '',
             FlashMessage::ERROR
         );
-        $this->forward('status');
+        return new ForwardResponse('status');
         return false;
     }
 }

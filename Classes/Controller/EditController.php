@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
@@ -14,6 +15,7 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
@@ -23,7 +25,7 @@ use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
  */
 class EditController extends AbstractFrontendController
 {
-    public function editAction()
+    public function editAction(): ResponseInterface
     {
         $token = '';
         if ($this->user) {
@@ -35,6 +37,7 @@ class EditController extends AbstractFrontendController
             'token' => $token
         ]);
         $this->assignForAll();
+        return $this->htmlResponse();
     }
 
     public function initializeUpdateAction()
@@ -77,12 +80,12 @@ class EditController extends AbstractFrontendController
      * @param string $hash
      * @param string $status could be "confirm", "refuse", "silentRefuse"
      */
-    public function confirmUpdateRequestAction(User $user, $hash, $status = 'confirm')
+    public function confirmUpdateRequestAction(User $user, $hash, $status = 'confirm'): ResponseInterface
     {
         $this->view->assign('user', $user);
         if (!HashUtility::validHash($hash, $user) || !$user->getTxFemanagerChangerequest()) {
             $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', FlashMessage::ERROR);
-            return;
+            return $this->htmlResponse(null);
         }
         switch ($status) {
             case 'confirm':
@@ -101,6 +104,7 @@ class EditController extends AbstractFrontendController
         $this->userRepository->update($user);
 
         $this->eventDispatcher->dispatch(new AfterUserUpdateEvent($user, $hash, $status));
+        return $this->htmlResponse();
     }
 
     /**

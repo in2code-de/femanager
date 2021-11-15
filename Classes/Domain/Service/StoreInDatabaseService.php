@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -28,7 +29,7 @@ class StoreInDatabaseService
     /**
      * @var \TYPO3\CMS\CORE\Database\ConnectionPool
      */
-    protected $databaseConnection = null;
+    protected $databaseConnection;
 
     /**
      * Executes the storage

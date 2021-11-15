@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Utility\ObjectUtility;

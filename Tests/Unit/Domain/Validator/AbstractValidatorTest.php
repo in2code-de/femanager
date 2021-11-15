@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Unit\Domain\Validator;
 
 use In2code\Femanager\Tests\Unit\Fixture\Domain\Validator\AbstractValidator;
@@ -91,7 +92,7 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function testValidateRequiredReturnsBool($value, $expectedResult)
     {
-        $this->assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateRequired', $value));
+        self::assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateRequired', $value));
     }
 
     /**
@@ -141,7 +142,7 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function testValidateEmailReturnsBool($value, $expectedResult)
     {
-        $this->assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateEmail', $value));
+        self::assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateEmail', $value));
     }
 
     /**
@@ -189,7 +190,7 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function testValidateMinReturnsBool($value, $allowedLength, $expectedResult)
     {
-        $this->assertSame(
+        self::assertSame(
             $expectedResult,
             $this->generalValidatorMock->_callRef('validateMin', $value, $allowedLength)
         );
@@ -245,7 +246,7 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function testValidateMaxReturnsBool($value, $allowedLength, $expectedResult)
     {
-        $this->assertSame(
+        self::assertSame(
             $expectedResult,
             $this->generalValidatorMock->_callRef('validateMax', $value, $allowedLength)
         );
@@ -298,7 +299,7 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function testValidateIntReturnsBool($value, $expectedResult)
     {
-        $this->assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateInt', $value));
+        self::assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateInt', $value));
     }
 
     /**
@@ -383,7 +384,7 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function testValidateLettersReturnsBool($value, $expectedResult)
     {
-        $this->assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateLetters', $value));
+        self::assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateLetters', $value));
     }
 
     /**
@@ -394,7 +395,7 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function testUnicodeValidateLettersReturnsBool($value, $expectedResult)
     {
-        $this->assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateUnicodeLetters', $value));
+        self::assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateUnicodeLetters', $value));
     }
 
     /**
@@ -542,7 +543,7 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function testValidateMustIncludeReturnsBool($value, $configuration, $expectedResult)
     {
-        $this->assertSame(
+        self::assertSame(
             $expectedResult,
             $this->generalValidatorMock->_callRef('validateMustInclude', $value, $configuration)
         );
@@ -683,7 +684,7 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function testValidateMustNotIncludeReturnsBool($value, $configuration, $expectedResult)
     {
-        $this->assertSame(
+        self::assertSame(
             $expectedResult,
             $this->generalValidatorMock->_callRef('validateMustNotInclude', $value, $configuration)
         );
@@ -764,7 +765,7 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function testValidateInListReturnsBool($value, $configuration, $expectedResult)
     {
-        $this->assertSame(
+        self::assertSame(
             $expectedResult,
             $this->generalValidatorMock->_callRef('validateInList', $value, $configuration)
         );
@@ -821,6 +822,6 @@ class AbstractValidatorTest extends UnitTestCase
     public function testValidateSameAsReturnsBool($value, $value2, $result)
     {
         $test = $this->generalValidatorMock->_callRef('validateSameAs', $value, $value2);
-        $this->assertSame($result, $test);
+        self::assertSame($result, $test);
     }
 }

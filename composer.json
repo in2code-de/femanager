@@ -51,6 +51,7 @@
     "typo3/cms-tstemplate": "^11.5",
     "typo3/cms-belog": "^11.5",
     "typo3/cms-lowlevel": "^11.5",
+    "typo3/coding-standards": "^v0.4.0",
     "helhum/typo3-console": "^7.0",
     "friendsofphp/php-cs-fixer": "^3.2",
     "phpmd/phpmd": "^2.10",
@@ -73,7 +74,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "In2code\\Femanager\\Tests\\": "Tests",
+      "In2code\\Femanager\\Tests\\": "Tests/",
       "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/",
       "TYPO3\\CMS\\Fluid\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/fluid/Tests/"
     }

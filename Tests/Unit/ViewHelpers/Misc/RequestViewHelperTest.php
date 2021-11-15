@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\ViewHelpers\Request;
 
 use In2code\Femanager\ViewHelpers\Misc\RequestViewHelper;
@@ -113,6 +114,6 @@ class RequestTest extends UnitTestCase
         $this->abstractValidationViewHelperMock->_set('testVariables', $parametersToSet);
 
         $result = $this->abstractValidationViewHelperMock->_call('render', $parameter, $htmlSpecialChars);
-        $this->assertSame($expectedResult, $result);
+        self::assertSame($expectedResult, $result);
     }
 }

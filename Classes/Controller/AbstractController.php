@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
 
@@ -21,10 +21,12 @@ use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
@@ -375,7 +377,7 @@ abstract class AbstractController extends ActionController
                 '',
                 FlashMessage::ERROR
             );
-            $this->forward('edit');
+            return new ForwardResponse('edit');
         }
     }
 
@@ -400,8 +402,6 @@ abstract class AbstractController extends ActionController
         );
     }
 
-    /**
-     */
     public function initializeAction()
     {
         $this->controllerContext = $this->buildControllerContext();
@@ -417,7 +417,7 @@ abstract class AbstractController extends ActionController
         );
 
         $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'];
-        if (TYPO3_MODE == 'BE') {
+        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
             $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
             if (is_array($config['plugin.']['tx_femanager.']['settings.'])) {
                 $this->config = $config['plugin.']['tx_femanager.']['settings.'];
@@ -463,8 +463,6 @@ abstract class AbstractController extends ActionController
         return false;
     }
 
-    /**
-     */
     protected function checkStoragePid()
     {
         if ((int)$this->allConfig['persistence']['storagePid'] === 0
@@ -475,11 +473,9 @@ abstract class AbstractController extends ActionController
         }
     }
 
-    /**
-     */
     protected function checkTypoScript()
     {
-        if (TYPO3_MODE == 'BE') {
+        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
             if ($this->config['_TypoScriptIncluded'] !== '1') {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript_be'),
@@ -498,8 +494,6 @@ abstract class AbstractController extends ActionController
         }
     }
 
-    /**
-     */
     protected function setAllUserGroups()
     {
         $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());

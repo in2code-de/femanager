@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Model\User;
@@ -35,7 +36,7 @@ abstract class AbstractFinisher implements FinisherInterface
      *
      * @var null
      */
-    protected $actionMethodName = null;
+    protected $actionMethodName;
 
     /**
      * @var ContentObjectRenderer

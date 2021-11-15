@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Domain\Model\User;
@@ -15,7 +16,7 @@ class AutoAdminConfirmationService
     /**
      * @var User
      */
-    protected $user = null;
+    protected $user;
 
     /**
      * @var array
@@ -25,7 +26,7 @@ class AutoAdminConfirmationService
     /**
      * @var ContentObjectRenderer
      */
-    protected $contentObject = null;
+    protected $contentObject;
 
     /**
      * @var string

@@ -1,10 +1,13 @@
 <?php
+
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Tests\Helper\TestingHelper;
 use In2code\Femanager\Tests\Unit\Fixture\Utility\BackendUtility as BackendUtilityFixture;
 use In2code\Femanager\Utility\BackendUtility;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 
 /**
  * Class BackendUtilityTest
@@ -21,6 +24,12 @@ class BackendUtilityTest extends UnitTestCase
     public function setUp(): void
     {
         TestingHelper::setDefaultConstants();
+
+        // ApplicationType needs to be faked to represent backend-mode here
+        $request = new ServerRequest();
+        $applicationType = SystemEnvironmentBuilder::REQUESTTYPE_BE;
+        $request = $request->withAttribute('applicationType', $applicationType);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
     /**
@@ -30,7 +39,7 @@ class BackendUtilityTest extends UnitTestCase
     public function testGetPageIdentifier()
     {
         $_GET['id'] = 123;
-        $this->assertSame(123, BackendUtility::getPageIdentifier());
+        self::assertSame(123, BackendUtility::getPageIdentifier());
     }
 
     /**
@@ -39,7 +48,7 @@ class BackendUtilityTest extends UnitTestCase
     public function testGetPluginOrModuleString()
     {
         $result = BackendUtility::getPluginOrModuleString();
-        $this->assertSame('module', $result);
+        self::assertSame('module', $result);
     }
 
     /**
@@ -51,6 +60,6 @@ class BackendUtilityTest extends UnitTestCase
         $testParams = ['foo' => ['bar']];
         $_GET = $testParams;
         $_POST['klks'] = ['test'];
-        $this->assertSame($testParams, BackendUtilityFixture::getCurrentParametersPublic());
+        self::assertSame($testParams, BackendUtilityFixture::getCurrentParametersPublic());
     }
 }

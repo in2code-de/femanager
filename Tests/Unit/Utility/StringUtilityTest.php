@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Utility\StringUtility;
@@ -49,7 +50,7 @@ class StringUtilityTest extends UnitTestCase
      */
     public function testCleanStringReturnsString($string, $expectedResult)
     {
-        $this->assertEquals($expectedResult, StringUtility::cleanString($string));
+        self::assertEquals($expectedResult, StringUtility::cleanString($string));
     }
 
     /**
@@ -85,7 +86,7 @@ class StringUtilityTest extends UnitTestCase
     public function testGetValuesInBracketsReturnsString($start, $expectedResult)
     {
         $result = StringUtility::getValuesInBrackets($start);
-        $this->assertEquals($result, $expectedResult);
+        self::assertEquals($result, $expectedResult);
     }
 
     /**
@@ -121,7 +122,7 @@ class StringUtilityTest extends UnitTestCase
     public function testGetValuesBeforeBracketsReturnsString($start, $expectedResult)
     {
         $result = StringUtility::getValuesBeforeBrackets($start);
-        $this->assertEquals($result, $expectedResult);
+        self::assertEquals($result, $expectedResult);
     }
 
     /**
@@ -167,7 +168,7 @@ class StringUtilityTest extends UnitTestCase
      */
     public function testStartsWithReturnsString($haystack, $needle, $expectedResult)
     {
-        $this->assertSame($expectedResult, StringUtility::startsWith($haystack, $needle));
+        self::assertSame($expectedResult, StringUtility::startsWith($haystack, $needle));
     }
 
     /**
@@ -213,7 +214,7 @@ class StringUtilityTest extends UnitTestCase
      */
     public function testEndsWithReturnsString($haystack, $needle, $expectedResult)
     {
-        $this->assertSame($expectedResult, StringUtility::endsWith($haystack, $needle));
+        self::assertSame($expectedResult, StringUtility::endsWith($haystack, $needle));
     }
 
     /**
@@ -252,7 +253,7 @@ class StringUtilityTest extends UnitTestCase
      */
     public function testMakelEmailArrayReturnsArray($haystack, $expectedResult)
     {
-        $this->assertSame($expectedResult, StringUtility::makeEmailArray($haystack));
+        self::assertSame($expectedResult, StringUtility::makeEmailArray($haystack));
     }
 
     /**
@@ -309,7 +310,7 @@ class StringUtilityTest extends UnitTestCase
             } else {
                 $regex = '~.{' . $length . '}~';
             }
-            $this->assertSame(1, preg_match($regex, $string));
+            self::assertSame(1, preg_match($regex, $string));
         }
     }
 
@@ -318,7 +319,7 @@ class StringUtilityTest extends UnitTestCase
      */
     public function testGetNumbersStringReturnsStrings()
     {
-        $this->assertSame('0123456789', StringUtility::getNumbersString());
+        self::assertSame('0123456789', StringUtility::getNumbersString());
     }
 
     /**
@@ -326,7 +327,7 @@ class StringUtilityTest extends UnitTestCase
      */
     public function testGetCharactersStringReturnsStrings()
     {
-        $this->assertSame('abcdefghijklmnopqrstuvwxyz', StringUtility::getCharactersString());
+        self::assertSame('abcdefghijklmnopqrstuvwxyz', StringUtility::getCharactersString());
     }
 
     /**
@@ -334,7 +335,7 @@ class StringUtilityTest extends UnitTestCase
      */
     public function testGetUpperCharactersStringReturnsStrings()
     {
-        $this->assertSame('ABCDEFGHIJKLMNOPQRSTUVWXYZ', StringUtility::getUpperCharactersString());
+        self::assertSame('ABCDEFGHIJKLMNOPQRSTUVWXYZ', StringUtility::getUpperCharactersString());
     }
 
     /**
@@ -391,6 +392,6 @@ class StringUtilityTest extends UnitTestCase
     public function testRemoveDoubleSlashesReturnsString($uri, $expectedResult)
     {
         $newUri = StringUtility::removeDoubleSlashesFromUri($uri);
-        $this->assertSame($expectedResult, $newUri);
+        self::assertSame($expectedResult, $newUri);
     }
 }

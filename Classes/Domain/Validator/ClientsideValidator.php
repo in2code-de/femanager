@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Validator;
 
@@ -10,6 +10,7 @@ use In2code\Femanager\Domain\Service\ValidationSettingsService;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
+use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -49,7 +50,7 @@ class ClientsideValidator extends AbstractValidator
      *
      * @var User
      */
-    protected $user = null;
+    protected $user;
 
     /**
      * Error message container
@@ -217,7 +218,7 @@ class ClientsideValidator extends AbstractValidator
                 case stristr($validationSetting, 'captcha('):
                     if (ExtensionManagementUtility::isLoaded('sr_freecap')) {
                         $wordRepository = ObjectUtility::getObjectManager()->get(
-                            \SJBR\SrFreecap\Domain\Repository\WordRepository::class
+                            WordRepository::class
                         );
                         $wordObject = $wordRepository->getWord();
                         $wordHash = $wordObject->getWordHash();
