@@ -1,5 +1,5 @@
 name: femanager7
-type: php
+type: typo3
 docroot: .Build/Web
 php_version: "7.2"
 webserver_type: nginx-fpm
@@ -11,7 +11,7 @@ additional_fqdns: []
 mariadb_version: "10.1"
 mysql_version: ""
 use_dns_when_possible: true
-composer_version: ""
+composer_version: "1"
 web_environment: []
 
 
@@ -180,3 +180,5 @@ web_environment: []
 # information on the commands that can be extended and the tasks you can define
 # for them. Example:
 #hooks:
+#  post-start:
+#    - exec: composer install -d /var/www/html
