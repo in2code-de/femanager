@@ -7,3 +7,16 @@ Extension basicly works like sr_feuser_register
 # Documentation
 
 - https://docs.typo3.org/typo3cms/extensions/femanager/
+
+### Local setup with ddev
+
+#### Requirements
+
+1. Install ddev, see: https://ddev.readthedocs.io/en/stable/#installation
+2. Install git-lfs, see: https://git-lfs.github.com/
+
+#### Installation with sample data
+
+1. Clone this repository
+2. Run `ddev start`
+3. Run `ddev initialize`
