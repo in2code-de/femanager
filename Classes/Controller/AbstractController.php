@@ -410,20 +410,35 @@ abstract class AbstractController extends ActionController
     protected function initializeDeleteAction()
     {
         $user = UserUtility::getCurrentUser();
+        $token = $this->request->getArgument('token');
         $uid = $this->request->getArgument('user');
-        $this->testSpoof($user, $uid);
+        $this->testSpoof($user, $uid, $token);
     }
 
     /**
-     * Check if user is authenticated
+     * Check if user is authenticated and params are valid
      *
      * @param User $user
      * @param int $uid Given fe_users uid
+     * @param String $receivedToken Token
      * @return void
      */
-    protected function testSpoof($user, $uid)
+    protected function testSpoof($user, $uid, $receivedToken)
     {
+        $errorOnProfileUpdate = false;
+        $knownToken = GeneralUtility::hmac($user->getUid(), (string)$user->getCrdate()->getTimestamp());
+
+        //check if the params are valid
+        if (!is_string($receivedToken) || !hash_equals($knownToken, $receivedToken)) {
+            $errorOnProfileUpdate = true;
+        }
+
+        //check if the logged user is allowed to edit / delete this record
         if ($user->getUid() !== (int) $uid && $uid > 0) {
+            $errorOnProfileUpdate = true;
+        }
+
+        if ($errorOnProfileUpdate === true) {
             LogUtility::log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
