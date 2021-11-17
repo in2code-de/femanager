@@ -10,3 +10,7 @@ ehthumbs.db
 Thumbs.db
 .svn
 .sass-cache
+.Build
+typo3_src
+index.php
+typo3
