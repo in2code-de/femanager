@@ -14,4 +14,5 @@ fi
 git lfs pull
 ddev import-db --src=.project/data/db.sql.gz
 cp .ddev/typo3/AdditionalConfiguration.php .Build/Web/typo3conf/
-ddev typo3cms install:setup
+cp .ddev/typo3/PackageStates.php .Build/Web/typo3conf/
+echo "Copied AdditionalConfiguration.php and PackageStates.php to folder .Build/Web"

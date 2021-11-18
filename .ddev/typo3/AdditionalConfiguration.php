@@ -34,7 +34,7 @@ if (getenv('IS_DDEV_PROJECT') == 'true') {
                 'exceptionalErrors' => 20480,
                 'isInitialDatabaseImportDone' => true,
                 'isInitialInstallationInProgress' => false,
-                'sitename' => 'New TYPO3 site',
+                'sitename' => 'Femanger Test Site',
                 'sqlDebug' => 0,
                 'systemLogLevel' => 2,
                 't3lib_cs_convMethod' => 'mbstring',
