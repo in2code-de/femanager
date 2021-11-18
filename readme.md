@@ -19,4 +19,5 @@ Extension basicly works like sr_feuser_register
 
 1. Clone this repository
 2. Run `ddev start`
+3. Run `dev composer install`   
 3. Run `ddev initialize`
