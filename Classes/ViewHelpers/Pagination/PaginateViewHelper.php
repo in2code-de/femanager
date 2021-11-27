@@ -14,8 +14,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Service\ExtensionService;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as ViewHelperException;
 
 /**
  * PaginateViewHelper
@@ -81,6 +83,7 @@ class PaginateViewHelper extends AbstractViewHelper
      * @param RenderingContextInterface $renderingContext
      * @return PaginatorInterface
      * @throws NotPaginatableException
+     * @throws ViewHelperException
      */
     protected static function getPaginator(
         array $arguments,
@@ -105,11 +108,18 @@ class PaginateViewHelper extends AbstractViewHelper
      * @param array $arguments
      * @param RenderingContextInterface $renderingContext
      * @return int
+     * @throws ViewHelperException
      */
     protected static function getPageNumber(array $arguments, RenderingContextInterface $renderingContext): int
     {
-        $extensionName = $renderingContext->getControllerContext()->getRequest()->getControllerExtensionName();
-        $pluginName = $renderingContext->getControllerContext()->getRequest()->getPluginName();
+        if (! $renderingContext instanceof RenderingContext) {
+            throw new ViewHelperException(
+                'Something went wrong; RenderingContext should be available in ViewHelper',
+                1637986936
+            );
+        }
+        $extensionName = $renderingContext->getRequest()->getControllerExtensionName();
+        $pluginName = $renderingContext->getRequest()->getPluginName();
         $extensionService = GeneralUtility::makeInstance(ExtensionService::class);
         $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
         $variables = GeneralUtility::_GP($pluginNamespace);
