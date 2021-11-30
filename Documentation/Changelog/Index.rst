@@ -27,6 +27,16 @@ Changes
    :Changes:
       Changes
 
+- :Version:
+      2.7.0
+   :State:
+      stable
+   :Date:
+      2021-11-30
+   :Changes:
+
+      * !!! Backport of Security Fixes of 4.x, 5.x  ==> Please take a look in the upgrade section
+
  - :Version:
       2.6.2
    :State:
