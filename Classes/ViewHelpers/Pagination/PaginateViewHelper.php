@@ -17,7 +17,7 @@ use TYPO3\CMS\Extbase\Service\ExtensionService;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as ViewHelperException;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
 /**
  * PaginateViewHelper
@@ -83,7 +83,7 @@ class PaginateViewHelper extends AbstractViewHelper
      * @param RenderingContextInterface $renderingContext
      * @return PaginatorInterface
      * @throws NotPaginatableException
-     * @throws ViewHelperException
+     * @throws FluidViewHelperException
      */
     protected static function getPaginator(
         array $arguments,
@@ -108,12 +108,12 @@ class PaginateViewHelper extends AbstractViewHelper
      * @param array $arguments
      * @param RenderingContextInterface $renderingContext
      * @return int
-     * @throws ViewHelperException
+     * @throws FluidViewHelperException
      */
     protected static function getPageNumber(array $arguments, RenderingContextInterface $renderingContext): int
     {
         if (! $renderingContext instanceof RenderingContext) {
-            throw new ViewHelperException(
+            throw new FluidViewHelperException(
                 'Something went wrong; RenderingContext should be available in ViewHelper',
                 1637986936
             );
