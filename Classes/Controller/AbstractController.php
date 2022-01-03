@@ -250,7 +250,10 @@ abstract class AbstractController extends ActionController
                 $this->settings['new']['email']['createUserNotify']['sender']['email']['value'],
                 $this->settings['new']['email']['createUserNotify']['sender']['name']['value']
             ),
-            $this->settings['new']['email']['createUserNotify']['subject']['data'],
+            $this->contentObject->cObjGetSingle(
+                $this->config['new.']['email.']['createUserNotify.']['subject'],
+                $this->config['new.']['email.']['createUserNotify.']['subject.']
+            ),
             $variables,
             $this->config['new.']['email.']['createUserNotify.']
         );
@@ -265,7 +268,10 @@ abstract class AbstractController extends ActionController
                     $this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-                $this->settings['new']['email']['createAdminNotify']['subject']['data'],
+                $this->contentObject->cObjGetSingle(
+                    $this->config['new.']['email.']['createAdminNotify.']['subject'],
+                    $this->config['new.']['email.']['createAdminNotify.']['subject.']
+                ),
                 $variables,
                 $this->config['new.']['email.']['createAdminNotify.']
             );
