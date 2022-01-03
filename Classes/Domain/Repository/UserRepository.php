@@ -296,7 +296,7 @@ class UserRepository extends Repository
     protected function ignoreEnableFieldsAndStoragePageAndStarttime(QueryInterface $query)
     {
         $this->ignoreEnableFieldsAndStoragePage($query);
-        $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled', 'starttime', 'endtime']);
+        $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled', 'starttime']);
     }
 
     /**
