@@ -276,6 +276,5 @@ class InvitationController extends AbstractFrontendController
             FlashMessage::ERROR
         );
         $this->forward('status');
-        return false;
     }
 }

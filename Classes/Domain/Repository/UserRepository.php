@@ -6,6 +6,7 @@ namespace In2code\Femanager\Domain\Repository;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\BackendUserUtility;
 use In2code\Femanager\Utility\BackendUtility;
+use TYPO3\CMS\Core\Database\QueryGenerator;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -274,7 +275,7 @@ class UserRepository extends Repository
      */
     protected function getTreeList($pageIdentifier)
     {
-        $queryGenerator = $this->objectManager->get('TYPO3\\CMS\\Core\\Database\\QueryGenerator');
+        $queryGenerator = $this->objectManager->get(QueryGenerator::class);
         $treeList = $queryGenerator->getTreeList($pageIdentifier, 99, 0, '1');
 
         return GeneralUtility::trimExplode(',', $treeList, true);

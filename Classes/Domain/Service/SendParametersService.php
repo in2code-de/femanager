@@ -59,12 +59,11 @@ class SendParametersService
             curl_setopt($curlObject, CURLOPT_POSTFIELDS, $this->getData());
             curl_setopt($curlObject, CURLOPT_RETURNTRANSFER, true);
             if ($GLOBALS['FE']['debug'] === 1) {
-                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($curlObject, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($curlObject, CURLOPT_SSL_VERIFYPEER, false);
             }
             curl_exec($curlObject);
             curl_close($curlObject);
-            $this->log();
         }
     }
 
@@ -86,27 +85,6 @@ class SendParametersService
     protected function getData()
     {
         return $this->contentObject->cObjGetSingle($this->configuration['data'], $this->configuration['data.']);
-    }
-
-    /**
-     * Write to devlog
-     *
-     * @return bool
-     */
-    protected function log()
-    {
-        if (!empty($this->configuration['debug'])) {
-            GeneralUtility::devLog(
-                'femanager sendpost values',
-                'femanager',
-                0,
-                [
-                    'url' => $this->getUri(),
-                    'data' => $this->getData(),
-                    'properties' => $this->properties
-                ]
-            );
-        }
     }
 
     /**

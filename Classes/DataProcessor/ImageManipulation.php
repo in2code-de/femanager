@@ -34,7 +34,7 @@ class ImageManipulation extends AbstractDataProcessor
                     /** @noinspection PhpMethodParametersCountMismatchInspection */
                     $fileService = ObjectUtility::getObjectManager()->get(
                         FileService::class,
-                        $this->getNewImageName($fileItem, $property),
+                        $this->getNewImageName($fileItem),
                         $fileItem
                     );
                     if ($fileService->isEverythingValid()) {
