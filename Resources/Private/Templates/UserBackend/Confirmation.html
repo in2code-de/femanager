@@ -18,81 +18,76 @@ UserBackend / List
 					<f:translate key="BackendConfirmationNoteText" arguments="{0:'{f:count(subject:users)}'}"><f:count subject="{users}" /> approval(s)</f:translate>
 				</div>
 
-				<femanager:pagination.paginate objects="{users}" as="usersPage" itemsPerPage="100">
-					<table cellspacing="0" cellpadding="0" border="0" class="table table-striped table-hover">
-						<tbody>
-							<tr class="c-headLine">
+				<table cellspacing="0" cellpadding="0" border="0" class="table table-striped table-hover">
+					<tbody>
+						<tr class="c-headLine">
+							<td nowrap="nowrap">
+								<f:translate key="BackendConfirmationColumnAction">Actions</f:translate>
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="BackendConfirmationColumnUid">UID</f:translate>
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="tx_femanager_domain_model_user.crdate" />
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="tx_femanager_domain_model_user.username" />
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="tx_femanager_domain_model_user.country" />
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="tx_femanager_domain_model_user.state" />
+								<!-- // TODO: Check me if i was displayed -->
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="tx_femanager_domain_model_user.email" />
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="tx_femanager_domain_model_user.name" />
+							</td>
+						</tr>
+
+						<f:for each="{paginator.paginatedItems}" as="user">
+							<tr class="db_list_normal firstcol femanager_list_line">
 								<td nowrap="nowrap">
-									<f:translate key="BackendConfirmationColumnAction">Actions</f:translate>
+									<f:link.action action="confirmUser" arguments="{userIdentifier:user.uid}">
+										<core:icon identifier="actions-check" />
+									</f:link.action>
+									<f:link.action action="refuseUser" arguments="{userIdentifier:user.uid}">
+										<core:icon identifier="actions-close" />
+									</f:link.action>
 								</td>
 								<td nowrap="nowrap">
-									<f:translate key="BackendConfirmationColumnUid">UID</f:translate>
+									{user.uid}
 								</td>
 								<td nowrap="nowrap">
-									<f:translate key="tx_femanager_domain_model_user.crdate" />
+									<f:format.date format="d.m.Y H:i">{user.crdate}</f:format.date>
 								</td>
 								<td nowrap="nowrap">
-									<f:translate key="tx_femanager_domain_model_user.username" />
+									{user.username}
 								</td>
 								<td nowrap="nowrap">
-									<f:translate key="tx_femanager_domain_model_user.country" />
+									{user.country}
 								</td>
 								<td nowrap="nowrap">
-									<f:translate key="tx_femanager_domain_model_user.state" />
-									<!-- // TODO: Check me if i was displayed -->
+									{user.state}
 								</td>
 								<td nowrap="nowrap">
-									<f:translate key="tx_femanager_domain_model_user.email" />
+									<f:if condition="{user.email}">
+										<f:link.email email="{user.email}">{user.email}</f:link.email>
+									</f:if>
 								</td>
 								<td nowrap="nowrap">
-									<f:translate key="tx_femanager_domain_model_user.name" />
+									{user.lastName}<f:if condition="{user.lastName}">,</f:if> {user.firstName}
 								</td>
 							</tr>
+						</f:for>
 
-							<f:for each="{usersPage.paginator.paginatedItems}" as="user">
-								<tr class="db_list_normal firstcol femanager_list_line">
-									<td nowrap="nowrap">
-										<f:link.action action="confirmUser" arguments="{userIdentifier:user.uid}">
-											<core:icon identifier="actions-check" />
-										</f:link.action>
-										<f:link.action action="refuseUser" arguments="{userIdentifier:user.uid}">
-											<core:icon identifier="actions-close" />
-										</f:link.action>
-									</td>
-									<td nowrap="nowrap">
-										{user.uid}
-									</td>
-									<td nowrap="nowrap">
-										<f:format.date format="d.m.Y H:i">{user.crdate}</f:format.date>
-									</td>
-									<td nowrap="nowrap">
-										{user.username}
-									</td>
-									<td nowrap="nowrap">
-										{user.country}
-									</td>
-									<td nowrap="nowrap">
-										{user.state}
-									</td>
-									<td nowrap="nowrap">
-										<f:if condition="{user.email}">
-											<f:link.email email="{user.email}">{user.email}</f:link.email>
-										</f:if>
-									</td>
-									<td nowrap="nowrap">
-										{user.lastName}<f:if condition="{user.lastName}">,</f:if> {user.firstName}
-									</td>
-								</tr>
-							</f:for>
+					</tbody>
+				</table>
 
-						</tbody>
-					</table>
-
-					<f:alias map="{pagination:usersPage.pagination, paginator:usersPage.paginator, name:usersPage.name}">
-						<f:render partial="Misc/Pagination" arguments="{_all}" />
-					</f:alias>
-				</femanager:pagination.paginate>
-
+				<f:render partial="Utility/Paginator" arguments="{pagination: pagination, pages: pages, paginator: paginator, actionName: 'confirmation'}" />
 			</f:then>
 			<f:else>
 				<div class="femanager_note">

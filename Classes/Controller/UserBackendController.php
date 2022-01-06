@@ -13,7 +13,10 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Pagination\ArrayPaginator;
+use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -27,17 +30,25 @@ class UserBackendController extends AbstractController
     /**
      * @param array $filter
      */
-    public function listAction(array $filter = []): ResponseInterface
+    public function listAction(array $filter = [], int $currentPage = 1): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->getTSConfig(
             )['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
+
+        $allUsers = $this->userRepository->findAllInBackend($filter)->toArray();
+        $arrayPaginator = new ArrayPaginator($allUsers, $currentPage, 100);
+        $pagination = new SimplePagination($arrayPaginator);
+
         $this->view->assignMultiple(
             [
-                'users' => $this->userRepository->findAllInBackend($filter),
+                'users' => $allUsers,
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'list',
-                'loginAsEnabled' => $loginAsEnabled
+                'loginAsEnabled' => $loginAsEnabled,
+                'paginator' => $arrayPaginator,
+                'pagination' => $pagination,
+                'pages' => range(1, $pagination->getLastPageNumber()),
             ]
         );
         return $this->htmlResponse();
@@ -46,20 +57,27 @@ class UserBackendController extends AbstractController
     /**
      * @param array $filter
      */
-    public function confirmationAction(array $filter = []): ResponseInterface
+    public function confirmationAction(array $filter = [], int $currentPage = 1): ResponseInterface
     {
         $this->configPID = $this->getConfigPID();
 
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
+        $allUsers = $this->userRepository->findAllInBackendForConfirmation(
+            $filter,
+            ConfigurationUtility::isBackendModuleFilterUserConfirmation()
+        )->toArray();
+        $arrayPaginator = new ArrayPaginator($allUsers, $currentPage, 100);
+        $pagination = new SimplePagination($arrayPaginator);
+
         $this->view->assignMultiple(
             [
-                'users' => $this->userRepository->findAllInBackendForConfirmation(
-                    $filter,
-                    ConfigurationUtility::isBackendModuleFilterUserConfirmation()
-                ),
+                'users' => $allUsers,
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
-                'action' => 'confirmation'
+                'action' => 'confirmation',
+                'paginator' => $arrayPaginator,
+                'pagination' => $pagination,
+                'pages' => range(1, $pagination->getLastPageNumber()),
             ]
         );
         return $this->htmlResponse();
@@ -149,18 +167,25 @@ class UserBackendController extends AbstractController
     /**
      * @param array $filter
      */
-    public function listOpenUserConfirmationsAction(array $filter = []): ResponseInterface
+    public function listOpenUserConfirmationsAction(array $filter = [], int $currentPage = 1): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
+        $allUsers = $this->userRepository->findAllInBackendForConfirmation(
+            $filter,
+            false
+        );
+        $arrayPaginator = new ArrayPaginator($allUsers, $currentPage, 100);
+        $pagination = new SimplePagination($arrayPaginator);
+
         $this->view->assignMultiple(
             [
-                'users' => $this->userRepository->findAllInBackendForConfirmation(
-                    $filter,
-                    false
-                ),
+                'users' => $allUsers,
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
-                'action' => 'listOpenUserConfirmations'
+                'action' => 'listOpenUserConfirmations',
+                'paginator' => $arrayPaginator,
+                'pagination' => $pagination,
+                'pages' => range(1, $pagination->getLastPageNumber()),
             ]
         );
         return $this->htmlResponse();

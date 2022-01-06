@@ -14,193 +14,186 @@ UserBackend / List
 		<f:if condition="{users}">
 			<f:then>
 
-				<femanager:pagination.paginate objects="{users}" as="usersPage" itemsPerPage="100">
+				<table cellspacing="0" cellpadding="0" border="0" class="table table-striped table-hover">
+					<tbody>
 
-					<table cellspacing="0" cellpadding="0" border="0" class="table table-striped table-hover">
-						<tbody>
+						<tr class="t3-row-header">
+							<td nowrap="nowrap" class="col-icon">&nbsp;</td>
+							<td nowrap="nowrap" colspan="9">
+								<span class="c-table">
+									<f:translate key="tx_femanager_domain_model_user" />
+								</span>
+								(<f:count subject="{users}" />)
+							</td>
+							<td nowrap="nowrap" class="col-icon">&nbsp;</td>
+						</tr>
+						<tr class="c-headLine">
+							<td nowrap="nowrap" class="col-icon">
+								<a title="Create New User" href="{femanager:Misc.BackendNewLink(tableName:'fe_users')}">
+									<core:icon identifier="actions-document-new" />
+								</a>
+							</td>
+							<td nowrap="nowrap" class="col-icon">
+								Online
+							</td>
+							<td nowrap="nowrap" class="col-title">
+								<f:translate key="tx_femanager_domain_model_user.username" />
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="tx_femanager_domain_model_user.email" />
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="tx_femanager_domain_model_user.name" />
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="tx_femanager_domain_model_user.usergroup" />
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="tx_femanager_domain_model_user.crdate" />
+							</td>
+							<td nowrap="nowrap">
+								<f:translate key="tx_femanager_domain_model_user.lastlogin" />
+							</td>
+							<td nowrap="nowrap">
+								UID
+							</td>
+							<td nowrap="nowrap">
+								PID
+							</td>
+							<td nowrap="nowrap" class="col-icon"></td>
+						</tr>
 
-							<tr class="t3-row-header">
-								<td nowrap="nowrap" class="col-icon">&nbsp;</td>
-								<td nowrap="nowrap" colspan="9">
-									<span class="c-table">
-										<f:translate key="tx_femanager_domain_model_user" />
+						<f:for each="{paginator.paginatedItems}" as="user">
+							<tr class="db_list_normal firstcol femanager_list_line">
+								<td nowrap="nowrap" class="col-icon">
+									<span title="id={user.uid}"
+											class="tx-feusermanager-icon-status-user-frontend"
+											style="{f:if(condition:'{user.disable}', then:'display:none', else:'')}">
+										<core:icon identifier="status-user-frontend" />
 									</span>
-									(<f:count subject="{users}" />)
-								</td>
-								<td nowrap="nowrap" class="col-icon">&nbsp;</td>
-							</tr>
-							<tr class="c-headLine">
-								<td nowrap="nowrap" class="col-icon">
-									<a title="Create New User" href="{femanager:Misc.BackendNewLink(tableName:'fe_users')}">
-										<core:icon identifier="actions-document-new" />
-									</a>
+									<span title="id={user.uid} - {f:translate(key:'BackendListUserVisibilityHidden')}"
+											class="tx-feusermanager-icon-status-user-frontend-disabled"
+											style="{f:if(condition:'{user.disable}', then:'', else:'display:none')}">
+										<core:icon identifier="status-user-frontend" state="disabled" />
+									</span>
 								</td>
 								<td nowrap="nowrap" class="col-icon">
-									Online
+									<span title="{f:translate(key:'BackendListUserStatusOnline')}"
+											class="tx-feusermanager-icon-status-status-permission-granted"
+											style="{f:if(condition:'{user.online}', then:'', else:'display:none')}">
+										<core:icon identifier="status-status-permission-granted" />
+									</span>
+									<span title="{f:translate(key:'BackendListUserStatusOffline')}"
+											class="tx-feusermanager-icon-status-status-permission-denied"
+											style="{f:if(condition:'{user.online}', then:'display:none', else:'')}">
+										<core:icon identifier="status-status-permission-denied" />
+									</span>
 								</td>
 								<td nowrap="nowrap" class="col-title">
-									<f:translate key="tx_femanager_domain_model_user.username" />
+									{user.username}
 								</td>
 								<td nowrap="nowrap">
-									<f:translate key="tx_femanager_domain_model_user.email" />
+									{user.email}
 								</td>
 								<td nowrap="nowrap">
-									<f:translate key="tx_femanager_domain_model_user.name" />
+									{user.lastName}<f:if condition="{user.lastName}">,</f:if> {user.firstName}
 								</td>
 								<td nowrap="nowrap">
-									<f:translate key="tx_femanager_domain_model_user.usergroup" />
-								</td>
-								<td nowrap="nowrap">
-									<f:translate key="tx_femanager_domain_model_user.crdate" />
-								</td>
-								<td nowrap="nowrap">
-									<f:translate key="tx_femanager_domain_model_user.lastlogin" />
-								</td>
-								<td nowrap="nowrap">
-									UID
-								</td>
-								<td nowrap="nowrap">
-									PID
-								</td>
-								<td nowrap="nowrap" class="col-icon"></td>
-							</tr>
-
-							<f:for each="{usersPage.paginator.paginatedItems}" as="user">
-								<tr class="db_list_normal firstcol femanager_list_line">
-									<td nowrap="nowrap" class="col-icon">
-										<span title="id={user.uid}"
-											  class="tx-feusermanager-icon-status-user-frontend"
-											  style="{f:if(condition:'{user.disable}', then:'display:none', else:'')}">
-											<core:icon identifier="status-user-frontend" />
-										</span>
-										<span title="id={user.uid} - {f:translate(key:'BackendListUserVisibilityHidden')}"
-											  class="tx-feusermanager-icon-status-user-frontend-disabled"
-											  style="{f:if(condition:'{user.disable}', then:'', else:'display:none')}">
-											<core:icon identifier="status-user-frontend" state="disabled" />
-										</span>
-									</td>
-									<td nowrap="nowrap" class="col-icon">
-										<span title="{f:translate(key:'BackendListUserStatusOnline')}"
-											  class="tx-feusermanager-icon-status-status-permission-granted"
-											  style="{f:if(condition:'{user.online}', then:'', else:'display:none')}">
-											<core:icon identifier="status-status-permission-granted" />
-										</span>
-										<span title="{f:translate(key:'BackendListUserStatusOffline')}"
-											  class="tx-feusermanager-icon-status-status-permission-denied"
-											  style="{f:if(condition:'{user.online}', then:'display:none', else:'')}">
-											<core:icon identifier="status-status-permission-denied" />
-										</span>
-									</td>
-									<td nowrap="nowrap" class="col-title">
-										{user.username}
-									</td>
-									<td nowrap="nowrap">
-										{user.email}
-									</td>
-									<td nowrap="nowrap">
-										{user.lastName}<f:if condition="{user.lastName}">,</f:if> {user.firstName}
-									</td>
-									<td nowrap="nowrap">
-										<f:for each="{user.usergroup}" as="usergroup" iteration="i">
-											<f:if condition="{i.isFirst}">
-												<f:else>
-													<br />
-												</f:else>
-											</f:if>
-											{usergroup.title}
-										</f:for>
-									</td>
-									<td nowrap="nowrap">
-										<f:format.date format="d.m.Y H:i">{user.crdate}</f:format.date>
-									</td>
-									<td nowrap="nowrap">
-										<f:format.date format="d.m.Y H:i">{user.lastlogin}</f:format.date>
-									</td>
-									<td nowrap="nowrap">
-										{user.uid}
-									</td>
-									<td nowrap="nowrap">
-										{user.pid}
-									</td>
-									<td nowrap="nowrap">
-										<f:comment>
-											Edit Icon
-										</f:comment>
-										<a title="{f:translate(key:'BackendListUserEdit')}" href="{femanager:Misc.BackendEditLink(tableName:'fe_users',identifier:user.uid)}">
-											<core:icon identifier="actions-document-open" />
-										</a>
-
-										<f:comment>
-											Delete Icon
-										</f:comment>
-										<span class="deleteUser cursorpointer" title="{f:translate(key:'BackendListUserDelete')}">
-											<core:icon identifier="actions-edit-delete" />
-										</span>
-
-										<f:comment>
-											Enable/Disable Icon
-										</f:comment>
-										<span title="{f:translate(key: 'BackendListUserVisibilityUnhide')}"
-											  class="unhideUser cursorpointer tx-feusermanager-icon-actions-edit-unhide"
-											  style="{f:if(condition:'{user.disable} == 1', then:'', else:'display:none')}">
-											<core:icon identifier="actions-edit-unhide" />
-										</span>
-										<span title="{f:translate(key: 'BackendListUserVisibilityHide')}"
-											  class="hideUser cursorpointer tx-feusermanager-icon-actions-edit-hide"
-											  style="{f:if(condition:'{user.disable} == 1', then:'display:none', else:'')}">
-											<core:icon identifier="actions-edit-hide" />
-										</span>
-
-										<f:if condition="{loginAsEnabled}">
-											<f:comment>
-												Login as Icon
-											</f:comment>
-											<span title="{f:translate(key:'BackendListLoginAs')}"
-													class="tx-feusermanager-icon-actions-system-backend-user-switch"
-													style="{f:if(condition:'{user.online} == 1', then:'display:none', else:'{f:if(condition:\'{user.disable}\', then:\'display:none\', else:\'\')}')}">
-											<a href="/?type=1548943013&tx_femanager_pi1[user]={user.uid}" title="{f:translate(key: 'BackendListLoginAs')}" target="_blank">
-												<core:icon identifier="actions-system-backend-user-switch" />
-											</a>
-										</span>
-											<span title="{f:translate(key:'BackendListLoginAs')}"
-													class="tx-feusermanager-icon-actions-system-backend-user-switch-disabled"
-													style="{f:if(condition:'{user.online} == 1', then:'', else:'{f:if(condition:\'{user.disable}\', then:\'\', else:\'display:none\')}')}">
-											<core:icon identifier="actions-system-backend-user-switch" state="disabled" />
-										</span>
+									<f:for each="{user.usergroup}" as="usergroup" iteration="i">
+										<f:if condition="{i.isFirst}">
+											<f:else>
+												<br />
+											</f:else>
 										</f:if>
+										{usergroup.title}
+									</f:for>
+								</td>
+								<td nowrap="nowrap">
+									<f:format.date format="d.m.Y H:i">{user.crdate}</f:format.date>
+								</td>
+								<td nowrap="nowrap">
+									<f:format.date format="d.m.Y H:i">{user.lastlogin}</f:format.date>
+								</td>
+								<td nowrap="nowrap">
+									{user.uid}
+								</td>
+								<td nowrap="nowrap">
+									{user.pid}
+								</td>
+								<td nowrap="nowrap">
+									<f:comment>
+										Edit Icon
+									</f:comment>
+									<a title="{f:translate(key:'BackendListUserEdit')}" href="{femanager:Misc.BackendEditLink(tableName:'fe_users',identifier:user.uid)}">
+										<core:icon identifier="actions-document-open" />
+									</a>
 
+									<f:comment>
+										Delete Icon
+									</f:comment>
+									<span class="deleteUser cursorpointer" title="{f:translate(key:'BackendListUserDelete')}">
+										<core:icon identifier="actions-edit-delete" />
+									</span>
+
+									<f:comment>
+										Enable/Disable Icon
+									</f:comment>
+									<span title="{f:translate(key: 'BackendListUserVisibilityUnhide')}"
+											class="unhideUser cursorpointer tx-feusermanager-icon-actions-edit-unhide"
+											style="{f:if(condition:'{user.disable} == 1', then:'', else:'display:none')}">
+										<core:icon identifier="actions-edit-unhide" />
+									</span>
+									<span title="{f:translate(key: 'BackendListUserVisibilityHide')}"
+											class="hideUser cursorpointer tx-feusermanager-icon-actions-edit-hide"
+											style="{f:if(condition:'{user.disable} == 1', then:'display:none', else:'')}">
+										<core:icon identifier="actions-edit-hide" />
+									</span>
+
+									<f:if condition="{loginAsEnabled}">
 										<f:comment>
-											Logout Icon
+											Login as Icon
 										</f:comment>
-										<span title="{f:translate(key:'BackendListUserLogout')}"
-											  class="tx-feusermanager-icon-apps-pagetree-drag-place-denied"
-											  style="{f:if(condition:'{user.online}', then:'', else:'display:none')}">
-											<f:link.action action="userLogout" arguments="{user:user}" class="logoutUser" title="{f:translate(key:'BackendListUserLogout')}">
-												<core:icon identifier="apps-pagetree-drag-place-denied" />
-											</f:link.action>
-										</span>
-										<span title="{f:translate(key:'BackendListUserLogout')}"
-											  class="tx-feusermanager-icon-apps-pagetree-drag-place-denied-disabled"
-											  style="{f:if(condition:'{user.online}', then:'display:none', else:'')}">
-											<core:icon identifier="apps-pagetree-drag-place-denied" state="disabled" />
-										</span>
+										<span title="{f:translate(key:'BackendListLoginAs')}"
+												class="tx-feusermanager-icon-actions-system-backend-user-switch"
+												style="{f:if(condition:'{user.online} == 1', then:'display:none', else:'{f:if(condition:\'{user.disable}\', then:\'display:none\', else:\'\')}')}">
+										<a href="/?type=1548943013&tx_femanager_pi1[user]={user.uid}" title="{f:translate(key: 'BackendListLoginAs')}" target="_blank">
+											<core:icon identifier="actions-system-backend-user-switch" />
+										</a>
+									</span>
+										<span title="{f:translate(key:'BackendListLoginAs')}"
+												class="tx-feusermanager-icon-actions-system-backend-user-switch-disabled"
+												style="{f:if(condition:'{user.online} == 1', then:'', else:'{f:if(condition:\'{user.disable}\', then:\'\', else:\'display:none\')}')}">
+										<core:icon identifier="actions-system-backend-user-switch" state="disabled" />
+									</span>
+									</f:if>
 
-										<input type="hidden" class="container_uid" name="container_uid" value="{user.uid}" />
-										<input type="hidden" class="container_module_uri" name="container_module_uri" value="{moduleUri}" />
-										<input type="hidden" class="container_table" name="container_table" value="fe_users" />
-										<input type="hidden" class="container_label_delete_confirmation" name="container_label_delete_confirmation" value="{f:translate(key:'BackendListUserDeleteConfirmation')}" />
-									</td>
-								</tr>
-							</f:for>
+									<f:comment>
+										Logout Icon
+									</f:comment>
+									<span title="{f:translate(key:'BackendListUserLogout')}"
+											class="tx-feusermanager-icon-apps-pagetree-drag-place-denied"
+											style="{f:if(condition:'{user.online}', then:'', else:'display:none')}">
+										<f:link.action action="userLogout" arguments="{user:user}" class="logoutUser" title="{f:translate(key:'BackendListUserLogout')}">
+											<core:icon identifier="apps-pagetree-drag-place-denied" />
+										</f:link.action>
+									</span>
+									<span title="{f:translate(key:'BackendListUserLogout')}"
+											class="tx-feusermanager-icon-apps-pagetree-drag-place-denied-disabled"
+											style="{f:if(condition:'{user.online}', then:'display:none', else:'')}">
+										<core:icon identifier="apps-pagetree-drag-place-denied" state="disabled" />
+									</span>
 
-						</tbody>
-					</table>
+									<input type="hidden" class="container_uid" name="container_uid" value="{user.uid}" />
+									<input type="hidden" class="container_module_uri" name="container_module_uri" value="{moduleUri}" />
+									<input type="hidden" class="container_table" name="container_table" value="fe_users" />
+									<input type="hidden" class="container_label_delete_confirmation" name="container_label_delete_confirmation" value="{f:translate(key:'BackendListUserDeleteConfirmation')}" />
+								</td>
+							</tr>
+						</f:for>
 
-					<f:alias map="{pagination:usersPage.pagination, paginator:usersPage.paginator, name:usersPage.name}">
-						<f:render partial="Misc/Pagination" arguments="{_all}" />
-					</f:alias>
-				</femanager:pagination.paginate>
-
+					</tbody>
+				</table>
+				<f:render partial="Utility/Paginator" arguments="{pagination: pagination, pages: pages, paginator: paginator, actionName: 'list'}" />
 			</f:then>
 			<f:else>
 				<div class="femanager_note">
