@@ -61,17 +61,6 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
             $parsedParams = [];
             parse_str($params, $parsedParams);
             $requestFactory->request($curlSettings['url'], 'POST', ['form_params' => $parsedParams]);
-            $this->writeToDevelopmentLog();
-        }
-    }
-
-    /**
-     * Write devlog entry
-     */
-    protected function writeToDevelopmentLog()
-    {
-        if (!empty($this->configuration['debug'])) {
-            GeneralUtility::devLog('SendPost Values', 'femanager', 0, $this->getCurlSettings());
         }
     }
 
