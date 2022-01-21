@@ -83,7 +83,9 @@
     "vendor-dir": ".Build/vendor",
     "bin-dir": ".Build/bin",
     "allow-plugins": {
-      "behat/behat": true
+      "behat/behat": true,
+      "typo3/class-alias-loader": true,
+      "typo3/cms-composer-installers": true
     }
   },
   "scripts": {
