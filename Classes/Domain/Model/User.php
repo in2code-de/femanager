@@ -29,6 +29,16 @@ class User extends FrontendUser
     protected $tstamp;
 
     /**
+     * @var \DateTime
+     */
+    protected $starttime;
+
+    /**
+     * @var \DateTime
+     */
+    protected $endtime;
+
+    /**
      * @var bool
      */
     protected $disable;
@@ -155,6 +165,42 @@ class User extends FrontendUser
     public function getTstamp()
     {
         return $this->tstamp;
+    }
+
+    /**
+     * @param \DateTime $starttime
+     * @return User
+     */
+    public function setStarttime($starttime)
+    {
+        $this->starttime = $starttime;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStarttime()
+    {
+        return $this->starttime;
+    }
+
+    /**
+     * @param \DateTime $endtime
+     * @return User
+     */
+    public function setEndtime($endtime)
+    {
+        $this->endtime = $endtime;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndtime()
+    {
+        return $this->endtime;
     }
 
     /**
