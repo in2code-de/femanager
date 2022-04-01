@@ -63,7 +63,7 @@
     "helhum/typo3-console": "^6.3",
     "typo3/cms-belog": "^10.4",
     "sjbr/sr-freecap": "^2.6",
-    "sjbr/static-info-tables": "^6.9",
+    "sjbr/static-info-tables": "v6.9.5",
     "helmich/typo3-typoscript-lint": "^2.5",
     "friendsofphp/php-cs-fixer": "^2.19",
     "genesis/behat-fail-aid": "^3.7",
