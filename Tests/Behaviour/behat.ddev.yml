@@ -28,7 +28,3 @@ default:
               extra_capabilities:
                 acceptInsecureCerts: true
             wd_host: 'http://chrome:4444/wd/hub'
-        my_session:
-          goutte:
-            guzzle_parameters:
-              verify: false
