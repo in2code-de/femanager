@@ -662,6 +662,9 @@
 			<trans-unit id="resendConfirmationDialogueLink">
 				<source>Resend confirmation email?</source>
 			</trans-unit>
+			<trans-unit id="createStatus">
+				<source>User registration</source>
+			</trans-unit>
 
 			<trans-unit id="js.loading_states">
 				<source>Loading states ...</source>
