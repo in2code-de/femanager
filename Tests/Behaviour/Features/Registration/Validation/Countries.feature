@@ -55,7 +55,10 @@ Feature: Countries
     And I fill in the following:
       | State | 5 |
 
+    And I fill in the following:
+      | Email | info@in2code.ws |
+
     And I press "Create Profile Now"
 
     Then I wait "4" seconds
-    Then I should see "Salzburg"
+    Then I should see "User registration"
