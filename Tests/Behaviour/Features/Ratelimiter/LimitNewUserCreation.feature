@@ -19,6 +19,7 @@ Feature: RateLimitNewUserCreation
       | Repeat Password | test |
       | Email | firstuser@test.de |
     And I press "Create Profile Now"
+    Then I wait "4" seconds
 
     Then I should see "User registration"
 
@@ -38,6 +39,7 @@ Feature: RateLimitNewUserCreation
       | Repeat Password | test |
       | Email | seconduser@test.de |
     And I press "Create Profile Now"
+    Then I wait "4" seconds
 
     Then I should see "User registration"
 
@@ -49,6 +51,7 @@ Feature: RateLimitNewUserCreation
       | Repeat Password | test |
       | Email | thirduser@test.de |
     And I press "Create Profile Now"
+    Then I wait "4" seconds
 
     Given I am on "/index.php?id=134"
     Then I should see "Create a new user-profile"
@@ -58,6 +61,7 @@ Feature: RateLimitNewUserCreation
       | Repeat Password | test |
       | Email | fourthuser@test.de |
     And I press "Create Profile Now"
+    Then I wait "4" seconds
 
     Given I am on "/index.php?id=134"
     Then I should see "Create a new user-profile"
@@ -67,6 +71,7 @@ Feature: RateLimitNewUserCreation
       | Repeat Password | test |
       | Email | fifthuser@test.de |
     And I press "Create Profile Now"
+    Then I wait "4" seconds
 
     Then I should see "Too many attempts"
 
