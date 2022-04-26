@@ -14,9 +14,6 @@ default:
     Behat\MinkExtension:
       base_url: https://femanager.ddev.site/
       files_path: /var/www/html/.Build/Web/fileadmin/user_upload
-      goutte:
-        guzzle_parameters:
-          verify: false
       selenium2: ~
       browser_name: 'chrome'
       sessions:
