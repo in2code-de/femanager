@@ -753,7 +753,7 @@
       </trans-unit>
       <trans-unit id="pleaseChooseCountry">
         <source>Please choose a country ...</source>
-        <target state="needs-translation">Please choose a country ...</target>
+        <target state="translated">Veuillez choisir un pays</target>
       </trans-unit>
       <trans-unit id="FilterLabel" approved="yes">
         <source>Search</source>
