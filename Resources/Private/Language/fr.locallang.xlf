@@ -53,7 +53,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateFormat">
         <source>m/d/Y</source>
-        <target state="needs-translation">m/d/Y</target>
+        <target state="translated">d/m/Y</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender" approved="yes">
         <source>Gender</source>
@@ -69,7 +69,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
         <source>Divers</source>
-        <target state="needs-translation">Divers</target>
+        <target state="translated">Divers</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
@@ -81,11 +81,11 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.fax">
         <source>Fax</source>
-        <target state="needs-translation">Fax</target>
+        <target state="translated">Fax</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.email">
         <source>Email</source>
-        <target state="needs-translation">Email</target>
+        <target state="translated">Email</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.title" approved="yes">
         <source>Title</source>
@@ -105,7 +105,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">État</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.www" approved="yes">
         <source>Website</source>
@@ -117,19 +117,19 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.image">
         <source>Image</source>
-        <target state="needs-translation">Image</target>
+        <target state="translated">Image</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.captcha">
         <source>Captcha</source>
-        <target state="needs-translation">Captcha</target>
+        <target state="translated">Captcha</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.terms">
         <source>I accept the terms and conditions</source>
-        <target state="needs-translation">I accept the terms and conditions</target>
+        <target state="translated">J’accepte les conditions générales</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.termslinktext">
         <source>Click here for terms and conditions</source>
-        <target state="needs-translation">Click here for terms and conditions</target>
+        <target state="translated">Page des conditions générales</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastlogin" approved="yes">
         <source>Last login</source>
@@ -221,7 +221,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.400">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Invitation</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.401" approved="yes">
         <source>Profile created and user invited</source>
@@ -625,7 +625,7 @@
       </trans-unit>
       <trans-unit id="submitResend">
         <source>Resend now</source>
-        <target state="needs-translation">Resend now</target>
+        <target state="translated">Renvoyer maintenant</target>
       </trans-unit>
       <trans-unit id="passwordRepeat" approved="yes">
         <source>Repeat Password</source>
@@ -825,7 +825,7 @@
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteTitle">
         <source>Possible action:</source>
-        <target state="needs-translation">Possible action:</target>
+        <target state="translated">Action possible:</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteText">
         <source>%s approval(s) available</source>
@@ -837,15 +837,15 @@
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnAction">
         <source>Actions</source>
-        <target state="needs-translation">Actions</target>
+        <target state="translated">Actions</target>
       </trans-unit>
       <trans-unit id="BackendMissingConfigPID">
         <source>The config PID is missing!</source>
-        <target state="needs-translation">The config PID is missing!</target>
+        <target state="translated">Le PID n'a pas été défini au configuration!</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnUid">
         <source>UID</source>
-        <target state="needs-translation">UID</target>
+        <target state="translated">UID</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageConfirmed">
         <source>%s was successfully approved</source>
