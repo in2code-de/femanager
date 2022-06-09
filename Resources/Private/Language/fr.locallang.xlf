@@ -209,7 +209,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.206">
         <source>Image deleted</source>
-        <target state="needs-translation">Image deleted</target>
+        <target state="translated">Image supprimée</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
         <source>Delete</source>
@@ -253,7 +253,7 @@
       </trans-unit>
       <trans-unit id="error_no_typoscript_be">
         <source>No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</source>
-        <target state="needs-translation">No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</target>
+        <target state="translated">Aucun TypoScript trouvé. Avez-vous déjà installé module.tx_femanager.settings.configPID dans votre PageTS?</target>
       </trans-unit>
       <trans-unit id="error_no_storagepid" approved="yes">
         <source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
