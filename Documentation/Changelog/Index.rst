@@ -8,6 +8,22 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 6.4.0
+      :Date: 2022-07-10
+      :Changes:
+
+      * [FEATURE] Add column "inactive since" to backend list - thx to SpoonerWeb
+      * [TASK] Add support for TYPO3 11
+      * [TASK] Update Test enviroment and add addtitional tests
+      * [TASK] Add missing translation key for "createStatus"
+      * [TASK] Bump jquery from 3.2.1 to 3.6.0 and migrate deprecated shorthand event .blur and .submit - thx to Patrick Lenk
+      * [BUGFIX] replace is_array with isset - hx to AlexVossBu
+      * [BUGFIX] no custom controller needed in TYPO3 10
+      * [BUGFIX] Remove "endtime" for check of unique in db
+      * [DOCS] Add note for configpid setting
+      * [BUGFIX] updated sjbr/static-info-tables version
+
+-
       :Version: 6.3.2
       :Date: 2021-10-13
       :Changes:
