@@ -72,7 +72,7 @@ class ConfigurationUtility extends AbstractUtility
     public static function isBackendModuleFilterUserConfirmation(): bool
     {
         $config = BackendUserUtility::getBackendUserAuthentication()->getTSConfig(
-            )['tx_femanager.']['UserBackend.']['confirmation.']['filter.']['userConfirmation'] ?? false;
+        )['tx_femanager.']['UserBackend.']['confirmation.']['filter.']['userConfirmation'] ?? false;
 
         return (bool)$config;
     }
@@ -84,7 +84,7 @@ class ConfigurationUtility extends AbstractUtility
     public static function IsResendUserConfirmationRequestActive(): bool
     {
         $config = BackendUserUtility::getBackendUserAuthentication()->getTSConfig(
-            )['tx_femanager.']['UserBackend.']['confirmation.']['ResendUserConfirmationRequest'] ?? false;
+        )['tx_femanager.']['UserBackend.']['confirmation.']['ResendUserConfirmationRequest'] ?? false;
         return (bool)$config;
     }
 }

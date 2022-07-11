@@ -31,7 +31,7 @@ class UserBackendController extends AbstractController
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->getTSConfig(
-            )['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
+        )['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
         $this->view->assignMultiple(
             [
                 'users' => $this->userRepository->findAllInBackend($filter),
