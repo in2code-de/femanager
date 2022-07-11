@@ -8,8 +8,8 @@ Changelog
    :header-rows: 1
 
 -
-      :Version: 6.4.0
-      :Date: 2022-07-10
+      :Version: 7.0.0
+      :Date: 2022-07-11
       :Changes:
 
       * [FEATURE] Add column "inactive since" to backend list - thx to SpoonerWeb
