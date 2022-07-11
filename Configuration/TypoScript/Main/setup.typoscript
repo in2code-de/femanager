@@ -617,6 +617,7 @@ plugin.tx_femanager {
         #        targetUrl = https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8
 
         # build your post datas like &param1=value1&param2=value2
+        # !!! take care to validate the incomming data in your receiver script!!!
         #        data = COA
         #        data {
         #          10 = TEXT
@@ -624,6 +625,7 @@ plugin.tx_femanager {
         #            # value from field {username}
         #            field = username
         #            wrap = &username=|
+        #            stdWrap.rawUrlEncode = 1
         #          }
 
         #          20 = TEXT
@@ -631,6 +633,7 @@ plugin.tx_femanager {
         #            # value from field {email}
         #            field = email
         #            wrap = &email=|
+        #            stdWrap.rawUrlEncode = 1
         #          }
 
         #          30 = TEXT
@@ -638,6 +641,7 @@ plugin.tx_femanager {
         #            # value from field {title}
         #            field = title
         #            wrap = &title=|
+        #            stdWrap.rawUrlEncode = 1
         #          }
         #        }
 

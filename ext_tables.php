@@ -1,5 +1,5 @@
 <?php
-if (!defined('TYPO3_MODE')) {
+if (!defined('TYPO3')) {
     die('Access denied.');
 }
 
@@ -10,12 +10,12 @@ call_user_func(function () {
     if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableModuleActive() &&
         !(TYPO3_REQUESTTYPE & TYPO3_REQUESTTYPE_INSTALL)) {
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-            'In2code.femanager',
+            'Femanager',
             'web',
             'm1',
             '',
             [
-                'UserBackend' => 'list,confirmation,userLogout,confirmUser,refuseUser,listOpenUserConfirmations,resendUserConfirmationRequest'
+                \In2code\Femanager\Controller\UserBackendController::class => 'list,confirmation,userLogout,confirmUser,refuseUser,listOpenUserConfirmations,resendUserConfirmationRequest'
             ],
             [
                 'access' => 'user,group',

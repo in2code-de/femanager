@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Domain\Model\User;
@@ -18,7 +19,7 @@ class FrontendUtilityTest extends UnitTestCase
      */
     protected $testFilesToDelete = [];
 
-    public function setUp()
+    public function setUp(): void
     {
         TestingHelper::setDefaultConstants();
     }
@@ -40,9 +41,9 @@ class FrontendUtilityTest extends UnitTestCase
             FrontendUtility::forceValue($user, $field, $value);
         }
 
-        $this->assertSame(2, $user->getGender());
-        $this->assertSame('Kaspar', $user->getFirstName());
-        $this->assertSame('Tx_Extbase_Domain_Model_FrontendUser', $user->getTxExtbaseType());
+        self::assertSame(2, $user->getGender());
+        self::assertSame('Kaspar', $user->getFirstName());
+        self::assertSame('Tx_Extbase_Domain_Model_FrontendUser', $user->getTxExtbaseType());
     }
 
     /**
@@ -52,7 +53,7 @@ class FrontendUtilityTest extends UnitTestCase
     public function testGetControllerName()
     {
         $_POST['tx_femanager_pi1']['controller'] = 'foo';
-        $this->assertSame('foo', FrontendUtility::getControllerName());
+        self::assertSame('foo', FrontendUtility::getControllerName());
     }
 
     /**
@@ -62,6 +63,6 @@ class FrontendUtilityTest extends UnitTestCase
     public function testGetActionName()
     {
         $_POST['tx_femanager_pi1']['action'] = 'bar';
-        $this->assertSame('bar', FrontendUtility::getActionName());
+        self::assertSame('bar', FrontendUtility::getActionName());
     }
 }

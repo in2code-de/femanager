@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Domain\Model\User;
@@ -39,7 +40,7 @@ class ObjectUtilityTest extends UnitTestCase
         $user2 = new User();
         $user2->_setProperty('uid', 852);
         $objectStorage->attach($user2);
-        $this->assertSame('123, 852', ObjectUtility::implodeObjectStorageOnProperty($objectStorage));
-        $this->assertSame('', ObjectUtility::implodeObjectStorageOnProperty($objectStorage, 'uidx'));
+        self::assertSame('123, 852', ObjectUtility::implodeObjectStorageOnProperty($objectStorage));
+        self::assertSame('', ObjectUtility::implodeObjectStorageOnProperty($objectStorage, 'uidx'));
     }
 }

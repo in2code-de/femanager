@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Unit\ViewHelpers\Form;
 
 use In2code\Femanager\ViewHelpers\Form\GetCountriesViewHelper;
@@ -16,12 +17,12 @@ class GetCountriesViewHelperTest extends UnitTestCase
      */
     protected $generalValidatorMock;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->generalValidatorMock = $this->getAccessibleMock(GetCountriesViewHelper::class, ['dummy']);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->generalValidatorMock);
     }
@@ -32,8 +33,8 @@ class GetCountriesViewHelperTest extends UnitTestCase
     public function testRenderReturnArray()
     {
         $result = $this->generalValidatorMock->_call('render');
-        $this->assertTrue(array_key_exists('DEU', $result));
-        $this->assertTrue(array_key_exists('FRA', $result));
-        $this->assertTrue(array_key_exists('SWZ', $result));
+        self::assertTrue(array_key_exists('DEU', $result));
+        self::assertTrue(array_key_exists('FRA', $result));
+        self::assertTrue(array_key_exists('SWZ', $result));
     }
 }

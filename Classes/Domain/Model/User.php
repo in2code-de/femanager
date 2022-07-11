@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Model;
 
 use In2code\Femanager\Utility\UserUtility;
@@ -75,7 +76,7 @@ class User extends FrontendUser
      *
      * @var \DateTime
      */
-    protected $termsDateOfAcceptance = null;
+    protected $termsDateOfAcceptance;
 
     /**
      * @var string

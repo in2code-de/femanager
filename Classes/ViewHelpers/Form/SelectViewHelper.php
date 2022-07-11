@@ -1,9 +1,12 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Form;
 
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper as OriginalSelectViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
 /**
  * Class SelectViewHelper
@@ -12,6 +15,7 @@ class SelectViewHelper extends OriginalSelectViewHelper
 {
     /**
      * Initialize
+     * @throws FluidViewHelperException
      */
     public function initialize()
     {
@@ -47,6 +51,7 @@ class SelectViewHelper extends OriginalSelectViewHelper
      * Retrieves the selected value(s)
      *
      * @return mixed value string or an array of strings
+     * @throws FluidViewHelperException
      */
     protected function getSelectedValue()
     {
@@ -54,7 +59,13 @@ class SelectViewHelper extends OriginalSelectViewHelper
 
         // set preselection from TypoScript
         if (empty($selectedValue)) {
-            $controllerName = strtolower($this->renderingContext->getControllerContext()->getRequest()->getControllerName());
+            if (! $this->renderingContext instanceof RenderingContext) {
+                throw new FluidViewHelperException(
+                    'Something went wrong; RenderingContext should be available in ViewHelper',
+                    1638341673
+                );
+            }
+            $controllerName = strtolower($this->renderingContext->getRequest()->getControllerName());
             $contentObject = $this->configurationManager->getContentObject();
             $typoScript = $this->configurationManager->getConfiguration(
                 ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT

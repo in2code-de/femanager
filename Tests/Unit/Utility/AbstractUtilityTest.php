@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Tests\Unit\Fixture\Utility\AbstractUtility;
@@ -29,7 +30,7 @@ class AbstractUtilityTest extends UnitTestCase
             ]
         ];
         $GLOBALS['TCA'][$table] = $tca;
-        $this->assertSame($tca, AbstractUtility::getTcaFromTablePublic($table));
+        self::assertSame($tca, AbstractUtility::getTcaFromTablePublic($table));
     }
 
     /**
@@ -38,6 +39,6 @@ class AbstractUtilityTest extends UnitTestCase
     public function testGetFilesArray()
     {
         $result = AbstractUtility::getFilesArrayPublic();
-        $this->assertTrue(is_array($result));
+        self::assertTrue(is_array($result));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
 
@@ -11,6 +11,7 @@ use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Site\SiteFinder;
@@ -26,7 +27,7 @@ class UserBackendController extends AbstractController
     /**
      * @param array $filter
      */
-    public function listAction(array $filter = [])
+    public function listAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->getTSConfig(
@@ -39,12 +40,13 @@ class UserBackendController extends AbstractController
                 'loginAsEnabled' => $loginAsEnabled
             ]
         );
+        return $this->htmlResponse();
     }
 
     /**
      * @param array $filter
      */
-    public function confirmationAction(array $filter = [])
+    public function confirmationAction(array $filter = []): ResponseInterface
     {
         $this->configPID = $this->getConfigPID();
 
@@ -60,6 +62,7 @@ class UserBackendController extends AbstractController
                 'action' => 'confirmation'
             ]
         );
+        return $this->htmlResponse();
     }
 
     /**
@@ -146,7 +149,7 @@ class UserBackendController extends AbstractController
     /**
      * @param array $filter
      */
-    public function listOpenUserConfirmationsAction(array $filter = [])
+    public function listOpenUserConfirmationsAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
@@ -160,6 +163,7 @@ class UserBackendController extends AbstractController
                 'action' => 'listOpenUserConfirmations'
             ]
         );
+        return $this->htmlResponse();
     }
 
     /**
@@ -176,7 +180,7 @@ class UserBackendController extends AbstractController
                 [$user->getUsername()]
             ),
             '',
-            \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
+            AbstractMessage::OK
         );
         $this->redirect('listOpenUserConfirmations');
     }
@@ -224,11 +228,11 @@ class UserBackendController extends AbstractController
                 ]
             ]
         );
-        $report = [];
-        $result = GeneralUtility::getUrl((string)$url, 0, ['accept' => 'application/json'], $report);
-        if (!is_string($result)) {
-            $GLOBALS['BE_USER']->writelog(4, 0, 1, 0, 'femanager: Frontend request failed.', $report);
-            // @todo
+
+        $response = GeneralUtility::makeInstance(RequestFactory::class)->request((string)$url, 'GET', ['headers' => ['accept' => 'application/json']]);
+        if ($response->getStatusCode() >= 300) {
+            $content = $response->getReasonPhrase();
+            $GLOBALS['BE_USER']->writelog(4, 0, 1, 0, 'femanager: Frontend request failed.', $content);
             $this->addFlashMessage(
                 LocalizationUtility::translate(
                     'BackendConfirmationFlashMessageFailed',
@@ -237,8 +241,9 @@ class UserBackendController extends AbstractController
                 'User Confirmation',
                 AbstractMessage::ERROR
             );
+        } else {
+            $content = $response->getBody()->getContents();
+            return json_decode($content, true);
         }
-
-        return json_decode($result, true);
     }
 }

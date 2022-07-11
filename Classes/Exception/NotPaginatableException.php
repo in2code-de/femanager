@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace In2code\Femanager\Exception;
 
 /**
- * Class FileNotFoundException
+ * NotPaginatableException
  */
-class FileNotFoundException extends \Exception
+class NotPaginatableException extends \Exception
 {
 }

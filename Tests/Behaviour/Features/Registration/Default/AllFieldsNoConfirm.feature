@@ -26,6 +26,7 @@ Feature: AllFieldsNoConfirm
     And I select "Group 2" from "tx_femanager_pi1[user][usergroup][0]"
     And I select "Deutschland" from "tx_femanager_pi1[user][country]"
     And I press "Create Profile Now"
+    Then I wait "4" seconds
 
     Then I should see "User registration"
 

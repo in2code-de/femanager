@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Service\RatelimiterService;

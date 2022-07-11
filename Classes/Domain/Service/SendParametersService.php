@@ -1,10 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Domain\Model\User;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -14,8 +16,7 @@ class SendParametersService
 {
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
 
@@ -43,6 +44,14 @@ class SendParametersService
     }
 
     /**
+     * @param ConfigurationManagerInterface $configurationManager
+     */
+    public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
+    {
+        $this->configurationManager = $configurationManager;
+    }
+
+    /**
      * SendPost - Send values via curl to target
      *
      * @param User $user User properties
@@ -63,6 +72,7 @@ class SendParametersService
             }
             curl_exec($curlObject);
             curl_close($curlObject);
+            $this->log();
         }
     }
 
@@ -84,6 +94,27 @@ class SendParametersService
     protected function getData()
     {
         return $this->contentObject->cObjGetSingle($this->configuration['data'], $this->configuration['data.']);
+    }
+
+    /**
+     * Write to devlog
+     *
+     * @return bool
+     */
+    protected function log()
+    {
+        if (!empty($this->configuration['debug'])) {
+            GeneralUtility::devLog(
+                'femanager sendpost values',
+                'femanager',
+                0,
+                [
+                    'url' => $this->getUri(),
+                    'data' => $this->getData(),
+                    'properties' => $this->properties
+                ]
+            );
+        }
     }
 
     /**

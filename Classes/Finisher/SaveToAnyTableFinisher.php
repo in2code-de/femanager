@@ -1,9 +1,14 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Service\StoreInDatabaseService;
 use In2code\Femanager\Utility\StringUtility;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Class SaveToAnyTableFinisher
@@ -15,19 +20,16 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      * Inject a complete new content object
      *
      * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $contentObject;
 
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $objectManager;
 
     /**
      * @var \TYPO3\CMS\Core\TypoScript\TypoScriptService
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $typoScriptService;
 
@@ -47,11 +49,38 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     protected $dataArray = [];
 
     /**
+     * @param ContentObjectRenderer $contentObject
+     */
+    public function injectContentObjectRenderer(ContentObjectRenderer $contentObject)
+    {
+        $this->contentObject = $contentObject;
+    }
+
+    /**
+     * @param ObjectManager $objectManager
+     */
+    public function injectObjectManager(ObjectManager $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
+
+    /**
+     * @param TypoScriptService $typoScriptService
+     */
+    public function injectTypoScriptService(TypoScriptService $typoScriptService)
+    {
+        $this->typoScriptService = $typoScriptService;
+    }
+
+    /**
      * Overwrite configuration with
      *      plugin.tx_femanager.settings.new.storeInDatabase
      */
     public function initializeFinisher()
     {
+        if ($this->typoScriptService == null) {
+            $this->typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
+        }
         $configuration = $this->typoScriptService->convertPlainArrayToTypoScriptArray($this->settings);
         if (!empty($configuration['new.']['storeInDatabase.'])) {
             $this->configuration = $configuration['new.']['storeInDatabase.'];

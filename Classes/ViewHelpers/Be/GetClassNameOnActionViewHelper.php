@@ -1,9 +1,12 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace In2code\Femanager\ViewHelpers\Be;
 
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
 /**
  * Class GetClassNameOnActionViewHelper
@@ -14,6 +17,7 @@ class GetClassNameOnActionViewHelper extends AbstractViewHelper
      * Return className if actionName fits to current action
      *
      * @return string
+     * @thows FluidViewHelperException
      */
     public function render(): string
     {
@@ -32,10 +36,17 @@ class GetClassNameOnActionViewHelper extends AbstractViewHelper
      * Return the current action name from the controller context
      *
      * @return string
+     * @throws FluidViewHelperException
      */
     protected function getCurrentActionName(): string
     {
-        return $this->renderingContext->getControllerContext()->getRequest()->getControllerActionName();
+        if (! $this->renderingContext instanceof RenderingContext) {
+            throw new FluidViewHelperException(
+                'Something went wrong; RenderingContext should be available in ViewHelper',
+                1638341674
+            );
+        }
+        return $this->renderingContext->getRequest()->getControllerActionName();
     }
 
     /**

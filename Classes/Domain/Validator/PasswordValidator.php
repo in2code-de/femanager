@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -11,14 +12,7 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidato
  */
 class PasswordValidator extends AbstractValidatorExtbase
 {
-
-    /**
-     * configurationManager
-     *
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    public $configurationManager;
+    public ?ConfigurationManagerInterface $configurationManager = null;
 
     /**
      * Content Object
@@ -49,6 +43,21 @@ class PasswordValidator extends AbstractValidatorExtbase
     protected $actionName;
 
     /**
+     * @param ConfigurationManagerInterface $configurationManager
+     */
+    public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
+    {
+        $this->configurationManager = $configurationManager;
+    }
+
+    public function initializeObject(): void
+    {
+        if ($this->configurationManager === null) {
+            $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+        }
+    }
+
+    /**
      * Validation of given Params
      *
      * @param $user
@@ -56,6 +65,7 @@ class PasswordValidator extends AbstractValidatorExtbase
      */
     public function isValid($user)
     {
+        $this->initializeObject();
         $this->init();
 
         // if password fields are not active or if keep function active

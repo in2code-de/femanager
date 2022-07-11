@@ -1,4 +1,5 @@
 <?php
+
 namespace In2code\Femanager\Tests\Scripts;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;

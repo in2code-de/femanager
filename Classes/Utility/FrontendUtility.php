@@ -1,9 +1,11 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -38,7 +40,7 @@ class FrontendUtility extends AbstractUtility
     public static function getFrontendLanguageUid(): int
     {
         $languageUid = 0;
-        $languageAspect = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class)->getAspect('language');
+        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
         $languageUid = $languageAspect->getId();
         return $languageUid;
     }

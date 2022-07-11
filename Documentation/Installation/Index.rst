@@ -1077,6 +1077,7 @@ Plain Text
     #						# value from field {username}
     #						field = username
     #						wrap = &username=|
+    #                stdWrap.rawUrlEncode = 1
     #					}
 
     #					20 = TEXT
@@ -1084,6 +1085,7 @@ Plain Text
     #						# value from field {email}
     #						field = email
     #						wrap = &email=|
+    #                stdWrap.rawUrlEncode = 1
     #					}
 
     #					30 = TEXT
@@ -1091,6 +1093,7 @@ Plain Text
     #						# value from field {title}
     #						field = title
     #						wrap = &title=|
+    #                stdWrap.rawUrlEncode = 1
     #					}
     #				}
 
@@ -2218,6 +2221,6 @@ You can overwrite these settings in your page TS.
          You need to specify the pid, where your main typoscript settings (frontend) is stored. Usually you will take the
           root page of your installation. This is needed to perform actions like confirm users via Backend or resend
           confirmation mails. If you have a multidomain system, you can overwrite config in your typoScript Tempplate for
-          each domain.
+          each domain. If this setting is not applied by the root typoscript template, try to define your setting in a ext_typoscript_setup.txt in your template / sitepackage extension.
       :Default:
          1
