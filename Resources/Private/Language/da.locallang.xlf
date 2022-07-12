@@ -875,9 +875,9 @@
         <source>Resend confirmation email?</source>
         <target state="final">Gensend konfirmering e-mail?</target>
       </trans-unit>
-      <trans-unit id="createStatus">
+      <trans-unit id="createStatus" approved="yes">
         <source>User registration</source>
-        <target state="needs-translation">User registration</target>
+        <target state="final">Brugerregistrering</target>
       </trans-unit>
       <trans-unit id="js.loading_states" approved="yes">
         <source>Loading states ...</source>
