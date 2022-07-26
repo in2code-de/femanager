@@ -1,5 +1,7 @@
 # TYPO3 Extension femanager
 
+**ALPHA VERSION for PHP 8 & 8.1 - not for productive usage!!!**
+
 TYPO3 Frontend User Registration and Management based on
 a very flexible configuration and on TYPO3 8.7 LTS and newer with the possibility to extend it.
 Extension basicly works like sr_feuser_register or any other frontend user registration.

@@ -8,6 +8,13 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 7.1.0
+      :Date: 2022-xx-xx
+      :Changes:
+
+      * [TASK] Add support for PHP 8 and 8.1 - WIP
+
+-
       :Version: 7.0.0
       :Date: 2022-07-11
       :Changes:
