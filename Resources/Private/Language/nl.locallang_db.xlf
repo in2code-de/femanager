@@ -5,455 +5,455 @@
     <body>
       <trans-unit id="tx_femanager_domain_model_user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Gebruiker</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.username">
         <source>Username</source>
-        <target state="needs-translation">Username</target>
+        <target state="translated">Gebruikersnaam</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.password">
         <source>Password</source>
-        <target state="needs-translation">Password</target>
+        <target state="translated">Wachtwoord</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.usergroup">
         <source>Usergroup</source>
-        <target state="needs-translation">Usergroup</target>
+        <target state="translated">Gebruikersgroep</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.name">
         <source>Name</source>
-        <target state="needs-translation">Name</target>
+        <target state="translated">Naam</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.firstName">
         <source>Firstname</source>
-        <target state="needs-translation">Firstname</target>
+        <target state="translated">Voornaam</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.middleName">
         <source>Middlename</source>
-        <target state="needs-translation">Middlename</target>
+        <target state="translated">Tussenvoegsel</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastName">
         <source>Lastname</source>
-        <target state="needs-translation">Lastname</target>
+        <target state="translated">Achternaam</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
         <source>Birthdate</source>
-        <target state="needs-translation">Birthdate</target>
+        <target state="translated">Geboortedatum</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender">
         <source>Gender</source>
-        <target state="needs-translation">Gender</target>
+        <target state="translated">Geslacht</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item0">
         <source>male</source>
-        <target state="needs-translation">male</target>
+        <target state="translated">man</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item1">
         <source>female</source>
-        <target state="needs-translation">female</target>
+        <target state="translated">vrouw</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
         <source>divers</source>
-        <target state="needs-translation">divers</target>
+        <target state="translated">divers</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address">
         <source>Address</source>
-        <target state="needs-translation">Address</target>
+        <target state="translated">Adres</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.telephone">
         <source>Telephone</source>
-        <target state="needs-translation">Telephone</target>
+        <target state="translated">Telefoon</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.fax">
         <source>Fax</source>
-        <target state="needs-translation">Fax</target>
+        <target state="translated">Fax</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.email">
         <source>Email</source>
-        <target state="needs-translation">Email</target>
+        <target state="translated">E-mail</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.title">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="translated">Titel</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.zip">
         <source>ZIP</source>
-        <target state="needs-translation">ZIP</target>
+        <target state="translated">Postcode</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.city">
         <source>City</source>
-        <target state="needs-translation">City</target>
+        <target state="translated">Plaats</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.country">
         <source>Country</source>
-        <target state="needs-translation">Country</target>
+        <target state="translated">Land</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Provincie</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.www">
         <source>Website</source>
-        <target state="needs-translation">Website</target>
+        <target state="translated">Website</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.company">
         <source>Company</source>
-        <target state="needs-translation">Company</target>
+        <target state="translated">Bedrijf</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.image">
         <source>Image</source>
-        <target state="needs-translation">Image</target>
+        <target state="translated">Afbeelding</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastlogin">
         <source>Last login</source>
-        <target state="needs-translation">Last login</target>
+        <target state="translated">Laatste login</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.captcha">
         <source>Captcha</source>
-        <target state="needs-translation">Captcha</target>
+        <target state="translated">Captcha</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Provincie</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.terms">
         <source>Terms and conditions</source>
-        <target state="needs-translation">Terms and conditions</target>
+        <target state="translated">Algemene voorwaarden</target>
       </trans-unit>
       <trans-unit id="fe_users.crdate">
         <source>Creation Time</source>
-        <target state="needs-translation">Creation Time</target>
+        <target state="translated">Aanmaakdatum</target>
       </trans-unit>
       <trans-unit id="fe_users.tstamp">
         <source>Last profile change at</source>
-        <target state="needs-translation">Last profile change at</target>
+        <target state="translated">Laatste profielwijziging op</target>
       </trans-unit>
       <trans-unit id="fe_users.registrationconfirmedbyuser">
         <source>Registration confirmed by user</source>
-        <target state="needs-translation">Registration confirmed by user</target>
+        <target state="translated">Registratie bevestigd door gebruiker</target>
       </trans-unit>
       <trans-unit id="fe_users.registrationconfirmedbyadmin">
         <source>Registration confirmed by admin</source>
-        <target state="needs-translation">Registration confirmed by admin</target>
+        <target state="translated">Registratie bevestigd door admin</target>
       </trans-unit>
       <trans-unit id="fe_users.tab">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Registratie</target>
       </trans-unit>
       <trans-unit id="fe_users.log">
         <source>FE_user Log</source>
-        <target state="needs-translation">FE_user Log</target>
+        <target state="translated">fe_user Log</target>
       </trans-unit>
       <trans-unit id="fe_users.terms">
         <source>User accepted terms and conditions</source>
-        <target state="needs-translation">User accepted terms and conditions</target>
+        <target state="translated">Gebruiker accepteerde de algemene voorwaarden</target>
       </trans-unit>
       <trans-unit id="fe_users.terms_version">
         <source>Accepted version of terms and conditions</source>
-        <target state="needs-translation">Accepted version of terms and conditions</target>
+        <target state="translated">Geaccepteerde versie van algemene voorwaarden</target>
       </trans-unit>
       <trans-unit id="fe_users.terms_date_of_acceptance">
         <source>Accepted datetime of terms and conditions</source>
-        <target state="needs-translation">Accepted datetime of terms and conditions</target>
+        <target state="translated">Geaccepteerde datum van algemene voorwaarden</target>
       </trans-unit>
       <trans-unit id="fe_users.changerequest">
         <source>Change Request</source>
-        <target state="needs-translation">Change Request</target>
+        <target state="translated">Aanvraag wijzigen</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log">
         <source>User Log</source>
-        <target state="needs-translation">User Log</target>
+        <target state="translated">Gebruiker log</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.title">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="translated">Titel</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.crdate">
         <source>Time</source>
-        <target state="needs-translation">Time</target>
+        <target state="translated">Tijd</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Status</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.100">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Registratie</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.101">
         <source>New Registration</source>
-        <target state="needs-translation">New Registration</target>
+        <target state="translated">Nieuwe registratie</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.102">
         <source>Registration confirmed by user</source>
-        <target state="needs-translation">Registration confirmed by user</target>
+        <target state="translated">Registratie bevestigd door gebruiker</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.103">
         <source>Registration confirmed by admin</source>
-        <target state="needs-translation">Registration confirmed by admin</target>
+        <target state="translated">Registratie bevestigd door admin</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.104">
         <source>Registration refused by user</source>
-        <target state="needs-translation">Registration refused by user</target>
+        <target state="translated">Registratie geweigerd door gebruiker</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.105">
         <source>Registration refused by admin</source>
-        <target state="needs-translation">Registration refused by admin</target>
+        <target state="translated">Registratie geweigerd door admin</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.106">
         <source>Profile creation request</source>
-        <target state="needs-translation">Profile creation request</target>
+        <target state="translated">Verzoek aanmaken profiel</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.200">
         <source>Update</source>
-        <target state="needs-translation">Update</target>
+        <target state="translated">Bijwerken</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.201">
         <source>Profile updated</source>
-        <target state="needs-translation">Profile updated</target>
+        <target state="translated">Profiel bijgewerkt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.202">
         <source>Profile update confirmed by admin</source>
-        <target state="needs-translation">Profile update confirmed by admin</target>
+        <target state="translated">Profiel update bevestigd door de beheerder</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.203">
         <source>Profile update refused by admin</source>
-        <target state="needs-translation">Profile update refused by admin</target>
+        <target state="translated">Profielupdate geweigerd door de beheerder</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.204">
         <source>Profile update request</source>
-        <target state="needs-translation">Profile update request</target>
+        <target state="translated">Aanvraag voor profiel update</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.205">
         <source>Profile update security failure</source>
-        <target state="needs-translation">Profile update security failure</target>
+        <target state="translated">Beveiligingsfout bij profielupdate</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.206">
         <source>Image deleted</source>
-        <target state="needs-translation">Image deleted</target>
+        <target state="translated">Afbeelding verwijderd</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="translated">Verwijder</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.301">
         <source>Profile deleted</source>
-        <target state="needs-translation">Profile deleted</target>
+        <target state="translated">Profiel verwijderd</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.400">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Uitnodiging</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.401">
         <source>Profile created and User invited</source>
-        <target state="needs-translation">Profile created and User invited</target>
+        <target state="translated">Profiel aangemaakt en gebruiker uitgenodigd</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.402">
         <source>Profile deleted from User</source>
-        <target state="needs-translation">Profile deleted from User</target>
+        <target state="translated">Profiel verwijderd door gebruiker</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.403">
         <source>Wrong Hash</source>
-        <target state="needs-translation">Wrong Hash</target>
+        <target state="translated">Verkeerde hash</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.404">
         <source>You tried to open a restricted page</source>
-        <target state="needs-translation">You tried to open a restricted page</target>
+        <target state="translated">U probeerde een pagina met toegangsbeperking te openen</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.405">
         <source>Password changed and Profile activated</source>
-        <target state="needs-translation">Password changed and Profile activated</target>
+        <target state="translated">Wachtwoord gewijzigd en profiel geactiveerd</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Gebruiker</target>
       </trans-unit>
       <trans-unit id="flexform.main.title">
         <source>Main Settings</source>
-        <target state="needs-translation">Main Settings</target>
+        <target state="translated">Algemene instellingen</target>
       </trans-unit>
       <trans-unit id="flexform.main.view">
         <source>Choose View</source>
-        <target state="needs-translation">Choose View</target>
+        <target state="translated">Kies weergave</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.0">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Registratie</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.1">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Bewerk</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.2">
         <source>List</source>
-        <target state="needs-translation">List</target>
+        <target state="translated">Lijst</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.3">
         <source>Detail</source>
-        <target state="needs-translation">Detail</target>
+        <target state="translated">Detail</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.4">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Uitnodiging</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.5">
         <source>Resend confirmation mail</source>
-        <target state="needs-translation">Resend confirmation mail</target>
+        <target state="translated">Bevestigingsmail opnieuw versturen</target>
       </trans-unit>
       <trans-unit id="flexform.new.title">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Registratie</target>
       </trans-unit>
       <trans-unit id="flexform.new.fields">
         <source>Select Fields for New-Form (empty = all fields)</source>
-        <target state="needs-translation">Select Fields for New-Form (empty = all fields)</target>
+        <target state="translated">Selecteer velden voor nieuw formulier (leeg = alle velden)</target>
       </trans-unit>
       <trans-unit id="flexform.new.overrideUserGroup">
         <source>Select Usergroups for new Users</source>
-        <target state="needs-translation">Select Usergroups for new Users</target>
+        <target state="translated">Selecteer gebruikersgroepen voor nieuwe gebruikers</target>
       </trans-unit>
       <trans-unit id="flexform.new.confirmByUser">
         <source>Registration must be confirmed from sender</source>
-        <target state="needs-translation">Registration must be confirmed from sender</target>
+        <target state="translated">Registratie moet worden bevestigd door de afzender</target>
       </trans-unit>
       <trans-unit id="flexform.new.showTermsAndConditions">
         <source>User must accept terms and conditions</source>
-        <target state="needs-translation">User must accept terms and conditions</target>
+        <target state="translated">Gebruiker moet de algemene voorwaarden accepteren</target>
       </trans-unit>
       <trans-unit id="flexform.new.confirmByAdmin">
         <source>Registration must be confirmed from an admin (add one or more emails)</source>
-        <target state="needs-translation">Registration must be confirmed from an admin (add one or more emails)</target>
+        <target state="translated">Registratie moet worden bevestigd door een beheerder (voeg een of meer e-mails toe)</target>
       </trans-unit>
       <trans-unit id="flexform.new.notifyAdmin">
         <source>Notify admin on registration (add one or more emails)</source>
-        <target state="needs-translation">Notify admin on registration (add one or more emails)</target>
+        <target state="translated">Informeer de beheerder over registratie (voeg één of meer e-mails toe)</target>
       </trans-unit>
       <trans-unit id="flexform.edit.title">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Bewerk</target>
       </trans-unit>
       <trans-unit id="flexform.edit.fields">
         <source>Select Fields for Edit-Form (empty = all fields)</source>
-        <target state="needs-translation">Select Fields for Edit-Form (empty = all fields)</target>
+        <target state="translated">Selecteer velden voor Bewerkformulier (leeg = alle velden)</target>
       </trans-unit>
       <trans-unit id="flexform.edit.showDeleteLink">
         <source>Show Delete Button in Edit Form</source>
-        <target state="needs-translation">Show Delete Button in Edit Form</target>
+        <target state="translated">Toon Verwijderknop in het bewerkformulier</target>
       </trans-unit>
       <trans-unit id="flexform.edit.confirmByAdmin">
         <source>Profile update must be confirmed from an admin (add one or more emails)</source>
-        <target state="needs-translation">Profile update must be confirmed from an admin (add one or more emails)</target>
+        <target state="translated">Profielupdate moet worden bevestigd door een beheerder (voeg één of meer e-mails toe)</target>
       </trans-unit>
       <trans-unit id="flexform.edit.notifyAdmin">
         <source>Notify admin on Profile update (add one or more emails)</source>
-        <target state="needs-translation">Notify admin on Profile update (add one or more emails)</target>
+        <target state="translated">Informeer de beheerder over profielupdate (voeg een of meer e-mails toe)</target>
       </trans-unit>
       <trans-unit id="flexform.list.title">
         <source>Listview</source>
-        <target state="needs-translation">Listview</target>
+        <target state="translated">Lijstweergave</target>
       </trans-unit>
       <trans-unit id="flexform.list.filter">
         <source>Show Searchfield</source>
-        <target state="needs-translation">Show Searchfield</target>
+        <target state="translated">Zoekveld weergeven</target>
       </trans-unit>
       <trans-unit id="flexform.list.limit">
         <source>Limit</source>
-        <target state="needs-translation">Limit</target>
+        <target state="translated">Limiet</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby">
         <source>Order by</source>
-        <target state="needs-translation">Order by</target>
+        <target state="translated">Sorteer op</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby.0">
         <source>Lastname</source>
-        <target state="needs-translation">Lastname</target>
+        <target state="translated">Achternaam</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby.1">
         <source>Firstname</source>
-        <target state="needs-translation">Firstname</target>
+        <target state="translated">Voornaam</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby.2">
         <source>Company</source>
-        <target state="needs-translation">Company</target>
+        <target state="translated">Bedrijf</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby.3">
         <source>Username</source>
-        <target state="needs-translation">Username</target>
+        <target state="translated">Gebruikersnaam</target>
       </trans-unit>
       <trans-unit id="flexform.list.sorting">
         <source>Sorting</source>
-        <target state="needs-translation">Sorting</target>
+        <target state="translated">Sorteren</target>
       </trans-unit>
       <trans-unit id="flexform.list.sorting.0">
         <source>Ascending</source>
-        <target state="needs-translation">Ascending</target>
+        <target state="translated">Oplopend</target>
       </trans-unit>
       <trans-unit id="flexform.list.sorting.1">
         <source>Descending</source>
-        <target state="needs-translation">Descending</target>
+        <target state="translated">Aflopend</target>
       </trans-unit>
       <trans-unit id="flexform.list.usergroup">
         <source>Show from usergroup (empty = show all)</source>
-        <target state="needs-translation">Show from usergroup (empty = show all)</target>
+        <target state="translated">Toon gebruikersgroep (leeg = toon alles)</target>
       </trans-unit>
       <trans-unit id="flexform.show.title">
         <source>Detailview</source>
-        <target state="needs-translation">Detailview</target>
+        <target state="translated">Detailweergave</target>
       </trans-unit>
       <trans-unit id="flexform.show.user">
         <source>User to show</source>
-        <target state="needs-translation">User to show</target>
+        <target state="translated">Gebruiker om te tonen</target>
       </trans-unit>
       <trans-unit id="flexform.show.user.1">
         <source>[Logged in FE User]</source>
-        <target state="needs-translation">[Logged in FE User]</target>
+        <target state="translated">[Ingelogd FE gebruiker]</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.title">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Uitnodiging</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.allowedUserGroups">
         <source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
-        <target state="needs-translation">Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</target>
+        <target state="translated">Beperk "Uitnodiging toevoegen" tot één of meer gebruikersgroepen (leeg = Geen beperking)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.fields">
         <source>Select Fields for invitation-Form (empty = all fields)</source>
-        <target state="needs-translation">Select Fields for invitation-Form (empty = all fields)</target>
+        <target state="translated">Selecteer velden voor uitnodigingsformulier (leeg = alle velden)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.overrideUserGroup">
         <source>Select Usergroups for new Users</source>
-        <target state="needs-translation">Select Usergroups for new Users</target>
+        <target state="translated">Selecteer gebruikersgroepen voor nieuwe gebruikers</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.confirmByAdmin">
         <source>Registration must be confirmed from an admin (add one or more emails)</source>
-        <target state="needs-translation">Registration must be confirmed from an admin (add one or more emails)</target>
+        <target state="translated">Registratie moet worden bevestigd door een beheerder (voeg een of meer e-mails toe)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.notifyAdminStep1">
         <source>Notify admin on step 1 (add one or more emails)</source>
-        <target state="needs-translation">Notify admin on step 1 (add one or more emails)</target>
+        <target state="translated">Informeer admin bij stap 1 (voeg één of meer e-mails toe)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.notifyAdmin">
         <source>Notify admin if user sets a password (add one or more emails)</source>
-        <target state="needs-translation">Notify admin if user sets a password (add one or more emails)</target>
+        <target state="translated">Verwittig de beheerder als de gebruiker een wachtwoord heeft ingesteld (voeg één of meer e-mails toe)</target>
       </trans-unit>
       <trans-unit id="flexform.misc.title">
         <source>Additional Settings</source>
-        <target state="needs-translation">Additional Settings</target>
+        <target state="translated">Extra instellingen</target>
       </trans-unit>
       <trans-unit id="flexform.misc.termsUrl">
         <source>Page with terms and conditions</source>
-        <target state="needs-translation">Page with terms and conditions</target>
+        <target state="translated">Pagina met algemene voorwaarden</target>
       </trans-unit>
       <trans-unit id="pleaseChoose">
         <source>Please choose...</source>
-        <target state="needs-translation">Please choose...</target>
+        <target state="translated">Maak een keuze...</target>
       </trans-unit>
       <trans-unit id="pleaseChooseCountry">
         <source>Please choose a country...</source>
-        <target state="needs-translation">Please choose a country...</target>
+        <target state="translated">Kies een land...</target>
       </trans-unit>
       <trans-unit id="noZonesForThisCountry">
         <source>No zones available for the chosen country</source>
-        <target state="needs-translation">No zones available for the chosen country</target>
+        <target state="translated">Geen zones beschikbaar voor het gekozen land</target>
       </trans-unit>
     </body>
   </file>
