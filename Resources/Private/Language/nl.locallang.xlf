@@ -5,51 +5,51 @@
     <body>
       <trans-unit id="tx_femanager_domain_model_user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Gebruiker</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.username">
         <source>Username</source>
-        <target state="needs-translation">Username</target>
+        <target state="translated">Gebruikersnaam</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.password">
         <source>Password</source>
-        <target state="needs-translation">Password</target>
+        <target state="translated">Wachtwoord</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.password_repeat">
         <source>Repeat Password</source>
-        <target state="needs-translation">Repeat Password</target>
+        <target state="translated">Herhaal wachtwoord</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.usergroup">
         <source>Usergroup</source>
-        <target state="needs-translation">Usergroup</target>
+        <target state="translated">Gebruikersgroep</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.name">
         <source>Full Name</source>
-        <target state="needs-translation">Full Name</target>
+        <target state="translated">Volledige naam</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.firstName">
         <source>Firstname</source>
-        <target state="needs-translation">Firstname</target>
+        <target state="translated">Voornaam</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.middleName">
         <source>Middlename</source>
-        <target state="needs-translation">Middlename</target>
+        <target state="translated">Tussenvoegsel</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastName">
         <source>Lastname</source>
-        <target state="needs-translation">Lastname</target>
+        <target state="translated">Achternaam</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
         <source>Birthdate</source>
-        <target state="needs-translation">Birthdate</target>
+        <target state="translated">Geboortedatum</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint">
         <source>Please type your birthdate as MM/DD/YYYY</source>
-        <target state="needs-translation">Please type your birthdate as MM/DD/YYYY</target>
+        <target state="translated">Typ je geboortedatum als MM/DD/JJJJ</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.placeholder">
         <source>MM/DD/YYYY</source>
-        <target state="needs-translation">MM/DD/YYYY</target>
+        <target state="translated">MM/DD/JJJJ</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateFormat">
         <source>m/d/Y</source>
