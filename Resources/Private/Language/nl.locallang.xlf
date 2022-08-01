@@ -53,835 +53,835 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateFormat">
         <source>m/d/Y</source>
-        <target state="needs-translation">m/d/Y</target>
+        <target state="translated">m/d/Y</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender">
         <source>Gender</source>
-        <target state="needs-translation">Gender</target>
+        <target state="translated">Geslacht</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item0">
         <source>Male</source>
-        <target state="needs-translation">Male</target>
+        <target state="translated">Man</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item1">
         <source>Female</source>
-        <target state="needs-translation">Female</target>
+        <target state="translated">Vrouw</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
         <source>Divers</source>
-        <target state="needs-translation">Divers</target>
+        <target state="translated">Divers</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address">
         <source>Address</source>
-        <target state="needs-translation">Address</target>
+        <target state="translated">Adres</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.telephone">
         <source>Telephone</source>
-        <target state="needs-translation">Telephone</target>
+        <target state="translated">Telefoon</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.fax">
         <source>Fax</source>
-        <target state="needs-translation">Fax</target>
+        <target state="translated">Fax</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.email">
         <source>Email</source>
-        <target state="needs-translation">Email</target>
+        <target state="translated">E-mail</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.title">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="translated">Titel</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.zip">
         <source>ZIP</source>
-        <target state="needs-translation">ZIP</target>
+        <target state="translated">Postcode</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.city">
         <source>City</source>
-        <target state="needs-translation">City</target>
+        <target state="translated">Plaats</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.country">
         <source>Country</source>
-        <target state="needs-translation">Country</target>
+        <target state="translated">Land</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Provincie</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.www">
         <source>Website</source>
-        <target state="needs-translation">Website</target>
+        <target state="translated">Website</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.company">
         <source>Company</source>
-        <target state="needs-translation">Company</target>
+        <target state="translated">Bedrijf</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.image">
         <source>Image</source>
-        <target state="needs-translation">Image</target>
+        <target state="translated">Afbeelding</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.captcha">
         <source>Captcha</source>
-        <target state="needs-translation">Captcha</target>
+        <target state="translated">Captcha</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.terms">
         <source>I accept the terms and conditions</source>
-        <target state="needs-translation">I accept the terms and conditions</target>
+        <target state="translated">Ik ga akkoord met de algemene voorwaarden</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.termslinktext">
         <source>Click here for terms and conditions</source>
-        <target state="needs-translation">Click here for terms and conditions</target>
+        <target state="translated">Klik hier voor de algemene voorwaarden</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastlogin">
         <source>Last login</source>
-        <target state="needs-translation">Last login</target>
+        <target state="translated">Laatste login</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.crdate">
         <source>Creation Time</source>
-        <target state="needs-translation">Creation Time</target>
+        <target state="translated">Aanmaakdatum</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log">
         <source>User Log</source>
-        <target state="needs-translation">User Log</target>
+        <target state="translated">Gebruikers Log</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.title">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="translated">Titel</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.crdate">
         <source>Time</source>
-        <target state="needs-translation">Time</target>
+        <target state="translated">Tijd</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Status</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.100">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Registratie</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.101">
         <source>New Registration</source>
-        <target state="needs-translation">New Registration</target>
+        <target state="translated">Nieuwe registratie</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.102">
         <source>Registration confirmed by user</source>
-        <target state="needs-translation">Registration confirmed by user</target>
+        <target state="translated">Registratie bevestigd door gebruiker</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.103">
         <source>Registration confirmed by admin</source>
-        <target state="needs-translation">Registration confirmed by admin</target>
+        <target state="translated">Registratie bevestigd door admin</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.104">
         <source>Registration refused by user</source>
-        <target state="needs-translation">Registration refused by user</target>
+        <target state="translated">Registratie geweigerd door gebruiker</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.105">
         <source>Registration refused by admin</source>
-        <target state="needs-translation">Registration refused by admin</target>
+        <target state="translated">Registratie geweigerd door admin</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.106">
         <source>Profile creation request</source>
-        <target state="needs-translation">Profile creation request</target>
+        <target state="translated">Verzoek aanmaken profiel</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.200">
         <source>Update</source>
-        <target state="needs-translation">Update</target>
+        <target state="translated">Bijwerken</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.201">
         <source>Profile updated</source>
-        <target state="needs-translation">Profile updated</target>
+        <target state="translated">Profiel bijgewerkt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.202">
         <source>Profile update confirmed by admin</source>
-        <target state="needs-translation">Profile update confirmed by admin</target>
+        <target state="translated">Profiel update bevestigd door de beheerder</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.203">
         <source>Profile update refused by admin</source>
-        <target state="needs-translation">Profile update refused by admin</target>
+        <target state="translated">Profielupdate geweigerd door de beheerder</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.204">
         <source>Profile update request</source>
-        <target state="needs-translation">Profile update request</target>
+        <target state="translated">Aanvraag profiel update</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.205">
         <source>Profile update security failure</source>
-        <target state="needs-translation">Profile update security failure</target>
+        <target state="translated">Beveiligingsfout bij profielupdate</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.206">
         <source>Image deleted</source>
-        <target state="needs-translation">Image deleted</target>
+        <target state="translated">Afbeelding verwijderd</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="translated">Verwijder</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.301">
         <source>Profile deleted</source>
-        <target state="needs-translation">Profile deleted</target>
+        <target state="translated">Profiel verwijderd</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.400">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Uitnodiging</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.401">
         <source>Profile created and user invited</source>
-        <target state="needs-translation">Profile created and user invited</target>
+        <target state="translated">Profiel aangemaakt en gebruiker uitgenodigd</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.402">
         <source>Profile deleted by user</source>
-        <target state="needs-translation">Profile deleted by user</target>
+        <target state="translated">Profiel verwijderd door gebruiker</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.403">
         <source>Wrong hash</source>
-        <target state="needs-translation">Wrong hash</target>
+        <target state="translated">Verkeerde hash</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.404">
         <source>You tried to open a restricted page</source>
-        <target state="needs-translation">You tried to open a restricted page</target>
+        <target state="translated">U probeerde een pagina met toegangsbeperking te openen</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.405">
         <source>Password changed and profile activated</source>
-        <target state="needs-translation">Password changed and profile activated</target>
+        <target state="translated">Wachtwoord gewijzigd en profiel geactiveerd</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Gebruiker</target>
       </trans-unit>
       <trans-unit id="error_no_typoscript">
         <source>No TypoScript found. Did you already include the static Template?</source>
-        <target state="needs-translation">No TypoScript found. Did you already include the static Template?</target>
+        <target state="translated">Geen TypoScript gevonden. Hebt u het statische sjabloon al opgenomen?</target>
       </trans-unit>
       <trans-unit id="error_no_typoscript_be">
         <source>No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</source>
-        <target state="needs-translation">No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</target>
+        <target state="translated">Geen TypoScript gevonden. Heeft u al setup module.tx_femanager.settings.configPID in uw PageTS?</target>
       </trans-unit>
       <trans-unit id="error_no_storagepid">
         <source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
-        <target state="needs-translation">No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</target>
+        <target state="translated">Er is geen opslag PID ingesteld. Stel de opslag PID in via TypoScript of in de plugin instellingen.</target>
       </trans-unit>
       <trans-unit id="error_not_authorized">
         <source>You are not authorized for this action</source>
-        <target state="needs-translation">You are not authorized for this action</target>
+        <target state="translated">U bent niet geautoriseerd om deze actie uit te voeren</target>
       </trans-unit>
       <trans-unit id="validationError">
         <source>Error</source>
-        <target state="needs-translation">Error</target>
+        <target state="translated">Fout</target>
       </trans-unit>
       <trans-unit id="validationErrorRequiredModel">
         <source>Username and password must be filled</source>
-        <target state="needs-translation">Username and password must be filled</target>
+        <target state="translated">Gebruikersnaam en wachtwoord moeten worden ingevuld</target>
       </trans-unit>
       <trans-unit id="validationErrorWrongDateFormat">
         <source>Given date format is wrong</source>
-        <target state="needs-translation">Given date format is wrong</target>
+        <target state="translated">Gegeven datum formaat is verkeerd</target>
       </trans-unit>
       <trans-unit id="validationErrorRequired">
         <source>Field %s is required</source>
-        <target state="needs-translation">Field %s is required</target>
+        <target state="translated">Veld %s is vereist</target>
       </trans-unit>
       <trans-unit id="validationErrorEmail">
         <source>Field %s is not a valid email address</source>
-        <target state="needs-translation">Field %s is not a valid email address</target>
+        <target state="translated">Veld %s is geen geldig e-mailadres</target>
       </trans-unit>
       <trans-unit id="validationErrorMin">
         <source>Please add more characters to field %s</source>
-        <target state="needs-translation">Please add more characters to field %s</target>
+        <target state="translated">Voeg meer karakters toe aan het veld %s</target>
       </trans-unit>
       <trans-unit id="validationErrorMax">
         <source>Please add less characters to field %s</source>
-        <target state="needs-translation">Please add less characters to field %s</target>
+        <target state="translated">Voeg minder tekens toe aan het veld %s</target>
       </trans-unit>
       <trans-unit id="validationErrorInt">
         <source>Only numbers are allowed in field %s</source>
-        <target state="needs-translation">Only numbers are allowed in field %s</target>
+        <target state="translated">Alleen cijfers zijn toegestaan in veld %s</target>
       </trans-unit>
       <trans-unit id="validationErrorLetters">
         <source>Only letters are allowed in field %s</source>
-        <target state="needs-translation">Only letters are allowed in field %s</target>
+        <target state="translated">Alleen letters zijn toegestaan in veld %s</target>
       </trans-unit>
       <trans-unit id="validationErrorUniquePage">
         <source>Value of field %s is already in use</source>
-        <target state="needs-translation">Value of field %s is already in use</target>
+        <target state="translated">Waarde van veld %s is al in gebruik</target>
       </trans-unit>
       <trans-unit id="validationErrorUniqueDb">
         <source>Value of field %s is already in use</source>
-        <target state="needs-translation">Value of field %s is already in use</target>
+        <target state="translated">Waarde van veld %s is al in gebruik</target>
       </trans-unit>
       <trans-unit id="validationErrorMustInclude">
         <source>Try another value for field %s</source>
-        <target state="needs-translation">Try another value for field %s</target>
+        <target state="translated">Probeer een andere waarde voor veld %s</target>
       </trans-unit>
       <trans-unit id="validationErrorMustNotInclude">
         <source>Not allowed signs in field %s</source>
-        <target state="needs-translation">Not allowed signs in field %s</target>
+        <target state="translated">Niet toegestaan tekens in veld %s</target>
       </trans-unit>
       <trans-unit id="validationErrorInList">
         <source>This value is not allowed in field %s</source>
-        <target state="needs-translation">This value is not allowed in field %s</target>
+        <target state="translated">Deze waarde is niet toegestaan in veld %s</target>
       </trans-unit>
       <trans-unit id="validationErrorSameAs">
         <source>Please check your value</source>
-        <target state="needs-translation">Please check your value</target>
+        <target state="translated">Controleer uw waarde</target>
       </trans-unit>
       <trans-unit id="validationErrorPasswordRepeat">
         <source>Both passwords do not fit</source>
-        <target state="needs-translation">Both passwords do not fit</target>
+        <target state="translated">Beide wachtwoorden komen niet overeen</target>
       </trans-unit>
       <trans-unit id="validationErrorDate">
         <source>Date has the wrong format</source>
-        <target state="needs-translation">Date has the wrong format</target>
+        <target state="translated">Datum heeft het verkeerde formaat</target>
       </trans-unit>
       <trans-unit id="validationErrorCaptcha">
         <source>Wrong Captcha code</source>
-        <target state="needs-translation">Wrong Captcha code</target>
+        <target state="translated">Verkeerde Captcha code</target>
       </trans-unit>
       <trans-unit id="validationErrorGeneral">
         <source>Field could not be validated</source>
-        <target state="needs-translation">Field could not be validated</target>
+        <target state="translated">Veld kon niet worden gevalideerd</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationSubject">
         <source>Please confirm a new registration</source>
-        <target state="needs-translation">Please confirm a new registration</target>
+        <target state="translated">Bevestig een nieuwe registratie</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationSalutation">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="translated">Beste Admin,</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationUserProperties">
         <source>User properties:</source>
-        <target state="needs-translation">User properties:</target>
+        <target state="translated">Gebruikerseigenschappen:</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationText1">
         <source>Please confirm registration of %s by clicking the following link:</source>
-        <target state="needs-translation">Please confirm registration of %s by clicking the following link:</target>
+        <target state="translated">Bevestig de registratie van %s door op de volgende link te klikken:</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationLinkConfirm">
         <source>Confirm registration</source>
-        <target state="needs-translation">Confirm registration</target>
+        <target state="translated">Registratie bevestigen</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationText2">
         <source>If you want to delete the registration, click this link:</source>
-        <target state="needs-translation">If you want to delete the registration, click this link:</target>
+        <target state="translated">Klik op deze link om de registratie te verwijderen:</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefused">
         <source>Delete profile</source>
-        <target state="needs-translation">Delete profile</target>
+        <target state="translated">Profiel verwijderen</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationText3">
         <source>If you want to delete the registration, without sending an email to the user, click this link:</source>
-        <target state="needs-translation">If you want to delete the registration, without sending an email to the user, click this link:</target>
+        <target state="translated">Als u de registratie wilt verwijderen, zonder e-mail te sturen naar de gebruiker, klikt u op deze link:</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent">
         <source>Silently delete profile</source>
-        <target state="needs-translation">Silently delete profile</target>
+        <target state="translated">Profiel stilletjes verwijderen</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationSubject">
         <source>Please confirm your profile creation request</source>
-        <target state="needs-translation">Please confirm your profile creation request</target>
+        <target state="translated">Bevestig uw verzoek om profiel aan te maken</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationSalutation">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Beste</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationText1">
         <source>Please confirm your profile registration on our server by clicking the following link:</source>
-        <target state="needs-translation">Please confirm your profile registration on our server by clicking the following link:</target>
+        <target state="translated">Bevestig uw profielregistratie op onze server door op de volgende link te klikken:</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationLinkConfirm">
         <source>Confirm profile</source>
-        <target state="needs-translation">Confirm profile</target>
+        <target state="translated">Profiel bevestigen</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationText2">
         <source>If you don't want to be registered on our system, click this link:</source>
-        <target state="needs-translation">If you don't want to be registered on our system, click this link:</target>
+        <target state="translated">Wilt u niet geregistreerd worden op ons systeem, klik dan op deze link:</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationLinkConfirmRefused">
         <source>Delete profile</source>
-        <target state="needs-translation">Delete profile</target>
+        <target state="translated">Profiel verwijderen</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationSignature">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="translated">Jouw website-team.</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifySubject">
         <source>Your registration was confirmed</source>
-        <target state="needs-translation">Your registration was confirmed</target>
+        <target state="translated">Uw aanmelding is bevestigd</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifySalutation">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Beste</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifyText1">
         <source>Your profile was confirmed and successfully created.</source>
-        <target state="needs-translation">Your profile was confirmed and successfully created.</target>
+        <target state="translated">Je profiel is bevestigd en succesvol aangemaakt.</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifySignature">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="translated">Jouw website-team.</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifyRefusedSubject">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Beste</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifyRefusedSalutation">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Beste</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifyRefusedText1">
         <source>Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</source>
-        <target state="needs-translation">Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</target>
+        <target state="translated">Bedankt voor je profielverzoek. Het spijt ons u te moeten mededelen dat we je verzoek hebben moeten weigeren.</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifyRefusedSignature">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="translated">Jouw website-team.</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifySubject">
         <source>New profile registration</source>
-        <target state="needs-translation">New profile registration</target>
+        <target state="translated">Nieuwe gebruikers registratie</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifySalutation">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="translated">Beste Admin,</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifyText1">
         <source>Profile creation - User %s</source>
-        <target state="needs-translation">Profile creation - User %s</target>
+        <target state="translated">Profiel aanmaken - Gebruiker %s</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifyText2">
         <source>Profile creation - User %s set a new password and profile was enabled</source>
-        <target state="needs-translation">Profile creation - User %s set a new password and profile was enabled</target>
+        <target state="translated">Profiel aanmaken - Gebruiker %s heeft een nieuw wachtwoord ingesteld en profiel is ingeschakeld</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifyUserProperties">
         <source>Profile properties:</source>
-        <target state="needs-translation">Profile properties:</target>
+        <target state="translated">Profiel eigenschappen:</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifySubject">
         <source>Profile update</source>
-        <target state="needs-translation">Profile update</target>
+        <target state="translated">Profiel bijgewerkt</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifySalutation">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="translated">Beste Admin,</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifyText1">
         <source>Profile change by user %s</source>
-        <target state="needs-translation">Profile change by user %s</target>
+        <target state="translated">Profiel wijzigen door gebruiker %s</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifyField">
         <source>Fieldname</source>
-        <target state="needs-translation">Fieldname</target>
+        <target state="translated">Veldnaam</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifyOld">
         <source>Old value</source>
-        <target state="needs-translation">Old value</target>
+        <target state="translated">Oude waarde</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifyNew">
         <source>New value</source>
-        <target state="needs-translation">New value</target>
+        <target state="translated">Nieuwe waarde</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestSubject">
         <source>New profile change request</source>
-        <target state="needs-translation">New profile change request</target>
+        <target state="translated">Aanvraag wijziging nieuw profiel</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestSalutation">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="translated">Beste Admin,</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestText1">
         <source>Profile change request from %s</source>
-        <target state="needs-translation">Profile change request from %s</target>
+        <target state="translated">Aanvraag profielwijziging van %s</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestText2">
         <source>All changes:</source>
-        <target state="needs-translation">All changes:</target>
+        <target state="translated">Alle wijzigingen:</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestField">
         <source>Fieldname</source>
-        <target state="needs-translation">Fieldname</target>
+        <target state="translated">Veldnaam</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestOld">
         <source>Old value</source>
-        <target state="needs-translation">Old value</target>
+        <target state="translated">Oude waarde</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestNew">
         <source>New value</source>
-        <target state="needs-translation">New value</target>
+        <target state="translated">Nieuwe waarde</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestLinkConfirm">
         <source>Confirm changes</source>
-        <target state="needs-translation">Confirm changes</target>
+        <target state="translated">Wijzigingen bevestigen</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestLinkRefuse">
         <source>Refuse changes and notify user</source>
-        <target state="needs-translation">Refuse changes and notify user</target>
+        <target state="translated">Wijzigingen weigeren en gebruiker op de hoogte brengen</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestLinkSiltentRefuse">
         <source>Refuse changes and do not notify user</source>
-        <target state="needs-translation">Refuse changes and do not notify user</target>
+        <target state="translated">Wijzigingen weigeren en de gebruiker niet op de hoogte brengen</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedSubject">
         <source>Your update request was refused</source>
-        <target state="needs-translation">Your update request was refused</target>
+        <target state="translated">Uw verzoek om update werd geweigerd</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedSalutation">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Beste</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedText1">
         <source>Thank you for your update request. We're sorry to tell you, that we had to refuse your request.</source>
-        <target state="needs-translation">Thank you for your update request. We're sorry to tell you, that we had to refuse your request.</target>
+        <target state="translated">Dank u voor uw update verzoek. Het spijt ons u te moeten mededelen dat we uw verzoek hebben moeten weigeren.</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedText2">
         <source>Please contact %s for further information.</source>
-        <target state="needs-translation">Please contact %s for further information.</target>
+        <target state="translated">Neem contact op met %s voor meer informatie.</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedSignature">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="translated">Jouw website-team.</target>
       </trans-unit>
       <trans-unit id="emailInvitationSubject">
         <source>Confirm your profile</source>
-        <target state="needs-translation">Confirm your profile</target>
+        <target state="translated">Bevestig je profiel</target>
       </trans-unit>
       <trans-unit id="emailInvitationSalutation">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Beste</target>
       </trans-unit>
       <trans-unit id="emailInvitationText1">
         <source>Your new profile was just created.</source>
-        <target state="needs-translation">Your new profile was just created.</target>
+        <target state="translated">Je nieuwe profiel is zojuist aangemaakt.</target>
       </trans-unit>
       <trans-unit id="emailInvitationText2">
         <source>Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</source>
-        <target state="needs-translation">Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</target>
+        <target state="translated">Bevestig uw profielregistratie op onze server door op de volgende link te klikken. Daarna kunt u een wachtwoord definiëren.</target>
       </trans-unit>
       <trans-unit id="emailInvitationLinkConfirm">
         <source>Confirm Profile</source>
-        <target state="needs-translation">Confirm Profile</target>
+        <target state="translated">Profiel bevestigen</target>
       </trans-unit>
       <trans-unit id="emailInvitationText3">
         <source>If you don't want to be registered on our system, click this link.</source>
-        <target state="needs-translation">If you don't want to be registered on our system, click this link.</target>
+        <target state="translated">Wilt u niet geregistreerd worden op ons systeem, klik dan op deze link.</target>
       </trans-unit>
       <trans-unit id="emailInvitationLinkConfirmRefused">
         <source>Delete Profile</source>
-        <target state="needs-translation">Delete Profile</target>
+        <target state="translated">Profiel verwijderen</target>
       </trans-unit>
       <trans-unit id="emailInvitationSignature">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="translated">Jouw website-team.</target>
       </trans-unit>
       <trans-unit id="emailInvitationAdminNotifiyStep1Subject">
         <source>User was invited</source>
-        <target state="needs-translation">User was invited</target>
+        <target state="translated">Gebruiker is uitgenodigd</target>
       </trans-unit>
       <trans-unit id="emailInvitationAdminNotifiySubject">
         <source>User invitation - Profile finally created</source>
-        <target state="needs-translation">User invitation - Profile finally created</target>
+        <target state="translated">Gebruikersuitnodiging - Profiel eindelijk aangemaakt</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyStep1Subject">
         <source>User refused invitation</source>
-        <target state="needs-translation">User refused invitation</target>
+        <target state="translated">Uitnodiging geweigerd door gebruiker</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiySalutation">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="translated">Beste Admin,</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyText1">
         <source>Profile invitation of %s</source>
-        <target state="needs-translation">Profile invitation of %s</target>
+        <target state="translated">Profieluitnodiging van %s</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyText2">
         <source>Profile invitation - User %s refused to set a new password. The profile was deleted.</source>
-        <target state="needs-translation">Profile invitation - User %s refused to set a new password. The profile was deleted.</target>
+        <target state="translated">Profieluitnodiging - Gebruiker %s heeft geweigerd een nieuw wachtwoord in te stellen. Het profiel is verwijderd.</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyUserProperties">
         <source>Profile properties:</source>
-        <target state="needs-translation">Profile properties:</target>
+        <target state="translated">Profiel eigenschappen:</target>
       </trans-unit>
       <trans-unit id="noRecordsFound">
         <source>No records found.</source>
-        <target state="needs-translation">No records found.</target>
+        <target state="translated">Geen resultaten gevonden.</target>
       </trans-unit>
       <trans-unit id="noRecordsFoundClearFilter">
         <source>Clean filter.</source>
-        <target state="needs-translation">Clean filter.</target>
+        <target state="translated">Filter opschonen.</target>
       </trans-unit>
       <trans-unit id="noRecordsFoundGoToPage0">
         <source>Show all users from all pages (for administrators only).</source>
-        <target state="needs-translation">Show all users from all pages (for administrators only).</target>
+        <target state="translated">Toon alle gebruikers van alle pagina's (alleen voor beheerders).</target>
       </trans-unit>
       <trans-unit id="noRecordFoundShow">
         <source>No FE_User given or not logged in</source>
-        <target state="needs-translation">No FE_User given or not logged in</target>
+        <target state="translated">Geen FE_User gegeven of niet ingelogd</target>
       </trans-unit>
       <trans-unit id="notLoggedIn">
         <source>Please log in before</source>
-        <target state="needs-translation">Please log in before</target>
+        <target state="translated">Eerst inloggen a.u.b.</target>
       </trans-unit>
       <trans-unit id="submitNew">
         <source>Create Profile Now</source>
-        <target state="needs-translation">Create Profile Now</target>
+        <target state="translated">Nieuw profiel maken</target>
       </trans-unit>
       <trans-unit id="submitResend">
         <source>Resend now</source>
-        <target state="needs-translation">Resend now</target>
+        <target state="translated">Nu opnieuw verzenden</target>
       </trans-unit>
       <trans-unit id="passwordRepeat">
         <source>Repeat Password</source>
-        <target state="needs-translation">Repeat Password</target>
+        <target state="translated">Herhaal wachtwoord</target>
       </trans-unit>
       <trans-unit id="titleCreateProfile">
         <source>Create a new user-profile</source>
-        <target state="needs-translation">Create a new user-profile</target>
+        <target state="translated">Een nieuw gebruikersprofiel aanmaken</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailTitle">
         <source>Resend confirmation mail</source>
-        <target state="needs-translation">Resend confirmation mail</target>
+        <target state="translated">Bevestigingsmail opnieuw versturen</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailFieldsetLegend">
         <source>Please enter your email address</source>
-        <target state="needs-translation">Please enter your email address</target>
+        <target state="translated">Voer je e-mailadres in</target>
       </trans-unit>
       <trans-unit id="submitEdit">
         <source>Update Profile</source>
-        <target state="needs-translation">Update Profile</target>
+        <target state="translated">Profiel bijwerken</target>
       </trans-unit>
       <trans-unit id="create">
         <source>Profile successfully created</source>
-        <target state="needs-translation">Profile successfully created</target>
+        <target state="translated">Profiel succesvol aangemaakt</target>
       </trans-unit>
       <trans-unit id="createAndInvited">
         <source>Profile successfully created and user informed</source>
-        <target state="needs-translation">Profile successfully created and user informed</target>
+        <target state="translated">Profiel succesvol aangemaakt en gebruiker geïnformeerd</target>
       </trans-unit>
       <trans-unit id="createAndInvitedFinished">
         <source>Profile successfully changed and enabled</source>
-        <target state="needs-translation">Profile successfully changed and enabled</target>
+        <target state="translated">Profiel succesvol gewijzigd en ingeschakeld</target>
       </trans-unit>
       <trans-unit id="createRequestWaitingForUserConfirm">
         <source>Thank you for your request. Please check your mail account to confirm the profile.</source>
-        <target state="needs-translation">Thank you for your request. Please check your mail account to confirm the profile.</target>
+        <target state="translated">Dank u voor uw aanvraag. Controleer uw e-mail account om het profiel te bevestigen.</target>
       </trans-unit>
       <trans-unit id="createRequestWaitingForAdminConfirm">
         <source>Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</source>
-        <target state="needs-translation">Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</target>
+        <target state="translated">Dank u voor uw bevestiging. Uw profiel zal beschikbaar zijn zodra de beheerder uw verzoek bevestigt.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailSend">
         <source>An Email was send to your account. Please check your inbox.</source>
-        <target state="needs-translation">An Email was send to your account. Please check your inbox.</target>
+        <target state="translated">Een e-mail is verzonden naar uw account. Controleer uw inbox.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailFail">
         <source>We received no valid mail.</source>
-        <target state="needs-translation">We received no valid mail.</target>
+        <target state="translated">We hebben geen geldige e-mail ontvangen.</target>
       </trans-unit>
       <trans-unit id="ratelimiter_too_many_attempts">
         <source>Too many attempts from this IP address. Try again later.</source>
-        <target state="needs-translation">Too many attempts from this IP address. Try again later.</target>
+        <target state="translated">Te veel pogingen van dit IP-adres. Probeer het later opnieuw.</target>
       </trans-unit>
       <trans-unit id="createFailedProfile">
         <source>Profile creation failed</source>
-        <target state="needs-translation">Profile creation failed</target>
+        <target state="translated">Profiel aanmaken mislukt</target>
       </trans-unit>
       <trans-unit id="userAlreadyConfirmed">
         <source>Profile is already confirmed</source>
-        <target state="needs-translation">Profile is already confirmed</target>
+        <target state="translated">Profiel is al bevestigd</target>
       </trans-unit>
       <trans-unit id="missingUserInDatabase">
         <source>No Profile found in database. Maybe it was deleted before.</source>
-        <target state="needs-translation">No Profile found in database. Maybe it was deleted before.</target>
+        <target state="translated">Geen profiel gevonden in de database. Misschien werd het al eerder verwijderd.</target>
       </trans-unit>
       <trans-unit id="createProfileDeleted">
         <source>Profile successfully deleted</source>
-        <target state="needs-translation">Profile successfully deleted</target>
+        <target state="translated">Profiel succesvol verwijderd</target>
       </trans-unit>
       <trans-unit id="titleUpdateProfile">
         <source>Update your user-profile</source>
-        <target state="needs-translation">Update your user-profile</target>
+        <target state="translated">Uw gebruikersprofiel bijwerken</target>
       </trans-unit>
       <trans-unit id="update">
         <source>Profile successfully changed</source>
-        <target state="needs-translation">Profile successfully changed</target>
+        <target state="translated">Gebruikersnaam is succesvol gewijzigd</target>
       </trans-unit>
       <trans-unit id="noChanges">
         <source>No changes detected, nothing to update</source>
-        <target state="needs-translation">No changes detected, nothing to update</target>
+        <target state="translated">Geen wijzigingen gedetecteerd, niets om bij te werken</target>
       </trans-unit>
       <trans-unit id="updateRequest">
         <source>Your change request was transmitted to the administrator. After a confirmation, your profile will be up-to-date.</source>
-        <target state="needs-translation">Your change request was transmitted to the administrator. After a confirmation, your profile will be up-to-date.</target>
+        <target state="translated">Uw wijzigingsverzoek is verzonden aan de beheerder. Na bevestiging zal uw profiel up-to-date zijn.</target>
       </trans-unit>
       <trans-unit id="login">
         <source>You're successfully logged in now</source>
-        <target state="needs-translation">You're successfully logged in now</target>
+        <target state="translated">Je bent succesvol ingelogd nu</target>
       </trans-unit>
       <trans-unit id="deleteProfile">
         <source>Delete Profile</source>
-        <target state="needs-translation">Delete Profile</target>
+        <target state="translated">Profiel verwijderen</target>
       </trans-unit>
       <trans-unit id="updateProfile">
         <source>Profile successfully updated</source>
-        <target state="needs-translation">Profile successfully updated</target>
+        <target state="translated">Profiel succesvol bijgewerkt</target>
       </trans-unit>
       <trans-unit id="updateFailedProfile">
         <source>Profile update failed</source>
-        <target state="needs-translation">Profile update failed</target>
+        <target state="translated">Profiel bijwerken mislukt</target>
       </trans-unit>
       <trans-unit id="field_image_fineuploader">
         <source>Please enable fineUploader plugin</source>
-        <target state="needs-translation">Please enable fineUploader plugin</target>
+        <target state="translated">Activeer de fineUploader plugin</target>
       </trans-unit>
       <trans-unit id="field_image_drag">
         <source>Drag file</source>
-        <target state="needs-translation">Drag file</target>
+        <target state="translated">Sleep bestand</target>
       </trans-unit>
       <trans-unit id="field_image_drag_processing">
         <source>Drag in progress ...</source>
-        <target state="needs-translation">Drag in progress ...</target>
+        <target state="translated">Slepen bezig...</target>
       </trans-unit>
       <trans-unit id="field_image_upload">
         <source>Upload</source>
-        <target state="needs-translation">Upload</target>
+        <target state="translated">Upload</target>
       </trans-unit>
       <trans-unit id="empty">
         <source>empty</source>
-        <target state="needs-translation">empty</target>
+        <target state="translated">leeg</target>
       </trans-unit>
       <trans-unit id="pleaseChoose">
         <source>Please choose ...</source>
-        <target state="needs-translation">Please choose ...</target>
+        <target state="translated">Maak een keuze ...</target>
       </trans-unit>
       <trans-unit id="pleaseChooseCountry">
         <source>Please choose a country ...</source>
-        <target state="needs-translation">Please choose a country ...</target>
+        <target state="translated">Kies een land ...</target>
       </trans-unit>
       <trans-unit id="FilterLabel">
         <source>Search</source>
-        <target state="needs-translation">Search</target>
+        <target state="translated">Zoek</target>
       </trans-unit>
       <trans-unit id="FilterPlaceholder">
         <source>Search ...</source>
-        <target state="needs-translation">Search ...</target>
+        <target state="translated">Zoek ...</target>
       </trans-unit>
       <trans-unit id="FilterSubmit">
         <source>Filter now</source>
-        <target state="needs-translation">Filter now</target>
+        <target state="translated">Nu filteren</target>
       </trans-unit>
       <trans-unit id="UserDeleteConfirmation">
         <source>Are you sure to delete your profile?</source>
-        <target state="needs-translation">Are you sure to delete your profile?</target>
+        <target state="translated">Weet u zeker, dat u dit profiel wilt verwijderen?</target>
       </trans-unit>
       <trans-unit id="titleInvitationProfile">
         <source>Invite a new user</source>
-        <target state="needs-translation">Invite a new user</target>
+        <target state="translated">Nieuwe gebruiker uitnodigen</target>
       </trans-unit>
       <trans-unit id="titleInvitationSetPassword">
         <source>Please set a new password</source>
-        <target state="needs-translation">Please set a new password</target>
+        <target state="translated">Stel een nieuw wachtwoord in</target>
       </trans-unit>
       <trans-unit id="BackendListUserDelete">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="translated">Verwijder</target>
       </trans-unit>
       <trans-unit id="BackendListUserDeleteConfirmation">
         <source>Are you sure to delete this User?</source>
-        <target state="needs-translation">Are you sure to delete this User?</target>
+        <target state="translated">Weet u zeker dat u deze gebruiker wilt verwijderen?</target>
       </trans-unit>
       <trans-unit id="BackendListUserEdit">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Bewerk</target>
       </trans-unit>
       <trans-unit id="BackendListUserLogout">
         <source>Logout</source>
-        <target state="needs-translation">Logout</target>
+        <target state="translated">Log uit</target>
       </trans-unit>
       <trans-unit id="BackendListUserStatusOffline">
         <source>Offline</source>
-        <target state="needs-translation">Offline</target>
+        <target state="translated">Offline</target>
       </trans-unit>
       <trans-unit id="BackendListUserStatusOnline">
         <source>Online</source>
-        <target state="needs-translation">Online</target>
+        <target state="translated">Online</target>
       </trans-unit>
       <trans-unit id="BackendListUserVisibilityHide">
         <source>Disable</source>
-        <target state="needs-translation">Disable</target>
+        <target state="translated">Deactiveer</target>
       </trans-unit>
       <trans-unit id="BackendListUserVisibilityHidden">
         <source>Hidden</source>
-        <target state="needs-translation">Hidden</target>
+        <target state="translated">Verborgen</target>
       </trans-unit>
       <trans-unit id="BackendListUserVisibilityUnhide">
         <source>Enable</source>
-        <target state="needs-translation">Enable</target>
+        <target state="translated">Activeer</target>
       </trans-unit>
       <trans-unit id="BackendListFilterLabel">
         <source>Search</source>
-        <target state="needs-translation">Search</target>
+        <target state="translated">Zoek</target>
       </trans-unit>
       <trans-unit id="BackendListLoginAs">
         <source>Login as</source>
-        <target state="needs-translation">Login as</target>
+        <target state="translated">Inloggen als</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteTitle">
         <source>Possible action:</source>
-        <target state="needs-translation">Possible action:</target>
+        <target state="translated">Mogelijke actie:</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteText">
         <source>%s approval(s) available</source>
-        <target state="needs-translation">%s approval(s) available</target>
+        <target state="translated">%s goedkeuring(en) beschikbaar</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteText">
         <source>%s missing user confirmation(s) available</source>
-        <target state="needs-translation">%s approval(s) available</target>
+        <target state="translated">%s goedkeuring(en) beschikbaar</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnAction">
         <source>Actions</source>
-        <target state="needs-translation">Actions</target>
+        <target state="translated">Acties</target>
       </trans-unit>
       <trans-unit id="BackendMissingConfigPID">
         <source>The config PID is missing!</source>
-        <target state="needs-translation">The config PID is missing!</target>
+        <target state="translated">De configuratie PID ontbreekt!</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnUid">
         <source>UID</source>
-        <target state="needs-translation">UID</target>
+        <target state="translated">UID</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageConfirmed">
         <source>%s was successfully approved</source>
-        <target state="needs-translation">%s was successfully approved</target>
+        <target state="translated">%s is met succes goedgekeurd</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageFailed">
         <source>The user confirmation failed, please check your system log or check your config</source>
-        <target state="needs-translation">The user confirmation failed, please check your system log or check your config</target>
+        <target state="translated">De bevestiging van de gebruiker is mislukt, controleer uw systeemlog of controleer uw configuratie</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageRefused">
         <source>%s was refused</source>
-        <target state="needs-translation">%s was refused</target>
+        <target state="translated">%s werd geweigerd</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationResendUserConfirmationRequest">
         <source>resend user confirmation e-mail</source>
-        <target state="needs-translation">resend user confirmation e-mail</target>
+        <target state="translated">bevestigingsmail van gebruiker opnieuw versturen</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageReSend">
         <source>%s confirmation mail was resend</source>
-        <target state="needs-translation">%s confirmation mail was resend</target>
+        <target state="translated">%s bevestiging e-mail werd opnieuw verzonden</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueMessage">
         <source>Your userprofile is not confirmed yet.</source>
-        <target state="needs-translation">Your userprofile is not confirmed yet.</target>
+        <target state="translated">Je gebruikersprofiel is nog niet bevestigd.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueLink">
         <source>Resend confirmation email?</source>
-        <target state="needs-translation">Resend confirmation email?</target>
+        <target state="translated">Bevestigingsmail opnieuw versturen?</target>
       </trans-unit>
       <trans-unit id="createStatus">
         <source>User registration</source>
-        <target state="needs-translation">User registration</target>
+        <target state="translated">Gebruikersregistratie</target>
       </trans-unit>
       <trans-unit id="js.loading_states">
         <source>Loading states ...</source>
-        <target state="needs-translation">Loading states ...</target>
+        <target state="translated">Statussen worden geladen...</target>
       </trans-unit>
     </body>
   </file>
