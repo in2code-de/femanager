@@ -24,6 +24,8 @@ class ConfigurationUtility extends AbstractUtility
         'new./fillEmailWithUsername' => 0,
         'new/misc/passwordSave' => 0,
         'new./misc./passwordSave' => 0,
+        'new./redirect' => 'TEXT',
+        'new./redirect.' => []
     ];
 
     /**

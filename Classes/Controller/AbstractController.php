@@ -341,14 +341,14 @@ abstract class AbstractController extends ActionController
         $target = null;
         // redirect from TypoScript cObject
         if ($this->contentObject->cObjGetSingle(
-            $this->config[$action . '.'][$category],
-            $this->config[$action . '.'][$category . '.']
+            ConfigurationUtility::getValue($action . './' . $category, $this->config),
+            ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
         )
         ) {
             $target = $this->contentObject->cObjGetSingle(
-                $this->config[$action . '.'][$category],
+                ConfigurationUtility::getValue($action . './' . $category, $this->config),
                 array_merge_recursive(
-                    $this->config[$action . '.'][$category . '.'],
+                    ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
                     [
                         'linkAccessRestrictedPages' => 1
                     ]
