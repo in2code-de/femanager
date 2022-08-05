@@ -31,7 +31,7 @@ class ImageManipulation extends AbstractDataProcessor
                 unset($arguments['user'][$property]);
             } else {
                 // file upload given
-                foreach ((array)$arguments['user'][$property] as $fileItem) {
+                foreach ($arguments['user'][$property] ?? [] as $fileItem) {
                     /** @noinspection PhpMethodParametersCountMismatchInspection */
                     $fileService = ObjectUtility::getObjectManager()->get(
                         FileService::class,

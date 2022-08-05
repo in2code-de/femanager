@@ -14,6 +14,7 @@ use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
 use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\BackendUtility;
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -167,14 +168,14 @@ abstract class AbstractController extends ActionController
     {
         // send notify email to admin
         $existingUser = clone $this->userRepository->findByUid($user->getUid());
-        if ($this->settings['edit']['notifyAdmin']
-            || $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value']) {
+        if ($this->settings['edit']['notifyAdmin'] ?? null
+            || $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value'] ?? null) {
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value']
                     ?? $this->settings['edit']['notifyAdmin'],
-                    $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value']
+                    $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value'] ?? null
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile update',
@@ -183,7 +184,7 @@ abstract class AbstractController extends ActionController
                     'changes' => UserUtility::getDirtyPropertiesFromUser($existingUser),
                     'settings' => $this->settings
                 ],
-                $this->config['edit.']['email.']['notifyAdmin.']
+                $this->config['edit.']['email.']['notifyAdmin.'] ?? []
             );
         }
 
@@ -203,26 +204,35 @@ abstract class AbstractController extends ActionController
      */
     public function updateRequest($user)
     {
-        $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($user);
-        $user = UserUtility::rollbackUserWithChangeRequest($user, $dirtyProperties);
-        $this->sendMailService->send(
-            'updateRequest',
-            StringUtility::makeEmailArray(
-                $this->settings['edit']['confirmByAdmin'],
-                $this->settings['edit']['email']['updateRequest']['sender']['name']['value']
-            ),
-            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-            'New Profile change request',
-            [
-                'user' => $user,
-                'changes' => $dirtyProperties,
-                'hash' => HashUtility::createHashForUser($user)
-            ],
-            $this->config['edit.']['email.']['updateRequest.']
-        );
-        $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user, ['dirtyProperties' => $dirtyProperties]);
-        $this->redirectByAction('edit', 'requestRedirect');
-        $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
+        if ($this->settings['edit']['confirmByAdmin'] ?? null) {
+            $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($user);
+            $user = UserUtility::rollbackUserWithChangeRequest($user, $dirtyProperties);
+            $this->sendMailService->send(
+                'updateRequest',
+                StringUtility::makeEmailArray(
+                    $this->settings['edit']['confirmByAdmin'],
+                    $this->settings['edit']['email']['updateRequest']['sender']['name']['value'] ?? null
+                ),
+                StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
+                'New Profile change request',
+                [
+                    'user' => $user,
+                    'changes' => $dirtyProperties,
+                    'hash' => HashUtility::createHashForUser($user)
+                ],
+                $this->config['edit.']['email.']['updateRequest.'] ?? []
+            );
+            $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user, ['dirtyProperties' => $dirtyProperties]
+            );
+            $this->redirectByAction('edit', 'requestRedirect');
+            $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
+        } else {
+            $this->logUtility->log(
+                Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
+                $user,
+                ['message' => 'settings[edit][confirmByAdmin] is missing!']
+            );
+        }
     }
 
     /**
@@ -245,20 +255,29 @@ abstract class AbstractController extends ActionController
     ): void {
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
-        $this->sendMailService->send(
-            'createUserNotify',
-            StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
-            StringUtility::makeEmailArray(
-                $this->settings['new']['email']['createUserNotify']['sender']['email']['value'],
-                $this->settings['new']['email']['createUserNotify']['sender']['name']['value']
-            ),
-            $this->contentObject->cObjGetSingle(
-                $this->config['new.']['email.']['createUserNotify.']['subject'],
-                $this->config['new.']['email.']['createUserNotify.']['subject.']
-            ),
-            $variables,
-            $this->config['new.']['email.']['createUserNotify.']
-        );
+        if (ConfigurationUtility::getValue(
+                'new./email./createUserNotify./sender./email./value',
+                $this->settings
+            ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
+            $this->sendMailService->send(
+                'createUserNotify',
+                StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
+                StringUtility::makeEmailArray(
+                    ConfigurationUtility::getValue(
+                        'new./email./createUserNotify./sender./email./value',
+                        $this->settings
+                    ),
+                    ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->settings)
+                ),
+                $this->contentObject->cObjGetSingle(
+                    ConfigurationUtility::getValue('new./email./createUserNotify./subject', $this->settings),
+                    ConfigurationUtility::getValue('new./email./createUserNotify./subject.', $this->settings),
+                ),
+                $variables,
+                ConfigurationUtility::getValue('new./email./createUserNotify.', $this->settings)
+            );
+        }
+
 
         // send notify email to admin
         if ($this->settings['new']['notifyAdmin'] ||
@@ -302,8 +321,8 @@ abstract class AbstractController extends ActionController
             // persist user (otherwise login may not be possible)
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
-            if ($this->config['new.']['login'] === '1') {
-                UserUtility::login($user, $this->allConfig['persistence']['storagePid']);
+            if ($this->config['new.']['login'] ?? 0 === '1') {
+                UserUtility::login($user, $this->allConfig['persistence']['storagePid'] ?? 0);
                 $this->addFlashMessage(LocalizationUtility::translate('login'), '', FlashMessage::NOTICE);
             }
         }
@@ -503,7 +522,7 @@ abstract class AbstractController extends ActionController
     protected function setAllUserGroups()
     {
         $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'];
+        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'] ?? "";
         $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
     }
 

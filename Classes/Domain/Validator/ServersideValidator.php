@@ -9,6 +9,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
+use function PHPUnit\Framework\isNull;
+
 /**
  * Class ServersideValidator
  */
@@ -320,9 +322,10 @@ class ServersideValidator extends AbstractValidator
                 if ($current instanceof FileReference) {
                     return true;
                 }
-
-                if (method_exists($current, 'getUid')) {
-                    $value = $current->getUid();
+                if (!isNull($current)) {
+                    if (method_exists($current, 'getUid')) {
+                        $value = $current->getUid();
+                    }
                 }
             }
         }

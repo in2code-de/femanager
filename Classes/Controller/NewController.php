@@ -10,6 +10,7 @@ use In2code\Femanager\Domain\Service\AutoAdminConfirmationService;
 use In2code\Femanager\Event\BeforeUserConfirmEvent;
 use In2code\Femanager\Event\BeforeUserCreateEvent;
 use In2code\Femanager\Event\CreateConfirmationRequestEvent;
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -69,7 +70,8 @@ class NewController extends AbstractFrontendController
         $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
-        UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
+
+        UserUtility::hashPassword($user, ConfigurationUtility::getValue('new/misc/passwordSave',$this->settings));
 
         $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
         $this->ratelimiterService->consumeSlot();
