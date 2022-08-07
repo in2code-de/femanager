@@ -369,7 +369,7 @@
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationText3" approved="yes">
         <source>If you want to delete the registration, without sending an email to the user, click this link:</source>
-        <target state="final">Wenn die Registrierung gelöcht werden soll, ohne dass der Benutzer eine E-Mail zugeschickt bekommt, bitte nachfolgenden Link klicken:</target>
+        <target state="final">Wenn die Registrierung gelöscht werden soll, ohne dass der Benutzer eine E-Mail zugeschickt bekommt, bitte nachfolgenden Link klicken:</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent" approved="yes">
         <source>Silently delete profile</source>
@@ -767,9 +767,9 @@
         <source>Filter now</source>
         <target state="final">Jetzt Filtern</target>
       </trans-unit>
-      <trans-unit id="UserDeleteConfirmation" approved="yes">
+      <trans-unit id="UserDeleteConfirmation">
         <source>Are you sure to delete your profile?</source>
-        <target state="final">Wollen Sie Ihr Profil wirklich löschen?</target>
+        <target state="translated">Sind Sie sicher, dass Sie Ihr Profil löschen möchten?</target>
       </trans-unit>
       <trans-unit id="titleInvitationProfile" approved="yes">
         <source>Invite a new user</source>
