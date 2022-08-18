@@ -15,7 +15,7 @@ class CleanUserGroup extends AbstractDataProcessor
      */
     public function process(array $arguments): array
     {
-        if (empty($arguments['user']['usergroup'][0]) && empty($arguments['user']['usergroup'][0]['__identity'])) {
+        if (is_array($arguments['user']['usergroup']) && empty($arguments['user']['usergroup'][0]) && empty($arguments['user']['usergroup'][0]['__identity'])) {
             unset($arguments['user']['usergroup'][0]);
         }
         return $arguments;
