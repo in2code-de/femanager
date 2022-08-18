@@ -441,7 +441,7 @@ abstract class AbstractController extends ActionController
 
             // Retrieve user TSconfig of currently logged in user
             $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
-            if (is_array($userTsConfig['tx_femanager.'])) {
+            if (is_array($userTsConfig['tx_femanager.']) && is_array($this->moduleConfig)) {
                 $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.']);
             }
         }

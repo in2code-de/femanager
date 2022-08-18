@@ -2194,7 +2194,8 @@ only admins should confirm the requests), **User TSConfig** can be used like (to
 Configuration
 """""""""""""
 
-All settings for the backend module are done in ext_typoscript_setup.txt in the key module.tx_femanager.
+Nearly all settings for the backend module are done in ext_typoscript_setup.txt in the key module.tx_femanager.
+One setting must be done in your TypoScript Template, the setting module.tx_femanager.settings.configPID should be set in your TypoScript, the default is 1.
 
 You can overwrite these settings in your page TS.
 
