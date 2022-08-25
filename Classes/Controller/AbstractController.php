@@ -503,7 +503,7 @@ abstract class AbstractController extends ActionController
     protected function setAllUserGroups()
     {
         $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'];
+        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'] ?? '';
         $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
     }
 

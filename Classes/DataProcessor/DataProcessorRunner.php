@@ -72,7 +72,7 @@ class DataProcessorRunner
         Arguments $controllerArguments
     ): array {
         foreach ($this->getClasses($settings) as $configuration) {
-            $class = $configuration['class'];
+            $class = $configuration['class'] ?? null;
             if (!class_exists($class)) {
                 throw new \UnexpectedValueException(
                     'DataProcessor class ' . $class . ' does not exists - check if file is loaded correctly',
@@ -84,7 +84,7 @@ class DataProcessorRunner
                 /** @noinspection PhpMethodParametersCountMismatchInspection */
                 $dataProcessor = ObjectUtility::getObjectManager()->get(
                     $class,
-                    (array)$configuration['config'],
+                    (array)($configuration['config'] ?? []),
                     $settings,
                     $contentObject,
                     $controllerArguments
@@ -106,7 +106,7 @@ class DataProcessorRunner
      */
     protected function getClasses($settings): array
     {
-        $allDataProcessors = (array)$settings['dataProcessors'];
+        $allDataProcessors = (array)($settings['dataProcessors'] ?? []);
         ksort($allDataProcessors);
         $dataProcessors = [];
         foreach ($allDataProcessors as $dataProcessor) {

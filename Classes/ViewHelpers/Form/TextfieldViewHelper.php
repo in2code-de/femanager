@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Form;
 
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -41,7 +42,7 @@ class TextfieldViewHelper extends OriginalTextfieldViewHelper
      */
     protected function getValueFromTypoScript(): string
     {
-        if (! $this->renderingContext instanceof RenderingContext) {
+        if (!$this->renderingContext instanceof RenderingContext) {
             throw new FluidViewHelperException(
                 'Something went wrong; RenderingContext should be available in ViewHelper',
                 1638341334
@@ -53,10 +54,16 @@ class TextfieldViewHelper extends OriginalTextfieldViewHelper
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
         $prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
-        $value = $contentObject->cObjGetSingle(
+        if (!$contentObject ||
+            empty($typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.']) ||
+            empty($this->arguments['property']) ||
+            empty($prefillTypoScript[$this->arguments['property']]) ||
+            empty($prefillTypoScript[$this->arguments['property'] . '.'])) {
+            return '';
+        }
+        return $contentObject->cObjGetSingle(
             $prefillTypoScript[$this->arguments['property']],
             $prefillTypoScript[$this->arguments['property'] . '.']
         );
-        return $value;
     }
 }
