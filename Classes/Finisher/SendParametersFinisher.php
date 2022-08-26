@@ -59,7 +59,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
         $typoScript = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        $this->configuration = $typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.'];
+        $this->configuration = $typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.'] ?? [];
     }
 
     /**
@@ -99,13 +99,14 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected function getData()
     {
-        return $this->contentObject->cObjGetSingle($this->configuration['data'], $this->configuration['data.']);
+        return isset($this->configuration['data'], $this->configuration['data.']) ? $this->contentObject->cObjGetSingle($this->configuration['data'],
+            $this->configuration['data.']) : '';
     }
 
     protected function getTargetUrl()
     {
         $linkConfiguration = [
-            'parameter' => $this->configuration['targetUrl'],
+            'parameter' => $this->configuration['targetUrl'] ?? '',
             'forceAbsoluteUrl' => '1',
             'returnLast' => 'url'
         ];
@@ -119,7 +120,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected function isEnabled()
     {
-        return $this->contentObject->cObjGetSingle($this->configuration['_enable'], $this->configuration['_enable.'])
-            === '1';
+        return isset($this->configuration['_enable'], $this->configuration['_enable.'])
+            && $this->contentObject->cObjGetSingle($this->configuration['_enable'], $this->configuration['_enable.']) === '1';
     }
 }

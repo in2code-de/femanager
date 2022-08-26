@@ -127,7 +127,7 @@ class UserUtility extends AbstractUtility
      */
     public static function takeEmailAsUsername(User $user, array $settings)
     {
-        if ($settings['new']['fillEmailWithUsername'] === '1') {
+        if (isset($settings['new']['fillEmailWithUsername']) && $settings['new']['fillEmailWithUsername'] === '1') {
             $user->setEmail($user->getUsername());
         }
 

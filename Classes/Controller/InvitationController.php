@@ -65,7 +65,7 @@ class InvitationController extends AbstractFrontendController
         if ($this->settings['invitation']['fillEmailWithUsername'] === '1') {
             $user->setEmail($user->getUsername());
         }
-        UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
+        UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave'] ?? '');
         $this->eventDispatcher->dispatch(new InviteUserCreateEvent($user));
         $this->ratelimiterService->consumeSlot();
         $this->createAllConfirmed($user);
@@ -185,7 +185,7 @@ class InvitationController extends AbstractFrontendController
             );
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings, 'invitation');
-        UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
+        UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave'] ?? '');
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
         $this->eventDispatcher->dispatch(new InviteUserUpdateEvent($user));

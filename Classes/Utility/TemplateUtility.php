@@ -50,9 +50,8 @@ class TemplateUtility extends AbstractUtility
             $templatePaths = array_values($templatePaths);
         }
         if ($returnAllPaths || empty($templatePaths)) {
-            $path = $configuration['view'][$part . 'RootPath'];
-            if (!empty($path)) {
-                $templatePaths[] = $path;
+            if (!empty($configuration['view'][$part . 'RootPath'])) {
+                $templatePaths[] = $configuration['view'][$part . 'RootPath'];
             }
         }
         if ($returnAllPaths || empty($templatePaths)) {

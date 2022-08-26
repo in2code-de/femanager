@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Model\User;
@@ -67,9 +68,9 @@ class FinisherRunner
         foreach ($this->getFinisherClasses($settings) as $finisherSettings) {
             /** @var FinisherService $finisherService */
             $finisherService = $this->objectManager->get(FinisherService::class, $user, $settings, $contentObject);
-            $finisherService->setClass($finisherSettings['class']);
-            $finisherService->setRequirePath((string)$finisherSettings['require']);
-            $finisherService->setConfiguration((array)$finisherSettings['config']);
+            $finisherService->setClass($finisherSettings['class'] ?? '');
+            $finisherService->setRequirePath((string)($finisherSettings['require'] ?? ''));
+            $finisherService->setConfiguration((array)($finisherSettings['config'] ?? []));
             $finisherService->setActionMethodName($actionMethodName);
             $finisherService->start();
         }
@@ -83,7 +84,7 @@ class FinisherRunner
      */
     protected function getFinisherClasses($settings)
     {
-        $finishers = (array)$settings['finishers'];
+        $finishers = (array)($settings['finishers'] ?? []);
         ksort($finishers);
         return $finishers;
     }

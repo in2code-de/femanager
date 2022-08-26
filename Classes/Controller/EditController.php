@@ -65,7 +65,7 @@ class EditController extends AbstractFrontendController
         $this->redirectIfDirtyObject($user);
         $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.']);
         $this->emailForUsername($user);
-        UserUtility::convertPassword($user, $this->settings['edit']['misc']['passwordSave']);
+        UserUtility::convertPassword($user, $this->settings['edit']['misc']['passwordSave'] ?? '');
         $this->eventDispatcher->dispatch(new BeforeUpdateUserEvent($user));
         if (!empty($this->settings['edit']['confirmByAdmin'])) {
             $this->updateRequest($user);
@@ -205,7 +205,7 @@ class EditController extends AbstractFrontendController
      */
     protected function emailForUsername(User $user)
     {
-        if ($this->settings['edit']['fillEmailWithUsername'] === '1') {
+        if (isset($this->settings['edit']['fillEmailWithUsername']) && $this->settings['edit']['fillEmailWithUsername'] === '1') {
             $user->setEmail($user->getUsername());
         }
     }

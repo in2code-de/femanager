@@ -119,6 +119,10 @@ class SendMailService
      */
     protected function embedImages(array $variables, array $typoScript, MailMessage $email): array
     {
+        if (!isset($typoScript['embedImage'], $typoScript['embedImage.'])) {
+            return $variables;
+        }
+
         $images = $this->contentObject->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.']);
 
         if (!$images) {
@@ -244,6 +248,10 @@ class SendMailService
      */
     protected function setAttachments(array $typoScript, MailMessage $email)
     {
+        if (!isset($typoScript['attachments'], $typoScript['attachments.'])) {
+            return;
+        }
+
         if ($this->contentObject->cObjGetSingle($typoScript['attachments'], $typoScript['attachments.'])) {
             $files = GeneralUtility::trimExplode(
                 ',',

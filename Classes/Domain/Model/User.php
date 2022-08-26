@@ -338,8 +338,8 @@ class User extends FrontendUser
      */
     public function isOnline(): bool
     {
-        if (method_exists($this->getLastlogin(), 'getTimestamp')
-            && $this->getLastlogin()->getTimestamp() > (time() - 2 * 60 * 60)
+        if (($lastLogin = $this->getLastlogin()) && method_exists($lastLogin, 'getTimestamp')
+            && $lastLogin->getTimestamp() > (time() - 2 * 60 * 60)
             && UserUtility::checkFrontendSessionToUser($this)
         ) {
             return true;

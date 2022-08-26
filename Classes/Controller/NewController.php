@@ -69,7 +69,7 @@ class NewController extends AbstractFrontendController
         $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
-        UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
+        UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave'] ?? '');
 
         $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
         $this->ratelimiterService->consumeSlot();

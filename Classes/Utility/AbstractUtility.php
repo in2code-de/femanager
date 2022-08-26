@@ -71,7 +71,7 @@ abstract class AbstractUtility
      */
     protected static function getTypoScriptFrontendController()
     {
-        return $GLOBALS['TSFE'];
+        return $GLOBALS['TSFE'] ?? null;
     }
 
     /**

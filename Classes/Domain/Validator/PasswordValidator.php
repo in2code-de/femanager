@@ -91,14 +91,9 @@ class PasswordValidator extends AbstractValidatorExtbase
      */
     protected function keepPasswordIfEmpty()
     {
-        if (isset($this->configuration['edit']['misc']['keepPasswordIfEmpty']) &&
-            $this->configuration['edit']['misc']['keepPasswordIfEmpty'] === '1' &&
-            isset($this->piVars['user']['password']) && $this->piVars['user']['password'] === '' &&
-            isset($this->piVars['password_repeat']) && $this->piVars['password_repeat'] === ''
-        ) {
-            return true;
-        }
-        return false;
+        return isset($this->configuration['edit']['misc']['keepPasswordIfEmpty'], $this->piVars['user']['password'], $this->piVars['password_repeat'])
+            && $this->configuration['edit']['misc']['keepPasswordIfEmpty'] === '1'
+            && $this->piVars['user']['password'] === '' && $this->piVars['password_repeat'] === '';
     }
 
     /**

@@ -168,7 +168,7 @@ abstract class AbstractController extends ActionController
         // send notify email to admin
         $existingUser = clone $this->userRepository->findByUid($user->getUid());
         if ($this->settings['edit']['notifyAdmin']
-            || $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value']) {
+            || $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value'] ?? false) {
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
@@ -183,7 +183,7 @@ abstract class AbstractController extends ActionController
                     'changes' => UserUtility::getDirtyPropertiesFromUser($existingUser),
                     'settings' => $this->settings
                 ],
-                $this->config['edit.']['email.']['notifyAdmin.']
+                $this->config['edit.']['email.']['notifyAdmin.'] ?? []
             );
         }
 
@@ -321,7 +321,8 @@ abstract class AbstractController extends ActionController
     {
         $target = null;
         // redirect from TypoScript cObject
-        if ($this->contentObject->cObjGetSingle(
+        if (isset($this->config[$action . '.'][$category], $this->config[$action . '.'][$category . '.']) &&
+            $this->contentObject->cObjGetSingle(
             $this->config[$action . '.'][$category],
             $this->config[$action . '.'][$category . '.']
         )
@@ -422,25 +423,25 @@ abstract class AbstractController extends ActionController
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
-        $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'];
+        $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
-            $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
-            if (is_array($config['plugin.']['tx_femanager.']['settings.'])) {
+            $config = BackendUtility::loadTS($this->allConfig['settings']['configPID'] ?? null);
+            if (isset($config['plugin.']['tx_femanager.']['settings.']) && is_array($config['plugin.']['tx_femanager.']['settings.'])) {
                 $this->config = $config['plugin.']['tx_femanager.']['settings.'];
                 $this->settings = $this->config;
             }
 
-            $this->moduleConfig = $config['module.']['tx_femanager.'];
+            $this->moduleConfig = $config['module.']['tx_femanager.'] ?? [];
 
             // Retrieve page TSconfig of the current page
             $pageTsConfig = BackendUtilityCore::getPagesTSconfig(BackendUtility::getPageIdentifier());
-            if (is_array($pageTsConfig['module.']['tx_femanager.'])) {
+            if (isset($pageTsConfig['module.']['tx_femanager.']) && is_array($pageTsConfig['module.']['tx_femanager.'])) {
                 $this->moduleConfig = array_merge($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.']);
             }
 
             // Retrieve user TSconfig of currently logged in user
             $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
-            if (is_array($userTsConfig['tx_femanager.'])) {
+            if (isset($userTsConfig['tx_femanager.']) && is_array($userTsConfig['tx_femanager.'])) {
                 $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.']);
             }
         }

@@ -66,7 +66,7 @@ class UserRepository extends Repository
             $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], true);
             $fieldsToSearch = GeneralUtility::trimExplode(
                 ',',
-                $settings['list']['filter']['searchword']['fieldsToSearch'],
+                $settings['list']['filter']['searchword']['fieldsToSearch'] ?? '',
                 true
             );
             foreach ($searchwords as $searchword) {
@@ -81,14 +81,14 @@ class UserRepository extends Repository
 
         // sorting
         $sorting = QueryInterface::ORDER_ASCENDING;
-        if ($settings['list']['sorting'] === 'desc') {
+        if (isset($settings['list']['sorting']) && $settings['list']['sorting'] === 'desc') {
             $sorting = QueryInterface::ORDER_DESCENDING;
         }
-        $field = preg_replace('/[^a-zA-Z0-9_-]/', '', $settings['list']['orderby']);
+        $field = preg_replace('/[^a-zA-Z0-9_-]/', '', $settings['list']['orderby'] ?? '');
         $query->setOrderings([$field => $sorting]);
 
         // set limit
-        if ((int)$settings['list']['limit'] > 0) {
+        if ((int)($settings['list']['limit'] ?? 0) > 0) {
             $query->setLimit((int)$settings['list']['limit']);
         }
 
