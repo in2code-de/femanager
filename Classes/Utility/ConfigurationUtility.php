@@ -16,16 +16,27 @@ class ConfigurationUtility extends AbstractUtility
 {
 
     const DEFAULT_CONFIGURATION = [
-        'new./email./createUserNotify./sender./email./value' => 0,
-        'new./email./createUserNotify./sender./name./value' => 0,
+        'new./email./createUserNotify./sender./email./value' => '9999',
+        'new./email./createUserNotify./sender./name./value' => '9999',
         'new./email./createUserNotify./subject' => 'TEXT',
         'new./email./createUserNotify./subject.' => [],
         'new./email./createUserNotify.' => [],
+        'new./email./createUserConfirmation./sender./email./value' => '',
+        'new./email./createUserConfirmation./sender./email./value' => '',
+        'new./email./createUserConfirmation./subject' => 'TEXT',
+        'new./email./createUserConfirmation./subject.' => [],
+        'new./email./createUserConfirmation.' => [],
         'new./fillEmailWithUsername' => 0,
         'new/misc/passwordSave' => 0,
         'new./misc./passwordSave' => 0,
         'new./redirect' => 'TEXT',
-        'new./redirect.' => []
+        'new./redirect.' => [],
+        'new./requestRedirect' => 'TEXT',
+        'new./requestRedirect.' => [],
+        'edit./redirect' => 'TEXT',
+        'edit./redirect.' => [],
+        'edit./requestRedirect' => 'TEXT',
+        'edit./requestRedirect.' => [],
     ];
 
     /**
@@ -101,6 +112,20 @@ class ConfigurationUtility extends AbstractUtility
         $config = BackendUserUtility::getBackendUserAuthentication()->getTSConfig(
             )['tx_femanager.']['UserBackend.']['confirmation.']['ResendUserConfirmationRequest'] ?? false;
         return (bool)$config;
+    }
+
+    public static function IsCreateUserNotifyActive($config): bool
+    {
+        if (ConfigurationUtility::getValue(
+                'new/email/createUserNotify/sender/email/value',
+                $config
+            ) && ConfigurationUtility::getValue(
+                'new./email./createUserNotify./sender./name./value',
+                $config
+            )) {
+            return true;
+        }
+        return false;
     }
 
     /**
