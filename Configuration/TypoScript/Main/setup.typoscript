@@ -118,7 +118,7 @@ plugin.tx_femanager {
       #      }
 
       # validation of user input values
-      # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space), mustNotInclude(number,letter,special,space), inList(1,2,3), captcha, sameAs(password)
+      # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space,uppercase,lowercase), mustNotInclude(number,letter,special,space), inList(1,2,3), captcha, sameAs(password)
       # see manual for an example how to add custom serverside and clientside validation
       validation {
         _enable {
@@ -144,7 +144,7 @@ plugin.tx_femanager {
         password {
           required = 1
           #min = 10
-          #mustInclude = number,letter,special
+          #mustInclude = number,letter,special,uppercase,lowercase
         }
 
         password_repeat {
@@ -746,7 +746,7 @@ plugin.tx_femanager {
       }
 
       # validation of user input values
-      # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space,uppercase), mustNotInclude(number,letter,uppercase,special,space), inList(1,2,3), captcha, sameAs(password)
+      # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space,uppercase,lowercase), mustNotInclude(number,letter,special,space,uppercase,lowercase), inList(1,2,3), captcha, sameAs(password)
       validation {
         _enable {
           # Enable clientside Formvalidation (JavaScript)
@@ -769,7 +769,7 @@ plugin.tx_femanager {
         password {
           required = 1
           #min = 10
-          #mustInclude = number,letter,special
+          #mustInclude = number,letter,special,uppercase,lowercase
         }
 
         password_repeat {
@@ -1101,7 +1101,7 @@ plugin.tx_femanager {
       #      }
 
       # validation of user input values
-      # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space), mustNotInclude(number,letter,special,space), inList(1,2,3), captcha, sameAs(password)
+      # possible validations for each field are: required, email, min, max, intOnly, lettersOnly, unicodeLettersOnly, uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special,space,uppercase,lowercase), mustNotInclude(number,letter,special,space,uppercase,lowercase), inList(1,2,3), captcha, sameAs(password)
       # Validation for first Step (Create)
       validation {
         _enable {
@@ -1146,7 +1146,7 @@ plugin.tx_femanager {
         password {
           required = 1
           #min = 10
-          #mustInclude = number,letter,special
+          #mustInclude = number,letter,special,uppercase,lowercase
         }
 
         password_repeat {
@@ -1689,18 +1689,18 @@ plugin.tx_femanager {
 #########################
 # add jQuery if it was turned on in the constants
 [0 < {$plugin.tx_femanager.settings.jQuery}]
-page.includeJSFooterlibs {
-  femanagerJQuery = //ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js
-  femanagerJQuery.external = 1
-}
+  page.includeJSFooterlibs {
+    femanagerJQuery = //ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js
+    femanagerJQuery.external = 1
+  }
 [end]
 
 # add twitter bootstrap JS if it was turned on in the constants
 [0 < {$plugin.tx_femanager.settings.bootstrap}]
-page.includeJSFooterlibs {
-  femanangerBootstrap = //maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
-  femanangerBootstrap.external = 1
-}
+  page.includeJSFooterlibs {
+    femanangerBootstrap = //maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
+    femanangerBootstrap.external = 1
+  }
 [end]
 
 #########################
@@ -1708,10 +1708,10 @@ page.includeJSFooterlibs {
 #########################
 # add twitter bootstrap CSS if it was turned on in the constants
 [0 < {$plugin.tx_femanager.settings.bootstrapCSS}]
-page.includeCSS {
-  femanangerBootstrap = //maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
-  femanangerBootstrap.external = 1
-}
+  page.includeCSS {
+    femanangerBootstrap = //maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
+    femanangerBootstrap.external = 1
+  }
 [end]
 
 page {
