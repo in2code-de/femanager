@@ -9,6 +9,7 @@ use In2code\Femanager\Utility\ObjectUtility;
 use LogicException;
 use PDO;
 use TYPO3\CMS\Core\Service\FlexFormService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class PluginRepository
@@ -30,11 +31,11 @@ class PluginRepository
     ];
 
     /**
-     * @param FlexFormService $flexFormService
+     * @param FlexFormService|null $flexFormService
      */
-    public function __construct(FlexFormService $flexFormService)
+    public function __construct(FlexFormService $flexFormService = null)
     {
-        $this->flexFormService = $flexFormService;
+        $this->flexFormService = $flexFormService ?? GeneralUtility::makeInstance(FlexFormService::class);
     }
 
     /**

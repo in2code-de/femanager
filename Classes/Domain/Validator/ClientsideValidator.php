@@ -8,7 +8,6 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\PluginRepository;
 use In2code\Femanager\Domain\Service\ValidationSettingsService;
 use In2code\Femanager\Utility\LocalizationUtility;
-use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
 use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
