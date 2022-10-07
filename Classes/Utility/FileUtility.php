@@ -11,7 +11,6 @@ use TYPO3\CMS\Core\Utility\PathUtility;
  */
 class FileUtility extends AbstractUtility
 {
-
     /**
      * @param string $path Absolute path
      * @throws \Exception

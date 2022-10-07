@@ -10,7 +10,6 @@ use In2code\Femanager\Domain\Model\User;
  */
 interface FinisherInterface
 {
-
     /**
      * @return User
      */

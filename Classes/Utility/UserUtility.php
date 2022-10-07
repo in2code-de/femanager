@@ -22,7 +22,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class UserUtility extends AbstractUtility
 {
-
     /**
      * Return current logged in fe_user
      *
@@ -124,8 +123,7 @@ class UserUtility extends AbstractUtility
      */
     public static function takeEmailAsUsername(User $user, array $settings)
     {
-
-        if (ConfigurationUtility::getValue('new./fillEmailWithUsername',$settings) === '1') {
+        if (ConfigurationUtility::getValue('new./fillEmailWithUsername', $settings) === '1') {
             $user->setEmail($user->getUsername());
         }
 

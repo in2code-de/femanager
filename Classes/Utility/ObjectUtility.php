@@ -16,7 +16,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class ObjectUtility extends AbstractUtility
 {
-
     /**
      * @param string $tableName
      * @return QueryBuilder

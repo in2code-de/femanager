@@ -13,7 +13,6 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  */
 class TemplateUtility extends AbstractUtility
 {
-
     /**
      * Get absolute path for templates with fallback
      *        In case of multiple paths this will just return the first one.

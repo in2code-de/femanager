@@ -222,7 +222,10 @@ abstract class AbstractController extends ActionController
                 ],
                 $this->config['edit.']['email.']['updateRequest.'] ?? []
             );
-            $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user, ['dirtyProperties' => $dirtyProperties]
+            $this->logUtility->log(
+                Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
+                $user,
+                ['dirtyProperties' => $dirtyProperties]
             );
             $this->redirectByAction('edit', 'requestRedirect');
             $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
@@ -256,9 +259,9 @@ abstract class AbstractController extends ActionController
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         if (ConfigurationUtility::getValue(
-                'new./email./createUserNotify./sender./email./value',
-                $this->settings
-            ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
+            'new./email./createUserNotify./sender./email./value',
+            $this->settings
+        ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
             $this->sendMailService->send(
                 'createUserNotify',
                 StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
@@ -530,7 +533,7 @@ abstract class AbstractController extends ActionController
     protected function setAllUserGroups()
     {
         $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'] ?? "";
+        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'] ?? '';
         $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
     }
 

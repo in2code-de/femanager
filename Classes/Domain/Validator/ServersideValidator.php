@@ -9,14 +9,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
-use function PHPUnit\Framework\isNull;
-
 /**
  * Class ServersideValidator
  */
 class ServersideValidator extends AbstractValidator
 {
-
     /**
      * Validation of given Params
      *

@@ -30,7 +30,6 @@ use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
  */
 class NewController extends AbstractFrontendController
 {
-
     /**
      * Render registration form
      *
@@ -71,7 +70,7 @@ class NewController extends AbstractFrontendController
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
 
-        UserUtility::hashPassword($user, ConfigurationUtility::getValue('new/misc/passwordSave',$this->settings));
+        UserUtility::hashPassword($user, ConfigurationUtility::getValue('new/misc/passwordSave', $this->settings));
 
         $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
         $this->ratelimiterService->consumeSlot();

@@ -10,7 +10,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class GetFirstViewHelper extends AbstractViewHelper
 {
-
     /**
      * Call getFirst() method of object storage
      *

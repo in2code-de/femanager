@@ -14,7 +14,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class SendParametersFinisher extends AbstractFinisher implements FinisherInterface
 {
-
     /**
      * Inject a complete new content object
      *

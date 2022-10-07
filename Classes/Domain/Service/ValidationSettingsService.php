@@ -3,7 +3,6 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
-use In2code\Femanager\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
@@ -12,7 +11,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class ValidationSettingsService
 {
-
     /**
      * Needed for validation settings. Should be "new", "edit" or "invitation"
      *
@@ -69,7 +67,9 @@ class ValidationSettingsService
 
         if (is_array($validationSettings)) {
             foreach ($validationSettings as $validation => $configuration) {
-                if ($string !== '') $string .= ',';
+                if ($string !== '') {
+                    $string .= ',';
+                }
                 $string .= $this->getSingleValidationString($validation, $configuration);
             }
         }

@@ -11,7 +11,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class HashUtility extends AbstractUtility
 {
-
     /**
      * Check if given hash is correct
      *

@@ -10,7 +10,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EmailDomainConfirmation extends AbstractConfirmation
 {
-
     /**
      * @return bool
      */

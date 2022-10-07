@@ -24,7 +24,6 @@ use TYPO3\CMS\Extbase\Http\ForwardResponse;
  */
 class InvitationController extends AbstractFrontendController
 {
-
     /**
      * action new
      */

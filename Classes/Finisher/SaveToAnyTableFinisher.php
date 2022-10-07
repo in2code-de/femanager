@@ -15,7 +15,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterface
 {
-
     /**
      * Inject a complete new content object
      *

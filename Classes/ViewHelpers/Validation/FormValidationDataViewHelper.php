@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Validation;
 
 use In2code\Femanager\Domain\Service\ValidationSettingsService;
-use In2code\Femanager\Utility\ObjectUtility;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

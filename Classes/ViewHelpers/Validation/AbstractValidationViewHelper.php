@@ -12,7 +12,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
  */
 abstract class AbstractValidationViewHelper extends AbstractViewHelper
 {
-
     /**
      * Get key for typoscript configuration "validation"
      *

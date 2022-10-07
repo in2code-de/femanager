@@ -18,7 +18,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ImageManipulation extends AbstractDataProcessor
 {
-
     /**
      * @param array $arguments
      * @return array

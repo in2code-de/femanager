@@ -13,7 +13,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class ConfigurationUtility extends AbstractUtility
 {
-
     const DEFAULT_CONFIGURATION = [
         'new./adminConfirmationRedirect' => '',
         'new./email./createUserNotify./sender./email./value' => '9999',
@@ -111,7 +110,7 @@ class ConfigurationUtility extends AbstractUtility
     public static function isBackendModuleFilterUserConfirmation(): bool
     {
         $config = BackendUserUtility::getBackendUserAuthentication()->getTSConfig(
-            )['tx_femanager.']['UserBackend.']['confirmation.']['filter.']['userConfirmation'] ?? false;
+        )['tx_femanager.']['UserBackend.']['confirmation.']['filter.']['userConfirmation'] ?? false;
 
         return (bool)$config;
     }
@@ -123,19 +122,19 @@ class ConfigurationUtility extends AbstractUtility
     public static function IsResendUserConfirmationRequestActive(): bool
     {
         $config = BackendUserUtility::getBackendUserAuthentication()->getTSConfig(
-            )['tx_femanager.']['UserBackend.']['confirmation.']['ResendUserConfirmationRequest'] ?? false;
+        )['tx_femanager.']['UserBackend.']['confirmation.']['ResendUserConfirmationRequest'] ?? false;
         return (bool)$config;
     }
 
     public static function IsCreateUserNotifyActive($config): bool
     {
         if (ConfigurationUtility::getValue(
-                'new/email/createUserNotify/sender/email/value',
-                $config
-            ) && ConfigurationUtility::getValue(
-                'new./email./createUserNotify./sender./name./value',
-                $config
-            )) {
+            'new/email/createUserNotify/sender/email/value',
+            $config
+        ) && ConfigurationUtility::getValue(
+            'new./email./createUserNotify./sender./name./value',
+            $config
+        )) {
             return true;
         }
         return false;

@@ -20,7 +20,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 abstract class AbstractUtility
 {
-
     /**
      * Get table configuration array for a defined table
      *

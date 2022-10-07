@@ -10,7 +10,6 @@ use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
  */
 class GetFirstViewHelper extends AbstractFormFieldViewHelper
 {
-
     /**
      * Initialize the arguments.
      *

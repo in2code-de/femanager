@@ -11,7 +11,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class StoreInDatabaseService
 {
-
     /**
      * Database Table to store
      *

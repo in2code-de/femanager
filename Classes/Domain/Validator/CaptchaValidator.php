@@ -3,7 +3,6 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
 
-use In2code\Femanager\Utility\ObjectUtility;
 use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -13,7 +12,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class CaptchaValidator extends AbstractValidator
 {
-
     /**
      * Validation of given Params
      *

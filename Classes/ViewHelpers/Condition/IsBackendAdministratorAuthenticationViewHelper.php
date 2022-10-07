@@ -11,7 +11,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class IsBackendAdministratorAuthenticationViewHelper extends AbstractViewHelper
 {
-
     /**
      * Check if a backenduser-administrator is logged in
      *

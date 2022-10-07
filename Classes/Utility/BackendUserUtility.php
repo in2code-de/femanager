@@ -10,7 +10,6 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
  */
 class BackendUserUtility extends AbstractUtility
 {
-
     /**
      * @return bool
      */

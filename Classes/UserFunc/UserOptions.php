@@ -13,7 +13,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class UserOptions
 {
-
     /**
      * Just add users from start point to selection
      *
