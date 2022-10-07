@@ -11,7 +11,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class GetCountriesViewHelperTest extends UnitTestCase
 {
-
     /**
      * @var GetCountriesViewHelper
      */
