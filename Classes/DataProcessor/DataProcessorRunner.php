@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\DataProcessor;
 
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -104,13 +105,13 @@ class DataProcessorRunner
      * @param array $settings
      * @return array
      */
-    protected function getClasses($settings): array
+    protected function getClasses(array $settings): array
     {
-        $allDataProcessors = (array)$settings['dataProcessors'];
+        $allDataProcessors = ConfigurationUtility::getValue('dataProcessors', $settings);
         ksort($allDataProcessors);
         $dataProcessors = [];
         foreach ($allDataProcessors as $dataProcessor) {
-            if (!empty($dataProcessor['events'])) {
+            if (isset($dataProcessor['events']) === true && $dataProcessor['events'] !== []) {
                 foreach ($dataProcessor['events'] as $controllerName => $actionList) {
                     if ($controllerName === FrontendUtility::getControllerName()) {
                         if (GeneralUtility::inList($actionList, FrontendUtility::getActionName())) {
@@ -120,6 +121,7 @@ class DataProcessorRunner
                 }
             }
         }
+
         return $dataProcessors;
     }
 }

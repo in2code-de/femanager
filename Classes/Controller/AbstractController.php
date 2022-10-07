@@ -169,7 +169,7 @@ abstract class AbstractController extends ActionController
         // send notify email to admin
         $existingUser = clone $this->userRepository->findByUid($user->getUid());
         if ($this->settings['edit']['notifyAdmin'] ?? null
-            || $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value'] ?? null) {
+        || $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value'] ?? null) {
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
@@ -182,7 +182,7 @@ abstract class AbstractController extends ActionController
                 [
                     'user' => $user,
                     'changes' => UserUtility::getDirtyPropertiesFromUser($existingUser),
-                    'settings' => $this->settings
+                    'settings' => $this->settings,
                 ],
                 $this->config['edit.']['email.']['notifyAdmin.'] ?? []
             );
@@ -218,7 +218,7 @@ abstract class AbstractController extends ActionController
                 [
                     'user' => $user,
                     'changes' => $dirtyProperties,
-                    'hash' => HashUtility::createHashForUser($user)
+                    'hash' => HashUtility::createHashForUser($user),
                 ],
                 $this->config['edit.']['email.']['updateRequest.'] ?? []
             );
@@ -356,7 +356,7 @@ abstract class AbstractController extends ActionController
                 array_merge_recursive(
                     ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
                     [
-                        'linkAccessRestrictedPages' => 1
+                        'linkAccessRestrictedPages' => 1,
                     ]
                 )
             );
@@ -447,7 +447,8 @@ abstract class AbstractController extends ActionController
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
-        $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'];
+        $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
+
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
             $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
             if (is_array($config['plugin.']['tx_femanager.']['settings.'])) {
@@ -515,7 +516,8 @@ abstract class AbstractController extends ActionController
                 );
             }
         } else {
-            if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
+            $typoscriptIncluded = ConfigurationUtility::getValue('_TypoScriptIncluded', $this->settings);
+            if ($typoscriptIncluded !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript'),
                     '',
@@ -545,15 +547,15 @@ abstract class AbstractController extends ActionController
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             [
                 $this->config['new.']['email.']['createUserConfirmation.']['sender.']['email.']['value'] =>
-                    $this->config['new.']['email.']['createUserConfirmation.']['sender.']['name.']['value']
+                    $this->config['new.']['email.']['createUserConfirmation.']['sender.']['name.']['value'],
             ],
             $this->contentObject->cObjGetSingle(
-                $this->config['new.']['email.']['createUserConfirmation.']['subject'] ,
+                $this->config['new.']['email.']['createUserConfirmation.']['subject'],
                 $this->config['new.']['email.']['createUserConfirmation.']['subject.']
             ),
             [
                 'user' => $user,
-                'hash' => HashUtility::createHashForUser($user)
+                'hash' => HashUtility::createHashForUser($user),
             ],
             $this->config['new.']['email.']['createUserConfirmation.']
         );

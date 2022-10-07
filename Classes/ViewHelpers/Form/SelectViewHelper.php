@@ -70,8 +70,10 @@ class SelectViewHelper extends OriginalSelectViewHelper
             $typoScript = $this->configurationManager->getConfiguration(
                 ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
             );
+
             $prefillTypoScript =
-                $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
+                $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? [];
+
             if (!empty($prefillTypoScript[$this->getFieldName()])) {
                 $selectedValue = $contentObject->cObjGetSingle(
                     $prefillTypoScript[$this->getFieldName()],

@@ -65,15 +65,15 @@ class ValidationSettingsService
     public function getValidationStringForField(string $fieldName): string
     {
         $string = '';
-        $validationSettings = $this->getSettings()[$this->controllerName][$this->validationName][$fieldName];
+        $validationSettings = $this->getSettings()[$this->controllerName][$this->validationName][$fieldName] ?? [];
+
         if (is_array($validationSettings)) {
             foreach ($validationSettings as $validation => $configuration) {
-                if (!empty($string)) {
-                    $string .= ',';
-                }
+                if ($string !== '') $string .= ',';
                 $string .= $this->getSingleValidationString($validation, $configuration);
             }
         }
+
         return $string;
     }
 
@@ -83,7 +83,8 @@ class ValidationSettingsService
      */
     public function isValidationEnabled(string $type = 'client'): bool
     {
-        return $this->getSettings()[$this->controllerName]['validation']['_enable'][$type] === '1';
+        $validationSetting = $this->getSettings()[$this->controllerName]['validation']['_enable'][$type] ?? '0';
+        return $validationSetting === '1';
     }
 
     /**

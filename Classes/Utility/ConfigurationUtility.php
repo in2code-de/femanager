@@ -15,6 +15,7 @@ class ConfigurationUtility extends AbstractUtility
 {
 
     const DEFAULT_CONFIGURATION = [
+        'new./adminConfirmationRedirect' => '',
         'new./email./createUserNotify./sender./email./value' => '9999',
         'new./email./createUserNotify./sender./name./value' => '9999',
         'new./email./createUserNotify./subject' => 'TEXT',
@@ -44,6 +45,11 @@ class ConfigurationUtility extends AbstractUtility
         'persistence./storagePid' => '0',
         '_enable' => '',
         '_enable.' => [],
+        '_TypoScriptIncluded' => 0,
+        'dataProcessors' => [],
+        'edit/fillEmailWithUsername' => '0',
+        'edit./forceValues./beforeAnyConfirmation.' => [],
+        'edit/misc/passwordSave' => '',
     ];
 
     /**
@@ -140,7 +146,7 @@ class ConfigurationUtility extends AbstractUtility
      */
     public static function getDefaultConfiguration($key)
     {
-        return self::DEFAULT_CONFIGURATION[$key];
+        return self::DEFAULT_CONFIGURATION[$key] ?? null;
     }
 
     public static function getValue($key, $config)
