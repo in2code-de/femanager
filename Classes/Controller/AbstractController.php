@@ -278,23 +278,28 @@ abstract class AbstractController extends ActionController
             );
         }
 
+        $createAdminNotify = ConfigurationUtility::getValue(
+            'new./email./createAdminNotify./receiver./email./value',
+            $this->settings
+        );
+        if (!$createAdminNotify) {
+            $createAdminNotify = ConfigurationUtility::getValue('new./notifyAdmin', $this->settings);
+        }
 
         // send notify email to admin
-        if ($this->settings['new']['notifyAdmin'] ||
-            $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']) {
+        if ($createAdminNotify) {
             $this->sendMailService->send(
                 'createNotify',
                 StringUtility::makeEmailArray(
-                    !empty($this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']) ? $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value'] : $this->settings['new']['notifyAdmin'],
-                    $this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
+                    $createAdminNotify
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 $this->contentObject->cObjGetSingle(
-                    $this->config['new.']['email.']['createAdminNotify.']['subject'],
-                    $this->config['new.']['email.']['createAdminNotify.']['subject.']
+                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject', $this->settings),
+                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject.', $this->settings)
                 ),
                 $variables,
-                $this->config['new.']['email.']['createAdminNotify.']
+                ConfigurationUtility::getValue('new./email./createAdminNotify.', $this->settings)
             );
         }
 
@@ -321,8 +326,9 @@ abstract class AbstractController extends ActionController
             // persist user (otherwise login may not be possible)
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
-            if ($this->config['new.']['login'] ?? 0 === '1') {
-                UserUtility::login($user, $this->allConfig['persistence']['storagePid'] ?? 0);
+
+            if (ConfigurationUtility::getValue('new./login', $this->config) === '1') {
+                UserUtility::login($user, ConfigurationUtility::getValue('persistence./storagePid', $this->allConfig));
                 $this->addFlashMessage(LocalizationUtility::translate('login'), '', FlashMessage::NOTICE);
             }
         }
@@ -542,7 +548,7 @@ abstract class AbstractController extends ActionController
                     $this->config['new.']['email.']['createUserConfirmation.']['sender.']['name.']['value']
             ],
             $this->contentObject->cObjGetSingle(
-                $this->config['new.']['email.']['createUserConfirmation.']['subject'],
+                $this->config['new.']['email.']['createUserConfirmation.']['subject'] ,
                 $this->config['new.']['email.']['createUserConfirmation.']['subject.']
             ),
             [

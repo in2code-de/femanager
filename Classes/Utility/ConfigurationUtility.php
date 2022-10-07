@@ -22,7 +22,6 @@ class ConfigurationUtility extends AbstractUtility
         'new./email./createUserNotify./subject.' => [],
         'new./email./createUserNotify.' => [],
         'new./email./createUserConfirmation./sender./email./value' => '',
-        'new./email./createUserConfirmation./sender./email./value' => '',
         'new./email./createUserConfirmation./subject' => 'TEXT',
         'new./email./createUserConfirmation./subject.' => [],
         'new./email./createUserConfirmation.' => [],
@@ -37,6 +36,13 @@ class ConfigurationUtility extends AbstractUtility
         'edit./redirect.' => [],
         'edit./requestRedirect' => 'TEXT',
         'edit./requestRedirect.' => [],
+        'new./notifyAdmin' => '',
+        'new./email./createAdminNotify./receiver./email./value' => '',
+        'new./email./createAdminNotify./subject' => 'TEXT',
+        'new./email./createAdminNotify./subject.' => [],
+        'new./email./createAdminNotify.' => [],
+        'new./login' => '0',
+        'persistence./storagePid' => '0',
     ];
 
     /**
