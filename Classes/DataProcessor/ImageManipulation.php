@@ -33,7 +33,7 @@ class ImageManipulation extends AbstractDataProcessor
                 // file upload given
                 foreach ($arguments['user'][$property] ?? [] as $fileItem) {
                     /** @noinspection PhpMethodParametersCountMismatchInspection */
-                    $fileService = ObjectUtility::getObjectManager()->get(
+                    $fileService = GeneralUtility::makeInstance(
                         FileService::class,
                         $this->getNewImageName($fileItem),
                         $fileItem
@@ -85,7 +85,7 @@ class ImageManipulation extends AbstractDataProcessor
      */
     protected function upload(array $fileItem): string
     {
-        $basicFileFunctions = ObjectUtility::getObjectManager()->get(BasicFileUtility::class);
+        $basicFileFunctions = GeneralUtility::makeInstance(BasicFileUtility::class);
         $uniqueFileName = $basicFileFunctions->getUniqueName(
             $this->getNewImageName($fileItem),
             $this->getUploadFolder()

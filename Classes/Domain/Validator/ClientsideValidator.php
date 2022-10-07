@@ -217,7 +217,7 @@ class ClientsideValidator extends AbstractValidator
 
                 case stristr($validationSetting, 'captcha('):
                     if (ExtensionManagementUtility::isLoaded('sr_freecap')) {
-                        $wordRepository = ObjectUtility::getObjectManager()->get(
+                        $wordRepository = GeneralUtility::makeInstance(
                             WordRepository::class
                         );
                         $wordObject = $wordRepository->getWord();
@@ -288,7 +288,7 @@ class ClientsideValidator extends AbstractValidator
     public function getValidationSettingsFromTypoScript(): string
     {
         $controllerName = $this->getControllerName();
-        $validationService = ObjectUtility::getObjectManager()->get(
+        $validationService = GeneralUtility::makeInstance(
             ValidationSettingsService::class,
             $controllerName,
             $this->getValidationName()
@@ -469,7 +469,7 @@ class ClientsideValidator extends AbstractValidator
      */
     protected function getControllerName(): string
     {
-        $pluginRepository = ObjectUtility::getObjectManager()->get(PluginRepository::class);
+        $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
         $controllerName = $pluginRepository->getControllerNameByPluginSettings($this->getPlugin());
 
         return $controllerName;

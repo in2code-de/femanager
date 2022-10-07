@@ -7,6 +7,7 @@ use In2code\Femanager\Domain\Service\ValidationSettingsService;
 use In2code\Femanager\Utility\ObjectUtility;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class FormValidationDataViewHelper
@@ -31,7 +32,7 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper implemen
                 'Settings should not be filled any more in field partials. Pls update your femanager partial files.'
             );
         }
-        $validationService = ObjectUtility::getObjectManager()->get(
+        $validationService = GeneralUtility::makeInstance(
             ValidationSettingsService::class,
             $this->getControllerName(),
             $this->getValidationName()

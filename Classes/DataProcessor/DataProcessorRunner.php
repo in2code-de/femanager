@@ -82,7 +82,7 @@ class DataProcessorRunner
             if (is_subclass_of($class, $this->interface)) {
                 /** @var AbstractDataProcessor $dataProcessor */
                 /** @noinspection PhpMethodParametersCountMismatchInspection */
-                $dataProcessor = ObjectUtility::getObjectManager()->get(
+                $dataProcessor = GeneralUtility::makeInstance(
                     $class,
                     $configuration['config'] ?? [],
                     $settings,

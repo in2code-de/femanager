@@ -83,7 +83,7 @@ class FileService
     {
         $fileIdentifier = 0;
         if (file_exists($file)) {
-            $resourceFactory = ObjectUtility::getObjectManager()->get(ResourceFactory::class);
+            $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
             $file = $resourceFactory->getFileObjectFromCombinedIdentifier($this->getCombinedIdentifier($file));
             $fileIdentifier = (int)$file->getProperty('uid');
         }
