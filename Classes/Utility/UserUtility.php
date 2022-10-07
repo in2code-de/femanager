@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\User;
@@ -16,7 +15,6 @@ use TYPO3\CMS\Core\Crypto\PasswordHashing\Pbkdf2PasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Class UserUtility
@@ -33,8 +31,7 @@ class UserUtility extends AbstractUtility
     public static function getCurrentUser()
     {
         if (self::getPropertyFromUser() !== null) {
-            /** @var UserRepository $userRepository */
-            $userRepository = GeneralUtility::makeInstance(ObjectManager::class)->get(UserRepository::class);
+            $userRepository = GeneralUtility::makeInstance(UserRepository::class);
 
             return $userRepository->findByUid((int)self::getPropertyFromUser());
         }

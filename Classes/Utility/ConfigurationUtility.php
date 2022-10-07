@@ -1,13 +1,12 @@
 <?php
 
 declare(strict_types=1);
-
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class ConfigurationUtility
@@ -43,6 +42,8 @@ class ConfigurationUtility extends AbstractUtility
         'new./email./createAdminNotify.' => [],
         'new./login' => '0',
         'persistence./storagePid' => '0',
+        '_enable' => '',
+        '_enable.' => [],
     ];
 
     /**
@@ -84,7 +85,7 @@ class ConfigurationUtility extends AbstractUtility
      */
     public static function getConfiguration(string $path = '')
     {
-        $configurationManager = ObjectUtility::getObjectManager()->get(ConfigurationManagerInterface::class);
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         $typoscript = $configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'Femanager',
@@ -145,8 +146,7 @@ class ConfigurationUtility extends AbstractUtility
     public static function getValue($key, $config)
     {
         try {
-            $value = ArrayUtility::getValueByPath($config, $key);
-            return $value;
+            return ArrayUtility::getValueByPath($config, $key);
         } catch (MissingArrayPathException $ex) {
             return self::getDefaultConfiguration($key);
         }

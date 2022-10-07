@@ -118,7 +118,7 @@ class TemplateUtility extends AbstractUtility
         $format = 'html'
     ) {
         /** @var StandaloneView $standAloneView */
-        $standAloneView = self::getObjectManager()->get(StandaloneView::class);
+        $standAloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standAloneView->getRequest()->setControllerExtensionName($extensionName);
         $standAloneView->getRequest()->setPluginName($pluginName);
         $standAloneView->getRequest()->setControllerName($controllerName);
