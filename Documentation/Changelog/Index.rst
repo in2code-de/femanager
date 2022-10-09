@@ -9,10 +9,10 @@ Changelog
 
 -
       :Version: 7.1.0
-      :Date: 2022-xx-xx
+      :Date: 2022-10-09
       :Changes:
 
-      * [TASK] Add support for PHP 8 and 8.1 - WIP
+      * [TASK] Add support for PHP 8 and 8.1 - Beta
 
 -
       :Version: 7.0.0

@@ -7,7 +7,7 @@ conf.py:
   copyright: 2013-2022
   project: Femanager
   version: 7
-  release: 7.0.0
+  release: 7.1.0
   latex_elements:
     papersize: a4paper
     pointsize: 10pt
