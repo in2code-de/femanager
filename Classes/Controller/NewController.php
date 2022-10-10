@@ -29,7 +29,6 @@ use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
  */
 class NewController extends AbstractFrontendController
 {
-
     /**
      * Render registration form
      *

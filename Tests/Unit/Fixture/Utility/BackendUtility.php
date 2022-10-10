@@ -10,7 +10,6 @@ use In2code\Femanager\Utility\BackendUtility as BackendUtilityFemanager;
  */
 class BackendUtility extends BackendUtilityFemanager
 {
-
     /**
      * @return array
      */

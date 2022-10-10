@@ -229,29 +229,29 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                     if (!$this->stringContainsNumber($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'letter':
                     if (!$this->stringContainsLetter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'uppercase':
                     if (!$this->stringContainsUppercase($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'special':
                     if (!$this->stringContainsSpecialCharacter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'space':
                     if (!$this->stringContainsSpaceCharacter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 default:
-                }
+            }
         }
         return $isValid;
     }
@@ -273,29 +273,29 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                     if ($this->stringContainsNumber($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'letter':
                     if ($this->stringContainsLetter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'uppercase':
                     if ($this->stringContainsUppercase($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'special':
                     if ($this->stringContainsSpecialCharacter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'space':
                     if ($this->stringContainsSpaceCharacter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 default:
-                }
+            }
         }
         return $isValid;
     }
@@ -400,7 +400,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                         return true;
                     }
                 }
-            break;
+                break;
 
             case 'm/d/Y':
                 if (preg_match('/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/', $value, $dateParts)) {
@@ -408,10 +408,10 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                         return true;
                     }
                 }
-            break;
+                break;
 
             default:
-            }
+        }
         return false;
     }
 

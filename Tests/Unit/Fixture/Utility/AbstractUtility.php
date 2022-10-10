@@ -14,7 +14,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class AbstractUtility extends AbstractUtilityFemanager
 {
-
     /**
      * @param string $tableName
      * @return array|mixed

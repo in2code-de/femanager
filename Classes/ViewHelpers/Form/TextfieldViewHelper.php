@@ -13,7 +13,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
  */
 class TextfieldViewHelper extends OriginalTextfieldViewHelper
 {
-
     /**
      * Get the value of this form element (changed to prefill from TypoScript)
      * Either returns arguments['value'], or the correct value for Object Access.

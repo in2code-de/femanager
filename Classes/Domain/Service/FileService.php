@@ -15,7 +15,6 @@ use TYPO3\CMS\Core\Utility\PathUtility;
  */
 class FileService
 {
-
     /**
      * @var string
      */

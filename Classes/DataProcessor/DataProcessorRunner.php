@@ -37,7 +37,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class DataProcessorRunner
 {
-
     /**
      * @var ContentObjectRenderer
      */

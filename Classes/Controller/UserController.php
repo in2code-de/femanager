@@ -20,7 +20,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class UserController extends AbstractFrontendController
 {
-
     /**
      * @param array $filter
      */

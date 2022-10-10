@@ -8,7 +8,6 @@ namespace In2code\Femanager\DataProcessor;
  */
 class CleanUserGroup extends AbstractDataProcessor
 {
-
     /**
      * @param array $arguments
      * @return array

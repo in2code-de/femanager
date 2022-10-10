@@ -19,7 +19,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ClientsideValidator extends AbstractValidator
 {
-
     /**
      * Validation settings string
      *        possible validations for each field are:
@@ -96,14 +95,14 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorRequired');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case 'email':
                     if ($this->getValue() && !$this->validateEmail($this->getValue())) {
                         $this->addMessage('validationErrorEmail');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case stristr($validationSetting, 'min('):
                     if ($this->getValue() &&
@@ -112,7 +111,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorMin');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case stristr($validationSetting, 'max('):
                     if ($this->getValue() &&
@@ -121,28 +120,28 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorMax');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case 'intOnly':
                     if ($this->getValue() && !$this->validateInt($this->getValue())) {
                         $this->addMessage('validationErrorInt');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case 'lettersOnly':
                     if ($this->getValue() && !$this->validateLetters($this->getValue())) {
                         $this->addMessage('validationErrorLetters');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case 'unicodeLettersOnly':
                     if ($this->getValue() && !$this->validateUnicodeLetters($this->getValue())) {
                         $this->addMessage('validationErrorLetters');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case 'uniqueInPage':
                     if ($this->getValue() &&
@@ -151,7 +150,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorUniquePage');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case 'uniqueInDb':
                     if ($this->getValue() &&
@@ -160,7 +159,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorUniqueDb');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case stristr($validationSetting, 'mustInclude('):
                     if ($this->getValue() &&
@@ -172,7 +171,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorMustInclude');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case stristr($validationSetting, 'mustNotInclude('):
                     if ($this->getValue() &&
@@ -184,7 +183,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorMustNotInclude');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case stristr($validationSetting, 'inList('):
                     if (!$this->validateInList(
@@ -194,14 +193,14 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorInList');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case stristr($validationSetting, 'sameAs('):
                     if (!$this->validateSameAs($this->getValue(), $this->getAdditionalValue())) {
                         $this->addMessage('validationErrorSameAs');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case 'date':
                     if ($this->getValue() &&
@@ -213,7 +212,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorDate');
                         $this->isValid = false;
                     }
-                break;
+                    break;
 
                 case stristr($validationSetting, 'captcha('):
                     if (ExtensionManagementUtility::isLoaded('sr_freecap')) {
@@ -229,7 +228,7 @@ class ClientsideValidator extends AbstractValidator
                         }
                     }
 
-                break;
+                    break;
 
                 default:
                     // e.g. search for method validateCustom()

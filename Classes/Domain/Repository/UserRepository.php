@@ -18,7 +18,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class UserRepository extends Repository
 {
-
     /**
      * Overload Find by UID to also get hidden records
      *

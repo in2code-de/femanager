@@ -99,7 +99,7 @@ class EditController extends AbstractFrontendController
                 $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDADMIN));
                 break;
             default:
-            }
+        }
         $user->setTxFemanagerChangerequest('');
         $this->userRepository->update($user);
 

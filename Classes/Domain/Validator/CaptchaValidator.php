@@ -12,7 +12,6 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  */
 class CaptchaValidator extends AbstractValidator
 {
-
     /**
      * Validation of given Params
      *

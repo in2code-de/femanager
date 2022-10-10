@@ -11,7 +11,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 abstract class AbstractFinisher implements FinisherInterface
 {
-
     /**
      * @var User
      */

@@ -14,7 +14,6 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
  */
 class ServersideValidator extends AbstractValidator
 {
-
     /**
      * Validation of given Params
      *

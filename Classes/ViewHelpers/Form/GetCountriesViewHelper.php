@@ -10,7 +10,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class GetCountriesViewHelper extends AbstractViewHelper
 {
-
     /**
      * @var array
      */

@@ -13,7 +13,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class FrontendUtilityTest extends UnitTestCase
 {
-
     /**
      * @var array
      */

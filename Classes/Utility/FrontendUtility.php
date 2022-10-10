@@ -13,7 +13,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class FrontendUtility extends AbstractUtility
 {
-
     /**
      * @var array
      */

@@ -12,7 +12,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class UserGroupRepository extends Repository
 {
-
     /**
      * Find all groups and respect exclude list
      *

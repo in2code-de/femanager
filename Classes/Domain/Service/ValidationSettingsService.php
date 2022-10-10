@@ -11,7 +11,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class ValidationSettingsService
 {
-
     /**
      * Needed for validation settings. Should be "new", "edit" or "invitation"
      *

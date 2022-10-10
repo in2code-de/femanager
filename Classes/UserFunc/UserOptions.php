@@ -12,7 +12,6 @@ use TYPO3\CMS\Core\Database\QueryGenerator;
  */
 class UserOptions
 {
-
     /**
      * Just add users from start point to selection
      *

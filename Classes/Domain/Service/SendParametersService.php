@@ -14,7 +14,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class SendParametersService
 {
-
     /**
      * @var ConfigurationManagerInterface
      */

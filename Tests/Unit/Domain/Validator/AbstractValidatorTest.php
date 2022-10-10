@@ -11,7 +11,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class AbstractValidatorTest extends UnitTestCase
 {
-
     /**
      * @var \In2code\Femanager\Domain\Validator\AbstractValidator
      */

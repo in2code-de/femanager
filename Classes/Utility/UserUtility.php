@@ -24,7 +24,6 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  */
 class UserUtility extends AbstractUtility
 {
-
     /**
      * Return current logged in fe_user
      *
