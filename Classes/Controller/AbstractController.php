@@ -259,34 +259,34 @@ abstract class AbstractController extends ActionController
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         if (ConfigurationUtility::getValue(
-            'new./email./createUserNotify./sender./email./value',
-            $this->settings
-        ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
+                'new./email./createUserNotify./sender./email./value',
+                $this->config
+            ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
             $this->sendMailService->send(
                 'createUserNotify',
                 StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
                 StringUtility::makeEmailArray(
                     ConfigurationUtility::getValue(
                         'new./email./createUserNotify./sender./email./value',
-                        $this->settings
+                        $this->config
                     ),
-                    ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->settings)
+                    ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)
                 ),
                 $this->contentObject->cObjGetSingle(
-                    ConfigurationUtility::getValue('new./email./createUserNotify./subject', $this->settings),
-                    ConfigurationUtility::getValue('new./email./createUserNotify./subject.', $this->settings),
+                    ConfigurationUtility::getValue('new./email./createUserNotify./subject', $this->config),
+                    ConfigurationUtility::getValue('new./email./createUserNotify./subject.', $this->config),
                 ),
                 $variables,
-                ConfigurationUtility::getValue('new./email./createUserNotify.', $this->settings)
+                ConfigurationUtility::getValue('new./email./createUserNotify.', $this->config)
             );
         }
 
         $createAdminNotify = ConfigurationUtility::getValue(
             'new./email./createAdminNotify./receiver./email./value',
-            $this->settings
+            $this->config
         );
         if (!$createAdminNotify) {
-            $createAdminNotify = ConfigurationUtility::getValue('new./notifyAdmin', $this->settings);
+            $createAdminNotify = ConfigurationUtility::getValue('new./notifyAdmin', $this->config);
         }
 
         // send notify email to admin
@@ -298,11 +298,11 @@ abstract class AbstractController extends ActionController
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 $this->contentObject->cObjGetSingle(
-                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject', $this->settings),
-                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject.', $this->settings)
+                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject', $this->config),
+                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject.', $this->config)
                 ),
                 $variables,
-                ConfigurationUtility::getValue('new./email./createAdminNotify.', $this->settings)
+                ConfigurationUtility::getValue('new./email./createAdminNotify.', $this->config)
             );
         }
 
