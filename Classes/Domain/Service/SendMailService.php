@@ -79,11 +79,7 @@ class SendMailService
         if (false === $this->isMailEnabled($typoScript, $receiver)) {
             return false;
         }
-
-        if (GeneralUtility::validEmail($receiver) === false) {
-            return false;
-        }
-
+        
         $this->contentObjectStart($variables);
         $email = GeneralUtility::makeInstance(MailMessage::class);
         $variables = $this->embedImages($variables, $typoScript, $email);
