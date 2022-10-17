@@ -41,6 +41,8 @@ class ConfigurationUtility extends AbstractUtility
         'new./email./createAdminNotify./subject.' => [],
         'new./email./createAdminNotify.' => [],
         'new./login' => '0',
+        'new./userConfirmationRedirect' => 'TEXT',
+        'new./userConfirmationRedirect.' => [],
         'persistence./storagePid' => '0',
         '_enable' => '',
         '_enable.' => [],

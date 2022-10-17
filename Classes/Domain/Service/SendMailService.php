@@ -79,7 +79,7 @@ class SendMailService
         if (false === $this->isMailEnabled($typoScript, $receiver)) {
             return false;
         }
-        
+
         $this->contentObjectStart($variables);
         $email = GeneralUtility::makeInstance(MailMessage::class);
         $variables = $this->embedImages($variables, $typoScript, $email);
@@ -121,7 +121,7 @@ class SendMailService
      */
     protected function embedImages(array $variables, array $typoScript, MailMessage $email): array
     {
-        $images = $this->contentObject->cObjGetSingle($typoScript['embedImage'], $typoScript['embedImage.']);
+        $images = $this->contentObject->cObjGetSingle($typoScript['embedImage'] ?? 'TEXT', $typoScript['embedImage.'] ?? []);
 
         if (!$images) {
             return $variables;
@@ -245,10 +245,10 @@ class SendMailService
      */
     protected function setAttachments(array $typoScript, MailMessage $email): void
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['attachments'], $typoScript['attachments.'])) {
+        if ($this->contentObject->cObjGetSingle($typoScript['attachments'] ?? '', $typoScript['attachments.'] ?? '')) {
             $files = GeneralUtility::trimExplode(
                 ',',
-                $this->contentObject->cObjGetSingle($typoScript['attachments'], $typoScript['attachments.']),
+                $this->contentObject->cObjGetSingle($typoScript['attachments'] ?? '', $typoScript['attachments.'] ?? ''),
                 true
             );
             foreach ($files as $file) {
