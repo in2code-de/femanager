@@ -66,7 +66,7 @@ class NewController extends AbstractFrontendController
             $this->redirect('createStatus');
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings);
-        $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
+        $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./beforeAnyConfirmation.',$this->config));
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
 
@@ -171,7 +171,7 @@ class NewController extends AbstractFrontendController
                 $this->redirect('new');
             }
 
-            $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onUserConfirmation.']);
+            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onUserConfirmation.',$this->config));
             $user->setTxFemanagerConfirmedbyuser(true);
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
@@ -232,7 +232,7 @@ class NewController extends AbstractFrontendController
                 $this->redirect('new');
             }
 
-            $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onAdminConfirmation.']);
+            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onAdminConfirmation.',$this->config));
             $user->setTxFemanagerConfirmedbyadmin(true);
             $user->setDisable(false);
             $this->userRepository->update($user);
@@ -271,7 +271,7 @@ class NewController extends AbstractFrontendController
                     ['sender@femanager.org' => 'Sender Name'],
                     'Your profile was refused',
                     ['user' => $user],
-                    $this->config['new.']['email.']['createUserNotifyRefused.']
+                    ConfigurationUtility::getValue('new./email./createUserNotifyRefused.',$this->config)
                 );
             }
             $this->userRepository->remove($user);
@@ -352,8 +352,8 @@ class NewController extends AbstractFrontendController
             $this->sendMailService->send(
                 'createAdminConfirmation',
                 StringUtility::makeEmailArray(
-                    $this->settings['new']['confirmByAdmin'],
-                    $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
+                    $this->settings['new']['confirmByAdmin'] ?? '',
+                    $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value'] ?? ''
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'New Registration request',
@@ -361,7 +361,7 @@ class NewController extends AbstractFrontendController
                     'user' => $user,
                     'hash' => HashUtility::createHashForUser($user)
                 ],
-                $this->config['new.']['email.']['createAdminConfirmation.']
+                ConfigurationUtility::getValue('new./email./createAdminConfirmation.', $this->config)
             );
             $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
         }
