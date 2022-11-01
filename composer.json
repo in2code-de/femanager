@@ -24,7 +24,7 @@
   "type": "typo3-cms-extension",
   "license": "GPL-2.0-or-later",
   "require": {
-    "php": "^7.4 || ^8.0 || ^8.1",
+    "php": "^7.4 || ^8.0",
     "ext-json": "*",
     "ext-pdo": "*",
     "typo3/cms-core": "^11.5",
