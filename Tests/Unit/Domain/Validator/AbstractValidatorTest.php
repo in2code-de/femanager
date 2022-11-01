@@ -733,6 +733,16 @@ class AbstractValidatorTest extends UnitTestCase
                 true
             ],
             [
+                '1,2',
+                '1,2,3',
+                true
+            ],
+            [
+                '1,2',
+                '3,2,1',
+                true
+            ],
+            [
                 '23',
                 '1,234,3',
                 false
@@ -752,6 +762,16 @@ class AbstractValidatorTest extends UnitTestCase
                 'bac',
                 false
             ],
+            [
+                '1,2,3',
+                '1,2',
+                false
+            ],
+            [
+                '1,2,3',
+                '2,1',
+                false
+            ]
         ];
     }
 

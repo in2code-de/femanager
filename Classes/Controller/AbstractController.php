@@ -259,9 +259,9 @@ abstract class AbstractController extends ActionController
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         if (ConfigurationUtility::getValue(
-                'new./email./createUserNotify./sender./email./value',
-                $this->config
-            ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
+            'new./email./createUserNotify./sender./email./value',
+            $this->config
+        ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
             $this->sendMailService->send(
                 'createUserNotify',
                 StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),

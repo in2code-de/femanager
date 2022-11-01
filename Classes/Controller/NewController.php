@@ -66,7 +66,7 @@ class NewController extends AbstractFrontendController
             $this->redirect('createStatus');
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings);
-        $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./beforeAnyConfirmation.',$this->config));
+        $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./beforeAnyConfirmation.', $this->config));
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
 
@@ -171,7 +171,7 @@ class NewController extends AbstractFrontendController
                 $this->redirect('new');
             }
 
-            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onUserConfirmation.',$this->config));
+            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onUserConfirmation.', $this->config));
             $user->setTxFemanagerConfirmedbyuser(true);
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
@@ -232,7 +232,7 @@ class NewController extends AbstractFrontendController
                 $this->redirect('new');
             }
 
-            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onAdminConfirmation.',$this->config));
+            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onAdminConfirmation.', $this->config));
             $user->setTxFemanagerConfirmedbyadmin(true);
             $user->setDisable(false);
             $this->userRepository->update($user);
@@ -271,7 +271,7 @@ class NewController extends AbstractFrontendController
                     ['sender@femanager.org' => 'Sender Name'],
                     'Your profile was refused',
                     ['user' => $user],
-                    ConfigurationUtility::getValue('new./email./createUserNotifyRefused.',$this->config)
+                    ConfigurationUtility::getValue('new./email./createUserNotifyRefused.', $this->config)
                 );
             }
             $this->userRepository->remove($user);
