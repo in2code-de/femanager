@@ -13,7 +13,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class ServersideValidatorTest extends UnitTestCase
 {
-
     /**
      * @var \In2code\Femanager\Domain\Validator\ServersideValidator
      */
@@ -71,7 +70,7 @@ class ServersideValidatorTest extends UnitTestCase
 
     /**
      * @param int $uid
-     * @return UserGroup&\PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\MockObject
+     * @return UserGroup|\PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getUserGroupMock(int $uid = 1)
     {
