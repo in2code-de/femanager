@@ -8,6 +8,14 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 6.3.3
+      :Date: 2021-11-02
+      :Changes:
+
+      * [BUGFIX] (!!!) Security Fix - Broken Access Control in Usergroup Validation (Andreas Nedbal - in2code) - thx to TYPO3 Security Team
+      * [BUGFIX] CleanUserGroup DataProcessor - thx to Daniel Hoffmann (in2code)
+
+-
       :Version: 6.3.2
       :Date: 2021-10-13
       :Changes:

@@ -47,10 +47,10 @@ Also official support (fee-based)  is possible within the EAP.
 
 This is the current status of the EAP features:
 
-| Femanager | TYPO3  | PHP           | Support/Development  | Status         |
-|-----------|--------|---------------|----------------------|----------------|
-| 7.1       | 11 LTS | 7.4, 8.0, 8.1 | Support for PHP 8    | in development |
-| 8.0       | 12  | 8             | Support for TYPO3 12 | planned        |
+| Femanager | TYPO3  | PHP           | Support/Development  | Status    |
+|-----------|--------|---------------|----------------------|-----------|
+| 7.1       | 11 LTS | 7.4, 8.0, 8.1 | Support for PHP 8    | available |
+| 8.0       | 12  | 8             | Support for TYPO3 12 | planned   |
 
 
 ## Your Contribution

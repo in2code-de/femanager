@@ -340,8 +340,11 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateInList($value, $validationSettingList)
     {
+        $valueList = GeneralUtility::trimExplode(',', $value, true);
         $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
-        return in_array($value, $validationSettings);
+        $diff = array_diff($valueList, $validationSettings);
+
+        return empty($diff);
     }
 
     /**

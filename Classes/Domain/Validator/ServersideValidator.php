@@ -7,6 +7,7 @@ namespace In2code\Femanager\Domain\Validator;
 use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
@@ -307,6 +308,19 @@ class ServersideValidator extends AbstractValidator
     protected function getValue($user, $fieldName)
     {
         $value = $this->getValueFromProperty($user, $fieldName);
+
+        if ($value instanceof ObjectStorage) {
+            $values = [];
+
+            foreach ($value as $object) {
+                if (method_exists($object, 'getUid')) {
+                    $values[] = $object->getUid();
+                }
+            }
+
+            return implode(',', $values);
+        }
+
         if (is_object($value)) {
             if (method_exists($value, 'getUid')) {
                 $value = $value->getUid();
