@@ -49,6 +49,7 @@ class ConfigurationUtility extends AbstractUtility
         'edit/fillEmailWithUsername' => '0',
         'edit./forceValues./beforeAnyConfirmation.' => [],
         'edit/misc/passwordSave' => '',
+        'new./forceValues./beforeAnyConfirmation.' => [],
     ];
 
     /**
