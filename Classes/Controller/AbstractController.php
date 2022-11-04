@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\DataProcessor\DataProcessorRunner;
@@ -29,7 +28,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -210,7 +208,7 @@ abstract class AbstractController extends ActionController
             $this->sendMailService->send(
                 'updateRequest',
                 StringUtility::makeEmailArray(
-                    $this->settings['edit']['confirmByAdmin'],
+                    $this->settings['edit']['confirmByAdmin'] ?? '',
                     $this->settings['edit']['email']['updateRequest']['sender']['name']['value'] ?? null
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
@@ -427,7 +425,7 @@ abstract class AbstractController extends ActionController
         $this->view->assignMultiple(
             [
                 'languageUid' => FrontendUtility::getFrontendLanguageUid(),
-                'storagePid' => $this->allConfig['persistence']['storagePid'],
+                'storagePid' => $this->allConfig['persistence']['storagePid'] ?? 0,
                 'Pid' => FrontendUtility::getCurrentPid(),
                 'data' => $this->contentObject->data,
                 'useStaticInfoTables' => ExtensionManagementUtility::isLoaded('static_info_tables'),
@@ -454,23 +452,23 @@ abstract class AbstractController extends ActionController
 
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
             $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
-            if (is_array($config['plugin.']['tx_femanager.']['settings.'])) {
+            if (is_array($config['plugin.']['tx_femanager.']['settings.'] ?? null)) {
                 $this->config = $config['plugin.']['tx_femanager.']['settings.'];
                 $this->settings = $this->config;
             }
 
-            $this->moduleConfig = $config['module.']['tx_femanager.'];
+            $this->moduleConfig = $config['module.']['tx_femanager.'] ?? '';
 
             // Retrieve page TSconfig of the current page
             $pageTsConfig = BackendUtilityCore::getPagesTSconfig(BackendUtility::getPageIdentifier());
             if (is_array($pageTsConfig['module.']['tx_femanager.'])) {
-                $this->moduleConfig = array_merge($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.']);
+                $this->moduleConfig = array_merge($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.'] ?? []);
             }
 
             // Retrieve user TSconfig of currently logged in user
             $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
             if (is_array($userTsConfig['tx_femanager.'])) {
-                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.']);
+                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.'] ?? []);
             }
         }
 
@@ -500,7 +498,7 @@ abstract class AbstractController extends ActionController
 
     protected function checkStoragePid()
     {
-        if ((int)$this->allConfig['persistence']['storagePid'] === 0
+        if ((int)($this->allConfig['persistence']['storagePid']?? 0) === 0
             && GeneralUtility::_GP('type') !== '1548935210'
             && TYPO3_MODE !== 'BE'
         ) {
@@ -510,8 +508,8 @@ abstract class AbstractController extends ActionController
 
     protected function checkTypoScript()
     {
-        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
-            if ($this->config['_TypoScriptIncluded'] !== '1') {
+        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'] ?? null)->isBackend()) {
+            if (($this->config['_TypoScriptIncluded'] ?? '1') !== '1') {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript_be'),
                     '',
@@ -541,7 +539,6 @@ abstract class AbstractController extends ActionController
      * Send email to user for confirmation
      *
      * @param User $user
-     * @throws UnsupportedRequestTypeException
      */
     public function sendCreateUserConfirmationMail(User $user)
     {
@@ -549,8 +546,8 @@ abstract class AbstractController extends ActionController
             'createUserConfirmation',
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             [
-                $this->config['new.']['email.']['createUserConfirmation.']['sender.']['email.']['value'] =>
-                    $this->config['new.']['email.']['createUserConfirmation.']['sender.']['name.']['value'],
+                ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value', $this->config) =>
+                ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config),
             ],
             $this->contentObject->cObjGetSingle(
                 ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),
@@ -560,7 +557,7 @@ abstract class AbstractController extends ActionController
                 'user' => $user,
                 'hash' => HashUtility::createHashForUser($user),
             ],
-            $this->config['new.']['email.']['createUserConfirmation.']
+            ConfigurationUtility::getValue('new./email./createUserConfirmation.', $this->config)
         );
     }
 }

@@ -21,6 +21,7 @@ class ConfigurationUtility extends AbstractUtility
         'new./email./createUserNotify./subject.' => [],
         'new./email./createUserNotify.' => [],
         'new./email./createUserConfirmation./sender./email./value' => '',
+        'new./email./createUserConfirmation./sender./name./value' => '',
         'new./email./createUserConfirmation./subject' => 'TEXT',
         'new./email./createUserConfirmation./subject.' => [],
         'new./email./createUserConfirmation.' => [],
