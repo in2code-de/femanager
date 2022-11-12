@@ -714,7 +714,7 @@ plugin.tx_femanager {
     ###################################
     edit {
       # take username and copy it to the email field (so email field is not nessesary in FE)
-      #fillEmailWithUsername = 1
+      fillEmailWithUsername = 0
 
       # redirect user (or admin if adminconfirmation) after profile update
       #      redirect = TEXT
@@ -1068,7 +1068,7 @@ plugin.tx_femanager {
     ###################################
     invitation {
       # take username and copy it to the email field (so email field is not nessesary in FE)
-      #fillEmailWithUsername = 1
+      fillEmailWithUsername = 0
 
       # redirect admin after step 1
       #      redirectStep1 = TEXT
