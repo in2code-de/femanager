@@ -16,12 +16,8 @@ class UpperViewHelper extends AbstractViewHelper
         $this->registerArgument('string', 'string', 'string', false);
     }
 
-    /**
-     * @return string
-     */
-    public function render()
+    public function render(): string
     {
-        $string = $this->arguments['string'] ?? '';
-        return ucfirst($string);
+        return ucfirst((string)($this->arguments['string'] ?? ''));
     }
 }

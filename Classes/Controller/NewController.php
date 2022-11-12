@@ -17,11 +17,13 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Event\Mvc\AfterRequestDispatchedEvent;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 
@@ -33,7 +35,7 @@ class NewController extends AbstractFrontendController
     /**
      * Render registration form
      *
-     * @param User $user
+     * @param User|null $user
      */
     public function newAction(User $user = null): ResponseInterface
     {
@@ -51,6 +53,8 @@ class NewController extends AbstractFrontendController
      * action create
      *
      * @param User $user
+     * @throws InvalidPasswordHashException
+     * @throws StopActionException
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
      * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
@@ -66,7 +70,8 @@ class NewController extends AbstractFrontendController
             $this->redirect('createStatus');
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings);
-        $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./beforeAnyConfirmation.', $this->config));
+        $configuration = ConfigurationUtility::getValue('new./forceValues./beforeAnyConfirmation.', $this->config);
+        $user = FrontendUtility::forceValues($user, $configuration);
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
 
@@ -92,8 +97,10 @@ class NewController extends AbstractFrontendController
      * @param string $status
      *            "userConfirmation", "userConfirmationRefused", "adminConfirmation",
      *            "adminConfirmationRefused", "adminConfirmationRefusedSilent"
+     * @throws IllegalObjectTypeException
+     * @throws StopActionException
      */
-    public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation')
+    public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation')
     {
         $backend = false;
 
@@ -163,7 +170,7 @@ class NewController extends AbstractFrontendController
      * @throws UnsupportedRequestTypeException
      * @throws IllegalObjectTypeException
      */
-    protected function statusUserConfirmation(User $user, $hash, $status)
+    protected function statusUserConfirmation(User $user, string $hash, string $status)
     {
         if (HashUtility::validHash($hash, $user)) {
             if ($user->getTxFemanagerConfirmedbyuser()) {
