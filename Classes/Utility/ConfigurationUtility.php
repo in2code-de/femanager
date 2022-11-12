@@ -38,6 +38,7 @@ class ConfigurationUtility extends AbstractUtility
         'new./email./createAdminNotify.' => [],
         'new./email./createAdminConfirmation.' => [],
         'new./email./createUserNotifyRefused.' => [],
+        'new/fillEmailWithUsername' => '0',
         'new./login' => '0',
         'new./userConfirmationRedirect' => 'TEXT',
         'new./userConfirmationRedirect.' => [],
