@@ -32,7 +32,7 @@ plugin.tx_femanager {
     ###################################
     new {
       # take username and copy it to the email field (so email field is not necessary in FE)
-      #      fillEmailWithUsername = 1
+      fillEmailWithUsername = 0
 
       # login after profile creation (don't work if admin confirmation is turned on). The experimental
       # feature "Set cookie on login" in EM may help in case of login problems
