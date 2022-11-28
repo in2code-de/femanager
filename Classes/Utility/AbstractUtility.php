@@ -64,12 +64,12 @@ abstract class AbstractUtility
     }
 
     /**
-     * @return TypoScriptFrontendController
+     * @return TypoScriptFrontendController|null
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getTypoScriptFrontendController()
     {
-        return $GLOBALS['TSFE'];
+        return $GLOBALS['TSFE'] ?? null;
     }
 
     /**
