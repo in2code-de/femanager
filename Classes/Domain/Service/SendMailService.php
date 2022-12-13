@@ -222,7 +222,7 @@ class SendMailService
     protected function setCc(array $typoScript, MailMessage $email)
     {
         if ($this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.'])) {
-            $email->setCc($this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.']));
+            $email->setCc(GeneralUtility::trimExplode(',', $this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.']), true));
         }
     }
 
