@@ -166,13 +166,14 @@ abstract class AbstractController extends ActionController
     {
         // send notify email to admin
         $existingUser = clone $this->userRepository->findByUid($user->getUid());
-        if ($this->settings['edit']['notifyAdmin'] ?? null
-        || $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value'] ?? null) {
+
+        if (ConfigurationUtility::notifyAdminAboutEdits($this->settings)===true)
+         {
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
-                    $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value']
-                    ?? $this->settings['edit']['notifyAdmin'],
+                    ConfigurationUtility::getValue('edit/email/createUserNotify/notifyAdmin/receiver/email/value') ??
+                    ConfigurationUtility::getValue('edit/notifyAdmin'),
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value'] ?? null
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),

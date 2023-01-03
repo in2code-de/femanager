@@ -24,6 +24,8 @@ class ConfigurationUtility extends AbstractUtility
         'edit./requestRedirect' => 'TEXT',
         'edit./requestRedirect.' => [],
         'edit/fillEmailWithUsername' => '0',
+        'edit/notifyAdmin' => '0',
+        'edit/email/createUserNotify/notifyAdmin/receiver/email/value' => '',
         'edit/misc/passwordSave' => '',
         'new./adminConfirmationRedirect' => '',
         'new./email./createAdminConfirmation.' => [],
@@ -163,5 +165,18 @@ class ConfigurationUtility extends AbstractUtility
         } catch (MissingArrayPathException $ex) {
             return self::getDefaultConfiguration($key);
         }
+    }
+
+    public static function notifyAdminAboutEdits($config) {
+        if (self::getValue(
+                'edit/notifyAdmin',
+                $config
+            ) && self::getValue(
+                'edit/email/createUserNotify/notifyAdmin/receiver/email/value',
+                $config
+            )) {
+            return true;
+        }
+        return false;
     }
 }
