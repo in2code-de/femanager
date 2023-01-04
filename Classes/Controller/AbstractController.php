@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
 
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use In2code\Femanager\DataProcessor\DataProcessorRunner;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
@@ -304,7 +305,7 @@ abstract class AbstractController extends ActionController
             $this->persistenceManager->persistAll();
             if ($this->config['new.']['login'] === '1') {
                 UserUtility::login($user, $this->allConfig['persistence']['storagePid']);
-                $this->addFlashMessage(LocalizationUtility::translate('login'), '', FlashMessage::NOTICE);
+                $this->addFlashMessage(LocalizationUtility::translate('login'), '', AbstractMessage::NOTICE);
             }
         }
     }
@@ -381,7 +382,7 @@ abstract class AbstractController extends ActionController
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
                 '',
-                FlashMessage::ERROR
+                AbstractMessage::ERROR
             );
             return new ForwardResponse('edit');
         }
@@ -475,7 +476,7 @@ abstract class AbstractController extends ActionController
             && GeneralUtility::_GP('type') !== '1548935210'
             && TYPO3_MODE !== 'BE'
         ) {
-            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', FlashMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', AbstractMessage::ERROR);
         }
     }
 
@@ -486,7 +487,7 @@ abstract class AbstractController extends ActionController
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript_be'),
                     '',
-                    FlashMessage::ERROR
+                    AbstractMessage::ERROR
                 );
             }
         } else {
@@ -494,7 +495,7 @@ abstract class AbstractController extends ActionController
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript'),
                     '',
-                    FlashMessage::ERROR
+                    AbstractMessage::ERROR
                 );
             }
         }

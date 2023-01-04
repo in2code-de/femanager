@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
 use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
@@ -85,7 +86,7 @@ class EditController extends AbstractFrontendController
     {
         $this->view->assign('user', $user);
         if (!HashUtility::validHash($hash, $user) || !$user->getTxFemanagerChangerequest()) {
-            $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', FlashMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', AbstractMessage::ERROR);
             return $this->htmlResponse(null);
         }
         switch ($status) {
@@ -196,7 +197,7 @@ class EditController extends AbstractFrontendController
     protected function redirectIfDirtyObject(User $user)
     {
         if (!ObjectUtility::isDirtyObject($user)) {
-            $this->addFlashMessage(LocalizationUtility::translate('noChanges'), '', FlashMessage::NOTICE);
+            $this->addFlashMessage(LocalizationUtility::translate('noChanges'), '', AbstractMessage::NOTICE);
             $this->redirect('edit');
         }
     }

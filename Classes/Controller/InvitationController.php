@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
 use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Event\InviteUserConfirmedEvent;
@@ -50,7 +51,7 @@ class InvitationController extends AbstractFrontendController
             $this->addFlashMessage(
                 LocalizationUtility::translate('ratelimiter_too_many_attempts'),
                 '',
-                FlashMessage::ERROR
+                AbstractMessage::ERROR
             );
             $this->redirect('status');
         }
@@ -149,7 +150,7 @@ class InvitationController extends AbstractFrontendController
                 // delete user for security reasons
                 $this->userRepository->remove($user);
             }
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
             return new ForwardResponse('status');
         }
 
@@ -239,7 +240,7 @@ class InvitationController extends AbstractFrontendController
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_INVITATIONHASHERROR),
                 '',
-                FlashMessage::ERROR
+                AbstractMessage::ERROR
             );
             $this->redirect('status');
         }
@@ -279,7 +280,7 @@ class InvitationController extends AbstractFrontendController
         $this->addFlashMessage(
             LocalizationUtility::translateByState(Log::STATUS_INVITATIONRESTRICTEDPAGE),
             '',
-            FlashMessage::ERROR
+            AbstractMessage::ERROR
         );
         return new ForwardResponse('status');
         return false;
