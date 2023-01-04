@@ -27,7 +27,7 @@ class ObjectUtility extends AbstractUtility
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @return ObjectManagerInterface
      */
     public static function getObjectManager(): ObjectManagerInterface
     {

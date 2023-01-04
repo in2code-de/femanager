@@ -128,7 +128,7 @@ class UserRepository extends Repository
      *
      * @param $field
      * @param $value
-     * @param \In2code\Femanager\Domain\Model\User $user Existing User
+     * @param User $user Existing User
      * @return User|null
      */
     public function checkUniquePage($field, $value, User $user = null)

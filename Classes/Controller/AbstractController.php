@@ -39,32 +39,32 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 abstract class AbstractController extends ActionController
 {
     /**
-     * @var \In2code\Femanager\Domain\Repository\UserRepository
+     * @var UserRepository
      */
     protected $userRepository;
 
     /**
-     * @var \In2code\Femanager\Domain\Repository\UserGroupRepository
+     * @var UserGroupRepository
      */
     protected $userGroupRepository;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+     * @var PersistenceManager
      */
     protected $persistenceManager;
 
     /**
-     * @var \In2code\Femanager\Domain\Service\SendMailService
+     * @var SendMailService
      */
     protected $sendMailService;
 
     /**
-     * @var \In2code\Femanager\Finisher\FinisherRunner
+     * @var FinisherRunner
      */
     protected $finisherRunner;
 
     /**
-     * @var \In2code\Femanager\Utility\LogUtility
+     * @var LogUtility
      */
     protected $logUtility;
 
@@ -120,12 +120,12 @@ abstract class AbstractController extends ActionController
 
     /**
      * AbstractController constructor.
-     * @param \In2code\Femanager\Domain\Repository\UserRepository $userRepository
-     * @param \In2code\Femanager\Domain\Repository\UserGroupRepository $userGroupRepository
-     * @param \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager
-     * @param \In2code\Femanager\Domain\Service\SendMailService $sendMailService
-     * @param \In2code\Femanager\Finisher\FinisherRunner $finisherRunner
-     * @param \In2code\Femanager\Utility\LogUtility $logUtility
+     * @param UserRepository $userRepository
+     * @param UserGroupRepository $userGroupRepository
+     * @param PersistenceManager $persistenceManager
+     * @param SendMailService $sendMailService
+     * @param FinisherRunner $finisherRunner
+     * @param LogUtility $logUtility
      */
     public function __construct(
         UserRepository $userRepository,

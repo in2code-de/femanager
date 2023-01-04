@@ -1,5 +1,9 @@
 <?php
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use In2code\Femanager\Utility\ConfigurationUtility;
 /**
  * Table configuration fe_users
  */
@@ -110,7 +114,7 @@ $feUsersColumns = [
     ],
 ];
 
-$staticInfoTablesIsLoaded = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_tables');
+$staticInfoTablesIsLoaded = ExtensionManagementUtility::isLoaded('static_info_tables');
 if ($staticInfoTablesIsLoaded) {
     $feUsersColumns['state'] = [
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
@@ -127,8 +131,8 @@ if ($staticInfoTablesIsLoaded) {
         ]
     ];
 }
-$extConf = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-    \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+$extConf = GeneralUtility::makeInstance(
+    ExtensionConfiguration::class
 );
 if ($extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect')) {
     $GLOBALS['TCA']['fe_users']['columns']['country']['config'] = [
@@ -145,7 +149,7 @@ if ($extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect')) {
 $fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin, tx_femanager_terms, ' .
     'tx_femanager_terms_date_of_acceptance';
 
-if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableLogActive()) {
+if (!ConfigurationUtility::isDisableLogActive()) {
     $feUsersColumns['tx_femanager_log'] = [
         'exclude' => 1,
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.log',
@@ -177,7 +181,7 @@ $feUsersColumns['tx_femanager_changerequest'] = [
 ];
 $fields .= ', tx_femanager_changerequest';
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+ExtensionManagementUtility::addToAllTCAtypes(
     'fe_users',
     'gender, date_of_birth',
     '',
@@ -186,15 +190,15 @@ $fields .= ', tx_femanager_changerequest';
 if ($staticInfoTablesIsLoaded) {
     $GLOBALS['TCA']['fe_users']['columns']['country']['onChange'] = 'reload';
     $fields .= ',state';
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+    ExtensionManagementUtility::addToAllTCAtypes(
         'fe_users',
         'state',
         '',
         'after:country'
     );
 }
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $feUsersColumns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+ExtensionManagementUtility::addTCAcolumns('fe_users', $feUsersColumns);
+ExtensionManagementUtility::addToAllTCAtypes(
     'fe_users',
     '--div--;LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.tab, ' . $fields
 );

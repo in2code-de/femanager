@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class UserLinks
 {
     /**
-     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @var ContentObjectRenderer
      */
     public $cObj;
 

@@ -17,12 +17,12 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
     /**
      * Inject a complete new content object
      *
-     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @var ContentObjectRenderer
      */
     protected $contentObject;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
 

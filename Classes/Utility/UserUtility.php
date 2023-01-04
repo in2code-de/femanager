@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Utility;
 
+use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Repository\UserRepository;
@@ -161,7 +162,7 @@ class UserUtility extends AbstractUtility
      *
      * @param User $user
      * @param string $method
-     * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
+     * @throws InvalidPasswordHashException
      */
     public static function convertPassword(User $user, $method)
     {
@@ -175,7 +176,7 @@ class UserUtility extends AbstractUtility
      *
      * @param User $user
      * @param string $method "Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", "md5" or "none" ("sha1" for TYPO3 V8)
-     * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
+     * @throws InvalidPasswordHashException
      */
     public static function hashPassword(User &$user, $method)
     {

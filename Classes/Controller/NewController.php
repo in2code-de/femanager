@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
 
+use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Service\AutoAdminConfirmationService;
@@ -50,9 +52,9 @@ class NewController extends AbstractFrontendController
      * action create
      *
      * @param User $user
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
      */
     public function createAction(User $user)
     {
@@ -394,7 +396,7 @@ class NewController extends AbstractFrontendController
      * re-sends a confirmation email if given mail is valid
      *
      * @throws UnsupportedRequestTypeException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws StopActionException
      */
     public function resendConfirmationMailAction()
     {

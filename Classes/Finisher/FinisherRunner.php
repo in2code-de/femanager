@@ -15,12 +15,12 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class FinisherRunner
 {
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
 
@@ -38,8 +38,8 @@ class FinisherRunner
 
     /**
      * FinisherRunner constructor.
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+     * @param ObjectManagerInterface $objectManager
+     * @param ConfigurationManagerInterface $configurationManager
      */
     public function __construct(
         ObjectManagerInterface $objectManager,
