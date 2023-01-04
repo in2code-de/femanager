@@ -51,6 +51,21 @@ jobs:
         run: "composer install"
       - name: "Run PHP CS Fixer"
         run: "composer test:php:cs"
+  php-rector:
+    name: "PHP Rector"
+    runs-on: ubuntu-20.04
+    needs: php-lint
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+      - name: "Composer Install"
+        run: "composer install"
+      - name: "Run PHP Rector"
+        run: "composer test:rector"
   unit-tests:
     name: "PHP Unit Tests"
     runs-on: ubuntu-20.04
