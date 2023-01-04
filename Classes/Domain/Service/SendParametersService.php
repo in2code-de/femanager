@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Service;
 
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Log\LogLevel;
 use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -103,16 +105,11 @@ class SendParametersService
     protected function log()
     {
         if (!empty($this->configuration['debug'])) {
-            GeneralUtility::devLog(
-                'femanager sendpost values',
-                'femanager',
-                0,
-                [
-                    'url' => $this->getUri(),
-                    'data' => $this->getData(),
-                    'properties' => $this->properties
-                ]
-            );
+            GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__)->log(LogLevel::INFO, 'femanager sendpost values', [
+                'url' => $this->getUri(),
+                'data' => $this->getData(),
+                'properties' => $this->properties
+            ]);
         }
     }
 
