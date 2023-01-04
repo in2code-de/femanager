@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
 
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
@@ -19,7 +20,7 @@ class PasswordValidator extends AbstractValidatorExtbase
      *
      * @var object
      */
-    public $cObj;
+    protected $cObj;
 
     /**
      * Plugin Variables
@@ -135,5 +136,10 @@ class PasswordValidator extends AbstractValidatorExtbase
         $this->cObj = $this->configurationManager->getContentObject();
         $this->piVars = GeneralUtility::_GP('tx_femanager_pi1');
         $this->actionName = $this->piVars['__referrer']['@action'];
+    }
+
+    public function setContentObjectRenderer(ContentObjectRenderer $cObj): void
+    {
+        $this->cObj = $cObj;
     }
 }
