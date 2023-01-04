@@ -2,11 +2,11 @@
 
 namespace In2code\Femanager\Tests\Unit\Domain\Validator;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Validator\ServersideValidator;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class AbstractValidatorTest

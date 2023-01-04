@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\User;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class HashUtility

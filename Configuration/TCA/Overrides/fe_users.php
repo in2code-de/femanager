@@ -1,9 +1,10 @@
 <?php
 
+use In2code\Femanager\Utility\ConfigurationUtility;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-use In2code\Femanager\Utility\ConfigurationUtility;
+
 /**
  * Table configuration fe_users
  */

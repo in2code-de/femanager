@@ -2,13 +2,13 @@
 
 namespace In2code\Femanager\Tests\Scripts;
 
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use Doctrine\DBAL\DBALException;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\HashUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Class UserLinks
