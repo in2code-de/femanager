@@ -2,6 +2,7 @@
 
 namespace In2code\Femanager\Tests\Scripts;
 
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use Doctrine\DBAL\DBALException;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\HashUtility;
@@ -17,7 +18,7 @@ class UserLinks
     /**
      * @var ContentObjectRenderer
      */
-    public $cObj;
+    protected $cObj;
 
     /**
      * @var string
@@ -177,5 +178,10 @@ class UserLinks
         }
 
         return $content;
+    }
+
+    public function setContentObjectRenderer(ContentObjectRenderer $cObj): void
+    {
+        $this->cObj = $cObj;
     }
 }
