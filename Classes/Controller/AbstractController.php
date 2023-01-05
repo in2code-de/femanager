@@ -119,6 +119,7 @@ abstract class AbstractController extends ActionController
 
     /**
      * AbstractController constructor.
+     *
      * @param UserRepository $userRepository
      * @param UserGroupRepository $userGroupRepository
      * @param PersistenceManager $persistenceManager
@@ -167,8 +168,7 @@ abstract class AbstractController extends ActionController
         // send notify email to admin
         $existingUser = clone $this->userRepository->findByUid($user->getUid());
 
-        if (ConfigurationUtility::notifyAdminAboutEdits($this->settings)===true)
-         {
+        if (ConfigurationUtility::notifyAdminAboutEdits($this->settings) === true) {
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
@@ -498,7 +498,7 @@ abstract class AbstractController extends ActionController
 
     protected function checkStoragePid()
     {
-        if ((int)($this->allConfig['persistence']['storagePid']?? 0) === 0
+        if ((int)($this->allConfig['persistence']['storagePid'] ?? 0) === 0
             && GeneralUtility::_GP('type') !== '1548935210'
             && TYPO3_MODE !== 'BE'
         ) {
@@ -547,7 +547,7 @@ abstract class AbstractController extends ActionController
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             [
                 ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value', $this->config) =>
-                ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config),
+                    ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config),
             ],
             $this->contentObject->cObjGetSingle(
                 ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),

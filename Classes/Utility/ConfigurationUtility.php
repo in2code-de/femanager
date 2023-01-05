@@ -167,14 +167,15 @@ class ConfigurationUtility extends AbstractUtility
         }
     }
 
-    public static function notifyAdminAboutEdits($config) {
+    public static function notifyAdminAboutEdits($config)
+    {
         if (self::getValue(
-                'edit/notifyAdmin',
-                $config
-            ) && self::getValue(
-                'edit/email/createUserNotify/notifyAdmin/receiver/email/value',
-                $config
-            )) {
+            'edit/notifyAdmin',
+            $config
+        ) && self::getValue(
+            'edit/email/createUserNotify/notifyAdmin/receiver/email/value',
+            $config
+        )) {
             return true;
         }
         return false;
