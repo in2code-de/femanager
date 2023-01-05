@@ -71,7 +71,7 @@ class ServersideValidatorTest extends UnitTestCase
 
     /**
      * @param int $uid
-     * @return UserGroup|MockObject|MockObject
+     * @return UserGroup|MockObject
      */
     protected function getUserGroupMock(int $uid = 1)
     {

@@ -110,7 +110,7 @@ class UserRepository extends Repository
         $this->ignoreEnableFieldsAndStoragePageAndStarttime($query);
 
         $and = [$query->equals($field, $value)];
-        if (method_exists($user, 'getUid')) {
+        if ($user !== null && method_exists($user, 'getUid')) {
             $and[] = $query->logicalNot($query->equals('uid', $user->getUid()));
         }
         $constraint = $query->logicalAnd($and);

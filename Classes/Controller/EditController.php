@@ -9,6 +9,7 @@ use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Event\AfterUserUpdateEvent;
 use In2code\Femanager\Event\BeforeUpdateUserEvent;
 use In2code\Femanager\Event\DeleteUserEvent;
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -64,9 +65,17 @@ class EditController extends AbstractFrontendController
     public function updateAction(User $user)
     {
         $this->redirectIfDirtyObject($user);
-        $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.']);
+        $user = FrontendUtility::forceValues(
+            $user,
+            ConfigurationUtility::getValue('edit./forceValues./beforeAnyConfirmation.', $this->config)
+        );
+
         $this->emailForUsername($user);
-        UserUtility::convertPassword($user, $this->settings['edit']['misc']['passwordSave']);
+        UserUtility::convertPassword(
+            $user,
+            ConfigurationUtility::getValue('edit/misc/passwordSave', $this->settings)
+        );
+
         $this->eventDispatcher->dispatch(new BeforeUpdateUserEvent($user));
         if (!empty($this->settings['edit']['confirmByAdmin'])) {
             $this->updateRequest($user);
@@ -206,7 +215,8 @@ class EditController extends AbstractFrontendController
      */
     protected function emailForUsername(User $user)
     {
-        if ($this->settings['edit']['fillEmailWithUsername'] === '1') {
+        $fillEmailWithUsername = ConfigurationUtility::getValue('edit/fillEmailWithUsername', $this->settings);
+        if ($fillEmailWithUsername === '1') {
             $user->setEmail($user->getUsername());
         }
     }

@@ -4,6 +4,8 @@ namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Utility\BackendUserUtility;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class BackendUserUtilityTest
@@ -15,6 +17,11 @@ class BackendUserUtilityTest extends UnitTestCase
      * @var array
      */
     protected $testFilesToDelete = [];
+
+    public function setUp(): void
+    {
+        $GLOBALS['BE_USER'] = GeneralUtility::makeInstance(BackendUserAuthentication::class);
+    }
 
     /**
      * @SuppressWarnings(PHPMD.Superglobals)

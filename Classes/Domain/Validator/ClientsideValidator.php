@@ -8,7 +8,6 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\PluginRepository;
 use In2code\Femanager\Domain\Service\ValidationSettingsService;
 use In2code\Femanager\Utility\LocalizationUtility;
-use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
 use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -216,7 +215,7 @@ class ClientsideValidator extends AbstractValidator
 
                 case stristr($validationSetting, 'captcha('):
                     if (ExtensionManagementUtility::isLoaded('sr_freecap')) {
-                        $wordRepository = ObjectUtility::getObjectManager()->get(
+                        $wordRepository = GeneralUtility::makeInstance(
                             WordRepository::class
                         );
                         $wordObject = $wordRepository->getWord();
@@ -287,7 +286,7 @@ class ClientsideValidator extends AbstractValidator
     public function getValidationSettingsFromTypoScript(): string
     {
         $controllerName = $this->getControllerName();
-        $validationService = ObjectUtility::getObjectManager()->get(
+        $validationService = GeneralUtility::makeInstance(
             ValidationSettingsService::class,
             $controllerName,
             $this->getValidationName()
@@ -468,7 +467,7 @@ class ClientsideValidator extends AbstractValidator
      */
     protected function getControllerName(): string
     {
-        $pluginRepository = ObjectUtility::getObjectManager()->get(PluginRepository::class);
+        $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
         $controllerName = $pluginRepository->getControllerNameByPluginSettings($this->getPlugin());
 
         return $controllerName;

@@ -10,12 +10,14 @@ use In2code\Femanager\Domain\Service\AutoAdminConfirmationService;
 use In2code\Femanager\Event\BeforeUserConfirmEvent;
 use In2code\Femanager\Event\BeforeUserCreateEvent;
 use In2code\Femanager\Event\CreateConfirmationRequestEvent;
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -33,7 +35,7 @@ class NewController extends AbstractFrontendController
     /**
      * Render registration form
      *
-     * @param User $user
+     * @param User|null $user
      */
     public function newAction(User $user = null): ResponseInterface
     {
@@ -51,6 +53,8 @@ class NewController extends AbstractFrontendController
      * action create
      *
      * @param User $user
+     * @throws InvalidPasswordHashException
+     * @throws StopActionException
      * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
      * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
      * @Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
@@ -66,10 +70,12 @@ class NewController extends AbstractFrontendController
             $this->redirect('createStatus');
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings);
-        $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
+        $configuration = ConfigurationUtility::getValue('new./forceValues./beforeAnyConfirmation.', $this->config);
+        $user = FrontendUtility::forceValues($user, $configuration);
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
-        UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
+
+        UserUtility::hashPassword($user, ConfigurationUtility::getValue('new/misc/passwordSave', $this->settings));
 
         $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
         $this->ratelimiterService->consumeSlot();
@@ -91,8 +97,10 @@ class NewController extends AbstractFrontendController
      * @param string $status
      *            "userConfirmation", "userConfirmationRefused", "adminConfirmation",
      *            "adminConfirmationRefused", "adminConfirmationRefusedSilent"
+     * @throws IllegalObjectTypeException
+     * @throws StopActionException
      */
-    public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation')
+    public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation')
     {
         $backend = false;
 
@@ -162,7 +170,7 @@ class NewController extends AbstractFrontendController
      * @throws UnsupportedRequestTypeException
      * @throws IllegalObjectTypeException
      */
-    protected function statusUserConfirmation(User $user, $hash, $status)
+    protected function statusUserConfirmation(User $user, string $hash, string $status)
     {
         if (HashUtility::validHash($hash, $user)) {
             if ($user->getTxFemanagerConfirmedbyuser()) {
@@ -170,7 +178,7 @@ class NewController extends AbstractFrontendController
                 $this->redirect('new');
             }
 
-            $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onUserConfirmation.']);
+            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onUserConfirmation.', $this->config));
             $user->setTxFemanagerConfirmedbyuser(true);
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
@@ -231,7 +239,7 @@ class NewController extends AbstractFrontendController
                 $this->redirect('new');
             }
 
-            $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onAdminConfirmation.']);
+            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onAdminConfirmation.', $this->config));
             $user->setTxFemanagerConfirmedbyadmin(true);
             $user->setDisable(false);
             $this->userRepository->update($user);
@@ -270,7 +278,7 @@ class NewController extends AbstractFrontendController
                     ['sender@femanager.org' => 'Sender Name'],
                     'Your profile was refused',
                     ['user' => $user],
-                    $this->config['new.']['email.']['createUserNotifyRefused.']
+                    ConfigurationUtility::getValue('new./email./createUserNotifyRefused.', $this->config)
                 );
             }
             $this->userRepository->remove($user);
@@ -351,8 +359,8 @@ class NewController extends AbstractFrontendController
             $this->sendMailService->send(
                 'createAdminConfirmation',
                 StringUtility::makeEmailArray(
-                    $this->settings['new']['confirmByAdmin'],
-                    $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
+                    $this->settings['new']['confirmByAdmin'] ?? '',
+                    $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value'] ?? ''
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'New Registration request',
@@ -360,7 +368,7 @@ class NewController extends AbstractFrontendController
                     'user' => $user,
                     'hash' => HashUtility::createHashForUser($user)
                 ],
-                $this->config['new.']['email.']['createAdminConfirmation.']
+                ConfigurationUtility::getValue('new./email./createAdminConfirmation.', $this->config)
             );
             $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
         }

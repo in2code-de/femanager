@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Utility\ConfigurationUtility;
-use In2code\Femanager\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Resource\Security\FileNameValidator;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -82,7 +81,7 @@ class FileService
     {
         $fileIdentifier = 0;
         if (file_exists($file)) {
-            $resourceFactory = ObjectUtility::getObjectManager()->get(ResourceFactory::class);
+            $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
             $file = $resourceFactory->getFileObjectFromCombinedIdentifier($this->getCombinedIdentifier($file));
             $fileIdentifier = (int)$file->getProperty('uid');
         }

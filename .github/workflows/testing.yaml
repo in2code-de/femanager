@@ -25,6 +25,8 @@ jobs:
       matrix:
         php-version:
           - 7.4
+          - 8.0
+          - 8.1
   typoscript-lint:
     name: "TypoScript linter"
     runs-on: ubuntu-20.04
@@ -88,6 +90,8 @@ jobs:
       matrix:
         php-version:
           - 7.4
+          - 8.0
+          - 8.1
   behaviour-tests:
     name: "PHP Behat Tests"
     runs-on: ubuntu-20.04
@@ -110,4 +114,6 @@ jobs:
       matrix:
         php-version:
           - 7.4
+          - 8.0
+          - 8.1
 
