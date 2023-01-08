@@ -68,6 +68,16 @@ class NewController extends AbstractFrontendController
         $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
+    
+        $usernameValidation = $this->settings['new']['validation']['username'];
+        if ($usernameValidation['uniqueInDb'] || $usernameValidation['uniqueInPage']) {
+            if (count($this->userRepository->findByUsername($user->getUsername())) > 0) {
+                $this->addFlashMessage(LocalizationUtility::translate('validationErrorUniquePage', $this->extensionName,
+                    ['username']), '', AbstractMessage::ERROR);
+                $this->forwardToReferringRequest();
+            }
+        }
+        
         UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
 
         $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
