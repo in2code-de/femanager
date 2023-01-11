@@ -173,6 +173,8 @@ Q: How can I send user values to a third-party-software like a CRM?
 
 A: Use some lines of TypoScript to send values after a registration to a tool like a CRM. Test it with a simple php file on your server which sends an email to you with the $_REQUEST Array.
 
+!!! take care to validate the incomming data in your receiver script !!!
+
 TypoScript:
 
 .. code-block:: text
@@ -198,6 +200,7 @@ TypoScript:
 							# value from field {username}
 							field = username
 							wrap = &username=|
+                     stdWrap.rawUrlEncode = 1
 						}
 
 						20 = TEXT
@@ -205,6 +208,7 @@ TypoScript:
 							# value from field {email}
 							field = email
 							wrap = &email=|
+                     stdWrap.rawUrlEncode = 1
 						}
 
 						30 = TEXT
@@ -212,6 +216,7 @@ TypoScript:
 							# value from field {title}
 							field = title
 							wrap = &title=|
+                     stdWrap.rawUrlEncode = 1
 						}
 					}
 

@@ -24,10 +24,11 @@
   "type": "typo3-cms-extension",
   "license": "GPL-2.0-or-later",
   "require": {
-    "php": "^7.4",
+    "php": "^7.2",
     "ext-json": "*",
     "ext-pdo": "*",
-    "typo3/cms-core": ">=11.0.0 <11.5.99"
+    "typo3/cms-core": ">=10.4.0 <11.5.99",
+    "symfony/config": "^5.4"
   },
   "replace": {
     "typo3-ter/femanager": "self.version"
@@ -62,10 +63,13 @@
     "helmich/typo3-typoscript-lint": "^2.5",
     "se/selenium-server-standalone": "^3.141",
     "behat/behat": "^3.8",
-    "friends-of-behat/mink-extension": "^2.5",
+    "friends-of-behat/mink-extension": "^2.6",
     "behat/mink-selenium2-driver": "^1.5",
     "genesis/behat-fail-aid": "^3.7",
-    "nimut/testing-framework": "6.x-dev"
+    "nimut/testing-framework": "6.x-dev",
+    "drevops/behat-screenshot": "^1.1",
+    "friends-of-behat/mink-browserkit-driver": "^1.6",
+    "sjbr/static-info-tables": "^11.5"
   },
   "autoload": {
     "psr-4": {
@@ -86,6 +90,8 @@
       "behat/behat": true,
       "typo3/class-alias-loader": true,
       "typo3/cms-composer-installers": true
+      "typo3/cms-composer-installers": true,
+      "typo3/class-alias-loader": true
     }
   },
   "scripts": {

@@ -24,6 +24,7 @@ class DataController extends ActionController
         foreach ($countryZones as $countryZone) {
             $jsonData[$countryZone->getIsoCode()] = $countryZone->getLocalName();
         }
-        return $this->responseFactory->createJsonResponse(json_encode($jsonData));
+
+        return $this->jsonResponse(json_encode($jsonData));
     }
 }

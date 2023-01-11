@@ -61,7 +61,7 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      */
     public function injectObjectManager(ObjectManager $objectManager)
     {
-        $this->contentObject = $objectManager;
+        $this->objectManager = $objectManager;
     }
 
     /**
@@ -69,7 +69,7 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      */
     public function injectTypoScriptService(TypoScriptService $typoScriptService)
     {
-        $this->contentObject = $typoScriptService;
+        $this->typoScriptService = $typoScriptService;
     }
 
     /**

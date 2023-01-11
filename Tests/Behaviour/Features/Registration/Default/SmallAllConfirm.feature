@@ -11,6 +11,7 @@ Feature: SmallAllConfirm
       | Repeat Password | test |
       | Email | alex@einpraegsam.net |
     And I press "Create Profile Now"
+    Then I wait "4" seconds
 
     Then I should see "Please check your mail account to confirm the profile"
 

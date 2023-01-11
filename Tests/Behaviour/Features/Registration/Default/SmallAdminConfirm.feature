@@ -11,6 +11,7 @@ Feature: SmallAdminConfirm
       | Repeat Password | test |
       | Email | alex@einpraegsam.net |
     And I press "Create Profile Now"
+    Then I wait "4" seconds
 
     Then I should see "Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request."
 

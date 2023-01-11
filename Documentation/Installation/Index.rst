@@ -1077,6 +1077,7 @@ Plain Text
     #						# value from field {username}
     #						field = username
     #						wrap = &username=|
+    #                stdWrap.rawUrlEncode = 1
     #					}
 
     #					20 = TEXT
@@ -1084,6 +1085,7 @@ Plain Text
     #						# value from field {email}
     #						field = email
     #						wrap = &email=|
+    #                stdWrap.rawUrlEncode = 1
     #					}
 
     #					30 = TEXT
@@ -1091,6 +1093,7 @@ Plain Text
     #						# value from field {title}
     #						field = title
     #						wrap = &title=|
+    #                stdWrap.rawUrlEncode = 1
     #					}
     #				}
 
