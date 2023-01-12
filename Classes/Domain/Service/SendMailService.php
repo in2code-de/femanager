@@ -174,17 +174,15 @@ class SendMailService
      */
     protected function overwriteEmailReceiver(array $typoScript, MailMessage $email): void
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['receiver.']['email'], $typoScript['receiver.']['email.'])
-            && $this->contentObject->cObjGetSingle($typoScript['receiver.']['name'], $typoScript['receiver.']['name.'])
-        ) {
-            $emailAddress = $this->contentObject->cObjGetSingle(
-                $typoScript['receiver.']['email'],
-                $typoScript['receiver.']['email.']
-            );
-            $name = $this->contentObject->cObjGetSingle(
-                $typoScript['receiver.']['name'],
-                $typoScript['receiver.']['name.']
-            );
+        $emailAddress = $this->contentObject->cObjGetSingle(
+            ConfigurationUtility::getValue('receiver./email', $typoScript),
+            ConfigurationUtility::getValue('receiver./email.', $typoScript)
+        );
+        $name = $this->contentObject->cObjGetSingle(
+            ConfigurationUtility::getValue('receiver./name', $typoScript),
+            ConfigurationUtility::getValue('receiver./name.', $typoScript)
+        );
+        if ($emailAddress && $name) {
             $email->setTo([$emailAddress => $name]);
         }
     }
