@@ -63,6 +63,8 @@ class ConfigurationUtility extends AbstractUtility
         'sender./email.' => [],
         'sender./name' => 'TEXT',
         'sender./name.' => [],
+        'priority' => 'TEXT',
+        'priority.' => [],
     ];
 
     /**

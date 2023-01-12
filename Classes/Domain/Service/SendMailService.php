@@ -237,10 +237,12 @@ class SendMailService
      */
     protected function setPriority(array $typoScript, MailMessage $email): void
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['priority'], $typoScript['priority.'])) {
-            $email->priority(
-                (int)$this->contentObject->cObjGetSingle($typoScript['priority'], $typoScript['priority.'])
-            );
+        $priority = (int)$this->contentObject->cObjGetSingle(
+            ConfigurationUtility::getValue('priority', $typoScript),
+            ConfigurationUtility::getValue('priority.', $typoScript)
+        );
+        if ($priority) {
+            $email->priority($priority);
         }
     }
 
