@@ -9,10 +9,13 @@ Changelog
 
 -
       :Version: 7.1.0
-      :Date: 2022-10-09
+      :Date: 2023-01-12
       :Changes:
 
-      * [TASK] Add support for PHP 8 and 8.1 - Beta
+      * [FEATURE] Add support for PHP 8 and 8.1  - thx to Stefan Busemann, Bastien Lutz, Mathias Bolt Lesniak, Thomas Löffler, Johannes Seipelt
+      * [BUGFIX] Re-fetch session from database to update 'userSession' property of TSFE.	Thx to Thomas Off <thomas.off@retiolum.de>
+      * [REFACTOR] Remove deprecated code and introduce rector  - thx to Thomas Löffler
+
 
 -
       :Version: 7.0.1
