@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Event\AfterMailSendEvent;
@@ -121,7 +122,10 @@ class SendMailService
      */
     protected function embedImages(array $variables, array $typoScript, MailMessage $email): array
     {
-        $images = $this->contentObject->cObjGetSingle($typoScript['embedImage'] ?? 'TEXT', $typoScript['embedImage.'] ?? []);
+        $images = $this->contentObject->cObjGetSingle(
+            $typoScript['embedImage'] ?? 'TEXT',
+            $typoScript['embedImage.'] ?? []
+        );
 
         if (!$images) {
             return $variables;
@@ -191,17 +195,16 @@ class SendMailService
      */
     protected function overwriteEmailSender(array $typoScript, MailMessage $email): void
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['sender.']['email'], $typoScript['sender.']['email.']) &&
-            $this->contentObject->cObjGetSingle($typoScript['sender.']['name'], $typoScript['sender.']['name.'])
-        ) {
-            $emailAddress = $this->contentObject->cObjGetSingle(
-                $typoScript['sender.']['email'],
-                $typoScript['sender.']['email.']
-            );
-            $name = $this->contentObject->cObjGetSingle(
-                $typoScript['sender.']['name'],
-                $typoScript['sender.']['name.']
-            );
+        $emailAddress = $this->contentObject->cObjGetSingle(
+            ConfigurationUtility::getValue('sender./email', $typoScript),
+            ConfigurationUtility::getValue('sender./email.', $typoScript)
+        );
+        $name = $this->contentObject->cObjGetSingle(
+            ConfigurationUtility::getValue('sender./name', $typoScript),
+            ConfigurationUtility::getValue('sender./name.', $typoScript)
+        );
+
+        if ($emailAddress && $name) {
             $email->setFrom([$emailAddress => $name]);
         }
     }
@@ -235,7 +238,9 @@ class SendMailService
     protected function setPriority(array $typoScript, MailMessage $email): void
     {
         if ($this->contentObject->cObjGetSingle($typoScript['priority'], $typoScript['priority.'])) {
-            $email->priority((int)$this->contentObject->cObjGetSingle($typoScript['priority'], $typoScript['priority.']));
+            $email->priority(
+                (int)$this->contentObject->cObjGetSingle($typoScript['priority'], $typoScript['priority.'])
+            );
         }
     }
 
@@ -248,7 +253,10 @@ class SendMailService
         if ($this->contentObject->cObjGetSingle($typoScript['attachments'] ?? '', $typoScript['attachments.'] ?? '')) {
             $files = GeneralUtility::trimExplode(
                 ',',
-                $this->contentObject->cObjGetSingle($typoScript['attachments'] ?? '', $typoScript['attachments.'] ?? ''),
+                $this->contentObject->cObjGetSingle(
+                    $typoScript['attachments'] ?? '',
+                    $typoScript['attachments.'] ?? ''
+                ),
                 true
             );
             foreach ($files as $file) {

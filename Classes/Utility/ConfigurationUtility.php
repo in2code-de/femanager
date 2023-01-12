@@ -59,6 +59,10 @@ class ConfigurationUtility extends AbstractUtility
         'new./userConfirmationRedirect.' => [],
         'new/misc/passwordSave' => 0,
         'persistence./storagePid' => '0',
+        'sender./email' => 'TEXT',
+        'sender./email.' => [],
+        'sender./name' => 'TEXT',
+        'sender./name.' => [],
     ];
 
     /**
