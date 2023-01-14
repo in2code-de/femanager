@@ -17,13 +17,10 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
-
-use function PHPUnit\Framework\isInstanceOf;
 
 /**
  * Class InvitationController
@@ -108,7 +105,7 @@ class InvitationController extends AbstractFrontendController
 
         // send notify email to admin
         $notifyAdminStep1 = ConfigurationUtility::getValue('invitation/notifyAdminStep1', $this->settings);
-        if ($notifyAdminStep1){
+        if ($notifyAdminStep1) {
             $this->sendMailService->send(
                 'invitationNotifyStep1',
                 StringUtility::makeEmailArray(
@@ -121,7 +118,7 @@ class InvitationController extends AbstractFrontendController
                     'user' => $user,
                     'settings' => $this->settings
                 ],
-                ConfigurationUtility::getValue('invitation./email./invitationAdminNotifyStep1.',$this->config)
+                ConfigurationUtility::getValue('invitation./email./invitationAdminNotifyStep1.', $this->config)
             );
         }
 
@@ -181,7 +178,7 @@ class InvitationController extends AbstractFrontendController
         }
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvitedFinished'));
         $this->logUtility->log(Log::STATUS_INVITATIONPROFILEENABLED, $user);
-        $notifyAdmin = ConfigurationUtility::getValue('invitation/notifyAdmin',$this->settings);
+        $notifyAdmin = ConfigurationUtility::getValue('invitation/notifyAdmin', $this->settings);
         if ($notifyAdmin) {
             $this->sendMailService->send(
                 'invitationNotify',
@@ -195,11 +192,11 @@ class InvitationController extends AbstractFrontendController
                     'user' => $user,
                     'settings' => $this->settings
                 ],
-                ConfigurationUtility::getValue('invitation./email./invitationAdminNotify.',$this->config)
+                ConfigurationUtility::getValue('invitation./email./invitationAdminNotify.', $this->config)
             );
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings, 'invitation');
-        UserUtility::hashPassword($user,ConfigurationUtility::getValue('invitation/misc/passwordSave', $this->settings));
+        UserUtility::hashPassword($user, ConfigurationUtility::getValue('invitation/misc/passwordSave', $this->settings));
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
         $this->eventDispatcher->dispatch(new InviteUserUpdateEvent($user));
@@ -229,7 +226,7 @@ class InvitationController extends AbstractFrontendController
             $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_INVITATIONPROFILEDELETEDUSER));
 
             // send notify email to admin
-            $notifyAdmin = ConfigurationUtility::getValue('invitation/notifyAdmin',$this->settings);
+            $notifyAdmin = ConfigurationUtility::getValue('invitation/notifyAdmin', $this->settings);
             if ($notifyAdmin) {
                 $this->sendMailService->send(
                     'invitationRefused',
