@@ -112,7 +112,7 @@ class PasswordValidator extends AbstractValidatorExtbase
         $flexFormValues = GeneralUtility::xml2array($this->cObj->data['pi_flexform']);
         if (is_array($flexFormValues)) {
             $fields =
-                $flexFormValues['data'][$this->actionName]['lDEF']['settings.' . $this->actionName . '.fields']['vDEF'];
+                $flexFormValues['data'][$this->actionName]['lDEF']['settings.' . $this->actionName . '.fields']['vDEF'] ?? [];
             if (empty($fields) || GeneralUtility::inList($fields, 'password')) {
                 // password fields are added to form
                 return true;
