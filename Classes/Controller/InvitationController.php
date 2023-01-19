@@ -137,10 +137,19 @@ class InvitationController extends AbstractFrontendController
     public function editAction($user, $hash = null): ResponseInterface
     {
         $user = $this->userRepository->findByUid($user);
+
+        // User must exist and hash must be valid
         if ($user === null || !HashUtility::validHash($hash, $user)) {
             $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
             $this->redirect('status');
         }
+
+        // User must not be deleted (deleted = 0) and not be activated (disable = 1)
+        if ($user->getDisable() == 0) {
+            $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', AbstractMessage::ERROR);
+            $this->redirect('status');
+        }
+
         $user->setDisable(false);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
