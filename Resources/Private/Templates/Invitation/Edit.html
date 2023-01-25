@@ -18,6 +18,9 @@ Available variables:
 					action="update"
 					additionalAttributes="{data-femanager-plugin:data.uid}"
 					class="form-horizontal {f:if(condition:'{settings.invitation.validation._enable.client}',then:'feManagerValidation',else:'')}">
+
+				<f:form.hidden name="hash" value="{hash}"/>
+
 				<fieldset>
 					<legend>
 						<f:translate key="titleInvitationSetPassword" />

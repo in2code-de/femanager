@@ -127,6 +127,19 @@ class InvitationController extends AbstractController
     public function editAction($user, $hash = null)
     {
         $user = $this->userRepository->findByUid($user);
+
+        // User must exist and hash must be valid
+        if ($user === null || !HashUtility::validHash($hash, $user)) {
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+            $this->forward('status');
+        }
+
+        // User must not be deleted (deleted = 0) and not be activated (disable = 1)
+        if ($user->getDisable() == 0) {
+            $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', FlashMessage::ERROR);
+            $this->forward('status');
+        }
+
         $user->setDisable(false);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
@@ -137,15 +150,6 @@ class InvitationController extends AbstractController
                 'hash' => $hash
             ]
         );
-
-        if (!HashUtility::validHash($hash, $user)) {
-            if ($user !== null) {
-                // delete user for security reasons
-                $this->userRepository->remove($user);
-            }
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
-            $this->forward('status');
-        }
 
         $this->assignForAll();
     }
@@ -158,8 +162,16 @@ class InvitationController extends AbstractController
      * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
      * @return void
      */
-    public function updateAction($user)
+    public function updateAction($user, $hash = null)
     {
+        if (!HashUtility::validHash($hash, $user)) {
+            $this->addFlashMessage(
+                LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
+                '',
+                FlashMessage::ERROR
+            );
+            $this->forward('status');
+        }
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvitedFinished'));
         LogUtility::log(Log::STATUS_INVITATIONPROFILEENABLED, $user);
         if ($this->settings['invitation']['notifyAdmin']) {
