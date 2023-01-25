@@ -8,7 +8,24 @@ Upgrade
 
 .. only:: html
 
-	:ref:`v6.0` |:ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+	:ref:`v6.3.4` | :ref:`v6.0` |:ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+
+.. _v6.3.4:
+
+to version 6.3.4
+----------------
+
+**Invitation Template**
+
+If you are using customized templates for the invitation function, please check the Resources/Private/Templates/Invitation/Edit.html
+
+You need to add
+
+.. code-block:: html
+
+<f:form.hidden name="hash" value="{hash}"/>
+
+in order,that the function is working.
 
 .. _v6.0:
 

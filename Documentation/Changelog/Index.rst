@@ -8,6 +8,13 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 6.3.4
+      :Date: 2023-01-25
+      :Changes:
+
+      * [BUGFIX] Security: Missing Hash Check for inviation controller - Invitation Templates must be updraded (if a custom template is used) - thx to Max Schäfer & Dennis Schober-Wenger
+
+-
       :Version: 6.3.3
       :Date: 2021-11-02
       :Changes:
