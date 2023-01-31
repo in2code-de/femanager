@@ -663,7 +663,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
@@ -741,7 +741,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
@@ -819,7 +819,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifySubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
@@ -897,7 +897,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifyRefusedSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
@@ -975,7 +975,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifySubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
@@ -1266,7 +1266,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
@@ -1344,7 +1344,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestRefusedSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
@@ -1422,7 +1422,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateNotifySubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
@@ -1629,7 +1629,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
@@ -1707,7 +1707,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationAdminNotifiyStep1Subject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
@@ -1785,7 +1785,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationAdminNotifiySubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
@@ -1863,7 +1863,7 @@ Plain Text
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationUserRefusedAdminNotifiyStep1Subject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
 
