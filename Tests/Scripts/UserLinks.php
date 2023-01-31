@@ -8,6 +8,7 @@ use In2code\Femanager\Utility\HashUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Class UserLinks
@@ -15,9 +16,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class UserLinks
 {
     /**
-     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @var ContentObjectRenderer
      */
-    public $cObj;
+    protected $cObj;
 
     /**
      * @var string
@@ -177,5 +178,10 @@ class UserLinks
         }
 
         return $content;
+    }
+
+    public function setContentObjectRenderer(ContentObjectRenderer $cObj): void
+    {
+        $this->cObj = $cObj;
     }
 }

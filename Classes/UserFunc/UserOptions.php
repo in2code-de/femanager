@@ -6,6 +6,7 @@ namespace In2code\Femanager\UserFunc;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Database\QueryGenerator;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class UserOptions
@@ -57,7 +58,7 @@ class UserOptions
     protected function getPageUidList(array $params): string
     {
         $list = '';
-        $queryGenerator = ObjectUtility::getObjectManager()->get(QueryGenerator::class);
+        $queryGenerator = GeneralUtility::makeInstance(QueryGenerator::class);
         $depth = $params['flexParentDatabaseRow']['recursive'];
         foreach ($this->getPages($params) as $pageIdentifier) {
             $list .= $queryGenerator->getTreeList($pageIdentifier, $depth, 0, 1);

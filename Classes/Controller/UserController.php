@@ -28,7 +28,7 @@ class UserController extends AbstractFrontendController
         $this->view->assignMultiple(
             [
                 'users' => $this->userRepository->findByUsergroups(
-                    $this->settings['list']['usergroup'],
+                    $this->settings['list']['usergroup'] ?? '',
                     $this->settings,
                     $filter
                 ),
@@ -45,7 +45,7 @@ class UserController extends AbstractFrontendController
     public function initializeShowAction()
     {
         $arguments = $this->request->getArguments();
-        if (!empty($this->settings['show']['user'])) {
+        if (!empty($this->settings['show']['user']) ?? '') {
             unset($arguments['user']);
         }
         $this->request->setArguments($arguments);

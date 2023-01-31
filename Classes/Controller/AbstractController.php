@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\DataProcessor\DataProcessorRunner;
@@ -14,6 +13,7 @@ use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
 use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\BackendUtility;
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -22,13 +22,12 @@ use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Core\Http\ApplicationType;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -39,32 +38,32 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 abstract class AbstractController extends ActionController
 {
     /**
-     * @var \In2code\Femanager\Domain\Repository\UserRepository
+     * @var UserRepository
      */
     protected $userRepository;
 
     /**
-     * @var \In2code\Femanager\Domain\Repository\UserGroupRepository
+     * @var UserGroupRepository
      */
     protected $userGroupRepository;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+     * @var PersistenceManager
      */
     protected $persistenceManager;
 
     /**
-     * @var \In2code\Femanager\Domain\Service\SendMailService
+     * @var SendMailService
      */
     protected $sendMailService;
 
     /**
-     * @var \In2code\Femanager\Finisher\FinisherRunner
+     * @var FinisherRunner
      */
     protected $finisherRunner;
 
     /**
-     * @var \In2code\Femanager\Utility\LogUtility
+     * @var LogUtility
      */
     protected $logUtility;
 
@@ -120,12 +119,13 @@ abstract class AbstractController extends ActionController
 
     /**
      * AbstractController constructor.
-     * @param \In2code\Femanager\Domain\Repository\UserRepository $userRepository
-     * @param \In2code\Femanager\Domain\Repository\UserGroupRepository $userGroupRepository
-     * @param \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager
-     * @param \In2code\Femanager\Domain\Service\SendMailService $sendMailService
-     * @param \In2code\Femanager\Finisher\FinisherRunner $finisherRunner
-     * @param \In2code\Femanager\Utility\LogUtility $logUtility
+     *
+     * @param UserRepository $userRepository
+     * @param UserGroupRepository $userGroupRepository
+     * @param PersistenceManager $persistenceManager
+     * @param SendMailService $sendMailService
+     * @param FinisherRunner $finisherRunner
+     * @param LogUtility $logUtility
      */
     public function __construct(
         UserRepository $userRepository,
@@ -167,23 +167,23 @@ abstract class AbstractController extends ActionController
     {
         // send notify email to admin
         $existingUser = clone $this->userRepository->findByUid($user->getUid());
-        if ($this->settings['edit']['notifyAdmin']
-            || $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value']) {
+
+        if (ConfigurationUtility::notifyAdminAboutEdits($this->settings) === true) {
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
-                    $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value']
-                    ?? $this->settings['edit']['notifyAdmin'],
-                    $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value']
+                    ConfigurationUtility::getValue('edit/email/createUserNotify/notifyAdmin/receiver/email/value') ??
+                    ConfigurationUtility::getValue('edit/notifyAdmin'),
+                    $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value'] ?? null
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile update',
                 [
                     'user' => $user,
                     'changes' => UserUtility::getDirtyPropertiesFromUser($existingUser),
-                    'settings' => $this->settings
+                    'settings' => $this->settings,
                 ],
-                $this->config['edit.']['email.']['notifyAdmin.']
+                $this->config['edit.']['email.']['notifyAdmin.'] ?? []
             );
         }
 
@@ -203,26 +203,38 @@ abstract class AbstractController extends ActionController
      */
     public function updateRequest($user)
     {
-        $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($user);
-        $user = UserUtility::rollbackUserWithChangeRequest($user, $dirtyProperties);
-        $this->sendMailService->send(
-            'updateRequest',
-            StringUtility::makeEmailArray(
-                $this->settings['edit']['confirmByAdmin'],
-                $this->settings['edit']['email']['updateRequest']['sender']['name']['value']
-            ),
-            StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-            'New Profile change request',
-            [
-                'user' => $user,
-                'changes' => $dirtyProperties,
-                'hash' => HashUtility::createHashForUser($user)
-            ],
-            $this->config['edit.']['email.']['updateRequest.']
-        );
-        $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user, ['dirtyProperties' => $dirtyProperties]);
-        $this->redirectByAction('edit', 'requestRedirect');
-        $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
+        if ($this->settings['edit']['confirmByAdmin'] ?? null) {
+            $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($user);
+            $user = UserUtility::rollbackUserWithChangeRequest($user, $dirtyProperties);
+            $this->sendMailService->send(
+                'updateRequest',
+                StringUtility::makeEmailArray(
+                    $this->settings['edit']['confirmByAdmin'] ?? '',
+                    $this->settings['edit']['email']['updateRequest']['sender']['name']['value'] ?? null
+                ),
+                StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
+                'New Profile change request',
+                [
+                    'user' => $user,
+                    'changes' => $dirtyProperties,
+                    'hash' => HashUtility::createHashForUser($user),
+                ],
+                $this->config['edit.']['email.']['updateRequest.'] ?? []
+            );
+            $this->logUtility->log(
+                Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
+                $user,
+                ['dirtyProperties' => $dirtyProperties]
+            );
+            $this->redirectByAction('edit', 'requestRedirect');
+            $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
+        } else {
+            $this->logUtility->log(
+                Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
+                $user,
+                ['message' => 'settings[edit][confirmByAdmin] is missing!']
+            );
+        }
     }
 
     /**
@@ -245,37 +257,51 @@ abstract class AbstractController extends ActionController
     ): void {
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
-        $this->sendMailService->send(
-            'createUserNotify',
-            StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
-            StringUtility::makeEmailArray(
-                $this->settings['new']['email']['createUserNotify']['sender']['email']['value'],
-                $this->settings['new']['email']['createUserNotify']['sender']['name']['value']
-            ),
-            $this->contentObject->cObjGetSingle(
-                $this->config['new.']['email.']['createUserNotify.']['subject'],
-                $this->config['new.']['email.']['createUserNotify.']['subject.']
-            ),
-            $variables,
-            $this->config['new.']['email.']['createUserNotify.']
+        if (ConfigurationUtility::getValue(
+            'new./email./createUserNotify./sender./email./value',
+            $this->config
+        ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
+            $this->sendMailService->send(
+                'createUserNotify',
+                StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
+                StringUtility::makeEmailArray(
+                    ConfigurationUtility::getValue(
+                        'new./email./createUserNotify./sender./email./value',
+                        $this->config
+                    ),
+                    ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)
+                ),
+                $this->contentObject->cObjGetSingle(
+                    ConfigurationUtility::getValue('new./email./createUserNotify./subject', $this->config),
+                    ConfigurationUtility::getValue('new./email./createUserNotify./subject.', $this->config),
+                ),
+                $variables,
+                ConfigurationUtility::getValue('new./email./createUserNotify.', $this->config)
+            );
+        }
+
+        $createAdminNotify = ConfigurationUtility::getValue(
+            'new./email./createAdminNotify./receiver./email./value',
+            $this->config
         );
+        if (!$createAdminNotify) {
+            $createAdminNotify = ConfigurationUtility::getValue('new./notifyAdmin', $this->config);
+        }
 
         // send notify email to admin
-        if ($this->settings['new']['notifyAdmin'] ||
-            $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']) {
+        if ($createAdminNotify) {
             $this->sendMailService->send(
                 'createNotify',
                 StringUtility::makeEmailArray(
-                    !empty($this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']) ? $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value'] : $this->settings['new']['notifyAdmin'],
-                    $this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
+                    $createAdminNotify
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 $this->contentObject->cObjGetSingle(
-                    $this->config['new.']['email.']['createAdminNotify.']['subject'],
-                    $this->config['new.']['email.']['createAdminNotify.']['subject.']
+                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject', $this->config),
+                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject.', $this->config)
                 ),
                 $variables,
-                $this->config['new.']['email.']['createAdminNotify.']
+                ConfigurationUtility::getValue('new./email./createAdminNotify.', $this->config)
             );
         }
 
@@ -302,9 +328,9 @@ abstract class AbstractController extends ActionController
             // persist user (otherwise login may not be possible)
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
-            if ($this->config['new.']['login'] === '1') {
-                UserUtility::login($user, $this->allConfig['persistence']['storagePid']);
-                $this->addFlashMessage(LocalizationUtility::translate('login'), '', FlashMessage::NOTICE);
+            if (ConfigurationUtility::getValue('new./login', $this->config) === '1') {
+                UserUtility::login($user, ConfigurationUtility::getValue('persistence./storagePid', $this->allConfig));
+                $this->addFlashMessage(LocalizationUtility::translate('login'), '', AbstractMessage::NOTICE);
             }
         }
     }
@@ -322,16 +348,16 @@ abstract class AbstractController extends ActionController
         $target = null;
         // redirect from TypoScript cObject
         if ($this->contentObject->cObjGetSingle(
-            $this->config[$action . '.'][$category],
-            $this->config[$action . '.'][$category . '.']
+            ConfigurationUtility::getValue($action . './' . $category, $this->config),
+            ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
         )
         ) {
             $target = $this->contentObject->cObjGetSingle(
-                $this->config[$action . '.'][$category],
+                ConfigurationUtility::getValue($action . './' . $category, $this->config),
                 array_merge_recursive(
-                    $this->config[$action . '.'][$category . '.'],
+                    ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
                     [
-                        'linkAccessRestrictedPages' => 1
+                        'linkAccessRestrictedPages' => 1,
                     ]
                 )
             );
@@ -381,7 +407,7 @@ abstract class AbstractController extends ActionController
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
                 '',
-                FlashMessage::ERROR
+                AbstractMessage::ERROR
             );
             return new ForwardResponse('edit');
         }
@@ -399,7 +425,7 @@ abstract class AbstractController extends ActionController
         $this->view->assignMultiple(
             [
                 'languageUid' => FrontendUtility::getFrontendLanguageUid(),
-                'storagePid' => $this->allConfig['persistence']['storagePid'],
+                'storagePid' => $this->allConfig['persistence']['storagePid'] ?? 0,
                 'Pid' => FrontendUtility::getCurrentPid(),
                 'data' => $this->contentObject->data,
                 'useStaticInfoTables' => ExtensionManagementUtility::isLoaded('static_info_tables'),
@@ -422,26 +448,27 @@ abstract class AbstractController extends ActionController
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
-        $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'];
+        $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
+
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
             $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
-            if (is_array($config['plugin.']['tx_femanager.']['settings.'])) {
+            if (is_array($config['plugin.']['tx_femanager.']['settings.'] ?? null)) {
                 $this->config = $config['plugin.']['tx_femanager.']['settings.'];
                 $this->settings = $this->config;
             }
 
-            $this->moduleConfig = $config['module.']['tx_femanager.'];
+            $this->moduleConfig = $config['module.']['tx_femanager.'] ?? '';
 
             // Retrieve page TSconfig of the current page
             $pageTsConfig = BackendUtilityCore::getPagesTSconfig(BackendUtility::getPageIdentifier());
-            if (is_array($pageTsConfig['module.']['tx_femanager.'])) {
-                $this->moduleConfig = array_merge($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.']);
+            if (is_array($pageTsConfig['module.']['tx_femanager.'] ?? null)) {
+                $this->moduleConfig = array_merge($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.'] ?? []);
             }
 
             // Retrieve user TSconfig of currently logged in user
             $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
-            if (is_array($userTsConfig['tx_femanager.'])) {
-                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.']);
+            if (is_array($userTsConfig['tx_femanager.'] ?? null)) {
+                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.'] ?? []);
             }
         }
 
@@ -471,30 +498,31 @@ abstract class AbstractController extends ActionController
 
     protected function checkStoragePid()
     {
-        if ((int)$this->allConfig['persistence']['storagePid'] === 0
+        if ((int)($this->allConfig['persistence']['storagePid'] ?? 0) === 0
             && GeneralUtility::_GP('type') !== '1548935210'
             && TYPO3_MODE !== 'BE'
         ) {
-            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', FlashMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', AbstractMessage::ERROR);
         }
     }
 
     protected function checkTypoScript()
     {
-        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
-            if ($this->config['_TypoScriptIncluded'] !== '1') {
+        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'] ?? null)->isBackend()) {
+            if (($this->config['_TypoScriptIncluded'] ?? '1') !== '1') {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript_be'),
                     '',
-                    FlashMessage::ERROR
+                    AbstractMessage::ERROR
                 );
             }
         } else {
-            if ($this->settings['_TypoScriptIncluded'] !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
+            $typoscriptIncluded = ConfigurationUtility::getValue('_TypoScriptIncluded', $this->settings);
+            if ($typoscriptIncluded !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript'),
                     '',
-                    FlashMessage::ERROR
+                    AbstractMessage::ERROR
                 );
             }
         }
@@ -503,7 +531,7 @@ abstract class AbstractController extends ActionController
     protected function setAllUserGroups()
     {
         $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
-        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'];
+        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'] ?? '';
         $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
     }
 
@@ -511,7 +539,6 @@ abstract class AbstractController extends ActionController
      * Send email to user for confirmation
      *
      * @param User $user
-     * @throws UnsupportedRequestTypeException
      */
     public function sendCreateUserConfirmationMail(User $user)
     {
@@ -519,18 +546,18 @@ abstract class AbstractController extends ActionController
             'createUserConfirmation',
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             [
-                $this->config['new.']['email.']['createUserConfirmation.']['sender.']['email.']['value'] =>
-                    $this->config['new.']['email.']['createUserConfirmation.']['sender.']['name.']['value']
+                ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value', $this->config) =>
+                    ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config),
             ],
             $this->contentObject->cObjGetSingle(
-                $this->config['new.']['email.']['createUserConfirmation.']['subject'],
-                $this->config['new.']['email.']['createUserConfirmation.']['subject.']
+                ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),
+                ConfigurationUtility::getValue('new./email./createUserConfirmation./subject.', $this->config)
             ),
             [
                 'user' => $user,
-                'hash' => HashUtility::createHashForUser($user)
+                'hash' => HashUtility::createHashForUser($user),
             ],
-            $this->config['new.']['email.']['createUserConfirmation.']
+            ConfigurationUtility::getValue('new./email./createUserConfirmation.', $this->config)
         );
     }
 }

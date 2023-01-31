@@ -19,7 +19,7 @@ call_user_func(function () {
             \In2code\Femanager\Controller\UserController::class => 'list, show, validate, loginAs, imageDelete',
             \In2code\Femanager\Controller\NewController::class => 'new, create, confirmCreateRequest, createStatus, resendConfirmationMail, resendConfirmationDialogue',
             \In2code\Femanager\Controller\EditController::class => 'edit, update, delete, confirmUpdateRequest',
-            \In2code\Femanager\Controller\InvitationController::class => 'new, create, edit, update, delete',
+            \In2code\Femanager\Controller\InvitationController::class => 'new, create, edit, update, delete, status',
             \In2code\Femanager\Controller\DataController::class => 'getStatesForCountry'
         ]
     );

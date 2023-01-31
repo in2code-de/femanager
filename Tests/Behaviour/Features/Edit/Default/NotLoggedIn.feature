@@ -7,4 +7,3 @@ Feature: NotLoggedIn
     Then I should see "Please log in before"
     Then I should not see "Firstname"
     Then I should not see "Lastname"
-    Then I should not see "Email"

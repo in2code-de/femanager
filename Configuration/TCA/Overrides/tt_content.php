@@ -1,18 +1,21 @@
 <?php
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 defined('TYPO3') or die();
 
 /**
  * FE Plugin
  */
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin('femanager', 'Pi1', 'FE_Manager');
+ExtensionUtility::registerPlugin('femanager', 'Pi1', 'FE_Manager');
 
 /**
  * Flexform
  */
 $pluginSignature = str_replace('_', '', 'femanager') . '_pi1';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+ExtensionManagementUtility::addPiFlexFormValue(
     $pluginSignature,
     'FILE:EXT:femanager/Configuration/FlexForms/FlexFormPi1.xml'
 );

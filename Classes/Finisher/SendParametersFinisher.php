@@ -17,12 +17,12 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
     /**
      * Inject a complete new content object
      *
-     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @var ContentObjectRenderer
      */
     protected $contentObject;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
 
@@ -118,7 +118,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected function isEnabled()
     {
-        return $this->contentObject->cObjGetSingle($this->configuration['_enable'], $this->configuration['_enable.'])
+        return $this->contentObject->cObjGetSingle($this->configuration['_enable'] ?? 'TEXT', $this->configuration['_enable.'] ?? '0')
             === '1';
     }
 }

@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Model\UserGroup;
+
 return [
-    \In2code\Femanager\Domain\Model\User::class => [
-        'tableName' => \In2code\Femanager\Domain\Model\User::TABLE_NAME,
+    User::class => [
+        'tableName' => User::TABLE_NAME,
         'properties' => [
             'terms' => [
                 'fieldName' => 'tx_femanager_terms'
@@ -14,7 +17,7 @@ return [
             ]
         ]
     ],
-    \In2code\Femanager\Domain\Model\UserGroup::class => [
+    UserGroup::class => [
         'tableName' => 'fe_groups'
     ]
 ];

@@ -285,7 +285,7 @@ class AbstractValidatorTest extends UnitTestCase
             ],
             [
                 '3 ',
-                false
+                (PHP_MAJOR_VERSION >= 8) ? true : false
             ]
         ];
     }

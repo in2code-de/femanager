@@ -6,6 +6,7 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Validator\ServersideValidator;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class AbstractValidatorTest
@@ -14,7 +15,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 class ServersideValidatorTest extends UnitTestCase
 {
     /**
-     * @var \In2code\Femanager\Domain\Validator\ServersideValidator
+     * @var ServersideValidator
      */
     protected $generalValidatorMock;
 
@@ -70,7 +71,7 @@ class ServersideValidatorTest extends UnitTestCase
 
     /**
      * @param int $uid
-     * @return UserGroup|\PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\MockObject
+     * @return UserGroup|MockObject
      */
     protected function getUserGroupMock(int $uid = 1)
     {

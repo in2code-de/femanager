@@ -6,7 +6,6 @@ namespace In2code\Femanager\Utility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
@@ -27,19 +26,11 @@ class ObjectUtility extends AbstractUtility
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     */
-    public static function getObjectManager(): ObjectManagerInterface
-    {
-        return parent::getObjectManager();
-    }
-
-    /**
      * @return ContentObjectRenderer
      */
     public static function getContentObject(): ContentObjectRenderer
     {
-        return self::getObjectManager()->get(ContentObjectRenderer::class);
+        return GeneralUtility::makeInstance(ContentObjectRenderer::class);
     }
 
     /**
@@ -88,8 +79,11 @@ class ObjectUtility extends AbstractUtility
      * @param string $glue
      * @return string
      */
-    public static function implodeObjectStorageOnProperty($objectStorage, $property = 'uid', $glue = ', '): string
-    {
+    public static function implodeObjectStorageOnProperty(
+        ObjectStorage $objectStorage,
+        string $property = 'uid',
+        string $glue = ', '
+    ): string {
         $values = [];
         if (!empty($objectStorage)) {
             foreach ($objectStorage as $object) {
