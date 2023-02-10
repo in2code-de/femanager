@@ -19,9 +19,8 @@ class ServersideValidator extends AbstractValidator
      * Validation of given Params
      *
      * @param User $user
-     * @return bool
      */
-    public function isValid($user): bool
+    public function isValid($user): void
     {
         $this->init();
         if ($this->validationSettings['_enable']['server'] === '1') {
@@ -97,7 +96,6 @@ class ServersideValidator extends AbstractValidator
                 }
             }
         }
-        return $this->isValid;
     }
 
     /**

@@ -62,16 +62,14 @@ class PasswordValidator extends AbstractValidatorExtbase
      * Validation of given Params
      *
      * @param $user
-     * @return bool
      */
-    public function isValid($user)
+    public function isValid($user):void
     {
         $this->initializeObject();
         $this->init();
 
         // if password fields are not active or if keep function active
         if (!$this->passwordFieldsAdded() || $this->keepPasswordIfEmpty()) {
-            return true;
         }
 
         $password = $user->getPassword();
@@ -79,10 +77,8 @@ class PasswordValidator extends AbstractValidatorExtbase
 
         if ($password !== $passwordRepeat) {
             $this->addError('validationErrorPasswordRepeat', 0, ['field' => 'password']);
-            return false;
         }
 
-        return true;
     }
 
     /**

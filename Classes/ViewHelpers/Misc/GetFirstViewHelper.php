@@ -15,7 +15,7 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
      *
      * @api
      */
-    public function initializeArguments()
+    public function initializeArguments():void
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
