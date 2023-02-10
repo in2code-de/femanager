@@ -8,6 +8,13 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 8.0.0
+      :Date: 2023-nn-nn
+      :Changes:
+
+      * [FEATURE] Add support for TYPO3 12
+
+-
       :Version: 7.1.0
       :Date: 2023-01-19
       :Changes:
