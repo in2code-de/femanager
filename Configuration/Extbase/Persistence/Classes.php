@@ -18,6 +18,6 @@ return [
         ]
     ],
     UserGroup::class => [
-        'tableName' => 'fe_groups'
+        'tableName' => \In2code\Femanager\Domain\Model\UserGroup::TABLE_NAME
     ]
 ];
