@@ -24,7 +24,7 @@ Basics
 - Create your own user model with getter/setter for your new fields that extends the user model from femanager
 - Override the user model in your ext_localconf.php
 
-See https://github.com/einpraegsam/femanagerextended for an example extension how to extend femanager with new fields
+See https://github.com/in2code-de/femanagerextended for an example extension how to extend femanager with new fields
 and validation methods
 
 
