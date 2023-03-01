@@ -8,7 +8,15 @@ Upgrade
 
 .. only:: html
 
-	:ref:`v7.1` |:ref:`v6.0` |:ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+	:ref:`v8.0` | :ref:`v7.1` |:ref:`v6.0` |:ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+
+
+.. _v8.0:
+
+to version 8.0.0
+----------------
+
+tbd
 
 .. _v7.1:
 

@@ -13,7 +13,7 @@ Changelog
       :Changes:
 
       * [FEATURE] Add support for TYPO3 12
-
+      * [TASK] Remove dependencies of generic Extbase domain classes - Thx to https://github.com/theLine
 -
       :Version: 7.1.0
       :Date: 2023-01-19
