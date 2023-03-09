@@ -140,7 +140,7 @@ class UserRepository extends Repository
             $query->equals($field, $value),
             $query->equals('deleted', 0)
         ];
-        if (method_exists($user, 'getUid')) {
+        if ($user !== null && method_exists($user, 'getUid')) {
             $and[] = $query->logicalNot($query->equals('uid', (int)$user->getUid()));
         }
         $constraint = $query->logicalAnd($and);
