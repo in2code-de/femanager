@@ -79,20 +79,16 @@ even more complicated in usability for an edge case feature. Please discuss a ne
 
 ## Screenshots
 
-<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_create1.png" width="500" />
+<img src="/Documentation/Images/femanager_create1.png" width="500" alt="Profile creation"/>
 
-<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_create2.png" width="500" />
+<img src="/Documentation/Images/femanager_create2.png" width="500" alt="Admin confirmation email"/>
 
-<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_create3.png" width="500" />
+<img src="/Documentation/Images/femanager_create3.png" width="500" alt="Field validation"/>
 
-<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_edit1.png" width="500" />
+<img src="/Documentation/Images/femanager_edit1.png" width="500" alt="Profile editing"/>
 
-<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_edit21.png" width="500" />
+<img src="/Documentation/Images/femanager_edit2.png" width="500" alt="Additional fields"/>
 
-<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_backend1.png" width="500" />
+<img src="/Documentation/Images/femanager_backend1.png" width="500" alt="Plugin configuration"/>
 
-<img src="https://docs.typo3.org/typo3cms/extensions/femanager/_images/femanager_backend2.png" width="500" />
-
-<img src="https://s.nimbus.everhelper.me/attachment/1317619/v5ea61f9y80o3utaf1lv/262407-HlClHQYRv0uU0oRE/screen.png" width="500" />
-
-<img src="https://s.nimbus.everhelper.me/attachment/1317613/kway0rezl7cmockn03xm/262407-pFkmYEVCHkLZLUHv/screen.png" width="500" />
+<img src="/Documentation/Images/femanager_backend2.png" width="500" alt="User log"/>
