@@ -18,6 +18,14 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       Release Description
 
 -
+      :Version: 5.5.4
+      :Date: 2023-03-16
+      :Changes:
+
+      * [BUGFIX] Notification email to admin now sends changes again
+      * [BUGFIX] Notification email to admin is also sent when adding recipient's address to flex form only
+
+-
       :Version: 5.5.3
       :Date: 2023-01-25
       :Changes:
