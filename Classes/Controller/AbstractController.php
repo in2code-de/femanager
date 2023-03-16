@@ -147,7 +147,7 @@ abstract class AbstractController extends ActionController
                 'updateNotify',
                 StringUtility::makeEmailArray(
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['email']['value']
-                    ?? $this->settings['edit']['notifyAdmin'],
+                        ?: $this->settings['edit']['notifyAdmin'],
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value']
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
@@ -238,7 +238,8 @@ abstract class AbstractController extends ActionController
             $this->sendMailService->send(
                 'createNotify',
                 StringUtility::makeEmailArray(
-                    !empty($this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']) ? $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value'] : $this->settings['new']['notifyAdmin'],
+                    $this->settings['new']['email']['createAdminNotify']['receiver']['email']['value']
+                        ?: $this->settings['new']['notifyAdmin'],
                     $this->settings['new']['email']['createAdminNotify']['receiver']['name']['value']
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
