@@ -8,13 +8,21 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 7.1.1
+      :Date: 2023-03-16
+      :Changes:
+
+      * [BUGFIX] Notification email to admin now sends changes again
+      * [BUGFIX] Notification email to admin is also sent when adding recipient's address to flex form only
+
+-
       :Version: 7.1.0
       :Date: 2023-01-19
       :Changes:
 
       * [FEATURE] Add support for PHP 8 and 8.1  - thx to Stefan Busemann, Bastien Lutz, Mathias Bolt Lesniak, Thomas Löffler, Johannes Seipelt
       * [BUGFIX] Re-fetch session from database to update 'userSession' property of TSFE.	Thx to Thomas Off <thomas.off@retiolum.de>
-      * [BUGFIX] Add hash check for inivtation action - thx to Max Schäfer & Dennis Schober-Wenger
+      * [BUGFIX] Add hash check for invitation action - thx to Max Schäfer & Dennis Schober-Wenger
       * [REFACTOR] Remove deprecated code and introduce rector  - thx to Thomas Löffler
 
 -
