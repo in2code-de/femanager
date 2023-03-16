@@ -154,7 +154,7 @@ abstract class AbstractController extends ActionController
                 'Profile update',
                 [
                     'user' => $user,
-                    'changes' => UserUtility::getDirtyPropertiesFromUser($existingUser),
+                    'changes' => UserUtility::getDirtyPropertiesFromUser($user),
                     'settings' => $this->settings
                 ],
                 $this->config['edit.']['email.']['notifyAdmin.']
