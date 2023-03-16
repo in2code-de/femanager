@@ -665,7 +665,7 @@
       </trans-unit>
       <trans-unit id="createRequestWaitingForAdminConfirm">
         <source>Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</source>
-        <target state="needs-translation">Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</target>
+        <target state="translated">Merci pour votre confirmation. Votre profil sera disponible dès que l'administrateur confirmera votre demande.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailSend">
         <source>An Email was send to your account. Please check your inbox.</source>
