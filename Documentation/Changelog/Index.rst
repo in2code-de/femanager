@@ -30,7 +30,7 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
       :Date: 2023-01-25
       :Changes:
 
-      * [BUGFIX] Security: Missing Hash Check for inviation controller - Invitation Templates must be updraded (if a custom template is used)
+      * [BUGFIX] Security: Missing Hash Check for invitation controller - Invitation Templates must be updated (if a custom template is used)
 
 -
       :Version: 5.5.2
