@@ -15,6 +15,13 @@ Changelog
       Release Description
 
 -
+      :Version: 6.3.5
+      :Date: 2023-03-23
+      :Changes:
+
+      * [BUGFIX] Notification email to admin is also sent when adding recipient's address to flex form only
+      * [BUGFIX] v5 backport: Notification mail to admin shows changes
+
       :Version: 6.3.4
       :Date: 2023-01-25
       :Changes:
