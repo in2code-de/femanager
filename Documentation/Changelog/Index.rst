@@ -7,6 +7,13 @@ Changelog
 .. t3-field-list-table::
    :header-rows: 1
 
+ - :Version:
+      Version
+   :Date:
+      Release Date
+   :Changes:
+      Release Description
+
 -
       :Version: 6.3.4
       :Date: 2023-01-25
