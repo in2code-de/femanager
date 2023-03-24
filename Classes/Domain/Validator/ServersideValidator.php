@@ -315,6 +315,9 @@ class ServersideValidator extends AbstractValidator
                 if (method_exists($object, 'getUid')) {
                     $values[] = $object->getUid();
                 }
+                if ($object instanceof FileReference) {
+                    return true;
+                }
             }
 
             return implode(',', $values);

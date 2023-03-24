@@ -44,3 +44,25 @@ $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'local - Docker';
 
 // Used for in-container requests
 $GLOBALS['TYPO3_CONF_VARS']['HTTP']['verify'] = '0';
+
+$GLOBALS['TYPO3_CONF_VARS'] = array_replace_recursive(
+    $GLOBALS['TYPO3_CONF_VARS']['FE'] = [
+        'cacheHash' => [
+            'enforceValidation' => true,
+            'excludedParameters' => [
+                'L',
+                'pk_campaign',
+                'pk_kwd',
+                'utm_source',
+                'utm_medium',
+                'utm_campaign',
+                'utm_term',
+                'utm_content',
+                'gclid',
+                'fbclid',
+                'msclkid',
+                'pid',
+            ],
+        ],
+    ]
+);
