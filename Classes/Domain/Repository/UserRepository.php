@@ -81,15 +81,17 @@ class UserRepository extends Repository
 
         // sorting
         $sorting = QueryInterface::ORDER_ASCENDING;
-        if ($settings['list']['sorting'] === 'desc') {
+        if (($settings['list']['sorting'] ?? null) === 'desc') {
             $sorting = QueryInterface::ORDER_DESCENDING;
         }
-        $field = preg_replace('/[^a-zA-Z0-9_-]/', '', $settings['list']['orderby']);
+        $orderby = $settings['list']['orderby'] ?? 'uid';
+        $field = preg_replace('/[^a-zA-Z0-9_-]/', '', $orderby);
         $query->setOrderings([$field => $sorting]);
 
         // set limit
-        if ((int)$settings['list']['limit'] > 0) {
-            $query->setLimit((int)$settings['list']['limit']);
+        $limit = $settings['list']['limit'] ?? 0;
+        if ($limit > 0) {
+            $query->setLimit((int)$limit);
         }
 
         $users = $query->execute();
