@@ -60,7 +60,7 @@ class UserRepository extends Repository
             foreach ($selectedUsergroups as $group) {
                 $logicalOr[] = $query->contains('usergroup', $group);
             }
-            $and[] = $query->logicalOr($logicalOr);
+            $and[] = $query->logicalOr(...$logicalOr);
         }
         if (!empty($filter['searchword'])) {
             $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], true);
@@ -74,10 +74,10 @@ class UserRepository extends Repository
                 foreach ($fieldsToSearch as $searchfield) {
                     $logicalOr[] = $query->like($searchfield, '%' . $searchword . '%');
                 }
-                $and[] = $query->logicalOr($logicalOr);
+                $and[] = $query->logicalOr(...$logicalOr);
             }
         }
-        $query->matching($query->logicalAnd($and));
+        $query->matching($query->logicalAnd(...$and));
 
         // sorting
         $sorting = QueryInterface::ORDER_ASCENDING;
