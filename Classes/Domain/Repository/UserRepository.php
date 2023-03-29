@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Repository;
 
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Service\PageTreeService;
 use In2code\Femanager\Utility\BackendUserUtility;
 use In2code\Femanager\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\QueryGenerator;
@@ -275,8 +276,8 @@ class UserRepository extends Repository
      */
     protected function getTreeList($pageIdentifier)
     {
-        $queryGenerator = $this->objectManager->get(QueryGenerator::class);
-        $treeList = $queryGenerator->getTreeList($pageIdentifier, 99, 0, '1');
+        $pageTreeService = GeneralUtility::makeInstance(PageTreeService::class);
+        $treeList = $pageTreeService->getTreeList($pageIdentifier, 99, 0, '1');
 
         return GeneralUtility::trimExplode(',', $treeList, true);
     }
