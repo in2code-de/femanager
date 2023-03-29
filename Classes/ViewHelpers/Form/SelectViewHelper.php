@@ -11,7 +11,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 /**
  * Class SelectViewHelper
  */
-class SelectViewHelper extends OriginalSelectViewHelper
+class SelectViewHelper
 {
     /**
      * Initialize
@@ -19,7 +19,7 @@ class SelectViewHelper extends OriginalSelectViewHelper
      */
     public function initialize()
     {
-        parent::initialize();
+        #parent::initialize();
 
         $this->tag->addAttribute('data-selected-value', $this->getSelectedValue());
     }
@@ -29,7 +29,7 @@ class SelectViewHelper extends OriginalSelectViewHelper
      */
     public function initializeArguments()
     {
-        parent::initializeArguments();
+       # parent::initializeArguments();
         $this->registerArgument('defaultOption', 'string', 'value to prepend', false);
     }
 
@@ -40,7 +40,7 @@ class SelectViewHelper extends OriginalSelectViewHelper
      */
     protected function getOptions()
     {
-        $options = parent::getOptions();
+    #    $options = parent::getOptions();
         if (!empty($this->arguments['defaultOption'])) {
             $options = ['' => $this->arguments['defaultOption']] + $options;
         }
@@ -55,7 +55,7 @@ class SelectViewHelper extends OriginalSelectViewHelper
      */
     protected function getSelectedValue()
     {
-        $selectedValue = parent::getSelectedValue();
+        #$selectedValue = parent::getSelectedValue();
 
         // set preselection from TypoScript
         if (empty($selectedValue)) {

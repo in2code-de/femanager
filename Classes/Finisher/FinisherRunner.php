@@ -7,7 +7,6 @@ namespace In2code\Femanager\Finisher;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Service\FinisherService;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -16,19 +15,14 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class FinisherRunner
 {
     /**
-     * @var ObjectManagerInterface
+     * @var FinisherService
      */
-    protected $objectManager;
+    protected $finisherService;
 
     /**
      * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
-
-    /**
-     * @var ContentObjectRenderer
-     */
-    protected $contentObject;
 
     /**
      * TypoScript settings
@@ -39,15 +33,12 @@ class FinisherRunner
 
     /**
      * FinisherRunner constructor.
-     * @param ObjectManagerInterface $objectManager
-     * @param ConfigurationManagerInterface $configurationManager
+     * @param FinisherService $finisherService
      */
     public function __construct(
-        ObjectManagerInterface $objectManager,
-        ConfigurationManagerInterface $configurationManager
+        FinisherService $finisherService
     ) {
-        $this->objectManager = $objectManager;
-        $this->configurationManager = $configurationManager;
+        $this->finisherService = $finisherService;
     }
 
     /**
@@ -65,13 +56,12 @@ class FinisherRunner
         ContentObjectRenderer $contentObject
     ) {
         foreach ($this->getFinisherClasses($settings) as $finisherSettings) {
-            /** @var FinisherService $finisherService */
-            $finisherService = $this->objectManager->get(FinisherService::class, $user, $settings, $contentObject);
-            $finisherService->setClass($finisherSettings['class']);
-            $finisherService->setRequirePath($finisherSettings['require'] ?? '');
-            $finisherService->setConfiguration($finisherSettings['config'] ?? []);
-            $finisherService->setActionMethodName($actionMethodName);
-            $finisherService->start();
+            $this->finisherService->init($user, $settings, $contentObject);
+            $this->finisherService->setClass($finisherSettings['class']);
+            $this->finisherService->setRequirePath($finisherSettings['require'] ?? '');
+            $this->finisherService->setConfiguration($finisherSettings['config'] ?? []);
+            $this->finisherService->setActionMethodName($actionMethodName);
+            $this->finisherService->start();
         }
     }
 

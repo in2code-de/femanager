@@ -10,12 +10,6 @@
     "sr_feuser_register",
     "fe_users"
   ],
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/bmack/TYPO3-Console.git"
-    }
-  ],
   "homepage": "https://github.com/in2code-de/femanager",
   "authors": [
     {
@@ -47,7 +41,8 @@
     "friends-of-behat/mink-extension": "^2.7",
     "friendsofphp/php-cs-fixer": "^3.14",
     "genesis/behat-fail-aid": "^3.7",
-    "helhum/typo3-console": "dev-v12-compat",
+    "helhum/typo3-console": "dev-main",
+    "michielroos/typo3scan": "^1.7",
     "mikey179/vfsstream": "^1.6",
     "phpmd/phpmd": "^2.13",
     "phpunit/phpunit": "^9.6",

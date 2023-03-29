@@ -5,13 +5,13 @@ namespace In2code\Femanager\ViewHelpers\Form;
 
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
-use TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldViewHelper as OriginalTextfieldViewHelper;
+#use TYPO3\CMS\Fluid\ViewHelpers\Form\TextfieldViewHelper as OriginalTextfieldViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
 /**
  * Class TextfieldViewHelper
  */
-class TextfieldViewHelper extends OriginalTextfieldViewHelper
+class TextfieldViewHelper
 {
     /**
      * Get the value of this form element (changed to prefill from TypoScript)
@@ -22,7 +22,7 @@ class TextfieldViewHelper extends OriginalTextfieldViewHelper
      */
     protected function getValueAttribute()
     {
-        $value = parent::getValueAttribute();
+        #$value = parent::getValueAttribute();
 
         // prefill value from TypoScript
         if (empty($value) && $this->getValueFromTypoScript()) {

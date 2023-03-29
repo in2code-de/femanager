@@ -63,16 +63,6 @@ class FinisherService
     protected $finisherInterface = 'In2code\Femanager\Finisher\FinisherInterface';
 
     /**
-     * @var ObjectManagerInterface
-     */
-    protected $objectManager;
-
-    public function injectObjectManager(ObjectManagerInterface $objectManager)
-    {
-        $this->objectManager = $objectManager;
-    }
-
-    /**
      * @return string
      */
     public function getClass()
@@ -249,7 +239,7 @@ class FinisherService
      * @param array $settings
      * @param ContentObjectRenderer $contentObject
      */
-    public function __construct(User $user, array $settings, ContentObjectRenderer $contentObject)
+    public function init(User $user, array $settings, ContentObjectRenderer $contentObject)
     {
         $this->setUser($user);
         $this->setSettings($settings);

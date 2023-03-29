@@ -7,7 +7,7 @@ call_user_func(function () {
     /**
      * Include Backend Module
      */
-    if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableModuleActive() &&
+    /*if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableModuleActive() &&
         !(TYPO3_REQUESTTYPE & TYPO3_REQUESTTYPE_INSTALL)) {
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
             'Femanager',
@@ -23,7 +23,7 @@ call_user_func(function () {
                 'labels' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf',
             ]
         );
-    }
+    }*/
 
     /**
      * Add user TSConfig
