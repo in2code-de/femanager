@@ -476,7 +476,7 @@ abstract class AbstractController extends ActionController
         $this->checkTypoScript();
         $this->checkStoragePid();
 
-        $dataProcessorRunner = $this->objectManager->get(DataProcessorRunner::class);
+        $dataProcessorRunner = GeneralUtility::makeInstance(DataProcessorRunner::class);
         $this->pluginVariables = $dataProcessorRunner->callClasses(
             $this->request->getArguments(),
             $this->settings,
@@ -500,7 +500,7 @@ abstract class AbstractController extends ActionController
     {
         if ((int)($this->allConfig['persistence']['storagePid'] ?? 0) === 0
             && GeneralUtility::_GP('type') !== '1548935210'
-            && TYPO3_MODE !== 'BE'
+            && !ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
         ) {
             $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', AbstractMessage::ERROR);
         }

@@ -7,7 +7,6 @@ use In2code\Femanager\Domain\Service\StoreInDatabaseService;
 use In2code\Femanager\Utility\StringUtility;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -21,11 +20,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      * @var ContentObjectRenderer
      */
     protected $contentObject;
-
-    /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
 
     /**
      * @var TypoScriptService
@@ -53,14 +47,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     public function injectContentObjectRenderer(ContentObjectRenderer $contentObject)
     {
         $this->contentObject = $contentObject;
-    }
-
-    /**
-     * @param ObjectManager $objectManager
-     */
-    public function injectObjectManager(ObjectManager $objectManager)
-    {
-        $this->objectManager = $objectManager;
     }
 
     /**
@@ -109,7 +95,7 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
         if ($this->isTableEnabled($table)) {
             $this->contentObject->start($this->getDataArray());
             /** @var StoreInDatabaseService $storeInDatabase */
-            $storeInDatabase = $this->objectManager->get(StoreInDatabaseService::class);
+            $storeInDatabase = GeneralUtility::makeInstance(StoreInDatabaseService::class);
             $storeInDatabase->setTable($table);
             $this->setPropertiesForTable($table, $storeInDatabase);
             $this->addArrayToDataArray(['uid_' . $table => $storeInDatabase->execute()]);
