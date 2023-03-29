@@ -41,15 +41,6 @@ class TestingHelper
         if (!defined('PHP_EXTENSIONS_DEFAULT')) {
             define('PHP_EXTENSIONS_DEFAULT', 'php');
         }
-        if (!defined('TYPO3_REQUESTTYPE')) {
-            define('TYPO3_REQUESTTYPE', '');
-        }
-        if (!defined('TYPO3_REQUESTTYPE_CLI')) {
-            define('TYPO3_REQUESTTYPE_CLI', '');
-        }
-        if (!defined('TYPO3_REQUESTTYPE_INSTALL')) {
-            define('TYPO3_REQUESTTYPE_INSTALL', '');
-        }
         if (!defined('TYPO3')) {
             define('TYPO3', true);
         }
