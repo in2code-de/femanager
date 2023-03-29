@@ -436,7 +436,6 @@ abstract class AbstractController extends ActionController
 
     public function initializeAction()
     {
-        $this->controllerContext = $this->buildControllerContext();
         $this->user = UserUtility::getCurrentUser();
         $this->contentObject = $this->configurationManager->getContentObject();
         $this->pluginVariables = $this->request->getArguments();
@@ -483,7 +482,9 @@ abstract class AbstractController extends ActionController
             $this->contentObject,
             $this->arguments
         );
-        $this->request->setArguments($this->pluginVariables);
+        $incomingRequest = $GLOBALS['TYPO3_REQUEST'];
+        $newRequest = $incomingRequest->withParsedBody($this->pluginVariables);
+        $GLOBALS['TYPO3_REQUEST'] = $newRequest;
     }
 
     /**
@@ -533,7 +534,7 @@ abstract class AbstractController extends ActionController
 
     protected function setAllUserGroups()
     {
-        $controllerName = strtolower($this->controllerContext->getRequest()->getControllerName());
+        $controllerName = $this->request->getControllerName();
         $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'] ?? '';
         $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
     }
