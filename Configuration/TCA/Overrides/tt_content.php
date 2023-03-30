@@ -10,6 +10,17 @@ defined('TYPO3') or die();
  */
 ExtensionUtility::registerPlugin('femanager', 'Pi1', 'FE_Manager');
 
+$pluginSignatureRegistration = ExtensionUtility::registerPlugin(
+    'femanager',
+    'Registration',
+    'Registration'
+);
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignatureRegistration] = 'pi_flexform';
+ExtensionManagementUtility::addPiFlexFormValue(
+    $pluginSignatureRegistration,
+    'FILE:EXT:femanager/Configuration/FlexForms/FlexFormRegistration.xml'
+);
+
 /**
  * Flexform
  */
