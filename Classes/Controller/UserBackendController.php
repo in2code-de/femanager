@@ -219,7 +219,7 @@ class UserBackendController extends AbstractController
         $url = $site->getRouter()->generateUri(
             $this->configPID,
             [
-                'tx_femanager_pi1' => [
+                'tx_femanager_registration' => [
                     'user' => $userIdentifier,
                     'hash' => HashUtility::createHashForUser($user),
                     'status' => $status,

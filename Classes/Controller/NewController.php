@@ -408,10 +408,11 @@ class NewController extends AbstractFrontendController
     public function resendConfirmationMailAction()
     {
         // @todo find a better way to fetch the data
-        $result = GeneralUtility::_GP('tx_femanager_pi1');
+        $result = GeneralUtility::_GP('tx_femanager_registration');
         if (is_array($result)) {
-            if (GeneralUtility::validEmail($result['user']['email'])) {
-                $user = $this->userRepository->findFirstByEmail($result['user']['email']);
+            $mail = $result['user']['email'] ?? '';
+            if ($mail && GeneralUtility::validEmail($mail)) {
+                $user = $this->userRepository->findFirstByEmail($mail);
                 if (is_a($user, User::class)) {
                     $this->sendCreateUserConfirmationMail($user);
                     $this->addFlashMessage(

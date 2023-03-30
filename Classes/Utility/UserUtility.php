@@ -84,12 +84,12 @@ class UserUtility extends AbstractUtility
      * @param User $user
      * @return User $user
      */
-    public static function fallbackUsernameAndPassword(User $user)
+    public static function fallbackUsernameAndPassword(User $user, string $pluginName = 'Pi1')
     {
         $settings = self::getConfigurationManager()->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'Femanager',
-            'Pi1'
+            $pluginName
         );
 
         if (isset($settings['new']['misc']['autogenerate'])) {

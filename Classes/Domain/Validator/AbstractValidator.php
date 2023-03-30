@@ -10,6 +10,7 @@ use In2code\Femanager\Event\UniqueUserEvent;
 use In2code\Femanager\Utility\FrontendUtility;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
@@ -426,15 +427,28 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     protected function setPluginVariables()
     {
-        $this->pluginVariables = GeneralUtility::_GP('tx_femanager_pi1');
+        // Get the current request object
+        $request = $GLOBALS['TYPO3_REQUEST'];
+        if (ApplicationType::fromRequest($request)->isFrontend()) {
+            $queryParams = $request->getQueryParams(); // GET parameters
+            $parsedBody = $request->getParsedBody(); // POST parameters
+            $allParams = array_merge($queryParams, $parsedBody);
+        }
+        // collect variables from plugins starting with tx_femanager
+        $this->pluginVariables = [];
+        foreach ($allParams as $key => $value) {
+            if (strpos($key, 'tx_femanager') === 0) {
+                $this->pluginVariables[$key] = $value;
+            }
+        }
     }
 
-    protected function setValidationSettings()
+    protected function setValidationSettings($pluginName = 'Pi1')
     {
         $config = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'Femanager',
-            'Pi1'
+            $pluginName
         );
         $this->validationSettings = $config[$this->getControllerName()][$this->getValidationName()];
     }

@@ -34,15 +34,12 @@ class IsRequiredFieldViewHelper extends AbstractValidationViewHelper
         return !empty($settings[$this->getControllerName()][$this->getValidationName()][$fieldName]['required']);
     }
 
-    /**
-     * @return array
-     */
-    protected function getSettingsConfiguration()
+    protected function getSettingsConfiguration(string $pluginName = 'Pi1'): array
     {
         return (array)$this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'Femanager',
-            'Pi1'
+            $pluginName
         );
     }
 

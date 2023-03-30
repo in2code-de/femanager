@@ -122,13 +122,13 @@ class ValidationSettingsService
     /**
      * @return array
      */
-    protected function getSettings(): array
+    protected function getSettings(string $pluginSignature = 'femanager_pi1'): array
     {
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         return (array)$configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'femanager',
-            'femanager_pi1'
+            $pluginSignature
         );
     }
 }

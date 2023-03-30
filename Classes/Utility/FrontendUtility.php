@@ -18,7 +18,8 @@ class FrontendUtility extends AbstractUtility
      */
     protected static $pluginNames = [
         'tx_femanager_pi1',
-        'tx_femanager_pi2'
+        'tx_femanager_pi2',
+        'tx_femanager_registration'
     ];
 
     /**

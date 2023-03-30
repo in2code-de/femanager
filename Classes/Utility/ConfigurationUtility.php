@@ -125,17 +125,18 @@ class ConfigurationUtility extends AbstractUtility
     /**
      * Get complete Typoscript or only a special value by a given path
      *
+     * @param string $pluginName
      * @param string $path "misc.uploadFolder" or empty for complete TypoScript array
      * @return string
      * @codeCoverageIgnore
      */
-    public static function getConfiguration(string $path = '')
+    public static function getConfiguration(string $pluginName = 'Pi1', string $path = '')
     {
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         $typoscript = $configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'Femanager',
-            'Pi1'
+            $pluginName
         );
         if (!empty($path)) {
             $typoscript = ArrayUtility::getValueByPath($typoscript, $path, '.');
