@@ -453,7 +453,7 @@
       </trans-unit>
       <trans-unit id="noZonesForThisCountry">
         <source>No zones available for the chosen country</source>
-        <target state="needs-translation">No zones available for the chosen country</target>
+        <target state="translated">Keine Zonen für das gewählte Land verfügbar</target>
       </trans-unit>
     </body>
   </file>
