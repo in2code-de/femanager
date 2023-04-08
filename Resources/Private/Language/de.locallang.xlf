@@ -877,7 +877,7 @@
       </trans-unit>
       <trans-unit id="createStatus">
         <source>User registration</source>
-        <target state="needs-translation">User registration</target>
+        <target state="translated">Benutzerregistrierung</target>
       </trans-unit>
       <trans-unit id="js.loading_states" approved="yes">
         <source>Loading states ...</source>
