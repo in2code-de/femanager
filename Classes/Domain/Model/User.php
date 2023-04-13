@@ -929,7 +929,7 @@ class User extends AbstractEntity
      * @param null $propertyName
      * @return bool
      */
-    public function _isDirty($propertyName = null)
+    public function _isDirty(string|null $propertyName = null): bool
     {
         return $this->getIgnoreDirty() ? false : parent::_isDirty($propertyName);
     }
