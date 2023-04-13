@@ -37,6 +37,9 @@ if (getenv('IS_DDEV_PROJECT') == 'true') {
                 'devIPmask' => '*',
                 'displayErrors' => 1,
             ],
-        ]
+            'BE' => [
+                'installToolPassword' => '$argon2i$v=19$m=65536,t=16,p=1$UnNyU1FXYmtzdEY3d2ZiOQ$7SkZw9NRaVvJC6gyTJj70pBUrnpFWtkVB3u0dz63uoE'
+            ]
+    ]
     );
 }
