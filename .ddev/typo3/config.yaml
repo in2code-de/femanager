@@ -1,6 +1,9 @@
-base: 'https://femanager.ddev.site/'
-baseVariants: {  }
+base: 'https://local.femanager.de/'
 errorHandling: {  }
+baseVariants:
+  -
+    base: 'https://femanager.ddev.site/'
+    condition: 'applicationContext == "Development/DDEV"'
 languages:
   -
     title: English
