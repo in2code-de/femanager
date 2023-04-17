@@ -114,17 +114,17 @@ typo3-add-dockerconfig:
 ## Starts the TYPO3 Databasecompare
 typo3-comparedb:
 	echo "$(EMOJI_leftright) Running database:updateschema"
-	docker-compose exec php ./.Build/bin/typo3cms database:updateschema
+	docker-compose exec php ./.Build/bin/typo3 database:updateschema
 
 ## Starts the TYPO3 setup process
 typo3-setupinstall:
 	echo "$(EMOJI_upright) Running install:setup"
-	docker-compose exec php ./.Build/bin/typo3cms install:setup
+	docker-compose exec php ./.Build/bin/typo3 install:setup
 
 ## Clears TYPO3 caches via typo3-console
 typo3-clearcache:
 	echo "$(EMOJI_broom) Clearing TYPO3 caches"
-	docker-compose exec php ./.Build/bin/typo3cms cache:flush
+	docker-compose exec php ./.Build/bin/typo3 cache:flush
 
 ## Downloads the dynamicReturnTypeMeta.json for the PhpStorm dynamic return type plugin
 typo3-install-autocomplete:
