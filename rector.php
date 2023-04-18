@@ -18,17 +18,19 @@ return static function (RectorConfig $rectorConfig): void {
     // $parameters->set(Typo3Option::TYPOSCRIPT_INDENT_SIZE, 2);
 
     $rectorConfig->sets([
-        Typo3LevelSetList::UP_TO_TYPO3_11,
+        Typo3LevelSetList::UP_TO_TYPO3_12,
+        \Rector\Set\ValueObject\DowngradeLevelSetList::DOWN_TO_PHP_81,
+        \Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_82
     ]);
 
     // Define your target version which you want to support
-    $rectorConfig->phpVersion(PhpVersion::PHP_81);
+    $rectorConfig->phpVersion(PhpVersion::PHP_82);
 
     // If you only want to process one/some TYPO3 extension(s), you can specify its path(s) here.
     // If you use the option --config change __DIR__ to getcwd()
-    $rectorConfig->paths([
-        __DIR__,
-    ]);
+    // $rectorConfig->paths([
+    //    __DIR__ . '/packages/acme_demo/',
+    // ]);
 
     // When you use rector there are rules that require some more actions like creating UpgradeWizards for outdated TCA types.
     // To fully support you we added some warnings. So watch out for them.
@@ -49,16 +51,19 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/public/*',
         __DIR__ . '/.github/*',
         __DIR__ . '/.Build/*',
-        __DIR__ . '/var/*',
+        __DIR__ . '/config/*',
+        __DIR__ . '/.ddev/*',
         __DIR__ . '/.project/*',
-        __DIR__ . '/Extensions/*',
+        __DIR__ . '/var/*',
         NameImportingPostRector::class => [
             'ext_localconf.php',
             'ext_tables.php',
             'ClassAliasMap.php',
             __DIR__ . '/**/Configuration/*.php',
             __DIR__ . '/**/Configuration/**/*.php',
-        ]
+        ],
+        \Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector::class,
+        \Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector::class
     ]);
 
     // If you have trouble that rector cannot run because some TYPO3 constants are not defined add an additional constants file
