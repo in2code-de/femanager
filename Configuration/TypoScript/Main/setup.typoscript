@@ -1745,11 +1745,10 @@ feManagerValidation {
   10 {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
     extensionName = Femanager
-    pluginName = Pi1
+    pluginName = List
     vendorName = In2code
     controller = User
     action = validate
-    switchableControllerActions.User.1 = validate
     features.requireCHashArgumentForActionArguments = 0
   }
 }
@@ -1770,7 +1769,7 @@ feManagerStateSelection {
   10 = USER_INT
   10 {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    extensionName = Femanager
+    extensionName = Data
     pluginName = Pi1
     vendorName = In2code
     controller = Data
