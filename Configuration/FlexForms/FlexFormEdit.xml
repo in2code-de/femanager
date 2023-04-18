@@ -3,13 +3,13 @@
         <langDisable>1</langDisable>
     </meta>
     <sheets>
-        <new>
+        <edit>
             <ROOT>
-                <sheetTitle>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.new.title</sheetTitle>
+                <sheetTitle>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.edit.title</sheetTitle>
                 <type>array</type>
                 <el>
-                    <settings.new.fields>
-                        <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.new.fields</label>
+                    <settings.edit.fields>
+                        <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.edit.fields</label>
                         <config>
                             <type>select</type>
                             <renderType>selectMultipleSideBySide</renderType>
@@ -94,10 +94,6 @@
                                     <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.dateOfBirth</numIndex>
                                     <numIndex index="1">dateOfBirth</numIndex>
                                 </numIndex>
-                                <numIndex index="20" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.terms</numIndex>
-                                    <numIndex index="1">terms</numIndex>
-                                </numIndex>
                             </items>
                             <maxitems>100</maxitems>
                             <size>10</size>
@@ -105,65 +101,34 @@
                             <minitems>0</minitems>
                             <allowNonIdValues>1</allowNonIdValues>
                             <itemsProcFunc>In2code\Femanager\UserFunc\UserFieldsOptions->addOptions</itemsProcFunc>
-                            <itemsProcFuncTab>new</itemsProcFuncTab>
+                            <itemsProcFuncTab>edit</itemsProcFuncTab>
                         </config>
-                    </settings.new.fields>
-                    <settings.new.overrideUserGroup>
-                        <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.new.overrideUserGroup</label>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>fe_groups</allowed>
-                            <size>3</size>
-                            <maxitems>50</maxitems>
-                            <minitems>0</minitems>
-                            <autoSizeMax>10</autoSizeMax>
-                        </config>
-                    </settings.new.overrideUserGroup>
-                    <settings.new.confirmByUser>
-                        <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.new.confirmByUser</label>
+                    </settings.edit.fields>
+                    <settings.edit.showDeleteLink>
+                        <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.edit.showDeleteLink</label>
                         <config>
                             <type>check</type>
                             <default>0</default>
                         </config>
-                    </settings.new.confirmByUser>
-                    <settings.new.confirmByAdmin>
-                        <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.new.confirmByAdmin</label>
+                    </settings.edit.showDeleteLink>
+                    <settings.edit.confirmByAdmin>
+                        <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.edit.confirmByAdmin</label>
                         <config>
                             <type>text</type>
                             <cols>32</cols>
                             <rows>2</rows>
                         </config>
-                    </settings.new.confirmByAdmin>
-                    <settings.new.notifyAdmin>
-                        <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.new.notifyAdmin</label>
+                    </settings.edit.confirmByAdmin>
+                    <settings.edit.notifyAdmin>
+                        <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.edit.notifyAdmin</label>
                         <config>
                             <type>text</type>
                             <cols>32</cols>
                             <rows>2</rows>
                         </config>
-                    </settings.new.notifyAdmin>
+                    </settings.edit.notifyAdmin>
                 </el>
             </ROOT>
-        </new>
-        <misc>
-            <ROOT>
-                <sheetTitle>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.misc.title</sheetTitle>
-                <type>array</type>
-                <el>
-                    <settings.misc.termsUrl>
-                        <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.misc.termsUrl</label>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>pages</allowed>
-                            <size>1</size>
-                            <maxitems>1</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.misc.termsUrl>
-                </el>
-            </ROOT>
-        </misc>
+        </edit>
     </sheets>
 </T3DataStructure>

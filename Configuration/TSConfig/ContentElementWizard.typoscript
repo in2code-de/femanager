@@ -1,0 +1,56 @@
+mod.wizards.newContentElement.wizardItems.ext-femanager {
+  header = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:pluginWizardTitle
+  after = plugins,common,forms,menu
+  before = special
+  elements {
+    femanager-registration {
+      iconIdentifier = extension-femanager-main
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-registration.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-registration.description
+      tt_content_defValues {
+        CType = femanager_registration
+      }
+    }
+    femanager-edit {
+      iconIdentifier = extension-femanager-main
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-edit.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-edit.description
+      tt_content_defValues {
+        CType = femanager_edit
+      }
+    }
+    femanager-list {
+      iconIdentifier = extension-femanager-main
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-list.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-list.description
+      tt_content_defValues {
+        CType = femanager_list
+      }
+    }
+    femanager-detail {
+      iconIdentifier = extension-femanager-main
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-detail.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-detail.description
+      tt_content_defValues {
+        CType = femanager_detail
+      }
+    }
+    femanager-invitation {
+      iconIdentifier = extension-femanager-main
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-invitation.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-invitation.description
+      tt_content_defValues {
+        CType = femanager_invitation
+      }
+    }
+    femanager-resendconfirmationmail {
+      iconIdentifier = extension-femanager-main
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-resendconfirmationmail.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-resendconfirmationmail.description
+      tt_content_defValues {
+        CType = femanager_resendconfirmationmail
+      }
+    }
+  }
+  show = *
+}

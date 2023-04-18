@@ -16,7 +16,9 @@ Upgrade
 to version 8.0.0
 ----------------
 
-tbd
+**Upgrade Plugins**
+
+All Plugins used in your pages must be updated. The Updater is located in Admin Tools -> Upgrade -> Run Upgrade Wizard -> "EXT:femanager: Migrate plugins"
 
 .. _v7.1:
 

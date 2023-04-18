@@ -12,6 +12,45 @@
 			<trans-unit id="mlang_labels_tablabel">
 				<source>FE Manager</source>
 			</trans-unit>
+			<trans-unit id="pluginWizardTitle">
+				<source>Femanager</source>
+			</trans-unit>
+			<trans-unit id="femanager_registration.title">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="femanager_registration.description">
+				<source>Description of Registration</source>
+			</trans-unit>
+			<trans-unit id="femanager_edit.title">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="femanager_edit.description">
+				<source>Description of Edit</source>
+			</trans-unit>
+			<trans-unit id="femanager_list.title">
+				<source>List</source>
+			</trans-unit>
+			<trans-unit id="femanager_list.description">
+				<source>Description of List</source>
+			</trans-unit>
+			<trans-unit id="femanager_detail.title">
+				<source>Detail</source>
+			</trans-unit>
+			<trans-unit id="femanager_detail.description">
+				<source>Description of Detail</source>
+			</trans-unit>
+			<trans-unit id="femanager_invitation.title">
+				<source>Invitation</source>
+			</trans-unit>
+			<trans-unit id="femanager_invitation.description">
+				<source>Description of Invitation</source>
+			</trans-unit>
+			<trans-unit id="femanager_resendconfirmationmail.title">
+				<source>Resend Confirmation Mail</source>
+			</trans-unit>
+			<trans-unit id="femanager_resendconfirmationmail.description">
+				<source>Description of Resend Confirmation Mail</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
