@@ -471,9 +471,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     protected function getControllerName(): string
     {
         $controllerName = 'new';
-        if ($this->pluginVariables['__referrer']['@controller'] === 'Edit') {
+        if (!empty($this->pluginVariables['__referrer']['@controller']) && $this->pluginVariables['__referrer']['@controller'] === 'Edit') {
             $controllerName = 'edit';
-        } elseif ($this->pluginVariables['__referrer']['@controller'] === 'Invitation') {
+        } elseif (!empty($this->pluginVariables['__referrer']['@controller']) && $this->pluginVariables['__referrer']['@controller'] === 'Invitation') {
             $controllerName = 'invitation';
         }
         $this->checkAllowedControllerName($controllerName);

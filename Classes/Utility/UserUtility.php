@@ -204,7 +204,7 @@ class UserUtility extends AbstractUtility
                 break;
 
             default:
-                $hashInstance = $passwordHashFactory->getDefaultHashInstance(TYPO3_MODE);
+                $hashInstance = $passwordHashFactory->getDefaultHashInstance('FE');
         }
 
         if ($hashInstance === false) {
@@ -324,8 +324,6 @@ class UserUtility extends AbstractUtility
         $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('dummy', true);
         // create the session (destroys all existing session data in the session backend!)
         $GLOBALS['TSFE']->fe_user->createUserSession(['uid' => (int)$user->getUid()]);
-        // re-fetch the session from the database so that the internal 'userSession' property of TSFE gets updated
-        $GLOBALS['TSFE']->fe_user->fetchUserSession();
         // write the session data again to the session backend; preserves what was there before!!
         $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('dummy', true);
     }

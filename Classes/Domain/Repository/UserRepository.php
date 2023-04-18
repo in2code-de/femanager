@@ -114,7 +114,7 @@ class UserRepository extends Repository
         if ($user !== null && method_exists($user, 'getUid')) {
             $and[] = $query->logicalNot($query->equals('uid', $user->getUid()));
         }
-        $constraint = $query->logicalAnd($and);
+        $constraint = $query->logicalAnd(...$and);
 
         $query->matching($constraint);
 

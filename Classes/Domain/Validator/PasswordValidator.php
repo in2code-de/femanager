@@ -119,7 +119,7 @@ class PasswordValidator extends AbstractValidatorExtbase
     /**
      * Initialize Validator Function
      */
-    protected function init(string $pluginName = 'Pi1')
+    protected function init(string $pluginName = 'Registration')
     {
         $this->configuration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
@@ -127,7 +127,7 @@ class PasswordValidator extends AbstractValidatorExtbase
             $pluginName
         );
         $this->cObj = $this->configurationManager->getContentObject();
-        $this->piVars = GeneralUtility::_GP('tx_femanager_' . lcfirst($pluginName));
+        $this->piVars = $this->cObj->getRequest()->getParsedBody()['tx_femanager_'. lcfirst($pluginName)] ?? $this->cObj->getRequest()->getQueryParams()['tx_femanager_'. lcfirst($pluginName)] ?? null;;
         $this->actionName = $this->piVars['__referrer']['@action'];
     }
 

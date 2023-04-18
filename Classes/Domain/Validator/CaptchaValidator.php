@@ -20,11 +20,9 @@ class CaptchaValidator extends AbstractValidator
     public function isValid($user): void
     {
         $this->init();
-        if (!$this->captchaEnabled() || $this->validCaptcha()) {
-
+        if ($this->captchaEnabled() && !$this->validCaptcha()) {
+            $this->addError('validationErrorCaptcha', 0, ['fieldName' => 'captcha']);
         }
-        $this->addError('validationErrorCaptcha', 0, ['fieldName' => 'captcha']);
-
     }
 
     /**
