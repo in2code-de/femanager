@@ -30,6 +30,6 @@ class ExplodeViewHelper extends AbstractViewHelper
         $separator = $this->arguments['seperator'];
         $trim = $this->arguments['trim'];
 
-        return $trim ? GeneralUtility::trimExplode($separator, $string, true) : explode($separator, $string);
+        return $trim ? GeneralUtility::trimExplode($separator, $string, true) : explode($separator, (string) $string);
     }
 }

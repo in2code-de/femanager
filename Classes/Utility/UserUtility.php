@@ -25,10 +25,8 @@ class UserUtility extends AbstractUtility
 {
     /**
      * Return current logged in fe_user
-     *
-     * @return User|null
      */
-    public static function getCurrentUser()
+    public static function getCurrentUser(): ?User
     {
         if (self::getPropertyFromUser() !== null) {
             $userRepository = GeneralUtility::makeInstance(UserRepository::class);
@@ -43,9 +41,8 @@ class UserUtility extends AbstractUtility
      * Get property from current logged in Frontend User
      *
      * @param string $propertyName
-     * @return string|null
      */
-    public static function getPropertyFromUser($propertyName = 'uid')
+    public static function getPropertyFromUser($propertyName = 'uid'): ?string
     {
         if (!empty(self::getTypoScriptFrontendController()->fe_user->user[$propertyName])) {
             return self::getTypoScriptFrontendController()->fe_user->user[$propertyName];
@@ -81,7 +78,6 @@ class UserUtility extends AbstractUtility
     /**
      * Autogenerate username and password if it's empty
      *
-     * @param User $user
      * @return User $user
      */
     public static function fallbackUsernameAndPassword(User $user, string $pluginName = 'Pi1')
@@ -122,8 +118,6 @@ class UserUtility extends AbstractUtility
     }
 
     /**
-     * @param User $user
-     * @param array $settings
      * @return User
      */
     public static function takeEmailAsUsername(User $user, array $settings)
@@ -138,7 +132,6 @@ class UserUtility extends AbstractUtility
     /**
      * Overwrite usergroups from user by flexform settings
      *
-     * @param User $user
      * @param array $settings
      * @param string $controllerName
      * @return User $object
@@ -161,7 +154,6 @@ class UserUtility extends AbstractUtility
     /**
      * Convert password to Argon2i, Bcrypt, Pbkdf2, Phpass, Blowfish or Md5 hash
      *
-     * @param User $user
      * @param string $method
      * @throws InvalidPasswordHashException
      */
@@ -175,7 +167,6 @@ class UserUtility extends AbstractUtility
     /**
      * Hash a password from $user->getPassword()
      *
-     * @param User $user
      * @param string $method "Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", "md5" or "none" ("sha1" for TYPO3 V8)
      * @throws InvalidPasswordHashException
      */
@@ -226,7 +217,6 @@ class UserUtility extends AbstractUtility
     /**
      * Get changed properties (compare two objects with same getter methods)
      *
-     * @param User $changedObject
      * @return array
      *            [firstName][old] = Alex
      *            [firstName][new] = Alexander
@@ -242,17 +232,17 @@ class UserUtility extends AbstractUtility
         ];
 
         foreach ($changedObject->_getCleanProperties() as $propertyName => $oldPropertyValue) {
-            if (method_exists($changedObject, 'get' . ucfirst($propertyName))
+            if (method_exists($changedObject, 'get' . ucfirst((string) $propertyName))
                 && !in_array($propertyName, $ignoreProperties)
             ) {
-                $newPropertyValue = $changedObject->{'get' . ucfirst($propertyName)}();
+                $newPropertyValue = $changedObject->{'get' . ucfirst((string) $propertyName)}();
                 if (!is_object($oldPropertyValue) || !is_object($newPropertyValue)) {
                     if ($oldPropertyValue !== $newPropertyValue) {
                         $dirtyProperties[$propertyName]['old'] = $oldPropertyValue;
                         $dirtyProperties[$propertyName]['new'] = $newPropertyValue;
                     }
                 } else {
-                    if (get_class($oldPropertyValue) === 'DateTime') {
+                    if ($oldPropertyValue::class === 'DateTime') {
                         /** @var $oldPropertyValue \DateTime */
                         /** @var $newPropertyValue \DateTime */
                         if ($oldPropertyValue->getTimestamp() !== $newPropertyValue->getTimestamp()) {
@@ -300,8 +290,6 @@ class UserUtility extends AbstractUtility
 
     /**
      * Remove FE Session to a given user
-     *
-     * @param User $user
      */
     public static function removeFrontendSessionToUser(User $user)
     {
@@ -314,7 +302,6 @@ class UserUtility extends AbstractUtility
     /**
      * Check if FE Session exists
      *
-     * @param User $user
      * @return bool
      */
     public static function checkFrontendSessionToUser(User $user)
@@ -322,11 +309,7 @@ class UserUtility extends AbstractUtility
         $queryBuilder = self::getConnectionPool()->getQueryBuilderForTable('fe_sessions');
 
         $row = $queryBuilder->select('ses_id')
-            ->from('fe_sessions')
-            ->where(
-                $queryBuilder->expr()->eq('ses_userid', (int)$user->getUid())
-            )
-            ->execute()
+            ->from('fe_sessions')->where($queryBuilder->expr()->eq('ses_userid', (int)$user->getUid()))->executeQuery()
             ->fetch();
 
         return !empty($row['ses_id']);
@@ -334,11 +317,8 @@ class UserUtility extends AbstractUtility
 
     /**
      * Login FE-User
-     *
-     * @param User $user
-     * @param string|null $storagePids
      */
-    public static function login(User $user, $storagePids = null)
+    public static function login(User $user, ?string $storagePids = null)
     {
         // ensure a session cookie is set (in case there is no session yet)
         $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('dummy', true);

@@ -1,6 +1,10 @@
 <?php
 
 declare(strict_types=1);
+use Rector\Set\ValueObject\DowngradeLevelSetList;
+use Rector\Set\ValueObject\LevelSetList;
+use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
+use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 
 use Rector\Config\RectorConfig;
 use Rector\Core\Configuration\Option;
@@ -19,8 +23,8 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->sets([
         Typo3LevelSetList::UP_TO_TYPO3_12,
-        \Rector\Set\ValueObject\DowngradeLevelSetList::DOWN_TO_PHP_81,
-        \Rector\Set\ValueObject\LevelSetList::UP_TO_PHP_82
+        DowngradeLevelSetList::DOWN_TO_PHP_81,
+        LevelSetList::UP_TO_PHP_82
     ]);
 
     // Define your target version which you want to support
@@ -62,8 +66,8 @@ return static function (RectorConfig $rectorConfig): void {
             __DIR__ . '/**/Configuration/*.php',
             __DIR__ . '/**/Configuration/**/*.php',
         ],
-        \Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector::class,
-        \Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector::class
+        AddLiteralSeparatorToNumberRector::class,
+        ClassPropertyAssignToConstructorPromotionRector::class
     ]);
 
     // If you have trouble that rector cannot run because some TYPO3 constants are not defined add an additional constants file

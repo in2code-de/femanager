@@ -46,9 +46,6 @@ class SendMailService
         $this->dispatcher = $dispatcher;
     }
 
-    /**
-     * @param array $variables
-     */
     protected function contentObjectStart(array $variables): void
     {
         if (empty($variables['user'] ?? []) === false &&
@@ -104,7 +101,6 @@ class SendMailService
      *
      * @param string $template Template file in Templates/Email/
      * @param array $variables Variables for assignMultiple
-     * @return string
      */
     protected function getMailBody(string $template, array $variables): string
     {
@@ -114,12 +110,6 @@ class SendMailService
         return $standAloneView->render();
     }
 
-    /**
-     * @param array $variables
-     * @param array $typoScript
-     * @param MailMessage $email
-     * @return array
-     */
     protected function embedImages(array $variables, array $typoScript, MailMessage $email): array
     {
         $images = $this->contentObject->cObjGetSingle(
@@ -135,7 +125,7 @@ class SendMailService
         $imageVariables = [];
 
         foreach ($images as $path) {
-            $name = basename($path);
+            $name = basename((string) $path);
             $imagePart = DataPart::fromPath($path);
             $contentType = $imagePart->getMediaType() . '/' . $imagePart->getMediaSubtype();
             $email->embedFromPath($path, $name, $contentType);
@@ -145,14 +135,6 @@ class SendMailService
         return array_merge($variables, ['embedImages' => $imageVariables]);
     }
 
-    /**
-     * @param string $template
-     * @param array $receiver
-     * @param array $sender
-     * @param string $subject
-     * @param array $variables
-     * @param MailMessage $email
-     */
     protected function prepareMailObject(
         string $template,
         array $receiver,
@@ -168,10 +150,6 @@ class SendMailService
             ->html($html);
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function overwriteEmailReceiver(array $typoScript, MailMessage $email): void
     {
         $emailAddress = $this->contentObject->cObjGetSingle(
@@ -187,10 +165,6 @@ class SendMailService
         }
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function overwriteEmailSender(array $typoScript, MailMessage $email): void
     {
         $emailAddress = $this->contentObject->cObjGetSingle(
@@ -207,10 +181,6 @@ class SendMailService
         }
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function setSubject(array $typoScript, MailMessage $email): void
     {
         if ($this->contentObject->cObjGetSingle($typoScript['subject'], $typoScript['subject.'])) {
@@ -218,10 +188,6 @@ class SendMailService
         }
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function setCc(array $typoScript, MailMessage $email): void
     {
         if ($this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.'])) {
@@ -229,10 +195,6 @@ class SendMailService
         }
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function setPriority(array $typoScript, MailMessage $email): void
     {
         $priority = (int)$this->contentObject->cObjGetSingle(
@@ -244,10 +206,6 @@ class SendMailService
         }
     }
 
-    /**
-     * @param array $typoScript
-     * @param MailMessage $email
-     */
     protected function setAttachments(array $typoScript, MailMessage $email): void
     {
         if ($this->contentObject->cObjGetSingle($typoScript['attachments'] ?? '', $typoScript['attachments.'] ?? '')) {
@@ -267,20 +225,12 @@ class SendMailService
 
     /**
      * Get path and filename for mail template
-     *
-     * @param string $fileName
-     * @return string
      */
     protected function getRelativeEmailPathAndFilename(string $fileName): string
     {
         return TemplateUtility::getTemplatePath('Email/' . ucfirst($fileName) . '.html');
     }
 
-    /**
-     * @param array $typoScript
-     * @param array $receiver
-     * @return bool
-     */
     protected function isMailEnabled(array $typoScript, array $receiver): bool
     {
         $cObjectName = ConfigurationUtility::getValue('_enable', $typoScript);

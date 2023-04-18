@@ -115,12 +115,12 @@ class PluginUpdater implements UpgradeWizardInterface
                 }
 
                 // Remove empty sheets
-                if (!count($flexFormData['data'][$sheetKey]['lDEF']) > 0) {
+                if (!(is_countable($flexFormData['data'][$sheetKey]['lDEF']) ? count($flexFormData['data'][$sheetKey]['lDEF']) : 0) > 0) {
                     unset($flexFormData['data'][$sheetKey]);
                 }
             }
 
-            if (count($flexFormData['data']) > 0) {
+            if ((is_countable($flexFormData['data']) ? count($flexFormData['data']) : 0) > 0) {
                 $newFlexform = $this->array2xml($flexFormData);
             } else {
                 $newFlexform = '';
@@ -170,7 +170,7 @@ class PluginUpdater implements UpgradeWizardInterface
         }
 
         $flexFormFile = $GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds']['*,' . $listType];
-        $flexFormContent = file_get_contents(GeneralUtility::getFileAbsFileName(substr(trim($flexFormFile), 5)));
+        $flexFormContent = file_get_contents(GeneralUtility::getFileAbsFileName(substr(trim((string) $flexFormFile), 5)));
         $flexFormData = GeneralUtility::xml2array($flexFormContent);
 
         // Iterate each sheet and extract all settings
@@ -186,10 +186,6 @@ class PluginUpdater implements UpgradeWizardInterface
 
     /**
      * Updates list_type and pi_flexform of the given content element UID
-     *
-     * @param int $uid
-     * @param string $newCtype
-     * @param string $flexform
      */
     protected function updateContentElement(int $uid, string $newCtype, string $flexform): void
     {
@@ -209,9 +205,6 @@ class PluginUpdater implements UpgradeWizardInterface
 
     /**
      * Transforms the given array to FlexForm XML
-     *
-     * @param array $input
-     * @return string
      */
     protected function array2xml(array $input = []): string
     {

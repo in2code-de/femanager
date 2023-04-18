@@ -85,7 +85,7 @@ class StoreInDatabaseService
      */
     public function addProperty($propertyName, $value)
     {
-        $propertyName = preg_replace('/[^a-zA-Z0-9_-]/', '', $propertyName);
+        $propertyName = preg_replace('/[^a-zA-Z0-9_-]/', '', (string) $propertyName);
         $this->properties[$propertyName] = $value;
     }
 

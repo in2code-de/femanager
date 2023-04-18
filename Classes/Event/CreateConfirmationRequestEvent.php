@@ -8,14 +8,11 @@ use In2code\Femanager\Domain\Model\User;
 
 class CreateConfirmationRequestEvent extends UserEvent
 {
-    public const MODE_AUTOMATIC = 'automatic';
+    final public const MODE_AUTOMATIC = 'automatic';
 
-    public const MODE_MANUAL = 'manual';
+    final public const MODE_MANUAL = 'manual';
 
-    /**
-     * @var string
-     */
-    private $mode;
+    private readonly string $mode;
 
     public function __construct(User $user, string $mode)
     {
@@ -23,9 +20,6 @@ class CreateConfirmationRequestEvent extends UserEvent
         $this->mode = $mode;
     }
 
-    /**
-     * @return string
-     */
     public function getMode(): string
     {
         return $this->mode;

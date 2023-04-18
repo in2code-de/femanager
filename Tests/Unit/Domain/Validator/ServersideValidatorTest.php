@@ -69,11 +69,7 @@ class ServersideValidatorTest extends UnitTestCase
         self::assertSame('testuser', $result);
     }
 
-    /**
-     * @param int $uid
-     * @return UserGroup|MockObject
-     */
-    protected function getUserGroupMock(int $uid = 1)
+    protected function getUserGroupMock(int $uid = 1): UserGroup|MockObject
     {
         $mockClass = $this->getMockBuilder(UserGroup::class)
             ->disableOriginalConstructor()

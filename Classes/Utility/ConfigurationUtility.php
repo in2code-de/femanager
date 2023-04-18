@@ -13,7 +13,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class ConfigurationUtility extends AbstractUtility
 {
-    const DEFAULT_CONFIGURATION = [
+    final public const DEFAULT_CONFIGURATION = [
         '_TypoScriptIncluded' => 0,
         '_enable' => '',
         '_enable.' => [],
@@ -92,9 +92,6 @@ class ConfigurationUtility extends AbstractUtility
         'priority.' => [],
     ];
 
-    /**
-     * @return bool
-     */
     public static function isDisableModuleActive(): bool
     {
         $configuration = self::getExtensionConfiguration();
@@ -102,9 +99,6 @@ class ConfigurationUtility extends AbstractUtility
         return $configuration['disableModule'] === '1';
     }
 
-    /**
-     * @return bool
-     */
     public static function isConfirmationModuleActive(): bool
     {
         $configuration = self::getExtensionConfiguration();
@@ -112,9 +106,6 @@ class ConfigurationUtility extends AbstractUtility
         return $configuration['enableConfirmationModule'] === '1';
     }
 
-    /**
-     * @return bool
-     */
     public static function isDisableLogActive(): bool
     {
         $configuration = self::getExtensionConfiguration();
@@ -125,7 +116,6 @@ class ConfigurationUtility extends AbstractUtility
     /**
      * Get complete Typoscript or only a special value by a given path
      *
-     * @param string $pluginName
      * @param string $path "misc.uploadFolder" or empty for complete TypoScript array
      * @return string
      * @codeCoverageIgnore
@@ -146,7 +136,6 @@ class ConfigurationUtility extends AbstractUtility
     }
 
     /**
-     * @return bool
      * @codeCoverageIgnore
      */
     public static function isBackendModuleFilterUserConfirmation(): bool
@@ -158,7 +147,6 @@ class ConfigurationUtility extends AbstractUtility
     }
 
     /**
-     * @return bool
      * @codeCoverageIgnore
      */
     public static function IsResendUserConfirmationRequestActive(): bool
@@ -194,7 +182,7 @@ class ConfigurationUtility extends AbstractUtility
     {
         try {
             return ArrayUtility::getValueByPath($config, $key);
-        } catch (MissingArrayPathException $ex) {
+        } catch (MissingArrayPathException) {
             return self::getDefaultConfiguration($key);
         }
     }

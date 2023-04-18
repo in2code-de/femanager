@@ -8,14 +8,8 @@ use In2code\Femanager\Domain\Model\User;
 
 class UserLogEvent extends UserEvent
 {
-    /**
-     * @var int
-     */
-    private $state;
-    /**
-     * @var array
-     */
-    private $additionalProperties;
+    private readonly int $state;
+    private readonly array $additionalProperties;
 
     public function __construct(?User $user, int $state, array $additionalProperties = [])
     {

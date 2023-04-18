@@ -33,17 +33,11 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected $configuration;
 
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
     public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
     }
 
-    /**
-     * @param ContentObjectRenderer $contentObject
-     */
     public function injectContentObjectRenderer(ContentObjectRenderer $contentObject)
     {
         $this->contentObject = $contentObject;
@@ -73,7 +67,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
             $requestFactory = GeneralUtility::makeInstance(RequestFactory::class);
             $params = $curlSettings['params'];
             $parsedParams = [];
-            parse_str($params, $parsedParams);
+            parse_str((string) $params, $parsedParams);
             $requestFactory->request($curlSettings['url'], 'POST', ['form_params' => $parsedParams]);
         }
     }

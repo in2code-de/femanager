@@ -13,7 +13,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class User extends AbstractEntity
 {
-    const TABLE_NAME = 'fe_users';
+    final public const TABLE_NAME = 'fe_users';
 
     /**
      * @var string
@@ -206,8 +206,8 @@ class User extends AbstractEntity
      */
     public function initializeObject()
     {
-        $this->usergroup = $this->usergroup ?? new ObjectStorage();
-        $this->image = $this->image ?? new ObjectStorage();
+        $this->usergroup ??= new ObjectStorage();
+        $this->image ??= new ObjectStorage();
     }
 
     /**
@@ -263,8 +263,6 @@ class User extends AbstractEntity
 
     /**
      * Adds a usergroup to the frontend user
-     *
-     * @param UserGroup $usergroup
      */
     public function addUsergroup(UserGroup $usergroup)
     {
@@ -273,8 +271,6 @@ class User extends AbstractEntity
 
     /**
      * Removes a usergroup from the frontend user
-     *
-     * @param UserGroup $usergroup
      */
     public function removeUsergroup(UserGroup $usergroup)
     {
@@ -594,8 +590,6 @@ class User extends AbstractEntity
 
     /**
      * Sets the lastlogin value
-     *
-     * @param \DateTime $lastlogin
      */
     public function setLastlogin(\DateTime $lastlogin)
     {
@@ -801,8 +795,6 @@ class User extends AbstractEntity
 
     /**
      * Returns, whether the user has accepted terms and conditions
-     *
-     * @return bool
      */
     public function isTerms(): bool
     {
@@ -812,7 +804,6 @@ class User extends AbstractEntity
     /**
      * Set whether the user has accepted terms and conditions
      *
-     * @param bool $terms
      * @return User
      */
     public function setTerms(bool $terms)
@@ -844,9 +835,6 @@ class User extends AbstractEntity
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsOnline(): bool
     {
         return $this->isOnline();
@@ -854,8 +842,6 @@ class User extends AbstractEntity
 
     /**
      * Check if last FE login was within the last 2h
-     *
-     * @return bool
      */
     public function isOnline(): bool
     {

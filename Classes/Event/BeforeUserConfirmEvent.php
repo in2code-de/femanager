@@ -8,18 +8,9 @@ use In2code\Femanager\Domain\Model\User;
 
 class BeforeUserConfirmEvent
 {
-    /**
-     * @var User|null
-     */
-    private $user;
-    /**
-     * @var string
-     */
-    private $hash;
-    /**
-     * @var string
-     */
-    private $status;
+    private ?User $user = null;
+    private readonly string $hash;
+    private readonly string $status;
 
     public function __construct(
         ?User $user,
@@ -31,25 +22,16 @@ class BeforeUserConfirmEvent
         $this->status = $status;
     }
 
-    /**
-     * @return User|null
-     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
-    /**
-     * @return string
-     */
     public function getHash(): string
     {
         return $this->hash;
     }
 
-    /**
-     * @return string
-     */
     public function getStatus(): string
     {
         return $this->status;

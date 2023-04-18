@@ -16,10 +16,8 @@ class FeatureContext extends MinkContext
      * Wait for X seconds
      *
      * @Given /^I wait "([^"]*)" seconds$/
-     *
-     * @param string|int $seconds
      */
-    public function iWaitSeconds($seconds)
+    public function iWaitSeconds(string|int $seconds)
     {
         if ($seconds === 'a few') {
             $seconds = 10;
@@ -76,7 +74,7 @@ class FeatureContext extends MinkContext
             if ($name === 'random') {
                 $this->variables[$name] = $this->createRandomString(12);
                 $random[] = $this->variables[$name];
-            } elseif (substr($name, 0, 7) === 'random:') {
+            } elseif (str_starts_with($name, 'random:')) {
                 // In order to test previous random values stored in the form,
                 // suppport random:n, where n is the number or random's ago
                 // to use, i.e., random:1 is the previous random value.
@@ -86,8 +84,8 @@ class FeatureContext extends MinkContext
                 }
             }
             if (isset($this->variables[$name])) {
-                $argument = substr_replace($argument, $this->variables[$name], $start, $end - $start + 1);
-                $start += strlen($this->variables[$name]);
+                $argument = substr_replace($argument, (string) $this->variables[$name], $start, $end - $start + 1);
+                $start += strlen((string) $this->variables[$name]);
             } else {
                 $start = $end + 1;
             }
@@ -111,7 +109,7 @@ class FeatureContext extends MinkContext
         }
         $fileName = '';
         for ($i = 0; $i < $length; $i++) {
-            $key = mt_rand(0, strlen($characters) - 1);
+            $key = random_int(0, strlen($characters) - 1);
             $fileName .= $characters[$key];
         }
         return $fileName;

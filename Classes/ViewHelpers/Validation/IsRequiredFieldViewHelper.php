@@ -13,9 +13,6 @@ class IsRequiredFieldViewHelper extends AbstractValidationViewHelper
 {
     protected ConfigurationManagerInterface $configurationManager;
 
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
     public function __construct(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;

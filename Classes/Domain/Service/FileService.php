@@ -42,7 +42,6 @@ class FileService
     }
 
     /**
-     * @return bool
      * @todo add filesize check
      */
     public function isEverythingValid(): bool
@@ -59,7 +58,7 @@ class FileService
     {
         $extensionList = ConfigurationUtility::getConfiguration('misc.uploadFileExtension');
         if (!empty($extensionList)) {
-            $extensionList = str_replace(' ', '', $extensionList);
+            $extensionList = str_replace(' ', '', (string) $extensionList);
         } else {
             $extensionList = $this->fallbackExtensions;
         }
@@ -75,7 +74,6 @@ class FileService
      * Create sys_file entry for given filename and return uid
      *
      * @param string $file absolute path and filename
-     * @return int
      */
     public function indexFile(string $file): int
     {
@@ -93,7 +91,6 @@ class FileService
      *      "/var/www/fileadmin/folder/test.pdf" => "1:folder/test.pdf"
      *
      * @param string $file relative path and filename
-     * @return string
      */
     protected function getCombinedIdentifier(string $file): string
     {
@@ -105,17 +102,14 @@ class FileService
 
     /**
      * "fileadmin/downloads/test.pdf" => "/downloads/test.pdf"
-     *
-     * @param string $pathAndName
-     * @return string
      */
     protected function substituteFileadminFromPathAndName(string $pathAndName): string
     {
         $substituteString = 'fileadmin/';
-        if (substr($pathAndName, 0, strlen($substituteString)) === $substituteString) {
+        if (str_starts_with($pathAndName, $substituteString)) {
             $pathAndName = str_replace($substituteString, '', $pathAndName);
         }
-        if (substr($pathAndName, 0, 1) !== '/') {
+        if (!str_starts_with($pathAndName, '/')) {
             $pathAndName = '/' . $pathAndName;
         }
         return $pathAndName;

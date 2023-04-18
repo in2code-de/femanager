@@ -43,9 +43,6 @@ class PasswordValidator extends AbstractValidatorExtbase
      */
     protected $actionName;
 
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
     public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
@@ -73,7 +70,7 @@ class PasswordValidator extends AbstractValidatorExtbase
         }
 
         $password = $user->getPassword();
-        $passwordRepeat = isset($this->piVars['password_repeat']) ? $this->piVars['password_repeat'] : '';
+        $passwordRepeat = $this->piVars['password_repeat'] ?? '';
 
         if ($password !== $passwordRepeat) {
             $this->addError('validationErrorPasswordRepeat', 0, ['field' => 'password']);

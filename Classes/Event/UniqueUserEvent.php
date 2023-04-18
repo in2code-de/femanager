@@ -8,22 +8,10 @@ use In2code\Femanager\Domain\Model\User;
 
 class UniqueUserEvent
 {
-    /**
-     * @var string
-     */
-    private $emailOrUsername;
-    /**
-     * @var string
-     */
-    private $fieldName;
-    /**
-     * @var User|null
-     */
-    private $user;
-    /**
-     * @var bool
-     */
-    private $unique;
+    private readonly string $emailOrUsername;
+    private readonly string $fieldName;
+    private ?User $user = null;
+    private bool $unique;
 
     public function __construct(
         string $emailOrUsername,

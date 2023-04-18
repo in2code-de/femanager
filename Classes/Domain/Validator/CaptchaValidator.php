@@ -40,7 +40,7 @@ class CaptchaValidator extends AbstractValidator
         $wordHash = $wordObject->getWordHash();
         if (!empty($wordHash) && !empty($this->pluginVariables['captcha'])) {
             if ($wordObject->getHashFunction() == 'md5') {
-                if (md5(strtolower(utf8_decode($this->pluginVariables['captcha']))) == $wordHash) {
+                if (md5(strtolower(mb_convert_encoding((string) $this->pluginVariables['captcha'], 'ISO-8859-1'))) == $wordHash) {
                     $wordRepository->cleanUpWord();
                     $isValid = true;
                 }

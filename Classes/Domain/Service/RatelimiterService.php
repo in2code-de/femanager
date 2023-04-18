@@ -14,10 +14,10 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class RatelimiterService implements SingletonInterface
 {
-    const CACHE_IDENTIFIER = 'femanager_ratelimiter';
-    const DEFAULT_CONFIG = ['timeframe' => 60, 'limit' => 3];
-    const LIMIT_IP = 'limit_ip_';
-    const SESSION_KEY = 'tx_femanager_ratelimiter';
+    final public const CACHE_IDENTIFIER = 'femanager_ratelimiter';
+    final public const DEFAULT_CONFIG = ['timeframe' => 60, 'limit' => 3];
+    final public const LIMIT_IP = 'limit_ip_';
+    final public const SESSION_KEY = 'tx_femanager_ratelimiter';
 
     /** @var FrontendInterface */
     protected $cache;

@@ -41,17 +41,11 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected $dataArray = [];
 
-    /**
-     * @param ContentObjectRenderer $contentObject
-     */
     public function injectContentObjectRenderer(ContentObjectRenderer $contentObject)
     {
         $this->contentObject = $contentObject;
     }
 
-    /**
-     * @param TypoScriptService $typoScriptService
-     */
     public function injectTypoScriptService(TypoScriptService $typoScriptService)
     {
         $this->typoScriptService = $typoScriptService;
@@ -106,7 +100,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      * Store properties for a table
      *
      * @param string $table
-     * @param StoreInDatabaseService $storeInDatabase
      */
     protected function setPropertiesForTable($table, StoreInDatabaseService $storeInDatabase)
     {
@@ -148,8 +141,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
 
     /**
      * Add array to dataArray
-     *
-     * @param array $array
      */
     protected function addArrayToDataArray(array $array)
     {

@@ -44,9 +44,8 @@ class UserRepository extends Repository
      * @param string $userGroupList commaseparated list of usergroup uids
      * @param array $settings Flexform and TypoScript Settings
      * @param array $filter Filter Array
-     * @return QueryResultInterface|array
      */
-    public function findByUsergroups($userGroupList, $settings, $filter)
+    public function findByUsergroups($userGroupList, $settings, $filter): QueryResultInterface|array
     {
         $query = $this->createQuery();
 
@@ -85,7 +84,7 @@ class UserRepository extends Repository
             $sorting = QueryInterface::ORDER_DESCENDING;
         }
         $orderby = $settings['list']['orderby'] ?? 'uid';
-        $field = preg_replace('/[^a-zA-Z0-9_-]/', '', $orderby);
+        $field = preg_replace('/[^a-zA-Z0-9_-]/', '', (string) $orderby);
         $query->setOrderings([$field => $sorting]);
 
         // set limit
@@ -105,9 +104,8 @@ class UserRepository extends Repository
      * @param $field
      * @param $value
      * @param User $user Existing User
-     * @return User|null
      */
-    public function checkUniqueDb($field, $value, User $user = null)
+    public function checkUniqueDb($field, $value, User $user = null): ?User
     {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePageAndStarttime($query);
@@ -132,9 +130,8 @@ class UserRepository extends Repository
      * @param $field
      * @param $value
      * @param User $user Existing User
-     * @return User|null
      */
-    public function checkUniquePage($field, $value, User $user = null)
+    public function checkUniquePage($field, $value, User $user = null): ?User
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
@@ -160,9 +157,8 @@ class UserRepository extends Repository
      * Find All for Backend Actions
      *
      * @param array $filter Filter Array
-     * @return QueryResultInterface|array
      */
-    public function findAllInBackend(array $filter)
+    public function findAllInBackend(array $filter): QueryResultInterface|array
     {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);
@@ -181,9 +177,8 @@ class UserRepository extends Repository
      *
      * @param array $filter Filter Array
      * @param bool $userConfirmation Show only fe_users which are confirmed by the user?
-     * @return QueryResultInterface|array
      */
-    public function findAllInBackendForConfirmation(array $filter, bool $userConfirmation = false)
+    public function findAllInBackendForConfirmation(array $filter, bool $userConfirmation = false): QueryResultInterface|array
     {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);
@@ -203,10 +198,6 @@ class UserRepository extends Repository
      * If no page id given or if on rootpage (pid 0):
      *      - Don't show any users for editors
      *      - Show all users for admins
-     *
-     * @param array $and
-     * @param QueryInterface $query
-     * @return array
      */
     protected function filterByPage(array $and, QueryInterface $query): array
     {
@@ -221,12 +212,6 @@ class UserRepository extends Repository
         return $and;
     }
 
-    /**
-     * @param array $filter
-     * @param QueryInterface $query
-     * @param array $and
-     * @return array
-     */
     protected function filterBySearchword(array $filter, QueryInterface $query, array $and): array
     {
         if (!empty($filter['searchword'])) {
@@ -257,12 +242,6 @@ class UserRepository extends Repository
         return $and;
     }
 
-    /**
-     * @param array $and
-     * @param QueryInterface $query
-     * @param bool $userConfirmation
-     * @return array
-     */
     protected function filterByUserConfirmation(array $and, QueryInterface $query, bool $userConfirmation): array
     {
         $and[] = $query->equals('txFemanagerConfirmedbyuser', $userConfirmation);
@@ -284,9 +263,6 @@ class UserRepository extends Repository
         return GeneralUtility::trimExplode(',', $treeList, true);
     }
 
-    /**
-     * @param QueryInterface $query
-     */
     protected function ignoreEnableFieldsAndStoragePage(QueryInterface $query)
     {
         $query->getQuerySettings()->setRespectStoragePage(false);
@@ -294,9 +270,6 @@ class UserRepository extends Repository
         $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled']);
     }
 
-    /**
-     * @param QueryInterface $query
-     */
     protected function ignoreEnableFieldsAndStoragePageAndStarttime(QueryInterface $query)
     {
         $this->ignoreEnableFieldsAndStoragePage($query);
@@ -305,11 +278,8 @@ class UserRepository extends Repository
 
     /**
      * Find All
-     *
-     * @param string $mail
-     * @return QueryResultInterface|array
      */
-    public function findFirstByEmail(string $mail)
+    public function findFirstByEmail(string $mail): QueryResultInterface|array
     {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);

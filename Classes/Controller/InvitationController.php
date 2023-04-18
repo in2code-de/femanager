@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Validator\ServersideValidator;
+use In2code\Femanager\Domain\Validator\PasswordValidator;
+use In2code\Femanager\Domain\Validator\CaptchaValidator;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Event\InviteUserConfirmedEvent;
@@ -40,12 +43,10 @@ class InvitationController extends AbstractFrontendController
 
     /**
      * action create
-     *
-     * @param User $user
-     * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
-     * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
-     * @Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
      */
+    #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
+    #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]
+    #[Validate(['validator' => CaptchaValidator::class, 'param' => 'user'])]
     public function createAction(User $user)
     {
         if ($this->ratelimiterService->isLimited()) {
@@ -79,8 +80,6 @@ class InvitationController extends AbstractFrontendController
     /**
      * Prefix method to createAction()
      *        Create Confirmation from Admin is not necessary
-     *
-     * @param User $user
      */
     public function createAllConfirmed(User $user)
     {
@@ -170,11 +169,10 @@ class InvitationController extends AbstractFrontendController
     /**
      * action update
      *
-     * @param User $user
      * @param string $hash
-     * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
-     * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
      */
+    #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
+    #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]
     public function updateAction(User $user, $hash = null)
     {
         if (!HashUtility::validHash($hash, $user)) {
@@ -279,7 +277,7 @@ class InvitationController extends AbstractFrontendController
      *
      * @return true|ForwardResponse
      */
-    protected function allowedUserForInvitationNewAndCreate()
+    protected function allowedUserForInvitationNewAndCreate(): true|ForwardResponse
     {
         if (empty($this->settings['invitation']['allowedUserGroups'] ?? [])) {
             return true;

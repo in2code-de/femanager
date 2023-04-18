@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Validator\ServersideValidator;
+use In2code\Femanager\Domain\Validator\PasswordValidator;
+use In2code\Femanager\Domain\Validator\CaptchaValidator;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Service\AutoAdminConfirmationService;
@@ -52,13 +55,12 @@ class NewController extends AbstractFrontendController
     /**
      * action create
      *
-     * @param User $user
      * @throws InvalidPasswordHashException
      * @throws StopActionException
-     * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
-     * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
-     * @Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
      */
+    #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
+    #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]
+    #[Validate(['validator' => CaptchaValidator::class, 'param' => 'user'])]
     public function createAction(User $user)
     {
         if ($this->ratelimiterService->isLimited()) {
@@ -117,33 +119,18 @@ class NewController extends AbstractFrontendController
         // check if the the request was triggered via Backend
         if ($request->hasHeader('Accept')) {
             $accept = $request->getHeader('Accept')[0];
-            if (false !== strpos($accept, 'application/json')) {
+            if (str_contains((string) $accept, 'application/json')) {
                 $backend = true;
             }
         }
 
-        switch ($status) {
-            case 'userConfirmation':
-                $furtherFunctions = $this->statusUserConfirmation($user, $hash, $status);
-                break;
-
-            case 'userConfirmationRefused':
-                $furtherFunctions = $this->statusUserConfirmationRefused($user, $hash);
-                break;
-
-            case 'adminConfirmation':
-                $furtherFunctions = $this->statusAdminConfirmation($user, $hash, $status, $backend);
-                break;
-
-            case 'adminConfirmationRefused':
-                // Admin refuses profile
-            case 'adminConfirmationRefusedSilent':
-                $furtherFunctions = $this->statusAdminConfirmationRefused($user, $hash, $status);
-                break;
-
-            default:
-                $furtherFunctions = false;
-        }
+        $furtherFunctions = match ($status) {
+            'userConfirmation' => $this->statusUserConfirmation($user, $hash, $status),
+            'userConfirmationRefused' => $this->statusUserConfirmationRefused($user, $hash),
+            'adminConfirmation' => $this->statusAdminConfirmation($user, $hash, $status, $backend),
+            'adminConfirmationRefused', 'adminConfirmationRefusedSilent' => $this->statusAdminConfirmationRefused($user, $hash, $status),
+            default => false,
+        };
 
         if ($backend) {
             $this->eventDispatcher->dispatch(new AfterRequestDispatchedEvent($this->request, $this->response));
@@ -163,9 +150,6 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: User confirmation
      *
-     * @param User $user
-     * @param string $hash
-     * @param string $status
      * @return bool allow further functions
      * @throws UnsupportedRequestTypeException
      * @throws IllegalObjectTypeException
@@ -203,7 +187,6 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: User confirmation refused
      *
-     * @param User $user
      * @param string $hash
      * @return bool allow further functions
      * @throws IllegalObjectTypeException
@@ -226,7 +209,6 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: Admin confirmation
      *
-     * @param User $user
      * @param string $hash
      * @param string $status
      * @return bool allow further functions
@@ -257,7 +239,6 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: Admin refused profile creation (normal or silent)
      *
-     * @param User $user
      * @param $hash
      * @param $status
      * @return bool allow further functions
@@ -301,8 +282,6 @@ class NewController extends AbstractFrontendController
 
     /**
      * Postfix method to createAction(): Create must be confirmed by Admin or User
-     *
-     * @param User $user
      */
     protected function createRequest(User $user)
     {
@@ -322,7 +301,6 @@ class NewController extends AbstractFrontendController
     /**
      * Send email to user for confirmation
      *
-     * @param User $user
      * @throws UnsupportedRequestTypeException
      */
     protected function createUserConfirmationRequest(User $user)
@@ -335,7 +313,6 @@ class NewController extends AbstractFrontendController
     /**
      * Send email to admin for confirmation
      *
-     * @param User $user
      * @throws UnsupportedRequestTypeException
      */
     protected function createAdminConfirmationRequest(User $user)
@@ -383,7 +360,6 @@ class NewController extends AbstractFrontendController
     }
 
     /**
-     * @param User $user
      * @return bool
      */
     protected function isAdminConfirmationMissing(User $user)

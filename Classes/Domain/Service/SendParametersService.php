@@ -44,9 +44,6 @@ class SendParametersService
         $this->configuration = $configuration;
     }
 
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
     public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
@@ -105,7 +102,7 @@ class SendParametersService
     protected function log()
     {
         if (!empty($this->configuration['debug'])) {
-            GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__)->log(LogLevel::INFO, 'femanager sendpost values', [
+            GeneralUtility::makeInstance(LogManager::class)->getLogger(self::class)->log(LogLevel::INFO, 'femanager sendpost values', [
                 'url' => $this->getUri(),
                 'data' => $this->getData(),
                 'properties' => $this->properties
@@ -124,8 +121,6 @@ class SendParametersService
 
     /**
      * Initialize
-     *
-     * @param User $user
      */
     protected function initialize(User $user)
     {

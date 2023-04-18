@@ -17,9 +17,8 @@ class LocalizationUtility
      * @param string $key The key from the LOCAL_LANG array for which to return the value.
      * @param string $extensionName The name of the extension
      * @param array $arguments the arguments of the extension, being passed over to vsprintf
-     * @return string|null
      */
-    public static function translate($key, $extensionName = 'femanager', $arguments = null)
+    public static function translate($key, $extensionName = 'femanager', $arguments = null): ?string
     {
         return ExtbaseLocalizationUtility::translate($key, $extensionName, $arguments);
     }
@@ -28,9 +27,8 @@ class LocalizationUtility
      * Get locallang translation with key prefix tx_femanager_domain_model_log.state.
      *
      * @param int $state
-     * @return string|null
      */
-    public static function translateByState($state)
+    public static function translateByState($state): ?string
     {
         return self::translate('tx_femanager_domain_model_log.state.' . $state);
     }

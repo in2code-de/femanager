@@ -43,25 +43,16 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected $isValid = true;
 
-    /**
-     * @param UserRepository $userRepository
-     */
     public function injectUserRepository(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
     public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
     }
 
-    /**
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function injectEventDispatcherInterface(EventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -83,10 +74,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     /**
      * Validation for required
      *
-     * @param mixed $value
      * @return \bool
      */
-    protected function validateRequired($value)
+    protected function validateRequired(mixed $value)
     {
         if (!is_object($value)) {
             if (is_numeric($value)) {
@@ -94,7 +84,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
             }
             return !empty($value);
         }
-        if ((is_array($value) || $value instanceof \Countable) && count($value) > 0) {
+        if ((is_countable($value)) && count($value) > 0) {
             return true;
         }
         if ($value instanceof \DateTime) {
@@ -352,7 +342,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsSpaceCharacter($value)
     {
-        return strpos($value, ' ') !== false;
+        return str_contains($value, ' ');
     }
 
     /**
@@ -437,7 +427,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         // collect variables from plugins starting with tx_femanager
         $this->pluginVariables = [];
         foreach ($allParams as $key => $value) {
-            if (strpos($key, 'tx_femanager') === 0) {
+            if (str_starts_with($key, 'tx_femanager')) {
                 $this->pluginVariables[$key] = $value;
             }
         }
@@ -490,9 +480,6 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         return $controllerName;
     }
 
-    /**
-     * @param string $controllerName
-     */
     protected function checkAllowedControllerName(string $controllerName)
     {
         $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
