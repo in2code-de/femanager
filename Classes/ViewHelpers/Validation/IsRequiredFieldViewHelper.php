@@ -11,11 +11,8 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class IsRequiredFieldViewHelper extends AbstractValidationViewHelper
 {
-    protected ConfigurationManagerInterface $configurationManager;
-
-    public function __construct(ConfigurationManagerInterface $configurationManager)
+    public function __construct(protected ConfigurationManagerInterface $configurationManager)
     {
-        $this->configurationManager = $configurationManager;
     }
 
     /**

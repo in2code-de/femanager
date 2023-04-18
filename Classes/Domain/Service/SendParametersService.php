@@ -29,19 +29,14 @@ class SendParametersService
     /**
      * @var array
      */
-    protected $configuration = [];
-
-    /**
-     * @var array
-     */
     protected $properties = [];
 
     /**
      * Constructor
+     * @param mixed[] $configuration
      */
-    public function __construct($configuration)
+    public function __construct(protected $configuration)
     {
-        $this->configuration = $configuration;
     }
 
     public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)

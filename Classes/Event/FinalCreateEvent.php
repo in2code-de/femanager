@@ -8,13 +8,9 @@ use In2code\Femanager\Domain\Model\User;
 
 class FinalCreateEvent extends UserEvent
 {
-    private readonly string $action;
-
-    public function __construct(?User $user, string $action)
+    public function __construct(?User $user, private readonly string $action)
     {
         parent::__construct($user);
-
-        $this->action = $action;
     }
 
     public function getAction(): string

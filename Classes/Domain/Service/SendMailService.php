@@ -28,22 +28,11 @@ class SendMailService
     public ?object $contentObject = null;
 
     /**
-     * @var Mailer|null
-     */
-    private ?Mailer $mailer = null;
-    /**
-     * @var EventDispatcherInterface|null
-     */
-    private ?EventDispatcherInterface $dispatcher = null;
-
-    /**
      * SendMailService constructor.
      */
-    public function __construct(Mailer $mailer, EventDispatcherInterface $dispatcher)
+    public function __construct(private readonly ?Mailer $mailer, private readonly ?EventDispatcherInterface $dispatcher)
     {
         $this->contentObject = ObjectUtility::getContentObject();
-        $this->mailer = $mailer;
-        $this->dispatcher = $dispatcher;
     }
 
     protected function contentObjectStart(array $variables): void

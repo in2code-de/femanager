@@ -12,12 +12,9 @@ class CreateConfirmationRequestEvent extends UserEvent
 
     final public const MODE_MANUAL = 'manual';
 
-    private readonly string $mode;
-
-    public function __construct(User $user, string $mode)
+    public function __construct(User $user, private readonly string $mode)
     {
         parent::__construct($user);
-        $this->mode = $mode;
     }
 
     public function getMode(): string

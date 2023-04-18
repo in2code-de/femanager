@@ -67,7 +67,7 @@ return static function (RectorConfig $rectorConfig): void {
             __DIR__ . '/**/Configuration/**/*.php',
         ],
         AddLiteralSeparatorToNumberRector::class,
-        ClassPropertyAssignToConstructorPromotionRector::class
+//        ClassPropertyAssignToConstructorPromotionRector::class
     ]);
 
     // If you have trouble that rector cannot run because some TYPO3 constants are not defined add an additional constants file

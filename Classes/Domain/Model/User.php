@@ -16,16 +16,6 @@ class User extends AbstractEntity
     final public const TABLE_NAME = 'fe_users';
 
     /**
-     * @var string
-     */
-    protected $username = '';
-
-    /**
-     * @var string
-     */
-    protected $password = '';
-
-    /**
      * @var ObjectStorage<UserGroup>
      */
     protected $usergroup;
@@ -193,10 +183,8 @@ class User extends AbstractEntity
      * @param string $username
      * @param string $password
      */
-    public function __construct($username = '', $password = '')
+    public function __construct(protected $username = '', protected $password = '')
     {
-        $this->username = $username;
-        $this->password = $password;
         $this->usergroup = new ObjectStorage();
         $this->image = new ObjectStorage();
     }
