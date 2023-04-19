@@ -124,10 +124,12 @@ class PluginRepository
      */
     protected function isViewInPluginConfiguration(string $view, string $pluginConfiguration): bool
     {
-        $flexFormArray = $this->flexFormService->convertFlexFormContentToArray($pluginConfiguration);
-        if (array_key_exists($view, $this->scaString)) {
-            return $this->scaString[$view] === $flexFormArray['switchableControllerActions'];
-        }
-        throw new LogicException('Given view is not allowed', 1541506310);
+        //TODO: how should we control access to actions? There is no method in the Flexform Array any more
+//        $flexFormArray = $this->flexFormService->convertFlexFormContentToArray($pluginConfiguration);
+//        if (array_key_exists($view, $this->scaString)) {
+//            return $this->scaString[$view] === $flexFormArray['switchableControllerActions'];
+//        }
+//        throw new LogicException('Given view is not allowed', 1541506310);
+        return true;
     }
 }
