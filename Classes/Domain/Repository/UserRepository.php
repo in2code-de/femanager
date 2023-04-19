@@ -33,7 +33,7 @@ class UserRepository extends Repository
         $and = [$query->equals('uid', $uid)];
 
         /** @var User $user */
-        $user = $query->matching($query->logicalAnd($and))->execute()->getFirst();
+        $user = $query->matching($query->logicalAnd(...$and))->execute()->getFirst();
 
         return $user;
     }
@@ -116,7 +116,7 @@ class UserRepository extends Repository
         if ($user !== null && method_exists($user, 'getUid')) {
             $and[] = $query->logicalNot($query->equals('uid', $user->getUid()));
         }
-        $constraint = $query->logicalAnd($and);
+        $constraint = $query->logicalAnd(...$and);
 
         $query->matching($constraint);
 
@@ -146,7 +146,7 @@ class UserRepository extends Repository
         if (method_exists($user, 'getUid')) {
             $and[] = $query->logicalNot($query->equals('uid', (int)$user->getUid()));
         }
-        $constraint = $query->logicalAnd($and);
+        $constraint = $query->logicalAnd(...$and);
 
         $query->matching($constraint);
 
@@ -169,7 +169,7 @@ class UserRepository extends Repository
         $and = [$query->greaterThan('uid', 0)];
         $and = $this->filterByPage($and, $query);
         $and = $this->filterBySearchword($filter, $query, $and);
-        $query->matching($query->logicalAnd($and));
+        $query->matching($query->logicalAnd(...$and));
         $query->setOrderings(['username' => QueryInterface::ORDER_ASCENDING]);
         $records = $query->execute();
 
@@ -191,7 +191,7 @@ class UserRepository extends Repository
         $and = $this->filterByPage($and, $query);
         $and = $this->filterBySearchword($filter, $query, $and);
         $and = $this->filterByUserConfirmation($and, $query, $userConfirmation);
-        $query->matching($query->logicalAnd($and));
+        $query->matching($query->logicalAnd(...$and));
         $query->setOrderings(['username' => QueryInterface::ORDER_ASCENDING]);
         $records = $query->execute();
 
@@ -250,7 +250,7 @@ class UserRepository extends Repository
                 $or[] = $query->like('username', '%' . $searchword . '%');
                 $or[] = $query->like('www', '%' . $searchword . '%');
                 $or[] = $query->like('zip', '%' . $searchword . '%');
-                $and[] = $query->logicalOr($or);
+                $and[] = $query->logicalOr(...$or);
             }
         }
 
@@ -317,7 +317,7 @@ class UserRepository extends Repository
             $query->equals('txFemanagerConfirmedbyuser', false),
             $query->equals('email', $mail)
         ];
-        $query->matching($query->logicalAnd($and));
+        $query->matching($query->logicalAnd(...$and));
 
         $query->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING]);
 
