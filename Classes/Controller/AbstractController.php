@@ -482,6 +482,7 @@ abstract class AbstractController extends ActionController
             $this->contentObject,
             $this->arguments
         );
+        //TODO: this is a workaround, because there is no proposed way to modify a request in the initializeAction
         $incomingRequest = $GLOBALS['TYPO3_REQUEST'];
         $newRequest = $incomingRequest->withParsedBody($this->pluginVariables);
         $GLOBALS['TYPO3_REQUEST'] = $newRequest;
