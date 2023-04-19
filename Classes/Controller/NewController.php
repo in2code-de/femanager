@@ -88,7 +88,7 @@ class NewController extends AbstractFrontendController
             $this->createRequest($user);
         }
 
-        $this->redirect('createStatus');
+        return $this->redirect('createStatus');
     }
 
     /**

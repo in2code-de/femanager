@@ -33,11 +33,6 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected $configuration;
 
-    public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
-    {
-        $this->configurationManager = $configurationManager;
-    }
-
     public function injectContentObjectRenderer(ContentObjectRenderer $contentObject)
     {
         $this->contentObject = $contentObject;
@@ -48,11 +43,12 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     public function initializeFinisher()
     {
+        $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         $this->contentObject->start($this->user->_getProperties());
         $typoScript = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        $this->configuration = $typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.'];
+        $this->configuration = !empty($typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.']) ? $typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.'] : null;
     }
 
     /**
