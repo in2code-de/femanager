@@ -428,17 +428,15 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     protected function setPluginVariables()
     {
         // Get the current request object
-        $request = $GLOBALS['TYPO3_REQUEST'];
-        if (ApplicationType::fromRequest($request)->isFrontend()) {
-            $queryParams = $request->getQueryParams(); // GET parameters
-            $parsedBody = $request->getParsedBody(); // POST parameters
-            $allParams = array_merge($queryParams, $parsedBody);
-        }
+        $request =  $_REQUEST;
+
         // collect variables from plugins starting with tx_femanager
         $this->pluginVariables = [];
-        foreach ($allParams as $key => $value) {
+
+        foreach ($request as $key => $value) {
             if (strpos($key, 'tx_femanager') === 0) {
-                $this->pluginVariables[$key] = $value;
+                $pluginName = $key;
+                $this->pluginVariables[$pluginName] = $value;
             }
         }
     }
