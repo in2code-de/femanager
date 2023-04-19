@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Repository;
 
 use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\ForwardCompatibility\Result;
+use Doctrine\DBAL\Result;
 use In2code\Femanager\Utility\ObjectUtility;
 use LogicException;
 use PDO;
@@ -66,22 +66,23 @@ class PluginRepository
     /**
      * @param string $view can be "new", "edit" or "invitation"
      * @param int $pageIdentifier
+     * @param string $pluginName
      * @return bool
      * @throws \Exception
      * @throws Exception
      */
-    public function isPluginWithViewOnGivenPage(string $view, int $pageIdentifier): bool
+    public function isPluginWithViewOnGivenPage(string $view, int $pageIdentifier, string $pluginName): bool
     {
         $queryBuilder = ObjectUtility::getQueryBuilder(self::TABLE_NAME);
+        $cType = str_replace('tx_', '', $pluginName);
         $pluginConfigurationQuery = $queryBuilder
             ->select('pi_flexform')
             ->from(self::TABLE_NAME)
             ->where(
                 $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageIdentifier, PDO::PARAM_INT)),
-                $queryBuilder->expr()->eq('CType', $queryBuilder->createNamedParameter('list')),
-                $queryBuilder->expr()->eq('list_type', $queryBuilder->createNamedParameter('femanager_pi1'))
+                $queryBuilder->expr()->eq('CType', $queryBuilder->createNamedParameter($cType, PDO::PARAM_STR))
             )
-            ->execute();
+            ->executeQuery();
         if (! $pluginConfigurationQuery instanceof Result) {
             throw new \Exception(
                 'Something went wrong while getting PluginConfigurations from query.',
