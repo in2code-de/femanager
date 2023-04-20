@@ -19,16 +19,16 @@ use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
+use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Event\Mvc\AfterRequestDispatchedEvent;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
-use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
+use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
 /**
  * Class NewController
@@ -39,6 +39,8 @@ class NewController extends AbstractFrontendController
      * Render registration form
      *
      * @param User|null $user
+     * @return ResponseInterface
+     * @throws JsonException
      */
     public function newAction(User $user = null): ResponseInterface
     {
@@ -55,19 +57,21 @@ class NewController extends AbstractFrontendController
     /**
      * action create
      *
+     * @param User $user
+     * @return ResponseInterface
+     * @throws IllegalObjectTypeException
      * @throws InvalidPasswordHashException
-     * @throws StopActionException
      */
     #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
     #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]
     #[Validate(['validator' => CaptchaValidator::class, 'param' => 'user'])]
-    public function createAction(User $user)
+    public function createAction(User $user): ResponseInterface
     {
         if ($this->ratelimiterService->isLimited()) {
             $this->addFlashMessage(
                 LocalizationUtility::translate('ratelimiter_too_many_attempts'),
                 '',
-                AbstractMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
             $this->redirect('createStatus');
         }
@@ -97,10 +101,19 @@ class NewController extends AbstractFrontendController
      * @param int $user User UID (user could be hidden)
      * @param string $hash Given hash
      * @param string $status
-     *            "userConfirmation", "userConfirmationRefused", "adminConfirmation",
-     *            "adminConfirmationRefused", "adminConfirmationRefusedSilent"
+     *              "userConfirmation", "userConfirmationRefused", "adminConfirmation",
+     *              "adminConfirmationRefused", "adminConfirmationRefusedSilent"
      * @throws IllegalObjectTypeException
-     * @throws StopActionException
+     * @throws UnknownObjectException
+     */
+
+    /**
+     * @param int $user
+     * @param string $hash
+     * @param string $status
+     * @return ResponseInterface|void
+     * @throws IllegalObjectTypeException
+     * @throws UnknownObjectException
      */
     public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation')
     {
@@ -111,15 +124,15 @@ class NewController extends AbstractFrontendController
         $this->eventDispatcher->dispatch(new BeforeUserConfirmEvent($user, $hash, $status));
 
         if ($user === null) {
-            $this->addFlashMessage(LocalizationUtility::translate('missingUserInDatabase'), '', AbstractMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('missingUserInDatabase'), '', ContextualFeedbackSeverity::ERROR);
             $this->redirect('new');
         }
 
         $request = ServerRequestFactory::fromGlobals();
-        // check if the the request was triggered via Backend
+        // check if the request was triggered via Backend
         if ($request->hasHeader('Accept')) {
             $accept = $request->getHeader('Accept')[0];
-            if (str_contains((string) $accept, 'application/json')) {
+            if (str_contains($accept, 'application/json')) {
                 $backend = true;
             }
         }
@@ -133,9 +146,11 @@ class NewController extends AbstractFrontendController
         };
 
         if ($backend) {
+            // TODO: $this->response
             $this->eventDispatcher->dispatch(new AfterRequestDispatchedEvent($this->request, $this->response));
             $this->persistenceManager->persistAll();
             // this request was triggered via Backend Module "Frontend users", so we stop here and provide a feedback to the BE
+            // TODO: Check
             echo json_encode(['status' => 'okay']) . PHP_EOL;
             die();
         }
@@ -144,21 +159,24 @@ class NewController extends AbstractFrontendController
             $this->redirectByAction('new', $status . 'Redirect');
         }
 
-        $this->redirect('new');
+        return $this->redirect('new');
     }
 
     /**
      * Status action: User confirmation
      *
+     * @param User $user
+     * @param string $hash
+     * @param string $status
      * @return bool allow further functions
-     * @throws UnsupportedRequestTypeException
      * @throws IllegalObjectTypeException
+     * @throws UnknownObjectException
      */
-    protected function statusUserConfirmation(User $user, string $hash, string $status)
+    protected function statusUserConfirmation(User $user, string $hash, string $status): bool
     {
         if (HashUtility::validHash($hash, $user)) {
             if ($user->getTxFemanagerConfirmedbyuser()) {
-                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', AbstractMessage::ERROR);
+                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', ContextualFeedbackSeverity::ERROR);
                 $this->redirect('new');
             }
 
@@ -176,7 +194,7 @@ class NewController extends AbstractFrontendController
                 $this->finalCreate($user, 'new', 'createStatus', true, $status);
             }
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
 
             return false;
         }
@@ -187,18 +205,19 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: User confirmation refused
      *
+     * @param User $user
      * @param string $hash
      * @return bool allow further functions
      * @throws IllegalObjectTypeException
      */
-    protected function statusUserConfirmationRefused(User $user, $hash)
+    protected function statusUserConfirmationRefused(User $user, string $hash): bool
     {
         if (HashUtility::validHash($hash, $user)) {
             $this->logUtility->log(Log::STATUS_REGISTRATIONREFUSEDUSER, $user);
             $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
             $this->userRepository->remove($user);
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
 
             return false;
         }
@@ -209,15 +228,19 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: Admin confirmation
      *
-     * @param string $hash
-     * @param string $status
+     * @param User $user
+     * @param $hash
+     * @param $status
+     * @param bool $backend
      * @return bool allow further functions
+     * @throws IllegalObjectTypeException
+     * @throws UnknownObjectException
      */
-    protected function statusAdminConfirmation(User $user, $hash, $status, $backend = false)
+    protected function statusAdminConfirmation(User $user, $hash, $status, bool $backend = false): bool
     {
         if (HashUtility::validHash($hash, $user)) {
             if ($user->getTxFemanagerConfirmedbyadmin()) {
-                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', AbstractMessage::ERROR);
+                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', ContextualFeedbackSeverity::ERROR);
                 $this->redirect('new');
             }
 
@@ -228,7 +251,7 @@ class NewController extends AbstractFrontendController
             $this->logUtility->log(Log::STATUS_REGISTRATIONCONFIRMEDADMIN, $user);
             $this->finalCreate($user, 'new', 'createStatus', false, $status, $backend);
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
 
             return false;
         }
@@ -239,12 +262,13 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: Admin refused profile creation (normal or silent)
      *
+     * @param User $user
      * @param $hash
      * @param $status
      * @return bool allow further functions
      * @throws IllegalObjectTypeException
      */
-    protected function statusAdminConfirmationRefused(User $user, $hash, $status)
+    protected function statusAdminConfirmationRefused(User $user, $hash, $status): bool
     {
         if (HashUtility::validHash($hash, $user)) {
             $this->logUtility->log(Log::STATUS_REGISTRATIONREFUSEDADMIN, $user);
@@ -264,7 +288,7 @@ class NewController extends AbstractFrontendController
             }
             $this->userRepository->remove($user);
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
 
             return false;
         }
@@ -273,7 +297,7 @@ class NewController extends AbstractFrontendController
     }
 
     /**
-     * Just for showing informations after user creation
+     * Just for showing information after user creation
      */
     public function createStatusAction(): ResponseInterface
     {
@@ -282,8 +306,12 @@ class NewController extends AbstractFrontendController
 
     /**
      * Postfix method to createAction(): Create must be confirmed by Admin or User
+     *
+     * @param User $user
+     * @return void
+     * @throws IllegalObjectTypeException
      */
-    protected function createRequest(User $user)
+    protected function createRequest(User $user): void
     {
         $user->setDisable(true);
         $this->userRepository->add($user);
@@ -300,8 +328,6 @@ class NewController extends AbstractFrontendController
 
     /**
      * Send email to user for confirmation
-     *
-     * @throws UnsupportedRequestTypeException
      */
     protected function createUserConfirmationRequest(User $user)
     {
@@ -313,11 +339,10 @@ class NewController extends AbstractFrontendController
     /**
      * Send email to admin for confirmation
      *
-     * @throws UnsupportedRequestTypeException
      */
     protected function createAdminConfirmationRequest(User $user)
     {
-        $aacService = $this->objectManager->get(
+        $aacService = GeneralUtility::makeInstance(
             AutoAdminConfirmationService::class,
             $user,
             $this->settings,
@@ -354,15 +379,16 @@ class NewController extends AbstractFrontendController
     /**
      * @return bool
      */
-    protected function isAllConfirmed()
+    protected function isAllConfirmed(): bool
     {
         return empty($this->settings['new']['confirmByUser']) && empty($this->settings['new']['confirmByAdmin']);
     }
 
     /**
+     * @param User $user
      * @return bool
      */
-    protected function isAdminConfirmationMissing(User $user)
+    protected function isAdminConfirmationMissing(User $user): bool
     {
         return !empty($this->settings['new']['confirmByAdmin']) && !$user->getTxFemanagerConfirmedbyadmin();
     }
@@ -377,9 +403,6 @@ class NewController extends AbstractFrontendController
 
     /**
      * re-sends a confirmation email if given mail is valid
-     *
-     * @throws UnsupportedRequestTypeException
-     * @throws StopActionException
      */
     public function resendConfirmationMailAction()
     {
@@ -394,7 +417,7 @@ class NewController extends AbstractFrontendController
                     $this->addFlashMessage(
                         LocalizationUtility::translate('resendConfirmationMailSend'),
                         '',
-                        AbstractMessage::INFO
+                        ContextualFeedbackSeverity::INFO
                     );
                     $this->redirect('resendConfirmationDialogue');
                 }
@@ -403,7 +426,7 @@ class NewController extends AbstractFrontendController
         $this->addFlashMessage(
             LocalizationUtility::translate('resendConfirmationMailFail'),
             LocalizationUtility::translate('validationError'),
-            AbstractMessage::ERROR
+            ContextualFeedbackSeverity::ERROR
         );
         $this->redirect('resendConfirmationDialogue');
     }
