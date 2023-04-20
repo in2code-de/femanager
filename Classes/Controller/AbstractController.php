@@ -20,8 +20,11 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Core\Http\ApplicationType;
+use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -484,7 +487,13 @@ abstract class AbstractController extends ActionController
         );
         //TODO: this is a workaround, because there is no proposed way to modify a request in the initializeAction
         $incomingRequest = $GLOBALS['TYPO3_REQUEST'];
-        $newRequest = $incomingRequest->withParsedBody($this->pluginVariables);
+        $requestBody = $incomingRequest->getParsedBody();
+        if (is_array($requestBody)) {
+            $requestBody2 = array_merge($requestBody, $this->pluginVariables);
+            $newRequest = $incomingRequest->withParsedBody($requestBody2);
+        } else {
+            $newRequest = $incomingRequest->withParsedBody($this->pluginVariables);
+        }
         $GLOBALS['TYPO3_REQUEST'] = $newRequest;
     }
 
