@@ -5,6 +5,7 @@ namespace In2code\Femanager\Domain\Repository;
 
 use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Result;
+use In2code\Femanager\Domain\Service\PluginService;
 use In2code\Femanager\Utility\ObjectUtility;
 use LogicException;
 use PDO;
@@ -39,97 +40,58 @@ class PluginRepository
     }
 
     /**
-     * @param int $contentIdentifier
-     * @return string
      * @throws \Exception
      * @throws Exception
      */
-    public function getControllerNameByPluginSettings(int $contentIdentifier): string
+    public function getControllerNameByPageWithPlugin(int $contentIdentifier): string
     {
         $queryBuilder = ObjectUtility::getQueryBuilder(self::TABLE_NAME);
-        $flexFormQuery = $queryBuilder
-            ->select('pi_flexform')
+        $pluginQuery = $queryBuilder
+            ->select('CType')
             ->from(self::TABLE_NAME)
-            ->where('uid=' . $contentIdentifier)
-            ->execute();
-        if (! $flexFormQuery instanceof Result) {
+            ->where('uid=' . $contentIdentifier);
+
+        $result = $pluginQuery->executeQuery();
+        if (!$result instanceof Result) {
             throw new \Exception(
                 'Something went wrong while getting FlexForm-value from Query.',
                 1638443805
             );
         }
-        $flexForm = (string)$flexFormQuery->fetchOne();
+        $pluginName = (string)$result->fetchOne();
 
-        return $this->getViewFromFlexForm($flexForm);
+        return $pluginName;
     }
 
     /**
-     * @param string $view can be "new", "edit" or "invitation"
-     * @param int $pageIdentifier
-     * @param string $pluginName
-     * @return bool
      * @throws \Exception
      * @throws Exception
      */
-    public function isPluginWithViewOnGivenPage(string $view, int $pageIdentifier, string $pluginName): bool
+    public function isPluginWithViewOnGivenPage(int $pageIdentifier, string $pluginName): bool
     {
-        $queryBuilder = ObjectUtility::getQueryBuilder(self::TABLE_NAME);
-        $cType = str_replace('tx_', '', $pluginName);
-        $pluginConfigurationQuery = $queryBuilder
-            ->select('pi_flexform')
-            ->from(self::TABLE_NAME)
-            ->where(
-                $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageIdentifier, PDO::PARAM_INT)),
-                $queryBuilder->expr()->eq('CType', $queryBuilder->createNamedParameter($cType, PDO::PARAM_STR))
-            )
-            ->executeQuery();
-        if (! $pluginConfigurationQuery instanceof Result) {
-            throw new \Exception(
-                'Something went wrong while getting PluginConfigurations from query.',
-                1638443806
-            );
-        }
-        $pluginConfigurations = $pluginConfigurationQuery->fetchAllAssociative();
-        foreach ($pluginConfigurations as $pluginConfiguration) {
-            if ($this->isViewInPluginConfiguration($view, (string)$pluginConfiguration['pi_flexform'])) {
-                return true;
+        $pluginService = GeneralUtility::makeInstance(PluginService::class);
+        $allowedPlugins = $pluginService->getAllowedPlugins();
+
+        if (in_array($pluginName, $allowedPlugins)) {
+            $queryBuilder = ObjectUtility::getQueryBuilder(self::TABLE_NAME);
+            $cType = str_replace('tx_', '', $pluginName);
+            $pluginOnPageQuery = $queryBuilder
+                ->select('uid')
+                ->from(self::TABLE_NAME)
+                ->where(
+                    $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageIdentifier, PDO::PARAM_INT)),
+                    $queryBuilder->expr()->eq('CType', $queryBuilder->createNamedParameter($cType, PDO::PARAM_STR))
+                )
+                ->executeQuery();
+            if (! $pluginOnPageQuery instanceof Result) {
+                throw new \Exception(
+                    'Something went wrong while getting PluginConfigurations from query.',
+                    1638443806
+                );
             }
+            return count($pluginOnPageQuery->fetchAllAssociative()) > 0;
         }
+
         return false;
-    }
-
-    /**
-     * @param string $flexForm
-     * @return string
-     */
-    protected function getViewFromFlexForm(string $flexForm): string
-    {
-        $view = '';
-        $settings = $this->flexFormService->convertFlexFormContentToArray($flexForm);
-        if (!empty($settings['switchableControllerActions'])
-            && in_array($settings['switchableControllerActions'], $this->scaString)) {
-            $view = array_search($settings['switchableControllerActions'], $this->scaString);
-        }
-        if (! is_string($view)) {
-            return '';
-        }
-        return $view;
-    }
-
-    /**
-     * @param string $view
-     * @param string $pluginConfiguration
-     * @return bool
-     * @throws LogicException
-     */
-    protected function isViewInPluginConfiguration(string $view, string $pluginConfiguration): bool
-    {
-        //TODO: how should we control access to actions? There is no method in the Flexform Array any more
-//        $flexFormArray = $this->flexFormService->convertFlexFormContentToArray($pluginConfiguration);
-//        if (array_key_exists($view, $this->scaString)) {
-//            return $this->scaString[$view] === $flexFormArray['switchableControllerActions'];
-//        }
-//        throw new LogicException('Given view is not allowed', 1541506310);
-        return true;
     }
 }
