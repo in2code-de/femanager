@@ -111,16 +111,10 @@ class TemplateUtility extends AbstractUtility
      * @return StandaloneView
      */
     public static function getDefaultStandAloneView(
-        $controllerName = 'New',
-        $extensionName = 'Femanager',
-        $pluginName = 'Pi1',
         $format = 'html'
     ) {
         /** @var StandaloneView $standAloneView */
         $standAloneView = GeneralUtility::makeInstance(StandaloneView::class);
-        $standAloneView->getRequest()->setControllerExtensionName($extensionName);
-        $standAloneView->getRequest()->setPluginName($pluginName);
-        $standAloneView->getRequest()->setControllerName($controllerName);
         $standAloneView->setFormat($format);
         $standAloneView->setLayoutRootPaths(TemplateUtility::getTemplateFolders('layout'));
         $standAloneView->setPartialRootPaths(TemplateUtility::getTemplateFolders('partial'));
