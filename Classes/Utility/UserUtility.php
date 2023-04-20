@@ -14,6 +14,7 @@ use TYPO3\CMS\Core\Crypto\PasswordHashing\Md5PasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\Pbkdf2PasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
@@ -213,7 +214,9 @@ class UserUtility extends AbstractUtility
                 break;
 
             default:
-                $hashInstance = $passwordHashFactory->getDefaultHashInstance(TYPO3_MODE);
+                // TODO: is it a security issue to have BE as the default mode?
+                $t3Mode = ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend() ? 'FE' : 'BE';
+                $hashInstance = $passwordHashFactory->getDefaultHashInstance($t3Mode);
         }
 
         if ($hashInstance === false) {
