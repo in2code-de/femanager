@@ -6,11 +6,11 @@ namespace In2code\Femanager\Domain\Validator;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\PluginRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
+use In2code\Femanager\Domain\Service\PluginService;
 use In2code\Femanager\Event\UniqueUserEvent;
 use In2code\Femanager\Utility\FrontendUtility;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
-use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
@@ -25,6 +25,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     public ?ConfigurationManagerInterface $configurationManager = null;
 
     protected ?EventDispatcherInterface $eventDispatcher = null;
+
+    protected ?PluginService $pluginService = null;
 
     /**
      * Former known as piVars
@@ -60,6 +62,14 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     }
 
     /**
+     * @param PluginService $pluginService
+     */
+    public function injectPluginService(PluginService $pluginService)
+    {
+        $this->pluginService = $pluginService;
+    }
+
+    /**
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function injectEventDispatcherInterface(EventDispatcherInterface $eventDispatcher)
@@ -77,6 +87,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         }
         if ($this->userRepository === null) {
             $this->userRepository = GeneralUtility::makeInstance(UserRepository::class);
+        }
+        if ($this->pluginService === null) {
+            $this->pluginService = GeneralUtility::makeInstance(PluginService::class);
         }
     }
 
@@ -441,14 +454,19 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         }
     }
 
-    protected function setValidationSettings($pluginName = 'Pi1')
+    protected function setValidationSettings()
     {
-        $config = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
-            'Femanager',
-            $pluginName
-        );
-        $this->validationSettings = $config[$this->getControllerName()][$this->getValidationName()];
+        $pluginName = $this->pluginService->getFemanagerPluginNameFromRequest();
+        if ($pluginName !== '') {
+            $config = $this->configurationManager->getConfiguration(
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+                'Femanager',
+                $pluginName
+            );
+            $controllerName = $this->getControllerName();
+            $validationName = $this->getValidationName();
+            $this->validationSettings = $config[$controllerName][$validationName];
+        }
     }
 
     /**
@@ -468,7 +486,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function getActionName(): string
     {
-        return $this->pluginVariables['__referrer']['@action'];
+        $pluginName = $this->pluginService->getFemanagerPluginNameFromRequest();
+        return $this->pluginVariables[$pluginName]['__referrer']['@action'] ?? '';
     }
 
     /**
@@ -478,24 +497,29 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function getControllerName(): string
     {
+        // Security check: see Commit ae6c8d0b390a96d11fe7e3a524b0ace2cb23b7da
+        // only allow controller names 'new', 'edit' and 'invitation
         $controllerName = 'new';
-        if ($this->pluginVariables['__referrer']['@controller'] === 'Edit') {
+        $pluginName = $this->pluginService->getFemanagerPluginNameFromRequest();
+        $controllerNameInPlugin = $this->pluginVariables[$pluginName]['__referrer']['@controller'] ?? '';
+        if ($controllerNameInPlugin === 'Edit') {
             $controllerName = 'edit';
-        } elseif ($this->pluginVariables['__referrer']['@controller'] === 'Invitation') {
+        } elseif ($controllerNameInPlugin === 'Invitation') {
             $controllerName = 'invitation';
         }
-        $this->checkAllowedControllerName($controllerName);
+        $this->checkAllowedControllerName($controllerName, $pluginName);
         return $controllerName;
     }
 
     /**
      * @param string $controllerName
+     * @param string $pluginName
      */
-    protected function checkAllowedControllerName(string $controllerName)
+    protected function checkAllowedControllerName(string $controllerName, string $pluginName)
     {
         $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
         $pageIdentifier = FrontendUtility::getCurrentPid();
-        if ($pluginRepository->isPluginWithViewOnGivenPage($controllerName, $pageIdentifier) === false) {
+        if ($pluginRepository->isPluginWithViewOnGivenPage($pageIdentifier, $pluginName) === false) {
             throw new \LogicException('ControllerName is not allowed', 1541506524);
         }
     }

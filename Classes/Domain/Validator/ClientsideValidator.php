@@ -468,7 +468,7 @@ class ClientsideValidator extends AbstractValidator
     protected function getControllerName(): string
     {
         $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
-        $controllerName = $pluginRepository->getControllerNameByPluginSettings($this->getPlugin());
+        $controllerName = $pluginRepository->getControllerNameByPageWithPlugin($this->getPlugin());
 
         return $controllerName;
     }
