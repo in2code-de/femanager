@@ -18,6 +18,7 @@ use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
@@ -52,7 +53,7 @@ class InvitationController extends AbstractFrontendController
             $this->addFlashMessage(
                 LocalizationUtility::translate('ratelimiter_too_many_attempts'),
                 '',
-                AbstractMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
             $this->redirect('status');
         }
@@ -140,13 +141,13 @@ class InvitationController extends AbstractFrontendController
 
         // User must exist and hash must be valid
         if ($user === null || !HashUtility::validHash($hash, $user)) {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
             $this->redirect('status');
         }
 
         // User must not be deleted (deleted = 0) and not be activated (disable = 1)
         if ($user->getDisable() == 0) {
-            $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', AbstractMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', ContextualFeedbackSeverity::ERROR);
             $this->redirect('status');
         }
 
@@ -181,7 +182,7 @@ class InvitationController extends AbstractFrontendController
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
                 '',
-                AbstractMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
             $this->redirect('status');
         }
@@ -260,7 +261,7 @@ class InvitationController extends AbstractFrontendController
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_INVITATIONHASHERROR),
                 '',
-                AbstractMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
             $this->redirect('status');
         }
@@ -300,7 +301,7 @@ class InvitationController extends AbstractFrontendController
         $this->addFlashMessage(
             LocalizationUtility::translateByState(Log::STATUS_INVITATIONRESTRICTEDPAGE),
             '',
-            AbstractMessage::ERROR
+            ContextualFeedbackSeverity::ERROR
         );
         return new ForwardResponse('status');
     }

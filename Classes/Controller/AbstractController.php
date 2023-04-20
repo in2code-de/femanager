@@ -26,6 +26,7 @@ use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -333,7 +334,7 @@ abstract class AbstractController extends ActionController
             $this->persistenceManager->persistAll();
             if (ConfigurationUtility::getValue('new./login', $this->config) === '1') {
                 UserUtility::login($user, ConfigurationUtility::getValue('persistence./storagePid', $this->allConfig));
-                $this->addFlashMessage(LocalizationUtility::translate('login'), '', AbstractMessage::NOTICE);
+                $this->addFlashMessage(LocalizationUtility::translate('login'), '', ContextualFeedbackSeverity::NOTICE);
             }
         }
     }
@@ -410,7 +411,7 @@ abstract class AbstractController extends ActionController
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
                 '',
-                AbstractMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
             return new ForwardResponse('edit');
         }
@@ -513,7 +514,7 @@ abstract class AbstractController extends ActionController
             && GeneralUtility::_GP('type') !== '1548935210'
             && !ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
         ) {
-            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', AbstractMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', ContextualFeedbackSeverity::ERROR);
         }
     }
 
@@ -524,7 +525,7 @@ abstract class AbstractController extends ActionController
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript_be'),
                     '',
-                    AbstractMessage::ERROR
+                    ContextualFeedbackSeverity::ERROR
                 );
             }
         } else {
@@ -536,7 +537,7 @@ abstract class AbstractController extends ActionController
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript'),
                     '',
-                    AbstractMessage::ERROR
+                    ContextualFeedbackSeverity::ERROR
                 );
             }
         }

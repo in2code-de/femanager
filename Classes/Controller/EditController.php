@@ -18,6 +18,7 @@ use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
@@ -94,7 +95,7 @@ class EditController extends AbstractFrontendController
     {
         $this->view->assign('user', $user);
         if (!HashUtility::validHash($hash, $user) || !$user->getTxFemanagerChangerequest()) {
-            $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', AbstractMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
             return $this->htmlResponse(null);
         }
         switch ($status) {
@@ -205,7 +206,7 @@ class EditController extends AbstractFrontendController
     protected function redirectIfDirtyObject(User $user)
     {
         if (!ObjectUtility::isDirtyObject($user)) {
-            $this->addFlashMessage(LocalizationUtility::translate('noChanges'), '', AbstractMessage::NOTICE);
+            $this->addFlashMessage(LocalizationUtility::translate('noChanges'), '', ContextualFeedbackSeverity::NOTICE);
             $this->redirect('edit');
         }
     }

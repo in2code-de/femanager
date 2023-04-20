@@ -13,8 +13,10 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Site\SiteFinder;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -104,7 +106,7 @@ class UserBackendController extends AbstractController
                     [$user->getUsername()]
                 ),
                 'User Confirmation',
-                AbstractMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
         }
 
@@ -139,7 +141,7 @@ class UserBackendController extends AbstractController
                     [$user->getUsername()]
                 ),
                 'User Confirmation',
-                AbstractMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
         }
 
@@ -180,7 +182,7 @@ class UserBackendController extends AbstractController
                 [$user->getUsername()]
             ),
             '',
-            AbstractMessage::OK
+            ContextualFeedbackSeverity::INFO
         );
         $this->redirect('listOpenUserConfirmations');
     }
@@ -199,7 +201,7 @@ class UserBackendController extends AbstractController
                 'femanager'
             ),
             'Backend Configuration',
-            AbstractMessage::ERROR
+            ContextualFeedbackSeverity::ERROR
         );
 
         return 0;
@@ -239,7 +241,7 @@ class UserBackendController extends AbstractController
                     'femanager'
                 ),
                 'User Confirmation',
-                AbstractMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
         } else {
             $content = $response->getBody()->getContents();
