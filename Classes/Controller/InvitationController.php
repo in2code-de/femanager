@@ -47,7 +47,7 @@ class InvitationController extends AbstractFrontendController
      * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
      * @Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
      */
-    public function createAction(User $user)
+    public function createAction(User $user): ResponseInterface
     {
         if ($this->ratelimiterService->isLimited()) {
             $this->addFlashMessage(
@@ -74,7 +74,7 @@ class InvitationController extends AbstractFrontendController
         );
         $this->eventDispatcher->dispatch(new InviteUserCreateEvent($user));
         $this->ratelimiterService->consumeSlot();
-        $this->createAllConfirmed($user);
+        return $this->createAllConfirmed($user);
     }
 
     /**
@@ -83,7 +83,7 @@ class InvitationController extends AbstractFrontendController
      *
      * @param User $user
      */
-    public function createAllConfirmed(User $user)
+    public function createAllConfirmed(User $user): ResponseInterface
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
@@ -125,8 +125,9 @@ class InvitationController extends AbstractFrontendController
 
         $this->eventDispatcher->dispatch(new InviteUserConfirmedEvent($user));
 
-        $this->redirectByAction('invitation', 'redirectStep1');
-        $this->redirect('new');
+        return $this->redirectByAction('invitation', 'redirectStep1');
+        // TODO: double check that this can be removed
+        //$this->redirect('new');
     }
 
     /**

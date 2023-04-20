@@ -20,6 +20,7 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Core\Http\ApplicationType;
@@ -347,19 +348,21 @@ abstract class AbstractController extends ActionController
      * @param string $action "new", "edit"
      * @param string $category "redirect", "requestRedirect" value from TypoScript
      */
-    protected function redirectByAction($action = 'new', $category = 'redirect')
+    protected function redirectByAction($action = 'new', $category = 'redirect'): ResponseInterface
     {
         $target = null;
         // redirect from TypoScript cObject
+        $configuration = ConfigurationUtility::getValue($action . './' . $category, $this->config);
+        $configuration2 = ConfigurationUtility::getValue($action . './' . $category . '.', $this->config);
         if ($this->contentObject->cObjGetSingle(
-            ConfigurationUtility::getValue($action . './' . $category, $this->config),
-            ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
+            $configuration ,
+            $configuration2
         )
         ) {
             $target = $this->contentObject->cObjGetSingle(
-                ConfigurationUtility::getValue($action . './' . $category, $this->config),
+                $configuration,
                 array_merge_recursive(
-                    ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
+                    $configuration2,
                     [
                         'linkAccessRestrictedPages' => 1,
                     ]
@@ -369,7 +372,9 @@ abstract class AbstractController extends ActionController
 
         // if redirect target
         if ($target) {
-            $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
+            return $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
+        } else {
+            return new ForwardResponse('new');
         }
     }
 
