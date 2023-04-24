@@ -30,7 +30,7 @@ class UserRepository extends Repository
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);
         $query->getQuerySettings()->setRespectSysLanguage(false);
-        $and = [$query->equals('uid', $uid)];
+        $and = $query->equals('uid', $uid);
 
         /** @var User $user */
         $user = $query->matching($query->logicalAnd($and))->execute()->getFirst();

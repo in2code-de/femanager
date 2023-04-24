@@ -14,6 +14,7 @@ use TYPO3\CMS\Core\Crypto\PasswordHashing\Md5PasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\Pbkdf2PasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
@@ -42,10 +43,17 @@ class UserUtility extends AbstractUtility
      *
      * @param string $propertyName
      */
-    public static function getPropertyFromUser($propertyName = 'uid'): ?string
+    public static function getPropertyFromUser($propertyName = 'uid'): mixed
     {
-        if (!empty(self::getTypoScriptFrontendController()->fe_user->user[$propertyName])) {
-            return self::getTypoScriptFrontendController()->fe_user->user[$propertyName];
+        /**
+         * @var $request ServerRequest
+         * @var $frontendUser \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication
+         */
+        $request = $GLOBALS['TYPO3_REQUEST'];
+        $frontendUser = $request->getAttribute('frontend.user');
+
+        if (!empty($frontendUser->user[$propertyName])) {
+            return $frontendUser->user[$propertyName];
         }
 
         return null;
