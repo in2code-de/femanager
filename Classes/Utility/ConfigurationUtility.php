@@ -200,7 +200,7 @@ class ConfigurationUtility extends AbstractUtility
 
     public static function notifyAdminAboutEdits($settings)
     {
-        return self::getValue('edit/email/notifyAdmin/_enable.value', $settings)
+        return self::getValue('edit/email/notifyAdmin/_enable/value', $settings)
             && (
                 self::getValue('edit/email/notifyAdmin/receiver/email/value', $settings)
                 || self::getValue('edit/notifyAdmin', $settings)
