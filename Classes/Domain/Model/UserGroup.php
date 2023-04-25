@@ -11,7 +11,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class UserGroup extends AbstractEntity
 {
-    const TABLE_NAME = 'fe_groups';
+    final public const TABLE_NAME = 'fe_groups';
 
     /**
      * @var string
@@ -92,8 +92,6 @@ class UserGroup extends AbstractEntity
 
     /**
      * Adds a subgroup to the frontend user
-     *
-     * @param UserGroup $subgroup
      */
     public function addSubgroup(UserGroup $subgroup)
     {
@@ -102,8 +100,6 @@ class UserGroup extends AbstractEntity
 
     /**
      * Removes a subgroup from the frontend user group
-     *
-     * @param UserGroup $subgroup
      */
     public function removeSubgroup(UserGroup $subgroup)
     {

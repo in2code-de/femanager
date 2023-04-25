@@ -103,7 +103,7 @@ class ClientsideValidator extends AbstractValidator
                     }
                     break;
 
-                case stristr($validationSetting, 'min('):
+                case stristr((string) $validationSetting, 'min('):
                     if ($this->getValue() &&
                         !$this->validateMin($this->getValue(), StringUtility::getValuesInBrackets($validationSetting))
                     ) {
@@ -112,7 +112,7 @@ class ClientsideValidator extends AbstractValidator
                     }
                     break;
 
-                case stristr($validationSetting, 'max('):
+                case stristr((string) $validationSetting, 'max('):
                     if ($this->getValue() &&
                         !$this->validateMax($this->getValue(), StringUtility::getValuesInBrackets($validationSetting))
                     ) {
@@ -160,7 +160,7 @@ class ClientsideValidator extends AbstractValidator
                     }
                     break;
 
-                case stristr($validationSetting, 'mustInclude('):
+                case stristr((string) $validationSetting, 'mustInclude('):
                     if ($this->getValue() &&
                         !$this->validateMustInclude(
                             $this->getValue(),
@@ -172,7 +172,7 @@ class ClientsideValidator extends AbstractValidator
                     }
                     break;
 
-                case stristr($validationSetting, 'mustNotInclude('):
+                case stristr((string) $validationSetting, 'mustNotInclude('):
                     if ($this->getValue() &&
                         !$this->validateMustNotInclude(
                             $this->getValue(),
@@ -184,7 +184,7 @@ class ClientsideValidator extends AbstractValidator
                     }
                     break;
 
-                case stristr($validationSetting, 'inList('):
+                case stristr((string) $validationSetting, 'inList('):
                     if (!$this->validateInList(
                         $this->getValue(),
                         StringUtility::getValuesInBrackets($validationSetting)
@@ -194,7 +194,7 @@ class ClientsideValidator extends AbstractValidator
                     }
                     break;
 
-                case stristr($validationSetting, 'sameAs('):
+                case stristr((string) $validationSetting, 'sameAs('):
                     if (!$this->validateSameAs($this->getValue(), $this->getAdditionalValue())) {
                         $this->addMessage('validationErrorSameAs');
                         $this->isValid = false;
@@ -213,16 +213,16 @@ class ClientsideValidator extends AbstractValidator
                     }
                     break;
 
-                case stristr($validationSetting, 'captcha('):
+                case stristr((string) $validationSetting, 'captcha('):
                     if (ExtensionManagementUtility::isLoaded('sr_freecap')) {
                         $wordRepository = GeneralUtility::makeInstance(
                             WordRepository::class
                         );
                         $wordObject = $wordRepository->getWord();
                         $wordHash = $wordObject->getWordHash();
-                        $userVal = md5(strtolower(utf8_decode($this->getValue())));
+                        $userVal = md5(strtolower(mb_convert_encoding($this->getValue(), 'ISO-8859-1')));
                         if ($wordHash !== $userVal) {
-                            $this->addMessage('validationErrorCaptcha', 'captcha');
+                            $this->addMessage('validationErrorCaptcha');
                             $this->isValid = false;
                         }
                     }
@@ -232,12 +232,12 @@ class ClientsideValidator extends AbstractValidator
                 default:
                     // e.g. search for method validateCustom()
                     $mainSetting = StringUtility::getValuesBeforeBrackets($validationSetting);
-                    if (method_exists($this, 'validate' . ucfirst($mainSetting))) {
-                        if (!$this->{'validate' . ucfirst($mainSetting)}(
+                    if (method_exists($this, 'validate' . ucfirst((string) $mainSetting))) {
+                        if (!$this->{'validate' . ucfirst((string) $mainSetting)}(
                             $this->getValue(),
                             StringUtility::getValuesInBrackets($validationSetting)
                         )) {
-                            $this->addMessage('validationError' . ucfirst($mainSetting));
+                            $this->addMessage('validationError' . ucfirst((string) $mainSetting));
                             $this->isValid = false;
                         }
                     }
@@ -251,8 +251,6 @@ class ClientsideValidator extends AbstractValidator
      * This function checks the given validation string from user input against settings in TypoScript. If both strings
      * do not match, it could be possible that there is a manipulation. In this case, we stop validation and return a
      * global error message
-     *
-     * @return bool
      */
     protected function isValidationSettingsDifferentToGlobalSettings(): bool
     {
@@ -280,9 +278,6 @@ class ClientsideValidator extends AbstractValidator
         return $this->validationSettingsString;
     }
 
-    /**
-     * @return string
-     */
     public function getValidationSettingsFromTypoScript(): string
     {
         $controllerName = $this->getControllerName();
@@ -295,13 +290,10 @@ class ClientsideValidator extends AbstractValidator
         return $validationService->getValidationStringForField($this->fieldName);
     }
 
-    /**
-     * @return array
-     */
     protected function getValidationSettings(): array
     {
         $validationSettings = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
-        $validationSettings = str_replace('|', ',', $validationSettings);
+        $validationSettings = str_replace('|', ',', (string) $validationSettings);
 
         return $validationSettings;
     }
@@ -374,7 +366,6 @@ class ClientsideValidator extends AbstractValidator
     }
 
     /**
-     * @param User $user
      * @return ClientsideValidator
      */
     public function setUser(User $user = null)
@@ -411,16 +402,12 @@ class ClientsideValidator extends AbstractValidator
         return $this->additionalValue;
     }
 
-    /**
-     * @return int
-     */
     public function getPlugin(): int
     {
         return $this->plugin;
     }
 
     /**
-     * @param int $plugin
      * @return ClientsideValidator
      */
     public function setPlugin(int $plugin)
@@ -439,7 +426,6 @@ class ClientsideValidator extends AbstractValidator
     }
 
     /**
-     * @param string $actionName
      * @return ClientsideValidator
      */
     public function setActionName(string $actionName)

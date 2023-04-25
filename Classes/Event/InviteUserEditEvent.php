@@ -8,21 +8,11 @@ use In2code\Femanager\Domain\Model\User;
 
 class InviteUserEditEvent extends UserEvent
 {
-    /**
-     * @var string
-     */
-    private $hash;
-
-    public function __construct(?User $user, string $hash)
+    public function __construct(?User $user, private readonly string $hash)
     {
         parent::__construct($user);
-
-        $this->hash = $hash;
     }
 
-    /**
-     * @return string
-     */
     public function getHash(): string
     {
         return $this->hash;

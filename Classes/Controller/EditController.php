@@ -3,6 +3,9 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
+use In2code\Femanager\Domain\Validator\ServersideValidator;
+use In2code\Femanager\Domain\Validator\PasswordValidator;
+use In2code\Femanager\Domain\Validator\CaptchaValidator;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
@@ -56,12 +59,9 @@ class EditController extends AbstractFrontendController
         $this->request->setArguments($this->pluginVariables);
     }
 
-    /**
-     * @param User $user
-     * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
-     * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
-     * @Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
-     */
+    #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
+    #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]
+    #[Validate(['validator' => CaptchaValidator::class, 'param' => 'user'])]
     public function updateAction(User $user)
     {
         $this->redirectIfDirtyObject($user);
@@ -119,8 +119,6 @@ class EditController extends AbstractFrontendController
 
     /**
      * Status update confirmation
-     *
-     * @param User $user
      */
     protected function statusConfirm(User $user)
     {
@@ -145,8 +143,6 @@ class EditController extends AbstractFrontendController
 
     /**
      * Status update refused
-     *
-     * @param User $user
      */
     protected function statusRefuse(User $user)
     {
@@ -167,8 +163,6 @@ class EditController extends AbstractFrontendController
 
     /**
      * action delete
-     *
-     * @param User $user
      */
     public function deleteAction(User $user)
     {
@@ -199,7 +193,6 @@ class EditController extends AbstractFrontendController
     /**
      * Check: If there are no changes, simple redirect back
      *
-     * @param User $user
      * @throws UnsupportedRequestTypeException
      */
     protected function redirectIfDirtyObject(User $user)
@@ -210,9 +203,6 @@ class EditController extends AbstractFrontendController
         }
     }
 
-    /**
-     * @param User $user
-     */
     protected function emailForUsername(User $user)
     {
         $fillEmailWithUsername = ConfigurationUtility::getValue('edit/fillEmailWithUsername', $this->settings);

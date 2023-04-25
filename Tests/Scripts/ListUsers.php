@@ -37,7 +37,7 @@ class ListUsers
             $res = $queryBuilder->execute();
             if ($res) {
                 while (($row = $res->fetch())) {
-                    DebuggerUtility::var_dump($row, 'in2code: ' . __CLASS__ . ':' . __LINE__);
+                    DebuggerUtility::var_dump($row, 'in2code: ' . self::class . ':' . __LINE__);
                 }
             }
         } catch (DBALException $e) {
@@ -65,7 +65,7 @@ class ListUsers
             $res = $queryBuilder->execute();
             if ($res) {
                 $row = $res->fetch();
-                DebuggerUtility::var_dump($row, 'in2code: ' . __CLASS__ . ':' . __LINE__);
+                DebuggerUtility::var_dump($row, 'in2code: ' . self::class . ':' . __LINE__);
             }
         } catch (DBALException $e) {
             $content = 'error: ' . $e->getMessage();

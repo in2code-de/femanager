@@ -33,11 +33,6 @@ abstract class AbstractConfirmation implements ConfirmationInterface
 
     /**
      * AbstractConfirmation constructor.
-     *
-     * @param array $config
-     * @param User $user
-     * @param array $settings
-     * @param ContentObjectRenderer $contentObject
      */
     public function __construct(array $config, User $user, array $settings, ContentObjectRenderer $contentObject)
     {

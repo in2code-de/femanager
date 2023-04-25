@@ -43,9 +43,6 @@ class PasswordValidator extends AbstractValidatorExtbase
      */
     protected $actionName;
 
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
     public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
@@ -73,7 +70,7 @@ class PasswordValidator extends AbstractValidatorExtbase
         }
 
         $password = $user->getPassword();
-        $passwordRepeat = isset($this->piVars['password_repeat']) ? $this->piVars['password_repeat'] : '';
+        $passwordRepeat = $this->piVars['password_repeat'] ?? '';
 
         if ($password !== $passwordRepeat) {
             $this->addError('validationErrorPasswordRepeat', 0, ['field' => 'password']);
@@ -122,7 +119,7 @@ class PasswordValidator extends AbstractValidatorExtbase
     /**
      * Initialize Validator Function
      */
-    protected function init(string $pluginName = 'Pi1')
+    protected function init(string $pluginName = 'Registration')
     {
         $this->configuration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
@@ -130,7 +127,7 @@ class PasswordValidator extends AbstractValidatorExtbase
             $pluginName
         );
         $this->cObj = $this->configurationManager->getContentObject();
-        $this->piVars = GeneralUtility::_GP('tx_femanager_' . lcfirst($pluginName));
+        $this->piVars = $this->cObj->getRequest()->getParsedBody()['tx_femanager_'. lcfirst($pluginName)] ?? $this->cObj->getRequest()->getQueryParams()['tx_femanager_'. lcfirst($pluginName)] ?? null;;
         $this->actionName = $this->piVars['__referrer']['@action'];
     }
 

@@ -35,11 +35,6 @@ abstract class AbstractDataProcessor implements DataProcessorInterface
 
     /**
      * AbstractDataProcessor constructor.
-     *
-     * @param array $configuration
-     * @param array $settings
-     * @param ContentObjectRenderer $contentObject
-     * @param Arguments $controllerArguments
      */
     public function __construct(
         array $configuration,
@@ -58,7 +53,6 @@ abstract class AbstractDataProcessor implements DataProcessorInterface
     }
 
     /**
-     * @param string $path
      * @return mixed
      */
     public function getConfiguration(string $path = '')

@@ -12,10 +12,8 @@ class GetFirstViewHelper extends AbstractViewHelper
 {
     /**
      * Call getFirst() method of object storage
-     *
-     * @return object|null
      */
-    public function render()
+    public function render(): ?object
     {
         $objects = $this->arguments['objects'];
         if (method_exists($objects, 'getFirst')) {

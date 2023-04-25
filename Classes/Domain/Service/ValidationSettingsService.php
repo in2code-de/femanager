@@ -41,10 +41,6 @@ class ValidationSettingsService
         'uniqueInPage'
     ];
 
-    /**
-     * @param string $controllerName
-     * @param string $validationName
-     */
     public function __construct(string $controllerName, string $validationName)
     {
         $this->controllerName = $controllerName;
@@ -58,7 +54,6 @@ class ValidationSettingsService
      *        mustInclude(number|letter|special), inList(1|2|3)
      *
      * @param string $fieldName Fieldname
-     * @return string
      */
     public function getValidationStringForField(string $fieldName): string
     {
@@ -77,10 +72,6 @@ class ValidationSettingsService
         return $string;
     }
 
-    /**
-     * @param string $type
-     * @return bool
-     */
     public function isValidationEnabled(string $type = 'client'): bool
     {
         $validationSetting = $this->getSettings()[$this->controllerName]['validation']['_enable'][$type] ?? '0';
@@ -109,7 +100,6 @@ class ValidationSettingsService
      * Check if validation is simple or extended
      *
      * @param string $validation
-     * @return bool
      */
     protected function isSimpleValidation($validation): bool
     {
@@ -119,9 +109,6 @@ class ValidationSettingsService
         return false;
     }
 
-    /**
-     * @return array
-     */
     protected function getSettings(string $pluginSignature = 'femanager_pi1'): array
     {
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);

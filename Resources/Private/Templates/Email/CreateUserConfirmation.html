@@ -10,23 +10,23 @@
 		{hash} Hash to ensure authentication of link
 
 <f:section name="main">
-	<p><f:translate key="emailCreateUserConfirmationSalutation" /> {user.username},</p>
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:mailCreateUserConfirmationSalutation" /> {user.username},</p>
 
 	<p>
-		<f:translate key="emailCreateUserConfirmationText1" />
+		<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationText1" />
 		<br>
 		<f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'userConfirmation'}">
-			<f:translate key="emailCreateUserConfirmationLinkConfirm" />
+			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationLinkConfirm" />
 		</f:link.action>
 	</p>
 
 	<p>
-		<f:translate key="emailCreateUserConfirmationText2" />
+		<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationText2" />
 		<br>
 		<f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'userConfirmationRefused'}">
-			<f:translate key="emailCreateUserConfirmationLinkConfirmRefused" />
+			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationLinkConfirmRefused" />
 		</f:link.action>
 	</p>
 
-	<p><f:translate key="emailCreateUserConfirmationSignature" /></p>
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationSignature" /></p>
 </f:section>

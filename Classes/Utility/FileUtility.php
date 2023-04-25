@@ -27,9 +27,6 @@ class FileUtility extends AbstractUtility
 
     /**
      * Get relative path from absolute path, but don't touch if it's already a relative path
-     *
-     * @param string $path
-     * @return string
      */
     public static function getRelativeFolderFromAbsolutePath(string $path): string
     {

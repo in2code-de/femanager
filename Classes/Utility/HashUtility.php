@@ -14,7 +14,6 @@ class HashUtility extends AbstractUtility
      * Check if given hash is correct
      *
      * @param string $hash
-     * @param User $user
      * @return bool
      */
     public static function validHash($hash, User $user)
@@ -25,7 +24,6 @@ class HashUtility extends AbstractUtility
     /**
      * Create hash for a user
      *
-     * @param User $user
      * @return string
      */
     public static function createHashForUser(User $user)

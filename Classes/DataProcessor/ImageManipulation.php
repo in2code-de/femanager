@@ -52,10 +52,6 @@ class ImageManipulation extends AbstractDataProcessor
         return $arguments;
     }
 
-    /**
-     * @param int $fileIdentifier
-     * @return int
-     */
     protected function createSysFileRelation(int $fileIdentifier): int
     {
         $properties = [
@@ -78,7 +74,6 @@ class ImageManipulation extends AbstractDataProcessor
     }
 
     /**
-     * @param array $fileItem
      * @return string New filename (absolute with path)
      * @throws \Exception
      */
@@ -98,19 +93,12 @@ class ImageManipulation extends AbstractDataProcessor
         );
     }
 
-    /**
-     * @return array
-     */
     protected function getPropertiesForUpload(): array
     {
         $propertylist = $this->getConfiguration('propertyNamesForUpload');
         return GeneralUtility::trimExplode(',', $propertylist, true);
     }
 
-    /**
-     * @param array $fileItem
-     * @return string
-     */
     protected function getNewImageName(array $fileItem): string
     {
         $imageName = '';
@@ -121,10 +109,6 @@ class ImageManipulation extends AbstractDataProcessor
         return $imageName;
     }
 
-    /**
-     * @param bool $absolute
-     * @return string
-     */
     protected function getUploadFolder(bool $absolute = true): string
     {
         $path = (string)ConfigurationUtility::getConfiguration('misc.uploadFolder');
@@ -144,9 +128,7 @@ class ImageManipulation extends AbstractDataProcessor
     }
 
     /**
-     * @param array $arguments
      * @param $property
-     * @return bool
      */
     protected function isFileIdentifierGiven(array $arguments, $property): bool
     {
@@ -154,9 +136,7 @@ class ImageManipulation extends AbstractDataProcessor
     }
 
     /**
-     * @param array $arguments
      * @param $property
-     * @return bool
      */
     protected function isUploadError(array $arguments, $property): bool
     {

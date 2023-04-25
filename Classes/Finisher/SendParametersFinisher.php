@@ -33,17 +33,6 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected $configuration;
 
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
-    public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
-    {
-        $this->configurationManager = $configurationManager;
-    }
-
-    /**
-     * @param ContentObjectRenderer $contentObject
-     */
     public function injectContentObjectRenderer(ContentObjectRenderer $contentObject)
     {
         $this->contentObject = $contentObject;
@@ -54,11 +43,12 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     public function initializeFinisher()
     {
+        $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         $this->contentObject->start($this->user->_getProperties());
         $typoScript = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        $this->configuration = $typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.'];
+        $this->configuration = !empty($typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.']) ? $typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.'] : null;
     }
 
     /**
@@ -73,7 +63,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
             $requestFactory = GeneralUtility::makeInstance(RequestFactory::class);
             $params = $curlSettings['params'];
             $parsedParams = [];
-            parse_str($params, $parsedParams);
+            parse_str((string) $params, $parsedParams);
             $requestFactory->request($curlSettings['url'], 'POST', ['form_params' => $parsedParams]);
         }
     }

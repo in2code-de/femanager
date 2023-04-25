@@ -29,8 +29,6 @@ class RequestViewHelper extends AbstractViewHelper
 
     /**
      * Get a GET or POST parameter
-     *
-     * @return string
      */
     public function render(): string
     {
@@ -51,11 +49,7 @@ class RequestViewHelper extends AbstractViewHelper
         return $result;
     }
 
-    /**
-     * @param array $param
-     * @return array|string
-     */
-    protected function getVariableFromDepth(array $param)
+    protected function getVariableFromDepth(array $param): array|string
     {
         if (is_array($this->variable)) {
             $this->variable = $this->variable[$param[$this->depth]] ?? null;
@@ -74,7 +68,7 @@ class RequestViewHelper extends AbstractViewHelper
      */
     protected function init($parameter)
     {
-        $parts = explode('|', $parameter);
+        $parts = explode('|', (string) $parameter);
         $this->variable = GeneralUtility::_GP($parts[0]);
         if ($this->testVariables) {
             $this->variable = $this->testVariables[$parts[0]];

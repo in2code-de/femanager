@@ -90,11 +90,11 @@ class UserFieldsOptions
     protected function getPid()
     {
         $pid = 0;
-        $backUrl = str_replace('?', '&', GeneralUtility::_GP('returnUrl'));
+        $backUrl = str_replace('?', '&', (string) GeneralUtility::_GP('returnUrl'));
         $urlParts = GeneralUtility::trimExplode('&', $backUrl, true);
         foreach ($urlParts as $part) {
-            if (stristr($part, 'id=')) {
-                $pid = str_replace('id=', '', $part);
+            if (stristr((string) $part, 'id=')) {
+                $pid = str_replace('id=', '', (string) $part);
             }
         }
 

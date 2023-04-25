@@ -10,14 +10,14 @@
 		{settings} Array with Flexform and TypoScript settings
 
 <f:section name="main">
-	<p><f:translate key="emailInvitationUserRefusedAdminNotifiySalutation" /></p>
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationUserRefusedAdminNotifiySalutation" /></p>
 
 	<p>
 		<f:format.printf arguments="{0:user.username}">
-			<f:translate key="emailInvitationUserRefusedAdminNotifiyText2" />
+			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationUserRefusedAdminNotifiyText2" />
 		</f:format.printf>
 	</p>
 
-	<p><f:translate key="emailInvitationUserRefusedAdminNotifiyUserProperties" /></p>
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationUserRefusedAdminNotifiyUserProperties" /></p>
 	<f:render partial="Mail/UserProperties" arguments="{_all}" />
 </f:section>

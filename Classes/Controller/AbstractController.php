@@ -119,13 +119,6 @@ abstract class AbstractController extends ActionController
 
     /**
      * AbstractController constructor.
-     *
-     * @param UserRepository $userRepository
-     * @param UserGroupRepository $userGroupRepository
-     * @param PersistenceManager $persistenceManager
-     * @param SendMailService $sendMailService
-     * @param FinisherRunner $finisherRunner
-     * @param LogUtility $logUtility
      */
     public function __construct(
         UserRepository $userRepository,
@@ -146,8 +139,6 @@ abstract class AbstractController extends ActionController
     /**
      * Prefix method to createAction()
      *        Create Confirmation from Admin is not necessary
-     *
-     * @param User $user
      */
     public function createAllConfirmed(User $user)
     {
@@ -160,8 +151,6 @@ abstract class AbstractController extends ActionController
     /**
      * Prefix method to updateAction()
      *        Update Confirmation from Admin is not necessary
-     *
-     * @param User $user
      */
     public function updateAllConfirmed(User $user)
     {
@@ -183,7 +172,8 @@ abstract class AbstractController extends ActionController
                     'changes' => UserUtility::getDirtyPropertiesFromUser($existingUser),
                     'settings' => $this->settings,
                 ],
-                $this->config['edit.']['email.']['notifyAdmin.'] ?? []
+                $this->config['edit.']['email.']['notifyAdmin.'] ?? [],
+                $this->request
             );
         }
 
@@ -219,7 +209,8 @@ abstract class AbstractController extends ActionController
                     'changes' => $dirtyProperties,
                     'hash' => HashUtility::createHashForUser($user),
                 ],
-                $this->config['edit.']['email.']['updateRequest.'] ?? []
+                $this->config['edit.']['email.']['updateRequest.'] ?? [],
+                $this->request
             );
             $this->logUtility->log(
                 Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
@@ -241,10 +232,8 @@ abstract class AbstractController extends ActionController
      * Some additional actions after profile creation
      *
      * @param User $user
-     * @param string $action
      * @param string $redirectByActionName Action to redirect
      * @param bool $login Login after creation
-     * @param string $status
      * @param bool $backend Don't redirect if called from backend action
      */
     public function finalCreate(
@@ -276,7 +265,8 @@ abstract class AbstractController extends ActionController
                     ConfigurationUtility::getValue('new./email./createUserNotify./subject.', $this->config),
                 ),
                 $variables,
-                ConfigurationUtility::getValue('new./email./createUserNotify.', $this->config)
+                ConfigurationUtility::getValue('new./email./createUserNotify.', $this->config),
+                $this->request
             );
         }
 
@@ -301,7 +291,8 @@ abstract class AbstractController extends ActionController
                     ConfigurationUtility::getValue('new./email./createAdminNotify./subject.', $this->config)
                 ),
                 $variables,
-                ConfigurationUtility::getValue('new./email./createAdminNotify.', $this->config)
+                ConfigurationUtility::getValue('new./email./createAdminNotify.', $this->config),
+                $this->request
             );
         }
 
@@ -318,7 +309,6 @@ abstract class AbstractController extends ActionController
     /**
      * Log user in
      *
-     * @param User $user
      * @param $login
      * @throws IllegalObjectTypeException
      */
@@ -365,7 +355,7 @@ abstract class AbstractController extends ActionController
 
         // if redirect target
         if ($target) {
-            $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
+            return $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
         }
     }
 
@@ -429,7 +419,7 @@ abstract class AbstractController extends ActionController
                 'Pid' => FrontendUtility::getCurrentPid(),
                 'data' => $this->contentObject->data,
                 'useStaticInfoTables' => ExtensionManagementUtility::isLoaded('static_info_tables'),
-                'jsLabels' => json_encode($jsLabels),
+                'jsLabels' => json_encode($jsLabels, JSON_THROW_ON_ERROR),
             ]
         );
     }
@@ -541,8 +531,6 @@ abstract class AbstractController extends ActionController
 
     /**
      * Send email to user for confirmation
-     *
-     * @param User $user
      */
     public function sendCreateUserConfirmationMail(User $user)
     {
@@ -561,7 +549,8 @@ abstract class AbstractController extends ActionController
                 'user' => $user,
                 'hash' => HashUtility::createHashForUser($user),
             ],
-            ConfigurationUtility::getValue('new./email./createUserConfirmation.', $this->config)
+            ConfigurationUtility::getValue('new./email./createUserConfirmation.', $this->config),
+            $this->request
         );
     }
 }

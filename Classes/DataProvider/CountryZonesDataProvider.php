@@ -33,9 +33,7 @@ class CountryZonesDataProvider
         $countryZones = $this->countryZoneRepository->findByCountry($country)->toArray();
         usort(
             $countryZones,
-            function (CountryZone $left, CountryZone $right) {
-                return strcasecmp($left->getLocalName(), $right->getLocalName());
-            }
+            fn(CountryZone $left, CountryZone $right) => strcasecmp((string) $left->getLocalName(), (string) $right->getLocalName())
         );
         return $countryZones;
     }
@@ -46,14 +44,13 @@ class CountryZonesDataProvider
     }
 
     /**
-     * @param string $countryIso3
      * @return Country|null
      */
     private function getCountryForIsoCode3(string $countryIso3): ?Country
     {
         $countries = $this->countryRepository->findAllowedByIsoCodeA3($countryIso3);
         $country = null;
-        if (count($countries) === 1) {
+        if ((is_countable($countries) ? count($countries) : 0) === 1) {
             $country = array_values($countries)[0];
         }
         return $country;

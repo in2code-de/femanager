@@ -3,9 +3,11 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
+use In2code\Femanager\Finisher\FinisherInterface;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Finisher\AbstractFinisher;
 use In2code\Femanager\Utility\StringUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -60,7 +62,7 @@ class FinisherService
     /**
      * @var string
      */
-    protected $finisherInterface = 'In2code\Femanager\Finisher\FinisherInterface';
+    protected $finisherInterface = FinisherInterface::class;
 
     /**
      * @return string
@@ -80,10 +82,7 @@ class FinisherService
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getRequirePath()
+    public function getRequirePath(): ?string
     {
         return $this->requirePath;
     }
@@ -91,10 +90,9 @@ class FinisherService
     /**
      * Set require path and do a require_once
      *
-     * @param string|null $requirePath
      * @return FinisherService
      */
-    public function setRequirePath($requirePath)
+    public function setRequirePath(?string $requirePath)
     {
         $this->requirePath = $requirePath;
         if ($this->getRequirePath() && file_exists($this->getRequirePath())) {
@@ -186,8 +184,9 @@ class FinisherService
             );
         }
         if (is_subclass_of($this->getClass(), $this->finisherInterface)) {
+
             /** @var AbstractFinisher $finisher */
-            $finisher = $this->objectManager->get(
+            $finisher = GeneralUtility::makeInstance(
                 $this->getClass(),
                 $this->getUser(),
                 $this->getConfiguration(),
@@ -207,13 +206,11 @@ class FinisherService
 
     /**
      * Call methods in finisher class
-     *
-     * @param AbstractFinisher $finisher
      */
     protected function callFinisherMethods(AbstractFinisher $finisher)
     {
         foreach (get_class_methods($finisher) as $method) {
-            if (!StringUtility::endsWith($method, 'Finisher') || strpos($method, 'initialize') === 0) {
+            if (!StringUtility::endsWith($method, 'Finisher') || str_starts_with($method, 'initialize')) {
                 continue;
             }
             $this->callInitializeFinisherMethod($finisher, $method);
@@ -224,7 +221,6 @@ class FinisherService
     /**
      * Call initializeFinisherMethods like "initializeSaveFinisher()"
      *
-     * @param AbstractFinisher $finisher
      * @param string $finisherMethod
      */
     protected function callInitializeFinisherMethod(AbstractFinisher $finisher, $finisherMethod)
@@ -234,11 +230,6 @@ class FinisherService
         }
     }
 
-    /**
-     * @param User $user
-     * @param array $settings
-     * @param ContentObjectRenderer $contentObject
-     */
     public function init(User $user, array $settings, ContentObjectRenderer $contentObject)
     {
         $this->setUser($user);

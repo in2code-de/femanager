@@ -35,10 +35,6 @@ class AutoAdminConfirmationService
 
     /**
      * AutoAdminConfirmationService constructor.
-     *
-     * @param User $user
-     * @param array $settings
-     * @param ContentObjectRenderer $contentObject
      */
     public function __construct(User $user, array $settings, ContentObjectRenderer $contentObject)
     {
@@ -49,8 +45,6 @@ class AutoAdminConfirmationService
 
     /**
      * Loop through all AutoAdminConfirmation classes
-     *
-     * @return bool
      */
     public function isAutoAdminConfirmationFullfilled(): bool
     {
@@ -72,7 +66,6 @@ class AutoAdminConfirmationService
     }
 
     /**
-     * @return array
      * @throws \Exception
      */
     protected function getConfirmationClasses(): array

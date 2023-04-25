@@ -11,25 +11,25 @@
 		{hash} Hash to ensure authentication of link
 
 <f:section name="main">
-	<p><f:translate key="emailUpdateRequestSalutation" /></p>
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestSalutation" /></p>
 
 	<p>
 		<f:format.printf arguments="{0:user.username}">
-			<f:translate key="emailUpdateRequestText1" />
+			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestText1" />
 		</f:format.printf>
 	</p>
 
-	<p><f:translate key="emailUpdateRequestText2" /></p>
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestText2" /></p>
 
 	<table border="1" cellpadding="2" cellspacing="2">
 		<tr>
-			<td><b><f:translate key="emailUpdateRequestField" /></b></td>
-			<td><b><f:translate key="emailUpdateRequestOld" /></b></td>
-			<td><b><f:translate key="emailUpdateRequestNew" /></b></td>
+			<td><b><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestField" /></b></td>
+			<td><b><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestOld" /></b></td>
+			<td><b><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestNew" /></b></td>
 		</tr>
 		<f:for each="{changes}" as="change" key="property">
 			<tr>
-				<td><f:translate key="tx_femanager_domain_model_user.{property}" /></td>
+				<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.{property}" /></td>
 				<td>
 					<f:if condition="{0:property} == {0:'password'}">
 						<f:else>
@@ -37,12 +37,12 @@
 								<f:then>
 									<f:if condition="{0:property} == {0:'gender'}">
 										<f:then>
-											<f:translate key="tx_femanager_domain_model_user.gender.item{change.old}" />
+											<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.gender.item{change.old}" />
 										</f:then>
 										<f:else>
 											<f:if condition="{0:property} == {0:'dateOfBirth'}">
 												<f:then>
-													<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{change.old}</f:format.date>
+													<f:format.date format="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.dateFormat')}">{change.old}</f:format.date>
 												</f:then>
 												<f:else>
 													{change.old}
@@ -52,7 +52,7 @@
 									</f:if>
 								</f:then>
 								<f:else>
-									[<f:translate key="empty" />]
+									[<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:empty" />]
 								</f:else>
 							</f:if>
 						</f:else>
@@ -66,12 +66,12 @@
 						<f:else>
 							<f:if condition="{0:property} == {0:'gender'}">
 								<f:then>
-									<f:translate key="tx_femanager_domain_model_user.gender.item{change.new}" />
+									<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.gender.item{change.new}" />
 								</f:then>
 								<f:else>
 									<f:if condition="{0:property} == {0:'dateOfBirth'}">
 										<f:then>
-											<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{change.new}</f:format.date>
+											<f:format.date format="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.dateFormat')}">{change.new}</f:format.date>
 										</f:then>
 										<f:else>
 											{change.new}
@@ -92,17 +92,17 @@
 	<ul>
 		<li>
 			<f:link.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash}">
-				<f:translate key="emailUpdateRequestLinkConfirm" />
+				<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestLinkConfirm" />
 			</f:link.action>
 		</li>
 		<li>
 			<f:link.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash, status:'refuse'}">
-				<f:translate key="emailUpdateRequestLinkRefuse" />
+				<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestLinkRefuse" />
 			</f:link.action>
 		</li>
 		<li>
 			<f:link.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash, status:'silentRefuse'}">
-				<f:translate key="emailUpdateRequestLinkSiltentRefuse" />
+				<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestLinkSiltentRefuse" />
 			</f:link.action>
 		</li>
 	</ul>

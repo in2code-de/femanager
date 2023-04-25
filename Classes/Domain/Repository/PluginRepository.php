@@ -16,7 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class PluginRepository
 {
-    const TABLE_NAME = 'tt_content';
+    final public const TABLE_NAME = 'tt_content';
 
     protected FlexFormService $flexFormService;
 
@@ -30,6 +30,12 @@ class PluginRepository
             . 'Invitation->update;Invitation->delete;Invitation->status;',
     ];
 
+    protected array $viewToPlugin = [
+        'new' => 'femanager_registration',
+        'edit' => 'femanager_edit',
+        'invitation' => 'femanager_invitation'
+    ];
+
     /**
      * @param FlexFormService|null $flexFormService
      */
@@ -39,8 +45,6 @@ class PluginRepository
     }
 
     /**
-     * @param int $contentIdentifier
-     * @return string
      * @throws \Exception
      * @throws Exception
      */
@@ -49,9 +53,7 @@ class PluginRepository
         $queryBuilder = ObjectUtility::getQueryBuilder(self::TABLE_NAME);
         $flexFormQuery = $queryBuilder
             ->select('pi_flexform')
-            ->from(self::TABLE_NAME)
-            ->where('uid=' . $contentIdentifier)
-            ->execute();
+            ->from(self::TABLE_NAME)->where('uid=' . $contentIdentifier)->executeQuery();
         if (! $flexFormQuery instanceof Result) {
             throw new \Exception(
                 'Something went wrong while getting FlexForm-value from Query.',
@@ -65,42 +67,32 @@ class PluginRepository
 
     /**
      * @param string $view can be "new", "edit" or "invitation"
-     * @param int $pageIdentifier
-     * @return bool
      * @throws \Exception
      * @throws Exception
      */
     public function isPluginWithViewOnGivenPage(string $view, int $pageIdentifier): bool
     {
         $queryBuilder = ObjectUtility::getQueryBuilder(self::TABLE_NAME);
-        $pluginConfigurationQuery = $queryBuilder
+        $pluginsOnPage = $queryBuilder
             ->select('pi_flexform')
             ->from(self::TABLE_NAME)
             ->where(
                 $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageIdentifier, PDO::PARAM_INT)),
-                $queryBuilder->expr()->eq('CType', $queryBuilder->createNamedParameter('list')),
-                $queryBuilder->expr()->eq('list_type', $queryBuilder->createNamedParameter('femanager_pi1'))
+                $queryBuilder->expr()->eq('CType', $queryBuilder->createNamedParameter($this->viewToPlugin[$view]))
             )
-            ->execute();
-        if (! $pluginConfigurationQuery instanceof Result) {
+            ->executeStatement();
+        if ($pluginsOnPage == 0) {
             throw new \Exception(
                 'Something went wrong while getting PluginConfigurations from query.',
                 1638443806
             );
+        } else {
+            return true;
         }
-        $pluginConfigurations = $pluginConfigurationQuery->fetchAllAssociative();
-        foreach ($pluginConfigurations as $pluginConfiguration) {
-            if ($this->isViewInPluginConfiguration($view, (string)$pluginConfiguration['pi_flexform'])) {
-                return true;
-            }
-        }
+
         return false;
     }
 
-    /**
-     * @param string $flexForm
-     * @return string
-     */
     protected function getViewFromFlexForm(string $flexForm): string
     {
         $view = '';
@@ -116,9 +108,6 @@ class PluginRepository
     }
 
     /**
-     * @param string $view
-     * @param string $pluginConfiguration
-     * @return bool
      * @throws LogicException
      */
     protected function isViewInPluginConfiguration(string $view, string $pluginConfiguration): bool

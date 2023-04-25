@@ -21,7 +21,6 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
 
     /**
      * Check if captcha is enabled
-     * @return bool
      * @throws FluidViewHelperException
      */
     public function render(): bool
@@ -32,7 +31,7 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
                 1638341672
             );
         }
-        $controllerName = strtolower($this->renderingContext->getRequest()->getControllerName());
+        $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
 
         return ExtensionManagementUtility::isLoaded('sr_freecap')
             && $this->templateVariableContainer->getByPath('settings.' . $controllerName . '.validation.captcha.captcha');
