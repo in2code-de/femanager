@@ -14,6 +14,7 @@ use Symfony\Component\Mime\Part\DataPart;
 use TYPO3\CMS\Core\Mail\Mailer;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 /**
  * Class SendMailService
@@ -61,7 +62,8 @@ class SendMailService
         array $sender,
         string $subject,
         array $variables = [],
-        array $typoScript = []
+        array $typoScript = [],
+        RequestInterface|null $request = null
     ): bool {
         if (false === $this->isMailEnabled($typoScript, $receiver)) {
             return false;
@@ -70,7 +72,7 @@ class SendMailService
         $this->contentObjectStart($variables);
         $email = GeneralUtility::makeInstance(MailMessage::class);
         $variables = $this->embedImages($variables, $typoScript, $email);
-        $this->prepareMailObject($template, $receiver, $sender, $subject, $variables, $email);
+        $this->prepareMailObject($template, $receiver, $sender, $subject, $variables, $email, $request);
         $this->overwriteEmailReceiver($typoScript, $email);
         $this->overwriteEmailSender($typoScript, $email);
         $this->setSubject($typoScript, $email);
@@ -91,9 +93,9 @@ class SendMailService
      * @param string $template Template file in Templates/Email/
      * @param array $variables Variables for assignMultiple
      */
-    protected function getMailBody(string $template, array $variables): string
+    protected function getMailBody(string $template, array $variables, RequestInterface|null $request = null): string
     {
-        $standAloneView = TemplateUtility::getDefaultStandAloneView();
+        $standAloneView = TemplateUtility::getDefaultStandAloneView($request);
         $standAloneView->setTemplatePathAndFilename($this->getRelativeEmailPathAndFilename($template));
         $standAloneView->assignMultiple($variables);
         return $standAloneView->render();
@@ -130,9 +132,10 @@ class SendMailService
         array $sender,
         string $subject,
         array $variables,
-        MailMessage $email
+        MailMessage $email,
+        RequestInterface|null $request = null
     ): void {
-        $html = $this->getMailBody($template, $variables);
+        $html = $this->getMailBody($template, $variables, $request);
         $email->setTo($receiver)
             ->setFrom($sender)
             ->setSubject($subject)

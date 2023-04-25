@@ -18,6 +18,7 @@ use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
+use In2code\Femanager\Utility\TemplateUtility;
 use In2code\Femanager\Utility\UserUtility;
 use JsonException;
 use Psr\Http\Message\ResponseInterface;
@@ -29,6 +30,7 @@ use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Event\Mvc\AfterRequestDispatchedEvent;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * Class NewController
@@ -67,6 +69,7 @@ class NewController extends AbstractFrontendController
     #[Validate(['validator' => CaptchaValidator::class, 'param' => 'user'])]
     public function createAction(User $user): ResponseInterface
     {
+
         if ($this->ratelimiterService->isLimited()) {
             $this->addFlashMessage(
                 LocalizationUtility::translate('ratelimiter_too_many_attempts'),
@@ -156,7 +159,7 @@ class NewController extends AbstractFrontendController
         }
 
         if ($furtherFunctions) {
-            $this->redirectByAction('new', $status . 'Redirect');
+            return $this->redirectByAction('new', $status . 'Redirect');
         }
 
         return $this->redirect('new');
@@ -283,7 +286,8 @@ class NewController extends AbstractFrontendController
                     ['sender@femanager.org' => 'Sender Name'],
                     'Your profile was refused',
                     ['user' => $user],
-                    ConfigurationUtility::getValue('new./email./createUserNotifyRefused.', $this->config)
+                    ConfigurationUtility::getValue('new./email./createUserNotifyRefused.', $this->config),
+                    $this->request
                 );
             }
             $this->userRepository->remove($user);
@@ -370,7 +374,8 @@ class NewController extends AbstractFrontendController
                     'user' => $user,
                     'hash' => HashUtility::createHashForUser($user)
                 ],
-                ConfigurationUtility::getValue('new./email./createAdminConfirmation.', $this->config)
+                ConfigurationUtility::getValue('new./email./createAdminConfirmation.', $this->config),
+                $this->request
             );
             $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
         }

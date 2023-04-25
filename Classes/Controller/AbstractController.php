@@ -172,7 +172,8 @@ abstract class AbstractController extends ActionController
                     'changes' => UserUtility::getDirtyPropertiesFromUser($existingUser),
                     'settings' => $this->settings,
                 ],
-                $this->config['edit.']['email.']['notifyAdmin.'] ?? []
+                $this->config['edit.']['email.']['notifyAdmin.'] ?? [],
+                $this->request
             );
         }
 
@@ -208,7 +209,8 @@ abstract class AbstractController extends ActionController
                     'changes' => $dirtyProperties,
                     'hash' => HashUtility::createHashForUser($user),
                 ],
-                $this->config['edit.']['email.']['updateRequest.'] ?? []
+                $this->config['edit.']['email.']['updateRequest.'] ?? [],
+                $this->request
             );
             $this->logUtility->log(
                 Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
@@ -263,7 +265,8 @@ abstract class AbstractController extends ActionController
                     ConfigurationUtility::getValue('new./email./createUserNotify./subject.', $this->config),
                 ),
                 $variables,
-                ConfigurationUtility::getValue('new./email./createUserNotify.', $this->config)
+                ConfigurationUtility::getValue('new./email./createUserNotify.', $this->config),
+                $this->request
             );
         }
 
@@ -288,7 +291,8 @@ abstract class AbstractController extends ActionController
                     ConfigurationUtility::getValue('new./email./createAdminNotify./subject.', $this->config)
                 ),
                 $variables,
-                ConfigurationUtility::getValue('new./email./createAdminNotify.', $this->config)
+                ConfigurationUtility::getValue('new./email./createAdminNotify.', $this->config),
+                $this->request
             );
         }
 
@@ -351,7 +355,7 @@ abstract class AbstractController extends ActionController
 
         // if redirect target
         if ($target) {
-            $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
+            return $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
         }
     }
 
@@ -545,7 +549,8 @@ abstract class AbstractController extends ActionController
                 'user' => $user,
                 'hash' => HashUtility::createHashForUser($user),
             ],
-            ConfigurationUtility::getValue('new./email./createUserConfirmation.', $this->config)
+            ConfigurationUtility::getValue('new./email./createUserConfirmation.', $this->config),
+            $this->request
         );
     }
 }

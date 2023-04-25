@@ -11,23 +11,23 @@
 		{settings} Array with Flexform and TypoScript settings
 
 <f:section name="main">
-	<p><f:translate key="emailUpdateNotifySalutation" /></p>
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateNotifySalutation" /></p>
 
 	<p>
 		<f:format.printf arguments="{0:user.username}">
-			<f:translate key="emailUpdateNotifyText1" />
+			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateNotifyText1" />
 		</f:format.printf>
 	</p>
 
 	<table border="1" cellpadding="2" cellspacing="2">
 		<tr>
-			<td><b><f:translate key="emailUpdateNotifyField" /></b></td>
-			<td><b><f:translate key="emailUpdateNotifyOld" /></b></td>
-			<td><b><f:translate key="emailUpdateNotifyNew" /></b></td>
+			<td><b><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateNotifyField" /></b></td>
+			<td><b><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateNotifyOld" /></b></td>
+			<td><b><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateNotifyNew" /></b></td>
 		</tr>
 		<f:for each="{changes}" as="change" key="property">
 			<tr>
-				<td><f:translate key="tx_femanager_domain_model_user.{property}" /></td>
+				<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.{property}" /></td>
 				<td>
 					<f:if condition="{0:property} == {0:'password'}">
 						<f:else>
@@ -35,12 +35,12 @@
 								<f:then>
 									<f:if condition="{0:property} == {0:'gender'}">
 										<f:then>
-											<f:translate key="tx_femanager_domain_model_user.gender.item{change.old}" />
+											<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.gender.item{change.old}" />
 										</f:then>
 										<f:else>
 											<f:if condition="{0:property} == {0:'dateOfBirth'}">
 												<f:then>
-													<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{change.old}</f:format.date>
+													<f:format.date format="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.dateFormat')}">{change.old}</f:format.date>
 												</f:then>
 												<f:else>
 													{change.old}
@@ -50,7 +50,7 @@
 									</f:if>
 								</f:then>
 								<f:else>
-									[<f:translate key="empty" />]
+									[<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:empty" />]
 								</f:else>
 							</f:if>
 						</f:else>
@@ -64,12 +64,12 @@
 						<f:else>
 							<f:if condition="{0:property} == {0:'gender'}">
 								<f:then>
-									<f:translate key="tx_femanager_domain_model_user.gender.item{change.new}" />
+									<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.gender.item{change.new}" />
 								</f:then>
 								<f:else>
 									<f:if condition="{0:property} == {0:'dateOfBirth'}">
 										<f:then>
-											<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{change.new}</f:format.date>
+											<f:format.date format="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.dateFormat')}">{change.new}</f:format.date>
 										</f:then>
 										<f:else>
 											{change.new}

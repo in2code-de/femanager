@@ -5,6 +5,7 @@ namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
@@ -111,10 +112,14 @@ class TemplateUtility extends AbstractUtility
      * @return StandaloneView
      */
     public static function getDefaultStandAloneView(
+        RequestInterface|null $request = null,
         string $format = 'html'
     ) {
         /** @var StandaloneView $standAloneView */
         $standAloneView = GeneralUtility::makeInstance(StandaloneView::class);
+        if ($request instanceof RequestInterface) {
+            $standAloneView->setRequest($request);
+        }
         $standAloneView->setFormat($format);
         $standAloneView->setLayoutRootPaths(TemplateUtility::getTemplateFolders('layout'));
         $standAloneView->setPartialRootPaths(TemplateUtility::getTemplateFolders('partial'));
