@@ -1,8 +1,4 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
-<f:be.container
-		includeCssFiles="{0: '{f:uri.resource(path:\'Css/Backend.min.css\')}'}"
-		includeRequireJsModules="{0: 'TYPO3/CMS/Femanager/Backend.min'}"
-		pageTitle="femanager">
 	<div class="module">
 		<div class="module-docheader">
 			<div class="typo3-docheader-functions">
@@ -34,7 +30,7 @@
 					&nbsp;
 				</div>
 				<div class="module-docheader-bar-column-right">
-					<f:be.buttons.shortcut />
+					<f:be:moduleLayout.button.shortcutButton />
 				</div>
 			</div>
 		</div>
@@ -50,4 +46,4 @@
 			<f:render section="main" />
 		</div>
 	</div>
-</f:be.container>
+

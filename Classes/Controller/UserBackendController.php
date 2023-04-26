@@ -13,6 +13,8 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Backend\Template\ModuleTemplate;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
@@ -23,14 +25,31 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class UserBackendController extends AbstractController
 {
-    protected $configPID;
+    protected int $configPID;
+
+    protected ModuleTemplateFactory $moduleTemplateFactory;
+
+    protected ModuleTemplate $moduleTemplate;
+
+    public function injectModuleTemplateFactory(ModuleTemplateFactory $moduleTemplateFactory)
+    {
+        $this->moduleTemplateFactory = $moduleTemplateFactory;
+    }
+
+    public function initializeAction(): void
+    {
+        parent::initializeAction();
+        $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $this->moduleTemplate->setTitle('Femanager');
+        $this->moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
+    }
 
     public function listAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->getTSConfig(
         )['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
-        $this->view->assignMultiple(
+        $this->moduleTemplate->assignMultiple(
             [
                 'users' => $this->userRepository->findAllInBackend($filter),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
@@ -38,7 +57,7 @@ class UserBackendController extends AbstractController
                 'loginAsEnabled' => $loginAsEnabled
             ]
         );
-        return $this->htmlResponse();
+        return $this->moduleTemplate->renderResponse('UserBackend/List');
     }
 
     public function confirmationAction(array $filter = []): ResponseInterface
@@ -47,7 +66,7 @@ class UserBackendController extends AbstractController
 
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
-        $this->view->assignMultiple(
+        $this->moduleTemplate->assignMultiple(
             [
                 'users' => $this->userRepository->findAllInBackendForConfirmation(
                     $filter,
@@ -57,7 +76,7 @@ class UserBackendController extends AbstractController
                 'action' => 'confirmation'
             ]
         );
-        return $this->htmlResponse();
+        return $this->moduleTemplate->renderResponse('UserBackend/Confirmation');
     }
 
     public function userLogoutAction(User $user): ResponseInterface
