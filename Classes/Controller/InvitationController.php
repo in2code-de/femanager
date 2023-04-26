@@ -125,17 +125,12 @@ class InvitationController extends AbstractFrontendController
         $this->eventDispatcher->dispatch(new InviteUserConfirmedEvent($user));
 
         return $this->redirectByAction('invitation', 'redirectStep1');
-        // TODO: double check that this can be removed
-        //$this->redirect('new');
     }
 
     /**
      * action edit
-     *
-     * @param int $user User UID
-     * @param string $hash
      */
-    public function editAction($user, $hash = null): ResponseInterface
+    public function editAction(int $user, string $hash = ''): ResponseInterface
     {
         $user = $this->userRepository->findByUid($user);
 
@@ -170,12 +165,10 @@ class InvitationController extends AbstractFrontendController
 
     /**
      * action update
-     *
-     * @param string $hash
      */
     #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
     #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]
-    public function updateAction(User $user, $hash = null)
+    public function updateAction(User $user, string $hash = ''): ResponseInterface
     {
         if (!HashUtility::validHash($hash, $user)) {
             $this->addFlashMessage(
@@ -209,8 +202,7 @@ class InvitationController extends AbstractFrontendController
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
         $this->eventDispatcher->dispatch(new InviteUserUpdateEvent($user));
-        $this->redirectByAction('invitation', 'redirectPasswordChanged');
-        $this->redirect('status');
+        return $this->redirectByAction('invitation', 'redirectPasswordChanged', 'status');
     }
 
     /**
@@ -222,11 +214,8 @@ class InvitationController extends AbstractFrontendController
 
     /**
      * action delete
-     *
-     * @param int $user User UID
-     * @param string $hash
      */
-    public function deleteAction($user, $hash = null)
+    public function deleteAction(int $user, string $hash = ''): ResponseInterface
     {
         $user = $this->userRepository->findByUid($user);
 
@@ -254,15 +243,14 @@ class InvitationController extends AbstractFrontendController
             }
 
             $this->userRepository->remove($user);
-            $this->redirectByAction('invitation', 'redirectDelete');
-            $this->redirect('status');
+            return $this->redirectByAction('invitation', 'redirectDelete', 'status');
         } else {
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_INVITATIONHASHERROR),
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            $this->redirect('status');
+            return $this->redirect('status');
         }
     }
 

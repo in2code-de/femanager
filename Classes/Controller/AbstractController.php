@@ -335,7 +335,7 @@ abstract class AbstractController extends ActionController
      * @param string $action "new", "edit"
      * @param string $category "redirect", "requestRedirect" value from TypoScript
      */
-    protected function redirectByAction($action = 'new', $category = 'redirect'): ResponseInterface
+    protected function redirectByAction($action = 'new', $category = 'redirect', $defaultAction = 'new'): ResponseInterface
     {
         $target = null;
         // redirect from TypoScript cObject
@@ -359,7 +359,7 @@ abstract class AbstractController extends ActionController
         if ($target) {
             return $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
         } else {
-            return new ForwardResponse('new');
+            return new ForwardResponse($defaultAction);
         }
     }
 

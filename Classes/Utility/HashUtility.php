@@ -12,21 +12,16 @@ class HashUtility extends AbstractUtility
 {
     /**
      * Check if given hash is correct
-     *
-     * @param string $hash
-     * @return bool
      */
-    public static function validHash($hash, User $user)
+    public static function validHash(string $hash, User $user): bool
     {
         return self::createHashForUser($user) === $hash;
     }
 
     /**
      * Create hash for a user
-     *
-     * @return string
      */
-    public static function createHashForUser(User $user)
+    public static function createHashForUser(User $user): string
     {
         return self::hashString($user->getUsername());
     }
@@ -36,9 +31,9 @@ class HashUtility extends AbstractUtility
      *
      * @param string $string Any String to hash
      * @param int $length Hash Length
-     * @return string $hash Hashed String
+     * @return string Hashed String
      */
-    protected static function hashString($string, $length = 16)
+    protected static function hashString(string $string, int $length = 16): string
     {
         return substr(md5($string . self::getEncryptionKey()), 0, $length);
     }
