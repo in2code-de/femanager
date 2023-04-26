@@ -33,7 +33,7 @@ class UserRepository extends Repository
         $and = $query->equals('uid', $uid);
 
         /** @var User $user */
-        $user = $query->matching($query->logicalAnd(...$and))->execute()->getFirst();
+        $user = $query->matching($query->logicalAnd($and))->execute()->getFirst();
 
         return $user;
     }
