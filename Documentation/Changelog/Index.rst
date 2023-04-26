@@ -14,6 +14,15 @@ Changelog
    :Changes:
       Release Description
 
+
+-
+      :Version: 6.3.6
+      :Date: 2023-04-26
+      :Changes:
+
+      * [BUGFIX] Removes configPID from ext_typoscript_setup.typoscript: The removed configuration can only be overwritten by another preset file in another extension, it can not be overwritten by PageTS.
+
+
 -
       :Version: 6.3.5
       :Date: 2023-03-23
