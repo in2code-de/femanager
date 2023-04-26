@@ -128,7 +128,7 @@ class PasswordValidator extends AbstractValidatorExtbase
         $this->configuration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'Femanager',
-            $pluginName
+            null
         );
         $this->cObj = $this->configurationManager->getContentObject();
         $this->piVars = $this->cObj->getRequest()->getParsedBody()[$pluginName] ?? $this->cObj->getRequest()->getQueryParams()[$pluginName] ?? null;
