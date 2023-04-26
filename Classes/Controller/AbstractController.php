@@ -442,11 +442,11 @@ abstract class AbstractController extends ActionController
         $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
 
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
-            $config = BackendUtility::loadTS($this->allConfig['settings']['configPID'] ?? null);
-            if (is_array($config['plugin.']['tx_femanager.']['settings.'] ?? null)) {
-                $this->config = $config['plugin.']['tx_femanager.']['settings.'];
-                $this->settings = $this->config;
-            }
+            $pid = $this->allConfig['persistence']['storagePid'] ?? 0;
+            $config = BackendUtility::loadTS((int)$pid);
+            $this->config = $config['plugin.']['tx_femanager.']['settings.'] ?? [];
+            $this->settings = $this->config;
+
 
             $this->moduleConfig = $config['module.']['tx_femanager.'] ?? [];
 
