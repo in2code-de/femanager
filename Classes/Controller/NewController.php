@@ -147,8 +147,8 @@ class NewController extends AbstractFrontendController
         };
 
         if ($backend) {
-            // TODO: $this->response
-            $this->eventDispatcher->dispatch(new AfterRequestDispatchedEvent($this->request, $this->response));
+            // TODO: $this->response and event
+            // $this->eventDispatcher->dispatch(new AfterRequestDispatchedEvent($this->request, $this->response));
             $this->persistenceManager->persistAll();
             // this request was triggered via Backend Module "Frontend users", so we stop here and provide a feedback to the BE
             // TODO: Check

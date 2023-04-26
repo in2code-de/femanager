@@ -83,7 +83,7 @@ class UserBackendController extends AbstractController
     {
         UserUtility::removeFrontendSessionToUser($user);
         $this->addFlashMessage('User successfully logged out');
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     public function confirmUserAction(int $userIdentifier): ResponseInterface
@@ -116,10 +116,10 @@ class UserBackendController extends AbstractController
             );
         }
 
-        $this->redirect('confirmation');
+        return $this->redirect('confirmation');
     }
 
-    public function refuseUserAction(int $userIdentifier)
+    public function refuseUserAction(int $userIdentifier): ResponseInterface
     {
         $this->configPID = $this->getConfigPID();
 
@@ -148,14 +148,14 @@ class UserBackendController extends AbstractController
             );
         }
 
-        $this->redirect('confirmation');
+        return $this->redirect('confirmation');
     }
 
     public function listOpenUserConfirmationsAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
-        $this->view->assignMultiple(
+        $this->moduleTemplate->assignMultiple(
             [
                 'users' => $this->userRepository->findAllInBackendForConfirmation(
                     $filter,
@@ -165,10 +165,10 @@ class UserBackendController extends AbstractController
                 'action' => 'listOpenUserConfirmations'
             ]
         );
-        return $this->htmlResponse();
+        return $this->moduleTemplate->renderResponse('UserBackend/ListOpenUserConfirmations');
     }
 
-    public function resendUserConfirmationRequestAction(int $userIdentifier)
+    public function resendUserConfirmationRequestAction(int $userIdentifier): ResponseInterface
     {
         $user = $this->userRepository->findByUid($userIdentifier);
         $this->sendCreateUserConfirmationMail($user);
@@ -181,13 +181,10 @@ class UserBackendController extends AbstractController
             '',
             ContextualFeedbackSeverity::INFO
         );
-        $this->redirect('listOpenUserConfirmations');
+        return $this->redirect('listOpenUserConfirmations');
     }
 
-    /**
-     * @return int
-     */
-    public function getConfigPID()
+    public function getConfigPID(): int
     {
         if (isset($this->moduleConfig['settings.']['configPID']) && $this->moduleConfig['settings.']['configPID'] > 0) {
             return (int)$this->moduleConfig['settings.']['configPID'];
@@ -204,12 +201,7 @@ class UserBackendController extends AbstractController
         return 0;
     }
 
-    /**
-     * @param $status
-     * @param $userIdentifier
-     * @param $user
-     */
-    public function getFrontendRequestResult($status, $userIdentifier, $user)
+    public function getFrontendRequestResult(string $status, int $userIdentifier, User $user)
     {
         /** @var SiteFinder $siteFinder */
         $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
@@ -227,8 +219,8 @@ class UserBackendController extends AbstractController
                 ]
             ]
         );
-
-        $response = GeneralUtility::makeInstance(RequestFactory::class)->request((string)$url, 'GET', ['headers' => ['accept' => 'application/json']]);
+        $requestFactory = GeneralUtility::makeInstance(RequestFactory::class);
+        $response = $requestFactory->request((string)$url, 'GET', ['headers' => ['accept' => 'application/json']]);
         if ($response->getStatusCode() >= 300) {
             $content = $response->getReasonPhrase();
             $GLOBALS['BE_USER']->writelog(4, 0, 1, 0, 'femanager: Frontend request failed.', $content);

@@ -630,7 +630,7 @@
 				<source>%s approval(s) available</source>
 			</trans-unit>
 			<trans-unit id="BackendConfirmationNoteText">
-				<source>%s missing user confirmation(s) available</source>
+				<source>%s user(s) need to be confirmed by admin</source>
 			</trans-unit>
 			<trans-unit id="BackendConfirmationColumnAction">
 				<source>Actions</source>
