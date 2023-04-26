@@ -16,14 +16,11 @@ class JsonEncodeViewHelper extends AbstractViewHelper
      */
     protected $escapeOutput = false;
 
-    /**
-     * @return string
-     */
     public function render(): string
     {
         $array = $this->arguments['array'];
 
-        return json_encode($array);
+        return json_encode($array, JSON_THROW_ON_ERROR);
     }
 
     /**

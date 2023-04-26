@@ -9,53 +9,25 @@ use Symfony\Component\Mime\Email;
 
 class BeforeMailSendEvent
 {
-    /**
-     * @var Email
-     */
-    private $email;
-    /**
-     * @var array
-     */
-    private $variables;
-    /**
-     * @var SendMailService
-     */
-    private $service;
-
-    public function __construct(Email $email, array $variables, SendMailService $service)
+    public function __construct(private Email $email, private readonly array $variables, private readonly SendMailService $service)
     {
-        $this->email = $email;
-        $this->variables = $variables;
-        $this->service = $service;
     }
 
-    /**
-     * @return Email
-     */
     public function getEmail(): Email
     {
         return $this->email;
     }
 
-    /**
-     * @return SendMailService
-     */
     public function getService(): SendMailService
     {
         return $this->service;
     }
 
-    /**
-     * @return array
-     */
     public function getVariables(): array
     {
         return $this->variables;
     }
 
-    /**
-     * @param Email $email
-     */
     public function setEmail(Email $email): void
     {
         $this->email = $email;

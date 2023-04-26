@@ -24,8 +24,6 @@ class FrontendUtility extends AbstractUtility
 
     /**
      * Get current pid
-     *
-     * @return int
      */
     public static function getCurrentPid(): int
     {
@@ -34,8 +32,6 @@ class FrontendUtility extends AbstractUtility
 
     /**
      * Get frontend language uid
-     *
-     * @return int
      */
     public static function getFrontendLanguageUid(): int
     {
@@ -45,16 +41,12 @@ class FrontendUtility extends AbstractUtility
         return $languageUid;
     }
 
-    /**
-     * @return string
-     */
     public static function getCharset(): string
     {
-        return self::getTypoScriptFrontendController()->metaCharset;
+        return 'utf-8';
     }
 
     /**
-     * @return string
      * @codeCoverageIgnore
      */
     public static function getUriToCurrentPage(): string
@@ -69,8 +61,6 @@ class FrontendUtility extends AbstractUtility
     /**
      * Set object properties from forceValues in TypoScript
      *
-     * @param User $user
-     * @param array $settings
      * @return User $object
      * @codeCoverageIgnore
      */
@@ -91,8 +81,6 @@ class FrontendUtility extends AbstractUtility
     /**
      * Set single object property from forceValues in TypoScript
      *
-     * @param User $user
-     * @param string $field
      * @param any $value
      */
     public static function forceValue(User $user, string $field, $value): void
@@ -117,9 +105,6 @@ class FrontendUtility extends AbstractUtility
         }
     }
 
-    /**
-     * @return string
-     */
     public static function getControllerName(): string
     {
         $controllerName = '';
@@ -132,9 +117,6 @@ class FrontendUtility extends AbstractUtility
         return $controllerName;
     }
 
-    /**
-     * @return string
-     */
     public static function getActionName(): string
     {
         $actionName = '';

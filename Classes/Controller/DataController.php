@@ -25,6 +25,6 @@ class DataController extends ActionController
             $jsonData[$countryZone->getIsoCode()] = $countryZone->getLocalName();
         }
 
-        return $this->jsonResponse(json_encode($jsonData));
+        return $this->jsonResponse(json_encode($jsonData, JSON_THROW_ON_ERROR));
     }
 }

@@ -1,11 +1,15 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
+use In2code\Femanager\Domain\Validator\CaptchaValidator;
+use In2code\Femanager\Domain\Validator\PasswordValidator;
+use In2code\Femanager\Domain\Validator\ServersideValidator;
 use In2code\Femanager\Event\AfterUserUpdateEvent;
 use In2code\Femanager\Event\BeforeUpdateUserEvent;
 use In2code\Femanager\Event\DeleteUserEvent;
@@ -17,11 +21,9 @@ use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\Validate;
-use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 
 /**
  * Class EditController
@@ -57,12 +59,9 @@ class EditController extends AbstractFrontendController
         $this->request->setArguments($this->pluginVariables);
     }
 
-    /**
-     * @param User $user
-     * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
-     * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
-     * @Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
-     */
+    #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
+    #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]
+    #[Validate(['validator' => CaptchaValidator::class, 'param' => 'user'])]
     public function updateAction(User $user)
     {
         $this->redirectIfDirtyObject($user);
@@ -120,8 +119,6 @@ class EditController extends AbstractFrontendController
 
     /**
      * Status update confirmation
-     *
-     * @param User $user
      */
     protected function statusConfirm(User $user)
     {
@@ -146,8 +143,6 @@ class EditController extends AbstractFrontendController
 
     /**
      * Status update refused
-     *
-     * @param User $user
      */
     protected function statusRefuse(User $user)
     {
@@ -168,8 +163,6 @@ class EditController extends AbstractFrontendController
 
     /**
      * action delete
-     *
-     * @param User $user
      */
     public function deleteAction(User $user)
     {
@@ -199,9 +192,6 @@ class EditController extends AbstractFrontendController
 
     /**
      * Check: If there are no changes, simple redirect back
-     *
-     * @param User $user
-     * @throws UnsupportedRequestTypeException
      */
     protected function redirectIfDirtyObject(User $user)
     {
@@ -211,9 +201,6 @@ class EditController extends AbstractFrontendController
         }
     }
 
-    /**
-     * @param User $user
-     */
     protected function emailForUsername(User $user)
     {
         $fillEmailWithUsername = ConfigurationUtility::getValue('edit/fillEmailWithUsername', $this->settings);

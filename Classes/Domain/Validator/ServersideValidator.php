@@ -272,8 +272,8 @@ class ServersideValidator extends AbstractValidator
      */
     protected function checkSameAsValidation($user, $validationSetting, $value, $fieldName)
     {
-        if (method_exists($user, 'get' . ucfirst($validationSetting))) {
-            $valueToCompare = $user->{'get' . ucfirst($validationSetting)}();
+        if (method_exists($user, 'get' . ucfirst((string) $validationSetting))) {
+            $valueToCompare = $user->{'get' . ucfirst((string) $validationSetting)}();
             if (!$this->validateSameAs($value, $valueToCompare)) {
                 $this->addError('validationErrorSameAs', 0, ['field' => $fieldName]);
                 $this->isValid = false;
@@ -289,9 +289,9 @@ class ServersideValidator extends AbstractValidator
      */
     protected function checkAnyValidation($validation, $value, $validationSetting, $fieldName)
     {
-        if (method_exists($this, 'validate' . ucfirst($validation))) {
-            if (!$this->{'validate' . ucfirst($validation)}($value, $validationSetting)) {
-                $this->addError('validationError' . ucfirst($validation), 0, ['field' => $fieldName]);
+        if (method_exists($this, 'validate' . ucfirst((string) $validation))) {
+            if (!$this->{'validate' . ucfirst((string) $validation)}($value, $validationSetting)) {
+                $this->addError('validationError' . ucfirst((string) $validation), 0, ['field' => $fieldName]);
                 $this->isValid = false;
             }
         }
@@ -347,8 +347,6 @@ class ServersideValidator extends AbstractValidator
     /**
      * @param $user
      * @param $fieldName
-     * @param array $validationSettings
-     * @return bool
      */
     protected function shouldBeValidated($user, $fieldName, array $validationSettings): bool
     {
@@ -384,9 +382,6 @@ class ServersideValidator extends AbstractValidator
         return $value;
     }
 
-    /**
-     * @return bool
-     */
     protected function propertyHasGetterMethod($user, $fieldName): bool
     {
         try {

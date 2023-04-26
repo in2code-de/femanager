@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
+use TYPO3\CMS\Core\TypoScript\TemplateService;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Http\ApplicationType;
@@ -15,9 +16,6 @@ use TYPO3\CMS\Core\Utility\RootlineUtility;
  */
 class BackendUtility
 {
-    /**
-     * @return int
-     */
     public static function getPageIdentifier(): int
     {
         return (int)GeneralUtility::_GET('id');
@@ -29,7 +27,6 @@ class BackendUtility
      * @param string $tableName like "fe_users"
      * @param int $identifier record identifier to edit
      * @param bool $addReturnUrl add current URI as returnUrl
-     * @return string
      */
     public static function getBackendEditUri(string $tableName, int $identifier, bool $addReturnUrl = true): string
     {
@@ -53,7 +50,6 @@ class BackendUtility
      * @param string $tableName like "fe_users"
      * @param int $pageIdentifier page identifier to store the new record in
      * @param bool $addReturnUrl add current URI as returnUrl
-     * @return string
      */
     public static function getBackendNewUri(string $tableName, int $pageIdentifier, bool $addReturnUrl = true): string
     {
@@ -89,8 +85,6 @@ class BackendUtility
 
     /**
      * Get all GET/POST params without module name and token
-     *
-     * @return array
      */
     protected static function getCurrentParameters(): array
     {
@@ -115,7 +109,7 @@ class BackendUtility
     public static function loadTS($pageUid = null)
     {
         $pageUid = ($pageUid && MathUtility::canBeInterpretedAsInteger($pageUid)) ? $pageUid : GeneralUtility::_GP('id');
-        $TSObj = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\TemplateService');
+        $TSObj = GeneralUtility::makeInstance(TemplateService::class);
         $TSObj->tt_track = 0;
         $TSObj->runThroughTemplates(GeneralUtility::makeInstance(RootlineUtility::class, $pageUid, '')->get());
         $TSObj->generateConfig();

@@ -67,6 +67,7 @@
     "typo3/cms-install": "^12.3.0",
     "typo3/cms-lowlevel": "^12.3.0",
     "typo3/cms-recordlist": "^12.3.0",
+    "typo3/cms-recycler": "^12.3",
     "typo3/cms-rte-ckeditor": "^12.3.0",
     "typo3/cms-scheduler": "^12.3.0",
     "typo3/cms-setup": "^12.3.0",

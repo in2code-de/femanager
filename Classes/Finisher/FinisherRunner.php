@@ -33,7 +33,6 @@ class FinisherRunner
 
     /**
      * FinisherRunner constructor.
-     * @param FinisherService $finisherService
      */
     public function __construct(
         FinisherService $finisherService
@@ -44,10 +43,8 @@ class FinisherRunner
     /**
      * Call finisher classes after submit
      *
-     * @param User $user
      * @param string $actionMethodName
      * @param array $settings
-     * @param ContentObjectRenderer $contentObject
      */
     public function callFinishers(
         User $user,

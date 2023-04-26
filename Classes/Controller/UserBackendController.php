@@ -14,7 +14,6 @@ use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Http\RequestFactory;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -26,9 +25,6 @@ class UserBackendController extends AbstractController
 {
     protected $configPID;
 
-    /**
-     * @param array $filter
-     */
     public function listAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
@@ -45,9 +41,6 @@ class UserBackendController extends AbstractController
         return $this->htmlResponse();
     }
 
-    /**
-     * @param array $filter
-     */
     public function confirmationAction(array $filter = []): ResponseInterface
     {
         $this->configPID = $this->getConfigPID();
@@ -67,9 +60,6 @@ class UserBackendController extends AbstractController
         return $this->htmlResponse();
     }
 
-    /**
-     * @param User $user
-     */
     public function userLogoutAction(User $user)
     {
         UserUtility::removeFrontendSessionToUser($user);
@@ -77,9 +67,6 @@ class UserBackendController extends AbstractController
         $this->redirect('list');
     }
 
-    /**
-     * @param int $userIdentifier
-     */
     public function confirmUserAction(int $userIdentifier)
     {
         $this->configPID = $this->getConfigPID();
@@ -113,9 +100,6 @@ class UserBackendController extends AbstractController
         $this->redirect('confirmation');
     }
 
-    /**
-     * @param int $userIdentifier
-     */
     public function refuseUserAction(int $userIdentifier)
     {
         $this->configPID = $this->getConfigPID();
@@ -148,9 +132,6 @@ class UserBackendController extends AbstractController
         $this->redirect('confirmation');
     }
 
-    /**
-     * @param array $filter
-     */
     public function listOpenUserConfirmationsAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
@@ -168,9 +149,6 @@ class UserBackendController extends AbstractController
         return $this->htmlResponse();
     }
 
-    /**
-     * @param int $userIdentifier
-     */
     public function resendUserConfirmationRequestAction(int $userIdentifier)
     {
         $user = $this->userRepository->findByUid($userIdentifier);
@@ -245,7 +223,7 @@ class UserBackendController extends AbstractController
             );
         } else {
             $content = $response->getBody()->getContents();
-            return json_decode($content, true);
+            return json_decode((string) $content, true, 512, JSON_THROW_ON_ERROR);
         }
     }
 }

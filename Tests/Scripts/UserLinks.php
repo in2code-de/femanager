@@ -116,7 +116,6 @@ class UserLinks
     }
 
     /**
-     * @param array $row
      * @return string
      */
     protected function getHash(array $row)
@@ -129,9 +128,8 @@ class UserLinks
 
     /**
      * @param $username
-     * @return array|false|null
      */
-    protected function getUserData($username)
+    protected function getUserData($username): array|false|null
     {
         /** @var QueryBuilder $queryBuilder */
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
@@ -152,11 +150,9 @@ class UserLinks
         }
     }
 
-    /**
-     * @return array|false|null
-     */
-    protected function getLastUsername()
+    protected function getLastUsername(): array|false|null
     {
+        $content = null;
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
         $queryBuilder->getRestrictions()->removeAll();
         $queryBuilder

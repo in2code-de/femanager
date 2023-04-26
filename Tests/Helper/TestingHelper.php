@@ -52,17 +52,11 @@ class TestingHelper
         }
     }
 
-    /**
-     * @return string
-     */
     public static function getWebRoot(): string
     {
         return realpath(__DIR__ . '/../../.Build/Web') . '/';
     }
 
-    /**
-     * @return string
-     */
     public static function getRoot(): string
     {
         return realpath(__DIR__ . '/../..') . '/';

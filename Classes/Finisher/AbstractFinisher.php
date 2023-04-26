@@ -116,10 +116,6 @@ abstract class AbstractFinisher implements FinisherInterface
     }
 
     /**
-     * @param User $user
-     * @param array $configuration
-     * @param array $settings
-     * @param ContentObjectRenderer $contentObject
      * @param string $actionMethodName
      */
     public function __construct(

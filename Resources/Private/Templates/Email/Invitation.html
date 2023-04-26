@@ -10,21 +10,25 @@
 		{hash} Hash to ensure authentication of link
 
 <f:section name="main">
-	<p><f:translate key="emailInvitationSalutation" extensionName="femanager" /> {user.username},</p>
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationSalutation" /> {user.username},</p>
 
-	<p><f:translate key="emailInvitationText1" extensionName="femanager" /></p>
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationText1" /></p>
 
 	<p>
-		<f:translate key="emailInvitationText2" extensionName="femanager" />
+		<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationText2" />
 		<br>
-			<f:translate key="emailInvitationLinkConfirm" extensionName="femanager" />
+		<f:link.action action="edit" controller="Invitation" absolute="1" arguments="{user:user, hash:hash}">
+			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationLinkConfirm" />
+		</f:link.action>
 	</p>
 
 	<p>
-		<f:translate key="emailInvitationText3" extensionName="femanager" />
+		<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationText3" />
 		<br>
-			<f:translate key="emailInvitationLinkConfirmRefused" extensionName="femanager" />
+		<f:link.action action="delete" controller="Invitation" absolute="1" arguments="{user:user, hash:hash}">
+			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationLinkConfirmRefused" />
+		</f:link.action>
 	</p>
 
-	<p><f:translate key="emailCreateUserConfirmationSignature" extensionName="femanager" /></p>
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationSignature" /></p>
 </f:section>

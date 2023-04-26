@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class PluginRepository
 {
-    const TABLE_NAME = 'tt_content';
+    final public const TABLE_NAME = 'tt_content';
 
     protected FlexFormService $flexFormService;
 
@@ -29,6 +29,12 @@ class PluginRepository
         'edit' => 'Edit->edit;Edit->update;Edit->delete;Edit->confirmUpdateRequest;User->imageDelete;',
         'invitation' => 'Invitation->new;Invitation->create;Invitation->edit;'
             . 'Invitation->update;Invitation->delete;Invitation->status;',
+    ];
+
+    protected array $viewToPlugin = [
+        'new' => 'femanager_registration',
+        'edit' => 'femanager_edit',
+        'invitation' => 'femanager_invitation'
     ];
 
     /**

@@ -8,33 +8,8 @@ use In2code\Femanager\Domain\Model\User;
 
 class UniqueUserEvent
 {
-    /**
-     * @var string
-     */
-    private $emailOrUsername;
-    /**
-     * @var string
-     */
-    private $fieldName;
-    /**
-     * @var User|null
-     */
-    private $user;
-    /**
-     * @var bool
-     */
-    private $unique;
-
-    public function __construct(
-        string $emailOrUsername,
-        string $fieldName,
-        ?User $user,
-        bool $unique
-    ) {
-        $this->emailOrUsername = $emailOrUsername;
-        $this->fieldName = $fieldName;
-        $this->user = $user;
-        $this->unique = $unique;
+    public function __construct(private readonly string $emailOrUsername, private readonly string $fieldName, private readonly ?User $user, private bool $unique)
+    {
     }
 
     public function setUnique(bool $unique): void

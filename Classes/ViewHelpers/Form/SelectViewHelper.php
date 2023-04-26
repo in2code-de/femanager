@@ -40,7 +40,8 @@ class SelectViewHelper
      */
     protected function getOptions()
     {
-    #    $options = parent::getOptions();
+    $options = null;
+        #    $options = parent::getOptions();
         if (!empty($this->arguments['defaultOption'])) {
             $options = ['' => $this->arguments['defaultOption']] + $options;
         }
@@ -65,7 +66,7 @@ class SelectViewHelper
                     1638341673
                 );
             }
-            $controllerName = strtolower($this->renderingContext->getRequest()->getControllerName());
+            $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
             $contentObject = $this->configurationManager->getContentObject();
             $typoScript = $this->configurationManager->getConfiguration(
                 ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
@@ -92,7 +93,7 @@ class SelectViewHelper
      */
     protected function getFieldName()
     {
-        preg_match_all('/\[.*?\]/i', $this->getNameWithoutPrefix(), $name);
-        return str_replace(['[', ']'], '', $name[0][0]);
+        preg_match_all('/\[.*?\]/i', (string) $this->getNameWithoutPrefix(), $name);
+        return str_replace(['[', ']'], '', (string) $name[0][0]);
     }
 }

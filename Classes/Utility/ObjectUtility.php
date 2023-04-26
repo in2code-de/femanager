@@ -16,10 +16,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class ObjectUtility extends AbstractUtility
 {
-    /**
-     * @param string $tableName
-     * @return QueryBuilder
-     */
     public static function getQueryBuilder(string $tableName): QueryBuilder
     {
         return GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
@@ -37,7 +33,6 @@ class ObjectUtility extends AbstractUtility
      * Checks if object was changed or not
      *
      * @param object $object
-     * @return bool
      * @codeCoverageIgnore
      */
     public static function isDirtyObject($object): bool
@@ -45,7 +40,7 @@ class ObjectUtility extends AbstractUtility
         foreach (array_keys($object->_getProperties()) as $propertyName) {
             try {
                 $property = ObjectAccess::getProperty($object, $propertyName);
-            } catch (PropertyNotAccessibleException $e) {
+            } catch (PropertyNotAccessibleException) {
                 // if property can not be accessed
                 continue;
             }
@@ -73,11 +68,6 @@ class ObjectUtility extends AbstractUtility
 
     /**
      * Implode subjobjects on a property (example for usergroups: "ug1, ug2, ug3")
-     *
-     * @param ObjectStorage $objectStorage
-     * @param string $property
-     * @param string $glue
-     * @return string
      */
     public static function implodeObjectStorageOnProperty(
         ObjectStorage $objectStorage,

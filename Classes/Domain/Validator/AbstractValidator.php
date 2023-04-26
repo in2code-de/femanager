@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Model\User;
@@ -11,6 +12,7 @@ use In2code\Femanager\Event\UniqueUserEvent;
 use In2code\Femanager\Utility\FrontendUtility;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
@@ -45,17 +47,11 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected $isValid = true;
 
-    /**
-     * @param UserRepository $userRepository
-     */
     public function injectUserRepository(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
     public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
@@ -96,10 +92,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     /**
      * Validation for required
      *
-     * @param mixed $value
      * @return \bool
      */
-    protected function validateRequired($value)
+    protected function validateRequired(mixed $value)
     {
         if (!is_object($value)) {
             if (is_numeric($value)) {
@@ -107,7 +102,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
             }
             return !empty($value);
         }
-        if ((is_array($value) || $value instanceof \Countable) && count($value) > 0) {
+        if ((is_countable($value)) && count($value) > 0) {
             return true;
         }
         if ($value instanceof \DateTime) {
@@ -365,7 +360,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsSpaceCharacter($value)
     {
-        return strpos($value, ' ') !== false;
+        return str_contains($value, ' ');
     }
 
     /**
@@ -441,15 +436,17 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     protected function setPluginVariables()
     {
         // Get the current request object
-        $request =  $_REQUEST;
-
+        $request = $GLOBALS['TYPO3_REQUEST'];
+        if (ApplicationType::fromRequest($request)->isFrontend()) {
+            $queryParams = $request->getQueryParams(); // GET parameters
+            $parsedBody = $request->getParsedBody(); // POST parameters
+            $allParams = array_merge($queryParams, $parsedBody);
+        }
         // collect variables from plugins starting with tx_femanager
         $this->pluginVariables = [];
-
-        foreach ($request as $key => $value) {
-            if (strpos($key, 'tx_femanager') === 0) {
-                $pluginName = $key;
-                $this->pluginVariables[$pluginName] = $value;
+        foreach ($allParams as $key => $value) {
+            if (str_starts_with($key, 'tx_femanager')) {
+                $this->pluginVariables[$key] = $value;
             }
         }
     }
@@ -511,10 +508,6 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         return $controllerName;
     }
 
-    /**
-     * @param string $controllerName
-     * @param string $pluginName
-     */
     protected function checkAllowedControllerName(string $controllerName, string $pluginName)
     {
         $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
