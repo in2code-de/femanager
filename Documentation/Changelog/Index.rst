@@ -14,6 +14,7 @@ Changelog
 
       * [BUGFIX] Notification email to admin now sends changes again
       * [BUGFIX] Notification email to admin is also sent when adding recipient's address to flex form only
+      * [TASK] Removes configPID from ext_typoscript_setup.typoscript
 
 -
       :Version: 7.1.0
