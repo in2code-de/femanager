@@ -99,7 +99,8 @@ class InvitationController extends AbstractFrontendController
                 'settings' => $this->settings,
                 'hash' => HashUtility::createHashForUser($user)
             ],
-            $this->config['invitation.']['email.']['invitation.']
+            $this->config['invitation.']['email.']['invitation.'],
+            $this->request
         );
 
         // send notify email to admin
