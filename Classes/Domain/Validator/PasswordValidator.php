@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Validator;
 
+use In2code\Femanager\Domain\Service\PluginService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
@@ -120,15 +121,18 @@ class PasswordValidator extends AbstractValidatorExtbase
     /**
      * Initialize Validator Function
      */
-    protected function init(string $pluginName = 'Registration')
+    protected function init()
     {
+        $pluginName = GeneralUtility::makeInstance(PluginService::class)
+            ->getFemanagerPluginNameFromRequest();
         $this->configuration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'Femanager',
             $pluginName
         );
         $this->cObj = $this->configurationManager->getContentObject();
-        $this->piVars = $this->cObj->getRequest()->getParsedBody()['tx_femanager_'. lcfirst($pluginName)] ?? $this->cObj->getRequest()->getQueryParams()['tx_femanager_'. lcfirst($pluginName)] ?? null;;
+        $this->piVars = $this->cObj->getRequest()->getParsedBody()[$pluginName] ?? $this->cObj->getRequest()->getQueryParams()[$pluginName] ?? null;
+
         $this->actionName = $this->piVars['__referrer']['@action'];
     }
 
