@@ -60,14 +60,14 @@ class UserBackendController extends AbstractController
         return $this->htmlResponse();
     }
 
-    public function userLogoutAction(User $user)
+    public function userLogoutAction(User $user): ResponseInterface
     {
         UserUtility::removeFrontendSessionToUser($user);
         $this->addFlashMessage('User successfully logged out');
         $this->redirect('list');
     }
 
-    public function confirmUserAction(int $userIdentifier)
+    public function confirmUserAction(int $userIdentifier): ResponseInterface
     {
         $this->configPID = $this->getConfigPID();
 

@@ -377,11 +377,9 @@ abstract class AbstractController extends ActionController
     /**
      * Check if user is authenticated and params are valid
      *
-     * @param User $user
      * @param int $uid Given fe_users uid
-     * @param string $receivedToken Token
      */
-    protected function testSpoof($user, $uid, $receivedToken)
+    protected function testSpoof(User $user, int $uid, string $receivedToken): ResponseInterface
     {
         $errorOnProfileUpdate = false;
         $knownToken = GeneralUtility::hmac($user->getUid(), (string)$user->getCrdate()->getTimestamp());
@@ -428,7 +426,7 @@ abstract class AbstractController extends ActionController
         );
     }
 
-    public function initializeAction()
+    public function initializeAction(): void
     {
         $this->user = UserUtility::getCurrentUser();
         $this->contentObject = $this->configurationManager->getContentObject();
@@ -444,23 +442,23 @@ abstract class AbstractController extends ActionController
         $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
 
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
-            $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
+            $config = BackendUtility::loadTS($this->allConfig['settings']['configPID'] ?? null);
             if (is_array($config['plugin.']['tx_femanager.']['settings.'] ?? null)) {
                 $this->config = $config['plugin.']['tx_femanager.']['settings.'];
                 $this->settings = $this->config;
             }
 
-            $this->moduleConfig = $config['module.']['tx_femanager.'] ?? '';
+            $this->moduleConfig = $config['module.']['tx_femanager.'] ?? [];
 
             // Retrieve page TSconfig of the current page
             $pageTsConfig = BackendUtilityCore::getPagesTSconfig(BackendUtility::getPageIdentifier());
-            if (is_array($pageTsConfig['module.']['tx_femanager.'] ?? null)) {
+            if (is_array($pageTsConfig['module.']['tx_femanager.'] ?? [])) {
                 $this->moduleConfig = array_merge($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.'] ?? []);
             }
 
             // Retrieve user TSconfig of currently logged in user
             $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
-            if (is_array($userTsConfig['tx_femanager.'] ?? null)) {
+            if (is_array($userTsConfig['tx_femanager.'] ?? [])) {
                 $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.'] ?? []);
             }
         }
