@@ -13,7 +13,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
  */
 class TextfieldViewHelper extends OriginalTextfieldViewHelper
 {
-
     /**
      * Get the value of this form element (changed to prefill from TypoScript)
      * Either returns arguments['value'], or the correct value for Object Access.
@@ -52,10 +51,10 @@ class TextfieldViewHelper extends OriginalTextfieldViewHelper
         $typoScript = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        $prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'];
+        $prefillTypoScript = $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? 0;
         $value = $contentObject->cObjGetSingle(
-            $prefillTypoScript[$this->arguments['property']],
-            $prefillTypoScript[$this->arguments['property'] . '.']
+            $prefillTypoScript[$this->arguments['property']] ?? '',
+            $prefillTypoScript[$this->arguments['property'] . '.'] ?? ''
         );
         return $value;
     }

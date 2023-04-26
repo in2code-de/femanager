@@ -14,7 +14,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class FinisherService
 {
-
     /**
      * @var ContentObjectRenderer
      */
@@ -64,7 +63,7 @@ class FinisherService
     protected $finisherInterface = 'In2code\Femanager\Finisher\FinisherInterface';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 

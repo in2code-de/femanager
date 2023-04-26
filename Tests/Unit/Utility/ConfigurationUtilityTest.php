@@ -11,7 +11,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class ConfigurationUtilityTest extends UnitTestCase
 {
-
     /**
      * @var array
      */

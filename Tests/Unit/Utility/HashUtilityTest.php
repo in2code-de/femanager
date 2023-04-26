@@ -12,7 +12,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class HashUtilityTest extends UnitTestCase
 {
-
     /**
      * @var array
      */

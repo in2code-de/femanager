@@ -10,17 +10,20 @@ use In2code\Femanager\Domain\Service\AutoAdminConfirmationService;
 use In2code\Femanager\Event\BeforeUserConfirmEvent;
 use In2code\Femanager\Event\BeforeUserCreateEvent;
 use In2code\Femanager\Event\CreateConfirmationRequestEvent;
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Event\Mvc\AfterRequestDispatchedEvent;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 
@@ -29,11 +32,10 @@ use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
  */
 class NewController extends AbstractFrontendController
 {
-
     /**
      * Render registration form
      *
-     * @param User $user
+     * @param User|null $user
      */
     public function newAction(User $user = null): ResponseInterface
     {
@@ -51,9 +53,11 @@ class NewController extends AbstractFrontendController
      * action create
      *
      * @param User $user
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
+     * @throws InvalidPasswordHashException
+     * @throws StopActionException
+     * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
      */
     public function createAction(User $user)
     {
@@ -61,15 +65,17 @@ class NewController extends AbstractFrontendController
             $this->addFlashMessage(
                 LocalizationUtility::translate('ratelimiter_too_many_attempts'),
                 '',
-                FlashMessage::ERROR
+                AbstractMessage::ERROR
             );
             $this->redirect('createStatus');
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings);
-        $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['beforeAnyConfirmation.']);
+        $configuration = ConfigurationUtility::getValue('new./forceValues./beforeAnyConfirmation.', $this->config);
+        $user = FrontendUtility::forceValues($user, $configuration);
         $user = UserUtility::fallbackUsernameAndPassword($user);
         $user = UserUtility::takeEmailAsUsername($user, $this->settings);
-        UserUtility::hashPassword($user, $this->settings['new']['misc']['passwordSave']);
+
+        UserUtility::hashPassword($user, ConfigurationUtility::getValue('new/misc/passwordSave', $this->settings));
 
         $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
         $this->ratelimiterService->consumeSlot();
@@ -91,8 +97,10 @@ class NewController extends AbstractFrontendController
      * @param string $status
      *            "userConfirmation", "userConfirmationRefused", "adminConfirmation",
      *            "adminConfirmationRefused", "adminConfirmationRefusedSilent"
+     * @throws IllegalObjectTypeException
+     * @throws StopActionException
      */
-    public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation')
+    public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation')
     {
         $backend = false;
 
@@ -101,7 +109,7 @@ class NewController extends AbstractFrontendController
         $this->eventDispatcher->dispatch(new BeforeUserConfirmEvent($user, $hash, $status));
 
         if ($user === null) {
-            $this->addFlashMessage(LocalizationUtility::translate('missingUserInDatabase'), '', FlashMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('missingUserInDatabase'), '', AbstractMessage::ERROR);
             $this->redirect('new');
         }
 
@@ -162,15 +170,15 @@ class NewController extends AbstractFrontendController
      * @throws UnsupportedRequestTypeException
      * @throws IllegalObjectTypeException
      */
-    protected function statusUserConfirmation(User $user, $hash, $status)
+    protected function statusUserConfirmation(User $user, string $hash, string $status)
     {
         if (HashUtility::validHash($hash, $user)) {
             if ($user->getTxFemanagerConfirmedbyuser()) {
-                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', FlashMessage::ERROR);
+                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', AbstractMessage::ERROR);
                 $this->redirect('new');
             }
 
-            $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onUserConfirmation.']);
+            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onUserConfirmation.', $this->config));
             $user->setTxFemanagerConfirmedbyuser(true);
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
@@ -184,7 +192,7 @@ class NewController extends AbstractFrontendController
                 $this->finalCreate($user, 'new', 'createStatus', true, $status);
             }
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
 
             return false;
         }
@@ -207,7 +215,7 @@ class NewController extends AbstractFrontendController
             $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
             $this->userRepository->remove($user);
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
 
             return false;
         }
@@ -227,18 +235,18 @@ class NewController extends AbstractFrontendController
     {
         if (HashUtility::validHash($hash, $user)) {
             if ($user->getTxFemanagerConfirmedbyadmin()) {
-                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', FlashMessage::ERROR);
+                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', AbstractMessage::ERROR);
                 $this->redirect('new');
             }
 
-            $user = FrontendUtility::forceValues($user, $this->config['new.']['forceValues.']['onAdminConfirmation.']);
+            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onAdminConfirmation.', $this->config));
             $user->setTxFemanagerConfirmedbyadmin(true);
             $user->setDisable(false);
             $this->userRepository->update($user);
             $this->logUtility->log(Log::STATUS_REGISTRATIONCONFIRMEDADMIN, $user);
             $this->finalCreate($user, 'new', 'createStatus', false, $status, $backend);
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
 
             return false;
         }
@@ -270,12 +278,12 @@ class NewController extends AbstractFrontendController
                     ['sender@femanager.org' => 'Sender Name'],
                     'Your profile was refused',
                     ['user' => $user],
-                    $this->config['new.']['email.']['createUserNotifyRefused.']
+                    ConfigurationUtility::getValue('new./email./createUserNotifyRefused.', $this->config)
                 );
             }
             $this->userRepository->remove($user);
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
 
             return false;
         }
@@ -351,8 +359,8 @@ class NewController extends AbstractFrontendController
             $this->sendMailService->send(
                 'createAdminConfirmation',
                 StringUtility::makeEmailArray(
-                    $this->settings['new']['confirmByAdmin'],
-                    $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value']
+                    $this->settings['new']['confirmByAdmin'] ?? '',
+                    $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value'] ?? ''
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'New Registration request',
@@ -360,7 +368,7 @@ class NewController extends AbstractFrontendController
                     'user' => $user,
                     'hash' => HashUtility::createHashForUser($user)
                 ],
-                $this->config['new.']['email.']['createAdminConfirmation.']
+                ConfigurationUtility::getValue('new./email./createAdminConfirmation.', $this->config)
             );
             $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForAdminConfirm'));
         }
@@ -395,7 +403,7 @@ class NewController extends AbstractFrontendController
      * re-sends a confirmation email if given mail is valid
      *
      * @throws UnsupportedRequestTypeException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws StopActionException
      */
     public function resendConfirmationMailAction()
     {

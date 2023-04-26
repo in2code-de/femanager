@@ -15,7 +15,6 @@ use TYPO3\CMS\Core\Http\ServerRequest;
  */
 class BackendUtilityTest extends UnitTestCase
 {
-
     /**
      * @var array
      */

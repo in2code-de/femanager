@@ -8,14 +8,13 @@ namespace In2code\Femanager\DataProcessor;
  */
 class CleanUserGroup extends AbstractDataProcessor
 {
-
     /**
      * @param array $arguments
      * @return array
      */
     public function process(array $arguments): array
     {
-        if (is_array($arguments['user']['usergroup']) && empty($arguments['user']['usergroup'][0]) && empty($arguments['user']['usergroup'][0]['__identity'])) {
+        if (is_array($arguments['user']['usergroup'] ?? null) && empty($arguments['user']['usergroup'][0]) && empty($arguments['user']['usergroup'][0]['__identity'])) {
             unset($arguments['user']['usergroup'][0]);
         }
         return $arguments;

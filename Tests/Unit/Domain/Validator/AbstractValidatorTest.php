@@ -11,7 +11,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class AbstractValidatorTest extends UnitTestCase
 {
-
     /**
      * @var \In2code\Femanager\Domain\Validator\AbstractValidator
      */
@@ -286,7 +285,7 @@ class AbstractValidatorTest extends UnitTestCase
             ],
             [
                 '3 ',
-                false
+                (PHP_MAJOR_VERSION >= 8) ? true : false
             ]
         ];
     }
@@ -734,6 +733,16 @@ class AbstractValidatorTest extends UnitTestCase
                 true
             ],
             [
+                '1,2',
+                '1,2,3',
+                true
+            ],
+            [
+                '1,2',
+                '3,2,1',
+                true
+            ],
+            [
                 '23',
                 '1,234,3',
                 false
@@ -753,6 +762,16 @@ class AbstractValidatorTest extends UnitTestCase
                 'bac',
                 false
             ],
+            [
+                '1,2,3',
+                '1,2',
+                false
+            ],
+            [
+                '1,2,3',
+                '2,1',
+                false
+            ]
         ];
     }
 

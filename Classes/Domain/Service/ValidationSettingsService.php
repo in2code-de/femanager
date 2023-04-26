@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
-use In2code\Femanager\Utility\ObjectUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
@@ -11,7 +11,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class ValidationSettingsService
 {
-
     /**
      * Needed for validation settings. Should be "new", "edit" or "invitation"
      *
@@ -64,15 +63,17 @@ class ValidationSettingsService
     public function getValidationStringForField(string $fieldName): string
     {
         $string = '';
-        $validationSettings = $this->getSettings()[$this->controllerName][$this->validationName][$fieldName];
+        $validationSettings = $this->getSettings()[$this->controllerName][$this->validationName][$fieldName] ?? [];
+
         if (is_array($validationSettings)) {
             foreach ($validationSettings as $validation => $configuration) {
-                if (!empty($string)) {
+                if ($string !== '') {
                     $string .= ',';
                 }
                 $string .= $this->getSingleValidationString($validation, $configuration);
             }
         }
+
         return $string;
     }
 
@@ -82,7 +83,8 @@ class ValidationSettingsService
      */
     public function isValidationEnabled(string $type = 'client'): bool
     {
-        return $this->getSettings()[$this->controllerName]['validation']['_enable'][$type] === '1';
+        $validationSetting = $this->getSettings()[$this->controllerName]['validation']['_enable'][$type] ?? '0';
+        return $validationSetting === '1';
     }
 
     /**
@@ -122,7 +124,7 @@ class ValidationSettingsService
      */
     protected function getSettings(): array
     {
-        $configurationManager = ObjectUtility::getObjectManager()->get(ConfigurationManagerInterface::class);
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         return (array)$configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'femanager',

@@ -8,6 +8,33 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 7.1.1
+      :Date: 2023-03-16
+      :Changes:
+
+      * [BUGFIX] Notification email to admin now sends changes again
+      * [BUGFIX] Notification email to admin is also sent when adding recipient's address to flex form only
+
+-
+      :Version: 7.1.0
+      :Date: 2023-01-19
+      :Changes:
+
+      * [FEATURE] Add support for PHP 8 and 8.1  - thx to Stefan Busemann, Bastien Lutz, Mathias Bolt Lesniak, Thomas Löffler, Johannes Seipelt
+      * [BUGFIX] Re-fetch session from database to update 'userSession' property of TSFE.	Thx to Thomas Off <thomas.off@retiolum.de>
+      * [BUGFIX] Add hash check for invitation action - thx to Max Schäfer & Dennis Schober-Wenger
+      * [REFACTOR] Remove deprecated code and introduce rector  - thx to Thomas Löffler
+
+-
+      :Version: 7.0.1
+      :Date: 2022-10-31
+      :Changes:
+
+      * [BUGFIX] (!!!) Security Fix - Broken Access Control in Usergroup Validation (Andreas Nedbal - in2code) - thx to TYPO3 Security Team
+      * [BUGFIX] login after registration (Re-fetch session from database to update 'userSession' property of TSFE) - thx to Thomas Off
+      * [BUGFIX] CleanUserGroup DataProcessor - thx to Daniel Hoffmann (in2code)
+
+-
       :Version: 7.0.0
       :Date: 2022-07-11
       :Changes:

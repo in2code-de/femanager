@@ -13,7 +13,6 @@ use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
  */
 class LogUtility extends LogUtilityFemanager
 {
-
     /**
      * @return Dispatcher
      */

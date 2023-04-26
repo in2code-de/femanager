@@ -12,7 +12,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class RequestViewHelper extends AbstractViewHelper
 {
-
     /**
      * @var array|string
      */
@@ -59,7 +58,7 @@ class RequestViewHelper extends AbstractViewHelper
     protected function getVariableFromDepth(array $param)
     {
         if (is_array($this->variable)) {
-            $this->variable = $this->variable[$param[$this->depth]];
+            $this->variable = $this->variable[$param[$this->depth]] ?? null;
             $this->depth++;
             $this->getVariableFromDepth($param);
         }

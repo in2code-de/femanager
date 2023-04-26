@@ -1,8 +1,11 @@
 # TYPO3 Extension femanager
 
 TYPO3 Frontend User Registration and Management based on
-a very flexible configuration and on TYPO3 8.7 LTS and newer with the possibility to extend it.
+a very flexible configuration and on TYPO3 11.5 LTS and newer with the possibility to extend it.
 Extension basicly works like sr_feuser_register or any other frontend user registration.
+
+> :warning: **TYPO3 12 compatibility**\
+> See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how to get access to a TYPO3 12 version
 
 ## Support
 This TYPO3 Extension is free to use. We as in2code and our developers highly appreciate your feedback and work hard to improve our extensions.
@@ -13,7 +16,6 @@ You can support our work [here](https://www.in2code.de/extensionsupport).
 Thank you very much in advance.
 
 Your in2code Team
-
 
 ## Quick installation
 
@@ -32,25 +34,13 @@ Quick guide:
 
 | Femanager | TYPO3     | PHP       | Support/Development                                             |
 |-----------|-----------|-----------|-----------------------------------------------------------------|
-| 7.x       | 11 LTS    | 7.4       | Features, Bugfixes, Security Updates                            |
+| 7.x       | 11 LTS    | 7.4 - 8.1 | Features, Bugfixes, Security Updates                            |
 | 6.x       | 10 LTS    | 7.2 - 7.4 | Bugfixes, Security Updates                                      |
-| 5.x       | 8, 9 LTS  | 7.2 - 7.3 | Security Updates. If you want feature backports ask for an offer |
-| 4.x       | 8.7       | 7.0 - 7.2 | Security Updates on demand (ask for an offer)                   |
-| 3.x       | 8.7       | 7.0 - 7.2 | Security Updates on demand (ask for an offer)                   |
-| 2.x       | 7.6       | 5.5 - 7.0 | Security Updates on demand (ask for an offer)                   |
-| 1.x       | 6.2 - 7.6 | 5.5 - 7.0 | Security Updates on demand (ask for an offer)                   |
-
-### Early Access Programm (EAP)
-
-You can support the development via our EAP on https://www.in2code.de/en/agency/typo3-extensions/early-access-program/
-Also official support (fee-based)  is possible within the EAP.
-
-This is the current status of the EAP features:
-
-| Femanager | TYPO3  | PHP           | Support/Development  | Status         |
-|-----------|--------|---------------|----------------------|----------------|
-| 7.1       | 11 LTS | 7.4, 8.0, 8.1 | Support for PHP 8    | in development |
-| 8.0       | 12  | 8             | Support for TYPO3 12 | planned        |
+| 5.x       | 8, 9 LTS  | 7.2 - 7.3 | Security Updates. If you want feature backports ask for an offer|
+| 4.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer)  |
+| 3.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer)  |
+| 2.x       | 7.6       | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer)  |
+| 1.x       | 6.2 - 7.6 | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer)  |
 
 ## Your Contribution
 

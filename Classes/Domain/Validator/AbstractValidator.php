@@ -8,7 +8,6 @@ use In2code\Femanager\Domain\Repository\PluginRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Event\UniqueUserEvent;
 use In2code\Femanager\Utility\FrontendUtility;
-use In2code\Femanager\Utility\ObjectUtility;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -229,29 +228,29 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                     if (!$this->stringContainsNumber($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'letter':
                     if (!$this->stringContainsLetter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'uppercase':
                     if (!$this->stringContainsUppercase($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'special':
                     if (!$this->stringContainsSpecialCharacter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'space':
                     if (!$this->stringContainsSpaceCharacter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 default:
-                }
+            }
         }
         return $isValid;
     }
@@ -273,29 +272,29 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                     if ($this->stringContainsNumber($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'letter':
                     if ($this->stringContainsLetter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'uppercase':
                     if ($this->stringContainsUppercase($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'special':
                     if ($this->stringContainsSpecialCharacter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 case 'space':
                     if ($this->stringContainsSpaceCharacter($value)) {
                         $isValid = false;
                     }
-                break;
+                    break;
                 default:
-                }
+            }
         }
         return $isValid;
     }
@@ -364,8 +363,11 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateInList($value, $validationSettingList)
     {
+        $valueList = GeneralUtility::trimExplode(',', $value, true);
         $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
-        return in_array($value, $validationSettings);
+        $diff = array_diff($valueList, $validationSettings);
+
+        return empty($diff);
     }
 
     /**
@@ -400,7 +402,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                         return true;
                     }
                 }
-            break;
+                break;
 
             case 'm/d/Y':
                 if (preg_match('/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/', $value, $dateParts)) {
@@ -408,10 +410,10 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                         return true;
                     }
                 }
-            break;
+                break;
 
             default:
-            }
+        }
         return false;
     }
 
@@ -479,7 +481,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function checkAllowedControllerName(string $controllerName)
     {
-        $pluginRepository = ObjectUtility::getObjectManager()->get(PluginRepository::class);
+        $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
         $pageIdentifier = FrontendUtility::getCurrentPid();
         if ($pluginRepository->isPluginWithViewOnGivenPage($controllerName, $pageIdentifier) === false) {
             throw new \LogicException('ControllerName is not allowed', 1541506524);

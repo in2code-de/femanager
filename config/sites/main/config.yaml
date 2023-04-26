@@ -1,4 +1,4 @@
-base: 'https://local.femanager.de/'
+base: 'https://local.femanager7.de/'
 errorHandling: {  }
 baseVariants:
   -

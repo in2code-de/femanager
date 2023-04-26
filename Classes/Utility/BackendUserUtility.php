@@ -10,7 +10,6 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
  */
 class BackendUserUtility extends AbstractUtility
 {
-
     /**
      * @return bool
      */
@@ -18,7 +17,13 @@ class BackendUserUtility extends AbstractUtility
     {
         $userAuthentication = self::getBackendUserAuthentication();
 
-        return $userAuthentication->user['admin'] === 1 || (int)$userAuthentication->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
+        if ($userAuthentication->user['admin'] === 1) {
+            return true;
+        }
+
+        $tsConfigEnableLoginAs = (int)($userAuthentication->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? 0);
+
+        return $tsConfigEnableLoginAs === 1;
     }
 
     /**

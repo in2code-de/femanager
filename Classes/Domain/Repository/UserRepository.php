@@ -18,7 +18,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class UserRepository extends Repository
 {
-
     /**
      * Overload Find by UID to also get hidden records
      *
@@ -111,7 +110,7 @@ class UserRepository extends Repository
         $this->ignoreEnableFieldsAndStoragePageAndStarttime($query);
 
         $and = [$query->equals($field, $value)];
-        if (method_exists($user, 'getUid')) {
+        if ($user !== null && method_exists($user, 'getUid')) {
             $and[] = $query->logicalNot($query->equals('uid', $user->getUid()));
         }
         $constraint = $query->logicalAnd($and);
@@ -129,7 +128,7 @@ class UserRepository extends Repository
      *
      * @param $field
      * @param $value
-     * @param \In2code\Femanager\Domain\Model\User $user Existing User
+     * @param User $user Existing User
      * @return User|null
      */
     public function checkUniquePage($field, $value, User $user = null)
@@ -141,7 +140,7 @@ class UserRepository extends Repository
             $query->equals($field, $value),
             $query->equals('deleted', 0)
         ];
-        if (method_exists($user, 'getUid')) {
+        if ($user !== null && method_exists($user, 'getUid')) {
             $and[] = $query->logicalNot($query->equals('uid', (int)$user->getUid()));
         }
         $constraint = $query->logicalAnd($and);

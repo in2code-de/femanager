@@ -12,7 +12,6 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  */
 class ListUsers
 {
-
     /**
      *  This is a test function for a behat test
      *  in web/typo3conf/ext/femanager/Tests/Behaviour/Features/Edit/Default/SmallNoConfirm.feature

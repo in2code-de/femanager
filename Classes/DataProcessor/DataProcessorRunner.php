@@ -3,8 +3,8 @@
 declare(strict_types=1);
 namespace In2code\Femanager\DataProcessor;
 
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
-use In2code\Femanager\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -37,7 +37,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class DataProcessorRunner
 {
-
     /**
      * @var ContentObjectRenderer
      */
@@ -82,9 +81,9 @@ class DataProcessorRunner
             if (is_subclass_of($class, $this->interface)) {
                 /** @var AbstractDataProcessor $dataProcessor */
                 /** @noinspection PhpMethodParametersCountMismatchInspection */
-                $dataProcessor = ObjectUtility::getObjectManager()->get(
+                $dataProcessor = GeneralUtility::makeInstance(
                     $class,
-                    (array)$configuration['config'],
+                    $configuration['config'] ?? [],
                     $settings,
                     $contentObject,
                     $controllerArguments
@@ -104,13 +103,13 @@ class DataProcessorRunner
      * @param array $settings
      * @return array
      */
-    protected function getClasses($settings): array
+    protected function getClasses(array $settings): array
     {
-        $allDataProcessors = (array)$settings['dataProcessors'];
+        $allDataProcessors = ConfigurationUtility::getValue('dataProcessors', $settings);
         ksort($allDataProcessors);
         $dataProcessors = [];
         foreach ($allDataProcessors as $dataProcessor) {
-            if (!empty($dataProcessor['events'])) {
+            if (isset($dataProcessor['events']) === true && $dataProcessor['events'] !== []) {
                 foreach ($dataProcessor['events'] as $controllerName => $actionList) {
                     if ($controllerName === FrontendUtility::getControllerName()) {
                         if (GeneralUtility::inList($actionList, FrontendUtility::getActionName())) {
@@ -120,6 +119,7 @@ class DataProcessorRunner
                 }
             }
         }
+
         return $dataProcessors;
     }
 }

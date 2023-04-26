@@ -30,14 +30,13 @@ class UserBackendController extends AbstractController
     public function listAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->getTSConfig(
-        )['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
+
         $this->view->assignMultiple(
             [
                 'users' => $this->userRepository->findAllInBackend($filter),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'list',
-                'loginAsEnabled' => $loginAsEnabled
+                'loginAsEnabled' => $this->loginAsEnabled()
             ]
         );
         return $this->htmlResponse();
@@ -245,5 +244,16 @@ class UserBackendController extends AbstractController
             $content = $response->getBody()->getContents();
             return json_decode($content, true);
         }
+    }
+
+    private function loginAsEnabled(): bool
+    {
+        if ($GLOBALS['BE_USER']->user['admin'] === 1) {
+            return true;
+        }
+
+        $tsConfigEnableLoginAs = (int)($GLOBALS['BE_USER']->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? 0);
+
+        return $tsConfigEnableLoginAs === 1;
     }
 }

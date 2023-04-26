@@ -10,7 +10,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class StringUtility extends AbstractUtility
 {
-
     /**
      * Only allowed a-z, A-Z, 0-9, -, .
      * Others will be replaced

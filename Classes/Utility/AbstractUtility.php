@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
+use Exception;
 use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
@@ -11,8 +12,6 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -21,7 +20,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 abstract class AbstractUtility
 {
-
     /**
      * Get table configuration array for a defined table
      *
@@ -62,16 +60,16 @@ abstract class AbstractUtility
      */
     protected static function getUserGroupRepository(): UserGroupRepository
     {
-        return self::getObjectManager()->get(UserGroupRepository::class);
+        return GeneralUtility::makeInstance(UserGroupRepository::class);
     }
 
     /**
-     * @return TypoScriptFrontendController
+     * @return TypoScriptFrontendController|null
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getTypoScriptFrontendController()
     {
-        return $GLOBALS['TSFE'];
+        return $GLOBALS['TSFE'] ?? null;
     }
 
     /**
@@ -107,7 +105,7 @@ abstract class AbstractUtility
      */
     protected static function getContentObject(): ContentObjectRenderer
     {
-        return self::getObjectManager()->get(ContentObjectRenderer::class);
+        return GeneralUtility::makeInstance(ContentObjectRenderer::class);
     }
 
     /**
@@ -117,15 +115,7 @@ abstract class AbstractUtility
      */
     protected static function getConfigurationManager(): ConfigurationManagerInterface
     {
-        return self::getObjectManager()->get(ConfigurationManagerInterface::class);
-    }
-
-    /**
-     * @return ObjectManagerInterface
-     */
-    protected static function getObjectManager()
-    {
-        return GeneralUtility::makeInstance(ObjectManager::class);
+        return GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
     }
 
     /**

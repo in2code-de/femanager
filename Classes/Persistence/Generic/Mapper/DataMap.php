@@ -12,7 +12,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap as DataMapExtbase;
  */
 class DataMap extends DataMapExtbase
 {
-
     /**
      * Disable record type for femanager
      *

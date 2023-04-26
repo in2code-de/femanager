@@ -18,7 +18,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ImageManipulation extends AbstractDataProcessor
 {
-
     /**
      * @param array $arguments
      * @return array
@@ -31,9 +30,9 @@ class ImageManipulation extends AbstractDataProcessor
                 unset($arguments['user'][$property]);
             } else {
                 // file upload given
-                foreach ((array)$arguments['user'][$property] as $fileItem) {
+                foreach ($arguments['user'][$property] ?? [] as $fileItem) {
                     /** @noinspection PhpMethodParametersCountMismatchInspection */
-                    $fileService = ObjectUtility::getObjectManager()->get(
+                    $fileService = GeneralUtility::makeInstance(
                         FileService::class,
                         $this->getNewImageName($fileItem),
                         $fileItem
@@ -85,7 +84,7 @@ class ImageManipulation extends AbstractDataProcessor
      */
     protected function upload(array $fileItem): string
     {
-        $basicFileFunctions = ObjectUtility::getObjectManager()->get(BasicFileUtility::class);
+        $basicFileFunctions = GeneralUtility::makeInstance(BasicFileUtility::class);
         $uniqueFileName = $basicFileFunctions->getUniqueName(
             $this->getNewImageName($fileItem),
             $this->getUploadFolder()

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\Log;
@@ -9,14 +10,16 @@ use In2code\Femanager\Event\InviteUserConfirmedEvent;
 use In2code\Femanager\Event\InviteUserCreateEvent;
 use In2code\Femanager\Event\InviteUserEditEvent;
 use In2code\Femanager\Event\InviteUserUpdateEvent;
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 
 /**
@@ -24,7 +27,6 @@ use TYPO3\CMS\Extbase\Http\ForwardResponse;
  */
 class InvitationController extends AbstractFrontendController
 {
-
     /**
      * action new
      */
@@ -40,9 +42,9 @@ class InvitationController extends AbstractFrontendController
      * action create
      *
      * @param User $user
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
      */
     public function createAction(User $user)
     {
@@ -50,7 +52,7 @@ class InvitationController extends AbstractFrontendController
             $this->addFlashMessage(
                 LocalizationUtility::translate('ratelimiter_too_many_attempts'),
                 '',
-                FlashMessage::ERROR
+                AbstractMessage::ERROR
             );
             $this->redirect('status');
         }
@@ -59,13 +61,16 @@ class InvitationController extends AbstractFrontendController
         $user->setDisable(true);
         $user = FrontendUtility::forceValues(
             $user,
-            $this->config['invitation.']['forceValues.']['beforeAnyConfirmation.']
+            ConfigurationUtility::getValue('invitation./forceValues./beforeAnyConfirmation.', $this->config)
         );
         $user = UserUtility::fallbackUsernameAndPassword($user);
-        if ($this->settings['invitation']['fillEmailWithUsername'] === '1') {
+        if (ConfigurationUtility::getValue('invitation/fillEmailWithUsername', $this->settings) === '1') {
             $user->setEmail($user->getUsername());
         }
-        UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
+        UserUtility::hashPassword(
+            $user,
+            ConfigurationUtility::getValue('invitation/misc/passwordSave', $this->settings)
+        );
         $this->eventDispatcher->dispatch(new InviteUserCreateEvent($user));
         $this->ratelimiterService->consumeSlot();
         $this->createAllConfirmed($user);
@@ -99,12 +104,13 @@ class InvitationController extends AbstractFrontendController
         );
 
         // send notify email to admin
-        if ($this->settings['invitation']['notifyAdminStep1']) {
+        $notifyAdminStep1 = ConfigurationUtility::getValue('invitation/notifyAdminStep1', $this->settings);
+        if ($notifyAdminStep1) {
             $this->sendMailService->send(
                 'invitationNotifyStep1',
                 StringUtility::makeEmailArray(
-                    $this->settings['invitation']['notifyAdminStep1'],
-                    $this->settings['invitation']['email']['invitationAdminNotifyStep1']['receiver']['name']['value']
+                    $notifyAdminStep1,
+                    ConfigurationUtility::getValue('invitation/email/invitationAdminNotifyStep1/receiver/name/value', $this->settings)
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile creation with invitation - Step 1',
@@ -112,7 +118,7 @@ class InvitationController extends AbstractFrontendController
                     'user' => $user,
                     'settings' => $this->settings
                 ],
-                $this->config['invitation.']['email.']['invitationAdminNotifyStep1.']
+                ConfigurationUtility::getValue('invitation./email./invitationAdminNotifyStep1.', $this->config)
             );
         }
 
@@ -131,6 +137,19 @@ class InvitationController extends AbstractFrontendController
     public function editAction($user, $hash = null): ResponseInterface
     {
         $user = $this->userRepository->findByUid($user);
+
+        // User must exist and hash must be valid
+        if ($user === null || !HashUtility::validHash($hash, $user)) {
+            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
+            $this->redirect('status');
+        }
+
+        // User must not be deleted (deleted = 0) and not be activated (disable = 1)
+        if ($user->getDisable() == 0) {
+            $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', AbstractMessage::ERROR);
+            $this->redirect('status');
+        }
+
         $user->setDisable(false);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
@@ -144,15 +163,6 @@ class InvitationController extends AbstractFrontendController
             ]
         );
 
-        if (!HashUtility::validHash($hash, $user)) {
-            if ($user !== null) {
-                // delete user for security reasons
-                $this->userRepository->remove($user);
-            }
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', FlashMessage::ERROR);
-            return new ForwardResponse('status');
-        }
-
         $this->assignForAll();
         return $this->htmlResponse();
     }
@@ -160,20 +170,30 @@ class InvitationController extends AbstractFrontendController
     /**
      * action update
      *
-     * @param \In2code\Femanager\Domain\Model\User $user
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
+     * @param User $user
+     * @param string $hash
+     * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
      */
-    public function updateAction($user)
+    public function updateAction(User $user, $hash = null)
     {
+        if (!HashUtility::validHash($hash, $user)) {
+            $this->addFlashMessage(
+                LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
+                '',
+                AbstractMessage::ERROR
+            );
+            $this->redirect('status');
+        }
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvitedFinished'));
         $this->logUtility->log(Log::STATUS_INVITATIONPROFILEENABLED, $user);
-        if ($this->settings['invitation']['notifyAdmin']) {
+        $notifyAdmin = ConfigurationUtility::getValue('invitation/notifyAdmin', $this->settings);
+        if ($notifyAdmin) {
             $this->sendMailService->send(
                 'invitationNotify',
                 StringUtility::makeEmailArray(
-                    $this->settings['invitation']['notifyAdmin'],
-                    $this->settings['invitation']['email']['invitationAdminNotify']['receiver']['name']['value']
+                    $notifyAdmin,
+                    ConfigurationUtility::getValue('invitation/email/invitationAdminNotify/receiver/name/value', $this->settings)
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile creation with invitation - Final',
@@ -181,11 +201,11 @@ class InvitationController extends AbstractFrontendController
                     'user' => $user,
                     'settings' => $this->settings
                 ],
-                $this->config['invitation.']['email.']['invitationAdminNotify.']
+                ConfigurationUtility::getValue('invitation./email./invitationAdminNotify.', $this->config)
             );
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings, 'invitation');
-        UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
+        UserUtility::hashPassword($user, ConfigurationUtility::getValue('invitation/misc/passwordSave', $this->settings));
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
         $this->eventDispatcher->dispatch(new InviteUserUpdateEvent($user));
@@ -210,17 +230,18 @@ class InvitationController extends AbstractFrontendController
     {
         $user = $this->userRepository->findByUid($user);
 
-        if (HashUtility::validHash($hash, $user)) {
+        if ($user !== null && HashUtility::validHash($hash, $user)) {
             $this->logUtility->log(Log::STATUS_PROFILEDELETE, $user);
             $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_INVITATIONPROFILEDELETEDUSER));
 
             // send notify email to admin
-            if ($this->settings['invitation']['notifyAdminStep1']) {
+            $notifyAdmin = ConfigurationUtility::getValue('invitation/notifyAdmin', $this->settings);
+            if ($notifyAdmin) {
                 $this->sendMailService->send(
                     'invitationRefused',
                     StringUtility::makeEmailArray(
-                        $this->settings['invitation']['notifyAdminStep1'],
-                        $this->settings['invitation']['email']['invitationRefused']['receiver']['name']['value']
+                        $notifyAdmin,
+                        ConfigurationUtility::getValue('invitation/email/invitationRefused/receiver/name/value', $this->settings)
                     ),
                     StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                     'Profile deleted from User after invitation - Step 1',
@@ -239,7 +260,7 @@ class InvitationController extends AbstractFrontendController
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_INVITATIONHASHERROR),
                 '',
-                FlashMessage::ERROR
+                AbstractMessage::ERROR
             );
             $this->redirect('status');
         }
@@ -256,16 +277,16 @@ class InvitationController extends AbstractFrontendController
     /**
      * Check if user is allowed to see this action
      *
-     * @return bool
+     * @return true|ForwardResponse
      */
     protected function allowedUserForInvitationNewAndCreate()
     {
-        if (empty($this->settings['invitation']['allowedUserGroups'])) {
+        if (empty($this->settings['invitation']['allowedUserGroups'] ?? [])) {
             return true;
         }
         $allowedUsergroupUids = GeneralUtility::trimExplode(
             ',',
-            $this->settings['invitation']['allowedUserGroups'],
+            $this->settings['invitation']['allowedUserGroups'] ?? [],
             true
         );
         $currentUsergroupUids = UserUtility::getCurrentUsergroupUids();
@@ -279,9 +300,8 @@ class InvitationController extends AbstractFrontendController
         $this->addFlashMessage(
             LocalizationUtility::translateByState(Log::STATUS_INVITATIONRESTRICTEDPAGE),
             '',
-            FlashMessage::ERROR
+            AbstractMessage::ERROR
         );
         return new ForwardResponse('status');
-        return false;
     }
 }

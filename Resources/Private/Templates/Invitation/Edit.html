@@ -1,5 +1,5 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
-<f:layout name="Default" />
+<f:layout name="Default"/>
 
 Invitation / Edit
 Available variables:
@@ -7,8 +7,8 @@ Available variables:
 {hash}
 
 <f:section name="main">
-	<f:render partial="Misc/FlashMessages" arguments="{_all}" />
-	<f:render partial="Misc/FormErrors" arguments="{object:User}" />
+	<f:render partial="Misc/FlashMessages" arguments="{_all}"/>
+	<f:render partial="Misc/FormErrors" arguments="{object:User}"/>
 
 	<div class="femanager_invitation_edit">
 		<f:if condition="{user}">
@@ -18,14 +18,17 @@ Available variables:
 					action="update"
 					additionalAttributes="{data-femanager-plugin:data.uid}"
 					class="form-horizontal {f:if(condition:'{settings.invitation.validation._enable.client}',then:'feManagerValidation',else:'')}">
+				<f:form.hidden name="hash" value="{hash}"/>
 				<fieldset>
+
 					<legend>
-						<f:translate key="titleInvitationSetPassword" />
+						<f:translate key="titleInvitationSetPassword"/>
 					</legend>
 
-					<f:render partial="Fields/Password" arguments="{_all}" />
 
-					<f:render partial="Fields/SubmitUpdate" arguments="{_all}" />
+					<f:render partial="Fields/Password" arguments="{_all}"/>
+
+					<f:render partial="Fields/SubmitUpdate" arguments="{_all}"/>
 				</fieldset>
 			</f:form>
 		</f:if>
