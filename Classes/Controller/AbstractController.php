@@ -9,6 +9,7 @@ use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
+use In2code\Femanager\Domain\Service\PluginService;
 use In2code\Femanager\Domain\Service\SendMailService;
 use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
@@ -480,7 +481,7 @@ abstract class AbstractController extends ActionController
         $incomingRequest = $GLOBALS['TYPO3_REQUEST'];
         $requestBody = $incomingRequest->getParsedBody();
         if (is_array($requestBody)) {
-            $requestBody2 = array_merge($requestBody, $this->pluginVariables);
+            $requestBody2 = array_merge($requestBody, [GeneralUtility::makeInstance(PluginService::class)->getFemanagerPluginNameFromRequest() => $this->pluginVariables]);
             $newRequest = $incomingRequest->withParsedBody($requestBody2);
         } else {
             $newRequest = $incomingRequest->withParsedBody($this->pluginVariables);
