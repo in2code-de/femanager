@@ -13,6 +13,7 @@ use In2code\Femanager\Domain\Validator\ServersideValidator;
 use In2code\Femanager\Event\BeforeUserConfirmEvent;
 use In2code\Femanager\Event\BeforeUserCreateEvent;
 use In2code\Femanager\Event\CreateConfirmationRequestEvent;
+use In2code\Femanager\Event\UserWasConfirmedByAdminEvent;
 use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
@@ -26,7 +27,6 @@ use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\Validate;
-use TYPO3\CMS\Extbase\Event\Mvc\AfterRequestDispatchedEvent;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
@@ -147,11 +147,10 @@ class NewController extends AbstractFrontendController
         };
 
         if ($backend) {
-            // TODO: $this->response and event
-            // $this->eventDispatcher->dispatch(new AfterRequestDispatchedEvent($this->request, $this->response));
             $this->persistenceManager->persistAll();
+            $event = new UserWasConfirmedByAdminEvent($request, $user);
+            $this->eventDispatcher->dispatch( $event);
             // this request was triggered via Backend Module "Frontend users", so we stop here and provide a feedback to the BE
-            // TODO: Check
             echo json_encode(['status' => 'okay']) . PHP_EOL;
             die();
         }
