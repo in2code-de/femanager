@@ -171,7 +171,7 @@ class UserBackendController extends AbstractController
     public function resendUserConfirmationRequestAction(int $userIdentifier): ResponseInterface
     {
         $user = $this->userRepository->findByUid($userIdentifier);
-        $this->sendCreateUserConfirmationMail($user);
+        $this->sendCreateUserConfirmationMailFromBackend($user);
         $this->addFlashMessage(
             LocalizationUtility::translate(
                 'BackendConfirmationFlashMessageReSend',

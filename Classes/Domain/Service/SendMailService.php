@@ -87,6 +87,32 @@ class SendMailService
         return $email->isSent();
     }
 
+    public function sendSimple(
+        string $template,
+        array $receiver,
+        array $sender,
+        string $subject,
+        array $variables = [],
+        array $typoScript = [],
+        RequestInterface|null $request = null
+    ): bool {
+        if (false === $this->isMailEnabled($typoScript, $receiver)) {
+            return false;
+        }
+        $email = GeneralUtility::makeInstance(MailMessage::class);
+        $variables = $this->embedImages($variables, $typoScript, $email);
+        $this->prepareMailObject($template, $receiver, $sender, $subject, $variables, $email, $request);
+        $email->setTo($receiver);
+        $email->setFrom($sender);
+        $email->setSubject($subject);
+
+        $this->dispatcher->dispatch(new BeforeMailSendEvent($email, $variables, $this));
+        $email->send();
+        $this->dispatcher->dispatch(new AfterMailSendEvent($email, $variables, $this));
+
+        return $email->isSent();
+    }
+
     /**
      * Generate Email Body
      *

@@ -562,4 +562,28 @@ abstract class AbstractController extends ActionController
             $this->request
         );
     }
+
+    public function sendCreateUserConfirmationMailFromBackend(User $user)
+    {
+        $receiver = StringUtility::makeEmailArray($user->getEmail(), $user->getUsername());
+        $sender = StringUtility::makeEmailArray(
+            ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value', $this->config),
+            ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config)
+        );
+        $subjectInConfig = ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config);
+        $subject = ($subjectInConfig == 'TEXT') ? 'Please confirm your registration' : $subjectInConfig;
+        // simple mails without cObj information are sent from the backend
+        $this->sendMailService->sendSimple(
+            'createUserConfirmation',
+            $receiver,
+            $sender,
+            $subject,
+            [
+                'user' => $user,
+                'hash' => HashUtility::createHashForUser($user),
+            ],
+            ConfigurationUtility::getValue('new./email./createUserConfirmation.', $this->config),
+            $this->request
+        );
+    }
 }
