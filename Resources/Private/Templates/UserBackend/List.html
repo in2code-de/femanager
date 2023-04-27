@@ -57,6 +57,11 @@ UserBackend / List
 									<f:translate key="tx_femanager_domain_model_user.lastlogin" />
 								</td>
 								<td nowrap="nowrap">
+									<f:translate key="tx_femanager_domain_model_user.inactivesince">
+										Inactive since
+									</f:translate>
+								</td>
+								<td nowrap="nowrap">
 									UID
 								</td>
 								<td nowrap="nowrap">
@@ -115,6 +120,9 @@ UserBackend / List
 									</td>
 									<td nowrap="nowrap">
 										<f:format.date format="d.m.Y H:i">{user.lastlogin}</f:format.date>
+									</td>
+									<td nowrap="nowrap">
+										<f:format.date format="d.m.Y H:i">{user.inactiveSince}</f:format.date>
 									</td>
 									<td nowrap="nowrap">
 										{user.uid}

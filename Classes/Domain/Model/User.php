@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Model;
 
 use In2code\Femanager\Utility\UserUtility;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -400,6 +402,23 @@ class User extends FrontendUser
     public function setState(string $state): void
     {
         $this->state = $state;
+    }
+
+    public function getInactiveSince(): ?\DateTime
+    {
+        $timestampLastSession = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('fe_sessions')
+            ->select(['ses_tstamp'], 'fe_sessions', ['ses_userid' => $this->getUid()])
+            ->fetchOne();
+
+        if ($timestampLastSession) {
+            $inactiveSince = new \DateTime();
+            $inactiveSince->setTimestamp($timestampLastSession);
+
+            return $inactiveSince;
+        }
+
+        return null;
     }
 
     /**
