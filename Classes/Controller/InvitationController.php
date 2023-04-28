@@ -267,7 +267,7 @@ class InvitationController extends AbstractFrontendController
      *
      * @return true|ForwardResponse
      */
-    protected function allowedUserForInvitationNewAndCreate(): true|ForwardResponse
+    protected function allowedUserForInvitationNewAndCreate(): ForwardResponse
     {
         if (empty($this->settings['invitation']['allowedUserGroups'] ?? [])) {
             return true;
