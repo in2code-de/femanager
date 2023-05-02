@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Domain\Model;
 
 use In2code\Femanager\Utility\UserUtility;
@@ -179,11 +180,8 @@ class User extends AbstractEntity
 
     /**
      * Constructs a new Front-End User
-     *
-     * @param string $username
-     * @param string $password
      */
-    public function __construct(protected $username = '', protected $password = '')
+    public function __construct(protected string $username = '', protected string $password = '')
     {
         $this->usergroup = new ObjectStorage();
         $this->image = new ObjectStorage();
@@ -200,40 +198,32 @@ class User extends AbstractEntity
 
     /**
      * Sets the username value
-     *
-     * @param string $username
      */
-    public function setUsername($username)
+    public function setUsername(string $username)
     {
         $this->username = $username;
     }
 
     /**
      * Returns the username value
-     *
-     * @return string
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
 
     /**
      * Sets the password value
-     *
-     * @param string $password
      */
-    public function setPassword($password)
+    public function setPassword(string $password)
     {
         $this->password = $password;
     }
 
     /**
      * Returns the password value
-     *
-     * @return string
      */
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -269,69 +259,57 @@ class User extends AbstractEntity
      * Returns the usergroups. Keep in mind that the property is called "usergroup"
      * although it can hold several usergroups.
      *
-     * @return ObjectStorage<UserGroup> An object storage containing the usergroup
+     * @return ObjectStorage<UserGroup> An object storage containing the usergroups
      */
-    public function getUsergroup()
+    public function getUsergroup(): ObjectStorage
     {
         return $this->usergroup;
     }
 
     /**
      * Sets the name value
-     *
-     * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
     /**
      * Returns the name value
-     *
-     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * Sets the firstName value
-     *
-     * @param string $firstName
      */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName)
     {
         $this->firstName = $firstName;
     }
 
     /**
      * Returns the firstName value
-     *
-     * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
     /**
      * Sets the middleName value
-     *
-     * @param string $middleName
      */
-    public function setMiddleName($middleName)
+    public function setMiddleName(string $middleName)
     {
         $this->middleName = $middleName;
     }
 
     /**
      * Returns the middleName value
-     *
-     * @return string
      */
-    public function getMiddleName()
+    public function getMiddleName(): string
     {
         return $this->middleName;
     }
@@ -341,37 +319,31 @@ class User extends AbstractEntity
      *
      * @param string $lastName
      */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
     }
 
     /**
      * Returns the lastName value
-     *
-     * @return string
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
 
     /**
      * Sets the address value
-     *
-     * @param string $address
      */
-    public function setAddress($address)
+    public function setAddress(string $address)
     {
         $this->address = $address;
     }
 
     /**
      * Returns the address value
-     *
-     * @return string
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
@@ -381,177 +353,143 @@ class User extends AbstractEntity
      *
      * @param string $telephone
      */
-    public function setTelephone($telephone)
+    public function setTelephone(string $telephone)
     {
         $this->telephone = $telephone;
     }
 
     /**
      * Returns the telephone value
-     *
-     * @return string
      */
-    public function getTelephone()
+    public function getTelephone(): string
     {
         return $this->telephone;
     }
 
     /**
      * Sets the fax value
-     *
-     * @param string $fax
      */
-    public function setFax($fax)
+    public function setFax(string $fax)
     {
         $this->fax = $fax;
     }
 
     /**
      * Returns the fax value
-     *
-     * @return string
      */
-    public function getFax()
+    public function getFax(): string
     {
         return $this->fax;
     }
 
     /**
      * Sets the email value
-     *
-     * @param string $email
      */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
 
     /**
      * Returns the email value
-     *
-     * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
      * Sets the title value
-     *
-     * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
     /**
      * Returns the title value
-     *
-     * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
      * Sets the zip value
-     *
-     * @param string $zip
      */
-    public function setZip($zip)
+    public function setZip(string $zip)
     {
         $this->zip = $zip;
     }
 
     /**
      * Returns the zip value
-     *
-     * @return string
      */
-    public function getZip()
+    public function getZip(): string
     {
         return $this->zip;
     }
 
     /**
      * Sets the city value
-     *
-     * @param string $city
      */
-    public function setCity($city)
+    public function setCity(string $city)
     {
         $this->city = $city;
     }
 
     /**
      * Returns the city value
-     *
-     * @return string
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
 
     /**
      * Sets the country value
-     *
-     * @param string $country
      */
-    public function setCountry($country)
+    public function setCountry(string $country)
     {
         $this->country = $country;
     }
 
     /**
      * Returns the country value
-     *
-     * @return string
      */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
 
     /**
      * Sets the www value
-     *
-     * @param string $www
      */
-    public function setWww($www)
+    public function setWww(string $www)
     {
         $this->www = $www;
     }
 
     /**
      * Returns the www value
-     *
-     * @return string
      */
-    public function getWww()
+    public function getWww(): www
     {
         return $this->www;
     }
 
     /**
      * Sets the company value
-     *
-     * @param string $company
      */
-    public function setCompany($company)
+    public function setCompany(string $company)
     {
         $this->company = $company;
     }
 
     /**
      * Returns the company value
-     *
-     * @return string
      */
-    public function getCompany()
+    public function getCompany(): string
     {
         return $this->company;
     }
@@ -568,10 +506,8 @@ class User extends AbstractEntity
 
     /**
      * Gets the image value
-     *
-     * @return ObjectStorage<FileReference>
      */
-    public function getImage()
+    public function getImage(): ObjectStorage|null
     {
         return $this->image;
     }
@@ -833,7 +769,9 @@ class User extends AbstractEntity
      */
     public function isOnline(): bool
     {
-        if (method_exists($this->getLastlogin(), 'getTimestamp')
+        if (
+            $this->getLastlogin() !== null
+            && method_exists($this->getLastlogin(), 'getTimestamp')
             && $this->getLastlogin()->getTimestamp() > (time() - 2 * 60 * 60)
             && UserUtility::checkFrontendSessionToUser($this)
         ) {
@@ -842,20 +780,13 @@ class User extends AbstractEntity
         return $this->isOnline;
     }
 
-    /**
-     * @param string $txExtbaseType
-     * @return User
-     */
-    public function setTxExtbaseType($txExtbaseType)
+    public function setTxExtbaseType(string $txExtbaseType): User
     {
         $this->txExtbaseType = $txExtbaseType;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getTxExtbaseType()
+    public function getTxExtbaseType(): string
     {
         return $this->txExtbaseType;
     }
@@ -869,20 +800,14 @@ class User extends AbstractEntity
         return null;
     }
 
-    /**
-     * @param string $passwordAutoGenerated
-     * @return User
-     */
-    public function setPasswordAutoGenerated($passwordAutoGenerated)
+    public function setPasswordAutoGenerated(string $passwordAutoGenerated): User
     {
         $this->passwordAutoGenerated = $passwordAutoGenerated;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPasswordAutoGenerated()
+
+    public function getPasswordAutoGenerated(): string
     {
         return $this->passwordAutoGenerated;
     }
@@ -899,9 +824,6 @@ class User extends AbstractEntity
 
     /**
      * Workaround to disable persistence in updateAction
-     *
-     * @param null $propertyName
-     * @return bool
      */
     public function _isDirty(string|null $propertyName = null): bool
     {

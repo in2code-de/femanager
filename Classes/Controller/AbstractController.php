@@ -429,11 +429,9 @@ abstract class AbstractController extends ActionController
     /**
      * Check if user is authenticated and params are valid
      *
-     * @param User $user
      * @param int $uid Given fe_users uid
-     * @param string $receivedToken Token
      */
-    protected function testSpoof($user, $uid, $receivedToken)
+    protected function testSpoof(User $user, int $uid, string $receivedToken): ResponseInterface
     {
         $errorOnProfileUpdate = false;
         $knownToken = GeneralUtility::hmac($user->getUid(), (string)$user->getCrdate()->getTimestamp());
@@ -480,7 +478,7 @@ abstract class AbstractController extends ActionController
         );
     }
 
-    public function initializeAction()
+    public function initializeAction(): void
     {
         $this->user = UserUtility::getCurrentUser();
         $this->contentObject = $this->configurationManager->getContentObject();
@@ -496,23 +494,23 @@ abstract class AbstractController extends ActionController
         $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
 
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
-            $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
-            if (is_array($config['plugin.']['tx_femanager.']['settings.'] ?? null)) {
-                $this->config = $config['plugin.']['tx_femanager.']['settings.'];
-                $this->settings = $this->config;
-            }
+            $pid = $this->allConfig['persistence']['storagePid'] ?? 0;
+            $config = BackendUtility::loadTS((int)$pid);
+            $this->config = $config['plugin.']['tx_femanager.']['settings.'] ?? [];
+            $this->settings = $this->config;
 
-            $this->moduleConfig = $config['module.']['tx_femanager.'] ?? '';
+
+            $this->moduleConfig = $config['module.']['tx_femanager.'] ?? [];
 
             // Retrieve page TSconfig of the current page
             $pageTsConfig = BackendUtilityCore::getPagesTSconfig(BackendUtility::getPageIdentifier());
-            if (is_array($pageTsConfig['module.']['tx_femanager.'] ?? null)) {
+            if (is_array($pageTsConfig['module.']['tx_femanager.'] ?? [])) {
                 $this->moduleConfig = array_merge($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.'] ?? []);
             }
 
             // Retrieve user TSconfig of currently logged in user
             $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
-            if (is_array($userTsConfig['tx_femanager.'] ?? null)) {
+            if (is_array($userTsConfig['tx_femanager.'] ?? [])) {
                 $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.'] ?? []);
             }
         }
@@ -608,6 +606,30 @@ abstract class AbstractController extends ActionController
                 ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),
                 ConfigurationUtility::getValue('new./email./createUserConfirmation./subject.', $this->config)
             ),
+            [
+                'user' => $user,
+                'hash' => HashUtility::createHashForUser($user),
+            ],
+            ConfigurationUtility::getValue('new./email./createUserConfirmation.', $this->config),
+            $this->request
+        );
+    }
+
+    public function sendCreateUserConfirmationMailFromBackend(User $user)
+    {
+        $receiver = StringUtility::makeEmailArray($user->getEmail(), $user->getUsername());
+        $sender = StringUtility::makeEmailArray(
+            ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value', $this->config),
+            ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config)
+        );
+        $subjectInConfig = ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config);
+        $subject = ($subjectInConfig == 'TEXT') ? 'Please confirm your registration' : $subjectInConfig;
+        // simple mails without cObj information are sent from the backend
+        $this->sendMailService->sendSimple(
+            'createUserConfirmation',
+            $receiver,
+            $sender,
+            $subject,
             [
                 'user' => $user,
                 'hash' => HashUtility::createHashForUser($user),
