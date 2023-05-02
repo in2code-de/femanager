@@ -1548,8 +1548,11 @@ plugin.tx_femanager {
       # Maximum size for image upload in bytes
       uploadSize = 25000000
 
-      # Number of allowed images to upload
+      # Allowed File Extensions
       uploadFileExtension = jpeg, jpg, gif, png, bmp, tif, tiff
+
+      # Allowed Mime Types
+      uploadMimeTypes = image/png,image/jpeg,image/gif
 
       # Width of the rendered image in FE
       renderImageWidth = 250
@@ -1591,25 +1594,6 @@ plugin.tx_femanager {
       # Remove empty usergroup variables
       10 {
         class = In2code\Femanager\DataProcessor\CleanUserGroup
-
-        events {
-          New = create
-          Edit = update
-        }
-      }
-
-      # Enable image upload
-      20 {
-        class = In2code\Femanager\DataProcessor\ImageManipulation
-
-        config {
-          propertyNamesForUpload = image
-          sysFileRelation {
-            tablenames = fe_users
-            fieldname = image
-            table_local = sys_file
-          }
-        }
 
         events {
           New = create

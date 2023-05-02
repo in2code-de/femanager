@@ -24,7 +24,11 @@ use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ApplicationType;
+use TYPO3\CMS\Core\Http\UploadedFile;
+use TYPO3\CMS\Core\Resource\DuplicationBehavior;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -33,6 +37,7 @@ use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -147,8 +152,54 @@ abstract class AbstractController extends ActionController
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
+        $this->processUploadedImage($user);
+
         $this->logUtility->log(Log::STATUS_NEWREGISTRATION, $user);
         $this->finalCreate($user, 'new', 'createStatus');
+    }
+
+    protected function processUploadedImage($user)
+    {
+        $uploadedFiles = $this->request->getUploadedFiles();
+        $allowedFileExtensions = explode(',', ConfigurationUtility::getConfiguration('misc.uploadFileExtension'));
+        $allowedMimeTypes = explode(',', ConfigurationUtility::getConfiguration('misc.uploadMimeTypes'));
+        if (count($uploadedFiles) > 0 && !empty($uploadedFiles['user']['image']) && count($uploadedFiles['user']['image']) > 0) {
+            $imageObjectStorage = GeneralUtility::makeInstance(ObjectStorage::class);
+            foreach ($uploadedFiles['user']['image'] as $uploadedFile) {
+                /**
+                 * @var $uploadedFile UploadedFile
+                 */
+                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes) && in_array(explode('.', $uploadedFile->getClientFilename())[1], $allowedFileExtensions)) {
+                    $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+                    $uploadString = ConfigurationUtility::getConfiguration('misc.uploadFolder');
+                    $storage = $resourceFactory->getStorageObjectFromCombinedIdentifier($uploadString);
+                    $parts = GeneralUtility::trimExplode(':', $uploadString);
+                    if (!$storage->hasFolder($parts[1])) {
+                        $storage->createFolder($parts[1]);
+                    }
+                    $uploadFolder = $resourceFactory->getFolderObjectFromCombinedIdentifier($uploadString);
+
+                    $newFile = $storage->addUploadedFile($uploadedFile,$uploadFolder,null, DuplicationBehavior::RENAME);
+
+                    $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_file_reference');
+                    $connection->insert(
+                        'sys_file_reference',
+                        [
+                            'uid_local' => $newFile->getUid(),
+                            'uid_foreign' => $user->getUid(),
+                            'tablenames' => 'fe_users',
+                            'fieldname' => 'image',
+                            'sorting_foreign' => 1
+                        ]
+                    );
+                    $sysFileReferenceUid = (int)$connection->lastInsertId('sys_file_reference');
+
+                    $fileReference = $resourceFactory->getFileReferenceObject($sysFileReferenceUid);
+
+                    $imageObjectStorage->attach($fileReference);
+                }
+            }
+        }
     }
 
     /**
