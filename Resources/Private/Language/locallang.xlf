@@ -629,8 +629,8 @@
 			<trans-unit id="BackendConfirmationNoteText">
 				<source>%s approval(s) available</source>
 			</trans-unit>
-			<trans-unit id="BackendConfirmationNoteText">
-				<source>%s missing user confirmation(s) available</source>
+			<trans-unit id="AdminBackendConfirmationNoteText">
+				<source>%s user(s) need to be confirmed by admin</source>
 			</trans-unit>
 			<trans-unit id="BackendConfirmationColumnAction">
 				<source>Actions</source>
@@ -654,7 +654,7 @@
 				<source>resend user confirmation e-mail</source>
 			</trans-unit>
 			<trans-unit id="BackendConfirmationFlashMessageReSend">
-				<source>%s confirmation mail was resend</source>
+				<source>%s confirmation mail was resent</source>
 			</trans-unit>
 			<trans-unit id="resendConfirmationDialogueMessage">
 				<source>Your userprofile is not confirmed yet.</source>

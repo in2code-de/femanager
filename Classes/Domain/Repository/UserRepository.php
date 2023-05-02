@@ -188,9 +188,7 @@ class UserRepository extends Repository
         $and = $this->filterByUserConfirmation($and, $query, $userConfirmation);
         $query->matching($query->logicalAnd(...$and));
         $query->setOrderings(['username' => QueryInterface::ORDER_ASCENDING]);
-        $records = $query->execute();
-
-        return $records;
+        return $query->execute();
     }
 
     /**

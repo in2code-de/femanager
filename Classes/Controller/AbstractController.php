@@ -9,6 +9,7 @@ use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
+use In2code\Femanager\Domain\Service\PluginService;
 use In2code\Femanager\Domain\Service\SendMailService;
 use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
@@ -23,7 +24,11 @@ use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ApplicationType;
+use TYPO3\CMS\Core\Http\UploadedFile;
+use TYPO3\CMS\Core\Resource\DuplicationBehavior;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -32,6 +37,7 @@ use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -146,8 +152,54 @@ abstract class AbstractController extends ActionController
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
+        $this->processUploadedImage($user);
+
         $this->logUtility->log(Log::STATUS_NEWREGISTRATION, $user);
         $this->finalCreate($user, 'new', 'createStatus');
+    }
+
+    protected function processUploadedImage($user)
+    {
+        $uploadedFiles = $this->request->getUploadedFiles();
+        $allowedFileExtensions = explode(',', ConfigurationUtility::getConfiguration('misc.uploadFileExtension'));
+        $allowedMimeTypes = explode(',', ConfigurationUtility::getConfiguration('misc.uploadMimeTypes'));
+        if (count($uploadedFiles) > 0 && !empty($uploadedFiles['user']['image']) && count($uploadedFiles['user']['image']) > 0) {
+            $imageObjectStorage = GeneralUtility::makeInstance(ObjectStorage::class);
+            foreach ($uploadedFiles['user']['image'] as $uploadedFile) {
+                /**
+                 * @var $uploadedFile UploadedFile
+                 */
+                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes) && in_array(explode('.', $uploadedFile->getClientFilename())[1], $allowedFileExtensions)) {
+                    $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+                    $uploadString = ConfigurationUtility::getConfiguration('misc.uploadFolder');
+                    $storage = $resourceFactory->getStorageObjectFromCombinedIdentifier($uploadString);
+                    $parts = GeneralUtility::trimExplode(':', $uploadString);
+                    if (!$storage->hasFolder($parts[1])) {
+                        $storage->createFolder($parts[1]);
+                    }
+                    $uploadFolder = $resourceFactory->getFolderObjectFromCombinedIdentifier($uploadString);
+
+                    $newFile = $storage->addUploadedFile($uploadedFile,$uploadFolder,null, DuplicationBehavior::RENAME);
+
+                    $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_file_reference');
+                    $connection->insert(
+                        'sys_file_reference',
+                        [
+                            'uid_local' => $newFile->getUid(),
+                            'uid_foreign' => $user->getUid(),
+                            'tablenames' => 'fe_users',
+                            'fieldname' => 'image',
+                            'sorting_foreign' => 1
+                        ]
+                    );
+                    $sysFileReferenceUid = (int)$connection->lastInsertId('sys_file_reference');
+
+                    $fileReference = $resourceFactory->getFileReferenceObject($sysFileReferenceUid);
+
+                    $imageObjectStorage->attach($fileReference);
+                }
+            }
+        }
     }
 
     /**
@@ -377,11 +429,9 @@ abstract class AbstractController extends ActionController
     /**
      * Check if user is authenticated and params are valid
      *
-     * @param User $user
      * @param int $uid Given fe_users uid
-     * @param string $receivedToken Token
      */
-    protected function testSpoof($user, $uid, $receivedToken)
+    protected function testSpoof(User $user, int $uid, string $receivedToken): ResponseInterface
     {
         $errorOnProfileUpdate = false;
         $knownToken = GeneralUtility::hmac($user->getUid(), (string)$user->getCrdate()->getTimestamp());
@@ -428,7 +478,7 @@ abstract class AbstractController extends ActionController
         );
     }
 
-    public function initializeAction()
+    public function initializeAction(): void
     {
         $this->user = UserUtility::getCurrentUser();
         $this->contentObject = $this->configurationManager->getContentObject();
@@ -444,23 +494,23 @@ abstract class AbstractController extends ActionController
         $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
 
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
-            $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
-            if (is_array($config['plugin.']['tx_femanager.']['settings.'] ?? null)) {
-                $this->config = $config['plugin.']['tx_femanager.']['settings.'];
-                $this->settings = $this->config;
-            }
+            $pid = $this->allConfig['persistence']['storagePid'] ?? 0;
+            $config = BackendUtility::loadTS((int)$pid);
+            $this->config = $config['plugin.']['tx_femanager.']['settings.'] ?? [];
+            $this->settings = $this->config;
 
-            $this->moduleConfig = $config['module.']['tx_femanager.'] ?? '';
+
+            $this->moduleConfig = $config['module.']['tx_femanager.'] ?? [];
 
             // Retrieve page TSconfig of the current page
             $pageTsConfig = BackendUtilityCore::getPagesTSconfig(BackendUtility::getPageIdentifier());
-            if (is_array($pageTsConfig['module.']['tx_femanager.'] ?? null)) {
+            if (is_array($pageTsConfig['module.']['tx_femanager.'] ?? [])) {
                 $this->moduleConfig = array_merge($this->moduleConfig, $pageTsConfig['module.']['tx_femanager.'] ?? []);
             }
 
             // Retrieve user TSconfig of currently logged in user
             $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
-            if (is_array($userTsConfig['tx_femanager.'] ?? null)) {
+            if (is_array($userTsConfig['tx_femanager.'] ?? [])) {
                 $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.'] ?? []);
             }
         }
@@ -480,7 +530,7 @@ abstract class AbstractController extends ActionController
         $incomingRequest = $GLOBALS['TYPO3_REQUEST'];
         $requestBody = $incomingRequest->getParsedBody();
         if (is_array($requestBody)) {
-            $requestBody2 = array_merge($requestBody, $this->pluginVariables);
+            $requestBody2 = array_merge($requestBody, [GeneralUtility::makeInstance(PluginService::class)->getFemanagerPluginNameFromRequest() => $this->pluginVariables]);
             $newRequest = $incomingRequest->withParsedBody($requestBody2);
         } else {
             $newRequest = $incomingRequest->withParsedBody($this->pluginVariables);
@@ -556,6 +606,30 @@ abstract class AbstractController extends ActionController
                 ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),
                 ConfigurationUtility::getValue('new./email./createUserConfirmation./subject.', $this->config)
             ),
+            [
+                'user' => $user,
+                'hash' => HashUtility::createHashForUser($user),
+            ],
+            ConfigurationUtility::getValue('new./email./createUserConfirmation.', $this->config),
+            $this->request
+        );
+    }
+
+    public function sendCreateUserConfirmationMailFromBackend(User $user)
+    {
+        $receiver = StringUtility::makeEmailArray($user->getEmail(), $user->getUsername());
+        $sender = StringUtility::makeEmailArray(
+            ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value', $this->config),
+            ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config)
+        );
+        $subjectInConfig = ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config);
+        $subject = ($subjectInConfig == 'TEXT') ? 'Please confirm your registration' : $subjectInConfig;
+        // simple mails without cObj information are sent from the backend
+        $this->sendMailService->sendSimple(
+            'createUserConfirmation',
+            $receiver,
+            $sender,
+            $subject,
             [
                 'user' => $user,
                 'hash' => HashUtility::createHashForUser($user),

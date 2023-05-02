@@ -49,7 +49,7 @@ class RequestViewHelper extends AbstractViewHelper
         return $result;
     }
 
-    protected function getVariableFromDepth(array $param): array|string
+    protected function getVariableFromDepth(?array $param): array|string|null
     {
         if (is_array($this->variable)) {
             $this->variable = $this->variable[$param[$this->depth]] ?? null;

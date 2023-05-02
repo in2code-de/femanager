@@ -458,7 +458,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
             $config = $this->configurationManager->getConfiguration(
                 ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
                 'Femanager',
-                $pluginName
+                null
             );
             $controllerName = $this->getControllerName();
             $validationName = $this->getValidationName();

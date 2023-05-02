@@ -15,7 +15,7 @@ UserBackend / List
 			<f:then>
 				<div class="alert alert-info">
 					<strong><f:translate key="BackendConfirmationNoteTitle">Action:</f:translate></strong>
-					<f:translate key="BackendConfirmationNoteText" arguments="{0:'{f:count(subject:users)}'}"><f:count subject="{users}" /> approval(s)</f:translate>
+					<f:translate key="AdminBackendConfirmationNoteText" arguments="{0:'{f:count(subject:users)}'}"><f:count subject="{users}" /> approval(s)</f:translate>
 				</div>
 
 				<femanager:pagination.paginate objects="{users}" as="usersPage" itemsPerPage="100">
