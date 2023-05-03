@@ -473,7 +473,7 @@ class User extends AbstractEntity
     /**
      * Returns the www value
      */
-    public function getWww(): www
+    public function getWww(): string
     {
         return $this->www;
     }
