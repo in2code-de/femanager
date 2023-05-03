@@ -20,6 +20,8 @@ to version 8.0.0
 
 All Plugins used in your pages must be updated. The Updater is located in Admin Tools -> Upgrade -> Run Upgrade Wizard -> "EXT:femanager: Migrate plugins"
 
+In your Typoscript Configuration the directive misc.uploadFolder must be changed to the combined identifier (e.g. 1:users/)
+
 .. _v7.1:
 
 to version 7.1.0
