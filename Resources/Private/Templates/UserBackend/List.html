@@ -160,7 +160,24 @@ UserBackend / List
 												</a>
 											</f:else>
 										</f:if>
-										
+
+										<f:comment>
+											Logout Icon
+										</f:comment>
+										<span title="{f:translate(key:'BackendListUserLogout')}"
+											  class="disabled tx-feusermanager-icon-apps-pagetree-drag-place-denied"
+											  style="{f:if(condition:'{user.online}', then:'', else:'display:none')}">
+											<f:link.action action="userLogout" arguments="{user:user}" class="logoutUser" title="{f:translate(key:'BackendListUserLogout')}">
+												<core:icon identifier="apps-pagetree-drag-place-denied" />
+											</f:link.action>
+										</span>
+										<span title="{f:translate(key:'BackendListUserLogout')}"
+											  class="tx-feusermanager-icon-apps-pagetree-drag-place-denied-disabled"
+											  style="{f:if(condition:'{user.online}', then:'display:none', else:'')}">
+											<core:icon identifier="apps-pagetree-drag-place-denied" state="disabled" />
+										</span>
+
+
 										<input type="hidden" class="container_uid" name="container_uid" value="{user.uid}" />
 										<input type="hidden" class="container_module_uri" name="container_module_uri" value="{moduleUri}" />
 										<input type="hidden" class="container_table" name="container_table" value="fe_users" />
