@@ -11,7 +11,8 @@
 		<femanager:form.select
 				id="femanager_field_state"
 				property="state"
-				defaultOption="{f:translate(key:'pleaseChooseCountry')}"
+				prependOptionLabel="{f:translate(key:'pleaseChooseCountry')}"
+				prependOptionValue=""
 				class="form-control"
 				additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'state')}"
 				data="{trigger-fields: 'femanager_field_country', data-endpoint: 'getStatesForCountry', arguments-country: 'femanager_field_country'}"/>

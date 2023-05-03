@@ -19,7 +19,8 @@
 					optionValueField="uid"
 					optionLabelField="title"
 					sortByOptionLabel="1"
-					defaultOption="{f:translate(key:'pleaseChoose')}"
+					prependOptionLabel="{f:translate(key:'pleaseChoose')}"
+					prependOptionValue=""
 					class="form-control"
 					value="{femanager:Misc.GetFirst(objectStorage:user.usergroup)}"
 					additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'usergroup')}" />
