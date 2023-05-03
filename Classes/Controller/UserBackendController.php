@@ -47,6 +47,7 @@ class UserBackendController extends AbstractController
     public function listAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        //TODO: the enableLoginAs funcionality is not working
         $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->getTSConfig(
         )['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
         $this->moduleTemplate->assignMultiple(
