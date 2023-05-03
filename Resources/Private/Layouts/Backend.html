@@ -1,5 +1,13 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
-	<div class="module">
+<f:be.pageRenderer
+		includeCssFiles="{
+        0: '{f:uri.resource(path:\'Css/Backend.min.css\')}'
+    }"
+		includeRequireJsModules="{
+        0: '{f:uri.resource(path:\'JavaScript/Backend.min.js\')}'
+    }"
+/>
+<div class="module">
 		<div class="module-docheader">
 			<div class="typo3-docheader-functions">
 				<div class="module-docheader-bar module-docheader-bar-navigation">
