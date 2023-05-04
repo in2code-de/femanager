@@ -60,11 +60,10 @@ class DataProcessorRunner
      * @throws \Exception
      */
     public function callClasses(
-        array $arguments,
         array $settings,
         ContentObjectRenderer $contentObject,
         Arguments $controllerArguments
-    ): array {
+    ) {
         foreach ($this->getClasses($settings) as $configuration) {
             $class = $configuration['class'];
             if (!class_exists($class)) {
@@ -84,12 +83,11 @@ class DataProcessorRunner
                     $controllerArguments
                 );
                 $dataProcessor->initializeDataProcessor();
-                $arguments = $dataProcessor->process($arguments);
+                $dataProcessor->process();
             } else {
                 throw new \UnexpectedValueException('Finisher does not implement ' . $this->interface, 1516373829946);
             }
         }
-        return $arguments;
     }
 
     /**

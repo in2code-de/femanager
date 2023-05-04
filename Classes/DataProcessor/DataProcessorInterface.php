@@ -11,8 +11,7 @@ interface DataProcessorInterface
     public function initializeDataProcessor();
 
     /**
-     * @param array $arguments
-     * @return array
+     * @return void
      */
-    public function process(array $arguments): array;
+    public function process(): void;
 }

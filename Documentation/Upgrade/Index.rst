@@ -22,6 +22,8 @@ All Plugins used in your pages must be updated. The Updater is located in Admin 
 
 In your Typoscript Configuration the directive misc.uploadFolder must be changed to the combined identifier (e.g. 1:users/)
 
+The dataprocessors configured under plugin.tx_femanager.settings.dataProcessors are now without a return value, if you need to change data in the request use PSR-15 Middlewares
+
 .. _v7.1:
 
 to version 7.1.0

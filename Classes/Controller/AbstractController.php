@@ -520,22 +520,11 @@ abstract class AbstractController extends ActionController
         $this->checkStoragePid();
 
         $dataProcessorRunner = GeneralUtility::makeInstance(DataProcessorRunner::class);
-        $this->pluginVariables = $dataProcessorRunner->callClasses(
-            $this->request->getArguments(),
+        $dataProcessorRunner->callClasses(
             $this->settings,
             $this->contentObject,
             $this->arguments
         );
-        //TODO: this is a workaround, because there is no proposed way to modify a request in the initializeAction
-        $incomingRequest = $GLOBALS['TYPO3_REQUEST'];
-        $requestBody = $incomingRequest->getParsedBody();
-        if (is_array($requestBody)) {
-            $requestBody2 = array_merge($requestBody, [GeneralUtility::makeInstance(PluginService::class)->getFemanagerPluginNameFromRequest() => $this->pluginVariables]);
-            $newRequest = $incomingRequest->withParsedBody($requestBody2);
-        } else {
-            $newRequest = $incomingRequest->withParsedBody($this->pluginVariables);
-        }
-        $GLOBALS['TYPO3_REQUEST'] = $newRequest;
     }
 
     /**
