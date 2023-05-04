@@ -2021,36 +2021,6 @@ Plain Text
 
             # Add any dataProcessor classes that will be called just before the action will be rendered
             dataProcessors {
-
-                # Remove empty usergroup variables
-                10 {
-                    class = In2code\Femanager\DataProcessor\CleanUserGroup
-
-                    events {
-                        New = create
-                        Edit = update
-                    }
-                }
-
-                # Enable image upload
-                20 {
-                    class = In2code\Femanager\DataProcessor\ImageManipulation
-
-                    config {
-                        propertyNamesForUpload = image
-                        sysFileRelation {
-                            tablenames = fe_users
-                            fieldname = image
-                            table_local = sys_file
-                        }
-                    }
-
-                    events {
-                        New = create
-                        Edit = update
-                    }
-                }
-
                 # Birthdate converter
                 30 {
                     class = In2code\Femanager\DataProcessor\DateConverter

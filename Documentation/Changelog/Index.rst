@@ -14,6 +14,8 @@ Changelog
 
       * [FEATURE] Add support for TYPO3 12
       * [TASK] Remove dependencies of generic Extbase domain classes - Thx to https://github.com/theLine
+      * [REFACTOR] Dataprocessor for CleanUserGroup is transferred to a Middleware
+      * [REFACTOR] Because of new handling for uploaded files the Dataprocessor for Imagemanipulation is removed
 -
       :Version: 7.1.0
       :Date: 2023-01-19
