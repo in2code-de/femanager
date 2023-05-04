@@ -148,14 +148,14 @@ abstract class AbstractController extends ActionController
      * Prefix method to createAction()
      *        Create Confirmation from Admin is not necessary
      */
-    public function createAllConfirmed(User $user)
+    public function createAllConfirmed(User $user): ResponseInterface|null
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
         $this->processUploadedImage($user);
 
         $this->logUtility->log(Log::STATUS_NEWREGISTRATION, $user);
-        $this->finalCreate($user, 'new', 'createStatus');
+        return $this->finalCreate($user, 'new', 'createStatus');
     }
 
     protected function processUploadedImage($user)
@@ -236,8 +236,8 @@ abstract class AbstractController extends ActionController
 
         $this->eventDispatcher->dispatch(new FinalUpdateEvent($user));
         $this->logUtility->log(Log::STATUS_PROFILEUPDATED, $user, ['existingUser' => $existingUser]);
-        $this->redirectByAction('edit');
         $this->addFlashMessage(LocalizationUtility::translate('update'));
+        return $this->redirectByAction('edit');
     }
 
     /**
@@ -245,7 +245,7 @@ abstract class AbstractController extends ActionController
      *
      * @param User $user
      */
-    public function updateRequest($user)
+    public function updateRequest($user): ResponseInterface
     {
         if ($this->settings['edit']['confirmByAdmin'] ?? null) {
             $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($user);
@@ -271,8 +271,8 @@ abstract class AbstractController extends ActionController
                 $user,
                 ['dirtyProperties' => $dirtyProperties]
             );
-            $this->redirectByAction('edit', 'requestRedirect');
             $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
+            return $this->redirectByAction('edit', 'requestRedirect');
         } else {
             $this->logUtility->log(
                 Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
@@ -297,7 +297,7 @@ abstract class AbstractController extends ActionController
         bool $login = true,
         string $status = '',
         bool $backend = false
-    ): void {
+    ): ResponseInterface|null {
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         if (ConfigurationUtility::getValue(
@@ -354,10 +354,13 @@ abstract class AbstractController extends ActionController
         $this->finisherRunner->callFinishers($user, $this->actionMethodName, $this->settings, $this->contentObject);
 
         if ($backend === false) {
-            $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'));
-            $this->addFlashMessage(LocalizationUtility::translate('create'));
-            $this->redirect($redirectByActionName);
+            $redirectTarget = $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'), $redirectByActionName);
+            if ($redirectTarget instanceof ForwardResponse) {
+                $this->addFlashMessage(LocalizationUtility::translate('create'));
+            }
+            return $redirectTarget;
         }
+        return null;
     }
 
     /**
@@ -561,7 +564,7 @@ abstract class AbstractController extends ActionController
             $typoscriptIncluded = ConfigurationUtility::getValue('_TypoScriptIncluded', $this->settings);
             if (
                 $typoscriptIncluded !== '1' && !GeneralUtility::_GP('eID')
-                && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
+                && !ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
             ) {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript'),

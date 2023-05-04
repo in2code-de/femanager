@@ -88,9 +88,13 @@ class NewController extends AbstractFrontendController
         $this->ratelimiterService->consumeSlot();
 
         if ($this->isAllConfirmed()) {
-            $this->createAllConfirmed($user);
+            $response = $this->createAllConfirmed($user);
         } else {
-            $this->createRequest($user);
+            $response = $this->createRequest($user);
+        }
+
+        if ($response !== null) {
+            return $response;
         }
 
         return $this->redirect('createStatus');
@@ -312,7 +316,7 @@ class NewController extends AbstractFrontendController
      * @return void
      * @throws IllegalObjectTypeException
      */
-    protected function createRequest(User $user): void
+    protected function createRequest(User $user): ResponseInterface|null
     {
         $user->setDisable(true);
         $this->userRepository->add($user);
@@ -320,11 +324,12 @@ class NewController extends AbstractFrontendController
         $this->logUtility->log(Log::STATUS_PROFILECREATIONREQUEST, $user);
         if (!empty($this->settings['new']['confirmByUser'])) {
             $this->createUserConfirmationRequest($user);
-            $this->redirectByAction('new', 'requestRedirect');
+            return $this->redirectByAction('new', 'requestRedirect');
         } elseif (!empty($this->settings['new']['confirmByAdmin'])) {
             $this->createAdminConfirmationRequest($user);
-            $this->redirectByAction('new', 'requestRedirect');
+            return $this->redirectByAction('new', 'requestRedirect');
         }
+        return null;
     }
 
     /**
@@ -334,7 +339,7 @@ class NewController extends AbstractFrontendController
     {
         $this->sendCreateUserConfirmationMail($user);
         $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
-        $this->redirectByAction('new', 'requestRedirect');
+        return $this->redirectByAction('new', 'requestRedirect');
     }
 
     /**
