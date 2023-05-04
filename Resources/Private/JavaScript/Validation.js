@@ -91,10 +91,14 @@ jQuery.fn.femanagerValidation = function($) {
             return;
 
         }
-		var $form = element.closest('form');
-		var user = $form.find('div:first').find('input[name="tx_femanager_validation[user][__identity]"]').val();
-		var action = $form.find('div:first').find('input[name="tx_femanager_validation[__referrer][@action]"]').val();
+        var $form = element.closest('form');
+        var plugin = $form.data('femanager-plugin');
+        var pluginName = $form.data('femanager-plugin-name');
+		var user = $form.find('div:first').find('input[name="tx_' + pluginName + ' [user][__identity]"]').val();
+		var action = $form.find('div:first').find('input[name="tx_' + pluginName + '[__referrer][@action]"]').val();
 		var url = Femanager.getBaseUrl() + '?id=' + $('#femanagerPid').val() + '&type=1548935210';
+        var storagePid = $('#femanagerStoragePid').val();
+        var validation = element.attr('data-validation');
 		var validations = getValidations(element);
 		var elementValue = element.val();
 		if ((element.prop('type') == 'checkbox') && (element.prop('checked') == false)) {
@@ -104,29 +108,32 @@ jQuery.fn.femanagerValidation = function($) {
 		if (indexOfArray(validations, 'sameAs')) { // search for "sameAs(password)"
 			var validationSameAs = indexOfArray(validations, 'sameAs');
 			var fieldToCompare = getStringInBrackets(validationSameAs);
-			var fieldToCompareObject = $('input[name="tx_femanager_validation[user][' + fieldToCompare + ']"]');
+			var fieldToCompareObject = $('input[name="tx_' + pluginName + '[user][' + fieldToCompare + ']"]');
 			additionalValue = fieldToCompareObject.val();
 			if ((fieldToCompareObject.prop('type') == 'checkbox') && (fieldToCompareObject.prop('checked') == false)) {
 				additionalValue = '';
 			}
 		}
+        var formData = {
+            'storagePid': storagePid,
+            'L': $('#femanagerLanguage').val(),
+            'id': $('#femanagerPid').val()
+        };
 
-        console.log(url);
+        formData['tx_' + pluginName + '[validation]'] = validation;
+        formData['tx_' + pluginName + '[value]'] = elementValue;
+        formData['tx_' + pluginName + '[field]'] = getFieldName(element);
+        formData['tx_' + pluginName + '[user]'] = (user !== undefined ? user : '');
+        formData['tx_' + pluginName + '[additionalValue]'] = (additionalValue ? additionalValue : '');
+        formData['tx_' + pluginName + '[plugin]'] = plugin;
+        formData['tx_' + pluginName + '[pluginName]'] = pluginName;
+        formData['tx_' + pluginName + '[referrerAction]'] = action;
+
+        console.log(formData);
 
 		$.ajax({
 			url: url,
-			data: {
-				'tx_femanager_validation[validation]': element.attr('data-validation'),
-				'tx_femanager_validation[value]': elementValue,
-				'tx_femanager_validation[field]': getFieldName(element),
-				'tx_femanager_validation[user]': (user !== undefined ? user : ''),
-				'tx_femanager_validation[additionalValue]': (additionalValue ? additionalValue : ''),
-				'tx_femanager_validation[plugin]': $form.data('femanager-plugin'),
-				'tx_femanager_validation[referrerAction]': action,
-				'storagePid': $('#femanagerStoragePid').val(),
-				'L': $('#femanagerLanguage').val(),
-				'id': $('#femanagerPid').val()
-			},
+			data: formData,
 			type: 'POST',
 			cache: false,
 			success: function(json) { // return values
@@ -154,8 +161,8 @@ jQuery.fn.femanagerValidation = function($) {
 
 	/**
 	 * Read fieldname
-	 * 		get "email" out of "tx_femanager_validation[user][email]"
-	 * 		get "passwort_repeat" out of "tx_femanager_validation[password_repeat]"
+	 * 		get "email" out of "tx_femanager_invitation[user][email]"
+	 * 		get "passwort_repeat" out of "tx_femanager_invitation[password_repeat]"
 	 *
 	 * @param element
 	 * @return string
@@ -178,7 +185,7 @@ jQuery.fn.femanagerValidation = function($) {
 	 */
 	function writeErrorMessage(element, message) {
 		cleanErrorMessage(element); // remove all errors to this field at the beginning
-		var errorMessage = $('.femanager_validation_container').html().replace('###messages###', message); // get html for error
+		var errorMessage = $('.femanager_invitation_container').html().replace('###messages###', message); // get html for error
 		element.before(errorMessage); // add message
 		element.closest('.form-group').addClass('has-error');
 		element.addClass('error');

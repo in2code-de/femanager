@@ -79,6 +79,7 @@ class UserController extends AbstractFrontendController
         User $user = null,
         string $additionalValue = '',
         int $plugin = 0,
+        string $pluginName = '',
         string $referrerAction = ''
     ): ResponseInterface {
         $clientsideValidator = GeneralUtility::makeInstance(ClientsideValidator::class);
@@ -89,6 +90,7 @@ class UserController extends AbstractFrontendController
             ->setUser($user)
             ->setAdditionalValue($additionalValue)
             ->setPlugin($plugin)
+            ->setPluginName($pluginName)
             ->setActionName($referrerAction)
             ->validateField();
 
@@ -102,7 +104,6 @@ class UserController extends AbstractFrontendController
                 'user' => $user
             ]
         );
-        die('here');
         $response = $this->jsonResponse();
         return $response;
     }

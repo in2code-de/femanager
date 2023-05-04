@@ -72,6 +72,11 @@ class ClientsideValidator extends AbstractValidator
     /**
      * @var string
      */
+    protected $pluginName = '';
+
+    /**
+     * @var string
+     */
     protected $actionName = '';
 
     /**
@@ -292,6 +297,9 @@ class ClientsideValidator extends AbstractValidator
 
     protected function getValidationSettings(): array
     {
+        if (!is_array($this->validationSettingsString)) {
+            return [];
+        }
         $validationSettings = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
         $validationSettings = str_replace('|', ',', (string) $validationSettings);
 
@@ -413,6 +421,24 @@ class ClientsideValidator extends AbstractValidator
     public function setPlugin(int $plugin)
     {
         $this->plugin = $plugin;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPluginName(): string
+    {
+        return $this->pluginName;
+    }
+
+    /**
+     * @return ClientsideValidator
+     */
+    public function setPluginName(string $pluginName)
+    {
+        $this->pluginName = $pluginName;
 
         return $this;
     }
