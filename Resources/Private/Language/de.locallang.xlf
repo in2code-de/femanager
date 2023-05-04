@@ -671,13 +671,13 @@
         <source>An Email was send to your account. Please check your inbox.</source>
         <target state="translated">Eine E-Mail wurde an Ihre E-Mail-Adresse verschickt. Bitte überprüfen sie Ihren Posteingang.</target>
       </trans-unit>
-      <trans-unit id="resendConfirmationMailFail">
+      <trans-unit id="resendConfirmationMailFail" approved="yes">
         <source>We received no valid mail.</source>
-        <target state="translated">Wir haben keine gültige E-Mail erhalten.</target>
+        <target state="final">Wir haben keine gültige E-Mail erhalten.</target>
       </trans-unit>
-      <trans-unit id="ratelimiter_too_many_attempts">
+      <trans-unit id="ratelimiter_too_many_attempts" approved="yes">
         <source>Too many attempts from this IP address. Try again later.</source>
-        <target state="translated">Zu viele Versuche von dieser IP-Adresse. Versuchen Sie es später erneut.</target>
+        <target state="final">Zu viele Versuche von dieser IP-Adresse. Versuchen Sie es später erneut.</target>
       </trans-unit>
       <trans-unit id="createFailedProfile" approved="yes">
         <source>Profile creation failed</source>
@@ -753,7 +753,7 @@
       </trans-unit>
       <trans-unit id="pleaseChooseCountry">
         <source>Please choose a country ...</source>
-        <target state="translated">Bitte Land auswählen ...</target>
+        <target state="translated">Bitte ein Land auswählen ...</target>
       </trans-unit>
       <trans-unit id="FilterLabel" approved="yes">
         <source>Search</source>
@@ -767,9 +767,9 @@
         <source>Filter now</source>
         <target state="final">Jetzt Filtern</target>
       </trans-unit>
-      <trans-unit id="UserDeleteConfirmation">
+      <trans-unit id="UserDeleteConfirmation" approved="yes">
         <source>Are you sure to delete your profile?</source>
-        <target state="translated">Sind Sie sicher, dass Sie Ihr Profil löschen möchten?</target>
+        <target state="final">Sind Sie sicher, dass Sie Ihr Profil löschen möchten?</target>
       </trans-unit>
       <trans-unit id="titleInvitationProfile" approved="yes">
         <source>Invite a new user</source>
@@ -827,13 +827,13 @@
         <source>Possible action:</source>
         <target state="final">Verfügbare Aktionen</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationNoteText">
+      <trans-unit id="BackendConfirmationNoteText" approved="yes">
         <source>%s approval(s) available</source>
-        <target state="translated">%s Genehmigung(en) verfügbar</target>
+        <target state="final">%s Genehmigung(en) verfügbar</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationNoteText">
+      <trans-unit id="BackendConfirmationNoteText" approved="yes">
         <source>%s missing user confirmation(s) available</source>
-        <target state="translated">%s Genehmigung(en) verfügbar</target>
+        <target state="final">%s Genehmigung(en) verfügbar</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnAction" approved="yes">
         <source>Actions</source>
@@ -851,9 +851,9 @@
         <source>%s was successfully approved</source>
         <target state="final">%s ist erfolgreich verifiziert worden.</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationFlashMessageFailed">
+      <trans-unit id="BackendConfirmationFlashMessageFailed" approved="yes">
         <source>The user confirmation failed, please check your system log or check your config</source>
-        <target state="translated">Die Benutzerbestätigung ist fehlgeschlagen, bitte überprüfen Sie Ihr Systemprotokoll oder überprüfen Sie Ihre Konfiguration</target>
+        <target state="final">Die Benutzerbestätigung ist fehlgeschlagen, bitte überprüfen Sie Ihr Systemprotokoll oder überprüfen Sie Ihre Konfiguration</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageRefused" approved="yes">
         <source>%s was refused</source>
@@ -863,21 +863,21 @@
         <source>resend user confirmation e-mail</source>
         <target state="final">E-Mail-Bestätigung erneut senden</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationFlashMessageReSend">
+      <trans-unit id="BackendConfirmationFlashMessageReSend" approved="yes">
         <source>%s confirmation mail was resend</source>
-        <target state="translated">%s Bestätigungsmail wurde erneut gesendet</target>
+        <target state="final">%s Bestätigungsmail wurde erneut gesendet</target>
       </trans-unit>
-      <trans-unit id="resendConfirmationDialogueMessage">
+      <trans-unit id="resendConfirmationDialogueMessage" approved="yes">
         <source>Your userprofile is not confirmed yet.</source>
-        <target state="translated">Ihr Benutzerprofil ist noch nicht bestätigt.</target>
+        <target state="final">Ihr Benutzerprofil ist noch nicht bestätigt.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueLink" approved="yes">
         <source>Resend confirmation email?</source>
         <target state="final">E-Mail-Bestätigung erneut senden?</target>
       </trans-unit>
-      <trans-unit id="createStatus">
+      <trans-unit id="createStatus" approved="yes">
         <source>User registration</source>
-        <target state="translated">Benutzerregistrierung</target>
+        <target state="final">Benutzerregistrierung</target>
       </trans-unit>
       <trans-unit id="js.loading_states" approved="yes">
         <source>Loading states ...</source>
