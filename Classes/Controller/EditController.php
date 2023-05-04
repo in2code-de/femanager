@@ -78,11 +78,15 @@ class EditController extends AbstractFrontendController
 
         $this->eventDispatcher->dispatch(new BeforeUpdateUserEvent($user));
         if (!empty($this->settings['edit']['confirmByAdmin'])) {
-            $this->updateRequest($user);
+            $response = $this->updateRequest($user);
         } else {
-            $this->updateAllConfirmed($user);
+            $response = $this->updateAllConfirmed($user);
         }
-        $this->redirect('edit');
+        if ($response !== null) {
+            return $response;
+        }
+
+        return $this->redirect('edit');
     }
 
     /**
