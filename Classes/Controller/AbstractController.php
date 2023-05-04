@@ -561,7 +561,7 @@ abstract class AbstractController extends ActionController
             $typoscriptIncluded = ConfigurationUtility::getValue('_TypoScriptIncluded', $this->settings);
             if (
                 $typoscriptIncluded !== '1' && !GeneralUtility::_GP('eID')
-                && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
+                && !ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
             ) {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript'),

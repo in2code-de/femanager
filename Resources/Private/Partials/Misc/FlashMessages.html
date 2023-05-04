@@ -2,7 +2,7 @@
 	<div class="femanager_status">
 		<div class="femanager_flashmessages">
 			<f:for each="{flashMessages}" as="flashMessage">
-				<div class="typo3-message message-{flashMessage.severity.name}">
+				<div class="typo3-message message-{flashMessage.severity.value}">
 					<div class="message-body">{flashMessage.message}</div>
 				</div>
 			</f:for>
