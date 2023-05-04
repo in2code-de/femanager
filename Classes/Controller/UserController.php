@@ -14,6 +14,7 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -70,28 +71,17 @@ class UserController extends AbstractFrontendController
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEIMAGEDELETE));
         $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
     }
-
-    /**
-     * Call this Action from eID to validate field values
-     *
-     * @param string $validation Validation string like "required, email, min(10)"
-     * @param string $value Given Field value
-     * @param string $field Fieldname like "username" or "email"
-     * @param User $user Existing User
-     * @param string $additionalValue Additional Values
-     * @param int $plugin tt_content.uid of the femanager plugin
-     * @param string $referrerAction current action name
-     */
-    public function validateAction(
-        $validation = null,
-        $value = null,
-        $field = null,
+    
+    public function ajaxValidateAction(
+        string $validation = '',
+        string $value = '',
+        string $field = '',
         User $user = null,
-        $additionalValue = '',
+        string $additionalValue = '',
         int $plugin = 0,
         string $referrerAction = ''
     ): ResponseInterface {
-        $clientsideValidator = $this->objectManager->get(ClientsideValidator::class);
+        $clientsideValidator = GeneralUtility::makeInstance(ClientsideValidator::class);
         $result = $clientsideValidator
             ->setValidationSettingsString($validation)
             ->setValue($value)
@@ -112,7 +102,9 @@ class UserController extends AbstractFrontendController
                 'user' => $user
             ]
         );
-        return $this->htmlResponse();
+        die('here');
+        $response = $this->jsonResponse();
+        return $response;
     }
 
     /**

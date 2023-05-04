@@ -89,6 +89,17 @@ call_user_func(function () {
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_PLUGIN
     );
 
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'Femanager',
+        'Validation',
+        [
+            \In2code\Femanager\Controller\UserController::class => 'ajaxValidate',
+        ],
+        [
+            \In2code\Femanager\Controller\UserController::class => 'ajaxValidate',
+        ],
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_PLUGIN
+    );
 
     #$container = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class);
     #$container->registerImplementation(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper::class, \In2code\Femanager\Persistence\Generic\Mapper\DataMap::class);
