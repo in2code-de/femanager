@@ -13,10 +13,9 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 class DateConverter extends AbstractDataProcessor
 {
     /**
-     * @param array $arguments
-     * @return array
+     * @return void
      */
-    public function process(array $arguments): array
+    public function process(): void
     {
         if (!empty($this->controllerArguments['user'])) {
             foreach (GeneralUtility::trimExplode(',', $this->getConfiguration('fieldNames'), true) as $fieldName) {
@@ -30,6 +29,5 @@ class DateConverter extends AbstractDataProcessor
                     );
             }
         }
-        return $arguments;
     }
 }

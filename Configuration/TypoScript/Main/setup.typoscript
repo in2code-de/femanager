@@ -1590,17 +1590,6 @@ plugin.tx_femanager {
 
     # Add any dataProcessor classes that will be called just before the action will be rendered
     dataProcessors {
-
-      # Remove empty usergroup variables
-      10 {
-        class = In2code\Femanager\DataProcessor\CleanUserGroup
-
-        events {
-          New = create
-          Edit = update
-        }
-      }
-
       # Birthdate converter
       30 {
         class = In2code\Femanager\DataProcessor\DateConverter
