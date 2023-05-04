@@ -58,7 +58,15 @@ class InvitationController extends AbstractFrontendController
             $this->redirect('status');
         }
 
-        $this->allowedUserForInvitationNewAndCreate();
+        if ($this->allowedUserForInvitationNewAndCreate() !== true) {
+            // current user is not allowed
+            $this->addFlashMessage(
+                LocalizationUtility::translateByState(Log::STATUS_INVITATIONRESTRICTEDPAGE),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
+            return $this->redirect('status');
+        }
         $user->setDisable(true);
         $user = FrontendUtility::forceValues(
             $user,
@@ -265,9 +273,9 @@ class InvitationController extends AbstractFrontendController
     /**
      * Check if user is allowed to see this action
      *
-     * @return true|ForwardResponse
+     * @return bool
      */
-    protected function allowedUserForInvitationNewAndCreate(): ForwardResponse
+    protected function allowedUserForInvitationNewAndCreate(): bool
     {
         if (empty($this->settings['invitation']['allowedUserGroups'] ?? [])) {
             return true;
@@ -283,13 +291,6 @@ class InvitationController extends AbstractFrontendController
         if (count(array_intersect($allowedUsergroupUids, $currentUsergroupUids))) {
             return true;
         }
-
-        // current user is not allowed
-        $this->addFlashMessage(
-            LocalizationUtility::translateByState(Log::STATUS_INVITATIONRESTRICTEDPAGE),
-            '',
-            ContextualFeedbackSeverity::ERROR
-        );
-        return new ForwardResponse('status');
+        return false;
     }
 }
