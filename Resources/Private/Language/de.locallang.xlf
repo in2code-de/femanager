@@ -67,9 +67,9 @@
         <source>Female</source>
         <target state="final">weiblich</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2" approved="yes">
         <source>Divers</source>
-        <target state="translated">Diverse</target>
+        <target state="final">Divers</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
@@ -103,9 +103,9 @@
         <source>Country</source>
         <target state="final">Land</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.state">
+      <trans-unit id="tx_femanager_domain_model_user.state" approved="yes">
         <source>State</source>
-        <target state="translated">Bundesstaat/-land</target>
+        <target state="final">Bundesstaat/-land</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.www" approved="yes">
         <source>Website</source>
@@ -119,9 +119,9 @@
         <source>Image</source>
         <target state="final">Bild</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.captcha">
+      <trans-unit id="tx_femanager_domain_model_user.captcha" approved="yes">
         <source>Captcha</source>
-        <target state="translated">Captcha</target>
+        <target state="final">Captcha</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.terms" approved="yes">
         <source>I accept the terms and conditions</source>
@@ -251,9 +251,9 @@
         <source>No TypoScript found. Did you already include the static Template?</source>
         <target state="final">Kein TypoScript gefunden. Eventuell fehlt das statische TypoScript?</target>
       </trans-unit>
-      <trans-unit id="error_no_typoscript_be">
+      <trans-unit id="error_no_typoscript_be" approved="yes">
         <source>No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</source>
-        <target state="translated">Kein TypoScript gefunden. Haben Sie bereits module.tx_femanager.settings.configPID in Ihrem PageTS eingerichtet?</target>
+        <target state="final">Kein TypoScript gefunden. Haben Sie bereits module.tx_femanager.settings.configPID in Ihrem PageTS eingerichtet?</target>
       </trans-unit>
       <trans-unit id="error_no_storagepid" approved="yes">
         <source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
@@ -663,13 +663,13 @@
         <source>Thank you for your request. Please check your mail account to confirm the profile.</source>
         <target state="final">Vielen Dank für die Anfrage. Bitte überprüfen Sie Ihr E-Mail-Postfach und bestätigen Sie Ihre Registrierung.</target>
       </trans-unit>
-      <trans-unit id="createRequestWaitingForAdminConfirm">
+      <trans-unit id="createRequestWaitingForAdminConfirm" approved="yes">
         <source>Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</source>
-        <target state="translated">Vielen Dank für Ihre Bestätigung. Ihr Profil wird verfügbar sein, sobald der Administrator Ihre Anfrage bestätigt.</target>
+        <target state="final">Vielen Dank für Ihre Bestätigung. Ihr Profil wird verfügbar sein, sobald der Administrator Ihre Anfrage bestätigt.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailSend">
         <source>An Email was send to your account. Please check your inbox.</source>
-        <target state="translated">Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.</target>
+        <target state="translated">Eine E-Mail wurde an Ihre E-Mail-Adresse verschickt. Bitte überprüfen sie Ihren Posteingang.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailFail">
         <source>We received no valid mail.</source>
@@ -839,9 +839,9 @@
         <source>Actions</source>
         <target state="final">Aktionen</target>
       </trans-unit>
-      <trans-unit id="BackendMissingConfigPID">
+      <trans-unit id="BackendMissingConfigPID" approved="yes">
         <source>The config PID is missing!</source>
-        <target state="translated">Die Konfigurations-PID fehlt!</target>
+        <target state="final">Die Konfigurations-PID fehlt!</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnUid" approved="yes">
         <source>UID</source>
@@ -859,9 +859,9 @@
         <source>%s was refused</source>
         <target state="final">%s wurde abgelehnt</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationResendUserConfirmationRequest">
+      <trans-unit id="BackendConfirmationResendUserConfirmationRequest" approved="yes">
         <source>resend user confirmation e-mail</source>
-        <target state="translated">E-Mail-Bestätigung erneut senden</target>
+        <target state="final">E-Mail-Bestätigung erneut senden</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageReSend">
         <source>%s confirmation mail was resend</source>
@@ -871,9 +871,9 @@
         <source>Your userprofile is not confirmed yet.</source>
         <target state="translated">Ihr Benutzerprofil ist noch nicht bestätigt.</target>
       </trans-unit>
-      <trans-unit id="resendConfirmationDialogueLink">
+      <trans-unit id="resendConfirmationDialogueLink" approved="yes">
         <source>Resend confirmation email?</source>
-        <target state="translated">Bestätigungsemail erneut senden?</target>
+        <target state="final">E-Mail-Bestätigung erneut senden?</target>
       </trans-unit>
       <trans-unit id="createStatus">
         <source>User registration</source>
