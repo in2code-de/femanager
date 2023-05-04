@@ -59,8 +59,8 @@ jQuery(document).ready(function($) {
             var endpoint = nodeElement.dataset['dataEndpoint'];
 
             var data = {
-                'tx_femanager_pi1[action]': endpoint,
-                'tx_femanager_pi1[controller]': 'Data',
+                'tx_femanager_data[action]': endpoint,
+                'tx_femanager_data[controller]': 'Data',
             };
 
             // Convert DOMStringMap to object. https://stackoverflow.com/a/48235245/2025722
@@ -72,7 +72,7 @@ jQuery(document).ready(function($) {
                         var sourceField = document.getElementById(arguments[argument]);
                         if (sourceField) {
                             var argumentName = lcfirst(argument.substr(9));
-                            data['tx_femanager_pi1[' + argumentName + ']'] = sourceField.value;
+                            data['tx_femanager_data[' + argumentName + ']'] = sourceField.value;
                         }
                     }
                 }
