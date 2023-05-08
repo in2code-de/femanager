@@ -93,10 +93,10 @@ call_user_func(function () {
         'Femanager',
         'Validation',
         [
-            \In2code\Femanager\Controller\UserController::class => 'ajaxValidate',
+            \In2code\Femanager\Controller\UserController::class => 'validate',
         ],
         [
-            \In2code\Femanager\Controller\UserController::class => 'ajaxValidate',
+            \In2code\Femanager\Controller\UserController::class => 'validate',
         ],
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_PLUGIN
     );

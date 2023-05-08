@@ -12,6 +12,7 @@ use In2code\Femanager\Utility\StringUtility;
 use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * Class ClientsideValidator
@@ -79,19 +80,40 @@ class ClientsideValidator extends AbstractValidator
      */
     protected $actionName = '';
 
+    protected function init()
+    {
+        $this->initializeObject();
+        $this->setPluginVariables();
+        $this->setClientValidationSettings();
+    }
+
+    protected function setClientValidationSettings()
+    {
+        $pluginName = $this->getPluginName();
+        if ($pluginName !== '') {
+            $config = $this->configurationManager->getConfiguration(
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+                'Femanager',
+                null
+            );
+            $controllerName = $this->getControllerNameByPlugin($pluginName);
+            $validationName = $this->getValidationNameByPlugin($pluginName);
+            $this->validationSettings = $config[$controllerName][$validationName];
+        }
+    }
+
     /**
      * Validate Field
      *
      * @return bool
      */
-    public function validateField()
+    public function validateField(string $pluginName = 'tx_femanager_new'): bool
     {
-        if ($this->isValidationSettingsDifferentToGlobalSettings()) {
+        if ($this->isValidationSettingsDifferentToGlobalSettings($pluginName)) {
             $this->addMessage('validationErrorGeneral');
 
             return false;
         }
-
         foreach ($this->getValidationSettings() as $validationSetting) {
             switch ($validationSetting) {
                 case 'required':
@@ -257,9 +279,9 @@ class ClientsideValidator extends AbstractValidator
      * do not match, it could be possible that there is a manipulation. In this case, we stop validation and return a
      * global error message
      */
-    protected function isValidationSettingsDifferentToGlobalSettings(): bool
+    protected function isValidationSettingsDifferentToGlobalSettings(string $pluginName = 'tx_femanager_new'): bool
     {
-        return $this->getValidationSettingsString() !== $this->getValidationSettingsFromTypoScript();
+        return $this->getValidationSettingsString() !== $this->getValidationSettingsFromTypoScript($pluginName);
     }
 
     /**
@@ -283,13 +305,13 @@ class ClientsideValidator extends AbstractValidator
         return $this->validationSettingsString;
     }
 
-    public function getValidationSettingsFromTypoScript(): string
+    public function getValidationSettingsFromTypoScript(string $pluginName = 'tx_femanager_new'): string
     {
-        $controllerName = $this->getControllerName();
+        $controllerName = $this->getControllerNameByPlugin($pluginName);
         $validationService = GeneralUtility::makeInstance(
             ValidationSettingsService::class,
             $controllerName,
-            $this->getValidationName()
+            $this->getValidationNameByPlugin($pluginName)
         );
 
         return $validationService->getValidationStringForField($this->fieldName);
@@ -297,13 +319,12 @@ class ClientsideValidator extends AbstractValidator
 
     protected function getValidationSettings(): array
     {
-        if (!is_array($this->validationSettingsString)) {
+
+        if (!is_string($this->validationSettingsString)) {
             return [];
         }
-        $validationSettings = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
-        $validationSettings = str_replace('|', ',', (string) $validationSettings);
-
-        return $validationSettings;
+        $validationSettings = str_replace('|', ',', (string) $this->validationSettingsString);
+        return GeneralUtility::trimExplode(',', $validationSettings, true);
     }
 
     /**
@@ -461,28 +482,14 @@ class ClientsideValidator extends AbstractValidator
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    protected function getValidationName(): string
+    protected function getValidationNameByPlugin(string $plugin = 'tx_femanager_new'): string
     {
         $validationName = 'validation';
-        if ($this->getControllerName() === 'invitation' && $this->getActionName() === 'edit') {
+        if ($this->getControllerNameByPlugin($plugin) === 'invitation' && $this->getActionName() === 'edit') {
             $validationName = 'validationEdit';
         }
 
         return $validationName;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getControllerName(): string
-    {
-        $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
-        $controllerName = $pluginRepository->getControllerNameByPageWithPlugin($this->getPlugin());
-
-        return $controllerName;
     }
 
     /**

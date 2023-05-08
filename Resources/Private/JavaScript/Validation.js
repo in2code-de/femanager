@@ -93,9 +93,9 @@ jQuery.fn.femanagerValidation = function($) {
         }
         var $form = element.closest('form');
         var plugin = $form.data('femanager-plugin');
-        var pluginName = $form.data('femanager-plugin-name');
-		var user = $form.find('div:first').find('input[name="tx_' + pluginName + ' [user][__identity]"]').val();
-		var action = $form.find('div:first').find('input[name="tx_' + pluginName + '[__referrer][@action]"]').val();
+        var pluginName = 'tx_' + $form.data('femanager-plugin-name');
+		var user = $form.find('div:first').find('input[name="tx_femanager_validation[user][__identity]"]').val();
+		var action = $form.find('div:first').find('input[name="tx_validation_validation[__referrer][@action]"]').val();
 		var url = Femanager.getBaseUrl() + '?id=' + $('#femanagerPid').val() + '&type=1548935210';
         var storagePid = $('#femanagerStoragePid').val();
         var validation = element.attr('data-validation');
@@ -108,7 +108,7 @@ jQuery.fn.femanagerValidation = function($) {
 		if (indexOfArray(validations, 'sameAs')) { // search for "sameAs(password)"
 			var validationSameAs = indexOfArray(validations, 'sameAs');
 			var fieldToCompare = getStringInBrackets(validationSameAs);
-			var fieldToCompareObject = $('input[name="tx_' + pluginName + '[user][' + fieldToCompare + ']"]');
+			var fieldToCompareObject = $('input[name="tx_femanager_validation[user][' + fieldToCompare + ']"]');
 			additionalValue = fieldToCompareObject.val();
 			if ((fieldToCompareObject.prop('type') == 'checkbox') && (fieldToCompareObject.prop('checked') == false)) {
 				additionalValue = '';
@@ -119,15 +119,14 @@ jQuery.fn.femanagerValidation = function($) {
             'L': $('#femanagerLanguage').val(),
             'id': $('#femanagerPid').val()
         };
-
-        formData['tx_' + pluginName + '[validation]'] = validation;
-        formData['tx_' + pluginName + '[value]'] = elementValue;
-        formData['tx_' + pluginName + '[field]'] = getFieldName(element);
-        formData['tx_' + pluginName + '[user]'] = (user !== undefined ? user : '');
-        formData['tx_' + pluginName + '[additionalValue]'] = (additionalValue ? additionalValue : '');
-        formData['tx_' + pluginName + '[plugin]'] = plugin;
-        formData['tx_' + pluginName + '[pluginName]'] = pluginName;
-        formData['tx_' + pluginName + '[referrerAction]'] = action;
+        formData['tx_femanager_validation[validation]'] = validation;
+        formData['tx_femanager_validation[value]'] = elementValue;
+        formData['tx_femanager_validation[field]'] = getFieldName(element);
+        formData['tx_femanager_validation[user]'] = (user !== undefined ? user : '');
+        formData['tx_femanager_validation[additionalValue]'] = (additionalValue ? additionalValue : '');
+        formData['tx_femanager_validation[plugin]'] = plugin;
+        formData['tx_femanager_validation[pluginName]'] = pluginName;
+        formData['tx_femanager_validation[referrerAction]'] = action;
 
 		$.ajax({
 			url: url,
@@ -159,8 +158,8 @@ jQuery.fn.femanagerValidation = function($) {
 
 	/**
 	 * Read fieldname
-	 * 		get "email" out of "tx_femanager_invitation[user][email]"
-	 * 		get "passwort_repeat" out of "tx_femanager_invitation[password_repeat]"
+	 * 		get "email" out of "tx_femanager_plugin[user][email]"
+	 * 		get "passwort_repeat" out of "tx_femanager_plugin[password_repeat]"
 	 *
 	 * @param element
 	 * @return string

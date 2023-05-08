@@ -1721,7 +1721,7 @@ femanager_validation {
     pluginName = Validation
     vendorName = In2code
     controller = User
-    action = ajaxValidate
+    action = validate
     features.requireCHashArgumentForActionArguments = 0
     10 =< tt_content.list.20.femanager_validation
   }

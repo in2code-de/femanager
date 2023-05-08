@@ -71,28 +71,30 @@ class UserController extends AbstractFrontendController
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEIMAGEDELETE));
         $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
     }
-    
-    public function ajaxValidateAction(
-        string $validation = '',
-        string $value = '',
-        string $field = '',
-        User $user = null,
-        string $additionalValue = '',
-        int $plugin = 0,
-        string $pluginName = '',
-        string $referrerAction = ''
-    ): ResponseInterface {
+
+    public function validateAction(): ResponseInterface {
+        $requestBody = $this->request->getParsedBody();
+        $validation = $requestBody['tx_femanager_validation']['validation'] ?? '';
+        $value =  $requestBody['tx_femanager_validation']['value'] ?? '';
+        $field =  $requestBody['tx_femanager_validation']['field'] ?? '';
+        // TODO: string
+        $user =  $requestBody['tx_femanager_validation']['user'] ?? null;
+        $additionalValue =  $requestBody['tx_femanager_validation']['additionalValue'] ?? '';
+        $plugin =  (int)$requestBody['tx_femanager_validation']['plugin'] ?? 0;
+        $pluginName =  $requestBody['tx_femanager_validation']['pluginName'] ?? '';
+        $referrerAction = $requestBody['tx_femanager_validation']['referrerAction'] ?? '';
+
         $clientsideValidator = GeneralUtility::makeInstance(ClientsideValidator::class);
         $result = $clientsideValidator
             ->setValidationSettingsString($validation)
             ->setValue($value)
             ->setFieldName($field)
-            ->setUser($user)
+            ->setUser(null)
             ->setAdditionalValue($additionalValue)
             ->setPlugin($plugin)
             ->setPluginName($pluginName)
             ->setActionName($referrerAction)
-            ->validateField();
+            ->validateField($pluginName);
 
         $this->view->assignMultiple(
             [
@@ -104,8 +106,7 @@ class UserController extends AbstractFrontendController
                 'user' => $user
             ]
         );
-        $response = $this->jsonResponse();
-        return $response;
+        return $this->jsonResponse();
     }
 
     /**
