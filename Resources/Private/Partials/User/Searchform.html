@@ -1,7 +1,7 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
 <f:if condition="{settings.list.filterActivate}">
 	<div class="femanager_list_searchform">
-		<f:form name="filter" class="form-horizontal" object="{filter}">
+		<f:form name="filter" class="form-horizontal">
 			<div class="femanager_fieldset femanager_city control-group">
 				<label for="searchword" class="control-label">
 					<f:translate key="FilterLabel" />
@@ -9,7 +9,7 @@
 				<div class="controls">
 					<femanager:form.textfield
 							id="searchword"
-							property="searchword"
+							name="filter[searchword]"
 							placeholder="{f:translate(key:'FilterPlaceholder')}"
 							class="input-block-level" />
 				</div>

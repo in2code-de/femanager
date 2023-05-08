@@ -38,18 +38,6 @@ class UserController extends AbstractFrontendController
         return $this->htmlResponse();
     }
 
-    /**
-     * Enforce user setting from FlexForm and ignore &tx_femanager_pi1[user]=421
-     */
-    public function initializeShowAction()
-    {
-        $arguments = $this->request->getArguments();
-        if (!empty($this->settings['show']['user']) ?? '') {
-            unset($arguments['user']);
-        }
-        $this->request->setArguments($arguments);
-    }
-
     public function showAction(User $user = null): ResponseInterface
     {
         $this->view->assign('user', $this->getUser($user));
