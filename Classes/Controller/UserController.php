@@ -38,18 +38,6 @@ class UserController extends AbstractFrontendController
         return $this->htmlResponse();
     }
 
-    /**
-     * Enforce user setting from FlexForm and ignore &tx_femanager_pi1[user]=421
-     */
-    public function initializeShowAction()
-    {
-        $arguments = $this->request->getArguments();
-        if (!empty($this->settings['show']['user']) ?? '') {
-            unset($arguments['user']);
-        }
-        $this->request->setArguments($arguments);
-    }
-
     public function showAction(User $user = null): ResponseInterface
     {
         $this->view->assign('user', $this->getUser($user));
@@ -60,16 +48,16 @@ class UserController extends AbstractFrontendController
     /**
      * @throws \Exception
      */
-    public function imageDeleteAction(User $user)
+    public function imageDeleteAction(User $user): ResponseInterface
     {
         if (UserUtility::getCurrentUser() !== $user) {
             throw new UnauthorizedException('You are not allowed to delete this image', 1516373759972);
         }
-        $user->setImage($this->objectManager->get(ObjectStorage::class));
+        $user->setImage(GeneralUtility::makeInstance(ObjectStorage::class));
         $this->userRepository->update($user);
         $this->logUtility->log(Log::STATUS_PROFILEUPDATEIMAGEDELETE, $user);
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEIMAGEDELETE));
-        $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
+        return $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
     }
 
     public function validateAction(): ResponseInterface {

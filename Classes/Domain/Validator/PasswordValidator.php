@@ -68,16 +68,14 @@ class PasswordValidator extends AbstractValidatorExtbase
         $this->init();
 
         // if password fields are not active or if keep function active
-        if (!$this->passwordFieldsAdded() || $this->keepPasswordIfEmpty()) {
+        if ($this->passwordFieldsAdded() && !$this->keepPasswordIfEmpty()) {
+            $password = $user->getPassword();
+            $passwordRepeat = $this->piVars['password_repeat'] ?? '';
+
+            if ($password !== $passwordRepeat) {
+                $this->addError('validationErrorPasswordRepeat', 0, ['field' => 'password']);
+            }
         }
-
-        $password = $user->getPassword();
-        $passwordRepeat = $this->piVars['password_repeat'] ?? '';
-
-        if ($password !== $passwordRepeat) {
-            $this->addError('validationErrorPasswordRepeat', 0, ['field' => 'password']);
-        }
-
     }
 
     /**
@@ -89,8 +87,8 @@ class PasswordValidator extends AbstractValidatorExtbase
     {
         if (isset($this->configuration['edit']['misc']['keepPasswordIfEmpty']) &&
             $this->configuration['edit']['misc']['keepPasswordIfEmpty'] === '1' &&
-            isset($this->piVars['user']['password']) && $this->piVars['user']['password'] === '' &&
-            isset($this->piVars['password_repeat']) && $this->piVars['password_repeat'] === ''
+            (!isset($this->piVars['user']['password']) || $this->piVars['user']['password'] === '') &&
+            (!isset($this->piVars['password_repeat']) || $this->piVars['password_repeat'] === '')
         ) {
             return true;
         }
