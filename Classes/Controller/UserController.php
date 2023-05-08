@@ -14,6 +14,7 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -59,16 +60,16 @@ class UserController extends AbstractFrontendController
     /**
      * @throws \Exception
      */
-    public function imageDeleteAction(User $user)
+    public function imageDeleteAction(User $user): ResponseInterface
     {
         if (UserUtility::getCurrentUser() !== $user) {
             throw new UnauthorizedException('You are not allowed to delete this image', 1516373759972);
         }
-        $user->setImage($this->objectManager->get(ObjectStorage::class));
+        $user->setImage(GeneralUtility::makeInstance(ObjectStorage::class));
         $this->userRepository->update($user);
         $this->logUtility->log(Log::STATUS_PROFILEUPDATEIMAGEDELETE, $user);
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEIMAGEDELETE));
-        $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
+        return $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
     }
 
     /**
