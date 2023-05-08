@@ -129,8 +129,6 @@ jQuery.fn.femanagerValidation = function($) {
         formData['tx_' + pluginName + '[pluginName]'] = pluginName;
         formData['tx_' + pluginName + '[referrerAction]'] = action;
 
-        console.log(formData);
-
 		$.ajax({
 			url: url,
 			data: formData,
@@ -185,7 +183,7 @@ jQuery.fn.femanagerValidation = function($) {
 	 */
 	function writeErrorMessage(element, message) {
 		cleanErrorMessage(element); // remove all errors to this field at the beginning
-		var errorMessage = $('.femanager_invitation_container').html().replace('###messages###', message); // get html for error
+		var errorMessage = $('.femanager_validation_container').html().replace('###messages###', message); // get html for error
 		element.before(errorMessage); // add message
 		element.closest('.form-group').addClass('has-error');
 		element.addClass('error');
