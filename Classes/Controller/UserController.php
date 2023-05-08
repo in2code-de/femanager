@@ -72,12 +72,15 @@ class UserController extends AbstractFrontendController
         $pluginName =  $requestBody['tx_femanager_validation']['pluginName'] ?? '';
         $referrerAction = $requestBody['tx_femanager_validation']['referrerAction'] ?? '';
 
+        if ($user !== null) {
+            $user = $this->userRepository->findByUid((int)$user);
+        }
         $clientsideValidator = GeneralUtility::makeInstance(ClientsideValidator::class);
         $result = $clientsideValidator
             ->setValidationSettingsString($validation)
             ->setValue($value)
             ->setFieldName($field)
-            ->setUser(null)
+            ->setUser($user)
             ->setAdditionalValue($additionalValue)
             ->setPlugin($plugin)
             ->setPluginName($pluginName)

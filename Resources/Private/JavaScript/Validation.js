@@ -94,8 +94,8 @@ jQuery.fn.femanagerValidation = function($) {
         var $form = element.closest('form');
         var plugin = $form.data('femanager-plugin');
         var pluginName = 'tx_' + $form.data('femanager-plugin-name');
-		var user = $form.find('div:first').find('input[name="tx_femanager_validation[user][__identity]"]').val();
-		var action = $form.find('div:first').find('input[name="tx_validation_validation[__referrer][@action]"]').val();
+		var user = $form.find('div:first').find('input[name="' + pluginName + '[user][__identity]"]').val();
+		var action = $form.find('div:first').find('input[name="' + pluginName + '[__referrer][@action]"]').val();
 		var url = Femanager.getBaseUrl() + '?id=' + $('#femanagerPid').val() + '&type=1548935210';
         var storagePid = $('#femanagerStoragePid').val();
         var validation = element.attr('data-validation');
