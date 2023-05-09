@@ -161,8 +161,8 @@ abstract class AbstractController extends ActionController
     protected function processUploadedImage($user)
     {
         $uploadedFiles = $this->request->getUploadedFiles();
-        $allowedFileExtensions = explode(',', ConfigurationUtility::getConfiguration('misc.uploadFileExtension'));
-        $allowedMimeTypes = explode(',', ConfigurationUtility::getConfiguration('misc.uploadMimeTypes'));
+        $allowedFileExtensions = preg_split('/\s*,\s*/', trim(ConfigurationUtility::getConfiguration('misc.uploadFileExtension')));
+        $allowedMimeTypes = preg_split('/\s*,\s*/', trim(ConfigurationUtility::getConfiguration('misc.uploadMimeTypes')));
         if (count($uploadedFiles) > 0 && !empty($uploadedFiles['user']['image']) && count($uploadedFiles['user']['image']) > 0) {
             foreach ($uploadedFiles['user']['image'] as $uploadedFile) {
                 /**
