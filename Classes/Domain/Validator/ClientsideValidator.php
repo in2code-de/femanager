@@ -317,14 +317,24 @@ class ClientsideValidator extends AbstractValidator
         return $validationService->getValidationStringForField($this->fieldName);
     }
 
+    /**
+     * $validationSettingsString contains comma-separated singleSettings
+     * e.g. "required, email, inList(1|2|3)
+     * the pipes in the singleSettings must be replaced AFTER exploding the $validationSettingsString
+     */
     protected function getValidationSettings(): array
     {
 
         if (!is_string($this->validationSettingsString)) {
             return [];
         }
-        $validationSettings = str_replace('|', ',', (string) $this->validationSettingsString);
-        return GeneralUtility::trimExplode(',', $validationSettings, true);
+        $singleSettingsArray = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
+        foreach ($singleSettingsArray as &$singleSetting) {
+            if (str_contains($singleSetting, '|')) {
+                $singleSetting = str_replace('|', ',', $singleSetting);
+            }
+        }
+        return $singleSettingsArray;
     }
 
     /**
