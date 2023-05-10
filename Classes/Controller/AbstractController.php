@@ -168,7 +168,7 @@ abstract class AbstractController extends ActionController
                 /**
                  * @var $uploadedFile UploadedFile
                  */
-                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes) && in_array(explode('.', $uploadedFile->getClientFilename())[1], $allowedFileExtensions)) {
+                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes) && in_array(pathinfo($uploadedFile->getClientFilename())['extension'], $allowedFileExtensions)) {
                     $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
                     $uploadString = ConfigurationUtility::getConfiguration('misc.uploadFolder');
                     $storage = $resourceFactory->getStorageObjectFromCombinedIdentifier($uploadString);
