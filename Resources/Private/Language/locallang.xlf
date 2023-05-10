@@ -243,10 +243,10 @@
 				<source>This value is not allowed in field %s</source>
 			</trans-unit>
 			<trans-unit id="validationErrorSameAs">
-				<source>Please check your value</source>
+				<source>Values do not match</source>
 			</trans-unit>
 			<trans-unit id="validationErrorPasswordRepeat">
-				<source>Both passwords do not fit</source>
+				<source>Both passwords do not match</source>
 			</trans-unit>
 			<trans-unit id="validationErrorDate">
 				<source>Date has the wrong format</source>

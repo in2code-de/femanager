@@ -108,7 +108,7 @@ jQuery.fn.femanagerValidation = function($) {
 		if (indexOfArray(validations, 'sameAs')) { // search for "sameAs(password)"
 			var validationSameAs = indexOfArray(validations, 'sameAs');
 			var fieldToCompare = getStringInBrackets(validationSameAs);
-			var fieldToCompareObject = $('input[name="tx_femanager_validation[user][' + fieldToCompare + ']"]');
+			var fieldToCompareObject = $('input[name="' + pluginName + '[user][' + fieldToCompare + ']"]');
 			additionalValue = fieldToCompareObject.val();
 			if ((fieldToCompareObject.prop('type') == 'checkbox') && (fieldToCompareObject.prop('checked') == false)) {
 				additionalValue = '';
