@@ -150,7 +150,7 @@ class UserLinks
         }
     }
 
-    protected function getLastUsername(): array|false|null
+    protected function getLastUsername(): string|false|null
     {
         $content = null;
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
