@@ -1701,11 +1701,11 @@ page {
 ##################################################
 # Page for frontend validation via AJAX
 ##################################################
-feManagerValidation = PAGE
-feManagerValidation {
+femanager_validation = PAGE
+femanager_validation {
   typeNum = 1548935210
   config {
-    additionalHeaders.10.header = Content-Type: application/json
+    additionalHeaders = Content-type:application/json
     no_cache = 0
     disableAllHeaderCode = 1
     disablePrefixComment = 1
@@ -1718,11 +1718,12 @@ feManagerValidation {
   10 {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
     extensionName = Femanager
-    pluginName = List
+    pluginName = Validation
     vendorName = In2code
     controller = User
     action = validate
     features.requireCHashArgumentForActionArguments = 0
+    10 =< tt_content.list.20.femanager_validation
   }
 }
 
@@ -1742,8 +1743,8 @@ feManagerStateSelection {
   10 = USER_INT
   10 {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    extensionName = Data
-    pluginName = Pi1
+    extensionName = Femanager
+    pluginName = Data
     vendorName = In2code
     controller = Data
     action = getStatesForCountry

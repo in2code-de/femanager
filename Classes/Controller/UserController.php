@@ -60,27 +60,22 @@ class UserController extends AbstractFrontendController
         return $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
     }
 
-    /**
-     * Call this Action from eID to validate field values
-     *
-     * @param string $validation Validation string like "required, email, min(10)"
-     * @param string $value Given Field value
-     * @param string $field Fieldname like "username" or "email"
-     * @param User $user Existing User
-     * @param string $additionalValue Additional Values
-     * @param int $plugin tt_content.uid of the femanager plugin
-     * @param string $referrerAction current action name
-     */
-    public function validateAction(
-        $validation = null,
-        $value = null,
-        $field = null,
-        User $user = null,
-        $additionalValue = '',
-        int $plugin = 0,
-        string $referrerAction = ''
-    ): ResponseInterface {
-        $clientsideValidator = $this->objectManager->get(ClientsideValidator::class);
+    public function validateAction(): ResponseInterface {
+        $requestBody = $this->request->getParsedBody();
+        $validation = $requestBody['tx_femanager_validation']['validation'] ?? '';
+        $value =  $requestBody['tx_femanager_validation']['value'] ?? '';
+        $field =  $requestBody['tx_femanager_validation']['field'] ?? '';
+        // TODO: string
+        $user =  $requestBody['tx_femanager_validation']['user'] ?? null;
+        $additionalValue =  $requestBody['tx_femanager_validation']['additionalValue'] ?? '';
+        $plugin =  (int)$requestBody['tx_femanager_validation']['plugin'] ?? 0;
+        $pluginName =  $requestBody['tx_femanager_validation']['pluginName'] ?? '';
+        $referrerAction = $requestBody['tx_femanager_validation']['referrerAction'] ?? '';
+
+        if ($user !== null) {
+            $user = $this->userRepository->findByUid((int)$user);
+        }
+        $clientsideValidator = GeneralUtility::makeInstance(ClientsideValidator::class);
         $result = $clientsideValidator
             ->setValidationSettingsString($validation)
             ->setValue($value)
@@ -88,8 +83,9 @@ class UserController extends AbstractFrontendController
             ->setUser($user)
             ->setAdditionalValue($additionalValue)
             ->setPlugin($plugin)
+            ->setPluginName($pluginName)
             ->setActionName($referrerAction)
-            ->validateField();
+            ->validateField($pluginName);
 
         $this->view->assignMultiple(
             [
@@ -101,7 +97,7 @@ class UserController extends AbstractFrontendController
                 'user' => $user
             ]
         );
-        return $this->htmlResponse();
+        return $this->jsonResponse();
     }
 
     /**

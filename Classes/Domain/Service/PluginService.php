@@ -22,9 +22,11 @@ class PluginService
         $request =  $GLOBALS['TYPO3_REQUEST'];
 
         // only the name of the first femanager plugin is returned
-        foreach ($request->getParsedBody() as $key => $value) {
-            if (in_array($key, self::ALLOWED_PLUGINS)) {
-                return $key;
+        if (is_array($request->getParsedBody())) {
+            foreach ($request->getParsedBody() as $key => $value) {
+                if (in_array($key, self::ALLOWED_PLUGINS)) {
+                    return $key;
+                }
             }
         }
         return '';

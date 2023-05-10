@@ -504,16 +504,28 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         } elseif ($controllerNameInPlugin === 'Invitation') {
             $controllerName = 'invitation';
         }
-        $this->checkAllowedControllerName($controllerName, $pluginName);
+        $this->checkAllowedPluginName($pluginName);
         return $controllerName;
     }
 
-    protected function checkAllowedControllerName(string $controllerName, string $pluginName)
+    protected function getControllerNameByPlugin(string $plugin): string
+    {
+        // Security check: see Commit ae6c8d0b390a96d11fe7e3a524b0ace2cb23b7da
+        // only allow controller names 'new', 'edit' and 'invitation
+        if ($plugin === 'tx_femanager_edit') {
+            return 'edit';
+        } elseif ($plugin === 'tx_femanager_invitation') {
+            return 'invitation';
+        }
+        return 'new';
+    }
+
+    protected function checkAllowedPluginName(string $pluginName)
     {
         $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
         $pageIdentifier = FrontendUtility::getCurrentPid();
         if ($pluginRepository->isPluginWithViewOnGivenPage($pageIdentifier, $pluginName) === false) {
-            throw new \LogicException('ControllerName is not allowed', 1541506524);
+            throw new \LogicException('PluginName is not allowed', 1683551467);
         }
     }
 }
