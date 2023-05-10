@@ -545,7 +545,7 @@ class AbstractValidatorTest extends UnitTestCase
     {
         self::assertSame(
             $expectedResult,
-            $this->generalValidatorMock->_callRef('validateMustInclude', $value, $configuration)
+            $this->generalValidatorMock->_callRef('validateInclude', $value, $configuration, AbstractValidator::MUST_INCLUDE)
         );
     }
 
