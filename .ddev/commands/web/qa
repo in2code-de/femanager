@@ -1,0 +1,3 @@
+#!/bin/bash
+
+.Build/bin/rector process ./ --dry-run
