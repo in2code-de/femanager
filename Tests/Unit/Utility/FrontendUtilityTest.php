@@ -5,7 +5,7 @@ namespace In2code\Femanager\Tests\Unit\Utility;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Tests\Helper\TestingHelper;
 use In2code\Femanager\Utility\FrontendUtility;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class FrontendUtilityTest

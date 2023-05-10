@@ -3,7 +3,7 @@
 namespace In2code\Femanager\ViewHelpers\Request;
 
 use In2code\Femanager\ViewHelpers\Misc\RequestViewHelper;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class RequestTest

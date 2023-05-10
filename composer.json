@@ -72,7 +72,8 @@
     "typo3/cms-scheduler": "^12.3.0",
     "typo3/cms-setup": "^12.3.0",
     "typo3/cms-t3editor": "^12.3.0",
-    "typo3/cms-tstemplate": "^12.3.0"
+    "typo3/cms-tstemplate": "^12.3.0",
+    "typo3/testing-framework": "^7.0"
   },
   "autoload": {
     "psr-4": {

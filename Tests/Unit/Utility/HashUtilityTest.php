@@ -4,7 +4,7 @@ namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\HashUtility;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class HashUtilityTest

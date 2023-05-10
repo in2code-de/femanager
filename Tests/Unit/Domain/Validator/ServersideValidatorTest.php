@@ -5,7 +5,7 @@ namespace In2code\Femanager\Tests\Unit\Domain\Validator;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Validator\ServersideValidator;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**

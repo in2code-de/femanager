@@ -3,7 +3,7 @@
 namespace In2code\Femanager\Tests\Unit\ViewHelpers\Form;
 
 use In2code\Femanager\ViewHelpers\Form\GetCountriesViewHelper;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class GetCountriesTest

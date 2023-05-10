@@ -3,7 +3,7 @@
 namespace In2code\Femanager\Tests\Unit\Domain\Validator;
 
 use In2code\Femanager\Tests\Unit\Fixture\Domain\Validator\AbstractValidator;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class AbstractValidatorTest
@@ -21,6 +21,7 @@ class AbstractValidatorTest extends UnitTestCase
      */
     public function setUp(): void
     {
+        var_dump('foo');
         $this->generalValidatorMock = $this->getAccessibleMock(AbstractValidator::class, ['dummy']);
     }
 

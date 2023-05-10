@@ -3,7 +3,7 @@
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Tests\Unit\Fixture\Utility\AbstractUtility;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class AbstractUtilityTest
@@ -11,10 +11,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class AbstractUtilityTest extends UnitTestCase
 {
-    /**
-     * @var array
-     */
-    protected $testFilesToDelete = [];
+    protected array $testFilesToDelete = [];
 
     /**
      * @SuppressWarnings(PHPMD.Superglobals)
