@@ -161,15 +161,14 @@ abstract class AbstractController extends ActionController
     protected function processUploadedImage($user)
     {
         $uploadedFiles = $this->request->getUploadedFiles();
-        $allowedFileExtensions = explode(',', ConfigurationUtility::getConfiguration('misc.uploadFileExtension'));
-        $allowedMimeTypes = explode(',', ConfigurationUtility::getConfiguration('misc.uploadMimeTypes'));
+        $allowedFileExtensions = preg_split('/\s*,\s*/', trim(ConfigurationUtility::getConfiguration('misc.uploadFileExtension')));
+        $allowedMimeTypes = preg_split('/\s*,\s*/', trim(ConfigurationUtility::getConfiguration('misc.uploadMimeTypes')));
         if (count($uploadedFiles) > 0 && !empty($uploadedFiles['user']['image']) && count($uploadedFiles['user']['image']) > 0) {
-            $imageObjectStorage = GeneralUtility::makeInstance(ObjectStorage::class);
             foreach ($uploadedFiles['user']['image'] as $uploadedFile) {
                 /**
                  * @var $uploadedFile UploadedFile
                  */
-                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes) && in_array(explode('.', $uploadedFile->getClientFilename())[1], $allowedFileExtensions)) {
+                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes) && in_array(pathinfo($uploadedFile->getClientFilename())['extension'], $allowedFileExtensions)) {
                     $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
                     $uploadString = ConfigurationUtility::getConfiguration('misc.uploadFolder');
                     $storage = $resourceFactory->getStorageObjectFromCombinedIdentifier($uploadString);
@@ -193,10 +192,6 @@ abstract class AbstractController extends ActionController
                         ]
                     );
                     $sysFileReferenceUid = (int)$connection->lastInsertId('sys_file_reference');
-
-                    $fileReference = $resourceFactory->getFileReferenceObject($sysFileReferenceUid);
-
-                    $imageObjectStorage->attach($fileReference);
                 }
             }
         }
@@ -210,6 +205,8 @@ abstract class AbstractController extends ActionController
     {
         // send notify email to admin
         $existingUser = clone $this->userRepository->findByUid($user->getUid());
+
+        $this->processUploadedImage($user);
 
         if (ConfigurationUtility::notifyAdminAboutEdits($this->settings) === true) {
             $this->sendMailService->send(
@@ -237,7 +234,7 @@ abstract class AbstractController extends ActionController
         $this->eventDispatcher->dispatch(new FinalUpdateEvent($user));
         $this->logUtility->log(Log::STATUS_PROFILEUPDATED, $user, ['existingUser' => $existingUser]);
         $this->addFlashMessage(LocalizationUtility::translate('update'));
-        return $this->redirectByAction('edit');
+        return $this->redirectByAction('edit', 'redirect', 'edit');
     }
 
     /**
@@ -272,7 +269,7 @@ abstract class AbstractController extends ActionController
                 ['dirtyProperties' => $dirtyProperties]
             );
             $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
-            return $this->redirectByAction('edit', 'requestRedirect');
+            return $this->redirectByAction('edit', 'requestRedirect', 'edit');
         } else {
             $this->logUtility->log(
                 Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
@@ -414,7 +411,7 @@ abstract class AbstractController extends ActionController
         if ($target) {
             return $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
         } else {
-            return new ForwardResponse($defaultAction);
+            return $this->redirect($defaultAction);
         }
     }
 
@@ -426,7 +423,7 @@ abstract class AbstractController extends ActionController
         $user = UserUtility::getCurrentUser();
         $token = $this->request->getArgument('token');
         $uid = $this->request->getArgument('user');
-        $this->testSpoof($user, $uid, $token);
+        $this->testSpoof($user, (int)$uid, $token);
     }
 
     /**
@@ -434,10 +431,10 @@ abstract class AbstractController extends ActionController
      *
      * @param int $uid Given fe_users uid
      */
-    protected function testSpoof(User $user, int $uid, string $receivedToken): ResponseInterface
+    protected function testSpoof(User $user, int $uid, string $receivedToken): ResponseInterface|null
     {
         $errorOnProfileUpdate = false;
-        $knownToken = GeneralUtility::hmac($user->getUid(), (string)$user->getCrdate()->getTimestamp());
+        $knownToken = GeneralUtility::hmac((string)$user->getUid(), (string)$user->getCrdate()->getTimestamp());
 
         //check if the params are valid
         if (!is_string($receivedToken) || !hash_equals($knownToken, $receivedToken)) {
@@ -458,6 +455,7 @@ abstract class AbstractController extends ActionController
             );
             return new ForwardResponse('edit');
         }
+        return null;
     }
 
     /**

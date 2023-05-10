@@ -34,7 +34,7 @@ class EditController extends AbstractFrontendController
     {
         $token = '';
         if ($this->user) {
-            $token = GeneralUtility::hmac($this->user->getUid(), (string)$this->user->getCrdate()->getTimestamp());
+            $token = GeneralUtility::hmac((string)$this->user->getUid(), (string)$this->user->getCrdate()->getTimestamp());
         }
         $this->view->assignMultiple([
             'user' => $this->user,
@@ -51,12 +51,10 @@ class EditController extends AbstractFrontendController
         $userValues = $this->request->getArgument('user');
         $token = $this->request->getArgument('token');
 
-        $this->testSpoof($user, $userValues['__identity'], $token);
-        if ($this->keepPassword()) {
-            unset($this->pluginVariables['user']['password']);
-            unset($this->pluginVariables['password_repeat']);
+        $response = $this->testSpoof($user, (int)$userValues['__identity'], $token);
+        if ($response !== null) {
+            return $response;
         }
-        $this->request->setArguments($this->pluginVariables);
     }
 
     #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
@@ -140,7 +138,9 @@ class EditController extends AbstractFrontendController
                 }
             }
         }
-        $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['onAdminConfirmation.']);
+        if (!empty($this->config['edit.']['forceValues.']['onAdminConfirmation.'])) {
+            $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['onAdminConfirmation.']);
+        }
         $this->logUtility->log(Log::STATUS_PROFILEUPDATECONFIRMEDADMIN, $user);
         $this->addFlashMessage(LocalizationUtility::translate('updateProfile'));
     }
@@ -174,8 +174,7 @@ class EditController extends AbstractFrontendController
         $this->logUtility->log(Log::STATUS_PROFILEDELETE, $user);
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEDELETE));
         $this->userRepository->remove($user);
-        $this->redirectByAction('delete');
-        $this->redirect('edit');
+        return $this->redirectByAction('delete', 'redirect', 'edit');
     }
 
     /**

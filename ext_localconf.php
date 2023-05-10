@@ -22,9 +22,11 @@ call_user_func(function () {
         'Edit',
         [
             \In2code\Femanager\Controller\EditController::class => 'edit, update, delete, confirmUpdateRequest',
+            \In2code\Femanager\Controller\UserController::class => 'imageDelete',
         ],
         [
             \In2code\Femanager\Controller\EditController::class => 'edit, update, delete, confirmUpdateRequest',
+            \In2code\Femanager\Controller\UserController::class => 'imageDelete',
         ],
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
