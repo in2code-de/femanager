@@ -1,7 +1,8 @@
 <?php
 
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Controller\UserBackendController;
-if (!\In2code\Femanager\Utility\ConfigurationUtility::isDisableModuleActive()) {
+if (!ConfigurationUtility::isDisableModuleActive()) {
     return [
         'tx_femanager' => [
             'parent' => 'web',

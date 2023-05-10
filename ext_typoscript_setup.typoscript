@@ -24,7 +24,6 @@ feManagerLoginAs {
     admPanel = 0
     debug = 0
   }
-
   10 = USER
   10 {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run

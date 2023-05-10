@@ -5,7 +5,7 @@ namespace In2code\Femanager\Domain\Service;
 
 class PluginService
 {
-    const ALLOWED_PLUGINS = [
+    final public const ALLOWED_PLUGINS = [
         'tx_femanager_registration',
         'tx_femanager_edit',
         'tx_femanager_list',

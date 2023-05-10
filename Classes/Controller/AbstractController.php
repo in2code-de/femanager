@@ -161,14 +161,14 @@ abstract class AbstractController extends ActionController
     protected function processUploadedImage($user)
     {
         $uploadedFiles = $this->request->getUploadedFiles();
-        $allowedFileExtensions = preg_split('/\s*,\s*/', trim(ConfigurationUtility::getConfiguration('misc.uploadFileExtension')));
-        $allowedMimeTypes = preg_split('/\s*,\s*/', trim(ConfigurationUtility::getConfiguration('misc.uploadMimeTypes')));
-        if (count($uploadedFiles) > 0 && !empty($uploadedFiles['user']['image']) && count($uploadedFiles['user']['image']) > 0) {
+        $allowedFileExtensions = preg_split('/\s*,\s*/', trim((string) ConfigurationUtility::getConfiguration('misc.uploadFileExtension')));
+        $allowedMimeTypes = preg_split('/\s*,\s*/', trim((string) ConfigurationUtility::getConfiguration('misc.uploadMimeTypes')));
+        if (count($uploadedFiles) > 0 && !empty($uploadedFiles['user']['image']) && (is_countable($uploadedFiles['user']['image']) ? count($uploadedFiles['user']['image']) : 0) > 0) {
             foreach ($uploadedFiles['user']['image'] as $uploadedFile) {
                 /**
                  * @var $uploadedFile UploadedFile
                  */
-                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes) && in_array(pathinfo($uploadedFile->getClientFilename())['extension'], $allowedFileExtensions)) {
+                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes) && in_array(pathinfo((string) $uploadedFile->getClientFilename())['extension'], $allowedFileExtensions)) {
                     $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
                     $uploadString = ConfigurationUtility::getConfiguration('misc.uploadFolder');
                     $storage = $resourceFactory->getStorageObjectFromCombinedIdentifier($uploadString);

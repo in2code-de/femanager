@@ -165,7 +165,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
                 } elseif (is_object($value) && method_exists($value, '__toString')) {
                     $key = (string)$value;
                 } elseif (is_object($value)) {
-                    throw new Exception('No identifying value for object of class "' . get_class($value) . '" found.', 1247826696);
+                    throw new Exception('No identifying value for object of class "' . $value::class . '" found.', 1247826696);
                 }
                 if ($this->hasArgument('optionLabelField')) {
                     $value = ObjectAccess::getPropertyPath($value, $this->arguments['optionLabelField']);
@@ -173,7 +173,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
                         if (method_exists($value, '__toString')) {
                             $value = (string)$value;
                         } else {
-                            throw new Exception('Label value for object of class "' . get_class($value) . '" was an object without a __toString() method.', 1247827553);
+                            throw new Exception('Label value for object of class "' . $value::class . '" was an object without a __toString() method.', 1247827553);
                         }
                     }
                 } elseif (is_object($value) && method_exists($value, '__toString')) {
@@ -197,7 +197,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
      * @param mixed $value Value to check for
      * @return bool True if the value should be marked as selected.
      */
-    protected function isSelected($value): bool
+    protected function isSelected(mixed $value): bool
     {
         $selectedValue = $this->getSelectedValue();
         if ($value === $selectedValue || (string)$value === $selectedValue) {
@@ -267,10 +267,9 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
     /**
      * Get the option value for an object
      *
-     * @param mixed $valueElement
      * @return string @todo: Does not always return string ...
      */
-    protected function getOptionValueScalar($valueElement)
+    protected function getOptionValueScalar(mixed $valueElement)
     {
         if (is_object($valueElement)) {
             if ($this->hasArgument('optionValueField')) {

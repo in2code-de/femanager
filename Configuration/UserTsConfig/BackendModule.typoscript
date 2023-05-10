@@ -5,4 +5,3 @@ tx_femanager.UserBackend.confirmation {
   # UI for resending UserConfirmationRequests are shown in confirmation view
   ResendUserConfirmationRequest = 0
 }
-

@@ -57,17 +57,11 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         $this->configurationManager = $configurationManager;
     }
 
-    /**
-     * @param PluginService $pluginService
-     */
     public function injectPluginService(PluginService $pluginService)
     {
         $this->pluginService = $pluginService;
     }
 
-    /**
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function injectEventDispatcherInterface(EventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;

@@ -104,8 +104,6 @@ class ClientsideValidator extends AbstractValidator
 
     /**
      * Validate Field
-     *
-     * @return bool
      */
     public function validateField(string $pluginName = 'tx_femanager_new'): bool
     {
@@ -330,8 +328,8 @@ class ClientsideValidator extends AbstractValidator
         }
         $singleSettingsArray = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
         foreach ($singleSettingsArray as &$singleSetting) {
-            if (str_contains($singleSetting, '|')) {
-                $singleSetting = str_replace('|', ',', $singleSetting);
+            if (str_contains((string) $singleSetting, '|')) {
+                $singleSetting = str_replace('|', ',', (string) $singleSetting);
             }
         }
         return $singleSettingsArray;
@@ -456,9 +454,6 @@ class ClientsideValidator extends AbstractValidator
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getPluginName(): string
     {
         return $this->pluginName;

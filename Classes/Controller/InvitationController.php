@@ -272,8 +272,6 @@ class InvitationController extends AbstractFrontendController
 
     /**
      * Check if user is allowed to see this action
-     *
-     * @return bool
      */
     protected function allowedUserForInvitationNewAndCreate(): bool
     {

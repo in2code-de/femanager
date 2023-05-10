@@ -39,7 +39,6 @@ class NewController extends AbstractFrontendController
      * Render registration form
      *
      * @param User|null $user
-     * @return ResponseInterface
      * @throws JsonException
      */
     public function newAction(User $user = null): ResponseInterface
@@ -57,8 +56,6 @@ class NewController extends AbstractFrontendController
     /**
      * action create
      *
-     * @param User $user
-     * @return ResponseInterface
      * @throws IllegalObjectTypeException
      * @throws InvalidPasswordHashException
      */
@@ -111,11 +108,7 @@ class NewController extends AbstractFrontendController
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
      */
-
     /**
-     * @param int $user
-     * @param string $hash
-     * @param string $status
      * @return ResponseInterface|void
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
@@ -137,7 +130,7 @@ class NewController extends AbstractFrontendController
         // check if the request was triggered via Backend
         if ($request->hasHeader('Accept')) {
             $accept = $request->getHeader('Accept')[0];
-            if (str_contains($accept, 'application/json')) {
+            if (str_contains((string) $accept, 'application/json')) {
                 $backend = true;
             }
         }
@@ -169,9 +162,6 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: User confirmation
      *
-     * @param User $user
-     * @param string $hash
-     * @param string $status
      * @return bool allow further functions
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
@@ -209,8 +199,6 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: User confirmation refused
      *
-     * @param User $user
-     * @param string $hash
      * @return bool allow further functions
      * @throws IllegalObjectTypeException
      */
@@ -232,10 +220,8 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: Admin confirmation
      *
-     * @param User $user
      * @param $hash
      * @param $status
-     * @param bool $backend
      * @return bool allow further functions
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
@@ -266,7 +252,6 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: Admin refused profile creation (normal or silent)
      *
-     * @param User $user
      * @param $hash
      * @param $status
      * @return bool allow further functions
@@ -312,7 +297,6 @@ class NewController extends AbstractFrontendController
     /**
      * Postfix method to createAction(): Create must be confirmed by Admin or User
      *
-     * @param User $user
      * @return void
      * @throws IllegalObjectTypeException
      */
@@ -383,18 +367,11 @@ class NewController extends AbstractFrontendController
         }
     }
 
-    /**
-     * @return bool
-     */
     protected function isAllConfirmed(): bool
     {
         return empty($this->settings['new']['confirmByUser']) && empty($this->settings['new']['confirmByAdmin']);
     }
 
-    /**
-     * @param User $user
-     * @return bool
-     */
     protected function isAdminConfirmationMissing(User $user): bool
     {
         return !empty($this->settings['new']['confirmByAdmin']) && !$user->getTxFemanagerConfirmedbyadmin();

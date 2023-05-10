@@ -108,7 +108,6 @@ class TemplateUtility extends AbstractUtility
      * @param string $controllerName
      * @param string $extensionName
      * @param string $pluginName
-     * @param string $format
      * @return StandaloneView
      */
     public static function getDefaultStandAloneView(

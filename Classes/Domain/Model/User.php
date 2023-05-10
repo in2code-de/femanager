@@ -316,8 +316,6 @@ class User extends AbstractEntity
 
     /**
      * Sets the lastName value
-     *
-     * @param string $lastName
      */
     public function setLastName(string $lastName)
     {
@@ -350,8 +348,6 @@ class User extends AbstractEntity
 
     /**
      * Sets the telephone value
-     *
-     * @param string $telephone
      */
     public function setTelephone(string $telephone)
     {
