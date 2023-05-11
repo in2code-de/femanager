@@ -122,7 +122,11 @@ class NewController extends AbstractFrontendController
         $this->eventDispatcher->dispatch(new BeforeUserConfirmEvent($user, $hash, $status));
 
         if ($user === null) {
-            $this->addFlashMessage(LocalizationUtility::translate('missingUserInDatabase'), '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                LocalizationUtility::translate('missingUserInDatabase'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
             $this->redirect('new');
         }
 
@@ -139,7 +143,8 @@ class NewController extends AbstractFrontendController
             'userConfirmation' => $this->statusUserConfirmation($user, $hash, $status),
             'userConfirmationRefused' => $this->statusUserConfirmationRefused($user, $hash),
             'adminConfirmation' => $this->statusAdminConfirmation($user, $hash, $status, $backend),
-            'adminConfirmationRefused', 'adminConfirmationRefusedSilent' => $this->statusAdminConfirmationRefused($user, $hash, $status),
+            'adminConfirmationRefused', 'adminConfirmationRefusedSilent' =>
+            $this->statusAdminConfirmationRefused($user, $hash, $status),
             default => false,
         };
 
@@ -147,7 +152,10 @@ class NewController extends AbstractFrontendController
             $this->persistenceManager->persistAll();
             $event = new UserWasConfirmedByAdminEvent($request, $user);
             $this->eventDispatcher->dispatch( $event);
-            // this request was triggered via Backend Module "Frontend users", so we stop here and provide a feedback to the BE
+            /**
+             * this request was triggered via Backend Module "Frontend users",
+             * so we stop here and provide a feedback to the BE
+             */
             echo json_encode(['status' => 'okay']) . PHP_EOL;
             die();
         }
@@ -170,11 +178,18 @@ class NewController extends AbstractFrontendController
     {
         if (HashUtility::validHash($hash, $user)) {
             if ($user->getTxFemanagerConfirmedbyuser()) {
-                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', ContextualFeedbackSeverity::ERROR);
+                $this->addFlashMessage(
+                    LocalizationUtility::translate('userAlreadyConfirmed'),
+                    '',
+                    ContextualFeedbackSeverity::ERROR
+                );
                 $this->redirect('new');
             }
 
-            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onUserConfirmation.', $this->config));
+            $user = FrontendUtility::forceValues(
+                $user,
+                ConfigurationUtility::getValue('new./forceValues./onUserConfirmation.', $this->config)
+            );
             $user->setTxFemanagerConfirmedbyuser(true);
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
@@ -188,7 +203,11 @@ class NewController extends AbstractFrontendController
                 $this->finalCreate($user, 'new', 'createStatus', true, $status);
             }
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                LocalizationUtility::translate('createFailedProfile'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
 
             return false;
         }
@@ -209,7 +228,11 @@ class NewController extends AbstractFrontendController
             $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
             $this->userRepository->remove($user);
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                LocalizationUtility::translate('createFailedProfile'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
 
             return false;
         }
@@ -230,18 +253,29 @@ class NewController extends AbstractFrontendController
     {
         if (HashUtility::validHash($hash, $user)) {
             if ($user->getTxFemanagerConfirmedbyadmin()) {
-                $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', ContextualFeedbackSeverity::ERROR);
+                $this->addFlashMessage(
+                    LocalizationUtility::translate('userAlreadyConfirmed'),
+                    '',
+                    ContextualFeedbackSeverity::ERROR
+                );
                 $this->redirect('new');
             }
 
-            $user = FrontendUtility::forceValues($user, ConfigurationUtility::getValue('new./forceValues./onAdminConfirmation.', $this->config));
+            $user = FrontendUtility::forceValues(
+                $user,
+                ConfigurationUtility::getValue('new./forceValues./onAdminConfirmation.', $this->config)
+            );
             $user->setTxFemanagerConfirmedbyadmin(true);
             $user->setDisable(false);
             $this->userRepository->update($user);
             $this->logUtility->log(Log::STATUS_REGISTRATIONCONFIRMEDADMIN, $user);
             $this->finalCreate($user, 'new', 'createStatus', false, $status, $backend);
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                LocalizationUtility::translate('createFailedProfile'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
 
             return false;
         }
@@ -278,7 +312,11 @@ class NewController extends AbstractFrontendController
             }
             $this->userRepository->remove($user);
         } else {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                LocalizationUtility::translate('createFailedProfile'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
 
             return false;
         }

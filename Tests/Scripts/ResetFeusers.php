@@ -40,7 +40,10 @@ class ResetFeusers
         $queryBuilder
             ->delete('fe_users')
             ->where(
-                $queryBuilder->expr()->eq('username', $queryBuilder->createNamedParameter($this->userValues['username']))
+                $queryBuilder->expr()->eq(
+                    'username',
+                    $queryBuilder->createNamedParameter($this->userValues['username'])
+                )
             );
         $queryBuilder2->insert('fe_users')->values($this->userValues);
 

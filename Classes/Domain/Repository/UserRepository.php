@@ -178,8 +178,10 @@ class UserRepository extends Repository
      * @param array $filter Filter Array
      * @param bool $userConfirmation Show only fe_users which are confirmed by the user?
      */
-    public function findAllInBackendForConfirmation(array $filter, bool $userConfirmation = false): QueryResultInterface|array
-    {
+    public function findAllInBackendForConfirmation(
+        array $filter,
+        bool $userConfirmation = false
+    ): QueryResultInterface|array {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);
         $and = [$query->equals('disable', true)];

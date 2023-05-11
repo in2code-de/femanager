@@ -13,6 +13,6 @@ class IsResendUserConfirmationRequestActivatedViewHelper extends AbstractViewHel
 {
     public function render(): bool
     {
-        return ConfigurationUtility::IsResendUserConfirmationRequestActive();
+        return ConfigurationUtility::isResendUserConfirmationRequestActive();
     }
 }

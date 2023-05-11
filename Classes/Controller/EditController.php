@@ -34,7 +34,10 @@ class EditController extends AbstractFrontendController
     {
         $token = '';
         if ($this->user) {
-            $token = GeneralUtility::hmac((string)$this->user->getUid(), (string)$this->user->getCrdate()->getTimestamp());
+            $token = GeneralUtility::hmac(
+                (string)$this->user->getUid(),
+                (string)$this->user->getCrdate()->getTimestamp()
+            );
         }
         $this->view->assignMultiple([
             'user' => $this->user,
@@ -96,7 +99,11 @@ class EditController extends AbstractFrontendController
     {
         $this->view->assign('user', $user);
         if (!HashUtility::validHash($hash, $user) || !$user->getTxFemanagerChangerequest()) {
-            $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                LocalizationUtility::translate('updateFailedProfile'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
             return $this->htmlResponse(null);
         }
         switch ($status) {

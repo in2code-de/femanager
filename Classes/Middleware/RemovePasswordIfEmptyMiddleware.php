@@ -18,7 +18,9 @@ class RemovePasswordIfEmptyMiddleware implements MiddlewareInterface
     {
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
         $typoscript = $configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,'femanager');
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
+            'femanager'
+        );
         $requestBody = $request->getParsedBody();
 
         if (!empty($typoscript['plugin.']['tx_femanager.']['settings.']['edit.']['misc.']['keepPasswordIfEmpty']) &&

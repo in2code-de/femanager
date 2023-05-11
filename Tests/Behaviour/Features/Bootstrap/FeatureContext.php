@@ -4,7 +4,9 @@ use Behat\MinkExtension\Context\MinkContext;
 
 /**
  * Class FeatureContext
+ * @TODO: Check Namespacing because of PHPCS Error
  */
+//phpcs:ignore PSR1.Classes.ClassDeclaration
 class FeatureContext extends MinkContext
 {
     /**

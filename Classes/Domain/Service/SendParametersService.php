@@ -97,11 +97,17 @@ class SendParametersService
     protected function log()
     {
         if (!empty($this->configuration['debug'])) {
-            GeneralUtility::makeInstance(LogManager::class)->getLogger(self::class)->log(LogLevel::INFO, 'femanager sendpost values', [
-                'url' => $this->getUri(),
-                'data' => $this->getData(),
-                'properties' => $this->properties
-            ]);
+            GeneralUtility::makeInstance(LogManager::class)
+                ->getLogger(self::class)
+                ->log(
+                    LogLevel::INFO,
+                    'femanager sendpost values',
+                    [
+                        'url' => $this->getUri(),
+                        'data' => $this->getData(),
+                        'properties' => $this->properties
+                    ]
+                );
         }
     }
 

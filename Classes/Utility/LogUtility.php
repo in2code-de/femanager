@@ -15,8 +15,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class LogUtility
 {
-    public function __construct(private readonly LogRepository $logRepository, private readonly EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        private readonly LogRepository $logRepository,
+        private readonly EventDispatcherInterface $eventDispatcher
+    ) {
     }
 
     /**

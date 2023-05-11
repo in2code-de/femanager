@@ -60,7 +60,8 @@ class UserController extends AbstractFrontendController
         return $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
     }
 
-    public function validateAction(): ResponseInterface {
+    public function validateAction(): ResponseInterface
+    {
         $requestBody = $this->request->getParsedBody();
         $validation = $requestBody['tx_femanager_validation']['validation'] ?? '';
         $value =  $requestBody['tx_femanager_validation']['value'] ?? '';

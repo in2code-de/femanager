@@ -29,7 +29,8 @@ class PluginUpdater implements UpgradeWizardInterface
             'targetListType' => 'femanager_registration',
         ],
         [
-            'switchableControllerActions' => 'Edit->edit;Edit->update;Edit->delete;Edit->confirmUpdateRequest;User->imageDelete;',
+            'switchableControllerActions' =>
+                'Edit->edit;Edit->update;Edit->delete;Edit->confirmUpdateRequest;User->imageDelete;',
             'targetListType' => 'femanager_edit',
         ],
         [
@@ -41,15 +42,19 @@ class PluginUpdater implements UpgradeWizardInterface
             'targetListType' => 'femanager_detail',
         ],
         [
-            'switchableControllerActions' => 'Invitation->new;Invitation->create;Invitation->edit;Invitation->update;Invitation->delete;Invitation->status;',
+            'switchableControllerActions' =>
+                'Invitation->new;Invitation->create;Invitation->edit;' .
+                'Invitation->update;Invitation->delete;Invitation->status;',
             'targetListType' => 'femanager_invitation',
         ],
         [
-            'switchableControllerActions' => 'New->resendConfirmationDialogue;New->resendConfirmationMail;New->confirmCreateRequest;New->createStatus',
+            'switchableControllerActions' =>
+                'New->resendConfirmationDialogue;New->resendConfirmationMail;' .
+                'New->confirmCreateRequest;New->createStatus',
             'targetListType' => 'femanager_resendconfirmationmail',
         ],
     ];
-    
+
     /** @var FlexFormService */
     protected $flexFormService;
 
@@ -115,7 +120,12 @@ class PluginUpdater implements UpgradeWizardInterface
                 }
 
                 // Remove empty sheets
-                if (!(is_countable($flexFormData['data'][$sheetKey]['lDEF']) ? count($flexFormData['data'][$sheetKey]['lDEF']) : 0) > 0) {
+                if (
+                    !(
+                        is_countable($flexFormData['data'][$sheetKey]['lDEF'])
+                            ? count($flexFormData['data'][$sheetKey]['lDEF']) : 0
+                    ) > 0
+                ) {
                     unset($flexFormData['data'][$sheetKey]);
                 }
             }
@@ -170,7 +180,8 @@ class PluginUpdater implements UpgradeWizardInterface
         }
 
         $flexFormFile = $GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds']['*,' . $listType];
-        $flexFormContent = file_get_contents(GeneralUtility::getFileAbsFileName(substr(trim((string) $flexFormFile), 5)));
+        $flexFormContent =
+            file_get_contents(GeneralUtility::getFileAbsFileName(substr(trim((string) $flexFormFile), 5)));
         $flexFormData = GeneralUtility::xml2array($flexFormContent);
 
         // Iterate each sheet and extract all settings

@@ -53,8 +53,25 @@ class GetClassNameOnActionViewHelper extends AbstractViewHelper
     public function initializeArguments()
     {
         parent::initializeArguments();
-        $this->registerArgument('actionName', 'string', 'action name to compare with current action', true);
-        $this->registerArgument('className', 'string', 'classname that should be returned if action fits', false, ' btn-info');
-        $this->registerArgument('fallbackClassName', 'string', 'fallback classname if action does not fit', false, '');
+        $this->registerArgument(
+            'actionName',
+            'string',
+            'action name to compare with current action',
+            true
+        );
+        $this->registerArgument(
+            'className',
+            'string',
+            'classname that should be returned if action fits',
+            false,
+            ' btn-info'
+        );
+        $this->registerArgument(
+            'fallbackClassName',
+            'string',
+            'fallback classname if action does not fit',
+            false,
+            ''
+        );
     }
 }

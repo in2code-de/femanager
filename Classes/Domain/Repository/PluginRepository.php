@@ -85,8 +85,14 @@ class PluginRepository
                 ->select('uid')
                 ->from(self::TABLE_NAME)
                 ->where(
-                    $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageIdentifier, PDO::PARAM_INT)),
-                    $queryBuilder->expr()->eq('CType', $queryBuilder->createNamedParameter($cType, PDO::PARAM_STR))
+                    $queryBuilder->expr()->eq(
+                        'pid',
+                        $queryBuilder->createNamedParameter($pageIdentifier, PDO::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->eq(
+                        'CType',
+                        $queryBuilder->createNamedParameter($cType, PDO::PARAM_STR)
+                    )
                 )
                 ->executeQuery();
             if (! $pluginOnPageQuery instanceof Result) {

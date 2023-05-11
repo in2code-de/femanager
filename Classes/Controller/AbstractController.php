@@ -161,14 +161,31 @@ abstract class AbstractController extends ActionController
     protected function processUploadedImage($user)
     {
         $uploadedFiles = $this->request->getUploadedFiles();
-        $allowedFileExtensions = preg_split('/\s*,\s*/', trim((string) ConfigurationUtility::getConfiguration('misc.uploadFileExtension')));
-        $allowedMimeTypes = preg_split('/\s*,\s*/', trim((string) ConfigurationUtility::getConfiguration('misc.uploadMimeTypes')));
-        if (count($uploadedFiles) > 0 && !empty($uploadedFiles['user']['image']) && (is_countable($uploadedFiles['user']['image']) ? count($uploadedFiles['user']['image']) : 0) > 0) {
+        $allowedFileExtensions = preg_split(
+            '/\s*,\s*/',
+            trim((string) ConfigurationUtility::getConfiguration('misc.uploadFileExtension'))
+        );
+        $allowedMimeTypes = preg_split(
+            '/\s*,\s*/',
+            trim((string) ConfigurationUtility::getConfiguration('misc.uploadMimeTypes'))
+        );
+        if (
+            count($uploadedFiles) > 0
+            && !empty($uploadedFiles['user']['image'])
+            && (is_countable($uploadedFiles['user']['image']) ? count($uploadedFiles['user']['image']) : 0) > 0
+        ) {
             foreach ($uploadedFiles['user']['image'] as $uploadedFile) {
                 /**
                  * @var $uploadedFile UploadedFile
                  */
-                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes) && in_array(pathinfo((string) $uploadedFile->getClientFilename())['extension'], $allowedFileExtensions)) {
+                if (
+                    in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes)
+                    && in_array(
+                        pathinfo(
+                            (string) $uploadedFile->getClientFilename())['extension'],
+                        $allowedFileExtensions
+                    )
+                ) {
                     $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
                     $uploadString = ConfigurationUtility::getConfiguration('misc.uploadFolder');
                     $storage = $resourceFactory->getStorageObjectFromCombinedIdentifier($uploadString);
@@ -178,9 +195,15 @@ abstract class AbstractController extends ActionController
                     }
                     $uploadFolder = $resourceFactory->getFolderObjectFromCombinedIdentifier($uploadString);
 
-                    $newFile = $storage->addUploadedFile($uploadedFile,$uploadFolder,null, DuplicationBehavior::RENAME);
+                    $newFile = $storage->addUploadedFile(
+                        $uploadedFile,
+                        $uploadFolder,
+                        null,
+                        DuplicationBehavior::RENAME
+                    );
 
-                    $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_file_reference');
+                    $connection = GeneralUtility::makeInstance(ConnectionPool::class)
+                        ->getConnectionForTable('sys_file_reference');
                     $connection->insert(
                         'sys_file_reference',
                         [
@@ -212,8 +235,10 @@ abstract class AbstractController extends ActionController
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
-                    ConfigurationUtility::getValue('edit/email/createUserNotify/notifyAdmin/receiver/email/value',$this->config) ??
-                    ConfigurationUtility::getValue('edit/notifyAdmin', $this->config),
+                    ConfigurationUtility::getValue(
+                        'edit/email/createUserNotify/notifyAdmin/receiver/email/value',
+                        $this->config
+                    ) ?? ConfigurationUtility::getValue('edit/notifyAdmin', $this->config),
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value'] ?? null
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
@@ -351,7 +376,11 @@ abstract class AbstractController extends ActionController
         $this->finisherRunner->callFinishers($user, $this->actionMethodName, $this->settings, $this->contentObject);
 
         if ($backend === false) {
-            $redirectTarget = $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'), $redirectByActionName);
+            $redirectTarget = $this->redirectByAction(
+                $action,
+                ($status ? $status . 'Redirect' : 'redirect'),
+                $redirectByActionName
+            );
             if ($redirectTarget instanceof ForwardResponse) {
                 $this->addFlashMessage(LocalizationUtility::translate('create'));
             }
@@ -373,8 +402,15 @@ abstract class AbstractController extends ActionController
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
             if (ConfigurationUtility::getValue('new./login', $this->config) === '1') {
-                UserUtility::login($user, ConfigurationUtility::getValue('persistence./storagePid', $this->allConfig));
-                $this->addFlashMessage(LocalizationUtility::translate('login'), '', ContextualFeedbackSeverity::NOTICE);
+                UserUtility::login(
+                    $user,
+                    ConfigurationUtility::getValue('persistence./storagePid', $this->allConfig)
+                );
+                $this->addFlashMessage(
+                    LocalizationUtility::translate('login'),
+                    '',
+                    ContextualFeedbackSeverity::NOTICE
+                );
             }
         }
     }
@@ -387,8 +423,11 @@ abstract class AbstractController extends ActionController
      * @param string $action "new", "edit"
      * @param string $category "redirect", "requestRedirect" value from TypoScript
      */
-    protected function redirectByAction($action = 'new', $category = 'redirect', $defaultAction = 'new'): ResponseInterface
-    {
+    protected function redirectByAction(
+        $action = 'new',
+        $category = 'redirect',
+        $defaultAction = 'new'
+    ): ResponseInterface {
         $target = null;
         // redirect from TypoScript cObject
         if ($this->contentObject->cObjGetSingle(
@@ -492,7 +531,8 @@ abstract class AbstractController extends ActionController
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
-        $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
+        $this->config =
+            $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
 
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
             $pid = $this->allConfig['persistence']['storagePid'] ?? 0;
@@ -544,7 +584,11 @@ abstract class AbstractController extends ActionController
             && GeneralUtility::_GP('type') !== '1548935210'
             && !ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
         ) {
-            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                LocalizationUtility::translate('error_no_storagepid'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
         }
     }
 
@@ -589,8 +633,13 @@ abstract class AbstractController extends ActionController
             'createUserConfirmation',
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             [
-                ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value', $this->config) =>
-                    ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config),
+                ConfigurationUtility::getValue(
+                    'new./email./createUserConfirmation./sender./email./value',
+                    $this->config
+                ) => ConfigurationUtility::getValue(
+                    'new./email./createUserConfirmation./sender./name./value',
+                    $this->config
+                ),
             ],
             $this->contentObject->cObjGetSingle(
                 ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),

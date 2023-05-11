@@ -30,12 +30,15 @@ class TestingHelper
             define('TYPO3_OS', 'LINUX');
         }
         if (!defined('PATH_site')) {
+            // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName
             define('PATH_site', self::getWebRoot());
         }
         if (!defined('PATH_thisScript')) {
+            // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName
             define('PATH_thisScript', self::getWebRoot() . 'typo3');
         }
         if (!defined('TYPO3_version')) {
+            // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName
             define('TYPO3_version', '8007000');
         }
         if (!defined('PHP_EXTENSIONS_DEFAULT')) {
@@ -45,6 +48,7 @@ class TestingHelper
             define('TYPO3', true);
         }
         if (!defined('PATH_typo3')) {
+            // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName
             define('PATH_typo3', self::getWebRoot());
         }
         if (!defined('LF')) {

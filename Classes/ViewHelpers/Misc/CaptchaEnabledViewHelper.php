@@ -34,6 +34,7 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
         $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
 
         return ExtensionManagementUtility::isLoaded('sr_freecap')
-            && $this->templateVariableContainer->getByPath('settings.' . $controllerName . '.validation.captcha.captcha');
+            && $this->templateVariableContainer->getByPath(
+                'settings.' . $controllerName . '.validation.captcha.captcha');
     }
 }

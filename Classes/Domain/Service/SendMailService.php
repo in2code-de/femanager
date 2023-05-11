@@ -31,8 +31,10 @@ class SendMailService
     /**
      * SendMailService constructor.
      */
-    public function __construct(private readonly ?Mailer $mailer, private readonly ?EventDispatcherInterface $dispatcher)
-    {
+    public function __construct(
+        private readonly ?Mailer $mailer,
+        private readonly ?EventDispatcherInterface $dispatcher
+    ) {
         $this->contentObject = ObjectUtility::getContentObject();
     }
 

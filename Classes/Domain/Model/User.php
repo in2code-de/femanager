@@ -821,6 +821,7 @@ class User extends AbstractEntity
     /**
      * Workaround to disable persistence in updateAction
      */
+    // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
     public function _isDirty($propertyName = null): bool
     {
         return $this->getIgnoreDirty() ? false : parent::_isDirty($propertyName);

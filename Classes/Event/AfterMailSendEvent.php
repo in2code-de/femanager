@@ -9,8 +9,11 @@ use Symfony\Component\Mime\Email;
 
 class AfterMailSendEvent
 {
-    public function __construct(private readonly Email $email, private readonly array $variables, private readonly SendMailService $service)
-    {
+    public function __construct(
+        private readonly Email $email,
+        private readonly array $variables,
+        private readonly SendMailService $service
+    ) {
     }
 
     public function getEmail(): Email

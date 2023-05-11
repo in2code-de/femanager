@@ -38,6 +38,9 @@ class BackendEditLinkViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ): string {
-        return BackendUtility::getBackendEditUri($arguments['tableName'], $arguments['identifier'], $arguments['addReturnUrl']);
+        return BackendUtility::getBackendEditUri(
+            $arguments['tableName'], $arguments['identifier'],
+            $arguments['addReturnUrl']
+        );
     }
 }

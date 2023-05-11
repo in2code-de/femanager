@@ -108,7 +108,8 @@ class BackendUtility
      */
     public static function loadTS($pageUid = null)
     {
-        $pageUid = ($pageUid && MathUtility::canBeInterpretedAsInteger($pageUid)) ? $pageUid : GeneralUtility::_GP('id');
+        $pageUid = ($pageUid && MathUtility::canBeInterpretedAsInteger($pageUid)) ?
+            $pageUid : GeneralUtility::_GP('id');
         $TSObj = GeneralUtility::makeInstance(TemplateService::class);
         $TSObj->tt_track = 0;
         $TSObj->runThroughTemplates(GeneralUtility::makeInstance(RootlineUtility::class, $pageUid, '')->get());

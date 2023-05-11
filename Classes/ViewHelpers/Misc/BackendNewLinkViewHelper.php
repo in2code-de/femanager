@@ -37,6 +37,9 @@ class BackendNewLinkViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ): string {
-        return BackendUtility::getBackendNewUri($arguments['tableName'], BackendUtility::getPageIdentifier(), $arguments['addReturnUrl']);
+        return BackendUtility::getBackendNewUri(
+            $arguments['tableName'], BackendUtility::getPageIdentifier(),
+            $arguments['addReturnUrl']
+        );
     }
 }
