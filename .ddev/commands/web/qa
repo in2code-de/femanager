@@ -2,3 +2,4 @@
 
 .Build/bin/rector process ./ --dry-run
 .project/phars/phpcpd ./ --exclude=.Build/* --exclude=var/*
+.project/phars/phpcs --standard=.project/qa/.phpcs_PSR1_PSR2_PSR12.xml Classes
