@@ -140,9 +140,10 @@ class UserLinks
             ->where(
                 $queryBuilder->expr()->eq('username', $queryBuilder->createNamedParameter($username)),
                 $queryBuilder->expr()->eq('pid', 5)
-            );
+            )
+            ->setMaxResults(1);
         try {
-            return $queryBuilder->execute()->fetch();
+            return $queryBuilder->executeQuery()->fetchAssociative();
         } catch (DBALException $e) {
             $errorMsg = $e->getMessage();
 
@@ -156,17 +157,18 @@ class UserLinks
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
         $queryBuilder->getRestrictions()->removeAll();
         $queryBuilder
-            ->select('*')
+            ->select('username')
             ->from('fe_users')
             ->where(
                 $queryBuilder->expr()->eq('pid', 5)
             )
-            ->orderBy('uid', 'desc');
+            ->orderBy('uid', 'desc')
+            ->setMaxResults(1);
 
         try {
-            $res = $queryBuilder->execute();
+            $res = $queryBuilder->executeQuery();
             if ($res) {
-                $row = $res->fetch();
+                $row = $res->fetchAssociative();
                 $content = $row['username'];
             }
         } catch (DBALException $e) {

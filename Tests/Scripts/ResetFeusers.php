@@ -45,8 +45,8 @@ class ResetFeusers
         $queryBuilder2->insert('fe_users')->values($this->userValues);
 
         try {
-            $queryBuilder->execute();
-            $queryBuilder2->execute();
+            $queryBuilder->executeStatement();
+            $queryBuilder2->executeStatement();
 
             return 'FE Users reset successfully';
         } catch (DBALException $e) {

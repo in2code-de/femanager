@@ -21,7 +21,7 @@ class ResetRateLimiter
             ->delete('cache_femanager_ratelimiter');
 
         try {
-            $queryBuilder->execute();
+            $queryBuilder->executeStatement();
 
             return 'Rate limiter cache has been reset';
         } catch (Exception $e) {

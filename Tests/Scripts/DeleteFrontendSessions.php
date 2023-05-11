@@ -21,7 +21,7 @@ class DeleteFrontendSessions
             );
 
         try {
-            $queryBuilder->execute();
+            $queryBuilder->executeStatement();
 
             return 'All frontend sessions deleted';
         } catch (DBALException $e) {

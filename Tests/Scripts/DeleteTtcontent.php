@@ -20,7 +20,7 @@ class DeleteTtcontent
         $query->update('tt_content')
             ->set('deleted', 1)
             ->where($query->expr()->like('bodytext', $query->createNamedParameter('%[deleteme]%')));
-        $rowCount = $query->execute();
+        $rowCount = $query->executeStatement();
         return 'All content elements deleted with query: bodytext like "%[deleteme]%" (' . $rowCount . ' rows)';
     }
 }

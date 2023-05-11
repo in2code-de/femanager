@@ -11,6 +11,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DeleteFeusers
 {
+
+    public function test()
+    {
+        echo "test";
+    }
     /**
      * @return string
      */
@@ -29,7 +34,7 @@ class DeleteFeusers
             );
 
         try {
-            $queryBuilder->execute();
+            $queryBuilder->executeStatement();
 
             return 'All content elements deleted that have no in2code.de email address';
         } catch (DBALException $e) {
