@@ -5,3 +5,4 @@
 .project/phars/phpcs --standard=.project/qa/.phpcs_PSR1_PSR2_PSR12.xml Classes Tests
 .project/phars/php-cs-fixer fix Classes
 .project/phars/php-cs-fixer fix Tests
+.project/phars/phpmd Classes ansi .project/qa/.phpmd.xml
