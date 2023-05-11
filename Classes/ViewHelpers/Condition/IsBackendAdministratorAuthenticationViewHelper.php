@@ -9,6 +9,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Class IsBackendAdministratorAuthenticationViewHelper
+ *
+ * @SuppressWarnings(PHPMD.LongClassName)
  */
 class IsBackendAdministratorAuthenticationViewHelper extends AbstractViewHelper
 {

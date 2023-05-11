@@ -15,6 +15,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
@@ -44,12 +45,23 @@ class UserBackendController extends AbstractController
         $this->moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
     }
 
+    /**
+     * @param array $filter
+     * @return ResponseInterface
+     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     public function listAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         //TODO: the enableLoginAs funcionality is not working
-        $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->getTSConfig(
-        )['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
+        $context = GeneralUtility::makeInstance(Context::class);
+        $userIsAdmin = $context->getPropertyFromAspect('backend.user', 'isAdmin');
+        $loginAsEnabled =
+            $userIsAdmin
+            || (int)$GLOBALS['BE_USER']->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
         $this->moduleTemplate->assignMultiple(
             [
                 'users' => $this->userRepository->findAllInBackend($filter),
@@ -202,6 +214,16 @@ class UserBackendController extends AbstractController
         return 0;
     }
 
+    /**
+     * @param string $status
+     * @param int $userIdentifier
+     * @param User $user
+     * @return mixed|void
+     * @throws \JsonException
+     * @throws \TYPO3\CMS\Core\Exception\SiteNotFoundException
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     public function getFrontendRequestResult(string $status, int $userIdentifier, User $user)
     {
         /** @var SiteFinder $siteFinder */

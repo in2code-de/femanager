@@ -19,32 +19,32 @@ class PageTreeService
      *
      * Recursively fetch all descendants of a given page
      *
-     * @param int $id uid of the page
+     * @param int $pageUid uid of the page
      * @param int $depth
      * @param int $begin
      * @param string $permClause
      * @return string comma separated list of descendant pages
      */
-    public function getTreeList($id, $depth, $begin = 0, $permClause = '')
+    public function getTreeList($pageUid, $depth, $begin = 0, $permClause = '')
     {
         $depth = (int)$depth;
         $begin = (int)$begin;
-        $id = (int)$id;
-        if ($id < 0) {
-            $id = abs($id);
+        $pageUid = (int)$pageUid;
+        if ($pageUid < 0) {
+            $pageUid = abs($pageUid);
         }
         if ($begin === 0) {
-            $theList = $id;
+            $theList = $pageUid;
         } else {
             $theList = '';
         }
-        if ($id && $depth > 0) {
+        if ($pageUid && $depth > 0) {
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
             $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
             $queryBuilder->select('uid')
                 ->from('pages')
                 ->where(
-                    $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($id, Connection::PARAM_INT)),
+                    $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageUid, Connection::PARAM_INT)),
                     $queryBuilder->expr()->eq('sys_language_uid', 0)
                 )
                 ->orderBy('uid');

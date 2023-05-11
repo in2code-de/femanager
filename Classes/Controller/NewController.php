@@ -248,6 +248,8 @@ class NewController extends AbstractFrontendController
      * @return bool allow further functions
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     protected function statusAdminConfirmation(User $user, $hash, $status, bool $backend = false): bool
     {

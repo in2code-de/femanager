@@ -12,6 +12,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Class GetCountriesFromStaticInfoTablesViewHelper
+ *
+ * @SuppressWarnings(PHPMD.LongClassName)
  */
 class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
 {

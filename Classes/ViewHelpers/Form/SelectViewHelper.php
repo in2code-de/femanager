@@ -128,7 +128,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
         $this->tag->addAttribute('name', $name);
         $options = $this->getOptions();
 
-        $viewHelperVariableContainer = $this->renderingContext->getViewHelperVariableContainer();
+        $variableContainer = $this->renderingContext->getViewHelperVariableContainer();
 
         $this->addAdditionalIdentityPropertiesIfNeeded();
         $this->setErrorClassAttribute();
@@ -150,19 +150,19 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
             // save the parent field name so that any child f:form.select.option
             // tag will know to call registerFieldNameForFormTokenGeneration
             // this is the reason why "self::class" is used instead of static::class (no LSB)
-            $viewHelperVariableContainer->addOrUpdate(
+            $variableContainer->addOrUpdate(
                 self::class,
                 'registerFieldNameForFormTokenGeneration',
                 $name
             );
         }
 
-        $viewHelperVariableContainer->addOrUpdate(self::class, 'selectedValue', $this->getSelectedValue());
+        $variableContainer->addOrUpdate(self::class, 'selectedValue', $this->getSelectedValue());
         $prependContent = $this->renderPrependOptionTag();
         $tagContent = $this->renderOptionTags($options);
         $childContent = $this->renderChildren();
-        $viewHelperVariableContainer->remove(self::class, 'selectedValue');
-        $viewHelperVariableContainer->remove(self::class, 'registerFieldNameForFormTokenGeneration');
+        $variableContainer->remove(self::class, 'selectedValue');
+        $variableContainer->remove(self::class, 'registerFieldNameForFormTokenGeneration');
         if (isset($this->arguments['optionsAfterContent']) && $this->arguments['optionsAfterContent']) {
             $tagContent = $childContent . $tagContent;
         } else {

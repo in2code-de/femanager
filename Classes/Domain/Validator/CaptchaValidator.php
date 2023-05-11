@@ -17,6 +17,8 @@ class CaptchaValidator extends AbstractValidator
      * Validation of given Params
      *
      * @param $user
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function isValid($user): void
     {

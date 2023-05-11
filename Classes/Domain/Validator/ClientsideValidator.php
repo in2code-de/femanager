@@ -501,6 +501,8 @@ class ClientsideValidator extends AbstractValidator
 
     /**
      * @param mixed $value
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     protected function isValid($value): void
     {

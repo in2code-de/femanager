@@ -10,6 +10,7 @@ use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Domain\Service\PluginService;
 use In2code\Femanager\Event\UniqueUserEvent;
 use In2code\Femanager\Utility\FrontendUtility;
+use LogicException;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Http\ApplicationType;
@@ -406,6 +407,11 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         $this->setValidationSettings();
     }
 
+    /**
+     * @return void
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     protected function setPluginVariables()
     {
         // Get the current request object
@@ -498,7 +504,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
         $pageIdentifier = FrontendUtility::getCurrentPid();
         if ($pluginRepository->isPluginWithViewOnGivenPage($pageIdentifier, $pluginName) === false) {
-            throw new \LogicException('PluginName is not allowed', 1683551467);
+            throw new LogicException('PluginName is not allowed', 1683551467);
         }
     }
 }

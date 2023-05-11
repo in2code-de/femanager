@@ -40,6 +40,8 @@ class TemplateUtility extends AbstractUtility
      *        for the first configuration (Paths, Path, hardcoded)
      *        will be returned. If TRUE all (possible) paths will be returned.
      * @return array
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function getTemplateFolders($part = 'template', $returnAllPaths = false)
     {
@@ -55,8 +57,6 @@ class TemplateUtility extends AbstractUtility
             if (!empty($path)) {
                 $templatePaths[] = $path;
             }
-        }
-        if ($returnAllPaths || empty($templatePaths)) {
             $templatePaths[] = 'EXT:femanager/Resources/Private/' . ucfirst($part) . 's/';
         }
         $templatePaths = array_unique($templatePaths);

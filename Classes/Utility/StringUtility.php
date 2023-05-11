@@ -103,6 +103,8 @@ class StringUtility extends AbstractUtility
      * @param bool $addUpperCase
      * @param bool $addSpecialCharacters
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function getRandomString($length = 32, $addUpperCase = true, $addSpecialCharacters = true)
     {

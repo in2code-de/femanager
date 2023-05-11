@@ -28,6 +28,8 @@ class BackendUtility
      * @param string $tableName like "fe_users"
      * @param int $identifier record identifier to edit
      * @param bool $addReturnUrl add current URI as returnUrl
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function getBackendEditUri(string $tableName, int $identifier, bool $addReturnUrl = true): string
     {
@@ -51,6 +53,8 @@ class BackendUtility
      * @param string $tableName like "fe_users"
      * @param int $pageIdentifier page identifier to store the new record in
      * @param bool $addReturnUrl add current URI as returnUrl
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function getBackendNewUri(string $tableName, int $pageIdentifier, bool $addReturnUrl = true): string
     {
@@ -72,6 +76,8 @@ class BackendUtility
 
     /**
      * @return string "plugin" or "module"
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public static function getPluginOrModuleString(): string
     {
@@ -106,6 +112,8 @@ class BackendUtility
     /**
      * @param int $pageUid [optional] the current pageuid
      * @return array
+     *
+     * @SuppressWarnings(PHPMD.CamelCaseVariableName)
      */
     public static function loadTS($pageUid = null)
     {

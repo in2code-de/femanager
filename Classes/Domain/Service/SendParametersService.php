@@ -48,6 +48,8 @@ class SendParametersService
      * SendPost - Send values via curl to target
      *
      * @param User $user User properties
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function send(User $user)
     {

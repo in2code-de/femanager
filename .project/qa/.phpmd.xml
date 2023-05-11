@@ -40,9 +40,24 @@
                     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility,
                     \TYPO3\CMS\Core\Log\LogLevel,
                     \TYPO3\CMS\Extbase\Reflection\ObjectAccess,
-                    \In2code\T3AM\Request\RequestHandler,
                     \TYPO3\CMS\Core\Utility\MathUtility,
-                    \In2code\T3AM\Client\DatabaseUtility
+                    \TYPO3\CMS\Backend\Utility\BackendUtility,
+                    \TYPO3\CMS\Core\Database\Query\QueryHelper,
+                    \TYPO3\CMS\Core\Utility\PathUtility,
+                    \Symfony\Component\Mime\Part\DataPart,
+                    \In2code\Femanager\Utility\BackendUtility,
+                    \In2code\Femanager\Utility\BackendUserUtility,
+                    \In2code\Femanager\Utility\ConfigurationUtility,
+                    \In2code\Femanager\Utility\ObjectUtility,
+                    \In2code\Femanager\Utility\UserUtility,
+                    \In2code\Femanager\Utility\StringUtility,
+                    \In2code\Femanager\Utility\TemplateUtility,
+                    \TYPO3\CMS\Core\Utility\PathUtility,
+                    \TYPO3\CMS\Core\Utility\ArrayUtility,
+                    \In2code\Femanager\Utility\LocalizationUtility,
+                    \In2code\Femanager\Utility\HashUtility,
+                    \In2code\Femanager\Utility\FrontendUtility,
+                    \TYPO3\CMS\Core\Http\ServerRequestFactory'
                 </value>
             </property>
         </properties>

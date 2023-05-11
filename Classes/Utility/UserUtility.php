@@ -43,6 +43,8 @@ class UserUtility extends AbstractUtility
      * Get property from current logged in Frontend User
      *
      * @param string $propertyName
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public static function getPropertyFromUser($propertyName = 'uid'): mixed
     {
@@ -326,6 +328,11 @@ class UserUtility extends AbstractUtility
 
     /**
      * Login FE-User
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.Superglobals)
+     *
+     * @TODO: Check Storagepid Parameter, the function should be restored
      */
     public static function login(User $user, ?string $storagePids = null)
     {

@@ -37,6 +37,11 @@ class RatelimiterService implements SingletonInterface
         $this->limit = (int)$config['limit'];
     }
 
+    /**
+     * @return TypoScriptFrontendController
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     protected function getTSFE(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];

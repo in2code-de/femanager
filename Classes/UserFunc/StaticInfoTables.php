@@ -18,7 +18,7 @@ class StaticInfoTables
         return ExtensionManagementUtility::isLoaded('static_info_tables');
     }
 
-    public function getStatesOptions(array $data, TcaSelectItems $tcaSelectItems)
+    public function getStatesOptions(array $data)
     {
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
             $countryZonesDataProvider = GeneralUtility::makeInstance(CountryZonesDataProvider::class);
@@ -58,7 +58,7 @@ class StaticInfoTables
         }
     }
 
-    public function getCountryOptions(array $data, TcaSelectItems $tcaSelectItems)
+    public function getCountryOptions(array $data)
     {
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
             $countryDataProvider = GeneralUtility::makeInstance(CountryDataProvider::class);
@@ -67,8 +67,8 @@ class StaticInfoTables
                 $data['items'][] = [$country->getShortNameEn(), $country->getIsoCodeA3()];
             }
         } else {
-            $fallbackCountryDataProvider = GeneralUtility::makeInstance(FallbackCountryDataProvider::class);
-            $countries = $fallbackCountryDataProvider->getCountries();
+            $fallbackDataProvider = GeneralUtility::makeInstance(FallbackCountryDataProvider::class);
+            $countries = $fallbackDataProvider->getCountries();
             foreach ($countries as $key => $name) {
                 $data['items'][] = [$name, $key];
             }

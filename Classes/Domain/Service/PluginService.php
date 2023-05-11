@@ -17,6 +17,8 @@ class PluginService
 
     /**
      * @return string The name of the femanager plugin in this request
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getFemanagerPluginNameFromRequest(): string
     {
@@ -24,7 +26,7 @@ class PluginService
 
         // only the name of the first femanager plugin is returned
         if (is_array($request->getParsedBody())) {
-            foreach ($request->getParsedBody() as $key => $value) {
+            foreach (array_keys($request->getParsedBody()) as $key) {
                 if (in_array($key, self::ALLOWED_PLUGINS)) {
                     return $key;
                 }

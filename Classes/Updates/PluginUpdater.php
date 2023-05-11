@@ -113,7 +113,7 @@ class PluginUpdater implements UpgradeWizardInterface
 
             // Remove flexform data which do not exist in flexform of new plugin
             foreach ($flexFormData['data'] as $sheetKey => $sheetData) {
-                foreach ($sheetData['lDEF'] as $settingName => $setting) {
+                foreach (array_keys($sheetData['lDEF']) as $settingName) {
                     if (!in_array($settingName, $allowedSettings, true)) {
                         unset($flexFormData['data'][$sheetKey]['lDEF'][$settingName]);
                     }
@@ -161,6 +161,12 @@ class PluginUpdater implements UpgradeWizardInterface
             ->fetchAllAssociative();
     }
 
+    /**
+     * @param string $switchableControllerActions
+     * @return string
+     *
+     * @SuppressWarnings(PHPMD.LongVariable)
+     */
     protected function getTargetListType(string $switchableControllerActions): string
     {
         foreach (self::MIGRATION_SETTINGS as $setting) {
@@ -173,6 +179,12 @@ class PluginUpdater implements UpgradeWizardInterface
         return '';
     }
 
+    /**
+     * @param string $listType
+     * @return array
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     protected function getAllowedSettingsFromFlexForm(string $listType): array
     {
         if (!isset($GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds']['*,' . $listType])) {
@@ -187,7 +199,7 @@ class PluginUpdater implements UpgradeWizardInterface
         // Iterate each sheet and extract all settings
         $settings = [];
         foreach ($flexFormData['sheets'] as $sheet) {
-            foreach ($sheet['ROOT']['el'] as $setting => $tceForms) {
+            foreach (array_keys($sheet['ROOT']['el']) as $setting) {
                 $settings[] = $setting;
             }
         }

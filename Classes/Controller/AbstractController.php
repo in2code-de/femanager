@@ -24,6 +24,7 @@ use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Http\UploadedFile;
@@ -215,7 +216,6 @@ abstract class AbstractController extends ActionController
                             'sorting_foreign' => 1
                         ]
                     );
-                    $sysFileReferenceUid = (int)$connection->lastInsertId('sys_file_reference');
                 }
             }
         }
@@ -312,6 +312,11 @@ abstract class AbstractController extends ActionController
      * @param string $redirectByActionName Action to redirect
      * @param bool $login Login after creation
      * @param bool $backend Don't redirect if called from backend action
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @TODO: Remove Suppress when login is reactivated
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function finalCreate(
         $user,
@@ -519,6 +524,12 @@ abstract class AbstractController extends ActionController
         );
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     public function initializeAction(): void
     {
         $this->user = UserUtility::getCurrentUser();
@@ -535,7 +546,7 @@ abstract class AbstractController extends ActionController
         $this->config =
             $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
 
-        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
+        if (ApplicationType::fromRequest($this->request)->isBackend()) {
             $pid = $this->allConfig['persistence']['storagePid'] ?? 0;
             $config = BackendUtility::loadTS((int)$pid);
             $this->config = $config['plugin.']['tx_femanager.']['settings.'] ?? [];
@@ -573,8 +584,10 @@ abstract class AbstractController extends ActionController
      * Deactivate errormessages in flashmessages
      *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
-    protected function getErrorFlashMessage()
+    protected function getErrorFlashMessage(): bool
     {
         return false;
     }
@@ -583,7 +596,7 @@ abstract class AbstractController extends ActionController
     {
         if ((int)($this->allConfig['persistence']['storagePid'] ?? 0) === 0
             && GeneralUtility::_GP('type') !== '1548935210'
-            && !ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
+            && !ApplicationType::fromRequest($this->request)->isBackend()
         ) {
             $this->addFlashMessage(
                 LocalizationUtility::translate('error_no_storagepid'),
@@ -595,7 +608,7 @@ abstract class AbstractController extends ActionController
 
     protected function checkTypoScript()
     {
-        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'] ?? null)->isBackend()) {
+        if (ApplicationType::fromRequest($this->request ?? null)->isBackend()) {
             if (($this->config['_TypoScriptIncluded'] ?? '1') !== '1') {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript_be'),
@@ -607,7 +620,7 @@ abstract class AbstractController extends ActionController
             $typoscriptIncluded = ConfigurationUtility::getValue('_TypoScriptIncluded', $this->settings);
             if (
                 $typoscriptIncluded !== '1' && !GeneralUtility::_GP('eID')
-                && !ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
+                && !ApplicationType::fromRequest($this->request)->isBackend()
             ) {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript'),
@@ -621,8 +634,8 @@ abstract class AbstractController extends ActionController
     protected function setAllUserGroups()
     {
         $controllerName = $this->request->getControllerName();
-        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'] ?? '';
-        $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
+        $removeFromSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'] ?? '';
+        $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromSelection);
     }
 
     /**

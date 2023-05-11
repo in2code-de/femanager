@@ -9,6 +9,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Class IsConfirmationModuleActivatedViewHelper
+ *
+ * @SuppressWarnings(PHPMD.LongClassName)
  */
 class IsResendUserConfirmationRequestActivatedViewHelper extends AbstractViewHelper
 {

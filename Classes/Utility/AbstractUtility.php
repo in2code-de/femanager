@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use UnexpectedValueException;
 
 /**
  * Class AbstractUtility
@@ -77,13 +78,13 @@ abstract class AbstractUtility
      * Get TYPO3 encryption key
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getEncryptionKey(): string
     {
         if (empty($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'])) {
-            throw new \UnexpectedValueException('No encryption key found in this TYPO3 installation', 1516373945265);
+            throw new UnexpectedValueException('No encryption key found in this TYPO3 installation', 1516373945265);
         }
         return $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'];
     }

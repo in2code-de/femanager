@@ -11,6 +11,7 @@ use In2code\Femanager\Utility\StringUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use UnexpectedValueException;
 
 /**
  * Class FinisherService
@@ -179,7 +180,7 @@ class FinisherService
     public function start()
     {
         if (!class_exists($this->getClass())) {
-            throw new \UnexpectedValueException(
+            throw new UnexpectedValueException(
                 'Class ' . $this->getClass() . ' does not exists - check if file was loaded with autoloader',
                 1516373888508
             );
@@ -198,7 +199,7 @@ class FinisherService
             $finisher->initializeFinisher();
             $this->callFinisherMethods($finisher);
         } else {
-            throw new \UnexpectedValueException(
+            throw new UnexpectedValueException(
                 'Finisher does not implement ' . $this->finisherInterface,
                 1516373899775
             );

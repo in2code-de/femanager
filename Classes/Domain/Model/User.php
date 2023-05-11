@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Model;
 
+use DateTime;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -97,7 +98,7 @@ class User extends AbstractEntity
     protected $image;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
     protected $lastlogin;
 
@@ -107,12 +108,12 @@ class User extends AbstractEntity
     protected $txFemanagerChangerequest;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     protected $crdate;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     protected $tstamp;
 
@@ -147,7 +148,7 @@ class User extends AbstractEntity
     protected $gender;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     protected $dateOfBirth;
 
@@ -161,7 +162,7 @@ class User extends AbstractEntity
     /**
      * the datetime the user accepted the terms
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $termsDateOfAcceptance;
 
@@ -511,7 +512,7 @@ class User extends AbstractEntity
     /**
      * Sets the lastlogin value
      */
-    public function setLastlogin(\DateTime $lastlogin)
+    public function setLastlogin(DateTime $lastlogin)
     {
         $this->lastlogin = $lastlogin;
     }
@@ -519,7 +520,7 @@ class User extends AbstractEntity
     /**
      * Returns the lastlogin value
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getLastlogin()
     {
@@ -555,7 +556,7 @@ class User extends AbstractEntity
     }
 
     /**
-     * @param \DateTime $crdate
+     * @param DateTime $crdate
      * @return User
      */
     public function setCrdate($crdate)
@@ -565,19 +566,19 @@ class User extends AbstractEntity
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getCrdate()
     {
         if ($this->crdate === null) {
             // timestamp is zero
-            $this->crdate = new \DateTime('01.01.1970');
+            $this->crdate = new DateTime('01.01.1970');
         }
         return $this->crdate;
     }
 
     /**
-     * @param \DateTime $tstamp
+     * @param DateTime $tstamp
      * @return User
      */
     public function setTstamp($tstamp)
@@ -587,7 +588,7 @@ class User extends AbstractEntity
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getTstamp()
     {
@@ -607,7 +608,7 @@ class User extends AbstractEntity
     /**
      * @return bool
      */
-    public function getDisable()
+    public function isDisable()
     {
         return $this->disable;
     }
@@ -615,6 +616,7 @@ class User extends AbstractEntity
     /**
      * @param \bool $txFemanagerConfirmedbyadmin
      * @return User
+     * @SuppressWarnings(PHPMD.LongVariable)
      */
     public function setTxFemanagerConfirmedbyadmin($txFemanagerConfirmedbyadmin)
     {
@@ -633,6 +635,7 @@ class User extends AbstractEntity
     /**
      * @param \bool $txFemanagerConfirmedbyuser
      * @return User
+     * @SuppressWarnings(PHPMD.LongVariable)
      */
     public function setTxFemanagerConfirmedbyuser($txFemanagerConfirmedbyuser)
     {
@@ -661,7 +664,7 @@ class User extends AbstractEntity
     /**
      * @return bool
      */
-    public function getIgnoreDirty()
+    public function isIgnoreDirty()
     {
         return $this->ignoreDirty;
     }
@@ -691,7 +694,7 @@ class User extends AbstractEntity
     /**
      * Returns the dateOfBirth
      *
-     * @return \DateTime $dateOfBirth
+     * @return DateTime $dateOfBirth
      */
     public function getDateOfBirth()
     {
@@ -701,12 +704,12 @@ class User extends AbstractEntity
     /**
      * Sets the dateOfBirth
      *
-     * @param \DateTime $dateOfBirth
+     * @param DateTime $dateOfBirth
      * @return User
      */
     public function setDateOfBirth($dateOfBirth)
     {
-        if ($dateOfBirth instanceof \DateTime) {
+        if ($dateOfBirth instanceof DateTime) {
             $dateOfBirth->setTime(0, 0, 0);
         }
         $this->dateOfBirth = $dateOfBirth;
@@ -734,7 +737,7 @@ class User extends AbstractEntity
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getTermsDateOfAcceptance()
     {
@@ -749,7 +752,7 @@ class User extends AbstractEntity
     protected function setTermsDateOfAcceptance()
     {
         if ($this->termsDateOfAcceptance === null) {
-            $now = new \DateTime();
+            $now = new DateTime();
             $this->termsDateOfAcceptance = $now;
         }
         return $this;
@@ -820,10 +823,12 @@ class User extends AbstractEntity
 
     /**
      * Workaround to disable persistence in updateAction
+     *
+     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
     public function _isDirty($propertyName = null): bool
     {
-        return $this->getIgnoreDirty() ? false : parent::_isDirty($propertyName);
+        return $this->isIgnoreDirty() ? false : parent::_isDirty($propertyName);
     }
 }

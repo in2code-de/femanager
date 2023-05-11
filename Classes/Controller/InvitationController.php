@@ -156,7 +156,7 @@ class InvitationController extends AbstractFrontendController
         }
 
         // User must not be deleted (deleted = 0) and not be activated (disable = 1)
-        if ($user->getDisable() == 0) {
+        if ($user->isDisable() == 0) {
             $this->addFlashMessage(
                 LocalizationUtility::translate('userAlreadyConfirmed'),
                 '',
