@@ -151,7 +151,7 @@ class NewController extends AbstractFrontendController
         if ($backend) {
             $this->persistenceManager->persistAll();
             $event = new UserWasConfirmedByAdminEvent($request, $user);
-            $this->eventDispatcher->dispatch( $event);
+            $this->eventDispatcher->dispatch($event);
             /**
              * this request was triggered via Backend Module "Frontend users",
              * so we stop here and provide a feedback to the BE

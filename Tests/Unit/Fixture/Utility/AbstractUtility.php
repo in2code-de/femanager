@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Tests\Unit\Fixture\Utility;
 
 use In2code\Femanager\Domain\Repository\UserGroupRepository;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Utility\ConfigurationUtility;

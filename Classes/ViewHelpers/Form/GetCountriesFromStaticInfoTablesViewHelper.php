@@ -96,7 +96,8 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
             'string',
             'shortNameLocal',
             false,
-            'shortNameLocal');
+            'shortNameLocal'
+        );
         $this->registerArgument(
             'sorting',
             'string',

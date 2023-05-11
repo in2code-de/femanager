@@ -182,7 +182,8 @@ abstract class AbstractController extends ActionController
                     in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes)
                     && in_array(
                         pathinfo(
-                            (string) $uploadedFile->getClientFilename())['extension'],
+                            (string) $uploadedFile->getClientFilename()
+                        )['extension'],
                         $allowedFileExtensions
                     )
                 ) {

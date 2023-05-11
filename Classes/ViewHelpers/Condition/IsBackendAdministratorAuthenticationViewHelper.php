@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Condition;
 
 use In2code\Femanager\Utility\BackendUserUtility;

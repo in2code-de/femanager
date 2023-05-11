@@ -11,7 +11,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DeleteFeusers
 {
-
     public function test()
     {
         echo "test";

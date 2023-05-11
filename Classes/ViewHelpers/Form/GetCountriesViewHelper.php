@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Form;
 
 use In2code\Femanager\DataProvider\FallbackCountryDataProvider;

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Validation;
 
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;

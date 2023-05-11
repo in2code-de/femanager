@@ -110,6 +110,8 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
     protected function isEnabled()
     {
         return $this->contentObject->cObjGetSingle(
-            $this->configuration['_enable'] ?? 'TEXT', $this->configuration['_enable.'] ?? '0') === '1';
+            $this->configuration['_enable'] ?? 'TEXT',
+            $this->configuration['_enable.'] ?? '0'
+        ) === '1';
     }
 }

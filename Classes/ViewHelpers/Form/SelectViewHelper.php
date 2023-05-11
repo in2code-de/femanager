@@ -56,7 +56,8 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
             'If true, places auto-generated option tags after those rendered in the tag content.
             If false, automatic options come first.',
             false,
-            false);
+            false
+        );
         $this->registerArgument(
             'optionValueField',
             'string',

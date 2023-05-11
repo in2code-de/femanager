@@ -62,7 +62,7 @@ class PasswordValidator extends AbstractValidatorExtbase
      *
      * @param $user
      */
-    public function isValid($user):void
+    public function isValid($user): void
     {
         $this->initializeObject();
         $this->init();

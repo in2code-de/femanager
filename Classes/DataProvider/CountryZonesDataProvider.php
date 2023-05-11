@@ -33,7 +33,7 @@ class CountryZonesDataProvider
         $countryZones = $this->countryZoneRepository->findByCountry($country)->toArray();
         usort(
             $countryZones,
-            fn(CountryZone $left, CountryZone $right) =>
+            fn (CountryZone $left, CountryZone $right) =>
             strcasecmp((string) $left->getLocalName(), (string) $right->getLocalName())
         );
         return $countryZones;

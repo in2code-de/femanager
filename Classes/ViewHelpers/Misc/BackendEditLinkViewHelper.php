@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use In2code\Femanager\Utility\BackendUtility;
@@ -39,7 +40,8 @@ class BackendEditLinkViewHelper extends AbstractViewHelper
         RenderingContextInterface $renderingContext
     ): string {
         return BackendUtility::getBackendEditUri(
-            $arguments['tableName'], $arguments['identifier'],
+            $arguments['tableName'],
+            $arguments['identifier'],
             $arguments['addReturnUrl']
         );
     }
