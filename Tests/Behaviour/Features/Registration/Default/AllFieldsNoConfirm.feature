@@ -23,8 +23,8 @@ Feature: AllFieldsNoConfirm
       | Website | www.in2code.de |
       | Company | in2code GmbH |
       | Birthdate | 20/01/1979 |
-    And I select "Group 2" from "tx_femanager_pi1[user][usergroup][0]"
-    And I select "Deutschland" from "tx_femanager_pi1[user][country]"
+    And I select "Group 2" from "tx_femanager_registration[user][usergroup][0]"
+    And I select "Deutschland" from "tx_femanager_registration[user][country]"
     And I press "Create Profile Now"
     Then I wait "4" seconds
 
