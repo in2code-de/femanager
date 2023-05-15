@@ -27,7 +27,7 @@ class StoreInDatabaseService
     protected $properties = [];
 
     /**
-     * @var \TYPO3\CMS\CORE\Database\ConnectionPool
+     * @var ConnectionPool
      */
     protected $databaseConnection;
 

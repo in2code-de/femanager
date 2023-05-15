@@ -120,7 +120,7 @@ class BackendUtility
         $pageUid = ($pageUid && MathUtility::canBeInterpretedAsInteger($pageUid)) ?
             $pageUid : GeneralUtility::_GP('id');
         $TSObj = GeneralUtility::makeInstance(TemplateService::class);
-        $TSObj->tt_track = 0;
+        $TSObj->tt_track = false;
         $TSObj->runThroughTemplates(GeneralUtility::makeInstance(RootlineUtility::class, $pageUid, '')->get());
         $TSObj->generateConfig();
 

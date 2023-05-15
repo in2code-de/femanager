@@ -308,33 +308,26 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
         }
         if ($selectedValues === null) {
             // set preselection from TypoScript
-            if (empty($selectedValues)) {
-                if (! $this->renderingContext instanceof RenderingContext) {
-                    throw new FluidViewHelperException(
-                        'Something went wrong; RenderingContext should be available in ViewHelper',
-                        1638341673
-                    );
-                }
-                $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
-                $contentObject = $this->configurationManager->getContentObject();
-                $typoScript = $this->configurationManager->getConfiguration(
-                    ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+            if (! $this->renderingContext instanceof RenderingContext) {
+                throw new FluidViewHelperException(
+                    'Something went wrong; RenderingContext should be available in ViewHelper',
+                    1638341673
                 );
-
-                $prefillTypoScript =
-                    $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? [];
-
-                if (!empty($prefillTypoScript[$this->getFieldName()])) {
-                    $selectedValues = $contentObject->cObjGetSingle(
-                        $prefillTypoScript[$this->getFieldName()],
-                        $prefillTypoScript[$this->getFieldName() . '.']
-                    );
-                }
             }
-        } else {
-            $selectedValues = [];
-            foreach ($value as $selectedValueElement) {
-                $selectedValues[] = $this->getOptionValueScalar($selectedValueElement);
+            $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
+            $contentObject = $this->configurationManager->getContentObject();
+            $typoScript = $this->configurationManager->getConfiguration(
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+            );
+
+            $prefillTypoScript =
+                $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? [];
+
+            if (!empty($prefillTypoScript[$this->getFieldName()])) {
+                $selectedValues = $contentObject->cObjGetSingle(
+                    $prefillTypoScript[$this->getFieldName()],
+                    $prefillTypoScript[$this->getFieldName() . '.']
+                );
             }
         }
         return $selectedValues;

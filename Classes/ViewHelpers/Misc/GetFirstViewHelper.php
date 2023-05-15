@@ -26,13 +26,12 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
     /**
      * View helper to get first subobject of objectstorage
      *
-     * @return \mixed
      */
-    public function render()
+    public function render(): mixed
     {
         $objectStorage = $this->arguments['objectStorage'];
         if ($objectStorage === null) {
-            return null;
+            return '';
         }
         foreach ($objectStorage as $object) {
             return $object;
@@ -48,6 +47,6 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
             }
         }
 
-        return null;
+        return '';
     }
 }

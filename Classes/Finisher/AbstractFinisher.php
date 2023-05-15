@@ -34,7 +34,7 @@ abstract class AbstractFinisher implements FinisherInterface
     /**
      * Controller actionName - usually "createAction" or "confirmationAction"
      *
-     * @var null
+     * @var string
      */
     protected $actionMethodName;
 
@@ -103,10 +103,9 @@ abstract class AbstractFinisher implements FinisherInterface
     }
 
     /**
-     * @param null $actionMethodName
      * @return AbstractFinisher
      */
-    public function setActionMethodName($actionMethodName)
+    public function setActionMethodName(string $actionMethodName)
     {
         $this->actionMethodName = $actionMethodName;
         return $this;
@@ -116,14 +115,11 @@ abstract class AbstractFinisher implements FinisherInterface
     {
     }
 
-    /**
-     * @param string $actionMethodName
-     */
     public function __construct(
         User $user,
         array $configuration,
         array $settings,
-        $actionMethodName,
+        string $actionMethodName,
         ContentObjectRenderer $contentObject
     ) {
         $this->setUser($user);

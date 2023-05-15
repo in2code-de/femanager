@@ -271,7 +271,7 @@ abstract class AbstractController extends ActionController
      *
      * @param User $user
      */
-    public function updateRequest($user): ResponseInterface
+    public function updateRequest($user): ResponseInterface|null
     {
         if ($this->settings['edit']['confirmByAdmin'] ?? null) {
             $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($user);
@@ -305,6 +305,7 @@ abstract class AbstractController extends ActionController
                 $user,
                 ['message' => 'settings[edit][confirmByAdmin] is missing!']
             );
+            return null;
         }
     }
 

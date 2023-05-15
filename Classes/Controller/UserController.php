@@ -71,7 +71,7 @@ class UserController extends AbstractFrontendController
         // TODO: string
         $user =  $requestBody['tx_femanager_validation']['user'] ?? null;
         $additionalValue =  $requestBody['tx_femanager_validation']['additionalValue'] ?? '';
-        $plugin =  (int)$requestBody['tx_femanager_validation']['plugin'] ?? 0;
+        $plugin =  (int)$requestBody['tx_femanager_validation']['plugin'];
         $pluginName =  $requestBody['tx_femanager_validation']['pluginName'] ?? '';
         $referrerAction = $requestBody['tx_femanager_validation']['referrerAction'] ?? '';
 

@@ -342,7 +342,6 @@ class NewController extends AbstractFrontendController
     /**
      * Postfix method to createAction(): Create must be confirmed by Admin or User
      *
-     * @return void
      * @throws IllegalObjectTypeException
      */
     protected function createRequest(User $user): ResponseInterface|null

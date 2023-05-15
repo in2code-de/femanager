@@ -31,7 +31,6 @@ class GetFirstViewHelper extends AbstractViewHelper
     public function initializeArguments()
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
         $this->registerArgument('objects', 'object ', 'Call getFirst() method of object storage', true);
     }
 }

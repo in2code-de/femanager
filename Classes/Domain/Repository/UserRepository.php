@@ -281,7 +281,7 @@ class UserRepository extends Repository
     /**
      * Find All
      */
-    public function findFirstByEmail(string $mail): QueryResultInterface|array
+    public function findFirstByEmail(string $mail): User|null
     {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);

@@ -11,11 +11,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class JsonEncodeViewHelper extends AbstractViewHelper
 {
-    /**
-     * @var null
-     */
-    protected $escapeOutput = false;
-
     public function render(): string
     {
         $array = $this->arguments['array'];

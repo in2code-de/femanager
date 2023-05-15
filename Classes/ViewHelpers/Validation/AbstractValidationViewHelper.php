@@ -30,6 +30,7 @@ abstract class AbstractValidationViewHelper extends AbstractViewHelper
                 1638341336
             );
         }
+
         if ($this->getControllerName() === 'invitation' &&
             $this->renderingContext->getRequest()->getControllerActionName() === 'edit') {
             $validationName = 'validationEdit';

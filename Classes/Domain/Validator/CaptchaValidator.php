@@ -31,9 +31,8 @@ class CaptchaValidator extends AbstractValidator
     /**
      * Check if captcha is valid
      *
-     * @return void
      */
-    protected function validCaptcha()
+    protected function validCaptcha(): bool
     {
         $isValid = false;
         $wordRepository = GeneralUtility::makeInstance(WordRepository::class);

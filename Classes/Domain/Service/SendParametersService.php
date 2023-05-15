@@ -94,9 +94,8 @@ class SendParametersService
     /**
      * Write to devlog
      *
-     * @return bool
      */
-    protected function log()
+    protected function log(): void
     {
         if (!empty($this->configuration['debug'])) {
             GeneralUtility::makeInstance(LogManager::class)

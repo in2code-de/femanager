@@ -18,6 +18,7 @@ use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 /**
  * Class UserUtility
@@ -48,13 +49,15 @@ class UserUtility extends AbstractUtility
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public static function getPropertyFromUser($propertyName = 'uid'): mixed
+    public static function getPropertyFromUser(string $propertyName = 'uid'): mixed
     {
         /**
-         * @var $request ServerRequest
-         * @var $frontendUser \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication
+         * @var ServerRequest $request
          */
         $request = $GLOBALS['TYPO3_REQUEST'];
+        /**
+         * @var FrontendUserAuthentication $frontendUser
+         */
         $frontendUser = $request->getAttribute('frontend.user');
 
         if (!empty($frontendUser->user[$propertyName])) {
@@ -156,7 +159,7 @@ class UserUtility extends AbstractUtility
             $usergroupUids = GeneralUtility::trimExplode(',', $settings[$controllerName]['overrideUserGroup'], true);
             foreach ($usergroupUids as $usergroupUid) {
                 /** @var UserGroup $usergroup */
-                $usergroup = self::getUserGroupRepository()->findByUid($usergroupUid);
+                $usergroup = self::getUserGroupRepository()->findByUid((int)$usergroupUid);
                 $user->addUsergroup($usergroup);
             }
         }

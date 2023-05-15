@@ -39,11 +39,7 @@ interface FinisherInterface
 
     public function getActionMethodName();
 
-    /**
-     * @param null $actionMethodName
-     * @return AbstractFinisher
-     */
-    public function setActionMethodName($actionMethodName);
+    public function setActionMethodName(string $actionMethodName);
 
     public function initializeFinisher();
 }

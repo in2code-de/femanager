@@ -320,7 +320,7 @@ class ServersideValidator extends AbstractValidator
                     $values[] = $object->getUid();
                 }
                 if ($object instanceof FileReference) {
-                    return true;
+                    return '';
                 }
             }
 
@@ -338,7 +338,7 @@ class ServersideValidator extends AbstractValidator
                 $current = $value->current();
 
                 if ($current instanceof FileReference) {
-                    return true;
+                    return '';
                 }
                 if ($current !== null) {
                     if (method_exists($current, 'getUid')) {

@@ -193,15 +193,6 @@ class User extends AbstractEntity
     }
 
     /**
-     * Called again with initialize object, as fetching an entity from the DB does not use the constructor
-     */
-    public function initializeObject()
-    {
-        $this->usergroup ??= new ObjectStorage();
-        $this->image ??= new ObjectStorage();
-    }
-
-    /**
      * Sets the username value
      */
     public function setUsername(string $username)
@@ -618,39 +609,29 @@ class User extends AbstractEntity
     }
 
     /**
-     * @param \bool $txFemanagerConfirmedbyadmin
-     * @return User
      * @SuppressWarnings(PHPMD.LongVariable)
      */
-    public function setTxFemanagerConfirmedbyadmin($txFemanagerConfirmedbyadmin)
+    public function setTxFemanagerConfirmedbyadmin(bool $txFemanagerConfirmedbyadmin): User
     {
         $this->txFemanagerConfirmedbyadmin = $txFemanagerConfirmedbyadmin;
         return $this;
     }
 
-    /**
-     * @return \bool
-     */
-    public function getTxFemanagerConfirmedbyadmin()
+    public function getTxFemanagerConfirmedbyadmin(): bool
     {
         return $this->txFemanagerConfirmedbyadmin;
     }
 
     /**
-     * @param \bool $txFemanagerConfirmedbyuser
-     * @return User
      * @SuppressWarnings(PHPMD.LongVariable)
      */
-    public function setTxFemanagerConfirmedbyuser($txFemanagerConfirmedbyuser)
+    public function setTxFemanagerConfirmedbyuser(bool $txFemanagerConfirmedbyuser): User
     {
         $this->txFemanagerConfirmedbyuser = $txFemanagerConfirmedbyuser;
         return $this;
     }
 
-    /**
-     * @return \bool
-     */
-    public function getTxFemanagerConfirmedbyuser()
+    public function getTxFemanagerConfirmedbyuser(): bool
     {
         return $this->txFemanagerConfirmedbyuser;
     }

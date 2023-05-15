@@ -18,6 +18,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
 {
     /**
+     * @phpstan-ignore-next-line
      * @var CountryRepository
      */
     protected $countryRepository;
@@ -30,9 +31,7 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
     }
 
     /**
-     * Build an country array
-     *
-     * @param string $sorting
+     * Build a country array
      */
     public function render(): array
     {
@@ -67,6 +66,7 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
 
         foreach ($countries as $country) {
             /** @var $country \SJBR\StaticInfoTables\Domain\Model\Country */
+            /* @phpstan-ignore-next-line */
             $countriesArray[ObjectAccess::getProperty($country, $key)] = ObjectAccess::getProperty($country, $value);
         }
 

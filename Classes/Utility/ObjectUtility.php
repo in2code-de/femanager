@@ -76,13 +76,11 @@ class ObjectUtility extends AbstractUtility
         string $glue = ', '
     ): string {
         $values = [];
-        if (!empty($objectStorage)) {
-            foreach ($objectStorage as $object) {
-                try {
-                    $values[] = ObjectAccess::getProperty($object, $property);
-                } catch (\Exception $exception) {
-                    unset($exception);
-                }
+        foreach ($objectStorage as $object) {
+            try {
+                $values[] = ObjectAccess::getProperty($object, $property);
+            } catch (\Exception $exception) {
+                unset($exception);
             }
         }
         return implode($glue, $values);

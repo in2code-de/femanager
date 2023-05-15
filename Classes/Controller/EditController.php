@@ -142,7 +142,7 @@ class EditController extends AbstractFrontendController
                 $usergroupUids = GeneralUtility::trimExplode(',', $value['new'], true);
                 foreach ($usergroupUids as $usergroupUid) {
                     /** @var UserGroup $usergroup */
-                    $usergroup = $this->userGroupRepository->findByUid($usergroupUid);
+                    $usergroup = $this->userGroupRepository->findByUid((int)$usergroupUid);
                     $user->addUsergroup($usergroup);
                 }
             }

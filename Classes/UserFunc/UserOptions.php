@@ -54,7 +54,7 @@ class UserOptions
         $pageTreeService = GeneralUtility::makeInstance(PageTreeService::class);
         $depth = $params['flexParentDatabaseRow']['recursive'];
         foreach ($this->getPages($params) as $pageIdentifier) {
-            $list .= $pageTreeService->getTreeList($pageIdentifier, $depth, 0, 1);
+            $list .= $pageTreeService->getTreeList($pageIdentifier, $depth, 0, '1');
             $list .= ',';
         }
         return rtrim($list, ',');

@@ -105,16 +105,11 @@ class TemplateUtility extends AbstractUtility
 
     /**
      * Get standaloneview with default properties
-     *
-     * @param string $controllerName
-     * @param string $extensionName
-     * @param string $pluginName
-     * @return StandaloneView
      */
     public static function getDefaultStandAloneView(
         RequestInterface|null $request = null,
         string $format = 'html'
-    ) {
+    ): StandaloneView {
         /** @var StandaloneView $standAloneView */
         $standAloneView = GeneralUtility::makeInstance(StandaloneView::class);
         if ($request instanceof RequestInterface) {

@@ -66,12 +66,8 @@ class StringUtility extends AbstractUtility
 
     /**
      * Check if string ends with another string
-     *
-     * @param string $haystack
-     * @param string $needle
-     * @return string
      */
-    public static function endsWith($haystack, $needle)
+    public static function endsWith(string $haystack, string $needle): string|bool
     {
         return stristr($haystack, $needle) && strlen($haystack) - strlen($needle) === strpos($haystack, $needle);
     }

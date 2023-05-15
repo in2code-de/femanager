@@ -57,7 +57,7 @@ class FinisherService
     /**
      * Controller actionName - usually "createAction" or "confirmationAction"
      *
-     * @var null
+     * @var string
      */
     protected $actionMethodName;
 
@@ -162,11 +162,7 @@ class FinisherService
         return $this->actionMethodName;
     }
 
-    /**
-     * @param null $actionMethodName
-     * @return FinisherService
-     */
-    public function setActionMethodName($actionMethodName)
+    public function setActionMethodName(string $actionMethodName): FinisherService
     {
         $this->actionMethodName = $actionMethodName;
         return $this;
