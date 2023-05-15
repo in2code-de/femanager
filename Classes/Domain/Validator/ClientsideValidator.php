@@ -187,9 +187,10 @@ class ClientsideValidator extends AbstractValidator
 
                 case stristr((string) $validationSetting, 'mustInclude('):
                     if ($this->getValue() &&
-                        !$this->validateMustInclude(
+                        !$this->validateString(
                             $this->getValue(),
-                            StringUtility::getValuesInBrackets($validationSetting)
+                            StringUtility::getValuesInBrackets($validationSetting),
+                            true
                         )
                     ) {
                         $this->addMessage('validationErrorMustInclude');
@@ -199,9 +200,10 @@ class ClientsideValidator extends AbstractValidator
 
                 case stristr((string) $validationSetting, 'mustNotInclude('):
                     if ($this->getValue() &&
-                        !$this->validateMustNotInclude(
+                        !$this->validateString(
                             $this->getValue(),
-                            StringUtility::getValuesInBrackets($validationSetting)
+                            StringUtility::getValuesInBrackets($validationSetting),
+                            false
                         )
                     ) {
                         $this->addMessage('validationErrorMustNotInclude');

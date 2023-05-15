@@ -216,84 +216,44 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     }
 
     /**
-     * Validation for "Must include some characters"
-     *
-     * @param string $value
-     * @param string $validationSettingList
-     * @return \bool
+     * @param $value
+     * @param $validationSettingList
+     * @param $mustInclude
+     * @return bool
      */
-    protected function validateMustInclude($value, $validationSettingList)
+    protected function validateString($value, $validationSettingList, $mustInclude = true): bool
     {
         $isValid = true;
         $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
         foreach ($validationSettings as $validationSetting) {
             switch ($validationSetting) {
                 case 'number':
-                    if (!$this->stringContainsNumber($value)) {
+                    $containsNumber = $this->stringContainsNumber($value);
+                    if ($mustInclude && !$containsNumber || !$mustInclude && $containsNumber) {
                         $isValid = false;
                     }
                     break;
                 case 'letter':
-                    if (!$this->stringContainsLetter($value)) {
+                    $containsLetter = $this->stringContainsLetter($value);
+                    if ($mustInclude && !$containsLetter || !$mustInclude && $containsLetter) {
                         $isValid = false;
                     }
                     break;
                 case 'uppercase':
-                    if (!$this->stringContainsUppercase($value)) {
+                    $containsUppercase = $this->stringContainsUppercase($value);
+                    if ($mustInclude && !$containsUppercase || !$mustInclude && $containsUppercase) {
                         $isValid = false;
                     }
                     break;
                 case 'special':
-                    if (!$this->stringContainsSpecialCharacter($value)) {
+                    $containsSpecialCharacter = $this->stringContainsSpecialCharacter($value);
+                    if ($mustInclude && !$containsSpecialCharacter || !$mustInclude && $containsSpecialCharacter) {
                         $isValid = false;
                     }
                     break;
                 case 'space':
-                    if (!$this->stringContainsSpaceCharacter($value)) {
-                        $isValid = false;
-                    }
-                    break;
-                default:
-            }
-        }
-        return $isValid;
-    }
-
-    /**
-     * Validation for "Must not include some characters"
-     *
-     * @param string $value
-     * @param string $validationSettingList
-     * @return \bool
-     */
-    protected function validateMustNotInclude($value, $validationSettingList)
-    {
-        $isValid = true;
-        $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
-        foreach ($validationSettings as $validationSetting) {
-            switch ($validationSetting) {
-                case 'number':
-                    if ($this->stringContainsNumber($value)) {
-                        $isValid = false;
-                    }
-                    break;
-                case 'letter':
-                    if ($this->stringContainsLetter($value)) {
-                        $isValid = false;
-                    }
-                    break;
-                case 'uppercase':
-                    if ($this->stringContainsUppercase($value)) {
-                        $isValid = false;
-                    }
-                    break;
-                case 'special':
-                    if ($this->stringContainsSpecialCharacter($value)) {
-                        $isValid = false;
-                    }
-                    break;
-                case 'space':
-                    if ($this->stringContainsSpaceCharacter($value)) {
+                    $containsSpaceCharacter = $this->stringContainsSpaceCharacter($value);
+                    if ($mustInclude && !$containsSpaceCharacter || !$mustInclude && $containsSpaceCharacter) {
                         $isValid = false;
                     }
                     break;
