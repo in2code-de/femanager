@@ -27,6 +27,8 @@ use TYPO3\CMS\Extbase\Http\ForwardResponse;
 
 /**
  * Class InvitationController
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class InvitationController extends AbstractFrontendController
 {

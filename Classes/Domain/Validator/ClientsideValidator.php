@@ -16,6 +16,8 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * Class ClientsideValidator
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class ClientsideValidator extends AbstractValidator
 {
@@ -104,6 +106,10 @@ class ClientsideValidator extends AbstractValidator
 
     /**
      * Validate Field
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
      */
     public function validateField(string $pluginName = 'tx_femanager_new'): bool
     {

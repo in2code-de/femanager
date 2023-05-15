@@ -23,6 +23,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class UserBackendController
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class UserBackendController extends AbstractController
 {

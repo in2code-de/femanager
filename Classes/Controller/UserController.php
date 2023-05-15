@@ -19,6 +19,8 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class UserController
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class UserController extends AbstractFrontendController
 {

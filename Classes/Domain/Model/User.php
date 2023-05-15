@@ -12,6 +12,10 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class User
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ * @SuppressWarnings(PHPMD.TooManyFields)
  */
 class User extends AbstractEntity
 {

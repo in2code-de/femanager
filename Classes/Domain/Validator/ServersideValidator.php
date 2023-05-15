@@ -12,6 +12,8 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * Class ServersideValidator
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class ServersideValidator extends AbstractValidator
 {
@@ -19,6 +21,8 @@ class ServersideValidator extends AbstractValidator
      * Validation of given Params
      *
      * @param User $user
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function isValid($user): void
     {
@@ -301,6 +305,8 @@ class ServersideValidator extends AbstractValidator
      * @param User $user
      * @param string $fieldName
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected function getValue($user, $fieldName)
     {

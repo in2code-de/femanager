@@ -20,6 +20,9 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidato
 
 /**
  * Class GeneralValidator
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 abstract class AbstractValidator extends AbstractValidatorExtbase
 {
@@ -220,6 +223,13 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * @param $validationSettingList
      * @param $mustInclude
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     *
+     * PHPMD.BooleanArgumentFlag issue has come ob because Copy&Paste Detector issue
+     * Commit: 55fd29fb082ba13ba5c1234240d7e74e78ee9dd4
+     *
      */
     protected function validateString($value, $validationSettingList, $mustInclude = true): bool
     {

@@ -23,6 +23,7 @@ use In2code\Femanager\Utility\UserUtility;
 use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
+use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -32,6 +33,8 @@ use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
 /**
  * Class NewController
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class NewController extends AbstractFrontendController
 {
@@ -112,6 +115,8 @@ class NewController extends AbstractFrontendController
      * @return ResponseInterface|void
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
+     *
+     * @SuppressWarnings(PHPMD.ExitExpression)
      */
     public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation')
     {

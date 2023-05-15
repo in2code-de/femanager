@@ -27,6 +27,8 @@ use TYPO3\CMS\Extbase\Annotation\Validate;
 
 /**
  * Class EditController
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class EditController extends AbstractFrontendController
 {

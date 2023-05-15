@@ -24,6 +24,8 @@ class PageTreeService
      * @param int $begin
      * @param string $permClause
      * @return string comma separated list of descendant pages
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function getTreeList($pageUid, $depth, $begin = 0, $permClause = '')
     {

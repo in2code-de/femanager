@@ -22,6 +22,8 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 /**
  * Class UserUtility
  * @codeCoverageIgnore
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class UserUtility extends AbstractUtility
 {
@@ -231,6 +233,8 @@ class UserUtility extends AbstractUtility
      * @return array
      *            [firstName][old] = Alex
      *            [firstName][new] = Alexander
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public static function getDirtyPropertiesFromUser(User $changedObject)
     {
