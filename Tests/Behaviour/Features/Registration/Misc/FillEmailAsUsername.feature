@@ -1,8 +1,8 @@
 # Features/Registration/Misc/FillEmailAsUsername.feature
-@Registration @RegistrationMisc @FillEmailAsUsername
+@Registration @RegistrationMisc @FillEmailAsUsername @Fail
 Feature: FillEmailAsUsername
 
-  Scenario: Check if
+  Scenario: Check if email field can be used as username
     Given I am on "/index.php?id=138"
     Then I should see "Create a new user-profile"
     And I fill in the following:

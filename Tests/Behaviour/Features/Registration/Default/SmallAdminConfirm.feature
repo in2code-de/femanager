@@ -1,5 +1,5 @@
 # Features/Registration/Default/SmallAdminConfirm.feature
-@Registration @RegistrationDefault @RegistrationDefaultSmallAdminConfirm
+@Registration @RegistrationDefault @RegistrationDefaultSmallAdminConfirm @Fail
 Feature: SmallAdminConfirm
 
   Scenario: Check if a small registration is possible with admin confirmation

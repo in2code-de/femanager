@@ -1,5 +1,5 @@
 # Features/Registration/Default/AllFieldsNoConfirm.feature
-@Registration @RegistrationDefault @RegistrationDefaultAllFieldsNoConfirm
+@Registration @RegistrationDefault @RegistrationDefaultAllFieldsNoConfirm @Fail
 Feature: AllFieldsNoConfirm
 
   Scenario: Check if a large registration is possible

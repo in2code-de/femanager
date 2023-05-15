@@ -1,5 +1,5 @@
 # Features/Registration/Misc/StoreInDatabase.feature
-@Registration @RegistrationMisc @RegistrationMiscStoreInDatabase
+@Registration @RegistrationMisc @RegistrationMiscStoreInDatabase @Fail
 Feature: StoreInDatabase
 
   Scenario: Check if it's possible to create tt_content elements

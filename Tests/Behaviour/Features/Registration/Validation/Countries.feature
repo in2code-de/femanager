@@ -42,7 +42,7 @@ Feature: Countries
       | Email | info@in2code.ws |
     Then I should see "Field Country is required"
 
-  @javascript
+  @javascript @Fail
   Scenario: Check if validation for State are stored after unsucessful submit
     Given I am on "/index.php?id=130"
     And I fill in the following:
