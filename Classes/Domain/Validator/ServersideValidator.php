@@ -232,7 +232,7 @@ class ServersideValidator extends AbstractValidator
      */
     protected function checkMustIncludeValidation($value, $validationSetting, $fieldName)
     {
-        if (!empty($value) && !$this->validateInclude($value, $validationSetting, self::MUST_INCLUDE)) {
+        if (!empty($value) && !$this->validateMustInclude($value, $validationSetting)) {
             $this->addError('validationErrorMustInclude', 0, ['field' => $fieldName]);
             $this->isValid = false;
         }
@@ -245,7 +245,7 @@ class ServersideValidator extends AbstractValidator
      */
     protected function checkMustNotIncludeValidation($value, $validationSetting, $fieldName)
     {
-        if (!empty($value) && !$this->validateInclude($value, $validationSetting, self::MUST_NOT_INCLUDE)) {
+        if (!empty($value) && !$this->validateMustNotInclude($value, $validationSetting)) {
             $this->addError('validationErrorMustNotInclude', 0, ['field' => $fieldName]);
             $this->isValid = false;
         }

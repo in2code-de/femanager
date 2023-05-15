@@ -31,10 +31,6 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     protected ?PluginService $pluginService = null;
 
-    final public const MUST_INCLUDE = 'must';
-
-    final public const MUST_NOT_INCLUDE = 'mustnot';
-
     /**
      * Former known as piVars
      *
@@ -219,35 +215,85 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         return $this->eventDispatcher->dispatch(new UniqueUserEvent($value, $field, $user, $uniqueDb))->isUnique();
     }
 
-
-    protected function validateInclude(string $value, string $validationSettingList, string $validationType): bool
+    /**
+     * Validation for "Must include some characters"
+     *
+     * @param string $value
+     * @param string $validationSettingList
+     * @return \bool
+     */
+    protected function validateMustInclude($value, $validationSettingList)
     {
         $isValid = true;
         $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
         foreach ($validationSettings as $validationSetting) {
             switch ($validationSetting) {
                 case 'number':
-                    if ($this->stringContainsNumber($value, $validationType)) {
+                    if (!$this->stringContainsNumber($value)) {
                         $isValid = false;
                     }
                     break;
                 case 'letter':
-                    if ($this->stringContainsLetter($value, $validationType)) {
+                    if (!$this->stringContainsLetter($value)) {
                         $isValid = false;
                     }
                     break;
                 case 'uppercase':
-                    if ($this->stringContainsUppercase($value, $validationType)) {
+                    if (!$this->stringContainsUppercase($value)) {
                         $isValid = false;
                     }
                     break;
                 case 'special':
-                    if ($this->stringContainsSpecialCharacter($value, $validationType)) {
+                    if (!$this->stringContainsSpecialCharacter($value)) {
                         $isValid = false;
                     }
                     break;
                 case 'space':
-                    if ($this->stringContainsSpaceCharacter($value, $validationType)) {
+                    if (!$this->stringContainsSpaceCharacter($value)) {
+                        $isValid = false;
+                    }
+                    break;
+                default:
+            }
+        }
+        return $isValid;
+    }
+
+    /**
+     * Validation for "Must not include some characters"
+     *
+     * @param string $value
+     * @param string $validationSettingList
+     * @return \bool
+     */
+    protected function validateMustNotInclude($value, $validationSettingList)
+    {
+        $isValid = true;
+        $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
+        foreach ($validationSettings as $validationSetting) {
+            switch ($validationSetting) {
+                case 'number':
+                    if ($this->stringContainsNumber($value)) {
+                        $isValid = false;
+                    }
+                    break;
+                case 'letter':
+                    if ($this->stringContainsLetter($value)) {
+                        $isValid = false;
+                    }
+                    break;
+                case 'uppercase':
+                    if ($this->stringContainsUppercase($value)) {
+                        $isValid = false;
+                    }
+                    break;
+                case 'special':
+                    if ($this->stringContainsSpecialCharacter($value)) {
+                        $isValid = false;
+                    }
+                    break;
+                case 'space':
+                    if ($this->stringContainsSpaceCharacter($value)) {
                         $isValid = false;
                     }
                     break;
@@ -263,14 +309,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * @param string $value
      * @return bool
      */
-    protected function stringContainsNumber($value, $validationType)
+    protected function stringContainsNumber($value)
     {
-        $result = strlen(preg_replace('/[^0-9]/', '', $value)) > 0;
-        if ($validationType === self::MUST_INCLUDE) {
-            return $result;
-        } else {
-            return !$result;
-        }
+        return strlen(preg_replace('/[^0-9]/', '', $value)) > 0;
     }
 
     /**
@@ -279,14 +320,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * @param string $value
      * @return bool
      */
-    protected function stringContainsLetter($value, $validationType)
+    protected function stringContainsLetter($value)
     {
-        $result = strlen(preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0;
-        if ($validationType === self::MUST_INCLUDE) {
-            return $result;
-        } else {
-            return !$result;
-        }
+        return strlen(preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0;
     }
 
     /**
@@ -295,14 +331,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * @param string $value
      * @return bool
      */
-    protected function stringContainsUppercase($value, $validationType)
+    protected function stringContainsUppercase($value)
     {
-        $result = strlen(preg_replace('/[^A-Z]/', '', $value)) > 0;
-        if ($validationType === self::MUST_INCLUDE) {
-            return $result;
-        } else {
-            return !$result;
-        }
+        return strlen(preg_replace('/[^A-Z]/', '', $value)) > 0;
     }
 
     /**
@@ -311,14 +342,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * @param string $value
      * @return bool
      */
-    protected function stringContainsSpecialCharacter($value, $validationType)
+    protected function stringContainsSpecialCharacter($value)
     {
-        $result = strlen(preg_replace('/[^a-zA-Z0-9]/', '', $value)) !== strlen($value);
-        if ($validationType === self::MUST_INCLUDE) {
-            return $result;
-        } else {
-            return !$result;
-        }
+        return strlen(preg_replace('/[^a-zA-Z0-9]/', '', $value)) !== strlen($value);
     }
 
     /**
@@ -327,14 +353,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * @param string $value
      * @return bool
      */
-    protected function stringContainsSpaceCharacter($value, $validationType)
+    protected function stringContainsSpaceCharacter($value)
     {
-        $result = str_contains($value, ' ');
-        if ($validationType === self::MUST_INCLUDE) {
-            return $result;
-        } else {
-            return !$result;
-        }
+        return str_contains($value, ' ');
     }
 
     /**
