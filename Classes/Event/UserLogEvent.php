@@ -6,15 +6,13 @@ namespace In2code\Femanager\Event;
 
 use In2code\Femanager\Domain\Model\User;
 
-class UserLogEvent extends UserEvent
+class UserLogEvent
 {
     public function __construct(
-        ?User $user,
+        protected ?User $user,
         private readonly int $state,
         private readonly array $additionalProperties = []
-    ) {
-        parent::__construct($user);
-    }
+    ) {}
 
     public function getAdditionalProperties(): array
     {
@@ -24,5 +22,10 @@ class UserLogEvent extends UserEvent
     public function getState(): int
     {
         return $this->state;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
     }
 }

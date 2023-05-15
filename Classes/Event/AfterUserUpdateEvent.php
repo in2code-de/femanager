@@ -6,12 +6,10 @@ namespace In2code\Femanager\Event;
 
 use In2code\Femanager\Domain\Model\User;
 
-class AfterUserUpdateEvent extends UserEvent
+class AfterUserUpdateEvent
 {
-    public function __construct(User $user, private readonly string $hash, private readonly string $status)
-    {
-        parent::__construct($user);
-    }
+
+    public function __construct(protected User $user, private readonly string $hash, private readonly string $status) {}
 
     public function getStatus(): string
     {
@@ -21,5 +19,10 @@ class AfterUserUpdateEvent extends UserEvent
     public function getHash(): string
     {
         return $this->hash;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
     }
 }

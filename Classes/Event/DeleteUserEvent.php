@@ -4,6 +4,14 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Event;
 
-class DeleteUserEvent extends UserEvent
+use In2code\Femanager\Domain\Model\User;
+
+class DeleteUserEvent
 {
+    public function __construct(protected ?User $user) {}
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
 }

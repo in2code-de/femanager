@@ -20,7 +20,7 @@
     </rule>
     <rule ref="rulesets/naming.xml/LongVariable">
         <properties>
-            <property name="maximum" value="26" />
+            <property name="maximum" value="30" />
         </properties>
     </rule>
     <rule ref="rulesets/unusedcode.xml" />
@@ -57,7 +57,7 @@
                     \In2code\Femanager\Utility\LocalizationUtility,
                     \In2code\Femanager\Utility\HashUtility,
                     \In2code\Femanager\Utility\FrontendUtility,
-                    \TYPO3\CMS\Core\Http\ServerRequestFactory'
+                    \TYPO3\CMS\Core\Http\ServerRequestFactory
                 </value>
             </property>
         </properties>

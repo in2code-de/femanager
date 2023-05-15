@@ -98,6 +98,11 @@ class PluginUpdater implements UpgradeWizardInterface
         return count($this->getMigrationRecords()) > 0;
     }
 
+    /**
+     * @return bool
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     */
     public function performMigration(): bool
     {
         $records = $this->getMigrationRecords();

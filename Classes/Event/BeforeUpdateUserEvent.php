@@ -4,6 +4,19 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Event;
 
-class BeforeUpdateUserEvent extends UserEvent
+use In2code\Femanager\Domain\Model\User;
+
+class BeforeUpdateUserEvent
 {
+    protected $user;
+
+    public function __construct(?User $user)
+    {
+        $this->user = $user;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
 }

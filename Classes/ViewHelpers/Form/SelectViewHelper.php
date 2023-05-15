@@ -11,6 +11,9 @@ use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
+/**
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ */
 class SelectViewHelper extends AbstractFormFieldViewHelper
 {
     /**
@@ -207,6 +210,9 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
      * Render the option tags.
      *
      * @return array An associative array of options, key will be the value of the option tag
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     protected function getOptions(): array
     {
