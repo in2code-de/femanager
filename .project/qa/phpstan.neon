@@ -1,0 +1,10 @@
+parameters:
+	level: 1
+	paths:
+	    - /var/www/html/Classes
+	excludePaths:
+	    - /var/www/html/Classes/DataProvider/CountryZonesDataProvider.php
+	ignoreErrors:
+	    - '#^Class SJBR\\SrFreecap\\[a-zA-Z0-9\\_]+ not found\.$#'
+	    - '#^Class SJBR\\StaticInfoTables\\[a-zA-Z0-9\\_]+ not found\.$#'
+
