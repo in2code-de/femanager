@@ -7,9 +7,15 @@ default:
         features: '%paths.base%/Features'
         bootstrap: '%paths.base%/Features/Bootstrap'
       contexts:
+        - DrevOps\BehatScreenshotExtension\Context\ScreenshotContext
         - FeatureContext
         - FailAid\Context\FailureContext
   extensions:
+    DrevOps\BehatScreenshotExtension:
+      dir: '%paths.base%/../../.project/data/screenshots'
+      fail: true
+      fail_prefix: 'failed_'
+      purge: true
     FailAid\Extension: ~
     Behat\MinkExtension:
       base_url: https://femanager.ddev.site/
@@ -25,3 +31,4 @@ default:
               extra_capabilities:
                 acceptInsecureCerts: true
             wd_host: 'http://chrome:4444/wd/hub'
+
