@@ -38,8 +38,6 @@ class RatelimiterService implements SingletonInterface
     }
 
     /**
-     * @return TypoScriptFrontendController
-     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected function getTSFE(): TypoScriptFrontendController

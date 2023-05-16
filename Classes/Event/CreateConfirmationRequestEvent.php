@@ -12,7 +12,9 @@ class CreateConfirmationRequestEvent
 
     final public const MODE_MANUAL = 'manual';
 
-    public function __construct(protected User $user, private readonly string $mode) {}
+    public function __construct(protected User $user, private readonly string $mode)
+    {
+    }
 
     public function getMode(): string
     {

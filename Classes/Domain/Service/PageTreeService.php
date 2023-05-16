@@ -46,7 +46,10 @@ class PageTreeService
             $queryBuilder->select('uid')
                 ->from('pages')
                 ->where(
-                    $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($pageUid, Connection::PARAM_INT)),
+                    $queryBuilder->expr()->eq(
+                        'pid',
+                        $queryBuilder->createNamedParameter($pageUid, Connection::PARAM_INT)
+                    ),
                     $queryBuilder->expr()->eq('sys_language_uid', 0)
                 )
                 ->orderBy('uid');

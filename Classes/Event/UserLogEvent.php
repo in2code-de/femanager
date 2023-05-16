@@ -12,7 +12,8 @@ class UserLogEvent
         protected ?User $user,
         private readonly int $state,
         private readonly array $additionalProperties = []
-    ) {}
+    ) {
+    }
 
     public function getAdditionalProperties(): array
     {

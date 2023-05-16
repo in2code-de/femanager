@@ -8,7 +8,9 @@ use In2code\Femanager\Domain\Model\User;
 
 class InviteUserEditEvent
 {
-    public function __construct(protected ?User $user, private readonly string $hash){}
+    public function __construct(protected ?User $user, private readonly string $hash)
+    {
+    }
 
     public function getHash(): string
     {

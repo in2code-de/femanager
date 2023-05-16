@@ -8,8 +8,9 @@ use In2code\Femanager\Domain\Model\User;
 
 class AfterUserUpdateEvent
 {
-
-    public function __construct(protected User $user, private readonly string $hash, private readonly string $status) {}
+    public function __construct(protected User $user, private readonly string $hash, private readonly string $status)
+    {
+    }
 
     public function getStatus(): string
     {

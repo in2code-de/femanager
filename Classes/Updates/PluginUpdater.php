@@ -99,8 +99,6 @@ class PluginUpdater implements UpgradeWizardInterface
     }
 
     /**
-     * @return bool
-     *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function performMigration(): bool
@@ -167,8 +165,6 @@ class PluginUpdater implements UpgradeWizardInterface
     }
 
     /**
-     * @param string $switchableControllerActions
-     * @return string
      *
      * @SuppressWarnings(PHPMD.LongVariable)
      */
@@ -185,8 +181,6 @@ class PluginUpdater implements UpgradeWizardInterface
     }
 
     /**
-     * @param string $listType
-     * @return array
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */

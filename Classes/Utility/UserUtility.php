@@ -45,7 +45,6 @@ class UserUtility extends AbstractUtility
     /**
      * Get property from current logged in Frontend User
      *
-     * @param string $propertyName
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */

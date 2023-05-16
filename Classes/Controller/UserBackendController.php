@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
 
+use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
+use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
+use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Event\AdminConfirmationUserEvent;
 use In2code\Femanager\Event\RefuseUserEvent;
@@ -48,10 +51,8 @@ class UserBackendController extends AbstractController
     }
 
     /**
-     * @param array $filter
-     * @return ResponseInterface
-     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
-     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws RouteNotFoundException
+     * @throws AspectNotFoundException
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
@@ -217,12 +218,9 @@ class UserBackendController extends AbstractController
     }
 
     /**
-     * @param string $status
-     * @param int $userIdentifier
-     * @param User $user
      * @return mixed|void
      * @throws \JsonException
-     * @throws \TYPO3\CMS\Core\Exception\SiteNotFoundException
+     * @throws SiteNotFoundException
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */

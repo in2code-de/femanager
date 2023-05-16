@@ -8,7 +8,9 @@ use In2code\Femanager\Domain\Model\User;
 
 class FinalCreateEvent
 {
-    public function __construct(protected ?User $user, private readonly string $action) {}
+    public function __construct(protected ?User $user, private readonly string $action)
+    {
+    }
 
     public function getAction(): string
     {

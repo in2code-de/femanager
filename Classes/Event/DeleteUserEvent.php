@@ -8,7 +8,9 @@ use In2code\Femanager\Domain\Model\User;
 
 class DeleteUserEvent
 {
-    public function __construct(protected ?User $user) {}
+    public function __construct(protected ?User $user)
+    {
+    }
 
     public function getUser(): ?User
     {
