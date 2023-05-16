@@ -73,11 +73,11 @@ class UserLinks
     public function getAdminConfirmationUri(array $row)
     {
         $params = '';
-        $params .= '&tx_femanager_pi1[user]=' . $row['uid'];
-        $params .= '&tx_femanager_pi1[hash]=' . $this->getHash($row);
-        $params .= '&tx_femanager_pi1[status]=adminConfirmation';
-        $params .= '&tx_femanager_pi1[action]=confirmCreateRequest';
-        $params .= '&tx_femanager_pi1[controller]=New';
+        $params .= '&tx_femanager_registration[user]=' . $row['uid'];
+        $params .= '&tx_femanager_registration[hash]=' . $this->getHash($row);
+        $params .= '&tx_femanager_registration[status]=adminConfirmation';
+        $params .= '&tx_femanager_registration[action]=confirmCreateRequest';
+        $params .= '&tx_femanager_registration[controller]=New';
         $configuration = [
             'parameter' => (int)$this->pid,
             'additionalParams' => $params,
@@ -99,11 +99,11 @@ class UserLinks
     public function getUserConfirmationUri(array $row)
     {
         $params = '';
-        $params .= '&tx_femanager_pi1[user]=' . $row['uid'];
-        $params .= '&tx_femanager_pi1[hash]=' . $this->getHash($row);
-        $params .= '&tx_femanager_pi1[status]=userConfirmation';
-        $params .= '&tx_femanager_pi1[action]=confirmCreateRequest';
-        $params .= '&tx_femanager_pi1[controller]=New';
+        $params .= '&tx_femanager_registration[user]=' . $row['uid'];
+        $params .= '&tx_femanager_registration[hash]=' . $this->getHash($row);
+        $params .= '&tx_femanager_registration[status]=userConfirmation';
+        $params .= '&tx_femanager_registration[action]=confirmCreateRequest';
+        $params .= '&tx_femanager_registration[controller]=New';
         $configuration = [
             'parameter' => (int)$this->pid,
             'additionalParams' => $params,

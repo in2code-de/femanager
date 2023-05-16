@@ -42,23 +42,24 @@ Feature: Countries
       | Email | info@in2code.ws |
     Then I should see "Field Country is required"
 
-  @javascript @Fail
-  Scenario: Check if validation for State are stored after unsucessful submit
-    Given I am on "/index.php?id=130"
-    And I fill in the following:
-      | Username | [random] |
-      | Password | testtest |
-      | Repeat Password | testtest |
-      | Country | AUT |
-
-    Then I wait "4" seconds
-    And I fill in the following:
-      | State | 5 |
-
-    And I fill in the following:
-      | Email | info@in2code.ws |
-
-    And I press "Create Profile Now"
-
-    Then I wait "4" seconds
-    Then I should see "User registration"
+  # @TODO: Reactivate when static_info_tables is avaiable for TYPO3v12
+#  @javascript @Fail
+#  Scenario: Check if validation for State are stored after unsucessful submit
+#    Given I am on "/index.php?id=130"
+#    And I fill in the following:
+#      | Username | [random] |
+#      | Password | testtest |
+#      | Repeat Password | testtest |
+#      | Country | AUT |
+#
+#    Then I wait "4" seconds
+#    And I fill in the following:
+#      | State | 5 |
+#
+#    And I fill in the following:
+#      | Email | info@in2code.ws |
+#
+#    And I press "Create Profile Now"
+#
+#    Then I wait "4" seconds
+#    Then I should see "User registration"

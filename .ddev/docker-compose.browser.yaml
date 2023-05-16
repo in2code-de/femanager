@@ -2,7 +2,7 @@ version: '3.6'
 services:
   chrome:
     container_name: ddev-${DDEV_SITENAME}-chromedriver
-    image: selenium/standalone-chrome-debug
+    image: seleniarm/standalone-chromium
     restart: "no"
     volumes:
       - /dev/shm:/dev/shm
@@ -10,4 +10,4 @@ services:
       - 4444
       - "15722:5900"
     external_links:
-      - "ddev-router:${DDEV_SITENAME}.ddev.site"
+      - ddev-router:$DDEV_HOSTNAME
