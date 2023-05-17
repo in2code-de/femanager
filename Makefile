@@ -42,9 +42,17 @@ start:
 	make urls
 
 ## Restores the database from the backup file defined in .env
-mysql-restore:
+mysql-restore: .mysql-wait
 	echo "$(EMOJI_robot) Restoring the database"
 	docker-compose exec mysql bash -c 'DUMPFILE="/$(SQLDUMPSDIR)/$(SQLDUMPFILE)"; if [[ "$${DUMPFILE##*.}" == "sql" ]]; then cat $$DUMPFILE; else zcat $$DUMPFILE; fi | mysql --default-character-set=utf8 -u$(MYSQL_USER) -p$(MYSQL_PASSWORD) $(MYSQL_DATABASE)'
+
+## Wait for the mysql container to be fully provisioned
+.mysql-wait:
+		echo "$(EMOJI_ping_pong) Checking DB up and running"
+		while ! docker compose exec mysql mysql -u$(MYSQL_USER) -p$(MYSQL_PASSWORD) $(MYSQL_DATABASE) -e "SELECT 1;" &> /dev/null; do \
+				echo "$(EMOJI_face_with_rolling_eyes) Waiting for database ..."; \
+				sleep 1; \
+		done;
 
 ## Starts composer-install
 composer-install:
