@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Finisher\FinisherInterface;
@@ -10,6 +11,7 @@ use In2code\Femanager\Utility\StringUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use UnexpectedValueException;
 
 /**
  * Class FinisherService
@@ -55,7 +57,7 @@ class FinisherService
     /**
      * Controller actionName - usually "createAction" or "confirmationAction"
      *
-     * @var null
+     * @var string
      */
     protected $actionMethodName;
 
@@ -160,11 +162,7 @@ class FinisherService
         return $this->actionMethodName;
     }
 
-    /**
-     * @param null $actionMethodName
-     * @return FinisherService
-     */
-    public function setActionMethodName($actionMethodName)
+    public function setActionMethodName(string $actionMethodName): FinisherService
     {
         $this->actionMethodName = $actionMethodName;
         return $this;
@@ -178,7 +176,7 @@ class FinisherService
     public function start()
     {
         if (!class_exists($this->getClass())) {
-            throw new \UnexpectedValueException(
+            throw new UnexpectedValueException(
                 'Class ' . $this->getClass() . ' does not exists - check if file was loaded with autoloader',
                 1516373888508
             );
@@ -197,7 +195,7 @@ class FinisherService
             $finisher->initializeFinisher();
             $this->callFinisherMethods($finisher);
         } else {
-            throw new \UnexpectedValueException(
+            throw new UnexpectedValueException(
                 'Finisher does not implement ' . $this->finisherInterface,
                 1516373899775
             );

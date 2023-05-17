@@ -29,7 +29,8 @@ class PluginUpdater implements UpgradeWizardInterface
             'targetListType' => 'femanager_registration',
         ],
         [
-            'switchableControllerActions' => 'Edit->edit;Edit->update;Edit->delete;Edit->confirmUpdateRequest;User->imageDelete;',
+            'switchableControllerActions' =>
+                'Edit->edit;Edit->update;Edit->delete;Edit->confirmUpdateRequest;User->imageDelete;',
             'targetListType' => 'femanager_edit',
         ],
         [
@@ -41,15 +42,19 @@ class PluginUpdater implements UpgradeWizardInterface
             'targetListType' => 'femanager_detail',
         ],
         [
-            'switchableControllerActions' => 'Invitation->new;Invitation->create;Invitation->edit;Invitation->update;Invitation->delete;Invitation->status;',
+            'switchableControllerActions' =>
+                'Invitation->new;Invitation->create;Invitation->edit;' .
+                'Invitation->update;Invitation->delete;Invitation->status;',
             'targetListType' => 'femanager_invitation',
         ],
         [
-            'switchableControllerActions' => 'New->resendConfirmationDialogue;New->resendConfirmationMail;New->confirmCreateRequest;New->createStatus',
+            'switchableControllerActions' =>
+                'New->resendConfirmationDialogue;New->resendConfirmationMail;' .
+                'New->confirmCreateRequest;New->createStatus',
             'targetListType' => 'femanager_resendconfirmationmail',
         ],
     ];
-    
+
     /** @var FlexFormService */
     protected $flexFormService;
 
@@ -93,6 +98,9 @@ class PluginUpdater implements UpgradeWizardInterface
         return count($this->getMigrationRecords()) > 0;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     */
     public function performMigration(): bool
     {
         $records = $this->getMigrationRecords();
@@ -108,14 +116,19 @@ class PluginUpdater implements UpgradeWizardInterface
 
             // Remove flexform data which do not exist in flexform of new plugin
             foreach ($flexFormData['data'] as $sheetKey => $sheetData) {
-                foreach ($sheetData['lDEF'] as $settingName => $setting) {
+                foreach (array_keys($sheetData['lDEF']) as $settingName) {
                     if (!in_array($settingName, $allowedSettings, true)) {
                         unset($flexFormData['data'][$sheetKey]['lDEF'][$settingName]);
                     }
                 }
 
                 // Remove empty sheets
-                if (!(is_countable($flexFormData['data'][$sheetKey]['lDEF']) ? count($flexFormData['data'][$sheetKey]['lDEF']) : 0) > 0) {
+                if (
+                    !(
+                        is_countable($flexFormData['data'][$sheetKey]['lDEF'])
+                            ? count($flexFormData['data'][$sheetKey]['lDEF']) : 0
+                    ) > 0
+                ) {
                     unset($flexFormData['data'][$sheetKey]);
                 }
             }
@@ -151,6 +164,10 @@ class PluginUpdater implements UpgradeWizardInterface
             ->fetchAllAssociative();
     }
 
+    /**
+     *
+     * @SuppressWarnings(PHPMD.LongVariable)
+     */
     protected function getTargetListType(string $switchableControllerActions): string
     {
         foreach (self::MIGRATION_SETTINGS as $setting) {
@@ -163,6 +180,10 @@ class PluginUpdater implements UpgradeWizardInterface
         return '';
     }
 
+    /**
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     protected function getAllowedSettingsFromFlexForm(string $listType): array
     {
         if (!isset($GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds']['*,' . $listType])) {
@@ -170,13 +191,14 @@ class PluginUpdater implements UpgradeWizardInterface
         }
 
         $flexFormFile = $GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds']['*,' . $listType];
-        $flexFormContent = file_get_contents(GeneralUtility::getFileAbsFileName(substr(trim((string) $flexFormFile), 5)));
+        $flexFormContent =
+            file_get_contents(GeneralUtility::getFileAbsFileName(substr(trim((string) $flexFormFile), 5)));
         $flexFormData = GeneralUtility::xml2array($flexFormContent);
 
         // Iterate each sheet and extract all settings
         $settings = [];
         foreach ($flexFormData['sheets'] as $sheet) {
-            foreach ($sheet['ROOT']['el'] as $setting => $tceForms) {
+            foreach (array_keys($sheet['ROOT']['el']) as $setting) {
                 $settings[] = $setting;
             }
         }

@@ -1,11 +1,12 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Domain\Service;
 
 class PluginService
 {
-    const ALLOWED_PLUGINS = [
+    final public const ALLOWED_PLUGINS = [
         'tx_femanager_registration',
         'tx_femanager_edit',
         'tx_femanager_list',
@@ -16,6 +17,8 @@ class PluginService
 
     /**
      * @return string The name of the femanager plugin in this request
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function getFemanagerPluginNameFromRequest(): string
     {
@@ -23,7 +26,7 @@ class PluginService
 
         // only the name of the first femanager plugin is returned
         if (is_array($request->getParsedBody())) {
-            foreach ($request->getParsedBody() as $key => $value) {
+            foreach (array_keys($request->getParsedBody()) as $key) {
                 if (in_array($key, self::ALLOWED_PLUGINS)) {
                     return $key;
                 }

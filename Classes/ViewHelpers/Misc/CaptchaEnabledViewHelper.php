@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -34,6 +35,8 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
         $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
 
         return ExtensionManagementUtility::isLoaded('sr_freecap')
-            && $this->templateVariableContainer->getByPath('settings.' . $controllerName . '.validation.captcha.captcha');
+            && $this->templateVariableContainer->getByPath(
+                'settings.' . $controllerName . '.validation.captcha.captcha'
+            );
     }
 }

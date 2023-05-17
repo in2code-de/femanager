@@ -27,6 +27,8 @@ use TYPO3\CMS\Extbase\Http\ForwardResponse;
 
 /**
  * Class InvitationController
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class InvitationController extends AbstractFrontendController
 {
@@ -118,7 +120,10 @@ class InvitationController extends AbstractFrontendController
                 'invitationNotifyStep1',
                 StringUtility::makeEmailArray(
                     $notifyAdminStep1,
-                    ConfigurationUtility::getValue('invitation/email/invitationAdminNotifyStep1/receiver/name/value', $this->settings)
+                    ConfigurationUtility::getValue(
+                        'invitation/email/invitationAdminNotifyStep1/receiver/name/value',
+                        $this->settings
+                    )
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile creation with invitation - Step 1',
@@ -144,13 +149,21 @@ class InvitationController extends AbstractFrontendController
 
         // User must exist and hash must be valid
         if ($user === null || !HashUtility::validHash($hash, $user)) {
-            $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                LocalizationUtility::translate('createFailedProfile'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
             $this->redirect('status');
         }
 
         // User must not be deleted (deleted = 0) and not be activated (disable = 1)
-        if ($user->getDisable() == 0) {
-            $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', ContextualFeedbackSeverity::ERROR);
+        if ($user->isDisable() == 0) {
+            $this->addFlashMessage(
+                LocalizationUtility::translate('userAlreadyConfirmed'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
             $this->redirect('status');
         }
 
@@ -194,7 +207,10 @@ class InvitationController extends AbstractFrontendController
                 'invitationNotify',
                 StringUtility::makeEmailArray(
                     $notifyAdmin,
-                    ConfigurationUtility::getValue('invitation/email/invitationAdminNotify/receiver/name/value', $this->settings)
+                    ConfigurationUtility::getValue(
+                        'invitation/email/invitationAdminNotify/receiver/name/value',
+                        $this->settings
+                    )
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile creation with invitation - Final',
@@ -206,7 +222,10 @@ class InvitationController extends AbstractFrontendController
             );
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings, 'invitation');
-        UserUtility::hashPassword($user, ConfigurationUtility::getValue('invitation/misc/passwordSave', $this->settings));
+        UserUtility::hashPassword(
+            $user,
+            ConfigurationUtility::getValue('invitation/misc/passwordSave', $this->settings)
+        );
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
         $this->eventDispatcher->dispatch(new InviteUserUpdateEvent($user));
@@ -229,7 +248,9 @@ class InvitationController extends AbstractFrontendController
 
         if ($user !== null && HashUtility::validHash($hash, $user)) {
             $this->logUtility->log(Log::STATUS_PROFILEDELETE, $user);
-            $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_INVITATIONPROFILEDELETEDUSER));
+            $this->addFlashMessage(
+                LocalizationUtility::translateByState(Log::STATUS_INVITATIONPROFILEDELETEDUSER)
+            );
 
             // send notify email to admin
             $notifyAdmin = ConfigurationUtility::getValue('invitation/notifyAdmin', $this->settings);
@@ -238,7 +259,10 @@ class InvitationController extends AbstractFrontendController
                     'invitationRefused',
                     StringUtility::makeEmailArray(
                         $notifyAdmin,
-                        ConfigurationUtility::getValue('invitation/email/invitationRefused/receiver/name/value', $this->settings)
+                        ConfigurationUtility::getValue(
+                            'invitation/email/invitationRefused/receiver/name/value',
+                            $this->settings
+                        )
                     ),
                     StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                     'Profile deleted from User after invitation - Step 1',
@@ -272,8 +296,6 @@ class InvitationController extends AbstractFrontendController
 
     /**
      * Check if user is allowed to see this action
-     *
-     * @return bool
      */
     protected function allowedUserForInvitationNewAndCreate(): bool
     {

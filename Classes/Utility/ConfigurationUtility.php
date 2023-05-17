@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
@@ -149,14 +150,14 @@ class ConfigurationUtility extends AbstractUtility
     /**
      * @codeCoverageIgnore
      */
-    public static function IsResendUserConfirmationRequestActive(): bool
+    public static function isResendUserConfirmationRequestActive(): bool
     {
         $config = BackendUserUtility::getBackendUserAuthentication()->getTSConfig(
         )['tx_femanager.']['UserBackend.']['confirmation.']['ResendUserConfirmationRequest'] ?? false;
         return (bool)$config;
     }
 
-    public static function IsCreateUserNotifyActive($config): bool
+    public static function isCreateUserNotifyActive($config): bool
     {
         if (ConfigurationUtility::getValue(
             'new/email/createUserNotify/sender/email/value',

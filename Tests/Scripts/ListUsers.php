@@ -34,9 +34,9 @@ class ListUsers
             );
 
         try {
-            $res = $queryBuilder->execute();
+            $res = $queryBuilder->executeQuery();
             if ($res) {
-                while (($row = $res->fetch())) {
+                while (($row = $res->fetchAssociative())) {
                     DebuggerUtility::var_dump($row, 'in2code: ' . self::class . ':' . __LINE__);
                 }
             }
@@ -59,12 +59,12 @@ class ListUsers
     {
         $content = '<h2>List latest FE_Users</h2>';
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
-        $queryBuilder->select('*')->from('fe_users')->orderBy('uid', 'desc');
+        $queryBuilder->select('*')->from('fe_users')->orderBy('uid', 'desc')->setMaxResults(1);
 
         try {
-            $res = $queryBuilder->execute();
+            $res = $queryBuilder->executeQuery();
             if ($res) {
-                $row = $res->fetch();
+                $row = $res->fetchAssociative();
                 DebuggerUtility::var_dump($row, 'in2code: ' . self::class . ':' . __LINE__);
             }
         } catch (DBALException $e) {

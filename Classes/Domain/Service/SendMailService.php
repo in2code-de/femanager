@@ -11,7 +11,6 @@ use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\TemplateUtility;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Mime\Part\DataPart;
-use TYPO3\CMS\Core\Mail\Mailer;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
@@ -31,8 +30,9 @@ class SendMailService
     /**
      * SendMailService constructor.
      */
-    public function __construct(private readonly ?Mailer $mailer, private readonly ?EventDispatcherInterface $dispatcher)
-    {
+    public function __construct(
+        private readonly ?EventDispatcherInterface $dispatcher
+    ) {
         $this->contentObject = ObjectUtility::getContentObject();
     }
 

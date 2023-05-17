@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cd Resources/Private && npm install && npm run run-build

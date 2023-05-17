@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\User;
@@ -17,10 +18,13 @@ use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 /**
  * Class UserUtility
  * @codeCoverageIgnore
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class UserUtility extends AbstractUtility
 {
@@ -41,15 +45,18 @@ class UserUtility extends AbstractUtility
     /**
      * Get property from current logged in Frontend User
      *
-     * @param string $propertyName
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public static function getPropertyFromUser($propertyName = 'uid'): mixed
+    public static function getPropertyFromUser(string $propertyName = 'uid'): mixed
     {
         /**
-         * @var $request ServerRequest
-         * @var $frontendUser \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication
+         * @var ServerRequest $request
          */
         $request = $GLOBALS['TYPO3_REQUEST'];
+        /**
+         * @var FrontendUserAuthentication $frontendUser
+         */
         $frontendUser = $request->getAttribute('frontend.user');
 
         if (!empty($frontendUser->user[$propertyName])) {
@@ -151,7 +158,7 @@ class UserUtility extends AbstractUtility
             $usergroupUids = GeneralUtility::trimExplode(',', $settings[$controllerName]['overrideUserGroup'], true);
             foreach ($usergroupUids as $usergroupUid) {
                 /** @var UserGroup $usergroup */
-                $usergroup = self::getUserGroupRepository()->findByUid($usergroupUid);
+                $usergroup = self::getUserGroupRepository()->findByUid((int)$usergroupUid);
                 $user->addUsergroup($usergroup);
             }
         }
@@ -228,6 +235,8 @@ class UserUtility extends AbstractUtility
      * @return array
      *            [firstName][old] = Alex
      *            [firstName][new] = Alexander
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public static function getDirtyPropertiesFromUser(User $changedObject)
     {
@@ -325,6 +334,11 @@ class UserUtility extends AbstractUtility
 
     /**
      * Login FE-User
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.Superglobals)
+     *
+     * @TODO: Check Storagepid Parameter, the function should be restored
      */
     public static function login(User $user, ?string $storagePids = null)
     {

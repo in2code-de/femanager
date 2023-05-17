@@ -27,6 +27,8 @@ use TYPO3\CMS\Extbase\Annotation\Validate;
 
 /**
  * Class EditController
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class EditController extends AbstractFrontendController
 {
@@ -34,7 +36,10 @@ class EditController extends AbstractFrontendController
     {
         $token = '';
         if ($this->user) {
-            $token = GeneralUtility::hmac((string)$this->user->getUid(), (string)$this->user->getCrdate()->getTimestamp());
+            $token = GeneralUtility::hmac(
+                (string)$this->user->getUid(),
+                (string)$this->user->getCrdate()->getTimestamp()
+            );
         }
         $this->view->assignMultiple([
             'user' => $this->user,
@@ -96,7 +101,11 @@ class EditController extends AbstractFrontendController
     {
         $this->view->assign('user', $user);
         if (!HashUtility::validHash($hash, $user) || !$user->getTxFemanagerChangerequest()) {
-            $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                LocalizationUtility::translate('updateFailedProfile'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
             return $this->htmlResponse(null);
         }
         switch ($status) {
@@ -133,7 +142,7 @@ class EditController extends AbstractFrontendController
                 $usergroupUids = GeneralUtility::trimExplode(',', $value['new'], true);
                 foreach ($usergroupUids as $usergroupUid) {
                     /** @var UserGroup $usergroup */
-                    $usergroup = $this->userGroupRepository->findByUid($usergroupUid);
+                    $usergroup = $this->userGroupRepository->findByUid((int)$usergroupUid);
                     $user->addUsergroup($usergroup);
                 }
             }

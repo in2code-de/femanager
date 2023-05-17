@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\ViewHelpers\Pagination;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder as ExtbaseUriBuilder;
 use TYPO3\CMS\Extbase\Service\ExtensionService;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
@@ -39,7 +40,7 @@ class UriViewHelper extends AbstractTagBasedViewHelper
                 1638341671
             );
         }
-        $uriBuilder = $this->renderingContext->getUriBuilder();
+        $uriBuilder = GeneralUtility::makeInstance(ExtbaseUriBuilder::class);
         $extensionName = $this->renderingContext->getRequest()->getControllerExtensionName();
         $pluginName = $this->renderingContext->getRequest()->getPluginName();
         $extensionService = GeneralUtility::makeInstance(ExtensionService::class);
@@ -52,10 +53,13 @@ class UriViewHelper extends AbstractTagBasedViewHelper
         if ($this->hasArgument('format') && $this->arguments['format'] !== '') {
             $arguments['format'] = $this->arguments['format'];
         }
-        $uriBuilder->reset()
+        $uri = $uriBuilder
+            ->reset()
+            ->setRequest($this->renderingContext->getRequest())
             ->setArguments([$argumentPrefix => $arguments])
             ->setAddQueryString(true)
             ->setArgumentsToBeExcludedFromQueryString([$argumentPrefix, 'cHash']);
-        return $uriBuilder->build();
+
+        return $uri->build();
     }
 }

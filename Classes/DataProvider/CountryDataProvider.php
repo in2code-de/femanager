@@ -14,10 +14,10 @@ class CountryDataProvider
 
     public function __construct()
     {
+        /* @phpstan-ignore-next-line */
         $this->countryRepository = GeneralUtility::makeInstance(CountryRepository::class);
     }
 
-    /** @return Country[] */
     public function getCountries(): array
     {
         return $this->countryRepository->findAllOrderedBy('shortNameLocal')->toArray();

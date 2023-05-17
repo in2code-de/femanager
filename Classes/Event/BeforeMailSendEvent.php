@@ -9,8 +9,11 @@ use Symfony\Component\Mime\Email;
 
 class BeforeMailSendEvent
 {
-    public function __construct(private Email $email, private readonly array $variables, private readonly SendMailService $service)
-    {
+    public function __construct(
+        private Email $email,
+        private readonly array $variables,
+        private readonly SendMailService $service
+    ) {
     }
 
     public function getEmail(): Email

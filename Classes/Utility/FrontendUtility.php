@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\User;
@@ -80,10 +81,8 @@ class FrontendUtility extends AbstractUtility
 
     /**
      * Set single object property from forceValues in TypoScript
-     *
-     * @param any $value
      */
-    public static function forceValue(User $user, string $field, $value): void
+    public static function forceValue(User $user, string $field, mixed $value): void
     {
         if ($field === 'usergroup') {
             // need objectstorage for usergroup field
@@ -93,7 +92,7 @@ class FrontendUtility extends AbstractUtility
 
             foreach ($values as $usergroupUid) {
                 /** @var UserGroup $usergroup */
-                $usergroup = $userGroupRepository->findByUid($usergroupUid);
+                $usergroup = $userGroupRepository->findByUid((int)$usergroupUid);
                 $user->addUsergroup($usergroup);
             }
         } else {

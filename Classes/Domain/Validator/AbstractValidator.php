@@ -10,6 +10,7 @@ use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Domain\Service\PluginService;
 use In2code\Femanager\Event\UniqueUserEvent;
 use In2code\Femanager\Utility\FrontendUtility;
+use LogicException;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Http\ApplicationType;
@@ -19,6 +20,9 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidato
 
 /**
  * Class GeneralValidator
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 abstract class AbstractValidator extends AbstractValidatorExtbase
 {
@@ -57,17 +61,11 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         $this->configurationManager = $configurationManager;
     }
 
-    /**
-     * @param PluginService $pluginService
-     */
     public function injectPluginService(PluginService $pluginService)
     {
         $this->pluginService = $pluginService;
     }
 
-    /**
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function injectEventDispatcherInterface(EventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -91,10 +89,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     /**
      * Validation for required
-     *
-     * @return \bool
      */
-    protected function validateRequired(mixed $value)
+    protected function validateRequired(mixed $value): bool
     {
         if (!is_object($value)) {
             if (is_numeric($value)) {
@@ -115,9 +111,9 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * Validation for email
      *
      * @param string $value
-     * @return \bool
+     * @return bool
      */
-    protected function validateEmail($value)
+    protected function validateEmail($value): bool
     {
         return GeneralUtility::validEmail($value);
     }
@@ -127,9 +123,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      *
      * @param string $value
      * @param string $validationSetting
-     * @return \bool
      */
-    protected function validateMin($value, $validationSetting)
+    protected function validateMin($value, $validationSetting): bool
     {
         if (mb_strlen($value) < $validationSetting) {
             return false;
@@ -142,9 +137,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      *
      * @param string $value
      * @param string $validationSetting
-     * @return \bool
      */
-    protected function validateMax($value, $validationSetting)
+    protected function validateMax($value, $validationSetting): bool
     {
         if (mb_strlen($value) > $validationSetting) {
             return false;
@@ -156,9 +150,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * Validation for Numbers only
      *
      * @param string $value
-     * @return \bool
      */
-    protected function validateInt($value)
+    protected function validateInt($value): bool
     {
         return is_numeric($value);
     }
@@ -167,9 +160,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * Validation for Letters (a-zA-Z), hyphen and underscore
      *
      * @param string $value
-     * @return \bool
      */
-    protected function validateLetters($value)
+    protected function validateLetters($value): bool
     {
         if (preg_replace('/[^a-zA-Z_-]/', '', $value) === $value) {
             return true;
@@ -181,22 +173,16 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      * Validation for all Unicode letters, hyphen and underscore
      *
      * @param string $value
-     * @return \bool
      */
-    protected function validateUnicodeLetters($value)
+    protected function validateUnicodeLetters($value): bool
     {
         return (bool)preg_match('/^[\pL_-]+$/u', $value);
     }
 
     /**
      * Validation for Unique in sysfolder
-     *
-     * @param string $value
-     * @param string $field
-     * @param User $user Existing User
-     * @return \bool
      */
-    protected function validateUniquePage($value, $field, User $user = null)
+    protected function validateUniquePage(string $value, string $field, User $user = null): bool
     {
         $foundUser = $this->userRepository->checkUniquePage($field, $value, $user);
         return !is_object($foundUser);
@@ -204,13 +190,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     /**
      * Validation for Unique in the db
-     *
-     * @param string $value
-     * @param string $field Fieldname like "username" or "email"
-     * @param User $user Existing User
-     * @return \bool
      */
-    protected function validateUniqueDb($value, $field, User $user = null)
+    protected function validateUniqueDb(string $value, string $field, User $user = null): bool
     {
         $foundUser = $this->userRepository->checkUniqueDb($field, $value, $user);
 
@@ -221,84 +202,46 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     }
 
     /**
-     * Validation for "Must include some characters"
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      *
-     * @param string $value
-     * @param string $validationSettingList
-     * @return \bool
+     * PHPMD.BooleanArgumentFlag issue has come ob because Copy&Paste Detector issue
+     * Commit: 55fd29fb082ba13ba5c1234240d7e74e78ee9dd4
+     *
      */
-    protected function validateMustInclude($value, $validationSettingList)
+    protected function validateString(string $value, string $validationSettingList, bool $mustInclude = true): bool
     {
         $isValid = true;
         $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
         foreach ($validationSettings as $validationSetting) {
             switch ($validationSetting) {
                 case 'number':
-                    if (!$this->stringContainsNumber($value)) {
+                    $containsNumber = $this->stringContainsNumber($value);
+                    if ($mustInclude && !$containsNumber || !$mustInclude && $containsNumber) {
                         $isValid = false;
                     }
                     break;
                 case 'letter':
-                    if (!$this->stringContainsLetter($value)) {
+                    $containsLetter = $this->stringContainsLetter($value);
+                    if ($mustInclude && !$containsLetter || !$mustInclude && $containsLetter) {
                         $isValid = false;
                     }
                     break;
                 case 'uppercase':
-                    if (!$this->stringContainsUppercase($value)) {
+                    $containsUppercase = $this->stringContainsUppercase($value);
+                    if ($mustInclude && !$containsUppercase || !$mustInclude && $containsUppercase) {
                         $isValid = false;
                     }
                     break;
                 case 'special':
-                    if (!$this->stringContainsSpecialCharacter($value)) {
+                    $containsSpecialCharacter = $this->stringContainsSpecialCharacter($value);
+                    if ($mustInclude && !$containsSpecialCharacter || !$mustInclude && $containsSpecialCharacter) {
                         $isValid = false;
                     }
                     break;
                 case 'space':
-                    if (!$this->stringContainsSpaceCharacter($value)) {
-                        $isValid = false;
-                    }
-                    break;
-                default:
-            }
-        }
-        return $isValid;
-    }
-
-    /**
-     * Validation for "Must not include some characters"
-     *
-     * @param string $value
-     * @param string $validationSettingList
-     * @return \bool
-     */
-    protected function validateMustNotInclude($value, $validationSettingList)
-    {
-        $isValid = true;
-        $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
-        foreach ($validationSettings as $validationSetting) {
-            switch ($validationSetting) {
-                case 'number':
-                    if ($this->stringContainsNumber($value)) {
-                        $isValid = false;
-                    }
-                    break;
-                case 'letter':
-                    if ($this->stringContainsLetter($value)) {
-                        $isValid = false;
-                    }
-                    break;
-                case 'uppercase':
-                    if ($this->stringContainsUppercase($value)) {
-                        $isValid = false;
-                    }
-                    break;
-                case 'special':
-                    if ($this->stringContainsSpecialCharacter($value)) {
-                        $isValid = false;
-                    }
-                    break;
-                case 'space':
-                    if ($this->stringContainsSpaceCharacter($value)) {
+                    $containsSpaceCharacter = $this->stringContainsSpaceCharacter($value);
+                    if ($mustInclude && !$containsSpaceCharacter || !$mustInclude && $containsSpaceCharacter) {
                         $isValid = false;
                     }
                     break;
@@ -365,12 +308,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     /**
      * Validation for checking if values are in a given list
-     *
-     * @param string $value
-     * @param string $validationSettingList
-     * @return \bool
      */
-    protected function validateInList($value, $validationSettingList)
+    protected function validateInList(string $value, string $validationSettingList): bool
     {
         $valueList = GeneralUtility::trimExplode(',', $value, true);
         $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
@@ -381,12 +320,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     /**
      * Validation for comparing two fields
-     *
-     * @param string $value
-     * @param string $value2
-     * @return \bool
      */
-    protected function validateSameAs($value, $value2)
+    protected function validateSameAs(string $value, string $value2): bool
     {
         if ($value === $value2) {
             return true;
@@ -396,12 +331,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     /**
      * Validation for checking if values is in date format
-     *
-     * @param string $value
-     * @param string $validationSetting
-     * @return \bool
      */
-    protected function validateDate($value, $validationSetting)
+    protected function validateDate(string $value, string $validationSetting): bool
     {
         $dateParts = [];
         switch ($validationSetting) {
@@ -433,8 +364,14 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         $this->setValidationSettings();
     }
 
+    /**
+     * @return void
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     protected function setPluginVariables()
     {
+        $allParams = [];
         // Get the current request object
         $request = $GLOBALS['TYPO3_REQUEST'];
         if (ApplicationType::fromRequest($request)->isFrontend()) {
@@ -525,7 +462,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
         $pageIdentifier = FrontendUtility::getCurrentPid();
         if ($pluginRepository->isPluginWithViewOnGivenPage($pageIdentifier, $pluginName) === false) {
-            throw new \LogicException('PluginName is not allowed', 1683551467);
+            throw new LogicException('PluginName is not allowed', 1683551467);
         }
     }
 }

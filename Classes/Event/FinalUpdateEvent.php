@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Event;
 
-class FinalUpdateEvent extends UserEvent
+use In2code\Femanager\Domain\Model\User;
+
+class FinalUpdateEvent
 {
+    public function __construct(protected ?User $user)
+    {
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
 }

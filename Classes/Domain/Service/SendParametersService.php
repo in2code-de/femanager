@@ -48,6 +48,8 @@ class SendParametersService
      * SendPost - Send values via curl to target
      *
      * @param User $user User properties
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function send(User $user)
     {
@@ -92,16 +94,21 @@ class SendParametersService
     /**
      * Write to devlog
      *
-     * @return bool
      */
-    protected function log()
+    protected function log(): void
     {
         if (!empty($this->configuration['debug'])) {
-            GeneralUtility::makeInstance(LogManager::class)->getLogger(self::class)->log(LogLevel::INFO, 'femanager sendpost values', [
-                'url' => $this->getUri(),
-                'data' => $this->getData(),
-                'properties' => $this->properties
-            ]);
+            GeneralUtility::makeInstance(LogManager::class)
+                ->getLogger(self::class)
+                ->log(
+                    LogLevel::INFO,
+                    'femanager sendpost values',
+                    [
+                        'url' => $this->getUri(),
+                        'data' => $this->getData(),
+                        'properties' => $this->properties
+                    ]
+                );
         }
     }
 

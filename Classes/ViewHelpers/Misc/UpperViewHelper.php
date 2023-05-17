@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;

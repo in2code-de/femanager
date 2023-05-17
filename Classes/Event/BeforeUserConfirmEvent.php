@@ -8,8 +8,11 @@ use In2code\Femanager\Domain\Model\User;
 
 class BeforeUserConfirmEvent
 {
-    public function __construct(private readonly ?User $user, private readonly string $hash, private readonly string $status)
-    {
+    public function __construct(
+        private readonly ?User $user,
+        private readonly string $hash,
+        private readonly string $status
+    ) {
     }
 
     public function getUser(): ?User

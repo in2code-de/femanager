@@ -37,6 +37,9 @@ class RatelimiterService implements SingletonInterface
         $this->limit = (int)$config['limit'];
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     protected function getTSFE(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
@@ -108,7 +111,9 @@ class RatelimiterService implements SingletonInterface
 
     protected function filterExpiredToken(array $token): array
     {
-        $slidingWindowStartTime = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp') - $this->timeframe;
+        $slidingWindowStartTime =
+            GeneralUtility::makeInstance(Context::class)
+                ->getPropertyFromAspect('date', 'timestamp') - $this->timeframe;
         foreach ($token as $idx => $accessTime) {
             if ($accessTime < $slidingWindowStartTime) {
                 unset($token[$idx]);

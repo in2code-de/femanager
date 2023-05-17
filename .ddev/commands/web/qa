@@ -1,0 +1,9 @@
+#!/bin/bash
+
+.Build/bin/rector process ./ --dry-run
+.project/phars/phpcpd ./ --exclude=.Build/* --exclude=var/*
+.project/phars/phpcs --standard=.project/qa/.phpcs_PSR1_PSR2_PSR12.xml Classes Tests
+.project/phars/php-cs-fixer fix Classes
+.project/phars/php-cs-fixer fix Tests
+.project/phars/phpmd Classes ansi .project/qa/.phpmd.xml
+.Build/bin/phpstan analyze -c .project/qa/phpstan.neon

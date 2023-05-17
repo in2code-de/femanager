@@ -6,15 +6,19 @@ namespace In2code\Femanager\Event;
 
 use In2code\Femanager\Domain\Model\User;
 
-class InviteUserEditEvent extends UserEvent
+class InviteUserEditEvent
 {
-    public function __construct(?User $user, private readonly string $hash)
+    public function __construct(protected ?User $user, private readonly string $hash)
     {
-        parent::__construct($user);
     }
 
     public function getHash(): string
     {
         return $this->hash;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
     }
 }

@@ -14,10 +14,14 @@
 <f:section name="main">
 	<f:if condition="{isValid}">
 		<f:then>
-			<femanager:Misc.JsonEncode array="{validate: 1}" />
+			<f:format.raw>
+				<f:format.json value="{validate: 1}" />
+			</f:format.raw>
 		</f:then>
 		<f:else>
-			<femanager:Misc.JsonEncode array="{validate: 0, message: '{f:render(partial:\'Misc/ValidationMessages\',arguments:\'{_all}\')}'}" />
+			<f:format.raw>
+				<f:format.json value="{validate: 0, message: '{f:render(partial:\'Misc/ValidationMessages\',arguments:\'{_all}\')}'}" />
+			</f:format.raw>
 		</f:else>
 	</f:if>
 </f:section>

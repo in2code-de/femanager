@@ -27,22 +27,23 @@ Feature: Countries
     Then I should see "Email: Field Email is required"
     Then I should see "Antarctica"
 
-  @javascript @RegistrationCountries1
-  Scenario: Check if validation for Countries work as expected for clientside validation
-    Given I am on "/index.php?id=130"
-    And I fill in the following:
-      | Username | [random] |
-      | Password | testtest |
-      | Repeat Password | testtest |
-      | Email | info@in2code.ws |
-    And I press "Create Profile Now"
+    # @TODO: Reactivate when static_info_tables is avaiable for TYPO3v12
+#  @javascript @RegistrationCountries1
+#  Scenario: Check if validation for Countries work as expected for clientside validation
+#    Given I am on "/index.php?id=130"
+#    And I fill in the following:
+#      | Username | [random] |
+#      | Password | testtest |
+#      | Repeat Password | testtest |
+#      | Email | info@in2code.ws |
+#    And I press "Create Profile Now"
+#
+#    Then I wait "6" seconds
+#    And I fill in the following:
+#      | Email | info@in2code.ws |
+#    Then I should see "Field Country is required"
 
-    Then I wait "6" seconds
-    And I fill in the following:
-      | Email | info@in2code.ws |
-    Then I should see "Field Country is required"
 
-  # @TODO: Reactivate when static_info_tables is avaiable for TYPO3v12
 #  @javascript @Fail
 #  Scenario: Check if validation for State are stored after unsucessful submit
 #    Given I am on "/index.php?id=130"

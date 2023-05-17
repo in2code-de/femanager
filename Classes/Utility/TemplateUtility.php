@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -39,6 +40,8 @@ class TemplateUtility extends AbstractUtility
      *        for the first configuration (Paths, Path, hardcoded)
      *        will be returned. If TRUE all (possible) paths will be returned.
      * @return array
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function getTemplateFolders($part = 'template', $returnAllPaths = false)
     {
@@ -54,8 +57,6 @@ class TemplateUtility extends AbstractUtility
             if (!empty($path)) {
                 $templatePaths[] = $path;
             }
-        }
-        if ($returnAllPaths || empty($templatePaths)) {
             $templatePaths[] = 'EXT:femanager/Resources/Private/' . ucfirst($part) . 's/';
         }
         $templatePaths = array_unique($templatePaths);
@@ -104,17 +105,11 @@ class TemplateUtility extends AbstractUtility
 
     /**
      * Get standaloneview with default properties
-     *
-     * @param string $controllerName
-     * @param string $extensionName
-     * @param string $pluginName
-     * @param string $format
-     * @return StandaloneView
      */
     public static function getDefaultStandAloneView(
         RequestInterface|null $request = null,
         string $format = 'html'
-    ) {
+    ): StandaloneView {
         /** @var StandaloneView $standAloneView */
         $standAloneView = GeneralUtility::makeInstance(StandaloneView::class);
         if ($request instanceof RequestInterface) {

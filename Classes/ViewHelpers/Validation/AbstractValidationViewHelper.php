@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Validation;
 
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
@@ -29,6 +30,7 @@ abstract class AbstractValidationViewHelper extends AbstractViewHelper
                 1638341336
             );
         }
+
         if ($this->getControllerName() === 'invitation' &&
             $this->renderingContext->getRequest()->getControllerActionName() === 'edit') {
             $validationName = 'validationEdit';

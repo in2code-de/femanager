@@ -12,6 +12,8 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * Class ServersideValidator
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class ServersideValidator extends AbstractValidator
 {
@@ -19,6 +21,8 @@ class ServersideValidator extends AbstractValidator
      * Validation of given Params
      *
      * @param User $user
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function isValid($user): void
     {
@@ -232,7 +236,7 @@ class ServersideValidator extends AbstractValidator
      */
     protected function checkMustIncludeValidation($value, $validationSetting, $fieldName)
     {
-        if (!empty($value) && !$this->validateMustInclude($value, $validationSetting)) {
+        if (!empty($value) && !$this->validateString($value, $validationSetting, true)) {
             $this->addError('validationErrorMustInclude', 0, ['field' => $fieldName]);
             $this->isValid = false;
         }
@@ -245,7 +249,7 @@ class ServersideValidator extends AbstractValidator
      */
     protected function checkMustNotIncludeValidation($value, $validationSetting, $fieldName)
     {
-        if (!empty($value) && !$this->validateMustNotInclude($value, $validationSetting)) {
+        if (!empty($value) && !$this->validateString($value, $validationSetting, false)) {
             $this->addError('validationErrorMustNotInclude', 0, ['field' => $fieldName]);
             $this->isValid = false;
         }
@@ -301,6 +305,8 @@ class ServersideValidator extends AbstractValidator
      * @param User $user
      * @param string $fieldName
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected function getValue($user, $fieldName)
     {
@@ -314,7 +320,7 @@ class ServersideValidator extends AbstractValidator
                     $values[] = $object->getUid();
                 }
                 if ($object instanceof FileReference) {
-                    return true;
+                    return '';
                 }
             }
 
@@ -332,7 +338,7 @@ class ServersideValidator extends AbstractValidator
                 $current = $value->current();
 
                 if ($current instanceof FileReference) {
-                    return true;
+                    return '';
                 }
                 if ($current !== null) {
                     if (method_exists($current, 'getUid')) {

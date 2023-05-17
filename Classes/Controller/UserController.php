@@ -19,6 +19,8 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class UserController
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class UserController extends AbstractFrontendController
 {
@@ -60,7 +62,8 @@ class UserController extends AbstractFrontendController
         return $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
     }
 
-    public function validateAction(): ResponseInterface {
+    public function validateAction(): ResponseInterface
+    {
         $requestBody = $this->request->getParsedBody();
         $validation = $requestBody['tx_femanager_validation']['validation'] ?? '';
         $value =  $requestBody['tx_femanager_validation']['value'] ?? '';
@@ -68,7 +71,7 @@ class UserController extends AbstractFrontendController
         // TODO: string
         $user =  $requestBody['tx_femanager_validation']['user'] ?? null;
         $additionalValue =  $requestBody['tx_femanager_validation']['additionalValue'] ?? '';
-        $plugin =  (int)$requestBody['tx_femanager_validation']['plugin'] ?? 0;
+        $plugin =  (int)$requestBody['tx_femanager_validation']['plugin'];
         $pluginName =  $requestBody['tx_femanager_validation']['pluginName'] ?? '';
         $referrerAction = $requestBody['tx_femanager_validation']['referrerAction'] ?? '';
 

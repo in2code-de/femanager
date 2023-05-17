@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -16,7 +17,8 @@ class BackendUserUtility extends AbstractUtility
     public static function isAdminAuthentication()
     {
         $userAuthentication = self::getBackendUserAuthentication();
-        $isUserBackendEnableLoginAs = $userAuthentication->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? 0;
+        $isUserBackendEnableLoginAs =
+            $userAuthentication->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? 0;
 
         return $userAuthentication->user['admin'] === 1 || (int)$isUserBackendEnableLoginAs === 1;
     }

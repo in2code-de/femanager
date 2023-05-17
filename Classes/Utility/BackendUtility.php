@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\TypoScript\TemplateService;
@@ -27,6 +28,8 @@ class BackendUtility
      * @param string $tableName like "fe_users"
      * @param int $identifier record identifier to edit
      * @param bool $addReturnUrl add current URI as returnUrl
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function getBackendEditUri(string $tableName, int $identifier, bool $addReturnUrl = true): string
     {
@@ -50,6 +53,8 @@ class BackendUtility
      * @param string $tableName like "fe_users"
      * @param int $pageIdentifier page identifier to store the new record in
      * @param bool $addReturnUrl add current URI as returnUrl
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function getBackendNewUri(string $tableName, int $pageIdentifier, bool $addReturnUrl = true): string
     {
@@ -71,6 +76,8 @@ class BackendUtility
 
     /**
      * @return string "plugin" or "module"
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public static function getPluginOrModuleString(): string
     {
@@ -105,12 +112,15 @@ class BackendUtility
     /**
      * @param int $pageUid [optional] the current pageuid
      * @return array
+     *
+     * @SuppressWarnings(PHPMD.CamelCaseVariableName)
      */
     public static function loadTS($pageUid = null)
     {
-        $pageUid = ($pageUid && MathUtility::canBeInterpretedAsInteger($pageUid)) ? $pageUid : GeneralUtility::_GP('id');
+        $pageUid = ($pageUid && MathUtility::canBeInterpretedAsInteger($pageUid)) ?
+            $pageUid : GeneralUtility::_GP('id');
         $TSObj = GeneralUtility::makeInstance(TemplateService::class);
-        $TSObj->tt_track = 0;
+        $TSObj->tt_track = false;
         $TSObj->runThroughTemplates(GeneralUtility::makeInstance(RootlineUtility::class, $pageUid, '')->get());
         $TSObj->generateConfig();
 

@@ -1,0 +1,19 @@
+parameters:
+	level: 5
+	treatPhpDocTypesAsCertain: false
+	paths:
+	    - /var/www/html/Classes
+	excludePaths:
+	    - /var/www/html/Classes/DataProvider/CountryZonesDataProvider.php
+	ignoreErrors:
+	    - '#^Class SJBR\\SrFreecap\\[a-zA-Z0-9\\_]+ not found\.$#'
+	    - '#^Class SJBR\\StaticInfoTables\\[a-zA-Z0-9\\_]+ not found\.$#'
+	    - '#^Call to method [a-zA-Z0-9\\_]+\(\) on an unknown class SJBR\\SrFreecap\\[a-zA-Z0-9\\_]+.$#'
+	    - '#^Call to method [a-zA-Z0-9\\_]+\(\) on an unknown class SJBR\\StaticInfoTables\\[a-zA-Z0-9\\_]+.$#'
+	    - '#^Call to an undefined method Psr\\Http\\Message\\ServerRequestInterface::getPluginName\(\).$#'
+	    - '#^Call to an undefined method Psr\\Http\\Message\\ServerRequestInterface::getControllerExtensionName\(\).$#'
+	    - '#^Call to an undefined method Psr\\Http\\Message\\ServerRequestInterface::getControllerName\(\).$#'
+	    - '#^Call to an undefined method Psr\\Http\\Message\\ServerRequestInterface::getControllerActionName\(\).$#'
+	    - '#^Call to an undefined method TYPO3\\CMS\\Core\\Resource\\FileInterface::getUid\(\).$#'
+	    - '#Parameter \#1 \$request of method TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder::setRequest\(\) expects TYPO3\\CMS\\Extbase\\Mvc\\RequestInterface, Psr\\Http\\Message\\ServerRequestInterface\|null given.$#'
+

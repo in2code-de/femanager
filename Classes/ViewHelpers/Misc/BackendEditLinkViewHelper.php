@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use In2code\Femanager\Utility\BackendUtility;
@@ -32,12 +33,18 @@ class BackendEditLinkViewHelper extends AbstractViewHelper
      * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function renderStatic(
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ): string {
-        return BackendUtility::getBackendEditUri($arguments['tableName'], $arguments['identifier'], $arguments['addReturnUrl']);
+        return BackendUtility::getBackendEditUri(
+            $arguments['tableName'],
+            $arguments['identifier'],
+            $arguments['addReturnUrl']
+        );
     }
 }

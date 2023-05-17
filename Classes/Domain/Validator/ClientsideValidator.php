@@ -16,6 +16,8 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * Class ClientsideValidator
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class ClientsideValidator extends AbstractValidator
 {
@@ -105,7 +107,9 @@ class ClientsideValidator extends AbstractValidator
     /**
      * Validate Field
      *
-     * @return bool
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
      */
     public function validateField(string $pluginName = 'tx_femanager_new'): bool
     {
@@ -189,9 +193,10 @@ class ClientsideValidator extends AbstractValidator
 
                 case stristr((string) $validationSetting, 'mustInclude('):
                     if ($this->getValue() &&
-                        !$this->validateMustInclude(
+                        !$this->validateString(
                             $this->getValue(),
-                            StringUtility::getValuesInBrackets($validationSetting)
+                            StringUtility::getValuesInBrackets($validationSetting),
+                            true
                         )
                     ) {
                         $this->addMessage('validationErrorMustInclude');
@@ -201,9 +206,10 @@ class ClientsideValidator extends AbstractValidator
 
                 case stristr((string) $validationSetting, 'mustNotInclude('):
                     if ($this->getValue() &&
-                        !$this->validateMustNotInclude(
+                        !$this->validateString(
                             $this->getValue(),
-                            StringUtility::getValuesInBrackets($validationSetting)
+                            StringUtility::getValuesInBrackets($validationSetting),
+                            false
                         )
                     ) {
                         $this->addMessage('validationErrorMustNotInclude');
@@ -330,8 +336,8 @@ class ClientsideValidator extends AbstractValidator
         }
         $singleSettingsArray = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
         foreach ($singleSettingsArray as &$singleSetting) {
-            if (str_contains($singleSetting, '|')) {
-                $singleSetting = str_replace('|', ',', $singleSetting);
+            if (str_contains((string) $singleSetting, '|')) {
+                $singleSetting = str_replace('|', ',', (string) $singleSetting);
             }
         }
         return $singleSettingsArray;
@@ -456,9 +462,6 @@ class ClientsideValidator extends AbstractValidator
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getPluginName(): string
     {
         return $this->pluginName;
@@ -504,8 +507,10 @@ class ClientsideValidator extends AbstractValidator
 
     /**
      * @param mixed $value
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    protected function isValid($value):void
+    protected function isValid($value): void
     {
     }
 }

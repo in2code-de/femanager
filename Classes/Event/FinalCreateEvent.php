@@ -6,15 +6,19 @@ namespace In2code\Femanager\Event;
 
 use In2code\Femanager\Domain\Model\User;
 
-class FinalCreateEvent extends UserEvent
+class FinalCreateEvent
 {
-    public function __construct(?User $user, private readonly string $action)
+    public function __construct(protected ?User $user, private readonly string $action)
     {
-        parent::__construct($user);
     }
 
     public function getAction(): string
     {
         return $this->action;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
     }
 }

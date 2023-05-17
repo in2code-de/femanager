@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -65,12 +66,8 @@ class StringUtility extends AbstractUtility
 
     /**
      * Check if string ends with another string
-     *
-     * @param string $haystack
-     * @param string $needle
-     * @return string
      */
-    public static function endsWith($haystack, $needle)
+    public static function endsWith(string $haystack, string $needle): string|bool
     {
         return stristr($haystack, $needle) && strlen($haystack) - strlen($needle) === strpos($haystack, $needle);
     }
@@ -102,6 +99,8 @@ class StringUtility extends AbstractUtility
      * @param bool $addUpperCase
      * @param bool $addSpecialCharacters
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function getRandomString($length = 32, $addUpperCase = true, $addSpecialCharacters = true)
     {

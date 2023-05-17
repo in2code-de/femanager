@@ -1,10 +1,13 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
+use Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
+use UnexpectedValueException;
 
 /**
  * Class FileUtility
@@ -13,12 +16,12 @@ class FileUtility extends AbstractUtility
 {
     /**
      * @param string $path Absolute path
-     * @throws \Exception
+     * @throws Exception
      */
     public static function createFolderIfNotExists(string $path)
     {
         if (!is_dir($path) && !GeneralUtility::mkdir($path)) {
-            throw new \UnexpectedValueException(
+            throw new UnexpectedValueException(
                 'Folder ' . self::getRelativeFolderFromAbsolutePath($path) . ' does not exists and can not be created!',
                 1516373962125
             );

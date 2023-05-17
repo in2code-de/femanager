@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
 
+use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
+use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
+use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Event\AdminConfirmationUserEvent;
 use In2code\Femanager\Event\RefuseUserEvent;
@@ -15,6 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
@@ -22,6 +26,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class UserBackendController
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class UserBackendController extends AbstractController
 {
@@ -44,12 +50,21 @@ class UserBackendController extends AbstractController
         $this->moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
     }
 
+    /**
+     * @throws RouteNotFoundException
+     * @throws AspectNotFoundException
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     public function listAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         //TODO: the enableLoginAs funcionality is not working
-        $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->getTSConfig(
-        )['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
+        $context = GeneralUtility::makeInstance(Context::class);
+        $userIsAdmin = $context->getPropertyFromAspect('backend.user', 'isAdmin');
+        $loginAsEnabled =
+            $userIsAdmin
+            || (int)$GLOBALS['BE_USER']->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
         $this->moduleTemplate->assignMultiple(
             [
                 'users' => $this->userRepository->findAllInBackend($filter),
@@ -202,6 +217,13 @@ class UserBackendController extends AbstractController
         return 0;
     }
 
+    /**
+     * @return mixed|void
+     * @throws \JsonException
+     * @throws SiteNotFoundException
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     public function getFrontendRequestResult(string $status, int $userIdentifier, User $user)
     {
         /** @var SiteFinder $siteFinder */

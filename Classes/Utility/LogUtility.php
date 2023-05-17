@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\Log;
@@ -15,8 +16,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class LogUtility
 {
-    public function __construct(private readonly LogRepository $logRepository, private readonly EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        private readonly LogRepository $logRepository,
+        private readonly EventDispatcherInterface $eventDispatcher
+    ) {
     }
 
     /**

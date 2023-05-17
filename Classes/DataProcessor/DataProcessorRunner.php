@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\DataProcessor;
 
 use In2code\Femanager\Utility\ConfigurationUtility;
@@ -8,6 +9,7 @@ use In2code\Femanager\Utility\FrontendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use UnexpectedValueException;
 
 /***************************************************************
  *  Copyright notice
@@ -67,7 +69,7 @@ class DataProcessorRunner
         foreach ($this->getClasses($settings) as $configuration) {
             $class = $configuration['class'];
             if (!class_exists($class)) {
-                throw new \UnexpectedValueException(
+                throw new UnexpectedValueException(
                     'DataProcessor class ' . $class . ' does not exists - check if file is loaded correctly',
                     1516373818752
                 );
@@ -85,7 +87,7 @@ class DataProcessorRunner
                 $dataProcessor->initializeDataProcessor();
                 $dataProcessor->process();
             } else {
-                throw new \UnexpectedValueException('Finisher does not implement ' . $this->interface, 1516373829946);
+                throw new UnexpectedValueException('Finisher does not implement ' . $this->interface, 1516373829946);
             }
         }
     }

@@ -21,6 +21,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
 /**
  * PaginateViewHelper
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class PaginateViewHelper extends AbstractViewHelper
 {

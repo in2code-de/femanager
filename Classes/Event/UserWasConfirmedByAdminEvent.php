@@ -9,19 +9,9 @@ use Psr\Http\Message\RequestInterface;
 
 class UserWasConfirmedByAdminEvent
 {
-    /**
-     * @var RequestInterface
-     */
-    protected $request;
-
-    /**
-     * @var User
-     */
-    protected $user;
-
     public function __construct(
-        RequestInterface $request,
-        User $user
+        protected RequestInterface $request,
+        protected User $user
     ) {
     }
 

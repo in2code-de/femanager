@@ -24,6 +24,7 @@ use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Http\UploadedFile;
@@ -42,6 +43,9 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Class AbstractController
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 abstract class AbstractController extends ActionController
 {
@@ -161,14 +165,32 @@ abstract class AbstractController extends ActionController
     protected function processUploadedImage($user)
     {
         $uploadedFiles = $this->request->getUploadedFiles();
-        $allowedFileExtensions = preg_split('/\s*,\s*/', trim(ConfigurationUtility::getConfiguration('misc.uploadFileExtension')));
-        $allowedMimeTypes = preg_split('/\s*,\s*/', trim(ConfigurationUtility::getConfiguration('misc.uploadMimeTypes')));
-        if (count($uploadedFiles) > 0 && !empty($uploadedFiles['user']['image']) && count($uploadedFiles['user']['image']) > 0) {
+        $allowedFileExtensions = preg_split(
+            '/\s*,\s*/',
+            trim((string) ConfigurationUtility::getConfiguration('misc.uploadFileExtension'))
+        );
+        $allowedMimeTypes = preg_split(
+            '/\s*,\s*/',
+            trim((string) ConfigurationUtility::getConfiguration('misc.uploadMimeTypes'))
+        );
+        if (
+            count($uploadedFiles) > 0
+            && !empty($uploadedFiles['user']['image'])
+            && (is_countable($uploadedFiles['user']['image']) ? count($uploadedFiles['user']['image']) : 0) > 0
+        ) {
             foreach ($uploadedFiles['user']['image'] as $uploadedFile) {
                 /**
                  * @var $uploadedFile UploadedFile
                  */
-                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes) && in_array(pathinfo($uploadedFile->getClientFilename())['extension'], $allowedFileExtensions)) {
+                if (
+                    in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes)
+                    && in_array(
+                        pathinfo(
+                            (string) $uploadedFile->getClientFilename()
+                        )['extension'],
+                        $allowedFileExtensions
+                    )
+                ) {
                     $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
                     $uploadString = ConfigurationUtility::getConfiguration('misc.uploadFolder');
                     $storage = $resourceFactory->getStorageObjectFromCombinedIdentifier($uploadString);
@@ -178,9 +200,15 @@ abstract class AbstractController extends ActionController
                     }
                     $uploadFolder = $resourceFactory->getFolderObjectFromCombinedIdentifier($uploadString);
 
-                    $newFile = $storage->addUploadedFile($uploadedFile,$uploadFolder,null, DuplicationBehavior::RENAME);
+                    $newFile = $storage->addUploadedFile(
+                        $uploadedFile,
+                        $uploadFolder,
+                        null,
+                        DuplicationBehavior::RENAME
+                    );
 
-                    $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_file_reference');
+                    $connection = GeneralUtility::makeInstance(ConnectionPool::class)
+                        ->getConnectionForTable('sys_file_reference');
                     $connection->insert(
                         'sys_file_reference',
                         [
@@ -191,7 +219,6 @@ abstract class AbstractController extends ActionController
                             'sorting_foreign' => 1
                         ]
                     );
-                    $sysFileReferenceUid = (int)$connection->lastInsertId('sys_file_reference');
                 }
             }
         }
@@ -212,8 +239,10 @@ abstract class AbstractController extends ActionController
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
-                    ConfigurationUtility::getValue('edit/email/createUserNotify/notifyAdmin/receiver/email/value',$this->config) ??
-                    ConfigurationUtility::getValue('edit/notifyAdmin', $this->config),
+                    ConfigurationUtility::getValue(
+                        'edit/email/createUserNotify/notifyAdmin/receiver/email/value',
+                        $this->config
+                    ) ?? ConfigurationUtility::getValue('edit/notifyAdmin', $this->config),
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value'] ?? null
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
@@ -242,7 +271,7 @@ abstract class AbstractController extends ActionController
      *
      * @param User $user
      */
-    public function updateRequest($user): ResponseInterface
+    public function updateRequest($user): ResponseInterface|null
     {
         if ($this->settings['edit']['confirmByAdmin'] ?? null) {
             $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($user);
@@ -276,6 +305,7 @@ abstract class AbstractController extends ActionController
                 $user,
                 ['message' => 'settings[edit][confirmByAdmin] is missing!']
             );
+            return null;
         }
     }
 
@@ -286,6 +316,11 @@ abstract class AbstractController extends ActionController
      * @param string $redirectByActionName Action to redirect
      * @param bool $login Login after creation
      * @param bool $backend Don't redirect if called from backend action
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @TODO: Remove Suppress when login is reactivated
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function finalCreate(
         $user,
@@ -351,7 +386,11 @@ abstract class AbstractController extends ActionController
         $this->finisherRunner->callFinishers($user, $this->actionMethodName, $this->settings, $this->contentObject);
 
         if ($backend === false) {
-            $redirectTarget = $this->redirectByAction($action, ($status ? $status . 'Redirect' : 'redirect'), $redirectByActionName);
+            $redirectTarget = $this->redirectByAction(
+                $action,
+                ($status ? $status . 'Redirect' : 'redirect'),
+                $redirectByActionName
+            );
             if ($redirectTarget instanceof ForwardResponse) {
                 $this->addFlashMessage(LocalizationUtility::translate('create'));
             }
@@ -373,8 +412,15 @@ abstract class AbstractController extends ActionController
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
             if (ConfigurationUtility::getValue('new./login', $this->config) === '1') {
-                UserUtility::login($user, ConfigurationUtility::getValue('persistence./storagePid', $this->allConfig));
-                $this->addFlashMessage(LocalizationUtility::translate('login'), '', ContextualFeedbackSeverity::NOTICE);
+                UserUtility::login(
+                    $user,
+                    ConfigurationUtility::getValue('persistence./storagePid', $this->allConfig)
+                );
+                $this->addFlashMessage(
+                    LocalizationUtility::translate('login'),
+                    '',
+                    ContextualFeedbackSeverity::NOTICE
+                );
             }
         }
     }
@@ -387,8 +433,11 @@ abstract class AbstractController extends ActionController
      * @param string $action "new", "edit"
      * @param string $category "redirect", "requestRedirect" value from TypoScript
      */
-    protected function redirectByAction($action = 'new', $category = 'redirect', $defaultAction = 'new'): ResponseInterface
-    {
+    protected function redirectByAction(
+        $action = 'new',
+        $category = 'redirect',
+        $defaultAction = 'new'
+    ): ResponseInterface {
         $target = null;
         // redirect from TypoScript cObject
         if ($this->contentObject->cObjGetSingle(
@@ -479,6 +528,12 @@ abstract class AbstractController extends ActionController
         );
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     public function initializeAction(): void
     {
         $this->user = UserUtility::getCurrentUser();
@@ -492,9 +547,10 @@ abstract class AbstractController extends ActionController
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
-        $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
+        $this->config =
+            $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
 
-        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
+        if (ApplicationType::fromRequest($this->request)->isBackend()) {
             $pid = $this->allConfig['persistence']['storagePid'] ?? 0;
             $config = BackendUtility::loadTS((int)$pid);
             $this->config = $config['plugin.']['tx_femanager.']['settings.'] ?? [];
@@ -532,8 +588,10 @@ abstract class AbstractController extends ActionController
      * Deactivate errormessages in flashmessages
      *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
-    protected function getErrorFlashMessage()
+    protected function getErrorFlashMessage(): bool
     {
         return false;
     }
@@ -542,15 +600,19 @@ abstract class AbstractController extends ActionController
     {
         if ((int)($this->allConfig['persistence']['storagePid'] ?? 0) === 0
             && GeneralUtility::_GP('type') !== '1548935210'
-            && !ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
+            && !ApplicationType::fromRequest($this->request)->isBackend()
         ) {
-            $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', ContextualFeedbackSeverity::ERROR);
+            $this->addFlashMessage(
+                LocalizationUtility::translate('error_no_storagepid'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
         }
     }
 
     protected function checkTypoScript()
     {
-        if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'] ?? null)->isBackend()) {
+        if (ApplicationType::fromRequest($this->request ?? null)->isBackend()) {
             if (($this->config['_TypoScriptIncluded'] ?? '1') !== '1') {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript_be'),
@@ -562,7 +624,7 @@ abstract class AbstractController extends ActionController
             $typoscriptIncluded = ConfigurationUtility::getValue('_TypoScriptIncluded', $this->settings);
             if (
                 $typoscriptIncluded !== '1' && !GeneralUtility::_GP('eID')
-                && !ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
+                && !ApplicationType::fromRequest($this->request)->isBackend()
             ) {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript'),
@@ -576,8 +638,8 @@ abstract class AbstractController extends ActionController
     protected function setAllUserGroups()
     {
         $controllerName = $this->request->getControllerName();
-        $removeFromUserGroupSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'] ?? '';
-        $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromUserGroupSelection);
+        $removeFromSelection = $this->settings[$controllerName]['misc']['removeFromUserGroupSelection'] ?? '';
+        $this->allUserGroups = $this->userGroupRepository->findAllForFrontendSelection($removeFromSelection);
     }
 
     /**
@@ -589,8 +651,13 @@ abstract class AbstractController extends ActionController
             'createUserConfirmation',
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             [
-                ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value', $this->config) =>
-                    ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config),
+                ConfigurationUtility::getValue(
+                    'new./email./createUserConfirmation./sender./email./value',
+                    $this->config
+                ) => ConfigurationUtility::getValue(
+                    'new./email./createUserConfirmation./sender./name./value',
+                    $this->config
+                ),
             ],
             $this->contentObject->cObjGetSingle(
                 ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),

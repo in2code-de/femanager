@@ -62,7 +62,7 @@ class PasswordValidator extends AbstractValidatorExtbase
      *
      * @param $user
      */
-    public function isValid($user):void
+    public function isValid($user): void
     {
         $this->initializeObject();
         $this->init();
@@ -105,7 +105,8 @@ class PasswordValidator extends AbstractValidatorExtbase
         $flexFormValues = GeneralUtility::xml2array($this->cObj->data['pi_flexform']);
         if (is_array($flexFormValues)) {
             $fields =
-                $flexFormValues['data'][$this->actionName]['lDEF']['settings.' . $this->actionName . '.fields']['vDEF'] ?? [];
+                $flexFormValues['data'][$this->actionName]['lDEF']['settings.' . $this->actionName . '.fields']['vDEF']
+                ?? [];
             if (empty($fields) || GeneralUtility::inList($fields, 'password')) {
                 // password fields are added to form
                 return true;
@@ -129,7 +130,8 @@ class PasswordValidator extends AbstractValidatorExtbase
             null
         );
         $this->cObj = $this->configurationManager->getContentObject();
-        $this->piVars = $this->cObj->getRequest()->getParsedBody()[$pluginName] ?? $this->cObj->getRequest()->getQueryParams()[$pluginName] ?? null;
+        $this->piVars = $this->cObj->getRequest()->getParsedBody()[$pluginName] ??
+            $this->cObj->getRequest()->getQueryParams()[$pluginName] ?? null;
 
         $this->actionName = $this->piVars['__referrer']['@action'];
     }

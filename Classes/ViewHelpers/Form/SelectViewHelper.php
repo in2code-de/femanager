@@ -11,6 +11,9 @@ use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
+/**
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ */
 class SelectViewHelper extends AbstractFormFieldViewHelper
 {
     /**
@@ -33,19 +36,86 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('size', 'string', 'Size of select field, a numeric value to show the amount of items to be visible at the same time - equivalent to HTML <select> site attribute');
-        $this->registerTagAttribute('disabled', 'string', 'Specifies that the input element should be disabled when the page loads');
-        $this->registerArgument('options', 'array', 'Associative array with internal IDs as key, and the values are displayed in the select box. Can be combined with or replaced by child f:form.select.* nodes.');
-        $this->registerArgument('optionsAfterContent', 'boolean', 'If true, places auto-generated option tags after those rendered in the tag content. If false, automatic options come first.', false, false);
-        $this->registerArgument('optionValueField', 'string', 'If specified, will call the appropriate getter on each object to determine the value.');
-        $this->registerArgument('optionLabelField', 'string', 'If specified, will call the appropriate getter on each object to determine the label.');
-        $this->registerArgument('sortByOptionLabel', 'boolean', 'If true, List will be sorted by label.', false, false);
-        $this->registerArgument('selectAllByDefault', 'boolean', 'If specified options are selected if none was set before.', false, false);
-        $this->registerArgument('errorClass', 'string', 'CSS class to set if there are errors for this ViewHelper', false, 'f3-form-error');
-        $this->registerArgument('prependOptionLabel', 'string', 'If specified, will provide an option at first position with the specified label.');
-        $this->registerArgument('prependOptionValue', 'string', 'If specified, will provide an option at first position with the specified value.');
-        $this->registerArgument('multiple', 'boolean', 'If set multiple options may be selected.', false, false);
-        $this->registerArgument('required', 'boolean', 'If set no empty value is allowed.', false, false);
+        $this->registerTagAttribute(
+            'size',
+            'string',
+            'Size of select field, a numeric value to show the amount of items to be visible at the same time
+- equivalent to HTML <select> site attribute'
+        );
+        $this->registerTagAttribute(
+            'disabled',
+            'string',
+            'Specifies that the input element should be disabled when the page loads'
+        );
+        $this->registerArgument(
+            'options',
+            'array',
+            'Associative array with internal IDs as key, and the values are displayed in the select box.
+            #Can be combined with or replaced by child f:form.select.* nodes.'
+        );
+        $this->registerArgument(
+            'optionsAfterContent',
+            'boolean',
+            'If true, places auto-generated option tags after those rendered in the tag content.
+            If false, automatic options come first.',
+            false,
+            false
+        );
+        $this->registerArgument(
+            'optionValueField',
+            'string',
+            'If specified, will call the appropriate getter on each object to determine the value.'
+        );
+        $this->registerArgument(
+            'optionLabelField',
+            'string',
+            'If specified, will call the appropriate getter on each object to determine the label.'
+        );
+        $this->registerArgument(
+            'sortByOptionLabel',
+            'boolean',
+            'If true, List will be sorted by label.',
+            false,
+            false
+        );
+        $this->registerArgument(
+            'selectAllByDefault',
+            'boolean',
+            'If specified options are selected if none was set before.',
+            false,
+            false
+        );
+        $this->registerArgument(
+            'errorClass',
+            'string',
+            'CSS class to set if there are errors for this ViewHelper',
+            false,
+            'f3-form-error'
+        );
+        $this->registerArgument(
+            'prependOptionLabel',
+            'string',
+            'If specified, will provide an option at first position with the specified label.'
+        );
+        $this->registerArgument(
+            'prependOptionValue',
+            'string',
+            'If specified, will provide an option at first position with the specified value.'
+        );
+        $this->registerArgument(
+            'multiple',
+            'boolean',
+            'If set multiple options may be selected.',
+            false,
+            false
+        );
+        $this->registerArgument(
+            'required',
+            'boolean',
+            'If set no empty value is allowed.',
+            false,
+            false
+        );
     }
 
     public function render(): string
@@ -61,7 +131,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
         $this->tag->addAttribute('name', $name);
         $options = $this->getOptions();
 
-        $viewHelperVariableContainer = $this->renderingContext->getViewHelperVariableContainer();
+        $variableContainer = $this->renderingContext->getViewHelperVariableContainer();
 
         $this->addAdditionalIdentityPropertiesIfNeeded();
         $this->setErrorClassAttribute();
@@ -83,19 +153,19 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
             // save the parent field name so that any child f:form.select.option
             // tag will know to call registerFieldNameForFormTokenGeneration
             // this is the reason why "self::class" is used instead of static::class (no LSB)
-            $viewHelperVariableContainer->addOrUpdate(
+            $variableContainer->addOrUpdate(
                 self::class,
                 'registerFieldNameForFormTokenGeneration',
                 $name
             );
         }
 
-        $viewHelperVariableContainer->addOrUpdate(self::class, 'selectedValue', $this->getSelectedValue());
+        $variableContainer->addOrUpdate(self::class, 'selectedValue', $this->getSelectedValue());
         $prependContent = $this->renderPrependOptionTag();
         $tagContent = $this->renderOptionTags($options);
         $childContent = $this->renderChildren();
-        $viewHelperVariableContainer->remove(self::class, 'selectedValue');
-        $viewHelperVariableContainer->remove(self::class, 'registerFieldNameForFormTokenGeneration');
+        $variableContainer->remove(self::class, 'selectedValue');
+        $variableContainer->remove(self::class, 'registerFieldNameForFormTokenGeneration');
         if (isset($this->arguments['optionsAfterContent']) && $this->arguments['optionsAfterContent']) {
             $tagContent = $childContent . $tagContent;
         } else {
@@ -140,6 +210,9 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
      * Render the option tags.
      *
      * @return array An associative array of options, key will be the value of the option tag
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     protected function getOptions(): array
     {
@@ -156,7 +229,8 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
                         if (method_exists($key, '__toString')) {
                             $key = (string)$key;
                         } else {
-                            throw new Exception('Identifying value for object of class "' . get_debug_type($value) . '" was an object.', 1247827428);
+                            throw new Exception('Identifying value for object of class "' .
+                                get_debug_type($value) . '" was an object.', 1247827428);
                         }
                     }
                 } elseif ($this->persistenceManager->getIdentifierByObject($value) !== null) {
@@ -165,7 +239,8 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
                 } elseif (is_object($value) && method_exists($value, '__toString')) {
                     $key = (string)$value;
                 } elseif (is_object($value)) {
-                    throw new Exception('No identifying value for object of class "' . get_class($value) . '" found.', 1247826696);
+                    throw new Exception('No identifying value for object of class "' .
+                        $value::class . '" found.', 1247826696);
                 }
                 if ($this->hasArgument('optionLabelField')) {
                     $value = ObjectAccess::getPropertyPath($value, $this->arguments['optionLabelField']);
@@ -173,7 +248,8 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
                         if (method_exists($value, '__toString')) {
                             $value = (string)$value;
                         } else {
-                            throw new Exception('Label value for object of class "' . get_class($value) . '" was an object without a __toString() method.', 1247827553);
+                            throw new Exception('Label value for object of class "' .
+                                $value::class . '" was an object without a __toString() method.', 1247827553);
                         }
                     }
                 } elseif (is_object($value) && method_exists($value, '__toString')) {
@@ -197,7 +273,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
      * @param mixed $value Value to check for
      * @return bool True if the value should be marked as selected.
      */
-    protected function isSelected($value): bool
+    protected function isSelected(mixed $value): bool
     {
         $selectedValue = $this->getSelectedValue();
         if ($value === $selectedValue || (string)$value === $selectedValue) {
@@ -232,33 +308,26 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
         }
         if ($selectedValues === null) {
             // set preselection from TypoScript
-            if (empty($selectedValues)) {
-                if (! $this->renderingContext instanceof RenderingContext) {
-                    throw new FluidViewHelperException(
-                        'Something went wrong; RenderingContext should be available in ViewHelper',
-                        1638341673
-                    );
-                }
-                $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
-                $contentObject = $this->configurationManager->getContentObject();
-                $typoScript = $this->configurationManager->getConfiguration(
-                    ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+            if (! $this->renderingContext instanceof RenderingContext) {
+                throw new FluidViewHelperException(
+                    'Something went wrong; RenderingContext should be available in ViewHelper',
+                    1638341673
                 );
-
-                $prefillTypoScript =
-                    $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? [];
-
-                if (!empty($prefillTypoScript[$this->getFieldName()])) {
-                    $selectedValues = $contentObject->cObjGetSingle(
-                        $prefillTypoScript[$this->getFieldName()],
-                        $prefillTypoScript[$this->getFieldName() . '.']
-                    );
-                }
             }
-        } else {
-            $selectedValues = [];
-            foreach ($value as $selectedValueElement) {
-                $selectedValues[] = $this->getOptionValueScalar($selectedValueElement);
+            $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
+            $contentObject = $this->configurationManager->getContentObject();
+            $typoScript = $this->configurationManager->getConfiguration(
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+            );
+
+            $prefillTypoScript =
+                $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? [];
+
+            if (!empty($prefillTypoScript[$this->getFieldName()])) {
+                $selectedValues = $contentObject->cObjGetSingle(
+                    $prefillTypoScript[$this->getFieldName()],
+                    $prefillTypoScript[$this->getFieldName() . '.']
+                );
             }
         }
         return $selectedValues;
@@ -267,10 +336,9 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
     /**
      * Get the option value for an object
      *
-     * @param mixed $valueElement
      * @return string @todo: Does not always return string ...
      */
-    protected function getOptionValueScalar($valueElement)
+    protected function getOptionValueScalar(mixed $valueElement)
     {
         if (is_object($valueElement)) {
             if ($this->hasArgument('optionValueField')) {

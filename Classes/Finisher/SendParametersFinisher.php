@@ -48,7 +48,8 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
         $typoScript = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        $this->configuration = !empty($typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.']) ? $typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.'] : null;
+        $this->configuration = !empty($typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.']) ?
+                $typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.'] : null;
     }
 
     /**
@@ -108,7 +109,9 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected function isEnabled()
     {
-        return $this->contentObject->cObjGetSingle($this->configuration['_enable'] ?? 'TEXT', $this->configuration['_enable.'] ?? '0')
-            === '1';
+        return $this->contentObject->cObjGetSingle(
+            $this->configuration['_enable'] ?? 'TEXT',
+            $this->configuration['_enable.'] ?? '0'
+        ) === '1';
     }
 }

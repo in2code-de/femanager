@@ -177,9 +177,13 @@ class UserRepository extends Repository
      *
      * @param array $filter Filter Array
      * @param bool $userConfirmation Show only fe_users which are confirmed by the user?
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    public function findAllInBackendForConfirmation(array $filter, bool $userConfirmation = false): QueryResultInterface|array
-    {
+    public function findAllInBackendForConfirmation(
+        array $filter,
+        bool $userConfirmation = false
+    ): QueryResultInterface|array {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);
         $and = [$query->equals('disable', true)];
@@ -215,25 +219,25 @@ class UserRepository extends Repository
         if (!empty($filter['searchword'])) {
             $searchwords = GeneralUtility::trimExplode(' ', $filter['searchword'], true);
             foreach ($searchwords as $searchword) {
-                $or = [];
-                $or[] = $query->like('address', '%' . $searchword . '%');
-                $or[] = $query->like('city', '%' . $searchword . '%');
-                $or[] = $query->like('company', '%' . $searchword . '%');
-                $or[] = $query->like('country', '%' . $searchword . '%');
-                $or[] = $query->like('email', '%' . $searchword . '%');
-                $or[] = $query->like('fax', '%' . $searchword . '%');
-                $or[] = $query->like('first_name', '%' . $searchword . '%');
-                $or[] = $query->like('image', '%' . $searchword . '%');
-                $or[] = $query->like('last_name', '%' . $searchword . '%');
-                $or[] = $query->like('middle_name', '%' . $searchword . '%');
-                $or[] = $query->like('name', '%' . $searchword . '%');
-                $or[] = $query->like('telephone', '%' . $searchword . '%');
-                $or[] = $query->like('title', '%' . $searchword . '%');
-                $or[] = $query->like('usergroup.title', '%' . $searchword . '%');
-                $or[] = $query->like('username', '%' . $searchword . '%');
-                $or[] = $query->like('www', '%' . $searchword . '%');
-                $or[] = $query->like('zip', '%' . $searchword . '%');
-                $and[] = $query->logicalOr(...$or);
+                $orConditions = [];
+                $orConditions[] = $query->like('address', '%' . $searchword . '%');
+                $orConditions[] = $query->like('city', '%' . $searchword . '%');
+                $orConditions[] = $query->like('company', '%' . $searchword . '%');
+                $orConditions[] = $query->like('country', '%' . $searchword . '%');
+                $orConditions[] = $query->like('email', '%' . $searchword . '%');
+                $orConditions[] = $query->like('fax', '%' . $searchword . '%');
+                $orConditions[] = $query->like('first_name', '%' . $searchword . '%');
+                $orConditions[] = $query->like('image', '%' . $searchword . '%');
+                $orConditions[] = $query->like('last_name', '%' . $searchword . '%');
+                $orConditions[] = $query->like('middle_name', '%' . $searchword . '%');
+                $orConditions[] = $query->like('name', '%' . $searchword . '%');
+                $orConditions[] = $query->like('telephone', '%' . $searchword . '%');
+                $orConditions[] = $query->like('title', '%' . $searchword . '%');
+                $orConditions[] = $query->like('usergroup.title', '%' . $searchword . '%');
+                $orConditions[] = $query->like('username', '%' . $searchword . '%');
+                $orConditions[] = $query->like('www', '%' . $searchword . '%');
+                $orConditions[] = $query->like('zip', '%' . $searchword . '%');
+                $and[] = $query->logicalOr(...$orConditions);
             }
         }
 
@@ -277,7 +281,7 @@ class UserRepository extends Repository
     /**
      * Find All
      */
-    public function findFirstByEmail(string $mail): QueryResultInterface|array
+    public function findFirstByEmail(string $mail): User|null
     {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);

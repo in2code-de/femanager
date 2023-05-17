@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
@@ -15,7 +16,7 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
      *
      * @api
      */
-    public function initializeArguments():void
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
@@ -25,13 +26,12 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
     /**
      * View helper to get first subobject of objectstorage
      *
-     * @return \mixed
      */
-    public function render()
+    public function render(): mixed
     {
         $objectStorage = $this->arguments['objectStorage'];
         if ($objectStorage === null) {
-            return null;
+            return '';
         }
         foreach ($objectStorage as $object) {
             return $object;
@@ -47,6 +47,6 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
             }
         }
 
-        return null;
+        return '';
     }
 }

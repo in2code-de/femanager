@@ -16,12 +16,13 @@ class ResetRateLimiter
      */
     public function reset()
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('cache_femanager_ratelimiter');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('cache_femanager_ratelimiter');
         $queryBuilder
             ->delete('cache_femanager_ratelimiter');
 
         try {
-            $queryBuilder->execute();
+            $queryBuilder->executeStatement();
 
             return 'Rate limiter cache has been reset';
         } catch (Exception $e) {
