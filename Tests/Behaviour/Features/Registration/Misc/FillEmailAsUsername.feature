@@ -1,5 +1,5 @@
 # Features/Registration/Misc/FillEmailAsUsername.feature
-@Registration @RegistrationMisc @FillEmailAsUsername @Fail
+@Registration @RegistrationMisc @FillEmailAsUsername
 Feature: FillEmailAsUsername
 
   Scenario: Check if email field can be used as username

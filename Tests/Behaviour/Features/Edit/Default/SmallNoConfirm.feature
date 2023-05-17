@@ -12,7 +12,7 @@ Feature: SmallNoConfirm
     Then I should see "FE Users reset successfully"
 
 
-  @javascript @Fail
+  @javascript
   Scenario: Login as frontend user and test profile update
     # Login
     Given I am on "/index.php?id=2"
