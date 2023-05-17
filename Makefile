@@ -199,6 +199,33 @@ login-mysql:
 	echo "$(EMOJI_dolphin) Logging into MySQL Container"
 	docker-compose exec mysql bash
 
+## Update all phars required with phive
+.phive-update:
+	mkdir -p ~/.phive/
+	docker run --rm -it -u1000:1000 -v "$$PWD":/app -v $$HOME/.phive/:/tmp/phive/ -e PHIVE_HOME=/tmp/phive/ in2code/php:8.2-fpm phive update
+
+qa: qa-rector qa-phpcpd qa-phpcs qa-phpmd qa-phpstan
+
+qa-rector:
+	docker compose exec -u app php .Build/bin/rector process ./ --dry-run
+
+qa-phpcpd:
+	docker run --rm -it -u1000:1000 -v "$$PWD":/app -v ~/.phive/:/tmp/phive/ in2code/php:8.2-fpm .project/phars/phpcpd ./ --exclude=.Build/* --exclude=var/*
+
+qa-phpcs:
+	docker run --rm -it -u1000:1000 -v "$$PWD":/app -v ~/.phive/:/tmp/phive/ -v "$$PWD/.project/:/.project/" in2code/php:8.2-fpm .project/phars/phpcs --standard=.project/qa/.phpcs_PSR1_PSR2_PSR12.xml Classes Tests
+
+qa-phpcsfixer:
+	docker run --rm -it -u1000:1000 -v "$$PWD":/app -v ~/.phive/:/tmp/phive/ in2code/php:8.2-fpm .project/phars/php-cs-fixer fix Classes
+	docker run --rm -it -u1000:1000 -v "$$PWD":/app -v ~/.phive/:/tmp/phive/ in2code/php:8.2-fpm .project/phars/php-cs-fixer fix Tests
+
+qa-phpmd:
+	docker run --rm -it -u1000:1000 -v "$$PWD":/app -v ~/.phive/:/tmp/phive/ -v "$$PWD/.project/:/.project/" in2code/php:8.2-fpm .project/phars/phpmd Classes ansi .project/qa/.phpmd.xml
+
+qa-phpstan:
+	docker run --rm -it -u1000:1000 -v "$$PWD":/var/www/html -v ~/.phive/:/tmp/phive/ -v "$$PWD/.project/:/.project/" in2code/php:8.2-fpm php -dmemory_limit=-1 /var/www/html/.Build/bin/phpstan analyze -c /var/www/html/.project/qa/phpstan.neon
+
+
 include .env
 
 # SETTINGS
