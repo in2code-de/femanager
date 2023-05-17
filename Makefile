@@ -42,7 +42,7 @@ start:
 	make urls
 
 ## Restores the database from the backup file defined in .env
-mysql-restore: .mysql-wait
+mysql-restore:
 	echo "$(EMOJI_robot) Restoring the database"
 	docker-compose exec mysql bash -c 'DUMPFILE="/$(SQLDUMPSDIR)/$(SQLDUMPFILE)"; if [[ "$${DUMPFILE##*.}" == "sql" ]]; then cat $$DUMPFILE; else zcat $$DUMPFILE; fi | mysql --default-character-set=utf8 -u$(MYSQL_USER) -p$(MYSQL_PASSWORD) $(MYSQL_DATABASE)'
 
@@ -64,6 +64,7 @@ create-dirs:
 	echo "$(EMOJI_dividers) Creating required directories"
 	mkdir -p $(TYPO3_CACHE_DIR)
 	mkdir -p $(SQLDUMPSDIR)
+	mkdir -p $(WEBROOT)
 
 ## Starts composer-install
 composer-install-production:
@@ -134,19 +135,19 @@ typo3-clearcache:
 	echo "$(EMOJI_broom) Clearing TYPO3 caches"
 	docker-compose exec php ./.Build/bin/typo3 cache:flush
 
-## Downloads the dynamicReturnTypeMeta.json for the PhpStorm dynamic return type plugin
-typo3-install-autocomplete:
-	echo "$(EMOJI_crystal_ball) Installing TYPO3 autocompletion"
-	curl -sLO https://raw.githubusercontent.com/TYPO3/TYPO3.CMS/master/dynamicReturnTypeMeta.json
-
 ## Checkout LFS files
 lfs-fetch:
 	echo "$(EMOJI_milky_way) Fetching git LFS content"
 	git lfs fetch
 	git lfs checkout
 
+provision-fileadmin:
+	echo "$(EMOJI_package) Provision fileadmin with necessary files from git lfs"
+	cd .Build/Web; \
+	tar xvfz ../../.project/data/fileadmin.tar.gz
+
 ## To start an existing project incl. rsync from fileadmin, uploads and database dump
-install-project: lfs-fetch link-compose-file destroy add-hosts-entry init-docker composer-install typo3-add-site typo3-add-dockerconfig typo3-install-autocomplete typo3-setupinstall mysql-restore typo3-clearcache typo3-comparedb
+install-project: lfs-fetch link-compose-file destroy add-hosts-entry init-docker composer-install typo3-add-site typo3-add-dockerconfig .mysql-wait typo3-setupinstall provision-fileadmin mysql-restore typo3-clearcache typo3-comparedb
 	echo "---------------------"
 	echo ""
 	echo "The project is online $(EMOJI_thumbsup)"
