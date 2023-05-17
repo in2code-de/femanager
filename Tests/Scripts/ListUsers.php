@@ -10,6 +10,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /**
  * Class ListUsers
  */
+
 class ListUsers
 {
     /**
@@ -23,21 +24,29 @@ class ListUsers
     public function listUsers()
     {
         $content = '<h2>List FE_Users</h2>';
+
         $username = GeneralUtility::_GET('username');
         if (!$username) {
             $username = 'akellner';
         }
+
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
         $queryBuilder->select('*')->from('fe_users')
             ->where(
                 $queryBuilder->expr()->eq('username', $queryBuilder->createNamedParameter($username))
             );
-
         try {
             $res = $queryBuilder->executeQuery();
             if ($res) {
                 while (($row = $res->fetchAssociative())) {
-                    DebuggerUtility::var_dump($row, 'in2code: ' . self::class . ':' . __LINE__);
+                    $content .= DebuggerUtility::var_dump(
+                        $row,
+                        'in2code: ' . self::class . ':' . __LINE__,
+                        8,
+                        false,
+                        true,
+                        true
+                    );
                 }
             }
         } catch (DBALException $e) {
@@ -65,7 +74,14 @@ class ListUsers
             $res = $queryBuilder->executeQuery();
             if ($res) {
                 $row = $res->fetchAssociative();
-                DebuggerUtility::var_dump($row, 'in2code: ' . self::class . ':' . __LINE__);
+                $content .= DebuggerUtility::var_dump(
+                    $row,
+                    'in2code: ' . self::class . ':' . __LINE__,
+                    8,
+                    false,
+                    true,
+                    true
+                );
             }
         } catch (DBALException $e) {
             $content = 'error: ' . $e->getMessage();
