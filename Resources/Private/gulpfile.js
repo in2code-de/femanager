@@ -49,6 +49,8 @@ gulp.task('watch', function() {
 
 gulp.task('default', gulp.series('css', 'js', 'watch'));
 
+gulp.task('build', gulp.series('css', 'js'));
+
 /**
  * Get arguments from commandline
  */
