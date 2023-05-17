@@ -9,12 +9,14 @@ default:
       contexts:
         - DrevOps\BehatScreenshotExtension\Context\ScreenshotContext
         - FeatureContext
+        - FailAid\Context\FailureContext
   extensions:
     DrevOps\BehatScreenshotExtension:
       dir: '%paths.base%/../../.project/data/screenshots'
       fail: true
       fail_prefix: 'failed_'
       purge: true
+    FailAid\Extension: ~
     Behat\MinkExtension:
       base_url: https://local.femanager.de
       files_path: /app/.Build/Web/fileadmin/user_upload
