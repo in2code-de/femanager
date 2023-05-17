@@ -1,5 +1,5 @@
 # Features/Ratelimiter/LimitNewUserCreation
-@Ratelimiter @Fail
+@Ratelimiter
 Feature: RateLimitNewUserCreation
 
   # Clean up before

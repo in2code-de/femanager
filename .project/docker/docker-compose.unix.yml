@@ -16,7 +16,9 @@ services:
           - ${HOST}
 
   php:
-    image: in2code/php-dev:8.1-fpm
+    build:
+      context: .project/docker/php/
+      dockerfile: Dockerfile
     volumes:
       - ./:/app/:cached
       - $HOME/.composer/auth.json:/tmp/composer/auth.json
@@ -25,7 +27,7 @@ services:
       - .env
 
   mysql:
-    image: in2code/mysql:5.7
+    image: in2code/mysql:8.0-mb4
     env_file:
       - .env
     volumes:
@@ -43,7 +45,9 @@ services:
     working_dir: /home/node/app/Resources/Private
 
   chrome:
-    image: selenium/standalone-chrome-debug:3.141
+    image: seleniarm/standalone-chromium:111.0
+    environment:
+      HTTP_EXPOSE: 4444
     volumes:
       - /dev/shm:/dev/shm
     ports:
@@ -56,5 +60,4 @@ services:
       VIRTUAL_HOST: ${MAIL}
 
 volumes:
-  typo3var:
   mysql:
