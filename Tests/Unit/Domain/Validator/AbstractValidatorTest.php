@@ -38,7 +38,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateRequiredReturnsBoolDataProvider()
+    public static function validateRequiredReturnsBoolDataProvider()
     {
         return [
             [
@@ -100,7 +100,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateEmailReturnsBoolDataProvider()
+    public static function validateEmailReturnsBoolDataProvider()
     {
         return [
             [
@@ -150,7 +150,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateMinReturnsBoolDataProvider()
+    public static function validateMinReturnsBoolDataProvider()
     {
         return [
             [
@@ -201,7 +201,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateMaxReturnsBoolDataProvider()
+    public static function validateMaxReturnsBoolDataProvider()
     {
         return [
             [
@@ -257,7 +257,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateIntReturnsBoolDataProvider()
+    public static function validateIntReturnsBoolDataProvider()
     {
         return [
             [
@@ -307,7 +307,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateLettersReturnsBoolDataProvider()
+    public static function validateLettersReturnsBoolDataProvider()
     {
         return [
             [
@@ -342,7 +342,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateUnicodeLettersReturnsBoolDataProvider()
+    public static function validateUnicodeLettersReturnsBoolDataProvider()
     {
         return [
             [
@@ -403,7 +403,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateMustIncludeReturnsBoolDataProvider()
+    public static function validateMustIncludeReturnsBoolDataProvider()
     {
         return [
             [
@@ -554,7 +554,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateMustNotIncludeReturnsBoolDataProvider()
+    public static function validateMustNotIncludeReturnsBoolDataProvider()
     {
         return [
             [
@@ -695,7 +695,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateInListReturnsBoolDataProvider()
+    public static function validateInListReturnsBoolDataProvider()
     {
         return [
             [
@@ -796,7 +796,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateSameAsReturnsBoolDateProvider()
+    public static function validateSameAsReturnsBoolDateProvider()
     {
         return [
             [

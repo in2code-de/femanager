@@ -29,7 +29,7 @@ class RequestTest extends UnitTestCase
     /**
      * @return array
      */
-    public function renderReturnsStringDataProvider()
+    public static function renderReturnsStringDataProvider()
     {
         return [
             [
