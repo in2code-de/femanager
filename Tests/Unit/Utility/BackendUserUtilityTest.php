@@ -20,6 +20,7 @@ class BackendUserUtilityTest extends UnitTestCase
 
     public function setUp(): void
     {
+        parent::setUp();
         $GLOBALS['BE_USER'] = GeneralUtility::makeInstance(BackendUserAuthentication::class);
     }
 

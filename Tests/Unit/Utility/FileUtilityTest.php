@@ -20,6 +20,7 @@ class FileUtilityTest extends UnitTestCase
 
     public function setUp(): void
     {
+        parent::setUp();
         TestingHelper::setDefaultConstants();
     }
 

@@ -20,6 +20,7 @@ class FrontendUtilityTest extends UnitTestCase
 
     public function setUp(): void
     {
+        parent::setUp();
         TestingHelper::setDefaultConstants();
     }
 
