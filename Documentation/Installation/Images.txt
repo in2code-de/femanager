@@ -1,14 +1,3 @@
-.. |em|      image:: ../Images/femanager_extensionmanager.png
-.. :align: left
-.. :border: 0
-.. :name: em
-.. :vspace: 20
-
-.. |emConfiguration|      image:: ../Images/femanager_extensionmanager_configuration.png
-.. :align: left
-.. :border: 0
-.. :name: emConfiguration
-.. :vspace: 20
 
 .. |backendmodule|      image:: ../Images/femanager_backendmodule.png
 .. :align: left
@@ -40,8 +29,8 @@
 .. :name: plugin
 .. :vspace: 20
 
-.. |plugin2|      image:: ../Images/femanager_plugin2.png
+.. |settings|      image:: ../Images/femanager_settings.png
 .. :align: left
 .. :border: 0
-.. :name: plugin2
+.. :name: settings
 .. :vspace: 20

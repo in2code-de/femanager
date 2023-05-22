@@ -10,7 +10,7 @@ Basics
 ^^^^^^
 
 - Install Extension static_info_tables
-- Install Extension static_info_tables(_de)(_fr)(_pl) etc... for localized countrynames
+- Install Extension static_info_tables(_de)(_fr)(_pl) etc... for localized country names
 - Import Records of the extensions via Extension Manager (see manual of static_info_tables)
 - Clear Cache
 - Copy all Partials from femanager to a fileadmin folder

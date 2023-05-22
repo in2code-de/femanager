@@ -30,7 +30,7 @@ Note: Login and a *I forgot my password* function is part of the core and not pa
 Requirements of femanager
 -------------------------
 
-- TYPO3 8.7
+- TYPO3 12.4
 - Extbase / Fluid
 - Best use with jQuery and bootstrap
 
@@ -167,12 +167,12 @@ Frontend: Add new fields
 Extend Femanager (fe_users) with new Fields
 
 
-Backend: Pluginview for Editors
+Backend: Plugin view for Editors
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 |backend1|
 
-Example settings in Plugin
+Example settings of the registration plugin
 
 
 Backend: FE-Users record
@@ -188,4 +188,11 @@ Backend: Manage Frontend-Users
 
 |backend3|
 
-A small backend module helps to manage the Frontend-Users
+A small backend module helps to manage the Frontend-Users.
+
+Backend: Admin-Confirmation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+|backend4|
+
+If enabled in the Extension Settings, an additional view will be shown in the backend to confirm new users.

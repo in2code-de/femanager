@@ -12,9 +12,9 @@ Introduction
 **Available since 4.0.0**
 
 If you turn on an adminconfirmation by adding an email address in the FlexForm field, admins normally have to confirm
-new requests from users. But it's possible to implement some own magic to make a confirmation happen automaticly.
+new requests from users. But it's possible to implement some own magic to make a confirmation happen automatically.
 You can add own AutoAdminConfirmation classes to bring in own magic (auto confirmation for an IP-Range, etc...).
-At the moment, femanager offers only one AutoAdminConfirmation class, which decided which users are auto-confirmed by
+At the moment, femanager offers only one AutoAdminConfirmation class, which decides which users are auto-confirmed by
 the top-level-domain of the email-address.
 
 

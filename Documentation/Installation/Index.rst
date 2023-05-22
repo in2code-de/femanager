@@ -18,12 +18,12 @@ Quick Guide
 
 - Get it via composer *composer require in2code/femanager* OR
 - Import extension from TYPO3 Extension Repository (TER)
-- Make your extension configuration in the Extension Manager
+- Make your extension configuration in the Backend Module "Settings"
 - Include static template to your main TypoScript template
 - Make your configuration in the Constants Editor (e.g. include jQuery or Twitter Bootstrap)
 - Add a new page with the Frontend Plugin and make your settings (e.g. for Registration)
 - Don't forget to set the startpage in the Content Element (the page where the fe_users should be stored)
-- Setup the hashing algorythm in the TypoScript Setup (see settings passwordSave)
+- Setup the hashing algorithm in the TypoScript Setup (see settings passwordSave)
 - It's recommended to use https on the page with registration form, to secure registration and validation via AJAX
 - Done
 
@@ -33,21 +33,14 @@ Quick Guide
 Step by Step
 ------------
 
-Extension Manager Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Images
-""""""
-
-|em|
-
-Extension Manager
-
-|emConfiguration|
-
-Extension Manager Configuration
+Extension Configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Settings
+""""""""
+
+|settings|
+
 """"""""
 
 .. t3-field-list-table::
@@ -92,19 +85,23 @@ Settings
 Plugin Configuration
 ^^^^^^^^^^^^^^^^^^^^
 
+Since v12 there are now different frontend plugins for the different views. You can choose between:
+- Registration (femanager_registration)
+- Edit (femanager_edit)
+- List (femanager_list)
+- Detail (femanager_detail)
+- Invitation (femanager_invitation)
+- Resend Confirmation Mail (femanager_resendconfirmationmail)
+
 Images
 """"""
 
 |plugin|
 
-Pagecontent
-
-|plugin2|
-
 Plugin Configuration
 
-Explanation Plugin Settings
-"""""""""""""""""""""""""""
+Explanation Plugin Settings - Registration
+""""""""""""""""""""""""""""""""""""""""""""
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -117,15 +114,6 @@ Explanation Plugin Settings
       Description
    :Default:
       Default Value
-
- - :Tab:
-      Main Settings
-   :Field:
-      Choose View
-   :Description:
-      Choose between Registration, Edit, List and Detail. This is the main setting for the output in Frontend.
-   :Default:
-      [empty]
 
  - :Tab:
       Registration
@@ -173,94 +161,136 @@ Explanation Plugin Settings
       [empty]
 
  - :Tab:
-      Edit
+      Additional Settings
    :Field:
+      Page with terms and conditions
+   :Description:
+      Choose the page where your terms and conditions are stored.
+   :Default:
+      [empty]
+
+
+
+Explanation Plugin Settings - Edit
+"""""""""""""""""""""""""""""""""""""
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+      Field Name
+   :Description:
+      Description
+   :Default:
+      Default Value
+
+ - :Field:
       Select Fields for Edit-Form (empty = all fields)
    :Description:
       Define which fields should be shown in the profile-update-form in Frontend. Empty shows all fields.
    :Default:
       [empty]
 
- - :Tab:
-      Edit
-   :Field:
+ - :Field:
       Show Delete Button in Edit Form
    :Description:
       Renders a delete-Profile-Button in Edit view if checked.
    :Default:
       0
 
- - :Tab:
-      Edit
-   :Field:
+ - :Field:
       Profile update must be confirmed from an admin (add one ore more emails)
    :Description:
       Add one ore more emails (one per line) if the admin should confirm the profile-update.
    :Default:
       [empty]
 
- - :Tab:
-      Edit
-   :Field:
+ - :Field:
       Notify admin on Profile update (add one ore more emails)
    :Description:
       Add one ore more emails (one per line) if the admin should be informed on a profile-update.
    :Default:
       [empty]
 
- - :Tab:
-      Listview
-   :Field:
+Explanation Plugin Settings - List
+"""""""""""""""""""""""""""""""""""""
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+      Field Name
+   :Description:
+      Description
+   :Default:
+      Default Value
+
+ - :Field:
       Show Searchfield
    :Description:
       Displays a Search in Frontend
    :Default:
       0
 
- - :Tab:
-      Listview
-   :Field:
+ - :Field:
       Limit
    :Description:
       Set a maximum limit for the FE-List
    :Default:
       [empty]
 
- - :Tab:
-      Listview
-   :Field:
+ - :Field:
       Order by
    :Description:
       Order by a fe_users field
    :Default:
       Lastname
 
- - :Tab:
-      Listview
-   :Field:
+ - :Field:
       Sorting
    :Description:
       Order Ascending or Descending
    :Default:
       Ascending
 
- - :Tab:
-      Listview
-   :Field:
+ - :Field:
       Show from usergroup (empty = show all)
    :Description:
       Filter List by one or more Usergroups
    :Default:
       [empty]
 
- - :Tab:
-      Detailview
-   :Field:
+Explanation Plugin Settings - Detail
+"""""""""""""""""""""""""""""""""""""
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+      Field Name
+   :Description:
+      Description
+   :Default:
+      Default Value
+
+ - :Field:
       User to show
    :Description:
-      Select one user for the Detailview. This can be left empty if this view is only visited from listview.
+      Select one user for the detail view. This can be left empty if this view is only visited from list view.
    :Default:
       [empty]
+
+Explanation Plugin Settings - Invitation
+""""""""""""""""""""""""""""""""""""""""""""
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Tab:
+      Tab
+   :Field:
+      Field Name
+   :Description:
+      Description
+   :Default:
+      Default Value
 
  - :Tab:
       Invitation
