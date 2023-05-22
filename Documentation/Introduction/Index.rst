@@ -117,7 +117,6 @@ General
 - Store values in other database tables (e.g. tt_address)
 - Save password as md5 or sha1 per default
 - HTML with twitter bootstrap classes to reduce integration time
-- Image upload with status bar
 - Supports static_info_tables
 - Extend this extension with new validators or new fields in fe_users (see example in best practice section) or use some SignalSlots
 - Extension uses namespaces (so TYPO3 version 6.0 or higher is needed)
