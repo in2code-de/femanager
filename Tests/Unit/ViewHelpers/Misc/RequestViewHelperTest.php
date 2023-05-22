@@ -28,9 +28,6 @@ class RequestViewHelperTest extends UnitTestCase
         unset($this->abstractValidationViewHelperMock);
     }
 
-    /**
-     * @return array
-     */
     public static function renderReturnsStringDataProvider(): array
     {
         return [
@@ -99,8 +96,12 @@ class RequestViewHelperTest extends UnitTestCase
      * @dataProvider renderReturnsStringDataProvider
      * @covers ::render
      */
-    public function testRenderReturnsString(string $parameter, bool $htmlSpecialChars, array $parametersToSet, string $expectedResult)
-    {
+    public function testRenderReturnsString(
+        string $parameter,
+        bool $htmlSpecialChars,
+        array $parametersToSet,
+        string $expectedResult
+    ) {
         $arguments = [
             'parameter' => $parameter,
             'htmlspecialchars' => $htmlSpecialChars,

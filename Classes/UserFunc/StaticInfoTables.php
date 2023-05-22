@@ -66,6 +66,9 @@ class StaticInfoTables
         }
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     public function getCountryOptions(array $data)
     {
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
@@ -81,13 +84,17 @@ class StaticInfoTables
             $request = $GLOBALS['TYPO3_REQUEST'];
             $languageService = null;
             if ($request->getAttribute('language') instanceof SiteLanguage) {
-                $languageService = $this->languageServiceFactory->createFromSiteLanguage($request->getAttribute('language'));
+                $languageService =
+                    $this->languageServiceFactory->createFromSiteLanguage($request->getAttribute('language'));
             }
 
             $returnArray = [];
             $countries = $this->countryProvider->getAll();
             foreach ($countries as $country) {
-                $returnArray[$country->getAlpha3IsoCode()] = $languageService !== null ? $languageService->sL($country->getLocalizedNameLabel()) : $country->getName();
+                $returnArray[$country->getAlpha3IsoCode()] =
+                    $languageService !== null ?
+                        $languageService->sL($country->getLocalizedNameLabel()) :
+                        $country->getName();
             }
             asort($returnArray);
             $data['items'] = $returnArray;

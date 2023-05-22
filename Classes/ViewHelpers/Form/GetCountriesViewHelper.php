@@ -10,7 +10,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Core\Country\CountryProvider;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 
-
 /**
  * Class GetCountriesViewHelper
  */
@@ -24,6 +23,7 @@ class GetCountriesViewHelper extends AbstractViewHelper
 
     /**
      * Build a country array
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
     public function render(): array
     {
@@ -33,13 +33,17 @@ class GetCountriesViewHelper extends AbstractViewHelper
         $request = $GLOBALS['TYPO3_REQUEST'];
         $languageService = null;
         if ($request->getAttribute('language') instanceof SiteLanguage) {
-            $languageService = $this->languageServiceFactory->createFromSiteLanguage($request->getAttribute('language'));
+            $languageService =
+                $this->languageServiceFactory->createFromSiteLanguage($request->getAttribute('language'));
         }
 
         $returnArray = [];
         $countries = $this->countryProvider->getAll();
         foreach ($countries as $country) {
-            $returnArray[$country->getAlpha3IsoCode()] = $languageService !== null ? $languageService->sL($country->getLocalizedNameLabel()) : $country->getName();
+            $returnArray[$country->getAlpha3IsoCode()] =
+                $languageService !== null ?
+                    $languageService->sL($country->getLocalizedNameLabel()) :
+                    $country->getName();
         }
         asort($returnArray);
         return $returnArray;
