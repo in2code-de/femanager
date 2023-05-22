@@ -16,10 +16,11 @@ class FrontendUtilityTest extends UnitTestCase
     /**
      * @var array
      */
-    protected $testFilesToDelete = [];
+    protected array $testFilesToDelete = [];
 
     public function setUp(): void
     {
+        parent::setUp();
         TestingHelper::setDefaultConstants();
     }
 

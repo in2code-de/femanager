@@ -18,10 +18,11 @@ class BackendUtilityTest extends UnitTestCase
     /**
      * @var array
      */
-    protected $testFilesToDelete = [];
+    protected array $testFilesToDelete = [];
 
     public function setUp(): void
     {
+        parent::setUp();
         TestingHelper::setDefaultConstants();
 
         // ApplicationType needs to be faked to represent backend-mode here

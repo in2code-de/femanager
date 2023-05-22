@@ -5,6 +5,7 @@ namespace In2code\Femanager\Tests\Unit\Domain\Validator;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Validator\ServersideValidator;
+use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -14,17 +15,17 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class ServersideValidatorTest extends UnitTestCase
 {
-    /**
-     * @var ServersideValidator
-     */
-    protected $generalValidatorMock;
+    protected ServersideValidator|AccessibleObjectInterface|MockObject $generalValidatorMock;
 
     /**
      * Make object available
      */
     public function setUp(): void
     {
-        $this->generalValidatorMock = $this->getAccessibleMock(ServersideValidator::class, ['dummy']);
+        $this->generalValidatorMock = $this->getAccessibleMock(
+            ServersideValidator::class,
+            null
+        );
     }
 
     /**
@@ -42,7 +43,7 @@ class ServersideValidatorTest extends UnitTestCase
     {
         $user = new User();
 
-        $usergroup1 = $this->getUserGroupMock(1);
+        $usergroup1 = $this->getUserGroupMock();
         $usergroup2 = $this->getUserGroupMock(2);
 
         $user->addUsergroup($usergroup1);
@@ -50,7 +51,7 @@ class ServersideValidatorTest extends UnitTestCase
 
         $fieldName = 'usergroup';
 
-        $result = $this->generalValidatorMock->_callRef('getValue', $user, $fieldName);
+        $result = $this->generalValidatorMock->_call('getValue', $user, $fieldName);
 
         self::assertSame('1,2', $result);
     }
@@ -64,7 +65,7 @@ class ServersideValidatorTest extends UnitTestCase
 
         $fieldName = 'username';
 
-        $result = $this->generalValidatorMock->_callRef('getValue', $user, $fieldName);
+        $result = $this->generalValidatorMock->_call('getValue', $user, $fieldName);
 
         self::assertSame('testuser', $result);
     }

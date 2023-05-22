@@ -22,3 +22,4 @@ docker-compose.yml
 .project/data/screenshots
 .php-cs-fixer.cache
 /config
+.phpunit.cache/

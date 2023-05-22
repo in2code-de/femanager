@@ -1,24 +1,26 @@
 <?php
 
-namespace In2code\Femanager\ViewHelpers\Request;
+namespace In2code\Femanager\Tests\Unit\ViewHelpers\Misc;
 
 use In2code\Femanager\ViewHelpers\Misc\RequestViewHelper;
+use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class RequestTest
- * @coversDefaultClass In2code\Femanager\ViewHelpers\Misc\RequestViewHelper
+ * @coversDefaultClass \In2code\Femanager\ViewHelpers\Misc\RequestViewHelper
  */
-class RequestTest extends UnitTestCase
+class RequestViewHelperTest extends UnitTestCase
 {
-    /**
-     * @var \TYPO3\CMS\Core\Tests\AccessibleObjectInterface
-     */
-    protected $abstractValidationViewHelperMock;
+    protected AccessibleObjectInterface|MockObject|RequestViewHelper $abstractValidationViewHelperMock;
 
     public function setUp(): void
     {
-        $this->abstractValidationViewHelperMock = $this->getAccessibleMock(RequestViewHelper::class, ['dummy']);
+        $this->abstractValidationViewHelperMock = $this->getAccessibleMock(
+            RequestViewHelper::class,
+            null
+        );
     }
 
     public function tearDown(): void
@@ -29,7 +31,7 @@ class RequestTest extends UnitTestCase
     /**
      * @return array
      */
-    public function renderReturnsStringDataProvider()
+    public static function renderReturnsStringDataProvider(): array
     {
         return [
             [
@@ -94,14 +96,10 @@ class RequestTest extends UnitTestCase
     }
 
     /**
-     * @param string $parameter
-     * @param bool $htmlSpecialChars
-     * @param array $parametersToSet
-     * @param string $expectedResult
      * @dataProvider renderReturnsStringDataProvider
      * @covers ::render
      */
-    public function testRenderReturnsString($parameter, $htmlSpecialChars, $parametersToSet, $expectedResult)
+    public function testRenderReturnsString(string $parameter, bool $htmlSpecialChars, array $parametersToSet, string $expectedResult)
     {
         $arguments = [
             'parameter' => $parameter,

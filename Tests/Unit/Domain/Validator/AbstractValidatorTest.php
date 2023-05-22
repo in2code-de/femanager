@@ -3,6 +3,8 @@
 namespace In2code\Femanager\Tests\Unit\Domain\Validator;
 
 use In2code\Femanager\Tests\Unit\Fixture\Domain\Validator\AbstractValidator;
+use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -11,18 +13,17 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class AbstractValidatorTest extends UnitTestCase
 {
-    /**
-     * @var \In2code\Femanager\Domain\Validator\AbstractValidator
-     */
-    protected $generalValidatorMock;
+    protected AccessibleObjectInterface|MockObject|AbstractValidator|\In2code\Femanager\Domain\Validator\AbstractValidator $generalValidatorMock;
 
     /**
      * Make object available
      */
     public function setUp(): void
     {
-        var_dump('foo');
-        $this->generalValidatorMock = $this->getAccessibleMock(AbstractValidator::class, ['dummy']);
+        $this->generalValidatorMock = $this->getAccessibleMock(
+            AbstractValidator::class,
+            null
+        );
     }
 
     /**
@@ -38,7 +39,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateRequiredReturnsBoolDataProvider()
+    public static function validateRequiredReturnsBoolDataProvider(): array
     {
         return [
             [
@@ -85,14 +86,12 @@ class AbstractValidatorTest extends UnitTestCase
     }
 
     /**
-     * @param string $value
-     * @param string $expectedResult
      * @dataProvider validateRequiredReturnsBoolDataProvider
      * @covers ::validateRequired
      */
-    public function testValidateRequiredReturnsBool($value, $expectedResult)
+    public function testValidateRequiredReturnsBool(mixed $value, bool $expectedResult)
     {
-        self::assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateRequired', $value));
+        self::assertSame($expectedResult, $this->generalValidatorMock->_call('validateRequired', $value));
     }
 
     /**
@@ -100,7 +99,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateEmailReturnsBoolDataProvider()
+    public static function validateEmailReturnsBoolDataProvider(): array
     {
         return [
             [
@@ -135,14 +134,12 @@ class AbstractValidatorTest extends UnitTestCase
     }
 
     /**
-     * @param string $value
-     * @param string $expectedResult
      * @dataProvider validateEmailReturnsBoolDataProvider
      * @covers ::validateEmail
      */
-    public function testValidateEmailReturnsBool($value, $expectedResult)
+    public function testValidateEmailReturnsBool(string $value, bool $expectedResult)
     {
-        self::assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateEmail', $value));
+        self::assertSame($expectedResult, $this->generalValidatorMock->_call('validateEmail', $value));
     }
 
     /**
@@ -150,7 +147,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateMinReturnsBoolDataProvider()
+    public static function validateMinReturnsBoolDataProvider(): array
     {
         return [
             [
@@ -182,17 +179,14 @@ class AbstractValidatorTest extends UnitTestCase
     }
 
     /**
-     * @param string $value
-     * @param int $allowedLength
-     * @param string $expectedResult
      * @dataProvider validateMinReturnsBoolDataProvider
      * @covers ::validateMin
      */
-    public function testValidateMinReturnsBool($value, $allowedLength, $expectedResult)
+    public function testValidateMinReturnsBool(string $value, int $allowedLength, bool $expectedResult)
     {
         self::assertSame(
             $expectedResult,
-            $this->generalValidatorMock->_callRef('validateMin', $value, $allowedLength)
+            $this->generalValidatorMock->_call('validateMin', $value, $allowedLength)
         );
     }
 
@@ -201,7 +195,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateMaxReturnsBoolDataProvider()
+    public static function validateMaxReturnsBoolDataProvider(): array
     {
         return [
             [
@@ -238,17 +232,14 @@ class AbstractValidatorTest extends UnitTestCase
     }
 
     /**
-     * @param string $value
-     * @param int $allowedLength
-     * @param string $expectedResult
      * @dataProvider validateMaxReturnsBoolDataProvider
      * @covers ::validateMax
      */
-    public function testValidateMaxReturnsBool($value, $allowedLength, $expectedResult)
+    public function testValidateMaxReturnsBool(string $value, int $allowedLength, bool $expectedResult)
     {
         self::assertSame(
             $expectedResult,
-            $this->generalValidatorMock->_callRef('validateMax', $value, $allowedLength)
+            $this->generalValidatorMock->_call('validateMax', $value, $allowedLength)
         );
     }
 
@@ -257,7 +248,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateIntReturnsBoolDataProvider()
+    public static function validateIntReturnsBoolDataProvider(): array
     {
         return [
             [
@@ -286,20 +277,18 @@ class AbstractValidatorTest extends UnitTestCase
             ],
             [
                 '3 ',
-                (PHP_MAJOR_VERSION >= 8) ? true : false
+                PHP_MAJOR_VERSION >= 8
             ]
         ];
     }
 
     /**
-     * @param string $value
-     * @param bool $expectedResult
      * @dataProvider validateIntReturnsBoolDataProvider
      * @covers ::validateInt
      */
-    public function testValidateIntReturnsBool($value, $expectedResult)
+    public function testValidateIntReturnsBool(string $value, bool $expectedResult)
     {
-        self::assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateInt', $value));
+        self::assertSame($expectedResult, $this->generalValidatorMock->_call('validateInt', $value));
     }
 
     /**
@@ -307,7 +296,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateLettersReturnsBoolDataProvider()
+    public static function validateLettersReturnsBoolDataProvider(): array
     {
         return [
             [
@@ -342,7 +331,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateUnicodeLettersReturnsBoolDataProvider()
+    public static function validateUnicodeLettersReturnsBoolDataProvider(): array
     {
         return [
             [
@@ -377,316 +366,335 @@ class AbstractValidatorTest extends UnitTestCase
     }
 
     /**
-     * @param string $value
-     * @param bool $expectedResult
      * @dataProvider validateLettersReturnsBoolDataProvider
      * @covers ::validateUnicodeLetters
      */
-    public function testValidateLettersReturnsBool($value, $expectedResult)
+    public function testValidateLettersReturnsBool(string $value, bool $expectedResult)
     {
-        self::assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateLetters', $value));
+        self::assertSame($expectedResult, $this->generalValidatorMock->_call('validateLetters', $value));
     }
 
     /**
-     * @param string $value
-     * @param bool $expectedResult
      * @dataProvider validateUnicodeLettersReturnsBoolDataProvider
      * @covers ::validateLetters
      */
-    public function testUnicodeValidateLettersReturnsBool($value, $expectedResult)
+    public function testUnicodeValidateLettersReturnsBool(string $value, bool $expectedResult)
     {
-        self::assertSame($expectedResult, $this->generalValidatorMock->_callRef('validateUnicodeLetters', $value));
+        self::assertSame($expectedResult, $this->generalValidatorMock->_call('validateUnicodeLetters', $value));
     }
 
-    /**
-     * Dataprovider for validateMustIncludeReturnsBool()
-     *
-     * @return array
-     */
-    public function validateMustIncludeReturnsBoolDataProvider()
+    public static function validateStringReturnsBoolDataProvider(): array
     {
         return [
             [
                 'in2code.de',
                 'number,letter,special',
-                true
-            ],
-            [
-                'in2code.de ',
-                'number,letter,special,space',
-                true
-            ],
-            [
-                'in2code.de',
-                'number,  special',
-                true
-            ],
-            [
-                'in2code.de',
-                '   special  ,   letter ',
-                true
-            ],
-            [
-                'in2code',
-                'number,letter',
-                true
-            ],
-            [
-                'in2code',
-                'special,letter',
-                false
-            ],
-            [
-                'in2code#',
-                'special',
-                true
-            ],
-            [
-                'in2co de',
-                'special',
-                true
-            ],
-            [
-                'in2code',
-                'number',
-                true
-            ],
-            [
-                'incode.',
-                'number,letter',
-                false
-            ],
-            [
-                'in2 code',
-                'number,letter',
-                true
-            ],
-            [
-                'in code',
-                'letter',
-                true
-            ],
-            [
-                '1 2',
-                'number',
-                true
-            ],
-            [
-                '2',
-                'number',
-                true
-            ],
-            [
-                '1 2',
-                'space',
-                true
-            ],
-            [
-                '132',
-                'space',
-                false
-            ],
-            [
-                'a;#/%äß´^á 3',
-                'space',
-                true
-            ],
-            [
-                'a;#/%äß´^á 3',
-                'letter,number,special,space',
-                true
-            ],
-            [
-                'a;#/%äß´^á 3',
-                'special,space',
-                true
-            ],
-            [
-                'in2code',
-                'uppercase',
-                false
-            ],
-            [
-                'In2code',
-                'uppercase',
-                true
-            ],
-            [
-                'in2Code',
-                'uppercase',
-                true
-            ],
-            [
-                'in2codE',
-                'uppercase',
-                true
-            ],
-            [
-                'In2code',
-                'number,uppercase',
-                true
-            ],
-            [
-                'I n2code',
-                'number,uppercase,space',
-                true
-            ],
-        ];
-    }
-
-    /**
-     * @param string $value
-     * @param string $configuration
-     * @param string $expectedResult
-     * @dataProvider validateMustIncludeReturnsBoolDataProvider
-     * @covers ::validateMustInclude
-     */
-    public function testValidateMustIncludeReturnsBool($value, $configuration, $expectedResult)
-    {
-        self::assertSame(
-            $expectedResult,
-            $this->generalValidatorMock->_callRef('validateMustInclude', $value, $configuration)
-        );
-    }
-
-    /**
-     * Dataprovider for validateMustNotIncludeReturnsBool()
-     *
-     * @return array
-     */
-    public function validateMustNotIncludeReturnsBoolDataProvider()
-    {
-        return [
-            [
-                'in2code.de',
-                'number,letter,special',
+                false,
                 false
             ],
             [
                 'in2code.de ',
                 'number,letter,special,space',
+                false,
                 false
             ],
             [
                 'in2code.de',
                 'number,  special',
+                false,
                 false
             ],
             [
                 'in2code.de',
                 '   special  ,   letter ',
+                false,
                 false
             ],
             [
                 'in2code',
                 'number,letter',
+                false,
                 false
             ],
             [
                 'in2code',
                 'special,space',
+                false,
                 true
             ],
             [
                 'in2code#',
                 'special',
+                false,
                 false
             ],
             [
                 'in2co3de',
                 'special',
+                false,
                 true
             ],
             [
                 'in2code',
                 'number',
+                false,
                 false
             ],
             [
                 'incode.',
                 'number,letter',
+                false,
                 false
             ],
             [
                 'in2 code',
                 'number,letter',
+                false,
                 false
             ],
             [
                 'in code',
                 'letter',
+                false,
                 false
             ],
             [
                 '1 2',
                 'number',
+                false,
                 false
             ],
             [
                 '2',
                 'number',
+                false,
                 false
             ],
             [
                 '1 2',
                 'space',
+                false,
                 false
             ],
             [
                 '132',
                 'space',
+                false,
                 true
             ],
             [
                 'a;#/%äß´^á 3',
                 'space',
+                false,
                 false
             ],
             [
                 'a;#/%äß´^á 3',
                 'letter,number,special,space',
+                false,
                 false
             ],
             [
                 'a;#/%äß´^á 3',
                 'special,space',
+                false,
                 false
             ],
             [
                 'in2code',
                 'uppercase',
+                false,
                 true
             ],
             [
                 'In2code',
                 'uppercase',
+                false,
                 false
             ],
             [
                 'in2codE',
                 'uppercase',
+                false,
                 false
             ],
             [
                 'in2Code',
                 'uppercase',
+                false,
                 false
+            ],
+            [
+                'in2code.de',
+                'number,letter,special',
+                true,
+                true
+            ],
+            [
+                'in2code.de ',
+                'number,letter,special,space',
+                true,
+                true
+            ],
+            [
+                'in2code.de',
+                'number,  special',
+                true,
+                true
+            ],
+            [
+                'in2code.de',
+                '   special  ,   letter ',
+                true,
+                true
+            ],
+            [
+                'in2code',
+                'number,letter',
+                true,
+                true
+            ],
+            [
+                'in2code',
+                'special,letter',
+                true,
+                false
+            ],
+            [
+                'in2code#',
+                'special',
+                true,
+                true
+            ],
+            [
+                'in2co de',
+                'special',
+                true,
+                true
+            ],
+            [
+                'in2code',
+                'number',
+                true,
+                true
+            ],
+            [
+                'incode.',
+                'number,letter',
+                true,
+                false
+            ],
+            [
+                'in2 code',
+                'number,letter',
+                true,
+                true
+            ],
+            [
+                'in code',
+                'letter',
+                true,
+                true
+            ],
+            [
+                '1 2',
+                'number',
+                true,
+                true
+            ],
+            [
+                '2',
+                'number',
+                true,
+                true
+            ],
+            [
+                '1 2',
+                'space',
+                true,
+                true
+            ],
+            [
+                '132',
+                'space',
+                true,
+                false
+            ],
+            [
+                'a;#/%äß´^á 3',
+                'space',
+                true,
+                true
+            ],
+            [
+                'a;#/%äß´^á 3',
+                'letter,number,special,space',
+                true,
+                true
+            ],
+            [
+                'a;#/%äß´^á 3',
+                'special,space',
+                true,
+                true
+            ],
+            [
+                'in2code',
+                'uppercase',
+                true,
+                false
+            ],
+            [
+                'In2code',
+                'uppercase',
+                true,
+                true
+            ],
+            [
+                'in2Code',
+                'uppercase',
+                true,
+                true
+            ],
+            [
+                'in2codE',
+                'uppercase',
+                true,
+                true
+            ],
+            [
+                'In2code',
+                'number,uppercase',
+                true,
+                true
+            ],
+            [
+                'I n2code',
+                'number,uppercase,space',
+                true,
+                true
             ],
         ];
     }
 
     /**
-     * @param string $value
-     * @param string $configuration
-     * @param string $expectedResult
-     * @dataProvider validateMustNotIncludeReturnsBoolDataProvider
-     * @covers ::validateMustNotInclude
+     * @dataProvider validateStringReturnsBoolDataProvider
+     * @covers ::validateString
      */
-    public function testValidateMustNotIncludeReturnsBool($value, $configuration, $expectedResult)
-    {
+    public function testValidateStringReturnsBool(
+        string $value,
+        string $configuration,
+        bool $mustInclude,
+        bool $expectedResult
+    ) {
         self::assertSame(
             $expectedResult,
-            $this->generalValidatorMock->_callRef('validateMustNotInclude', $value, $configuration)
+            $this->generalValidatorMock->_call(
+                'validateString',
+                $value,
+                $configuration,
+                $mustInclude
+            )
         );
     }
 
@@ -695,7 +703,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateInListReturnsBoolDataProvider()
+    public static function validateInListReturnsBoolDataProvider(): array
     {
         return [
             [
@@ -777,17 +785,14 @@ class AbstractValidatorTest extends UnitTestCase
     }
 
     /**
-     * @param string $value
-     * @param string $configuration
-     * @param string $expectedResult
      * @dataProvider validateInListReturnsBoolDataProvider
      * @covers ::validateInList
      */
-    public function testValidateInListReturnsBool($value, $configuration, $expectedResult)
+    public function testValidateInListReturnsBool(mixed $value, mixed $configuration, bool $expectedResult)
     {
         self::assertSame(
             $expectedResult,
-            $this->generalValidatorMock->_callRef('validateInList', $value, $configuration)
+            $this->generalValidatorMock->_call('validateInList', $value, $configuration)
         );
     }
 
@@ -796,7 +801,7 @@ class AbstractValidatorTest extends UnitTestCase
      *
      * @return array
      */
-    public function validateSameAsReturnsBoolDateProvider()
+    public static function validateSameAsReturnsBoolDateProvider(): array
     {
         return [
             [
@@ -833,15 +838,12 @@ class AbstractValidatorTest extends UnitTestCase
     }
 
     /**
-     * @param string $value
-     * @param string $value2
-     * @param string $result
      * @dataProvider validateSameAsReturnsBoolDateProvider
      * @covers ::validateSameAs
      */
-    public function testValidateSameAsReturnsBool($value, $value2, $result)
+    public function testValidateSameAsReturnsBool(mixed $value, mixed $value2, bool $expectedResult)
     {
-        $test = $this->generalValidatorMock->_callRef('validateSameAs', $value, $value2);
-        self::assertSame($result, $test);
+        $test = $this->generalValidatorMock->_call('validateSameAs', $value, $value2);
+        self::assertSame($expectedResult, $test);
     }
 }

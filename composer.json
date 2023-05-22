@@ -47,7 +47,6 @@
     "phpmd/phpmd": "^2.13",
     "phpstan/extension-installer": "^1.2",
     "phpstan/phpstan": "^1.10",
-    "phpunit/phpunit": "^9.6",
     "saschaegerer/phpstan-typo3": "^1.8",
     "se/selenium-server-standalone": "^3.141",
     "ssch/typo3-rector": "^1.2",
@@ -73,7 +72,7 @@
     "typo3/cms-setup": "^12.3.0",
     "typo3/cms-t3editor": "^12.3.0",
     "typo3/cms-tstemplate": "^12.3.0",
-    "typo3/testing-framework": "^7.0"
+    "typo3/testing-framework": "^8.0"
   },
   "autoload": {
     "psr-4": {

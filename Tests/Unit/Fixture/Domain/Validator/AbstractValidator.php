@@ -11,8 +11,9 @@ use In2code\Femanager\Domain\Validator\AbstractValidator as AbstractValidatorFem
  */
 class AbstractValidator extends AbstractValidatorFemanager
 {
-    public function isValid($value)
+
+    protected function isValid(mixed $value): void
     {
-        parent::isValid($value);
+
     }
 }

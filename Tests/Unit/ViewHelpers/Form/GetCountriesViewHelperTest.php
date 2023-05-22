@@ -11,14 +11,15 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class GetCountriesViewHelperTest extends UnitTestCase
 {
-    /**
-     * @var GetCountriesViewHelper
-     */
-    protected $generalValidatorMock;
+    protected GetCountriesViewHelper $generalValidatorMock;
 
     public function setUp(): void
     {
-        $this->generalValidatorMock = $this->getAccessibleMock(GetCountriesViewHelper::class, ['dummy']);
+        parent::setUp();
+        $this->generalValidatorMock = $this->getAccessibleMock(
+            GetCountriesViewHelper::class,
+            null
+        );
     }
 
     public function tearDown(): void
@@ -32,8 +33,8 @@ class GetCountriesViewHelperTest extends UnitTestCase
     public function testRenderReturnArray()
     {
         $result = $this->generalValidatorMock->_call('render');
-        self::assertTrue(array_key_exists('DEU', $result));
-        self::assertTrue(array_key_exists('FRA', $result));
-        self::assertTrue(array_key_exists('SWZ', $result));
+        self::assertArrayHasKey('DEU', $result);
+        self::assertArrayHasKey('FRA', $result);
+        self::assertArrayHasKey('SWZ', $result);
     }
 }

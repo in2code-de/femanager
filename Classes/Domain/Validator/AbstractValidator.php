@@ -309,10 +309,10 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     /**
      * Validation for checking if values are in a given list
      */
-    protected function validateInList(string $value, string $validationSettingList): bool
+    protected function validateInList(mixed $value, mixed $validationSettingList): bool
     {
-        $valueList = GeneralUtility::trimExplode(',', $value, true);
-        $validationSettings = GeneralUtility::trimExplode(',', $validationSettingList, true);
+        $valueList = GeneralUtility::trimExplode(',', (string)$value, true);
+        $validationSettings = GeneralUtility::trimExplode(',', (string)$validationSettingList, true);
         $diff = array_diff($valueList, $validationSettings);
 
         return empty($diff);
@@ -321,7 +321,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
     /**
      * Validation for comparing two fields
      */
-    protected function validateSameAs(string $value, string $value2): bool
+    protected function validateSameAs(mixed $value, mixed $value2): bool
     {
         if ($value === $value2) {
             return true;

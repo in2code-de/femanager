@@ -12,14 +12,9 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class StringUtilityTest extends UnitTestCase
 {
     /**
-     * @var array
-     */
-    protected $testFilesToDelete = [];
-
-    /**
      * @return array
      */
-    public function cleanStringReturnsStringDataProvider()
+    public static function cleanStringReturnsStringDataProvider(): array
     {
         return [
             [
@@ -42,12 +37,10 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
-     * @param string $string
-     * @param string $expectedResult
      * @dataProvider cleanStringReturnsStringDataProvider
      * @covers ::cleanString
      */
-    public function testCleanStringReturnsString($string, $expectedResult)
+    public function testCleanStringReturnsString(string $string, string $expectedResult)
     {
         self::assertEquals($expectedResult, StringUtility::cleanString($string));
     }
@@ -55,7 +48,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function getValuesInBracketsReturnsStringDataProvider()
+    public static function getValuesInBracketsReturnsStringDataProvider(): array
     {
         return [
             // #0
@@ -77,12 +70,10 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
-     * @param string $start
-     * @param string $expectedResult
      * @dataProvider getValuesInBracketsReturnsStringDataProvider
      * @covers ::getValuesInBrackets
      */
-    public function testGetValuesInBracketsReturnsString($start, $expectedResult)
+    public function testGetValuesInBracketsReturnsString(string $start, string $expectedResult)
     {
         $result = StringUtility::getValuesInBrackets($start);
         self::assertEquals($result, $expectedResult);
@@ -91,7 +82,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function getValuesBeforeBracketsDataProvider()
+    public static function getValuesBeforeBracketsDataProvider(): array
     {
         return [
             // #0
@@ -113,12 +104,10 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
-     * @param string $start
-     * @param string $expectedResult
      * @dataProvider getValuesBeforeBracketsDataProvider
      * @covers ::getValuesBeforeBrackets
      */
-    public function testGetValuesBeforeBracketsReturnsString($start, $expectedResult)
+    public function testGetValuesBeforeBracketsReturnsString(string $start, string $expectedResult)
     {
         $result = StringUtility::getValuesBeforeBrackets($start);
         self::assertEquals($result, $expectedResult);
@@ -127,7 +116,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function startsWithReturnsStringDataProvider()
+    public static function startsWithReturnsStringDataProvider(): array
     {
         return [
             [
@@ -159,13 +148,10 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
-     * @param string $haystack
-     * @param string $needle
-     * @param bool $expectedResult
      * @dataProvider startsWithReturnsStringDataProvider
      * @covers ::startsWith
      */
-    public function testStartsWithReturnsString($haystack, $needle, $expectedResult)
+    public function testStartsWithReturnsString(string $haystack, string $needle, bool $expectedResult)
     {
         self::assertSame($expectedResult, StringUtility::startsWith($haystack, $needle));
     }
@@ -173,7 +159,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function endsWithReturnsStringDataProvider()
+    public static function endsWithReturnsStringDataProvider(): array
     {
         return [
             [
@@ -205,13 +191,10 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
-     * @param string $haystack
-     * @param string $needle
-     * @param bool $expectedResult
      * @dataProvider endsWithReturnsStringDataProvider
      * @covers ::endsWith
      */
-    public function testEndsWithReturnsString($haystack, $needle, $expectedResult)
+    public function testEndsWithReturnsString(string $haystack, string $needle, bool $expectedResult)
     {
         self::assertSame($expectedResult, StringUtility::endsWith($haystack, $needle));
     }
@@ -219,7 +202,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function makeEmailArrayReturnsArrayDataProvider()
+    public static function makeEmailArrayReturnsArrayDataProvider(): array
     {
         return [
             [
@@ -245,12 +228,10 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
-     * @param string $haystack
-     * @param array $expectedResult
      * @dataProvider makeEmailArrayReturnsArrayDataProvider
      * @covers ::makeEmailArray
      */
-    public function testMakelEmailArrayReturnsArray($haystack, $expectedResult)
+    public function testMakelEmailArrayReturnsArray(string $haystack, array $expectedResult)
     {
         self::assertSame($expectedResult, StringUtility::makeEmailArray($haystack));
     }
@@ -258,7 +239,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function getRandomStringAlwaysReturnsStringsOfGivenLengthDataProvider()
+    public static function getRandomStringAlwaysReturnsStringsOfGivenLengthDataProvider(): array
     {
         return [
             'default params' => [
@@ -290,13 +271,10 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
-     * @param int $length
-     * @param bool $addUpperCase
-     * @param bool $addSpecialCharacters
      * @dataProvider getRandomStringAlwaysReturnsStringsOfGivenLengthDataProvider
      * @covers ::getRandomString
      */
-    public function testGetRandomStringAlwaysReturnsStringsOfGivenLength($length, $addUpperCase, $addSpecialCharacters)
+    public function testGetRandomStringAlwaysReturnsStringsOfGivenLength(int $length, bool $addUpperCase, bool $addSpecialCharacters)
     {
         for ($i = 0; $i < 100; $i++) {
             $string = StringUtility::getRandomString($length, $addUpperCase, $addSpecialCharacters);
@@ -340,7 +318,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function removeDoubleSlashesReturnsStringDataProvider()
+    public static function removeDoubleSlashesReturnsStringDataProvider(): array
     {
         return [
             [
@@ -383,12 +361,10 @@ class StringUtilityTest extends UnitTestCase
     }
 
     /**
-     * @param string $uri
-     * @param string $expectedResult
      * @dataProvider removeDoubleSlashesReturnsStringDataProvider
      * @covers ::removeDoubleSlashesFromUri
      */
-    public function testRemoveDoubleSlashesReturnsString($uri, $expectedResult)
+    public function testRemoveDoubleSlashesReturnsString(string $uri, string $expectedResult)
     {
         $newUri = StringUtility::removeDoubleSlashesFromUri($uri);
         self::assertSame($expectedResult, $newUri);

@@ -12,18 +12,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class HashUtilityTest extends UnitTestCase
 {
-    /**
-     * @var array
-     */
-    protected $testFilesToDelete = [];
+    protected array $testFilesToDelete = [];
 
-    /**
-     * @var User
-     */
-    protected $user;
+    protected User $user;
 
     public function setUp(): void
     {
+        parent::setUp();
         $this->user = new User();
         $this->user->setUsername('foo');
     }
