@@ -18,6 +18,6 @@ See some features or best practice parts of the extension femanager.
 	NewValidators/Index
 	AutoConfirmation/Index
 	Finishers/Index
-	Signals/Index
+	Events/Index
 	ResendUserConfirmationRequest/Index
 	RateLimiter/Index
