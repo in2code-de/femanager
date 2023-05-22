@@ -16,7 +16,7 @@ class ObjectUtilityTest extends UnitTestCase
     /**
      * @var array
      */
-    protected $testFilesToDelete = [];
+    protected array $testFilesToDelete = [];
 
     /**
      * @covers ::getQueryBuilder

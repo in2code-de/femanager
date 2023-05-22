@@ -12,14 +12,9 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class StringUtilityTest extends UnitTestCase
 {
     /**
-     * @var array
-     */
-    protected $testFilesToDelete = [];
-
-    /**
      * @return array
      */
-    public function cleanStringReturnsStringDataProvider()
+    public static function cleanStringReturnsStringDataProvider()
     {
         return [
             [
@@ -55,7 +50,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function getValuesInBracketsReturnsStringDataProvider()
+    public static function getValuesInBracketsReturnsStringDataProvider()
     {
         return [
             // #0
@@ -91,7 +86,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function getValuesBeforeBracketsDataProvider()
+    public static function getValuesBeforeBracketsDataProvider()
     {
         return [
             // #0
@@ -127,7 +122,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function startsWithReturnsStringDataProvider()
+    public static function startsWithReturnsStringDataProvider()
     {
         return [
             [
@@ -173,7 +168,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function endsWithReturnsStringDataProvider()
+    public static function endsWithReturnsStringDataProvider()
     {
         return [
             [
@@ -219,7 +214,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function makeEmailArrayReturnsArrayDataProvider()
+    public static function makeEmailArrayReturnsArrayDataProvider()
     {
         return [
             [
@@ -258,7 +253,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function getRandomStringAlwaysReturnsStringsOfGivenLengthDataProvider()
+    public static function getRandomStringAlwaysReturnsStringsOfGivenLengthDataProvider()
     {
         return [
             'default params' => [
@@ -340,7 +335,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @return array
      */
-    public function removeDoubleSlashesReturnsStringDataProvider()
+    public static function removeDoubleSlashesReturnsStringDataProvider()
     {
         return [
             [

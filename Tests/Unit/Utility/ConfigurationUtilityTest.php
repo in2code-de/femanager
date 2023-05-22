@@ -14,7 +14,7 @@ class ConfigurationUtilityTest extends UnitTestCase
     /**
      * @var array
      */
-    protected $testFilesToDelete = [];
+    protected array $testFilesToDelete = [];
 
     /**
      * @SuppressWarnings(PHPMD.Superglobals)

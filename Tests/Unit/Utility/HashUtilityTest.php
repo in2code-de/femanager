@@ -15,7 +15,7 @@ class HashUtilityTest extends UnitTestCase
     /**
      * @var array
      */
-    protected $testFilesToDelete = [];
+    protected array $testFilesToDelete = [];
 
     /**
      * @var User
