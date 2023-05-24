@@ -4,6 +4,9 @@ TYPO3 Frontend User Registration and Management based on
 a very flexible configuration and on TYPO3 12 and newer with the possibility to extend it.
 Extension basicly works like sr_feuser_register or any other frontend user registration.
 
+> :warning: **TYPO3 12 compatibility**\
+> See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how to get access to a TYPO3 12 version
+
 ## Support
 This TYPO3 Extension is free to use. We as in2code and our developers highly appreciate your feedback and work hard to improve our extensions.
 To do so, in2code provides two extra days per month for coding and developing (Coding Night and Freaky Friday). During these days our more than 20 developers spend their time with improvements and updates for this and other extensions.
@@ -39,18 +42,6 @@ Quick guide:
 | 3.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer)   |
 | 2.x       | 7.6       | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer)   |
 | 1.x       | 6.2 - 7.6 | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer)   |
-
-## Early Access Programm (EAP)
-
-You can support the development via our EAP on https://www.in2code.de/en/agency/typo3-extensions/early-access-program/
-Also official support (fee-based) is possible within the EAP.
-
-This is the current status of the EAP features:
-
-| Femanager | TYPO3   | PHP           | Support/Development  | Status         |
-|-----------|---------|---------------|----------------------|----------------|
-| 8.0       | 12      | 8.0, 8.1      | Support for TYPO3 12 | in development |
-| 7.1       | 11 LTS  | 7.4, 8.0, 8.1 | Support for PHP 8    | Released       |
 
 ## Your Contribution
 
