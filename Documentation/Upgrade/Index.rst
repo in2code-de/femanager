@@ -16,13 +16,36 @@ Upgrade
 to version 8.0.0
 ----------------
 
-**Upgrade Plugins**
+Upgrade Plugins
+~~~~~~~~~~~~~~~
 
-All Plugins used in your pages must be updated. The Updater is located in Admin Tools -> Upgrade -> Run Upgrade Wizard -> "EXT:femanager: Migrate plugins"
+All Plugins used in your pages **must** be updated.
+The Updater is located in :guilabel:`Admin Tools > Upgrade > Run Upgrade Wizard > "EXT:femanager: Migrate plugins"`
 
-In your Typoscript Configuration the directive misc.uploadFolder must be changed to the combined identifier (e.g. 1:users/)
+TypoScript Changes
+~~~~~~~~~~~~~~~~~~
 
-The dataprocessors configured under plugin.tx_femanager.settings.dataProcessors are now without a return value, if you need to change data in the request use PSR-15 Middlewares
+If you use the uploading feature for avatar images, the configuration has to be changed to the combined identifier
+
+**Constants:**
+
+.. code-block:: typoscript
+
+   plugin.tx_femanager {
+      settings {
+         uploadFolder = 1:users/
+      }
+   }
+
+DataProcessors
+~~~~~~~~~~~~~~
+
+The DataProcessors configured under plugin.tx_femanager.settings.dataProcessors are now without a return value, if you need to change data in the request use PSR-15 Middlewares
+
+Autologin
+~~~~~~~~~
+
+Currently the AutoLogin feature does not work. When we have found a solution the feature will be enabled again, until then a link to the login page could be inserted.
 
 .. _v7.1:
 
@@ -37,7 +60,7 @@ You need to add
 
 .. code-block:: html
 
-<f:form.hidden name="hash" value="{hash}"/>
+   <f:form.hidden name="hash" value="{hash}"/>
 
 in order,that the function is working.
 
@@ -54,7 +77,7 @@ Version 6.0 support TYPO3 9 LTS and 10 LTS. The support for TYPO3 8 was dropped.
 If you want to use the Backend Module to confirm or refuse Frontend User, you need to setup the configPID. The extension
 uses now a frontend call out of the backend, to organise these actions.
 
-.. code-block:: text
+.. code-block:: typoscript
 
     module.tx_femanager {
         settings {
