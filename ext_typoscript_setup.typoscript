@@ -5,9 +5,6 @@ module.tx_femanager {
     partialRootPaths.0 = EXT:femanager/Resources/Private/Partials/
     layoutRootPaths.0 = EXT:femanager/Resources/Private/Layouts/
   }
-  settings {
-    configPID = 1
-  }
 }
 
 ##################################################

@@ -242,14 +242,14 @@ abstract class AbstractController extends ActionController
                     ConfigurationUtility::getValue(
                         'edit/email/createUserNotify/notifyAdmin/receiver/email/value',
                         $this->config
-                    ) ?? ConfigurationUtility::getValue('edit/notifyAdmin', $this->config),
+                    ) ?: ConfigurationUtility::getValue('edit/notifyAdmin', $this->config),
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value'] ?? null
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile update',
                 [
                     'user' => $user,
-                    'changes' => UserUtility::getDirtyPropertiesFromUser($existingUser),
+                    'changes' => UserUtility::getDirtyPropertiesFromUser($user),
                     'settings' => $this->settings,
                 ],
                 $this->config['edit.']['email.']['notifyAdmin.'] ?? [],
@@ -567,8 +567,8 @@ abstract class AbstractController extends ActionController
 
             // Retrieve user TSconfig of currently logged in user
             $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
-            if (is_array($userTsConfig['tx_femanager.'] ?? [])) {
-                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.'] ?? []);
+            if (is_array($userTsConfig['tx_femanager.']) && is_array($this->moduleConfig)) {
+                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.']);
             }
         }
 

@@ -302,13 +302,9 @@ class ServersideValidator extends AbstractValidator
     }
 
     /**
-     * @param User $user
-     * @param string $fieldName
-     * @return string
-     *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    protected function getValue($user, $fieldName)
+    protected function getValue(User $user, string $fieldName): string|bool
     {
         $value = $this->getValueFromProperty($user, $fieldName);
 
@@ -320,7 +316,7 @@ class ServersideValidator extends AbstractValidator
                     $values[] = $object->getUid();
                 }
                 if ($object instanceof FileReference) {
-                    return '';
+                    return true;
                 }
             }
 

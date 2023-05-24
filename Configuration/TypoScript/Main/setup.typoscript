@@ -1651,3 +1651,8 @@ feManagerStateSelection {
     features.requireCHashArgumentForActionArguments = 0
   }
 }
+
+##################################################
+# Configuration Setting for Backend Module
+##################################################
+module.tx_femanager.settings.configPID = 1
