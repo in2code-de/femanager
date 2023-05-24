@@ -193,7 +193,7 @@ class ConfigurationUtility extends AbstractUtility
         if (self::getValue(
             'edit/notifyAdmin',
             $config
-        ) && self::getValue(
+        ) || self::getValue(
             'edit/email/createUserNotify/notifyAdmin/receiver/email/value',
             $config
         )) {
