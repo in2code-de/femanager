@@ -2,18 +2,19 @@
 
 namespace In2code\Femanager\Tests\Unit\Domain\Validator;
 
-use In2code\Femanager\Tests\Unit\Fixture\Domain\Validator\AbstractValidator;
+use In2code\Femanager\Domain\Validator\AbstractValidator;
+use In2code\Femanager\Tests\Unit\Fixture\Domain\Validator\AbstractValidator as AbstractValidatorFixture;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class AbstractValidatorTest
- * @coversDefaultClass \In2code\Femanager\Domain\Validator\AbstractValidator
+ * @coversDefaultClass AbstractValidator
  */
 class AbstractValidatorTest extends UnitTestCase
 {
-    protected AccessibleObjectInterface|MockObject|AbstractValidator|\In2code\Femanager\Domain\Validator\AbstractValidator $generalValidatorMock;
+    protected AccessibleObjectInterface|MockObject|AbstractValidatorFixture|AbstractValidator $generalValidatorMock;
 
     /**
      * Make object available
@@ -21,7 +22,7 @@ class AbstractValidatorTest extends UnitTestCase
     public function setUp(): void
     {
         $this->generalValidatorMock = $this->getAccessibleMock(
-            AbstractValidator::class,
+            AbstractValidatorFixture::class,
             null
         );
     }
@@ -36,8 +37,6 @@ class AbstractValidatorTest extends UnitTestCase
 
     /**
      * Dataprovider for validateRequiredReturnsBool()
-     *
-     * @return array
      */
     public static function validateRequiredReturnsBoolDataProvider(): array
     {
@@ -96,8 +95,6 @@ class AbstractValidatorTest extends UnitTestCase
 
     /**
      * Dataprovider for validateEmailReturnsBool()
-     *
-     * @return array
      */
     public static function validateEmailReturnsBoolDataProvider(): array
     {
@@ -144,8 +141,6 @@ class AbstractValidatorTest extends UnitTestCase
 
     /**
      * Dataprovider for validateMinReturnsBool()
-     *
-     * @return array
      */
     public static function validateMinReturnsBoolDataProvider(): array
     {
@@ -192,8 +187,6 @@ class AbstractValidatorTest extends UnitTestCase
 
     /**
      * Dataprovider for validateMaxReturnsBool()
-     *
-     * @return array
      */
     public static function validateMaxReturnsBoolDataProvider(): array
     {
@@ -245,8 +238,6 @@ class AbstractValidatorTest extends UnitTestCase
 
     /**
      * Dataprovider for validateIntReturnsBool()
-     *
-     * @return array
      */
     public static function validateIntReturnsBoolDataProvider(): array
     {
@@ -293,8 +284,6 @@ class AbstractValidatorTest extends UnitTestCase
 
     /**
      * Dataprovider for validateLettersReturnsBool()
-     *
-     * @return array
      */
     public static function validateLettersReturnsBoolDataProvider(): array
     {
@@ -328,8 +317,6 @@ class AbstractValidatorTest extends UnitTestCase
 
     /**
      * Dataprovider for validateUnicodeLettersReturnsBool()
-     *
-     * @return array
      */
     public static function validateUnicodeLettersReturnsBoolDataProvider(): array
     {
@@ -700,8 +687,6 @@ class AbstractValidatorTest extends UnitTestCase
 
     /**
      * Dataprovider for validateInListReturnsBool()
-     *
-     * @return array
      */
     public static function validateInListReturnsBoolDataProvider(): array
     {
@@ -798,8 +783,6 @@ class AbstractValidatorTest extends UnitTestCase
 
     /**
      * Dataprovider for validateSameAsReturnsBool()
-     *
-     * @return array
      */
     public static function validateSameAsReturnsBoolDateProvider(): array
     {

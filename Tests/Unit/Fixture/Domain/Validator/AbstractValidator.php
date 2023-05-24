@@ -13,6 +13,5 @@ class AbstractValidator extends AbstractValidatorFemanager
 {
     protected function isValid(mixed $value): void
     {
-
     }
 }
