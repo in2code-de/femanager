@@ -255,6 +255,11 @@ class UserBackendController extends AbstractController
         }
     }
 
+    /**
+     * @throws AspectNotFoundException
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
     private function loginAsEnabled(): bool
     {
         //TODO: the enableLoginAs funcionality is not working
@@ -263,7 +268,8 @@ class UserBackendController extends AbstractController
             return true;
         }
 
-        $tsConfigEnableLoginAs = (int)($GLOBALS['BE_USER']->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? 0);
+        $tsConfigEnableLoginAs = (int)($GLOBALS['BE_USER']
+            ->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? 0);
 
         return $tsConfigEnableLoginAs === 1;
     }

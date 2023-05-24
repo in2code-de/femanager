@@ -19,14 +19,10 @@ class BackendUserUtility extends AbstractUtility
     public static function isAdminAuthentication()
     {
         $userAuthentication = self::getBackendUserAuthentication();
-        $context = GeneralUtility::makeInstance(Context::class);
-        if ($context->getPropertyFromAspect('backend.user', 'isAdmin') === true) {
-            return true;
-        }
-        
-        $tsConfigEnableLoginAs = (int)($userAuthentication->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? 0);
+        $isUserBackendEnableLoginAs =
+            $userAuthentication->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? 0;
 
-        return $tsConfigEnableLoginAs === 1;
+        return $userAuthentication->user['admin'] === 1 || (int)$isUserBackendEnableLoginAs === 1;
     }
 
     /**
