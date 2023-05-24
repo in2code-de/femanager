@@ -59,18 +59,12 @@ class UserBackendController extends AbstractController
     public function listAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        //TODO: the enableLoginAs funcionality is not working
-        $context = GeneralUtility::makeInstance(Context::class);
-        $userIsAdmin = $context->getPropertyFromAspect('backend.user', 'isAdmin');
-        $loginAsEnabled =
-            $userIsAdmin
-            || (int)$GLOBALS['BE_USER']->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
         $this->moduleTemplate->assignMultiple(
             [
                 'users' => $this->userRepository->findAllInBackend($filter),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'list',
-                'loginAsEnabled' => $loginAsEnabled
+                'loginAsEnabled' => $this->loginAsEnabled()
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/List');
@@ -259,5 +253,18 @@ class UserBackendController extends AbstractController
             $content = $response->getBody()->getContents();
             return json_decode((string) $content, true, 512, JSON_THROW_ON_ERROR);
         }
+    }
+
+    private function loginAsEnabled(): bool
+    {
+        //TODO: the enableLoginAs funcionality is not working
+        $context = GeneralUtility::makeInstance(Context::class);
+        if ($context->getPropertyFromAspect('backend.user', 'isAdmin') === true) {
+            return true;
+        }
+
+        $tsConfigEnableLoginAs = (int)($GLOBALS['BE_USER']->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? 0);
+
+        return $tsConfigEnableLoginAs === 1;
     }
 }
