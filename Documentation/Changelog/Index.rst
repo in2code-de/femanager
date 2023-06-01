@@ -9,13 +9,17 @@ Changelog
 
 -
       :Version: 8.0.0
-      :Date: 2023-nn-nn
+      :Date: 2023-06-01
       :Changes:
 
-      * [FEATURE] Add support for TYPO3 12
+      * [FEATURE] Add support for TYPO3 12 - please use the Upgrade wizzard to get your plugins to work!
       * [TASK] Remove dependencies of generic Extbase domain classes - Thx to https://github.com/theLine
+      * [REFACTOR] Use Country API from TYPO3
       * [REFACTOR] Dataprocessor for CleanUserGroup is transferred to a Middleware
       * [REFACTOR] Because of new handling for uploaded files the Dataprocessor for Imagemanipulation is removed
+      * [DOCUMENTATION] Replace outdated signal documentation with event description
+      * [TASK] Update unit tests & behaviour tests
+      * [BUGFIX] Fix validation for allowed usergroups
 -
       :Version: 7.1.1
       :Date: 2023-03-16

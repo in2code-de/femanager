@@ -34,7 +34,7 @@ Quick guide:
 
 | Femanager | TYPO3     | PHP       | Support/Development                                              |
 |-----------|-----------|-----------|------------------------------------------------------------------|
-| 8.x       | 12 LTS    | 8.1       | Features, Bugfixes, Security Updates                             |
+| 8.x       | 12 LTS    | 8.1 - 8.2 | Features, Bugfixes, Security Updates                             |
 | 7.x       | 11 LTS    | 7.4 - 8.1 | Bugfixes, Security Updates                                       |
 | 6.x       | 10 LTS    | 7.2 - 7.4 | Bugfixes, Security Updates                                       |
 | 5.x       | 8, 9 LTS  | 7.2 - 7.3 | Security Updates. If you want feature backports ask for an offer |
