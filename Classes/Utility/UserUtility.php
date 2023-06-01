@@ -259,9 +259,16 @@ class UserUtility extends AbstractUtility
                             $dirtyProperties[$propertyName]['old'] = $oldPropertyValue->getTimestamp();
                             $dirtyProperties[$propertyName]['new'] = $newPropertyValue->getTimestamp();
                         }
-                    } else {
+                    } elseif(get_class($oldPropertyValue) === ObjectStorage::class) {
                         $titlesOld = ObjectUtility::implodeObjectStorageOnProperty($oldPropertyValue);
                         $titlesNew = ObjectUtility::implodeObjectStorageOnProperty($newPropertyValue);
+                        if ($titlesOld !== $titlesNew) {
+                            $dirtyProperties[$propertyName]['old'] = $titlesOld;
+                            $dirtyProperties[$propertyName]['new'] = $titlesNew;
+                        }
+                    } else {
+                        $titlesOld = ObjectAccess::getProperty($oldPropertyValue, 'uid');
+                        $titlesNew = ObjectAccess::getProperty($newPropertyValue, 'uid');
                         if ($titlesOld !== $titlesNew) {
                             $dirtyProperties[$propertyName]['old'] = $titlesOld;
                             $dirtyProperties[$propertyName]['new'] = $titlesNew;
