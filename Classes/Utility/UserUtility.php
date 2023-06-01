@@ -267,11 +267,11 @@ class UserUtility extends AbstractUtility
                             $dirtyProperties[$propertyName]['new'] = $titlesNew;
                         }
                     } else {
-                        $titlesOld = ObjectAccess::getProperty($oldPropertyValue, 'uid');
-                        $titlesNew = ObjectAccess::getProperty($newPropertyValue, 'uid');
-                        if ($titlesOld !== $titlesNew) {
-                            $dirtyProperties[$propertyName]['old'] = $titlesOld;
-                            $dirtyProperties[$propertyName]['new'] = $titlesNew;
+                        $uidOld = ObjectAccess::getProperty($oldPropertyValue, 'uid');
+                        $uidNew = ObjectAccess::getProperty($newPropertyValue, 'uid');
+                        if ($uidOld !== $uidNew) {
+                            $dirtyProperties[$propertyName]['old'] = $uidOld;
+                            $dirtyProperties[$propertyName]['new'] = $uidNew;
                         }
                     }
                 }
