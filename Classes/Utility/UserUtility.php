@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\User;
@@ -259,7 +260,7 @@ class UserUtility extends AbstractUtility
                             $dirtyProperties[$propertyName]['old'] = $oldPropertyValue->getTimestamp();
                             $dirtyProperties[$propertyName]['new'] = $newPropertyValue->getTimestamp();
                         }
-                    } elseif(get_class($oldPropertyValue) === ObjectStorage::class) {
+                    } elseif (get_class($oldPropertyValue) === ObjectStorage::class) {
                         $titlesOld = ObjectUtility::implodeObjectStorageOnProperty($oldPropertyValue);
                         $titlesNew = ObjectUtility::implodeObjectStorageOnProperty($newPropertyValue);
                         if ($titlesOld !== $titlesNew) {
