@@ -325,10 +325,10 @@ class ServersideValidator extends AbstractValidator
 
         if (is_object($value)) {
             if (method_exists($value, 'getUid')) {
-                $value = $value->getUid();
+                return $value->getUid();
             }
             if (method_exists($value, 'getFirst')) {
-                $value = $value->getFirst()->getUid();
+                return $value->getFirst()->getUid();
             }
             if (method_exists($value, 'current')) {
                 $current = $value->current();
@@ -338,7 +338,7 @@ class ServersideValidator extends AbstractValidator
                 }
                 if ($current !== null) {
                     if (method_exists($current, 'getUid')) {
-                        $value = $current->getUid();
+                        return $current->getUid();
                     }
                 }
             }
