@@ -30,7 +30,7 @@ class ImageManipulation extends AbstractDataProcessor
                 unset($arguments['user'][$property]);
             } else {
                 // Convert property name
-                $property = GeneralUtility::lcfirst(GeneralUtility::underscoredToUpperCamelCase($property));
+                $property = lcfirst(GeneralUtility::underscoredToUpperCamelCase($property));
 
                 // file upload given
                 foreach ($arguments['user'][$property] ?? [] as $fileItem) {
