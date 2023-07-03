@@ -206,7 +206,7 @@ jQuery.fn.femanagerValidation = function($) {
 		} else {
             const firstError = element.find('.error:first')[0];
             if (!firstError) return;
-            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            firstError.scrollIntoView({ behavior: 'smooth' });
 		}
 	}
 
