@@ -140,7 +140,7 @@ class InvitationController extends AbstractFrontendController
             $this->addFlashMessage(LocalizationUtility::translate('userAlreadyConfirmed'), '', AbstractMessage::ERROR);
             $this->redirect('status');
         }
-        
+
         $user->setDisable(false);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
