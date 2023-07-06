@@ -49,6 +49,7 @@ Add some Page-TSConfig to extend the selection:
             addFieldOptions {
                twitterId = Twitter ID
                skypeId = Skype ID
+               userCategories = User Categories
                somethingElse = LLL:EXT:yourextension/Resources/Private/Language/locallang_be.xlf:custom
             }
          }
@@ -88,6 +89,39 @@ Example file fileadmin/Partials/Fields/TwitterId.html:
       </div>
    </div>
 
+Example file fileadmin/Partials/Fields/UserCategories.html:
+
+.. code-block:: html
+
+   <html
+         xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+         xmlns:femanager="http://typo3.org/ns/In2code/Femanager/ViewHelpers"
+         xmlns:femanagerextended="http://typo3.org/ns/In2code/Femanagerextended/ViewHelpers"
+         data-namespace-typo3-fluid="true">
+       <div class="femanager_fieldset femanager_user_categories form-group">
+           <div class="col-sm-10">
+               <fieldset>
+                   <f:translate key="tx_femanagerextended_domain_model_user.user_categories" extensionName="femanagerextended" />
+                   <f:if condition="{femanager:Validation.IsRequiredField(fieldName:'user_categories')}">
+                       <span>*</span>
+                   </f:if>
+               </fieldset>
+               <f:if condition="{femanager:Validation.IsRequiredField(fieldName:'user_categories')}">
+                   <span>*</span>
+               </f:if>
+               <f:for as="category" each="{femanagerextended:form.getCategories(rootCategory:1)}">
+                   <div class="form-check">
+                       <f:form.checkbox property="userCategories" value="{category.uid}" multiple="true" class="form-check-input" />
+                       <label class="form-check-label">{category.title}</label>
+                   </div>
+               </f:for>
+               <f:comment>
+                   <f:form.select property="userCategories" options="{femanagerextended:form.getCategories(rootCategory:1)}" optionLabelField="title" multiple="true" class="form-select" />
+               </f:comment>
+           </div>
+       </div>
+   </html>
+
 
 ext_tables.sql
 """"""""""""""
@@ -98,7 +132,8 @@ Example SQL file in your extension which extends fe_users with your new fields:
 
    CREATE TABLE fe_users (
       twitter_id varchar(255) DEFAULT '' NOT NULL,
-      skype_id varchar(255) DEFAULT '' NOT NULL
+      skype_id varchar(255) DEFAULT '' NOT NULL,
+      user_categories tinytext DEFAULT '0'
    );
 
 
@@ -137,6 +172,20 @@ Example Configuration/TCA/Overrides/fe_users.php file:
             'default' => '0',
          ],
       ],
+      'user_categories' => [
+         'exclude' => 1,
+         'label' => 'LLL:EXT:femanagerextended/Resources/Private/Language/locallang_db.xlf:' .
+             'tx_femanagerextended_domain_model_user.user_categories',
+         'config' => [
+             'type' => 'category',
+             'relationship' => 'oneToMany',
+             'treeConfig' => [
+                 'startingPoints' => 1,
+             ],
+             'minitems' => 0,
+             'maxitems' => 99,
+         ]
+      ],
    ];
 
    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tmpFeUsersColumns);
@@ -150,73 +199,115 @@ Example Model User.php which extends to the default femanager Model:
 
 .. code-block:: php
 
-   namespace YourVendor\YourExtension\Domain\Model;
+   namespace In2code\Femanagerextended\Domain\Model;
 
-   class User extends \In2code\Femanager\Domain\Model\User {
+   use TYPO3\CMS\Extbase\Domain\Model\Category;
+   use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-      /**
-       * twitterId
-       *
-       * @var string
-       */
-      protected $twitterId;
+   class User extends \In2code\Femanager\Domain\Model\User
+   {
 
-      /**
-       * skypeId
-       *
-       * @var string
-       */
-      protected $skypeId;
+       /**
+        * twitterId
+        *
+        * @var string
+        */
+       protected string $twitterId;
 
-      /**
-       * Returns the twitterId
-       *
-       * @return string $twitterId
-       */
-      public function getTwitterId(): string
-      {
-            return $this->twitterId;
-      }
+       /**
+        * skypeId
+        *
+        * @var string
+        */
+       protected string $skypeId;
 
-      /**
-       * Sets the twitterId
-       *
-       * @param string $twitterId
-       * @return void
-       */
-      public function setTwitterId($twitterId): void
-      {
-            $this->twitterId = $twitterId;
-      }
+       /**
+        * @var ObjectStorage<Category>
+        */
+       protected ObjectStorage $userCategories;
 
-      /**
-       * Returns the skypeId
-       *
-       * @return string $skypeId
-       */
-      public function getSkypeId(): string
-      {
-            return $this->skypeId;
-      }
+       public function __construct($username = '', $password = '')
+       {
+           parent::__construct($username, $password);
+           $this->userCategories = new ObjectStorage();
+       }
 
-      /**
-       * Sets the skypeId
-       *
-       * @param string $skypeId
-       * @return void
-       */
-      public function setSkypeId($skypeId): void
-      {
-            $this->skypeId = $skypeId;
-      }
 
-		/**
-		 * @param string $username
-		 */
-		public function setUsername($username): void
-        {
-				$this->username = $username;
-		}
+       /**
+        * Returns the twitterId
+        *
+        * @return string $twitterId
+        */
+       public function getTwitterId(): string
+       {
+           return $this->twitterId;
+       }
+
+       /**
+        * Sets the twitterId
+        *
+        * @param string $twitterId
+        * @return void
+        */
+       public function setTwitterId(string $twitterId): void
+       {
+           $this->twitterId = $twitterId;
+       }
+
+       /**
+        * Returns the skypeId
+        *
+        * @return string $skypeId
+        */
+       public function getSkypeId(): string
+       {
+           return $this->skypeId;
+       }
+
+       /**
+        * Sets the skypeId
+        *
+        * @param string $skypeId
+        * @return void
+        */
+       public function setSkypeId(string $skypeId): void
+       {
+           $this->skypeId = $skypeId;
+       }
+
+       /**
+        * @return ObjectStorage
+        */
+       public function getUserCategories(): ObjectStorage
+       {
+           return $this->userCategories;
+       }
+
+       /**
+        * @param ObjectStorage $userCategories
+        */
+       public function setUserCategories(ObjectStorage $userCategories): void
+       {
+           $this->userCategories = $userCategories;
+       }
+
+       /**
+        * @param Category $category
+        * @return void
+        */
+       public function addUserCategory(Category $category)
+       {
+           $this->userCategories->attach($category);
+       }
+
+       /**
+        * @param Category $category
+        * @return void
+        */
+       public function removeUserCategory(Category $category)
+       {
+           $this->userCategories->detach($category);
+       }
    }
 
 
