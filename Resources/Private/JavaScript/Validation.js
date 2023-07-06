@@ -210,9 +210,9 @@ jQuery.fn.femanagerValidation = function($) {
 			submitFormAllowed = true;
             element.trigger('submit');
 		} else {
-			$('html,body').animate({
-				scrollTop: element.find('.error:first').offset().top
-			});
+            const firstError = element.find('.error:first')[0];
+            if (!firstError) return;
+            firstError.scrollIntoView({ behavior: 'smooth' });
 		}
 	}
 
