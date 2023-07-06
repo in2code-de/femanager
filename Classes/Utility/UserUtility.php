@@ -17,6 +17,8 @@ use TYPO3\CMS\Core\Crypto\PasswordHashing\Pbkdf2PasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * Class UserUtility
