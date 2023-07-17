@@ -8,6 +8,21 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 7.2.0
+      :Date: 2023-07-17
+      :Changes:
+
+      * [FEATURE] Add column "inactive since" to backend list - thx to Thomas Löffler
+      * [BUGFIX] missing email AdminNotify after editing of user profile - thx to Christian Ludwig
+      * [BUGFIX] Do not re-evaluate object values in ServersideValidator - thx to Torben Hansen
+      * [BUGFIX] Add full object support in getDirtyPropertiesFromUser() - thx to Daniel Haupt
+      * [BUGFIX] Prevent undefined array key for empty configPID - thx to Daniel Haupt
+      * [BUGFIX] Migrate usage of GU::lcfirst with Rector - thx to Torben Hansen
+      * [TASK] Corrects Documenation Rendering Configuration - thx to Daniel Hoffmann
+      * [TASK] [TASK] Replace jQuery scrollTop with vanilla scrollIntoView - thx to Felix Ranesberger
+
+
+-
       :Version: 7.1.1
       :Date: 2023-03-16
       :Changes:
