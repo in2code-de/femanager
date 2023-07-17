@@ -135,6 +135,10 @@
         <source>Last login</source>
         <target state="final">Sist logget inn</target>
       </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.inactivesince">
+        <source>Inactive since</source>
+        <target state="needs-translation">Inactive since</target>
+      </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.crdate" approved="yes">
         <source>Creation Time</source>
         <target state="final">Opprettet</target>
