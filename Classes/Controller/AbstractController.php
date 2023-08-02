@@ -347,8 +347,8 @@ abstract class AbstractController extends ActionController
                     ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)
                 ),
                 $this->contentObject->cObjGetSingle(
-                    ConfigurationUtility::getValue('new./email./createUserNotify./subject', $this->config),
-                    ConfigurationUtility::getValue('new./email./createUserNotify./subject.', $this->config),
+                    (string)ConfigurationUtility::getValue('new./email./createUserNotify./subject', $this->config),
+                    (array)ConfigurationUtility::getValue('new./email./createUserNotify./subject.', $this->config),
                 ),
                 $variables,
                 ConfigurationUtility::getValue('new./email./createUserNotify.', $this->config),
@@ -373,8 +373,8 @@ abstract class AbstractController extends ActionController
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 $this->contentObject->cObjGetSingle(
-                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject', $this->config),
-                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject.', $this->config)
+                    (string)ConfigurationUtility::getValue('new./email./createAdminNotify./subject', $this->config),
+                    (array)ConfigurationUtility::getValue('new./email./createAdminNotify./subject.', $this->config)
                 ),
                 $variables,
                 ConfigurationUtility::getValue('new./email./createAdminNotify.', $this->config),
@@ -441,14 +441,14 @@ abstract class AbstractController extends ActionController
         $target = null;
         // redirect from TypoScript cObject
         if ($this->contentObject->cObjGetSingle(
-            ConfigurationUtility::getValue($action . './' . $category, $this->config),
-            ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
+            (string)ConfigurationUtility::getValue($action . './' . $category, $this->config),
+            (array)ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
         )
         ) {
             $target = $this->contentObject->cObjGetSingle(
-                ConfigurationUtility::getValue($action . './' . $category, $this->config),
+                (string)ConfigurationUtility::getValue($action . './' . $category, $this->config),
                 array_merge_recursive(
-                    ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
+                    (array)ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
                     [
                         'linkAccessRestrictedPages' => 1,
                     ]
@@ -660,8 +660,8 @@ abstract class AbstractController extends ActionController
                 ),
             ],
             $this->contentObject->cObjGetSingle(
-                ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),
-                ConfigurationUtility::getValue('new./email./createUserConfirmation./subject.', $this->config)
+                (string)ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),
+                (array)ConfigurationUtility::getValue('new./email./createUserConfirmation./subject.', $this->config)
             ),
             [
                 'user' => $user,

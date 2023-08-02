@@ -89,7 +89,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected function getData()
     {
-        return $this->contentObject->cObjGetSingle($this->configuration['data'], $this->configuration['data.']);
+        return $this->contentObject->cObjGetSingle((string)$this->configuration['data'], (array)$this->configuration['data.']);
     }
 
     protected function getTargetUrl()
