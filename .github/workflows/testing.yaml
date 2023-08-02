@@ -102,7 +102,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: jonaseberle/github-action-setup-ddev@v1
+      - uses: ddev/github-action-setup-ddev@v1
       - name: "Composer Install"
         run: "ddev composer install"
       - name: "Initialize TYPO3 in ddev"
