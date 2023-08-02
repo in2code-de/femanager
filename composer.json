@@ -49,7 +49,6 @@
     "genesis/behat-fail-aid": "^3.7",
     "helhum/typo3-console": "^7.0",
     "helmich/typo3-typoscript-lint": "^2.5",
-    "in2code/femanagerextended": "dev-main",
     "mikey179/vfsstream": "^1.6",
     "nimut/testing-framework": "6.x-dev",
     "phpmd/phpmd": "^2.10",
