@@ -8,6 +8,16 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 7.2.1
+      :Date: 2023-08-08
+      :Changes:
+
+      * [TASK] Adds documentation for extended - thx to Daniel Hofmann (in2code)
+      * [TASK] Update Image used for Github Actions
+      * [BUGFIX] Fixes reaction when no typoscript configuration is set for redirect - thx to Daniel Hofmann (in2code)
+      * [BUGFIX] Fixed Object Support for getDirtyPropertiesFromUser() - thx to Daniel Hofmann (in2code)
+
+-
       :Version: 7.2.0
       :Date: 2023-07-17
       :Changes:
@@ -20,7 +30,6 @@ Changelog
       * [BUGFIX] Migrate usage of GU::lcfirst with Rector - thx to Torben Hansen
       * [TASK] Corrects Documenation Rendering Configuration - thx to Daniel Hoffmann
       * [TASK] [TASK] Replace jQuery scrollTop with vanilla scrollIntoView - thx to Felix Ranesberger
-
 
 -
       :Version: 7.1.1
