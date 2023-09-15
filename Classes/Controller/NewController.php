@@ -334,6 +334,7 @@ class NewController extends AbstractFrontendController
      */
     public function createStatusAction(): ResponseInterface
     {
+        $this->assignForAll();
         return $this->htmlResponse();
     }
 
