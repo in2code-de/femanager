@@ -36,7 +36,15 @@ class InvitationController extends AbstractFrontendController
      */
     public function newAction(): ResponseInterface
     {
-        $this->allowedUserForInvitationNewAndCreate();
+        if ($this->allowedUserForInvitationNewAndCreate() !== true) {
+            // current user is not allowed
+            $this->addFlashMessage(
+                LocalizationUtility::translateByState(Log::STATUS_INVITATIONRESTRICTEDPAGE),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
+            return $this->redirect('status');
+        }
         $this->view->assign('allUserGroups', $this->allUserGroups);
         $this->assignForAll();
         return $this->htmlResponse();
