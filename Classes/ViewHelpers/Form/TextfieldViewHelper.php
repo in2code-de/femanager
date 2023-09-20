@@ -123,12 +123,12 @@ class TextfieldViewHelper extends AbstractFormFieldViewHelper
 
         return $this->tag->render();
     }
-   /**
-    * Read value from TypoScript
-    *
-    * @return string Value from TypoScript
-    * @throws FluidViewHelperException
-    */
+    /**
+     * Read value from TypoScript
+     *
+     * @return string Value from TypoScript
+     * @throws FluidViewHelperException
+     */
     protected function getValueFromTypoScript(): string
     {
         if (!$this->renderingContext instanceof RenderingContext) {

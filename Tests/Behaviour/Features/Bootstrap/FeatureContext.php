@@ -86,8 +86,8 @@ class FeatureContext extends MinkContext
                 }
             }
             if (isset($this->variables[$name])) {
-                $argument = substr_replace($argument, (string) $this->variables[$name], $start, $end - $start + 1);
-                $start += strlen((string) $this->variables[$name]);
+                $argument = substr_replace($argument, (string)$this->variables[$name], $start, $end - $start + 1);
+                $start += strlen((string)$this->variables[$name]);
             } else {
                 $start = $end + 1;
             }

@@ -21,7 +21,7 @@ class SaveContent
             'tstamp' => time(),
             'crdate' => time(),
             'CType' => 'text',
-            'bodytext' => print_r(GeneralUtility::_POST(), true) . '<p>[deleteme]</p>'
+            'bodytext' => print_r(GeneralUtility::_POST(), true) . '<p>[deleteme]</p>',
         ];
         /** @var $databaseconnection ConnectionPool */
         $databaseconnection = GeneralUtility::makeInstance(ConnectionPool::class);

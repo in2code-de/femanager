@@ -4,8 +4,8 @@ namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Tests\Helper\TestingHelper;
 use In2code\Femanager\Utility\FileUtility;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class FileUtilityTest

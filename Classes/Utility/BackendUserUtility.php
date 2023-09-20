@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class BackendUserUtility

@@ -9,7 +9,6 @@ use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
-use In2code\Femanager\Domain\Service\PluginService;
 use In2code\Femanager\Domain\Service\SendMailService;
 use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
@@ -24,7 +23,6 @@ use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
-use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Http\UploadedFile;
@@ -38,7 +36,6 @@ use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -167,11 +164,11 @@ abstract class AbstractController extends ActionController
         $uploadedFiles = $this->request->getUploadedFiles();
         $allowedFileExtensions = preg_split(
             '/\s*,\s*/',
-            trim((string) ConfigurationUtility::getConfiguration('misc.uploadFileExtension'))
+            trim((string)ConfigurationUtility::getConfiguration('misc.uploadFileExtension'))
         );
         $allowedMimeTypes = preg_split(
             '/\s*,\s*/',
-            trim((string) ConfigurationUtility::getConfiguration('misc.uploadMimeTypes'))
+            trim((string)ConfigurationUtility::getConfiguration('misc.uploadMimeTypes'))
         );
         if (
             count($uploadedFiles) > 0
@@ -186,7 +183,7 @@ abstract class AbstractController extends ActionController
                     in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes)
                     && in_array(
                         pathinfo(
-                            (string) $uploadedFile->getClientFilename()
+                            (string)$uploadedFile->getClientFilename()
                         )['extension'],
                         $allowedFileExtensions
                     )
@@ -216,7 +213,7 @@ abstract class AbstractController extends ActionController
                             'uid_foreign' => $user->getUid(),
                             'tablenames' => 'fe_users',
                             'fieldname' => 'image',
-                            'sorting_foreign' => 1
+                            'sorting_foreign' => 1,
                         ]
                     );
                 }
@@ -299,14 +296,13 @@ abstract class AbstractController extends ActionController
             );
             $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
             return $this->redirectByAction('edit', 'requestRedirect', 'edit');
-        } else {
-            $this->logUtility->log(
-                Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
-                $user,
-                ['message' => 'settings[edit][confirmByAdmin] is missing!']
-            );
-            return null;
         }
+        $this->logUtility->log(
+            Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
+            $user,
+            ['message' => 'settings[edit][confirmByAdmin] is missing!']
+        );
+        return null;
     }
 
     /**
@@ -459,9 +455,8 @@ abstract class AbstractController extends ActionController
         // if redirect target
         if ($target) {
             return $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
-        } else {
-            return $this->redirect($defaultAction);
         }
+        return $this->redirect($defaultAction);
     }
 
     /**
@@ -555,7 +550,6 @@ abstract class AbstractController extends ActionController
             $config = BackendUtility::loadTS((int)$pid);
             $this->config = $config['plugin.']['tx_femanager.']['settings.'] ?? [];
             $this->settings = $this->config;
-
 
             $this->moduleConfig = $config['module.']['tx_femanager.'] ?? [];
 

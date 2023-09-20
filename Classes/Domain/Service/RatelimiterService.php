@@ -76,7 +76,7 @@ class RatelimiterService implements SingletonInterface
         $feUser = $this->getTSFE()->fe_user;
         $identifier = $feUser->getSessionData(self::SESSION_KEY);
 
-        if (null === $identifier) {
+        if ($identifier === null) {
             $unique = GeneralUtility::makeInstance(Random::class)->generateRandomHexString(16);
             $feUser->setAndSaveSessionData(self::SESSION_KEY, $unique);
         }

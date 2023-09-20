@@ -39,7 +39,7 @@ class ValidationSettingsService
         'unicodeLettersOnly',
         'required',
         'uniqueInDb',
-        'uniqueInPage'
+        'uniqueInPage',
     ];
 
     public function __construct(string $controllerName, string $validationName)

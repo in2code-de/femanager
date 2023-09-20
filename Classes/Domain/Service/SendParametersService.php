@@ -93,7 +93,6 @@ class SendParametersService
 
     /**
      * Write to devlog
-     *
      */
     protected function log(): void
     {
@@ -106,7 +105,7 @@ class SendParametersService
                     [
                         'url' => $this->getUri(),
                         'data' => $this->getData(),
-                        'properties' => $this->properties
+                        'properties' => $this->properties,
                     ]
                 );
         }

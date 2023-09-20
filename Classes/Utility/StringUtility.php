@@ -35,7 +35,7 @@ class StringUtility extends AbstractUtility
     public static function getValuesInBrackets($value)
     {
         preg_match_all('/\(.*?\)/i', $value, $result);
-        return str_replace(['(', ')'], '', (string) $result[0][0]);
+        return str_replace(['(', ')'], '', (string)$result[0][0]);
     }
 
     /**

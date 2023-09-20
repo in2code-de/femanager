@@ -65,7 +65,7 @@ class SendMailService
         array $typoScript = [],
         RequestInterface|null $request = null
     ): bool {
-        if (false === $this->isMailEnabled($typoScript, $receiver)) {
+        if ($this->isMailEnabled($typoScript, $receiver) === false) {
             return false;
         }
 
@@ -96,7 +96,7 @@ class SendMailService
         array $typoScript = [],
         RequestInterface|null $request = null
     ): bool {
-        if (false === $this->isMailEnabled($typoScript, $receiver)) {
+        if ($this->isMailEnabled($typoScript, $receiver) === false) {
             return false;
         }
         $email = GeneralUtility::makeInstance(MailMessage::class);
@@ -142,7 +142,7 @@ class SendMailService
         $imageVariables = [];
 
         foreach ($images as $path) {
-            $name = basename((string) $path);
+            $name = basename((string)$path);
             $imagePart = DataPart::fromPath($path);
             $contentType = $imagePart->getMediaType() . '/' . $imagePart->getMediaSubtype();
             $email->embedFromPath($path, $name, $contentType);

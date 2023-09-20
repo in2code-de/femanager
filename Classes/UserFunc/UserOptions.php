@@ -7,7 +7,6 @@ namespace In2code\Femanager\UserFunc;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Service\PageTreeService;
 use In2code\Femanager\Utility\ObjectUtility;
-use TYPO3\CMS\Core\Database\QueryGenerator;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -25,7 +24,7 @@ class UserOptions
         if ($this->getPages($params) !== []) {
             $params['items'] = [
                 $params['items'][0], // please choose
-                $params['items'][1] // currently logged in user
+                $params['items'][1], // currently logged in user
             ];
 
             foreach ($this->getUsers($params) as $user) {

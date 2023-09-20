@@ -247,14 +247,14 @@ class UserUtility extends AbstractUtility
             'txFemanagerChangerequest',
             'ignoreDirty',
             'isOnline',
-            'lastlogin'
+            'lastlogin',
         ];
 
         foreach ($changedObject->_getCleanProperties() as $propertyName => $oldPropertyValue) {
-            if (method_exists($changedObject, 'get' . ucfirst((string) $propertyName))
+            if (method_exists($changedObject, 'get' . ucfirst((string)$propertyName))
                 && !in_array($propertyName, $ignoreProperties)
             ) {
-                $newPropertyValue = $changedObject->{'get' . ucfirst((string) $propertyName)}();
+                $newPropertyValue = $changedObject->{'get' . ucfirst((string)$propertyName)}();
                 if (!is_object($oldPropertyValue) || !is_object($newPropertyValue)) {
                     if ($oldPropertyValue !== $newPropertyValue) {
                         $dirtyProperties[$propertyName]['old'] = $oldPropertyValue;
@@ -268,7 +268,7 @@ class UserUtility extends AbstractUtility
                             $dirtyProperties[$propertyName]['old'] = $oldPropertyValue->getTimestamp();
                             $dirtyProperties[$propertyName]['new'] = $newPropertyValue->getTimestamp();
                         }
-                    } elseif(get_class($oldPropertyValue) === ObjectStorage::class) {
+                    } elseif (get_class($oldPropertyValue) === ObjectStorage::class) {
                         $titlesOld = ObjectUtility::implodeObjectStorageOnProperty($oldPropertyValue);
                         $titlesNew = ObjectUtility::implodeObjectStorageOnProperty($newPropertyValue);
                         if ($titlesOld !== $titlesNew) {

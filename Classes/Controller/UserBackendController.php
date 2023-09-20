@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
 
-use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
-use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
-use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Event\AdminConfirmationUserEvent;
 use In2code\Femanager\Event\RefuseUserEvent;
@@ -15,10 +12,13 @@ use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
+use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
@@ -64,7 +64,7 @@ class UserBackendController extends AbstractController
                 'users' => $this->userRepository->findAllInBackend($filter),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'list',
-                'loginAsEnabled' => $this->loginAsEnabled()
+                'loginAsEnabled' => $this->loginAsEnabled(),
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/List');
@@ -83,7 +83,7 @@ class UserBackendController extends AbstractController
                     ConfigurationUtility::isBackendModuleFilterUserConfirmation()
                 ),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
-                'action' => 'confirmation'
+                'action' => 'confirmation',
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/Confirmation');
@@ -172,7 +172,7 @@ class UserBackendController extends AbstractController
                     false
                 ),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
-                'action' => 'listOpenUserConfirmations'
+                'action' => 'listOpenUserConfirmations',
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/ListOpenUserConfirmations');
@@ -232,8 +232,8 @@ class UserBackendController extends AbstractController
                     'hash' => HashUtility::createHashForUser($user),
                     'status' => $status,
                     'action' => 'confirmCreateRequest',
-                    'controller' => 'New'
-                ]
+                    'controller' => 'New',
+                ],
             ]
         );
         $requestFactory = GeneralUtility::makeInstance(RequestFactory::class);
@@ -251,7 +251,7 @@ class UserBackendController extends AbstractController
             );
         } else {
             $content = $response->getBody()->getContents();
-            return json_decode((string) $content, true, 512, JSON_THROW_ON_ERROR);
+            return json_decode((string)$content, true, 512, JSON_THROW_ON_ERROR);
         }
     }
 

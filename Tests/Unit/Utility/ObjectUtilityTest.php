@@ -4,8 +4,8 @@ namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Utility\ObjectUtility;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class ObjectUtilityTest

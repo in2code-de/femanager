@@ -35,7 +35,7 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
      */
     public function render(): array
     {
-        if (null === $this->countryRepository) {
+        if ($this->countryRepository === null) {
             return ['ERROR: static_info_tables is not loaded'];
         }
         $key = $this->arguments['key'];

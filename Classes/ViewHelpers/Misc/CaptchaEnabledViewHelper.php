@@ -32,7 +32,7 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
                 1638341672
             );
         }
-        $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
+        $controllerName = strtolower((string)$this->renderingContext->getRequest()->getControllerName());
 
         return ExtensionManagementUtility::isLoaded('sr_freecap')
             && $this->templateVariableContainer->getByPath(

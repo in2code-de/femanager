@@ -13,7 +13,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class PageTreeService
 {
     /**
-     *
      * Copied and adapted from QueryGenerator::getTreeList to solve deprecation #92080
      * https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/11.0/Deprecation-92080-DeprecatedQueryGeneratorAndQueryView.html
      *
