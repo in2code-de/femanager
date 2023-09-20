@@ -111,7 +111,7 @@ return [
         'displayErrors' => 1,
         'encryptionKey' => '06f0ff44d53f7df5a3d17df33c37f30067e4bf45849d5e86a5cd24525e5bc0ebd86ee6a6f04461d77045296c014929c1',
         'exceptionalErrors' => 12290,
-        'sitename' => 'EXT:powermail',
+        'sitename' => 'EXT:femanager',
         'systemMaintainers' => [
             5,
         ],
