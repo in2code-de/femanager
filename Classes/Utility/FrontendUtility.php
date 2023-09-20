@@ -21,7 +21,7 @@ class FrontendUtility extends AbstractUtility
         'tx_femanager_pi1',
         'tx_femanager_pi2',
         'tx_femanager_registration',
-        'tx_femanager_edit'
+        'tx_femanager_edit',
     ];
 
     /**
@@ -55,7 +55,7 @@ class FrontendUtility extends AbstractUtility
     {
         $contentObject = ObjectUtility::getContentObject();
         $configuration = [
-            'parameter' => self::getCurrentPid()
+            'parameter' => self::getCurrentPid(),
         ];
         return $contentObject->typoLink_URL($configuration);
     }

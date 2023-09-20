@@ -59,7 +59,7 @@ class FileService
     {
         $extensionList = ConfigurationUtility::getConfiguration('misc.uploadFileExtension');
         if (!empty($extensionList)) {
-            $extensionList = str_replace(' ', '', (string) $extensionList);
+            $extensionList = str_replace(' ', '', (string)$extensionList);
         } else {
             $extensionList = $this->fallbackExtensions;
         }

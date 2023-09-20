@@ -27,14 +27,14 @@ class CountryZonesDataProvider
     public function getCountryZonesForCountryIso3(string $countryIso3): array
     {
         $country = $this->getCountryForIsoCode3($countryIso3);
-        if (null === $country) {
+        if ($country === null) {
             return [];
         }
         $countryZones = $this->countryZoneRepository->findByCountry($country)->toArray();
         usort(
             $countryZones,
             fn (CountryZone $left, CountryZone $right) => // @phpstan-ignore-line
-            strcasecmp((string) $left->getLocalName(), (string) $right->getLocalName())
+            strcasecmp((string)$left->getLocalName(), (string)$right->getLocalName())
         );
         return $countryZones;
     }

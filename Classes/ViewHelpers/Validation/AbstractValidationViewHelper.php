@@ -53,6 +53,6 @@ abstract class AbstractValidationViewHelper extends AbstractViewHelper
                 1638341335
             );
         }
-        return strtolower((string) $this->renderingContext->getRequest()->getControllerName());
+        return strtolower((string)$this->renderingContext->getRequest()->getControllerName());
     }
 }

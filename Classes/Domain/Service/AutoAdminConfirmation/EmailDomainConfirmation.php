@@ -26,7 +26,7 @@ class EmailDomainConfirmation extends AbstractConfirmation
     {
         $domains = GeneralUtility::trimExplode(',', $this->getConfig()['confirmByEmailDomains'], true);
         foreach ($domains as $domain) {
-            if (stristr($this->getEmailDomain(), (string) $domain)) {
+            if (stristr($this->getEmailDomain(), (string)$domain)) {
                 return true;
             }
         }

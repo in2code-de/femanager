@@ -82,7 +82,7 @@ class UserLinks
             'parameter' => (int)$this->pid,
             'additionalParams' => $params,
             'returnLast' => 'url',
-            'useCacheHash' => '1'
+            'useCacheHash' => '1',
         ];
         $uri = $this->cObj->typoLink_URL($configuration);
 
@@ -108,7 +108,7 @@ class UserLinks
             'parameter' => (int)$this->pid,
             'additionalParams' => $params,
             'returnLast' => 'url',
-            'useCacheHash' => '1'
+            'useCacheHash' => '1',
         ];
         $uri = $this->cObj->typoLink_URL($configuration);
 

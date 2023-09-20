@@ -42,8 +42,8 @@ class StaticInfoTables
                 $data['items'] = [
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChooseCountry',
-                        ''
-                    ]
+                        '',
+                    ],
                 ];
             } else {
                 $countryZones = $countryZonesDataProvider->getCountryZonesForCountryIso3($country);
@@ -52,8 +52,8 @@ class StaticInfoTables
                     $data['items'] = [
                         [
                             'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:noZonesForThisCountry',
-                            ''
-                        ]
+                            '',
+                        ],
                     ];
                 } else {
                     foreach ($countryZones as $countryZone) {

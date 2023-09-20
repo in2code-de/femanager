@@ -110,27 +110,27 @@ class StringUtilityTest extends UnitTestCase
             [
                 'Finisherx',
                 'Finisher',
-                true
+                true,
             ],
             [
                 'inisher',
                 'Finisher',
-                false
+                false,
             ],
             [
                 'abc',
                 'a',
-                true
+                true,
             ],
             [
                 'abc',
                 'ab',
-                true
+                true,
             ],
             [
                 'abc',
                 'abc',
-                true
+                true,
             ],
         ];
     }
@@ -150,27 +150,27 @@ class StringUtilityTest extends UnitTestCase
             [
                 'xFinisher',
                 'Finisher',
-                true
+                true,
             ],
             [
                 'inisher',
                 'Finisher',
-                false
+                false,
             ],
             [
                 'abc',
                 'c',
-                true
+                true,
             ],
             [
                 'abc',
                 'bc',
-                true
+                true,
             ],
             [
                 'abc',
                 'abc',
-                true
+                true,
             ],
         ];
     }
@@ -191,20 +191,20 @@ class StringUtilityTest extends UnitTestCase
                 'email1@mail.org' . PHP_EOL . 'email2@mail.org',
                 [
                     'email1@mail.org' => 'femanager',
-                    'email2@mail.org' => 'femanager'
-                ]
+                    'email2@mail.org' => 'femanager',
+                ],
             ],
             [
                 'nomail.org' . PHP_EOL . 'email2@mail.org',
                 [
-                    'email2@mail.org' => 'femanager'
-                ]
+                    'email2@mail.org' => 'femanager',
+                ],
             ],
             [
                 'email2@mail.org',
                 [
-                    'email2@mail.org' => 'femanager'
-                ]
+                    'email2@mail.org' => 'femanager',
+                ],
             ],
         ];
     }
@@ -224,28 +224,28 @@ class StringUtilityTest extends UnitTestCase
             'default params' => [
                 32,
                 true,
-                false
+                false,
             ],
             'default length lowercase' => [
                 32,
                 false,
-                false
+                false,
             ],
             '60 length' => [
                 60,
                 true,
-                false
+                false,
             ],
             '60 length lowercase' => [
                 60,
                 false,
-                false
+                false,
             ],
             '60 length special characters' => [
                 60,
                 false,
-                true
-            ]
+                true,
+            ],
         ];
     }
 
@@ -269,7 +269,7 @@ class StringUtilityTest extends UnitTestCase
             } else {
                 $regex = '~.{' . $length . '}~';
             }
-            self::assertSame(1, preg_match($regex, (string) $string));
+            self::assertSame(1, preg_match($regex, (string)$string));
         }
     }
 
@@ -302,40 +302,40 @@ class StringUtilityTest extends UnitTestCase
         return [
             [
                 '/folder1/page.html',
-                '/folder1/page.html'
+                '/folder1/page.html',
             ],
             [
                 '/folder1//page.html',
-                '/folder1/page.html'
+                '/folder1/page.html',
             ],
             [
                 '/folder1///page.html',
-                '/folder1/page.html'
+                '/folder1/page.html',
             ],
             [
                 '//folder1//folder2//',
-                '/folder1/folder2/'
+                '/folder1/folder2/',
             ],
             [
                 'index.php?id=123&param[xx]=yyy',
-                'index.php?id=123&param[xx]=yyy'
+                'index.php?id=123&param[xx]=yyy',
             ],
             [
                 'https://www.test.org/folder/page.html',
-                'https://www.test.org/folder/page.html'
+                'https://www.test.org/folder/page.html',
             ],
             [
                 'https://www.test.org//folder///page.html',
-                'https://www.test.org/folder/page.html'
+                'https://www.test.org/folder/page.html',
             ],
             [
                 'http://www.test.org//folder///page.html',
-                'http://www.test.org/folder/page.html'
+                'http://www.test.org/folder/page.html',
             ],
             [
                 'www.test.org//folder///page.html',
-                'www.test.org/folder/page.html'
-            ]
+                'www.test.org/folder/page.html',
+            ],
         ];
     }
 

@@ -314,7 +314,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
                     1638341673
                 );
             }
-            $controllerName = strtolower((string) $this->renderingContext->getRequest()->getControllerName());
+            $controllerName = strtolower((string)$this->renderingContext->getRequest()->getControllerName());
             $contentObject = $this->configurationManager->getContentObject();
             $typoScript = $this->configurationManager->getConfiguration(
                 ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
@@ -378,7 +378,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
      */
     protected function getFieldName()
     {
-        preg_match_all('/\[.*?\]/i', (string) $this->getNameWithoutPrefix(), $name);
-        return str_replace(['[', ']'], '', (string) $name[0][0]);
+        preg_match_all('/\[.*?\]/i', (string)$this->getNameWithoutPrefix(), $name);
+        return str_replace(['[', ']'], '', (string)$name[0][0]);
     }
 }

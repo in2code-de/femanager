@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Service;
 
-use In2code\Femanager\Finisher\FinisherInterface;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Finisher\AbstractFinisher;
+use In2code\Femanager\Finisher\FinisherInterface;
 use In2code\Femanager\Utility\StringUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use UnexpectedValueException;
 
@@ -182,7 +181,6 @@ class FinisherService
             );
         }
         if (is_subclass_of($this->getClass(), $this->finisherInterface)) {
-
             /** @var AbstractFinisher $finisher */
             $finisher = GeneralUtility::makeInstance(
                 $this->getClass(),

@@ -33,7 +33,7 @@ class UserController extends AbstractFrontendController
                     $this->settings,
                     $filter
                 ),
-                'filter' => $filter
+                'filter' => $filter,
             ]
         );
         $this->assignForAll();
@@ -97,7 +97,7 @@ class UserController extends AbstractFrontendController
                 'validation' => $validation,
                 'value' => $value,
                 'fieldname' => $field,
-                'user' => $user
+                'user' => $user,
             ]
         );
         return $this->jsonResponse();

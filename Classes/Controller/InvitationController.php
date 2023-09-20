@@ -23,7 +23,6 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\Validate;
-use TYPO3\CMS\Extbase\Http\ForwardResponse;
 
 /**
  * Class InvitationController
@@ -37,7 +36,15 @@ class InvitationController extends AbstractFrontendController
      */
     public function newAction(): ResponseInterface
     {
-        $this->allowedUserForInvitationNewAndCreate();
+        if ($this->allowedUserForInvitationNewAndCreate() !== true) {
+            // current user is not allowed
+            $this->addFlashMessage(
+                LocalizationUtility::translateByState(Log::STATUS_INVITATIONRESTRICTEDPAGE),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
+            return $this->redirect('status');
+        }
         $this->view->assign('allUserGroups', $this->allUserGroups);
         $this->assignForAll();
         return $this->htmlResponse();
@@ -107,7 +114,7 @@ class InvitationController extends AbstractFrontendController
             [
                 'user' => $user,
                 'settings' => $this->settings,
-                'hash' => HashUtility::createHashForUser($user)
+                'hash' => HashUtility::createHashForUser($user),
             ],
             $this->config['invitation.']['email.']['invitation.'],
             $this->request
@@ -129,7 +136,7 @@ class InvitationController extends AbstractFrontendController
                 'Profile creation with invitation - Step 1',
                 [
                     'user' => $user,
-                    'settings' => $this->settings
+                    'settings' => $this->settings,
                 ],
                 ConfigurationUtility::getValue('invitation./email./invitationAdminNotifyStep1.', $this->config)
             );
@@ -176,7 +183,7 @@ class InvitationController extends AbstractFrontendController
         $this->view->assignMultiple(
             [
                 'user' => $user,
-                'hash' => $hash
+                'hash' => $hash,
             ]
         );
 
@@ -216,7 +223,7 @@ class InvitationController extends AbstractFrontendController
                 'Profile creation with invitation - Final',
                 [
                     'user' => $user,
-                    'settings' => $this->settings
+                    'settings' => $this->settings,
                 ],
                 ConfigurationUtility::getValue('invitation./email./invitationAdminNotify.', $this->config)
             );
@@ -268,7 +275,7 @@ class InvitationController extends AbstractFrontendController
                     'Profile deleted from User after invitation - Step 1',
                     [
                         'user' => $user,
-                        'settings' => $this->settings
+                        'settings' => $this->settings,
                     ],
                     $this->config['invitation.']['email.']['invitationRefused.']
                 );
@@ -276,14 +283,13 @@ class InvitationController extends AbstractFrontendController
 
             $this->userRepository->remove($user);
             return $this->redirectByAction('invitation', 'redirectDelete', 'status');
-        } else {
-            $this->addFlashMessage(
-                LocalizationUtility::translateByState(Log::STATUS_INVITATIONHASHERROR),
-                '',
-                ContextualFeedbackSeverity::ERROR
-            );
-            return $this->redirect('status');
         }
+        $this->addFlashMessage(
+            LocalizationUtility::translateByState(Log::STATUS_INVITATIONHASHERROR),
+            '',
+            ContextualFeedbackSeverity::ERROR
+        );
+        return $this->redirect('status');
     }
 
     /**

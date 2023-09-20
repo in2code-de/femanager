@@ -65,7 +65,7 @@ class SendMailService
         array $typoScript = [],
         RequestInterface|null $request = null
     ): bool {
-        if (false === $this->isMailEnabled($typoScript, $receiver)) {
+        if ($this->isMailEnabled($typoScript, $receiver) === false) {
             return false;
         }
 
@@ -96,7 +96,7 @@ class SendMailService
         array $typoScript = [],
         RequestInterface|null $request = null
     ): bool {
-        if (false === $this->isMailEnabled($typoScript, $receiver)) {
+        if ($this->isMailEnabled($typoScript, $receiver) === false) {
             return false;
         }
         $email = GeneralUtility::makeInstance(MailMessage::class);
@@ -142,7 +142,7 @@ class SendMailService
         $imageVariables = [];
 
         foreach ($images as $path) {
-            $name = basename((string) $path);
+            $name = basename((string)$path);
             $imagePart = DataPart::fromPath($path);
             $contentType = $imagePart->getMediaType() . '/' . $imagePart->getMediaSubtype();
             $email->embedFromPath($path, $name, $contentType);
@@ -171,12 +171,12 @@ class SendMailService
     protected function overwriteEmailReceiver(array $typoScript, MailMessage $email): void
     {
         $emailAddress = $this->contentObject->cObjGetSingle(
-            ConfigurationUtility::getValue('receiver./email', $typoScript),
-            ConfigurationUtility::getValue('receiver./email.', $typoScript)
+            (string)ConfigurationUtility::getValue('receiver./email', $typoScript),
+            (array)ConfigurationUtility::getValue('receiver./email.', $typoScript)
         );
         $name = $this->contentObject->cObjGetSingle(
-            ConfigurationUtility::getValue('receiver./name', $typoScript),
-            ConfigurationUtility::getValue('receiver./name.', $typoScript)
+            (string)ConfigurationUtility::getValue('receiver./name', $typoScript),
+            (array)ConfigurationUtility::getValue('receiver./name.', $typoScript)
         );
         if ($emailAddress && $name) {
             $email->setTo([$emailAddress => $name]);
@@ -186,12 +186,12 @@ class SendMailService
     protected function overwriteEmailSender(array $typoScript, MailMessage $email): void
     {
         $emailAddress = $this->contentObject->cObjGetSingle(
-            ConfigurationUtility::getValue('sender./email', $typoScript),
-            ConfigurationUtility::getValue('sender./email.', $typoScript)
+            (string)ConfigurationUtility::getValue('sender./email', $typoScript),
+            (array)ConfigurationUtility::getValue('sender./email.', $typoScript)
         );
         $name = $this->contentObject->cObjGetSingle(
-            ConfigurationUtility::getValue('sender./name', $typoScript),
-            ConfigurationUtility::getValue('sender./name.', $typoScript)
+            (string)ConfigurationUtility::getValue('sender./name', $typoScript),
+            (array)ConfigurationUtility::getValue('sender./name.', $typoScript)
         );
 
         if ($emailAddress && $name) {
@@ -201,23 +201,23 @@ class SendMailService
 
     protected function setSubject(array $typoScript, MailMessage $email): void
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['subject'], $typoScript['subject.'])) {
-            $email->setSubject($this->contentObject->cObjGetSingle($typoScript['subject'], $typoScript['subject.']));
+        if ($this->contentObject->cObjGetSingle((string)$typoScript['subject'], (array)$typoScript['subject.'])) {
+            $email->setSubject($this->contentObject->cObjGetSingle((string)$typoScript['subject'], (array)$typoScript['subject.']));
         }
     }
 
     protected function setCc(array $typoScript, MailMessage $email): void
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.'])) {
-            $email->setCc($this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.']));
+        if ($this->contentObject->cObjGetSingle((string)$typoScript['cc'], (array)$typoScript['cc.'])) {
+            $email->setCc($this->contentObject->cObjGetSingle((string)$typoScript['cc'], (array)$typoScript['cc.']));
         }
     }
 
     protected function setPriority(array $typoScript, MailMessage $email): void
     {
         $priority = (int)$this->contentObject->cObjGetSingle(
-            ConfigurationUtility::getValue('priority', $typoScript),
-            ConfigurationUtility::getValue('priority.', $typoScript)
+            (string)ConfigurationUtility::getValue('priority', $typoScript),
+            (array)ConfigurationUtility::getValue('priority.', $typoScript)
         );
         if ($priority) {
             $email->priority($priority);
@@ -226,12 +226,12 @@ class SendMailService
 
     protected function setAttachments(array $typoScript, MailMessage $email): void
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['attachments'] ?? '', $typoScript['attachments.'] ?? '')) {
+        if ($this->contentObject->cObjGetSingle($typoScript['attachments'] ?? '', $typoScript['attachments.'] ?? [])) {
             $files = GeneralUtility::trimExplode(
                 ',',
                 $this->contentObject->cObjGetSingle(
                     $typoScript['attachments'] ?? '',
-                    $typoScript['attachments.'] ?? ''
+                    $typoScript['attachments.'] ?? []
                 ),
                 true
             );
@@ -251,8 +251,8 @@ class SendMailService
 
     protected function isMailEnabled(array $typoScript, array $receiver): bool
     {
-        $cObjectName = ConfigurationUtility::getValue('_enable', $typoScript);
-        $cObjectConf = ConfigurationUtility::getValue('_enable.', $typoScript);
+        $cObjectName = (string)ConfigurationUtility::getValue('_enable', $typoScript);
+        $cObjectConf = (array)ConfigurationUtility::getValue('_enable.', $typoScript);
 
         return $this->contentObject->cObjGetSingle($cObjectName, $cObjectConf) && count($receiver) > 0;
     }

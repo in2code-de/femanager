@@ -24,7 +24,7 @@ class ConfigurationUtilityTest extends UnitTestCase
     public function testIsDisableModuleActive()
     {
         $configuration = [
-            'disableModule' => '1'
+            'disableModule' => '1',
         ];
         // @extensionScannerIgnoreLine
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;
@@ -39,7 +39,7 @@ class ConfigurationUtilityTest extends UnitTestCase
     public function testIsConfirmationModuleActive()
     {
         $configuration = [
-            'enableConfirmationModule' => '1'
+            'enableConfirmationModule' => '1',
         ];
         // @extensionScannerIgnoreLine
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;
@@ -54,7 +54,7 @@ class ConfigurationUtilityTest extends UnitTestCase
     public function testIsDisableLogActive()
     {
         $configuration = [
-            'disableLog' => '1'
+            'disableLog' => '1',
         ];
         // @extensionScannerIgnoreLine
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['femanager'] = $configuration;

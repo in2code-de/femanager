@@ -30,7 +30,6 @@ class CaptchaValidator extends AbstractValidator
 
     /**
      * Check if captcha is valid
-     *
      */
     protected function validCaptcha(): bool
     {
@@ -44,7 +43,7 @@ class CaptchaValidator extends AbstractValidator
                     md5(
                         strtolower(
                             mb_convert_encoding(
-                                (string) $this->pluginVariables['captcha'],
+                                (string)$this->pluginVariables['captcha'],
                                 'ISO-8859-1'
                             )
                         )

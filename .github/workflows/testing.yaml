@@ -24,8 +24,6 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - 7.4
-          - 8.0
           - 8.1
   typoscript-lint:
     name: "TypoScript linter"
@@ -48,7 +46,7 @@ jobs:
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.1
       - name: "Composer Install"
         run: "composer install"
       - name: "Run PHP CS Fixer"
@@ -63,7 +61,7 @@ jobs:
       - name: "Install PHP"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.1
       - name: "Composer Install"
         run: "composer install"
       - name: "Run PHP Rector"
@@ -89,8 +87,6 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - 7.4
-          - 8.0
           - 8.1
   behaviour-tests:
     name: "PHP Behat Tests"
@@ -102,7 +98,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: jonaseberle/github-action-setup-ddev@v1
+      - uses: ddev/github-action-setup-ddev@v1
       - name: "Composer Install"
         run: "ddev composer install"
       - name: "Initialize TYPO3 in ddev"
@@ -113,7 +109,4 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - 7.4
-          - 8.0
           - 8.1
-

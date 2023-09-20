@@ -10,14 +10,14 @@ return [
         'tableName' => User::TABLE_NAME,
         'properties' => [
             'terms' => [
-                'fieldName' => 'tx_femanager_terms'
+                'fieldName' => 'tx_femanager_terms',
             ],
             'termsDateOfAcceptance' => [
-                'fieldName' => 'tx_femanager_terms_date_of_acceptance'
-            ]
-        ]
+                'fieldName' => 'tx_femanager_terms_date_of_acceptance',
+            ],
+        ],
     ],
     UserGroup::class => [
-        'tableName' => UserGroup::TABLE_NAME
-    ]
+        'tableName' => UserGroup::TABLE_NAME,
+    ],
 ];

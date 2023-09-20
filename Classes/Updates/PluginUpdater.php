@@ -16,9 +16,9 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
-use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 
 #[UpgradeWizard('femanager_pluginupdater')]
 class PluginUpdater implements UpgradeWizardInterface
@@ -165,7 +165,6 @@ class PluginUpdater implements UpgradeWizardInterface
     }
 
     /**
-     *
      * @SuppressWarnings(PHPMD.LongVariable)
      */
     protected function getTargetListType(string $switchableControllerActions): string
@@ -181,7 +180,6 @@ class PluginUpdater implements UpgradeWizardInterface
     }
 
     /**
-     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected function getAllowedSettingsFromFlexForm(string $listType): array
@@ -192,7 +190,7 @@ class PluginUpdater implements UpgradeWizardInterface
 
         $flexFormFile = $GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds']['*,' . $listType];
         $flexFormContent =
-            file_get_contents(GeneralUtility::getFileAbsFileName(substr(trim((string) $flexFormFile), 5)));
+            file_get_contents(GeneralUtility::getFileAbsFileName(substr(trim((string)$flexFormFile), 5)));
         $flexFormData = GeneralUtility::xml2array($flexFormContent);
 
         // Iterate each sheet and extract all settings
