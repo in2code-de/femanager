@@ -44,7 +44,7 @@ class EditController extends AbstractFrontendController
         $this->view->assignMultiple([
             'user' => $this->user,
             'allUserGroups' => $this->allUserGroups,
-            'token' => $token
+            'token' => $token,
         ]);
         $this->assignForAll();
         return $this->htmlResponse();
@@ -166,7 +166,7 @@ class EditController extends AbstractFrontendController
             'Your change request was refused',
             [
                 'user' => $user,
-                'settings' => $this->settings
+                'settings' => $this->settings,
             ],
             $this->config['edit.']['email.']['updateRequestRefused.']
         );

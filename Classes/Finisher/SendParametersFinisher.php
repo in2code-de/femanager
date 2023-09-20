@@ -64,7 +64,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
             $requestFactory = GeneralUtility::makeInstance(RequestFactory::class);
             $params = $curlSettings['params'];
             $parsedParams = [];
-            parse_str((string) $params, $parsedParams);
+            parse_str((string)$params, $parsedParams);
             $requestFactory->request($curlSettings['url'], 'POST', ['form_params' => $parsedParams]);
         }
     }
@@ -78,7 +78,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
     {
         return [
             'url' => $this->getTargetUrl(),
-            'params' => $this->getData()
+            'params' => $this->getData(),
         ];
     }
 
@@ -89,7 +89,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected function getData()
     {
-        return $this->contentObject->cObjGetSingle($this->configuration['data'], $this->configuration['data.']);
+        return $this->contentObject->cObjGetSingle((string)$this->configuration['data'], (array)$this->configuration['data.']);
     }
 
     protected function getTargetUrl()
@@ -97,7 +97,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
         $linkConfiguration = [
             'parameter' => $this->configuration['targetUrl'],
             'forceAbsoluteUrl' => '1',
-            'returnLast' => 'url'
+            'returnLast' => 'url',
         ];
         return $this->contentObject->typoLink('dummy', $linkConfiguration);
     }

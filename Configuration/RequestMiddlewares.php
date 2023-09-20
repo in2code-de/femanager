@@ -19,11 +19,11 @@ return [
         'in2code/femanager/remove-passowrd-if-empty' => [
             'target' => RemovePasswordIfEmptyMiddleware::class,
             'before' => [
-                'typo3/cms-frontend/shortcut-and-mountpoint-redirect'
+                'typo3/cms-frontend/shortcut-and-mountpoint-redirect',
             ],
             'after' => [
-                'typo3/cms-frontend/prepare-tsfe-rendering'
-            ]
-        ]
-    ]
+                'typo3/cms-frontend/prepare-tsfe-rendering',
+            ],
+        ],
+    ],
 ];

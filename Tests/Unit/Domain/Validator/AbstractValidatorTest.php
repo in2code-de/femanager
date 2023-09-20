@@ -43,44 +43,44 @@ class AbstractValidatorTest extends UnitTestCase
         return [
             [
                 'in2code.de',
-                true
+                true,
             ],
             [
                 '.',
-                true
+                true,
             ],
             [
                 1234,
-                true
+                true,
             ],
             [
                 1234.56,
-                true
+                true,
             ],
             [
                 '',
-                false
+                false,
             ],
             [
                 [],
-                false
+                false,
             ],
             [
                 '0',
-                true
+                true,
             ],
             [
                 0,
-                true
+                true,
             ],
             [
                 null,
-                false
+                false,
             ],
             [
                 false,
-                false
-            ]
+                false,
+            ],
         ];
     }
 
@@ -101,31 +101,31 @@ class AbstractValidatorTest extends UnitTestCase
         return [
             [
                 'in2code.de',
-                false
+                false,
             ],
             [
                 '',
-                false
+                false,
             ],
             [
                 'alex@in2code.de',
-                true
+                true,
             ],
             [
                 'alex@in2code.',
-                false
+                false,
             ],
             [
                 'www.in2code.de',
-                false
+                false,
             ],
             [
                 'test@www.in2code.de',
-                true
+                true,
             ],
             [
                 'alex@test.test.in2code.de',
-                true
+                true,
             ],
         ];
     }
@@ -148,28 +148,28 @@ class AbstractValidatorTest extends UnitTestCase
             [
                 'in2code.de',
                 10,
-                true
+                true,
             ],
             [
                 'in2code.d',
                 10,
-                false
+                false,
             ],
             [
                 'i',
                 1,
-                true
+                true,
             ],
             [
                 'i',
                 2,
-                false
+                false,
             ],
             [
                 ' i ',
                 2,
-                true
-            ]
+                true,
+            ],
         ];
     }
 
@@ -194,33 +194,33 @@ class AbstractValidatorTest extends UnitTestCase
             [
                 'in2code.de',
                 10,
-                true
+                true,
             ],
             [
                 'in2code.de.',
                 10,
-                false
+                false,
             ],
             [
                 'i',
                 1,
-                true
+                true,
             ],
             [
                 'i',
                 2,
-                true
+                true,
             ],
             [
                 ' i ',
                 2,
-                false
+                false,
             ],
             [
                 'i',
                 0,
-                false
-            ]
+                false,
+            ],
         ];
     }
 
@@ -244,32 +244,32 @@ class AbstractValidatorTest extends UnitTestCase
         return [
             [
                 '123',
-                true
+                true,
             ],
             [
                 '1235135',
-                true
+                true,
             ],
             [
                 '123a23',
-                false
+                false,
             ],
             [
                 '123 23',
-                false
+                false,
             ],
             [
                 '12323,',
-                false
+                false,
             ],
             [
                 '12323²',
-                false
+                false,
             ],
             [
                 '3 ',
-                PHP_MAJOR_VERSION >= 8
-            ]
+                PHP_MAJOR_VERSION >= 8,
+            ],
         ];
     }
 
@@ -290,28 +290,28 @@ class AbstractValidatorTest extends UnitTestCase
         return [
             [
                 'abafdbadsf',
-                true
+                true,
             ],
             [
                 'a_-b',
-                true
+                true,
             ],
             [
                 'abafd3adsf',
-                false
+                false,
             ],
             [
                 'abä',
-                false
+                false,
             ],
             [
                 'ab:',
-                false
+                false,
             ],
             [
                 'ab cd',
-                false
-            ]
+                false,
+            ],
         ];
     }
 
@@ -323,32 +323,32 @@ class AbstractValidatorTest extends UnitTestCase
         return [
             [
                 'abafdbadsf',
-                true
+                true,
             ],
             [
                 'aeÈ-',
-                true
+                true,
             ],
             [
                 'a_-b',
-                true
+                true,
             ],
             [
                 'abafd3adsf',
-                false
+                false,
             ],
             [
                 'abäÜÄ',
-                true
+                true,
             ],
             [
                 'ab:',
-                false
+                false,
             ],
             [
                 'ab cd',
-                false
-            ]
+                false,
+            ],
         ];
     }
 
@@ -377,289 +377,289 @@ class AbstractValidatorTest extends UnitTestCase
                 'in2code.de',
                 'number,letter,special',
                 false,
-                false
+                false,
             ],
             [
                 'in2code.de ',
                 'number,letter,special,space',
                 false,
-                false
+                false,
             ],
             [
                 'in2code.de',
                 'number,  special',
                 false,
-                false
+                false,
             ],
             [
                 'in2code.de',
                 '   special  ,   letter ',
                 false,
-                false
+                false,
             ],
             [
                 'in2code',
                 'number,letter',
                 false,
-                false
+                false,
             ],
             [
                 'in2code',
                 'special,space',
                 false,
-                true
+                true,
             ],
             [
                 'in2code#',
                 'special',
                 false,
-                false
+                false,
             ],
             [
                 'in2co3de',
                 'special',
                 false,
-                true
+                true,
             ],
             [
                 'in2code',
                 'number',
                 false,
-                false
+                false,
             ],
             [
                 'incode.',
                 'number,letter',
                 false,
-                false
+                false,
             ],
             [
                 'in2 code',
                 'number,letter',
                 false,
-                false
+                false,
             ],
             [
                 'in code',
                 'letter',
                 false,
-                false
+                false,
             ],
             [
                 '1 2',
                 'number',
                 false,
-                false
+                false,
             ],
             [
                 '2',
                 'number',
                 false,
-                false
+                false,
             ],
             [
                 '1 2',
                 'space',
                 false,
-                false
+                false,
             ],
             [
                 '132',
                 'space',
                 false,
-                true
+                true,
             ],
             [
                 'a;#/%äß´^á 3',
                 'space',
                 false,
-                false
+                false,
             ],
             [
                 'a;#/%äß´^á 3',
                 'letter,number,special,space',
                 false,
-                false
+                false,
             ],
             [
                 'a;#/%äß´^á 3',
                 'special,space',
                 false,
-                false
+                false,
             ],
             [
                 'in2code',
                 'uppercase',
                 false,
-                true
+                true,
             ],
             [
                 'In2code',
                 'uppercase',
                 false,
-                false
+                false,
             ],
             [
                 'in2codE',
                 'uppercase',
                 false,
-                false
+                false,
             ],
             [
                 'in2Code',
                 'uppercase',
                 false,
-                false
+                false,
             ],
             [
                 'in2code.de',
                 'number,letter,special',
                 true,
-                true
+                true,
             ],
             [
                 'in2code.de ',
                 'number,letter,special,space',
                 true,
-                true
+                true,
             ],
             [
                 'in2code.de',
                 'number,  special',
                 true,
-                true
+                true,
             ],
             [
                 'in2code.de',
                 '   special  ,   letter ',
                 true,
-                true
+                true,
             ],
             [
                 'in2code',
                 'number,letter',
                 true,
-                true
+                true,
             ],
             [
                 'in2code',
                 'special,letter',
                 true,
-                false
+                false,
             ],
             [
                 'in2code#',
                 'special',
                 true,
-                true
+                true,
             ],
             [
                 'in2co de',
                 'special',
                 true,
-                true
+                true,
             ],
             [
                 'in2code',
                 'number',
                 true,
-                true
+                true,
             ],
             [
                 'incode.',
                 'number,letter',
                 true,
-                false
+                false,
             ],
             [
                 'in2 code',
                 'number,letter',
                 true,
-                true
+                true,
             ],
             [
                 'in code',
                 'letter',
                 true,
-                true
+                true,
             ],
             [
                 '1 2',
                 'number',
                 true,
-                true
+                true,
             ],
             [
                 '2',
                 'number',
                 true,
-                true
+                true,
             ],
             [
                 '1 2',
                 'space',
                 true,
-                true
+                true,
             ],
             [
                 '132',
                 'space',
                 true,
-                false
+                false,
             ],
             [
                 'a;#/%äß´^á 3',
                 'space',
                 true,
-                true
+                true,
             ],
             [
                 'a;#/%äß´^á 3',
                 'letter,number,special,space',
                 true,
-                true
+                true,
             ],
             [
                 'a;#/%äß´^á 3',
                 'special,space',
                 true,
-                true
+                true,
             ],
             [
                 'in2code',
                 'uppercase',
                 true,
-                false
+                false,
             ],
             [
                 'In2code',
                 'uppercase',
                 true,
-                true
+                true,
             ],
             [
                 'in2Code',
                 'uppercase',
                 true,
-                true
+                true,
             ],
             [
                 'in2codE',
                 'uppercase',
                 true,
-                true
+                true,
             ],
             [
                 'In2code',
                 'number,uppercase',
                 true,
-                true
+                true,
             ],
             [
                 'I n2code',
                 'number,uppercase,space',
                 true,
-                true
+                true,
             ],
         ];
     }
@@ -694,78 +694,78 @@ class AbstractValidatorTest extends UnitTestCase
             [
                 '2',
                 '1,2,5,8',
-                true
+                true,
             ],
             [
                 '2',
                 '1,1,2',
-                true
+                true,
             ],
             [
                 '1',
                 '1,3,2',
-                true
+                true,
             ],
             [
                 '1',
                 '1,3,2',
-                true
+                true,
             ],
             [
                 '1',
                 1,
-                true
+                true,
             ],
             [
                 1,
                 '1,2',
-                true
+                true,
             ],
             [
                 'a',
                 'a',
-                true
+                true,
             ],
             [
                 '1,2',
                 '1,2,3',
-                true
+                true,
             ],
             [
                 '1,2',
                 '3,2,1',
-                true
+                true,
             ],
             [
                 '23',
                 '1,234,3',
-                false
+                false,
             ],
             [
                 'a',
                 'ab',
-                false
+                false,
             ],
             [
                 'a',
                 'ba',
-                false
+                false,
             ],
             [
                 'a',
                 'bac',
-                false
+                false,
             ],
             [
                 '1,2,3',
                 '1,2',
-                false
+                false,
             ],
             [
                 '1,2,3',
                 '2,1',
-                false
-            ]
+                false,
+            ],
         ];
     }
 
@@ -790,32 +790,32 @@ class AbstractValidatorTest extends UnitTestCase
             [
                 'abcd',
                 'abcd',
-                true
+                true,
             ],
             [
                 'a',
                 'b',
-                false
+                false,
             ],
             [
                 'a',
                 '',
-                false
+                false,
             ],
             [
                 '',
                 '',
-                true
+                true,
             ],
             [
                 0,
                 '0',
-                false
+                false,
             ],
             [
                 1,
                 '1',
-                false
+                false,
             ],
         ];
     }

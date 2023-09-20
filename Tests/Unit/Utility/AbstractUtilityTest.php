@@ -22,8 +22,8 @@ class AbstractUtilityTest extends UnitTestCase
         $table = 'tx_test';
         $tca = [
             'test' => [
-                'foo'
-            ]
+                'foo',
+            ],
         ];
         $GLOBALS['TCA'][$table] = $tca;
         self::assertSame($tca, AbstractUtility::getTcaFromTablePublic($table));

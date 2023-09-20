@@ -13,7 +13,7 @@ class DeleteFeusers
 {
     public function test()
     {
-        echo "test";
+        echo 'test';
     }
     /**
      * @return string

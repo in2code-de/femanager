@@ -276,8 +276,8 @@ class ServersideValidator extends AbstractValidator
      */
     protected function checkSameAsValidation($user, $validationSetting, $value, $fieldName)
     {
-        if (method_exists($user, 'get' . ucfirst((string) $validationSetting))) {
-            $valueToCompare = $user->{'get' . ucfirst((string) $validationSetting)}();
+        if (method_exists($user, 'get' . ucfirst((string)$validationSetting))) {
+            $valueToCompare = $user->{'get' . ucfirst((string)$validationSetting)}();
             if (!$this->validateSameAs($value, $valueToCompare)) {
                 $this->addError('validationErrorSameAs', 0, ['field' => $fieldName]);
                 $this->isValid = false;
@@ -293,9 +293,9 @@ class ServersideValidator extends AbstractValidator
      */
     protected function checkAnyValidation($validation, $value, $validationSetting, $fieldName)
     {
-        if (method_exists($this, 'validate' . ucfirst((string) $validation))) {
-            if (!$this->{'validate' . ucfirst((string) $validation)}($value, $validationSetting)) {
-                $this->addError('validationError' . ucfirst((string) $validation), 0, ['field' => $fieldName]);
+        if (method_exists($this, 'validate' . ucfirst((string)$validation))) {
+            if (!$this->{'validate' . ucfirst((string)$validation)}($value, $validationSetting)) {
+                $this->addError('validationError' . ucfirst((string)$validation), 0, ['field' => $fieldName]);
                 $this->isValid = false;
             }
         }

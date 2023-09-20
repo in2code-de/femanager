@@ -25,7 +25,6 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
 
     /**
      * View helper to get first subobject of objectstorage
-     *
      */
     public function render(): mixed
     {

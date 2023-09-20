@@ -207,7 +207,6 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      *
      * PHPMD.BooleanArgumentFlag issue has come ob because Copy&Paste Detector issue
      * Commit: 55fd29fb082ba13ba5c1234240d7e74e78ee9dd4
-     *
      */
     protected function validateString(string $value, string $validationSettingList, bool $mustInclude = true): bool
     {
@@ -451,7 +450,8 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         // only allow controller names 'new', 'edit' and 'invitation
         if ($plugin === 'tx_femanager_edit') {
             return 'edit';
-        } elseif ($plugin === 'tx_femanager_invitation') {
+        }
+        if ($plugin === 'tx_femanager_invitation') {
             return 'invitation';
         }
         return 'new';

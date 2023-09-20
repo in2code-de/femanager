@@ -10,7 +10,6 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /**
  * Class ListUsers
  */
-
 class ListUsers
 {
     /**

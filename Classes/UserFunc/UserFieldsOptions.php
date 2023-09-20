@@ -42,7 +42,7 @@ class UserFieldsOptions
             foreach ((array)$options as $value => $label) {
                 $params['items'][] = [
                     StringUtility::startsWith($label, 'LLL:') ? $this->languageService->sL($label) : $label,
-                    $value
+                    $value,
                 ];
             }
         }
@@ -58,7 +58,7 @@ class UserFieldsOptions
         if (ExtensionManagementUtility::isLoaded('sr_freecap')) {
             $params['items'][] = [
                 $this->languageService->sL($this->localLangPrefix . 'tx_femanager_domain_model_user.captcha'),
-                'captcha'
+                'captcha',
             ];
         }
     }
@@ -73,7 +73,7 @@ class UserFieldsOptions
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
             $params['items'][] = [
                 $this->languageService->sL($this->localLangPrefix . 'tx_femanager_domain_model_user.state'),
-                'state'
+                'state',
             ];
         }
     }
@@ -91,11 +91,11 @@ class UserFieldsOptions
     protected function getPid()
     {
         $pid = 0;
-        $backUrl = str_replace('?', '&', (string) GeneralUtility::_GP('returnUrl'));
+        $backUrl = str_replace('?', '&', (string)GeneralUtility::_GP('returnUrl'));
         $urlParts = GeneralUtility::trimExplode('&', $backUrl, true);
         foreach ($urlParts as $part) {
-            if (stristr((string) $part, 'id=')) {
-                $pid = str_replace('id=', '', (string) $part);
+            if (stristr((string)$part, 'id=')) {
+                $pid = str_replace('id=', '', (string)$part);
             }
         }
 

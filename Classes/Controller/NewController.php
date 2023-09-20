@@ -23,7 +23,6 @@ use In2code\Femanager\Utility\UserUtility;
 use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
-use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -49,7 +48,7 @@ class NewController extends AbstractFrontendController
         $this->view->assignMultiple(
             [
                 'user' => $user,
-                'allUserGroups' => $this->allUserGroups
+                'allUserGroups' => $this->allUserGroups,
             ]
         );
         $this->assignForAll();
@@ -67,7 +66,6 @@ class NewController extends AbstractFrontendController
     #[Validate(['validator' => CaptchaValidator::class, 'param' => 'user'])]
     public function createAction(User $user): ResponseInterface
     {
-
         if ($this->ratelimiterService->isLimited()) {
             $this->addFlashMessage(
                 LocalizationUtility::translate('ratelimiter_too_many_attempts'),
@@ -139,7 +137,7 @@ class NewController extends AbstractFrontendController
         // check if the request was triggered via Backend
         if ($request->hasHeader('Accept')) {
             $accept = $request->getHeader('Accept')[0];
-            if (str_contains((string) $accept, 'application/json')) {
+            if (str_contains((string)$accept, 'application/json')) {
                 $backend = true;
             }
         }
@@ -353,7 +351,8 @@ class NewController extends AbstractFrontendController
         if (!empty($this->settings['new']['confirmByUser'])) {
             $this->createUserConfirmationRequest($user);
             return $this->redirectByAction('new', 'requestRedirect');
-        } elseif (!empty($this->settings['new']['confirmByAdmin'])) {
+        }
+        if (!empty($this->settings['new']['confirmByAdmin'])) {
             $this->createAdminConfirmationRequest($user);
             return $this->redirectByAction('new', 'requestRedirect');
         }
@@ -372,7 +371,6 @@ class NewController extends AbstractFrontendController
 
     /**
      * Send email to admin for confirmation
-     *
      */
     protected function createAdminConfirmationRequest(User $user)
     {
@@ -402,7 +400,7 @@ class NewController extends AbstractFrontendController
                 'New Registration request',
                 [
                     'user' => $user,
-                    'hash' => HashUtility::createHashForUser($user)
+                    'hash' => HashUtility::createHashForUser($user),
                 ],
                 ConfigurationUtility::getValue('new./email./createAdminConfirmation.', $this->config),
                 $this->request

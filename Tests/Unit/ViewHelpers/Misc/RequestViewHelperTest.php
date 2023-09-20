@@ -35,27 +35,27 @@ class RequestViewHelperTest extends UnitTestCase
                 'L',
                 true,
                 [
-                    'L' => '123'
+                    'L' => '123',
                 ],
-                '123'
+                '123',
             ],
             [
                 'test',
                 true,
                 [
-                    'test' => '>'
+                    'test' => '>',
                 ],
-                '&gt;'
+                '&gt;',
             ],
             [
                 'tx_test|sword',
                 true,
                 [
                     'tx_test' => [
-                        'sword' => 'abc'
-                    ]
+                        'sword' => 'abc',
+                    ],
                 ],
-                'abc'
+                'abc',
             ],
             [
                 'tx_test_pi1|abc|def',
@@ -63,11 +63,11 @@ class RequestViewHelperTest extends UnitTestCase
                 [
                     'tx_test_pi1' => [
                         'abc' => [
-                            'def' => 'xyz'
-                        ]
-                    ]
+                            'def' => 'xyz',
+                        ],
+                    ],
                 ],
-                'xyz'
+                'xyz',
             ],
             [
                 'asfd|abc|def|ghi',
@@ -76,18 +76,18 @@ class RequestViewHelperTest extends UnitTestCase
                     'asfd' => [
                         'abc' => [
                             'def' => [
-                                'ghi' => '7x'
-                            ]
-                        ]
-                    ]
+                                'ghi' => '7x',
+                            ],
+                        ],
+                    ],
                 ],
-                '7x'
+                '7x',
             ],
             [
                 'abc',
                 true,
                 [],
-                ''
+                '',
             ],
         ];
     }
@@ -105,7 +105,7 @@ class RequestViewHelperTest extends UnitTestCase
         $arguments = [
             'parameter' => $parameter,
             'htmlspecialchars' => $htmlSpecialChars,
-            'parametersToSet' => $parametersToSet
+            'parametersToSet' => $parametersToSet,
         ];
 
         $this->abstractValidationViewHelperMock->_set('arguments', $arguments);

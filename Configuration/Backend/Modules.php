@@ -1,7 +1,8 @@
 <?php
 
-use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Controller\UserBackendController;
+use In2code\Femanager\Utility\ConfigurationUtility;
+
 if (!ConfigurationUtility::isDisableModuleActive()) {
     return [
         'tx_femanager' => [
@@ -20,12 +21,10 @@ if (!ConfigurationUtility::isDisableModuleActive()) {
                     'confirmUser',
                     'refuseUser',
                     'listOpenUserConfirmations',
-                    'resendUserConfirmationRequest'
+                    'resendUserConfirmationRequest',
                 ],
             ],
         ],
     ];
-} else {
-    return [];
 }
-
+return [];

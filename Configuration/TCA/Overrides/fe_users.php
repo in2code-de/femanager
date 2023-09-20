@@ -19,20 +19,20 @@ $feUsersColumns = [
                 [
                     'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                     'tx_femanager_domain_model_user.gender.item0',
-                    '0'
+                    '0',
                 ],
                 [
                     'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                     'tx_femanager_domain_model_user.gender.item1',
-                    '1'
+                    '1',
                 ],
                 [
                     'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                     'tx_femanager_domain_model_user.gender.item2',
-                    '2'
-                ]
+                    '2',
+                ],
             ],
-        ]
+        ],
     ],
     'date_of_birth' => [
         'exclude' => 0,
@@ -44,8 +44,8 @@ $feUsersColumns = [
             'size' => 10,
             'eval' => 'date',
             'checkbox' => '0',
-            'default' => 0
-        ]
+            'default' => 0,
+        ],
     ],
     'crdate' => [
         'exclude' => 1,
@@ -57,8 +57,8 @@ $feUsersColumns = [
             'size' => 30,
             'eval' => 'datetime',
             'readOnly' => true,
-            'default' => time()
-        ]
+            'default' => time(),
+        ],
     ],
     'tstamp' => [
         'exclude' => 1,
@@ -70,8 +70,8 @@ $feUsersColumns = [
             'size' => 30,
             'eval' => 'datetime',
             'readOnly' => true,
-            'default' => time()
-        ]
+            'default' => time(),
+        ],
     ],
     'tx_femanager_confirmedbyuser' => [
         'exclude' => 1,
@@ -80,7 +80,7 @@ $feUsersColumns = [
         'config' => [
             'type' => 'check',
             'default' => 0,
-        ]
+        ],
     ],
     'tx_femanager_confirmedbyadmin' => [
         'exclude' => 1,
@@ -89,7 +89,7 @@ $feUsersColumns = [
         'config' => [
             'type' => 'check',
             'default' => 0,
-        ]
+        ],
     ],
     'tx_femanager_terms' => [
         'exclude' => 1,
@@ -98,7 +98,7 @@ $feUsersColumns = [
         'config' => [
             'type' => 'check',
             'default' => 0,
-        ]
+        ],
     ],
     'tx_femanager_terms_date_of_acceptance' => [
         'displayCond' => 'FIELD:tx_femanager_terms:REQ:TRUE',
@@ -111,7 +111,7 @@ $feUsersColumns = [
             'size' => 30,
             'eval' => 'datetime',
             'readOnly' => true,
-        ]
+        ],
     ],
 ];
 
@@ -125,11 +125,11 @@ if ($staticInfoTablesIsLoaded) {
             'type' => 'select',
             'renderType' => 'selectSingle',
             'items' => [
-                ['LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose', '']
+                ['LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose', ''],
             ],
             'itemsProcFunc' => 'In2code\\Femanager\\UserFunc\\StaticInfoTables->getStatesOptions',
             'maxitems' => 1,
-        ]
+        ],
     ];
 }
 $extConf = GeneralUtility::makeInstance(
@@ -141,7 +141,7 @@ if ($extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect')) {
         'renderType' => 'selectSingle',
         'itemsProcFunc' => 'In2code\\Femanager\\UserFunc\\StaticInfoTables->getCountryOptions',
         'items' => [
-            ['LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose', '']
+            ['LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose', ''],
         ],
         'maxitems' => 1,
     ];
@@ -164,7 +164,7 @@ if (!ConfigurationUtility::isDisableLogActive()) {
                 'collapseAll' => 1,
                 'expandSingle' => 1,
             ],
-        ]
+        ],
     ];
     $fields .= ', tx_femanager_log';
 }
@@ -177,8 +177,8 @@ $feUsersColumns['tx_femanager_changerequest'] = [
         'cols' => '40',
         'rows' => '15',
         'wrap' => 'off',
-        'readOnly' => 1
-    ]
+        'readOnly' => 1,
+    ],
 ];
 $fields .= ', tx_femanager_changerequest';
 

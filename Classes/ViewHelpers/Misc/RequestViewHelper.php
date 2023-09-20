@@ -68,7 +68,7 @@ class RequestViewHelper extends AbstractViewHelper
      */
     protected function init($parameter)
     {
-        $parts = explode('|', (string) $parameter);
+        $parts = explode('|', (string)$parameter);
         $this->variable = GeneralUtility::_GP($parts[0]);
         if ($this->testVariables) {
             $this->variable = $this->testVariables[$parts[0]];

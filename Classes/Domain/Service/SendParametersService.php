@@ -88,12 +88,11 @@ class SendParametersService
      */
     protected function getData()
     {
-        return $this->contentObject->cObjGetSingle($this->configuration['data'], $this->configuration['data.']);
+        return $this->contentObject->cObjGetSingle((string)$this->configuration['data'], (array)$this->configuration['data.']);
     }
 
     /**
      * Write to devlog
-     *
      */
     protected function log(): void
     {
@@ -106,7 +105,7 @@ class SendParametersService
                     [
                         'url' => $this->getUri(),
                         'data' => $this->getData(),
-                        'properties' => $this->properties
+                        'properties' => $this->properties,
                     ]
                 );
         }
@@ -117,7 +116,7 @@ class SendParametersService
      */
     protected function isTurnedOn()
     {
-        return $this->contentObject->cObjGetSingle($this->configuration['_enable'], $this->configuration['_enable.'])
+        return $this->contentObject->cObjGetSingle((string)$this->configuration['_enable'], (array)$this->configuration['_enable.'])
             === '1';
     }
 

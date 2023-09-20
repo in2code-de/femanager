@@ -21,13 +21,13 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title',
-        'iconfile' => 'EXT:femanager/Resources/Public/Icons/Log.png'
+        'iconfile' => 'EXT:femanager/Resources/Public/Icons/Log.png',
     ],
     'types' => [
         '1' => [
             'showitem' => 'title, crdate, state, user, ' .
                 '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,sys_language_uid, ' .
-                'l10n_parent, l10n_diffsource, hidden, starttime, endtime'
+                'l10n_parent, l10n_diffsource, hidden, starttime, endtime',
         ],
     ],
     'palettes' => [
@@ -64,7 +64,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => 1,
@@ -84,11 +84,11 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
                 ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
-                ]
+                ],
             ],
         ],
         'endtime' => [
@@ -102,11 +102,11 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
                 ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
-                ]
+                ],
             ],
         ],
         'title' => [
@@ -116,7 +116,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'crdate' => [
@@ -127,7 +127,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 30,
                 'eval' => 'datetime',
-                'readOnly' => 1
+                'readOnly' => 1,
             ],
         ],
         'state' => [
@@ -141,116 +141,116 @@ return [
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.100',
-                        '--div--'
+                        '--div--',
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.101',
-                        Log::STATUS_NEWREGISTRATION
+                        Log::STATUS_NEWREGISTRATION,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.102',
-                        Log::STATUS_REGISTRATIONCONFIRMEDUSER
+                        Log::STATUS_REGISTRATIONCONFIRMEDUSER,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.103',
-                        Log::STATUS_REGISTRATIONCONFIRMEDADMIN
+                        Log::STATUS_REGISTRATIONCONFIRMEDADMIN,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.104',
-                        Log::STATUS_REGISTRATIONREFUSEDUSER
+                        Log::STATUS_REGISTRATIONREFUSEDUSER,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.105',
-                        Log::STATUS_REGISTRATIONREFUSEDADMIN
+                        Log::STATUS_REGISTRATIONREFUSEDADMIN,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.106',
-                        Log::STATUS_PROFILECREATIONREQUEST
+                        Log::STATUS_PROFILECREATIONREQUEST,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.200',
-                        '--div--'
+                        '--div--',
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.201',
-                        Log::STATUS_PROFILEUPDATED
+                        Log::STATUS_PROFILEUPDATED,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.202',
-                        Log::STATUS_PROFILEUPDATECONFIRMEDADMIN
+                        Log::STATUS_PROFILEUPDATECONFIRMEDADMIN,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.203',
-                        Log::STATUS_PROFILEUPDATEREFUSEDADMIN
+                        Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.204',
-                        Log::STATUS_PROFILEUPDATEREQUEST
+                        Log::STATUS_PROFILEUPDATEREQUEST,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.205',
-                        Log::STATUS_PROFILEUPDATEREFUSEDSECURITY
+                        Log::STATUS_PROFILEUPDATEREFUSEDSECURITY,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.206',
-                        Log::STATUS_PROFILEUPDATEIMAGEDELETE
+                        Log::STATUS_PROFILEUPDATEIMAGEDELETE,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.300',
-                        '--div--'
+                        '--div--',
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.301',
-                        Log::STATUS_PROFILEDELETE
+                        Log::STATUS_PROFILEDELETE,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.400',
-                        '--div--'
+                        '--div--',
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.401',
-                        Log::STATUS_INVITATIONPROFILECREATED
+                        Log::STATUS_INVITATIONPROFILECREATED,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.402',
-                        Log::STATUS_INVITATIONPROFILEDELETEDUSER
+                        Log::STATUS_INVITATIONPROFILEDELETEDUSER,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.403',
-                        Log::STATUS_INVITATIONHASHERROR
+                        Log::STATUS_INVITATIONHASHERROR,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.404',
-                        Log::STATUS_INVITATIONRESTRICTEDPAGE
+                        Log::STATUS_INVITATIONRESTRICTEDPAGE,
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.405',
-                        Log::STATUS_INVITATIONPROFILEENABLED
+                        Log::STATUS_INVITATIONPROFILEENABLED,
                     ],
                 ],
                 'size' => 1,
-                'maxitems' => 1
+                'maxitems' => 1,
             ],
         ],
         'user' => [

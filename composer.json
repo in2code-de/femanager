@@ -42,6 +42,7 @@
     "friendsofphp/php-cs-fixer": "^3.14",
     "genesis/behat-fail-aid": "^3.7",
     "helhum/typo3-console": "^8.0.0",
+    "helmich/typo3-typoscript-lint": "^3.1",
     "michielroos/typo3scan": "^1.7",
     "mikey179/vfsstream": "^1.6",
     "phpmd/phpmd": "^2.13",
@@ -109,10 +110,7 @@
     "test:php:fix": "php-cs-fixer fix --config=.project/tests/.php-cs-fixer.php --diff",
     "test:ts:lint": "typoscript-lint -c .project/tests/typoscript-lint.yml --fail-on-warnings",
     "test:rector": "rector -n",
-    "test:rector:fix": [
-      "rector",
-      "test:php:fix"
-    ],
+    "test:rector:fix": "rector",
     "prepare-release": [
       "@extension-create-libs",
       "rm -rf .Build/",

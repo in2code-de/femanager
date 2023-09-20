@@ -27,7 +27,7 @@ class ResetFeusers
         'first_name' => 'Alex',
         'last_name' => 'Kellner',
         'email' => 'alex@in2code.de',
-        'tx_femanager_log' => '1'
+        'tx_femanager_log' => '1',
     ];
 
     /**

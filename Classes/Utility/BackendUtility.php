@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Utility;
 
-use TYPO3\CMS\Core\TypoScript\TemplateService;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Http\ApplicationType;
+use TYPO3\CMS\Core\TypoScript\TemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
@@ -36,9 +36,9 @@ class BackendUtility
         $uriParameters = [
             'edit' => [
                 $tableName => [
-                    $identifier => 'edit'
-                ]
-            ]
+                    $identifier => 'edit',
+                ],
+            ],
         ];
         if ($addReturnUrl) {
             $uriParameters['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
@@ -61,9 +61,9 @@ class BackendUtility
         $uriParameters = [
             'edit' => [
                 $tableName => [
-                    $pageIdentifier => 'new'
-                ]
-            ]
+                    $pageIdentifier => 'new',
+                ],
+            ],
         ];
         if ($addReturnUrl) {
             // @codeCoverageIgnoreStart
@@ -98,7 +98,7 @@ class BackendUtility
         $parameters = [];
         $ignoreKeys = [
             'M',
-            'moduleToken'
+            'moduleToken',
         ];
         foreach ((array)GeneralUtility::_GET() as $key => $value) {
             if (in_array($key, $ignoreKeys)) {

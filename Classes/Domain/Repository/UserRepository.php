@@ -8,7 +8,6 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Service\PageTreeService;
 use In2code\Femanager\Utility\BackendUserUtility;
 use In2code\Femanager\Utility\BackendUtility;
-use TYPO3\CMS\Core\Database\QueryGenerator;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -51,7 +50,7 @@ class UserRepository extends Repository
 
         // where
         $and = [
-            $query->greaterThan('uid', 0)
+            $query->greaterThan('uid', 0),
         ];
         if (!empty($userGroupList)) {
             $selectedUsergroups = GeneralUtility::trimExplode(',', $userGroupList, true);
@@ -84,7 +83,7 @@ class UserRepository extends Repository
             $sorting = QueryInterface::ORDER_DESCENDING;
         }
         $orderby = $settings['list']['orderby'] ?? 'uid';
-        $field = preg_replace('/[^a-zA-Z0-9_-]/', '', (string) $orderby);
+        $field = preg_replace('/[^a-zA-Z0-9_-]/', '', (string)$orderby);
         $query->setOrderings([$field => $sorting]);
 
         // set limit
@@ -138,7 +137,7 @@ class UserRepository extends Repository
 
         $and = [
             $query->equals($field, $value),
-            $query->equals('deleted', 0)
+            $query->equals('deleted', 0),
         ];
         if ($user !== null && method_exists($user, 'getUid')) {
             $and[] = $query->logicalNot($query->equals('uid', (int)$user->getUid()));
@@ -287,7 +286,7 @@ class UserRepository extends Repository
         $this->ignoreEnableFieldsAndStoragePage($query);
         $and = [
             $query->equals('txFemanagerConfirmedbyuser', false),
-            $query->equals('email', $mail)
+            $query->equals('email', $mail),
         ];
         $query->matching($query->logicalAnd(...$and));
 

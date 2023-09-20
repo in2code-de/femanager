@@ -12,7 +12,7 @@ class PluginService
         'tx_femanager_list',
         'tx_femanager_detail',
         'tx_femanager_invitation',
-        'tx_femanager_resendConfirmationMail'
+        'tx_femanager_resendConfirmationMail',
     ];
 
     /**
