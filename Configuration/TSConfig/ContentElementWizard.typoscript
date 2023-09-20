@@ -5,48 +5,48 @@ mod.wizards.newContentElement.wizardItems.ext-femanager {
   elements {
     femanager-registration {
       iconIdentifier = extension-femanager-main
-      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-registration.title
-      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-registration.description
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_registration.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_registration.description
       tt_content_defValues {
         CType = femanager_registration
       }
     }
     femanager-edit {
       iconIdentifier = extension-femanager-main
-      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-edit.title
-      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-edit.description
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_edit.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_edit.description
       tt_content_defValues {
         CType = femanager_edit
       }
     }
     femanager-list {
       iconIdentifier = extension-femanager-main
-      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-list.title
-      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-list.description
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_list.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_list.description
       tt_content_defValues {
         CType = femanager_list
       }
     }
     femanager-detail {
       iconIdentifier = extension-femanager-main
-      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-detail.title
-      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-detail.description
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_detail.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_detail.description
       tt_content_defValues {
         CType = femanager_detail
       }
     }
     femanager-invitation {
       iconIdentifier = extension-femanager-main
-      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-invitation.title
-      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-invitation.description
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_invitation.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_invitation.description
       tt_content_defValues {
         CType = femanager_invitation
       }
     }
     femanager-resendconfirmationmail {
       iconIdentifier = extension-femanager-main
-      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-resendconfirmationmail.title
-      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager-resendconfirmationmail.description
+      title = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_resendconfirmationmail.title
+      description = LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf:femanager_resendconfirmationmail.description
       tt_content_defValues {
         CType = femanager_resendconfirmationmail
       }
