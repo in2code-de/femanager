@@ -21,6 +21,7 @@ class FrontendUtility extends AbstractUtility
         'tx_femanager_pi1',
         'tx_femanager_pi2',
         'tx_femanager_registration',
+        'tx_femanager_edit',
     ];
 
     /**
