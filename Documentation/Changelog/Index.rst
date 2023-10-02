@@ -8,6 +8,14 @@ Changelog
    :header-rows: 1
 
 -
+      :Version: 7.2.2
+      :Date: 2023-10-04
+      :Changes:
+
+      * [SECURITY] This update is needed for version for 7.0.0 to 7.2.1 older versions are not affected
+      * [BUGFIX] Add missing permission check for invitation controlling - thx to Daniel Hofmann (in2code)
+
+-
       :Version: 7.2.1
       :Date: 2023-08-08
       :Changes:
