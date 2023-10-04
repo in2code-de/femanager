@@ -32,7 +32,10 @@ class InvitationController extends AbstractFrontendController
      */
     public function newAction(): ResponseInterface
     {
-        $this->allowedUserForInvitationNewAndCreate();
+        $permissionCheck = $this->allowedUserForInvitationNewAndCreate();
+        if ($permissionCheck instanceof ResponseInterface) {
+            return $permissionCheck;
+        }
         $this->view->assign('allUserGroups', $this->allUserGroups);
         $this->assignForAll();
         return $this->htmlResponse();
@@ -57,7 +60,10 @@ class InvitationController extends AbstractFrontendController
             $this->redirect('status');
         }
 
-        $this->allowedUserForInvitationNewAndCreate();
+        $permissionCheck = $this->allowedUserForInvitationNewAndCreate();
+        if ($permissionCheck instanceof ResponseInterface) {
+            return $permissionCheck;
+        }
         $user->setDisable(true);
         $user = FrontendUtility::forceValues(
             $user,
