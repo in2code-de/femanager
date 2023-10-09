@@ -357,7 +357,7 @@ abstract class AbstractController extends ActionController
             $this->config
         );
         if (!$createAdminNotify) {
-            $createAdminNotify = ConfigurationUtility::getValue('new./notifyAdmin', $this->config);
+            $createAdminNotify = $this->settings['new']['notifyAdmin'];
         }
 
         // send notify email to admin
