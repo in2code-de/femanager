@@ -8,7 +8,7 @@ if (!ConfigurationUtility::isDisableModuleActive()) {
         'tx_femanager' => [
             'parent' => 'web',
             'position' => ['after' => 'web_info'],
-            'access' => 'user,group',
+            'access' => 'user',
             'icon' => 'EXT:femanager/Resources/Public/Icons/Extension.svg',
             'path' => '/module/web/femanager',
             'labels' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_mod.xlf',
