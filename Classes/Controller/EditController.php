@@ -24,6 +24,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 
 /**
  * Class EditController
@@ -50,24 +51,35 @@ class EditController extends AbstractFrontendController
         return $this->htmlResponse();
     }
 
-    public function initializeUpdateAction()
-    {
-        $user = UserUtility::getCurrentUser();
-        $userValues = $this->request->getArgument('user');
-        $token = $this->request->getArgument('token');
-
-        $response = $this->testSpoof($user, (int)$userValues['__identity'], $token);
-        if ($response !== null) {
-            return $response;
-        }
-    }
-
     #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
     #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]
     #[Validate(['validator' => CaptchaValidator::class, 'param' => 'user'])]
     public function updateAction(User $user)
     {
-        $this->redirectIfDirtyObject($user);
+        $currentUser = UserUtility::getCurrentUser();
+        $userValues = $this->request->hasArgument('user') ? $this->request->getArgument('user') : null;
+        $token = $this->request->hasArgument('token') ? $this->request->getArgument('token') : null;
+
+        if ($currentUser === null ||
+            empty($userValues['__identity']) ||
+            (int)$userValues['__identity'] === null ||
+            $token === null ||
+            $this->isSpoof($currentUser, (int)$userValues['__identity'], $token)
+        ) {
+            $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
+            $this->addFlashMessage(
+                LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
+            return new ForwardResponse('edit');
+        }
+
+        $response = $this->redirectIfNoChangesOnObject($user);
+        if ($response !== null) {
+            return $response;
+        }
+
         $user = FrontendUtility::forceValues(
             $user,
             ConfigurationUtility::getValue('edit./forceValues./beforeAnyConfirmation.', $this->config)
@@ -179,6 +191,23 @@ class EditController extends AbstractFrontendController
      */
     public function deleteAction(User $user)
     {
+        $currentUser = UserUtility::getCurrentUser();
+        $token = $this->request->hasArgument('token') ? $this->request->getArgument('token') : null;
+        $uid = $this->request->hasArgument('user') ? $this->request->getArgument('user') : null;
+        if ($currentUser === null ||
+            $token === null ||
+            $uid === null ||
+            $this->isSpoof($currentUser, (int)$uid, $token)
+        ) {
+            $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
+            $this->addFlashMessage(
+                LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
+            return new ForwardResponse('edit');
+        }
+
         $this->eventDispatcher->dispatch(new DeleteUserEvent($user));
         $this->logUtility->log(Log::STATUS_PROFILEDELETE, $user);
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEDELETE));
@@ -205,12 +234,13 @@ class EditController extends AbstractFrontendController
     /**
      * Check: If there are no changes, simple redirect back
      */
-    protected function redirectIfDirtyObject(User $user)
+    protected function redirectIfNoChangesOnObject(User $user)
     {
         if (!ObjectUtility::isDirtyObject($user)) {
             $this->addFlashMessage(LocalizationUtility::translate('noChanges'), '', ContextualFeedbackSeverity::NOTICE);
-            $this->redirect('edit');
+            return $this->redirect('edit');
         }
+        return null;
     }
 
     protected function emailForUsername(User $user)

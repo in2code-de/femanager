@@ -240,13 +240,6 @@ class InvitationController extends AbstractFrontendController
     }
 
     /**
-     * Init for delete
-     */
-    protected function initializeDeleteAction()
-    {
-    }
-
-    /**
      * action delete
      */
     public function deleteAction(int $user, string $hash = ''): ResponseInterface
