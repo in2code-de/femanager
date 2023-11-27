@@ -23,6 +23,7 @@ use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 
 /**
  * Class UserBackendController
@@ -91,6 +92,10 @@ class UserBackendController extends AbstractController
 
     public function userLogoutAction(User $user): ResponseInterface
     {
+        $queryParams = $this->request->getQueryParams();
+        if (empty($queryParams['id']) || $queryParams['id'] !== (string)$user->getPid()) {
+            return new ForwardResponse('list');
+        }
         UserUtility::removeFrontendSessionToUser($user);
         $this->addFlashMessage('User successfully logged out');
         return $this->redirect('list');
@@ -101,6 +106,10 @@ class UserBackendController extends AbstractController
         $this->configPID = $this->getConfigPID();
 
         $user = $this->userRepository->findByUid($userIdentifier);
+        $queryParams = $this->request->getQueryParams();
+        if (empty($queryParams['id']) || $user === null || $queryParams['id'] !== (string)$user->getPid()) {
+            return new ForwardResponse('list');
+        }
         $this->eventDispatcher->dispatch(new AdminConfirmationUserEvent($user));
 
         $jsonResult = $this->getFrontendRequestResult('adminConfirmation', $userIdentifier, $user);
@@ -134,6 +143,10 @@ class UserBackendController extends AbstractController
         $this->configPID = $this->getConfigPID();
 
         $user = $this->userRepository->findByUid($userIdentifier);
+        $queryParams = $this->request->getQueryParams();
+        if (empty($queryParams['id']) || $user === null || $queryParams['id'] !== (string)$user->getPid()) {
+            return new ForwardResponse('list');
+        }
         $this->eventDispatcher->dispatch(new RefuseUserEvent($user));
 
         $jsonResult = $this->getFrontendRequestResult('adminConfirmationRefused', $userIdentifier, $user);
@@ -181,6 +194,10 @@ class UserBackendController extends AbstractController
     public function resendUserConfirmationRequestAction(int $userIdentifier): ResponseInterface
     {
         $user = $this->userRepository->findByUid($userIdentifier);
+        $queryParams = $this->request->getQueryParams();
+        if (empty($queryParams['id']) || $user === null || $queryParams['id'] !== (string)$user->getPid()) {
+            return new ForwardResponse('list');
+        }
         $this->sendCreateUserConfirmationMailFromBackend($user);
         $this->addFlashMessage(
             LocalizationUtility::translate(
