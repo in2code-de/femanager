@@ -1,0 +1,86 @@
+#ddev-generated
+
+http:
+  routers:
+    
+    
+    femanager-web-80-http:
+      
+      rule: HostRegexp(`femanager.ddev.site`)
+      
+      service: "femanager-web-80-http"
+      tls: false
+      entrypoints:
+        - http-80
+    
+    
+    femanager-web-8025-http:
+      
+      rule: HostRegexp(`femanager.ddev.site`)
+      
+      service: "femanager-web-8025-http"
+      tls: false
+      entrypoints:
+        - http-8025
+    
+    
+    
+    
+    
+    
+    femanager-web-80-https:
+      
+      rule: HostRegexp(`femanager.ddev.site`)
+      
+      service: "femanager-web-80-https"
+      
+      tls: true
+      
+      entrypoints:
+        - http-443
+    
+    
+    femanager-web-8025-https:
+      
+      rule: HostRegexp(`femanager.ddev.site`)
+      
+      service: "femanager-web-8025-https"
+      
+      tls: true
+      
+      entrypoints:
+        - http-8026
+    
+    
+
+  services:
+    
+    femanager-web-80-http:
+      loadbalancer:
+        servers:
+          - url: http://ddev-femanager-web:80
+    
+    femanager-web-8025-http:
+      loadbalancer:
+        servers:
+          - url: http://ddev-femanager-web:8025
+    
+    femanager-web-80-https:
+    
+      loadbalancer:
+        servers:
+          - url: http://ddev-femanager-web:80
+    
+    femanager-web-8025-https:
+    
+      loadbalancer:
+        servers:
+          - url: http://ddev-femanager-web:8025
+    
+
+
+tls:
+  certificates:
+    - certFile: /mnt/ddev-global-cache/traefik/certs/femanager.crt
+      keyFile: /mnt/ddev-global-cache/traefik/certs/femanager.key
+
