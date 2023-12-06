@@ -63,8 +63,8 @@ class NewController extends AbstractFrontendController
      */
     #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
     #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]
-    #[Validate(['validator' => CaptchaValidator::class, 'param' => 'user'])]
-    public function createAction(User $user): ResponseInterface
+    #[Validate(['validator' => CaptchaValidator::class, 'param' => 'captcha'])]
+    public function createAction(User $user, string $captcha): ResponseInterface
     {
         if ($this->ratelimiterService->isLimited()) {
             $this->addFlashMessage(

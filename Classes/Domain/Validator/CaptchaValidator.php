@@ -16,14 +16,14 @@ class CaptchaValidator extends AbstractValidator
     /**
      * Validation of given Params
      *
-     * @param $user
+     * @param $value
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function isValid($user): void
+    public function isValid($value): void
     {
         $this->init();
-        if ($this->captchaEnabled() && !$this->validCaptcha()) {
+        if ($this->captchaEnabled() && (!is_string($value) || !$this->validCaptcha($value))) {
             $this->addError('validationErrorCaptcha', 0, ['fieldName' => 'captcha']);
         }
     }
@@ -31,27 +31,17 @@ class CaptchaValidator extends AbstractValidator
     /**
      * Check if captcha is valid
      */
-    protected function validCaptcha(): bool
+    protected function validCaptcha(string $captcha): bool
     {
         $isValid = false;
         $wordRepository = GeneralUtility::makeInstance(WordRepository::class);
         $wordObject = $wordRepository->getWord();
         $wordHash = $wordObject->getWordHash();
-        if (!empty($wordHash) && !empty($this->pluginVariables['captcha'])) {
-            if ($wordObject->getHashFunction() == 'md5') {
-                if (
-                    md5(
-                        strtolower(
-                            mb_convert_encoding(
-                                (string)$this->pluginVariables['captcha'],
-                                'ISO-8859-1'
-                            )
-                        )
-                    ) == $wordHash
-                ) {
-                    $wordRepository->cleanUpWord();
-                    $isValid = true;
-                }
+        if (!empty($wordHash) && !empty($captcha) && $wordObject->getHashFunction() === 'md5') {
+            $userHash = md5(strtolower(mb_convert_encoding($captcha, 'ISO-8859-1')));
+            if (hash_equals($wordHash, $userHash)) {
+                $wordRepository->cleanUpWord();
+                $isValid = true;
             }
         }
         return $isValid;
@@ -62,7 +52,7 @@ class CaptchaValidator extends AbstractValidator
      *
      * @return bool
      */
-    protected function captchaEnabled()
+    protected function captchaEnabled(): bool
     {
         return ExtensionManagementUtility::isLoaded('sr_freecap')
             && !empty($this->validationSettings['captcha']['captcha']);
