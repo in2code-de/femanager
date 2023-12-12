@@ -56,7 +56,7 @@ class InvitationController extends AbstractFrontendController
     #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
     #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]
     #[Validate(['validator' => CaptchaValidator::class, 'param' => 'captcha'])]
-    public function createAction(User $user, string $captcha): ResponseInterface
+    public function createAction(User $user, string $captcha = null): ResponseInterface
     {
         if ($this->ratelimiterService->isLimited()) {
             $this->addFlashMessage(
