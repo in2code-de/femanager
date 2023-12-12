@@ -12,8 +12,17 @@ use TYPO3\CMS\Core\DependencyInjection\PublicServicePass;
 return function (ContainerConfigurator $configurator, ContainerBuilder $containerBuilder) {
     $containerBuilder->addCompilerPass(new ChangeClassDatamapPass());
 
+    $services = $configurator->services();
+    $defaults = $services->defaults();
+    $defaults->autoconfigure();
+    $defaults->autowire();
+    $defaults->private();
+
     if (class_exists(Country::class)) {
         $containerBuilder->registerForAutoconfiguration(StaticInfoTables::class)->addTag('femanager.userfunc.staticinfotables');
         $containerBuilder->addCompilerPass(new PublicServicePass('femanager.userfunc.staticinfotables'));
+
+        $services->set(StaticInfoTables::class)
+            ->public();
     }
 };
