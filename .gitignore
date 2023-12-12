@@ -24,3 +24,4 @@ docker-compose.yml
 /config
 .phpunit.cache/
 .project/phars/
+packages/
