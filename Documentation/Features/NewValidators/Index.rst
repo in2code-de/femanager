@@ -11,7 +11,7 @@ Picture
 
 |newField1|
 
-Add own clientside (JcavaScript) Validation
+Add own clientside (JavaScript) Validation
 
 |newField2|
 
@@ -26,9 +26,9 @@ Basics
 - Add translation labels via TypoScript
 
 .. attention::
-   The following example works only with TYPO3 Version 10.4 LTS
+   The following example works only with TYPO3 Version >= 10.4 LTS
 
-See https://github.com/einpraegsam/femanagerextended for an example extension how to extend femanager
+See https://github.com/in2code-de/femanagerextended for an example extension how to extend femanager
 with new fields and validation methods
 
 
