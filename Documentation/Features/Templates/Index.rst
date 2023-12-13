@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 .. _changetemplates:
 
@@ -24,7 +24,7 @@ You can copy all Files from
 to a new folder in fileadmin - e.g. fileadmin/templates/femanager/ and modify them as you want.
 After that, you should say femanager to use the new Templates with some lines of TypoScript setup:
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	plugin.tx_femanager {
 		view {
@@ -45,7 +45,7 @@ You can copy only the Files that you want to modify from
 to a new folder in fileadmin - e.g. fileadmin/templates/femanager/ and modify them as you want.
 After that, you should say femanager to use the old folders and merge them with the new folders
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	plugin.tx_femanager {
 		view {

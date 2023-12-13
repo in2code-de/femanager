@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 .. include:: Images.txt
 
 .. _newfields:
@@ -342,7 +342,7 @@ ext_localconf.php:
 TypoScript to include Model and override default controller with TYPO3 9.5.x
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	config.tx_extbase{
 		persistence{

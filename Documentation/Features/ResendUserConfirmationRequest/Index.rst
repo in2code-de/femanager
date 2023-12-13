@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 .. include:: Images.txt
 
 
@@ -29,7 +29,7 @@ usage of this views.
 
 |plugin3|
 
-Sometimes unconfirmed users are trying to trigger the confirmation mail again by registering again with the same email or username. They get an error "username / email already existing". Since 4.2, an additional message with a "resend confirmation mail" link is displayed in those cases where the existing user has not yet confirmed his registration. 
+Sometimes unconfirmed users are trying to trigger the confirmation mail again by registering again with the same email or username. They get an error "username / email already existing". Since 4.2, an additional message with a "resend confirmation mail" link is displayed in those cases where the existing user has not yet confirmed his registration.
 
 For this message to be displayed, you need to have the following typoscript setting configured:
 
@@ -50,6 +50,6 @@ resend an email with a confirmation link.
 
 To activate the feature add the userTSConfig:
 
-::
+.. code-block:: typoscript
 
     tx_femanager.UserBackend.confirmation.ResendUserConfirmationRequest = 1

@@ -1,4 +1,4 @@
-.. include:: ../Includes.txt
+.. include:: ../Includes.rst.txt
 .. include:: Images.txt
 
 .. _installation:
@@ -16,16 +16,16 @@ Installation and Configuration
 Quick Guide
 -----------
 
-- Get it via composer *composer require in2code/femanager* OR
-- Import extension from TYPO3 Extension Repository (TER)
-- Make your extension configuration in the Extension Manager
-- Include static template to your main TypoScript template
-- Make your configuration in the Constants Editor (e.g. include jQuery or Twitter Bootstrap)
-- Add a new page with the Frontend Plugin and make your settings (e.g. for Registration)
-- Don't forget to set the startpage in the Content Element (the page where the fe_users should be stored)
-- Setup the hashing algorythm in the TypoScript Setup (see settings passwordSave)
-- It's recommended to use https on the page with registration form, to secure registration and validation via AJAX
-- Done
+#. Get it via composer *composer require in2code/femanager* OR
+#. Import extension from TYPO3 Extension Repository (TER)
+#. Make your extension configuration in the Extension Manager
+#. Include static template to your main TypoScript template
+#. Make your configuration in the Constants Editor (e.g. include jQuery or Twitter Bootstrap)
+#. Add a new page with the Frontend Plugin and make your settings (e.g. for Registration)
+#. Don't forget to set the startpage in the Content Element (the page where the fe_users should be stored)
+#. Setup the hashing algorythm in the TypoScript Setup (see settings passwordSave)
+#. It's recommended to use https on the page with registration form, to secure registration and validation via AJAX
+#. Done
 
 
 .. _stepbystep:
@@ -415,10 +415,10 @@ Constants can be easily changed with the Template Backend-Module (Constants Edit
 
 There are only a couple of constants in femanager. This is only for the main settings. Please have a look into the TypoScript Setup, if you want to configure more stuff.
 
-Plain Text
+Typoscript
 """"""""""
 
-.. code-block:: text
+.. code-block:: typoscript
 
     plugin.tx_femanager {
         view {
@@ -472,10 +472,10 @@ With TypoScript, you are able to:
 
 All settings can be configured directly with TypoScript Setup. Please see all possibilities below:
 
-Plain Text
+Typoscript
 """"""""""
 
-.. code-block:: text
+.. code-block:: typoscript
 
     plugin.tx_femanager {
         view {
