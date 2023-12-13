@@ -1,4 +1,4 @@
-.. include:: ../Includes.txt
+.. include:: ../Includes.rst.txt
 .. include:: Images.txt
 
 .. _upgrade:
@@ -8,7 +8,7 @@ Upgrade
 
 .. only:: html
 
-	:ref:`v8.0` | :ref:`v7.1` |:ref:`v6.0` |:ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+	:ref:`v8.0` | :ref:`v7.1` | :ref:`v6.0` | :ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0` |
 
 
 .. _v8.0:
@@ -97,11 +97,11 @@ Please update these partials:
 
 :file:`/Partials/Misc/DeleteLink.html`
 
-The argument token was introduced :html:`(token:token)`
+The argument token was introduced.
 
 **old:**
 
-   .. code-block:: html
+.. code-block:: html
 
 	<f:link.action
 		action="delete"
@@ -114,7 +114,7 @@ The argument token was introduced :html:`(token:token)`
 
 **new:**
 
-   .. code-block:: html
+.. code-block:: html
 
 	<f:link.action
 		action="delete"

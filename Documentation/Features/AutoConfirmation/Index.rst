@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 
 .. _autoconfirmation:
@@ -27,7 +27,7 @@ Small example
 
 Accept every user profile from domains de, it, ch and at:
 
-::
+.. code-block:: typoscript
 
    plugin.tx_femanager.settings {
        autoAdminConfirmation {
@@ -48,7 +48,7 @@ Extended example
 
 Accept every user profile from domains de, it, ch and at but not if they are using gmail.de or gmx.de:
 
-::
+.. code-block:: typoscript
 
    plugin.tx_femanager.settings {
        autoAdminConfirmation {
@@ -76,7 +76,7 @@ Example
 
 TypoScript:
 
-::
+.. code-block:: typoscript
 
    plugin.tx_femanager.settings {
        autoAdminConfirmation {
@@ -99,7 +99,7 @@ TypoScript:
 
 PHP:
 
-::
+.. code-block:: php
 
    <?php
    declare(strict_types=1);

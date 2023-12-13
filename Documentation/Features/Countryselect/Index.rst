@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 
 .. _countryselect:
@@ -24,7 +24,7 @@ The idea is very simple. You can change the “options Attribute” of the form.
 
 
 
-.. code-block:: text
+.. code-block:: html
 
 	<femanager:form.select
 		id="femanager_field_country"

@@ -1,42 +1,46 @@
-.. include:: Includes.txt
+.. include:: Includes.rst.txt
+
+.. _start:
 
 =========
 femanager
 =========
 
-Femanager is a TYPO3 extension for a modern Frontend-User registration and profile management.
+:Extension key:
+   femanager
 
-.. only:: html
+:Package name:
+   in2code/femanager
 
-	:Copyright:
-		2013 - 2023
+:Version:
+   8.0.0
 
-	:Classification:
-		femanager
+:Language:
+	en,de
 
-	:Version:
-		8.0.0
+:Author:
+	Alex Kellner, Stefan Busemann, Daniel Hoffmann
 
-	:Language:
-		en
+:Repository:
+   https://github.com/in2code-de/femanager
 
-	:Keywords:
-		frontend, user, registration, frontend, profile, sr_feuser_register
+:Community-Support:
+   https://typo3.slack.com/messages/C0NAHDRJB/
 
-	:Author:
-		Alex Kellner, Stefan Busemann
+:Rendered:
+    |today|
 
-	:Email:
-		service@in2code.de
+----
 
+Femanager offers an extensive frontend user registration including management functions. It is based on a modern TYPO3 version as well as Extbase and Fluid and offers a variety of extension options.
 
-Table of Contents
-=================
+----
+
+**Table of Contents:**
 
 .. toctree::
-	:maxdepth: 3
+	:maxdepth: 2
 	:titlesonly:
-	:glob:
 
 	Introduction/Index
 	Installation/Index
@@ -45,12 +49,10 @@ Table of Contents
 	FAQ/Index
 	Changelog/Index
 
-Additional Links
-================
+..  Meta Menu
 
-You can use one of the following links, to get more informations about this plugin:
+..  toctree::
+    :hidden:
 
-- All information about femanager developing, the developers behind femanager, etc...: https://github.com/in2code-de/femanager
-- femanager is powered by https://www.in2code.de
-- Do you need help from the community:
-    - Slack channel #ext-femanager: https://typo3.slack.com/messages/C0NAHDRJB/
+    Sitemap
+    genindex

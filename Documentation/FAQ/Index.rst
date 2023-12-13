@@ -1,4 +1,4 @@
-.. include:: ../Includes.txt
+.. include:: ../Includes.rst.txt
 
 .. _faq:
 
@@ -9,19 +9,19 @@ Frequently Asked Questions (FAQ)
 Q: How to use static_info_tables for countryselection?
 ------------------------------------------------------
 
-A: See code in best practice section
+A: :ref:`See code in best practice section <countryselect>`
 
 
 Q: How to add new fields to fe_users?
 -------------------------------------
 
-A: See code in best practice section
+A: :ref:`See code in best practice section <newfields>`
 
 
 Q: How to add my own field validation?
 --------------------------------------
 
-A: See code in best practice section
+A: :ref:`See code in best practice section <extendvalidators>`
 
 
 Q: Class 'In2code\Femanager\Domain\Model\Log' not found - what can I do?
@@ -35,12 +35,10 @@ first) and click on *Create autoload information for extensions* in section *Dum
 That will create a new autoload file.
 
 
-Q: An exception occurred while executing 'SELECT `uid` FROM `tx_femanager_domain_model_log` WHERE ... doesn't exist
--------------------------------------------------------------------------------------------------------------------
+Q: An exception occurred while executing :sql:`SELECT uid FROM tx_femanager_domain_model_log WHERE ...` doesn't exist
+---------------------------------------------------------------------------------------------------------------------
 
-A: There are some tables missing in your database. Please open the install tool under
-www.yourdomain.org/typo3/install (of course you have to add a file named *ENABLE_INSTALL_TOOL* to typo3conf/ folder
-first) and click on Compare current database with specification.
+A: There are some tables missing in your database. Please compare databases with :guilabel:`Admin Tools > Maintenance >  Database Compare`.
 
 
 Q: How can I disable the clientside/serverside validation?
@@ -48,7 +46,7 @@ Q: How can I disable the clientside/serverside validation?
 
 A: Enable/Disable Validation via TypoScript – disable example:
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	plugin.tx_femanager {
 		settings.new.validation {
@@ -63,7 +61,7 @@ Q: How can I configure the validation of my fields?
 
 A: Have a look into TypoScript:
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	plugin.tx_femanager {
 		settings.new {
@@ -119,7 +117,7 @@ Q: How can I prefill form fields?
 
 A: You can use TypoScript cObj to fill form fields in registration- or edit-form:
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	plugin.tx_femanager {
 		settings {
@@ -152,7 +150,7 @@ Q: JavaScript Validation won't work – what can I do?
 
 A: Check if all needed JavaScript files are loaded (see frontend html- source). Add some JavaScript with constant editor or directly:
 
-.. code-block:: text
+.. code-block:: typoscript
 
     plugin.tx_femanager.settings.jQuery = 1
     plugin.tx_femanager.settings.bootstrap = 1
@@ -160,7 +158,7 @@ A: Check if all needed JavaScript files are loaded (see frontend html- source). 
 
 Example ordering and needed JavaScripts:
 
-.. code-block:: text
+.. code-block:: html
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
@@ -177,7 +175,7 @@ A: Use some lines of TypoScript to send values after a registration to a tool li
 
 TypoScript:
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	plugin.tx_femanager {
 		settings {
@@ -233,7 +231,7 @@ Q: How can I store values in another table?
 
 A: With some lines of TypoScript it's possible to store values to any table in the TYPO3 database:
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	plugin.tx_femanager {
 		settings {
@@ -272,7 +270,7 @@ Q: How can I overwrite labels and errormessages with my own text?
 
 A: Every TYPO3 extension can be extended with own labels in any language. You have to search for the key, that you want to overwrite – have a look into the file EXT:femanager/Resources/Private/Language/locallang.xlf – example:
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	plugin.tx_femanager {
 		_LOCAL_LANG {
@@ -294,7 +292,7 @@ Q: How to add a captcha for spam prevention
 
 A: Since version 1.1.0 femanager allows sr_freecap as captcha extension. Import sr_freecap to your TYPO3. From this moment on, you can add a new fieldtype in your flexform “captcha”. In addition you have to enable captcha with TypoScript:
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	plugin.tx_femanager.settings.new.validation.captcha.captcha = 1
 	plugin.tx_femanager.settings.edit.validation.captcha.captcha = 1
@@ -305,7 +303,7 @@ Q: How to change the dateformat of the birthday field?
 
 A: Per default “m/d/Y” (for EN) and “d.m.Y “ (for DE) will be used. If you want to overwrite this, you can use some lines of TypoScript
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	plugin.tx_femanager {
 		_LOCAL_LANG {
@@ -325,7 +323,7 @@ Q: Flashmessage from other plugins are shown in femanager!
 
 A: If you want to hide flashmessages in other extbase plugins, use following TypoScript setup:
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	config.tx_extbase.legacy.enableLegacyFlashMessageHandling = 0
 
@@ -341,7 +339,7 @@ Q: How to change the extbase_type of new Users?
 
 A: You can change this via TypoScript:
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	config.tx_extbase.persistence.classes {
 		In2code\Femanager\Domain\Model\User {

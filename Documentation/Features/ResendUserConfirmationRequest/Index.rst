@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 .. include:: Images.txt
 
 
@@ -27,13 +27,11 @@ Configuration. Add the plugin "Femanager" to a page and select "resend confirmat
 IMPORTANT: If you want to use these new views and you did use femanager version 4.1 or older, you need open existing plugins and save them again, in order to allow the
 usage of this views.
 
-|plugin3|
-
 Sometimes unconfirmed users are trying to trigger the confirmation mail again by registering again with the same email or username. They get an error "username / email already existing". Since 4.2, an additional message with a "resend confirmation mail" link is displayed in those cases where the existing user has not yet confirmed his registration.
 
 For this message to be displayed, you need to have the following typoscript setting configured:
 
-::
+.. code-block:: typoscript
 
     settings.showResendUserConfirmationRequestView = {your pid}
 
@@ -50,6 +48,6 @@ resend an email with a confirmation link.
 
 To activate the feature add the userTSConfig:
 
-::
+.. code-block:: typoscript
 
     tx_femanager.UserBackend.confirmation.ResendUserConfirmationRequest = 1

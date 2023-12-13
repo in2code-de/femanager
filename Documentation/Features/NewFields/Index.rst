@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 .. include:: Images.txt
 
 .. _newfields:
@@ -227,7 +227,7 @@ ext_localconf.php:
    ];
 
 Include own controllers with TYPO3 12.4.x (with XCLASS)
-"""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 You can override the whole controller with XCLASS. This is not the best solution but it works.
 XCLASS Limitations: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Xclasses/Index.html#xclasses-limitations

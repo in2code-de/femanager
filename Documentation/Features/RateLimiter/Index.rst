@@ -1,6 +1,6 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
-.. _countryselect:
+.. _ratelimiter:
 
 Rate Limiter
 ------------
@@ -17,7 +17,7 @@ TypoScript Settings
 ^^^^^^^^^^^^^^^^^^^
 
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	plugin.tx_femanager {
 		settings {

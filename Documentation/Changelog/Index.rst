@@ -1,11 +1,8 @@
-.. include:: ../Includes.txt
+.. include:: ../Includes.rst.txt
 
 
 Changelog
 =========
-
-.. t3-field-list-table::
-   :header-rows: 1
 
 -
       :Version: 8.0.0
