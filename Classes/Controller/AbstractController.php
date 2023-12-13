@@ -370,24 +370,13 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * Init for User delete action
-     */
-    protected function initializeDeleteAction()
-    {
-        $user = UserUtility::getCurrentUser();
-        $token = $this->request->getArgument('token');
-        $uid = $this->request->getArgument('user');
-        $this->testSpoof($user, $uid, $token);
-    }
-
-    /**
      * Check if user is authenticated and params are valid
      *
      * @param User $user
      * @param int $uid Given fe_users uid
      * @param string $receivedToken Token
      */
-    protected function testSpoof($user, $uid, $receivedToken)
+    protected function isSpoof($user, $uid, $receivedToken)
     {
         $errorOnProfileUpdate = false;
         $knownToken = GeneralUtility::hmac($user->getUid(), (string)$user->getCrdate()->getTimestamp());
@@ -403,14 +392,9 @@ abstract class AbstractController extends ActionController
         }
 
         if ($errorOnProfileUpdate === true) {
-            $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
-            $this->addFlashMessage(
-                LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
-                '',
-                AbstractMessage::ERROR
-            );
-            return new ForwardResponse('edit');
+            return true;
         }
+        return false;
     }
 
     /**

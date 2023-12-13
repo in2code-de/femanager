@@ -220,13 +220,6 @@ class InvitationController extends AbstractFrontendController
     }
 
     /**
-     * Init for delete
-     */
-    protected function initializeDeleteAction()
-    {
-    }
-
-    /**
      * action delete
      *
      * @param int $user User UID
