@@ -323,13 +323,13 @@
         <source>This value is not allowed in field %s</source>
         <target state="final">Denne verdien er ikke tillatt i felt %s</target>
       </trans-unit>
-      <trans-unit id="validationErrorSameAs" approved="yes">
-        <source>Please check your value</source>
-        <target state="final">Vennligst sjekk verdien</target>
+      <trans-unit id="validationErrorSameAs">
+        <source>Values do not match</source>
+        <target state="needs-translation">Values do not match</target>
       </trans-unit>
-      <trans-unit id="validationErrorPasswordRepeat" approved="yes">
-        <source>Both passwords do not fit</source>
-        <target state="final">Passordene er ikke like</target>
+      <trans-unit id="validationErrorPasswordRepeat">
+        <source>Both passwords do not match</source>
+        <target state="needs-translation">Both passwords do not match</target>
       </trans-unit>
       <trans-unit id="validationErrorDate" approved="yes">
         <source>Date has the wrong format</source>
@@ -835,9 +835,9 @@
         <source>%s approval(s) available</source>
         <target state="final">%s mangler brukerbekreftelse(r) tilgjengelig</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationNoteText" approved="yes">
-        <source>%s missing user confirmation(s) available</source>
-        <target state="final">%s mangler brukerbekreftelse(r) tilgjengelig</target>
+      <trans-unit id="AdminBackendConfirmationNoteText">
+        <source>%s user(s) need to be confirmed by admin</source>
+        <target state="needs-translation">%s user(s) need to be confirmed by admin</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnAction" approved="yes">
         <source>Actions</source>
@@ -867,9 +867,9 @@
         <source>resend user confirmation e-mail</source>
         <target state="final">send på nytt bekreftelsesepost for bruker</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationFlashMessageReSend" approved="yes">
-        <source>%s confirmation mail was resend</source>
-        <target state="final">%s bekreftelsesepost ble sendt på nytt</target>
+      <trans-unit id="BackendConfirmationFlashMessageReSend">
+        <source>%s confirmation mail was resent</source>
+        <target state="needs-translation">%s confirmation mail was resent</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueMessage" approved="yes">
         <source>Your userprofile is not confirmed yet.</source>
