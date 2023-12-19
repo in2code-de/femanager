@@ -15,6 +15,58 @@
         <source>FE Manager</source>
         <target state="final">FE Manager</target>
       </trans-unit>
+      <trans-unit id="pluginWizardTitle">
+        <source>Femanager</source>
+        <target state="needs-translation">Femanager</target>
+      </trans-unit>
+      <trans-unit id="femanager_registration.title">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
+      </trans-unit>
+      <trans-unit id="femanager_registration.description">
+        <source>Description of Registration</source>
+        <target state="needs-translation">Description of Registration</target>
+      </trans-unit>
+      <trans-unit id="femanager_edit.title">
+        <source>Edit</source>
+        <target state="needs-translation">Edit</target>
+      </trans-unit>
+      <trans-unit id="femanager_edit.description">
+        <source>Description of Edit</source>
+        <target state="needs-translation">Description of Edit</target>
+      </trans-unit>
+      <trans-unit id="femanager_list.title">
+        <source>List</source>
+        <target state="needs-translation">List</target>
+      </trans-unit>
+      <trans-unit id="femanager_list.description">
+        <source>Description of List</source>
+        <target state="needs-translation">Description of List</target>
+      </trans-unit>
+      <trans-unit id="femanager_detail.title">
+        <source>Detail</source>
+        <target state="needs-translation">Detail</target>
+      </trans-unit>
+      <trans-unit id="femanager_detail.description">
+        <source>Description of Detail</source>
+        <target state="needs-translation">Description of Detail</target>
+      </trans-unit>
+      <trans-unit id="femanager_invitation.title">
+        <source>Invitation</source>
+        <target state="needs-translation">Invitation</target>
+      </trans-unit>
+      <trans-unit id="femanager_invitation.description">
+        <source>Description of Invitation</source>
+        <target state="needs-translation">Description of Invitation</target>
+      </trans-unit>
+      <trans-unit id="femanager_resendconfirmationmail.title">
+        <source>Resend Confirmation Mail</source>
+        <target state="needs-translation">Resend Confirmation Mail</target>
+      </trans-unit>
+      <trans-unit id="femanager_resendconfirmationmail.description">
+        <source>Description of Resend Confirmation Mail</source>
+        <target state="needs-translation">Description of Resend Confirmation Mail</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
