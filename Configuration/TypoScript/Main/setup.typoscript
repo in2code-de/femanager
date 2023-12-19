@@ -217,7 +217,7 @@ plugin.tx_femanager {
           # if a user refuses to create his profile, the deletion of the profile must be confirmed
           # this is a useful setting, as some virus scanners are preloading all links in an email, which then deletes this user automatically
           # default = 0
-          confirmUserConfirmationRefused = 1
+          confirmUserConfirmationRefused = 0
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
