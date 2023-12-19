@@ -117,8 +117,24 @@ class NewController extends AbstractFrontendController
                 $furtherFunctions = $this->statusUserConfirmation($user, $hash, $status);
                 break;
 
-            case 'userConfirmationRefused':
+            case 'confirmDeletion':
                 $furtherFunctions = $this->statusUserConfirmationRefused($user, $hash);
+                break;
+
+            case 'userConfirmationRefused':
+                if ($this->config['new.']['email.']['createUserConfirmation.']['confirmUserConfirmationRefused'] == '1') {
+                    $this->view->assignMultiple(
+                        [
+                            'user' => $user,
+                            'status' => 'confirmDeletion',
+                            'hash' =>$hash
+                        ]
+                    );
+                    $this->assignForAll();
+                    return $this->htmlResponse();
+                } else {
+                    $furtherFunctions = $this->statusUserConfirmationRefused($user, $hash);
+                }
                 break;
 
             case 'adminConfirmation':
