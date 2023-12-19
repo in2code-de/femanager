@@ -323,13 +323,13 @@
         <source>This value is not allowed in field %s</source>
         <target state="final">Это значение не допускается в поле %s</target>
       </trans-unit>
-      <trans-unit id="validationErrorSameAs" approved="yes">
-        <source>Please check your value</source>
-        <target state="final">Пожалуйста, проверьте указанные значения</target>
+      <trans-unit id="validationErrorSameAs">
+        <source>Values do not match</source>
+        <target state="needs-translation">Values do not match</target>
       </trans-unit>
-      <trans-unit id="validationErrorPasswordRepeat" approved="yes">
-        <source>Both passwords do not fit</source>
-        <target state="final">Введённые пароли не совпадают</target>
+      <trans-unit id="validationErrorPasswordRepeat">
+        <source>Both passwords do not match</source>
+        <target state="needs-translation">Both passwords do not match</target>
       </trans-unit>
       <trans-unit id="validationErrorDate" approved="yes">
         <source>Date has the wrong format</source>
@@ -835,9 +835,9 @@
         <source>%s approval(s) available</source>
         <target state="needs-translation">%s approval(s) available</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationNoteText">
-        <source>%s missing user confirmation(s) available</source>
-        <target state="needs-translation">%s approval(s) available</target>
+      <trans-unit id="AdminBackendConfirmationNoteText">
+        <source>%s user(s) need to be confirmed by admin</source>
+        <target state="needs-translation">%s user(s) need to be confirmed by admin</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnAction">
         <source>Actions</source>
@@ -868,8 +868,8 @@
         <target state="needs-translation">resend user confirmation e-mail</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageReSend">
-        <source>%s confirmation mail was resend</source>
-        <target state="needs-translation">%s confirmation mail was resend</target>
+        <source>%s confirmation mail was resent</source>
+        <target state="needs-translation">%s confirmation mail was resent</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueMessage">
         <source>Your userprofile is not confirmed yet.</source>
