@@ -5,6 +5,25 @@ Changelog
 =========
 
 -
+      :Version: 8.0.1
+      :Date: 2023-12-19
+      :Changes:
+
+      * [FEATURE] Integrate Static Info tables via Service - thx to Daniel Hoffmann (in2code)
+      * [TASK] Upport all fixes from 7.1-7.2 - thx to Daniel Hoffmann (in2code)
+      * [TASK] Upport from scroll-fix - thx to Daniel Hoffmann (in2code)
+      * [BUGFIX] Bugfix wrong colspan - thx to Luis Thaler (in2code)
+      * [BUGFIX] Make backend module accessible for editors - thx to Luis Thaler (in2code)
+      * [BUGFIX] Fix image URLs in README.md - thx to Daniel Haupt
+      * [BUGFIX] Shows the labels in New Content Wizard again  - thx to Daniel Hoffmann (in2code)
+      * [BUGFIX] Make captcha parameter optional  - thx to Daniel Hoffmann (in2code)
+      * [BUGFIX] Add missing use statement for ObjectAccess - thx to Stefan Busemann (in2code)
+      * [BUGFIX] Add full object support in getDirtyPropertiesFromUser() -  thx Torben Hansen
+      * [BUGFIX] Do not re-evaluate object values in ServersideValidator - thx to Torben Hansen
+      * [BUGFIX] Add missing pluginName in FrontendUtility - thx to Daniel Hoffmann (in2code) /  bpaulsen
+      * [BUGFIX] Exception when accessing a fe_user record in the TYPO3 Backend - thx to Daniel Hoffmann (in2code)
+
+-
       :Version: 8.0.0
       :Date: 2023-06-01
       :Changes:
@@ -17,6 +36,46 @@ Changelog
       * [DOCUMENTATION] Replace outdated signal documentation with event description
       * [TASK] Update unit tests & behaviour tests
       * [BUGFIX] Fix validation for allowed usergroups
+-
+      :Version: 7.2.3
+      :Date: 2023-12-13
+      :Changes:
+
+      * [SECURITY] This update is needed for version for 7.0.0 to 7.2.2 older versions are not affected
+      * BUGFIX] Dont use initilize actions for granting access - thx to Daniel Hofmann (in2code)
+
+-
+      :Version: 7.2.2
+      :Date: 2023-10-04
+      :Changes:
+
+      * [SECURITY] This update is needed for version for 7.0.0 to 7.2.1 older versions are not affected
+      * [BUGFIX] Add missing permission check for invitation controller - thx to Daniel Hofmann (in2code)
+
+-
+      :Version: 7.2.1
+      :Date: 2023-08-08
+      :Changes:
+
+      * [TASK] Adds documentation for extended - thx to Daniel Hofmann (in2code)
+      * [TASK] Update Image used for Github Actions
+      * [BUGFIX] Fixes reaction when no typoscript configuration is set for redirect - thx to Daniel Hofmann (in2code)
+      * [BUGFIX] Fixed Object Support for getDirtyPropertiesFromUser() - thx to Daniel Hofmann (in2code)
+
+-
+      :Version: 7.2.0
+      :Date: 2023-07-17
+      :Changes:
+
+      * [FEATURE] Add column "inactive since" to backend list - thx to Thomas Löffler
+      * [BUGFIX] missing email AdminNotify after editing of user profile - thx to Christian Ludwig
+      * [BUGFIX] Do not re-evaluate object values in ServersideValidator - thx to Torben Hansen
+      * [BUGFIX] Add full object support in getDirtyPropertiesFromUser() - thx to Daniel Haupt
+      * [BUGFIX] Prevent undefined array key for empty configPID - thx to Daniel Haupt
+      * [BUGFIX] Migrate usage of GU::lcfirst with Rector - thx to Torben Hansen
+      * [TASK] Corrects Documenation Rendering Configuration - thx to Daniel Hoffmann
+      * [TASK] [TASK] Replace jQuery scrollTop with vanilla scrollIntoView - thx to Felix Ranesberger
+
 -
       :Version: 7.1.1
       :Date: 2023-03-16
