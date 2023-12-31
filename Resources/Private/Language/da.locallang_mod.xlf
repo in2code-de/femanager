@@ -15,57 +15,57 @@
         <source>FE Manager</source>
         <target state="final">Manager</target>
       </trans-unit>
-      <trans-unit id="pluginWizardTitle">
+      <trans-unit id="pluginWizardTitle" approved="yes">
         <source>Femanager</source>
-        <target state="needs-translation">Femanager</target>
+        <target state="final">Femanager</target>
       </trans-unit>
-      <trans-unit id="femanager_registration.title">
+      <trans-unit id="femanager_registration.title" approved="yes">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="final">Registrerering</target>
       </trans-unit>
-      <trans-unit id="femanager_registration.description">
+      <trans-unit id="femanager_registration.description" approved="yes">
         <source>Description of Registration</source>
-        <target state="needs-translation">Description of Registration</target>
+        <target state="final">Beskrivelse af registreringen</target>
       </trans-unit>
-      <trans-unit id="femanager_edit.title">
+      <trans-unit id="femanager_edit.title" approved="yes">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="final">Redigér</target>
       </trans-unit>
-      <trans-unit id="femanager_edit.description">
+      <trans-unit id="femanager_edit.description" approved="yes">
         <source>Description of Edit</source>
-        <target state="needs-translation">Description of Edit</target>
+        <target state="final">Beskrivelse af redigér</target>
       </trans-unit>
-      <trans-unit id="femanager_list.title">
+      <trans-unit id="femanager_list.title" approved="yes">
         <source>List</source>
-        <target state="needs-translation">List</target>
+        <target state="final">Liste</target>
       </trans-unit>
-      <trans-unit id="femanager_list.description">
+      <trans-unit id="femanager_list.description" approved="yes">
         <source>Description of List</source>
-        <target state="needs-translation">Description of List</target>
+        <target state="final">Beskrivelse af liste</target>
       </trans-unit>
-      <trans-unit id="femanager_detail.title">
+      <trans-unit id="femanager_detail.title" approved="yes">
         <source>Detail</source>
-        <target state="needs-translation">Detail</target>
+        <target state="final">Detaljer</target>
       </trans-unit>
-      <trans-unit id="femanager_detail.description">
+      <trans-unit id="femanager_detail.description" approved="yes">
         <source>Description of Detail</source>
-        <target state="needs-translation">Description of Detail</target>
+        <target state="final">Beskrivelse af detalje</target>
       </trans-unit>
-      <trans-unit id="femanager_invitation.title">
+      <trans-unit id="femanager_invitation.title" approved="yes">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="final">Invitation</target>
       </trans-unit>
-      <trans-unit id="femanager_invitation.description">
+      <trans-unit id="femanager_invitation.description" approved="yes">
         <source>Description of Invitation</source>
-        <target state="needs-translation">Description of Invitation</target>
+        <target state="final">Beskrivelse af invitation</target>
       </trans-unit>
-      <trans-unit id="femanager_resendconfirmationmail.title">
+      <trans-unit id="femanager_resendconfirmationmail.title" approved="yes">
         <source>Resend Confirmation Mail</source>
-        <target state="needs-translation">Resend Confirmation Mail</target>
+        <target state="final">Gensend bekræftelses-e-mail</target>
       </trans-unit>
-      <trans-unit id="femanager_resendconfirmationmail.description">
+      <trans-unit id="femanager_resendconfirmationmail.description" approved="yes">
         <source>Description of Resend Confirmation Mail</source>
-        <target state="needs-translation">Description of Resend Confirmation Mail</target>
+        <target state="final">Beskrivelse af Send bekræftelsesmail igen</target>
       </trans-unit>
     </body>
   </file>
