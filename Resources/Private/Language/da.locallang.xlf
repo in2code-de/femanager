@@ -323,13 +323,13 @@
         <source>This value is not allowed in field %s</source>
         <target state="final">Denne værdi er ikke tilladt i feltet %s</target>
       </trans-unit>
-      <trans-unit id="validationErrorSameAs">
+      <trans-unit id="validationErrorSameAs" approved="yes">
         <source>Values do not match</source>
-        <target state="needs-translation">Values do not match</target>
+        <target state="final">Værdier stemmer ikke overens</target>
       </trans-unit>
-      <trans-unit id="validationErrorPasswordRepeat">
+      <trans-unit id="validationErrorPasswordRepeat" approved="yes">
         <source>Both passwords do not match</source>
-        <target state="needs-translation">Both passwords do not match</target>
+        <target state="final">Begge adgangskoder stemmer ikke overens</target>
       </trans-unit>
       <trans-unit id="validationErrorDate" approved="yes">
         <source>Date has the wrong format</source>
@@ -835,9 +835,9 @@
         <source>%s approval(s) available</source>
         <target state="final">%s manglende bruger-konfirmation(er) tilgængelige</target>
       </trans-unit>
-      <trans-unit id="AdminBackendConfirmationNoteText">
+      <trans-unit id="AdminBackendConfirmationNoteText" approved="yes">
         <source>%s user(s) need to be confirmed by admin</source>
-        <target state="needs-translation">%s user(s) need to be confirmed by admin</target>
+        <target state="final">%s bruger(e) skal bekræftes af admin</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnAction" approved="yes">
         <source>Actions</source>
@@ -867,9 +867,9 @@
         <source>resend user confirmation e-mail</source>
         <target state="final">gensend bruger konfirmerings e-mail</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationFlashMessageReSend">
+      <trans-unit id="BackendConfirmationFlashMessageReSend" approved="yes">
         <source>%s confirmation mail was resent</source>
-        <target state="needs-translation">%s confirmation mail was resent</target>
+        <target state="final">%s bekræftelsesmail blev sendt igen</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueMessage" approved="yes">
         <source>Your userprofile is not confirmed yet.</source>
