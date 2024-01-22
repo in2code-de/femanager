@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\User;
@@ -16,6 +17,8 @@ use TYPO3\CMS\Core\Crypto\PasswordHashing\Pbkdf2PasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * Class UserUtility
@@ -259,12 +262,19 @@ class UserUtility extends AbstractUtility
                             $dirtyProperties[$propertyName]['old'] = $oldPropertyValue->getTimestamp();
                             $dirtyProperties[$propertyName]['new'] = $newPropertyValue->getTimestamp();
                         }
-                    } else {
+                    } elseif (get_class($oldPropertyValue) === ObjectStorage::class) {
                         $titlesOld = ObjectUtility::implodeObjectStorageOnProperty($oldPropertyValue);
                         $titlesNew = ObjectUtility::implodeObjectStorageOnProperty($newPropertyValue);
                         if ($titlesOld !== $titlesNew) {
                             $dirtyProperties[$propertyName]['old'] = $titlesOld;
                             $dirtyProperties[$propertyName]['new'] = $titlesNew;
+                        }
+                    } else {
+                        $uidOld = ObjectAccess::getProperty($oldPropertyValue, 'uid');
+                        $uidNew = ObjectAccess::getProperty($newPropertyValue, 'uid');
+                        if ($uidOld !== $uidNew) {
+                            $dirtyProperties[$propertyName]['old'] = $uidOld;
+                            $dirtyProperties[$propertyName]['new'] = $uidNew;
                         }
                     }
                 }

@@ -24,8 +24,8 @@ class ConfigurationUtility extends AbstractUtility
         'edit./requestRedirect' => 'TEXT',
         'edit./requestRedirect.' => [],
         'edit/fillEmailWithUsername' => '0',
-        'edit/notifyAdmin' => '0',
-        'edit/email/createUserNotify/notifyAdmin/receiver/email/value' => '',
+        'edit/notifyAdmin' => '',
+        'edit/email/notifyAdmin/receiver/email/value' => '',
         'edit/misc/passwordSave' => '',
         'invitation/misc/passwordSave' => '',
         'invitation./email./invitationAdminNotify.' => [],
@@ -198,17 +198,12 @@ class ConfigurationUtility extends AbstractUtility
         }
     }
 
-    public static function notifyAdminAboutEdits($config)
+    public static function notifyAdminAboutEdits($settings)
     {
-        if (self::getValue(
-            'edit/notifyAdmin',
-            $config
-        ) && self::getValue(
-            'edit/email/createUserNotify/notifyAdmin/receiver/email/value',
-            $config
-        )) {
-            return true;
-        }
-        return false;
+        return self::getValue('edit/email/notifyAdmin/_enable/value', $settings)
+            && (
+                self::getValue('edit/email/notifyAdmin/receiver/email/value', $settings)
+                || self::getValue('edit/notifyAdmin', $settings)
+            );
     }
 }

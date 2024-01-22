@@ -21,7 +21,7 @@ UserBackend / List
 
 							<tr class="t3-row-header">
 								<td nowrap="nowrap" class="col-icon">&nbsp;</td>
-								<td nowrap="nowrap" colspan="9">
+								<td nowrap="nowrap" colspan="10">
 									<span class="c-table">
 										<f:translate key="tx_femanager_domain_model_user" />
 									</span>
@@ -55,6 +55,11 @@ UserBackend / List
 								</td>
 								<td nowrap="nowrap">
 									<f:translate key="tx_femanager_domain_model_user.lastlogin" />
+								</td>
+								<td nowrap="nowrap">
+									<f:translate key="tx_femanager_domain_model_user.inactivesince">
+										Inactive since
+									</f:translate>
 								</td>
 								<td nowrap="nowrap">
 									UID
@@ -115,6 +120,9 @@ UserBackend / List
 									</td>
 									<td nowrap="nowrap">
 										<f:format.date format="d.m.Y H:i">{user.lastlogin}</f:format.date>
+									</td>
+									<td nowrap="nowrap">
+										<f:format.date format="d.m.Y H:i">{user.inactiveSince}</f:format.date>
 									</td>
 									<td nowrap="nowrap">
 										{user.uid}

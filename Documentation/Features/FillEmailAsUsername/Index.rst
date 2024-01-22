@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 
 .. _fillEmailAsUsername:
@@ -34,7 +34,7 @@ Example
 
 TypoScript:
 
-::
+.. code-block:: typoscript
 
    plugin.tx_femanager.settings {
        new {

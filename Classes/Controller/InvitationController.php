@@ -32,7 +32,10 @@ class InvitationController extends AbstractFrontendController
      */
     public function newAction(): ResponseInterface
     {
-        $this->allowedUserForInvitationNewAndCreate();
+        $permissionCheck = $this->allowedUserForInvitationNewAndCreate();
+        if ($permissionCheck instanceof ResponseInterface) {
+            return $permissionCheck;
+        }
         $this->view->assign('allUserGroups', $this->allUserGroups);
         $this->assignForAll();
         return $this->htmlResponse();
@@ -57,7 +60,10 @@ class InvitationController extends AbstractFrontendController
             $this->redirect('status');
         }
 
-        $this->allowedUserForInvitationNewAndCreate();
+        $permissionCheck = $this->allowedUserForInvitationNewAndCreate();
+        if ($permissionCheck instanceof ResponseInterface) {
+            return $permissionCheck;
+        }
         $user->setDisable(true);
         $user = FrontendUtility::forceValues(
             $user,
@@ -211,13 +217,6 @@ class InvitationController extends AbstractFrontendController
         $this->eventDispatcher->dispatch(new InviteUserUpdateEvent($user));
         $this->redirectByAction('invitation', 'redirectPasswordChanged');
         $this->redirect('status');
-    }
-
-    /**
-     * Init for delete
-     */
-    protected function initializeDeleteAction()
-    {
     }
 
     /**

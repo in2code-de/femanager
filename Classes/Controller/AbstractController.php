@@ -172,15 +172,15 @@ abstract class AbstractController extends ActionController
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
-                    ConfigurationUtility::getValue('edit/email/createUserNotify/notifyAdmin/receiver/email/value') ??
-                    ConfigurationUtility::getValue('edit/notifyAdmin'),
+                    ConfigurationUtility::getValue('edit/email/notifyAdmin/receiver/email/value', $this->settings) ?:
+                    ConfigurationUtility::getValue('edit/notifyAdmin', $this->settings),
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value'] ?? null
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 'Profile update',
                 [
                     'user' => $user,
-                    'changes' => UserUtility::getDirtyPropertiesFromUser($existingUser),
+                    'changes' => UserUtility::getDirtyPropertiesFromUser($user),
                     'settings' => $this->settings,
                 ],
                 $this->config['edit.']['email.']['notifyAdmin.'] ?? []
@@ -272,8 +272,8 @@ abstract class AbstractController extends ActionController
                     ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)
                 ),
                 $this->contentObject->cObjGetSingle(
-                    ConfigurationUtility::getValue('new./email./createUserNotify./subject', $this->config),
-                    ConfigurationUtility::getValue('new./email./createUserNotify./subject.', $this->config),
+                    (string)ConfigurationUtility::getValue('new./email./createUserNotify./subject', $this->config),
+                    (array)ConfigurationUtility::getValue('new./email./createUserNotify./subject.', $this->config),
                 ),
                 $variables,
                 ConfigurationUtility::getValue('new./email./createUserNotify.', $this->config)
@@ -297,8 +297,8 @@ abstract class AbstractController extends ActionController
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 $this->contentObject->cObjGetSingle(
-                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject', $this->config),
-                    ConfigurationUtility::getValue('new./email./createAdminNotify./subject.', $this->config)
+                    (string)ConfigurationUtility::getValue('new./email./createAdminNotify./subject', $this->config),
+                    (array)ConfigurationUtility::getValue('new./email./createAdminNotify./subject.', $this->config)
                 ),
                 $variables,
                 ConfigurationUtility::getValue('new./email./createAdminNotify.', $this->config)
@@ -348,14 +348,14 @@ abstract class AbstractController extends ActionController
         $target = null;
         // redirect from TypoScript cObject
         if ($this->contentObject->cObjGetSingle(
-            ConfigurationUtility::getValue($action . './' . $category, $this->config),
-            ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
+            (string)ConfigurationUtility::getValue($action . './' . $category, $this->config),
+            (array)ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
         )
         ) {
             $target = $this->contentObject->cObjGetSingle(
-                ConfigurationUtility::getValue($action . './' . $category, $this->config),
+                (string)ConfigurationUtility::getValue($action . './' . $category, $this->config),
                 array_merge_recursive(
-                    ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
+                    (array)ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
                     [
                         'linkAccessRestrictedPages' => 1,
                     ]
@@ -370,24 +370,13 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * Init for User delete action
-     */
-    protected function initializeDeleteAction()
-    {
-        $user = UserUtility::getCurrentUser();
-        $token = $this->request->getArgument('token');
-        $uid = $this->request->getArgument('user');
-        $this->testSpoof($user, $uid, $token);
-    }
-
-    /**
      * Check if user is authenticated and params are valid
      *
      * @param User $user
      * @param int $uid Given fe_users uid
      * @param string $receivedToken Token
      */
-    protected function testSpoof($user, $uid, $receivedToken)
+    protected function isSpoof($user, $uid, $receivedToken)
     {
         $errorOnProfileUpdate = false;
         $knownToken = GeneralUtility::hmac($user->getUid(), (string)$user->getCrdate()->getTimestamp());
@@ -403,14 +392,9 @@ abstract class AbstractController extends ActionController
         }
 
         if ($errorOnProfileUpdate === true) {
-            $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
-            $this->addFlashMessage(
-                LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
-                '',
-                AbstractMessage::ERROR
-            );
-            return new ForwardResponse('edit');
+            return true;
         }
+        return false;
     }
 
     /**
@@ -451,7 +435,7 @@ abstract class AbstractController extends ActionController
         $this->config = $this->config[BackendUtility::getPluginOrModuleString() . '.']['tx_femanager.']['settings.'] ?? [];
 
         if (ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
-            $config = BackendUtility::loadTS($this->allConfig['settings']['configPID']);
+            $config = BackendUtility::loadTS($this->allConfig['settings']['configPID'] ?? null);
             if (is_array($config['plugin.']['tx_femanager.']['settings.'] ?? null)) {
                 $this->config = $config['plugin.']['tx_femanager.']['settings.'];
                 $this->settings = $this->config;
@@ -467,8 +451,9 @@ abstract class AbstractController extends ActionController
 
             // Retrieve user TSconfig of currently logged in user
             $userTsConfig = $GLOBALS['BE_USER']->getTSConfig();
-            if (is_array($userTsConfig['tx_femanager.'] ?? null)) {
-                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.'] ?? []);
+
+            if ((is_array($userTsConfig['tx_femanager.']) ?? null) && (is_array($this->moduleConfig)?? null)) {
+                $this->moduleConfig = array_merge_recursive($this->moduleConfig, $userTsConfig['tx_femanager.']);
             }
         }
 
@@ -550,8 +535,8 @@ abstract class AbstractController extends ActionController
                     ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config),
             ],
             $this->contentObject->cObjGetSingle(
-                ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),
-                ConfigurationUtility::getValue('new./email./createUserConfirmation./subject.', $this->config)
+                (string)ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),
+                (array)ConfigurationUtility::getValue('new./email./createUserConfirmation./subject.', $this->config)
             ),
             [
                 'user' => $user,

@@ -30,6 +30,12 @@
     "typo3/cms-core": "^11.5",
     "symfony/config": "^5.4"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/in2code-de/femanagerextended.git"
+    }
+  ],
   "replace": {
     "typo3-ter/femanager": "self.version"
   },

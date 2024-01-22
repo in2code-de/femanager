@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 .. _signalslots:
 
@@ -235,7 +235,7 @@ femanagersignalslot/ext_emconf.php:
 
 This file is important to install your new extension – write something like:
 
-.. code-block:: text
+.. code-block:: php
 
 	<?php
 
@@ -258,11 +258,11 @@ This file is important to install your new extension – write something like:
 			),
 	);
 
-femanagersignalslot/ext_localconf.php:
+file:`femanagersignalslot/ext_localconf.php`:
 
 This is an example how to use a signal from femanager – in this case we decided to use the signal “createActionBeforePersist” in class “In2codeFemanagerControllerNewController” and want to call a slot in class “In2codeFemanagersignalslotDomainServiceSendMailService” with methodname “send()”
 
-.. code-block:: text
+.. code-block:: php
 
 	<?php
 
@@ -279,7 +279,7 @@ femanagersignalslot/Classes/Domain/Service/SendMailService.php:
 
 This is our main class which is called every time a new registration process was initiated.
 
-.. code-block:: text
+.. code-block:: php
 
 	<?php
 	namespace In2code\Femanagersignalslot\Domain\Service;

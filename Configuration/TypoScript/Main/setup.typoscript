@@ -946,7 +946,7 @@ plugin.tx_femanager {
           #          }
         }
 
-        # Email for if update request was refused by admin
+        # Email sent when user updates his/her profile and (if configured) request was confirmed by admin.
         notifyAdmin {
           ##########################
           # Set values (overwrite)
@@ -1778,3 +1778,8 @@ feManagerStateSelection {
     features.requireCHashArgumentForActionArguments = 0
   }
 }
+
+##################################################
+# Configuration Setting for Backend Module
+##################################################
+module.tx_femanager.settings.configPID = 1

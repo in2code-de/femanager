@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 
 .. _finishers:
@@ -23,7 +23,7 @@ Small example
 
 Just define which classes should be used. Every method like \*Finisher() will be called - e.g. myFinisher():
 
-::
+.. code-block:: typoscript
 
    plugin.tx_femanager.settings {
        finishers {
@@ -35,7 +35,8 @@ Just define which classes should be used. Every method like \*Finisher() will be
 
 
 Add a php-file and extend your class with the AbstractFinisher from femanager:
-::
+
+.. code-block:: php
 
    <?php
    namespace Vendor\Ext\Finisher;
@@ -69,7 +70,7 @@ in TypoScript and with the possibility to load the file
 (useful if file could not be loaded from autoloader
 because it's stored in fileadmin or elsewhere)
 
-::
+.. code-block:: typoscript
 
    plugin.tx_femanager.settings {
        finishers {
@@ -95,7 +96,7 @@ because it's stored in fileadmin or elsewhere)
 
 Add your php-file again and extend your class with the AbstractFinisher from femanager:
 
-::
+.. code-block:: php
 
    <?php
    namespace Vendor\Ext\Finisher;

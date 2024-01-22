@@ -1,4 +1,4 @@
-.. include:: ../Includes.txt
+.. include:: ../Includes.rst.txt
 .. include:: Images.txt
 
 .. _upgrade:
@@ -8,7 +8,7 @@ Upgrade
 
 .. only:: html
 
-	:ref:`v7.1` |:ref:`v6.0` |:ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+	:ref:`v7.1` | :ref:`v6.0` | :ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
 
 .. _v7.1:
 
@@ -60,7 +60,7 @@ Please update these partials:
 
 :file:`/Partials/Misc/DeleteLink.html`
 
-The argument token was introduced :html:`(token:token)`
+The argument token was introduced :php:`(token:token)`
 
 **old:**
 
@@ -90,7 +90,7 @@ The argument token was introduced :html:`(token:token)`
 
 :file:`/Templates/Edit/Edit.html`
 
-You need to add: :html:`<f:form.hidden name="token" value="{token}" />` between the form tag.
+You need to add: :php:`<f:form.hidden name="token" value="{token}" />` between the form tag.
 
 Example:
 
