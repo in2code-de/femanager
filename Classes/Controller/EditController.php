@@ -9,6 +9,7 @@ use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Event\AfterUserUpdateEvent;
 use In2code\Femanager\Event\BeforeUpdateUserEvent;
 use In2code\Femanager\Event\DeleteUserEvent;
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -16,9 +17,12 @@ use In2code\Femanager\Utility\ObjectUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 
 /**
  * Class EditController
@@ -42,11 +46,6 @@ class EditController extends AbstractFrontendController
 
     public function initializeUpdateAction()
     {
-        $user = UserUtility::getCurrentUser();
-        $userValues = $this->request->getArgument('user');
-        $token = $this->request->getArgument('token');
-
-        $this->testSpoof($user, $userValues['__identity'], $token);
         if ($this->keepPassword()) {
             unset($this->pluginVariables['user']['password']);
             unset($this->pluginVariables['password_repeat']);
@@ -56,16 +55,46 @@ class EditController extends AbstractFrontendController
 
     /**
      * @param User $user
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\ServersideValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\PasswordValidator", param="user")
+     * @Validate("In2code\Femanager\Domain\Validator\CaptchaValidator", param="user")
      */
     public function updateAction(User $user)
     {
-        $this->redirectIfDirtyObject($user);
-        $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['beforeAnyConfirmation.']);
+        $currentUser = UserUtility::getCurrentUser();
+        $userValues = $this->request->hasArgument('user') ? $this->request->getArgument('user') : null;
+        $token = $this->request->hasArgument('token') ? $this->request->getArgument('token') : null;
+
+        if ($currentUser === null ||
+            empty($userValues['__identity']) ||
+            (int)$userValues['__identity'] === null ||
+            $token === null ||
+            $this->isSpoof($currentUser, (int)$userValues['__identity'], $token)
+        ) {
+            $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
+            $this->addFlashMessage(
+                LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
+                '',
+                FlashMessage::ERROR
+            );
+            return new ForwardResponse('edit');
+        }
+
+        $response = $this->redirectIfNoChangesOnObject($user);
+        if ($response !== null) {
+            return $response;
+        }
+        $user = FrontendUtility::forceValues(
+            $user,
+            ConfigurationUtility::getValue('edit./forceValues./beforeAnyConfirmation.', $this->config)
+        );
+
         $this->emailForUsername($user);
-        UserUtility::convertPassword($user, $this->settings['edit']['misc']['passwordSave']);
+        UserUtility::convertPassword(
+            $user,
+            ConfigurationUtility::getValue('edit/misc/passwordSave', $this->settings)
+        );
+
         $this->eventDispatcher->dispatch(new BeforeUpdateUserEvent($user));
         if (!empty($this->settings['edit']['confirmByAdmin'])) {
             $this->updateRequest($user);
@@ -84,7 +113,7 @@ class EditController extends AbstractFrontendController
     {
         $this->view->assign('user', $user);
         if (!HashUtility::validHash($hash, $user) || !$user->getTxFemanagerChangerequest()) {
-            $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', FlashMessage::ERROR);
+            $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', AbstractMessage::ERROR);
             return $this->htmlResponse(null);
         }
         switch ($status) {
@@ -162,6 +191,23 @@ class EditController extends AbstractFrontendController
      */
     public function deleteAction(User $user)
     {
+        $currentUser = UserUtility::getCurrentUser();
+        $token = $this->request->hasArgument('token') ? $this->request->getArgument('token') : null;
+        $uid = $this->request->hasArgument('user') ? $this->request->getArgument('user') : null;
+        if ($currentUser === null ||
+            $token === null ||
+            $uid === null ||
+            $this->isSpoof($currentUser, (int)$uid, $token)
+        ) {
+            $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
+            $this->addFlashMessage(
+                LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
+                '',
+                FlashMessage::ERROR
+            );
+            return new ForwardResponse('edit');
+        }
+
         $this->eventDispatcher->dispatch(new DeleteUserEvent($user));
         $this->logUtility->log(Log::STATUS_PROFILEDELETE, $user);
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEDELETE));
@@ -188,16 +234,14 @@ class EditController extends AbstractFrontendController
 
     /**
      * Check: If there are no changes, simple redirect back
-     *
-     * @param User $user
-     * @throws UnsupportedRequestTypeException
      */
-    protected function redirectIfDirtyObject(User $user)
+    protected function redirectIfNoChangesOnObject(User $user)
     {
         if (!ObjectUtility::isDirtyObject($user)) {
             $this->addFlashMessage(LocalizationUtility::translate('noChanges'), '', FlashMessage::NOTICE);
-            $this->redirect('edit');
+            return $this->redirect('edit');
         }
+        return null;
     }
 
     /**
@@ -205,7 +249,8 @@ class EditController extends AbstractFrontendController
      */
     protected function emailForUsername(User $user)
     {
-        if ($this->settings['edit']['fillEmailWithUsername'] === '1') {
+        $fillEmailWithUsername = ConfigurationUtility::getValue('edit/fillEmailWithUsername', $this->settings);
+        if ($fillEmailWithUsername === '1') {
             $user->setEmail($user->getUsername());
         }
     }

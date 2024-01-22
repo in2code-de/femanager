@@ -63,7 +63,7 @@ class FinisherService
     protected $finisherInterface = 'In2code\Femanager\Finisher\FinisherInterface';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 

@@ -18,17 +18,17 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     /**
      * Inject a complete new content object
      *
-     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @var ContentObjectRenderer
      */
     protected $contentObject;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     * @var ObjectManager
      */
     protected $objectManager;
 
     /**
-     * @var \TYPO3\CMS\Core\TypoScript\TypoScriptService
+     * @var TypoScriptService
      */
     protected $typoScriptService;
 
@@ -127,8 +127,8 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
         foreach ($this->configuration[$table] as $field => $value) {
             if (!$this->isSkippedKey($field)) {
                 $value = $this->contentObject->cObjGetSingle(
-                    $this->configuration[$table][$field],
-                    $this->configuration[$table][$field . '.']
+                    (string)$this->configuration[$table][$field],
+                    (array)$this->configuration[$table][$field . '.']
                 );
                 $storeInDatabase->addProperty($field, $value);
             }
@@ -144,8 +144,8 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     protected function isTableEnabled($table)
     {
         return $this->contentObject->cObjGetSingle(
-            $this->configuration[$table]['_enable'],
-            $this->configuration[$table]['_enable.']
+            (string)$this->configuration[$table]['_enable'],
+            (array)$this->configuration[$table]['_enable.']
         ) === '1';
     }
 

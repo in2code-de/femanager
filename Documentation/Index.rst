@@ -1,4 +1,4 @@
-.. include:: Includes.txt
+.. include:: Includes.rst.txt
 
 =========
 femanager
@@ -9,13 +9,13 @@ Femanager is a TYPO3 extension for a modern Frontend-User registration and profi
 .. only:: html
 
 	:Copyright:
-		2013 - 2022
+		2013 - 2023
 
 	:Classification:
 		femanager
 
 	:Version:
-		7.0.0
+		7.2.3
 
 	:Language:
 		en
@@ -44,6 +44,14 @@ Table of Contents
 	Features/Index
 	FAQ/Index
 	Changelog/Index
+
+..  Meta Menu
+
+..  toctree::
+    :hidden:
+
+    Sitemap
+    genindex
 
 Additional Links
 ================

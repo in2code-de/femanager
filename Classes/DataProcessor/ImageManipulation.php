@@ -29,10 +29,13 @@ class ImageManipulation extends AbstractDataProcessor
             if ($this->isFileIdentifierGiven($arguments, $property) || $this->isUploadError($arguments, $property)) {
                 unset($arguments['user'][$property]);
             } else {
+                // Convert property name
+                $property = lcfirst(GeneralUtility::underscoredToUpperCamelCase($property));
+
                 // file upload given
-                foreach ((array)$arguments['user'][$property] as $fileItem) {
+                foreach ($arguments['user'][$property] ?? [] as $fileItem) {
                     /** @noinspection PhpMethodParametersCountMismatchInspection */
-                    $fileService = ObjectUtility::getObjectManager()->get(
+                    $fileService = GeneralUtility::makeInstance(
                         FileService::class,
                         $this->getNewImageName($fileItem),
                         $fileItem
@@ -84,7 +87,7 @@ class ImageManipulation extends AbstractDataProcessor
      */
     protected function upload(array $fileItem): string
     {
-        $basicFileFunctions = ObjectUtility::getObjectManager()->get(BasicFileUtility::class);
+        $basicFileFunctions = GeneralUtility::makeInstance(BasicFileUtility::class);
         $uniqueFileName = $basicFileFunctions->getUniqueName(
             $this->getNewImageName($fileItem),
             $this->getUploadFolder()

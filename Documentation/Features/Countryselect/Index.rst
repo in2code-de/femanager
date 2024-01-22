@@ -1,4 +1,4 @@
-.. include:: ../../Includes.txt
+.. include:: ../../Includes.rst.txt
 
 
 .. _countryselect:
@@ -24,7 +24,7 @@ The idea is very simple. You can change the “options Attribute” of the form.
 
 
 
-.. code-block:: text
+.. code-block:: typoscript
 
 	<femanager:form.select
 		id="femanager_field_country"
@@ -98,7 +98,7 @@ Possible options for this ViewHelper are:
 
 Some Examples are:
 
-.. code-block:: text
+.. code-block:: html
 
 	{femanager:Form.GetCountriesFromStaticInfoTables(key:'isoCodeA2',value:'shortNameDe')}
 	{femanager:Form.GetCountriesFromStaticInfoTables(key:'isoCodeA2',value:'shortNameFr',sortbyField:'shortNameFr')}

@@ -6,6 +6,7 @@ namespace In2code\Femanager\Domain\Validator;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Class PasswordValidator
@@ -19,7 +20,7 @@ class PasswordValidator extends AbstractValidatorExtbase
      *
      * @var object
      */
-    public $cObj;
+    protected $cObj;
 
     /**
      * Plugin Variables
@@ -111,7 +112,7 @@ class PasswordValidator extends AbstractValidatorExtbase
         $flexFormValues = GeneralUtility::xml2array($this->cObj->data['pi_flexform']);
         if (is_array($flexFormValues)) {
             $fields =
-                $flexFormValues['data'][$this->actionName]['lDEF']['settings.' . $this->actionName . '.fields']['vDEF'];
+                $flexFormValues['data'][$this->actionName]['lDEF']['settings.' . $this->actionName . '.fields']['vDEF'] ?? [];
             if (empty($fields) || GeneralUtility::inList($fields, 'password')) {
                 // password fields are added to form
                 return true;
@@ -135,5 +136,10 @@ class PasswordValidator extends AbstractValidatorExtbase
         $this->cObj = $this->configurationManager->getContentObject();
         $this->piVars = GeneralUtility::_GP('tx_femanager_pi1');
         $this->actionName = $this->piVars['__referrer']['@action'];
+    }
+
+    public function setContentObjectRenderer(ContentObjectRenderer $cObj): void
+    {
+        $this->cObj = $cObj;
     }
 }

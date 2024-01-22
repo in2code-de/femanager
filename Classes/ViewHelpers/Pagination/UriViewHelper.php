@@ -56,10 +56,6 @@ class UriViewHelper extends AbstractTagBasedViewHelper
             ->setArguments([$argumentPrefix => $arguments])
             ->setAddQueryString(true)
             ->setArgumentsToBeExcludedFromQueryString([$argumentPrefix, 'cHash']);
-        $addQueryStringMethod = $this->arguments['addQueryStringMethod'] ?? null;
-        if (is_string($addQueryStringMethod)) {
-            $uriBuilder->setAddQueryStringMethod($addQueryStringMethod);
-        }
         return $uriBuilder->build();
     }
 }

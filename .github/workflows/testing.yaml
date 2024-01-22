@@ -25,6 +25,8 @@ jobs:
       matrix:
         php-version:
           - 7.4
+          - 8.0
+          - 8.1
   typoscript-lint:
     name: "TypoScript linter"
     runs-on: ubuntu-20.04
@@ -51,6 +53,21 @@ jobs:
         run: "composer install"
       - name: "Run PHP CS Fixer"
         run: "composer test:php:cs"
+  php-rector:
+    name: "PHP Rector"
+    runs-on: ubuntu-20.04
+    needs: php-lint
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+      - name: "Composer Install"
+        run: "composer install"
+      - name: "Run PHP Rector"
+        run: "composer test:rector"
   unit-tests:
     name: "PHP Unit Tests"
     runs-on: ubuntu-20.04
@@ -73,6 +90,8 @@ jobs:
       matrix:
         php-version:
           - 7.4
+          - 8.0
+          - 8.1
   behaviour-tests:
     name: "PHP Behat Tests"
     runs-on: ubuntu-20.04
@@ -83,7 +102,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: jonaseberle/github-action-setup-ddev@v1
+      - uses: ddev/github-action-setup-ddev@v1
       - name: "Composer Install"
         run: "ddev composer install"
       - name: "Initialize TYPO3 in ddev"
@@ -95,4 +114,6 @@ jobs:
       matrix:
         php-version:
           - 7.4
+          - 8.0
+          - 8.1
 

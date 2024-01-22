@@ -16,6 +16,7 @@ use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 
 /**
  * Class UserBackendController
@@ -30,14 +31,13 @@ class UserBackendController extends AbstractController
     public function listAction(array $filter = []): ResponseInterface
     {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $loginAsEnabled = $GLOBALS['BE_USER']->user['admin'] === 1 || (int)$GLOBALS['BE_USER']->getTSConfig(
-        )['tx_femanager.']['UserBackend.']['enableLoginAs'] === 1;
+
         $this->view->assignMultiple(
             [
                 'users' => $this->userRepository->findAllInBackend($filter),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'list',
-                'loginAsEnabled' => $loginAsEnabled
+                'loginAsEnabled' => $this->loginAsEnabled()
             ]
         );
         return $this->htmlResponse();
@@ -70,6 +70,10 @@ class UserBackendController extends AbstractController
      */
     public function userLogoutAction(User $user)
     {
+        $queryParams = $this->request->getQueryParams();
+        if (empty($queryParams['id']) || $queryParams['id'] !== (string)$user->getPid()) {
+            return new ForwardResponse('list');
+        }
         UserUtility::removeFrontendSessionToUser($user);
         $this->addFlashMessage('User successfully logged out');
         $this->redirect('list');
@@ -83,6 +87,10 @@ class UserBackendController extends AbstractController
         $this->configPID = $this->getConfigPID();
 
         $user = $this->userRepository->findByUid($userIdentifier);
+        $queryParams = $this->request->getQueryParams();
+        if (empty($queryParams['id']) || $user === null || $queryParams['id'] !== (string)$user->getPid()) {
+            return new ForwardResponse('list');
+        }
         $this->eventDispatcher->dispatch(new AdminConfirmationUserEvent($user));
 
         $jsonResult = $this->getFrontendRequestResult('adminConfirmation', $userIdentifier, $user);
@@ -119,6 +127,10 @@ class UserBackendController extends AbstractController
         $this->configPID = $this->getConfigPID();
 
         $user = $this->userRepository->findByUid($userIdentifier);
+        $queryParams = $this->request->getQueryParams();
+        if (empty($queryParams['id']) || $user === null || $queryParams['id'] !== (string)$user->getPid()) {
+            return new ForwardResponse('list');
+        }
         $this->eventDispatcher->dispatch(new RefuseUserEvent($user));
 
         $jsonResult = $this->getFrontendRequestResult('adminConfirmationRefused', $userIdentifier, $user);
@@ -172,6 +184,10 @@ class UserBackendController extends AbstractController
     public function resendUserConfirmationRequestAction(int $userIdentifier)
     {
         $user = $this->userRepository->findByUid($userIdentifier);
+        $queryParams = $this->request->getQueryParams();
+        if (empty($queryParams['id']) || $user === null || $queryParams['id'] !== (string)$user->getPid()) {
+            return new ForwardResponse('list');
+        }
         $this->sendCreateUserConfirmationMail($user);
         $this->addFlashMessage(
             LocalizationUtility::translate(
@@ -245,5 +261,16 @@ class UserBackendController extends AbstractController
             $content = $response->getBody()->getContents();
             return json_decode($content, true);
         }
+    }
+
+    private function loginAsEnabled(): bool
+    {
+        if ($GLOBALS['BE_USER']->user['admin'] === 1) {
+            return true;
+        }
+
+        $tsConfigEnableLoginAs = (int)($GLOBALS['BE_USER']->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? 0);
+
+        return $tsConfigEnableLoginAs === 1;
     }
 }

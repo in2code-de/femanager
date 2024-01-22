@@ -44,12 +44,12 @@ class TemplateUtility extends AbstractUtility
         $templatePaths = [];
         $configuration = self::getConfigurationManager()
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'femanager');
-        if (!empty($configuration['view'][$part . 'RootPaths'])) {
-            $templatePaths = $configuration['view'][$part . 'RootPaths'];
+        if (!empty($configuration['view'][$part . 'RootPaths'] ?? '')) {
+            $templatePaths = $configuration['view'][$part . 'RootPaths'] ?? '';
             $templatePaths = array_values($templatePaths);
         }
         if ($returnAllPaths || empty($templatePaths)) {
-            $path = $configuration['view'][$part . 'RootPath'];
+            $path = $configuration['view'][$part . 'RootPath'] ?? '';
             if (!empty($path)) {
                 $templatePaths[] = $path;
             }
@@ -117,7 +117,7 @@ class TemplateUtility extends AbstractUtility
         $format = 'html'
     ) {
         /** @var StandaloneView $standAloneView */
-        $standAloneView = self::getObjectManager()->get(StandaloneView::class);
+        $standAloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standAloneView->getRequest()->setControllerExtensionName($extensionName);
         $standAloneView->getRequest()->setPluginName($pluginName);
         $standAloneView->getRequest()->setControllerName($controllerName);

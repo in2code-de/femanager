@@ -8,7 +8,6 @@ use In2code\Femanager\Domain\Repository\PluginRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Event\UniqueUserEvent;
 use In2code\Femanager\Utility\FrontendUtility;
-use In2code\Femanager\Utility\ObjectUtility;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -482,7 +481,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function checkAllowedControllerName(string $controllerName)
     {
-        $pluginRepository = ObjectUtility::getObjectManager()->get(PluginRepository::class);
+        $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
         $pageIdentifier = FrontendUtility::getCurrentPid();
         if ($pluginRepository->isPluginWithViewOnGivenPage($controllerName, $pageIdentifier) === false) {
             throw new \LogicException('ControllerName is not allowed', 1541506524);

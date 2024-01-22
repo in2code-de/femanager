@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Model\User;
@@ -15,12 +16,12 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class FinisherRunner
 {
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
 
@@ -38,8 +39,8 @@ class FinisherRunner
 
     /**
      * FinisherRunner constructor.
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+     * @param ObjectManagerInterface $objectManager
+     * @param ConfigurationManagerInterface $configurationManager
      */
     public function __construct(
         ObjectManagerInterface $objectManager,
@@ -67,8 +68,8 @@ class FinisherRunner
             /** @var FinisherService $finisherService */
             $finisherService = $this->objectManager->get(FinisherService::class, $user, $settings, $contentObject);
             $finisherService->setClass($finisherSettings['class']);
-            $finisherService->setRequirePath((string)$finisherSettings['require']);
-            $finisherService->setConfiguration((array)$finisherSettings['config']);
+            $finisherService->setRequirePath($finisherSettings['require'] ?? '');
+            $finisherService->setConfiguration($finisherSettings['config'] ?? []);
             $finisherService->setActionMethodName($actionMethodName);
             $finisherService->start();
         }

@@ -7,7 +7,7 @@ use In2code\Femanager\Domain\Service\RatelimiterService;
 abstract class AbstractFrontendController extends AbstractController
 {
     /**
-     * @var \In2code\Femanager\Domain\Service\RatelimiterService
+     * @var RatelimiterService
      */
     protected $ratelimiterService;
 

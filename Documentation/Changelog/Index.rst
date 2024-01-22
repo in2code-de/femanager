@@ -1,11 +1,67 @@
-.. include:: ../Includes.txt
+.. include:: ../Includes.rst.txt
 
 
 Changelog
 =========
 
-.. t3-field-list-table::
-   :header-rows: 1
+-
+      :Version: 7.2.3
+      :Date: 2023-12-13
+      :Changes:
+
+      * [SECURITY] This update is needed for version for 7.0.0 to 7.2.2 older versions are not affected
+      * BUGFIX] Dont use initilize actions for granting access - thx to Daniel Hofmann (in2code)
+
+-
+      :Version: 7.2.2
+      :Date: 2023-10-04
+      :Changes:
+
+      * [SECURITY] This update is needed for version for 7.0.0 to 7.2.1 older versions are not affected
+      * [BUGFIX] Add missing permission check for invitation controller - thx to Daniel Hofmann (in2code)
+
+-
+      :Version: 7.2.1
+      :Date: 2023-08-08
+      :Changes:
+
+      * [TASK] Adds documentation for extended - thx to Daniel Hofmann (in2code)
+      * [TASK] Update Image used for Github Actions
+      * [BUGFIX] Fixes reaction when no typoscript configuration is set for redirect - thx to Daniel Hofmann (in2code)
+      * [BUGFIX] Fixed Object Support for getDirtyPropertiesFromUser() - thx to Daniel Hofmann (in2code)
+
+-
+      :Version: 7.2.0
+      :Date: 2023-07-17
+      :Changes:
+
+      * [FEATURE] Add column "inactive since" to backend list - thx to Thomas Löffler
+      * [BUGFIX] missing email AdminNotify after editing of user profile - thx to Christian Ludwig
+      * [BUGFIX] Do not re-evaluate object values in ServersideValidator - thx to Torben Hansen
+      * [BUGFIX] Add full object support in getDirtyPropertiesFromUser() - thx to Daniel Haupt
+      * [BUGFIX] Prevent undefined array key for empty configPID - thx to Daniel Haupt
+      * [BUGFIX] Migrate usage of GU::lcfirst with Rector - thx to Torben Hansen
+      * [TASK] Corrects Documenation Rendering Configuration - thx to Daniel Hoffmann
+      * [TASK] [TASK] Replace jQuery scrollTop with vanilla scrollIntoView - thx to Felix Ranesberger
+
+-
+      :Version: 7.1.1
+      :Date: 2023-03-16
+      :Changes:
+
+      * [BUGFIX] Notification email to admin now sends changes again
+      * [BUGFIX] Notification email to admin is also sent when adding recipient's address to flex form only
+      * [TASK] Removes configPID from ext_typoscript_setup.typoscript
+
+-
+      :Version: 7.1.0
+      :Date: 2023-01-19
+      :Changes:
+
+      * [FEATURE] Add support for PHP 8 and 8.1  - thx to Stefan Busemann, Bastien Lutz, Mathias Bolt Lesniak, Thomas Löffler, Johannes Seipelt
+      * [BUGFIX] Re-fetch session from database to update 'userSession' property of TSFE.	Thx to Thomas Off <thomas.off@retiolum.de>
+      * [BUGFIX] Add hash check for invitation action - thx to Max Schäfer & Dennis Schober-Wenger
+      * [REFACTOR] Remove deprecated code and introduce rector  - thx to Thomas Löffler
 
 -
       :Version: 7.0.1
