@@ -304,7 +304,7 @@ class ServersideValidator extends AbstractValidator
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    protected function getValue(User $user, string $fieldName): string|bool
+    protected function getValue(User $user, string $fieldName): mixed
     {
         $value = $this->getValueFromProperty($user, $fieldName);
 
