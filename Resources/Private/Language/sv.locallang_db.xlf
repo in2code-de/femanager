@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="sv-SE">
+    <header/>
+    <body>
+      <trans-unit id="tx_femanager_domain_model_user" approved="yes">
+        <source>User</source>
+        <target state="final">Användare</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.username" approved="yes">
+        <source>Username</source>
+        <target state="final">Användarnamn</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password" approved="yes">
+        <source>Password</source>
+        <target state="final">Lösenord</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.usergroup" approved="yes">
+        <source>Usergroup</source>
+        <target state="final">Användargrupp</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.name" approved="yes">
+        <source>Name</source>
+        <target state="final">Namn</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.firstName" approved="yes">
+        <source>Firstname</source>
+        <target state="final">Förnamn</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.middleName" approved="yes">
+        <source>Middlename</source>
+        <target state="final">Mellannamn</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastName" approved="yes">
+        <source>Lastname</source>
+        <target state="final">Efternamn</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth" approved="yes">
+        <source>Birthdate</source>
+        <target state="final">Födelsedag</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender" approved="yes">
+        <source>Gender</source>
+        <target state="final">Kön</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item0" approved="yes">
+        <source>male</source>
+        <target state="final">man</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item1" approved="yes">
+        <source>female</source>
+        <target state="final">kvinna</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+        <source>divers</source>
+        <target state="needs-translation">divers</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Adress</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.telephone" approved="yes">
+        <source>Telephone</source>
+        <target state="final">Telefon</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.fax" approved="yes">
+        <source>Fax</source>
+        <target state="final">Fax</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.email" approved="yes">
+        <source>Email</source>
+        <target state="final">E-post</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.zip" approved="yes">
+        <source>ZIP</source>
+        <target state="final">Postnummer</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.city" approved="yes">
+        <source>City</source>
+        <target state="final">Ort</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Land</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.www" approved="yes">
+        <source>Website</source>
+        <target state="final">Webbplats</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.company" approved="yes">
+        <source>Company</source>
+        <target state="final">Företag</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Bild</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastlogin" approved="yes">
+        <source>Last login</source>
+        <target state="final">Senast inloggad</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.captcha" approved="yes">
+        <source>Captcha</source>
+        <target state="final">Captcha</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.terms" approved="yes">
+        <source>Terms and conditions</source>
+        <target state="final">Villkor</target>
+      </trans-unit>
+      <trans-unit id="fe_users.crdate" approved="yes">
+        <source>Creation Time</source>
+        <target state="final">Skapad den</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tstamp" approved="yes">
+        <source>Last profile change at</source>
+        <target state="final">Senaste profiländringen den</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyuser" approved="yes">
+        <source>Registration confirmed by user</source>
+        <target state="final">Registrering bekräftad av användare</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyadmin" approved="yes">
+        <source>Registration confirmed by admin</source>
+        <target state="final">Registrering bekräftad av administratör</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tab" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrering</target>
+      </trans-unit>
+      <trans-unit id="fe_users.log" approved="yes">
+        <source>FE_user Log</source>
+        <target state="final">FE-användarlogg</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms" approved="yes">
+        <source>User accepted terms and conditions</source>
+        <target state="final">Användare godkände villkoren</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_version" approved="yes">
+        <source>Accepted version of terms and conditions</source>
+        <target state="final">Godkänd version av villkoren</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_date_of_acceptance" approved="yes">
+        <source>Accepted datetime of terms and conditions</source>
+        <target state="final">Godkänt datum av villkor</target>
+      </trans-unit>
+      <trans-unit id="fe_users.changerequest" approved="yes">
+        <source>Change Request</source>
+        <target state="final">Ändringsbegäran</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log" approved="yes">
+        <source>User Log</source>
+        <target state="final">Användarlogg</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.crdate" approved="yes">
+        <source>Time</source>
+        <target state="final">Tid</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state" approved="yes">
+        <source>State</source>
+        <target state="final">Län</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.100" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrering</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.101" approved="yes">
+        <source>New Registration</source>
+        <target state="final">Ny registrering</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.102" approved="yes">
+        <source>Registration confirmed by user</source>
+        <target state="final">Registrering bekräftad av användare</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.103" approved="yes">
+        <source>Registration confirmed by admin</source>
+        <target state="final">Registrering bekräftad av administratör</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.104" approved="yes">
+        <source>Registration refused by user</source>
+        <target state="final">Registrering nekad av användare</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.105" approved="yes">
+        <source>Registration refused by admin</source>
+        <target state="final">Registrering nekad av administratör</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.106" approved="yes">
+        <source>Profile creation request</source>
+        <target state="final">Förfrågan att skapa profil</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.200" approved="yes">
+        <source>Update</source>
+        <target state="final">Uppdatera</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.201" approved="yes">
+        <source>Profile updated</source>
+        <target state="final">Profil uppdaterad</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.202" approved="yes">
+        <source>Profile update confirmed by admin</source>
+        <target state="final">Profiluppdatering bekräftad av administratör</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.203" approved="yes">
+        <source>Profile update refused by admin</source>
+        <target state="final">Profiluppdatering nekad av administratör</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.204" approved="yes">
+        <source>Profile update request</source>
+        <target state="final">Begäran om uppdatering av profil</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.205" approved="yes">
+        <source>Profile update security failure</source>
+        <target state="final">Säkerhetsfel vid profiluppdatering</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.206" approved="yes">
+        <source>Image deleted</source>
+        <target state="final">Bild borttagen</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
+        <source>Delete</source>
+        <target state="final">Ta bort</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.301" approved="yes">
+        <source>Profile deleted</source>
+        <target state="final">Profil borttagen</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.400" approved="yes">
+        <source>Invitation</source>
+        <target state="final">Inbjudan</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.401" approved="yes">
+        <source>Profile created and User invited</source>
+        <target state="final">Profil skapad och användare inbjuden</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.402" approved="yes">
+        <source>Profile deleted from User</source>
+        <target state="final">Profil borttagen från användare</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.403" approved="yes">
+        <source>Wrong Hash</source>
+        <target state="final">Fel hash</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.404" approved="yes">
+        <source>You tried to open a restricted page</source>
+        <target state="final">Du försökte öppna en sida utan behörighet</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.405" approved="yes">
+        <source>Password changed and Profile activated</source>
+        <target state="final">Lösenord ändrat och profil aktiverad</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
+        <source>User</source>
+        <target state="final">Användare</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.title" approved="yes">
+        <source>Main Settings</source>
+        <target state="final">Huvudinställningar</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view" approved="yes">
+        <source>Choose View</source>
+        <target state="final">Välj vy</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.0" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrering</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.1" approved="yes">
+        <source>Edit</source>
+        <target state="final">Redigera</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.2" approved="yes">
+        <source>List</source>
+        <target state="final">Lista</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.3" approved="yes">
+        <source>Detail</source>
+        <target state="final">Detalj</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.4" approved="yes">
+        <source>Invitation</source>
+        <target state="final">Inbjudan</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.5" approved="yes">
+        <source>Resend confirmation mail</source>
+        <target state="final">Skicka om bekräftelsemail</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.title" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrering</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.fields" approved="yes">
+        <source>Select Fields for New-Form (empty = all fields)</source>
+        <target state="final">Välj fält för Ny-formulär (tomt = alla fält)</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.overrideUserGroup" approved="yes">
+        <source>Select Usergroups for new Users</source>
+        <target state="final">Välj användargrupper för nya användare</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByUser" approved="yes">
+        <source>Registration must be confirmed from sender</source>
+        <target state="final">Registrering måste bekräftas av avsändaren</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.showTermsAndConditions" approved="yes">
+        <source>User must accept terms and conditions</source>
+        <target state="final">Användare måste godkänna villkoren</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByAdmin" approved="yes">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target state="final">Registrering måste bekräftas av en administratör (lägg till en eller flera e-postadresser)</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.notifyAdmin" approved="yes">
+        <source>Notify admin on registration (add one or more emails)</source>
+        <target state="final">Avisera administratör vid registrering (lägg till en eller flera e-postadresser)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.title" approved="yes">
+        <source>Edit</source>
+        <target state="final">Redigera</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.fields" approved="yes">
+        <source>Select Fields for Edit-Form (empty = all fields)</source>
+        <target state="final">Välj fält för redigeringsformulär (tom = alla fält)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.showDeleteLink" approved="yes">
+        <source>Show Delete Button in Edit Form</source>
+        <target state="final">Visa 'Ta bort'-knapp i redigeringsformulär</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.confirmByAdmin" approved="yes">
+        <source>Profile update must be confirmed from an admin (add one or more emails)</source>
+        <target state="final">Profiluppdatering måste bekräftas av administratör (Lägg till en eller flera e-postadresser)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.notifyAdmin" approved="yes">
+        <source>Notify admin on Profile update (add one or more emails)</source>
+        <target state="final">Avisera administratör vid profiluppdatering (Lägg till en eller flera e-postadresser)</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.title" approved="yes">
+        <source>Listview</source>
+        <target state="final">Listvy</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.filter" approved="yes">
+        <source>Show Searchfield</source>
+        <target state="final">Visa sökfält</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.limit" approved="yes">
+        <source>Limit</source>
+        <target state="final">Gräns</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby" approved="yes">
+        <source>Order by</source>
+        <target state="final">Ordna enligt</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.0" approved="yes">
+        <source>Lastname</source>
+        <target state="final">Efternamn</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.1" approved="yes">
+        <source>Firstname</source>
+        <target state="final">Förnamn</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.2" approved="yes">
+        <source>Company</source>
+        <target state="final">Företag</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.3">
+        <source>Username</source>
+        <target state="needs-translation">Username</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting" approved="yes">
+        <source>Sorting</source>
+        <target state="final">Sortering</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.0" approved="yes">
+        <source>Ascending</source>
+        <target state="final">Stigande</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.1" approved="yes">
+        <source>Descending</source>
+        <target state="final">Fallande</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.usergroup" approved="yes">
+        <source>Show from usergroup (empty = show all)</source>
+        <target state="final">Visa från användargrupp (tom = visa alla)</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.title" approved="yes">
+        <source>Detailview</source>
+        <target state="final">Detaljvy</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user" approved="yes">
+        <source>User to show</source>
+        <target state="final">Användare att visa</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user.1" approved="yes">
+        <source>[Logged in FE User]</source>
+        <target state="final">[Inloggad FE-användare]</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.title" approved="yes">
+        <source>Invitation</source>
+        <target state="final">Inbjudan</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.allowedUserGroups" approved="yes">
+        <source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
+        <target state="final">Begränsa "Lägg till inbjudan" till en eller flera användargrupper (tom = Ingen begränsning)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.fields" approved="yes">
+        <source>Select Fields for invitation-Form (empty = all fields)</source>
+        <target state="final">Välj fält för inbjudningsformulär (tom = alla fält)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.overrideUserGroup" approved="yes">
+        <source>Select Usergroups for new Users</source>
+        <target state="final">Välj användargrupp för nya användare</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.confirmByAdmin" approved="yes">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target state="final">Registrering måste bekräftas av administratör (lägg till en eller flera e-postadresser)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdminStep1" approved="yes">
+        <source>Notify admin on step 1 (add one or more emails)</source>
+        <target state="final">Avisera administratör på steg 1 (lägg till en eller flera e-postadresser)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdmin" approved="yes">
+        <source>Notify admin if user sets a password (add one or more emails)</source>
+        <target state="final">Avisera administratör om användare sätter ett lösenord (lägg till en eller flera e-postadresser)</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.title" approved="yes">
+        <source>Additional Settings</source>
+        <target state="final">Ytterligare Inställningar</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.termsUrl" approved="yes">
+        <source>Page with terms and conditions</source>
+        <target state="final">Sida med villkor</target>
+      </trans-unit>
+      <trans-unit id="pleaseChoose" approved="yes">
+        <source>Please choose...</source>
+        <target state="final">Vänligen välj ...</target>
+      </trans-unit>
+      <trans-unit id="pleaseChooseCountry">
+        <source>Please choose a country...</source>
+        <target state="needs-translation">Please choose a country...</target>
+      </trans-unit>
+      <trans-unit id="noZonesForThisCountry">
+        <source>No zones available for the chosen country</source>
+        <target state="needs-translation">No zones available for the chosen country</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

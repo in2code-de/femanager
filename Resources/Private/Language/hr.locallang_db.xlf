@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="hr">
+    <header/>
+    <body>
+      <trans-unit id="tx_femanager_domain_model_user" approved="yes">
+        <source>User</source>
+        <target state="final">Korisnik</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.username" approved="yes">
+        <source>Username</source>
+        <target state="final">Korisničko ime</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password" approved="yes">
+        <source>Password</source>
+        <target state="final">Lozinka</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.usergroup" approved="yes">
+        <source>Usergroup</source>
+        <target state="final">Korisnička grupa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.name" approved="yes">
+        <source>Name</source>
+        <target state="final">Ime i prezime</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.firstName" approved="yes">
+        <source>Firstname</source>
+        <target state="final">Ime</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.middleName" approved="yes">
+        <source>Middlename</source>
+        <target state="final">Srednje ime</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastName" approved="yes">
+        <source>Lastname</source>
+        <target state="final">Prezime</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth" approved="yes">
+        <source>Birthdate</source>
+        <target state="final">Datum rođenja</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender" approved="yes">
+        <source>Gender</source>
+        <target state="final">Spol</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item0" approved="yes">
+        <source>male</source>
+        <target state="final">muško</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item1" approved="yes">
+        <source>female</source>
+        <target state="final">žensko</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+        <source>divers</source>
+        <target state="needs-translation">divers</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Adresa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.telephone" approved="yes">
+        <source>Telephone</source>
+        <target state="final">Telefon</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.fax" approved="yes">
+        <source>Fax</source>
+        <target state="final">Fax</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.email" approved="yes">
+        <source>Email</source>
+        <target state="final">E-mail</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titula</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.zip" approved="yes">
+        <source>ZIP</source>
+        <target state="final">Poštanski broj</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.city" approved="yes">
+        <source>City</source>
+        <target state="final">Grad</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Država</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.www" approved="yes">
+        <source>Website</source>
+        <target state="final">Internet stranica</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.company" approved="yes">
+        <source>Company</source>
+        <target state="final">Tvrtka</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Slika</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastlogin" approved="yes">
+        <source>Last login</source>
+        <target state="final">Posljednja prijava</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.captcha" approved="yes">
+        <source>Captcha</source>
+        <target state="final">Captcha</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.terms">
+        <source>Terms and conditions</source>
+        <target state="needs-translation">Terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.crdate" approved="yes">
+        <source>Creation Time</source>
+        <target state="final">Vrijeme otvaranja računa</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tstamp" approved="yes">
+        <source>Last profile change at</source>
+        <target state="final">Posljednje ažuriranje korisničkog računa u</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyuser" approved="yes">
+        <source>Registration confirmed by user</source>
+        <target state="final">Korisnik je potvrdio otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyadmin" approved="yes">
+        <source>Registration confirmed by admin</source>
+        <target state="final">Administrator je potvrdio otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tab" approved="yes">
+        <source>Registration</source>
+        <target state="final">Otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="fe_users.log" approved="yes">
+        <source>FE_user Log</source>
+        <target state="final">Zapisnik korisnika prednjeg sučelja</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms">
+        <source>User accepted terms and conditions</source>
+        <target state="needs-translation">User accepted terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_version">
+        <source>Accepted version of terms and conditions</source>
+        <target state="needs-translation">Accepted version of terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_date_of_acceptance">
+        <source>Accepted datetime of terms and conditions</source>
+        <target state="needs-translation">Accepted datetime of terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.changerequest" approved="yes">
+        <source>Change Request</source>
+        <target state="final">Zahtjev za ažuriranjem</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log" approved="yes">
+        <source>User Log</source>
+        <target state="final">Zapisnik korisnika</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Naslov</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.crdate" approved="yes">
+        <source>Time</source>
+        <target state="final">Vrijeme</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state" approved="yes">
+        <source>State</source>
+        <target state="final">Status</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.100" approved="yes">
+        <source>Registration</source>
+        <target state="final">Otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.101" approved="yes">
+        <source>New Registration</source>
+        <target state="final">Novo otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.102" approved="yes">
+        <source>Registration confirmed by user</source>
+        <target state="final">Korisnik je potvrdio otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.103" approved="yes">
+        <source>Registration confirmed by admin</source>
+        <target state="final">Administrator je potvrdio otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.104" approved="yes">
+        <source>Registration refused by user</source>
+        <target state="final">Korisnik je odbio otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.105" approved="yes">
+        <source>Registration refused by admin</source>
+        <target state="final">Administrator je odbio otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.106" approved="yes">
+        <source>Profile creation request</source>
+        <target state="final">Zahtjev za otvaranjem korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.200" approved="yes">
+        <source>Update</source>
+        <target state="final">Ažuriranje</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.201" approved="yes">
+        <source>Profile updated</source>
+        <target state="final">Korisnički račun je ažuriran</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.202" approved="yes">
+        <source>Profile update confirmed by admin</source>
+        <target state="final">Administrator je odobrio ažuriranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.203" approved="yes">
+        <source>Profile update refused by admin</source>
+        <target state="final">Administrator je odbio ažuriranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.204" approved="yes">
+        <source>Profile update request</source>
+        <target state="final">Zahtjev za ažuriranjem korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.205" approved="yes">
+        <source>Profile update security failure</source>
+        <target state="final">Sigurnosna pogreška kod ažuriranja korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.206">
+        <source>Image deleted</source>
+        <target state="needs-translation">Image deleted</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
+        <source>Delete</source>
+        <target state="final">Brisanje</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.301" approved="yes">
+        <source>Profile deleted</source>
+        <target state="final">Korisnički račun izbrisan</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.400" approved="yes">
+        <source>Invitation</source>
+        <target state="final">Pozivnica</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.401" approved="yes">
+        <source>Profile created and User invited</source>
+        <target state="final">Korisnički račun je otvoren i korisnik je pozvan</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.402" approved="yes">
+        <source>Profile deleted from User</source>
+        <target state="final">Korisnik je izbrisao korisnički račun</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.403" approved="yes">
+        <source>Wrong Hash</source>
+        <target state="final">Pogrešan hash</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.404" approved="yes">
+        <source>You tried to open a restricted page</source>
+        <target state="final">Pokušali ste pristupiti stranici s ograničenjem pristupa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.405" approved="yes">
+        <source>Password changed and Profile activated</source>
+        <target state="final">Lozinka je izmjenjena i korisnički račun omogućen</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
+        <source>User</source>
+        <target state="final">Korisnik</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.title" approved="yes">
+        <source>Main Settings</source>
+        <target state="final">Glavne postavke</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view" approved="yes">
+        <source>Choose View</source>
+        <target state="final">Odaberite pregled</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.0" approved="yes">
+        <source>Registration</source>
+        <target state="final">Otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.1" approved="yes">
+        <source>Edit</source>
+        <target state="final">Uređivanje</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.2" approved="yes">
+        <source>List</source>
+        <target state="final">Popis</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.3" approved="yes">
+        <source>Detail</source>
+        <target state="final">Detalji</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.4" approved="yes">
+        <source>Invitation</source>
+        <target state="final">Pozivnica</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.5">
+        <source>Resend confirmation mail</source>
+        <target state="needs-translation">Resend confirmation mail</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.title" approved="yes">
+        <source>Registration</source>
+        <target state="final">Otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.fields" approved="yes">
+        <source>Select Fields for New-Form (empty = all fields)</source>
+        <target state="final">Odaberite polja za obrazac - Novi korisnički račun (prazno odabire sva polja)</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.overrideUserGroup" approved="yes">
+        <source>Select Usergroups for new Users</source>
+        <target state="final">Odaberite korisničke grupe za nove korisnike</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByUser" approved="yes">
+        <source>Registration must be confirmed from sender</source>
+        <target state="final">Pošiljatelj mora potvrditi otvaranje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.showTermsAndConditions">
+        <source>User must accept terms and conditions</source>
+        <target state="needs-translation">User must accept terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByAdmin" approved="yes">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target state="final">Administrator mora potvrditi otvaranje korisničkog računa (dodajte jednu ili više e-mail adresa)</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.notifyAdmin" approved="yes">
+        <source>Notify admin on registration (add one or more emails)</source>
+        <target state="final">Obavijesti administratora kod novog otvaranja korisničkog računa (dodajte jednu ili više e-mail adresa)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.title" approved="yes">
+        <source>Edit</source>
+        <target state="final">Uredi</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.fields" approved="yes">
+        <source>Select Fields for Edit-Form (empty = all fields)</source>
+        <target state="final">Odaberite polja za obrazac - Uređivanje korisničkog računa (prazno odabire sva polja)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.showDeleteLink" approved="yes">
+        <source>Show Delete Button in Edit Form</source>
+        <target state="final">Prikaži gumb za brisanje u obrascu za uređivanje korisničkog računa</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.confirmByAdmin" approved="yes">
+        <source>Profile update must be confirmed from an admin (add one or more emails)</source>
+        <target state="final">Administrator mora odobriti ažuriranje korisničkog računa (dodajte jednu ili više e-mail adresa)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.notifyAdmin" approved="yes">
+        <source>Notify admin on Profile update (add one or more emails)</source>
+        <target state="final">Obavijesti administratora kod ažuriranja korisničkog računa (dodajte jednu ili više e-mail adresa)</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.title" approved="yes">
+        <source>Listview</source>
+        <target state="final">Popis</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.filter" approved="yes">
+        <source>Show Searchfield</source>
+        <target state="final">Prikaži polje traženja</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.limit" approved="yes">
+        <source>Limit</source>
+        <target state="final">Ograničenje</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby" approved="yes">
+        <source>Order by</source>
+        <target state="final">Poredaj prema</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.0" approved="yes">
+        <source>Lastname</source>
+        <target state="final">Prezime</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.1" approved="yes">
+        <source>Firstname</source>
+        <target state="final">Ime</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.2" approved="yes">
+        <source>Company</source>
+        <target state="final">Tvrtka</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.3">
+        <source>Username</source>
+        <target state="needs-translation">Username</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting" approved="yes">
+        <source>Sorting</source>
+        <target state="final">Poredak</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.0" approved="yes">
+        <source>Ascending</source>
+        <target state="final">Uzlazno</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.1" approved="yes">
+        <source>Descending</source>
+        <target state="final">Silazno</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.usergroup" approved="yes">
+        <source>Show from usergroup (empty = show all)</source>
+        <target state="final">Prikaži iz korisničke grupe (prazno prikazuje sve)</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.title" approved="yes">
+        <source>Detailview</source>
+        <target state="final">Detaljni pregled</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user" approved="yes">
+        <source>User to show</source>
+        <target state="final">Prikaži odabrane korisnike</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user.1" approved="yes">
+        <source>[Logged in FE User]</source>
+        <target state="final">[Prijavljeni korisnik prednjeg sučelja]</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.title" approved="yes">
+        <source>Invitation</source>
+        <target state="final">Pozivnica</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.allowedUserGroups" approved="yes">
+        <source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
+        <target state="final">Ograniči slanje pozivnica na jednu ili više korisničkih grupa (prazno = nema ograničenja)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.fields" approved="yes">
+        <source>Select Fields for invitation-Form (empty = all fields)</source>
+        <target state="final">Odaberite polja za obrazac - pozivnica za otvaranje korisničkog računa (prazno odabire sva polja)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.overrideUserGroup" approved="yes">
+        <source>Select Usergroups for new Users</source>
+        <target state="final">Odaberite korisničke grupe za nove korisnike</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.confirmByAdmin" approved="yes">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target state="final">Administrator mora potvrditi otvaranje korisničkog računa (dodajte jednu ili više e-mail adresa)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdminStep1" approved="yes">
+        <source>Notify admin on step 1 (add one or more emails)</source>
+        <target state="final">Obavijesti administratora pri prvom koraku (dodajte jednu ili više e-mail adresa)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdmin" approved="yes">
+        <source>Notify admin if user sets a password (add one or more emails)</source>
+        <target state="final">Obavijesti administratora ako korisnik postavi lozinku (dodajte jednu ili više e-mail adresa)</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.title">
+        <source>Additional Settings</source>
+        <target state="needs-translation">Additional Settings</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.termsUrl">
+        <source>Page with terms and conditions</source>
+        <target state="needs-translation">Page with terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="pleaseChoose" approved="yes">
+        <source>Please choose...</source>
+        <target state="final">Molimo odaberite...</target>
+      </trans-unit>
+      <trans-unit id="pleaseChooseCountry">
+        <source>Please choose a country...</source>
+        <target state="needs-translation">Please choose a country...</target>
+      </trans-unit>
+      <trans-unit id="noZonesForThisCountry">
+        <source>No zones available for the chosen country</source>
+        <target state="needs-translation">No zones available for the chosen country</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="fi">
+    <header/>
+    <body>
+      <trans-unit id="tx_femanager_domain_model_user">
+        <source>User</source>
+        <target state="needs-translation">User</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.username">
+        <source>Username</source>
+        <target state="needs-translation">Username</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password">
+        <source>Password</source>
+        <target state="needs-translation">Password</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.usergroup">
+        <source>Usergroup</source>
+        <target state="needs-translation">Usergroup</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.name">
+        <source>Name</source>
+        <target state="needs-translation">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.firstName">
+        <source>Firstname</source>
+        <target state="needs-translation">Firstname</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.middleName">
+        <source>Middlename</source>
+        <target state="needs-translation">Middlename</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastName">
+        <source>Lastname</source>
+        <target state="needs-translation">Lastname</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
+        <source>Birthdate</source>
+        <target state="needs-translation">Birthdate</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender">
+        <source>Gender</source>
+        <target state="needs-translation">Gender</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item0">
+        <source>male</source>
+        <target state="needs-translation">male</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item1">
+        <source>female</source>
+        <target state="needs-translation">female</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+        <source>divers</source>
+        <target state="needs-translation">divers</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.address">
+        <source>Address</source>
+        <target state="needs-translation">Address</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.telephone">
+        <source>Telephone</source>
+        <target state="needs-translation">Telephone</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.fax">
+        <source>Fax</source>
+        <target state="needs-translation">Fax</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.email">
+        <source>Email</source>
+        <target state="needs-translation">Email</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.title">
+        <source>Title</source>
+        <target state="needs-translation">Title</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.zip">
+        <source>ZIP</source>
+        <target state="needs-translation">ZIP</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.city">
+        <source>City</source>
+        <target state="needs-translation">City</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.country">
+        <source>Country</source>
+        <target state="needs-translation">Country</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.www">
+        <source>Website</source>
+        <target state="needs-translation">Website</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.company">
+        <source>Company</source>
+        <target state="needs-translation">Company</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.image">
+        <source>Image</source>
+        <target state="needs-translation">Image</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastlogin">
+        <source>Last login</source>
+        <target state="needs-translation">Last login</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.captcha">
+        <source>Captcha</source>
+        <target state="needs-translation">Captcha</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.terms">
+        <source>Terms and conditions</source>
+        <target state="needs-translation">Terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.crdate">
+        <source>Creation Time</source>
+        <target state="needs-translation">Creation Time</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tstamp">
+        <source>Last profile change at</source>
+        <target state="needs-translation">Last profile change at</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyuser">
+        <source>Registration confirmed by user</source>
+        <target state="needs-translation">Registration confirmed by user</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyadmin">
+        <source>Registration confirmed by admin</source>
+        <target state="needs-translation">Registration confirmed by admin</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tab">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
+      </trans-unit>
+      <trans-unit id="fe_users.log">
+        <source>FE_user Log</source>
+        <target state="needs-translation">FE_user Log</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms">
+        <source>User accepted terms and conditions</source>
+        <target state="needs-translation">User accepted terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_version">
+        <source>Accepted version of terms and conditions</source>
+        <target state="needs-translation">Accepted version of terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_date_of_acceptance">
+        <source>Accepted datetime of terms and conditions</source>
+        <target state="needs-translation">Accepted datetime of terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.changerequest">
+        <source>Change Request</source>
+        <target state="needs-translation">Change Request</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log">
+        <source>User Log</source>
+        <target state="needs-translation">User Log</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.title">
+        <source>Title</source>
+        <target state="needs-translation">Title</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.crdate">
+        <source>Time</source>
+        <target state="needs-translation">Time</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.100">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.101">
+        <source>New Registration</source>
+        <target state="needs-translation">New Registration</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.102">
+        <source>Registration confirmed by user</source>
+        <target state="needs-translation">Registration confirmed by user</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.103">
+        <source>Registration confirmed by admin</source>
+        <target state="needs-translation">Registration confirmed by admin</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.104">
+        <source>Registration refused by user</source>
+        <target state="needs-translation">Registration refused by user</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.105">
+        <source>Registration refused by admin</source>
+        <target state="needs-translation">Registration refused by admin</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.106">
+        <source>Profile creation request</source>
+        <target state="needs-translation">Profile creation request</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.200">
+        <source>Update</source>
+        <target state="needs-translation">Update</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.201">
+        <source>Profile updated</source>
+        <target state="needs-translation">Profile updated</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.202">
+        <source>Profile update confirmed by admin</source>
+        <target state="needs-translation">Profile update confirmed by admin</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.203">
+        <source>Profile update refused by admin</source>
+        <target state="needs-translation">Profile update refused by admin</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.204">
+        <source>Profile update request</source>
+        <target state="needs-translation">Profile update request</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.205">
+        <source>Profile update security failure</source>
+        <target state="needs-translation">Profile update security failure</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.206">
+        <source>Image deleted</source>
+        <target state="needs-translation">Image deleted</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.300">
+        <source>Delete</source>
+        <target state="needs-translation">Delete</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.301">
+        <source>Profile deleted</source>
+        <target state="needs-translation">Profile deleted</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.400">
+        <source>Invitation</source>
+        <target state="needs-translation">Invitation</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.401">
+        <source>Profile created and User invited</source>
+        <target state="needs-translation">Profile created and User invited</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.402">
+        <source>Profile deleted from User</source>
+        <target state="needs-translation">Profile deleted from User</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.403">
+        <source>Wrong Hash</source>
+        <target state="needs-translation">Wrong Hash</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.404">
+        <source>You tried to open a restricted page</source>
+        <target state="needs-translation">You tried to open a restricted page</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.405">
+        <source>Password changed and Profile activated</source>
+        <target state="needs-translation">Password changed and Profile activated</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.user">
+        <source>User</source>
+        <target state="needs-translation">User</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.title">
+        <source>Main Settings</source>
+        <target state="needs-translation">Main Settings</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view">
+        <source>Choose View</source>
+        <target state="needs-translation">Choose View</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.0">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.1">
+        <source>Edit</source>
+        <target state="needs-translation">Edit</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.2">
+        <source>List</source>
+        <target state="needs-translation">List</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.3">
+        <source>Detail</source>
+        <target state="needs-translation">Detail</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.4">
+        <source>Invitation</source>
+        <target state="needs-translation">Invitation</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.5">
+        <source>Resend confirmation mail</source>
+        <target state="needs-translation">Resend confirmation mail</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.title">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.fields">
+        <source>Select Fields for New-Form (empty = all fields)</source>
+        <target state="needs-translation">Select Fields for New-Form (empty = all fields)</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.overrideUserGroup">
+        <source>Select Usergroups for new Users</source>
+        <target state="needs-translation">Select Usergroups for new Users</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByUser">
+        <source>Registration must be confirmed from sender</source>
+        <target state="needs-translation">Registration must be confirmed from sender</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.showTermsAndConditions">
+        <source>User must accept terms and conditions</source>
+        <target state="needs-translation">User must accept terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByAdmin">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target state="needs-translation">Registration must be confirmed from an admin (add one or more emails)</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.notifyAdmin">
+        <source>Notify admin on registration (add one or more emails)</source>
+        <target state="needs-translation">Notify admin on registration (add one or more emails)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.title">
+        <source>Edit</source>
+        <target state="needs-translation">Edit</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.fields">
+        <source>Select Fields for Edit-Form (empty = all fields)</source>
+        <target state="needs-translation">Select Fields for Edit-Form (empty = all fields)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.showDeleteLink">
+        <source>Show Delete Button in Edit Form</source>
+        <target state="needs-translation">Show Delete Button in Edit Form</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.confirmByAdmin">
+        <source>Profile update must be confirmed from an admin (add one or more emails)</source>
+        <target state="needs-translation">Profile update must be confirmed from an admin (add one or more emails)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.notifyAdmin">
+        <source>Notify admin on Profile update (add one or more emails)</source>
+        <target state="needs-translation">Notify admin on Profile update (add one or more emails)</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.title">
+        <source>Listview</source>
+        <target state="needs-translation">Listview</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.filter">
+        <source>Show Searchfield</source>
+        <target state="needs-translation">Show Searchfield</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.limit">
+        <source>Limit</source>
+        <target state="needs-translation">Limit</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby">
+        <source>Order by</source>
+        <target state="needs-translation">Order by</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.0">
+        <source>Lastname</source>
+        <target state="needs-translation">Lastname</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.1">
+        <source>Firstname</source>
+        <target state="needs-translation">Firstname</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.2">
+        <source>Company</source>
+        <target state="needs-translation">Company</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.3">
+        <source>Username</source>
+        <target state="needs-translation">Username</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting">
+        <source>Sorting</source>
+        <target state="needs-translation">Sorting</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.0">
+        <source>Ascending</source>
+        <target state="needs-translation">Ascending</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.1">
+        <source>Descending</source>
+        <target state="needs-translation">Descending</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.usergroup">
+        <source>Show from usergroup (empty = show all)</source>
+        <target state="needs-translation">Show from usergroup (empty = show all)</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.title">
+        <source>Detailview</source>
+        <target state="needs-translation">Detailview</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user">
+        <source>User to show</source>
+        <target state="needs-translation">User to show</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user.1">
+        <source>[Logged in FE User]</source>
+        <target state="needs-translation">[Logged in FE User]</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.title">
+        <source>Invitation</source>
+        <target state="needs-translation">Invitation</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.allowedUserGroups">
+        <source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
+        <target state="needs-translation">Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.fields">
+        <source>Select Fields for invitation-Form (empty = all fields)</source>
+        <target state="needs-translation">Select Fields for invitation-Form (empty = all fields)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.overrideUserGroup">
+        <source>Select Usergroups for new Users</source>
+        <target state="needs-translation">Select Usergroups for new Users</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.confirmByAdmin">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target state="needs-translation">Registration must be confirmed from an admin (add one or more emails)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdminStep1">
+        <source>Notify admin on step 1 (add one or more emails)</source>
+        <target state="needs-translation">Notify admin on step 1 (add one or more emails)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdmin">
+        <source>Notify admin if user sets a password (add one or more emails)</source>
+        <target state="needs-translation">Notify admin if user sets a password (add one or more emails)</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.title">
+        <source>Additional Settings</source>
+        <target state="needs-translation">Additional Settings</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.termsUrl">
+        <source>Page with terms and conditions</source>
+        <target state="needs-translation">Page with terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="pleaseChoose">
+        <source>Please choose...</source>
+        <target state="needs-translation">Please choose...</target>
+      </trans-unit>
+      <trans-unit id="pleaseChooseCountry">
+        <source>Please choose a country...</source>
+        <target state="needs-translation">Please choose a country...</target>
+      </trans-unit>
+      <trans-unit id="noZonesForThisCountry">
+        <source>No zones available for the chosen country</source>
+        <target state="needs-translation">No zones available for the chosen country</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

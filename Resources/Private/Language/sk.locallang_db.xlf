@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="sk">
+    <header/>
+    <body>
+      <trans-unit id="tx_femanager_domain_model_user" approved="yes">
+        <source>User</source>
+        <target state="final">Užívateľ</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.username" approved="yes">
+        <source>Username</source>
+        <target state="final">Užívateľské meno</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password" approved="yes">
+        <source>Password</source>
+        <target state="final">Heslo</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.usergroup" approved="yes">
+        <source>Usergroup</source>
+        <target state="final">Skupina</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.name" approved="yes">
+        <source>Name</source>
+        <target state="final">Meno</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.firstName" approved="yes">
+        <source>Firstname</source>
+        <target state="final">Prvé meno</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.middleName" approved="yes">
+        <source>Middlename</source>
+        <target state="final">Stredné meno</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastName" approved="yes">
+        <source>Lastname</source>
+        <target state="final">Priezvisko</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth" approved="yes">
+        <source>Birthdate</source>
+        <target state="final">Dátum narodenia</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender" approved="yes">
+        <source>Gender</source>
+        <target state="final">Pohlavie</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item0" approved="yes">
+        <source>male</source>
+        <target state="final">muž</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item1" approved="yes">
+        <source>female</source>
+        <target state="final">žena</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+        <source>divers</source>
+        <target state="needs-translation">divers</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Adresa</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.telephone" approved="yes">
+        <source>Telephone</source>
+        <target state="final">Telefón</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.fax" approved="yes">
+        <source>Fax</source>
+        <target state="final">Fax</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.email" approved="yes">
+        <source>Email</source>
+        <target state="final">Email</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titul</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.zip" approved="yes">
+        <source>ZIP</source>
+        <target state="final">PSČ</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.city" approved="yes">
+        <source>City</source>
+        <target state="final">Mesto</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Krajina</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.www" approved="yes">
+        <source>Website</source>
+        <target state="final">Webstránka</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.company" approved="yes">
+        <source>Company</source>
+        <target state="final">Spoločnosť</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Obrázok</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastlogin" approved="yes">
+        <source>Last login</source>
+        <target state="final">Posledné prihlásenie</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.captcha" approved="yes">
+        <source>Captcha</source>
+        <target state="final">Captcha</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.terms">
+        <source>Terms and conditions</source>
+        <target state="needs-translation">Terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.crdate" approved="yes">
+        <source>Creation Time</source>
+        <target state="final">Čas vytvorenia</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tstamp" approved="yes">
+        <source>Last profile change at</source>
+        <target state="final">Posledná zmena profilu</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyuser" approved="yes">
+        <source>Registration confirmed by user</source>
+        <target state="final">Registrácia potvrdená užívateľom</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyadmin" approved="yes">
+        <source>Registration confirmed by admin</source>
+        <target state="final">Registrácia potvrdená administrátorom</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tab" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrácia</target>
+      </trans-unit>
+      <trans-unit id="fe_users.log" approved="yes">
+        <source>FE_user Log</source>
+        <target state="final">FE_user Log</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms">
+        <source>User accepted terms and conditions</source>
+        <target state="needs-translation">User accepted terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_version">
+        <source>Accepted version of terms and conditions</source>
+        <target state="needs-translation">Accepted version of terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_date_of_acceptance">
+        <source>Accepted datetime of terms and conditions</source>
+        <target state="needs-translation">Accepted datetime of terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="fe_users.changerequest" approved="yes">
+        <source>Change Request</source>
+        <target state="final">Change Request</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log" approved="yes">
+        <source>User Log</source>
+        <target state="final">Užívateľský log</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titul</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.crdate" approved="yes">
+        <source>Time</source>
+        <target state="final">Čas</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state" approved="yes">
+        <source>State</source>
+        <target state="final">Stav</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.100" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrácia</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.101" approved="yes">
+        <source>New Registration</source>
+        <target state="final">Nová registrácia</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.102" approved="yes">
+        <source>Registration confirmed by user</source>
+        <target state="final">Registrácia potvrdená užívateľom</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.103" approved="yes">
+        <source>Registration confirmed by admin</source>
+        <target state="final">Registrácia potvrdená administrátorom</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.104" approved="yes">
+        <source>Registration refused by user</source>
+        <target state="final">Registrácia bola zamietnutá užívateľom</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.105" approved="yes">
+        <source>Registration refused by admin</source>
+        <target state="final">Registrácia bola zamietnutá administrátorom</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.106" approved="yes">
+        <source>Profile creation request</source>
+        <target state="final">Požiadavka na vytvorenie profilu</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.200" approved="yes">
+        <source>Update</source>
+        <target state="final">Aktualizácia</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.201" approved="yes">
+        <source>Profile updated</source>
+        <target state="final">Profil bol aktualizovaný</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.202" approved="yes">
+        <source>Profile update confirmed by admin</source>
+        <target state="final">Aktualizácia profilu bola potvrdená administrátorom</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.203" approved="yes">
+        <source>Profile update refused by admin</source>
+        <target state="final">Aktualizácia profilu bola zamietnutá administrátorom</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.204" approved="yes">
+        <source>Profile update request</source>
+        <target state="final">Požiadavka na aktualizáciu profilu</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.205" approved="yes">
+        <source>Profile update security failure</source>
+        <target state="final">Aktualizácia profilu zlyhala z bezpečnostných dôvodov</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.206">
+        <source>Image deleted</source>
+        <target state="needs-translation">Image deleted</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
+        <source>Delete</source>
+        <target state="final">Odstrániť</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.301" approved="yes">
+        <source>Profile deleted</source>
+        <target state="final">Profil bol odstránený</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.400" approved="yes">
+        <source>Invitation</source>
+        <target state="final">Pozvánka</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.401" approved="yes">
+        <source>Profile created and User invited</source>
+        <target state="final">Profil bol vytvorený a užívateľ bol pozvaný</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.402" approved="yes">
+        <source>Profile deleted from User</source>
+        <target state="final">Profil bol odstránený užívateľom</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.403" approved="yes">
+        <source>Wrong Hash</source>
+        <target state="final">Nesprávny hash</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.404" approved="yes">
+        <source>You tried to open a restricted page</source>
+        <target state="final">Pokúsili ste sa o prístup na zabezpečenú stránku</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.405" approved="yes">
+        <source>Password changed and Profile activated</source>
+        <target state="final">Heslo bolo zmenené a profil bol aktivovaný</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
+        <source>User</source>
+        <target state="final">Užívateľ</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.title" approved="yes">
+        <source>Main Settings</source>
+        <target state="final">Hlavné nastavenia</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view" approved="yes">
+        <source>Choose View</source>
+        <target state="final">Vyberte pohľad</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.0" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrácia</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.1" approved="yes">
+        <source>Edit</source>
+        <target state="final">Upraviť</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.2" approved="yes">
+        <source>List</source>
+        <target state="final">Zoznam</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.3" approved="yes">
+        <source>Detail</source>
+        <target state="final">Detail</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.4" approved="yes">
+        <source>Invitation</source>
+        <target state="final">Pozvánka</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.5">
+        <source>Resend confirmation mail</source>
+        <target state="needs-translation">Resend confirmation mail</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.title" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrácia</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.fields" approved="yes">
+        <source>Select Fields for New-Form (empty = all fields)</source>
+        <target state="final">Vyberte polia pre novú registráciu (prázdna hodnota = všetky polia)</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.overrideUserGroup" approved="yes">
+        <source>Select Usergroups for new Users</source>
+        <target state="final">Vyberte skupiny pre nových užívateľov</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByUser" approved="yes">
+        <source>Registration must be confirmed from sender</source>
+        <target state="final">Registrácia musí byť potvrdená odosielateľom</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.showTermsAndConditions">
+        <source>User must accept terms and conditions</source>
+        <target state="needs-translation">User must accept terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByAdmin" approved="yes">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target state="final">Registrácia musí byť potvrdená administrátorom (zadajte jeden alebo viac emailov)</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.notifyAdmin" approved="yes">
+        <source>Notify admin on registration (add one or more emails)</source>
+        <target state="final">Upozorniť administrátora pri registrácii (zadajte jeden alebo viac emailov)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.title" approved="yes">
+        <source>Edit</source>
+        <target state="final">Upraviť</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.fields" approved="yes">
+        <source>Select Fields for Edit-Form (empty = all fields)</source>
+        <target state="final">Vyberte polia pre úpravu profilu (prázdna hodnota = všetky polia)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.showDeleteLink" approved="yes">
+        <source>Show Delete Button in Edit Form</source>
+        <target state="final">Zobraziť tlačidlo "Odstrániť" pri úprave profilu</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.confirmByAdmin" approved="yes">
+        <source>Profile update must be confirmed from an admin (add one or more emails)</source>
+        <target state="final">Aktualizácia profilu musí byť potvrdená administrátorom (zadajte jeden alebo viac emailov)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.notifyAdmin" approved="yes">
+        <source>Notify admin on Profile update (add one or more emails)</source>
+        <target state="final">Upozorniť administrátora pri aktualizácii profilu (zadajte jeden alebo viac emailov)</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.title" approved="yes">
+        <source>Listview</source>
+        <target state="final">Zoznam</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.filter" approved="yes">
+        <source>Show Searchfield</source>
+        <target state="final">Zobraziť vyhľadávacie pole</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.limit" approved="yes">
+        <source>Limit</source>
+        <target state="final">Limit</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby" approved="yes">
+        <source>Order by</source>
+        <target state="final">Zoradiť podľa</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.0" approved="yes">
+        <source>Lastname</source>
+        <target state="final">Priezvisko</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.1" approved="yes">
+        <source>Firstname</source>
+        <target state="final">Prvé meno</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.2" approved="yes">
+        <source>Company</source>
+        <target state="final">Spoločnosť</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.3">
+        <source>Username</source>
+        <target state="needs-translation">Username</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting" approved="yes">
+        <source>Sorting</source>
+        <target state="final">Zoraďovanie</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.0" approved="yes">
+        <source>Ascending</source>
+        <target state="final">Vzostupne</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.1" approved="yes">
+        <source>Descending</source>
+        <target state="final">Zostupne</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.usergroup" approved="yes">
+        <source>Show from usergroup (empty = show all)</source>
+        <target state="final">Zobraziť z vybraných skupín užívateľov (prázdna hodnota = všetky skupiny)</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.title" approved="yes">
+        <source>Detailview</source>
+        <target state="final">Detailný pohľad</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user">
+        <source>User to show</source>
+        <target state="needs-translation">User to show</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user.1" approved="yes">
+        <source>[Logged in FE User]</source>
+        <target state="final">[Prihlásený FE užívateľ]</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.title" approved="yes">
+        <source>Invitation</source>
+        <target state="final">Pozvánka</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.allowedUserGroups">
+        <source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
+        <target state="needs-translation">Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.fields">
+        <source>Select Fields for invitation-Form (empty = all fields)</source>
+        <target state="needs-translation">Select Fields for invitation-Form (empty = all fields)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.overrideUserGroup" approved="yes">
+        <source>Select Usergroups for new Users</source>
+        <target state="final">Vyberte skupiny pre nových užívateľov</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.confirmByAdmin" approved="yes">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target state="final">Registrácia musí byť potvrdená administrátorom (zadajte jeden alebo viac emailov)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdminStep1">
+        <source>Notify admin on step 1 (add one or more emails)</source>
+        <target state="needs-translation">Notify admin on step 1 (add one or more emails)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdmin" approved="yes">
+        <source>Notify admin if user sets a password (add one or more emails)</source>
+        <target state="final">Upozorniť administrátora ak užívateľ zmení heslo (jeden, alebo viac emailov)</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.title">
+        <source>Additional Settings</source>
+        <target state="needs-translation">Additional Settings</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.termsUrl">
+        <source>Page with terms and conditions</source>
+        <target state="needs-translation">Page with terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="pleaseChoose" approved="yes">
+        <source>Please choose...</source>
+        <target state="final">Prosím vyberte...</target>
+      </trans-unit>
+      <trans-unit id="pleaseChooseCountry">
+        <source>Please choose a country...</source>
+        <target state="needs-translation">Please choose a country...</target>
+      </trans-unit>
+      <trans-unit id="noZonesForThisCountry">
+        <source>No zones available for the chosen country</source>
+        <target state="needs-translation">No zones available for the chosen country</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
