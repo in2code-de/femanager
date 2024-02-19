@@ -456,6 +456,54 @@
 			<trans-unit id="emailInvitationUserRefusedAdminNotifiyUserProperties">
 				<source>Profile properties:</source>
 			</trans-unit>
+
+			<trans-unit id="formConfirmActionText">
+				<source>Please confirm your choice</source>
+			</trans-unit>
+			<trans-unit id="formAdminConfirmationText">
+				<source>By clicking this submit button, the registration of %s will be confirmed:</source>
+			</trans-unit>
+			<trans-unit id="formAdminConfirmationSubmitButton">
+				<source>Confirm registration</source>
+			</trans-unit>
+			<trans-unit id="formAdminConfirmationRefusedText">
+				<source>By clicking this button, you confirm to delete the registration:</source>
+			</trans-unit>
+			<trans-unit id="formAdminConfirmationRefusedSubmitButton">
+				<source>Delete registration</source>
+			</trans-unit>
+			<trans-unit id="formAdminConfirmationRefusedSilentText">
+				<source>By clicking this button, you confirm to delete the registration, without sending an email to the user:</source>
+			</trans-unit>
+			<trans-unit id="formAdminConfirmationRefusedSilentSubmitButton">
+				<source>Silently delete registration</source>
+			</trans-unit>
+			<trans-unit id="formUserConfirmationText">
+				<source>By clicking this submit button, your registration will be confirmed:</source>
+			</trans-unit>
+			<trans-unit id="formUserConfirmationSubmitButton">
+				<source>Confirm registration</source>
+			</trans-unit>
+			<trans-unit id="formUserConfirmationRefusedText">
+				<source>To confirm that you don't want to be registered on our system and having your information removed, click this button:</source>
+			</trans-unit>
+			<trans-unit id="formUserConfirmationRefusedSubmitButton">
+				<source>Delete registration</source>
+			</trans-unit>
+			<trans-unit id="formInvitationConfirmationText">
+				<source>By clicking this submit button you confirm your profile. After that, you can define a password:</source>
+			</trans-unit>
+			<trans-unit id="formInvitationConfirmationSubmitButton">
+				<source>Confirm Registration</source>
+			</trans-unit>
+			<trans-unit id="formInvitationConfirmationRefusedText">
+				<source>To confirm that you don't want to be registered on our system and having your information removed, click this button:</source>
+			</trans-unit>
+			<trans-unit id="formInvitationConfirmationRefusedSubmitButton">
+				<source>Delete Registration</source>
+			</trans-unit>
+
+
 			<trans-unit id="noRecordsFound">
 				<source>No records found.</source>
 			</trans-unit>

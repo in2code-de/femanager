@@ -32,6 +32,9 @@ use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
  */
 class NewController extends AbstractFrontendController
 {
+
+    use HasConfirmationByFormSubmitTrait;
+
     /**
      * Render registration form
      *
@@ -103,7 +106,6 @@ class NewController extends AbstractFrontendController
     public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation')
     {
         $backend = false;
-
         $user = $this->userRepository->findByUid($user);
 
         $this->eventDispatcher->dispatch(new BeforeUserConfirmEvent($user, $hash, $status));
@@ -112,8 +114,13 @@ class NewController extends AbstractFrontendController
             $this->addFlashMessage(LocalizationUtility::translate('missingUserInDatabase'), '', AbstractMessage::ERROR);
             $this->redirect('new');
         }
-
         $request = ServerRequestFactory::fromGlobals();
+
+        $approvalOfActionByFormSubmitRequired = true;
+        if($this->addVariablesForActionConfirmation($approvalOfActionByFormSubmitRequired, $user, $status)) {
+            return $this->htmlResponse();
+        };
+
         // check if the the request was triggered via Backend
         if ($request->hasHeader('Accept')) {
             $accept = $request->getHeader('Accept')[0];

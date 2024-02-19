@@ -27,6 +27,8 @@ use TYPO3\CMS\Extbase\Http\ForwardResponse;
  */
 class InvitationController extends AbstractFrontendController
 {
+    use HasConfirmationByFormSubmitTrait;
+
     /**
      * action new
      */
@@ -144,6 +146,8 @@ class InvitationController extends AbstractFrontendController
     {
         $user = $this->userRepository->findByUid($user);
 
+        $this->addVariablesForActionConfirmation(true, $user, 'invitationConfirmation');
+
         // User must exist and hash must be valid
         if ($user === null || !HashUtility::validHash($hash, $user)) {
             $this->addFlashMessage(LocalizationUtility::translate('createFailedProfile'), '', AbstractMessage::ERROR);
@@ -228,6 +232,10 @@ class InvitationController extends AbstractFrontendController
     public function deleteAction($user, $hash = null)
     {
         $user = $this->userRepository->findByUid($user);
+
+        if($this->addVariablesForActionConfirmation(true, $user, 'invitationConfirmationRefused')) {
+            return $this->htmlResponse();
+        };
 
         if ($user !== null && HashUtility::validHash($hash, $user)) {
             $this->logUtility->log(Log::STATUS_PROFILEDELETE, $user);
