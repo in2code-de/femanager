@@ -25,6 +25,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ApplicationType;
+use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Http\UploadedFile;
 use TYPO3\CMS\Core\Resource\DuplicationBehavior;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
@@ -387,7 +388,7 @@ abstract class AbstractController extends ActionController
                 ($status ? $status . 'Redirect' : 'redirect'),
                 $redirectByActionName
             );
-            if ($redirectTarget instanceof ForwardResponse) {
+            if ($redirectTarget instanceof RedirectResponse) {
                 $this->addFlashMessage(LocalizationUtility::translate('create'));
             }
             return $redirectTarget;
