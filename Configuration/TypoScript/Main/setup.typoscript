@@ -1690,8 +1690,7 @@ plugin.tx_femanager {
 # add jQuery if it was turned on in the constants
 [0 < {$plugin.tx_femanager.settings.jQuery}]
 page.includeJSFooterlibs {
-  femanagerJQuery = //ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
-  femanagerJQuery.external = 1
+  femanagerJQuery = EXT:femanager/Resources/Public/JavaScript/Vendor/jquery.min.js
 }
 [end]
 

@@ -445,7 +445,7 @@ Typoscript
             # cat=plugin.tx_femanager//0200; type=text; label= Upload folder: Define where to save images of the users
             uploadFolder = fileadmin/users/
 
-            # cat=plugin.tx_femanager//0900; type=boolean; label= Include jQuery: Load and implement jQuery from external source (googleapis.com)
+            # cat=plugin.tx_femanager//0900; type=boolean; label= Include jQuery
             jQuery = 0
 
             # cat=plugin.tx_femanager//0910; type=boolean; label= Include Twitter Bootstrap JS: Load and implement Twitter Bootstrap JavaScript from external source (bootstrapcdn.com)
@@ -2123,8 +2123,7 @@ Typoscript
     #########################
     # add jQuery if it was turned on in the constants
     [globalVar = LIT:0 < {$plugin.tx_femanager.settings.jQuery}]
-    page.includeJSFooterlibs.femanagerJQuery = //ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js
-    page.includeJSFooterlibs.femanagerJQuery.external = 1
+    page.includeJSFooterlibs.femanagerJQuery = EXT:femanager/Resources/Public/JavaScript/Vendor/jquery.min.js
     [end]
 
     # add twitter bootstrap JS if it was turned on in the constants

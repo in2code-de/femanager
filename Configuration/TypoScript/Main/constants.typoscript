@@ -25,7 +25,7 @@ plugin.tx_femanager {
     # cat=plugin.tx_femanager//0200; type=text; label= Upload folder: Define where to save images of the users
     uploadFolder = fileadmin/users/
 
-    # cat=plugin.tx_femanager//0900; type=boolean; label= Include jQuery: Load and implement jQuery from external source (googleapis.com)
+    # cat=plugin.tx_femanager//0900; type=boolean; label= Include jQuery
     jQuery = 0
 
     # cat=plugin.tx_femanager//0910; type=boolean; label= Include Twitter Bootstrap JS: Load and implement Twitter Bootstrap JavaScript from external source (bootstrapcdn.com)

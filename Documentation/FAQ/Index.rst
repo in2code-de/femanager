@@ -160,7 +160,7 @@ Example ordering and needed JavaScripts:
 
 .. code-block:: html
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+    <script src="/typo3conf/ext/in2template/Resources/Public/JavaScripts/Vendor/jquery.min.js?1711611980"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/typo3conf/ext/femanager/Resources/Public/JavaScript/Validation.min.js?1502824793" type="text/javascript"></script>
     <script src="/typo3conf/ext/femanager/Resources/Public/JavaScript/Femanager.min.js?1502824793" type="text/javascript"></script>
