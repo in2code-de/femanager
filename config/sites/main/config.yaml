@@ -1,8 +1,7 @@
 base: 'https://local.femanager.de/'
-errorHandling: {  }
 baseVariants:
   -
-    base: 'https://femanager.ddev.site/'
+    base: 'https://femanager6.ddev.site/'
     condition: 'applicationContext == "Development/DDEV"'
 languages:
   -
@@ -17,7 +16,7 @@ languages:
     hreflang: en-US
     direction: ltr
     flag: en-us-gb
-    languageId: '0'
+    languageId: 0
   -
     title: deutsch
     enabled: true
@@ -32,7 +31,6 @@ languages:
     fallbackType: strict
     fallbacks: ''
     flag: de
-    languageId: '1'
+    languageId: 1
 rootPageId: 1
-routes: {  }
 websiteTitle: ''
