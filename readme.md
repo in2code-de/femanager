@@ -4,9 +4,6 @@ TYPO3 Frontend User Registration and Management based on
 a very flexible configuration and on TYPO3 11.5 LTS and newer with the possibility to extend it.
 Extension basicly works like sr_feuser_register or any other frontend user registration.
 
-> :warning: **TYPO3 12 compatibility**\
-> See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how to get access to a TYPO3 12 version
-
 ## Support
 This TYPO3 Extension is free to use. We as in2code and our developers highly appreciate your feedback and work hard to improve our extensions.
 To do so, in2code provides two extra days per month for coding and developing (Coding Night and Freaky Friday). During these days our more than 20 developers spend their time with improvements and updates for this and other extensions.
