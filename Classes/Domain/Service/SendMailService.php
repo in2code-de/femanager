@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Event\AfterMailSendEvent;
+use In2code\Femanager\Event\BeforeMailBodyRenderEvent;
 use In2code\Femanager\Event\BeforeMailSendEvent;
 use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\ObjectUtility;
@@ -38,7 +39,8 @@ class SendMailService
 
     protected function contentObjectStart(array $variables): void
     {
-        if (empty($variables['user'] ?? []) === false &&
+        if (
+            empty($variables['user'] ?? []) === false &&
             method_exists(($variables['user'] ?? null), '_getProperties') === true
         ) {
             $this->contentObject->start($variables['user']->_getProperties());
@@ -124,6 +126,7 @@ class SendMailService
         $standAloneView = TemplateUtility::getDefaultStandAloneView($request);
         $standAloneView->setTemplatePathAndFilename($this->getRelativeEmailPathAndFilename($template));
         $standAloneView->assignMultiple($variables);
+        $this->dispatcher->dispatch(new BeforeMailBodyRenderEvent($standAloneView, $variables, $this));
         return $standAloneView->render();
     }
 
