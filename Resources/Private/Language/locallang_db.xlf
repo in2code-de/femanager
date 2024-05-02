@@ -40,7 +40,7 @@
 				<source>female</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.gender.item2">
-				<source>divers</source>
+				<source>diverse</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.address">
 				<source>Address</source>
