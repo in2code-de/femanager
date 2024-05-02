@@ -18,6 +18,11 @@ $feUsersColumns = [
             'items' => [
                 [
                     'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+                    'tx_femanager_domain_model_user.gender.item99',
+                    '99',
+                ],
+                [
+                    'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                     'tx_femanager_domain_model_user.gender.item0',
                     '0',
                 ],
@@ -32,6 +37,7 @@ $feUsersColumns = [
                     '2',
                 ],
             ],
+            'default' => '99',
         ],
     ],
     'date_of_birth' => [

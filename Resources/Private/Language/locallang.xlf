@@ -54,6 +54,9 @@
 			<trans-unit id="tx_femanager_domain_model_user.gender.item2">
 				<source>Divers</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_user.gender.item99">
+				<source>rather not say</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_user.address">
 				<source>Address</source>
 			</trans-unit>

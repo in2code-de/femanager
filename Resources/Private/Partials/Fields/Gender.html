@@ -10,6 +10,17 @@
 		<div class="radio">
 			<label>
 				<f:form.radio
+						id="femanager_field_gender99"
+						property="gender"
+						value="99"
+						checked="{user.gender} == 99"
+						additionalAttributes="{femanager:Validation.FormValidationData(settings:settings,fieldName:'gender')}" />
+				<f:translate key="tx_femanager_domain_model_user.gender.item99" />
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+				<f:form.radio
 						id="femanager_field_gender1"
 						property="gender"
 						value="1"

@@ -149,7 +149,7 @@ class User extends AbstractEntity
     /**
      * @var int
      */
-    protected $gender;
+    protected $gender = 99;
 
     /**
      * @var DateTime
