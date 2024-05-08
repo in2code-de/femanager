@@ -9,13 +9,13 @@ Femanager is a TYPO3 extension for a modern Frontend-User registration and profi
 .. only:: html
 
 	:Copyright:
-		2013 - 2023
+		2013 - 2024
 
 	:Classification:
 		femanager
 
 	:Version:
-		7.2.3
+		7.3.0
 
 	:Language:
 		en

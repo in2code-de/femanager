@@ -5,6 +5,19 @@ Changelog
 =========
 
 -
+      :Version: 7.3.0
+      :Date: 2024-05-08
+      :Changes:
+
+      * [FEATURE] Add confirmation form to delete profile during registration - thx to Stefan Busemann (in2code)
+      * [FEATURE] Add BeforeMailBodyRenderEvent - thx to Michael Bakonyi
+      * [FEATURE] Include bootstrap directly from repository instead of maxcdn.bootstrapcdn.com  - thx to Felix Ranesberger (in2code)
+      * [BUGFIX] Fix a typo in the labels - thx to Oliver Klee
+      * [BUGFIX] Open the "terms & conditions" page in a new tab - thx to Oliver Klee
+      * [BUGFIX] errorClass attribute not working - thx to Stig Nørgaard Færch
+      * [DOC] Update documenation - thx to Daniel Hoffman (in2code)
+
+-
       :Version: 7.2.3
       :Date: 2023-12-13
       :Changes:
@@ -87,6 +100,16 @@ Changelog
       * [BUGFIX] Remove "endtime" for check of unique in db
       * [DOCS] Add note for configpid setting
       * [BUGFIX] updated sjbr/static-info-tables version
+
+-
+      :Version: 6.4.0
+      :Date: 2024-05-08
+      :Changes:
+
+      * [FEATURE] Add confirmation form to delete profile during registration - thx to Stefan Busemann (in2code)
+      * [TASK] Remove unnecessary scrollIntoView property - thx to Felix Ranesberger (in2code)
+      * [TASK] Replace jQuery scrollTop with vanilla scrollIntoView - thx to Felix Ranesberger (in2code)
+      * [TASK] Build new JS distribution file - thx to Felix Ranesberger (in2code)
 
 -
       :Version: 6.3.2
