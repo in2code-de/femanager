@@ -52,8 +52,8 @@
         <target state="final">kvinna</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
-        <source>divers</source>
-        <target state="needs-translation">divers</target>
+        <source>diverse</source>
+        <target state="needs-translation">diverse</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
