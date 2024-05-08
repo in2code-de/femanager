@@ -51,9 +51,9 @@
         <source>female</source>
         <target state="final">weiblich</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender.item2" approved="yes">
-        <source>divers</source>
-        <target state="final">divers</target>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+        <source>diverse</source>
+        <target state="needs-translation">diverse</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
