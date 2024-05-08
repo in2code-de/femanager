@@ -32,7 +32,8 @@ Quick guide:
 
 | Femanager | TYPO3     | PHP       | Support/Development                                              |
 |-----------|-----------|-----------|------------------------------------------------------------------|
-| 7.x       | 11 LTS    | 7.4 - 8.1 | Features, Bugfixes, Security Updates                             |
+| 8.x       | 12 LTS    | 8.2 - 8.2 | Features, Bugfixes, Security Updates                             |
+| 7.x       | 11 LTS    | 7.4 - 8.1 | Bugfixes, Security Updates                                       |
 | 6.x       | 10 LTS    | 7.2 - 7.4 | Security Updates. If you want feature backports ask for an offer |
 | 5.x       | 8, 9 LTS  | 7.1 - 7.3 | Security Updates. If you want feature backports ask for an offer |
 | 4.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer)   |
@@ -65,6 +66,14 @@ This is the current status of the EAP features:
 to accept only bugfixes that can be reproduced.
 - **Features**: Not every feature is relevant for the bulk of the users. In addition: We don't want to make the extension
 even more complicated in usability for an edge case feature. Please discuss a new feature before.
+
+### Branches
+
+* Main: For the latest LTS Version (currently Version for TYPO3 12)
+* V7: Version 7 for TYPO3 11)
+* V6: Version 6 for TYPO3 10)
+* V5: Version 5 for TYPO3 9)
+* V2: Version 2 for TYPO3 8)
 
 ### Contribution with ddev
 
