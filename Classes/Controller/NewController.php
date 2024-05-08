@@ -26,7 +26,6 @@ use TYPO3\CMS\Extbase\Event\Mvc\AfterRequestDispatchedEvent;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class NewController
@@ -144,9 +143,9 @@ class NewController extends AbstractFrontendController
                     );
                     $this->assignForAll();
                     return $this->htmlResponse();
-                } else {
-                    $furtherFunctions = $this->statusUserConfirmationRefused($user, $hash);
                 }
+                $furtherFunctions = $this->statusUserConfirmationRefused($user, $hash);
+
                 break;
 
             case 'adminConfirmation':
