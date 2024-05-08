@@ -16,6 +16,7 @@ See some features or best practice parts of the extension femanager.
 	NewFields/Index
 	NewValidators/Index
 	AutoConfirmation/Index
+	ConfirmUserConfirmationRefused/Index
 	Finishers/Index
 	Signals/Index
 	ResendUserConfirmationRequest/Index

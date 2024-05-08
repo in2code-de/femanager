@@ -14,6 +14,17 @@ Changelog
    :Changes:
       Release Description
 
+-
+      :Version: 6.4.0
+      :Date: 2024-05-08
+      :Changes:
+
+      * [FEATURE] Add confirmation form to delete profile during registration
+      * [TASK] Remove unnecessary scrollIntoView property - thx to Felix Ranesberger (in2code)
+      * [TASK] Replace jQuery scrollTop with vanilla scrollIntoView - thx to Felix Ranesberger (in2code)
+      * [TASK] Build new JS distribution file - thx to Felix Ranesberger (in2code)
+
+
 
 -
       :Version: 6.3.6
