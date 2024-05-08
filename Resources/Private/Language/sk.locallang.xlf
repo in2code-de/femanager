@@ -68,8 +68,8 @@
         <target state="final">Žena</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
-        <source>Divers</source>
-        <target state="needs-translation">Divers</target>
+        <source>Diverse</source>
+        <target state="needs-translation">Diverse</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
