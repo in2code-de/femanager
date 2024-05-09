@@ -3,6 +3,22 @@
 
 Changelog
 =========
+-
+      :Version: 8.1.0
+      :Date: 2024-05-09
+      :Changes:
+
+      * [FEATURE] Add confirmation form to delete profile during registration - thx to Stefan Busemann (in2code)
+      * [FEATURE] Add BeforeMailBodyRenderEvent - thx to Michael Bakonyi
+      * [FEATURE] Include bootstrap directly from repository instead of maxcdn.bootstrapcdn.com  - thx to Felix Ranesberger (in2code)
+      * [FEATURE] Allow multiple CC recipients With this change more than one CC recipient for emails can be configured - thx to Marco Huber
+      * [BUGFIX] Fix a typo in the labels - thx to Oliver Klee
+      * [BUGFIX] Open the "terms & conditions" page in a new tab - thx to Oliver Klee
+      * [BUGFIX] errorClass attribute not working - thx to Stig Nørgaard Færch
+      * [BUGFIX] Use mixed return type for ServersideValidator::getValu - thx to Andreas Nedbal (in2code)
+      * [BUGFIX] Replace incorrect response in AdminConfirmation - thx Thomas Anders
+      * [BUGFIX] Restore email notification to admin after registration - thx Patrick Lenk
+      * [DOC] Update documenation - thx to Daniel Hoffman (in2code)
 
 -
       :Version: 8.0.1
@@ -36,6 +52,20 @@ Changelog
       * [DOCUMENTATION] Replace outdated signal documentation with event description
       * [TASK] Update unit tests & behaviour tests
       * [BUGFIX] Fix validation for allowed usergroups
+
+-
+      :Version: 7.3.0
+      :Date: 2024-05-08
+      :Changes:
+
+      * [FEATURE] Add confirmation form to delete profile during registration - thx to Stefan Busemann (in2code)
+      * [FEATURE] Add BeforeMailBodyRenderEvent - thx to Michael Bakonyi
+      * [FEATURE] Include bootstrap directly from repository instead of maxcdn.bootstrapcdn.com  - thx to Felix Ranesberger (in2code)
+      * [BUGFIX] Fix a typo in the labels - thx to Oliver Klee
+      * [BUGFIX] Open the "terms & conditions" page in a new tab - thx to Oliver Klee
+      * [BUGFIX] errorClass attribute not working - thx to Stig Nørgaard Færch
+      * [DOC] Update documenation - thx to Daniel Hoffman (in2code)
+
 -
       :Version: 7.2.3
       :Date: 2023-12-13
@@ -83,54 +113,6 @@ Changelog
 
       * [BUGFIX] Notification email to admin now sends changes again
       * [BUGFIX] Notification email to admin is also sent when adding recipient's address to flex form only
--
-      :Version: 7.2.3
-      :Date: 2023-12-13
-      :Changes:
-
-      * [SECURITY] This update is needed for version for 7.0.0 to 7.2.2 older versions are not affected
-      * BUGFIX] Dont use initilize actions for granting access - thx to Daniel Hofmann (in2code)
-
--
-      :Version: 7.2.2
-      :Date: 2023-10-04
-      :Changes:
-
-      * [SECURITY] This update is needed for version for 7.0.0 to 7.2.1 older versions are not affected
-      * [BUGFIX] Add missing permission check for invitation controller - thx to Daniel Hofmann (in2code)
-
--
-      :Version: 7.2.1
-      :Date: 2023-08-08
-      :Changes:
-
-      * [TASK] Adds documentation for extended - thx to Daniel Hofmann (in2code)
-      * [TASK] Update Image used for Github Actions
-      * [BUGFIX] Fixes reaction when no typoscript configuration is set for redirect - thx to Daniel Hofmann (in2code)
-      * [BUGFIX] Fixed Object Support for getDirtyPropertiesFromUser() - thx to Daniel Hofmann (in2code)
-
--
-      :Version: 7.2.0
-      :Date: 2023-07-17
-      :Changes:
-
-      * [FEATURE] Add column "inactive since" to backend list - thx to Thomas Löffler
-      * [BUGFIX] missing email AdminNotify after editing of user profile - thx to Christian Ludwig
-      * [BUGFIX] Do not re-evaluate object values in ServersideValidator - thx to Torben Hansen
-      * [BUGFIX] Add full object support in getDirtyPropertiesFromUser() - thx to Daniel Haupt
-      * [BUGFIX] Prevent undefined array key for empty configPID - thx to Daniel Haupt
-      * [BUGFIX] Migrate usage of GU::lcfirst with Rector - thx to Torben Hansen
-      * [TASK] Corrects Documenation Rendering Configuration - thx to Daniel Hoffmann
-      * [TASK] [TASK] Replace jQuery scrollTop with vanilla scrollIntoView - thx to Felix Ranesberger
-
--
-      :Version: 7.1.1
-      :Date: 2023-03-16
-      :Changes:
-
-      * [BUGFIX] Notification email to admin now sends changes again
-      * [BUGFIX] Notification email to admin is also sent when adding recipient's address to flex form only
-      * [TASK] Removes configPID from ext_typoscript_setup.typoscript
 
 -
       :Version: 7.1.0
@@ -166,6 +148,16 @@ Changelog
       * [BUGFIX] Remove "endtime" for check of unique in db
       * [DOCS] Add note for configpid setting
       * [BUGFIX] updated sjbr/static-info-tables version
+
+-
+      :Version: 6.4.0
+      :Date: 2024-05-08
+      :Changes:
+
+      * [FEATURE] Add confirmation form to delete profile during registration
+      * [TASK] Remove unnecessary scrollIntoView property - thx to Felix Ranesberger (in2code)
+      * [TASK] Replace jQuery scrollTop with vanilla scrollIntoView - thx to Felix Ranesberger (in2code)
+      * [TASK] Build new JS distribution file - thx to Felix Ranesberger (in2code)
 
 -
       :Version: 6.3.2
