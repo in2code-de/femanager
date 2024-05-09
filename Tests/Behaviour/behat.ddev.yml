@@ -18,7 +18,7 @@ default:
       purge: true
     FailAid\Extension: ~
     Behat\MinkExtension:
-      base_url: https://femanager.ddev.site/
+      base_url: https://femanager8.ddev.site/
       files_path: /var/www/html/.Build/Web/fileadmin/user_upload
       selenium2: ~
       browser_name: 'chrome'
