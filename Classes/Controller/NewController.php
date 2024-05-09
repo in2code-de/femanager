@@ -144,14 +144,14 @@ class NewController extends AbstractFrontendController
         // todo refactor this into a better workflow
         if ($status == 'userConfirmationRefused') {
             if (ConfigurationUtility::getValue(
-                    'new./email./createUserConfirmation./confirmUserConfirmationRefused',
-                    $this->config
-                ) == '1') {
+                'new./email./createUserConfirmation./confirmUserConfirmationRefused',
+                $this->config
+            ) == '1') {
                 $this->view->assignMultiple(
                     [
                         'user' => $user,
                         'status' => 'confirmDeletion',
-                        'hash' => $hash
+                        'hash' => $hash,
                     ]
                 );
                 $this->assignForAll();
