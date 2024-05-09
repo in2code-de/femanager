@@ -703,6 +703,10 @@
         <source>Update your user-profile</source>
         <target state="final">Päivitä käyttäjäprofiiliasi</target>
       </trans-unit>
+      <trans-unit id="confirmUserConfirmationRefused">
+        <source>Please confirm the deletion of your account.</source>
+        <target state="needs-translation">Please confirm the deletion of your account.</target>
+      </trans-unit>
       <trans-unit id="update" approved="yes">
         <source>Profile successfully changed</source>
         <target state="final">Käyttäjäprofiilin tiedot päivitetty</target>
