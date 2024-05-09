@@ -67,9 +67,9 @@
         <source>Female</source>
         <target state="final">Kvinde</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2" approved="yes">
         <source>Diverse</source>
-        <target state="needs-translation">Diverse</target>
+        <target state="final">Andet</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
