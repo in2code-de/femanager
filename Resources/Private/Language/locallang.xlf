@@ -533,6 +533,9 @@
 			<trans-unit id="titleUpdateProfile">
 				<source>Update your user-profile</source>
 			</trans-unit>
+			<trans-unit id="confirmUserConfirmationRefused">
+				<source>Please confirm the deletion of your account.</source>
+			</trans-unit>
 			<trans-unit id="update">
 				<source>Profile successfully changed</source>
 			</trans-unit>

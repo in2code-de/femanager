@@ -174,9 +174,9 @@ plugin.tx_femanager {
           # Overwrite Receivers (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Senders (please fill both)
           sender {
@@ -191,11 +191,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
@@ -235,6 +235,12 @@ plugin.tx_femanager {
           #            20.wrap = ,|
           #            20.value = fileadmin/image.jpg
           #          }
+
+          # if a user refuses to create his profile, the deletion of the profile must be confirmed
+          # this is a useful setting, as some virus scanners are preloading all links in an email, which then deletes this user automatically
+          # default = 0
+          confirmUserConfirmationRefused = 0
+
         }
         # Email for Admin confirmation (Admin must confirm registration in an email)
         createAdminConfirmation {
@@ -249,16 +255,16 @@ plugin.tx_femanager {
           # Overwrite Receivers (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
             name.value = {$plugin.tx_femanager.settings.adminName}
           }
           # Overwrite Senders (please fill both)
           sender {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Subject
           subject = TEXT
@@ -266,11 +272,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
@@ -324,9 +330,9 @@ plugin.tx_femanager {
           # Overwrite Receivers (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Senders (please fill both)
           sender {
@@ -341,11 +347,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
@@ -399,9 +405,9 @@ plugin.tx_femanager {
           # Overwrite Receivers (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Senders (please fill both)
           sender {
@@ -416,11 +422,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
@@ -474,16 +480,16 @@ plugin.tx_femanager {
           # Overwrite Receivers (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
             name.value = {$plugin.tx_femanager.settings.adminName}
           }
           # Overwrite Senders (please fill both)
           sender {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Subject
           subject = TEXT
@@ -491,11 +497,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
@@ -754,14 +760,14 @@ plugin.tx_femanager {
           # Overwrite Receivers (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Senders (please fill both)
           sender {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
             name.value = {$plugin.tx_femanager.settings.adminName}
           }
@@ -771,11 +777,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
@@ -829,9 +835,9 @@ plugin.tx_femanager {
           # Overwrite Receiver (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Senders (please fill both)
           sender {
@@ -846,11 +852,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5 (from important to not important)
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
@@ -904,16 +910,16 @@ plugin.tx_femanager {
           # Overwrite Receiver (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
             name.value = {$plugin.tx_femanager.settings.adminName}
           }
           # Overwrite Senders (please fill both)
           sender {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Subject
           subject = TEXT
@@ -921,11 +927,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5 (from important to not important)
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
@@ -1102,9 +1108,9 @@ plugin.tx_femanager {
           # Overwrite Receivers (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Senders (please fill both)
           sender {
@@ -1119,11 +1125,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
@@ -1177,16 +1183,16 @@ plugin.tx_femanager {
           # Overwrite Receivers (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
             name.value = {$plugin.tx_femanager.settings.adminName}
           }
           # Overwrite Senders (please fill both)
           sender {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Subject
           subject = TEXT
@@ -1194,11 +1200,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
@@ -1252,16 +1258,16 @@ plugin.tx_femanager {
           # Overwrite Receivers (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
             name.value = {$plugin.tx_femanager.settings.adminName}
           }
           # Overwrite Senders (please fill both)
           sender {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Subject
           subject = TEXT
@@ -1269,11 +1275,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
@@ -1327,16 +1333,16 @@ plugin.tx_femanager {
           # Overwrite Receivers (please fill both)
           receiver {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
             name.value = {$plugin.tx_femanager.settings.adminName}
           }
           # Overwrite Senders (please fill both)
           sender {
             email = TEXT
-            email.value = 
+            email.value =
             name = TEXT
-            name.value = 
+            name.value =
           }
           # Overwrite Subject
           subject = TEXT
@@ -1344,11 +1350,11 @@ plugin.tx_femanager {
 
           # Set CC receivers (comma separatet list for multiple CC receivers)
           cc = TEXT
-          cc.value = 
+          cc.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
-          priority.value = 
+          priority.value =
 
           # Add Attachment (separate each with comma)
           #          attachments = COA
