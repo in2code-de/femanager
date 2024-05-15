@@ -484,7 +484,7 @@ abstract class AbstractController extends ActionController
     {
         if ((int)($this->allConfig['persistence']['storagePid'] ?? 0) === 0
             && GeneralUtility::_GP('type') !== '1548935210'
-            && TYPO3_MODE !== 'BE'
+            && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
         ) {
             $this->addFlashMessage(LocalizationUtility::translate('error_no_storagepid'), '', AbstractMessage::ERROR);
         }
@@ -502,7 +502,7 @@ abstract class AbstractController extends ActionController
             }
         } else {
             $typoscriptIncluded = ConfigurationUtility::getValue('_TypoScriptIncluded', $this->settings);
-            if ($typoscriptIncluded !== '1' && !GeneralUtility::_GP('eID') && TYPO3_MODE !== 'BE') {
+            if ($typoscriptIncluded !== '1' && !GeneralUtility::_GP('eID') && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
                 $this->addFlashMessage(
                     (string)LocalizationUtility::translate('error_no_typoscript'),
                     '',
