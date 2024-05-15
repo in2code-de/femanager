@@ -112,8 +112,8 @@
     "test:ts:lint": "typoscript-lint -c .project/tests/typoscript-lint.yml --fail-on-warnings",
     "test:rector": "rector -n",
     "test:rector:fix": [
-      "rector",
-      "test:php:fix"
+      "@test:rector",
+      "@test:php:fix"
     ],
     "prepare-release": [
       "@extension-create-libs",
