@@ -69,7 +69,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
         <source>Diverse</source>
-        <target state="needs-translation">Diverse</target>
+        <target state="translated">Divers</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
@@ -137,7 +137,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.inactivesince">
         <source>Inactive since</source>
-        <target state="needs-translation">Inactive since</target>
+        <target state="translated">Inaktiv seit</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.crdate" approved="yes">
         <source>Creation Time</source>
@@ -325,11 +325,11 @@
       </trans-unit>
       <trans-unit id="validationErrorSameAs">
         <source>Values do not match</source>
-        <target state="needs-translation">Values do not match</target>
+        <target state="translated">Die Werte sind unterschiedlich</target>
       </trans-unit>
       <trans-unit id="validationErrorPasswordRepeat">
         <source>Both passwords do not match</source>
-        <target state="needs-translation">Both passwords do not match</target>
+        <target state="translated">Die Passwörter stimmen nicht überein</target>
       </trans-unit>
       <trans-unit id="validationErrorDate" approved="yes">
         <source>Date has the wrong format</source>
@@ -705,7 +705,7 @@
       </trans-unit>
       <trans-unit id="confirmUserConfirmationRefused">
         <source>Please confirm the deletion of your account.</source>
-        <target state="needs-translation">Please confirm the deletion of your account.</target>
+        <target state="translated">Bitte bestätigen Sie die Löschung Ihres Kontos.</target>
       </trans-unit>
       <trans-unit id="update" approved="yes">
         <source>Profile successfully changed</source>
@@ -841,7 +841,7 @@
       </trans-unit>
       <trans-unit id="AdminBackendConfirmationNoteText">
         <source>%s user(s) need to be confirmed by admin</source>
-        <target state="needs-translation">%s user(s) need to be confirmed by admin</target>
+        <target state="translated">%s Benutzer muss/müssen von Admin bestätigt werden</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnAction" approved="yes">
         <source>Actions</source>
@@ -873,7 +873,7 @@
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageReSend">
         <source>%s confirmation mail was resent</source>
-        <target state="needs-translation">%s confirmation mail was resent</target>
+        <target state="translated">%s-Bestätigungsmail wurde erneut gesendet</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueMessage" approved="yes">
         <source>Your userprofile is not confirmed yet.</source>
