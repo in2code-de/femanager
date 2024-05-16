@@ -22,71 +22,75 @@
 	<p><f:translate key="emailUpdateRequestText2" /></p>
 
 	<table border="1" cellpadding="2" cellspacing="2">
-		<tr>
-			<td><b><f:translate key="emailUpdateRequestField" /></b></td>
-			<td><b><f:translate key="emailUpdateRequestOld" /></b></td>
-			<td><b><f:translate key="emailUpdateRequestNew" /></b></td>
-		</tr>
-		<f:for each="{changes}" as="change" key="property">
+		<thead>
 			<tr>
-				<td><f:translate key="tx_femanager_domain_model_user.{property}" /></td>
-				<td>
-					<f:if condition="{0:property} == {0:'password'}">
-						<f:else>
-							<f:if condition="{change.old}">
-								<f:then>
-									<f:if condition="{0:property} == {0:'gender'}">
-										<f:then>
-											<f:translate key="tx_femanager_domain_model_user.gender.item{change.old}" />
-										</f:then>
-										<f:else>
-											<f:if condition="{0:property} == {0:'dateOfBirth'}">
-												<f:then>
-													<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{change.old}</f:format.date>
-												</f:then>
-												<f:else>
-													{change.old}
-												</f:else>
-											</f:if>
-										</f:else>
-									</f:if>
-								</f:then>
-								<f:else>
-									[<f:translate key="empty" />]
-								</f:else>
-							</f:if>
-						</f:else>
-						<f:then>
-							******
-						</f:then>
-					</f:if>
-				</td>
-				<td>
-					<f:if condition="{0:property} == {0:'password'}">
-						<f:else>
-							<f:if condition="{0:property} == {0:'gender'}">
-								<f:then>
-									<f:translate key="tx_femanager_domain_model_user.gender.item{change.new}" />
-								</f:then>
-								<f:else>
-									<f:if condition="{0:property} == {0:'dateOfBirth'}">
-										<f:then>
-											<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{change.new}</f:format.date>
-										</f:then>
-										<f:else>
-											{change.new}
-										</f:else>
-									</f:if>
-								</f:else>
-							</f:if>
-						</f:else>
-						<f:then>
-							******
-						</f:then>
-					</f:if>
-				</td>
+				<th scope="col"><b><f:translate key="emailUpdateRequestField" /></b></th>
+				<th scope="col"><b><f:translate key="emailUpdateRequestOld" /></b></th>
+				<th scope="col"><b><f:translate key="emailUpdateRequestNew" /></b></th>
 			</tr>
-		</f:for>
+		</thead>
+		<tbody>
+			<f:for each="{changes}" as="change" key="property">
+				<tr>
+					<th scope="row"><f:translate key="tx_femanager_domain_model_user.{property}" /></th>
+					<td>
+						<f:if condition="{0:property} == {0:'password'}">
+							<f:else>
+								<f:if condition="{change.old}">
+									<f:then>
+										<f:if condition="{0:property} == {0:'gender'}">
+											<f:then>
+												<f:translate key="tx_femanager_domain_model_user.gender.item{change.old}" />
+											</f:then>
+											<f:else>
+												<f:if condition="{0:property} == {0:'dateOfBirth'}">
+													<f:then>
+														<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{change.old}</f:format.date>
+													</f:then>
+													<f:else>
+														{change.old}
+													</f:else>
+												</f:if>
+											</f:else>
+										</f:if>
+									</f:then>
+									<f:else>
+										[<f:translate key="empty" />]
+									</f:else>
+								</f:if>
+							</f:else>
+							<f:then>
+								******
+							</f:then>
+						</f:if>
+					</td>
+					<td>
+						<f:if condition="{0:property} == {0:'password'}">
+							<f:else>
+								<f:if condition="{0:property} == {0:'gender'}">
+									<f:then>
+										<f:translate key="tx_femanager_domain_model_user.gender.item{change.new}" />
+									</f:then>
+									<f:else>
+										<f:if condition="{0:property} == {0:'dateOfBirth'}">
+											<f:then>
+												<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{change.new}</f:format.date>
+											</f:then>
+											<f:else>
+												{change.new}
+											</f:else>
+										</f:if>
+									</f:else>
+								</f:if>
+							</f:else>
+							<f:then>
+								******
+							</f:then>
+						</f:if>
+					</td>
+				</tr>
+			</f:for>
+		</tbody>
 	</table>
 
 	<ul>
