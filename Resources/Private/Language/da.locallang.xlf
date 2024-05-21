@@ -703,9 +703,9 @@
         <source>Update your user-profile</source>
         <target state="final">Opdatér din brugerprofil</target>
       </trans-unit>
-      <trans-unit id="confirmUserConfirmationRefused">
+      <trans-unit id="confirmUserConfirmationRefused" approved="yes">
         <source>Please confirm the deletion of your account.</source>
-        <target state="needs-translation">Please confirm the deletion of your account.</target>
+        <target state="final">Bekræft venligst sletningen af din konto.</target>
       </trans-unit>
       <trans-unit id="update" approved="yes">
         <source>Profile successfully changed</source>
