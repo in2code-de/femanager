@@ -28,7 +28,7 @@
     "ext-json": "*",
     "ext-pdo": "*",
     "typo3/cms-core": "^12.3.0",
-    "symfony/config": "^6.1"
+    "symfony/config": "^6.3 || ^7.0"
   },
   "repositories": [
     {
