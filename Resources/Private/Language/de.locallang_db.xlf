@@ -27,9 +27,9 @@
         <source>Firstname</source>
         <target state="final">Vorname</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.middleName">
+      <trans-unit id="tx_femanager_domain_model_user.middleName" approved="yes">
         <source>Middlename</source>
-        <target state="translated">Zweiter Vorname</target>
+        <target state="final">Zweiter Vorname</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastName" approved="yes">
         <source>Lastname</source>
@@ -115,9 +115,9 @@
         <source>State</source>
         <target state="final">Bundesland</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.terms">
+      <trans-unit id="tx_femanager_domain_model_user.terms" approved="yes">
         <source>Terms and conditions</source>
-        <target state="translated">Nutzungsbedingungen</target>
+        <target state="final">Nutzungsbedingungen</target>
       </trans-unit>
       <trans-unit id="fe_users.crdate" approved="yes">
         <source>Creation Time</source>
@@ -135,33 +135,33 @@
         <source>Registration confirmed by admin</source>
         <target state="final">Registrierung durch Admin bestätigt</target>
       </trans-unit>
-      <trans-unit id="fe_users.tab">
+      <trans-unit id="fe_users.tab" approved="yes">
         <source>Registration</source>
-        <target state="translated">Anmeldungen</target>
+        <target state="final">Anmeldungen</target>
       </trans-unit>
-      <trans-unit id="fe_users.log">
+      <trans-unit id="fe_users.log" approved="yes">
         <source>FE_user Log</source>
-        <target state="translated">Benutzerprotokoll</target>
+        <target state="final">Benutzerprotokoll</target>
       </trans-unit>
-      <trans-unit id="fe_users.terms">
+      <trans-unit id="fe_users.terms" approved="yes">
         <source>User accepted terms and conditions</source>
-        <target state="translated">Benutzer akzeptierte Nutzungsbedingungen</target>
+        <target state="final">Benutzer akzeptierte Nutzungsbedingungen</target>
       </trans-unit>
-      <trans-unit id="fe_users.terms_version">
+      <trans-unit id="fe_users.terms_version" approved="yes">
         <source>Accepted version of terms and conditions</source>
-        <target state="translated">Akzeptierte Version der Nutzungsbedingungen</target>
+        <target state="final">Akzeptierte Version der Nutzungsbedingungen</target>
       </trans-unit>
-      <trans-unit id="fe_users.terms_date_of_acceptance">
+      <trans-unit id="fe_users.terms_date_of_acceptance" approved="yes">
         <source>Accepted datetime of terms and conditions</source>
-        <target state="translated">Akzeptierte Datumszeit der Nutzungsbedingungen</target>
+        <target state="final">Akzeptierte Datumszeit der Nutzungsbedingungen</target>
       </trans-unit>
       <trans-unit id="fe_users.changerequest" approved="yes">
         <source>Change Request</source>
         <target state="final">Änderungsanfrage</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log">
+      <trans-unit id="tx_femanager_domain_model_log" approved="yes">
         <source>User Log</source>
-        <target state="translated">Benutzerprotokoll</target>
+        <target state="final">Benutzerprotokoll</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.title" approved="yes">
         <source>Title</source>
