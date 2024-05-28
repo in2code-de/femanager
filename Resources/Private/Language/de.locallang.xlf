@@ -67,9 +67,9 @@
         <source>Female</source>
         <target state="final">weiblich</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2" approved="yes">
         <source>Diverse</source>
-        <target state="translated">Divers</target>
+        <target state="final">Divers</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
@@ -125,7 +125,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.terms" approved="yes">
         <source>I accept the terms and conditions</source>
-        <target state="final">Ich habe die Bedingungen gelesen und akzeptiert</target>
+        <target state="final">Ich habe die Bedingungen gelesen und akzetiert</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.termslinktext" approved="yes">
         <source>Click here for terms and conditions</source>
@@ -135,9 +135,9 @@
         <source>Last login</source>
         <target state="final">Letzter Login</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.inactivesince">
+      <trans-unit id="tx_femanager_domain_model_user.inactivesince" approved="yes">
         <source>Inactive since</source>
-        <target state="translated">Inaktiv seit</target>
+        <target state="final">Inaktiv seit</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.crdate" approved="yes">
         <source>Creation Time</source>
@@ -323,13 +323,13 @@
         <source>This value is not allowed in field %s</source>
         <target state="final">Dieser Wert ist nicht zulässig im Feld %s</target>
       </trans-unit>
-      <trans-unit id="validationErrorSameAs">
+      <trans-unit id="validationErrorSameAs" approved="yes">
         <source>Values do not match</source>
-        <target state="translated">Die Werte sind unterschiedlich</target>
+        <target state="final">Die Werte sind unterschiedlich</target>
       </trans-unit>
-      <trans-unit id="validationErrorPasswordRepeat">
+      <trans-unit id="validationErrorPasswordRepeat" approved="yes">
         <source>Both passwords do not match</source>
-        <target state="translated">Die Passwörter stimmen nicht überein</target>
+        <target state="final">Die Passwörter stimmen nicht überein</target>
       </trans-unit>
       <trans-unit id="validationErrorDate" approved="yes">
         <source>Date has the wrong format</source>
@@ -671,9 +671,9 @@
         <source>Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</source>
         <target state="final">Vielen Dank für Ihre Bestätigung. Ihr Profil wird verfügbar sein, sobald der Administrator Ihre Anfrage bestätigt.</target>
       </trans-unit>
-      <trans-unit id="resendConfirmationMailSend">
+      <trans-unit id="resendConfirmationMailSend" approved="yes">
         <source>An Email was send to your account. Please check your inbox.</source>
-        <target state="translated">Eine E-Mail wurde an Ihre E-Mail-Adresse verschickt. Bitte überprüfen sie Ihren Posteingang.</target>
+        <target state="final">Eine E-Mail wurde an Ihre E-Mail-Adresse verschickt. Bitte überprüfen sie Ihren Posteingang.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailFail" approved="yes">
         <source>We received no valid mail.</source>
@@ -703,9 +703,9 @@
         <source>Update your user-profile</source>
         <target state="final">Profil ändern</target>
       </trans-unit>
-      <trans-unit id="confirmUserConfirmationRefused">
+      <trans-unit id="confirmUserConfirmationRefused" approved="yes">
         <source>Please confirm the deletion of your account.</source>
-        <target state="translated">Bitte bestätigen Sie die Löschung Ihres Kontos.</target>
+        <target state="final">Bitte bestätigen Sie die Löschung Ihres Kontos.</target>
       </trans-unit>
       <trans-unit id="update" approved="yes">
         <source>Profile successfully changed</source>
@@ -759,9 +759,9 @@
         <source>Please choose ...</source>
         <target state="final">Bitte wählen...</target>
       </trans-unit>
-      <trans-unit id="pleaseChooseCountry">
+      <trans-unit id="pleaseChooseCountry" approved="yes">
         <source>Please choose a country ...</source>
-        <target state="translated">Bitte ein Land auswählen ...</target>
+        <target state="final">Bitte ein Land auswählen ...</target>
       </trans-unit>
       <trans-unit id="FilterLabel" approved="yes">
         <source>Search</source>
@@ -839,9 +839,9 @@
         <source>%s approval(s) available</source>
         <target state="final">%s Genehmigung(en) verfügbar</target>
       </trans-unit>
-      <trans-unit id="AdminBackendConfirmationNoteText">
+      <trans-unit id="AdminBackendConfirmationNoteText" approved="yes">
         <source>%s user(s) need to be confirmed by admin</source>
-        <target state="translated">%s Benutzer muss/müssen von Admin bestätigt werden</target>
+        <target state="final">%s Benutzer muss/müssen von Admin bestätigt werden</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnAction" approved="yes">
         <source>Actions</source>
@@ -871,9 +871,9 @@
         <source>resend user confirmation e-mail</source>
         <target state="final">E-Mail-Bestätigung erneut senden</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationFlashMessageReSend">
+      <trans-unit id="BackendConfirmationFlashMessageReSend" approved="yes">
         <source>%s confirmation mail was resent</source>
-        <target state="translated">%s-Bestätigungsmail wurde erneut gesendet</target>
+        <target state="final">%s-Bestätigungsmail wurde erneut gesendet</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueMessage" approved="yes">
         <source>Your userprofile is not confirmed yet.</source>
