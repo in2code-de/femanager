@@ -3,213 +3,213 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="nl">
     <header/>
     <body>
-      <trans-unit id="tx_femanager_domain_model_user">
+      <trans-unit id="tx_femanager_domain_model_user" approved="yes">
         <source>User</source>
-        <target state="translated">Gebruiker</target>
+        <target state="final">Gebruiker</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.username">
+      <trans-unit id="tx_femanager_domain_model_user.username" approved="yes">
         <source>Username</source>
-        <target state="translated">Gebruikersnaam</target>
+        <target state="final">Gebruikersnaam</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.password">
+      <trans-unit id="tx_femanager_domain_model_user.password" approved="yes">
         <source>Password</source>
-        <target state="translated">Wachtwoord</target>
+        <target state="final">Wachtwoord</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.password_repeat">
+      <trans-unit id="tx_femanager_domain_model_user.password_repeat" approved="yes">
         <source>Repeat Password</source>
-        <target state="translated">Herhaal wachtwoord</target>
+        <target state="final">Herhaal wachtwoord</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.usergroup">
+      <trans-unit id="tx_femanager_domain_model_user.usergroup" approved="yes">
         <source>Usergroup</source>
-        <target state="translated">Gebruikersgroep</target>
+        <target state="final">Gebruikersgroep</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.name">
+      <trans-unit id="tx_femanager_domain_model_user.name" approved="yes">
         <source>Full Name</source>
-        <target state="translated">Volledige naam</target>
+        <target state="final">Volledige naam</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.firstName">
+      <trans-unit id="tx_femanager_domain_model_user.firstName" approved="yes">
         <source>Firstname</source>
-        <target state="translated">Voornaam</target>
+        <target state="final">Voornaam</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.middleName">
+      <trans-unit id="tx_femanager_domain_model_user.middleName" approved="yes">
         <source>Middlename</source>
-        <target state="translated">Tussenvoegsel</target>
+        <target state="final">Tussenvoegsel</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.lastName">
+      <trans-unit id="tx_femanager_domain_model_user.lastName" approved="yes">
         <source>Lastname</source>
-        <target state="translated">Achternaam</target>
+        <target state="final">Achternaam</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth" approved="yes">
         <source>Birthdate</source>
-        <target state="translated">Geboortedatum</target>
+        <target state="final">Geboortedatum</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint">
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint" approved="yes">
         <source>Please type your birthdate as MM/DD/YYYY</source>
-        <target state="translated">Typ je geboortedatum als MM/DD/JJJJ</target>
+        <target state="final">Typ je geboortedatum als MM/DD/JJJJ</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.placeholder">
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.placeholder" approved="yes">
         <source>MM/DD/YYYY</source>
-        <target state="translated">MM/DD/JJJJ</target>
+        <target state="final">MM/DD/JJJJ</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.dateFormat">
+      <trans-unit id="tx_femanager_domain_model_user.dateFormat" approved="yes">
         <source>m/d/Y</source>
-        <target state="translated">m/d/Y</target>
+        <target state="final">m/d/Y</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender">
+      <trans-unit id="tx_femanager_domain_model_user.gender" approved="yes">
         <source>Gender</source>
-        <target state="translated">Geslacht</target>
+        <target state="final">Geslacht</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender.item0">
+      <trans-unit id="tx_femanager_domain_model_user.gender.item0" approved="yes">
         <source>Male</source>
-        <target state="translated">Man</target>
+        <target state="final">Man</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender.item1">
+      <trans-unit id="tx_femanager_domain_model_user.gender.item1" approved="yes">
         <source>Female</source>
-        <target state="translated">Vrouw</target>
+        <target state="final">Vrouw</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
         <source>Diverse</source>
         <target state="needs-translation">Diverse</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.address">
+      <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
-        <target state="translated">Adres</target>
+        <target state="final">Adres</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.telephone">
+      <trans-unit id="tx_femanager_domain_model_user.telephone" approved="yes">
         <source>Telephone</source>
-        <target state="translated">Telefoon</target>
+        <target state="final">Telefoon</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.fax">
+      <trans-unit id="tx_femanager_domain_model_user.fax" approved="yes">
         <source>Fax</source>
-        <target state="translated">Fax</target>
+        <target state="final">Fax</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.email">
+      <trans-unit id="tx_femanager_domain_model_user.email" approved="yes">
         <source>Email</source>
-        <target state="translated">E-mail</target>
+        <target state="final">E-mail</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.title">
+      <trans-unit id="tx_femanager_domain_model_user.title" approved="yes">
         <source>Title</source>
-        <target state="translated">Titel</target>
+        <target state="final">Titel</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.zip">
+      <trans-unit id="tx_femanager_domain_model_user.zip" approved="yes">
         <source>ZIP</source>
-        <target state="translated">Postcode</target>
+        <target state="final">Postcode</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.city">
+      <trans-unit id="tx_femanager_domain_model_user.city" approved="yes">
         <source>City</source>
-        <target state="translated">Plaats</target>
+        <target state="final">Plaats</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.country">
+      <trans-unit id="tx_femanager_domain_model_user.country" approved="yes">
         <source>Country</source>
-        <target state="translated">Land</target>
+        <target state="final">Land</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.state">
+      <trans-unit id="tx_femanager_domain_model_user.state" approved="yes">
         <source>State</source>
-        <target state="translated">Provincie</target>
+        <target state="final">Provincie</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.www">
+      <trans-unit id="tx_femanager_domain_model_user.www" approved="yes">
         <source>Website</source>
-        <target state="translated">Website</target>
+        <target state="final">Website</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.company">
+      <trans-unit id="tx_femanager_domain_model_user.company" approved="yes">
         <source>Company</source>
-        <target state="translated">Bedrijf</target>
+        <target state="final">Bedrijf</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.image">
+      <trans-unit id="tx_femanager_domain_model_user.image" approved="yes">
         <source>Image</source>
-        <target state="translated">Afbeelding</target>
+        <target state="final">Afbeelding</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.captcha">
+      <trans-unit id="tx_femanager_domain_model_user.captcha" approved="yes">
         <source>Captcha</source>
-        <target state="translated">Captcha</target>
+        <target state="final">Captcha</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.terms">
+      <trans-unit id="tx_femanager_domain_model_user.terms" approved="yes">
         <source>I accept the terms and conditions</source>
-        <target state="translated">Ik ga akkoord met de algemene voorwaarden</target>
+        <target state="final">Ik ga akkoord met de algemene voorwaarden</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.termslinktext">
+      <trans-unit id="tx_femanager_domain_model_user.termslinktext" approved="yes">
         <source>Click here for terms and conditions</source>
-        <target state="translated">Klik hier voor de algemene voorwaarden</target>
+        <target state="final">Klik hier voor de algemene voorwaarden</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.lastlogin">
+      <trans-unit id="tx_femanager_domain_model_user.lastlogin" approved="yes">
         <source>Last login</source>
-        <target state="translated">Laatste login</target>
+        <target state="final">Laatste login</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.inactivesince">
         <source>Inactive since</source>
         <target state="needs-translation">Inactive since</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.crdate">
+      <trans-unit id="tx_femanager_domain_model_user.crdate" approved="yes">
         <source>Creation Time</source>
-        <target state="translated">Aanmaakdatum</target>
+        <target state="final">Aanmaakdatum</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log">
+      <trans-unit id="tx_femanager_domain_model_log" approved="yes">
         <source>User Log</source>
-        <target state="translated">Gebruikers Log</target>
+        <target state="final">Gebruikers Log</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.title">
+      <trans-unit id="tx_femanager_domain_model_log.title" approved="yes">
         <source>Title</source>
-        <target state="translated">Titel</target>
+        <target state="final">Titel</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.crdate">
+      <trans-unit id="tx_femanager_domain_model_log.crdate" approved="yes">
         <source>Time</source>
-        <target state="translated">Tijd</target>
+        <target state="final">Tijd</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state">
+      <trans-unit id="tx_femanager_domain_model_log.state" approved="yes">
         <source>State</source>
-        <target state="translated">Status</target>
+        <target state="final">Status</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.100">
+      <trans-unit id="tx_femanager_domain_model_log.state.100" approved="yes">
         <source>Registration</source>
-        <target state="translated">Registratie</target>
+        <target state="final">Registratie</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.101">
+      <trans-unit id="tx_femanager_domain_model_log.state.101" approved="yes">
         <source>New Registration</source>
-        <target state="translated">Nieuwe registratie</target>
+        <target state="final">Nieuwe registratie</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.102">
+      <trans-unit id="tx_femanager_domain_model_log.state.102" approved="yes">
         <source>Registration confirmed by user</source>
-        <target state="translated">Registratie bevestigd door gebruiker</target>
+        <target state="final">Registratie bevestigd door gebruiker</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.103">
+      <trans-unit id="tx_femanager_domain_model_log.state.103" approved="yes">
         <source>Registration confirmed by admin</source>
-        <target state="translated">Registratie bevestigd door admin</target>
+        <target state="final">Registratie bevestigd door admin</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.104">
+      <trans-unit id="tx_femanager_domain_model_log.state.104" approved="yes">
         <source>Registration refused by user</source>
-        <target state="translated">Registratie geweigerd door gebruiker</target>
+        <target state="final">Registratie geweigerd door gebruiker</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.105">
+      <trans-unit id="tx_femanager_domain_model_log.state.105" approved="yes">
         <source>Registration refused by admin</source>
-        <target state="translated">Registratie geweigerd door admin</target>
+        <target state="final">Registratie geweigerd door admin</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.106">
+      <trans-unit id="tx_femanager_domain_model_log.state.106" approved="yes">
         <source>Profile creation request</source>
-        <target state="translated">Verzoek aanmaken profiel</target>
+        <target state="final">Verzoek aanmaken profiel</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.200">
+      <trans-unit id="tx_femanager_domain_model_log.state.200" approved="yes">
         <source>Update</source>
-        <target state="translated">Bijwerken</target>
+        <target state="final">Bijwerken</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.201">
+      <trans-unit id="tx_femanager_domain_model_log.state.201" approved="yes">
         <source>Profile updated</source>
-        <target state="translated">Profiel bijgewerkt</target>
+        <target state="final">Profiel bijgewerkt</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.202">
+      <trans-unit id="tx_femanager_domain_model_log.state.202" approved="yes">
         <source>Profile update confirmed by admin</source>
-        <target state="translated">Profiel update bevestigd door de beheerder</target>
+        <target state="final">Profiel update bevestigd door de beheerder</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.203">
+      <trans-unit id="tx_femanager_domain_model_log.state.203" approved="yes">
         <source>Profile update refused by admin</source>
-        <target state="translated">Profielupdate geweigerd door de beheerder</target>
+        <target state="final">Profielupdate geweigerd door de beheerder</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.204">
+      <trans-unit id="tx_femanager_domain_model_log.state.204" approved="yes">
         <source>Profile update request</source>
-        <target state="translated">Aanvraag profiel update</target>
+        <target state="final">Aanvraag profiel update</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.205">
+      <trans-unit id="tx_femanager_domain_model_log.state.205" approved="yes">
         <source>Profile update security failure</source>
-        <target state="translated">Beveiligingsfout bij profielupdate</target>
+        <target state="final">Beveiligingsfout bij profielupdate</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.206">
         <source>Image deleted</source>
@@ -419,53 +419,53 @@
         <source>Your profile was confirmed and successfully created.</source>
         <target state="translated">Je profiel is bevestigd en succesvol aangemaakt.</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifySignature">
+      <trans-unit id="emailCreateUserNotifySignature" approved="yes">
         <source>Your website team.</source>
-        <target state="translated">Jouw website-team.</target>
+        <target state="final">Jouw website-team.</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifyRefusedSubject">
+      <trans-unit id="emailCreateUserNotifyRefusedSubject" approved="yes">
         <source>Dear</source>
-        <target state="translated">Beste</target>
+        <target state="final">Beste</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifyRefusedSalutation">
+      <trans-unit id="emailCreateUserNotifyRefusedSalutation" approved="yes">
         <source>Dear</source>
-        <target state="translated">Beste</target>
+        <target state="final">Beste</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifyRefusedText1">
+      <trans-unit id="emailCreateUserNotifyRefusedText1" approved="yes">
         <source>Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</source>
-        <target state="translated">Bedankt voor je profielverzoek. Het spijt ons u te moeten mededelen dat we je verzoek hebben moeten weigeren.</target>
+        <target state="final">Bedankt voor je profielverzoek. Het spijt ons u te moeten mededelen dat we je verzoek hebben moeten weigeren.</target>
       </trans-unit>
-      <trans-unit id="emailCreateUserNotifyRefusedSignature">
+      <trans-unit id="emailCreateUserNotifyRefusedSignature" approved="yes">
         <source>Your website team.</source>
-        <target state="translated">Jouw website-team.</target>
+        <target state="final">Jouw website-team.</target>
       </trans-unit>
-      <trans-unit id="emailCreateNotifySubject">
+      <trans-unit id="emailCreateNotifySubject" approved="yes">
         <source>New profile registration</source>
-        <target state="translated">Nieuwe gebruikers registratie</target>
+        <target state="final">Nieuwe gebruikers registratie</target>
       </trans-unit>
-      <trans-unit id="emailCreateNotifySalutation">
+      <trans-unit id="emailCreateNotifySalutation" approved="yes">
         <source>Dear Admin,</source>
-        <target state="translated">Beste Admin,</target>
+        <target state="final">Beste Admin,</target>
       </trans-unit>
-      <trans-unit id="emailCreateNotifyText1">
+      <trans-unit id="emailCreateNotifyText1" approved="yes">
         <source>Profile creation - User %s</source>
-        <target state="translated">Profiel aanmaken - Gebruiker %s</target>
+        <target state="final">Profiel aanmaken - Gebruiker %s</target>
       </trans-unit>
-      <trans-unit id="emailCreateNotifyText2">
+      <trans-unit id="emailCreateNotifyText2" approved="yes">
         <source>Profile creation - User %s set a new password and profile was enabled</source>
-        <target state="translated">Profiel aanmaken - Gebruiker %s heeft een nieuw wachtwoord ingesteld en profiel is ingeschakeld</target>
+        <target state="final">Profiel aanmaken - Gebruiker %s heeft een nieuw wachtwoord ingesteld en profiel is ingeschakeld</target>
       </trans-unit>
-      <trans-unit id="emailCreateNotifyUserProperties">
+      <trans-unit id="emailCreateNotifyUserProperties" approved="yes">
         <source>Profile properties:</source>
-        <target state="translated">Profiel eigenschappen:</target>
+        <target state="final">Profiel eigenschappen:</target>
       </trans-unit>
-      <trans-unit id="emailUpdateNotifySubject">
+      <trans-unit id="emailUpdateNotifySubject" approved="yes">
         <source>Profile update</source>
-        <target state="translated">Profiel bijgewerkt</target>
+        <target state="final">Profiel bijgewerkt</target>
       </trans-unit>
-      <trans-unit id="emailUpdateNotifySalutation">
+      <trans-unit id="emailUpdateNotifySalutation" approved="yes">
         <source>Dear Admin,</source>
-        <target state="translated">Beste Admin,</target>
+        <target state="final">Beste Admin,</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifyText1">
         <source>Profile change by user %s</source>
