@@ -1,5 +1,4 @@
 .. include:: ../../Includes.rst.txt
-.. include:: Images.txt
 
 .. _showlistusers:
 
@@ -23,14 +22,14 @@ frontend user.
 #. choose "detail" view
 #. select the tab "Detail" and choose "Logged in FE User"
 
-|showlistusers1|
+.. image:: ../../Images/feature-showlistusers-loggedin-user.png
 
 Show a given user
 ^^^^^^^^^^^^^^^^^
 
 You can provide a list view of all frontend users or frontend users of selected groups
 
-|showlistusers2|
+.. image:: ../../Images/feature-showlistusers-loggedin-user1.png
 
 #. Add a femanager plugin to your page
 #. choose "detail" view
@@ -55,7 +54,7 @@ List Users and provide a detail page
    By combining a list aIf you don't select any frontend user, any users can be displayed by passing the get param &tx_femanager_pi1[user]=XX to the detail page url. Be careful to avoid unwanted information disclosure!
 
 
-|showlistusers3|
+.. image:: ../../Images/feature-showlistusers-loggedin-user2.png
 
 Plugin Options:
 

@@ -1,14 +1,11 @@
 .. include:: ../Includes.rst.txt
-.. include:: Images.txt
 
 .. _installation:
 
 Installation and Configuration
 ==============================
 
-.. only:: html
-
-	:ref:`quick` | :ref:`stepbystep` |
+:ref:`quick` | :ref:`stepbystep` |
 
 
 .. _quick:
@@ -39,11 +36,11 @@ Extension Manager Configuration
 Images
 """"""
 
-|em|
+.. image:: ../Images/femanager_extensionmanager.png
 
 Extension Manager
 
-|emConfiguration|
+.. image:: ../Images/femanager_extensionmanager_configuration.png
 
 Extension Manager Configuration
 
@@ -95,11 +92,11 @@ Plugin Configuration
 Images
 """"""
 
-|plugin|
+.. image:: ../Images/femanager_plugin.png
 
 Pagecontent
 
-|plugin2|
+.. image:: ../Images/femanager_plugin2.png
 
 Plugin Configuration
 
@@ -322,7 +319,7 @@ FE Users Record
 Images
 """"""
 
-|feusersRecord|
+.. image:: ../Images/femanager_feusers_record.png
 
 fe_users Record
 
@@ -402,7 +399,7 @@ TypoScript Configuration
 Images
 """"""
 
-|constants|
+.. image:: ../Images/femanager_constants.png
 
 Constants Editor
 
@@ -2158,11 +2155,11 @@ Backend Module
 Images
 """"""
 
-|backendmodule|
+.. image:: ../Images/femanager_backendmodule.png
 
 Backend Module (List)
 
-|backendmodule2|
+.. image:: ../Images/femanager_backendmodule2.png
 
 Backend Module (Confirmation)
 

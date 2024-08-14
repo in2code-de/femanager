@@ -51,7 +51,6 @@ Table of Contents
     :hidden:
 
     Sitemap
-    genindex
 
 Additional Links
 ================

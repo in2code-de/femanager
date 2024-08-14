@@ -1,14 +1,11 @@
 .. include:: ../Includes.rst.txt
-.. include:: Images.txt
 
 .. _upgrade:
 
 Upgrade
 =======
 
-.. only:: html
-
-	:ref:`v7.1` | :ref:`v6.0` | :ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+:ref:`v7.1` | :ref:`v6.0` | :ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
 
 .. _v7.1:
 
@@ -23,7 +20,7 @@ You need to add
 
 .. code-block:: html
 
-<f:form.hidden name="hash" value="{hash}"/>
+   <f:form.hidden name="hash" value="{hash}"/>
 
 in order,that the function is working.
 
@@ -66,27 +63,27 @@ The argument token was introduced :php:`(token:token)`
 
    .. code-block:: html
 
-	<f:link.action
-		action="delete"
-		arguments="{user:user}"
-		class="btn btn-warning btn-large"
-		additionalAttributes="{data-confirm:'{f:translate(key:\'UserDeleteConfirmation\')}'}">
-		<i class="icon-trash icon-white"></i>
-		<f:translate key="deleteProfile" />
-	</f:link.action>
+      <f:link.action
+         action="delete"
+         arguments="{user:user}"
+         class="btn btn-warning btn-large"
+         additionalAttributes="{data-confirm:'{f:translate(key:\'UserDeleteConfirmation\')}'}">
+         <i class="icon-trash icon-white"></i>
+         <f:translate key="deleteProfile" />
+      </f:link.action>
 
 **new:**
 
    .. code-block:: html
 
-	<f:link.action
-		action="delete"
-		arguments="{user:user, token:token}"
-		class="btn btn-warning btn-large"
-		additionalAttributes="{data-confirm:'{f:translate(key:\'UserDeleteConfirmation\')}'}">
-		<i class="icon-trash icon-white"></i>
-		<f:translate key="deleteProfile" />
-	</f:link.action>
+      <f:link.action
+         action="delete"
+         arguments="{user:user, token:token}"
+         class="btn btn-warning btn-large"
+         additionalAttributes="{data-confirm:'{f:translate(key:\'UserDeleteConfirmation\')}'}">
+         <i class="icon-trash icon-white"></i>
+         <f:translate key="deleteProfile" />
+      </f:link.action>
 
 :file:`/Templates/Edit/Edit.html`
 
