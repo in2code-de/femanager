@@ -220,7 +220,7 @@ class ClientsideValidator extends AbstractValidator
                         );
                         $wordObject = $wordRepository->getWord();
                         $wordHash = $wordObject->getWordHash();
-                        $userVal = md5(strtolower(utf8_decode($this->getValue())));
+                        $userVal = md5(strtolower(mb_convert_encoding($this->getValue(), 'ISO-8859-1')));
                         if ($wordHash !== $userVal) {
                             $this->addMessage('validationErrorCaptcha', 'captcha');
                             $this->isValid = false;
