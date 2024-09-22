@@ -1,7 +1,7 @@
 <table border="1" cellpadding="2" cellspacing="2">
 	<f:if condition="{user.username}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.username" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.username" /></th>
 			<td>
 				{user.username}
 			</td>
@@ -9,7 +9,7 @@
 	</f:if>
 	<f:if condition="{user.email}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.email" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.email" /></th>
 			<td>
 				{user.email}
 			</td>
@@ -17,7 +17,7 @@
 	</f:if>
 	<f:if condition="{user.www}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.www" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.www" /></th>
 			<td>
 				{user.www}
 			</td>
@@ -25,7 +25,7 @@
 	</f:if>
 	<f:if condition="{user.title}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.title" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.title" /></th>
 			<td>
 				{user.title}
 			</td>
@@ -33,7 +33,7 @@
 	</f:if>
 	<f:if condition="{user.firstName}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.firstName" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.firstName" /></th>
 			<td>
 				{user.firstName}
 			</td>
@@ -41,7 +41,7 @@
 	</f:if>
 	<f:if condition="{user.middleName}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.middleName" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.middleName" /></th>
 			<td>
 				{user.middleName}
 			</td>
@@ -49,7 +49,7 @@
 	</f:if>
 	<f:if condition="{user.lastName}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.lastName" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.lastName" /></th>
 			<td>
 				{user.lastName}
 			</td>
@@ -57,7 +57,7 @@
 	</f:if>
 	<f:if condition="{user.name}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.name" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.name" /></th>
 			<td>
 				{user.name}
 			</td>
@@ -65,21 +65,21 @@
 	</f:if>
 	<f:if condition="{user.company}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.company" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.company" /></th>
 			<td>
 				{user.company}
 			</td>
 		</tr>
 	</f:if>
 	<tr>
-		<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.gender" /></td>
+		<th scope="row"><f:translate key="tx_femanager_domain_model_user.gender" /></th>
 		<td>
 			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.gender.item{user.gender}" />
 		</td>
 	</tr>
 	<f:if condition="{user.dateOfBirth}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.dateOfBirth" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.dateOfBirth" /></th>
 			<td>
 				<f:format.date format="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.dateFormat')}">{user.dateOfBirth}</f:format.date>
 			</td>
@@ -87,7 +87,7 @@
 	</f:if>
 	<f:if condition="{user.telephone}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.telephone" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.telephone" /></th>
 			<td>
 				{user.telephone}
 			</td>
@@ -95,7 +95,7 @@
 	</f:if>
 	<f:if condition="{user.fax}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.fax" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.fax" /></th>
 			<td>
 				{user.fax}
 			</td>
@@ -103,7 +103,7 @@
 	</f:if>
 	<f:if condition="{user.address}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.address" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.address" /></th>
 			<td>
 				{user.address}
 			</td>
@@ -111,7 +111,7 @@
 	</f:if>
 	<f:if condition="{user.zip}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.zip" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.zip" /></th>
 			<td>
 				{user.zip}
 			</td>
@@ -119,7 +119,7 @@
 	</f:if>
 	<f:if condition="{user.city}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.city" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.city" /></th>
 			<td>
 				{user.city}
 			</td>
@@ -127,7 +127,7 @@
 	</f:if>
 	<f:if condition="{user.country}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.country" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.country" /></th>
 			<td>
 				{user.country}
 			</td>
@@ -135,7 +135,7 @@
 	</f:if>
 	<f:if condition="{user.state}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.state" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.state" /></th>
 			<td>
 				<!-- // TODO: Check me if i was displayed -->
 				{user.state}
@@ -144,7 +144,7 @@
 	</f:if>
 	<f:if condition="{user.image}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.image" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.image" /></th>
 			<td>
 				<f:if condition="{embedImages.0}">
 					<img src="{embedImages.0}" alt="Error in User Image">
@@ -154,7 +154,7 @@
 	</f:if>
 	<f:if condition="{user.usergroup}">
 		<tr>
-			<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.usergroup" /></td>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.usergroup" /></th>
 			<td>
 				<f:for each="{user.usergroup}" as="usergroup" iteration="i">{usergroup.title}<f:if condition="{i.isLast}"><f:else>, </f:else></f:if></f:for>
 			</td>
