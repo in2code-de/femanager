@@ -71,12 +71,14 @@
 			</td>
 		</tr>
 	</f:if>
-	<tr>
-		<th scope="row"><f:translate key="tx_femanager_domain_model_user.gender" /></th>
-		<td>
-			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.gender.item{user.gender}" />
-		</td>
-	</tr>
+	<f:if condition="{user.gender}">
+		<tr>
+			<th scope="row"><f:translate key="tx_femanager_domain_model_user.gender" /></th>
+			<td>
+				<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.gender.item{user.gender}" />
+			</td>
+		</tr>
+	</f:if>
 	<f:if condition="{user.dateOfBirth}">
 		<tr>
 			<th scope="row"><f:translate key="tx_femanager_domain_model_user.dateOfBirth" /></th>
