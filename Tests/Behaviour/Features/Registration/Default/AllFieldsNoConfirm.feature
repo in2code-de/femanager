@@ -28,7 +28,7 @@ Feature: AllFieldsNoConfirm
     And I press "Create Profile Now"
     Then I wait "4" seconds
 
-    Then I should see "User registration"
+    Then I should see "Profile successfully created"
 
     Given I am on "/index.php?id=89"
     Then I should see "[random:1]"
