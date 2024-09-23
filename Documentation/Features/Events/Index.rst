@@ -26,6 +26,17 @@ Events List
    :header-rows: 1
 
    -  :Event:
+         Event
+      :Where:
+         Where
+      :Replaces signal:
+         Replaces signal
+      :Parameters:
+         Parameters
+      :Description:
+         Description
+
+   -  :Event:
          AdminConfirmationUserEvent
       :Where:
          UserBackendController->confirmUserAction()
