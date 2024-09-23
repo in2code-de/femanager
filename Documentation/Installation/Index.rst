@@ -1,14 +1,11 @@
 .. include:: ../Includes.rst.txt
-.. include:: Images.txt
 
 .. _installation:
 
 Installation and Configuration
 ==============================
 
-.. only:: html
-
-	:ref:`quick` | :ref:`stepbystep` |
+:ref:`quick` | :ref:`stepbystep` |
 
 
 .. _quick:
@@ -39,7 +36,8 @@ Extension Configuration
 Settings
 """"""""
 
-|settings|
+
+.. image:: ../Images/femanager_extensionmanager.png
 
 """"""""
 
@@ -96,7 +94,8 @@ Since v12 there are now different frontend plugins for the different views. You 
 Images
 """"""
 
-|plugin|
+.. image:: ../Images/femanager_plugin.png
+
 
 Plugin Configuration
 
@@ -352,7 +351,8 @@ FE Users Record
 Images
 """"""
 
-|feusersRecord|
+.. image:: ../Images/femanager_feusers_record.png
+
 
 fe_users Record
 
@@ -432,7 +432,8 @@ TypoScript Configuration
 Images
 """"""
 
-|constants|
+.. image:: ../Images/femanager_constants.png
+
 
 Constants Editor
 
@@ -2157,12 +2158,11 @@ Backend Module
 
 Images
 """"""
-
-|backendmodule|
+.. image:: ../Images/femanager_backendmodule.png
 
 Backend Module (List)
 
-|backendmodule2|
+.. image:: ../Images/femanager_backendmodule2.png
 
 Backend Module (Confirmation)
 

@@ -1,5 +1,4 @@
 .. include:: ../Includes.rst.txt
-.. include:: Images.txt
 
 .. _upgrade:
 
@@ -103,27 +102,27 @@ The argument token was introduced.
 
 .. code-block:: html
 
-	<f:link.action
-		action="delete"
-		arguments="{user:user}"
-		class="btn btn-warning btn-large"
-		additionalAttributes="{data-confirm:'{f:translate(key:\'UserDeleteConfirmation\')}'}">
-		<i class="icon-trash icon-white"></i>
-		<f:translate key="deleteProfile" />
-	</f:link.action>
+      <f:link.action
+         action="delete"
+         arguments="{user:user}"
+         class="btn btn-warning btn-large"
+         additionalAttributes="{data-confirm:'{f:translate(key:\'UserDeleteConfirmation\')}'}">
+         <i class="icon-trash icon-white"></i>
+         <f:translate key="deleteProfile" />
+      </f:link.action>
 
 **new:**
 
 .. code-block:: html
 
-	<f:link.action
-		action="delete"
-		arguments="{user:user, token:token}"
-		class="btn btn-warning btn-large"
-		additionalAttributes="{data-confirm:'{f:translate(key:\'UserDeleteConfirmation\')}'}">
-		<i class="icon-trash icon-white"></i>
-		<f:translate key="deleteProfile" />
-	</f:link.action>
+      <f:link.action
+         action="delete"
+         arguments="{user:user, token:token}"
+         class="btn btn-warning btn-large"
+         additionalAttributes="{data-confirm:'{f:translate(key:\'UserDeleteConfirmation\')}'}">
+         <i class="icon-trash icon-white"></i>
+         <f:translate key="deleteProfile" />
+      </f:link.action>
 
 :file:`/Templates/Edit/Edit.html`
 

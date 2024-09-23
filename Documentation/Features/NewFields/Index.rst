@@ -1,5 +1,4 @@
 .. include:: ../../Includes.rst.txt
-.. include:: Images.txt
 
 .. _newfields:
 
@@ -9,7 +8,7 @@ Adding new fields to fe_users with your own extension
 Picture
 ^^^^^^^
 
-|extendFields|
+.. image:: ../../Images/femanager_edit2.png
 
 Add new Fields to the Registration-/Editform
 
@@ -35,7 +34,8 @@ Step by Step
 Add new fields to the flexform
 """"""""""""""""""""""""""""""
 
-|newFields|
+.. image:: ../../Images/femanager_flexform_newfields.png
+
 
 Extend Fieldselection in Flexform
 

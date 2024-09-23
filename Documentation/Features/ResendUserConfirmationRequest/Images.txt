@@ -1,5 +1,0 @@
-.. |backend4|      image:: ../../Images/femanager_backend4.png
-.. :align: left
-.. :border: 0
-.. :name: backend4
-.. :vspace: 20

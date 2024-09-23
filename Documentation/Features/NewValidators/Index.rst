@@ -1,5 +1,4 @@
 .. include:: ../../Includes.rst.txt
-.. include:: Images.txt
 
 .. _extendvalidators:
 
@@ -9,11 +8,13 @@ Adding own serverside and clientside validation to femanager forms
 Picture
 ^^^^^^^
 
-|newField1|
+.. image:: ../../Images/femanager_edit2.png
+
 
 Add own clientside (JavaScript) Validation
 
-|newField2|
+.. image:: ../../Images/femanager_flexform_newfields.png
+
 
 Add own serverside (PHP) Validation
 

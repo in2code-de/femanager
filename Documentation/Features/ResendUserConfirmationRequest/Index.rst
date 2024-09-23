@@ -1,5 +1,4 @@
 .. include:: ../../Includes.rst.txt
-.. include:: Images.txt
 
 
 .. _resendUserConfirmationRequest:
@@ -44,7 +43,8 @@ Backend View
 Lists all frontend users, which did not confirm their email so far. An admin is able to decline (delete) users or
 resend an email with a confirmation link.
 
-|backend4|
+.. image:: ../../Images/femanager_backend4.png
+
 
 To activate the feature add the userTSConfig:
 

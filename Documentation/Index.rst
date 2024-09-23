@@ -55,4 +55,3 @@ Femanager offers an extensive frontend user registration including management fu
     :hidden:
 
     Sitemap
-    genindex
