@@ -5,6 +5,25 @@ Changelog
 =========
 
 -
+      :Version: 7.4.0
+      :Date: 2024-10-04
+      :Changes:
+      * [FEATURE] Add type and autocomplete information to input fields - thx to Oliver Klee
+      * [TASK] Use semantic HTML for tables in the emails - thx to Oliver Klee
+      * [TASK] Improve the code formatting of additional input attributes - thx to Oliver Klee
+      * [TASK] Apply the latest Rector fixes for TYPO3 11LTS  - thx to Oliver Klee
+      * [TASK] Mitigate browser "spell jacking" in form elements- thx to Patrick Lenk
+      * [TASK] Add autocomplete attribute to password fields - thx to Patrick Lenk
+      * [TASK] Switch to PHP-based Documentation Rendering - thx to Sandra Erbel
+      * [BUGFIX] Avoid deprecated PHP function `utf8_decode` - thx to Oliver Klee
+      * [BUGFIX] Add missing scope - thx to Stefan Busemann (in2code)
+      * [BUGFIX] Add missing if clause in UserProperties.html - thx to Sandra Erbel
+      * [BUGFIX] Use specific seleniarm image for behat tests - thx to Stefan Busemann (in2code)
+      * [BUGFIX] Restore email notification to admin after registration - thx to Patrick Lenk
+      * [BUGFIX] Fix composer script calls in the `test:rector:fix` script  - thx to Oliver Klee
+      * [BUGFIX] Fix the Rector PHP target version - thx to Oliver Klee
+      * [BUGFIX] Allow the PHPStan extension installer for Composer - thx to Oliver Klee
+-
       :Version: 7.3.0
       :Date: 2024-05-08
       :Changes:
