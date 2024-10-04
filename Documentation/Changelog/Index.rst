@@ -22,6 +22,8 @@ Changelog
       * [BUGFIX] Add missing if clause in UserProperties.html  (port from 7.4 by in2code)
       * [BUGFIX] Remove type url to improve user experience - thx to Stefan Busemann (in2code)
       * [BUGFIX] Add missing make command to generate docs - thx to Stefan Busemann (in2code)
+      * [BUGFIX] fix response object usage - thx Hannes Bochmann
+      * [DOCS] Add header row to Features/Events/Index.rst - thx to haegelixatwork
       * [DOCS] Update EAP note - thx to Stefan Busemann (in2code)
 
 -
