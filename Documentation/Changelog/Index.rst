@@ -3,6 +3,27 @@
 
 Changelog
 =========
+
+-
+      :Version: 8.2.0
+      :Date: 2024-10-04
+      :Changes:
+      * [FEATURE] Add type and autocomplete information to input fields (port from 7.4 by in2code)
+      * [TASK] Docs - add simple render command - thx to Stefan Busemann (in2code)
+      * [TASK] Update Symfony dependency - thx to Julian Hofmann (in2code)
+      * [TASK] Switch to PHP-based Documentation Rendering (port from 7.4 by in2code)
+      * [TASK] Add autocomplete attribute to password fields (port from 7.4 by in2code)
+      * [TASK] Mitigate browser "spell jacking" in form elements (port from 7.4 by in2code)
+      * [TASK] Improve the code formatting of additional input attributes (port from 7.4 by in2code)
+      * [TASK] Use semantic HTML for tables in the emails (port from 7.4 by in2code)
+      * [BUGFIX] Update composer.json - thx to Oliver Klee
+      * [BUGFIX] Pass proper object name to form error partial - thx to Pierrick Caillon
+      * [BUGFIX] Improve coding style - thx to Stefan Busemann (in2code)
+      * [BUGFIX] Add missing if clause in UserProperties.html  (port from 7.4 by in2code)
+      * [BUGFIX] Remove type url to improve user experience - thx to Stefan Busemann (in2code)
+      * [BUGFIX] Add missing make command to generate docs - thx to Stefan Busemann (in2code)
+      * [DOCS] Update EAP note - thx to Stefan Busemann (in2code)
+
 -
       :Version: 8.1.0
       :Date: 2024-05-09
@@ -52,6 +73,26 @@ Changelog
       * [DOCUMENTATION] Replace outdated signal documentation with event description
       * [TASK] Update unit tests & behaviour tests
       * [BUGFIX] Fix validation for allowed usergroups
+
+-
+      :Version: 7.4.0
+      :Date: 2024-10-04
+      :Changes:
+      * [FEATURE] Add type and autocomplete information to input fields - thx to Oliver Klee
+      * [TASK] Use semantic HTML for tables in the emails - thx to Oliver Klee
+      * [TASK] Improve the code formatting of additional input attributes - thx to Oliver Klee
+      * [TASK] Apply the latest Rector fixes for TYPO3 11LTS  - thx to Oliver Klee
+      * [TASK] Mitigate browser "spell jacking" in form elements- thx to Patrick Lenk
+      * [TASK] Add autocomplete attribute to password fields - thx to Patrick Lenk
+      * [TASK] Switch to PHP-based Documentation Rendering - thx to Sandra Erbel
+      * [BUGFIX] Avoid deprecated PHP function `utf8_decode` - thx to Oliver Klee
+      * [BUGFIX] Add missing scope - thx to Stefan Busemann (in2code)
+      * [BUGFIX] Add missing if clause in UserProperties.html - thx to Sandra Erbel
+      * [BUGFIX] Use specific seleniarm image for behat tests - thx to Stefan Busemann (in2code)
+      * [BUGFIX] Restore email notification to admin after registration - thx to Patrick Lenk
+      * [BUGFIX] Fix composer script calls in the `test:rector:fix` script  - thx to Oliver Klee
+      * [BUGFIX] Fix the Rector PHP target version - thx to Oliver Klee
+      * [BUGFIX] Allow the PHPStan extension installer for Composer - thx to Oliver Klee
 
 -
       :Version: 7.3.0

@@ -13,7 +13,7 @@ femanager
    in2code/femanager
 
 :Version:
-   8.0.0
+   8.2.0
 
 :Language:
 	en,de
