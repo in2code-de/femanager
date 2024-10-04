@@ -23,6 +23,7 @@ use In2code\Femanager\Utility\UserUtility;
 use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
+use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -72,7 +73,7 @@ class NewController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            $this->redirect('createStatus');
+            throw new PropagateResponseException($this->redirect('createStatus'));
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings);
         $configuration = ConfigurationUtility::getValue('new./forceValues./beforeAnyConfirmation.', $this->config);
@@ -130,7 +131,7 @@ class NewController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            $this->redirect('new');
+            throw new PropagateResponseException($this->redirect('new'));
         }
 
         $request = ServerRequestFactory::fromGlobals();
@@ -204,7 +205,7 @@ class NewController extends AbstractFrontendController
                     '',
                     ContextualFeedbackSeverity::ERROR
                 );
-                $this->redirect('new');
+                throw new PropagateResponseException($this->redirect('new'));
             }
 
             $user = FrontendUtility::forceValues(
@@ -281,7 +282,7 @@ class NewController extends AbstractFrontendController
                     '',
                     ContextualFeedbackSeverity::ERROR
                 );
-                $this->redirect('new');
+                throw new PropagateResponseException($this->redirect('new'));
             }
 
             $user = FrontendUtility::forceValues(
@@ -449,7 +450,7 @@ class NewController extends AbstractFrontendController
     /**
      * re-sends a confirmation email if given mail is valid
      */
-    public function resendConfirmationMailAction()
+    public function resendConfirmationMailAction(): ResponseInterface
     {
         // @todo find a better way to fetch the data
         $result = GeneralUtility::_GP('tx_femanager_registration');
@@ -464,7 +465,7 @@ class NewController extends AbstractFrontendController
                         '',
                         ContextualFeedbackSeverity::INFO
                     );
-                    $this->redirect('resendConfirmationDialogue');
+                    return $this->redirect('resendConfirmationDialogue');
                 }
             }
         }
@@ -473,6 +474,6 @@ class NewController extends AbstractFrontendController
             LocalizationUtility::translate('validationError'),
             ContextualFeedbackSeverity::ERROR
         );
-        $this->redirect('resendConfirmationDialogue');
+        return $this->redirect('resendConfirmationDialogue');
     }
 }
