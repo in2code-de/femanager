@@ -18,12 +18,15 @@ use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Site\SiteFinder;
+use TYPO3\CMS\Core\Type\Bitmask\Permission;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use In2code\Femanager\Utility\BackendUserUtility;
 
 /**
  * Class UserBackendController
@@ -92,10 +95,10 @@ class UserBackendController extends AbstractController
 
     public function userLogoutAction(User $user): ResponseInterface
     {
-        $queryParams = $this->request->getQueryParams();
-        if (empty($queryParams['id']) || $queryParams['id'] !== (string)$user->getPid()) {
+        if ($this->checkPageAndUserAccess($user) === false) {
             return new ForwardResponse('list');
         }
+
         UserUtility::removeFrontendSessionToUser($user);
         $this->addFlashMessage('User successfully logged out');
         return $this->redirect('list');
@@ -106,10 +109,11 @@ class UserBackendController extends AbstractController
         $this->configPID = $this->getConfigPID();
 
         $user = $this->userRepository->findByUid($userIdentifier);
-        $queryParams = $this->request->getQueryParams();
-        if (empty($queryParams['id']) || $user === null || $queryParams['id'] !== (string)$user->getPid()) {
+
+        if ($this->checkPageAndUserAccess($user) === false) {
             return new ForwardResponse('list');
         }
+
         $this->eventDispatcher->dispatch(new AdminConfirmationUserEvent($user));
 
         $jsonResult = $this->getFrontendRequestResult('adminConfirmation', $userIdentifier, $user);
@@ -138,15 +142,36 @@ class UserBackendController extends AbstractController
         return $this->redirect('confirmation');
     }
 
+    private function checkPageAndUserAccess($user): bool
+    {
+        if ($user === null) {
+            return false;
+        }
+
+        if (BackendUserUtility::isAdminAuthentication() === false) {
+            // check if the current BE User has access to the page where the FE_User is stored
+            $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
+            $pageRow = $pageRepository->getPage($user->getPid());
+            if ($GLOBALS['BE_USER']->doesUserHaveAccess(
+                    $pageRow,
+                    Permission::PAGE_SHOW
+                ) === false) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public function refuseUserAction(int $userIdentifier): ResponseInterface
     {
         $this->configPID = $this->getConfigPID();
 
         $user = $this->userRepository->findByUid($userIdentifier);
-        $queryParams = $this->request->getQueryParams();
-        if (empty($queryParams['id']) || $user === null || $queryParams['id'] !== (string)$user->getPid()) {
+
+        if ($this->checkPageAndUserAccess($user) === false) {
             return new ForwardResponse('list');
         }
+
         $this->eventDispatcher->dispatch(new RefuseUserEvent($user));
 
         $jsonResult = $this->getFrontendRequestResult('adminConfirmationRefused', $userIdentifier, $user);
@@ -194,10 +219,11 @@ class UserBackendController extends AbstractController
     public function resendUserConfirmationRequestAction(int $userIdentifier): ResponseInterface
     {
         $user = $this->userRepository->findByUid($userIdentifier);
-        $queryParams = $this->request->getQueryParams();
-        if (empty($queryParams['id']) || $user === null || $queryParams['id'] !== (string)$user->getPid()) {
+
+        if ($this->checkPageAndUserAccess($user) === false) {
             return new ForwardResponse('list');
         }
+
         $this->sendCreateUserConfirmationMailFromBackend($user);
         $this->addFlashMessage(
             LocalizationUtility::translate(
