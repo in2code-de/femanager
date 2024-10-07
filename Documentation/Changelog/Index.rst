@@ -5,6 +5,13 @@ Changelog
 =========
 
 -
+      :Version: 8.2.x
+      :Date: 2024-xx-xx
+      :Changes:
+      * [TASK] Disable autocomplete for the CAPTCHA field - thx to Oliver Klee
+
+
+-
       :Version: 8.2.0
       :Date: 2024-10-04
       :Changes:
