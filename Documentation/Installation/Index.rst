@@ -5,7 +5,7 @@
 Installation and Configuration
 ==============================
 
-:ref:`quick` | :ref:`stepbystep` |
+:ref:`quick` | :ref:`stepbystep` | 
 
 
 .. _quick:
@@ -2182,6 +2182,7 @@ logout your fe-users with just one click.
 A new feature called **log in as** allows you to open a new window where your frontend is shown and you are already
 logged in as the chosen user (admin only feature)
 
+.. _confirmation-module:
 **Confirmation Module**
 
 The confirmation module can be activated via Extension Manager because it's still in the beta phase. Nevertheless you
@@ -2217,8 +2218,7 @@ You can overwrite these settings in your page TS.
       :Field:
          typoscript main template storage
       :Description:
-         You need to specify the pid, where your main typoscript settings (frontend) is stored. Usually you will take the
-          root page of your installation. This is needed to perform actions like confirm users via Backend or resend
+         You need to specify the pid, where your main typoscript settings (frontend) is stored. You should take a page, where a plugin (regristration / invitation) is available.. This is needed to perform actions like confirm users via Backend or resend
           confirmation mails. If you have a multidomain system, you can overwrite config in your typoScript Tempplate for
           each domain. If this setting is not applied by the root typoscript template, try to define your setting in a ext_typoscript_setup.txt in your template / sitepackage extension.
       :Default:
