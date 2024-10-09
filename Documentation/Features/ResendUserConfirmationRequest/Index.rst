@@ -51,3 +51,8 @@ To activate the feature add the userTSConfig:
 .. code-block:: typoscript
 
     tx_femanager.UserBackend.confirmation.ResendUserConfirmationRequest = 1
+
+Backend Configuration
+^^^^^^^^^^^^^^^^^^^^^
+
+Take care, that the setting "module.tx_femanager.settings.configPID" is set up for any site (see :ref:`Configuration in Confirmation Module <_confirmation-module>`)
