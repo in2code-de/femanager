@@ -38,6 +38,10 @@ class ServersideValidator extends AbstractValidator
                                 $this->checkRequiredValidation($validationSetting, $value, $fieldName);
                                 break;
 
+                            case 'fileRequired':
+                                $this->checkFileRequiredValidation($validationSetting, $value, $fieldName);
+                                break;
+
                             case 'email':
                                 $this->checkEmailValidation($value, $validationSetting, $fieldName);
                                 break;
@@ -110,6 +114,19 @@ class ServersideValidator extends AbstractValidator
     protected function checkRequiredValidation($validationSetting, $value, $fieldName)
     {
         if ($validationSetting === '1' && !$this->validateRequired($value)) {
+            $this->addErrorForProperty($fieldName, 'validationErrorRequired', 0, ['field' => $fieldName]);
+            $this->isValid = false;
+        }
+    }
+
+    /**
+     * @param $validationSetting
+     * @param $value
+     * @param $fieldName
+     */
+    protected function checkFileRequiredValidation($validationSetting, $value, $fieldName)
+    {
+        if ($validationSetting === '1' && !$this->validateFileRequired($value, $fieldName)) {
             $this->addErrorForProperty($fieldName, 'validationErrorRequired', 0, ['field' => $fieldName]);
             $this->isValid = false;
         }
