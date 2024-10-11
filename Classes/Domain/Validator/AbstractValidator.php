@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
 
 /**
@@ -103,6 +104,25 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         }
         if ($value instanceof \DateTime) {
             return true;
+        }
+        return false;
+    }
+
+    /**
+     * Validation for required
+     */
+    protected function validateFileRequired(mixed $value, string $fieldName): bool
+    {
+        if (empty($value)) {
+            $request = $GLOBALS['TYPO3_REQUEST'];
+            $uploadedFiles = $request->getUploadedFiles();
+
+            if (isset($uploadedFiles[$this->pluginService->getFemanagerPluginNameFromRequest()]['user'][$fieldName])) {
+                return true;
+            }
+        }
+        else {
+            return $this->validateRequired($value);
         }
         return false;
     }

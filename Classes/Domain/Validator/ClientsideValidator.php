@@ -125,6 +125,13 @@ class ClientsideValidator extends AbstractValidator
                     }
                     break;
 
+                case 'fileRequired':
+                    if (!$this->validateFileRequired($this->getValue(), $this->getFieldName())) {
+                        $this->addMessage('validationErrorRequired');
+                        $this->isValid = false;
+                    }
+                    break;
+
                 case 'email':
                     if ($this->getValue() && !$this->validateEmail($this->getValue())) {
                         $this->addMessage('validationErrorEmail');
