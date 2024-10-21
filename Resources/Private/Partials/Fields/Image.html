@@ -12,7 +12,8 @@
 				<f:form.upload
 						id="femanager_field_image"
 						property="image.0"
-						class="custom-file-input" />
+						class="custom-file-input"
+						additionalAttributes="{femanager:Validation.FormValidationData(settings: settings, fieldName: 'image')}"/>
 			</f:else>
 			<f:then>
 				<div><f:image image="{user.firstImage}" maxWidth="800"/></div>
