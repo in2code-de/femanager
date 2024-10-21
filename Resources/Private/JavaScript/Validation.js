@@ -45,7 +45,11 @@ jQuery.fn.femanagerValidation = function($) {
 	})();
 
 	// on field blur
-    $('*[data-validation]').on('blur', function () {
+    $('*[data-validation]:not([type="file"])').on('blur', function () {
+		validateField($(this), false); // validate this field only
+	});
+
+	$('*[data-validation][type="file"]').on('change', function () {
 		validateField($(this), false); // validate this field only
 	});
 
