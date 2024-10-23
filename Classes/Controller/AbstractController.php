@@ -161,7 +161,7 @@ abstract class AbstractController extends ActionController
 
     protected function processUploadedImage($user)
     {
-        $uploadedFiles = $this->request->getUploadedFiles();
+        $uploadedFiles = $this->request->getUploadedFiles(); // the image is now in $uploadedFiles['image'], not in $uploadedFiles['user']['image']
         $allowedFileExtensions = preg_split(
             '/\s*,\s*/',
             trim((string)ConfigurationUtility::getConfiguration('misc.uploadFileExtension'))
@@ -172,10 +172,12 @@ abstract class AbstractController extends ActionController
         );
         if (
             count($uploadedFiles) > 0
-            && !empty($uploadedFiles['user']['image'])
-            && (is_countable($uploadedFiles['user']['image']) ? count($uploadedFiles['user']['image']) : 0) > 0
+            && !empty($uploadedFiles['image'])
         ) {
-            foreach ($uploadedFiles['user']['image'] as $uploadedFile) {
+            $images = [];
+            $images[] = $uploadedFiles['image']; // add image to an array (this way the original code in the foreach loop below does not have to be changed at all)
+
+            foreach ($images as $uploadedFile) {
                 /**
                  * @var $uploadedFile UploadedFile
                  */
