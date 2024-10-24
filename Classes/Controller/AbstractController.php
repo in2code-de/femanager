@@ -326,7 +326,7 @@ abstract class AbstractController extends ActionController
         string $status = '',
         bool $backend = false
     ): ResponseInterface|null {
-        //$this->loginPreflight($user, $login); @TODO: Reactivate when login works again
+        $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         if (ConfigurationUtility::getValue(
             'new./email./createUserNotify./sender./email./value',

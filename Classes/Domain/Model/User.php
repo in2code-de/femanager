@@ -815,4 +815,18 @@ class User extends AbstractEntity
     {
         return $this->isIgnoreDirty() ? false : parent::_isDirty($propertyName);
     }
+
+    public function getTempUserArray(): array
+    {
+        return [
+            'uid' => $this->getUid(),
+            'username' => $this->getUsername(),
+            'password' => $this->getPassword(),
+            'usergroup' => $this->getUsergroup(),
+            'name' => $this->getName(),
+            'firstName' => $this->getFirstName(),
+            'middleName' => $this->getMiddleName(),
+            'lastName' => $this->getLastName(),
+        ];
+    }
 }
