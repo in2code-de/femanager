@@ -7,6 +7,7 @@ namespace In2code\Femanager\Controller;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Event\AdminConfirmationUserEvent;
 use In2code\Femanager\Event\RefuseUserEvent;
+use In2code\Femanager\Utility\BackendUserUtility;
 use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -26,7 +27,6 @@ use TYPO3\CMS\Core\Type\Bitmask\Permission;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
-use In2code\Femanager\Utility\BackendUserUtility;
 
 /**
  * Class UserBackendController
@@ -69,6 +69,7 @@ class UserBackendController extends AbstractController
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'list',
                 'loginAsEnabled' => $this->loginAsEnabled(),
+                'configPID' => $this->getConfigPID(),
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/List');
@@ -305,7 +306,6 @@ class UserBackendController extends AbstractController
      */
     private function loginAsEnabled(): bool
     {
-        //TODO: the enableLoginAs funcionality is not working
         $context = GeneralUtility::makeInstance(Context::class);
         if ($context->getPropertyFromAspect('backend.user', 'isAdmin') === true) {
             return true;

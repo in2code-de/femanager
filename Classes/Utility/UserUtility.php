@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Utility;
 
+use DateTimeImmutable;
+use Exception;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Repository\UserRepository;
+use Psr\Http\Message\RequestInterface;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\Argon2iPasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\BcryptPasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\BlowfishPasswordHash;
@@ -355,4 +358,31 @@ class UserUtility extends AbstractUtility
         $tsfe->fe_user->createUserSession($user->getTempUserArray());
         $tsfe->fe_user->enforceNewSessionId();
     }
+
+    public static function generateLoginAsParametersWithHmac(int $userId, string $redirectUrl): array
+    {
+        $validUntil = new DateTimeImmutable('10 seconds');
+        $parameters = [
+            'userId' => $userId,
+            'valid_until' => $validUntil->getTimestamp(),
+            'redirectUrl' => $redirectUrl,
+        ];
+        $paramString = json_encode($parameters);
+        $hmac = GeneralUtility::hmac($paramString);
+        $parameters['hmac'] = $hmac;
+        return $parameters;
+    }
+
+    public static function validateHmac(int $validUntil, int $userId, string $redirectUrl, string $hmac): void
+    {
+        $actual = GeneralUtility::hmac(json_encode([
+            'userId' => $userId,
+            'valid_until' => $validUntil->getTimestamp(),
+            'redirectUrl' => $redirectUrl,
+        ], JSON_THROW_ON_ERROR));
+        if (!hash_equals($actual, $hmac)) {
+            throw new Exception('Invalid');
+        }
+    }
+
 }
