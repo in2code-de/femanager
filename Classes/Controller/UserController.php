@@ -112,7 +112,7 @@ class UserController extends AbstractFrontendController
      */
     public function loginAsAction(User $user, int $redirectPid = 1): ResponseInterface
     {
-        $this->eventDispatcher->dispatch(new ImpersonateEvent($user));
+        $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
 
         if (!BackendUserUtility::isAdminAuthentication()) {
             throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'), 1516373787864);
