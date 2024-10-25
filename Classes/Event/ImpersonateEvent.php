@@ -8,12 +8,17 @@ use In2code\Femanager\Domain\Model\User;
 
 class ImpersonateEvent
 {
-    public function __construct(protected ?User $user)
+    public function __construct(protected ?User $user, protected ?int $backendUserId)
     {
     }
 
     public function getUser(): ?User
     {
         return $this->user;
+    }
+
+    public function getBackendUserId(): ?int
+    {
+        return $this->backendUserId;
     }
 }

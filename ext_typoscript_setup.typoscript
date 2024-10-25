@@ -7,9 +7,9 @@ module.tx_femanager {
   }
 }
 
-##################################################
-# Page for backend module Login as function via JS
-##################################################
+##########################################################
+# Page for backend module Login as function (impersonate)
+##########################################################
 feManagerLoginAs = PAGE
 feManagerLoginAs {
   typeNum = 1548943013
@@ -25,11 +25,9 @@ feManagerLoginAs {
   10 {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
     extensionName = Femanager
-    pluginName = Pi1
+    pluginName = Impersonate
     vendorName = In2code
     controller = User
     action = loginAs
-    switchableControllerActions.User.1 = loginAs
-    features.requireCHashArgumentForActionArguments = 0
   }
 }
