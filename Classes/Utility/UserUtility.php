@@ -347,15 +347,12 @@ class UserUtility extends AbstractUtility
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @SuppressWarnings(PHPMD.Superglobals)
      *
-     * @TODO: Check Storagepid Parameter, the function should be restored
+     * @TODO: Check Storagepid Parameter
      */
     public static function login(User $user, ?string $storagePids = null)
     {
-        // ensure a session cookie is set (in case there is no session yet)
-        $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('dummy', true);
-        // create the session (destroys all existing session data in the session backend!)
-        $GLOBALS['TSFE']->fe_user->createUserSession(['uid' => (int)$user->getUid()]);
-        // write the session data again to the session backend; preserves what was there before!!
-        $GLOBALS['TSFE']->fe_user->setAndSaveSessionData('dummy', true);
+        $tsfe = $GLOBALS['TSFE'];
+        $tsfe->fe_user->createUserSession($user->getTempUserArray());
+        $tsfe->fe_user->enforceNewSessionId();
     }
 }
