@@ -117,14 +117,22 @@ class UserController extends AbstractFrontendController
         if (!BackendUserUtility::isAdminAuthentication()) {
             throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'), 1516373787864);
         }
+        $token = $this->sessionTokenService->generateTokenForUser($user);
+        $this->userRepository->update($user);
+        $this->persistenceManager->persistAll();
+
+        // Terminate any existing frontend sessions for this user
+        UserUtility::removeFrontendSessionToUser($user);
+        // create a new session for the frontend user
+        UserUtility::login($user);
+        // Create new frontend session with token
+        UserUtility::setSessionTokenForUser($token);
 
         $redirectUri = $this->uriBuilder
             ->setTargetPageUid($redirectPid)
             ->setCreateAbsoluteUri(true)
             ->build();
 
-        // create a new session for the frontend user
-        UserUtility::login($user);
 
         return new RedirectResponse($redirectUri);
     }

@@ -10,6 +10,7 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Domain\Service\SendMailService;
+use In2code\Femanager\Domain\Service\SessionTokenService;
 use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
 use In2code\Femanager\Finisher\FinisherRunner;
@@ -65,6 +66,11 @@ abstract class AbstractController extends ActionController
      * @var SendMailService
      */
     protected $sendMailService;
+
+    /**
+     * @var SessionTokenService
+     */
+    protected $sessionTokenService;
 
     /**
      * @var FinisherRunner
@@ -134,6 +140,7 @@ abstract class AbstractController extends ActionController
         UserGroupRepository $userGroupRepository,
         PersistenceManager $persistenceManager,
         SendMailService $sendMailService,
+        SessionTokenService $sessionTokenService,
         FinisherRunner $finisherRunner,
         LogUtility $logUtility
     ) {
@@ -141,6 +148,7 @@ abstract class AbstractController extends ActionController
         $this->userGroupRepository = $userGroupRepository;
         $this->persistenceManager = $persistenceManager;
         $this->sendMailService = $sendMailService;
+        $this->sessionTokenService = $sessionTokenService;
         $this->finisherRunner = $finisherRunner;
         $this->logUtility = $logUtility;
     }
@@ -404,14 +412,16 @@ abstract class AbstractController extends ActionController
     protected function loginPreflight(User $user, $login)
     {
         if ($login) {
+            $token = $this->sessionTokenService->generateTokenForUser($user);
+
             // persist user (otherwise login may not be possible)
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
+
+            UserUtility::setSessionTokenForUser($token);
+
             if (ConfigurationUtility::getValue('new./login', $this->config) === '1') {
-                UserUtility::login(
-                    $user,
-                    ConfigurationUtility::getValue('persistence./storagePid', $this->allConfig)
-                );
+                $this->performSecureLogin($user);
                 $this->addFlashMessage(
                     LocalizationUtility::translate('login'),
                     '',
@@ -419,6 +429,22 @@ abstract class AbstractController extends ActionController
                 );
             }
         }
+    }
+
+    protected function performSecureLogin(User $user): void
+    {
+        $storedToken = $GLOBALS['TSFE']->fe_user->getKey('ses', 'femanager_token');
+
+        // Validate session token
+        if (!$this->sessionTokenService->validateUserToken($user, $storedToken)) {
+            throw new \RuntimeException('Invalid session token', 1401391351);
+        }
+
+        // Perform actual login
+        UserUtility::login(
+            $user,
+            ConfigurationUtility::getValue('persistence./storagePid', $this->allConfig)
+        );
     }
 
     /**

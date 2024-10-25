@@ -336,7 +336,7 @@ class UserUtility extends AbstractUtility
 
         $row = $queryBuilder->select('ses_id')
             ->from('fe_sessions')->where($queryBuilder->expr()->eq('ses_userid', (int)$user->getUid()))->executeQuery()
-            ->fetch();
+            ->fetchAssociative();
 
         return !empty($row['ses_id']);
     }
@@ -354,5 +354,11 @@ class UserUtility extends AbstractUtility
         $tsfe = $GLOBALS['TSFE'];
         $tsfe->fe_user->createUserSession($user->getTempUserArray());
         $tsfe->fe_user->enforceNewSessionId();
+    }
+
+    public static function setSessionTokenForUser(string $token)
+    {
+        $GLOBALS['TSFE']->fe_user->setKey('ses', 'femanager_token', $token);
+        $GLOBALS['TSFE']->fe_user->storeSessionData();
     }
 }

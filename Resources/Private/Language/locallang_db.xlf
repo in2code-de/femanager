@@ -102,6 +102,12 @@
 			<trans-unit id="fe_users.registrationconfirmedbyadmin">
 				<source>Registration confirmed by admin</source>
 			</trans-unit>
+			<trans-unit id="fe_users.session_token">
+				<source>Session Token</source>
+			</trans-unit>
+			<trans-unit id="fe_users.session_token_expiry">
+				<source>Session Token Expiry</source>
+			</trans-unit>
 			<trans-unit id="fe_users.tab">
 				<source>Registration</source>
 			</trans-unit>

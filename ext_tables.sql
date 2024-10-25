@@ -10,6 +10,8 @@ CREATE TABLE fe_users (
   tx_femanager_changerequest text,
   tx_femanager_terms tinyint(3) DEFAULT '0' NOT NULL,
   tx_femanager_terms_date_of_acceptance INT(11) DEFAULT '0' NOT NULL,
+  tx_femanager_session_token varchar(64) DEFAULT '' NOT NULL,
+  tx_femanager_session_token_expiry int(11) DEFAULT '0' NOT NULL,
   state varchar(255) DEFAULT '' NOT NULL
 );
 

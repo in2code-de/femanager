@@ -113,6 +113,26 @@ $feUsersColumns = [
             'readOnly' => true,
         ],
     ],
+    'tx_femanager_session_token' => [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.session_token',
+        'config' => [
+            'type' => 'input',
+            'size' => 40,
+            'max' => 64,
+            'readOnly' => true,
+        ],
+    ],
+    'tx_femanager_session_token_expiry' => [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.session_token_expiry',
+        'config' => [
+            'type' => 'input',
+            'size' => 30,
+            'eval' => 'datetime',
+            'readOnly' => true,
+        ],
+    ],
 ];
 
 $staticInfoTablesIsLoaded = ExtensionManagementUtility::isLoaded('static_info_tables');
@@ -148,7 +168,7 @@ if ($extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect')) {
 }
 
 $fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin, tx_femanager_terms, ' .
-    'tx_femanager_terms_date_of_acceptance';
+    'tx_femanager_terms_date_of_acceptance, tx_femanager_session_token, tx_femanager_session_token_expiry';
 
 if (!ConfigurationUtility::isDisableLogActive()) {
     $feUsersColumns['tx_femanager_log'] = [
