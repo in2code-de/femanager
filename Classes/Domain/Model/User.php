@@ -815,4 +815,17 @@ class User extends AbstractEntity
     {
         return $this->isIgnoreDirty() ? false : parent::_isDirty($propertyName);
     }
+
+    /**
+     * @return array Array of only some properties required for logging in a temporary user
+     * see: AbstractUserAuthentication:createUserSession(array $userRecordCandidate)
+     */
+    public function getTempUserArray(): array
+    {
+        return [
+            'uid' => $this->getUid(),
+            'lastlogin' => $this->getLastlogin(),
+            'is_online' => $this->isOnline(), // currently not used
+        ];
+    }
 }

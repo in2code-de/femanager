@@ -14,6 +14,8 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
+use TYPO3\CMS\Core\Http\RedirectResponse;
+use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -108,16 +110,23 @@ class UserController extends AbstractFrontendController
      *
      * @throws UnauthorizedException
      */
-    public function loginAsAction(User $user)
+    public function loginAsAction(User $user, int $redirectPid = 1): ResponseInterface
     {
-        $this->eventDispatcher->dispatch(new ImpersonateEvent($user));
+        $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
 
         if (!BackendUserUtility::isAdminAuthentication()) {
             throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'), 1516373787864);
         }
+
+        $redirectUri = $this->uriBuilder
+            ->setTargetPageUid($redirectPid)
+            ->setCreateAbsoluteUri(true)
+            ->build();
+
+        // create a new session for the frontend user
         UserUtility::login($user);
-        $this->redirectByAction('loginAs', 'redirect');
-        $this->redirectToUri('/');
+
+        return new RedirectResponse($redirectUri);
     }
 
     /**
