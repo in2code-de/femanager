@@ -39,18 +39,7 @@ class ServersideValidator extends AbstractValidator
                                 break;
 
                             case 'fileRequired':
-                                $request = $GLOBALS['TYPO3_REQUEST'];
-                                $uploadedFiles = $request->getUploadedFiles(); // the image is now in $uploadedFiles['image'], not in $uploadedFiles['user']['image']
-                                $images = array();
-                                foreach ($uploadedFiles as $fileInAction) {
-                                    $images[] = $fileInAction;
-                                }
-                                if ($images) {
-                                    foreach ($images as $uploadedFile) {
-                                        $this->checkFileRequiredValidation($validationSetting, $uploadedFile, $fieldName);
-                                    }
-                                }
-
+                                $this->checkFileRequiredValidation($validationSetting, $value, $fieldName);
                                 break;
 
                             case 'email':

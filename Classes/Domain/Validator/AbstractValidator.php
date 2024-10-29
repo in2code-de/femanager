@@ -117,7 +117,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
             $request = $GLOBALS['TYPO3_REQUEST'];
             $uploadedFiles = $request->getUploadedFiles();
 
-            if (isset($uploadedFiles[$this->pluginService->getFemanagerPluginNameFromRequest()]['user'][$fieldName])) {
+            if (isset($uploadedFiles[$this->pluginService->getFemanagerPluginNameFromRequest()][$fieldName])) {
                 return true;
             }
         }
