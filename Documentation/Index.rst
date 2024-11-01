@@ -61,3 +61,7 @@ You can use one of the following links, to get more informations about this plug
 - femanager is powered by https://www.in2code.de
 - Do you need help from the community:
     - Slack channel #ext-femanager: https://typo3.slack.com/messages/C0NAHDRJB/
+
+Known Issues
+=============
+* Resend confirmation in Backend Module is broken in V7
