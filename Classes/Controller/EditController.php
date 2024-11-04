@@ -216,22 +216,6 @@ class EditController extends AbstractFrontendController
     }
 
     /**
-     * Check if password should be kept
-     *
-     *      If password is empty
-     *      If password repeat is also empty
-     *      If keepPasswordIfEmpty configuration is turned on
-     *
-     * @return bool
-     */
-    protected function keepPassword()
-    {
-        return !empty($this->settings['edit']['misc']['keepPasswordIfEmpty']) &&
-        empty($this->pluginVariables['user']['password']) &&
-        empty($this->pluginVariables['password_repeat']);
-    }
-
-    /**
      * Check: If there are no changes, simple redirect back
      */
     protected function redirectIfNoChangesOnObject(User $user)
