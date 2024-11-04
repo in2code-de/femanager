@@ -213,6 +213,11 @@ class NewController extends AbstractFrontendController
                 ConfigurationUtility::getValue('new./forceValues./onUserConfirmation.', $this->config)
             );
             $user->setTxFemanagerConfirmedbyuser(true);
+
+            if (!$this->isAdminConfirmationMissing($user)) {
+                $user->setDisable(false);
+            }
+
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
             $this->logUtility->log(Log::STATUS_REGISTRATIONCONFIRMEDUSER, $user);
@@ -220,7 +225,6 @@ class NewController extends AbstractFrontendController
             if ($this->isAdminConfirmationMissing($user)) {
                 $this->createAdminConfirmationRequest($user);
             } else {
-                $user->setDisable(false);
                 $this->logUtility->log(Log::STATUS_NEWREGISTRATION, $user);
                 $this->finalCreate($user, 'new', 'createStatus', true, $status);
             }
