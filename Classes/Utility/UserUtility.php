@@ -193,7 +193,7 @@ class UserUtility extends AbstractUtility
         $saltedHashPassword = $user->getPassword();
         /** @var PasswordHashFactory $passwordHashFactory */
         $passwordHashFactory = GeneralUtility::makeInstance(PasswordHashFactory::class);
-        switch ($method) {
+        switch ((string)$method) {
             case 'Argon2i':
                 $hashInstance = GeneralUtility::makeInstance(Argon2iPasswordHash::class);
                 break;
