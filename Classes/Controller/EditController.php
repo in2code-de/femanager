@@ -39,7 +39,7 @@ class EditController extends AbstractFrontendController
         if ($this->user) {
             $token = GeneralUtility::hmac(
                 (string)$this->user->getUid(),
-                (string)$this->user->getCrdate()->getTimestamp()
+                (string)($this->user->getCrdate() ?: new \DateTime('01.01.1970'))->getTimestamp()
             );
         }
         $this->view->assignMultiple([
