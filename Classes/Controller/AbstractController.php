@@ -469,7 +469,7 @@ abstract class AbstractController extends ActionController
     protected function isSpoof(User $user, int $uid, string $receivedToken): bool
     {
         $errorOnProfileUpdate = false;
-        $knownToken = GeneralUtility::hmac((string)$user->getUid(), (string)$user->getCrdate()->getTimestamp());
+        $knownToken = GeneralUtility::hmac((string)$user->getUid(), (string)($user->getCrdate() ?: new \DateTime('01.01.1970'))->getTimestamp());
 
         //check if the params are valid
         if (!is_string($receivedToken) || !hash_equals($knownToken, $receivedToken)) {

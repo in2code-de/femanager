@@ -565,10 +565,6 @@ class User extends AbstractEntity
      */
     public function getCrdate()
     {
-        if ($this->crdate === null) {
-            // timestamp is zero
-            $this->crdate = new DateTime('01.01.1970');
-        }
         return $this->crdate;
     }
 
