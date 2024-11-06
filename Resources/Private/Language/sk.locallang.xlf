@@ -668,8 +668,8 @@
         <target state="final">Ďakujeme za vašu žiadosť. Skontrolujte si prosím váš email a potvrďte profil.</target>
       </trans-unit>
       <trans-unit id="createRequestWaitingForAdminConfirm">
-        <source>Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</source>
-        <target state="needs-translation">Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request.</target>
+        <source>Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</source>
+        <target state="needs-translation">Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailSend">
         <source>An Email was send to your account. Please check your inbox.</source>
