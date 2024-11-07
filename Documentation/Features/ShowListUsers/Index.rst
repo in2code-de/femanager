@@ -21,14 +21,22 @@ Useful, if you want to show a "read only view" for the currently logged in front
 #. Add a femanager_detail plugin to your page
 #. in the field "User to show" choose "Logged in FE User"
 
-|showlistusers1|
+.. image:: ../../Images/feature-showlistusers-loggedin-user.png
+   :align: left
+   :border: 0
+   :name: create1
+   :vspace: 20
 
 Show a given user
 ^^^^^^^^^^^^^^^^^
 
 You can provide a detail view of a given frontend user
 
-|showlistusers2|
+.. image:: ../../Images/feature-showlistusers-loggedin-user1.png
+   :align: left
+   :border: 0
+   :name: create1
+   :vspace: 20
 
 #. Add a femanager_detail plugin to your page
 #. select the user to be shown in the field "User to show"
@@ -47,7 +55,11 @@ List Users
 #. set the plugin options to show the users you want to display
 
 
-|showlistusers3|
+.. image:: ../../Images/feature-showlistusers-loggedin-user2.png
+   :align: left
+   :border: 0
+   :name: create1
+   :vspace: 20
 
 Plugin Options:
 
