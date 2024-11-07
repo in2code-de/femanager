@@ -69,7 +69,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
         <source>Diverse</source>
-        <target state="needs-translation">Diverse</target>
+        <target state="translated">Divers</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
@@ -137,7 +137,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.inactivesince">
         <source>Inactive since</source>
-        <target state="needs-translation">Inactive since</target>
+        <target state="translated">Inactif depuis</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.crdate" approved="yes">
         <source>Creation Time</source>
@@ -325,7 +325,7 @@
       </trans-unit>
       <trans-unit id="validationErrorSameAs">
         <source>Values do not match</source>
-        <target state="needs-translation">Values do not match</target>
+        <target state="translated">Les valeurs ne correspondent pas</target>
       </trans-unit>
       <trans-unit id="validationErrorPasswordRepeat">
         <source>Both passwords do not match</source>
@@ -797,7 +797,7 @@
       </trans-unit>
       <trans-unit id="BackendListUserEdit">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Éditer</target>
       </trans-unit>
       <trans-unit id="BackendListUserLogout">
         <source>Logout</source>
