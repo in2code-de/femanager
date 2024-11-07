@@ -154,9 +154,9 @@ class UserBackendController extends AbstractController
             $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
             $pageRow = $pageRepository->getPage($user->getPid());
             if ($GLOBALS['BE_USER']->doesUserHaveAccess(
-                    $pageRow,
-                    Permission::PAGE_SHOW
-                ) === false) {
+                $pageRow,
+                Permission::PAGE_SHOW
+            ) === false) {
                 return false;
             }
         }
