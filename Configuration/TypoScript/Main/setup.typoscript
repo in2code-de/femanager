@@ -126,6 +126,7 @@ plugin.tx_femanager {
           required = 1
           uniqueInDb = 1
           mustNotInclude = space
+          max = 255
         }
         email {
           required = 1
@@ -155,6 +156,39 @@ plugin.tx_femanager {
         state {
           required = 0
           if = In2code\Femanager\Domain\Validator\ShouldValidateStateCondition
+        }
+        name {
+          max = 160
+        }
+        first_name {
+          max = 50
+        }
+        middle_name {
+          max = 50
+        }
+        last_name {
+          max = 50
+        }
+        telephone {
+          max = 30
+        }
+        fax {
+          max = 30
+        }
+        title {
+          max = 40
+        }
+        zip {
+          max = 10
+        }
+        city {
+          max = 50
+        }
+        country {
+          max = 40
+        }
+        www {
+          max = 80
         }
       }
 
@@ -742,6 +776,39 @@ plugin.tx_femanager {
         captcha {
           # requires installation of sr_freecap
           #          captcha = 1
+        }
+        name {
+          max = 160
+        }
+        first_name {
+          max = 50
+        }
+        middle_name {
+          max = 50
+        }
+        last_name {
+          max = 50
+        }
+        telephone {
+          max = 30
+        }
+        fax {
+          max = 30
+        }
+        title {
+          max = 40
+        }
+        zip {
+          max = 10
+        }
+        city {
+          max = 50
+        }
+        country {
+          max = 40
+        }
+        www {
+          max = 80
         }
       }
       # All email settings within the update process
