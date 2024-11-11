@@ -239,9 +239,9 @@ abstract class AbstractController extends ActionController
                 'updateNotify',
                 StringUtility::makeEmailArray(
                     ConfigurationUtility::getValue(
-                        'edit/email/createUserNotify/notifyAdmin/receiver/email/value',
+                        'edit./email./notifyAdmin./receiver./email./value',
                         $this->config
-                    ) ?: ConfigurationUtility::getValue('edit/notifyAdmin', $this->config),
+                    ) ?: ConfigurationUtility::getValue('edit./notifyAdmin', $this->config),
                     $this->settings['edit']['email']['notifyAdmin']['receiver']['name']['value'] ?? null
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
