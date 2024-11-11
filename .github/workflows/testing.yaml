@@ -62,10 +62,13 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
+      - uses: ddev/github-action-setup-ddev@v1
       - name: "Composer Install"
-        run: "composer install"
-      - name: "Run PHP Rector"
-        run: "composer test:rector"
+        run: "ddev composer install"
+      - name: "Initialize TYPO3 in ddev"
+        run: "ddev initialize"
+      - name: "Run Behat Tests"
+        run: "ddev composer test:rector"
   unit-tests:
     name: "PHP Unit Tests"
     runs-on: ubuntu-20.04

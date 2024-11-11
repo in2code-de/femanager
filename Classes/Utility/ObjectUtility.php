@@ -7,6 +7,7 @@ namespace In2code\Femanager\Utility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
@@ -34,9 +35,10 @@ class ObjectUtility extends AbstractUtility
      * Checks if object was changed or not
      *
      * @param object $object
+     * @param RequestInterface $request
      * @codeCoverageIgnore
      */
-    public static function isDirtyObject($object): bool
+    public static function isDirtyObject($object, RequestInterface $request): bool
     {
         foreach (array_keys($object->_getProperties()) as $propertyName) {
             try {
@@ -62,6 +64,15 @@ class ObjectUtility extends AbstractUtility
                 if ($property->_isDirty()) {
                     return true;
                 }
+            }
+
+            /** check if there is an uploaded image */
+            $uploadedFiles = $request->getUploadedFiles();
+            if (
+                count($uploadedFiles) > 0
+                && !empty($uploadedFiles['image'])
+            ) {
+                return true;
             }
         }
         return false;

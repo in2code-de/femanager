@@ -220,7 +220,7 @@ class EditController extends AbstractFrontendController
      */
     protected function redirectIfNoChangesOnObject(User $user)
     {
-        if (!ObjectUtility::isDirtyObject($user)) {
+        if (!ObjectUtility::isDirtyObject($user, $this->request)) {
             $this->addFlashMessage(LocalizationUtility::translate('noChanges'), '', ContextualFeedbackSeverity::NOTICE);
             return $this->redirect('edit');
         }

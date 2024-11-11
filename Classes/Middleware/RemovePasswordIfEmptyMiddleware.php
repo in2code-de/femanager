@@ -16,20 +16,22 @@ class RemovePasswordIfEmptyMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
-        $typoscript = $configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
-            'femanager'
-        );
         $requestBody = $request->getParsedBody();
 
-        if (!empty($typoscript['plugin.']['tx_femanager.']['settings.']['edit.']['misc.']['keepPasswordIfEmpty']) &&
-            empty($requestBody['tx_femanager_edit']['user']['password']) &&
-            empty($requestBody['tx_femanager_edit']['password_repeat'])) {
-            $requestBody = $request->getParsedBody();
-            unset($requestBody['tx_femanager_edit']['user']['password']);
-            unset($requestBody['tx_femanager_edit']['password_repeat']);
-            $request = $request->withParsedBody($requestBody);
+        if (isset($requestBody['tx_femanager_edit'])) {
+            $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
+            $typoscript = $configurationManager->getConfiguration(
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
+                'femanager'
+            );
+
+            if (!empty($typoscript['plugin.']['tx_femanager.']['settings.']['edit.']['misc.']['keepPasswordIfEmpty']) &&
+                empty($requestBody['tx_femanager_edit']['user']['password']) &&
+                empty($requestBody['tx_femanager_edit']['password_repeat'])) {
+                unset($requestBody['tx_femanager_edit']['user']['password']);
+                unset($requestBody['tx_femanager_edit']['password_repeat']);
+                $request = $request->withParsedBody($requestBody);
+            }
         }
 
         return $handler->handle($request);

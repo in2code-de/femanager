@@ -16,7 +16,6 @@ use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
 
 /**
@@ -120,8 +119,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
             if (isset($uploadedFiles[$this->pluginService->getFemanagerPluginNameFromRequest()][$fieldName])) {
                 return true;
             }
-        }
-        else {
+        } else {
             return $this->validateRequired($value);
         }
         return false;
