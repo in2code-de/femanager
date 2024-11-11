@@ -31,10 +31,11 @@ Quick guide:
 
 | Femanager | TYPO3     | PHP       | Support/Development                                            |
 |-----------|-----------|-----------|----------------------------------------------------------------|
-| 8.x       | 12 LTS    | 8.1 -     | Features, Bugfixes, Security Updates                           |
-| 7.x       | 11 LTS    | 7.4 - 8.1 | Bugfixes, Security Updates                                     |
+| 13.x      | 13 LTS    | 8.2 - 8.4 | Features, Bugfixes, Security Updates                           |
+| 8.x       | 12 LTS    | 8.1 -     | Bugfixes, Security Updates                                     |
+| 7.x       | 11 ELTS   | 7.4 - 8.1 | Security Updates                                               |
 | 6.x       | 10 ELTS   | 7.2 - 7.4 | Security Updates                                               |
-| 5.x       | 8, 9 ELTS | 7.2 - 7.3 | Security Updates                                               |
+| 5.x       | 8, 9 ELTS | 7.2 - 7.3 | Out of support / security updates on demand (ask for an offer) |
 | 4.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer) |
 | 3.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer) |
 | 2.x       | 7.6       | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer) |

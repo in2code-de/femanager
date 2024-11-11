@@ -5,11 +5,11 @@ Changelog
 =========
 
 -
-      :Version: 7.4.x
-      :Date: 2024-xx-xx
+      :Version: 7.4.1
+      :Date: 2024-11-11
       :Changes:
       * [TASK] Disable autocomplete for the CAPTCHA field - thx to Oliver Klee
-
+      * [DOCS] Update Roadmap
 
 -
       :Version: 7.4.0
