@@ -5,11 +5,28 @@ Changelog
 =========
 
 -
-      :Version: 8.2.x
-      :Date: 2024-xx-xx
+      :Version: 8.2.1
+      :Date: 2024-11-11
       :Changes:
+      * [BUGFIX] Restore function to impersonate frontend user (loginAs) - thx to Christine Zoglmeier (in2code)
+      * [BUGFIX] auto login - thx to Christine Zoglmeier (in2code)
+      * [BUGFIX] configuration fetching for admin edit notify mails - thx to Andreas Nedbal (in2code)
+      * [BUGFIX] Remove side-effect in User crdate getter - thx to Andreas Nedbal (in2code)
+      * [BUGFIX] Add max size validations for default fe_user fields - thx to Andreas Nedbal (in2code)
+      * [BUGFIX] Use configured receiver name in createAdminNotify - thx to Andreas Nedbal (in2code)
+      * [BUGFIX] file required validation - thx to Andreas Nedbal (in2code)
+      * [BUGFIX] changing image only - thx to Stefan Busemann (in2code)
+      * [BUGFIX] CreateUserConfirmation.html refers to non-existing labe - thx to Stefan Busemann (in2code)
+      * [BUGFIX] Resend confirmation - thx to Stefan Busemann (in2code)
+      * [BUGFIX] Make upload work again - thx to Stefan Busemann (in2code)
+      * [BUGFIX] TypoScript setting removeFromUserGroupSelection - thx to Stefan Busemann (in2code)
+      * [BUGFIX] Exception by selecting wrong hashing integration - thx to Stefan Busemann (in2code)
+      * [TASK] Change text of createRequestWaitingForAdminConfirm localization - thx to Andreas Nedbal (in2code)
+      * [TASK] GitHub Actions - thx to Andreas Nedbal (in2code)
       * [TASK] Disable autocomplete for the CAPTCHA field - thx to Oliver Klee
-
+      * [TASK] Clean up RemovePasswordIfEmptyMiddleware - thx to Andreas Nedbal (in2code)
+      * [TASK] Remove unused code - thx to Stefan Busemann (in2code)
+      * [REFACTOR] unify checkPageAndUserAccess - thx to Stefan Busemann (in2code)
 
 -
       :Version: 8.2.0
@@ -82,6 +99,13 @@ Changelog
       * [DOCUMENTATION] Replace outdated signal documentation with event description
       * [TASK] Update unit tests & behaviour tests
       * [BUGFIX] Fix validation for allowed usergroups
+
+-
+      :Version: 7.4.1
+      :Date: 2024-11-11
+      :Changes:
+      * [TASK] Disable autocomplete for the CAPTCHA field - thx to Oliver Klee
+      * [DOCS] Update Roadmap
 
 -
       :Version: 7.4.0

@@ -1,8 +1,7 @@
 # TYPO3 Extension femanager
 
 TYPO3 Frontend User Registration and Management based on
-a very flexible configuration and on TYPO3 12 and newer with the possibility to extend it.
-Extension basicly works like sr_feuser_register or any other frontend user registration.
+a very flexible configuration and on TYPO3 (version 8 or newer) with the possibility to extend it.
 
 > :warning: **TYPO3 13 compatibility**\
 > See [EAP page (DE)](https://www.in2code.de/agentur/typo3-extensions/early-access-programm/) or [EAP page (EN)](https://www.in2code.de/en/agency/typo3-extensions/early-access-program/) for more information how to get access to a TYPO3 12 version
@@ -32,17 +31,17 @@ Quick guide:
 
 ## Which femanager for which TYPO3 and PHP?
 
-| Femanager | TYPO3     | PHP       | Support/Development                                            | Branch  |
-|-----------|-----------|-----------|----------------------------------------------------------------|---------|
-| 13.x      | 13 LTS    | 8.2       | Features, Bugfixes, Security Updates                           | n/a yet |
-| 8.x       | 12 LTS    | 8.1 - 8.2 | Features, Bugfixes, Security Updates                           | main    |
-| 7.x       | 11 LTS    | 7.4 - 8.1 | Bugfixes, Security Updates                                     | v7      |
-| 6.x       | 10 LTS    | 7.2 - 7.4 | Security Updates - If you want feature backports ask for an offer| v6      |
-| 5.x       | 8, 9 LTS  | 7.2 - 7.3 | Security Updates                                               | v5      |
-| 4.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer) | n/a     |
-| 3.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer) | n/a     |
-| 2.x       | 7.6       | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer) | v2      |
-| 1.x       | 6.2 - 7.6 | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer) | n/a     |
+| Femanager | TYPO3     | PHP       | Support/Development                                               | Branch |
+|-----------|-----------|-----------|-------------------------------------------------------------------|-------|
+| 13.x      | 13 LTS    | 8.2 - 8.4 | Features, Bugfixes, Security Updates                              | main  |
+| 8.x       | 12 LTS    | 8.1 - 8.2 | Bugfixes, Security Updates                                        | v8    |
+| 7.x       | 11 LTS    | 7.4 - 8.1 | Security Updates - If you want feature backports ask for an offer | v7    |
+| 6.x       | 10 LTS    | 7.2 - 7.4 | Security Updates - If you want feature backports ask for an offer | v6    |
+| 5.x       | 8, 9 LTS  | 7.2 - 7.3 | Out of support / security updates on demand (ask for an offer)    | v5    |
+| 4.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer)    | n/a   |
+| 3.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer)    | n/a   |
+| 2.x       | 7.6       | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer)    | v2    |
+| 1.x       | 6.2 - 7.6 | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer)    | n/a   |
 
 ## Your Contribution
 
