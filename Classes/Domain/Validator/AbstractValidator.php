@@ -250,7 +250,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsNumber($value)
     {
-        return strlen((string) preg_replace('/[^0-9]/', '', $value)) > 0;
+        return strlen((string)preg_replace('/[^0-9]/', '', $value)) > 0;
     }
 
     /**
@@ -261,7 +261,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsLetter($value)
     {
-        return strlen((string) preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0;
+        return strlen((string)preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0;
     }
 
     /**
@@ -272,7 +272,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsUppercase($value)
     {
-        return strlen((string) preg_replace('/[^A-Z]/', '', $value)) > 0;
+        return strlen((string)preg_replace('/[^A-Z]/', '', $value)) > 0;
     }
 
     /**
@@ -283,7 +283,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsSpecialCharacter($value)
     {
-        return strlen((string) preg_replace('/[^a-zA-Z0-9]/', '', $value)) !== strlen($value);
+        return strlen((string)preg_replace('/[^a-zA-Z0-9]/', '', $value)) !== strlen($value);
     }
 
     /**

@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Tests\Unit\Fixture\Utility;
 
-use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use In2code\Femanager\Utility\AbstractUtility as AbstractUtilityFemanager;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**

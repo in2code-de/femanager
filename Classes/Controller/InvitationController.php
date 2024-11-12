@@ -315,6 +315,6 @@ class InvitationController extends AbstractFrontendController
         );
         $currentUsergroupUids = UserUtility::getCurrentUsergroupUids();
         // compare allowedUsergroups with currentUsergroups
-        return (bool) count(array_intersect($allowedUsergroupUids, $currentUsergroupUids));
+        return (bool)count(array_intersect($allowedUsergroupUids, $currentUsergroupUids));
     }
 }

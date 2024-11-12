@@ -7,7 +7,6 @@ namespace In2code\Femanager\Finisher;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Class SendParametersFinisher
@@ -31,8 +30,7 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
          * Inject a complete new content object
          */
         protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject
-    )
-    {
+    ) {
     }
 
     /**

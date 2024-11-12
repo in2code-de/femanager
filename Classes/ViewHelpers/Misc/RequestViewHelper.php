@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\ViewHelpers\Misc;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**

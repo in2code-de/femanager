@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Service;
 
-use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Service\AutoAdminConfirmation\ConfirmationInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use UnexpectedValueException;
 
 /**

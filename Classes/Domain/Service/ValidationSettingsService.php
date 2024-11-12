@@ -37,8 +37,7 @@ class ValidationSettingsService
          * Needed for validation settings. Should be "validation" or "validationEdit"
          */
         protected string $validationName
-    )
-    {
+    ) {
     }
 
     /**

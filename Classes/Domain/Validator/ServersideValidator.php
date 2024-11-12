@@ -311,7 +311,7 @@ class ServersideValidator extends AbstractValidator
     protected function checkAnyValidation($validation, $value, $validationSetting, string|array $fieldName)
     {
         if (method_exists($this, 'validate' . ucfirst((string)$validation)) && !$this->{'validate' . ucfirst((string)$validation)}($value, $validationSetting)) {
-            $this->addErrorForProperty($fieldName, 'validationError' . ucfirst((string) $validation), 0, ['field' => $fieldName]);
+            $this->addErrorForProperty($fieldName, 'validationError' . ucfirst((string)$validation), 0, ['field' => $fieldName]);
             $this->isValid = false;
         }
     }

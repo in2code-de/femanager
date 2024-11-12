@@ -192,7 +192,7 @@ class ConfigurationUtility extends AbstractUtility
             return true;
         }
 
-        return (bool) self::getValue(
+        return (bool)self::getValue(
             'edit/email/notifyAdmin/receiver/email/value',
             $config
         );

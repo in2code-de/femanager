@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace In2code\Femanager\DataProcessor;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Class AbstractDataProcessor

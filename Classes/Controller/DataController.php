@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
 
-use In2code\Femanager\DataProvider\CountryZonesDataProvider;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 

@@ -8,7 +8,6 @@ use In2code\Femanager\Domain\Service\StoreInDatabaseService;
 use In2code\Femanager\Utility\StringUtility;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Class SaveToAnyTableFinisher
@@ -38,8 +37,9 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     public function __construct(/**
      * Inject a complete new content object
      */
-    protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject, \TYPO3\CMS\Core\TypoScript\TypoScriptService $typoScriptService)
-    {
+        protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject,
+        \TYPO3\CMS\Core\TypoScript\TypoScriptService $typoScriptService
+    ) {
         $this->typoScriptService = $typoScriptService;
     }
 
@@ -130,7 +130,7 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
             return true;
         }
 
-        return (bool) StringUtility::endsWith($key, '.');
+        return (bool)StringUtility::endsWith($key, '.');
     }
 
     /**
