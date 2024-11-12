@@ -16,13 +16,13 @@ $EM_CONF[$_EXTKEY] = [
     'version' => '8.2.1',
     'constraints' => [
         'depends' => [
-            'typo3' => '12.0.0-12.4.99',
+            'typo3' => '13.0.0-13.4.99',
             'php' => '8.1.0-',
         ],
         'conflicts' => [],
         'suggests' => [
-            'sr_freecap' => '2.3.0-2.99.99',
-            'static_info_tables' => '6.9.0-6.99.99',
+            'sr_freecap' => '13.4.0-13.4.99',
+            'static_info_tables' => '13.4.0-13.4.99',
         ],
     ],
     'autoload' => [
