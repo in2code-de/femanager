@@ -35,21 +35,21 @@ class UserLinks
      */
     public function __construct()
     {
-        $this->username = GeneralUtility::_GET('username');
+        $this->username = $GLOBALS['TYPO3_REQUEST']->getQueryParams()['username'] ?? null;
         if ($this->username === null) {
             $this->username = $this->getLastUsername();
         }
-        $this->pid = GeneralUtility::_GET('pid');
+
+        $this->pid = $GLOBALS['TYPO3_REQUEST']->getQueryParams()['pid'] ?? null;
         if ($this->pid === null) {
-            throw new \Exception('pid missing like ?pid=123');
+            throw new \Exception('pid missing like ?pid=123', 5974318372);
         }
     }
 
     /**
-     * @return string
      * @throws Exception
      */
-    public function links()
+    public function links(): string
     {
         $row = $this->getUserData($this->username);
         $content = '<h2>Get confirmation links of one FE_User</h2>';
@@ -58,9 +58,8 @@ class UserLinks
         $content .= 'uid: ' . $row['uid'] . '<br />';
         $content .= 'status: ' . ($row['disable'] === 0 ? 'enabled' : 'disabled') . '<br />';
         $content .= '<a href="' . $this->getAdminConfirmationUri($row) . '">Admin confirmation link</a><br />';
-        $content .= '<a href="' . $this->getUserConfirmationUri($row) . '">User confirmation link</a><br />';
 
-        return $content;
+        return $content . ('<a href="' . $this->getUserConfirmationUri($row) . '">User confirmation link</a><br />');
     }
 
     /**
@@ -84,9 +83,8 @@ class UserLinks
             'returnLast' => 'url',
             'useCacheHash' => '1',
         ];
-        $uri = $this->cObj->typoLink_URL($configuration);
 
-        return $uri;
+        return $this->cObj->typoLink_URL($configuration);
     }
 
     /**
@@ -110,15 +108,11 @@ class UserLinks
             'returnLast' => 'url',
             'useCacheHash' => '1',
         ];
-        $uri = $this->cObj->typoLink_URL($configuration);
 
-        return $uri;
+        return $this->cObj->typoLink_URL($configuration);
     }
 
-    /**
-     * @return string
-     */
-    protected function getHash(array $row)
+    protected function getHash(array $row): string
     {
         $user = new User();
         $user->setUsername($row['username']);
@@ -144,8 +138,8 @@ class UserLinks
             ->setMaxResults(1);
         try {
             return $queryBuilder->executeQuery()->fetchAssociative();
-        } catch (DBALException $e) {
-            $errorMsg = $e->getMessage();
+        } catch (DBALException $dbalException) {
+            $errorMsg = $dbalException->getMessage();
 
             return 'Could not fetch fe_users. ' . $errorMsg;
         }
@@ -171,8 +165,8 @@ class UserLinks
                 $row = $res->fetchAssociative();
                 $content = $row['username'];
             }
-        } catch (DBALException $e) {
-            $content = 'error: ' . $e->getMessage();
+        } catch (DBALException $dbalException) {
+            $content = 'error: ' . $dbalException->getMessage();
         }
 
         return $content;

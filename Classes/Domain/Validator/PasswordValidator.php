@@ -15,8 +15,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class PasswordValidator extends AbstractValidatorExtbase
 {
-    public ?ConfigurationManagerInterface $configurationManager = null;
-
     /**
      * Content Object
      *
@@ -45,14 +43,13 @@ class PasswordValidator extends AbstractValidatorExtbase
      */
     protected $actionName;
 
-    public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
+    public function __construct(public ?ConfigurationManagerInterface $configurationManager)
     {
-        $this->configurationManager = $configurationManager;
     }
 
     public function initializeObject(): void
     {
-        if ($this->configurationManager === null) {
+        if (!$this->configurationManager instanceof \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface) {
             $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         }
     }
@@ -62,7 +59,7 @@ class PasswordValidator extends AbstractValidatorExtbase
      *
      * @param $user
      */
-    public function isValid($user): void
+    protected function isValid($user): void
     {
         $this->initializeObject();
         $this->init();
@@ -80,27 +77,19 @@ class PasswordValidator extends AbstractValidatorExtbase
 
     /**
      * Check if Passwords are empty and if keep configuration is active
-     *
-     * @return bool
      */
-    protected function keepPasswordIfEmpty()
+    protected function keepPasswordIfEmpty(): bool
     {
-        if (isset($this->configuration['edit']['misc']['keepPasswordIfEmpty']) &&
+        return isset($this->configuration['edit']['misc']['keepPasswordIfEmpty']) &&
             $this->configuration['edit']['misc']['keepPasswordIfEmpty'] === '1' &&
             (!isset($this->piVars['user']['password']) || $this->piVars['user']['password'] === '') &&
-            (!isset($this->piVars['password_repeat']) || $this->piVars['password_repeat'] === '')
-        ) {
-            return true;
-        }
-        return false;
+            (!isset($this->piVars['password_repeat']) || $this->piVars['password_repeat'] === '');
     }
 
     /**
      * Check if password fields are added with flexform
-     *
-     * @return bool
      */
-    protected function passwordFieldsAdded()
+    protected function passwordFieldsAdded(): bool
     {
         $flexFormValues = GeneralUtility::xml2array($this->cObj->data['pi_flexform']);
         if (is_array($flexFormValues)) {
@@ -129,7 +118,7 @@ class PasswordValidator extends AbstractValidatorExtbase
             'Femanager',
             null
         );
-        $this->cObj = $this->configurationManager->getContentObject();
+        $this->cObj = $this->request->getAttribute('currentContentObject');
         $this->piVars = $this->cObj->getRequest()->getParsedBody()[$pluginName] ??
             $this->cObj->getRequest()->getQueryParams()[$pluginName] ?? null;
 

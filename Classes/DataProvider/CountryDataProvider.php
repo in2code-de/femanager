@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CountryDataProvider
 {
-    protected $countryRepository;
+    protected object $countryRepository;
 
     public function __construct()
     {

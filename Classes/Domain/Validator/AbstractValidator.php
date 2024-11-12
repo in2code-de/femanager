@@ -26,14 +26,6 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidato
  */
 abstract class AbstractValidator extends AbstractValidatorExtbase
 {
-    protected ?UserRepository $userRepository = null;
-
-    public ?ConfigurationManagerInterface $configurationManager = null;
-
-    protected ?EventDispatcherInterface $eventDispatcher = null;
-
-    protected ?PluginService $pluginService = null;
-
     /**
      * Former known as piVars
      *
@@ -51,38 +43,25 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected $isValid = true;
 
-    public function injectUserRepository(UserRepository $userRepository)
+    public function __construct(protected ?UserRepository $userRepository, public ?ConfigurationManagerInterface $configurationManager, protected ?PluginService $pluginService, protected ?EventDispatcherInterface $eventDispatcher)
     {
-        $this->userRepository = $userRepository;
-    }
-
-    public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
-    {
-        $this->configurationManager = $configurationManager;
-    }
-
-    public function injectPluginService(PluginService $pluginService)
-    {
-        $this->pluginService = $pluginService;
-    }
-
-    public function injectEventDispatcherInterface(EventDispatcherInterface $eventDispatcher)
-    {
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function initializeObject(): void
     {
-        if ($this->configurationManager === null) {
+        if (!$this->configurationManager instanceof \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface) {
             $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         }
-        if ($this->eventDispatcher === null) {
+
+        if (!$this->eventDispatcher instanceof \Psr\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher = GeneralUtility::makeInstance(EventDispatcher::class);
         }
-        if ($this->userRepository === null) {
+
+        if (!$this->userRepository instanceof \In2code\Femanager\Domain\Repository\UserRepository) {
             $this->userRepository = GeneralUtility::makeInstance(UserRepository::class);
         }
-        if ($this->pluginService === null) {
+
+        if (!$this->pluginService instanceof \In2code\Femanager\Domain\Service\PluginService) {
             $this->pluginService = GeneralUtility::makeInstance(PluginService::class);
         }
     }
@@ -96,15 +75,15 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
             if (is_numeric($value)) {
                 return true;
             }
+
             return !empty($value);
         }
+
         if ((is_countable($value)) && count($value) > 0) {
             return true;
         }
-        if ($value instanceof \DateTime) {
-            return true;
-        }
-        return false;
+
+        return $value instanceof \DateTime;
     }
 
     /**
@@ -122,16 +101,14 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         } else {
             return $this->validateRequired($value);
         }
+
         return false;
     }
 
     /**
      * Validation for email
-     *
-     * @param string $value
-     * @return bool
      */
-    protected function validateEmail($value): bool
+    protected function validateEmail(string $value): bool
     {
         return GeneralUtility::validEmail($value);
     }
@@ -144,10 +121,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateMin($value, $validationSetting): bool
     {
-        if (mb_strlen($value) < $validationSetting) {
-            return false;
-        }
-        return true;
+        return mb_strlen($value) >= $validationSetting;
     }
 
     /**
@@ -158,10 +132,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateMax($value, $validationSetting): bool
     {
-        if (mb_strlen($value) > $validationSetting) {
-            return false;
-        }
-        return true;
+        return mb_strlen($value) <= $validationSetting;
     }
 
     /**
@@ -181,10 +152,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateLetters($value): bool
     {
-        if (preg_replace('/[^a-zA-Z_-]/', '', $value) === $value) {
-            return true;
-        }
-        return false;
+        return preg_replace('/[^a-zA-Z_-]/', '', $value) === $value;
     }
 
     /**
@@ -237,34 +205,40 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
                     if ($mustInclude && !$containsNumber || !$mustInclude && $containsNumber) {
                         $isValid = false;
                     }
+
                     break;
                 case 'letter':
                     $containsLetter = $this->stringContainsLetter($value);
                     if ($mustInclude && !$containsLetter || !$mustInclude && $containsLetter) {
                         $isValid = false;
                     }
+
                     break;
                 case 'uppercase':
                     $containsUppercase = $this->stringContainsUppercase($value);
                     if ($mustInclude && !$containsUppercase || !$mustInclude && $containsUppercase) {
                         $isValid = false;
                     }
+
                     break;
                 case 'special':
                     $containsSpecialCharacter = $this->stringContainsSpecialCharacter($value);
                     if ($mustInclude && !$containsSpecialCharacter || !$mustInclude && $containsSpecialCharacter) {
                         $isValid = false;
                     }
+
                     break;
                 case 'space':
                     $containsSpaceCharacter = $this->stringContainsSpaceCharacter($value);
                     if ($mustInclude && !$containsSpaceCharacter || !$mustInclude && $containsSpaceCharacter) {
                         $isValid = false;
                     }
+
                     break;
                 default:
             }
         }
+
         return $isValid;
     }
 
@@ -276,7 +250,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsNumber($value)
     {
-        return strlen(preg_replace('/[^0-9]/', '', $value)) > 0;
+        return strlen((string) preg_replace('/[^0-9]/', '', $value)) > 0;
     }
 
     /**
@@ -287,7 +261,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsLetter($value)
     {
-        return strlen(preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0;
+        return strlen((string) preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0;
     }
 
     /**
@@ -298,7 +272,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsUppercase($value)
     {
-        return strlen(preg_replace('/[^A-Z]/', '', $value)) > 0;
+        return strlen((string) preg_replace('/[^A-Z]/', '', $value)) > 0;
     }
 
     /**
@@ -309,7 +283,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function stringContainsSpecialCharacter($value)
     {
-        return strlen(preg_replace('/[^a-zA-Z0-9]/', '', $value)) !== strlen($value);
+        return strlen((string) preg_replace('/[^a-zA-Z0-9]/', '', $value)) !== strlen($value);
     }
 
     /**
@@ -332,7 +306,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         $validationSettings = GeneralUtility::trimExplode(',', (string)$validationSettingList, true);
         $diff = array_diff($valueList, $validationSettings);
 
-        return empty($diff);
+        return $diff === [];
     }
 
     /**
@@ -340,10 +314,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
      */
     protected function validateSameAs(mixed $value, mixed $value2): bool
     {
-        if ($value === $value2) {
-            return true;
-        }
-        return false;
+        return $value === $value2;
     }
 
     /**
@@ -354,23 +325,22 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         $dateParts = [];
         switch ($validationSetting) {
             case 'd.m.Y':
-                if (preg_match('/^([0-9]{2})\.([0-9]{2})\.([0-9]{4})$/', $value, $dateParts)) {
-                    if (checkdate((int)$dateParts[2], (int)$dateParts[1], (int)$dateParts[3])) {
-                        return true;
-                    }
+                if (preg_match('/^(\d{2})\.(\d{2})\.(\d{4})$/', $value, $dateParts) && checkdate((int)$dateParts[2], (int)$dateParts[1], (int)$dateParts[3])) {
+                    return true;
                 }
+
                 break;
 
             case 'm/d/Y':
-                if (preg_match('/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/', $value, $dateParts)) {
-                    if (checkdate((int)$dateParts[1], (int)$dateParts[2], (int)$dateParts[3])) {
-                        return true;
-                    }
+                if (preg_match('/^(\d{2})\/(\d{2})\/(\d{4})$/', $value, $dateParts) && checkdate((int)$dateParts[1], (int)$dateParts[2], (int)$dateParts[3])) {
+                    return true;
                 }
+
                 break;
 
             default:
         }
+
         return false;
     }
 
@@ -396,6 +366,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
             $parsedBody = $request->getParsedBody(); // POST parameters
             $allParams = array_merge($queryParams, $parsedBody);
         }
+
         // collect variables from plugins starting with tx_femanager
         $this->pluginVariables = [];
         foreach ($allParams as $key => $value) {
@@ -420,21 +391,15 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         }
     }
 
-    /**
-     * @return string
-     */
     protected function getValidationName(): string
     {
-        $validationName = 'validation';
         if ($this->getControllerName() === 'invitation' && $this->getActionName() === 'edit') {
-            $validationName = 'validationEdit';
+            return 'validationEdit';
         }
-        return $validationName;
+
+        return 'validation';
     }
 
-    /**
-     * @return string
-     */
     protected function getActionName(): string
     {
         $pluginName = $this->pluginService->getFemanagerPluginNameFromRequest();
@@ -443,8 +408,6 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     /**
      * Get controller name in lowercase
-     *
-     * @return string
      */
     protected function getControllerName(): string
     {
@@ -458,6 +421,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         } elseif ($controllerNameInPlugin === 'Invitation') {
             $controllerName = 'invitation';
         }
+
         $this->checkAllowedPluginName($pluginName);
         return $controllerName;
     }
@@ -469,9 +433,11 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         if ($plugin === 'tx_femanager_edit') {
             return 'edit';
         }
+
         if ($plugin === 'tx_femanager_invitation') {
             return 'invitation';
         }
+
         return 'new';
     }
 

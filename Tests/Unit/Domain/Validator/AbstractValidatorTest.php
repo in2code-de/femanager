@@ -88,7 +88,7 @@ class AbstractValidatorTest extends UnitTestCase
      * @dataProvider validateRequiredReturnsBoolDataProvider
      * @covers ::validateRequired
      */
-    public function testValidateRequiredReturnsBool(mixed $value, bool $expectedResult)
+    public function testValidateRequiredReturnsBool(mixed $value, bool $expectedResult): void
     {
         self::assertSame($expectedResult, $this->generalValidatorMock->_call('validateRequired', $value));
     }
@@ -134,7 +134,7 @@ class AbstractValidatorTest extends UnitTestCase
      * @dataProvider validateEmailReturnsBoolDataProvider
      * @covers ::validateEmail
      */
-    public function testValidateEmailReturnsBool(string $value, bool $expectedResult)
+    public function testValidateEmailReturnsBool(string $value, bool $expectedResult): void
     {
         self::assertSame($expectedResult, $this->generalValidatorMock->_call('validateEmail', $value));
     }
@@ -177,7 +177,7 @@ class AbstractValidatorTest extends UnitTestCase
      * @dataProvider validateMinReturnsBoolDataProvider
      * @covers ::validateMin
      */
-    public function testValidateMinReturnsBool(string $value, int $allowedLength, bool $expectedResult)
+    public function testValidateMinReturnsBool(string $value, int $allowedLength, bool $expectedResult): void
     {
         self::assertSame(
             $expectedResult,
@@ -228,7 +228,7 @@ class AbstractValidatorTest extends UnitTestCase
      * @dataProvider validateMaxReturnsBoolDataProvider
      * @covers ::validateMax
      */
-    public function testValidateMaxReturnsBool(string $value, int $allowedLength, bool $expectedResult)
+    public function testValidateMaxReturnsBool(string $value, int $allowedLength, bool $expectedResult): void
     {
         self::assertSame(
             $expectedResult,
@@ -277,7 +277,7 @@ class AbstractValidatorTest extends UnitTestCase
      * @dataProvider validateIntReturnsBoolDataProvider
      * @covers ::validateInt
      */
-    public function testValidateIntReturnsBool(string $value, bool $expectedResult)
+    public function testValidateIntReturnsBool(string $value, bool $expectedResult): void
     {
         self::assertSame($expectedResult, $this->generalValidatorMock->_call('validateInt', $value));
     }
@@ -356,7 +356,7 @@ class AbstractValidatorTest extends UnitTestCase
      * @dataProvider validateLettersReturnsBoolDataProvider
      * @covers ::validateUnicodeLetters
      */
-    public function testValidateLettersReturnsBool(string $value, bool $expectedResult)
+    public function testValidateLettersReturnsBool(string $value, bool $expectedResult): void
     {
         self::assertSame($expectedResult, $this->generalValidatorMock->_call('validateLetters', $value));
     }
@@ -365,7 +365,7 @@ class AbstractValidatorTest extends UnitTestCase
      * @dataProvider validateUnicodeLettersReturnsBoolDataProvider
      * @covers ::validateLetters
      */
-    public function testUnicodeValidateLettersReturnsBool(string $value, bool $expectedResult)
+    public function testUnicodeValidateLettersReturnsBool(string $value, bool $expectedResult): void
     {
         self::assertSame($expectedResult, $this->generalValidatorMock->_call('validateUnicodeLetters', $value));
     }
@@ -673,7 +673,7 @@ class AbstractValidatorTest extends UnitTestCase
         string $configuration,
         bool $mustInclude,
         bool $expectedResult
-    ) {
+    ): void {
         self::assertSame(
             $expectedResult,
             $this->generalValidatorMock->_call(
@@ -773,7 +773,7 @@ class AbstractValidatorTest extends UnitTestCase
      * @dataProvider validateInListReturnsBoolDataProvider
      * @covers ::validateInList
      */
-    public function testValidateInListReturnsBool(mixed $value, mixed $configuration, bool $expectedResult)
+    public function testValidateInListReturnsBool(mixed $value, mixed $configuration, bool $expectedResult): void
     {
         self::assertSame(
             $expectedResult,
@@ -824,7 +824,7 @@ class AbstractValidatorTest extends UnitTestCase
      * @dataProvider validateSameAsReturnsBoolDateProvider
      * @covers ::validateSameAs
      */
-    public function testValidateSameAsReturnsBool(mixed $value, mixed $value2, bool $expectedResult)
+    public function testValidateSameAsReturnsBool(mixed $value, mixed $value2, bool $expectedResult): void
     {
         $test = $this->generalValidatorMock->_call('validateSameAs', $value, $value2);
         self::assertSame($expectedResult, $test);

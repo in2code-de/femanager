@@ -11,7 +11,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class UpperViewHelper extends AbstractViewHelper
 {
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('string', 'string', 'string', false);

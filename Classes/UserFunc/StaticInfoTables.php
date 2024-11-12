@@ -26,18 +26,15 @@ class StaticInfoTables
         return ExtensionManagementUtility::isLoaded('static_info_tables');
     }
 
-    public function getStatesOptions(array $data)
+    public function getStatesOptions(array $data): void
     {
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
             $countryZonesDataProvider = GeneralUtility::makeInstance(CountryZonesDataProvider::class);
             $country = $data['row']['country'] ?? null;
             if (is_array($country)) {
-                if (count($country) > 0) {
-                    $country = array_values($country)[0];
-                } else {
-                    $country = null;
-                }
+                $country = $country !== [] ? array_values($country)[0] : null;
             }
+
             if (empty($country)) {
                 $data['items'] = [
                     [
@@ -69,7 +66,7 @@ class StaticInfoTables
     /**
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function getCountryOptions(array $data)
+    public function getCountryOptions(array $data): void
     {
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
             $countryDataProvider = GeneralUtility::makeInstance(CountryDataProvider::class);
@@ -92,10 +89,11 @@ class StaticInfoTables
             $countries = $this->countryProvider->getAll();
             foreach ($countries as $country) {
                 $returnArray[$country->getAlpha3IsoCode()] =
-                    $languageService !== null ?
+                    $languageService instanceof \TYPO3\CMS\Core\Localization\LanguageService ?
                         $languageService->sL($country->getLocalizedNameLabel()) :
                         $country->getName();
             }
+
             asort($returnArray);
             $data['items'] = $returnArray;
         }

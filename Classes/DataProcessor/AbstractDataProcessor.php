@@ -14,38 +14,10 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 abstract class AbstractDataProcessor implements DataProcessorInterface
 {
     /**
-     * @var array
-     */
-    protected $configuration = [];
-
-    /**
-     * @var array
-     */
-    protected $settings = [];
-
-    /**
-     * @var ContentObjectRenderer|null
-     */
-    protected $contentObject;
-
-    /**
-     * @var Arguments|null
-     */
-    protected $controllerArguments;
-
-    /**
      * AbstractDataProcessor constructor.
      */
-    public function __construct(
-        array $configuration,
-        array $settings,
-        ContentObjectRenderer $contentObject,
-        Arguments $controllerArguments
-    ) {
-        $this->configuration = $configuration;
-        $this->settings = $settings;
-        $this->contentObject = $contentObject;
-        $this->controllerArguments = $controllerArguments;
+    public function __construct(protected array $configuration, protected array $settings, protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject, protected \TYPO3\CMS\Extbase\Mvc\Controller\Arguments $controllerArguments)
+    {
     }
 
     public function initializeDataProcessor()
@@ -58,9 +30,10 @@ abstract class AbstractDataProcessor implements DataProcessorInterface
     public function getConfiguration(string $path = '')
     {
         $configuration = $this->configuration;
-        if (!empty($path)) {
-            $configuration = ArrayUtility::getValueByPath($configuration, $path, '.');
+        if ($path !== '' && $path !== '0') {
+            return ArrayUtility::getValueByPath($configuration, $path, '.');
         }
+
         return $configuration;
     }
 }

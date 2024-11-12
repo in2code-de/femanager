@@ -24,10 +24,10 @@ class TemplateUtility extends AbstractUtility
      * @return string
      * @see getTemplateFolders()
      */
-    public static function getTemplateFolder($part = 'template')
+    public static function getTemplateFolder(string $part = 'template')
     {
         $matches = self::getTemplateFolders($part);
-        return !empty($matches) ? $matches[0] : '';
+        return $matches === [] ? '' : $matches[0];
     }
 
     /**
@@ -39,11 +39,10 @@ class TemplateUtility extends AbstractUtility
      * @param bool $returnAllPaths Default: FALSE, If FALSE only paths
      *        for the first configuration (Paths, Path, hardcoded)
      *        will be returned. If TRUE all (possible) paths will be returned.
-     * @return array
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    public static function getTemplateFolders($part = 'template', $returnAllPaths = false)
+    public static function getTemplateFolders(string $part = 'template', $returnAllPaths = false): array
     {
         $templatePaths = [];
         $configuration = self::getConfigurationManager()
@@ -52,18 +51,22 @@ class TemplateUtility extends AbstractUtility
             $templatePaths = $configuration['view'][$part . 'RootPaths'] ?? '';
             $templatePaths = array_values($templatePaths);
         }
-        if ($returnAllPaths || empty($templatePaths)) {
+
+        if ($returnAllPaths || $templatePaths === []) {
             $path = $configuration['view'][$part . 'RootPath'] ?? '';
             if (!empty($path)) {
                 $templatePaths[] = $path;
             }
+
             $templatePaths[] = 'EXT:femanager/Resources/Private/' . ucfirst($part) . 's/';
         }
+
         $templatePaths = array_unique($templatePaths);
         $absolutePaths = [];
         foreach ($templatePaths as $templatePath) {
             $absolutePaths[] = GeneralUtility::getFileAbsFileName($templatePath);
         }
+
         return $absolutePaths;
     }
 
@@ -76,10 +79,10 @@ class TemplateUtility extends AbstractUtility
      * @param string $part "template", "partial", "layout"
      * @return string Filename/path
      */
-    public static function getTemplatePath($pathAndFilename, $part = 'template')
+    public static function getTemplatePath(string $pathAndFilename, string $part = 'template')
     {
         $matches = self::getTemplatePaths($pathAndFilename, $part);
-        return !empty($matches) ? end($matches) : '';
+        return $matches === [] ? '' : end($matches);
     }
 
     /**
@@ -91,7 +94,7 @@ class TemplateUtility extends AbstractUtility
      * @param string $part "template", "partial", "layout"
      * @return array All existing matches found
      */
-    public static function getTemplatePaths($pathAndFilename, $part = 'template')
+    public static function getTemplatePaths(string $pathAndFilename, string $part = 'template'): array
     {
         $pathAndFilenames = [];
         $absolutePaths = self::getTemplateFolders($part, true);
@@ -100,6 +103,7 @@ class TemplateUtility extends AbstractUtility
                 $pathAndFilenames[] = $absolutePath . $pathAndFilename;
             }
         }
+
         return $pathAndFilenames;
     }
 
@@ -115,6 +119,7 @@ class TemplateUtility extends AbstractUtility
         if ($request instanceof RequestInterface) {
             $standAloneView->setRequest($request);
         }
+
         $standAloneView->setFormat($format);
         $standAloneView->setLayoutRootPaths(TemplateUtility::getTemplateFolders('layout'));
         $standAloneView->setPartialRootPaths(TemplateUtility::getTemplateFolders('partial'));

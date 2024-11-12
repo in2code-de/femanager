@@ -11,10 +11,7 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
  */
 class BackendUserUtility extends AbstractUtility
 {
-    /**
-     * @return bool
-     */
-    public static function isAdminAuthentication()
+    public static function isAdminAuthentication(): bool
     {
         $userAuthentication = self::getBackendUserAuthentication();
         $isUserBackendEnableLoginAs =
@@ -26,7 +23,7 @@ class BackendUserUtility extends AbstractUtility
     /**
      * @return BackendUserAuthentication
      */
-    public static function getBackendUserAuthentication()
+    protected static function getBackendUserAuthentication()
     {
         return parent::getBackendUserAuthentication();
     }

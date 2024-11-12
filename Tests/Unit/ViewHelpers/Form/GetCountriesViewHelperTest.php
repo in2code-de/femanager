@@ -39,7 +39,7 @@ class GetCountriesViewHelperTest extends UnitTestCase
     /**
      * @covers ::render
      */
-    public function testRenderReturnArray()
+    public function testRenderReturnArray(): void
     {
         $request = (new ServerRequest())->withAttribute('language', new SiteLanguage(
             0,

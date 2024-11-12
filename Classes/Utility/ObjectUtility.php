@@ -23,10 +23,7 @@ class ObjectUtility extends AbstractUtility
         return GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
     }
 
-    /**
-     * @return ContentObjectRenderer
-     */
-    public static function getContentObject(): ContentObjectRenderer
+    protected static function getContentObject(): ContentObjectRenderer
     {
         return GeneralUtility::makeInstance(ContentObjectRenderer::class);
     }
@@ -35,7 +32,6 @@ class ObjectUtility extends AbstractUtility
      * Checks if object was changed or not
      *
      * @param object $object
-     * @param RequestInterface $request
      * @codeCoverageIgnore
      */
     public static function isDirtyObject($object, RequestInterface $request): bool
@@ -57,24 +53,23 @@ class ObjectUtility extends AbstractUtility
                 if ($object->_isDirty($propertyName)) {
                     return true;
                 }
-            } else {
+            } elseif ($property->_isDirty()) {
                 /**
                  * ObjectStorage
                  */
-                if ($property->_isDirty()) {
-                    return true;
-                }
+                return true;
             }
 
             /** check if there is an uploaded image */
             $uploadedFiles = $request->getUploadedFiles();
             if (
-                count($uploadedFiles) > 0
+                $uploadedFiles !== []
                 && !empty($uploadedFiles['image'])
             ) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -94,6 +89,7 @@ class ObjectUtility extends AbstractUtility
                 unset($exception);
             }
         }
+
         return implode($glue, $values);
     }
 }

@@ -27,10 +27,8 @@ class UserFieldsOptions
 
     /**
      * Add options to FlexForm Selection - Options can be defined in TSConfig
-     *
-     * @param array $params
      */
-    public function addOptions(&$params)
+    public function addOptions(array &$params): void
     {
         $this->initialize();
         $tSconfig = BackendUtility::getPagesTSconfig($this->getPid());
@@ -50,10 +48,8 @@ class UserFieldsOptions
 
     /**
      * Add captcha option
-     *
-     * @param array $params
      */
-    protected function addCaptchaOption(&$params)
+    protected function addCaptchaOption(array &$params)
     {
         if (ExtensionManagementUtility::isLoaded('sr_freecap')) {
             $params['items'][] = [
@@ -65,10 +61,8 @@ class UserFieldsOptions
 
     /**
      * Add captcha option
-     *
-     * @param array $params
      */
-    protected function addStateOption(&$params)
+    protected function addStateOption(array &$params)
     {
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
             $params['items'][] = [
@@ -85,13 +79,11 @@ class UserFieldsOptions
      *        %2Ftypo3%2Fsysext%2Fcms%2Flayout%2Fdb_layout.php
      *        %3Fid%3D17%23element-tt_content-14
      *        &edit[tt_content][14]=edit
-     *
-     * @return int
      */
-    protected function getPid()
+    protected function getPid(): int
     {
         $pid = 0;
-        $backUrl = str_replace('?', '&', (string)GeneralUtility::_GP('returnUrl'));
+        $backUrl = str_replace('?', '&', (string)($GLOBALS['TYPO3_REQUEST']->getParsedBody()['returnUrl'] ?? $GLOBALS['TYPO3_REQUEST']->getQueryParams()['returnUrl'] ?? null));
         $urlParts = GeneralUtility::trimExplode('&', $backUrl, true);
         foreach ($urlParts as $part) {
             if (stristr((string)$part, 'id=')) {

@@ -12,7 +12,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class ExplodeViewHelper extends AbstractViewHelper
 {
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('string', 'string', 'Any list (e.g. "a,b,c,d")', false);

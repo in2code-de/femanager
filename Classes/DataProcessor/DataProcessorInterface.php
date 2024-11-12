@@ -11,8 +11,5 @@ interface DataProcessorInterface
 {
     public function initializeDataProcessor();
 
-    /**
-     * @return void
-     */
     public function process(): void;
 }

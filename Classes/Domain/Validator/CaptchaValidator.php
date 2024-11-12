@@ -20,7 +20,7 @@ class CaptchaValidator extends AbstractValidator
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function isValid($value): void
+    protected function isValid($value): void
     {
         $this->init();
         if ($this->captchaEnabled() && (!is_string($value) || !$this->validCaptcha($value))) {
@@ -37,20 +37,19 @@ class CaptchaValidator extends AbstractValidator
         $wordRepository = GeneralUtility::makeInstance(WordRepository::class);
         $wordObject = $wordRepository->getWord();
         $wordHash = $wordObject->getWordHash();
-        if (!empty($wordHash) && !empty($captcha) && $wordObject->getHashFunction() === 'md5') {
+        if (!empty($wordHash) && ($captcha !== '' && $captcha !== '0') && $wordObject->getHashFunction() === 'md5') {
             $userHash = md5(strtolower(mb_convert_encoding($captcha, 'ISO-8859-1')));
             if (hash_equals($wordHash, $userHash)) {
                 $wordRepository->cleanUpWord();
                 $isValid = true;
             }
         }
+
         return $isValid;
     }
 
     /**
      * Check if captcha is enabled (TypoScript, and sr_freecap loaded)
-     *
-     * @return bool
      */
     protected function captchaEnabled(): bool
     {

@@ -56,6 +56,7 @@ class UserController extends AbstractFrontendController
         if (UserUtility::getCurrentUser() !== $user) {
             throw new UnauthorizedException('You are not allowed to delete this image', 1516373759972);
         }
+
         $user->setImage(GeneralUtility::makeInstance(ObjectStorage::class));
         $this->userRepository->update($user);
         $this->logUtility->log(Log::STATUS_PROFILEUPDATEIMAGEDELETE, $user);
@@ -79,6 +80,7 @@ class UserController extends AbstractFrontendController
         if ($user !== null) {
             $user = $this->userRepository->findByUid((int)$user);
         }
+
         $clientsideValidator = GeneralUtility::makeInstance(ClientsideValidator::class);
         $result = $clientsideValidator
             ->setValidationSettingsString($validation)
@@ -133,13 +135,14 @@ class UserController extends AbstractFrontendController
      */
     protected function getUser(User $user = null)
     {
-        if ($user === null) {
+        if (!$user instanceof \In2code\Femanager\Domain\Model\User) {
             if (is_numeric($this->settings['show']['user'])) {
                 $user = $this->userRepository->findByUid($this->settings['show']['user']);
             } elseif ($this->settings['show']['user'] === '[this]') {
                 $user = $this->user;
             }
         }
+
         return $user;
     }
 }

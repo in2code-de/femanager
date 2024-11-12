@@ -16,13 +16,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterface
 {
     /**
-     * Inject a complete new content object
-     *
-     * @var ContentObjectRenderer
-     */
-    protected $contentObject;
-
-    /**
      * @var TypoScriptService
      */
     protected $typoScriptService;
@@ -42,12 +35,10 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected $dataArray = [];
 
-    public function injectContentObjectRenderer(ContentObjectRenderer $contentObject)
-    {
-        $this->contentObject = $contentObject;
-    }
-
-    public function injectTypoScriptService(TypoScriptService $typoScriptService)
+    public function __construct(/**
+     * Inject a complete new content object
+     */
+    protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject, \TYPO3\CMS\Core\TypoScript\TypoScriptService $typoScriptService)
     {
         $this->typoScriptService = $typoScriptService;
     }
@@ -56,11 +47,12 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      * Overwrite configuration with
      *      plugin.tx_femanager.settings.new.storeInDatabase
      */
-    public function initializeFinisher()
+    public function initializeFinisher(): void
     {
         if ($this->typoScriptService == null) {
             $this->typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
         }
+
         $configuration = $this->typoScriptService->convertPlainArrayToTypoScriptArray($this->settings);
         if (!empty($configuration['new.']['storeInDatabase.'])) {
             $this->configuration = $configuration['new.']['storeInDatabase.'];
@@ -70,11 +62,11 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     /**
      * Store to any table
      */
-    public function storeFinisher()
+    public function storeFinisher(): void
     {
         if (!empty($this->configuration)) {
             $this->addArrayToDataArray($this->user->_getProperties());
-            foreach ((array)array_keys($this->configuration) as $table) {
+            foreach (array_keys($this->configuration) as $table) {
                 $this->storeForTable($table);
             }
         }
@@ -82,10 +74,8 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
 
     /**
      * Store for a given table
-     *
-     * @param string $table
      */
-    protected function storeForTable($table)
+    protected function storeForTable(string $table)
     {
         if ($this->isTableEnabled($table)) {
             $this->contentObject->start($this->getDataArray());
@@ -119,9 +109,8 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      * Check if this table is enabled in TypoScript
      *
      * @param string $table
-     * @return bool
      */
-    protected function isTableEnabled($table)
+    protected function isTableEnabled($table): bool
     {
         return $this->contentObject->cObjGetSingle(
             (string)$this->configuration[$table]['_enable'],
@@ -137,7 +126,11 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected function isSkippedKey($key)
     {
-        return StringUtility::startsWith($key, '_') || StringUtility::endsWith($key, '.');
+        if (StringUtility::startsWith($key, '_')) {
+            return true;
+        }
+
+        return (bool) StringUtility::endsWith($key, '.');
     }
 
     /**
@@ -160,9 +153,8 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
 
     /**
      * @param array $dataArray
-     * @return SaveToAnyTableFinisher
      */
-    public function setDataArray($dataArray)
+    public function setDataArray($dataArray): static
     {
         $this->dataArray = $dataArray;
         return $this;

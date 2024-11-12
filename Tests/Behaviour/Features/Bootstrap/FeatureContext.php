@@ -19,11 +19,12 @@ class FeatureContext extends MinkContext
      *
      * @Given /^I wait "([^"]*)" seconds$/
      */
-    public function iWaitSeconds(string|int $seconds)
+    public function iWaitSeconds(string|int $seconds): void
     {
         if ($seconds === 'a few') {
             $seconds = 10;
         }
+
         sleep($seconds);
     }
 
@@ -34,7 +35,7 @@ class FeatureContext extends MinkContext
      *
      * @param string $html
      */
-    public function theSourcecodeShouldContain($html)
+    public function theSourcecodeShouldContain($html): void
     {
         $html = str_replace('\n', PHP_EOL, $html);
         $this->assertSession()->responseContains($this->fixStepArgument($html));
@@ -47,7 +48,7 @@ class FeatureContext extends MinkContext
      *
      * @param string $html
      */
-    public function theSourcecodeShouldNotContain($html)
+    public function theSourcecodeShouldNotContain($html): void
     {
         $html = str_replace('\n', PHP_EOL, $html);
         $this->assertSession()->responseNotContains($this->fixStepArgument($html));
@@ -72,6 +73,7 @@ class FeatureContext extends MinkContext
             if ($end === false) {
                 break;
             }
+
             $name = substr($argument, $start + 1, $end - $start - 1);
             if ($name === 'random') {
                 $this->variables[$name] = $this->createRandomString(12);
@@ -85,6 +87,7 @@ class FeatureContext extends MinkContext
                     $this->variables[$name] = $random[count($random) - $num];
                 }
             }
+
             if (isset($this->variables[$name])) {
                 $argument = substr_replace($argument, (string)$this->variables[$name], $start, $end - $start + 1);
                 $start += strlen((string)$this->variables[$name]);
@@ -101,19 +104,20 @@ class FeatureContext extends MinkContext
      *
      * @param int $length
      * @param bool $lowerAndUpperCase
-     * @return string
      */
-    protected function createRandomString($length = 32, $lowerAndUpperCase = false)
+    protected function createRandomString($length = 32, $lowerAndUpperCase = false): string
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
         if ($lowerAndUpperCase) {
             $characters .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         }
+
         $fileName = '';
         for ($i = 0; $i < $length; $i++) {
             $key = random_int(0, strlen($characters) - 1);
             $fileName .= $characters[$key];
         }
+
         return $fileName;
     }
 }

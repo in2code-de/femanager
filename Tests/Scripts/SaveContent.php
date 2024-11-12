@@ -10,10 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class SaveContent
 {
-    /**
-     * @return string
-     */
-    public function save()
+    public function save(): string
     {
         $data = [
             'header' => 'New content from sendPost',
@@ -21,7 +18,7 @@ class SaveContent
             'tstamp' => time(),
             'crdate' => time(),
             'CType' => 'text',
-            'bodytext' => print_r(GeneralUtility::_POST(), true) . '<p>[deleteme]</p>',
+            'bodytext' => print_r($GLOBALS['TYPO3_REQUEST']->getParsedBody(), true) . '<p>[deleteme]</p>',
         ];
         /** @var $databaseconnection ConnectionPool */
         $databaseconnection = GeneralUtility::makeInstance(ConnectionPool::class);

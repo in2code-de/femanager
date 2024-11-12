@@ -18,28 +18,16 @@ class FileService
     /**
      * @var string
      */
-    protected $fileName = '';
-
-    /**
-     * @var array
-     */
-    protected $fileArray = [];
-
-    /**
-     * @var string
-     */
     protected $fallbackExtensions = 'jpg,jpeg,png,gif,bmp,tif,tiff';
 
     /**
      * FileService constructor.
      *
-     * @param string $filename Filename like (upload.png)
+     * @param string $fileName Filename like (upload.png)
      * @param array $fileArray From PHP with tmp_name, etc...
      */
-    public function __construct(string $filename, array $fileArray)
+    public function __construct(protected string $fileName, protected array $fileArray)
     {
-        $this->fileName = $filename;
-        $this->fileArray = $fileArray;
     }
 
     /**
@@ -58,11 +46,8 @@ class FileService
     protected function validFileExtension(): bool
     {
         $extensionList = ConfigurationUtility::getConfiguration('misc.uploadFileExtension');
-        if (!empty($extensionList)) {
-            $extensionList = str_replace(' ', '', (string)$extensionList);
-        } else {
-            $extensionList = $this->fallbackExtensions;
-        }
+        $extensionList = empty($extensionList) ? $this->fallbackExtensions : str_replace(' ', '', (string)$extensionList);
+
         $fileInfo = pathinfo($this->fileName);
 
         return !empty($fileInfo['extension']) &&
@@ -84,6 +69,7 @@ class FileService
             $file = $resourceFactory->getFileObjectFromCombinedIdentifier($this->getCombinedIdentifier($file));
             $fileIdentifier = (int)$file->getProperty('uid');
         }
+
         return $fileIdentifier;
     }
 
@@ -110,9 +96,11 @@ class FileService
         if (str_starts_with($pathAndName, $substituteString)) {
             $pathAndName = str_replace($substituteString, '', $pathAndName);
         }
+
         if (!str_starts_with($pathAndName, '/')) {
-            $pathAndName = '/' . $pathAndName;
+            return '/' . $pathAndName;
         }
+
         return $pathAndName;
     }
 }

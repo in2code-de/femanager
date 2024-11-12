@@ -11,14 +11,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DeleteFeusers
 {
-    public function test()
+    public function test(): void
     {
         echo 'test';
     }
-    /**
-     * @return string
-     */
-    public function delete()
+
+    public function delete(): string
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
         $queryBuilder
@@ -36,9 +34,10 @@ class DeleteFeusers
             $queryBuilder->executeStatement();
 
             return 'All content elements deleted that have no in2code.de email address';
-        } catch (DBALException $e) {
-            $errorMsg = $e->getMessage();
+        } catch (DBALException $dbalException) {
+            $errorMsg = $dbalException->getMessage();
         }
+
         return 'Could not delete fe_users. ' . $errorMsg;
     }
 }

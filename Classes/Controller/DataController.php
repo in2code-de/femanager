@@ -10,11 +10,8 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class DataController extends ActionController
 {
-    protected $countryZonesDataProvider;
-
-    public function __construct(CountryZonesDataProvider $countryZonesDataProvider)
+    public function __construct(protected \In2code\Femanager\DataProvider\CountryZonesDataProvider $countryZonesDataProvider)
     {
-        $this->countryZonesDataProvider = $countryZonesDataProvider;
     }
 
     public function getStatesForCountryAction(string $country): ResponseInterface

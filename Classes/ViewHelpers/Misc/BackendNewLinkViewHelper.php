@@ -14,12 +14,10 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  */
 class BackendNewLinkViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     /**
      * initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('tableName', 'string', 'Records table name (like "fe_users")', true);
         $this->registerArgument('addReturnUrl', 'bool', 'Add current URI as returnUrl', false, true);
@@ -31,19 +29,15 @@ class BackendNewLinkViewHelper extends AbstractViewHelper
      * @param array $arguments
      * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
-     * @return string
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ): string {
+    public function render(): string
+    {
         return BackendUtility::getBackendNewUri(
-            $arguments['tableName'],
+            $this->arguments['tableName'],
             BackendUtility::getPageIdentifier(),
-            $arguments['addReturnUrl']
+            $this->arguments['addReturnUrl']
         );
     }
 }

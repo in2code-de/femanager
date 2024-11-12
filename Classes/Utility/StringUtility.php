@@ -19,7 +19,7 @@ class StringUtility extends AbstractUtility
      * @param string $replace
      * @return string
      */
-    public static function cleanString($filename, $replace = '_')
+    public static function cleanString($filename, $replace = '_'): ?string
     {
         return preg_replace('/[^a-zA-Z0-9-\.]/', $replace, trim($filename));
     }
@@ -30,12 +30,11 @@ class StringUtility extends AbstractUtility
      *      test(1,2,3) => 1,2,3
      *
      * @param string $value
-     * @return string
      */
-    public static function getValuesInBrackets($value)
+    public static function getValuesInBrackets($value): string
     {
         preg_match_all('/\(.*?\)/i', $value, $result);
-        return str_replace(['(', ')'], '', (string)$result[0][0]);
+        return str_replace(['(', ')'], '', $result[0][0]);
     }
 
     /**
@@ -43,10 +42,9 @@ class StringUtility extends AbstractUtility
      *
      *      test(1,2,3) => test
      *
-     * @param string $value
      * @return string
      */
-    public static function getValuesBeforeBrackets($value)
+    public static function getValuesBeforeBrackets(string $value)
     {
         $valueParts = GeneralUtility::trimExplode('(', $value, true);
         return $valueParts[0];
@@ -57,9 +55,8 @@ class StringUtility extends AbstractUtility
      *
      * @param string $haystack
      * @param string $needle
-     * @return bool
      */
-    public static function startsWith($haystack, $needle)
+    public static function startsWith($haystack, $needle): bool
     {
         return stristr($haystack, $needle) && strrpos($haystack, $needle, -strlen($haystack)) !== false;
     }
@@ -80,7 +77,7 @@ class StringUtility extends AbstractUtility
      * @param string $name Name for every email name combination
      * @return array $mailArray
      */
-    public static function makeEmailArray($emailString, $name = 'femanager')
+    public static function makeEmailArray(string $emailString, $name = 'femanager'): array
     {
         $emails = GeneralUtility::trimExplode(PHP_EOL, $emailString, true);
         $mailArray = [];
@@ -89,6 +86,7 @@ class StringUtility extends AbstractUtility
                 $mailArray[$email] = $name;
             }
         }
+
         return $mailArray;
     }
 
@@ -98,31 +96,33 @@ class StringUtility extends AbstractUtility
      * @param int $length
      * @param bool $addUpperCase
      * @param bool $addSpecialCharacters
-     * @return string
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    public static function getRandomString($length = 32, $addUpperCase = true, $addSpecialCharacters = true)
+    public static function getRandomString($length = 32, $addUpperCase = true, $addSpecialCharacters = true): string
     {
         $characters = self::getNumbersString() . self::getCharactersString();
         if ($addUpperCase) {
             $characters .= self::getUpperCharactersString();
         }
+
         if ($addSpecialCharacters) {
             $characters .= '#+*&%$§()[]{}!.:-_,;';
         }
+
         $string = '';
         for ($i = 0; $i < $length; $i++) {
             $key = random_int(0, strlen($characters) - 1);
             $string .= $characters[$key];
         }
+
         return $string;
     }
 
     /**
      * @return string "0123456789"
      */
-    public static function getNumbersString()
+    public static function getNumbersString(): string
     {
         return implode('', range(0, 9));
     }
@@ -130,7 +130,7 @@ class StringUtility extends AbstractUtility
     /**
      * @return string "abcdefghijklmnopqrstuvwxyz"
      */
-    public static function getCharactersString()
+    public static function getCharactersString(): string
     {
         return implode('', range('a', 'z'));
     }
@@ -138,7 +138,7 @@ class StringUtility extends AbstractUtility
     /**
      * @return string "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
      */
-    public static function getUpperCharactersString()
+    public static function getUpperCharactersString(): string
     {
         return implode('', range('A', 'Z'));
     }
@@ -149,7 +149,7 @@ class StringUtility extends AbstractUtility
      * @param string $string
      * @return string
      */
-    public static function removeDoubleSlashesFromUri($string)
+    public static function removeDoubleSlashesFromUri($string): ?string
     {
         return preg_replace('~([^:]|^)(/{2,})~', '$1/', $string);
     }

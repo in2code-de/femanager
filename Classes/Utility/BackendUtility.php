@@ -19,7 +19,7 @@ class BackendUtility
 {
     public static function getPageIdentifier(): int
     {
-        return (int)GeneralUtility::_GET('id');
+        return (int)($GLOBALS['TYPO3_REQUEST']->getQueryParams()['id'] ?? null);
     }
 
     /**
@@ -43,6 +43,7 @@ class BackendUtility
         if ($addReturnUrl) {
             $uriParameters['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
         }
+
         return (string)GeneralUtility::makeInstance(UriBuilder::class)
             ->buildUriFromRoute('record_edit', $uriParameters);
     }
@@ -70,6 +71,7 @@ class BackendUtility
             $uriParameters['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
             // @codeCoverageIgnoreEnd
         }
+
         return (string)GeneralUtility::makeInstance(UriBuilder::class)
             ->buildUriFromRoute('record_edit', $uriParameters);
     }
@@ -81,13 +83,12 @@ class BackendUtility
      */
     public static function getPluginOrModuleString(): string
     {
-        $string = 'plugin';
         if (($GLOBALS['TYPO3_REQUEST'] ?? null) instanceof ServerRequestInterface
-            && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()
-        ) {
-            $string = 'module';
+            && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend()) {
+            return 'module';
         }
-        return $string;
+
+        return 'plugin';
     }
 
     /**
@@ -100,12 +101,14 @@ class BackendUtility
             'M',
             'moduleToken',
         ];
-        foreach ((array)GeneralUtility::_GET() as $key => $value) {
+        foreach ((array)$GLOBALS['TYPO3_REQUEST']->getQueryParams() as $key => $value) {
             if (in_array($key, $ignoreKeys)) {
                 continue;
             }
+
             $parameters[$key] = $value;
         }
+
         return $parameters;
     }
 
@@ -118,12 +121,12 @@ class BackendUtility
     public static function loadTS($pageUid = null)
     {
         $pageUid = ($pageUid && MathUtility::canBeInterpretedAsInteger($pageUid)) ?
-            $pageUid : GeneralUtility::_GP('id');
+            $pageUid : $GLOBALS['TYPO3_REQUEST']->getParsedBody()['id'] ?? $GLOBALS['TYPO3_REQUEST']->getQueryParams()['id'] ?? null;
         $TSObj = GeneralUtility::makeInstance(TemplateService::class);
         $TSObj->tt_track = false;
         $TSObj->runThroughTemplates(GeneralUtility::makeInstance(RootlineUtility::class, $pageUid, '')->get());
         $TSObj->generateConfig();
 
-        return $TSObj->setup;
+        return $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getSetupArray();
     }
 }

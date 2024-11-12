@@ -13,9 +13,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class BackendUserUtilityTest extends UnitTestCase
 {
-    /**
-     * @var array
-     */
     protected array $testFilesToDelete = [];
 
     public function setUp(): void
@@ -29,7 +26,7 @@ class BackendUserUtilityTest extends UnitTestCase
      * @covers ::isAdminAuthentication
      * @covers \In2code\Femanager\Utility\AbstractUtility::getBackendUserAuthentication
      */
-    public function testIsAdminAuthentication()
+    public function testIsAdminAuthentication(): void
     {
         $this->resetSingletonInstances = true;
         $GLOBALS['BE_USER']->user['admin'] = 1;
@@ -41,7 +38,7 @@ class BackendUserUtilityTest extends UnitTestCase
      * @covers ::getBackendUserAuthentication
      * @covers \In2code\Femanager\Utility\AbstractUtility::getBackendUserAuthentication
      */
-    public function testGetBackendUserAuthentication()
+    public function testGetBackendUserAuthentication(): void
     {
         $this->resetSingletonInstances = true;
         $GLOBALS['BE_USER']->user['admin'] = 1;

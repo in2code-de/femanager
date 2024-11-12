@@ -11,15 +11,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EmailDomainConfirmation extends AbstractConfirmation
 {
-    /**
-     * @return bool
-     */
     public function isAutoConfirmed(): bool
     {
-        if (!$this->isException() && $this->isGivenDomainsPartOfEmail()) {
-            return true;
-        }
-        return false;
+        return !$this->isException() && $this->isGivenDomainsPartOfEmail();
     }
 
     protected function isGivenDomainsPartOfEmail(): bool
@@ -30,6 +24,7 @@ class EmailDomainConfirmation extends AbstractConfirmation
                 return true;
             }
         }
+
         return false;
     }
 

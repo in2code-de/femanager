@@ -11,9 +11,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class ConfigurationUtilityTest extends UnitTestCase
 {
-    /**
-     * @var array
-     */
     protected array $testFilesToDelete = [];
 
     /**
@@ -21,7 +18,7 @@ class ConfigurationUtilityTest extends UnitTestCase
      * @covers ::isDisableModuleActive
      * @covers \In2code\Femanager\Utility\AbstractUtility::getExtensionConfiguration
      */
-    public function testIsDisableModuleActive()
+    public function testIsDisableModuleActive(): void
     {
         $configuration = [
             'disableModule' => '1',
@@ -36,7 +33,7 @@ class ConfigurationUtilityTest extends UnitTestCase
      * @covers ::isConfirmationModuleActive
      * @covers \In2code\Femanager\Utility\AbstractUtility::getExtensionConfiguration
      */
-    public function testIsConfirmationModuleActive()
+    public function testIsConfirmationModuleActive(): void
     {
         $configuration = [
             'enableConfirmationModule' => '1',
@@ -51,7 +48,7 @@ class ConfigurationUtilityTest extends UnitTestCase
      * @covers ::isDisableLogActive
      * @covers \In2code\Femanager\Utility\AbstractUtility::getExtensionConfiguration
      */
-    public function testIsDisableLogActive()
+    public function testIsDisableLogActive(): void
     {
         $configuration = [
             'disableLog' => '1',

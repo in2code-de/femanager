@@ -32,6 +32,7 @@ class PluginService
                 }
             }
         }
+
         return '';
     }
 

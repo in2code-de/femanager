@@ -30,10 +30,7 @@ class ResetFeusers
         'tx_femanager_log' => '1',
     ];
 
-    /**
-     * @return string
-     */
-    public function reset()
+    public function reset(): string
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
         $queryBuilder2 = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
@@ -52,8 +49,8 @@ class ResetFeusers
             $queryBuilder2->executeStatement();
 
             return 'FE Users reset successfully';
-        } catch (DBALException $e) {
-            $errorMsg = $e->getMessage();
+        } catch (DBALException $dbalException) {
+            $errorMsg = $dbalException->getMessage();
         }
 
         return 'Could not delete fe_users. ' . $errorMsg;

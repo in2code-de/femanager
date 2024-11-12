@@ -26,7 +26,7 @@ class PageTreeService
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function getTreeList($pageUid, $depth, $begin = 0, $permClause = '')
+    public function getTreeList($pageUid, $depth, $begin = 0, $permClause = ''): int|string|float
     {
         $depth = (int)$depth;
         $begin = (int)$begin;
@@ -34,11 +34,9 @@ class PageTreeService
         if ($pageUid < 0) {
             $pageUid = abs($pageUid);
         }
-        if ($begin === 0) {
-            $theList = $pageUid;
-        } else {
-            $theList = '';
-        }
+
+        $theList = $begin === 0 ? $pageUid : '';
+
         if ($pageUid && $depth > 0) {
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
             $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
@@ -55,20 +53,24 @@ class PageTreeService
             if ($permClause !== '') {
                 $queryBuilder->andWhere(QueryHelper::stripLogicalOperatorPrefix($permClause));
             }
+
             $statement = $queryBuilder->executeQuery();
             while ($row = $statement->fetchAssociative()) {
                 if ($begin <= 0) {
                     $theList .= ',' . $row['uid'];
                 }
+
                 if ($depth > 1) {
                     $theSubList = $this->getTreeList($row['uid'], $depth - 1, $begin - 1, $permClause);
                     if (!empty($theList) && !empty($theSubList) && ($theSubList[0] !== ',')) {
                         $theList .= ',';
                     }
+
                     $theList .= $theSubList;
                 }
             }
         }
+
         return $theList;
     }
 }

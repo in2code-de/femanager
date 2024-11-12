@@ -13,9 +13,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class FrontendUtilityTest extends UnitTestCase
 {
-    /**
-     * @var array
-     */
     protected array $testFilesToDelete = [];
 
     public function setUp(): void
@@ -27,7 +24,7 @@ class FrontendUtilityTest extends UnitTestCase
     /**
      * @covers ::forceValue
      */
-    public function testForceValue()
+    public function testForceValue(): void
     {
         $user = new User();
 
@@ -50,7 +47,7 @@ class FrontendUtilityTest extends UnitTestCase
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getControllerName
      */
-    public function testGetControllerName()
+    public function testGetControllerName(): void
     {
         $_POST['tx_femanager_pi1']['controller'] = 'foo';
         self::assertSame('foo', FrontendUtility::getControllerName());
@@ -60,7 +57,7 @@ class FrontendUtilityTest extends UnitTestCase
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getActionName
      */
-    public function testGetActionName()
+    public function testGetActionName(): void
     {
         $_POST['tx_femanager_pi1']['action'] = 'bar';
         self::assertSame('bar', FrontendUtility::getActionName());

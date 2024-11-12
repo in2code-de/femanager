@@ -56,7 +56,7 @@ class PluginUpdater implements UpgradeWizardInterface
     ];
 
     /** @var FlexFormService */
-    protected $flexFormService;
+    protected object $flexFormService;
 
     public function __construct()
     {
@@ -72,8 +72,7 @@ class PluginUpdater implements UpgradeWizardInterface
     {
         $description = 'The old plugin using switchableControllerActions has been split into separate plugins. ';
         $description .= 'This update wizard migrates all existing plugin settings and changes the plugin';
-        $description .= 'to use the new plugins available. Count of plugins: ' . count($this->getMigrationRecords());
-        return $description;
+        return $description . ('to use the new plugins available. Count of plugins: ' . count($this->getMigrationRecords()));
     }
 
     public function getPrerequisites(): array
@@ -95,7 +94,7 @@ class PluginUpdater implements UpgradeWizardInterface
 
     public function checkIfWizardIsRequired(): bool
     {
-        return count($this->getMigrationRecords()) > 0;
+        return $this->getMigrationRecords() !== [];
     }
 
     /**
@@ -112,6 +111,7 @@ class PluginUpdater implements UpgradeWizardInterface
             if ($targetListType === '') {
                 continue;
             }
+
             $allowedSettings = $this->getAllowedSettingsFromFlexForm($targetListType);
 
             // Remove flexform data which do not exist in flexform of new plugin
@@ -243,7 +243,6 @@ class PluginUpdater implements UpgradeWizardInterface
         ];
         $spaceInd = 4;
         $output = GeneralUtility::array2xml($input, '', 0, 'T3FlexForms', $spaceInd, $options);
-        $output = '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>' . LF . $output;
-        return $output;
+        return '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>' . LF . $output;
     }
 }

@@ -10,10 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DeleteTtcontent
 {
-    /**
-     * @return string
-     */
-    public function delete()
+    public function delete(): string
     {
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
         $query = $connectionPool->getQueryBuilderForTable('tt_content');

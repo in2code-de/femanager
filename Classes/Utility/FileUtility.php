@@ -18,7 +18,7 @@ class FileUtility extends AbstractUtility
      * @param string $path Absolute path
      * @throws Exception
      */
-    public static function createFolderIfNotExists(string $path)
+    public static function createFolderIfNotExists(string $path): void
     {
         if (!is_dir($path) && !GeneralUtility::mkdir($path)) {
             throw new UnexpectedValueException(
@@ -34,8 +34,9 @@ class FileUtility extends AbstractUtility
     public static function getRelativeFolderFromAbsolutePath(string $path): string
     {
         if (PathUtility::isAbsolutePath($path)) {
-            $path = PathUtility::getRelativePathTo($path);
+            return PathUtility::getRelativePathTo($path);
         }
+
         return $path;
     }
 }

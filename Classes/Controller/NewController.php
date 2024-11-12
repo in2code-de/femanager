@@ -73,8 +73,9 @@ class NewController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            throw new PropagateResponseException($this->redirect('createStatus'));
+            throw new PropagateResponseException($this->redirect('createStatus'), 2354365223);
         }
+
         $user = UserUtility::overrideUserGroup($user, $this->settings);
         $configuration = ConfigurationUtility::getValue('new./forceValues./beforeAnyConfirmation.', $this->config);
         $user = FrontendUtility::forceValues($user, $configuration);
@@ -86,13 +87,9 @@ class NewController extends AbstractFrontendController
         $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
         $this->ratelimiterService->consumeSlot();
 
-        if ($this->isAllConfirmed()) {
-            $response = $this->createAllConfirmed($user);
-        } else {
-            $response = $this->createRequest($user);
-        }
+        $response = $this->isAllConfirmed() ? $this->createAllConfirmed($user) : $this->createRequest($user);
 
-        if ($response !== null) {
+        if ($response instanceof \Psr\Http\Message\ResponseInterface) {
             return $response;
         }
 
@@ -117,7 +114,7 @@ class NewController extends AbstractFrontendController
      *
      * @SuppressWarnings(PHPMD.ExitExpression)
      */
-    public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation')
+    public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation'): \Psr\Http\Message\ResponseInterface
     {
         $backend = false;
 
@@ -131,7 +128,7 @@ class NewController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            throw new PropagateResponseException($this->redirect('new'));
+            throw new PropagateResponseException($this->redirect('new'), 9459349538);
         }
 
         $request = ServerRequestFactory::fromGlobals();
@@ -142,22 +139,21 @@ class NewController extends AbstractFrontendController
                 $backend = true;
             }
         }
+
         // todo refactor this into a better workflow
-        if ($status == 'userConfirmationRefused') {
-            if (ConfigurationUtility::getValue(
-                'new./email./createUserConfirmation./confirmUserConfirmationRefused',
-                $this->config
-            ) == '1') {
-                $this->view->assignMultiple(
-                    [
-                        'user' => $user,
-                        'status' => 'confirmDeletion',
-                        'hash' => $hash,
-                    ]
-                );
-                $this->assignForAll();
-                return $this->htmlResponse();
-            }
+        if ($status === 'userConfirmationRefused' && ConfigurationUtility::getValue(
+            'new./email./createUserConfirmation./confirmUserConfirmationRefused',
+            $this->config
+        ) == '1') {
+            $this->view->assignMultiple(
+                [
+                    'user' => $user,
+                    'status' => 'confirmDeletion',
+                    'hash' => $hash,
+                ]
+            );
+            $this->assignForAll();
+            return $this->htmlResponse();
         }
 
         $furtherFunctions = match ($status) {
@@ -205,7 +201,7 @@ class NewController extends AbstractFrontendController
                     '',
                     ContextualFeedbackSeverity::ERROR
                 );
-                throw new PropagateResponseException($this->redirect('new'));
+                throw new PropagateResponseException($this->redirect('new'), 7693909042);
             }
 
             $user = FrontendUtility::forceValues(
@@ -273,7 +269,7 @@ class NewController extends AbstractFrontendController
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    protected function statusAdminConfirmation(User $user, $hash, $status, bool $backend = false): bool
+    protected function statusAdminConfirmation(User $user, $hash, string $status, bool $backend = false): bool
     {
         if (HashUtility::validHash($hash, $user)) {
             if ($user->getTxFemanagerConfirmedbyadmin()) {
@@ -282,7 +278,7 @@ class NewController extends AbstractFrontendController
                     '',
                     ContextualFeedbackSeverity::ERROR
                 );
-                throw new PropagateResponseException($this->redirect('new'));
+                throw new PropagateResponseException($this->redirect('new'), 6582520703);
             }
 
             $user = FrontendUtility::forceValues(
@@ -334,6 +330,7 @@ class NewController extends AbstractFrontendController
                     $this->request
                 );
             }
+
             $this->userRepository->remove($user);
         } else {
             $this->addFlashMessage(
@@ -372,17 +369,19 @@ class NewController extends AbstractFrontendController
             $this->createUserConfirmationRequest($user);
             return $this->redirectByAction('new', 'requestRedirect');
         }
+
         if (!empty($this->settings['new']['confirmByAdmin'])) {
             $this->createAdminConfirmationRequest($user);
             return $this->redirectByAction('new', 'requestRedirect');
         }
+
         return null;
     }
 
     /**
      * Send email to user for confirmation
      */
-    protected function createUserConfirmationRequest(User $user)
+    protected function createUserConfirmationRequest(User $user): \Psr\Http\Message\ResponseInterface
     {
         $this->sendCreateUserConfirmationMail($user);
         $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
@@ -453,7 +452,7 @@ class NewController extends AbstractFrontendController
     public function resendConfirmationMailAction(): ResponseInterface
     {
         // @todo find a better way to fetch the data
-        $result = GeneralUtility::_GP('tx_femanager_registration');
+        $result = $this->request->getParsedBody()['tx_femanager_registration'] ?? $this->request->getQueryParams()['tx_femanager_registration'] ?? null;
         if (is_array($result)) {
             $mail = $result['user']['email'] ?? '';
             if ($mail && GeneralUtility::validEmail($mail)) {
@@ -469,6 +468,7 @@ class NewController extends AbstractFrontendController
                 }
             }
         }
+
         $this->addFlashMessage(
             LocalizationUtility::translate('resendConfirmationMailFail'),
             LocalizationUtility::translate('validationError'),

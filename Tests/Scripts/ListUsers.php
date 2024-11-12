@@ -18,14 +18,12 @@ class ListUsers
      *  in web/typo3conf/ext/femanager/Tests/Behaviour/Features/Edit/Default/SmallNoConfirm.feature
      *  Scenario: Login as frontend user and test profile update
      *  Given I am on "/index.php?id=33" ==> list random values
-     *
-     * @return string
      */
-    public function listUsers()
+    public function listUsers(): string
     {
         $content = '<h2>List FE_Users</h2>';
 
-        $username = GeneralUtility::_GET('username');
+        $username = $GLOBALS['TYPO3_REQUEST']->getQueryParams()['username'] ?? null;
         if (!$username) {
             $username = 'akellner';
         }
@@ -49,8 +47,8 @@ class ListUsers
                     );
                 }
             }
-        } catch (DBALException $e) {
-            $content = 'error: ' . $e->getMessage();
+        } catch (DBALException $dbalException) {
+            $content = 'error: ' . $dbalException->getMessage();
         }
 
         return $content;
@@ -61,10 +59,8 @@ class ListUsers
      *  in web/typo3conf/ext/femanager/Tests/Behaviour/Features/Edit/Default/SmallNoConfirm.feature
      *  Scenario: Login as frontend user and test profile update
      *  Given I am on "/index.php?id=33" ==> list random values
-     *
-     * @return string
      */
-    public function listLastestUser()
+    public function listLastestUser(): string
     {
         $content = '<h2>List latest FE_Users</h2>';
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
@@ -83,14 +79,14 @@ class ListUsers
                     true
                 );
             }
-        } catch (DBALException $e) {
-            $content = 'error: ' . $e->getMessage();
+        } catch (DBALException $dbalException) {
+            $content = 'error: ' . $dbalException->getMessage();
         }
 
         return $content;
     }
 
-    public function listLatestUserIncludingHidden()
+    public function listLatestUserIncludingHidden(): string
     {
         $content = '<h2>List latest hidden FE_User</h2>';
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
@@ -114,8 +110,8 @@ class ListUsers
                     true
                 );
             }
-        } catch (DBALException $e) {
-            $content = 'error: ' . $e->getMessage();
+        } catch (DBALException $dbalException) {
+            $content = 'error: ' . $dbalException->getMessage();
         }
 
         return $content;

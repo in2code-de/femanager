@@ -28,7 +28,7 @@ class LogUtility
      * @param array $additionalProperties for individual logging
      * @codeCoverageIgnore
      */
-    public function log($state, User $user, array $additionalProperties = [])
+    public function log($state, User $user, array $additionalProperties = []): void
     {
         if (!ConfigurationUtility::isDisableLogActive()) {
             $log = GeneralUtility::makeInstance(Log::class);

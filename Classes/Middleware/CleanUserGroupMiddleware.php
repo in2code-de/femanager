@@ -21,6 +21,7 @@ class CleanUserGroupMiddleware implements MiddlewareInterface
         ) {
             unset($requestBody['tx_femanager_registration']['user']['usergroup'][0]);
         }
+
         $request = $request->withParsedBody($requestBody);
         return $handler->handle($request);
     }

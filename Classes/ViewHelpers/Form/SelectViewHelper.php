@@ -16,6 +16,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
  */
 class SelectViewHelper extends AbstractFormFieldViewHelper
 {
+    public $request;
+
     /**
      * @var string
      */
@@ -26,7 +28,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
      */
     protected $selectedValue;
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->tag->addAttribute('data-selected-value', $this->getSelectedValue());
@@ -123,11 +125,13 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
         if ($this->arguments['required']) {
             $this->tag->addAttribute('required', 'required');
         }
+
         $name = $this->getName();
         if ($this->arguments['multiple']) {
             $this->tag->addAttribute('multiple', 'multiple');
             $name .= '[]';
         }
+
         $this->tag->addAttribute('name', $name);
         $options = $this->getOptions();
 
@@ -150,6 +154,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
             for ($i = 1; $i < $optionsCount; $i++) {
                 $this->registerFieldNameForFormTokenGeneration($name);
             }
+
             // save the parent field name so that any child f:form.select.option
             // tag will know to call registerFieldNameForFormTokenGeneration
             // this is the reason why "self::class" is used instead of static::class (no LSB)
@@ -171,12 +176,12 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
         } else {
             $tagContent .= $childContent;
         }
+
         $tagContent = $prependContent . $tagContent;
 
         $this->tag->forceClosingTag(true);
         $this->tag->setContent($tagContent);
-        $content .= $this->tag->render();
-        return $content;
+        return $content . $this->tag->render();
     }
 
     /**
@@ -190,6 +195,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
             $label = $this->arguments['prependOptionLabel'];
             $output .= $this->renderOptionTag((string)$value, (string)$label, false) . LF;
         }
+
         return $output;
     }
 
@@ -203,6 +209,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
             $isSelected = $this->isSelected($value);
             $output .= $this->renderOptionTag((string)$value, (string)$label, $isSelected) . LF;
         }
+
         return $output;
     }
 
@@ -219,6 +226,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
         if (!is_array($this->arguments['options']) && !$this->arguments['options'] instanceof \Traversable) {
             return [];
         }
+
         $options = [];
         $optionsArgument = $this->arguments['options'];
         foreach ($optionsArgument as $key => $value) {
@@ -242,6 +250,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
                     throw new Exception('No identifying value for object of class "' .
                         $value::class . '" found.', 1247826696);
                 }
+
                 if ($this->hasArgument('optionLabelField')) {
                     $value = ObjectAccess::getPropertyPath($value, $this->arguments['optionLabelField']);
                     if (is_object($value)) {
@@ -259,11 +268,14 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
                     $value = $this->persistenceManager->getIdentifierByObject($value);
                 }
             }
+
             $options[$key] = $value;
         }
+
         if ($this->arguments['sortByOptionLabel']) {
             asort($options, SORT_LOCALE_STRING);
         }
+
         return $options;
     }
 
@@ -279,14 +291,17 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
         if ($value === $selectedValue || (string)$value === $selectedValue) {
             return true;
         }
+
         if ($this->hasArgument('multiple')) {
             if ($selectedValue === null && $this->arguments['selectAllByDefault'] === true) {
                 return true;
             }
+
             if (is_array($selectedValue) && in_array($value, $selectedValue)) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -306,30 +321,29 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
                 return $selectedValues;
             }
         }
-        if ($selectedValues === null) {
-            // set preselection from TypoScript
-            if (! $this->renderingContext instanceof RenderingContext) {
-                throw new FluidViewHelperException(
-                    'Something went wrong; RenderingContext should be available in ViewHelper',
-                    1638341673
-                );
-            }
-            $controllerName = strtolower((string)$this->renderingContext->getRequest()->getControllerName());
-            $contentObject = $this->configurationManager->getContentObject();
-            $typoScript = $this->configurationManager->getConfiguration(
-                ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+
+        // set preselection from TypoScript
+        if (! $this->renderingContext instanceof RenderingContext) {
+            throw new FluidViewHelperException(
+                'Something went wrong; RenderingContext should be available in ViewHelper',
+                1638341673
             );
-
-            $prefillTypoScript =
-                $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? [];
-
-            if (!empty($prefillTypoScript[$this->getFieldName()])) {
-                $selectedValues = $contentObject->cObjGetSingle(
-                    $prefillTypoScript[$this->getFieldName()],
-                    $prefillTypoScript[$this->getFieldName() . '.']
-                );
-            }
         }
+
+        $controllerName = strtolower((string)$this->renderingContext->getRequest()->getControllerName());
+        $contentObject = $this->request->getAttribute('currentContentObject');
+        $typoScript = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+        );
+        $prefillTypoScript =
+            $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? [];
+        if (!empty($prefillTypoScript[$this->getFieldName()])) {
+            return $contentObject->cObjGetSingle(
+                $prefillTypoScript[$this->getFieldName()],
+                $prefillTypoScript[$this->getFieldName() . '.']
+            );
+        }
+
         return $selectedValues;
     }
 
@@ -344,12 +358,15 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
             if ($this->hasArgument('optionValueField')) {
                 return ObjectAccess::getPropertyPath($valueElement, $this->arguments['optionValueField']);
             }
+
             // @todo use $this->persistenceManager->isNewObject() once it is implemented
             if ($this->persistenceManager->getIdentifierByObject($valueElement) !== null) {
                 return $this->persistenceManager->getIdentifierByObject($valueElement);
             }
+
             return (string)$valueElement;
         }
+
         return $valueElement;
     }
 
@@ -367,18 +384,16 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
         if ($isSelected) {
             $output .= ' selected="selected"';
         }
-        $output .= '>' . htmlspecialchars($label) . '</option>';
-        return $output;
+
+        return $output . ('>' . htmlspecialchars($label) . '</option>');
     }
 
     /**
      * Get Field name
-     *
-     * @return string
      */
-    protected function getFieldName()
+    protected function getFieldName(): string
     {
-        preg_match_all('/\[.*?\]/i', (string)$this->getNameWithoutPrefix(), $name);
-        return str_replace(['[', ']'], '', (string)$name[0][0]);
+        preg_match_all('/\[.*?\]/i', $this->getNameWithoutPrefix(), $name);
+        return str_replace(['[', ']'], '', $name[0][0]);
     }
 }

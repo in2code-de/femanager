@@ -29,14 +29,14 @@ class StoreInDatabaseService
     /**
      * @var ConnectionPool
      */
-    protected $databaseConnection;
+    protected object $databaseConnection;
 
     /**
      * Executes the storage
      *
      * @return int uid of inserted record
      */
-    public function execute()
+    public function execute(): int
     {
         $insertTable = $this->databaseConnection->getConnectionForTable($this->getTable());
         $insertTable->insert(
@@ -44,7 +44,7 @@ class StoreInDatabaseService
             $this->getProperties()
         );
 
-        return (int)$insertTable->lastInsertId($this->getTable());
+        return (int)$insertTable->lastInsertId();
     }
 
     /**
@@ -52,7 +52,7 @@ class StoreInDatabaseService
      *
      * @param string $table
      */
-    public function setTable($table)
+    public function setTable($table): void
     {
         $table = preg_replace('/[^a-zA-Z0-9_-]/', '', $table);
         $this->table = $table;
@@ -84,7 +84,7 @@ class StoreInDatabaseService
      * @param $propertyName
      * @param $value
      */
-    public function addProperty($propertyName, $value)
+    public function addProperty($propertyName, $value): void
     {
         $propertyName = preg_replace('/[^a-zA-Z0-9_-]/', '', (string)$propertyName);
         $this->properties[$propertyName] = $value;
@@ -95,7 +95,7 @@ class StoreInDatabaseService
      *
      * @param $propertyName
      */
-    public function removeProperty($propertyName)
+    public function removeProperty($propertyName): void
     {
         unset($this->properties[$propertyName]);
     }

@@ -36,7 +36,7 @@ class InvitationController extends AbstractFrontendController
      */
     public function newAction(): ResponseInterface
     {
-        if ($this->allowedUserForInvitationNewAndCreate() !== true) {
+        if (!$this->allowedUserForInvitationNewAndCreate()) {
             // current user is not allowed
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_INVITATIONRESTRICTEDPAGE),
@@ -45,6 +45,7 @@ class InvitationController extends AbstractFrontendController
             );
             return $this->redirect('status');
         }
+
         $this->view->assign('allUserGroups', $this->allUserGroups);
         $this->assignForAll();
         return $this->htmlResponse();
@@ -64,10 +65,10 @@ class InvitationController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            $this->redirect('status');
+            return $this->redirect('status');
         }
 
-        if ($this->allowedUserForInvitationNewAndCreate() !== true) {
+        if (!$this->allowedUserForInvitationNewAndCreate()) {
             // current user is not allowed
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_INVITATIONRESTRICTEDPAGE),
@@ -76,6 +77,7 @@ class InvitationController extends AbstractFrontendController
             );
             return $this->redirect('status');
         }
+
         $user->setDisable(true);
         $user = FrontendUtility::forceValues(
             $user,
@@ -85,6 +87,7 @@ class InvitationController extends AbstractFrontendController
         if (ConfigurationUtility::getValue('invitation/fillEmailWithUsername', $this->settings) === '1') {
             $user->setEmail($user->getUsername());
         }
+
         UserUtility::hashPassword(
             $user,
             ConfigurationUtility::getValue('invitation/misc/passwordSave', $this->settings)
@@ -161,7 +164,7 @@ class InvitationController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            $this->redirect('status');
+            return $this->redirect('status');
         }
 
         // User must not be deleted (deleted = 0) and not be activated (disable = 1)
@@ -171,7 +174,7 @@ class InvitationController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            $this->redirect('status');
+            return $this->redirect('status');
         }
 
         $user->setDisable(false);
@@ -204,8 +207,9 @@ class InvitationController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            $this->redirect('status');
+            return $this->redirect('status');
         }
+
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvitedFinished'));
         $this->logUtility->log(Log::STATUS_INVITATIONPROFILEENABLED, $user);
         $notifyAdmin = ConfigurationUtility::getValue('invitation/notifyAdmin', $this->settings);
@@ -228,6 +232,7 @@ class InvitationController extends AbstractFrontendController
                 ConfigurationUtility::getValue('invitation./email./invitationAdminNotify.', $this->config)
             );
         }
+
         $user = UserUtility::overrideUserGroup($user, $this->settings, 'invitation');
         UserUtility::hashPassword(
             $user,
@@ -277,6 +282,7 @@ class InvitationController extends AbstractFrontendController
             $this->userRepository->remove($user);
             return $this->redirectByAction('invitation', 'redirectDelete', 'status');
         }
+
         $this->addFlashMessage(
             LocalizationUtility::translateByState(Log::STATUS_INVITATIONHASHERROR),
             '',
@@ -301,17 +307,14 @@ class InvitationController extends AbstractFrontendController
         if (empty($this->settings['invitation']['allowedUserGroups'] ?? [])) {
             return true;
         }
+
         $allowedUsergroupUids = GeneralUtility::trimExplode(
             ',',
             $this->settings['invitation']['allowedUserGroups'] ?? [],
             true
         );
         $currentUsergroupUids = UserUtility::getCurrentUsergroupUids();
-
         // compare allowedUsergroups with currentUsergroups
-        if (count(array_intersect($allowedUsergroupUids, $currentUsergroupUids))) {
-            return true;
-        }
-        return false;
+        return (bool) count(array_intersect($allowedUsergroupUids, $currentUsergroupUids));
     }
 }

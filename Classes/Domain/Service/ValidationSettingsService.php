@@ -13,20 +13,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 class ValidationSettingsService
 {
     /**
-     * Needed for validation settings. Should be "new", "edit" or "invitation"
-     *
-     * @var string
-     */
-    protected $controllerName = '';
-
-    /**
-     * Needed for validation settings. Should be "validation" or "validationEdit"
-     *
-     * @var string
-     */
-    protected $validationName = '';
-
-    /**
      * Validation names with simple configuration
      *
      * @var array
@@ -42,10 +28,17 @@ class ValidationSettingsService
         'uniqueInPage',
     ];
 
-    public function __construct(string $controllerName, string $validationName)
+    public function __construct(
+        /**
+         * Needed for validation settings. Should be "new", "edit" or "invitation"
+         */
+        protected string $controllerName,
+        /**
+         * Needed for validation settings. Should be "validation" or "validationEdit"
+         */
+        protected string $validationName
+    )
     {
-        $this->controllerName = $controllerName;
-        $this->validationName = $validationName;
     }
 
     /**
@@ -66,6 +59,7 @@ class ValidationSettingsService
                 if ($string !== '') {
                     $string .= ',';
                 }
+
                 $string .= $this->getSingleValidationString($validation, $configuration);
             }
         }
@@ -90,10 +84,12 @@ class ValidationSettingsService
         if ($this->isSimpleValidation($validation) && $configuration === '1') {
             $string = $validation;
         }
+
         if (!$this->isSimpleValidation($validation)) {
             $string = $validation;
             $string .= '(' . str_replace(',', '|', $configuration) . ')';
         }
+
         return $string;
     }
 
@@ -104,10 +100,7 @@ class ValidationSettingsService
      */
     protected function isSimpleValidation($validation): bool
     {
-        if (in_array($validation, $this->simpleValidations)) {
-            return true;
-        }
-        return false;
+        return in_array($validation, $this->simpleValidations);
     }
 
     protected function getSettings(string $pluginSignature = 'femanager_pi1'): array

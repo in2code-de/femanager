@@ -16,7 +16,6 @@ abstract class AbstractValidationViewHelper extends AbstractViewHelper
     /**
      * Get key for typoscript configuration "validation"
      *
-     * @return string
      * @throws FluidViewHelperException
      */
     protected function getValidationName(): string
@@ -33,7 +32,7 @@ abstract class AbstractValidationViewHelper extends AbstractViewHelper
 
         if ($this->getControllerName() === 'invitation' &&
             $this->renderingContext->getRequest()->getControllerActionName() === 'edit') {
-            $validationName = 'validationEdit';
+            return 'validationEdit';
         }
 
         return $validationName;
@@ -53,6 +52,7 @@ abstract class AbstractValidationViewHelper extends AbstractViewHelper
                 1638341335
             );
         }
+
         return strtolower((string)$this->renderingContext->getRequest()->getControllerName());
     }
 }

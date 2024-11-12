@@ -23,8 +23,6 @@ class SendMailService
 {
     /**
      * Content Object
-     *
-     * @var object|null
      */
     public ?object $contentObject = null;
 
@@ -41,7 +39,7 @@ class SendMailService
     {
         if (
             empty($variables['user'] ?? []) === false &&
-            method_exists(($variables['user'] ?? null), '_getProperties') === true
+            method_exists(($variables['user'] ?? null), '_getProperties')
         ) {
             $this->contentObject->start($variables['user']->_getProperties());
         }
@@ -101,6 +99,7 @@ class SendMailService
         if ($this->isMailEnabled($typoScript, $receiver) === false) {
             return false;
         }
+
         $email = GeneralUtility::makeInstance(MailMessage::class);
         $variables = $this->embedImages($variables, $typoScript, $email);
         $this->prepareMailObject($template, $receiver, $sender, $subject, $variables, $email, $request);
@@ -126,6 +125,7 @@ class SendMailService
         $standAloneView = TemplateUtility::getDefaultStandAloneView($request);
         $standAloneView->setTemplatePathAndFilename($this->getRelativeEmailPathAndFilename($template));
         $standAloneView->assignMultiple($variables);
+
         $this->dispatcher->dispatch(new BeforeMailBodyRenderEvent($standAloneView, $variables, $this));
         return $standAloneView->render();
     }
@@ -222,7 +222,7 @@ class SendMailService
             (string)ConfigurationUtility::getValue('priority', $typoScript),
             (array)ConfigurationUtility::getValue('priority.', $typoScript)
         );
-        if ($priority) {
+        if ($priority !== 0) {
             $email->priority($priority);
         }
     }
@@ -257,6 +257,6 @@ class SendMailService
         $cObjectName = (string)ConfigurationUtility::getValue('_enable', $typoScript);
         $cObjectConf = (array)ConfigurationUtility::getValue('_enable.', $typoScript);
 
-        return $this->contentObject->cObjGetSingle($cObjectName, $cObjectConf) && count($receiver) > 0;
+        return $this->contentObject->cObjGetSingle($cObjectName, $cObjectConf) && $receiver !== [];
     }
 }

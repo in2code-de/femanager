@@ -26,7 +26,7 @@ class HashUtilityTest extends UnitTestCase
     /**
      * @covers \In2code\Femanager\Utility\AbstractUtility::getEncryptionKey
      */
-    public function testEncryptionKey()
+    public function testEncryptionKey(): void
     {
         $this->expectExceptionCode(1516373945265);
         HashUtility::createHashForUser($this->user);
@@ -36,7 +36,7 @@ class HashUtilityTest extends UnitTestCase
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::validHash
      */
-    public function testValidHash()
+    public function testValidHash(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'] = 'abc';
         self::assertTrue(HashUtility::validHash('715e5634c193bbe4', $this->user));
@@ -48,7 +48,7 @@ class HashUtilityTest extends UnitTestCase
      * @covers ::hashString
      * @covers \In2code\Femanager\Utility\AbstractUtility::getEncryptionKey
      */
-    public function testCreateHashForUser()
+    public function testCreateHashForUser(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'] = 'abc';
         $hash = HashUtility::createHashForUser($this->user);

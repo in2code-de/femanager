@@ -53,7 +53,7 @@ class PluginRepository
                     )
                 )
                 ->executeQuery();
-            return count($pluginOnPageQuery->fetchAllAssociative()) > 0;
+            return $pluginOnPageQuery->fetchAllAssociative() !== [];
         }
 
         return false;

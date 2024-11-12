@@ -14,12 +14,10 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  */
 class BackendEditLinkViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     /**
      * initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('tableName', 'string', 'Records table name (like "fe_users")', true);
         $this->registerArgument('identifier', 'integer', 'Record identifier to edit', true);
@@ -32,19 +30,15 @@ class BackendEditLinkViewHelper extends AbstractViewHelper
      * @param array $arguments
      * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
-     * @return string
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ): string {
+    public function render(): string
+    {
         return BackendUtility::getBackendEditUri(
-            $arguments['tableName'],
-            $arguments['identifier'],
-            $arguments['addReturnUrl']
+            $this->arguments['tableName'],
+            $this->arguments['identifier'],
+            $this->arguments['addReturnUrl']
         );
     }
 }

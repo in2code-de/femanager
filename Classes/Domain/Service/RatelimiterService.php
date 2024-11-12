@@ -15,18 +15,19 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 class RatelimiterService implements SingletonInterface
 {
     final public const CACHE_IDENTIFIER = 'femanager_ratelimiter';
+
     final public const DEFAULT_CONFIG = ['timeframe' => 60, 'limit' => 3];
+
     final public const LIMIT_IP = 'limit_ip_';
+
     final public const SESSION_KEY = 'tx_femanager_ratelimiter';
 
     /** @var FrontendInterface */
     protected $cache;
 
-    /** @var int */
-    protected $limit;
+    protected int $limit;
 
-    /** @var int */
-    protected $timeframe;
+    protected int $timeframe;
 
     public function __construct()
     {
@@ -53,10 +54,11 @@ class RatelimiterService implements SingletonInterface
 
             return count($userIpAccess) >= $this->limit;
         }
+
         return false;
     }
 
-    public function consumeSlot()
+    public function consumeSlot(): void
     {
         if ($this->limit > 0) {
             $userIp = GeneralUtility::getIndpEnv('REMOTE_ADDR');
@@ -71,7 +73,7 @@ class RatelimiterService implements SingletonInterface
         return $this->getTSFE()->fe_user->getSessionData(self::SESSION_KEY);
     }
 
-    public function touchCookie()
+    public function touchCookie(): void
     {
         $feUser = $this->getTSFE()->fe_user;
         $identifier = $feUser->getSessionData(self::SESSION_KEY);

@@ -130,8 +130,8 @@ class ConfigurationUtility extends AbstractUtility
             'Femanager',
             $pluginName
         );
-        if (!empty($path)) {
-            $typoscript = ArrayUtility::getValueByPath($typoscript, $path, '.');
+        if ($path !== '' && $path !== '0') {
+            return ArrayUtility::getValueByPath($typoscript, $path, '.');
         }
 
         return $typoscript;
@@ -158,29 +158,23 @@ class ConfigurationUtility extends AbstractUtility
         return (bool)$config;
     }
 
-    public static function isCreateUserNotifyActive($config): bool
+    public static function isCreateUserNotifyActive(array $config): bool
     {
-        if (ConfigurationUtility::getValue(
+        return ConfigurationUtility::getValue(
             'new/email/createUserNotify/sender/email/value',
             $config
         ) && ConfigurationUtility::getValue(
             'new./email./createUserNotify./sender./name./value',
             $config
-        )) {
-            return true;
-        }
-        return false;
+        );
     }
 
-    /**
-     * @return mixed
-     */
-    public static function getDefaultConfiguration($key)
+    public static function getDefaultConfiguration($key): array|int|string|null
     {
         return self::DEFAULT_CONFIGURATION[$key] ?? null;
     }
 
-    public static function getValue($key, $config)
+    public static function getValue($key, array $config)
     {
         try {
             return ArrayUtility::getValueByPath($config, $key);
@@ -189,17 +183,18 @@ class ConfigurationUtility extends AbstractUtility
         }
     }
 
-    public static function notifyAdminAboutEdits($config)
+    public static function notifyAdminAboutEdits($config): bool
     {
         if (self::getValue(
             'edit/email/notifyAdmin',
             $config
-        ) || self::getValue(
-            'edit/email/notifyAdmin/receiver/email/value',
-            $config
         )) {
             return true;
         }
-        return false;
+
+        return (bool) self::getValue(
+            'edit/email/notifyAdmin/receiver/email/value',
+            $config
+        );
     }
 }

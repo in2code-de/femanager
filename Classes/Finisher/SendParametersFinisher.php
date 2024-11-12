@@ -15,13 +15,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class SendParametersFinisher extends AbstractFinisher implements FinisherInterface
 {
     /**
-     * Inject a complete new content object
-     *
-     * @var ContentObjectRenderer
-     */
-    protected $contentObject;
-
-    /**
      * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
@@ -33,29 +26,33 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected $configuration;
 
-    public function injectContentObjectRenderer(ContentObjectRenderer $contentObject)
+    public function __construct(
+        /**
+         * Inject a complete new content object
+         */
+        protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject
+    )
     {
-        $this->contentObject = $contentObject;
     }
 
     /**
      * Initialize
      */
-    public function initializeFinisher()
+    public function initializeFinisher(): void
     {
         $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         $this->contentObject->start($this->user->_getProperties());
         $typoScript = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        $this->configuration = !empty($typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.']) ?
-                $typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.'] : null;
+        $this->configuration = empty($typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.']) ?
+                null : $typoScript['plugin.']['tx_femanager.']['settings.']['new.']['sendPost.'];
     }
 
     /**
      * Send values via curl to a third party software
      */
-    public function sendFinisher()
+    public function sendFinisher(): void
     {
         if ($this->isEnabled()) {
             $curlSettings = $this->getCurlSettings();
@@ -71,10 +68,8 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
 
     /**
      * CURL settings
-     *
-     * @return array
      */
-    protected function getCurlSettings()
+    protected function getCurlSettings(): array
     {
         return [
             'url' => $this->getTargetUrl(),
@@ -104,10 +99,8 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
 
     /**
      * Check if sendPost is activated
-     *
-     * @return bool
      */
-    protected function isEnabled()
+    protected function isEnabled(): bool
     {
         return $this->contentObject->cObjGetSingle(
             $this->configuration['_enable'] ?? 'TEXT',

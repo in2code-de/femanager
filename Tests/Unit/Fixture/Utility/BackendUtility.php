@@ -11,10 +11,7 @@ use In2code\Femanager\Utility\BackendUtility as BackendUtilityFemanager;
  */
 class BackendUtility extends BackendUtilityFemanager
 {
-    /**
-     * @return array
-     */
-    public static function getCurrentParametersPublic()
+    public static function getCurrentParametersPublic(): array
     {
         return self::getCurrentParameters();
     }

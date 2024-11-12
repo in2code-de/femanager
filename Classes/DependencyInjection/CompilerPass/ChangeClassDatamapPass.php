@@ -10,7 +10,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap;
 
 class ChangeClassDatamapPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition(DataMap::class)) {
             return;

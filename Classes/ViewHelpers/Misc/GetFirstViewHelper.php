@@ -32,18 +32,16 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
         if ($objectStorage === null) {
             return '';
         }
+
         foreach ($objectStorage as $object) {
             return $object;
         }
 
         // try to get value from originalRequest
-        if ($this->configurationManager->isFeatureEnabled('rewrittenPropertyMapper')) {
-            // seperate if version is 6.2 or lower
-            if ((method_exists($this, 'hasMappingErrorOccured') && $this->hasMappingErrorOccured()) ||
-                (method_exists($this, 'hasMappingErrorOccurred') && $this->hasMappingErrorOccurred())
-            ) {
-                return $this->getValueAttribute();
-            }
+        // seperate if version is 6.2 or lower
+        if ($this->configurationManager->isFeatureEnabled('rewrittenPropertyMapper') && ((method_exists($this, 'hasMappingErrorOccured') && $this->hasMappingErrorOccured()) ||
+            (method_exists($this, 'hasMappingErrorOccurred') && $this->hasMappingErrorOccurred()))) {
+            return $this->getValueAttribute();
         }
 
         return '';

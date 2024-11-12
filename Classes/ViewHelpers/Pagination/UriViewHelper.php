@@ -19,7 +19,7 @@ class UriViewHelper extends AbstractTagBasedViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('name', 'string', 'identifier important if more widgets on same page', false, 'widget');
@@ -40,6 +40,7 @@ class UriViewHelper extends AbstractTagBasedViewHelper
                 1638341671
             );
         }
+
         $uriBuilder = GeneralUtility::makeInstance(ExtbaseUriBuilder::class);
         $extensionName = $this->renderingContext->getRequest()->getControllerExtensionName();
         $pluginName = $this->renderingContext->getRequest()->getPluginName();
@@ -50,9 +51,11 @@ class UriViewHelper extends AbstractTagBasedViewHelper
         if ($this->hasArgument('action')) {
             $arguments['action'] = $this->arguments['action'];
         }
+
         if ($this->hasArgument('format') && $this->arguments['format'] !== '') {
             $arguments['format'] = $this->arguments['format'];
         }
+
         $uri = $uriBuilder
             ->reset()
             ->setRequest($this->renderingContext->getRequest())

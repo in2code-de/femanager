@@ -39,11 +39,6 @@ abstract class AbstractFinisher implements FinisherInterface
     protected $actionMethodName;
 
     /**
-     * @var ContentObjectRenderer
-     */
-    protected $contentObject;
-
-    /**
      * @return User
      */
     public function getUser()
@@ -120,12 +115,11 @@ abstract class AbstractFinisher implements FinisherInterface
         array $configuration,
         array $settings,
         string $actionMethodName,
-        ContentObjectRenderer $contentObject
+        protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject
     ) {
         $this->setUser($user);
         $this->setConfiguration($configuration);
         $this->setSettings($settings);
         $this->setActionMethodName($actionMethodName);
-        $this->contentObject = $contentObject;
     }
 }

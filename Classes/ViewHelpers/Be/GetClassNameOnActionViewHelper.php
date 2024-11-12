@@ -44,13 +44,14 @@ class GetClassNameOnActionViewHelper extends AbstractViewHelper
                 1638341674
             );
         }
+
         return $this->renderingContext->getRequest()->getControllerActionName();
     }
 
     /**
      * Register all arguments for this viewhelper
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument(

@@ -12,7 +12,7 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 class ShouldValidateStateCondition implements ValidationConditionInterface
 {
-    protected $isStaticInfoTablesLoaded;
+    protected bool $isStaticInfoTablesLoaded;
 
     protected $countryZonesDataProvider;
 

@@ -37,11 +37,9 @@ class EditController extends AbstractFrontendController
     {
         $token = '';
         if ($this->user) {
-            $token = GeneralUtility::hmac(
-                (string)$this->user->getUid(),
-                (string)($this->user->getCrdate() ?: new \DateTime('01.01.1970'))->getTimestamp()
-            );
+            $token = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Crypto\HashService::class)->hmac((string)$this->user->getUid(), (string)($this->user->getCrdate() ?: new \DateTime('01.01.1970'))->getTimestamp());
         }
+
         $this->view->assignMultiple([
             'user' => $this->user,
             'allUserGroups' => $this->allUserGroups,
@@ -60,7 +58,7 @@ class EditController extends AbstractFrontendController
         $userValues = $this->request->hasArgument('user') ? $this->request->getArgument('user') : null;
         $token = $this->request->hasArgument('token') ? $this->request->getArgument('token') : null;
 
-        if ($currentUser === null ||
+        if (!$currentUser instanceof \In2code\Femanager\Domain\Model\User ||
             empty($userValues['__identity']) ||
             (int)$userValues['__identity'] === null ||
             $token === null ||
@@ -76,7 +74,7 @@ class EditController extends AbstractFrontendController
         }
 
         $response = $this->redirectIfNoChangesOnObject($user);
-        if ($response !== null) {
+        if ($response instanceof \Psr\Http\Message\ResponseInterface) {
             return $response;
         }
 
@@ -97,6 +95,7 @@ class EditController extends AbstractFrontendController
         } else {
             $response = $this->updateAllConfirmed($user);
         }
+
         if ($response !== null) {
             return $response;
         }
@@ -120,6 +119,7 @@ class EditController extends AbstractFrontendController
             );
             return $this->htmlResponse(null);
         }
+
         switch ($status) {
             case 'confirm':
                 $this->statusConfirm($user);
@@ -133,6 +133,7 @@ class EditController extends AbstractFrontendController
                 break;
             default:
         }
+
         $user->setTxFemanagerChangerequest('');
         $this->userRepository->update($user);
 
@@ -159,9 +160,11 @@ class EditController extends AbstractFrontendController
                 }
             }
         }
+
         if (!empty($this->config['edit.']['forceValues.']['onAdminConfirmation.'])) {
             $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['onAdminConfirmation.']);
         }
+
         $this->logUtility->log(Log::STATUS_PROFILEUPDATECONFIRMEDADMIN, $user);
         $this->addFlashMessage(LocalizationUtility::translate('updateProfile'));
     }
@@ -189,12 +192,12 @@ class EditController extends AbstractFrontendController
     /**
      * action delete
      */
-    public function deleteAction(User $user)
+    public function deleteAction(User $user): \TYPO3\CMS\Extbase\Http\ForwardResponse|\Psr\Http\Message\ResponseInterface
     {
         $currentUser = UserUtility::getCurrentUser();
         $token = $this->request->hasArgument('token') ? $this->request->getArgument('token') : null;
         $uid = $this->request->hasArgument('user') ? $this->request->getArgument('user') : null;
-        if ($currentUser === null ||
+        if (!$currentUser instanceof \In2code\Femanager\Domain\Model\User ||
             $token === null ||
             $uid === null ||
             $this->isSpoof($currentUser, (int)$uid, $token)
@@ -218,12 +221,13 @@ class EditController extends AbstractFrontendController
     /**
      * Check: If there are no changes, simple redirect back
      */
-    protected function redirectIfNoChangesOnObject(User $user)
+    protected function redirectIfNoChangesOnObject(User $user): ?\Psr\Http\Message\ResponseInterface
     {
         if (!ObjectUtility::isDirtyObject($user, $this->request)) {
             $this->addFlashMessage(LocalizationUtility::translate('noChanges'), '', ContextualFeedbackSeverity::NOTICE);
             return $this->redirect('edit');
         }
+
         return null;
     }
 

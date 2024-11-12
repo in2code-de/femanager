@@ -195,7 +195,7 @@ class User extends AbstractEntity
     /**
      * Sets the username value
      */
-    public function setUsername(string $username)
+    public function setUsername(string $username): void
     {
         $this->username = $username;
     }
@@ -211,7 +211,7 @@ class User extends AbstractEntity
     /**
      * Sets the password value
      */
-    public function setPassword(string $password)
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
@@ -230,7 +230,7 @@ class User extends AbstractEntity
      *
      * @param ObjectStorage<UserGroup> $usergroup
      */
-    public function setUsergroup(ObjectStorage $usergroup)
+    public function setUsergroup(ObjectStorage $usergroup): void
     {
         $this->usergroup = $usergroup;
     }
@@ -238,7 +238,7 @@ class User extends AbstractEntity
     /**
      * Adds a usergroup to the frontend user
      */
-    public function addUsergroup(UserGroup $usergroup)
+    public function addUsergroup(UserGroup $usergroup): void
     {
         $this->usergroup->attach($usergroup);
     }
@@ -246,7 +246,7 @@ class User extends AbstractEntity
     /**
      * Removes a usergroup from the frontend user
      */
-    public function removeUsergroup(UserGroup $usergroup)
+    public function removeUsergroup(UserGroup $usergroup): void
     {
         $this->usergroup->detach($usergroup);
     }
@@ -265,7 +265,7 @@ class User extends AbstractEntity
     /**
      * Sets the name value
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -281,7 +281,7 @@ class User extends AbstractEntity
     /**
      * Sets the firstName value
      */
-    public function setFirstName(string $firstName)
+    public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -297,7 +297,7 @@ class User extends AbstractEntity
     /**
      * Sets the middleName value
      */
-    public function setMiddleName(string $middleName)
+    public function setMiddleName(string $middleName): void
     {
         $this->middleName = $middleName;
     }
@@ -313,7 +313,7 @@ class User extends AbstractEntity
     /**
      * Sets the lastName value
      */
-    public function setLastName(string $lastName)
+    public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -329,7 +329,7 @@ class User extends AbstractEntity
     /**
      * Sets the address value
      */
-    public function setAddress(string $address)
+    public function setAddress(string $address): void
     {
         $this->address = $address;
     }
@@ -345,7 +345,7 @@ class User extends AbstractEntity
     /**
      * Sets the telephone value
      */
-    public function setTelephone(string $telephone)
+    public function setTelephone(string $telephone): void
     {
         $this->telephone = $telephone;
     }
@@ -361,7 +361,7 @@ class User extends AbstractEntity
     /**
      * Sets the fax value
      */
-    public function setFax(string $fax)
+    public function setFax(string $fax): void
     {
         $this->fax = $fax;
     }
@@ -377,7 +377,7 @@ class User extends AbstractEntity
     /**
      * Sets the email value
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -393,7 +393,7 @@ class User extends AbstractEntity
     /**
      * Sets the title value
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -409,7 +409,7 @@ class User extends AbstractEntity
     /**
      * Sets the zip value
      */
-    public function setZip(string $zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
@@ -425,7 +425,7 @@ class User extends AbstractEntity
     /**
      * Sets the city value
      */
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -441,7 +441,7 @@ class User extends AbstractEntity
     /**
      * Sets the country value
      */
-    public function setCountry(string $country)
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
@@ -457,7 +457,7 @@ class User extends AbstractEntity
     /**
      * Sets the www value
      */
-    public function setWww(string $www)
+    public function setWww(string $www): void
     {
         $this->www = $www;
     }
@@ -473,7 +473,7 @@ class User extends AbstractEntity
     /**
      * Sets the company value
      */
-    public function setCompany(string $company)
+    public function setCompany(string $company): void
     {
         $this->company = $company;
     }
@@ -491,7 +491,7 @@ class User extends AbstractEntity
      *
      * @param ObjectStorage<FileReference> $image
      */
-    public function setImage(ObjectStorage $image)
+    public function setImage(ObjectStorage $image): void
     {
         $this->image = $image;
     }
@@ -507,7 +507,7 @@ class User extends AbstractEntity
     /**
      * Sets the lastlogin value
      */
-    public function setLastlogin(DateTime $lastlogin)
+    public function setLastlogin(DateTime $lastlogin): void
     {
         $this->lastlogin = $lastlogin;
     }
@@ -527,16 +527,15 @@ class User extends AbstractEntity
      */
     protected $state = '';
 
-    public function removeAllUsergroups()
+    public function removeAllUsergroups(): void
     {
         $this->usergroup = new ObjectStorage();
     }
 
     /**
      * @param string $txFemanagerChangerequest
-     * @return User
      */
-    public function setTxFemanagerChangerequest($txFemanagerChangerequest)
+    public function setTxFemanagerChangerequest($txFemanagerChangerequest): static
     {
         $this->txFemanagerChangerequest = $txFemanagerChangerequest;
         return $this;
@@ -552,9 +551,8 @@ class User extends AbstractEntity
 
     /**
      * @param DateTime $crdate
-     * @return User
      */
-    public function setCrdate($crdate)
+    public function setCrdate($crdate): static
     {
         $this->crdate = $crdate;
         return $this;
@@ -570,9 +568,8 @@ class User extends AbstractEntity
 
     /**
      * @param DateTime $tstamp
-     * @return User
      */
-    public function setTstamp($tstamp)
+    public function setTstamp($tstamp): static
     {
         $this->tstamp = $tstamp;
         return $this;
@@ -588,9 +585,8 @@ class User extends AbstractEntity
 
     /**
      * @param bool $disable
-     * @return User
      */
-    public function setDisable($disable)
+    public function setDisable($disable): static
     {
         $this->disable = $disable;
         return $this;
@@ -634,9 +630,8 @@ class User extends AbstractEntity
 
     /**
      * @param bool $ignoreDirty
-     * @return User
      */
-    public function setIgnoreDirty($ignoreDirty)
+    public function setIgnoreDirty($ignoreDirty): static
     {
         $this->ignoreDirty = $ignoreDirty;
         return $this;
@@ -664,9 +659,8 @@ class User extends AbstractEntity
      * Sets the gender
      *
      * @param int $gender
-     * @return User
      */
-    public function setGender($gender)
+    public function setGender($gender): static
     {
         $this->gender = $gender;
         return $this;
@@ -686,13 +680,13 @@ class User extends AbstractEntity
      * Sets the dateOfBirth
      *
      * @param DateTime $dateOfBirth
-     * @return User
      */
-    public function setDateOfBirth($dateOfBirth)
+    public function setDateOfBirth($dateOfBirth): static
     {
         if ($dateOfBirth instanceof DateTime) {
             $dateOfBirth->setTime(0, 0, 0);
         }
+
         $this->dateOfBirth = $dateOfBirth;
         return $this;
     }
@@ -707,10 +701,8 @@ class User extends AbstractEntity
 
     /**
      * Set whether the user has accepted terms and conditions
-     *
-     * @return User
      */
-    public function setTerms(bool $terms)
+    public function setTerms(bool $terms): static
     {
         $this->terms = $terms;
         $this->setTermsDateOfAcceptance();
@@ -727,15 +719,14 @@ class User extends AbstractEntity
 
     /**
      * set terms date to now if it's not set yet
-     *
-     * @return User
      */
-    protected function setTermsDateOfAcceptance()
+    protected function setTermsDateOfAcceptance(): static
     {
         if ($this->termsDateOfAcceptance === null) {
             $now = new DateTime();
             $this->termsDateOfAcceptance = $now;
         }
+
         return $this;
     }
 
@@ -757,6 +748,7 @@ class User extends AbstractEntity
         ) {
             return true;
         }
+
         return $this->isOnline;
     }
 
@@ -771,12 +763,13 @@ class User extends AbstractEntity
         return $this->txExtbaseType;
     }
 
-    public function getFirstImage()
+    public function getFirstImage(): ?object
     {
         $images = $this->getImage();
         foreach ($images as $image) {
             return $image;
         }
+
         return null;
     }
 
@@ -807,7 +800,7 @@ class User extends AbstractEntity
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
-    public function _isDirty($propertyName = null): bool
+    public function _isDirty(?string $propertyName = null): bool
     {
         return $this->isIgnoreDirty() ? false : parent::_isDirty($propertyName);
     }

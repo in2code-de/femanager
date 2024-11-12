@@ -37,7 +37,7 @@ class StringUtilityTest extends UnitTestCase
      * @dataProvider cleanStringReturnsStringDataProvider
      * @covers ::cleanString
      */
-    public function testCleanStringReturnsString(string $string, string $expectedResult)
+    public function testCleanStringReturnsString(string $string, string $expectedResult): void
     {
         self::assertEquals($expectedResult, StringUtility::cleanString($string));
     }
@@ -67,7 +67,7 @@ class StringUtilityTest extends UnitTestCase
      * @dataProvider getValuesInBracketsReturnsStringDataProvider
      * @covers ::getValuesInBrackets
      */
-    public function testGetValuesInBracketsReturnsString(string $start, string $expectedResult)
+    public function testGetValuesInBracketsReturnsString(string $start, string $expectedResult): void
     {
         $result = StringUtility::getValuesInBrackets($start);
         self::assertEquals($result, $expectedResult);
@@ -98,7 +98,7 @@ class StringUtilityTest extends UnitTestCase
      * @dataProvider getValuesBeforeBracketsDataProvider
      * @covers ::getValuesBeforeBrackets
      */
-    public function testGetValuesBeforeBracketsReturnsString(string $start, string $expectedResult)
+    public function testGetValuesBeforeBracketsReturnsString(string $start, string $expectedResult): void
     {
         $result = StringUtility::getValuesBeforeBrackets($start);
         self::assertEquals($result, $expectedResult);
@@ -139,7 +139,7 @@ class StringUtilityTest extends UnitTestCase
      * @dataProvider startsWithReturnsStringDataProvider
      * @covers ::startsWith
      */
-    public function testStartsWithReturnsString(string $haystack, string $needle, bool $expectedResult)
+    public function testStartsWithReturnsString(string $haystack, string $needle, bool $expectedResult): void
     {
         self::assertSame($expectedResult, StringUtility::startsWith($haystack, $needle));
     }
@@ -179,7 +179,7 @@ class StringUtilityTest extends UnitTestCase
      * @dataProvider endsWithReturnsStringDataProvider
      * @covers ::endsWith
      */
-    public function testEndsWithReturnsString(string $haystack, string $needle, bool $expectedResult)
+    public function testEndsWithReturnsString(string $haystack, string $needle, bool $expectedResult): void
     {
         self::assertSame($expectedResult, StringUtility::endsWith($haystack, $needle));
     }
@@ -213,7 +213,7 @@ class StringUtilityTest extends UnitTestCase
      * @dataProvider makeEmailArrayReturnsArrayDataProvider
      * @covers ::makeEmailArray
      */
-    public function testMakelEmailArrayReturnsArray(string $haystack, array $expectedResult)
+    public function testMakelEmailArrayReturnsArray(string $haystack, array $expectedResult): void
     {
         self::assertSame($expectedResult, StringUtility::makeEmailArray($haystack));
     }
@@ -257,26 +257,23 @@ class StringUtilityTest extends UnitTestCase
         int $length,
         bool $addUpperCase,
         bool $addSpecialCharacters
-    ) {
+    ): void {
         for ($i = 0; $i < 100; $i++) {
             $string = StringUtility::getRandomString($length, $addUpperCase, $addSpecialCharacters);
             if ($addSpecialCharacters === false) {
-                if ($addUpperCase) {
-                    $regex = '~[a-zA-Z0-9]{' . $length . '}~';
-                } else {
-                    $regex = '~[a-z0-9]{' . $length . '}~';
-                }
+                $regex = $addUpperCase ? '~[a-zA-Z0-9]{' . $length . '}~' : '~[a-z0-9]{' . $length . '}~';
             } else {
                 $regex = '~.{' . $length . '}~';
             }
-            self::assertSame(1, preg_match($regex, (string)$string));
+
+            self::assertSame(1, preg_match($regex, $string));
         }
     }
 
     /**
      * @covers ::getNumbersString
      */
-    public function testGetNumbersStringReturnsStrings()
+    public function testGetNumbersStringReturnsStrings(): void
     {
         self::assertSame('0123456789', StringUtility::getNumbersString());
     }
@@ -284,7 +281,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @covers ::getCharactersString
      */
-    public function testGetCharactersStringReturnsStrings()
+    public function testGetCharactersStringReturnsStrings(): void
     {
         self::assertSame('abcdefghijklmnopqrstuvwxyz', StringUtility::getCharactersString());
     }
@@ -292,7 +289,7 @@ class StringUtilityTest extends UnitTestCase
     /**
      * @covers ::getUpperCharactersString
      */
-    public function testGetUpperCharactersStringReturnsStrings()
+    public function testGetUpperCharactersStringReturnsStrings(): void
     {
         self::assertSame('ABCDEFGHIJKLMNOPQRSTUVWXYZ', StringUtility::getUpperCharactersString());
     }
@@ -343,7 +340,7 @@ class StringUtilityTest extends UnitTestCase
      * @dataProvider removeDoubleSlashesReturnsStringDataProvider
      * @covers ::removeDoubleSlashesFromUri
      */
-    public function testRemoveDoubleSlashesReturnsString(string $uri, string $expectedResult)
+    public function testRemoveDoubleSlashesReturnsString(string $uri, string $expectedResult): void
     {
         $newUri = StringUtility::removeDoubleSlashesFromUri($uri);
         self::assertSame($expectedResult, $newUri);

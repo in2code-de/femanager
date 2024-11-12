@@ -27,13 +27,14 @@ class CountryZonesDataProvider
     public function getCountryZonesForCountryIso3(string $countryIso3): array
     {
         $country = $this->getCountryForIsoCode3($countryIso3);
-        if ($country === null) {
+        if (!$country instanceof \SJBR\StaticInfoTables\Domain\Model\Country) {
             return [];
         }
+
         $countryZones = $this->countryZoneRepository->findByCountry($country)->toArray();
         usort(
             $countryZones,
-            fn (CountryZone $left, CountryZone $right) => // @phpstan-ignore-line
+            fn (CountryZone $left, CountryZone $right): int => // @phpstan-ignore-line
             strcasecmp((string)$left->getLocalName(), (string)$right->getLocalName())
         );
         return $countryZones;
@@ -50,10 +51,10 @@ class CountryZonesDataProvider
     private function getCountryForIsoCode3(string $countryIso3): ?Country // @phpstan-ignore-line
     {
         $countries = $this->countryRepository->findAllowedByIsoCodeA3($countryIso3);
-        $country = null;
         if ((is_countable($countries) ? count($countries) : 0) === 1) {
-            $country = array_values($countries)[0];
+            return array_values($countries)[0];
         }
-        return $country;
+
+        return null;
     }
 }

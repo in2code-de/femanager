@@ -31,7 +31,7 @@ class IsRequiredFieldViewHelper extends AbstractValidationViewHelper
 
     protected function getSettingsConfiguration(string $pluginName = 'Pi1'): array
     {
-        return (array)$this->configurationManager->getConfiguration(
+        return $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'Femanager',
             $pluginName
@@ -43,7 +43,7 @@ class IsRequiredFieldViewHelper extends AbstractValidationViewHelper
      *
      * @api
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('fieldName', 'string ', 'Check if this field is a required field', true);

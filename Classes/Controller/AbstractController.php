@@ -47,36 +47,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 abstract class AbstractController extends ActionController
 {
     /**
-     * @var UserRepository
-     */
-    protected $userRepository;
-
-    /**
-     * @var UserGroupRepository
-     */
-    protected $userGroupRepository;
-
-    /**
-     * @var PersistenceManager
-     */
-    protected $persistenceManager;
-
-    /**
-     * @var SendMailService
-     */
-    protected $sendMailService;
-
-    /**
-     * @var FinisherRunner
-     */
-    protected $finisherRunner;
-
-    /**
-     * @var LogUtility
-     */
-    protected $logUtility;
-
-    /**
      * Content Object
      *
      * @var ContentObjectRenderer
@@ -129,20 +99,8 @@ abstract class AbstractController extends ActionController
     /**
      * AbstractController constructor.
      */
-    public function __construct(
-        UserRepository $userRepository,
-        UserGroupRepository $userGroupRepository,
-        PersistenceManager $persistenceManager,
-        SendMailService $sendMailService,
-        FinisherRunner $finisherRunner,
-        LogUtility $logUtility
-    ) {
-        $this->userRepository = $userRepository;
-        $this->userGroupRepository = $userGroupRepository;
-        $this->persistenceManager = $persistenceManager;
-        $this->sendMailService = $sendMailService;
-        $this->finisherRunner = $finisherRunner;
-        $this->logUtility = $logUtility;
+    public function __construct(protected \In2code\Femanager\Domain\Repository\UserRepository $userRepository, protected \In2code\Femanager\Domain\Repository\UserGroupRepository $userGroupRepository, protected \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager, protected \In2code\Femanager\Domain\Service\SendMailService $sendMailService, protected \In2code\Femanager\Finisher\FinisherRunner $finisherRunner, protected \In2code\Femanager\Utility\LogUtility $logUtility)
+    {
     }
 
     /**
@@ -171,7 +129,7 @@ abstract class AbstractController extends ActionController
             trim((string)ConfigurationUtility::getConfiguration('misc.uploadMimeTypes'))
         );
         if (
-            count($uploadedFiles) > 0
+            $uploadedFiles !== []
             && !empty($uploadedFiles['image'])
         ) {
             $images = [];
@@ -197,6 +155,7 @@ abstract class AbstractController extends ActionController
                     if (!$storage->hasFolder($parts[1])) {
                         $storage->createFolder($parts[1]);
                     }
+
                     $uploadFolder = $resourceFactory->getFolderObjectFromCombinedIdentifier($uploadString);
 
                     $newFile = $storage->addUploadedFile(
@@ -234,7 +193,7 @@ abstract class AbstractController extends ActionController
 
         $this->processUploadedImage($user);
 
-        if (ConfigurationUtility::notifyAdminAboutEdits($this->settings) === true) {
+        if (ConfigurationUtility::notifyAdminAboutEdits($this->settings)) {
             $this->sendMailService->send(
                 'updateNotify',
                 StringUtility::makeEmailArray(
@@ -299,6 +258,7 @@ abstract class AbstractController extends ActionController
             $this->addFlashMessage(LocalizationUtility::translate('updateRequest'));
             return $this->redirectByAction('edit', 'requestRedirect', 'edit');
         }
+
         $this->logUtility->log(
             Log::STATUS_PROFILEUPDATEREFUSEDADMIN,
             $user,
@@ -310,18 +270,16 @@ abstract class AbstractController extends ActionController
     /**
      * Some additional actions after profile creation
      *
-     * @param User $user
      * @param string $redirectByActionName Action to redirect
      * @param bool $login Login after creation
      * @param bool $backend Don't redirect if called from backend action
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @TODO: Remove Suppress when login is reactivated
-     *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function finalCreate(
-        $user,
+        \In2code\Femanager\Domain\Model\User $user,
         string $action,
         string $redirectByActionName,
         bool $login = true,
@@ -368,7 +326,7 @@ abstract class AbstractController extends ActionController
                 'createNotify',
                 StringUtility::makeEmailArray(
                     $createAdminNotify,
-                    ConfigurationUtility::getValue('new./email./createAdminNotify./receiver./name./value', $this->config) ?? 'femanager'
+                    ConfigurationUtility::getValue('new./email./createAdminNotify./receiver./name./value', $this->config)
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 $this->contentObject->cObjGetSingle(
@@ -387,14 +345,16 @@ abstract class AbstractController extends ActionController
         if ($backend === false) {
             $redirectTarget = $this->redirectByAction(
                 $action,
-                ($status ? $status . 'Redirect' : 'redirect'),
+                ($status !== '' && $status !== '0' ? $status . 'Redirect' : 'redirect'),
                 $redirectByActionName
             );
             if ($redirectTarget instanceof RedirectResponse) {
                 $this->addFlashMessage(LocalizationUtility::translate('create'));
             }
+
             return $redirectTarget;
         }
+
         return null;
     }
 
@@ -433,9 +393,9 @@ abstract class AbstractController extends ActionController
      * @param string $category "redirect", "requestRedirect" value from TypoScript
      */
     protected function redirectByAction(
-        $action = 'new',
-        $category = 'redirect',
-        $defaultAction = 'new'
+        string $action = 'new',
+        string $category = 'redirect',
+        ?string $defaultAction = 'new'
     ): ResponseInterface {
         $target = null;
         // redirect from TypoScript cObject
@@ -459,6 +419,7 @@ abstract class AbstractController extends ActionController
         if ($target) {
             return $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
         }
+
         return $this->redirect($defaultAction);
     }
 
@@ -470,28 +431,25 @@ abstract class AbstractController extends ActionController
     protected function isSpoof(User $user, int $uid, string $receivedToken): bool
     {
         $errorOnProfileUpdate = false;
-        $knownToken = GeneralUtility::hmac((string)$user->getUid(), (string)($user->getCrdate() ?: new \DateTime('01.01.1970'))->getTimestamp());
+        $knownToken = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Crypto\HashService::class)->hmac((string)$user->getUid(), (string)($user->getCrdate() ?: new \DateTime('01.01.1970'))->getTimestamp());
 
         //check if the params are valid
-        if (!is_string($receivedToken) || !hash_equals($knownToken, $receivedToken)) {
+        if (!hash_equals($knownToken, $receivedToken)) {
             $errorOnProfileUpdate = true;
         }
 
         //check if the logged user is allowed to edit / delete this record
-        if ($user->getUid() !== (int)$uid && $uid > 0) {
-            $errorOnProfileUpdate = true;
-        }
-
-        if ($errorOnProfileUpdate === true) {
+        if ($user->getUid() !== $uid && $uid > 0) {
             return true;
         }
-        return false;
+
+        return $errorOnProfileUpdate;
     }
 
     /**
      * Assigns all values, which should be available in all views
      */
-    public function assignForAll()
+    public function assignForAll(): void
     {
         $jsLabels = [
             'loading_states' => LocalizationUtility::translate('js.loading_states'),
@@ -510,15 +468,13 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * @return void
      * @throws \Exception
-     *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function initializeAction(): void
+    protected function initializeAction(): void
     {
         $this->user = UserUtility::getCurrentUser();
-        $this->contentObject = $this->configurationManager->getContentObject();
+        $this->contentObject = $this->request->getAttribute('currentContentObject');
         $this->pluginVariables = $this->request->getArguments();
         $this->moduleConfig = [];
         $this->allConfig = $this->configurationManager->getConfiguration(
@@ -567,7 +523,6 @@ abstract class AbstractController extends ActionController
     /**
      * Deactivate errormessages in flashmessages
      *
-     * @return bool
      *
      * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
@@ -579,7 +534,7 @@ abstract class AbstractController extends ActionController
     protected function checkStoragePid()
     {
         if ((int)($this->allConfig['persistence']['storagePid'] ?? 0) === 0
-            && GeneralUtility::_GP('type') !== '1548935210'
+            && ($this->request->getParsedBody()['type'] ?? $this->request->getQueryParams()['type'] ?? null) !== '1548935210'
             && !ApplicationType::fromRequest($this->request)->isBackend()
         ) {
             $this->addFlashMessage(
@@ -603,7 +558,7 @@ abstract class AbstractController extends ActionController
         } else {
             $typoscriptIncluded = ConfigurationUtility::getValue('_TypoScriptIncluded', $this->settings);
             if (
-                $typoscriptIncluded !== '1' && !GeneralUtility::_GP('eID')
+                $typoscriptIncluded !== '1' && !($this->request->getParsedBody()['eID'] ?? $this->request->getQueryParams()['eID'] ?? null)
                 && !ApplicationType::fromRequest($this->request)->isBackend()
             ) {
                 $this->addFlashMessage(
@@ -625,7 +580,7 @@ abstract class AbstractController extends ActionController
     /**
      * Send email to user for confirmation
      */
-    public function sendCreateUserConfirmationMail(User $user)
+    public function sendCreateUserConfirmationMail(User $user): void
     {
         $this->sendMailService->send(
             'createUserConfirmation',
@@ -652,7 +607,7 @@ abstract class AbstractController extends ActionController
         );
     }
 
-    public function sendCreateUserConfirmationMailFromBackend(User $user)
+    public function sendCreateUserConfirmationMailFromBackend(User $user): void
     {
         $receiver = StringUtility::makeEmailArray($user->getEmail(), $user->getUsername());
         $sender = StringUtility::makeEmailArray(

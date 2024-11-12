@@ -19,23 +19,17 @@ class AbstractUtility extends AbstractUtilityFemanager
      * @param string $tableName
      * @return array|mixed
      */
-    public static function getTcaFromTablePublic($tableName)
+    public static function getTcaFromTablePublic($tableName): array
     {
         return self::getTcaFromTable($tableName);
     }
 
-    /**
-     * @return array
-     */
-    public static function getFilesArrayPublic()
+    public static function getFilesArrayPublic(): array
     {
         return self::getFilesArray();
     }
 
-    /**
-     * @return UserGroupRepository
-     */
-    public static function getUserGroupRepositoryPublic()
+    public static function getUserGroupRepositoryPublic(): \In2code\Femanager\Domain\Repository\UserGroupRepository
     {
         return self::getUserGroupRepository();
     }
@@ -48,18 +42,12 @@ class AbstractUtility extends AbstractUtilityFemanager
         return self::getTypoScriptFrontendController();
     }
 
-    /**
-     * @return ContentObjectRenderer
-     */
-    public static function getContentObjectPublic()
+    public static function getContentObjectPublic(): \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
     {
         return self::getContentObject();
     }
 
-    /**
-     * @return ConfigurationManagerInterface
-     */
-    public static function getConfigurationManagerPublic()
+    public static function getConfigurationManagerPublic(): \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
     {
         return self::getConfigurationManager();
     }

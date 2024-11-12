@@ -41,10 +41,11 @@ class GetCountriesViewHelper extends AbstractViewHelper
         $countries = $this->countryProvider->getAll();
         foreach ($countries as $country) {
             $returnArray[$country->getAlpha3IsoCode()] =
-                $languageService !== null ?
+                $languageService instanceof \TYPO3\CMS\Core\Localization\LanguageService ?
                     $languageService->sL($country->getLocalizedNameLabel()) :
                     $country->getName();
         }
+
         asort($returnArray);
         return $returnArray;
     }

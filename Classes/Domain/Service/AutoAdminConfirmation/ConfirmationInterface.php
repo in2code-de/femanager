@@ -9,8 +9,5 @@ namespace In2code\Femanager\Domain\Service\AutoAdminConfirmation;
  */
 interface ConfirmationInterface
 {
-    /**
-     * @return bool
-     */
     public function isAutoConfirmed(): bool;
 }

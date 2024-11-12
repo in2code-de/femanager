@@ -26,20 +26,18 @@ abstract class AbstractUtility
      * Get table configuration array for a defined table
      *
      * @param string $table
-     * @return array
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getTcaFromTable($table = 'fe_users'): array
     {
-        $tca = [];
         if (!empty($GLOBALS['TCA'][$table])) {
-            $tca = $GLOBALS['TCA'][$table];
+            return $GLOBALS['TCA'][$table];
         }
-        return $tca;
+
+        return [];
     }
 
     /**
-     * @return ConnectionPool
      * @SuppressWarnings(PHPMD.Superglobals)
      * @codeCoverageIgnore
      */
@@ -49,17 +47,13 @@ abstract class AbstractUtility
     }
 
     /**
-     * @return array
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected static function getFilesArray(): array
     {
-        return (array)$_FILES;
+        return $_FILES;
     }
 
-    /**
-     * @return UserGroupRepository
-     */
     protected static function getUserGroupRepository(): UserGroupRepository
     {
         return GeneralUtility::makeInstance(UserGroupRepository::class);
@@ -77,7 +71,6 @@ abstract class AbstractUtility
     /**
      * Get TYPO3 encryption key
      *
-     * @return string
      * @throws Exception
      * @SuppressWarnings(PHPMD.Superglobals)
      */
@@ -86,13 +79,13 @@ abstract class AbstractUtility
         if (empty($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'])) {
             throw new UnexpectedValueException('No encryption key found in this TYPO3 installation', 1516373945265);
         }
+
         return $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'];
     }
 
     /**
      * Get extension configuration from LocalConfiguration.php
      *
-     * @return array
      * @throws ExtensionConfigurationExtensionNotConfiguredException
      * @throws ExtensionConfigurationPathDoesNotExistException
      */
@@ -102,7 +95,6 @@ abstract class AbstractUtility
     }
 
     /**
-     * @return ContentObjectRenderer
      * @throws Exception
      */
     protected static function getContentObject(): ContentObjectRenderer
@@ -111,7 +103,6 @@ abstract class AbstractUtility
     }
 
     /**
-     * @return ConfigurationManagerInterface
      * @codeCoverageIgnore
      * @throws Exception
      */

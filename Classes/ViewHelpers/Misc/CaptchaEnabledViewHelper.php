@@ -14,7 +14,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
  */
 class CaptchaEnabledViewHelper extends AbstractViewHelper
 {
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('settings', 'bool', 'array $settings TypoScript', true);
@@ -32,6 +32,7 @@ class CaptchaEnabledViewHelper extends AbstractViewHelper
                 1638341672
             );
         }
+
         $controllerName = strtolower((string)$this->renderingContext->getRequest()->getControllerName());
 
         return ExtensionManagementUtility::isLoaded('sr_freecap')

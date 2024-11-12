@@ -14,6 +14,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
  */
 class TextfieldViewHelper extends AbstractFormFieldViewHelper
 {
+    public $request;
+
     /**
      * @var string
      */
@@ -123,6 +125,7 @@ class TextfieldViewHelper extends AbstractFormFieldViewHelper
 
         return $this->tag->render();
     }
+
     /**
      * Read value from TypoScript
      *
@@ -137,17 +140,17 @@ class TextfieldViewHelper extends AbstractFormFieldViewHelper
                 1638341334
             );
         }
+
         $controllerName = strtolower((string)$this->renderingContext->getRequest()->getControllerName());
-        $contentObject = $this->configurationManager->getContentObject();
+        $contentObject = $this->request->getAttribute('currentContentObject');
         $typoScript = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
         $prefillTypoScript =
             $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? 0;
-        $value = $contentObject->cObjGetSingle(
+        return $contentObject->cObjGetSingle(
             $prefillTypoScript[$this->arguments['property']] ?? '',
             $prefillTypoScript[$this->arguments['property'] . '.'] ?? ''
         );
-        return $value;
     }
 }

@@ -16,21 +16,6 @@ use UnexpectedValueException;
 class AutoAdminConfirmationService
 {
     /**
-     * @var User
-     */
-    protected $user;
-
-    /**
-     * @var array
-     */
-    protected $settings = [];
-
-    /**
-     * @var ContentObjectRenderer
-     */
-    protected $contentObject;
-
-    /**
      * @var string
      */
     protected $confirmInterface = ConfirmationInterface::class;
@@ -38,11 +23,8 @@ class AutoAdminConfirmationService
     /**
      * AutoAdminConfirmationService constructor.
      */
-    public function __construct(User $user, array $settings, ContentObjectRenderer $contentObject)
+    public function __construct(protected \In2code\Femanager\Domain\Model\User $user, protected array $settings, protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject)
     {
-        $this->user = $user;
-        $this->settings = $settings;
-        $this->contentObject = $contentObject;
     }
 
     /**
@@ -64,6 +46,7 @@ class AutoAdminConfirmationService
                 $autoConfirmation = true;
             }
         }
+
         return $autoConfirmation;
     }
 
@@ -82,15 +65,18 @@ class AutoAdminConfirmationService
                         1516373867533
                     );
                 }
+
                 if (!is_subclass_of($className, $this->confirmInterface)) {
                     throw new UnexpectedValueException(
                         'Class ' . $className . ' does not implement interface ' . $this->confirmInterface,
                         1516373878882
                     );
                 }
+
                 $classes[] = $configuration;
             }
         }
+
         return $classes;
     }
 }

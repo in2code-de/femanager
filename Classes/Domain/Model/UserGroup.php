@@ -45,7 +45,7 @@ class UserGroup extends AbstractEntity
      *
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -65,7 +65,7 @@ class UserGroup extends AbstractEntity
      *
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -86,7 +86,7 @@ class UserGroup extends AbstractEntity
      *
      * @param ObjectStorage<UserGroup> $subgroup An object storage containing the subgroups to add
      */
-    public function setSubgroup(ObjectStorage $subgroup)
+    public function setSubgroup(ObjectStorage $subgroup): void
     {
         $this->subgroup = $subgroup;
     }
@@ -94,7 +94,7 @@ class UserGroup extends AbstractEntity
     /**
      * Adds a subgroup to the frontend user
      */
-    public function addSubgroup(UserGroup $subgroup)
+    public function addSubgroup(UserGroup $subgroup): void
     {
         $this->subgroup->attach($subgroup);
     }
@@ -102,7 +102,7 @@ class UserGroup extends AbstractEntity
     /**
      * Removes a subgroup from the frontend user group
      */
-    public function removeSubgroup(UserGroup $subgroup)
+    public function removeSubgroup(UserGroup $subgroup): void
     {
         $this->subgroup->detach($subgroup);
     }

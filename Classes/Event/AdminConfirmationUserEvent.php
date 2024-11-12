@@ -8,11 +8,8 @@ use In2code\Femanager\Domain\Model\User;
 
 class AdminConfirmationUserEvent
 {
-    protected $user;
-
-    public function __construct(?User $user)
+    public function __construct(protected ?\In2code\Femanager\Domain\Model\User $user)
     {
-        $this->user = $user;
     }
 
     public function getUser(): ?User

@@ -116,6 +116,7 @@ class ClientsideValidator extends AbstractValidator
 
             return false;
         }
+
         foreach ($this->getValidationSettings() as $validationSetting) {
             switch ($validationSetting) {
                 case 'required':
@@ -123,6 +124,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorRequired');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case stristr((string)$validationSetting, 'fileRequired('):
@@ -130,6 +132,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorRequired');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case 'email':
@@ -137,6 +140,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorEmail');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case stristr((string)$validationSetting, 'min('):
@@ -146,6 +150,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorMin');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case stristr((string)$validationSetting, 'max('):
@@ -155,6 +160,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorMax');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case 'intOnly':
@@ -162,6 +168,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorInt');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case 'lettersOnly':
@@ -169,6 +176,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorLetters');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case 'unicodeLettersOnly':
@@ -176,6 +184,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorLetters');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case 'uniqueInPage':
@@ -185,6 +194,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorUniquePage');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case 'uniqueInDb':
@@ -194,6 +204,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorUniqueDb');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case stristr((string)$validationSetting, 'mustInclude('):
@@ -207,6 +218,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorMustInclude');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case stristr((string)$validationSetting, 'mustNotInclude('):
@@ -220,6 +232,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorMustNotInclude');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case stristr((string)$validationSetting, 'inList('):
@@ -230,6 +243,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorInList');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case stristr((string)$validationSetting, 'sameAs('):
@@ -237,6 +251,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorSameAs');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case 'date':
@@ -249,6 +264,7 @@ class ClientsideValidator extends AbstractValidator
                         $this->addMessage('validationErrorDate');
                         $this->isValid = false;
                     }
+
                     break;
 
                 case stristr((string)$validationSetting, 'captcha('):
@@ -270,14 +286,12 @@ class ClientsideValidator extends AbstractValidator
                 default:
                     // e.g. search for method validateCustom()
                     $mainSetting = StringUtility::getValuesBeforeBrackets($validationSetting);
-                    if (method_exists($this, 'validate' . ucfirst((string)$mainSetting))) {
-                        if (!$this->{'validate' . ucfirst((string)$mainSetting)}(
-                            $this->getValue(),
-                            StringUtility::getValuesInBrackets($validationSetting)
-                        )) {
-                            $this->addMessage('validationError' . ucfirst((string)$mainSetting));
-                            $this->isValid = false;
-                        }
+                    if (method_exists($this, 'validate' . ucfirst((string)$mainSetting)) && !$this->{'validate' . ucfirst((string)$mainSetting)}(
+                        $this->getValue(),
+                        StringUtility::getValuesInBrackets($validationSetting)
+                    )) {
+                        $this->addMessage('validationError' . ucfirst((string)$mainSetting));
+                        $this->isValid = false;
                     }
             }
         }
@@ -299,9 +313,8 @@ class ClientsideValidator extends AbstractValidator
      * Set validation
      *
      * @param string $validationSettingsString
-     * @return ClientsideValidator
      */
-    public function setValidationSettingsString($validationSettingsString)
+    public function setValidationSettingsString($validationSettingsString): static
     {
         $this->validationSettingsString = $validationSettingsString;
 
@@ -338,20 +351,21 @@ class ClientsideValidator extends AbstractValidator
         if (!is_string($this->validationSettingsString)) {
             return [];
         }
+
         $singleSettingsArray = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
         foreach ($singleSettingsArray as &$singleSetting) {
             if (str_contains((string)$singleSetting, '|')) {
                 $singleSetting = str_replace('|', ',', (string)$singleSetting);
             }
         }
+
         return $singleSettingsArray;
     }
 
     /**
      * @param string $value
-     * @return ClientsideValidator
      */
-    public function setValue($value)
+    public function setValue($value): static
     {
         $this->value = $value;
 
@@ -371,16 +385,15 @@ class ClientsideValidator extends AbstractValidator
      *
      * @param string $message
      */
-    public function addMessage($message)
+    public function addMessage($message): void
     {
         $this->messages = array_merge($this->messages, [$message]);
     }
 
     /**
      * @param array $messages
-     * @return ClientsideValidator
      */
-    public function setMessages($messages)
+    public function setMessages($messages): static
     {
         $this->messages = $messages;
 
@@ -397,9 +410,8 @@ class ClientsideValidator extends AbstractValidator
 
     /**
      * @param string $fieldName
-     * @return ClientsideValidator
      */
-    public function setFieldName($fieldName)
+    public function setFieldName($fieldName): static
     {
         $this->fieldName = $fieldName;
 
@@ -414,10 +426,7 @@ class ClientsideValidator extends AbstractValidator
         return $this->fieldName;
     }
 
-    /**
-     * @return ClientsideValidator
-     */
-    public function setUser(User $user = null)
+    public function setUser(User $user = null): static
     {
         $this->user = $user;
 
@@ -434,9 +443,8 @@ class ClientsideValidator extends AbstractValidator
 
     /**
      * @param string $additionalValue
-     * @return ClientsideValidator
      */
-    public function setAdditionalValue($additionalValue)
+    public function setAdditionalValue($additionalValue): static
     {
         $this->additionalValue = $additionalValue;
 
@@ -456,10 +464,7 @@ class ClientsideValidator extends AbstractValidator
         return $this->plugin;
     }
 
-    /**
-     * @return ClientsideValidator
-     */
-    public function setPlugin(int $plugin)
+    public function setPlugin(int $plugin): static
     {
         $this->plugin = $plugin;
 
@@ -471,28 +476,19 @@ class ClientsideValidator extends AbstractValidator
         return $this->pluginName;
     }
 
-    /**
-     * @return ClientsideValidator
-     */
-    public function setPluginName(string $pluginName)
+    public function setPluginName(string $pluginName): static
     {
         $this->pluginName = $pluginName;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getActionName(): string
+    protected function getActionName(): string
     {
         return $this->actionName;
     }
 
-    /**
-     * @return ClientsideValidator
-     */
-    public function setActionName(string $actionName)
+    public function setActionName(string $actionName): static
     {
         $this->actionName = $actionName;
 
@@ -501,12 +497,11 @@ class ClientsideValidator extends AbstractValidator
 
     protected function getValidationNameByPlugin(string $plugin = 'tx_femanager_new'): string
     {
-        $validationName = 'validation';
         if ($this->getControllerNameByPlugin($plugin) === 'invitation' && $this->getActionName() === 'edit') {
-            $validationName = 'validationEdit';
+            return 'validationEdit';
         }
 
-        return $validationName;
+        return 'validation';
     }
 
     /**

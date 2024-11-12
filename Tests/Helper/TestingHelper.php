@@ -10,7 +10,7 @@ class TestingHelper
     /**
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public static function setDefaultConstants()
+    public static function setDefaultConstants(): void
     {
         $_SERVER['REMOTE_ADDR'] = '';
         $_SERVER['SSL_SESSION_ID'] = '';
@@ -29,28 +29,35 @@ class TestingHelper
         if (!defined('TYPO3_OS')) {
             define('TYPO3_OS', 'LINUX');
         }
+
         if (!defined('PATH_site')) {
             // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName
             define('PATH_site', self::getWebRoot());
         }
+
         if (!defined('PATH_thisScript')) {
             // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName
             define('PATH_thisScript', self::getWebRoot() . 'typo3');
         }
+
         if (!defined('TYPO3_version')) {
             // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName
             define('TYPO3_version', '8007000');
         }
+
         if (!defined('PHP_EXTENSIONS_DEFAULT')) {
             define('PHP_EXTENSIONS_DEFAULT', 'php');
         }
+
         if (!defined('TYPO3')) {
             define('TYPO3', true);
         }
+
         if (!defined('PATH_typo3')) {
             // phpcs:ignore Generic.NamingConventions.UpperCaseConstantName
             define('PATH_typo3', self::getWebRoot());
         }
+
         if (!defined('LF')) {
             define('LF', PHP_EOL);
         }

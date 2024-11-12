@@ -31,7 +31,7 @@ class PaginateViewHelper extends AbstractViewHelper
      */
     protected $escapeOutput = false;
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('objects', 'mixed', 'array or queryresult', true);
@@ -41,10 +41,6 @@ class PaginateViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param array $arguments
-     * @param Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     * @return string
      * @throws NotPaginatableException
      */
     public static function renderStatic(
@@ -55,6 +51,7 @@ class PaginateViewHelper extends AbstractViewHelper
         if ($arguments['objects'] === null) {
             return $renderChildrenClosure();
         }
+
         $templateVariableContainer = $renderingContext->getVariableProvider();
         $templateVariableContainer->add($arguments['as'], [
             'pagination' => self::getPagination($arguments, $renderingContext),
@@ -92,6 +89,7 @@ class PaginateViewHelper extends AbstractViewHelper
         } else {
             throw new NotPaginatableException('Given object is not supported for pagination', 1634132847);
         }
+
         return GeneralUtility::makeInstance(
             $paginatorClass,
             $arguments['objects'],
@@ -111,16 +109,16 @@ class PaginateViewHelper extends AbstractViewHelper
                 1637986936
             );
         }
+
         $extensionName = $renderingContext->getRequest()->getControllerExtensionName();
         $pluginName = $renderingContext->getRequest()->getPluginName();
         $extensionService = GeneralUtility::makeInstance(ExtensionService::class);
         $pluginNamespace = $extensionService->getPluginNamespace($extensionName, $pluginName);
-        $variables = GeneralUtility::_GP($pluginNamespace);
-        if ($variables !== null) {
-            if (!empty($variables[self::getName($arguments)]['currentPage'])) {
-                return (int)$variables[self::getName($arguments)]['currentPage'];
-            }
+        $variables = $GLOBALS['TYPO3_REQUEST']->getParsedBody()[$pluginNamespace] ?? $GLOBALS['TYPO3_REQUEST']->getQueryParams()[$pluginNamespace] ?? null;
+        if ($variables !== null && !empty($variables[self::getName($arguments)]['currentPage'])) {
+            return (int)$variables[self::getName($arguments)]['currentPage'];
         }
+
         return 1;
     }
 

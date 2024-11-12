@@ -76,14 +76,12 @@ class UserUtility extends AbstractUtility
      *      5,
      *      7
      *  )
-     *
-     * @return array
      */
-    public static function getCurrentUsergroupUids()
+    public static function getCurrentUsergroupUids(): array
     {
         $currentLoggedInUser = self::getCurrentUser();
         $usergroupUids = [];
-        if ($currentLoggedInUser !== null) {
+        if ($currentLoggedInUser instanceof \In2code\Femanager\Domain\Model\User) {
             foreach ($currentLoggedInUser->getUsergroup() as $usergroup) {
                 $usergroupUids[] = $usergroup->getUid();
             }
@@ -97,7 +95,7 @@ class UserUtility extends AbstractUtility
      *
      * @return User $user
      */
-    public static function fallbackUsernameAndPassword(User $user, string $pluginName = 'Pi1')
+    public static function fallbackUsernameAndPassword(User $user, string $pluginName = 'Pi1'): User
     {
         $settings = self::getConfigurationManager()->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
@@ -108,7 +106,7 @@ class UserUtility extends AbstractUtility
         if (isset($settings['new']['misc']['autogenerate'])) {
             $autogenerateSettings = $settings['new']['misc']['autogenerate'];
 
-            if (!$user->getUsername()) {
+            if ($user->getUsername() === '' || $user->getUsername() === '0') {
                 $user->setUsername(
                     StringUtility::getRandomString(
                         $autogenerateSettings['username']['length'],
@@ -116,11 +114,12 @@ class UserUtility extends AbstractUtility
                         $autogenerateSettings['username']['addSpecialCharacters']
                     )
                 );
-                if ($user->getEmail()) {
+                if ($user->getEmail() !== '' && $user->getEmail() !== '0') {
                     $user->setUsername($user->getEmail());
                 }
             }
-            if (!$user->getPassword()) {
+
+            if ($user->getPassword() === '' || $user->getPassword() === '0') {
                 $password = StringUtility::getRandomString(
                     $autogenerateSettings['password']['length'],
                     $autogenerateSettings['password']['addUpperCase'],
@@ -134,10 +133,7 @@ class UserUtility extends AbstractUtility
         return $user;
     }
 
-    /**
-     * @return User
-     */
-    public static function takeEmailAsUsername(User $user, array $settings)
+    public static function takeEmailAsUsername(User $user, array $settings): User
     {
         if (ConfigurationUtility::getValue('new/fillEmailWithUsername', $settings) === '1') {
             $user->setEmail($user->getUsername());
@@ -149,11 +145,10 @@ class UserUtility extends AbstractUtility
     /**
      * Overwrite usergroups from user by flexform settings
      *
-     * @param array $settings
      * @param string $controllerName
      * @return User $object
      */
-    public static function overrideUserGroup(User $user, $settings, $controllerName = 'new')
+    public static function overrideUserGroup(User $user, array $settings, $controllerName = 'new'): User
     {
         if (!empty($settings[$controllerName]['overrideUserGroup'])) {
             $user->removeAllUsergroups();
@@ -174,7 +169,7 @@ class UserUtility extends AbstractUtility
      * @param string $method
      * @throws InvalidPasswordHashException
      */
-    public static function convertPassword(User $user, $method)
+    public static function convertPassword(User $user, $method): void
     {
         if (array_key_exists('password', UserUtility::getDirtyPropertiesFromUser($user))) {
             self::hashPassword($user, $method);
@@ -187,7 +182,7 @@ class UserUtility extends AbstractUtility
      * @param string $method "Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", "md5" or "none" ("sha1" for TYPO3 V8)
      * @throws InvalidPasswordHashException
      */
-    public static function hashPassword(User &$user, $method)
+    public static function hashPassword(User &$user, $method): void
     {
         $hashInstance = false;
         $saltedHashPassword = $user->getPassword();
@@ -240,7 +235,7 @@ class UserUtility extends AbstractUtility
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public static function getDirtyPropertiesFromUser(User $changedObject)
+    public static function getDirtyPropertiesFromUser(User $changedObject): array
     {
         $dirtyProperties = [];
         $ignoreProperties = [
@@ -260,28 +255,26 @@ class UserUtility extends AbstractUtility
                         $dirtyProperties[$propertyName]['old'] = $oldPropertyValue;
                         $dirtyProperties[$propertyName]['new'] = $newPropertyValue;
                     }
+                } elseif ($oldPropertyValue::class === 'DateTime') {
+                    /** @var $oldPropertyValue \DateTime */
+                    /** @var $newPropertyValue \DateTime */
+                    if ($oldPropertyValue->getTimestamp() !== $newPropertyValue->getTimestamp()) {
+                        $dirtyProperties[$propertyName]['old'] = $oldPropertyValue->getTimestamp();
+                        $dirtyProperties[$propertyName]['new'] = $newPropertyValue->getTimestamp();
+                    }
+                } elseif ($oldPropertyValue::class === ObjectStorage::class) {
+                    $titlesOld = ObjectUtility::implodeObjectStorageOnProperty($oldPropertyValue);
+                    $titlesNew = ObjectUtility::implodeObjectStorageOnProperty($newPropertyValue);
+                    if ($titlesOld !== $titlesNew) {
+                        $dirtyProperties[$propertyName]['old'] = $titlesOld;
+                        $dirtyProperties[$propertyName]['new'] = $titlesNew;
+                    }
                 } else {
-                    if ($oldPropertyValue::class === 'DateTime') {
-                        /** @var $oldPropertyValue \DateTime */
-                        /** @var $newPropertyValue \DateTime */
-                        if ($oldPropertyValue->getTimestamp() !== $newPropertyValue->getTimestamp()) {
-                            $dirtyProperties[$propertyName]['old'] = $oldPropertyValue->getTimestamp();
-                            $dirtyProperties[$propertyName]['new'] = $newPropertyValue->getTimestamp();
-                        }
-                    } elseif (get_class($oldPropertyValue) === ObjectStorage::class) {
-                        $titlesOld = ObjectUtility::implodeObjectStorageOnProperty($oldPropertyValue);
-                        $titlesNew = ObjectUtility::implodeObjectStorageOnProperty($newPropertyValue);
-                        if ($titlesOld !== $titlesNew) {
-                            $dirtyProperties[$propertyName]['old'] = $titlesOld;
-                            $dirtyProperties[$propertyName]['new'] = $titlesNew;
-                        }
-                    } else {
-                        $uidOld = ObjectAccess::getProperty($oldPropertyValue, 'uid');
-                        $uidNew = ObjectAccess::getProperty($newPropertyValue, 'uid');
-                        if ($uidOld !== $uidNew) {
-                            $dirtyProperties[$propertyName]['old'] = $uidOld;
-                            $dirtyProperties[$propertyName]['new'] = $uidNew;
-                        }
+                    $uidOld = ObjectAccess::getProperty($oldPropertyValue, 'uid');
+                    $uidNew = ObjectAccess::getProperty($newPropertyValue, 'uid');
+                    if ($uidOld !== $uidNew) {
+                        $dirtyProperties[$propertyName]['old'] = $uidOld;
+                        $dirtyProperties[$propertyName]['new'] = $uidNew;
                     }
                 }
             }
@@ -294,10 +287,9 @@ class UserUtility extends AbstractUtility
      * overwrite user with old values and xml with new values
      *
      * @param User $user
-     * @param array $dirtyProperties
      * @return User $user
      */
-    public static function rollbackUserWithChangeRequest($user, $dirtyProperties)
+    public static function rollbackUserWithChangeRequest($user, array $dirtyProperties)
     {
         $existingProperties = $user->_getCleanProperties();
 
@@ -317,7 +309,7 @@ class UserUtility extends AbstractUtility
     /**
      * Remove FE Session to a given user
      */
-    public static function removeFrontendSessionToUser(User $user)
+    public static function removeFrontendSessionToUser(User $user): void
     {
         self::getConnectionPool()->getConnectionForTable('fe_sessions')->delete(
             'fe_sessions',
@@ -327,16 +319,13 @@ class UserUtility extends AbstractUtility
 
     /**
      * Check if FE Session exists
-     *
-     * @return bool
      */
-    public static function checkFrontendSessionToUser(User $user)
+    public static function checkFrontendSessionToUser(User $user): bool
     {
         $queryBuilder = self::getConnectionPool()->getQueryBuilderForTable('fe_sessions');
 
         $row = $queryBuilder->select('ses_id')
-            ->from('fe_sessions')->where($queryBuilder->expr()->eq('ses_userid', (int)$user->getUid()))->executeQuery()
-            ->fetch();
+            ->from('fe_sessions')->where($queryBuilder->expr()->eq('ses_userid', (int)$user->getUid()))->executeQuery()->fetchAssociative();
 
         return !empty($row['ses_id']);
     }
@@ -349,7 +338,7 @@ class UserUtility extends AbstractUtility
      *
      * @TODO: Check Storagepid Parameter
      */
-    public static function login(User $user, ?string $storagePids = null)
+    public static function login(User $user, ?string $storagePids = null): void
     {
         $tsfe = $GLOBALS['TSFE'];
         $tsfe->fe_user->createUserSession($user->getTempUserArray());

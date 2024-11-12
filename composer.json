@@ -47,7 +47,6 @@
     "friends-of-behat/mink-extension": "^2.7",
     "friendsofphp/php-cs-fixer": "^3.14",
     "genesis/behat-fail-aid": "^3.7",
-    "helhum/typo3-console": "^8.0.0",
     "helmich/typo3-typoscript-lint": "^3.1",
     "mikey179/vfsstream": "^1.6",
     "phpmd/phpmd": "^2.13",

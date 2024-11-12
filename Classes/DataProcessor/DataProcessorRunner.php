@@ -65,7 +65,7 @@ class DataProcessorRunner
         array $settings,
         ContentObjectRenderer $contentObject,
         Arguments $controllerArguments
-    ) {
+    ): void {
         foreach ($this->getClasses($settings) as $configuration) {
             $class = $configuration['class'];
             if (!class_exists($class)) {
@@ -74,6 +74,7 @@ class DataProcessorRunner
                     1516373818752
                 );
             }
+
             if (is_subclass_of($class, $this->interface)) {
                 /** @var AbstractDataProcessor $dataProcessor */
                 /** @noinspection PhpMethodParametersCountMismatchInspection */
@@ -101,13 +102,17 @@ class DataProcessorRunner
         ksort($allDataProcessors);
         $dataProcessors = [];
         foreach ($allDataProcessors as $dataProcessor) {
-            if (isset($dataProcessor['events']) === true && $dataProcessor['events'] !== []) {
+            if (isset($dataProcessor['events']) && $dataProcessor['events'] !== []) {
                 foreach ($dataProcessor['events'] as $controllerName => $actionList) {
-                    if ($controllerName === FrontendUtility::getControllerName()) {
-                        if (GeneralUtility::inList($actionList, FrontendUtility::getActionName())) {
-                            $dataProcessors[] = $dataProcessor;
-                        }
+                    if ($controllerName !== FrontendUtility::getControllerName()) {
+                        continue;
                     }
+
+                    if (!GeneralUtility::inList($actionList, FrontendUtility::getActionName())) {
+                        continue;
+                    }
+
+                    $dataProcessors[] = $dataProcessor;
                 }
             }
         }

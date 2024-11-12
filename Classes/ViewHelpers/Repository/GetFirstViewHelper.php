@@ -20,6 +20,7 @@ class GetFirstViewHelper extends AbstractViewHelper
         if (method_exists($objects, 'getFirst')) {
             return $objects->getFirst();
         }
+
         return null;
     }
 
@@ -28,7 +29,7 @@ class GetFirstViewHelper extends AbstractViewHelper
      *
      * @api
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('objects', 'object ', 'Call getFirst() method of object storage', true);

@@ -15,11 +15,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class FinisherRunner
 {
     /**
-     * @var FinisherService
-     */
-    protected $finisherService;
-
-    /**
      * @var ConfigurationManagerInterface
      */
     protected $configurationManager;
@@ -34,24 +29,19 @@ class FinisherRunner
     /**
      * FinisherRunner constructor.
      */
-    public function __construct(
-        FinisherService $finisherService
-    ) {
-        $this->finisherService = $finisherService;
+    public function __construct(protected \In2code\Femanager\Domain\Service\FinisherService $finisherService)
+    {
     }
 
     /**
      * Call finisher classes after submit
-     *
-     * @param string $actionMethodName
-     * @param array $settings
      */
     public function callFinishers(
         User $user,
-        $actionMethodName,
-        $settings,
+        string $actionMethodName,
+        array $settings,
         ContentObjectRenderer $contentObject
-    ) {
+    ): void {
         foreach ($this->getFinisherClasses($settings) as $finisherSettings) {
             $this->finisherService->init($user, $settings, $contentObject);
             $this->finisherService->setClass($finisherSettings['class']);
@@ -64,11 +54,8 @@ class FinisherRunner
 
     /**
      * Get all finisher classes from typoscript and sort them
-     *
-     * @param array $settings
-     * @return array
      */
-    protected function getFinisherClasses($settings)
+    protected function getFinisherClasses(array $settings): array
     {
         $finishers = (array)$settings['finishers'];
         ksort($finishers);

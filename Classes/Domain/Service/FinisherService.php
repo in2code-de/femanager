@@ -75,9 +75,8 @@ class FinisherService
 
     /**
      * @param string $class
-     * @return FinisherService
      */
-    public function setClass($class)
+    public function setClass($class): static
     {
         $this->class = $class;
         return $this;
@@ -90,15 +89,14 @@ class FinisherService
 
     /**
      * Set require path and do a require_once
-     *
-     * @return FinisherService
      */
-    public function setRequirePath(?string $requirePath)
+    public function setRequirePath(?string $requirePath): static
     {
         $this->requirePath = $requirePath;
         if ($this->getRequirePath() && file_exists($this->getRequirePath())) {
             require_once($this->getRequirePath());
         }
+
         return $this;
     }
 
@@ -112,9 +110,8 @@ class FinisherService
 
     /**
      * @param array $configuration
-     * @return FinisherService
      */
-    public function setConfiguration($configuration)
+    public function setConfiguration($configuration): static
     {
         $this->configuration = $configuration;
         return $this;
@@ -130,9 +127,8 @@ class FinisherService
 
     /**
      * @param User $user
-     * @return FinisherService
      */
-    public function setUser($user)
+    public function setUser($user): static
     {
         $this->user = $user;
         return $this;
@@ -148,9 +144,8 @@ class FinisherService
 
     /**
      * @param array $settings
-     * @return FinisherService
      */
-    public function setSettings($settings)
+    public function setSettings($settings): static
     {
         $this->settings = $settings;
         return $this;
@@ -172,7 +167,7 @@ class FinisherService
      *
      * @throws \Exception
      */
-    public function start()
+    public function start(): void
     {
         if (!class_exists($this->getClass())) {
             throw new UnexpectedValueException(
@@ -180,6 +175,7 @@ class FinisherService
                 1516373888508
             );
         }
+
         if (is_subclass_of($this->getClass(), $this->finisherInterface)) {
             /** @var AbstractFinisher $finisher */
             $finisher = GeneralUtility::makeInstance(
@@ -206,9 +202,14 @@ class FinisherService
     protected function callFinisherMethods(AbstractFinisher $finisher)
     {
         foreach (get_class_methods($finisher) as $method) {
-            if (!StringUtility::endsWith($method, 'Finisher') || str_starts_with($method, 'initialize')) {
+            if (!StringUtility::endsWith($method, 'Finisher')) {
                 continue;
             }
+
+            if (str_starts_with($method, 'initialize')) {
+                continue;
+            }
+
             $this->callInitializeFinisherMethod($finisher, $method);
             $finisher->{$method}();
         }
@@ -226,7 +227,7 @@ class FinisherService
         }
     }
 
-    public function init(User $user, array $settings, ContentObjectRenderer $contentObject)
+    public function init(User $user, array $settings, ContentObjectRenderer $contentObject): void
     {
         $this->setUser($user);
         $this->setSettings($settings);

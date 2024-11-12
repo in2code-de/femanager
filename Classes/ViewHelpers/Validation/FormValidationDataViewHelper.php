@@ -32,6 +32,7 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper implemen
                 'Settings should not be filled any more in field partials. Pls update your femanager partial files.'
             );
         }
+
         $validationService = GeneralUtility::makeInstance(
             ValidationSettingsService::class,
             $this->getControllerName(),
@@ -47,6 +48,7 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper implemen
                 }
             }
         }
+
         return $additionalAttributes;
     }
 
@@ -55,7 +57,7 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper implemen
      *
      * @api
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('settings', 'array ', 'all TypoScript settings for this form', true);

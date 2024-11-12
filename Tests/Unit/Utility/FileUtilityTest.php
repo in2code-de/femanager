@@ -13,9 +13,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class FileUtilityTest extends UnitTestCase
 {
-    /**
-     * @var array
-     */
     protected array $testFilesToDelete = [];
 
     public function setUp(): void
@@ -27,7 +24,7 @@ class FileUtilityTest extends UnitTestCase
     /**
      * @covers ::createFolderIfNotExists
      */
-    public function testCreateFolderIfNotExists()
+    public function testCreateFolderIfNotExists(): void
     {
         $testpath = TestingHelper::getWebRoot() . 'fileadmin/';
 
@@ -39,7 +36,7 @@ class FileUtilityTest extends UnitTestCase
     /**
      * @covers ::getRelativeFolderFromAbsolutePath
      */
-    public function testGetRelativeFolderFromAbsolutePath()
+    public function testGetRelativeFolderFromAbsolutePath(): void
     {
         $paths = [
             'abc/' => 'abc/',

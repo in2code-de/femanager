@@ -13,73 +13,35 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 abstract class AbstractConfirmation implements ConfirmationInterface
 {
     /**
-     * @var array
-     */
-    protected $config = [];
-
-    /**
-     * @var User
-     */
-    protected $user;
-
-    /**
-     * @var array
-     */
-    protected $settings = [];
-
-    /**
-     * @var ContentObjectRenderer
-     */
-    protected $contentObject;
-
-    /**
      * AbstractConfirmation constructor.
      */
-    public function __construct(array $config, User $user, array $settings, ContentObjectRenderer $contentObject)
+    public function __construct(protected array $config, protected \In2code\Femanager\Domain\Model\User $user, protected array $settings, protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject)
     {
-        $this->config = $config;
-        $this->user = $user;
-        $this->settings = $settings;
-        $this->contentObject = $contentObject;
     }
 
     /**
      * Skip manual confirmation from admin?
-     *
-     * @return bool
      */
     public function isAutoConfirmed(): bool
     {
         return false;
     }
 
-    /**
-     * @return array
-     */
     public function getConfig(): array
     {
         return $this->config;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @return array
-     */
     public function getSettings(): array
     {
         return $this->settings;
     }
 
-    /**
-     * @return ContentObjectRenderer
-     */
     public function getContentObject(): ContentObjectRenderer
     {
         return $this->contentObject;

@@ -16,10 +16,8 @@ class UserOptions
 {
     /**
      * Just add users from start point to selection
-     *
-     * @param array $params
      */
-    public function addOptions(&$params)
+    public function addOptions(array &$params): void
     {
         if ($this->getPages($params) !== []) {
             $params['items'] = [
@@ -41,7 +39,7 @@ class UserOptions
             ->from(User::TABLE_NAME)
             ->where('pid in (' . $this->getPageUidList($params) . ')')
             ->setMaxResults(10000)->orderBy('username', 'ASC')->executeQuery();
-        return $result->fetchAll();
+        return $result->fetchAllAssociative();
     }
 
     /**
@@ -56,6 +54,7 @@ class UserOptions
             $list .= $pageTreeService->getTreeList($pageIdentifier, $depth, 0, '1');
             $list .= ',';
         }
+
         return rtrim($list, ',');
     }
 
@@ -67,6 +66,7 @@ class UserOptions
                 $pages[] = $page['uid'];
             }
         }
+
         return $pages;
     }
 }

@@ -15,9 +15,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class BackendUtilityTest extends UnitTestCase
 {
-    /**
-     * @var array
-     */
     protected array $testFilesToDelete = [];
 
     public function setUp(): void
@@ -36,7 +33,7 @@ class BackendUtilityTest extends UnitTestCase
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getPageIdentifier
      */
-    public function testGetPageIdentifier()
+    public function testGetPageIdentifier(): void
     {
         $_GET['id'] = 123;
         self::assertSame(123, BackendUtility::getPageIdentifier());
@@ -45,7 +42,7 @@ class BackendUtilityTest extends UnitTestCase
     /**
      * @covers ::getPluginOrModuleString
      */
-    public function testGetPluginOrModuleString()
+    public function testGetPluginOrModuleString(): void
     {
         $result = BackendUtility::getPluginOrModuleString();
         self::assertSame('module', $result);
@@ -55,7 +52,7 @@ class BackendUtilityTest extends UnitTestCase
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getCurrentParameters
      */
-    public function testGetCurrentParameters()
+    public function testGetCurrentParameters(): void
     {
         $testParams = ['foo' => ['bar']];
         $_GET = $testParams;

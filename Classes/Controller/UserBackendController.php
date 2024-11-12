@@ -37,16 +37,13 @@ class UserBackendController extends AbstractController
 {
     protected int $configPID;
 
-    protected ModuleTemplateFactory $moduleTemplateFactory;
-
     protected ModuleTemplate $moduleTemplate;
 
-    public function injectModuleTemplateFactory(ModuleTemplateFactory $moduleTemplateFactory)
+    public function __construct(protected ModuleTemplateFactory $moduleTemplateFactory)
     {
-        $this->moduleTemplateFactory = $moduleTemplateFactory;
     }
 
-    public function initializeAction(): void
+    protected function initializeAction(): void
     {
         parent::initializeAction();
         $this->moduleTemplate = $this->moduleTemplateFactory->create($this->request);
@@ -160,6 +157,7 @@ class UserBackendController extends AbstractController
                 return false;
             }
         }
+
         return true;
     }
 
@@ -243,6 +241,7 @@ class UserBackendController extends AbstractController
         if (isset($this->moduleConfig['settings.']['configPID']) && $this->moduleConfig['settings.']['configPID'] > 0) {
             return (int)$this->moduleConfig['settings.']['configPID'];
         }
+
         $this->addFlashMessage(
             LocalizationUtility::translate(
                 'BackendMissingConfigPID',
@@ -297,6 +296,8 @@ class UserBackendController extends AbstractController
             $content = $response->getBody()->getContents();
             return json_decode((string)$content, true, 512, JSON_THROW_ON_ERROR);
         }
+
+        return null;
     }
 
     /**

@@ -18,7 +18,7 @@ class DataMap extends DataMapExtbase
      *
      * @param string $recordType The record type
      */
-    public function setRecordType($recordType)
+    public function setRecordType($recordType): void
     {
         parent::setRecordType($recordType);
         if ($this->getClassName() === User::class || $this->getClassName() === UserGroup::class) {

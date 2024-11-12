@@ -39,7 +39,7 @@ use TYPO3\TestingFramework\Core\Testbase;
  * according script within TYPO3 core's Build/Scripts directory and
  * adapt to extensions needs.
  */
-(static function () {
+(static function (): void {
     $testbase = new Testbase();
 
     // These if's are for core testing (package typo3/cms) only. cms-composer-installer does
@@ -52,6 +52,7 @@ use TYPO3\TestingFramework\Core\Testbase;
     if (!getenv('TYPO3_PATH_ROOT')) {
         putenv('TYPO3_PATH_ROOT=' . rtrim($testbase->getWebRoot(), '/'));
     }
+
     if (!getenv('TYPO3_PATH_WEB')) {
         putenv('TYPO3_PATH_WEB=' . rtrim($testbase->getWebRoot(), '/'));
     }
@@ -65,7 +66,7 @@ use TYPO3\TestingFramework\Core\Testbase;
     Environment::initialize(
         Environment::getContext(),
         Environment::isCli(),
-        defined('TYPO3_COMPOSER_MODE') && TYPO3_COMPOSER_MODE === true,
+        defined('TYPO3_COMPOSER_MODE') && TYPO3_COMPOSER_MODE,
         Environment::getProjectPath(),
         Environment::getPublicPath(),
         Environment::getVarPath(),

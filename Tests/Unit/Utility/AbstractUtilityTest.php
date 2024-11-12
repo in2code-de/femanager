@@ -17,7 +17,7 @@ class AbstractUtilityTest extends UnitTestCase
      * @SuppressWarnings(PHPMD.Superglobals)
      * @covers ::getTcaFromTable
      */
-    public function testGetTcaFromTable()
+    public function testGetTcaFromTable(): void
     {
         $table = 'tx_test';
         $tca = [
@@ -32,7 +32,7 @@ class AbstractUtilityTest extends UnitTestCase
     /**
      * @covers ::getFilesArray
      */
-    public function testGetFilesArray()
+    public function testGetFilesArray(): void
     {
         $result = AbstractUtility::getFilesArrayPublic();
         self::assertTrue(is_array($result));

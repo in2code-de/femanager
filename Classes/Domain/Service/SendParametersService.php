@@ -17,11 +17,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class SendParametersService
 {
     /**
-     * @var ConfigurationManagerInterface
-     */
-    protected $configurationManager;
-
-    /**
      * @var ContentObjectRenderer
      */
     protected $contentObject;
@@ -35,13 +30,8 @@ class SendParametersService
      * Constructor
      * @param mixed[] $configuration
      */
-    public function __construct(protected $configuration)
+    public function __construct(protected $configuration, protected \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
     {
-    }
-
-    public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
-    {
-        $this->configurationManager = $configurationManager;
     }
 
     /**
@@ -51,7 +41,7 @@ class SendParametersService
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function send(User $user)
+    public function send(User $user): void
     {
         $this->initialize($user);
         $this->contentObject->start($this->properties);
@@ -65,6 +55,7 @@ class SendParametersService
                 curl_setopt($curlObject, CURLOPT_SSL_VERIFYHOST, false);
                 curl_setopt($curlObject, CURLOPT_SSL_VERIFYPEER, false);
             }
+
             curl_exec($curlObject);
             curl_close($curlObject);
             $this->log();
@@ -111,10 +102,7 @@ class SendParametersService
         }
     }
 
-    /**
-     * @return bool
-     */
-    protected function isTurnedOn()
+    protected function isTurnedOn(): bool
     {
         return $this->contentObject->cObjGetSingle((string)$this->configuration['_enable'], (array)$this->configuration['_enable.'])
             === '1';
@@ -126,6 +114,6 @@ class SendParametersService
     protected function initialize(User $user)
     {
         $this->properties = $user->_getCleanProperties();
-        $this->contentObject = $this->configurationManager->getContentObject();
+        $this->contentObject = $this->request->getAttribute('currentContentObject');
     }
 }

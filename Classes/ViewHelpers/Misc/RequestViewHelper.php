@@ -37,15 +37,15 @@ class RequestViewHelper extends AbstractViewHelper
 
         $parts = $this->init($parameter);
         $result = $this->getVariableFromDepth($parts);
-        if ($htmlspecialchars === true) {
-            if (is_string($result)) {
-                $result = htmlspecialchars($result);
-            }
+        if ($htmlspecialchars === true && is_string($result)) {
+            $result = htmlspecialchars($result);
         }
-        if (is_array($result) or $result === null) {
+
+        if (is_array($result) || $result === null) {
             // ensure that the return value is always as string
-            $result='';
+            return '';
         }
+
         return $result;
     }
 
@@ -64,12 +64,11 @@ class RequestViewHelper extends AbstractViewHelper
      * Initially sets $this->variable
      *
      * @param $parameter
-     * @return array
      */
-    protected function init($parameter)
+    protected function init($parameter): array
     {
         $parts = explode('|', (string)$parameter);
-        $this->variable = GeneralUtility::_GP($parts[0]);
+        $this->variable = $GLOBALS['TYPO3_REQUEST']->getParsedBody()[$parts[0]] ?? $GLOBALS['TYPO3_REQUEST']->getQueryParams()[$parts[0]] ?? null;
         if ($this->testVariables) {
             $this->variable = $this->testVariables[$parts[0]];
         }
@@ -80,7 +79,7 @@ class RequestViewHelper extends AbstractViewHelper
     /**
      * Register all arguments for this viewhelper
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('parameter', 'string', 'like tx_ext_pi1|list|field', false, '');

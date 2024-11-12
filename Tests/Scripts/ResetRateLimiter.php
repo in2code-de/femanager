@@ -11,10 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ResetRateLimiter
 {
-    /**
-     * @return string
-     */
-    public function reset()
+    public function reset(): string
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('cache_femanager_ratelimiter');
@@ -25,9 +22,10 @@ class ResetRateLimiter
             $queryBuilder->executeStatement();
 
             return 'Rate limiter cache has been reset';
-        } catch (Exception $e) {
-            $errorMsg = $e->getMessage();
+        } catch (Exception $exception) {
+            $errorMsg = $exception->getMessage();
         }
+
         return 'Could not reset rate limiter. ' . $errorMsg;
     }
 }

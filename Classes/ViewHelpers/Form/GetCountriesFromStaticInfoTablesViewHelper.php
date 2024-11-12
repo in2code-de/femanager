@@ -38,6 +38,7 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
         if ($this->countryRepository === null) {
             return ['ERROR: static_info_tables is not loaded'];
         }
+
         $key = $this->arguments['key'];
         $value = $this->arguments['value'];
         $sortbyField = $this->arguments['sortbyField'];
@@ -52,6 +53,7 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
                 $countriesArray[ObjectAccess::getProperty($country, $key)] =
                     ObjectAccess::getProperty($country, $value);
             }
+
             $countriesArray['---'] = '---';
         }
 
@@ -76,7 +78,7 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
     /**
      * Initialize
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument(

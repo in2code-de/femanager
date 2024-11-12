@@ -37,10 +37,8 @@ class FrontendUtility extends AbstractUtility
      */
     public static function getFrontendLanguageUid(): int
     {
-        $languageUid = 0;
         $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
-        $languageUid = $languageAspect->getId();
-        return $languageUid;
+        return $languageAspect->getId();
     }
 
     public static function getCharset(): string
@@ -66,17 +64,19 @@ class FrontendUtility extends AbstractUtility
      * @return User $object
      * @codeCoverageIgnore
      */
-    public static function forceValues(User $user, array $settings)
+    public static function forceValues(User $user, array $settings): User
     {
-        foreach ((array)$settings as $field => $config) {
+        foreach ($settings as $field => $config) {
             $config = null;
             if (stristr($field, '.')) {
                 continue;
             }
+
             // value to set
             $value = self::getContentObject()->cObjGetSingle($settings[$field], $settings[$field . '.']);
             self::forceValue($user, $field, $value);
         }
+
         return $user;
     }
 
@@ -114,6 +114,7 @@ class FrontendUtility extends AbstractUtility
                 $controllerName = $variables['controller'];
             }
         }
+
         return $controllerName;
     }
 
@@ -126,6 +127,7 @@ class FrontendUtility extends AbstractUtility
                 $actionName = $variables['action'];
             }
         }
+
         return $actionName;
     }
 }

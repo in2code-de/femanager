@@ -101,7 +101,7 @@ class RequestViewHelperTest extends UnitTestCase
         bool $htmlSpecialChars,
         array $parametersToSet,
         string $expectedResult
-    ) {
+    ): void {
         $arguments = [
             'parameter' => $parameter,
             'htmlspecialchars' => $htmlSpecialChars,

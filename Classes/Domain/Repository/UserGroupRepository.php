@@ -25,6 +25,7 @@ class UserGroupRepository extends Repository
         if ($removeList) {
             $query->matching($query->logicalNot($query->in('uid', explode(',', $removeList))));
         }
+
         $query->setOrderings(['title' => QueryInterface::ORDER_ASCENDING]);
         return $query->execute();
     }
