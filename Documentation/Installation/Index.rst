@@ -2176,7 +2176,7 @@ The Femanager-Backend-Module List is only a small module to search and list some
 Some AJAX-requests will help you and your editors to delete or hide and unhide users very fast.
 The edit icons works in the same way as in the list module.
 
-In addition you can see who's only in this moment (If fe_users session exists and is not older than 2h) and you can
+In addition you can see who's online in this moment (If fe_users session exists and is not older than 2h) and you can
 logout your fe-users with just one click.
 
 A new feature called **log in as** allows you to open a new window where your frontend is shown and you are already
@@ -2196,10 +2196,10 @@ only admins should confirm the requests), **User TSConfig** can be used like (to
 Configuration
 """""""""""""
 
-Nearly all settings for the backend module are done in ext_typoscript_setup.txt in the key module.tx_femanager.
+Nearly all settings for the backend module are done via the key module.tx_femanager.
 One setting must be done in your TypoScript Template, the setting module.tx_femanager.settings.configPID should be set in your TypoScript, the default is 1.
 
-You can overwrite these settings in your page TS.
+You can overwrite these settings in your Page TSConfig.
 
 
 .. t3-field-list-table::
@@ -2218,8 +2218,8 @@ You can overwrite these settings in your page TS.
       :Field:
          typoscript main template storage
       :Description:
-         You need to specify the pid, where your main typoscript settings (frontend) is stored. You should take a page, where a plugin (regristration / invitation) is available.. This is needed to perform actions like confirm users via Backend or resend
-          confirmation mails. If you have a multidomain system, you can overwrite config in your typoScript Tempplate for
-          each domain. If this setting is not applied by the root typoscript template, try to define your setting in a ext_typoscript_setup.txt in your template / sitepackage extension.
+         You need to specify the pid, where your main TypoScript settings (frontend) is stored. You should take a page, where a plugin (regristration / invitation) is available. 
+         This is needed to perform actions like confirm users via backend or resend confirmation mails. If you have a multidomain system, you can overwrite the config in your TypoScript Template for each domain. 
+         If this setting is not applied by the root TypoScript Template, try to define your setting in a ext_typoscript_setup.typoscript in your template / sitepackage extension or via Page TSConfig.
       :Default:
          1
