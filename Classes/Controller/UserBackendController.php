@@ -5,12 +5,17 @@ declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Repository\UserGroupRepository;
+use In2code\Femanager\Domain\Repository\UserRepository;
+use In2code\Femanager\Domain\Service\SendMailService;
 use In2code\Femanager\Event\AdminConfirmationUserEvent;
 use In2code\Femanager\Event\RefuseUserEvent;
+use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\BackendUserUtility;
 use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
+use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
@@ -27,6 +32,7 @@ use TYPO3\CMS\Core\Type\Bitmask\Permission;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
  * Class UserBackendController
@@ -39,7 +45,14 @@ class UserBackendController extends AbstractController
 
     protected ModuleTemplate $moduleTemplate;
 
-    public function __construct(protected ModuleTemplateFactory $moduleTemplateFactory)
+    public function __construct(
+        protected UserRepository $userRepository,
+        protected UserGroupRepository $userGroupRepository,
+        protected PersistenceManager $persistenceManager,
+        protected SendMailService $sendMailService,
+        protected FinisherRunner $finisherRunner,
+        protected LogUtility $logUtility,
+        protected ModuleTemplateFactory $moduleTemplateFactory)
     {
     }
 

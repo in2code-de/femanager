@@ -7,13 +7,18 @@ namespace In2code\Femanager\Controller;
 use In2code\Femanager\DataProcessor\DataProcessorRunner;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Repository\UserGroupRepository;
+use In2code\Femanager\Domain\Repository\UserRepository;
+use In2code\Femanager\Domain\Service\SendMailService;
 use In2code\Femanager\Event\FinalCreateEvent;
 use In2code\Femanager\Event\FinalUpdateEvent;
+use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\BackendUtility;
 use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
+use In2code\Femanager\Utility\LogUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
@@ -30,6 +35,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -93,7 +99,13 @@ abstract class AbstractController extends ActionController
     /**
      * AbstractController constructor.
      */
-    public function __construct(protected \In2code\Femanager\Domain\Repository\UserRepository $userRepository, protected \In2code\Femanager\Domain\Repository\UserGroupRepository $userGroupRepository, protected \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager, protected \In2code\Femanager\Domain\Service\SendMailService $sendMailService, protected \In2code\Femanager\Finisher\FinisherRunner $finisherRunner, protected \In2code\Femanager\Utility\LogUtility $logUtility)
+    public function __construct(
+        protected UserRepository $userRepository,
+        protected UserGroupRepository $userGroupRepository,
+        protected PersistenceManager $persistenceManager,
+        protected SendMailService $sendMailService,
+        protected FinisherRunner $finisherRunner,
+        protected LogUtility $logUtility)
     {
     }
 
@@ -510,7 +522,8 @@ abstract class AbstractController extends ActionController
         $dataProcessorRunner->callClasses(
             $this->settings,
             $this->contentObject,
-            $this->arguments
+            $this->arguments,
+            $this->request
         );
     }
 
