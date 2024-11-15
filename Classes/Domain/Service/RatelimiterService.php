@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Service;
 
+use Psr\Http\Message\RequestInterface;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Context\Context;
@@ -32,7 +33,7 @@ class RatelimiterService implements SingletonInterface
     public function __construct()
     {
         $this->cache = GeneralUtility::makeInstance(CacheManager::class)->getCache(self::CACHE_IDENTIFIER);
-        $setup = $this->getTSFE()->tmpl->setup;
+        $setup = $this->getRequest()->getAttribute('frontend.typoscript')->getSetupArray();
         $config = $setup['plugin.']['tx_femanager.']['settings.']['ratelimiter.'] ?? self::DEFAULT_CONFIG;
         $this->timeframe = (int)$config['timeframe'];
         $this->limit = (int)$config['limit'];
@@ -130,5 +131,10 @@ class RatelimiterService implements SingletonInterface
         $cacheID = $this->getCacheID($tokenName, $value);
 
         return $this->retrieveToken($cacheID);
+    }
+
+    protected function getRequest(): RequestInterface
+    {
+        return $GLOBALS['TYPO3_REQUEST'];
     }
 }
