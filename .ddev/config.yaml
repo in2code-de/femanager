@@ -1,4 +1,4 @@
-name: femanager8
+name: femanager
 type: typo3
 docroot: .Build/Web/
 php_version: "8.2"
@@ -14,7 +14,7 @@ database:
 hooks:
     post-start:
         - exec: composer install
-host_db_port: "32821"
+host_db_port: "32825"
 use_dns_when_possible: true
 composer_version: "2"
 web_environment:
