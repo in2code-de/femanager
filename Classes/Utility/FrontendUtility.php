@@ -6,7 +6,9 @@ namespace In2code\Femanager\Utility;
 
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
+use Psr\Http\Message\RequestInterface;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -105,11 +107,12 @@ class FrontendUtility extends AbstractUtility
         }
     }
 
-    public static function getControllerName(): string
+    public static function getControllerName(RequestInterface $request): string
     {
         $controllerName = '';
         foreach (self::$pluginNames as $pluginName) {
-            $variables = GeneralUtility::_GPmerged($pluginName);
+            $variables = $request->getQueryParams()[$pluginName] ?? [];
+            ArrayUtility::mergeRecursiveWithOverrule($variables, $request->getParsedBody()[$pluginName] ?? []);
             if (!empty($variables['controller'])) {
                 $controllerName = $variables['controller'];
             }
@@ -118,11 +121,12 @@ class FrontendUtility extends AbstractUtility
         return $controllerName;
     }
 
-    public static function getActionName(): string
+    public static function getActionName(RequestInterface $request): string
     {
         $actionName = '';
         foreach (self::$pluginNames as $pluginName) {
-            $variables = GeneralUtility::_GPmerged($pluginName);
+            $variables = $request->getQueryParams()[$pluginName] ?? [];
+            ArrayUtility::mergeRecursiveWithOverrule($variables, $request->getParsedBody()[$pluginName] ?? []);
             if (!empty($variables['action'])) {
                 $actionName = $variables['action'];
             }

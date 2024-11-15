@@ -6,6 +6,7 @@ namespace In2code\Femanager\DataProcessor;
 
 use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\FrontendUtility;
+use Psr\Http\Message\RequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -64,9 +65,10 @@ class DataProcessorRunner
     public function callClasses(
         array $settings,
         ContentObjectRenderer $contentObject,
-        Arguments $controllerArguments
+        Arguments $controllerArguments,
+        RequestInterface $request
     ): void {
-        foreach ($this->getClasses($settings) as $configuration) {
+        foreach ($this->getClasses($settings, $request) as $configuration) {
             $class = $configuration['class'];
             if (!class_exists($class)) {
                 throw new UnexpectedValueException(
@@ -96,7 +98,7 @@ class DataProcessorRunner
     /**
      * Get all classes to this event from typoscript and sort them
      */
-    protected function getClasses(array $settings): array
+    protected function getClasses(array $settings, RequestInterface $request): array
     {
         $allDataProcessors = ConfigurationUtility::getValue('dataProcessors', $settings);
         ksort($allDataProcessors);
@@ -104,11 +106,11 @@ class DataProcessorRunner
         foreach ($allDataProcessors as $dataProcessor) {
             if (isset($dataProcessor['events']) && $dataProcessor['events'] !== []) {
                 foreach ($dataProcessor['events'] as $controllerName => $actionList) {
-                    if ($controllerName !== FrontendUtility::getControllerName()) {
+                    if ($controllerName !== FrontendUtility::getControllerName($request)) {
                         continue;
                     }
 
-                    if (!GeneralUtility::inList($actionList, FrontendUtility::getActionName())) {
+                    if (!GeneralUtility::inList($actionList, FrontendUtility::getActionName($request))) {
                         continue;
                     }
 
