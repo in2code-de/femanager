@@ -13,7 +13,7 @@ Feature: SmallAdminConfirm
     And I press "Create Profile Now"
     Then I wait "4" seconds
 
-    Then I should see "Thank you for your confirmation. Your profile will be available as soon as the admin confirms your request."
+    Then I should see "Thank you for your registration. Your profile will be available as soon as the admin confirms your request."
 
     # Check if user is disabled
     Given I am on /index.php?id=48&pid=25"
