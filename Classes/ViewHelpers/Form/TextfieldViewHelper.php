@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\ViewHelpers\Form;
 
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
@@ -141,8 +142,9 @@ class TextfieldViewHelper extends AbstractFormFieldViewHelper
             );
         }
 
-        $controllerName = strtolower((string)$this->renderingContext->getRequest()->getControllerName());
-        $contentObject = $this->request->getAttribute('currentContentObject');
+        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        $controllerName = strtolower((string)$request->getControllerName());
+        $contentObject = $request->getAttribute('currentContentObject');
         $typoScript = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
