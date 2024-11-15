@@ -1,86 +1,77 @@
 #ddev-generated
+# If you remove the ddev-generated line above you
+# are responsible for maintaining this file. DDEV will not then
+# update it, for example if you add `additional_hostnames`, etc.
 
 http:
   routers:
-    
-    
     femanager-web-80-http:
-      
-      rule: HostRegexp(`femanager.ddev.site`)
-      
-      service: "femanager-web-80-http"
-      tls: false
       entrypoints:
         - http-80
-    
-    
-    femanager-web-8025-http:
+      rule: HostRegexp(`^femanager\.ddev\.site$`)
       
-      rule: HostRegexp(`femanager.ddev.site`)
-      
-      service: "femanager-web-8025-http"
+      service: "femanager-web-80"
+      ruleSyntax: v3
       tls: false
+      # middlewares:
+      #   - "femanager-redirectHttps"
+    femanager-web-8025-http:
       entrypoints:
         - http-8025
-    
-    
-    
+      rule: HostRegexp(`^femanager\.ddev\.site$`)
+      
+      service: "femanager-web-8025"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "femanager-redirectHttps"
     
     
     
     femanager-web-80-https:
-      
-      rule: HostRegexp(`femanager.ddev.site`)
-      
-      service: "femanager-web-80-https"
-      
-      tls: true
-      
       entrypoints:
         - http-443
-    
-    
-    femanager-web-8025-https:
+      rule: HostRegexp(`^femanager\.ddev\.site$`)
       
-      rule: HostRegexp(`femanager.ddev.site`)
-      
-      service: "femanager-web-8025-https"
+      service: "femanager-web-80"
+      ruleSyntax: v3
       
       tls: true
       
+    femanager-web-8025-https:
       entrypoints:
         - http-8026
+      rule: HostRegexp(`^femanager\.ddev\.site$`)
+      
+      service: "femanager-web-8025"
+      ruleSyntax: v3
+      
+      tls: true
+      
     
-    
+
+  middlewares:
+    femanager-redirectHttps:
+      redirectScheme:
+        scheme: https
+        permanent: true
 
   services:
-    
-    femanager-web-80-http:
+    femanager-web-80:
       loadbalancer:
         servers:
           - url: http://ddev-femanager-web:80
-    
-    femanager-web-8025-http:
+        
+    femanager-web-8025:
       loadbalancer:
         servers:
           - url: http://ddev-femanager-web:8025
+        
     
-    femanager-web-80-https:
     
-      loadbalancer:
-        servers:
-          - url: http://ddev-femanager-web:80
     
-    femanager-web-8025-https:
-    
-      loadbalancer:
-        servers:
-          - url: http://ddev-femanager-web:8025
-    
-
 
 tls:
   certificates:
     - certFile: /mnt/ddev-global-cache/traefik/certs/femanager.crt
       keyFile: /mnt/ddev-global-cache/traefik/certs/femanager.key
-

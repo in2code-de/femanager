@@ -8,6 +8,6 @@ services:
       - /dev/shm:/dev/shm
     ports:
       - 4444
-      - "15722:5900"
+      - "15723:5900"
     external_links:
       - ddev-router:$DDEV_HOSTNAME
