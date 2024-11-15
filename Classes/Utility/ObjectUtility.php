@@ -23,7 +23,7 @@ class ObjectUtility extends AbstractUtility
         return GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
     }
 
-    protected static function getContentObject(): ContentObjectRenderer
+    public static function getContentObject(): ContentObjectRenderer
     {
         return GeneralUtility::makeInstance(ContentObjectRenderer::class);
     }
