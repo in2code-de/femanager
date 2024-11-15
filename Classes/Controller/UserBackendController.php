@@ -52,8 +52,8 @@ class UserBackendController extends AbstractController
         protected SendMailService $sendMailService,
         protected FinisherRunner $finisherRunner,
         protected LogUtility $logUtility,
-        protected ModuleTemplateFactory $moduleTemplateFactory)
-    {
+        protected ModuleTemplateFactory $moduleTemplateFactory
+    ) {
     }
 
     protected function initializeAction(): void

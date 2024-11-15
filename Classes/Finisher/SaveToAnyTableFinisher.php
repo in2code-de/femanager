@@ -151,7 +151,8 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
         return $this;
     }
 
-    public function injectTypoScriptService(TypoScriptService $typoScriptService) {
+    public function injectTypoScriptService(TypoScriptService $typoScriptService)
+    {
         $this->typoScriptService = $typoScriptService;
     }
 }

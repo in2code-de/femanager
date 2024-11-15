@@ -25,8 +25,8 @@ class DataController extends ActionController
         protected FinisherRunner $finisherRunner,
         protected LogUtility $logUtility,
         protected RatelimiterService $ratelimiterService,
-        protected CountryZonesDataProvider $countryZonesDataProvider)
-    {
+        protected CountryZonesDataProvider $countryZonesDataProvider
+    ) {
     }
 
     public function getStatesForCountryAction(string $country): ResponseInterface

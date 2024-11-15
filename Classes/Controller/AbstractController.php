@@ -105,8 +105,8 @@ abstract class AbstractController extends ActionController
         protected PersistenceManager $persistenceManager,
         protected SendMailService $sendMailService,
         protected FinisherRunner $finisherRunner,
-        protected LogUtility $logUtility)
-    {
+        protected LogUtility $logUtility
+    ) {
     }
 
     /**

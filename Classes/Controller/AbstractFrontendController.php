@@ -19,7 +19,7 @@ abstract class AbstractFrontendController extends AbstractController
         protected SendMailService $sendMailService,
         protected FinisherRunner $finisherRunner,
         protected LogUtility $logUtility,
-        protected RatelimiterService $ratelimiterService)
-    {
+        protected RatelimiterService $ratelimiterService
+    ) {
     }
 }
