@@ -34,15 +34,6 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected $dataArray = [];
 
-    public function __construct(/**
-     * Inject a complete new content object
-     */
-        protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject,
-        \TYPO3\CMS\Core\TypoScript\TypoScriptService $typoScriptService
-    ) {
-        $this->typoScriptService = $typoScriptService;
-    }
-
     /**
      * Overwrite configuration with
      *      plugin.tx_femanager.settings.new.storeInDatabase
@@ -158,5 +149,9 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     {
         $this->dataArray = $dataArray;
         return $this;
+    }
+
+    public function injectTypoScriptService(TypoScriptService $typoScriptService) {
+        $this->typoScriptService = $typoScriptService;
     }
 }

@@ -25,14 +25,6 @@ class SendParametersFinisher extends AbstractFinisher implements FinisherInterfa
      */
     protected $configuration;
 
-    public function __construct(
-        /**
-         * Inject a complete new content object
-         */
-        protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject
-    ) {
-    }
-
     /**
      * Initialize
      */
