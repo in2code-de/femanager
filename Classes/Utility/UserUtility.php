@@ -7,6 +7,7 @@ namespace In2code\Femanager\Utility;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Repository\UserRepository;
+use Psr\Http\Message\RequestInterface;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\Argon2iPasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\BcryptPasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\BlowfishPasswordHash;
@@ -340,8 +341,12 @@ class UserUtility extends AbstractUtility
      */
     public static function login(User $user, ?string $storagePids = null): void
     {
-        $tsfe = $GLOBALS['TSFE'];
-        $tsfe->fe_user->createUserSession($user->getTempUserArray());
-        $tsfe->fe_user->enforceNewSessionId();
+        /** @var RequestInterface $request */
+        $request = $GLOBALS['TYPO3_REQUEST'];
+        /** @var FrontendUserAuthentication $feUser */
+        $feUser = $request->getAttribute('frontend.user');
+
+        $feUser->createUserSession($user->getTempUserArray());
+        $feUser->enforceNewSessionId();
     }
 }
