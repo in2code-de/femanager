@@ -77,8 +77,13 @@ class StringUtility extends AbstractUtility
      * @param string $name Name for every email name combination
      * @return array $mailArray
      */
-    public static function makeEmailArray(string $emailString, $name = 'femanager'): array
+    public static function makeEmailArray(mixed $emailString, string $name = 'femanager'): array
     {
+        // TODO: Remove this once ConfigurationUtility is refactored
+        if ($emailString == null) {
+            $emailString = '';
+        }
+
         $emails = GeneralUtility::trimExplode(PHP_EOL, $emailString, true);
         $mailArray = [];
         foreach ($emails as $email) {
