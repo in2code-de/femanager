@@ -174,7 +174,7 @@ class ConfigurationUtility extends AbstractUtility
         return self::DEFAULT_CONFIGURATION[$key] ?? null;
     }
 
-    public static function getValue($key, array $config)
+    public static function getValue(string $key, array $config): mixed
     {
         try {
             return ArrayUtility::getValueByPath($config, $key);
