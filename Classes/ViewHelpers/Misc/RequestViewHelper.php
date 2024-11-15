@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\ViewHelpers\Misc;
 
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -67,7 +68,8 @@ class RequestViewHelper extends AbstractViewHelper
     protected function init($parameter): array
     {
         $parts = explode('|', (string)$parameter);
-        $this->variable = $GLOBALS['TYPO3_REQUEST']->getParsedBody()[$parts[0]] ?? $GLOBALS['TYPO3_REQUEST']->getQueryParams()[$parts[0]] ?? null;
+        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        $this->variable = $request->getParsedBody()[$parts[0]] ?? $request->getQueryParams()[$parts[0]] ?? null;
         if ($this->testVariables) {
             $this->variable = $this->testVariables[$parts[0]];
         }
