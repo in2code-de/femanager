@@ -7,7 +7,7 @@ namespace In2code\Femanager\Domain\Repository;
 use Exception;
 use In2code\Femanager\Domain\Service\PluginService;
 use In2code\Femanager\Utility\ObjectUtility;
-use PDO;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -45,11 +45,11 @@ class PluginRepository
                 ->where(
                     $queryBuilder->expr()->eq(
                         'pid',
-                        $queryBuilder->createNamedParameter($pageIdentifier, PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter($pageIdentifier, Connection::PARAM_INT)
                     ),
                     $queryBuilder->expr()->eq(
                         'CType',
-                        $queryBuilder->createNamedParameter($cType, PDO::PARAM_STR)
+                        $queryBuilder->createNamedParameter($cType, Connection::PARAM_STR)
                     )
                 )
                 ->executeQuery();
