@@ -667,9 +667,9 @@
         <source>Thank you for your request. Please check your mail account to confirm the profile.</source>
         <target state="final">Tak for din henvendelse. Tjek venligst din e-mail for at konfirmere profilen.</target>
       </trans-unit>
-      <trans-unit id="createRequestWaitingForAdminConfirm">
+      <trans-unit id="createRequestWaitingForAdminConfirm" approved="yes">
         <source>Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</source>
-        <target state="needs-translation">Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</target>
+        <target state="final">Tak for din registrering. Din profil vil være tilgængelig, så snart administratoren bekræfter din anmodning.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailSend" approved="yes">
         <source>An Email was send to your account. Please check your inbox.</source>
