@@ -528,13 +528,15 @@ abstract class AbstractController extends ActionController
         $this->checkTypoScript();
         $this->checkStoragePid();
 
-        $dataProcessorRunner = GeneralUtility::makeInstance(DataProcessorRunner::class);
-        $dataProcessorRunner->callClasses(
-            $this->settings,
-            $this->contentObject,
-            $this->arguments,
-            $this->request
-        );
+        if (ApplicationType::fromRequest($this->request)->isFrontend()) {
+            $dataProcessorRunner = GeneralUtility::makeInstance(DataProcessorRunner::class);
+            $dataProcessorRunner->callClasses(
+                $this->settings,
+                $this->contentObject,
+                $this->arguments,
+                $this->request
+            );
+        }
     }
 
     /**
