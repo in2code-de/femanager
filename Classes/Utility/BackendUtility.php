@@ -122,11 +122,8 @@ class BackendUtility
     {
         $pageUid = ($pageUid && MathUtility::canBeInterpretedAsInteger($pageUid)) ?
             $pageUid : $GLOBALS['TYPO3_REQUEST']->getParsedBody()['id'] ?? $GLOBALS['TYPO3_REQUEST']->getQueryParams()['id'] ?? null;
-        $TSObj = GeneralUtility::makeInstance(TemplateService::class);
-        $TSObj->tt_track = false;
-        $TSObj->runThroughTemplates(GeneralUtility::makeInstance(RootlineUtility::class, $pageUid, '')->get());
-        $TSObj->generateConfig();
 
-        return $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getSetupArray();
+        $typoScriptHandlerServer = GeneralUtility::makeInstance(TypoScriptUtility::class);
+        return $typoScriptHandlerServer->getTypoScript($pageUid);
     }
 }
