@@ -264,7 +264,7 @@ class UserRepository extends Repository
         $pageTreeService = GeneralUtility::makeInstance(PageTreeService::class);
         $treeList = $pageTreeService->getTreeList($pageIdentifier, 99, 0, '1');
 
-        return GeneralUtility::trimExplode(',', $treeList, true);
+        return GeneralUtility::trimExplode(',', (string) $treeList, true);
     }
 
     protected function ignoreEnableFieldsAndStoragePage(QueryInterface $query)
