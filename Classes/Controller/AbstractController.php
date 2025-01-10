@@ -27,8 +27,9 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Http\UploadedFile;
-use TYPO3\CMS\Core\Resource\DuplicationBehavior;
+use \TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Core\Resource\StorageRepository;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -98,6 +99,13 @@ abstract class AbstractController extends ActionController
 
     /**
      * AbstractController constructor.
+     *
+     * @param UserRepository $userRepository
+     * @param UserGroupRepository $userGroupRepository
+     * @param PersistenceManager $persistenceManager
+     * @param SendMailService $sendMailService
+     * @param FinisherRunner $finisherRunner
+     * @param LogUtility $logUtility
      */
     public function __construct(
         protected UserRepository $userRepository,
@@ -105,7 +113,7 @@ abstract class AbstractController extends ActionController
         protected PersistenceManager $persistenceManager,
         protected SendMailService $sendMailService,
         protected FinisherRunner $finisherRunner,
-        protected LogUtility $logUtility
+        protected LogUtility $logUtility,
     ) {
     }
 
@@ -154,15 +162,17 @@ abstract class AbstractController extends ActionController
                         $allowedFileExtensions
                     )
                 ) {
-                    $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+                    /** @var StorageRepository $storageRepository */
+                    $storageRepository = GeneralUtility::makeInstance(StorageRepository::class);
                     $uploadString = ConfigurationUtility::getConfiguration('misc.uploadFolder');
-                    $storage = $resourceFactory->getStorageObjectFromCombinedIdentifier($uploadString);
+                    $storage = $storageRepository->findByCombinedIdentifier($uploadString);
                     $parts = GeneralUtility::trimExplode(':', $uploadString);
-                    if (!$storage->hasFolder($parts[1])) {
+                    if ($storage && !$storage?->hasFolder($parts[1])) {
                         $storage->createFolder($parts[1]);
                     }
 
-                    $uploadFolder = $resourceFactory->getFolderObjectFromCombinedIdentifier($uploadString);
+                    $resourceStorage = $storageRepository->findByCombinedIdentifier($uploadString);
+                    $uploadFolder = $resourceStorage?->getFolder($parts[1]);
 
                     $newFile = $storage->addUploadedFile(
                         $uploadedFile,
@@ -295,9 +305,9 @@ abstract class AbstractController extends ActionController
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         if (ConfigurationUtility::getValue(
-            'new./email./createUserNotify./sender./email./value',
-            $this->config
-        ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
+                'new./email./createUserNotify./sender./email./value',
+                $this->config
+            ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
             $this->sendMailService->send(
                 'createUserNotify',
                 StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
