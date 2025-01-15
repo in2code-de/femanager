@@ -194,6 +194,9 @@ plugin.tx_femanager {
 
       # All email settings within the creation process
       email {
+        # When activated, links with actions like create or delete redirects to a confirmation page
+        # This is done, so that the action for the link cannot activated by verification processes of the e-mail client or other things which might open the link in advance (for example virus or malware checks).
+        activateEmailLinkFormConfirmation = 1
 
         # Email for User confirmation (User must confirm his Email address)
         createUserConfirmation {

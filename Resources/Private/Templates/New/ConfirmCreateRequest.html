@@ -2,7 +2,7 @@
 
 User / Status
 
-<f:section name="main">
+<f:section name="OLDmain">
 	<h3><f:translate key="createStatus">User registration</f:translate></h3>
 	<f:render partial="Misc/FlashMessages" arguments="{_all}" />
 	<f:switch expression="{status}">
@@ -34,4 +34,9 @@ User / Status
 			</f:form>
 		</f:case>
 	</f:switch>
+</f:section>
+
+<f:section name="main">
+	<f:render partial="Misc/ApprovalStep" arguments="{_all}"/>
+	<f:render partial="Misc/FlashMessages" arguments="{_all}" />
 </f:section>
