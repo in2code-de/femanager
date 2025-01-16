@@ -138,7 +138,7 @@ class NewController extends AbstractFrontendController
         $request = ServerRequestFactory::fromGlobals();
 
         $approvalOfActionByFormSubmitRequired = true;
-        if($this->addVariablesForActionConfirmation($approvalOfActionByFormSubmitRequired, $user, $status)) {
+        if($this->addVariablesForActionConfirmation($approvalOfActionByFormSubmitRequired, $user, $status, $hash)) {
             return $this->htmlResponse();
         };
 
