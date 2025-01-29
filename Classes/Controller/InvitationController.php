@@ -138,7 +138,8 @@ class InvitationController extends AbstractFrontendController
                     'user' => $user,
                     'settings' => $this->settings,
                 ],
-                ConfigurationUtility::getValue('invitation./email./invitationAdminNotifyStep1.', $this->config)
+                ConfigurationUtility::getValue('invitation./email./invitationAdminNotifyStep1.', $this->config),
+                $this->request
             );
         }
 
@@ -225,7 +226,8 @@ class InvitationController extends AbstractFrontendController
                     'user' => $user,
                     'settings' => $this->settings,
                 ],
-                ConfigurationUtility::getValue('invitation./email./invitationAdminNotify.', $this->config)
+                ConfigurationUtility::getValue('invitation./email./invitationAdminNotify.', $this->config),
+                $this->request
             );
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings, 'invitation');
@@ -270,7 +272,8 @@ class InvitationController extends AbstractFrontendController
                         'user' => $user,
                         'settings' => $this->settings,
                     ],
-                    $this->config['invitation.']['email.']['invitationRefused.']
+                    $this->config['invitation.']['email.']['invitationRefused.'],
+                    $this->request
                 );
             }
 
