@@ -183,7 +183,8 @@ class EditController extends AbstractFrontendController
                 'user' => $user,
                 'settings' => $this->settings,
             ],
-            $this->config['edit.']['email.']['updateRequestRefused.']
+            $this->config['edit.']['email.']['updateRequestRefused.'],
+            $this->request
         );
         $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDADMIN, $user);
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDADMIN));
