@@ -53,7 +53,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateFormat" approved="yes">
         <source>m/d/Y</source>
-        <target state="final">m/d/Å</target>
+        <target state="final">d.m.Y</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender" approved="yes">
         <source>Gender</source>
