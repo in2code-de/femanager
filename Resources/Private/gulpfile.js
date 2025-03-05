@@ -3,8 +3,8 @@
 
 var gulp = require('gulp');
 var sass = require('gulp-sass')(require('sass'));
-var uglify = require('gulp-uglify');
 var plumber = require('gulp-plumber');
+var terser = require('gulp-terser');
 var debug = getArg('--debug');
 var rename = require('gulp-rename');
 
@@ -29,7 +29,7 @@ gulp.task('css', function() {
 gulp.task('js', function() {
 	return gulp.src('JavaScript/**/*.js')
 			.pipe(plumber())
-			.pipe(uglify())
+			.pipe(terser())
 			.pipe(rename({
 				suffix: '.min'
 			}))
