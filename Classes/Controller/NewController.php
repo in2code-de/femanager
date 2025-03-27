@@ -452,7 +452,7 @@ class NewController extends AbstractFrontendController
     public function resendConfirmationMailAction(): ResponseInterface
     {
         // @todo find a better way to fetch the data
-        $result = $this->request->getParsedBody()['tx_femanager_registration'] ?? $this->request->getQueryParams()['tx_femanager_registration'] ?? null;
+        $result = $this->request->getParsedBody()['tx_femanager_resendconfirmationmail'] ?? $this->request->getQueryParams()['tx_femanager_resendconfirmationmail'] ?? null;
         if (is_array($result)) {
             $mail = $result['user']['email'] ?? '';
             if ($mail && GeneralUtility::validEmail($mail)) {

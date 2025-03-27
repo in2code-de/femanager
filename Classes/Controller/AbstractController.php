@@ -333,7 +333,7 @@ abstract class AbstractController extends ActionController
             $this->config
         );
         if (!$createAdminNotify) {
-            $createAdminNotify = $this->settings['new']['notifyAdmin'];
+            $createAdminNotify = $this->settings['new']['notifyAdmin'] ?? null;
         }
 
         // send notify email to admin
