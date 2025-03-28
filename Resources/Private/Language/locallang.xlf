@@ -508,7 +508,7 @@
 				<source>Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</source>
 			</trans-unit>
 			<trans-unit id="resendConfirmationMailSend">
-				<source>An Email was send to your account. Please check your inbox.</source>
+				<source>An email was sent to your account. Please check your inbox.</source>
 			</trans-unit>
 			<trans-unit id="resendConfirmationMailFail">
 				<source>We received no valid mail.</source>
