@@ -275,6 +275,10 @@ plugin.tx_femanager {
           # default = 0
           confirmUserConfirmationRefused = 0
 
+          # if a user creates his profile, the creation of the profile must be confirmed
+          # this is a useful setting, as some virus scanners are preloading all links in an email, which then creates this user automatically
+          # default = 0
+          confirmUserConfirmation = 0
         }
         # Email for Admin confirmation (Admin must confirm registration in an email)
         createAdminConfirmation {

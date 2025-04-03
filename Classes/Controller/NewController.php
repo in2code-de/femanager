@@ -156,10 +156,24 @@ class NewController extends AbstractFrontendController
             return $this->htmlResponse();
         }
 
+        if ($status === 'userConfirmation' && ConfigurationUtility::getValue(
+                'new./email./createUserConfirm./confirmUserConfirmation',
+                $this->config
+            ) == '1') {
+            $this->view->assignMultiple(
+                [
+                    'user' => $user,
+                    'status' => 'confirmUser',
+                    'hash' => $hash,
+                ]
+            );
+            $this->assignForAll();
+            return $this->htmlResponse();
+        }
+
         $furtherFunctions = match ($status) {
-            'userConfirmation' => $this->statusUserConfirmation($user, $hash, $status),
-            'userConfirmationRefused' => $this->statusUserConfirmationRefused($user, $hash),
-            'confirmDeletion' => $this->statusUserConfirmationRefused($user, $hash),
+            'userConfirmation', 'confirmUser' => $this->statusUserConfirmation($user, $hash, $status),
+            'userConfirmationRefused', 'confirmDeletion' => $this->statusUserConfirmationRefused($user, $hash),
             'adminConfirmation' => $this->statusAdminConfirmation($user, $hash, $status, $backend),
             'adminConfirmationRefused', 'adminConfirmationRefusedSilent' =>
             $this->statusAdminConfirmationRefused($user, $hash, $status),
