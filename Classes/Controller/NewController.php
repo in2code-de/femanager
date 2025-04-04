@@ -114,7 +114,7 @@ class NewController extends AbstractFrontendController
      *
      * @SuppressWarnings(PHPMD.ExitExpression)
      */
-    public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation'): \Psr\Http\Message\ResponseInterface
+    public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation', ?string $adminHash = null): \Psr\Http\Message\ResponseInterface
     {
         $backend = false;
 
@@ -434,6 +434,7 @@ class NewController extends AbstractFrontendController
                 [
                     'user' => $user,
                     'hash' => HashUtility::createHashForUser($user),
+                    'adminHash' => HashUtility::createHashForUser($user, 'admin'),
                 ],
                 ConfigurationUtility::getValue('new./email./createAdminConfirmation.', $this->config),
                 $this->request
