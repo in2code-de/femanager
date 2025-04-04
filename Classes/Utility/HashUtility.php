@@ -14,17 +14,17 @@ class HashUtility extends AbstractUtility
     /**
      * Check if given hash is correct
      */
-    public static function validHash(string $hash, User $user): bool
+    public static function validHash(string $hash, User $user, string $suffix = ''): bool
     {
-        return self::createHashForUser($user) === $hash;
+        return self::createHashForUser($user, $suffix) === $hash;
     }
 
     /**
      * Create hash for a user
      */
-    public static function createHashForUser(User $user): string
+    public static function createHashForUser(User $user, string $suffix = ''): string
     {
-        return self::hashString($user->getUsername());
+        return self::hashString($user->getUsername() . $suffix);
     }
 
     /**
