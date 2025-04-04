@@ -157,9 +157,9 @@ class NewController extends AbstractFrontendController
         }
 
         if ($status === 'userConfirmation' && ConfigurationUtility::getValue(
-                'new./email./createUserConfirmation./confirmUserConfirmation',
-                $this->config
-            ) == '1') {
+            'new./email./createUserConfirmation./confirmUserConfirmation',
+            $this->config
+        ) == '1') {
             $this->view->assignMultiple(
                 [
                     'user' => $user,
@@ -172,10 +172,9 @@ class NewController extends AbstractFrontendController
         }
 
         if ($status === 'adminConfirmation' && ConfigurationUtility::getValue(
-                'new./email./createUserConfirmation./confirmAdminConfirmation',
-                $this->config
-            ) == '1') {
-
+            'new./email./createUserConfirmation./confirmAdminConfirmation',
+            $this->config
+        ) == '1') {
             if (!HashUtility::validHash($adminHash, $user, 'admin')) {
                 $this->addFlashMessage(
                     LocalizationUtility::translate('error_not_authorized'),
@@ -201,7 +200,6 @@ class NewController extends AbstractFrontendController
                 'new./email./createUserConfirmation./confirmAdminConfirmation',
                 $this->config
             ) == '1') {
-
             if (!HashUtility::validHash($adminHash, $user, 'admin')) {
                 $this->addFlashMessage(
                     LocalizationUtility::translate('error_not_authorized'),
