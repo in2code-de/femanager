@@ -539,6 +539,15 @@
 			<trans-unit id="confirmUserConfirmationRefused">
 				<source>Please confirm the deletion of your account.</source>
 			</trans-unit>
+			<trans-unit id="confirmAdminConfirmation">
+				<source>Please confirm the creation of this account.</source>
+			</trans-unit>
+			<trans-unit id="confirmAdminConfirmationRefused">
+				<source>Please confirm the deletion of this account.</source>
+			</trans-unit>
+			<trans-unit id="confirmAdminConfirmationRefusedSilent">
+				<source>Please confirm the silent deletion of this account.</source>
+			</trans-unit>
 			<trans-unit id="update">
 				<source>Profile successfully changed</source>
 			</trans-unit>

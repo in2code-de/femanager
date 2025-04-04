@@ -279,6 +279,11 @@ plugin.tx_femanager {
           # this is a useful setting, as some virus scanners are preloading all links in an email, which then creates this user automatically
           # default = 0
           confirmUserConfirmation = 0
+
+          # if an admin needs to confirm a profile, this adds a confirmation step
+          # this is a useful setting, as some virus scanners are preloading all links in an email, which then accepts/refuses this user automatically
+          # default = 0
+          confirmAdminConfirmation = 0
         }
         # Email for Admin confirmation (Admin must confirm registration in an email)
         createAdminConfirmation {
