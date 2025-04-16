@@ -21,6 +21,8 @@ class HashUtility extends AbstractUtility
 
     /**
      * Create hash for a user
+     *
+     * suffix is used for admin or user confirmation. In case of an admin confirmation "admin" is used
      */
     public static function createHashForUser(User $user, string $suffix = ''): string
     {
