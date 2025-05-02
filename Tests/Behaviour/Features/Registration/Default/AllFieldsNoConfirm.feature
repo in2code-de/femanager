@@ -20,13 +20,13 @@ Feature: AllFieldsNoConfirm
       | Title | Prof. Dr. Dr. |
       | ZIP | 89999 |
       | City | Rosenheim |
-      | Website | www.in2code.de |
+      | Website | https://www.in2code.de |
       | Company | in2code GmbH |
       | Birthdate | 20/01/1979 |
     And I select "Group 2" from "tx_femanager_pi1[user][usergroup][0]"
     And I select "Deutschland" from "tx_femanager_pi1[user][country]"
     And I press "Create Profile Now"
-    Then I wait "4" seconds
+    Then I wait "5" seconds
 
     Then I should see "User registration"
 
@@ -43,7 +43,7 @@ Feature: AllFieldsNoConfirm
     Then I should see "Prof. Dr. Dr."
     Then I should see "89999"
     Then I should see "Rosenheim"
-    Then I should see "www.in2code.de"
+    Then I should see "https://www.in2code.de"
     Then I should see "in2code GmbH"
 
   # Clean up

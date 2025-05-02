@@ -106,7 +106,9 @@
       "[ -L .Build/Web/typo3conf/ext/femanager ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/femanager"
     ],
     "test:unit": "phpunit -c phpunit.xml.dist",
-    "test:behaviour:ddev": "behat --config Tests/Behaviour/behat.ddev.yml --tags '~@javascript'",
+    "test:behaviour:ddev": "behat --config Tests/Behaviour/behat.ddev.yml",
+    "test:behaviour:ddev:tag": "behat --config Tests/Behaviour/behat.ddev.yml --tags",
+    "test:behaviour:ddev:stop": "behat --config Tests/Behaviour/behat.ddev.yml --stop-on-failure",
     "test:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
     "test:php:cs": "php-cs-fixer fix --dry-run --config=.project/tests/.php-cs-fixer.php --diff",
     "test:php:fix": "php-cs-fixer fix --config=.project/tests/.php-cs-fixer.php --diff",
