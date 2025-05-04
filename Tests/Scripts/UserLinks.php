@@ -73,8 +73,11 @@ class UserLinks
     public function getAdminConfirmationUri(array $row)
     {
         $params = '';
-        $params .= '&tx_femanager_pi1[user]=' . $row['uid'];
-        $params .= '&tx_femanager_pi1[hash]=' . $this->getHash($row);
+        $params .= '&tx_femanager_pi1[user]='. $row['uid'];
+        $params .= '&tx_femanager_pi1[hash]='. $this->getHash($row);
+        $user = new User();
+        $user->setUsername($row['username']);
+        $params .= '&tx_femanager_pi1[adminHash]='. HashUtility::createHashForUser($user, 'admin');
         $params .= '&tx_femanager_pi1[status]=adminConfirmation';
         $params .= '&tx_femanager_pi1[action]=confirmCreateRequest';
         $params .= '&tx_femanager_pi1[controller]=New';
@@ -119,12 +122,11 @@ class UserLinks
      * @param array $row
      * @return string
      */
-    protected function getHash(array $row)
+    protected function getHash(array $row, $suffix = ""): string
     {
         $user = new User();
         $user->setUsername($row['username']);
-
-        return HashUtility::createHashForUser($user);
+        return HashUtility::createHashForUser($user, $suffix = "");
     }
 
     /**

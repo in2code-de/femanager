@@ -67,6 +67,7 @@
     "typo3/cms-filelist": "^11.5",
     "typo3/cms-fluid-styled-content": "^11.5",
     "typo3/cms-frontend": "^11.5",
+    "typo3/cms-impexp": "^11.5",
     "typo3/cms-info": "^11.5",
     "typo3/cms-install": "^11.5",
     "typo3/cms-lowlevel": "^11.5",

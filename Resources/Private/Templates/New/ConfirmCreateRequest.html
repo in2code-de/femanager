@@ -6,6 +6,33 @@ User / Status
 	<h3><f:translate key="createStatus">User registration</f:translate></h3>
 	<f:render partial="Misc/FlashMessages" arguments="{_all}" />
 	<f:switch expression="{status}">
+		<f:case value="confirmUser">
+			<f:form
+				name="user"
+				action="confirmCreateRequest"
+				enctype="multipart/form-data"
+				additionalAttributes="{data-femanager-plugin:data.uid}"
+				class="form-horizontal">
+				<fieldset>
+					<legend>
+						<f:translate key="confirmUserConfirmation" />
+					</legend>
+
+					<f:form.hidden name="user" value="{user.uid}" />
+					<f:form.hidden name="hash" value="{hash}" />
+					<f:form.hidden name="status" value="confirmedByUser" />
+				</fieldset>
+
+				<div class="femanager_fieldset femanager_submit form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						<f:form.submit
+							value="{f:translate(key:'submitNew')}"
+							id="femanager_field_submit"
+							class="btn btn-primary btn-large" />
+					</div>
+				</div>
+			</f:form>
+		</f:case>
 		<f:case value="confirmDeletion">
 			<f:form
 				name="user"
@@ -27,6 +54,80 @@ User / Status
 					<div class="col-sm-10 col-sm-offset-2">
 						<f:form.submit
 							value="{f:translate(key:'UserDeleteConfirmation')}"
+							id="femanager_field_submit"
+							class="btn btn-primary btn-large" />
+					</div>
+				</div>
+			</f:form>
+		</f:case>
+		<f:case value="confirmAdmin">
+			<f:form
+				name="user"
+				action="confirmCreateRequest"
+				enctype="multipart/form-data"
+				additionalAttributes="{data-femanager-plugin:data.uid}"
+				class="form-horizontal">
+				<fieldset>
+					<legend>
+						<f:translate key="confirmAdminConfirmation" />
+					</legend>
+
+					<f:form.hidden name="user" value="{user.uid}" />
+					<f:form.hidden name="hash" value="{hash}" />
+					<f:form.hidden name="status" value="confirmedByAdmin" />
+				</fieldset>
+
+				<div class="femanager_fieldset femanager_submit form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationUserProperties" /></p>
+						<f:render partial="Mail/UserProperties" arguments="{_all}" />
+						<br>
+						<f:form.submit
+							value="{f:translate(key:'submitNew')}"
+							id="femanager_field_submit"
+							class="btn btn-primary btn-large" />
+					</div>
+				</div>
+			</f:form>
+		</f:case>
+		<f:case value="confirmAdminRefused">
+			<f:form
+				name="user"
+				action="confirmCreateRequest"
+				enctype="multipart/form-data"
+				additionalAttributes="{data-femanager-plugin:data.uid}"
+				class="form-horizontal">
+				<fieldset>
+					<legend>
+						<f:if condition="{silent}">
+							<f:then>
+								<f:translate key="confirmAdminConfirmationRefusedSilent" />
+							</f:then>
+							<f:else>
+								<f:translate key="confirmAdminConfirmationRefused" />
+							</f:else>
+						</f:if>
+					</legend>
+
+					<f:form.hidden name="user" value="{user.uid}" />
+					<f:form.hidden name="hash" value="{hash}" />
+					<f:if condition="{silent}">
+						<f:then>
+							<f:form.hidden name="status" value="confirmAdminRefusedSilent" />
+						</f:then>
+						<f:else>
+							<f:form.hidden name="status" value="confirmedByAdminRefused" />
+						</f:else>
+					</f:if>
+				</fieldset>
+
+				<div class="femanager_fieldset femanager_submit form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationUserProperties" /></p>
+						<f:render partial="Mail/UserProperties" arguments="{_all}" />
+						<br>
+						<f:form.submit
+							value="{f:translate(key:'deleteProfile')}"
 							id="femanager_field_submit"
 							class="btn btn-primary btn-large" />
 					</div>
