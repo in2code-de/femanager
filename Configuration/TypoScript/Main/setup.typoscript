@@ -1549,6 +1549,11 @@ plugin.tx_femanager {
       # Allowed Mime Types
       uploadMimeTypes = image/png,image/jpeg,image/gif
 
+      uploadFields {
+        1 = image
+        2 = tx_myext_myfield
+      }
+
       # Width of the rendered image in FE
       renderImageWidth = 250
     }

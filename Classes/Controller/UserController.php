@@ -53,7 +53,7 @@ class UserController extends AbstractFrontendController
      */
     public function imageDeleteAction(User $user): ResponseInterface
     {
-        if (UserUtility::getCurrentUser() !== $user) {
+        if (UserUtility::getCurrentUser()->getUid() !== $user->getUid()) {
             throw new UnauthorizedException('You are not allowed to delete this image', 1516373759972);
         }
 

@@ -125,13 +125,13 @@ abstract class AbstractController extends ActionController
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
-        $this->processUploadedImage($user);
+        $this->processUploadedFiles($user);
 
         $this->logUtility->log(Log::STATUS_NEWREGISTRATION, $user);
         return $this->finalCreate($user, 'new', 'createStatus');
     }
 
-    protected function processUploadedImage($user)
+    protected function processUploadedFiles($user)
     {
         $uploadedFiles = $this->request->getUploadedFiles(); // the image is now in $uploadedFiles['image'], not in $uploadedFiles['user']['image']
         $allowedFileExtensions = preg_split(
@@ -142,19 +142,22 @@ abstract class AbstractController extends ActionController
             '/\s*,\s*/',
             trim((string)ConfigurationUtility::getConfiguration('misc.uploadMimeTypes'))
         );
+
+        // we expect to see at least 'image'
+        $uploadFields = ConfigurationUtility::getConfiguration('misc.uploadFields');
+        foreach ($uploadFields as $field) {}
         if (
             $uploadedFiles !== []
-            && !empty($uploadedFiles['image'])
+            && !empty($uploadedFiles[$field])
         ) {
             $images = [];
-            $images[] = $uploadedFiles['image']; // add image to an array (this way the original code in the foreach loop below does not have to be changed at all)
+            // add image to an array (this way the original code in the foreach loop below
+            // does not have to be changed at all)
+            $images[] = $uploadedFiles[$field];
 
             foreach ($images as $uploadedFile) {
-                /**
-                 * @var $uploadedFile UploadedFile
-                 */
-                if (
-                    in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes)
+                /**  @var $uploadedFile UploadedFile  */
+                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes)
                     && in_array(
                         pathinfo(
                             (string)$uploadedFile->getClientFilename()
@@ -189,8 +192,10 @@ abstract class AbstractController extends ActionController
                             'uid_local' => $newFile->getUid(),
                             'uid_foreign' => $user->getUid(),
                             'tablenames' => 'fe_users',
-                            'fieldname' => 'image',
+                            'fieldname' => $field,
                             'sorting_foreign' => 1,
+                            'crdate' => time(),
+                            'tstamp' => time(),
                         ]
                     );
                 }
@@ -207,7 +212,7 @@ abstract class AbstractController extends ActionController
         // send notify email to admin
         $existingUser = clone $this->userRepository->findByUid($user->getUid());
 
-        $this->processUploadedImage($user);
+        $this->processUploadedFiles($user);
 
         if (ConfigurationUtility::notifyAdminAboutEdits($this->settings)) {
             $this->sendMailService->send(
