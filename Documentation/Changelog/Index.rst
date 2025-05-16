@@ -17,12 +17,11 @@ All changes are documented on https://docs.typo3.org/typo3cms/extensions/femanag
    :Changes:
       Release Description
 -
-      :Version: 5.5.4
-      :Date: 2023-03-23
+      :Version: 5.5.5
+      :Date: 2025-05-20
       :Changes:
 
-      * [BUGFIX] Notification email to admin now sends changes again - thx to https://github.com/chludwig
-      * [BUGFIX] Notification email to admin is also sent when adding recipient's address to flex form only - thx to https://github.com/chludwig
+      * [SECURITY] Don't pass User to newAction: This prevents information disclosure by passing an argument to this controlling
 
 -
       :Version: 5.5.4

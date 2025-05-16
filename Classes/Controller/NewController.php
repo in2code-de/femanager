@@ -27,14 +27,12 @@ class NewController extends AbstractController
     /**
      * Render registration form
      *
-     * @param User $user
      * @return void
      */
-    public function newAction(User $user = null)
+    public function newAction()
     {
         $this->view->assignMultiple(
             [
-                'user' => $user,
                 'allUserGroups' => $this->allUserGroups
             ]
         );
