@@ -114,7 +114,7 @@ class NewController extends AbstractFrontendController
      *
      * @SuppressWarnings(PHPMD.ExitExpression)
      */
-    public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation'): \Psr\Http\Message\ResponseInterface
+    public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation', ?string $adminHash = null): \Psr\Http\Message\ResponseInterface
     {
         $backend = false;
 
@@ -156,12 +156,76 @@ class NewController extends AbstractFrontendController
             return $this->htmlResponse();
         }
 
+        if ($status === 'userConfirmation' && ConfigurationUtility::getValue(
+            'new./email./createUserConfirmation./confirmUserConfirmation',
+            $this->config
+        ) == '1') {
+            $this->view->assignMultiple(
+                [
+                    'user' => $user,
+                    'status' => 'confirmUser',
+                    'hash' => $hash,
+                ]
+            );
+            $this->assignForAll();
+            return $this->htmlResponse();
+        }
+
+        if ($status === 'adminConfirmation' && ConfigurationUtility::getValue(
+            'new./email./createUserConfirmation./confirmAdminConfirmation',
+            $this->config
+        ) == '1') {
+            if (!HashUtility::validHash($adminHash, $user, 'admin')) {
+                $this->addFlashMessage(
+                    LocalizationUtility::translate('error_not_authorized'),
+                    '',
+                    ContextualFeedbackSeverity::ERROR
+                );
+                throw new PropagateResponseException($this->redirect('new'), 1743766811);
+            }
+
+            $this->view->assignMultiple(
+                [
+                    'user' => $user,
+                    'status' => 'confirmAdmin',
+                    'hash' => $hash,
+                ]
+            );
+            $this->assignForAll();
+            return $this->htmlResponse();
+        }
+
+        if (($status === 'adminConfirmationRefused' || $status === 'adminConfirmationRefusedSilent') &&
+            ConfigurationUtility::getValue(
+                'new./email./createUserConfirmation./confirmAdminConfirmation',
+                $this->config
+            ) == '1') {
+            if (!HashUtility::validHash($adminHash, $user, 'admin')) {
+                $this->addFlashMessage(
+                    LocalizationUtility::translate('error_not_authorized'),
+                    '',
+                    ContextualFeedbackSeverity::ERROR
+                );
+                throw new PropagateResponseException($this->redirect('new'), 1743766811);
+            }
+
+            $this->view->assignMultiple(
+                [
+                    'user' => $user,
+                    'status' => 'confirmAdminRefused',
+                    'silent' => $status === 'adminConfirmationRefusedSilent',
+                    'hash' => $hash,
+                ]
+            );
+            $this->assignForAll();
+            return $this->htmlResponse();
+        }
+
         $furtherFunctions = match ($status) {
-            'userConfirmation' => $this->statusUserConfirmation($user, $hash, $status),
-            'userConfirmationRefused' => $this->statusUserConfirmationRefused($user, $hash),
-            'confirmDeletion' => $this->statusUserConfirmationRefused($user, $hash),
-            'adminConfirmation' => $this->statusAdminConfirmation($user, $hash, $status, $backend),
-            'adminConfirmationRefused', 'adminConfirmationRefusedSilent' =>
+            'userConfirmation', 'confirmUser' => $this->statusUserConfirmation($user, $hash, $status),
+            'userConfirmationRefused', 'confirmDeletion' => $this->statusUserConfirmationRefused($user, $hash),
+            'adminConfirmation', 'confirmAdmin' => $this->statusAdminConfirmation($user, $hash, $status, $backend),
+            'adminConfirmationRefused', 'adminConfirmationRefusedSilent', 'confirmAdminDeletion', 'confirmAdminDeletionSilent' =>
             $this->statusAdminConfirmationRefused($user, $hash, $status),
             default => false,
         };
@@ -420,6 +484,7 @@ class NewController extends AbstractFrontendController
                 [
                     'user' => $user,
                     'hash' => HashUtility::createHashForUser($user),
+                    'adminHash' => HashUtility::createHashForUser($user, 'admin'),
                 ],
                 ConfigurationUtility::getValue('new./email./createAdminConfirmation.', $this->config),
                 $this->request

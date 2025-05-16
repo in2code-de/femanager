@@ -7,7 +7,35 @@ Upgrade
 
 .. only:: html
 
-	:ref:`v8.0` | :ref:`v7.1` | :ref:`v6.0` | :ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0` |
+	:ref:`v13.0` | :ref:`v8.0` | :ref:`v7.1` | :ref:`v6.0` | :ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0` |
+
+.. _v13.0:
+
+to version 13.0.0
+----------------
+
+Deprecations
+
+
+Confirmation links
+~~~~~~~~~~~~~~~~~~
+
+New TypoScript options are added for this:
+new.email.createUserConfirmation.confirmUserConfirmation
+When enabled, a user confirming their profile creation via the email link will show a confirmation dialog beforehand. This prevents unexpected execution f.e. via Virus Scanners
+new.email.createUserConfirmation.confirmAdminConfirmation
+When enabled, an admin confirming/refusing/silently refusing someones profile creation via the email link will show a confirmation dialog beforehand
+This PR also includes adjustments to HashUtility allowing to specify more data while hashing a user, so that another hash can be created to prevent meddling with the admin actions (which by default is already prevented using cHashes).
+
+For new.email.createUserConfirmation.confirmAdminConfirmation, this technically is a breaking change as template
+adjustments were required to pass the admin hash to the email links. If you have customized templates, please add the
+variable "adminHash:adminHash" to all action links in Resources/Private/Templates/Email/CreateAdminConfirmation.html
+
+Example:
+old:		<f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'adminConfirmation'}">
+new		<f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, adminHash:adminHash, status:'adminConfirmation'}">
+
+These settings are getting the default settings for V14!
 
 
 .. _v8.0:

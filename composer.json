@@ -68,6 +68,7 @@
     "typo3/cms-fluid": "^13.4.0",
     "typo3/cms-fluid-styled-content": "^13.4.0",
     "typo3/cms-frontend": "^13.4.0",
+    "typo3/cms-impexp": "^13.4",
     "typo3/cms-info": "^13.4.0",
     "typo3/cms-lowlevel": "^13.4.0",
     "typo3/cms-recordlist": "^13.4.0",
