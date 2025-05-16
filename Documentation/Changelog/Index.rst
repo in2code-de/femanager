@@ -13,6 +13,13 @@ Changelog
       Release Date
    :Changes:
       Release Description
+-
+      :Version: 6.4.1
+      :Date: 2024-05-20
+      :Changes:
+
+      * [BUGFIX] Security: Missing Hash Check for invitation controller - Invitation Templates must be updated (if a custom template is used)
+
 
 -
       :Version: 6.4.0
