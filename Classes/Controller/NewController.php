@@ -41,14 +41,12 @@ class NewController extends AbstractFrontendController
     /**
      * Render registration form
      *
-     * @param User|null $user
      * @throws JsonException
      */
-    public function newAction(User $user = null): ResponseInterface
+    public function newAction(): ResponseInterface
     {
         $this->view->assignMultiple(
             [
-                'user' => $user,
                 'allUserGroups' => $this->allUserGroups,
             ]
         );
