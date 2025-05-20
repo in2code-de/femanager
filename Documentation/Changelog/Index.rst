@@ -5,6 +5,12 @@ Changelog
 =========
 
 -
+      :Version: 8.2.2
+      :Date: 2025-05-20
+      :Changes:
+      * [BUGFIX] Security: Missing Hash Check for invitation controller - Invitation Templates must be updated (if a custom template is used)
+
+-
       :Version: 8.2.1
       :Date: 2024-11-11
       :Changes:

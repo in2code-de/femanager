@@ -71,10 +71,10 @@ call_user_func(function () {
         'Femanager',
         'ResendConfirmationMail',
         [
-            \In2code\Femanager\Controller\NewController::class => 'confirmCreateRequest, createStatus, resendConfirmationMail, resendConfirmationDialogue',
+            \In2code\Femanager\Controller\NewController::class => 'resendConfirmationDialogue, resendConfirmationMail, confirmCreateRequest, createStatus',
         ],
         [
-            \In2code\Femanager\Controller\NewController::class => 'confirmCreateRequest, createStatus, resendConfirmationMail, resendConfirmationDialogue',
+            \In2code\Femanager\Controller\NewController::class => 'resendConfirmationDialogue, resendConfirmationMail, confirmCreateRequest, createStatus',
         ],
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
