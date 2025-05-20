@@ -24,31 +24,31 @@ help:
 ## Stop all containers
 stop:
 	echo "$(EMOJI_stop) Shutting down"
-	docker-compose stop
+	docker compose stop
 	sleep 0.4
-	docker-compose down --remove-orphans
+	docker compose down --remove-orphans
 
 ## Removes all containers and volumes
 destroy: stop
 	echo "$(EMOJI_litter) Removing the project"
-	docker-compose down -v --remove-orphans
+	docker compose down -v --remove-orphans
 	git clean -dfx
 
-## Starts docker-compose up -d
+## Starts docker compose up -d
 start:
 	echo "$(EMOJI_up) Starting the docker project"
-	docker-compose up -d --build
+	docker compose up -d --build
 	make urls
 
 ## Restores the database from the backup file defined in .env
 mysql-restore:
 	echo "$(EMOJI_robot) Restoring the database"
-	docker-compose exec mysql bash -c 'DUMPFILE="/$(SQLDUMPSDIR)/$(SQLDUMPFILE)"; if [[ "$${DUMPFILE##*.}" == "sql" ]]; then cat $$DUMPFILE; else zcat $$DUMPFILE; fi | mysql --default-character-set=utf8 -u$(MYSQL_USER) -p$(MYSQL_PASSWORD) $(MYSQL_DATABASE)'
+	docker compose exec mysql bash -c 'DUMPFILE="/$(SQLDUMPSDIR)/$(SQLDUMPFILE)"; if [[ "$${DUMPFILE##*.}" == "sql" ]]; then cat $$DUMPFILE; else zcat $$DUMPFILE; fi | mysql --default-character-set=utf8 -u$(MYSQL_USER) -p$(MYSQL_PASSWORD) $(MYSQL_DATABASE)'
 
 ## Starts composer-install
 composer-install:
 	echo "$(EMOJI_package) Installing composer dependencies"
-	docker-compose exec php composer install
+	docker compose exec php composer install
 
 ## Create necessary directories
 create-dirs:
@@ -59,7 +59,7 @@ create-dirs:
 ## Starts composer-install
 composer-install-production:
 	echo "$(EMOJI_package) Installing composer dependencies (without dev)"
-	docker-compose exec php composer install --no-dev -ao
+	docker compose exec php composer install --no-dev -ao
 
 ## Install mkcert on this computer, skips installation if already present
 install-mkcert:
@@ -82,7 +82,7 @@ create-certificate: install-mkcert
 	if [[ ! -f $(HOME)/.dinghy/certs/${HOST}.key ]]; then mkcert -cert-file $(HOME)/.dinghy/certs/${HOST}.crt -key-file $(HOME)/.dinghy/certs/${HOST}.key ${HOST}; fi;
 	if [[ ! -f $(HOME)/.dinghy/certs/${MAIL}.key ]]; then mkcert -cert-file $(HOME)/.dinghy/certs/${MAIL}.crt -key-file $(HOME)/.dinghy/certs/${MAIL}.key ${MAIL}; fi;
 
-## Choose the right docker-compose file for your environment
+## Choose the right docker compose file for your environment
 link-compose-file:
 	echo "$(EMOJI_triangular_ruler) Linking the OS specific compose file"
 ifeq ($(shell uname -s), Darwin)
@@ -94,9 +94,9 @@ endif
 ## Initialize the docker setup
 init-docker: create-dirs create-certificate
 	echo "$(EMOJI_rocket) Initializing docker environment"
-	docker-compose pull
-	docker-compose up -d --build
-	docker-compose exec -u root php chown -R app:app /app/$(TYPO3_CACHE_DIR)/;
+	docker compose pull
+	docker compose up -d --build
+	docker compose exec -u root php chown -R app:app /app/$(TYPO3_CACHE_DIR)/;
 
 ## Copies the Additional/DockerConfiguration.php to the correct directory
 typo3-add-dockerconfig:
@@ -107,17 +107,17 @@ typo3-add-dockerconfig:
 ## Starts the TYPO3 Databasecompare
 typo3-comparedb:
 	echo "$(EMOJI_leftright) Running database:updateschema"
-	docker-compose exec php ./.Build/bin/typo3cms database:updateschema
+	docker compose exec php ./.Build/bin/typo3cms database:updateschema
 
 ## Starts the TYPO3 setup process
 typo3-setupinstall:
 	echo "$(EMOJI_upright) Running install:setup"
-	docker-compose exec php ./.Build/bin/typo3cms install:setup
+	docker compose exec php ./.Build/bin/typo3cms install:setup
 
 ## Clears TYPO3 caches via typo3-console
 typo3-clearcache:
 	echo "$(EMOJI_broom) Clearing TYPO3 caches"
-	docker-compose exec php ./.Build/bin/typo3cms cache:flush
+	docker compose exec php ./.Build/bin/typo3cms cache:flush
 
 ## Downloads the dynamicReturnTypeMeta.json for the PhpStorm dynamic return type plugin
 typo3-install-autocomplete:
@@ -149,7 +149,7 @@ new-project: destroy add-hosts-entry init-docker composer-install typo3-add-dock
 ## Print Project URIs
 urls:
 	PROJECT=$$(echo "$${PWD##*/}" | tr -d '.'); \
-	SERVICES=$$(docker-compose ps --services | grep '$(SERVICELIST)'); \
+	SERVICES=$$(docker compose ps --services | grep '$(SERVICELIST)'); \
 	LONGEST=$$(($$(echo -e "$$SERVICES\nFrontend:" | wc -L 2> /dev/null || echo 15)+2)); \
 	echo "$(EMOJI_telescope) Project URLs:"; \
 	echo ''; \
@@ -170,12 +170,12 @@ add-hosts-entry:
 ## Log into the PHP container
 login-php:
 	echo "$(EMOJI_elephant) Logging into the PHP container"
-	docker-compose exec php bash
+	docker compose exec php bash
 
 ## Log into the mysql container
 login-mysql:
 	echo "$(EMOJI_dolphin) Logging into MySQL Container"
-	docker-compose exec mysql bash
+	docker compose exec mysql bash
 
 include .env
 
