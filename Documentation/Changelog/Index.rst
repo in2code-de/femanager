@@ -5,6 +5,12 @@ Changelog
 =========
 
 -
+      :Version: 8.3.0
+      :Date: 2025-06-10
+      :Changes:
+      * [FEATURE] Add confirmation buttons for a final confirm - backport from V13 thx to stigfaerch
+
+-
       :Version: 8.2.2
       :Date: 2025-05-20
       :Changes:
