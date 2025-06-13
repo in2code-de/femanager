@@ -102,6 +102,7 @@ class NewController extends AbstractFrontendController
     public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation', string $adminHash = null)
     {
         $backend = false;
+        $furtherFunctions = false;
 
         $user = $this->userRepository->findByUid($user);
 
