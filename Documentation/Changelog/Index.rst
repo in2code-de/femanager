@@ -4,11 +4,15 @@
 Changelog
 =========
 -
+      :Version: 7.5.1
+      :Date: 2025-06-10
+      :Changes:
+      * [BUGFIX] Avoid PHP Warning: Undefined variable
+-
       :Version: 7.5.0
       :Date: 2025-06-10
       :Changes:
       * [FEATURE] Add confirmation buttons for a final confirm
-
 
 -
       :Version: 7.4.2
