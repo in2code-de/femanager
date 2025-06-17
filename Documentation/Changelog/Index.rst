@@ -4,6 +4,12 @@
 Changelog
 =========
 -
+      :Version: 7.5.2
+      :Date: 2025-06-17
+      :Changes:
+      * [BUGFIX] missing HTML View for confirmedByAdminRefusedSilent
+
+-
       :Version: 7.5.1
       :Date: 2025-06-10
       :Changes:
