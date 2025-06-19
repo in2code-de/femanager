@@ -145,59 +145,60 @@ abstract class AbstractController extends ActionController
 
         // we expect to see at least 'image'
         $uploadFields = ConfigurationUtility::getConfiguration('misc.uploadFields');
-        foreach ($uploadFields as $field) {}
-        if (
-            $uploadedFiles !== []
-            && !empty($uploadedFiles[$field])
-        ) {
-            $images = [];
-            // add image to an array (this way the original code in the foreach loop below
-            // does not have to be changed at all)
-            $images[] = $uploadedFiles[$field];
+        foreach ($uploadFields as $field) {
+            if (
+                $uploadedFiles !== []
+                && !empty($uploadedFiles[$field])
+            ) {
+                $images = [];
+                // add image to an array (this way the original code in the foreach loop below
+                // does not have to be changed at all)
+                $images[] = $uploadedFiles[$field];
 
-            foreach ($images as $uploadedFile) {
-                /**  @var $uploadedFile UploadedFile  */
-                if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes)
-                    && in_array(
-                        pathinfo(
-                            (string)$uploadedFile->getClientFilename()
-                        )['extension'],
-                        $allowedFileExtensions
-                    )
-                ) {
-                    /** @var StorageRepository $storageRepository */
-                    $storageRepository = GeneralUtility::makeInstance(StorageRepository::class);
-                    $uploadString = ConfigurationUtility::getConfiguration('misc.uploadFolder');
-                    $storage = $storageRepository->findByCombinedIdentifier($uploadString);
-                    $parts = GeneralUtility::trimExplode(':', $uploadString);
-                    if ($storage && !$storage?->hasFolder($parts[1])) {
-                        $storage->createFolder($parts[1]);
+                foreach ($images as $uploadedFile) {
+                    /**  @var $uploadedFile UploadedFile */
+                    if (in_array($uploadedFile->getClientMediaType(), $allowedMimeTypes)
+                        && in_array(
+                            pathinfo(
+                                (string)$uploadedFile->getClientFilename()
+                            )['extension'],
+                            $allowedFileExtensions
+                        )
+                    ) {
+                        /** @var StorageRepository $storageRepository */
+                        $storageRepository = GeneralUtility::makeInstance(StorageRepository::class);
+                        $uploadString = ConfigurationUtility::getConfiguration('misc.uploadFolder');
+                        $storage = $storageRepository->findByCombinedIdentifier($uploadString);
+                        $parts = GeneralUtility::trimExplode(':', $uploadString);
+                        if ($storage && !$storage?->hasFolder($parts[1])) {
+                            $storage->createFolder($parts[1]);
+                        }
+
+                        $resourceStorage = $storageRepository->findByCombinedIdentifier($uploadString);
+                        $uploadFolder = $resourceStorage?->getFolder($parts[1]);
+
+                        $newFile = $storage->addUploadedFile(
+                            $uploadedFile,
+                            $uploadFolder,
+                            null,
+                            DuplicationBehavior::RENAME
+                        );
+
+                        $connection = GeneralUtility::makeInstance(ConnectionPool::class)
+                            ->getConnectionForTable('sys_file_reference');
+                        $connection->insert(
+                            'sys_file_reference',
+                            [
+                                'uid_local' => $newFile->getUid(),
+                                'uid_foreign' => $user->getUid(),
+                                'tablenames' => 'fe_users',
+                                'fieldname' => $field,
+                                'sorting_foreign' => 1,
+                                'crdate' => time(),
+                                'tstamp' => time(),
+                            ]
+                        );
                     }
-
-                    $resourceStorage = $storageRepository->findByCombinedIdentifier($uploadString);
-                    $uploadFolder = $resourceStorage?->getFolder($parts[1]);
-
-                    $newFile = $storage->addUploadedFile(
-                        $uploadedFile,
-                        $uploadFolder,
-                        null,
-                        DuplicationBehavior::RENAME
-                    );
-
-                    $connection = GeneralUtility::makeInstance(ConnectionPool::class)
-                        ->getConnectionForTable('sys_file_reference');
-                    $connection->insert(
-                        'sys_file_reference',
-                        [
-                            'uid_local' => $newFile->getUid(),
-                            'uid_foreign' => $user->getUid(),
-                            'tablenames' => 'fe_users',
-                            'fieldname' => $field,
-                            'sorting_foreign' => 1,
-                            'crdate' => time(),
-                            'tstamp' => time(),
-                        ]
-                    );
                 }
             }
         }
