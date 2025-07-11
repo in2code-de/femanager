@@ -224,6 +224,12 @@
 			<trans-unit id="validationErrorMax">
 				<source>Please add less characters to field %s</source>
 			</trans-unit>
+			<trans-unit id="validationErrorMinInt">
+				<source>Please respect the minimum value for field %s</source>
+			</trans-unit>
+			<trans-unit id="validationErrorMaxInt">
+				<source>Please respect the maximum value for field %s</source>
+			</trans-unit>
 			<trans-unit id="validationErrorInt">
 				<source>Only numbers are allowed in field %s</source>
 			</trans-unit>
