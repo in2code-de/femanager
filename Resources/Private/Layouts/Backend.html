@@ -1,11 +1,7 @@
 {namespace femanager=In2code\Femanager\ViewHelpers}
 <f:be.pageRenderer
-		includeCssFiles="{
-        0: '{f:uri.resource(path:\'Css/Backend.min.css\')}'
-    }"
-		includeJavaScriptModules="{
-        0: '{f:uri.resource(path:\'JavaScript/Backend.min.js\')}'
-    }"
+		includeCssFiles="{0: 'EXT:femanager/Resources/Public/Css/Backend.min.css'}"
+		includeJavaScriptModules="{0: '@in2code/femanager/backend'}"
 />
 <div class="module">
 		<div class="module-docheader">
