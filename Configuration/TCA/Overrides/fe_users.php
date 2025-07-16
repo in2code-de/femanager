@@ -17,19 +17,16 @@ $feUsersColumns = [
             'type' => 'radio',
             'items' => [
                 [
-                    'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
-                    'tx_femanager_domain_model_user.gender.item0',
-                    '0',
+                    'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gender.item0',
+                    'value' => '0',
                 ],
                 [
-                    'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
-                    'tx_femanager_domain_model_user.gender.item1',
-                    '1',
+                    'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gender.item1',
+                    'value' => '1',
                 ],
                 [
-                    'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
-                    'tx_femanager_domain_model_user.gender.item2',
-                    '2',
+                    'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gender.item2',
+                    'value' => '2',
                 ],
             ],
         ],
@@ -39,11 +36,8 @@ $feUsersColumns = [
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
             'tx_femanager_domain_model_user.dateOfBirth',
         'config' => [
-            'type' => 'input',
-            'renderType' => 'inputDateTime',
-            'size' => 10,
-            'eval' => 'date',
-            'checkbox' => '0',
+            'type' => 'datetime',
+            'format' => 'date',
             'default' => 0,
         ],
     ],
@@ -52,10 +46,8 @@ $feUsersColumns = [
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
             'fe_users.crdate',
         'config' => [
-            'type' => 'input',
-            'renderType' => 'inputDateTime',
-            'size' => 30,
-            'eval' => 'datetime',
+            'type' => 'datetime',
+            'format' => 'date',
             'readOnly' => true,
             'default' => time(),
         ],
@@ -65,10 +57,8 @@ $feUsersColumns = [
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
             'fe_users.tstamp',
         'config' => [
-            'type' => 'input',
-            'renderType' => 'inputDateTime',
-            'size' => 30,
-            'eval' => 'datetime',
+            'type' => 'datetime',
+            'format' => 'date',
             'readOnly' => true,
             'default' => time(),
         ],
@@ -106,10 +96,9 @@ $feUsersColumns = [
             'fe_users.terms_date_of_acceptance',
         'exclude' => true,
         'config' => [
-            'type' => 'input',
-            'renderType' => 'inputDateTime',
-            'size' => 30,
-            'eval' => 'datetime',
+            'type' => 'datetime',
+            'format' => 'date',
+            'default' => 0,
             'readOnly' => true,
         ],
     ],
@@ -125,7 +114,10 @@ if ($staticInfoTablesIsLoaded) {
             'type' => 'select',
             'renderType' => 'selectSingle',
             'items' => [
-                ['LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose', ''],
+                [
+                    'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose',
+                    'value' => ''
+                ],
             ],
             'itemsProcFunc' => 'In2code\\Femanager\\UserFunc\\StaticInfoTables->getStatesOptions',
             'maxitems' => 1,
@@ -141,7 +133,10 @@ if ($extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect')) {
         'renderType' => 'selectSingle',
         'itemsProcFunc' => 'In2code\\Femanager\\UserFunc\\StaticInfoTables->getCountryOptions',
         'items' => [
-            ['LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose', ''],
+            [
+                'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose',
+                'value' => ''
+            ],
         ],
         'maxitems' => 1,
     ];
