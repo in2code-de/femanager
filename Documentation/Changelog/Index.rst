@@ -13,6 +13,14 @@ Changelog
       Release Date
    :Changes:
       Release Description
+      -
+            :Version: 6.4.2
+            :Date: 2025-07-22
+            :Changes:
+
+            * [BUGFIX] Security: Avoid unintended persistence
+
+
 -
       :Version: 6.4.1
       :Date: 2024-05-20
@@ -30,7 +38,6 @@ Changelog
       * [TASK] Remove unnecessary scrollIntoView property - thx to Felix Ranesberger (in2code)
       * [TASK] Replace jQuery scrollTop with vanilla scrollIntoView - thx to Felix Ranesberger (in2code)
       * [TASK] Build new JS distribution file - thx to Felix Ranesberger (in2code)
-
 
 
 -
