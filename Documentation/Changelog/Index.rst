@@ -3,6 +3,15 @@
 
 Changelog
 =========
+-
+      :Version: 8.3.1
+      :Date: 2025-07-22
+      :Changes:
+      * [SECURITY] Avoid unintended persistence
+
+        You can disable logging function of femanager or update to the latest version.
+
+        https://projekte.in2code.de/issues/72776
 
 -
       :Version: 8.3.0
