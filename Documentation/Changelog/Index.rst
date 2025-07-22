@@ -4,6 +4,12 @@
 Changelog
 =========
 -
+      :Version: 7.5.3
+      :Date: 2025-07-22
+      :Changes:
+      * [SECURITY] Avoid unintended persistence
+
+-
       :Version: 7.5.2
       :Date: 2025-06-17
       :Changes:
