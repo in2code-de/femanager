@@ -162,6 +162,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.206">
 				<source>Image deleted</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.207">
+				<source>Attempted to spoof profile</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.300">
 				<source>Delete</source>
 			</trans-unit>
