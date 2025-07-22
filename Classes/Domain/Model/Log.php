@@ -23,6 +23,7 @@ class Log extends AbstractEntity
     final public const STATUS_PROFILEUPDATEREQUEST = 204;
     final public const STATUS_PROFILEUPDATEREFUSEDSECURITY = 205;
     final public const STATUS_PROFILEUPDATEIMAGEDELETE = 206;
+    final public const STATUS_PROFILEUPDATEATTEMPTEDSPOOF = 207;
     final public const STATUS_PROFILEDELETE = 301;
     final public const STATUS_INVITATIONPROFILECREATED = 401;
     final public const STATUS_INVITATIONPROFILEDELETEDUSER = 402;

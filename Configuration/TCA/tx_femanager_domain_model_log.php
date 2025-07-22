@@ -210,6 +210,11 @@ return [
                     ],
                     [
                         'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
+                        'tx_femanager_domain_model_log.state.207',
+                        Log::STATUS_PROFILEUPDATEATTEMPTEDSPOOF,
+                    ],
+                    [
+                        'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
                         'tx_femanager_domain_model_log.state.300',
                         '--div--',
                     ],
