@@ -3,13 +3,13 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="de">
     <header/>
     <body>
-      <trans-unit id="tx_femanager_domain_model_user" approved="yes">
+      <trans-unit id="tx_femanager_domain_model_user">
         <source>User</source>
-        <target state="final">Benutzer</target>
+        <target state="translated">Benutzer</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.username" approved="yes">
+      <trans-unit id="tx_femanager_domain_model_user.username">
         <source>Username</source>
-        <target state="final">Benutzername</target>
+        <target state="translated">Benutzername</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.password" approved="yes">
         <source>Password</source>
@@ -667,9 +667,9 @@
         <source>Thank you for your request. Please check your mail account to confirm the profile.</source>
         <target state="final">Vielen Dank für die Anfrage. Bitte überprüfen Sie Ihr E-Mail-Postfach und bestätigen Sie Ihre Registrierung.</target>
       </trans-unit>
-      <trans-unit id="createRequestWaitingForAdminConfirm">
+      <trans-unit id="createRequestWaitingForAdminConfirm" approved="yes">
         <source>Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</source>
-        <target state="translated">Vielen Dank für Ihre Registrierung. Ihr Profil wird verfügbar sein, sobald der Administrator Ihre Anfrage bestätigt.</target>
+        <target state="final">Vielen Dank für Ihre Registrierung. Ihr Profil wird verfügbar sein, sobald der Administrator Ihre Anfrage bestätigt.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailSend" approved="yes">
         <source>An Email was send to your account. Please check your inbox.</source>
