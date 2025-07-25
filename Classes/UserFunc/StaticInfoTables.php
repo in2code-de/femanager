@@ -6,18 +6,16 @@ namespace In2code\Femanager\UserFunc;
 
 use In2code\Femanager\DataProvider\CountryDataProvider;
 use In2code\Femanager\DataProvider\CountryZonesDataProvider;
-use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Country\CountryProvider;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class StaticInfoTables
 {
     public function __construct(
-        private readonly CountryProvider $countryProvider,
-        private readonly LanguageServiceFactory $languageServiceFactory
+        private readonly CountryProvider $countryProvider
     ) {
     }
 
@@ -71,33 +69,38 @@ class StaticInfoTables
      */
     public function getCountryOptions(array $data)
     {
+        $items = [];
+
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
             $countryDataProvider = GeneralUtility::makeInstance(CountryDataProvider::class);
             $countries = $countryDataProvider->getCountries();
             foreach ($countries as $country) {
-                $data['items'][] = [$country->getShortNameEn(), $country->getIsoCodeA3()];
+                $items[] = [
+                    $country->getShortNameEn(),
+                    $country->getIsoCodeA3()
+                ];
             }
         } else {
-            /**
-             * @var ServerRequestInterface $request
-             */
-            $request = $GLOBALS['TYPO3_REQUEST'];
-            $languageService = null;
-            if ($request->getAttribute('language') instanceof SiteLanguage) {
-                $languageService =
-                    $this->languageServiceFactory->createFromSiteLanguage($request->getAttribute('language'));
-            }
-
-            $returnArray = [];
             $countries = $this->countryProvider->getAll();
             foreach ($countries as $country) {
-                $returnArray[$country->getAlpha3IsoCode()] =
-                    $languageService !== null ?
-                        $languageService->sL($country->getLocalizedNameLabel()) :
-                        $country->getName();
+                $items[] = [
+                    $this->getLanguageService()->sL($country->getLocalizedNameLabel()),
+                    $country->getAlpha3IsoCode(),
+                ];
             }
-            asort($returnArray);
-            $data['items'] = $returnArray;
+
+            $locale = (string)($this->getLanguageService()->getLocale() ?? 'en');
+            $collator = new \Collator($locale);
+            usort($items, function(array $itemA, array $itemB) use ($collator) {
+                return $collator->compare($itemA[0], $itemB[0]);
+            });
         }
+
+        $data['items'] = array_merge($data['items'], $items);
+    }
+
+    protected function getLanguageService(): LanguageService
+    {
+        return $GLOBALS['LANG'];
     }
 }
