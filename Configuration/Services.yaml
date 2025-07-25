@@ -28,6 +28,8 @@ services:
       public: true
     In2code\Femanager\Finisher\FinisherRunner:
       public: true
+    In2code\Femanager\UserFunc\StaticInfoTables:
+      public: true
     In2code\Femanager\Utility\LogUtility:
       public: true
     In2code\Femanager\Domain\Service\PluginService:
