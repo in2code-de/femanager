@@ -249,18 +249,22 @@ class UserUtility extends AbstractUtility
                 && !in_array($propertyName, $ignoreProperties)
             ) {
                 $newPropertyValue = $changedObject->{'get' . ucfirst($propertyName)}();
-                if (!is_object($oldPropertyValue) || !is_object($newPropertyValue)) {
+                if (!is_object($oldPropertyValue) && !is_object($newPropertyValue)) {
                     if ($oldPropertyValue !== $newPropertyValue) {
                         $dirtyProperties[$propertyName]['old'] = $oldPropertyValue;
                         $dirtyProperties[$propertyName]['new'] = $newPropertyValue;
                     }
                 } else {
-                    if (get_class($oldPropertyValue) === 'DateTime') {
+                    if (($oldPropertyValue !== null && $oldPropertyValue instanceof \DateTime) || ($newPropertyValue !== null && $newPropertyValue instanceof \DateTime)) {
                         /** @var $oldPropertyValue \DateTime */
                         /** @var $newPropertyValue \DateTime */
-                        if ($oldPropertyValue->getTimestamp() !== $newPropertyValue->getTimestamp()) {
-                            $dirtyProperties[$propertyName]['old'] = $oldPropertyValue->getTimestamp();
-                            $dirtyProperties[$propertyName]['new'] = $newPropertyValue->getTimestamp();
+
+                        $oldTimestamp = $oldPropertyValue !== null ? $oldPropertyValue->getTimestamp() : 0;
+                        $newTimestamp = $newPropertyValue !== null ? $newPropertyValue->getTimestamp() : 0;
+
+                        if ($oldTimestamp !== $newTimestamp) {
+                            $dirtyProperties[$propertyName]['old'] = $oldTimestamp;
+                            $dirtyProperties[$propertyName]['new'] = $newTimestamp;
                         }
                     } elseif (get_class($oldPropertyValue) === ObjectStorage::class) {
                         $titlesOld = ObjectUtility::implodeObjectStorageOnProperty($oldPropertyValue);
