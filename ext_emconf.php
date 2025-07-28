@@ -7,7 +7,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'femanager',
     'description' => 'TYPO3 Frontend User Registration and Management based on
-        Extbase and Fluid and on TYPO3 12 and the possibility to extend it.',
+        Extbase and Fluid and on TYPO3 13 and the possibility to extend it.',
     'category' => 'plugin',
     'author' => 'Alexander Kellner, Stefan Busemann, Daniel Hoffmann',
     'author_email' => 'info@in2code.de',
