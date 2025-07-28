@@ -215,6 +215,10 @@
         <source>Image deleted</source>
         <target state="needs-translation">Image deleted</target>
       </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.207">
+        <source>Attempted to spoof profile</source>
+        <target state="needs-translation">Attempted to spoof profile</target>
+      </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
         <source>Delete</source>
         <target state="final">Poista</target>
@@ -294,6 +298,14 @@
       <trans-unit id="validationErrorMax" approved="yes">
         <source>Please add less characters to field %s</source>
         <target state="final">Kentässä %s on liikaa merkkejä.</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMinInt">
+        <source>Please respect the minimum value for field %s</source>
+        <target state="needs-translation">Please respect the minimum value for field %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMaxInt">
+        <source>Please respect the maximum value for field %s</source>
+        <target state="needs-translation">Please respect the maximum value for field %s</target>
       </trans-unit>
       <trans-unit id="validationErrorInt" approved="yes">
         <source>Only numbers are allowed in field %s</source>
@@ -672,8 +684,8 @@
         <target state="needs-translation">Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailSend">
-        <source>An Email was send to your account. Please check your inbox.</source>
-        <target state="needs-translation">An Email was send to your account. Please check your inbox.</target>
+        <source>An email was sent to your account. Please check your inbox.</source>
+        <target state="needs-translation">An email was sent to your account. Please check your inbox.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailFail">
         <source>We received no valid mail.</source>
@@ -703,9 +715,25 @@
         <source>Update your user-profile</source>
         <target state="final">Päivitä käyttäjäprofiiliasi</target>
       </trans-unit>
+      <trans-unit id="confirmUserConfirmation">
+        <source>Please confirm the creation of your account.</source>
+        <target state="needs-translation">Please confirm the creation of your account.</target>
+      </trans-unit>
       <trans-unit id="confirmUserConfirmationRefused">
         <source>Please confirm the deletion of your account.</source>
         <target state="needs-translation">Please confirm the deletion of your account.</target>
+      </trans-unit>
+      <trans-unit id="confirmAdminConfirmation">
+        <source>Please confirm the creation of this account.</source>
+        <target state="needs-translation">Please confirm the creation of this account.</target>
+      </trans-unit>
+      <trans-unit id="confirmAdminConfirmationRefused">
+        <source>Please confirm the deletion of this account.</source>
+        <target state="needs-translation">Please confirm the deletion of this account.</target>
+      </trans-unit>
+      <trans-unit id="confirmAdminConfirmationRefusedSilent">
+        <source>Please confirm the silent deletion of this account.</source>
+        <target state="needs-translation">Please confirm the silent deletion of this account.</target>
       </trans-unit>
       <trans-unit id="update" approved="yes">
         <source>Profile successfully changed</source>
