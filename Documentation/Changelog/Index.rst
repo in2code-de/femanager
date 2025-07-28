@@ -3,7 +3,47 @@
 
 Changelog
 =========
+-
+      :Version: 13.0.0
+      :Date: 2024-11-11
+      :Changes:
+      * [FEATURE] add general basic validator "minInt" and "maxInt" - thx to Martin Keller
+      * [FEATURE] Support TYPO3 V13 - thx to Sebastian Stein (in2code), Andreas Nedbal (in2code), Stefan Busemann (in2code)
+      * [FEATURE] Additional confirmation step for admin confirm/refuse of users - Stefan Busemann (in2code)
+      * [SECURITY] Don't pass User to newAction - Andreas Nedbal (in2code)
+      * [SECURITY] Avoid unintended persistence - Andreas Nedbal (in2code)
+      * [LANG] Adjust label for resendConfirmationMailSend - Christine Zoglmeier (in2code)
+      * [BUGFIX] Failing resend frontend view - Stefan Busemann (in2code)
+      * [BUGFIX] Load data processor only in frontend context - thx to Johannes Böttcher
+      * [BUGFIX] Load TypoScript configuration in backend context - thx to Johannes Böttcher
+      * [BUGFIX] Migrate RequireJS backend script to ES6  - thx to Johannes Böttcher
+      * [BUGFIX] Pass request object to mail service in controller context - thx to DaRealFrea
+      * [BUGFIX] Missing resend confirmation dialogue - Stefan Busemann (in2code)
+      * [BUGFIX] wrong default action for resend plugin - Stefan Busemann (in2code)
+      * [REFACTOR] (controller): enhance file handling and readability - thx to Gregor
+      * [BUGFIX] Retain user-entered searchword after submit - thx to Simon Praetorius
 
+-
+      :Version: 8.3.1
+      :Date: 2025-07-22
+      :Changes:
+      * [SECURITY] Avoid unintended persistence
+
+        You can disable logging function of femanager or update to the latest version.
+
+        https://projekte.in2code.de/issues/72776
+
+-
+      :Version: 8.3.0
+      :Date: 2025-06-10
+      :Changes:
+      * [FEATURE] Add confirmation buttons for a final confirm - backport from V13 thx to stigfaerch
+
+-
+      :Version: 8.2.2
+      :Date: 2025-05-20
+      :Changes:
+      * [BUGFIX] Security: Missing Hash Check for invitation controller - Invitation Templates must be updated (if a custom template is used)
 -
       :Version: 8.2.1
       :Date: 2024-11-11
