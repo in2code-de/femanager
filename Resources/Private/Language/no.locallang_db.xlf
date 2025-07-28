@@ -231,6 +231,10 @@
         <source>Image deleted</source>
         <target state="final">Bilde slettet</target>
       </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.207">
+        <source>Attempted to spoof profile</source>
+        <target state="needs-translation">Attempted to spoof profile</target>
+      </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
         <source>Delete</source>
         <target state="final">Slett</target>
