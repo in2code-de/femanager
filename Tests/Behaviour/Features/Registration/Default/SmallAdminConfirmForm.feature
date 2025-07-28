@@ -30,7 +30,7 @@ Feature: SmallAdminConfirmForm
     Then I should see "Thank you for your registration. Your profile will be available as soon as the admin confirms your request."
 
     # Check if user is disabled
-    Given I am on /index.php?id=48&pid=145"
+    Given I am on "/index.php?id=48&pid=145"
     Then I wait "4" seconds
     Then I should see "[random:1]"
     Then I should see "status: disabled"
