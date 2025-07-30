@@ -35,6 +35,9 @@ UserBackend / List
 									<f:translate key="tx_femanager_domain_model_user.username" />
 								</td>
 								<td nowrap="nowrap">
+									<f:translate key="tx_femanager_domain_model_user.usergroup" />
+								</td>
+								<td nowrap="nowrap">
 									<f:translate key="tx_femanager_domain_model_user.country" />
 								</td>
 								<td nowrap="nowrap">
@@ -67,6 +70,16 @@ UserBackend / List
 									</td>
 									<td nowrap="nowrap">
 										{user.username}
+									</td>
+									<td nowrap="nowrap">
+										<f:for each="{user.usergroup}" as="usergroup" iteration="i">
+											<f:if condition="{i.isFirst}">
+												<f:else>
+													<br />
+												</f:else>
+											</f:if>
+											{usergroup.title}
+										</f:for>
 									</td>
 									<td nowrap="nowrap">
 										{user.country}
