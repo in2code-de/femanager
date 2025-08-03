@@ -1,24 +1,33 @@
 # .gitattributes
 .gitkeep                         export-ignore
-/.env                            export-ignore
-/.project                        export-ignore
+/.FemanagerFeaturesList.md       export-ignore
+/.crowdin.yml                    export-ignore
+/.ddev                           export-ignore
 /.editorconfig                   export-ignore
+/.env                            export-ignore
 /.gitattributes                  export-ignore
+/.github                         export-ignore
 /.gitignore                      export-ignore
-/config                          export-ignore
-/docker-compose.yml              export-ignore
-/dynamicReturnTypeMeta.json      export-ignore
+/.project                        export-ignore
 /Makefile                        export-ignore
-/phpunit.xml.dist                export-ignore
-/Tests                           export-ignore
 /Resources/Private/JavaScript    export-ignore
 /Resources/Private/Sass          export-ignore
 /Resources/Private/gulpfile.js   export-ignore
 /Resources/Private/package.json  export-ignore
+/Tests                           export-ignore
+/config                          export-ignore
+/docker-compose.yml              export-ignore
+/dynamicReturnTypeMeta.json      export-ignore
+/early-access-version.md         export-ignore
+/phive.xml                       export-ignore
+/phpunit.xml.dist                export-ignore
+/rector.php                      export-ignore
+
 # Handle line endings automatically for files detected as text
 # and leave all files detected as binary untouched.
 * text=auto
-# Enforce checkout with linux lf consistent over all plattforms
+
+# Enforce checkout with Linux LF consistent over all platforms
 .*     text eol=lf
 *.html text eol=lf
 *.css  text eol=lf
@@ -36,5 +45,6 @@
 *.sql  text eol=lf
 *.t3s  text eol=lf
 *.txt  text eol=lf
+
 .project/data/db.sql.gz filter=lfs diff=lfs merge=lfs -text
 .project/data/db-before-plugin-update.sql.gz filter=lfs diff=lfs merge=lfs -text
