@@ -8,6 +8,8 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Repository\UserRepository;
 use Psr\Http\Message\RequestInterface;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\Argon2iPasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\BcryptPasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\BlowfishPasswordHash;
@@ -36,34 +38,15 @@ class UserUtility extends AbstractUtility
      */
     public static function getCurrentUser(): ?User
     {
-        if (self::getPropertyFromUser() !== null) {
-            $userRepository = GeneralUtility::makeInstance(UserRepository::class);
-
-            return $userRepository->findByUid((int)self::getPropertyFromUser());
-        }
-
-        return null;
-    }
-
-    /**
-     * Get property from current logged in Frontend User
-     *
-     *
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    public static function getPropertyFromUser(string $propertyName = 'uid'): mixed
-    {
-        /**
-         * @var ServerRequest $request
-         */
-        $request = $GLOBALS['TYPO3_REQUEST'];
-        /**
-         * @var FrontendUserAuthentication $frontendUser
-         */
-        $frontendUser = $request->getAttribute('frontend.user');
-
-        if (!empty($frontendUser->user[$propertyName])) {
-            return $frontendUser->user[$propertyName];
+        $context = GeneralUtility::makeInstance(Context::class);
+        try {
+            $userId = $context->getPropertyFromAspect('frontend.user', 'id', 0);
+            if ($userId > 0) {
+                $userRepository = GeneralUtility::makeInstance(UserRepository::class);
+                return $userRepository->findByUid($userId);
+            }
+        } catch (AspectNotFoundException) {
+            return null;
         }
 
         return null;
