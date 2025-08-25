@@ -426,7 +426,7 @@ class ClientsideValidator extends AbstractValidator
         return $this->fieldName;
     }
 
-    public function setUser(User $user = null): static
+    public function setUser(?User $user = null): static
     {
         $this->user = $user;
 

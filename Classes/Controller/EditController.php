@@ -52,7 +52,7 @@ class EditController extends AbstractFrontendController
     #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
     #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]
     #[Validate(['validator' => CaptchaValidator::class, 'param' => 'captcha'])]
-    public function updateAction(User $user, string $captcha = null)
+    public function updateAction(User $user, ?string $captcha = null)
     {
         $currentUser = UserUtility::getCurrentUser();
         $userValues = $this->request->getArgument('user') ?? [];

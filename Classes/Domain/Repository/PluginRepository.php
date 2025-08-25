@@ -23,7 +23,7 @@ class PluginRepository
     /**
      * @param FlexFormService|null $flexFormService
      */
-    public function __construct(FlexFormService $flexFormService = null)
+    public function __construct(?FlexFormService $flexFormService = null)
     {
         $this->flexFormService = $flexFormService ?? GeneralUtility::makeInstance(FlexFormService::class);
     }
