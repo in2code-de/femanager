@@ -319,10 +319,8 @@ class UserUtility extends AbstractUtility
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @SuppressWarnings(PHPMD.Superglobals)
-     *
-     * @TODO: Check Storagepid Parameter
      */
-    public static function login(User $user, ?string $storagePids = null): void
+    public static function login(User $user): void
     {
         /** @var RequestInterface $request */
         $request = $GLOBALS['TYPO3_REQUEST'];

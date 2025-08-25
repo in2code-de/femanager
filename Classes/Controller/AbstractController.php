@@ -393,10 +393,7 @@ abstract class AbstractController extends ActionController
             $this->userRepository->update($user);
             $this->persistenceManager->persistAll();
             if (ConfigurationUtility::getValue('new./login', $this->config) === '1') {
-                UserUtility::login(
-                    $user,
-                    ConfigurationUtility::getValue('persistence./storagePid', $this->allConfig)
-                );
+                UserUtility::login($user);
                 $this->addFlashMessage(
                     LocalizationUtility::translate('login'),
                     '',
