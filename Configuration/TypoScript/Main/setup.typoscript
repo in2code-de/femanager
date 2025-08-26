@@ -210,6 +210,10 @@ plugin.tx_femanager {
           cc = TEXT
           cc.value =
 
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
+
           # Set mail priority from 1 to 5
           priority = TEXT
           priority.value =
@@ -293,6 +297,10 @@ plugin.tx_femanager {
           cc = TEXT
           cc.value =
 
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
+
           # Set mail priority from 1 to 5
           priority = TEXT
           priority.value =
@@ -373,6 +381,10 @@ plugin.tx_femanager {
           cc = TEXT
           cc.value =
 
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
+
           # Set mail priority from 1 to 5
           priority = TEXT
           priority.value =
@@ -451,6 +463,10 @@ plugin.tx_femanager {
           cc = TEXT
           cc.value =
 
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
+
           # Set mail priority from 1 to 5
           priority = TEXT
           priority.value =
@@ -528,6 +544,10 @@ plugin.tx_femanager {
           # Set CC receivers
           cc = TEXT
           cc.value =
+
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
@@ -825,6 +845,10 @@ plugin.tx_femanager {
           cc = TEXT
           cc.value =
 
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
+
           # Set mail priority from 1 to 5
           priority = TEXT
           priority.value =
@@ -903,6 +927,10 @@ plugin.tx_femanager {
           cc = TEXT
           cc.value =
 
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
+
           # Set mail priority from 1 to 5 (from important to not important)
           priority = TEXT
           priority.value =
@@ -980,6 +1008,10 @@ plugin.tx_femanager {
           # Set CC receivers
           cc = TEXT
           cc.value =
+
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
 
           # Set mail priority from 1 to 5 (from important to not important)
           priority = TEXT
@@ -1193,6 +1225,10 @@ plugin.tx_femanager {
           cc = TEXT
           cc.value =
 
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
+
           # Set mail priority from 1 to 5
           priority = TEXT
           priority.value =
@@ -1270,6 +1306,10 @@ plugin.tx_femanager {
           # Set CC receivers
           cc = TEXT
           cc.value =
+
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT
@@ -1349,6 +1389,10 @@ plugin.tx_femanager {
           cc = TEXT
           cc.value =
 
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
+
           # Set mail priority from 1 to 5
           priority = TEXT
           priority.value =
@@ -1426,6 +1470,10 @@ plugin.tx_femanager {
           # Set CC receivers
           cc = TEXT
           cc.value =
+
+          # Set reply to receivers
+          replyTo = TEXT
+          replyTo.value =
 
           # Set mail priority from 1 to 5
           priority = TEXT

@@ -6,9 +6,7 @@
 Installation and Configuration
 ==============================
 
-.. only:: html
-
-	:ref:`quick` | :ref:`stepbystep` |
+:ref:`quick` | :ref:`stepbystep` |
 
 
 .. _quick:
@@ -667,6 +665,10 @@ Plain Text
                         cc = TEXT
                         cc.value =
 
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
+
                         # Set mail priority from 1 to 5
                         priority = TEXT
                         priority.value =
@@ -744,6 +746,10 @@ Plain Text
                         # Set CC receivers
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -823,6 +829,10 @@ Plain Text
                         cc = TEXT
                         cc.value =
 
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
+
                         # Set mail priority from 1 to 5
                         priority = TEXT
                         priority.value =
@@ -901,6 +911,10 @@ Plain Text
                         cc = TEXT
                         cc.value =
 
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
+
                         # Set mail priority from 1 to 5
                         priority = TEXT
                         priority.value =
@@ -978,6 +992,10 @@ Plain Text
                         # Set CC receivers
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -1267,6 +1285,10 @@ Plain Text
                         cc = TEXT
                         cc.value =
 
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
+
                         # Set mail priority from 1 to 5
                         priority = TEXT
                         priority.value =
@@ -1345,6 +1367,10 @@ Plain Text
                         cc = TEXT
                         cc.value =
 
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
+
                         # Set mail priority from 1 to 5 (from important to not important)
                         priority = TEXT
                         priority.value =
@@ -1422,6 +1448,10 @@ Plain Text
                         # Set CC receivers
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5 (from important to not important)
                         priority = TEXT
@@ -1630,6 +1660,10 @@ Plain Text
                         cc = TEXT
                         cc.value =
 
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
+
                         # Set mail priority from 1 to 5
                         priority = TEXT
                         priority.value =
@@ -1707,6 +1741,10 @@ Plain Text
                         # Set CC receivers
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -1786,6 +1824,10 @@ Plain Text
                         cc = TEXT
                         cc.value =
 
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
+
                         # Set mail priority from 1 to 5
                         priority = TEXT
                         priority.value =
@@ -1863,6 +1905,10 @@ Plain Text
                         # Set CC receivers
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
