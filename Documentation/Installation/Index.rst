@@ -5,7 +5,7 @@
 Installation and Configuration
 ==============================
 
-:ref:`quick` | :ref:`stepbystep` | 
+:ref:`quick` | :ref:`stepbystep` |
 
 
 .. _quick:
@@ -694,9 +694,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -772,9 +776,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -850,9 +858,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifySubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -928,9 +940,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifyRefusedSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -1006,9 +1022,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifySubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -1297,9 +1317,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -1375,9 +1399,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestRefusedSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5 (from important to not important)
                         priority = TEXT
@@ -1453,9 +1481,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateNotifySubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5 (from important to not important)
                         priority = TEXT
@@ -1660,9 +1692,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationSubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -1738,9 +1774,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationAdminNotifiyStep1Subject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -1816,9 +1856,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationAdminNotifiySubject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT
@@ -1894,9 +1938,13 @@ TypoScript
                         subject = TEXT
                         subject.data = LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationUserRefusedAdminNotifiyStep1Subject
 
-                        # Set CC receivers (comma separatet list for multiple CC receivers)
+                        # Set CC receivers (comma separated list for multiple CC receivers)
                         cc = TEXT
                         cc.value =
+
+                        # Set reply to receivers (comma separated list for multiple reply to receivers)
+                        replyTo = TEXT
+                        replyTo.value =
 
                         # Set mail priority from 1 to 5
                         priority = TEXT

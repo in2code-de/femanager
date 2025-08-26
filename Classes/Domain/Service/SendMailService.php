@@ -77,6 +77,7 @@ class SendMailService
         $this->overwriteEmailSender($typoScript, $email);
         $this->setSubject($typoScript, $email);
         $this->setCc($typoScript, $email);
+        $this->setReplyTo($typoScript, $email);
         $this->setPriority($typoScript, $email);
         $this->setAttachments($typoScript, $email);
 
@@ -213,6 +214,13 @@ class SendMailService
     {
         if ($this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.'])) {
             $email->setCc(GeneralUtility::trimExplode(',', $this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.']), true));
+        }
+    }
+
+    protected function setReplyTo(array $typoScript, MailMessage $email): void
+    {
+        if ($this->contentObject->cObjGetSingle($typoScript['replyTo'], $typoScript['replyTo.'])) {
+            $email->setReplyTo(GeneralUtility::trimExplode(',', $this->contentObject->cObjGetSingle($typoScript['replyTo'], $typoScript['replyTo.']), true));
         }
     }
 
