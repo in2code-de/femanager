@@ -35,6 +35,7 @@ class CaptchaValidator extends AbstractValidator
     {
         $isValid = false;
         $wordRepository = GeneralUtility::makeInstance(WordRepository::class);
+        $wordRepository->setRequest($GLOBALS['TYPO3_REQUEST']);
         $wordObject = $wordRepository->getWord();
         $wordHash = $wordObject->getWordHash();
         if (!empty($wordHash) && ($captcha !== '' && $captcha !== '0') && $wordObject->getHashFunction() === 'md5') {
