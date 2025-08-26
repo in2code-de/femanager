@@ -328,6 +328,15 @@ class UserUtility extends AbstractUtility
         $feUser = $request->getAttribute('frontend.user');
 
         $feUser->createUserSession($user->getTempUserArray());
+        // @todo refactor to possibly get rid of the internal "enforceNewSessionId" call
+        //
+        // this call is required for now because at this point in time the FrontendUserAuthentication does not contain
+        // the Session data of the newly created user.
+        // "enforceNewSessionId" forces TYPO3 to recreate and update the UserSession with the current user data.
+        //
+        // see: https://projekte.in2code.de/issues/72860#note-5 and https://projekte.in2code.de/issues/57055
+        //
+        // This should be refactored to not use an TYPO3 @internal function.
         $feUser->enforceNewSessionId();
     }
 }
