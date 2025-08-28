@@ -25,6 +25,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ApplicationType;
+use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Http\UploadedFile;
 use \TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior;
@@ -654,5 +655,26 @@ abstract class AbstractController extends ActionController
             ConfigurationUtility::getValue('new./email./createUserConfirmation.', $this->config),
             $this->request
         );
+    }
+
+    protected function validateMissingCaptcha(string $redirectAction): void
+    {
+        if ($this->isCaptchaEnabled() && $this->request->getAttribute('extbase')->getArgument('captcha') === '') {
+            $this->addFlashMessage(
+                LocalizationUtility::translate('validationErrorCaptcha'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
+            throw new PropagateResponseException($this->redirect($redirectAction), 12398019239);
+        }
+    }
+
+    protected function isCaptchaEnabled(): bool {
+        $extbaseAttribute = $this->request->getAttribute('extbase');
+        $controllerName = strtolower($extbaseAttribute->getControllerName());
+
+        return $extbaseAttribute->hasArgument('captcha') &&
+            $this->config[$controllerName . '.']['validation.']['captcha.']['captcha'] == true &&
+            ExtensionManagementUtility::isLoaded('sr_freecap');
     }
 }

@@ -54,6 +54,8 @@ class EditController extends AbstractFrontendController
     #[Validate(['validator' => CaptchaValidator::class, 'param' => 'captcha'])]
     public function updateAction(User $user, ?string $captcha = null)
     {
+        $this->validateMissingCaptcha('edit');
+
         $currentUser = UserUtility::getCurrentUser();
         $userValues = $this->request->getArgument('user') ?? [];
         $token = $this->request->getArgument('token') ?? null;
