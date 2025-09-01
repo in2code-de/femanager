@@ -66,6 +66,8 @@ class NewController extends AbstractFrontendController
     #[Validate(['validator' => CaptchaValidator::class, 'param' => 'captcha'])]
     public function createAction(User $user, ?string $captcha = null): ResponseInterface
     {
+        $this->validateMissingCaptcha('new');
+
         if ($this->ratelimiterService->isLimited()) {
             $this->addFlashMessage(
                 LocalizationUtility::translate('ratelimiter_too_many_attempts'),
