@@ -205,22 +205,25 @@ class SendMailService
 
     protected function setSubject(array $typoScript, MailMessage $email): void
     {
-        if ($this->contentObject->cObjGetSingle((string)$typoScript['subject'], (array)$typoScript['subject.'])) {
-            $email->setSubject($this->contentObject->cObjGetSingle((string)$typoScript['subject'], (array)$typoScript['subject.']));
+        $subject = $this->contentObject->cObjGetSingle((string)$typoScript['subject'], (array)$typoScript['subject.']);
+        if ($subject) {
+            $email->setSubject($subject);
         }
     }
 
     protected function setCc(array $typoScript, MailMessage $email): void
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.'])) {
-            $email->setCc(GeneralUtility::trimExplode(',', $this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.']), true));
+        $cc = $this->contentObject->cObjGetSingle($typoScript['cc'], $typoScript['cc.']);
+        if ($cc) {
+            $email->setCc(GeneralUtility::trimExplode(',', $cc, true));
         }
     }
 
     protected function setReplyTo(array $typoScript, MailMessage $email): void
     {
-        if ($this->contentObject->cObjGetSingle($typoScript['replyTo'], $typoScript['replyTo.'])) {
-            $email->setReplyTo(GeneralUtility::trimExplode(',', $this->contentObject->cObjGetSingle($typoScript['replyTo'], $typoScript['replyTo.']), true));
+        $replyTo = $this->contentObject->cObjGetSingle($typoScript['replyTo'], $typoScript['replyTo.']);
+        if ($replyTo) {
+            $email->setReplyTo(GeneralUtility::trimExplode(',', $replyTo, true));
         }
     }
 
