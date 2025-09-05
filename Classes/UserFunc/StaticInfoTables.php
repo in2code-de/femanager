@@ -24,7 +24,7 @@ class StaticInfoTables
         return ExtensionManagementUtility::isLoaded('static_info_tables');
     }
 
-    public function getStatesOptions(array $data): void
+    public function getStatesOptions(array &$data): void
     {
         if (ExtensionManagementUtility::isLoaded('static_info_tables')) {
             $countryZonesDataProvider = GeneralUtility::makeInstance(CountryZonesDataProvider::class);
@@ -64,7 +64,7 @@ class StaticInfoTables
     /**
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function getCountryOptions(array $data): void
+    public function getCountryOptions(array &$data): void
     {
         $items = [];
 
