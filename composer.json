@@ -27,6 +27,7 @@
     "php": ">=8.1",
     "ext-json": "*",
     "ext-pdo": "*",
+    "ext-intl": "*",
     "typo3/cms-core": "^12.3.0",
     "symfony/config": "^6.4 || ^7.0"
   },
