@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\UserFunc;
 
+use Collator;
 use In2code\Femanager\DataProvider\CountryDataProvider;
 use In2code\Femanager\DataProvider\CountryZonesDataProvider;
 use TYPO3\CMS\Core\Country\CountryProvider;
@@ -86,7 +87,7 @@ class StaticInfoTables
             }
 
             $locale = (string)($this->getLanguageService()->getLocale() ?? 'en');
-            $collator = new \Collator($locale);
+            $collator = new Collator($locale);
             usort($items, function(array $itemA, array $itemB) use ($collator) {
                 return $collator->compare($itemA[0], $itemB[0]);
             });
