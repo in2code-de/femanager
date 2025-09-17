@@ -260,7 +260,7 @@ class SendMailService
      */
     protected function getRelativeEmailPathAndFilename(string $fileName): string
     {
-        return TemplateUtility::getTemplatePath('Email/' . ucfirst($fileName) . '.html');
+        return TemplateUtility::getTemplatePath('Mail/' . ucfirst($fileName) . '.html');
     }
 
     protected function isMailEnabled(array $typoScript, array $receiver): bool
