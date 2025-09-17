@@ -3,6 +3,7 @@
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Utility\StringUtility;
+use Symfony\Component\Mime\Address;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -190,20 +191,20 @@ class StringUtilityTest extends UnitTestCase
             [
                 'email1@mail.org' . PHP_EOL . 'email2@mail.org',
                 [
-                    'email1@mail.org' => 'femanager',
-                    'email2@mail.org' => 'femanager',
+                    new Address('email1@mail.org', 'femanager'),
+                    new Address('email2@mail.org', 'femanager'),
                 ],
             ],
             [
                 'nomail.org' . PHP_EOL . 'email2@mail.org',
                 [
-                    'email2@mail.org' => 'femanager',
+                    new Address('email2@mail.org', 'femanager'),
                 ],
             ],
             [
                 'email2@mail.org',
                 [
-                    'email2@mail.org' => 'femanager',
+                    new Address('email2@mail.org', 'femanager'),
                 ],
             ],
         ];
@@ -215,7 +216,7 @@ class StringUtilityTest extends UnitTestCase
      */
     public function testMakelEmailArrayReturnsArray(string $haystack, array $expectedResult): void
     {
-        self::assertSame($expectedResult, StringUtility::makeEmailArray($haystack));
+        self::assertEqualsCanonicalizing($expectedResult, StringUtility::makeEmailArray($haystack));
     }
 
     public static function getRandomStringAlwaysReturnsStringsOfGivenLengthDataProvider(): array

@@ -89,7 +89,7 @@ class StringUtility extends AbstractUtility
         $mailArray = [];
         foreach ($emails as $email) {
             if (GeneralUtility::validEmail($email)) {
-                $mailArray[$email] = new Address($email, $name);
+                $mailArray[] = new Address($email, $name);
             }
         }
 
