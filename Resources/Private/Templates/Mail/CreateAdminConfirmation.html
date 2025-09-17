@@ -1,4 +1,4 @@
-<f:layout name="Mail/Default" />
+<f:layout name="Default" />
 
 	Email / CreateAdminConfirmation
 
@@ -13,7 +13,7 @@
 	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationSalutation" /></p>
 
 	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationUserProperties" /></p>
-	<f:render partial="Mail/UserProperties" arguments="{_all}" />
+	<f:render partial="UserProperties" arguments="{_all}" />
 
 	<p>
 		<f:format.printf arguments="{0:user.username}">

@@ -1,0 +1,11 @@
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationSalutation" /> {user.username},
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationText1" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationText2" />:
+<f:uri.action action="edit" controller="Invitation" absolute="1" arguments="{user:user, hash:hash}" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationText3" />:
+<f:uri.action action="delete" controller="Invitation" absolute="1" arguments="{user:user, hash:hash}" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationSignature" />

@@ -1,0 +1,6 @@
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifySalutation" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifyText2" arguments="{0:user.username}"/>
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifyUserProperties" />
+<f:render partial="UserPropertiesPlaintext" arguments="{_all}" />

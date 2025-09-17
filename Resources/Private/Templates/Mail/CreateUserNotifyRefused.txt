@@ -1,0 +1,5 @@
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifyRefusedSalutation" /> {user.username},
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifyRefusedText1" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifyRefusedSignature" />

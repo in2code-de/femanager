@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Utility;
 
+use Symfony\Component\Mime\Address;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -70,12 +71,12 @@ class StringUtility extends AbstractUtility
     }
 
     /**
-     * Create array for swiftmailer
+     * Create Addresses array for mailer
      *        sender and receiver mail/name combination with fallback
      *
      * @param string $emailString String with separated emails (splitted by \n)
      * @param string $name Name for every email name combination
-     * @return array $mailArray
+     * @return array<Address> $mailArray
      */
     public static function makeEmailArray(mixed $emailString, string $name = 'femanager'): array
     {
@@ -88,7 +89,7 @@ class StringUtility extends AbstractUtility
         $mailArray = [];
         foreach ($emails as $email) {
             if (GeneralUtility::validEmail($email)) {
-                $mailArray[$email] = $name;
+                $mailArray[$email] = new Address($email, $name);
             }
         }
 
