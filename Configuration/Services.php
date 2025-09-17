@@ -3,7 +3,6 @@
 namespace In2code\Femanager\DependencyInjection;
 
 use In2code\Femanager\DependencyInjection\CompilerPass\ChangeClassDatamapPass;
-use SJBR\StaticInfoTables\Domain\Model\Country;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 

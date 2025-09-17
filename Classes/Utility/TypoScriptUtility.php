@@ -12,8 +12,11 @@ use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 
-class TypoScriptUtility {
-    public function __construct() {}
+class TypoScriptUtility
+{
+    public function __construct()
+    {
+    }
 
     /**
      * Method getTypoScript

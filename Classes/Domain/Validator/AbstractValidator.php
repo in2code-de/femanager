@@ -135,12 +135,12 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         return mb_strlen($value) <= $validationSetting;
     }
 
- /**
-     * Validation for Minimum of characters
-     *
-     * @param int $value
-     * @param string $validationSetting
-     */
+    /**
+        * Validation for Minimum of characters
+        *
+        * @param int $value
+        * @param string $validationSetting
+        */
     protected function validateMinInt($value, $validationSetting): bool
     {
         return $value >= $validationSetting;

@@ -272,7 +272,7 @@ class ClientsideValidator extends AbstractValidator
                         $wordRepository = GeneralUtility::makeInstance(
                             WordRepository::class
                         );
-                        $wordRepository->setRequest($this->request ?? $GLOBALS["TYPO3_REQUEST"]);
+                        $wordRepository->setRequest($this->request ?? $GLOBALS['TYPO3_REQUEST']);
                         $wordObject = $wordRepository->getWord();
                         $wordHash = $wordObject->getWordHash();
                         $userVal = md5(strtolower(mb_convert_encoding($this->getValue(), 'ISO-8859-1')));

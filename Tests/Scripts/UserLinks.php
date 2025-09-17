@@ -72,11 +72,11 @@ class UserLinks
     public function getAdminConfirmationUri(array $row)
     {
         $params = '';
-        $params .= '&tx_femanager_registration[user]='. $row['uid'];
-        $params .= '&tx_femanager_registration[hash]='. $this->getHash($row);
+        $params .= '&tx_femanager_registration[user]=' . $row['uid'];
+        $params .= '&tx_femanager_registration[hash]=' . $this->getHash($row);
         $user = new User();
         $user->setUsername($row['username']);
-        $params .= '&tx_femanager_registration[adminHash]='. HashUtility::createHashForUser($user, 'admin');
+        $params .= '&tx_femanager_registration[adminHash]=' . HashUtility::createHashForUser($user, 'admin');
         $params .= '&tx_femanager_registration[status]=adminConfirmation';
         $params .= '&tx_femanager_registration[action]=confirmCreateRequest';
         $params .= '&tx_femanager_registration[controller]=New';
@@ -115,11 +115,11 @@ class UserLinks
         return $this->cObj->typoLink_URL($configuration);
     }
 
-    protected function getHash(array $row, $suffix = ""): string
+    protected function getHash(array $row, $suffix = ''): string
     {
         $user = new User();
         $user->setUsername($row['username']);
-        return HashUtility::createHashForUser($user, $suffix = "");
+        return HashUtility::createHashForUser($user, $suffix = '');
     }
 
     /**
