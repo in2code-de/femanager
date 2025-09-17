@@ -13,12 +13,21 @@ Changelog
       Release Date
    :Changes:
       Release Description
-      -
-            :Version: 6.4.2
-            :Date: 2025-07-22
-            :Changes:
 
-            * [BUGFIX] Security: Avoid unintended persistence
+-
+      :Version: 6.4.3
+      :Date: 2025-09-17
+      :Changes:
+
+      * [BACKPORT][FEATURE] introduce new mail configuration option for replyTo
+
+
+-
+      :Version: 6.4.2
+      :Date: 2025-07-22
+      :Changes:
+
+      * [BUGFIX] Security: Avoid unintended persistence
 
 
 -
