@@ -3,7 +3,9 @@
 namespace In2code\Femanager\Tests\Unit\ViewHelpers\Form;
 
 use In2code\Femanager\ViewHelpers\Form\GetCountriesViewHelper;
+use Psr\EventDispatcher\ListenerProviderInterface;
 use TYPO3\CMS\Core\Country\CountryProvider;
+use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
@@ -21,11 +23,15 @@ class GetCountriesViewHelperTest extends UnitTestCase
     public function setUp(): void
     {
         parent::setUp();
+
+        $listenerProviderMock = $this->getMockBuilder(ListenerProviderInterface::class)->getMock();
+        $eventDispatcher = new EventDispatcher($listenerProviderMock);
+
         $this->generalValidatorMock = $this->getAccessibleMock(
             GetCountriesViewHelper::class,
             null,
             [
-                new CountryProvider(),
+                new CountryProvider($eventDispatcher),
                 $this->getMockBuilder(LanguageServiceFactory::class)->disableOriginalConstructor()->getMock(),
             ]
         );
