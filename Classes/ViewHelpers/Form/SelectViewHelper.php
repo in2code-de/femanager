@@ -30,7 +30,7 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
     public function initialize(): void
     {
         parent::initialize();
-        $this->tag->addAttribute('data-selected-value', $this->getSelectedValue());
+        $this->tag->addAttribute('data-selected-value', is_array($this->getSelectedValue()) ? implode(',', $this->getSelectedValue()) : $this->getSelectedValue());
     }
 
     public function initializeArguments(): void
@@ -237,7 +237,6 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
      */
     protected function getSelectedValue()
     {
-        $selectedValues = null;
         $this->setRespectSubmittedDataValue(true);
         $value = $this->getValueAttribute();
         if (!is_array($value) && !$value instanceof \Traversable) {
@@ -245,6 +244,10 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
             if ($selectedValues !== null) {
                 return $selectedValues;
             }
+        }
+        $selectedValues = [];
+        foreach ($value as $selectedValueElement) {
+            $selectedValues[] = $this->getOptionValueScalar($selectedValueElement);
         }
 
         $request = $this->getRequest();
