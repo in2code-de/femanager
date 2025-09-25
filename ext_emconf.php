@@ -9,11 +9,11 @@ $EM_CONF[$_EXTKEY] = [
     'description' => 'TYPO3 Frontend User Registration and Management based on
         Extbase and Fluid and on TYPO3 12 and the possibility to extend it.',
     'category' => 'plugin',
-    'author' => 'Alexander Kellner, Stefan Busemann, Daniel Hoffmann',
+    'author' => 'Alexander Kellner, Stefan Busemann, Daniel Hoffmann, Sebastian Stein',
     'author_email' => 'info@in2code.de',
     'author_company' => 'in2code.de - Wir leben TYPO3',
     'state' => 'stable',
-    'version' => '8.3.1',
+    'version' => '8.3.2',
     'constraints' => [
         'depends' => [
             'typo3' => '12.0.0-12.4.99',
