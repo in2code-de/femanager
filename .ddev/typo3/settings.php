@@ -49,6 +49,7 @@ return [
             'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
             'options' => [],
         ],
+        'pageNotFoundOnCHashError' => false,
     ],
     'GFX' => [
         'processor' => 'GraphicsMagick',
@@ -116,5 +117,9 @@ return [
             5,
         ],
         'trustedHostsPattern' => '.*.*',
+        'features' => [
+            'frontend.cache.autoTagging' => true,
+            'security.frontend.allowInsecureSiteResolutionByQueryParameters' => true,
+        ],
     ],
 ];

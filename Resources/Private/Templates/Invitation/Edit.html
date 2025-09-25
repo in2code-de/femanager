@@ -9,32 +9,25 @@ Available variables:
 <f:section name="main">
 	<f:render partial="Misc/FlashMessages" arguments="{_all}"/>
 	<f:render partial="Misc/FormErrors" arguments="{object: 'user'}"/>
-	<f:if condition="{showApprovalStep}">
-		<f:then>
-			<f:render partial="Misc/ApprovalStep" arguments="{_all}" />
-		</f:then>
-		<f:else>
-			<div class="femanager_invitation_edit">
-				<f:if condition="{user}">
-					<f:form
-							name="user"
-							object="{user}"
-							action="update"
-							arguments="{hash:hash}"
-							additionalAttributes="{data-femanager-plugin:data.uid, data-femanager-plugin-name: data.CType,spellcheck:'false'}"
-							class="form-horizontal {f:if(condition:'{settings.invitation.validation._enable.client}',then:'feManagerValidation',else:'')}">
-						<fieldset>
-							<legend>
-								<f:translate key="titleInvitationSetPassword"/>
-							</legend>
+	<div class="femanager_invitation_edit">
+			<f:if condition="{user}">
+				<f:form
+						name="user"
+						object="{user}"
+						action="update"
+						arguments="{hash:hash}"
+						additionalAttributes="{data-femanager-plugin:data.uid, data-femanager-plugin-name: data.CType,spellcheck:'false'}"
+						class="form-horizontal {f:if(condition:'{settings.invitation.validation._enable.client}',then:'feManagerValidation',else:'')}">
+					<fieldset>
+						<legend>
+							<f:translate key="titleInvitationSetPassword"/>
+						</legend>
 
-							<f:render partial="Fields/Password" arguments="{_all}"/>
+						<f:render partial="Fields/Password" arguments="{_all}"/>
 
-							<f:render partial="Fields/SubmitUpdate" arguments="{_all}"/>
-						</fieldset>
-					</f:form>
-				</f:if>
-			</div>
-		</f:else>
-	</f:if>
+						<f:render partial="Fields/SubmitUpdate" arguments="{_all}"/>
+					</fieldset>
+				</f:form>
+			</f:if>
+		</div>
 </f:section>
