@@ -31,7 +31,6 @@ use TYPO3\CMS\Extbase\Annotation\Validate;
  */
 class InvitationController extends AbstractFrontendController
 {
-    use HasConfirmationByFormSubmitTrait;
 
     /**
      * action new

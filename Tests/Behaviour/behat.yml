@@ -9,7 +9,7 @@ default:
       contexts: [FeatureContext]
   extensions:
     Behat\MinkExtension:
-      base_url: https://local.femanager.de
+      base_url: https://femanager8.ddev.site
       files_path: /app/.Build/Web/fileadmin/user_upload
       goutte: ~
       selenium2: ~

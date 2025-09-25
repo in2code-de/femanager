@@ -13,6 +13,7 @@ class HashUtility extends AbstractUtility
 {
     /**
      * Check if given hash is correct
+     * suffix is used for admin or user confirmation. In case of an admin confirmation "admin" is used
      */
     public static function validHash(string $hash, User $user, string $suffix = ''): bool
     {
