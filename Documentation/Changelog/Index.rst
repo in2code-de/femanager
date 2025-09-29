@@ -4,6 +4,22 @@
 Changelog
 =========
 -
+      :Version: 13.1.0
+      :Date: 2025-09-25
+      :Changes:
+      * [FEATURE] Show all usergroups of a feuser in BE Module - ported by Stefan Busemann (in2code)
+      * [FEATURE] introduce new mail configuration option for replyTo - thx Sebastian Stein (in2code)
+      * [BUGFIX] fix sjbr/sr-freecap integration - thx Sebastian Stein (in2code)
+      * [BUGFIX] Pass Request to sr_freecap in ClientsideValidator  - thx Andreas Nedbal (in2code)
+      * [BUGFIX] fix broken phpunit tests - thx Sebastian Stein (in2code)
+      * [BUGFIX] Resolve country select list without EXT:static:info_tables - thx to Alexander Nitsche
+      * [TASK] Keep development-only files out of Composer installations - thx to Oliver Klee
+      * [TASK] fix php 8.4 explicit nullable type deprecations - thx Sebastian Stein (in2code)
+      * [TASK] fetch logged-in user id from user context - thx Sebastian Stein (in2code)
+      * [TASK] add note to country testpag-  thx Sebastian Stein (in2code)
+      * [TASK] mark getStatesOptions and getCountryOptions argument as passed by reference- thx Sebastian Stein (in2code)
+      * [DOCUMENTATION] add documentation why "enforceNewSessionId" is used in UserUtility::login(...)
+
       :Version: 13.0.0
       :Date: 2024-11-11
       :Changes:
