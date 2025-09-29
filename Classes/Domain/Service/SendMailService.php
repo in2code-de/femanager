@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Service;
 
+use Doctrine\DBAL\Types\GuidType;
 use In2code\Femanager\Event\AfterMailSendEvent;
 use In2code\Femanager\Event\BeforeMailBodyRenderEvent;
 use In2code\Femanager\Event\BeforeMailSendEvent;
@@ -13,6 +14,7 @@ use In2code\Femanager\Utility\TemplateUtility;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Mime\Part\DataPart;
 use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
@@ -221,6 +223,9 @@ class SendMailService
 
     protected function setReplyTo(array $typoScript, MailMessage $email): void
     {
+        if (is_null( $typoScript['replyTo'] ?? null)) {
+            return;
+        }
         $replyTo = $this->contentObject->cObjGetSingle($typoScript['replyTo'], $typoScript['replyTo.']);
         if ($replyTo) {
             $email->setReplyTo(GeneralUtility::trimExplode(',', $replyTo, true));
