@@ -3,13 +3,13 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="de">
     <header/>
     <body>
-      <trans-unit id="tx_femanager_domain_model_user">
+      <trans-unit id="tx_femanager_domain_model_user" approved="yes">
         <source>User</source>
-        <target state="translated">Benutzer</target>
+        <target state="final">Benutzer</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.username">
+      <trans-unit id="tx_femanager_domain_model_user.username" approved="yes">
         <source>Username</source>
-        <target state="translated">Benutzername</target>
+        <target state="final">Benutzername</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.password" approved="yes">
         <source>Password</source>
@@ -215,9 +215,9 @@
         <source>Image deleted</source>
         <target state="final">Bild gelöscht</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.207">
+      <trans-unit id="tx_femanager_domain_model_log.state.207" approved="yes">
         <source>Attempted to spoof profile</source>
-        <target state="needs-translation">Attempted to spoof profile</target>
+        <target state="final">Versuchte Profilfälschung</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
         <source>Delete</source>
@@ -299,13 +299,13 @@
         <source>Please add less characters to field %s</source>
         <target state="final">Bitte benutzen Sie weniger Zeichen im Feld %s</target>
       </trans-unit>
-      <trans-unit id="validationErrorMinInt">
+      <trans-unit id="validationErrorMinInt" approved="yes">
         <source>Please respect the minimum value for field %s</source>
-        <target state="needs-translation">Please respect the minimum value for field %s</target>
+        <target state="final">Bitte beachten Sie den Mindestwert für das Feld %s</target>
       </trans-unit>
-      <trans-unit id="validationErrorMaxInt">
+      <trans-unit id="validationErrorMaxInt" approved="yes">
         <source>Please respect the maximum value for field %s</source>
-        <target state="needs-translation">Please respect the maximum value for field %s</target>
+        <target state="final">Bitte beachten Sie den Maximalwert für das Feld %s</target>
       </trans-unit>
       <trans-unit id="validationErrorInt" approved="yes">
         <source>Only numbers are allowed in field %s</source>
@@ -683,9 +683,9 @@
         <source>Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</source>
         <target state="final">Vielen Dank für Ihre Registrierung. Ihr Profil wird verfügbar sein, sobald der Administrator Ihre Anfrage bestätigt.</target>
       </trans-unit>
-      <trans-unit id="resendConfirmationMailSend">
+      <trans-unit id="resendConfirmationMailSend" approved="yes">
         <source>An email was sent to your account. Please check your inbox.</source>
-        <target state="needs-translation">An email was sent to your account. Please check your inbox.</target>
+        <target state="final">Eine E-Mail wurde an Ihr Konto gesendet. Bitte überprüfen Sie Ihren Posteingang.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailFail" approved="yes">
         <source>We received no valid mail.</source>
@@ -715,25 +715,25 @@
         <source>Update your user-profile</source>
         <target state="final">Profil ändern</target>
       </trans-unit>
-      <trans-unit id="confirmUserConfirmation">
+      <trans-unit id="confirmUserConfirmation" approved="yes">
         <source>Please confirm the creation of your account.</source>
-        <target state="needs-translation">Please confirm the creation of your account.</target>
+        <target state="final">Bitte bestätigen Sie die Erstellung Ihres Kontos.</target>
       </trans-unit>
       <trans-unit id="confirmUserConfirmationRefused" approved="yes">
         <source>Please confirm the deletion of your account.</source>
         <target state="final">Bitte bestätigen Sie die Löschung Ihres Kontos.</target>
       </trans-unit>
-      <trans-unit id="confirmAdminConfirmation">
+      <trans-unit id="confirmAdminConfirmation" approved="yes">
         <source>Please confirm the creation of this account.</source>
-        <target state="needs-translation">Please confirm the creation of this account.</target>
+        <target state="final">Bitte bestätigen Sie die Erstellung dieses Kontos.</target>
       </trans-unit>
-      <trans-unit id="confirmAdminConfirmationRefused">
+      <trans-unit id="confirmAdminConfirmationRefused" approved="yes">
         <source>Please confirm the deletion of this account.</source>
-        <target state="needs-translation">Please confirm the deletion of this account.</target>
+        <target state="final">Bitte bestätigen Sie die Löschung dieses Kontos.</target>
       </trans-unit>
       <trans-unit id="confirmAdminConfirmationRefusedSilent">
         <source>Please confirm the silent deletion of this account.</source>
-        <target state="needs-translation">Please confirm the silent deletion of this account.</target>
+        <target state="translated">Bitte bestätigen Sie die Löschung ohne Rückmeldung dieses Kontos.</target>
       </trans-unit>
       <trans-unit id="update" approved="yes">
         <source>Profile successfully changed</source>
