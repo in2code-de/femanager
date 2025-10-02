@@ -51,9 +51,9 @@
         <source>MM/DD/YYYY</source>
         <target state="final">MM/JJ/AAAA</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.dateFormat">
+      <trans-unit id="tx_femanager_domain_model_user.dateFormat" approved="yes">
         <source>m/d/Y</source>
-        <target state="translated">d/m/Y</target>
+        <target state="final">d/m/Y</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender" approved="yes">
         <source>Gender</source>
@@ -67,9 +67,9 @@
         <source>Female</source>
         <target state="final">femme</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2" approved="yes">
         <source>Diverse</source>
-        <target state="translated">Divers</target>
+        <target state="final">Divers</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
@@ -79,13 +79,13 @@
         <source>Telephone</source>
         <target state="final">Téléphone</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.fax">
+      <trans-unit id="tx_femanager_domain_model_user.fax" approved="yes">
         <source>Fax</source>
-        <target state="translated">Fax</target>
+        <target state="final">Fax</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.email">
+      <trans-unit id="tx_femanager_domain_model_user.email" approved="yes">
         <source>Email</source>
-        <target state="translated">Email</target>
+        <target state="final">Email</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.title" approved="yes">
         <source>Title</source>
@@ -103,9 +103,9 @@
         <source>Country</source>
         <target state="final">Pays</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.state">
+      <trans-unit id="tx_femanager_domain_model_user.state" approved="yes">
         <source>State</source>
-        <target state="translated">État</target>
+        <target state="final">État</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.www" approved="yes">
         <source>Website</source>
@@ -115,29 +115,29 @@
         <source>Company</source>
         <target state="final">Société</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.image">
+      <trans-unit id="tx_femanager_domain_model_user.image" approved="yes">
         <source>Image</source>
-        <target state="translated">Image</target>
+        <target state="final">Image</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.captcha">
+      <trans-unit id="tx_femanager_domain_model_user.captcha" approved="yes">
         <source>Captcha</source>
-        <target state="translated">Captcha</target>
+        <target state="final">Captcha</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.terms">
+      <trans-unit id="tx_femanager_domain_model_user.terms" approved="yes">
         <source>I accept the terms and conditions</source>
-        <target state="translated">J’accepte les conditions générales</target>
+        <target state="final">J’accepte les conditions générales</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.termslinktext">
+      <trans-unit id="tx_femanager_domain_model_user.termslinktext" approved="yes">
         <source>Click here for terms and conditions</source>
-        <target state="translated">Page des conditions générales</target>
+        <target state="final">Page des conditions générales</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastlogin" approved="yes">
         <source>Last login</source>
         <target state="final">Dernière connexion</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_user.inactivesince">
+      <trans-unit id="tx_femanager_domain_model_user.inactivesince" approved="yes">
         <source>Inactive since</source>
-        <target state="translated">Inactif depuis</target>
+        <target state="final">Inactif depuis</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.crdate" approved="yes">
         <source>Creation Time</source>
@@ -211,9 +211,9 @@
         <source>Profile update security failure</source>
         <target state="final">Erreur de sécurité lors de la mise à jour du compte</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.206">
+      <trans-unit id="tx_femanager_domain_model_log.state.206" approved="yes">
         <source>Image deleted</source>
-        <target state="translated">Image supprimée</target>
+        <target state="final">Image supprimée</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.207">
         <source>Attempted to spoof profile</source>
@@ -227,9 +227,9 @@
         <source>Profile deleted</source>
         <target state="final">Profil supprimé</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.400">
+      <trans-unit id="tx_femanager_domain_model_log.state.400" approved="yes">
         <source>Invitation</source>
-        <target state="translated">Invitation</target>
+        <target state="final">Invitation</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.401" approved="yes">
         <source>Profile created and user invited</source>
@@ -259,9 +259,9 @@
         <source>No TypoScript found. Did you already include the static Template?</source>
         <target state="final">Aucun TypoScript trouvé. Avez-vous inclus le template static ?</target>
       </trans-unit>
-      <trans-unit id="error_no_typoscript_be">
+      <trans-unit id="error_no_typoscript_be" approved="yes">
         <source>No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</source>
-        <target state="translated">Aucun TypoScript trouvé. Avez-vous déjà installé module.tx_femanager.settings.configPID dans votre PageTS?</target>
+        <target state="final">Aucun TypoScript trouvé. Avez-vous déjà installé module.tx_femanager.settings.configPID dans votre PageTS?</target>
       </trans-unit>
       <trans-unit id="error_no_storagepid" approved="yes">
         <source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
@@ -335,9 +335,9 @@
         <source>This value is not allowed in field %s</source>
         <target state="final">La valeur du champ %s n'est pas autorisée</target>
       </trans-unit>
-      <trans-unit id="validationErrorSameAs">
+      <trans-unit id="validationErrorSameAs" approved="yes">
         <source>Values do not match</source>
-        <target state="translated">Les valeurs ne correspondent pas</target>
+        <target state="final">Les valeurs ne correspondent pas</target>
       </trans-unit>
       <trans-unit id="validationErrorPasswordRepeat">
         <source>Both passwords do not match</source>
@@ -639,9 +639,9 @@
         <source>Create Profile Now</source>
         <target state="final">Créer un profil</target>
       </trans-unit>
-      <trans-unit id="submitResend">
+      <trans-unit id="submitResend" approved="yes">
         <source>Resend now</source>
-        <target state="translated">Renvoyer maintenant</target>
+        <target state="final">Renvoyer maintenant</target>
       </trans-unit>
       <trans-unit id="passwordRepeat" approved="yes">
         <source>Repeat Password</source>
@@ -787,9 +787,9 @@
         <source>Please choose ...</source>
         <target state="final">Veuillez choisir ...</target>
       </trans-unit>
-      <trans-unit id="pleaseChooseCountry">
+      <trans-unit id="pleaseChooseCountry" approved="yes">
         <source>Please choose a country ...</source>
-        <target state="translated">Veuillez choisir un pays</target>
+        <target state="final">Veuillez choisir un pays</target>
       </trans-unit>
       <trans-unit id="FilterLabel" approved="yes">
         <source>Search</source>
@@ -823,9 +823,9 @@
         <source>Are you sure to delete this User?</source>
         <target state="final">Êtes-vous sûr de vouloir supprimer cet utilisateur ?</target>
       </trans-unit>
-      <trans-unit id="BackendListUserEdit">
+      <trans-unit id="BackendListUserEdit" approved="yes">
         <source>Edit</source>
-        <target state="translated">Éditer</target>
+        <target state="final">Éditer</target>
       </trans-unit>
       <trans-unit id="BackendListUserLogout">
         <source>Logout</source>
@@ -859,9 +859,9 @@
         <source>Login as</source>
         <target state="final">Se connecter sous :</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationNoteTitle">
+      <trans-unit id="BackendConfirmationNoteTitle" approved="yes">
         <source>Possible action:</source>
-        <target state="translated">Action possible:</target>
+        <target state="final">Action possible:</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteText">
         <source>%s approval(s) available</source>
@@ -871,17 +871,17 @@
         <source>%s user(s) need to be confirmed by admin</source>
         <target state="needs-translation">%s user(s) need to be confirmed by admin</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationColumnAction">
+      <trans-unit id="BackendConfirmationColumnAction" approved="yes">
         <source>Actions</source>
-        <target state="translated">Actions</target>
+        <target state="final">Actions</target>
       </trans-unit>
-      <trans-unit id="BackendMissingConfigPID">
+      <trans-unit id="BackendMissingConfigPID" approved="yes">
         <source>The config PID is missing!</source>
-        <target state="translated">Le PID n'a pas été défini au configuration!</target>
+        <target state="final">Le PID n'a pas été défini au configuration!</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationColumnUid">
+      <trans-unit id="BackendConfirmationColumnUid" approved="yes">
         <source>UID</source>
-        <target state="translated">UID</target>
+        <target state="final">UID</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageConfirmed">
         <source>%s was successfully approved</source>
