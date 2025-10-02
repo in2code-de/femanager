@@ -731,9 +731,9 @@
         <source>Please confirm the deletion of this account.</source>
         <target state="final">Bitte bestätigen Sie die Löschung dieses Kontos.</target>
       </trans-unit>
-      <trans-unit id="confirmAdminConfirmationRefusedSilent">
+      <trans-unit id="confirmAdminConfirmationRefusedSilent" approved="yes">
         <source>Please confirm the silent deletion of this account.</source>
-        <target state="translated">Bitte bestätigen Sie die Löschung ohne Rückmeldung dieses Kontos.</target>
+        <target state="final">Bitte bestätigen Sie die Löschung ohne Rückmeldung dieses Kontos.</target>
       </trans-unit>
       <trans-unit id="update" approved="yes">
         <source>Profile successfully changed</source>
