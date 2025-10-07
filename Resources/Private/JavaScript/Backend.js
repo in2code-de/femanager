@@ -1,103 +1,148 @@
-import $ from 'jquery';
+document.addEventListener("DOMContentLoaded", () => {
+    const hideUnhideUser = (event) => {
+        const currentElement = event.currentTarget;
+        const moduleUri = currentElement.parentElement.querySelector('.container_module_uri').value;
+        const uid = currentElement.parentElement.querySelector('.container_uid').value;
+        const table = currentElement.parentElement.querySelector('.container_table').value;
 
-$(document).ready(function ($) {
-    // Hide/Unhide User
-    $('.hideUser, .unhideUser').click(function () {
-        var $this = $(this);
-        var moduleUri = $this.siblings('.container_module_uri').val();
-        var uid = $this.siblings('.container_uid').val();
-        var table = $this.siblings('.container_table').val();
+        let hidden = 0;
 
-        if ($this.hasClass('hideUser')) {
-            $this
+        if (currentElement.classList.contains('hideUser')) {
+            currentElement
                 .closest('tr')
-                .find('.tx-feusermanager-icon-status-user-frontend').hide();
-            $this
+                .querySelector('.tx-feusermanager-icon-status-status-permission-granted')
+                .style.display = "none";
+
+            currentElement
                 .closest('tr')
-                .find('.tx-feusermanager-icon-status-user-frontend-disabled').show();
-            $this
+                .querySelector('.tx-feusermanager-icon-status-user-frontend-disabled')
+                .style.display = "block";
+
+            currentElement
                 .closest('tr')
-                .find('.tx-feusermanager-icon-actions-edit-hide').hide();
-            $this
+                .querySelector('.tx-feusermanager-icon-actions-edit-hide')
+                .style.display = "none";
+
+            currentElement
                 .closest('tr')
-                .find('.tx-feusermanager-icon-actions-edit-unhide').show();
-            $this
+                .querySelector('.tx-feusermanager-icon-actions-edit-unhide')
+                .style.display = "block";
+
+            currentElement
                 .closest('tr')
-                .find('.tx-feusermanager-icon-actions-system-backend-user-switch').hide();
-            $this
+                .querySelector('.tx-feusermanager-icon-actions-system-backend-user-switch')
+                .style.display = "none";
+
+            currentElement
                 .closest('tr')
-                .find('.tx-feusermanager-icon-actions-system-backend-user-switch-disabled').show();
-            var hidden = 1;
+                .querySelector('.tx-feusermanager-icon-actions-system-backend-user-switch-disabled')
+                .style.display = "none";
+
+            hidden = 1;
         } else {
-            $this
+            currentElement
                 .closest('tr')
-                .find('.tx-feusermanager-icon-status-user-frontend').show();
-            $this
-                .closest('tr')
-                .find('.tx-feusermanager-icon-status-user-frontend-disabled').hide();
-            $this
-                .closest('tr')
-                .find('.tx-feusermanager-icon-actions-edit-hide').show();
-            $this
-                .closest('tr')
-                .find('.tx-feusermanager-icon-actions-edit-unhide').hide();
-            $this
-                .closest('tr')
-                .find('.tx-feusermanager-icon-actions-system-backend-user-switch').show();
-            $this
-                .closest('tr')
-                .find('.tx-feusermanager-icon-actions-system-backend-user-switch-disabled').hide();
-            var hidden = 0;
-        }
-        url = moduleUri + '&data[' + table + '][' + uid + '][disable]=' + hidden;
-        $.ajax({
-            url: url
-        });
-    });
+                .querySelector('.tx-feusermanager-icon-status-status-permission-granted')
+                .style.display = "block";
 
-    // Delete User
-    $('.deleteUser').click(function () {
-        var $this = $(this);
-        var moduleUri = $this.siblings('.container_module_uri').val();
-        var uid = $this.siblings('.container_uid').val();
-        var table = $this.siblings('.container_table').val();
-        var confirmationMessage = $this.siblings('.container_label_delete_confirmation').val();
+            currentElement
+                .closest('tr')
+                .querySelector('.tx-feusermanager-icon-status-user-frontend-disabled')
+                .style.display = "none";
+
+            currentElement
+                .closest('tr')
+                .querySelector('.tx-feusermanager-icon-actions-edit-hide')
+                .style.display = "block";
+
+            currentElement
+                .closest('tr')
+                .querySelector('.tx-feusermanager-icon-actions-edit-unhide')
+                .style.display = "none";
+
+            currentElement
+                .closest('tr')
+                .querySelector('.tx-feusermanager-icon-actions-system-backend-user-switch')
+                .style.display = "block";
+
+            currentElement
+                .closest('tr')
+                .querySelector('.tx-feusermanager-icon-actions-system-backend-user-switch-disabled')
+                .style.display = "block";
+        }
+
+        const url = moduleUri + '&data[' + table + '][' + uid + '][disable]=' + hidden;
+        fetch(url);
+    };
+
+    const deleteUser = (event) => {
+        const currentElement = event.currentTarget;
+        const moduleUri = currentElement.parentElement.querySelector('.container_module_uri').value;
+        const uid = currentElement.parentElement.querySelector('.container_uid').value;
+        const table = currentElement.parentElement.querySelector('.container_table').value;
+        const confirmationMessage = currentElement.parentElement.querySelector('.container_label_delete_confirmation').value;
+        const url = moduleUri + '&cmd[' + table + '][' + uid + '][delete]=1';
 
         if (confirm(confirmationMessage)) {
-            $this.closest('tr').fadeOut('fast');
-            var url = moduleUri + '&cmd[' + table + '][' + uid + '][delete]=1'
-            $.ajax({
-                url: url
-            });
+            currentElement.closest('tr').remove();
+            fetch(url);
+        }
+    };
+
+    const logoutUser = (event) => {
+        event.preventDefault();
+
+        const currentElement = event.currentTarget;
+        const url = currentElement.getAttribute('href');
+
+        currentElement
+            .closest('tr')
+            .querySelector('.tx-feusermanager-icon-status-status-permission-granted')
+            .style.display = "none";
+
+        currentElement
+            .closest('tr')
+            .querySelector('.tx-feusermanager-icon-status-status-permission-denied')
+            .style.display = "block";
+
+        currentElement
+            .closest('tr')
+            .querySelector('.tx-feusermanager-icon-actions-system-backend-user-switch-disabled')
+            .style.display = "none";
+
+        currentElement
+            .closest('tr')
+            .querySelector('.tx-feusermanager-icon-actions-system-backend-user-switch')
+            .style.display = "block";
+
+        currentElement
+            .closest('tr')
+            .querySelector('.tx-feusermanager-icon-apps-pagetree-drag-place-denied')
+            .style.display = "none";
+
+        currentElement
+            .closest('tr')
+            .querySelector('.tx-feusermanager-icon-apps-pagetree-drag-place-denied-disabled')
+            .style.display = "block";
+
+        fetch(url);
+    };
+
+    document.addEventListener('click', (event) => {
+        if (event.target.matches('.hideUser, .unhideUser')) {
+            hideUnhideUser(event)
         }
     });
 
-    // User Logout
-    $('.logoutUser').click(function (e) {
-        e.preventDefault();
-        var $this = $(this);
-        $this
-            .closest('tr')
-            .find('.tx-feusermanager-icon-status-status-permission-granted').hide();
-        $this
-            .closest('tr')
-            .find('.tx-feusermanager-icon-status-status-permission-denied').show();
-        $this
-            .closest('tr')
-            .find('.tx-feusermanager-icon-actions-system-backend-user-switch-disabled').hide();
-        $this
-            .closest('tr')
-            .find('.tx-feusermanager-icon-actions-system-backend-user-switch').show();
-        $this
-            .closest('tr')
-            .find('.tx-feusermanager-icon-apps-pagetree-drag-place-denied').hide();
-        $this
-            .closest('tr')
-            .find('.tx-feusermanager-icon-apps-pagetree-drag-place-denied-disabled').show();
-        var url = $this.prop('href');
-        $.ajax({
-            url: url
-        });
+    document.addEventListener('click', (event) => {
+        if (event.target.matches('.deleteUser')) {
+            deleteUser(event)
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (event.target.matches('.logoutUser')) {
+            logoutUser(event)
+        }
     });
 });
-

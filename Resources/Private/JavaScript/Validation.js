@@ -1,277 +1,314 @@
-jQuery.fn.femanagerValidation = function($) {
-	var element = $(this);
-	var requestCallback;
-	var submitFormAllowed = false;
-	if (element.find('*[data-validation]').length == 0) {
-		submitFormAllowed = true;
-	}
+/**
+ * Femanager Validation in vanilla JavaScript
+ */
+class FemanagerValidation {
+    constructor(formElement) {
+        this.element = formElement;
+        this.requestCallback = null;
+        this.submitFormAllowed = false;
 
-	/**
-	 * AJAX queue function
-	 */
-	var MyRequestsCompleted = (function() {
-		var numRequestToComplete,
-			requestsCompleted,
-			callBacks,
-			singleCallBack;
+        if (this.element.querySelectorAll('*[data-validation]').length === 0) {
+            this.submitFormAllowed = true;
+        }
 
-		return function(options) {
-			if (!options) options = {};
+        this.init();
+    }
 
-			numRequestToComplete = options.numRequest || 0;
-			requestsCompleted = options.requestsCompleted || 0;
-			element = options.element || 0;
-			callBacks = [];
-			var fireCallbacks = function() {
-				$('body').css('cursor', 'default');
-				submitForm(element); // submit form
-				for (var i = 0; i < callBacks.length; i++) callBacks[i]();
-			};
-			if (options.singleCallback) callBacks.push(options.singleCallback);
+    init() {
+        // Add event listeners for validation
+        const validationFields = this.element.querySelectorAll('*[data-validation]:not([type="file"])');
+        validationFields.forEach(field => {
+            field.addEventListener('blur', () => {
+                this.validateField(field, false);
+            });
+        });
 
-			this.addCallbackToQueue = function(isComplete, callback) {
-				if (isComplete) requestsCompleted++;
-				if (callback) callBacks.push(callback);
-				if (requestsCompleted == numRequestToComplete) fireCallbacks();
-			};
-			this.requestComplete = function(isComplete) {
-				if (isComplete) requestsCompleted++;
-				if (requestsCompleted == numRequestToComplete) fireCallbacks();
-			};
-			this.setCallback = function(callback) {
-				callBacks.push(callBack);
-			};
-		};
-	})();
+        const fileFields = this.element.querySelectorAll('*[data-validation][type="file"]');
+        fileFields.forEach(field => {
+            field.addEventListener('change', () => {
+                this.validateField(field, false);
+            });
+        });
 
-	// on field blur
-    $('*[data-validation]:not([type="file"])').on('blur', function () {
-		validateField($(this), false); // validate this field only
-	});
+        // Form submit event
+        this.element.addEventListener('submit', (e) => {
+            document.body.style.cursor = 'wait';
+            if (!this.submitFormAllowed) {
+                e.preventDefault();
+                this.validateAllFields(this.element);
+            }
+        });
+    }
 
-	$('*[data-validation][type="file"]').on('change', function () {
-		validateField($(this), false); // validate this field only
-	});
+    /**
+     * AJAX queue function
+     */
+    createRequestsCompleted(options = {}) {
+        const numRequestToComplete = options.numRequest || 0;
+        let requestsCompleted = options.requestsCompleted || 0;
+        const element = options.element || null;
+        const callBacks = [];
 
-	// form submit
-    element.on('submit', function (e) {
-		$('body').css('cursor', 'wait');
-		if (!submitFormAllowed) {
-			e.preventDefault();
-			validateAllFields($(this));
-		}
-	});
+        if (options.singleCallback) {
+            callBacks.push(options.singleCallback);
+        }
 
-	/**
-	 * Validate every field in form
-	 *
-	 * @param object element		Form object
-	 * @return void
-	 */
-	function validateAllFields(element) {
-		// Store number of ajax requests for queue function
-		requestCallback = new MyRequestsCompleted({
-			numRequest: element.find('*[data-validation]').length,
-			element: element
-		});
+        const fireCallbacks = () => {
+            document.body.style.cursor = 'default';
+            this.submitForm(element); // submit form
+            callBacks.forEach(callback => callback());
+        };
 
-		// one loop for every field to validate
-		element.find('*[data-validation]').each(function() {
-			validateField($(this), true);
-		});
-	}
+        return {
+            addCallbackToQueue: (isComplete, callback) => {
+                if (isComplete) requestsCompleted++;
+                if (callback) callBacks.push(callback);
+                if (requestsCompleted === numRequestToComplete) fireCallbacks();
+            },
+            requestComplete: (isComplete) => {
+                if (isComplete) requestsCompleted++;
+                if (requestsCompleted === numRequestToComplete) fireCallbacks();
+            },
+            setCallback: (callback) => {
+                callBacks.push(callback);
+            }
+        };
+    }
 
-	/**
-	 * Validate single filed
-	 *
-	 * @param object element		Field object
-	 * @return void
-	 */
-	function validateField(element, countForSubmit) {
-	    if (element.prop('disabled')) {
+    /**
+     * Validate every field in form
+     *
+     * @param {HTMLElement} element - Form element
+     * @return void
+     */
+    validateAllFields(element) {
+        // Store number of ajax requests for queue function
+        this.requestCallback = this.createRequestsCompleted({
+            numRequest: element.querySelectorAll('*[data-validation]').length,
+            element: element
+        });
+
+        // one loop for every field to validate
+        element.querySelectorAll('*[data-validation]').forEach(field => {
+            this.validateField(field, true);
+        });
+    }
+
+    /**
+     * Validate single field
+     *
+     * @param {HTMLElement} element - Field element
+     * @param {boolean} countForSubmit - Whether to count this validation for form submission
+     * @return void
+     */
+    validateField(element, countForSubmit) {
+        if (element.disabled) {
             if (countForSubmit) {
-                requestCallback.addCallbackToQueue(true);
+                this.requestCallback.addCallbackToQueue(true);
             }
             return;
-
         }
-        var $form = element.closest('form');
-        var plugin = $form.data('femanager-plugin');
-        var pluginName = 'tx_' + $form.data('femanager-plugin-name');
-		var user = $form.find('div:first').find('input[name="' + pluginName + '[user][__identity]"]').val();
-		var action = $form.find('div:first').find('input[name="' + pluginName + '[__referrer][@action]"]').val();
-		var url = Femanager.getBaseUrl() + '?id=' + $('#femanagerPid').val() + '&type=1548935210';
-        var storagePid = $('#femanagerStoragePid').val();
-        var validation = element.attr('data-validation');
-		var validations = getValidations(element);
-		var elementValue = element.val();
-		if ((element.prop('type') == 'checkbox') && (element.prop('checked') == false)) {
-			elementValue = '';
-		}
-		var additionalValue = '';
-		if (indexOfArray(validations, 'sameAs')) { // search for "sameAs(password)"
-			var validationSameAs = indexOfArray(validations, 'sameAs');
-			var fieldToCompare = getStringInBrackets(validationSameAs);
-			var fieldToCompareObject = $('input[name="' + pluginName + '[user][' + fieldToCompare + ']"]');
-			additionalValue = fieldToCompareObject.val();
-			if ((fieldToCompareObject.prop('type') == 'checkbox') && (fieldToCompareObject.prop('checked') == false)) {
-				additionalValue = '';
-			}
-		}
-        var formData = {
-            'storagePid': storagePid,
-            'L': $('#femanagerLanguage').val(),
-            'id': $('#femanagerPid').val()
-        };
-        formData['tx_femanager_validation[validation]'] = validation;
-        formData['tx_femanager_validation[value]'] = elementValue;
-        formData['tx_femanager_validation[field]'] = getFieldName(element);
-        formData['tx_femanager_validation[user]'] = (user !== undefined ? user : '');
-        formData['tx_femanager_validation[additionalValue]'] = (additionalValue ? additionalValue : '');
-        formData['tx_femanager_validation[plugin]'] = plugin;
-        formData['tx_femanager_validation[pluginName]'] = pluginName;
-        formData['tx_femanager_validation[referrerAction]'] = action;
 
-		$.ajax({
-			url: url,
-			data: formData,
-			type: 'POST',
-			cache: false,
-			success: function(json) { // return values
-				if (countForSubmit) {
-					requestCallback.addCallbackToQueue(true);
-				}
-				if (json) {
-					try {
-						if (!json.validate) {
-							writeErrorMessage(element, json.message)
-						} else {
-							cleanErrorMessage(element);
-						}
-					} catch(e) {
-						element.before(data)
-					}
+        const form = element.closest('form');
+        const plugin = form.dataset.femanagerPlugin;
+        const pluginName = 'tx_' + form.dataset.femanagerPluginName;
+        const user = form.querySelector('div:first-child input[name="' + pluginName + '[user][__identity]"]')?.value;
+        const action = form.querySelector('div:first-child input[name="' + pluginName + '[__referrer][@action]"]')?.value;
+        const url = Femanager.getBaseUrl() + '?id=' + document.getElementById('femanagerPid')?.value + '&type=1548935210';
+        const storagePid = document.getElementById('femanagerStoragePid')?.value;
+        const validation = element.getAttribute('data-validation');
+        const validations = this.getValidations(element);
 
-				}
-			},
-			error: function() {
-				logAjaxError();
-			}
-		});
-	}
+        let elementValue = element.value;
+        if (element.type === 'checkbox' && !element.checked) {
+            elementValue = '';
+        }
 
-	/**
-	 * Read fieldname
-	 * 		get "email" out of "tx_femanager_plugin[user][email]"
-	 * 		get "passwort_repeat" out of "tx_femanager_plugin[password_repeat]"
-	 *
-	 * @param element
-	 * @return string
-	 */
-	function getFieldName(element) {
-		var name = '';
-		var nameParts = element.prop('name').split('[');
-		if (nameParts[2] !== undefined) {
-			name = nameParts[2].replace(']', '');
-		} else {
-			name = nameParts[1].replace(']', '');
-		}
-		return name;
-	}
+        let additionalValue = '';
+        if (this.indexOfArray(validations, 'sameAs')) { // search for "sameAs(password)"
+            const validationSameAs = this.indexOfArray(validations, 'sameAs');
+            const fieldToCompare = this.getStringInBrackets(validationSameAs);
+            const fieldToCompareObject = document.querySelector('input[name="' + pluginName + '[user][' + fieldToCompare + ']"]');
+            if (fieldToCompareObject) {
+                additionalValue = fieldToCompareObject.value;
+                if (fieldToCompareObject.type === 'checkbox' && !fieldToCompareObject.checked) {
+                    additionalValue = '';
+                }
+            }
+        }
 
-	/**
-	 * Write errormessage next to the field
-	 *
-	 * @param element				Field
-	 */
-	function writeErrorMessage(element, message) {
-		cleanErrorMessage(element); // remove all errors to this field at the beginning
-		var errorMessage = $('.femanager_validation_container').html().replace('###messages###', message); // get html for error
-		element.before(errorMessage); // add message
-		element.closest('.form-group').addClass('has-error');
-		element.addClass('error');
-	}
+        const formData = new URLSearchParams();
+        formData.append('storagePid', storagePid || '');
+        formData.append('L', document.getElementById('femanagerLanguage')?.value || '');
+        formData.append('id', document.getElementById('femanagerPid')?.value || '');
+        formData.append('tx_femanager_validation[validation]', validation || '');
+        formData.append('tx_femanager_validation[value]', elementValue || '');
+        formData.append('tx_femanager_validation[field]', this.getFieldName(element) || '');
+        formData.append('tx_femanager_validation[user]', user !== undefined ? user : '');
+        formData.append('tx_femanager_validation[additionalValue]', additionalValue || '');
+        formData.append('tx_femanager_validation[plugin]', plugin || '');
+        formData.append('tx_femanager_validation[pluginName]', pluginName || '');
+        formData.append('tx_femanager_validation[referrerAction]', action || '');
 
-	/**
-	 * Remove one error message
-	 *
-	 * @param element
-	 */
-	function cleanErrorMessage(element) {
-		element.closest('.form-group').removeClass('has-error');
-		element.siblings('.alert').remove(); // hide message to this field
-		element.removeClass('error');
-	}
+        fetch(url, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            cache: 'no-cache'
+        })
+        .then(response => response.json())
+        .then(json => {
+            if (countForSubmit) {
+                this.requestCallback.addCallbackToQueue(true);
+            }
 
-	/**
-	 * Check if there are errors and submit form
-	 *
-	 * @param element
-	 */
-	function submitForm(element) {
-		// submit form if there are no errors
-		if (element.find('.error').length == 0) {
-			submitFormAllowed = true;
-            element.trigger('submit');
-		} else {
-            const firstError = element.find('.error:first')[0];
+            if (json) {
+                try {
+                    if (!json.validate) {
+                        this.writeErrorMessage(element, json.message);
+                    } else {
+                        this.cleanErrorMessage(element);
+                    }
+                } catch(e) {
+                    element.insertAdjacentHTML('beforebegin', data);
+                }
+            }
+        })
+        .catch(() => {
+            this.logAjaxError();
+        });
+    }
+
+    /**
+     * Read fieldname
+     *      get "email" out of "tx_femanager_plugin[user][email]"
+     *      get "passwort_repeat" out of "tx_femanager_plugin[password_repeat]"
+     *
+     * @param {HTMLElement} element - Field element
+     * @return {string} Field name
+     */
+    getFieldName(element) {
+        let name = '';
+        const nameParts = element.name.split('[');
+        if (nameParts[2] !== undefined) {
+            name = nameParts[2].replace(']', '');
+        } else {
+            name = nameParts[1].replace(']', '');
+        }
+        return name;
+    }
+
+    /**
+     * Write errormessage next to the field
+     *
+     * @param {HTMLElement} element - Field element
+     * @param {string} message - Error message
+     */
+    writeErrorMessage(element, message) {
+        this.cleanErrorMessage(element); // remove all errors to this field at the beginning
+        const validationContainer = document.querySelector('.femanager_validation_container');
+        if (!validationContainer) return;
+
+        const errorMessage = validationContainer.innerHTML.replace('###messages###', message); // get html for error
+        element.insertAdjacentHTML('beforebegin', errorMessage); // add message
+        element.closest('.form-group').classList.add('has-error');
+        element.classList.add('error');
+    }
+
+    /**
+     * Remove one error message
+     *
+     * @param {HTMLElement} element - Field element
+     */
+    cleanErrorMessage(element) {
+        element.closest('.form-group').classList.remove('has-error');
+        element.parentNode.querySelectorAll('.alert').forEach(alert => {
+            if (alert !== element) {
+                alert.remove();
+            }
+        });
+        element.classList.remove('error');
+    }
+
+    /**
+     * Check if there are errors and submit form
+     *
+     * @param {HTMLElement} element - Form element
+     */
+    submitForm(element) {
+        // submit form if there are no errors
+        if (element.querySelectorAll('.error').length === 0) {
+            this.submitFormAllowed = true;
+            element.submit();
+        } else {
+            const firstError = element.querySelector('.error');
             if (!firstError) return;
             firstError.scrollIntoView({ behavior: 'smooth' });
-		}
-	}
+        }
+    }
 
-	/**
-	 * Check if part of a value exist in an array
-	 *
-	 * @param array
-	 * @return string found value
-	 */
-	function indexOfArray(array, string) {
-		for (var i=0; i < array.length; i++) {
-			if (array[i].indexOf(string) !== -1) {
-				return array[i];
-			}
-		}
-		return '';
-	}
+    /**
+     * Check if part of a value exist in an array
+     *
+     * @param {Array} array - Array to search in
+     * @param {string} string - String to search for
+     * @return {string} Found value or empty string
+     */
+    indexOfArray(array, string) {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].indexOf(string) !== -1) {
+                return array[i];
+            }
+        }
+        return '';
+    }
 
-	/**
-	 * Get validation methods of a field
-	 * 		data-validation="required,max(5)" => array
-	 * 			required,
-	 * 			max(5)
-	 *
-	 * @param element
-	 * @return array
-	 */
-	function getValidations(element) {
-		return element.attr('data-validation').split(',');
-	}
+    /**
+     * Get validation methods of a field
+     *      data-validation="required,max(5)" => array
+     *          required,
+     *          max(5)
+     *
+     * @param {HTMLElement} element - Field element
+     * @return {Array} Array of validation methods
+     */
+    getValidations(element) {
+        return element.getAttribute('data-validation').split(',');
+    }
 
-	/**
-	 * Get string in brackets
-	 * 		lala(lulu) => lulu
-	 *
-	 * @param string
-	 * @return string
-	 */
-	function getStringInBrackets(string) {
-		var result = '';
-		if (string.indexOf('(') !== -1) {
-			var parts = string.split('(');
-			result = parts[1].substr(0, parts[1].length - 1);
-		}
-		return result;
-	}
+    /**
+     * Get string in brackets
+     *      lala(lulu) => lulu
+     *
+     * @param {string} string - String with brackets
+     * @return {string} String inside brackets
+     */
+    getStringInBrackets(string) {
+        let result = '';
+        if (string.indexOf('(') !== -1) {
+            const parts = string.split('(');
+            result = parts[1].substr(0, parts[1].length - 1);
+        }
+        return result;
+    }
 
-	/**
-	 * Log Error in Console
-	 *
-	 * @return void
-	 */
-	function logAjaxError() {
-		if (typeof console === 'object') {
-			console.log('Error: The called url is not available - if you use TYPO3 in a subfolder, please use config.baseURL in TypoScript');
-		}
-	}
-};
+    /**
+     * Log Error in Console
+     *
+     * @return void
+     */
+    logAjaxError() {
+        if (typeof console === 'object') {
+            console.log('Error: The called url is not available - if you use TYPO3 in a subfolder, please use config.baseURL in TypoScript');
+        }
+    }
+}
+
+// Initialize validation for all forms with class feManagerValidation
+function initFemanagerValidation() {
+    document.querySelectorAll('.feManagerValidation').forEach(form => {
+        new FemanagerValidation(form);
+    });
+}
