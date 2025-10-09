@@ -56,6 +56,15 @@ to accept only bugfixes that can be reproduced.
 - **Features**: Not every feature is relevant for the bulk of the users. In addition: We don't want to make the extension
 even more complicated in usability for an edge case feature. Please discuss a new feature before.
 
+### Translations
+
+You can contribute by translating language files into different languages.
+
+We are using Crowdin for our translation. Learn how to use the service:
+https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Localization/TranslationServer/Crowdin.html#localization-with-crowdin
+
+Translation for femanager can be found at: https://crowdin.com/project/typo3-extension-femanager/
+
 ### Contribution with ddev
 
 #### Requirements
