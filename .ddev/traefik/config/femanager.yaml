@@ -5,6 +5,16 @@
 
 http:
   routers:
+    femanager-xhgui-80-http:
+      entrypoints:
+        - http-8143
+      rule: HostRegexp(`^femanager\.ddev\.site$`)
+      
+      service: "femanager-xhgui-80"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "femanager-redirectHttps"
     femanager-web-80-http:
       entrypoints:
         - http-80
@@ -25,17 +35,18 @@ http:
       tls: false
       # middlewares:
       #   - "femanager-redirectHttps"
-    femanager-xhgui-80-http:
+    
+    
+    femanager-xhgui-80-https:
       entrypoints:
-        - http-8143
+        - http-8142
       rule: HostRegexp(`^femanager\.ddev\.site$`)
       
       service: "femanager-xhgui-80"
       ruleSyntax: v3
-      tls: false
-      # middlewares:
-      #   - "femanager-redirectHttps"
-    
+      
+      tls: true
+      
     
     
     femanager-web-80-https:
@@ -59,17 +70,6 @@ http:
       tls: true
       
     
-    femanager-xhgui-80-https:
-      entrypoints:
-        - http-8142
-      rule: HostRegexp(`^femanager\.ddev\.site$`)
-      
-      service: "femanager-xhgui-80"
-      ruleSyntax: v3
-      
-      tls: true
-      
-    
 
   middlewares:
     femanager-redirectHttps:
@@ -78,6 +78,12 @@ http:
         permanent: true
 
   services:
+    femanager-xhgui-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-femanager-xhgui:80
+        
+    
     femanager-web-80:
       loadbalancer:
         servers:
@@ -89,12 +95,6 @@ http:
           - url: http://ddev-femanager-web:8025
         
     
-    
-    femanager-xhgui-80:
-      loadbalancer:
-        servers:
-          - url: http://ddev-femanager-xhgui:80
-        
     
     
 
