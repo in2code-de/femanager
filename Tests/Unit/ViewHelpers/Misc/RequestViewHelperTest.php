@@ -4,8 +4,10 @@ namespace In2code\Femanager\Tests\Unit\ViewHelpers\Misc;
 
 use In2code\Femanager\ViewHelpers\Misc\RequestViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\TestingFramework\Core\AccessibleObjectInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 
 /**
  * Class RequestTest
@@ -111,7 +113,19 @@ class RequestViewHelperTest extends UnitTestCase
         $this->abstractValidationViewHelperMock->_set('arguments', $arguments);
         $this->abstractValidationViewHelperMock->_set('testVariables', $parametersToSet);
 
-        $result = $this->abstractValidationViewHelperMock->_call('render', $parameter, $htmlSpecialChars);
+        $request = $this->createMock(ServerRequestInterface::class);
+
+        $request->method('getParsedBody')->willReturn($parametersToSet);
+        $request->method('getQueryParams')->willReturn($parametersToSet);
+
+        $renderingContext = $this->createMock(RenderingContextInterface::class);
+        $renderingContext->method('getAttribute')
+            ->with(ServerRequestInterface::class)
+            ->willReturn($request);
+
+        $this->abstractValidationViewHelperMock->setRenderingContext($renderingContext);
+
+        $result = $this->abstractValidationViewHelperMock->_call('render');
         self::assertSame($expectedResult, $result);
     }
 }

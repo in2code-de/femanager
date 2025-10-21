@@ -42,7 +42,9 @@ class BackendUserUtilityTest extends UnitTestCase
     {
         $this->resetSingletonInstances = true;
         $GLOBALS['BE_USER']->user['admin'] = 1;
-        $user = BackendUserUtility::getBackendUserAuthentication();
+
+        $method = new \ReflectionMethod(BackendUserUtility::class, 'getBackendUserAuthentication');
+        $user = $method->invoke(null);
         self::assertSame(1, $user->user['admin']);
     }
 }

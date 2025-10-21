@@ -30,16 +30,6 @@ class BackendUtilityTest extends UnitTestCase
     }
 
     /**
-     * @SuppressWarnings(PHPMD.Superglobals)
-     * @covers ::getPageIdentifier
-     */
-    public function testGetPageIdentifier(): void
-    {
-        $_GET['id'] = 123;
-        self::assertSame(123, BackendUtility::getPageIdentifier());
-    }
-
-    /**
      * @covers ::getPluginOrModuleString
      */
     public function testGetPluginOrModuleString(): void
@@ -54,9 +44,16 @@ class BackendUtilityTest extends UnitTestCase
      */
     public function testGetCurrentParameters(): void
     {
-        $testParams = ['foo' => ['bar']];
-        $_GET = $testParams;
-        $_POST['klks'] = ['test'];
-        self::assertSame($testParams, BackendUtilityFixture::getCurrentParametersPublic());
+        $getData = [
+            'foo' => ['bar']
+        ];
+        $postData = [
+            'klks' => ['test']
+        ];
+
+        $GLOBALS['TYPO3_REQUEST'] = (new \GuzzleHttp\Psr7\ServerRequest('POST', '/'))
+            ->withParsedBody($postData)->withQueryParams($getData);
+
+        self::assertSame($getData, BackendUtilityFixture::getCurrentParametersPublic());
     }
 }

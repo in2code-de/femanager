@@ -2,6 +2,7 @@
 
 namespace In2code\Femanager\Tests\Unit\Utility;
 
+use GuzzleHttp\Psr7\ServerRequest;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Tests\Helper\TestingHelper;
 use In2code\Femanager\Utility\FrontendUtility;
@@ -49,8 +50,16 @@ class FrontendUtilityTest extends UnitTestCase
      */
     public function testGetControllerName(): void
     {
-        $_POST['tx_femanager_pi1']['controller'] = 'foo';
-        self::assertSame('foo', FrontendUtility::getControllerName());
+        $postData = [
+            'tx_femanager_pi1' => [
+                'controller' => 'foo'
+            ]
+        ];
+
+        $request = (new ServerRequest('POST', '/'))
+            ->withParsedBody($postData);
+
+        self::assertSame('foo', FrontendUtility::getControllerName($request));
     }
 
     /**
@@ -59,7 +68,15 @@ class FrontendUtilityTest extends UnitTestCase
      */
     public function testGetActionName(): void
     {
-        $_POST['tx_femanager_pi1']['action'] = 'bar';
-        self::assertSame('bar', FrontendUtility::getActionName());
+        $postData = [
+            'tx_femanager_pi1' => [
+                'action' => 'bar'
+            ]
+        ];
+
+        $request = (new ServerRequest('POST', '/'))
+            ->withParsedBody($postData);
+
+        self::assertSame('bar', FrontendUtility::getActionName($request));
     }
 }
