@@ -1,0 +1,7 @@
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestRefusedSalutation" /> {user.username},
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestRefusedText1" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestRefusedText2" arguments="{0:settings.edit.email.updateRequestRefused.sender.email.value}"/>
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestRefusedSignature" />

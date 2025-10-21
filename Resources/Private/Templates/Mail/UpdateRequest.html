@@ -1,0 +1,113 @@
+<f:layout name="Default" />
+
+Email / UpdateRequest
+
+This mail will be send to the admin, to get a confirmation about a profile update.
+It's only activated, if there is min. one email in the flexform setting.
+
+Available variables:
+{user} User Object
+{changes} Array with Changes
+{hash} Hash to ensure authentication of link
+
+<f:section name="main">
+	<p><f:translate key="emailUpdateRequestSalutation" /></p>
+
+	<p>
+		<f:format.printf arguments="{0:user.username}">
+			<f:translate key="emailUpdateRequestText1" />
+		</f:format.printf>
+	</p>
+
+	<p><f:translate key="emailUpdateRequestText2" /></p>
+
+	<table border="1" cellpadding="2" cellspacing="2">
+		<thead>
+		<tr>
+			<th scope="col"><b><f:translate key="emailUpdateRequestField" /></b></th>
+			<th scope="col"><b><f:translate key="emailUpdateRequestOld" /></b></th>
+			<th scope="col"><b><f:translate key="emailUpdateRequestNew" /></b></th>
+		</tr>
+		</thead>
+		<tbody>
+		<f:for each="{changes}" as="change" key="property">
+			<tr>
+				<th scope="row"><f:translate key="tx_femanager_domain_model_user.{property}" /></th>
+				<td>
+					<f:if condition="{0:property} == {0:'password'}">
+						<f:else>
+							<f:if condition="{change.old}">
+								<f:then>
+									<f:if condition="{0:property} == {0:'gender'}">
+										<f:then>
+											<f:translate key="tx_femanager_domain_model_user.gender.item{change.old}" />
+										</f:then>
+										<f:else>
+											<f:if condition="{0:property} == {0:'dateOfBirth'}">
+												<f:then>
+													<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{change.old}</f:format.date>
+												</f:then>
+												<f:else>
+													{change.old}
+												</f:else>
+											</f:if>
+										</f:else>
+									</f:if>
+								</f:then>
+								<f:else>
+									[<f:translate key="empty" />]
+								</f:else>
+							</f:if>
+						</f:else>
+						<f:then>
+							******
+						</f:then>
+					</f:if>
+				</td>
+				<td>
+					<f:if condition="{0:property} == {0:'password'}">
+						<f:else>
+							<f:if condition="{0:property} == {0:'gender'}">
+								<f:then>
+									<f:translate key="tx_femanager_domain_model_user.gender.item{change.new}" />
+								</f:then>
+								<f:else>
+									<f:if condition="{0:property} == {0:'dateOfBirth'}">
+										<f:then>
+											<f:format.date format="{f:translate(key:'tx_femanager_domain_model_user.dateFormat')}">{change.new}</f:format.date>
+										</f:then>
+										<f:else>
+											{change.new}
+										</f:else>
+									</f:if>
+								</f:else>
+							</f:if>
+						</f:else>
+						<f:then>
+							******
+						</f:then>
+					</f:if>
+				</td>
+			</tr>
+		</f:for>
+		</tbody>
+	</table>
+
+	<ul>
+		<li>
+			<f:link.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash}">
+				<f:translate key="emailUpdateRequestLinkConfirm" />
+			</f:link.action>
+		</li>
+		<li>
+			<f:link.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash, status:'refuse'}">
+				<f:translate key="emailUpdateRequestLinkRefuse" />
+			</f:link.action>
+		</li>
+		<li>
+			<f:link.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash, status:'silentRefuse'}">
+				<f:translate key="emailUpdateRequestLinkSiltentRefuse" />
+			</f:link.action>
+		</li>
+	</ul>
+</f:section>

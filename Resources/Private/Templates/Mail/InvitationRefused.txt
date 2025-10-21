@@ -1,0 +1,6 @@
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationUserRefusedAdminNotifiySalutation" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationUserRefusedAdminNotifiyText2" arguments="{0:user.username}" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationUserRefusedAdminNotifiyUserProperties" />
+<f:render partial="UserPropertiesPlaintext" arguments="{_all}" />

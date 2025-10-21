@@ -74,7 +74,7 @@ class StaticInfoTables
             foreach ($countries as $country) {
                 $items[] = [
                     $country->getShortNameEn(),
-                    $country->getIsoCodeA3()
+                    $country->getIsoCodeA3(),
                 ];
             }
         } else {
@@ -88,7 +88,7 @@ class StaticInfoTables
 
             $locale = (string)($this->getLanguageService()->getLocale() ?? 'en');
             $collator = new Collator($locale);
-            usort($items, function(array $itemA, array $itemB) use ($collator) {
+            usort($items, function (array $itemA, array $itemB) use ($collator) {
                 return $collator->compare($itemA[0], $itemB[0]);
             });
         }

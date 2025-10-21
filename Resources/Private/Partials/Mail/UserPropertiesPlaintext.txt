@@ -1,0 +1,58 @@
+<f:if condition="{user.username}">
+	<f:translate key="tx_femanager_domain_model_user.username" />: {user.username}
+</f:if>
+<f:if condition="{user.email}">
+	<f:translate key="tx_femanager_domain_model_user.email" />: {user.email}
+</f:if>
+<f:if condition="{user.www}">
+	<f:translate key="tx_femanager_domain_model_user.www" />: {user.www}
+</f:if>
+<f:if condition="{user.title}">
+	<f:translate key="tx_femanager_domain_model_user.title" />: {user.title}
+</f:if>
+<f:if condition="{user.firstName}">
+	<f:translate key="tx_femanager_domain_model_user.firstName" />: {user.firstName}
+</f:if>
+<f:if condition="{user.middleName}">
+	<f:translate key="tx_femanager_domain_model_user.middleName" />: {user.middleName}
+</f:if>
+<f:if condition="{user.lastName}">
+	<f:translate key="tx_femanager_domain_model_user.lastName" />: {user.lastName}
+</f:if>
+<f:if condition="{user.name}">
+	<f:translate key="tx_femanager_domain_model_user.name" />: {user.name}
+</f:if>
+<f:if condition="{user.company}">
+	<f:translate key="tx_femanager_domain_model_user.company" />: {user.company}
+</f:if>
+<f:if condition="{user.gender}">
+	<f:translate key="tx_femanager_domain_model_user.gender" />: <f:translate key="tx_femanager_domain_model_user.gender.item{user.gender}" />
+</f:if>
+<f:if condition="{user.dateOfBirth}">
+	<f:translate key="tx_femanager_domain_model_user.dateOfBirth" />: <f:format.date format="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:tx_femanager_domain_model_user.dateFormat')}">{user.dateOfBirth}</f:format.date>
+</f:if>
+<f:if condition="{user.telephone}">
+	<f:translate key="tx_femanager_domain_model_user.telephone" />: {user.telephone}
+</f:if>
+<f:if condition="{user.fax}">
+	<f:translate key="tx_femanager_domain_model_user.fax" />: {user.fax}
+</f:if>
+<f:if condition="{user.address}">
+	<f:translate key="tx_femanager_domain_model_user.address" />: {user.address}
+</f:if>
+<f:if condition="{user.zip}">
+	<f:translate key="tx_femanager_domain_model_user.zip" />: {user.zip}
+</f:if>
+<f:if condition="{user.city}">
+	<f:translate key="tx_femanager_domain_model_user.city" />: {user.city}
+</f:if>
+<f:if condition="{user.country}">
+	<f:translate key="tx_femanager_domain_model_user.country" />: {user.country}
+</f:if>
+<f:if condition="{user.state}">
+	<f:translate key="tx_femanager_domain_model_user.state" />: {user.state}
+</f:if>
+
+<f:if condition="{user.usergroup}">
+	<f:translate key="tx_femanager_domain_model_user.usergroup" />: <f:for each="{user.usergroup}" as="usergroup" iteration="i">{usergroup.title}<f:if condition="{i.isLast}"><f:else>, </f:else></f:if></f:for>
+</f:if>

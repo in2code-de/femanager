@@ -1,0 +1,17 @@
+<f:layout name="Default" />
+
+	Email / CreateUserNotify
+
+	This mail will be send to the user, to inform him about his new profile.
+	It's always activated, even if the admin confirmation and/or the double-opt-in is activated.
+
+	Available variables:
+		{user} User Object
+
+<f:section name="main">
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifySalutation" /> {user.username},</p>
+
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifyText1" /></p>
+
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserNotifySignature" /></p>
+</f:section>

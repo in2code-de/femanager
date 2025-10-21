@@ -117,6 +117,14 @@ class ConfigurationUtility extends AbstractUtility
         return $configuration['disableLog'] === '1';
     }
 
+    public static function useFluidMail(): bool
+    {
+        $configuration = self::getExtensionConfiguration();
+
+        return $configuration['useFluidMail'] === '1';
+    }
+
+
     /**
      * Get complete Typoscript or only a special value by a given path
      *

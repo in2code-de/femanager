@@ -7,6 +7,9 @@ namespace In2code\Femanager\Event;
 use In2code\Femanager\Domain\Service\SendMailService;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
+/**
+ * @deprecated will be removed with version 14.0
+ */
 class BeforeMailBodyRenderEvent
 {
     public function __construct(private StandaloneView $standAloneView, private readonly array $variables, private readonly SendMailService $service)

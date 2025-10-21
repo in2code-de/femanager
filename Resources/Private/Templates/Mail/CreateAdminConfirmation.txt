@@ -1,0 +1,15 @@
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationSalutation" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationUserProperties" />
+<f:render partial="UserPropertiesPlaintext" arguments="{_all}" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationText1" arguments="{0:user.username}" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationLinkConfirm" />:
+<f:uri.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, adminHash:adminHash, status:'adminConfirmation'}" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationText2" />:
+<f:uri.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, adminHash:adminHash, status:'adminConfirmationRefused'}" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationText3" />:
+<f:uri.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, adminHash:adminHash, status:'adminConfirmationRefusedSilent'}" />

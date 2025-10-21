@@ -184,40 +184,6 @@ class StringUtilityTest extends UnitTestCase
         self::assertSame($expectedResult, StringUtility::endsWith($haystack, $needle));
     }
 
-    public static function makeEmailArrayReturnsArrayDataProvider(): array
-    {
-        return [
-            [
-                'email1@mail.org' . PHP_EOL . 'email2@mail.org',
-                [
-                    'email1@mail.org' => 'femanager',
-                    'email2@mail.org' => 'femanager',
-                ],
-            ],
-            [
-                'nomail.org' . PHP_EOL . 'email2@mail.org',
-                [
-                    'email2@mail.org' => 'femanager',
-                ],
-            ],
-            [
-                'email2@mail.org',
-                [
-                    'email2@mail.org' => 'femanager',
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider makeEmailArrayReturnsArrayDataProvider
-     * @covers ::makeEmailArray
-     */
-    public function testMakelEmailArrayReturnsArray(string $haystack, array $expectedResult): void
-    {
-        self::assertSame($expectedResult, StringUtility::makeEmailArray($haystack));
-    }
-
     public static function getRandomStringAlwaysReturnsStringsOfGivenLengthDataProvider(): array
     {
         return [

@@ -1,0 +1,12 @@
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifySalutation" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifyText1" arguments="{0:user.username}"/>
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifyUserProperties" />
+<f:render partial="UserPropertiesPlaintext" arguments="{_all}" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationText2" />:
+<f:uri.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'adminConfirmationRefused'}" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationText3" />:
+<f:uri.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'adminConfirmationRefusedSilent'}" />

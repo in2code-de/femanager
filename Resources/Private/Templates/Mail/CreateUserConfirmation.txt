@@ -1,0 +1,9 @@
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationSalutation" /> {user.username},
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationText1" />:
+<f:uri.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'userConfirmation'}" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationText2" />:
+<f:uri.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'userConfirmationRefused'}" />
+
+<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationSignature" />

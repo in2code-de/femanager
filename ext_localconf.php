@@ -121,4 +121,8 @@ call_user_func(function () {
     if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['femanager_ratelimiter'])) {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['femanager_ratelimiter'] = [];
     }
+
+    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['layoutRootPaths'][1408] = 'EXT:femanager/Resources/Private/Layouts/Mail';
+    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['partialRootPaths'][1408] = 'EXT:femanager/Resources/Private/Partials/Mail';
+    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['templateRootPaths'][1408] = 'EXT:femanager/Resources/Private/Templates/Mail';
 });

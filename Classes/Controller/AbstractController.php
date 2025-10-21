@@ -28,8 +28,7 @@ use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Http\UploadedFile;
-use \TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior;
-use TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior;
 use TYPO3\CMS\Core\Resource\StorageRepository;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -312,9 +311,9 @@ abstract class AbstractController extends ActionController
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         if (ConfigurationUtility::getValue(
-                'new./email./createUserNotify./sender./email./value',
-                $this->config
-            ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
+            'new./email./createUserNotify./sender./email./value',
+            $this->config
+        ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
             $this->sendMailService->send(
                 'createUserNotify',
                 StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
@@ -608,15 +607,10 @@ abstract class AbstractController extends ActionController
         $this->sendMailService->send(
             'createUserConfirmation',
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
-            [
-                ConfigurationUtility::getValue(
-                    'new./email./createUserConfirmation./sender./email./value',
-                    $this->config
-                ) => ConfigurationUtility::getValue(
-                    'new./email./createUserConfirmation./sender./name./value',
-                    $this->config
-                ),
-            ],
+            StringUtility::makeEmailArray(
+                ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value', $this->config),
+                ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config)
+            ),
             $this->contentObject->cObjGetSingle(
                 (string)ConfigurationUtility::getValue('new./email./createUserConfirmation./subject', $this->config),
                 (array)ConfigurationUtility::getValue('new./email./createUserConfirmation./subject.', $this->config)
@@ -666,7 +660,8 @@ abstract class AbstractController extends ActionController
         }
     }
 
-    protected function isCaptchaEnabled(): bool {
+    protected function isCaptchaEnabled(): bool
+    {
         $extbaseAttribute = $this->request->getAttribute('extbase');
         $controllerName = strtolower($extbaseAttribute->getControllerName());
 
