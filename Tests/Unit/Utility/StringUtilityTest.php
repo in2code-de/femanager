@@ -3,7 +3,6 @@
 namespace In2code\Femanager\Tests\Unit\Utility;
 
 use In2code\Femanager\Utility\StringUtility;
-use Symfony\Component\Mime\Address;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -183,40 +182,6 @@ class StringUtilityTest extends UnitTestCase
     public function testEndsWithReturnsString(string $haystack, string $needle, bool $expectedResult): void
     {
         self::assertSame($expectedResult, StringUtility::endsWith($haystack, $needle));
-    }
-
-    public static function makeEmailArrayReturnsArrayDataProvider(): array
-    {
-        return [
-            [
-                'email1@mail.org' . PHP_EOL . 'email2@mail.org',
-                [
-                    new Address('email1@mail.org', 'femanager'),
-                    new Address('email2@mail.org', 'femanager'),
-                ],
-            ],
-            [
-                'nomail.org' . PHP_EOL . 'email2@mail.org',
-                [
-                    new Address('email2@mail.org', 'femanager'),
-                ],
-            ],
-            [
-                'email2@mail.org',
-                [
-                    new Address('email2@mail.org', 'femanager'),
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider makeEmailArrayReturnsArrayDataProvider
-     * @covers ::makeEmailArray
-     */
-    public function testMakelEmailArrayReturnsArray(string $haystack, array $expectedResult): void
-    {
-        self::assertEqualsCanonicalizing($expectedResult, StringUtility::makeEmailArray($haystack));
     }
 
     public static function getRandomStringAlwaysReturnsStringsOfGivenLengthDataProvider(): array
