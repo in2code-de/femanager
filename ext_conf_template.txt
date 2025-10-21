@@ -9,3 +9,6 @@ disableLog = 0
 
 # cat=basic/enable/200; type=boolean; label= Replace the input field for a fe_user's country with a select box.: This feature can be active without static_info_tables, but will use data from static_info_tables if it is installed.
 overrideFeUserCountryFieldWithSelect = 0
+
+# cat=basic/enable/210; type=boolean; label=Enable fluid mail feature (will be default at V14)
+useFluidMail = 0

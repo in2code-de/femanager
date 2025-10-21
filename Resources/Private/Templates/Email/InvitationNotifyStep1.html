@@ -1,0 +1,26 @@
+<f:comment>
+	@todo: remove template file with V14
+</f:comment>
+<f:layout name="Email" />
+
+	Email / InvitationNotify
+
+	This mail will be send to the admin, to inform him about a profile creation.
+	It's only activated, if there is min. one email in the flexform setting.
+
+	Available variables:
+		{user} User Object
+		{settings} Array with Flexform and TypoScript settings
+
+<f:section name="main">
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifySalutation" /></p>
+
+	<p>
+		<f:format.printf arguments="{0:user.username}">
+			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifyText1" />
+		</f:format.printf>
+	</p>
+
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateNotifyUserProperties" /></p>
+	<f:render partial="Mail/UserProperties" arguments="{_all}" />
+</f:section>

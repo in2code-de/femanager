@@ -1,0 +1,37 @@
+<f:comment>
+	@todo: remove template file with V14
+</f:comment>
+<f:layout name="Email" />
+
+	Email / Invitation
+
+	This mail will be send to the user, to confirm his new profile and set a password.
+	It's everytime activated.
+
+	Available variables:
+		{user} User Object
+		{hash} Hash to ensure authentication of link
+
+<f:section name="main">
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationSalutation" /> {user.username},</p>
+
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationText1" /></p>
+
+	<p>
+		<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationText2" />
+		<br>
+		<f:link.action action="edit" controller="Invitation" absolute="1" arguments="{user:user, hash:hash}">
+			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationLinkConfirm" />
+		</f:link.action>
+	</p>
+
+	<p>
+		<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationText3" />
+		<br>
+		<f:link.action action="delete" controller="Invitation" absolute="1" arguments="{user:user, hash:hash}">
+			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailInvitationLinkConfirmRefused" />
+		</f:link.action>
+	</p>
+
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateUserConfirmationSignature" /></p>
+</f:section>

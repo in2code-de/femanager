@@ -1,0 +1,27 @@
+<f:comment>
+	@todo: remove template file with V14
+</f:comment>
+<f:layout name="Email" />
+
+	Email / UpdateRequestRefused
+
+	This mail will be send to the user, to inform him about a declined profile update from the admin.
+	It's only activated, if the admin clicks the related link in his UpdateRequest Email.
+
+	Available variables:
+		{user} User Object
+
+<f:section name="main">
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestRefusedSalutation" /> {user.username},</p>
+
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestRefusedText1" /></p>
+
+	<p>
+		<f:format.printf arguments="{0:settings.edit.email.updateRequestRefused.sender.email.value}">
+			<f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestRefusedText2" />
+		</f:format.printf>
+	</p>
+
+	<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailUpdateRequestRefusedSignature" /></p>
+
+</f:section>

@@ -89,7 +89,12 @@ class StringUtility extends AbstractUtility
         $mailArray = [];
         foreach ($emails as $email) {
             if (GeneralUtility::validEmail($email)) {
-                $mailArray[] = new Address($email, $name);
+                if(ConfigurationUtility::useFluidMail()) {
+                    $mailArray[] = new Address($email, $name);
+                } else {
+                    $mailArray[$email] = $name;
+                }
+
             }
         }
 
