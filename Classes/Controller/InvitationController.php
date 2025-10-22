@@ -103,6 +103,7 @@ class InvitationController extends AbstractFrontendController
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
+        $this->processUploadedImage($user);
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvited'));
         $this->logUtility->log(Log::STATUS_INVITATIONPROFILECREATED, $user);
 
