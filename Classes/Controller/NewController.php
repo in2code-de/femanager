@@ -480,7 +480,7 @@ class NewController extends AbstractFrontendController
                     $this->settings['new']['confirmByAdmin'] ?? '',
                     $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value'] ?? ''
                 ),
-                StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
+                ['sender@femanager.org' => 'Sender Name'],
                 'New Registration request',
                 [
                     'user' => $user,
