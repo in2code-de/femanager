@@ -127,7 +127,7 @@ class UserBackendController extends AbstractController
 
         $this->eventDispatcher->dispatch(new AdminConfirmationUserEvent($user));
 
-        $jsonResult = $this->getFrontendRequestResult('adminConfirmation', $userIdentifier, $user);
+        $jsonResult = $this->getFrontendRequestResult('confirmAdmin', $userIdentifier, $user);
 
         if ($jsonResult['status'] ?? false) {
             $this->addFlashMessage(
@@ -186,7 +186,7 @@ class UserBackendController extends AbstractController
 
         $this->eventDispatcher->dispatch(new RefuseUserEvent($user));
 
-        $jsonResult = $this->getFrontendRequestResult('adminConfirmationRefused', $userIdentifier, $user);
+        $jsonResult = $this->getFrontendRequestResult('confirmAdminRefused', $userIdentifier, $user);
 
         if ($jsonResult['status'] ?? false) {
             $this->addFlashMessage(
