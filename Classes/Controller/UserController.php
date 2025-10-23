@@ -15,6 +15,7 @@ use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
 use TYPO3\CMS\Core\Http\RedirectResponse;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -53,8 +54,18 @@ class UserController extends AbstractFrontendController
      */
     public function imageDeleteAction(User $user): ResponseInterface
     {
-        if (UserUtility::getCurrentUser() !== $user) {
-            throw new UnauthorizedException('You are not allowed to delete this image', 1516373759972);
+        $currentUser = UserUtility::getCurrentUser();
+        if ($currentUser && $currentUser->getUid() === $user->getUid()) {
+            $user->setImage(GeneralUtility::makeInstance(ObjectStorage::class));
+            $this->userRepository->update($user);
+            $this->logUtility->log(Log::STATUS_PROFILEUPDATEIMAGEDELETE, $user);
+            $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEIMAGEDELETE));
+        } else {
+            $this->logUtility->log(Log::STATUS_PROFILEUPDATENOTAUTHORIZED, $user);
+            $this->addFlashMessage(
+                LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATENOTAUTHORIZED),
+                '',
+                ContextualFeedbackSeverity::ERROR);
         }
         $user->setImage(GeneralUtility::makeInstance(ObjectStorage::class));
         $this->userRepository->update($user);
@@ -140,6 +151,7 @@ class UserController extends AbstractFrontendController
                 $user = $this->user;
             }
         }
+
         return $user;
     }
 }
