@@ -345,6 +345,8 @@ abstract class AbstractController extends ActionController
 
         // send notify email to admin
         if ($createAdminNotify) {
+            $variables['adminHash'] = HashUtility::createHashForUser($user, 'admin');
+
             $this->sendMailService->send(
                 'createNotify',
                 StringUtility::makeEmailArray(
