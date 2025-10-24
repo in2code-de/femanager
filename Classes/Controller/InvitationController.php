@@ -157,8 +157,6 @@ class InvitationController extends AbstractFrontendController
     {
         $user = $this->userRepository->findByUid($user);
 
-        $this->addVariablesForActionConfirmation(true, $user, 'invitationConfirmation');
-
         // User must exist and hash must be valid
         if ($user === null || !HashUtility::validHash($hash, $user)) {
             $this->addFlashMessage(
