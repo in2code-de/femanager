@@ -4,6 +4,17 @@
 Changelog
 =========
 -
+      :Version: 13.2.0
+      :Date: 2025-10-24
+      :Changes:
+      * [FEATURE] Add Support for Fluid Mail - thx Sebastian Stein (in2code) - sponsored by Digitalwerkstatt Luechow
+      * [FEATURE] add "Profile update not authorized" error message - thx to Sebastian Stein (in2code)
+      * [TASK] Convert Femanager JavaScript from jQuery to Vanilla - thx Andreas Nedbal (in2code) - sponsored by Digitalwerkstatt Luechow
+      * [BUGFIX] Fix createAdminNotify email action links not working - thx Andreas Nedbal (in2code)
+      * [BUGFIX] Usage of FlexForm value settings.edit.notifyAdmin  - thx to Aletschhorn
+      * [BUGFIX] Fix admin confirm/refuse backend actions- thx Andreas Nedbal (in2code)
+
+-
       :Version: 13.1.0
       :Date: 2025-09-25
       :Changes:
