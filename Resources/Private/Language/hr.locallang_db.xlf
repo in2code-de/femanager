@@ -235,6 +235,10 @@
         <source>Attempted to spoof profile</source>
         <target state="needs-translation">Attempted to spoof profile</target>
       </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.208">
+        <source>Profile update not authorized</source>
+        <target state="needs-translation">Profile update not authorized</target>
+      </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
         <source>Delete</source>
         <target state="final">Brisanje</target>
