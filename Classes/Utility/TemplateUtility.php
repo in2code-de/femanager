@@ -48,8 +48,13 @@ class TemplateUtility extends AbstractUtility
         $configuration = self::getConfigurationManager()
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'femanager');
         if (!empty($configuration['view'][$part . 'RootPaths'] ?? '')) {
-            $templatePaths = $configuration['view'][$part . 'RootPaths'] ?? '';
-            $templatePaths = array_values($templatePaths);
+            // typoscript keys should be sorted here, but aren't!!
+            $unsortedTemplatePaths = $configuration['view'][$part . 'RootPaths'] ?? '';
+            $arrayKeys = array_keys($unsortedTemplatePaths);
+            sort($arrayKeys);
+            foreach ($arrayKeys as $key) {
+                $templatePaths[] = $unsortedTemplatePaths[$key];
+            }
         }
 
         if ($returnAllPaths || $templatePaths === []) {
@@ -60,7 +65,8 @@ class TemplateUtility extends AbstractUtility
 
             $templatePaths[] = 'EXT:femanager/Resources/Private/' . ucfirst($part) . 's/';
         }
-
+        // this breaks the configured order of paths by removing higher
+        // priority paths if they have lower priority duplicates
         $templatePaths = array_unique($templatePaths);
         $absolutePaths = [];
         foreach ($templatePaths as $templatePath) {
