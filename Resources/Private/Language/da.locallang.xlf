@@ -219,9 +219,9 @@
         <source>Attempted to spoof profile</source>
         <target state="final">Forsøgt på svindel-profil</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.208">
+      <trans-unit id="tx_femanager_domain_model_log.state.208" approved="yes">
         <source>Profile update not authorized</source>
-        <target state="needs-translation">Profile update not authorized</target>
+        <target state="final">Opdatering af profil ikke godkendt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
         <source>Delete</source>
