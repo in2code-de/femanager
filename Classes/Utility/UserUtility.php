@@ -20,6 +20,7 @@ use TYPO3\CMS\Core\Crypto\PasswordHashing\Pbkdf2PasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -41,7 +42,7 @@ class UserUtility extends AbstractUtility
         try {
             $userId = $context->getPropertyFromAspect('frontend.user', 'id', 0);
             if ($userId > 0) {
-                $userRepository = GeneralUtility::makeInstance(UserRepository::class);
+                $userRepository = GeneralUtility::makeInstance(ObjectManager::class)->get(UserRepository::class);
                 return $userRepository->findByUid($userId);
             }
         } catch (AspectNotFoundException) {
