@@ -561,7 +561,7 @@
       </trans-unit>
       <trans-unit id="emailInvitationSubject">
         <source>Confirm your profile</source>
-        <target state="needs-translation">Confirm your profile</target>
+        <target state="translated">Confirma tu perfil</target>
       </trans-unit>
       <trans-unit id="emailInvitationSalutation" approved="yes">
         <source>Dear</source>
@@ -593,15 +593,15 @@
       </trans-unit>
       <trans-unit id="emailInvitationAdminNotifiyStep1Subject">
         <source>User was invited</source>
-        <target state="needs-translation">User was invited</target>
+        <target state="translated">Usuario invitado</target>
       </trans-unit>
       <trans-unit id="emailInvitationAdminNotifiySubject">
         <source>User invitation - Profile finally created</source>
-        <target state="needs-translation">User invitation - Profile finally created</target>
+        <target state="translated">Invitación de usuario - Perfil creado correctamente</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyStep1Subject">
         <source>User refused invitation</source>
-        <target state="needs-translation">User refused invitation</target>
+        <target state="translated">El usuario rechazó la invitación</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiySalutation" approved="yes">
         <source>Dear Admin,</source>
@@ -613,7 +613,7 @@
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyText2">
         <source>Profile invitation - User %s refused to set a new password. The profile was deleted.</source>
-        <target state="needs-translation">Profile invitation - User %s refused to set a new password. The profile was deleted.</target>
+        <target state="translated">Invitación al perfil - El usuario %s se negó a establecer una nueva contraseña. El perfil fue eliminado.</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyUserProperties" approved="yes">
         <source>Profile properties:</source>
@@ -829,31 +829,31 @@
       </trans-unit>
       <trans-unit id="BackendListUserEdit">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Editar</target>
       </trans-unit>
       <trans-unit id="BackendListUserLogout">
         <source>Logout</source>
-        <target state="needs-translation">Logout</target>
+        <target state="translated">Cerrar sesión</target>
       </trans-unit>
       <trans-unit id="BackendListUserStatusOffline">
         <source>Offline</source>
-        <target state="needs-translation">Offline</target>
+        <target state="translated">Desconectado</target>
       </trans-unit>
       <trans-unit id="BackendListUserStatusOnline">
         <source>Online</source>
-        <target state="needs-translation">Online</target>
+        <target state="translated">Conectado</target>
       </trans-unit>
       <trans-unit id="BackendListUserVisibilityHide">
         <source>Disable</source>
-        <target state="needs-translation">Disable</target>
+        <target state="translated">Desactivar</target>
       </trans-unit>
       <trans-unit id="BackendListUserVisibilityHidden">
         <source>Hidden</source>
-        <target state="needs-translation">Hidden</target>
+        <target state="translated">Oculto</target>
       </trans-unit>
       <trans-unit id="BackendListUserVisibilityUnhide">
         <source>Enable</source>
-        <target state="needs-translation">Enable</target>
+        <target state="translated">Activar</target>
       </trans-unit>
       <trans-unit id="BackendListFilterLabel" approved="yes">
         <source>Search</source>
@@ -861,11 +861,11 @@
       </trans-unit>
       <trans-unit id="BackendListLoginAs">
         <source>Login as</source>
-        <target state="needs-translation">Login as</target>
+        <target state="translated">Iniciar sesión como</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteTitle">
         <source>Possible action:</source>
-        <target state="needs-translation">Possible action:</target>
+        <target state="translated">Acción posible:</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteText">
         <source>%s approval(s) available</source>
