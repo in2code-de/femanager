@@ -69,7 +69,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
         <source>Diverse</source>
-        <target state="needs-translation">Diverse</target>
+        <target state="translated">Otro</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
         <source>Address</source>
@@ -105,7 +105,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Estado</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.www" approved="yes">
         <source>Website</source>
@@ -121,15 +121,15 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.captcha">
         <source>Captcha</source>
-        <target state="needs-translation">Captcha</target>
+        <target state="translated">Captcha</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.terms">
         <source>I accept the terms and conditions</source>
-        <target state="needs-translation">I accept the terms and conditions</target>
+        <target state="translated">Acepto los términos y condiciones</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.termslinktext">
         <source>Click here for terms and conditions</source>
-        <target state="needs-translation">Click here for terms and conditions</target>
+        <target state="translated">Haga clic aquí para ver los términos y condiciones</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastlogin" approved="yes">
         <source>Last login</source>
@@ -137,7 +137,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.inactivesince">
         <source>Inactive since</source>
-        <target state="needs-translation">Inactive since</target>
+        <target state="translated">Inactivo desde</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.crdate" approved="yes">
         <source>Creation Time</source>
@@ -213,15 +213,15 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.206">
         <source>Image deleted</source>
-        <target state="needs-translation">Image deleted</target>
+        <target state="translated">Imagen borrada</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.207">
         <source>Attempted to spoof profile</source>
-        <target state="needs-translation">Attempted to spoof profile</target>
+        <target state="translated">Intento de falsear el perfil</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.208">
         <source>Profile update not authorized</source>
-        <target state="needs-translation">Profile update not authorized</target>
+        <target state="translated">Actualización del perfil no autorizada</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
         <source>Delete</source>
@@ -265,7 +265,7 @@
       </trans-unit>
       <trans-unit id="error_no_typoscript_be">
         <source>No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</source>
-        <target state="needs-translation">No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</target>
+        <target state="translated">No se encontró TypoScript. ¿Ya ha configurado module.tx_femanager.settings.configPID en su PageTS?</target>
       </trans-unit>
       <trans-unit id="error_no_storagepid" approved="yes">
         <source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
@@ -273,7 +273,7 @@
       </trans-unit>
       <trans-unit id="error_not_authorized">
         <source>You are not authorized for this action</source>
-        <target state="needs-translation">You are not authorized for this action</target>
+        <target state="translated">No está autorizado para realizar esta acción</target>
       </trans-unit>
       <trans-unit id="validationError" approved="yes">
         <source>Error</source>
@@ -305,11 +305,11 @@
       </trans-unit>
       <trans-unit id="validationErrorMinInt">
         <source>Please respect the minimum value for field %s</source>
-        <target state="needs-translation">Please respect the minimum value for field %s</target>
+        <target state="translated">Por favor, respete el valor mínimo del campo %s</target>
       </trans-unit>
       <trans-unit id="validationErrorMaxInt">
         <source>Please respect the maximum value for field %s</source>
-        <target state="needs-translation">Please respect the maximum value for field %s</target>
+        <target state="translated">Por favor, respete el valor máximo del campo %s</target>
       </trans-unit>
       <trans-unit id="validationErrorInt" approved="yes">
         <source>Only numbers are allowed in field %s</source>
@@ -341,11 +341,11 @@
       </trans-unit>
       <trans-unit id="validationErrorSameAs">
         <source>Values do not match</source>
-        <target state="needs-translation">Values do not match</target>
+        <target state="translated">Los valores no coinciden</target>
       </trans-unit>
       <trans-unit id="validationErrorPasswordRepeat">
         <source>Both passwords do not match</source>
-        <target state="needs-translation">Both passwords do not match</target>
+        <target state="translated">Ambas contraseñas no coinciden.</target>
       </trans-unit>
       <trans-unit id="validationErrorDate" approved="yes">
         <source>Date has the wrong format</source>
@@ -357,11 +357,11 @@
       </trans-unit>
       <trans-unit id="validationErrorGeneral">
         <source>Field could not be validated</source>
-        <target state="needs-translation">Field could not be validated</target>
+        <target state="translated">El campo no pudo ser validado</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationSubject">
         <source>Please confirm a new registration</source>
-        <target state="needs-translation">Please confirm a new registration</target>
+        <target state="translated">Por favor, confirme su registro</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationSalutation" approved="yes">
         <source>Dear Admin,</source>
@@ -457,7 +457,7 @@
       </trans-unit>
       <trans-unit id="emailCreateNotifySubject">
         <source>New profile registration</source>
-        <target state="needs-translation">New profile registration</target>
+        <target state="translated">Nuevo registro de perfil</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifySalutation" approved="yes">
         <source>Dear Admin,</source>
@@ -477,7 +477,7 @@
       </trans-unit>
       <trans-unit id="emailUpdateNotifySubject">
         <source>Profile update</source>
-        <target state="needs-translation">Profile update</target>
+        <target state="translated">Actualizar perfil</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifySalutation" approved="yes">
         <source>Dear Admin,</source>
@@ -501,7 +501,7 @@
       </trans-unit>
       <trans-unit id="emailUpdateRequestSubject">
         <source>New profile change request</source>
-        <target state="needs-translation">New profile change request</target>
+        <target state="translated">Nueva solicitud de cambio de perfil</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestSalutation" approved="yes">
         <source>Dear Admin,</source>
@@ -541,7 +541,7 @@
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedSubject">
         <source>Your update request was refused</source>
-        <target state="needs-translation">Your update request was refused</target>
+        <target state="translated">Su solicitud de actualización fue rechazada</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedSalutation" approved="yes">
         <source>Dear</source>
