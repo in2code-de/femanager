@@ -209,7 +209,7 @@ class NewController extends AbstractFrontendController
             'userConfirmation', 'confirmUser' => $this->statusUserConfirmation($user, $hash, $status),
             'userConfirmationRefused', 'confirmDeletion' => $this->statusUserConfirmationRefused($user, $hash),
             'adminConfirmation', 'confirmAdmin' => $this->statusAdminConfirmation($user, $hash, $status, $backend),
-            'adminConfirmationRefused', 'adminConfirmationRefusedSilent', 'confirmAdminDeletion', 'confirmAdminDeletionSilent' =>
+            'adminConfirmationRefused', 'adminConfirmationRefusedSilent', 'confirmAdminDeletion', 'confirmAdminRefused', 'confirmAdminDeletionSilent' =>
             $this->statusAdminConfirmationRefused($user, $hash, $status),
             default => false,
         };
@@ -461,7 +461,7 @@ class NewController extends AbstractFrontendController
                     $this->settings['new']['confirmByAdmin'] ?? '',
                     $this->settings['new']['email']['createAdminConfirmation']['receiver']['name']['value'] ?? ''
                 ),
-                StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
+                ['sender@femanager.org' => 'Sender Name'],
                 'New Registration request',
                 [
                     'user' => $user,
