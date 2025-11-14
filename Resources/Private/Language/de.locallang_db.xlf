@@ -3,9 +3,9 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="de">
     <header/>
     <body>
-      <trans-unit id="tx_femanager_domain_model_user" approved="yes">
+      <trans-unit id="tx_femanager_domain_model_user">
         <source>User</source>
-        <target state="final">Benutzer</target>
+        <target state="translated">Benutzer</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.username" approved="yes">
         <source>Username</source>
@@ -237,7 +237,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.208">
         <source>Profile update not authorized</source>
-        <target state="needs-translation">Profile update not authorized</target>
+        <target state="translated">Profilaktualisierung nicht autorisiert</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
         <source>Delete</source>
