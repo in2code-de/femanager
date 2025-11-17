@@ -103,6 +103,7 @@ class InvitationController extends AbstractFrontendController
     {
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
+        $this->processUploadedImage($user);
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvited'));
         $this->logUtility->log(Log::STATUS_INVITATIONPROFILECREATED, $user);
 
@@ -155,8 +156,6 @@ class InvitationController extends AbstractFrontendController
     public function editAction(int $user, string $hash = ''): ResponseInterface
     {
         $user = $this->userRepository->findByUid($user);
-
-        $this->addVariablesForActionConfirmation(true, $user, 'invitationConfirmation');
 
         // User must exist and hash must be valid
         if ($user === null || !HashUtility::validHash($hash, $user)) {

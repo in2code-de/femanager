@@ -4,6 +4,13 @@
 Changelog
 =========
 -
+      :Version: 8.3.3
+      :Date: 2025-09-25
+      :Changes:
+      * [BUGFIX] Usage of FlexForm value settings.edit.notifyAdmin - thx to https://github.com/Aletschhorn
+      * [BUGFIX] fix image upload for confirmation and invitation actions - thx to Sebastian Stein (in2code)
+
+-
       :Version: 8.3.2
       :Date: 2025-09-25
       :Changes:
@@ -12,6 +19,7 @@ Changelog
       * [BUGFIX] User confirmation buttons are active even if not enabled in - Stefan Busemann
       * [TASK] Keep development-only files out of Composer installations - thx to Oliver Klee / Stefan Busemann
 
+-
       :Version: 8.3.1
       :Date: 2025-07-22
       :Changes:
