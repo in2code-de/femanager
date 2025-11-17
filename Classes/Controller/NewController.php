@@ -209,7 +209,7 @@ class NewController extends AbstractFrontendController
             'userConfirmation', 'confirmUser' => $this->statusUserConfirmation($user, $hash, $status),
             'userConfirmationRefused', 'confirmDeletion' => $this->statusUserConfirmationRefused($user, $hash),
             'adminConfirmation', 'confirmAdmin' => $this->statusAdminConfirmation($user, $hash, $status, $backend),
-            'adminConfirmationRefused', 'adminConfirmationRefusedSilent', 'confirmAdminDeletion', 'confirmAdminRefused', 'confirmAdminDeletionSilent' =>
+            'adminConfirmationRefused', 'adminConfirmationRefusedSilent', 'confirmAdminDeletion', 'confirmAdminRefused', 'confirmAdminRefusedSilent' =>
             $this->statusAdminConfirmationRefused($user, $hash, $status),
             default => false,
         };
@@ -364,7 +364,7 @@ class NewController extends AbstractFrontendController
         if (HashUtility::validHash($hash, $user)) {
             $this->logUtility->log(Log::STATUS_REGISTRATIONREFUSEDADMIN, $user);
             $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
-            if ($status !== 'adminConfirmationRefusedSilent') {
+            if ($status !== 'adminConfirmationRefusedSilent' && $status !== 'confirmAdminRefusedSilent') {
                 $this->sendMailService->send(
                     'CreateUserNotifyRefused',
                     StringUtility::makeEmailArray(
