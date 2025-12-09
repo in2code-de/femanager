@@ -105,15 +105,15 @@ class NewController extends AbstractFrontendController
      * @param string $status
      *              "userConfirmation", "userConfirmationRefused", "adminConfirmation",
      *              "adminConfirmationRefused", "adminConfirmationRefusedSilent"
+     * @param string|null $adminHash
+     * @return ResponseInterface
      * @throws IllegalObjectTypeException
+     * @throws JsonException
+     * @throws PropagateResponseException
      * @throws UnknownObjectException
-     */
-    /**
-     * @return ResponseInterface|void
-     * @throws IllegalObjectTypeException
-     * @throws UnknownObjectException
-     *
      * @SuppressWarnings(PHPMD.ExitExpression)
+     *
+     * @todo refactor the complete status workflow for V14
      */
     public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation', ?string $adminHash = null): \Psr\Http\Message\ResponseInterface
     {
@@ -141,7 +141,6 @@ class NewController extends AbstractFrontendController
             }
         }
 
-        // todo refactor this into a better workflow
         if ($status === 'userConfirmationRefused' && ConfigurationUtility::getValue(
             'new./email./createUserConfirmation./confirmUserConfirmationRefused',
             $this->config
@@ -226,7 +225,7 @@ class NewController extends AbstractFrontendController
             'userConfirmation', 'confirmUser' => $this->statusUserConfirmation($user, $hash, $status),
             'userConfirmationRefused', 'confirmDeletion' => $this->statusUserConfirmationRefused($user, $hash),
             'adminConfirmation', 'confirmAdmin' => $this->statusAdminConfirmation($user, $hash, $status, $backend),
-            'adminConfirmationRefused', 'adminConfirmationRefusedSilent', 'confirmAdminDeletion', 'confirmAdminRefused', 'confirmAdminDeletionSilent' =>
+            'adminConfirmationRefused', 'adminConfirmationRefusedSilent', 'confirmAdminDeletion', 'confirmAdminRefused', 'confirmAdminRefusedSilent' =>
             $this->statusAdminConfirmationRefused($user, $hash, $status),
             default => false,
         };
