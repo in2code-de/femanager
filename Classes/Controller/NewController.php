@@ -380,7 +380,7 @@ class NewController extends AbstractFrontendController
         if (HashUtility::validHash($hash, $user)) {
             $this->logUtility->log(Log::STATUS_REGISTRATIONREFUSEDADMIN, $user);
             $this->addFlashMessage(LocalizationUtility::translate('createProfileDeleted'));
-            if ($status !== 'adminConfirmationRefusedSilent') {
+            if (!in_array($status, ['adminConfirmationRefusedSilent', 'confirmAdminRefusedSilent'])) {
                 $this->sendMailService->send(
                     'CreateUserNotifyRefused',
                     StringUtility::makeEmailArray(
