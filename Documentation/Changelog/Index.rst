@@ -4,6 +4,13 @@
 Changelog
 =========
 -
+      :Version: 13.2.1
+      :Date: 2025-12-18
+      :Changes:
+      * [BUGFIX] add missing status "confirmAdminRefusedSilent" to statusAdminConfirmationRefused - thx Sebastian Stein (in2code)
+      * [BUGFIX] Use correct mail template for updateNotify mail - thx Sebastian Stein (in2code)
+
+-
       :Version: 13.2.0
       :Date: 2025-10-24
       :Changes:
