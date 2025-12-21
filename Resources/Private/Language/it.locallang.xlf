@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="it">
+    <header/>
+    <body>
+      <trans-unit id="tx_femanager_domain_model_user" approved="yes">
+        <source>User</source>
+        <target state="final">Utente</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.username" approved="yes">
+        <source>Username</source>
+        <target state="final">Nome utente</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password" approved="yes">
+        <source>Password</source>
+        <target state="final">Password</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password_repeat" approved="yes">
+        <source>Repeat Password</source>
+        <target state="final">Ripetere Password</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.usergroup" approved="yes">
+        <source>Usergroup</source>
+        <target state="final">Gruppo utente</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.name" approved="yes">
+        <source>Full Name</source>
+        <target state="final">Nome completo</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.firstName" approved="yes">
+        <source>Firstname</source>
+        <target state="final">Nome</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.middleName" approved="yes">
+        <source>Middlename</source>
+        <target state="final">Secondo nome</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastName" approved="yes">
+        <source>Lastname</source>
+        <target state="final">Cognome</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth" approved="yes">
+        <source>Birthdate</source>
+        <target state="final">Data di nascita</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint" approved="yes">
+        <source>Please type your birthdate as MM/DD/YYYY</source>
+        <target state="final">Si prega di inserire la data di nascita utilizzando GG/MM/AAAA</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.placeholder" approved="yes">
+        <source>MM/DD/YYYY</source>
+        <target state="final">GG/MM/AAAA</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateFormat" approved="yes">
+        <source>m/d/Y</source>
+        <target state="final">g/m/A</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender" approved="yes">
+        <source>Gender</source>
+        <target state="final">Sesso</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item0" approved="yes">
+        <source>Male</source>
+        <target state="final">Maschio</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item1" approved="yes">
+        <source>Female</source>
+        <target state="final">Femmina</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+        <source>Diverse</source>
+        <target state="needs-translation">Diverse</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Indirizzo</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.telephone" approved="yes">
+        <source>Telephone</source>
+        <target state="final">Telefono</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.fax" approved="yes">
+        <source>Fax</source>
+        <target state="final">Fax</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.email" approved="yes">
+        <source>Email</source>
+        <target state="final">Email</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titolo</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.zip" approved="yes">
+        <source>ZIP</source>
+        <target state="final">CAP</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.city" approved="yes">
+        <source>City</source>
+        <target state="final">Città</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Nazione</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.www" approved="yes">
+        <source>Website</source>
+        <target state="final">Sito web</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.company" approved="yes">
+        <source>Company</source>
+        <target state="final">Società</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Immagine</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.captcha">
+        <source>Captcha</source>
+        <target state="needs-translation">Captcha</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.terms">
+        <source>I accept the terms and conditions</source>
+        <target state="needs-translation">I accept the terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.termslinktext">
+        <source>Click here for terms and conditions</source>
+        <target state="needs-translation">Click here for terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastlogin" approved="yes">
+        <source>Last login</source>
+        <target state="final">Ultimo accesso</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.inactivesince">
+        <source>Inactive since</source>
+        <target state="needs-translation">Inactive since</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.crdate" approved="yes">
+        <source>Creation Time</source>
+        <target state="final">Data di creazione</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log" approved="yes">
+        <source>User Log</source>
+        <target state="final">Registro Utente</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titolo</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.crdate" approved="yes">
+        <source>Time</source>
+        <target state="final">Data</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state" approved="yes">
+        <source>State</source>
+        <target state="final">Stato</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.100" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrazione</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.101" approved="yes">
+        <source>New Registration</source>
+        <target state="final">Nuova Registrazione</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.102" approved="yes">
+        <source>Registration confirmed by user</source>
+        <target state="final">Registrazione confermata dall'utente</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.103" approved="yes">
+        <source>Registration confirmed by admin</source>
+        <target state="final">Registrazione confermata dall'amministratore</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.104" approved="yes">
+        <source>Registration refused by user</source>
+        <target state="final">Registrazione rifiutata dall'utente</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.105" approved="yes">
+        <source>Registration refused by admin</source>
+        <target state="final">Registrazione rifiutata dall'amministratore</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.106" approved="yes">
+        <source>Profile creation request</source>
+        <target state="final">Richiesta creazione profilo</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.200" approved="yes">
+        <source>Update</source>
+        <target state="final">Aggiornare</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.201" approved="yes">
+        <source>Profile updated</source>
+        <target state="final">Profilo aggiornato</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.202" approved="yes">
+        <source>Profile update confirmed by admin</source>
+        <target state="final">Aggiornamento del profilo confermato dall'amministratore</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.203" approved="yes">
+        <source>Profile update refused by admin</source>
+        <target state="final">Aggiornamento del profilo rifiutato dall'amministratore</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.204" approved="yes">
+        <source>Profile update request</source>
+        <target state="final">Richiesta di aggiornamento del profilo</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.205" approved="yes">
+        <source>Profile update security failure</source>
+        <target state="final">Mancato aggiornamento della sicurezza dei dati del profilo</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.206">
+        <source>Image deleted</source>
+        <target state="needs-translation">Image deleted</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.207">
+        <source>Attempted to spoof profile</source>
+        <target state="needs-translation">Attempted to spoof profile</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.208">
+        <source>Profile update not authorized</source>
+        <target state="needs-translation">Profile update not authorized</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.300" approved="yes">
+        <source>Delete</source>
+        <target state="final">Cancella</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.301" approved="yes">
+        <source>Profile deleted</source>
+        <target state="final">Profilo cancellato</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.400" approved="yes">
+        <source>Invitation</source>
+        <target state="final">Invito</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.401" approved="yes">
+        <source>Profile created and user invited</source>
+        <target state="final">Il profilo è stato creato e l'utente creato</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.402" approved="yes">
+        <source>Profile deleted by user</source>
+        <target state="final">Il profilo è stato eliminato dall'utente</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.403" approved="yes">
+        <source>Wrong hash</source>
+        <target state="final">Hash sbagliato</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.404" approved="yes">
+        <source>You tried to open a restricted page</source>
+        <target state="final">Hai provato ad aprire una pagina ad accesso riservato</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.405" approved="yes">
+        <source>Password changed and profile activated</source>
+        <target state="final">La password è stata cambiata e il profilo attivato</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
+        <source>User</source>
+        <target state="final">Utente</target>
+      </trans-unit>
+      <trans-unit id="error_no_typoscript" approved="yes">
+        <source>No TypoScript found. Did you already include the static Template?</source>
+        <target state="final">Nessuna configurazione TypoScript trovata. È stato incluso il Template statico?</target>
+      </trans-unit>
+      <trans-unit id="error_no_typoscript_be">
+        <source>No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</source>
+        <target state="needs-translation">No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</target>
+      </trans-unit>
+      <trans-unit id="error_no_storagepid" approved="yes">
+        <source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
+        <target state="final">Il PID dello storage non è stato configurato. Si prega di configurare il PID dello storage utilizzando il TypoScript oppure le impostazioni del plugin.</target>
+      </trans-unit>
+      <trans-unit id="error_not_authorized" approved="yes">
+        <source>You are not authorized for this action</source>
+        <target state="final">Non sei autorizzato a effettuare questa operazione</target>
+      </trans-unit>
+      <trans-unit id="validationError" approved="yes">
+        <source>Error</source>
+        <target state="final">Errore</target>
+      </trans-unit>
+      <trans-unit id="validationErrorRequiredModel" approved="yes">
+        <source>Username and password must be filled</source>
+        <target state="final">Username e password devono essere inseriti</target>
+      </trans-unit>
+      <trans-unit id="validationErrorWrongDateFormat" approved="yes">
+        <source>Given date format is wrong</source>
+        <target state="final">Il formato inserito per la data non è corretto</target>
+      </trans-unit>
+      <trans-unit id="validationErrorRequired" approved="yes">
+        <source>Field %s is required</source>
+        <target state="final">Il campo %s è obbligatorio</target>
+      </trans-unit>
+      <trans-unit id="validationErrorEmail" approved="yes">
+        <source>Field %s is not a valid email address</source>
+        <target state="final">L'indirizzo email %s inserito non è valido</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMin" approved="yes">
+        <source>Please add more characters to field %s</source>
+        <target state="final">Si prega di aggiungere più caratteri al campo %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMax" approved="yes">
+        <source>Please add less characters to field %s</source>
+        <target state="final">Si prega di aggiungere meno caratteri al campo %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMinInt">
+        <source>Please respect the minimum value for field %s</source>
+        <target state="needs-translation">Please respect the minimum value for field %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMaxInt">
+        <source>Please respect the maximum value for field %s</source>
+        <target state="needs-translation">Please respect the maximum value for field %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorInt" approved="yes">
+        <source>Only numbers are allowed in field %s</source>
+        <target state="final">Nel campo %s sono consentiti solo numeri</target>
+      </trans-unit>
+      <trans-unit id="validationErrorLetters" approved="yes">
+        <source>Only letters are allowed in field %s</source>
+        <target state="final">Nel campo %s sono consentite solo lettere</target>
+      </trans-unit>
+      <trans-unit id="validationErrorUniquePage" approved="yes">
+        <source>Value of field %s is already in use</source>
+        <target state="final">Il campo %s è già presente</target>
+      </trans-unit>
+      <trans-unit id="validationErrorUniqueDb" approved="yes">
+        <source>Value of field %s is already in use</source>
+        <target state="final">Il campo %s è già in uso</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMustInclude" approved="yes">
+        <source>Try another value for field %s</source>
+        <target state="final">Prova ad utilizzare un altro valore per il campo %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMustNotInclude" approved="yes">
+        <source>Not allowed signs in field %s</source>
+        <target state="final">Non sono permessi segni nel campo %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorInList" approved="yes">
+        <source>This value is not allowed in field %s</source>
+        <target state="final">Questo valore non è consentito nel campo %s</target>
+      </trans-unit>
+      <trans-unit id="validationErrorSameAs">
+        <source>Values do not match</source>
+        <target state="needs-translation">Values do not match</target>
+      </trans-unit>
+      <trans-unit id="validationErrorPasswordRepeat">
+        <source>Both passwords do not match</source>
+        <target state="needs-translation">Both passwords do not match</target>
+      </trans-unit>
+      <trans-unit id="validationErrorDate" approved="yes">
+        <source>Date has the wrong format</source>
+        <target state="final">La data ha un formato errato</target>
+      </trans-unit>
+      <trans-unit id="validationErrorCaptcha" approved="yes">
+        <source>Wrong Captcha code</source>
+        <target state="final">Il codice Captcha è sbagliato</target>
+      </trans-unit>
+      <trans-unit id="validationErrorGeneral">
+        <source>Field could not be validated</source>
+        <target state="needs-translation">Field could not be validated</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationSubject" approved="yes">
+        <source>Please confirm a new registration</source>
+        <target state="final">Si prega di confermare la nuova registrazione</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationSalutation" approved="yes">
+        <source>Dear Admin,</source>
+        <target state="final">Caro Amministratore,</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationUserProperties" approved="yes">
+        <source>User properties:</source>
+        <target state="final">Proprietà utente:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationText1" approved="yes">
+        <source>Please confirm registration of %s by clicking the following link:</source>
+        <target state="final">Si prega di confermare la registrazione del %s cliccando sul seguente link:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirm" approved="yes">
+        <source>Confirm registration</source>
+        <target state="final">Conferma la registrazione</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationText2" approved="yes">
+        <source>If you want to delete the registration, click this link:</source>
+        <target state="final">Se si vuole cancellare la registrazione, cliccare sul seguente link:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefused" approved="yes">
+        <source>Delete profile</source>
+        <target state="final">Cancella profilo</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationText3" approved="yes">
+        <source>If you want to delete the registration, without sending an email to the user, click this link:</source>
+        <target state="final">Se si vuole cancellare la registrazione, senza inviare una email di notifica all'utente, cliccare il seguente link:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent" approved="yes">
+        <source>Silently delete profile</source>
+        <target state="final">Elimina profilo silenzioso</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationSubject" approved="yes">
+        <source>Please confirm your profile creation request</source>
+        <target state="final">Si prega di confermare la tua richiesta di profilo creato</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationSalutation" approved="yes">
+        <source>Dear</source>
+        <target state="final">Gentile</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationText1" approved="yes">
+        <source>Please confirm your profile registration on our server by clicking the following link:</source>
+        <target state="final">Si prega di confermare la registrazione del profilo cliccando sul seguente link:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationLinkConfirm" approved="yes">
+        <source>Confirm profile</source>
+        <target state="final">Conferma profilo</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationText2" approved="yes">
+        <source>If you don't want to be registered on our system, click this link:</source>
+        <target state="final">Se non si desidera essere registrati sul nostro sistema, fare clic sul seguente link:</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationLinkConfirmRefused" approved="yes">
+        <source>Delete profile</source>
+        <target state="final">Cancella profilo</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationSignature" approved="yes">
+        <source>Your website team.</source>
+        <target state="final">Il Team del sito web.</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifySubject" approved="yes">
+        <source>Your registration was confirmed</source>
+        <target state="final">La tua registrazione è stata confermata</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifySalutation" approved="yes">
+        <source>Dear</source>
+        <target state="final">Gentile</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyText1" approved="yes">
+        <source>Your profile was confirmed and successfully created.</source>
+        <target state="final">Il tuo profilo è stato creato e confermato correttamente.</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifySignature" approved="yes">
+        <source>Your website team.</source>
+        <target state="final">Il Team del sito web.</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedSubject" approved="yes">
+        <source>Dear</source>
+        <target state="final">Gentile</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedSalutation" approved="yes">
+        <source>Dear</source>
+        <target state="final">Gentile</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedText1" approved="yes">
+        <source>Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</source>
+        <target state="final">Grazie per la tua richiesta di profilo. Siamo spiacenti di comunicare che abbiamo rifiutato la tua richiesta.</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedSignature" approved="yes">
+        <source>Your website team.</source>
+        <target state="final">Il Team del sito web.</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifySubject" approved="yes">
+        <source>New profile registration</source>
+        <target state="final">Nuovo profilo di registrazione</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifySalutation" approved="yes">
+        <source>Dear Admin,</source>
+        <target state="final">Gentile Amministratore,</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifyText1" approved="yes">
+        <source>Profile creation - User %s</source>
+        <target state="final">Registrazione del profilo di %s</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifyText2" approved="yes">
+        <source>Profile creation - User %s set a new password and profile was enabled</source>
+        <target state="final">Profilo Invito - L'Utente %s ha configurato una nuova password e il profilo è stato abilitato</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifyUserProperties" approved="yes">
+        <source>Profile properties:</source>
+        <target state="final">Proprietà del profilo:</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifySubject" approved="yes">
+        <source>Profile update</source>
+        <target state="final">Profilo aggiornato</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifySalutation" approved="yes">
+        <source>Dear Admin,</source>
+        <target state="final">Gentile Amministratore,</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyText1" approved="yes">
+        <source>Profile change by user %s</source>
+        <target state="final">Cambio del profilo di %s</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyField" approved="yes">
+        <source>Fieldname</source>
+        <target state="final">Nome del campo</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyOld" approved="yes">
+        <source>Old value</source>
+        <target state="final">Valore precedente</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyNew" approved="yes">
+        <source>New value</source>
+        <target state="final">Nuovo valore</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestSubject" approved="yes">
+        <source>New profile change request</source>
+        <target state="final">Nuova richiesta di modifica profilo</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestSalutation" approved="yes">
+        <source>Dear Admin,</source>
+        <target state="final">Gentile Amministratore,</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestText1" approved="yes">
+        <source>Profile change request from %s</source>
+        <target state="final">Cambio del profilo richiesto da %s</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestText2" approved="yes">
+        <source>All changes:</source>
+        <target state="final">Tutti i cambiamenti:</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestField" approved="yes">
+        <source>Fieldname</source>
+        <target state="final">Nome del campo</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestOld" approved="yes">
+        <source>Old value</source>
+        <target state="final">Valore precedente</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestNew" approved="yes">
+        <source>New value</source>
+        <target state="final">Nuovo valore</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestLinkConfirm" approved="yes">
+        <source>Confirm changes</source>
+        <target state="final">Conferma cambiamenti</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestLinkRefuse" approved="yes">
+        <source>Refuse changes and notify user</source>
+        <target state="final">Rifiuta i cambiamenti e notifica l'utente</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestLinkSiltentRefuse" approved="yes">
+        <source>Refuse changes and do not notify user</source>
+        <target state="final">Rifiuta i cambiamenti e non notificare l'utente</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedSubject" approved="yes">
+        <source>Your update request was refused</source>
+        <target state="final">Il tuo aggiornamento è stato rifiutato</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedSalutation" approved="yes">
+        <source>Dear</source>
+        <target state="final">Gentile</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedText1" approved="yes">
+        <source>Thank you for your update request. We're sorry to tell you, that we had to refuse your request.</source>
+        <target state="final">Grazie per aver la vostra richiesta di aggiornamento. Siamo spiacenti di informarla che la sua richiesta è stata rifiutata.</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedText2" approved="yes">
+        <source>Please contact %s for further information.</source>
+        <target state="final">Si prega di contattare %s per maggiori informazioni.</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedSignature" approved="yes">
+        <source>Your website team.</source>
+        <target state="final">Il Team dei sito web.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationSubject" approved="yes">
+        <source>Confirm your profile</source>
+        <target state="final">Conferma profilo</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationSalutation" approved="yes">
+        <source>Dear</source>
+        <target state="final">Gentile</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationText1" approved="yes">
+        <source>Your new profile was just created.</source>
+        <target state="final">Il tuo nuovo profilo è stato creato.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationText2" approved="yes">
+        <source>Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</source>
+        <target state="final">Si prega di confermare la procedura di registrazione profilo sui nostri server cliccando sul seguente link. Successivamente, si potrà definire la password.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationLinkConfirm" approved="yes">
+        <source>Confirm Profile</source>
+        <target state="final">Conferma Profilo</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationText3" approved="yes">
+        <source>If you don't want to be registered on our system, click this link.</source>
+        <target state="final">Se non si desidera essere registrati sul nostro sistema, si prega di cliccare sul seguente link.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationLinkConfirmRefused" approved="yes">
+        <source>Delete Profile</source>
+        <target state="final">Cancella Profilo</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationSignature" approved="yes">
+        <source>Your website team.</source>
+        <target state="final">Il Team del sito web.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationAdminNotifiyStep1Subject" approved="yes">
+        <source>User was invited</source>
+        <target state="final">L'utente è stato invitato</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationAdminNotifiySubject" approved="yes">
+        <source>User invitation - Profile finally created</source>
+        <target state="final">Invito Utente - Il profilo è stato creato</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyStep1Subject" approved="yes">
+        <source>User refused invitation</source>
+        <target state="final">L'utente ha rifiutato l'invito</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiySalutation" approved="yes">
+        <source>Dear Admin,</source>
+        <target state="final">Caro Amministratore,</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyText1" approved="yes">
+        <source>Profile invitation of %s</source>
+        <target state="final">Registrazione del profilo di %s</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyText2" approved="yes">
+        <source>Profile invitation - User %s refused to set a new password. The profile was deleted.</source>
+        <target state="final">Profilo Invito - L'Utente %s ha rifiutato di impostare una nuova password. Il profilo è stato eliminato.</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyUserProperties" approved="yes">
+        <source>Profile properties:</source>
+        <target state="final">Proprietà del profilo:</target>
+      </trans-unit>
+      <trans-unit id="noRecordsFound" approved="yes">
+        <source>No records found.</source>
+        <target state="final">Nessun record trovato.</target>
+      </trans-unit>
+      <trans-unit id="noRecordsFoundClearFilter" approved="yes">
+        <source>Clean filter.</source>
+        <target state="final">Pulisci i filtri.</target>
+      </trans-unit>
+      <trans-unit id="noRecordsFoundGoToPage0" approved="yes">
+        <source>Show all users from all pages (for administrators only).</source>
+        <target state="final">Mostra tutti gli utenti di tutte le pagine (solo per amministratori).</target>
+      </trans-unit>
+      <trans-unit id="noRecordFoundShow" approved="yes">
+        <source>No FE_User given or not logged in</source>
+        <target state="final">Nessun dato dei FE_User o nessun utente loggato</target>
+      </trans-unit>
+      <trans-unit id="notLoggedIn" approved="yes">
+        <source>Please log in before</source>
+        <target state="final">Si prega di effettuare il login prima</target>
+      </trans-unit>
+      <trans-unit id="submitNew" approved="yes">
+        <source>Create Profile Now</source>
+        <target state="final">Creare un Profilo adesso</target>
+      </trans-unit>
+      <trans-unit id="submitResend">
+        <source>Resend now</source>
+        <target state="needs-translation">Resend now</target>
+      </trans-unit>
+      <trans-unit id="passwordRepeat" approved="yes">
+        <source>Repeat Password</source>
+        <target state="final">Ripetere Password</target>
+      </trans-unit>
+      <trans-unit id="titleCreateProfile" approved="yes">
+        <source>Create a new user-profile</source>
+        <target state="final">Crea un nuovo profilo utente</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailTitle">
+        <source>Resend confirmation mail</source>
+        <target state="needs-translation">Resend confirmation mail</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailFieldsetLegend">
+        <source>Please enter your email address</source>
+        <target state="needs-translation">Please enter your email address</target>
+      </trans-unit>
+      <trans-unit id="submitEdit" approved="yes">
+        <source>Update Profile</source>
+        <target state="final">Aggiorna Profilo</target>
+      </trans-unit>
+      <trans-unit id="create" approved="yes">
+        <source>Profile successfully created</source>
+        <target state="final">Il profilo è stato creato correttamente</target>
+      </trans-unit>
+      <trans-unit id="createAndInvited" approved="yes">
+        <source>Profile successfully created and user informed</source>
+        <target state="final">Il profilo è stato creato correttamente e l'utente è stato informato</target>
+      </trans-unit>
+      <trans-unit id="createAndInvitedFinished" approved="yes">
+        <source>Profile successfully changed and enabled</source>
+        <target state="final">Il profilo è stato cambiato ed abilitato corettamente</target>
+      </trans-unit>
+      <trans-unit id="createRequestWaitingForUserConfirm" approved="yes">
+        <source>Thank you for your request. Please check your mail account to confirm the profile.</source>
+        <target state="final">Grazie per la richiesta. Si prega di controllare il proprio indirizzo di posta elettronica per confermare il profilo.</target>
+      </trans-unit>
+      <trans-unit id="createRequestWaitingForAdminConfirm">
+        <source>Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</source>
+        <target state="needs-translation">Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailSend">
+        <source>An email was sent to your account. Please check your inbox.</source>
+        <target state="needs-translation">An email was sent to your account. Please check your inbox.</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailFail">
+        <source>We received no valid mail.</source>
+        <target state="needs-translation">We received no valid mail.</target>
+      </trans-unit>
+      <trans-unit id="ratelimiter_too_many_attempts">
+        <source>Too many attempts from this IP address. Try again later.</source>
+        <target state="needs-translation">Too many attempts from this IP address. Try again later.</target>
+      </trans-unit>
+      <trans-unit id="createFailedProfile" approved="yes">
+        <source>Profile creation failed</source>
+        <target state="final">Creazione del profilo fallita</target>
+      </trans-unit>
+      <trans-unit id="userAlreadyConfirmed" approved="yes">
+        <source>Profile is already confirmed</source>
+        <target state="final">Il profilo è stato già confermato</target>
+      </trans-unit>
+      <trans-unit id="missingUserInDatabase" approved="yes">
+        <source>No Profile found in database. Maybe it was deleted before.</source>
+        <target state="final">Nessun profilo è stato trovato nel database. Forse è stato cancellato precedentemente.</target>
+      </trans-unit>
+      <trans-unit id="createProfileDeleted" approved="yes">
+        <source>Profile successfully deleted</source>
+        <target state="final">Il profilo è stato correttamente cancellato</target>
+      </trans-unit>
+      <trans-unit id="titleUpdateProfile" approved="yes">
+        <source>Update your user-profile</source>
+        <target state="final">Aggiorna il tuo profilo utente</target>
+      </trans-unit>
+      <trans-unit id="confirmUserConfirmation">
+        <source>Please confirm the creation of your account.</source>
+        <target state="needs-translation">Please confirm the creation of your account.</target>
+      </trans-unit>
+      <trans-unit id="confirmUserConfirmationRefused">
+        <source>Please confirm the deletion of your account.</source>
+        <target state="needs-translation">Please confirm the deletion of your account.</target>
+      </trans-unit>
+      <trans-unit id="confirmAdminConfirmation">
+        <source>Please confirm the creation of this account.</source>
+        <target state="needs-translation">Please confirm the creation of this account.</target>
+      </trans-unit>
+      <trans-unit id="confirmAdminConfirmationRefused">
+        <source>Please confirm the deletion of this account.</source>
+        <target state="needs-translation">Please confirm the deletion of this account.</target>
+      </trans-unit>
+      <trans-unit id="confirmAdminConfirmationRefusedSilent">
+        <source>Please confirm the silent deletion of this account.</source>
+        <target state="needs-translation">Please confirm the silent deletion of this account.</target>
+      </trans-unit>
+      <trans-unit id="update" approved="yes">
+        <source>Profile successfully changed</source>
+        <target state="final">Il profilo è stato cambiato correttamente</target>
+      </trans-unit>
+      <trans-unit id="noChanges" approved="yes">
+        <source>No changes detected, nothing to update</source>
+        <target state="final">Nessun cambiamento è stato rilevato, quindi non ci sono aggiornamenti da effettuare</target>
+      </trans-unit>
+      <trans-unit id="updateRequest" approved="yes">
+        <source>Your change request was transmitted to the administrator. After a confirmation, your profile will be up-to-date.</source>
+        <target state="final">Le tue richieste di cambiamento sono state inviare all'Amministratore del sistema. Dopo la conferma, il tuo profilo sarà aggiornato.</target>
+      </trans-unit>
+      <trans-unit id="login" approved="yes">
+        <source>You're successfully logged in now</source>
+        <target state="final">Login effettuato con successo</target>
+      </trans-unit>
+      <trans-unit id="deleteProfile" approved="yes">
+        <source>Delete Profile</source>
+        <target state="final">Cancella Profilo</target>
+      </trans-unit>
+      <trans-unit id="updateProfile" approved="yes">
+        <source>Profile successfully updated</source>
+        <target state="final">Il profilo è stato aggiornato correttamente</target>
+      </trans-unit>
+      <trans-unit id="updateFailedProfile" approved="yes">
+        <source>Profile update failed</source>
+        <target state="final">L'aggiornamento del profilo è fallito</target>
+      </trans-unit>
+      <trans-unit id="field_image_fineuploader" approved="yes">
+        <source>Please enable fineUploader plugin</source>
+        <target state="final">Abilitare il plugin fineUploader</target>
+      </trans-unit>
+      <trans-unit id="field_image_drag" approved="yes">
+        <source>Drag file</source>
+        <target state="final">Trascina il file</target>
+      </trans-unit>
+      <trans-unit id="field_image_drag_processing" approved="yes">
+        <source>Drag in progress ...</source>
+        <target state="final">Trascinamento in corso ...</target>
+      </trans-unit>
+      <trans-unit id="field_image_upload" approved="yes">
+        <source>Upload</source>
+        <target state="final">Carica</target>
+      </trans-unit>
+      <trans-unit id="empty" approved="yes">
+        <source>empty</source>
+        <target state="final">vuoto</target>
+      </trans-unit>
+      <trans-unit id="pleaseChoose" approved="yes">
+        <source>Please choose ...</source>
+        <target state="final">Scegli ...</target>
+      </trans-unit>
+      <trans-unit id="pleaseChooseCountry">
+        <source>Please choose a country ...</source>
+        <target state="needs-translation">Please choose a country ...</target>
+      </trans-unit>
+      <trans-unit id="FilterLabel" approved="yes">
+        <source>Search</source>
+        <target state="final">Cerca</target>
+      </trans-unit>
+      <trans-unit id="FilterPlaceholder" approved="yes">
+        <source>Search ...</source>
+        <target state="final">Cerca ...</target>
+      </trans-unit>
+      <trans-unit id="FilterSubmit" approved="yes">
+        <source>Filter now</source>
+        <target state="final">Filtra ora</target>
+      </trans-unit>
+      <trans-unit id="UserDeleteConfirmation" approved="yes">
+        <source>Are you sure to delete your profile?</source>
+        <target state="final">Sei sicuro di voler cancellare il tuo profilo?</target>
+      </trans-unit>
+      <trans-unit id="titleInvitationProfile" approved="yes">
+        <source>Invite a new user</source>
+        <target state="final">Invita un nuovo utente</target>
+      </trans-unit>
+      <trans-unit id="titleInvitationSetPassword" approved="yes">
+        <source>Please set a new password</source>
+        <target state="final">Per favore inserisci una nuova password</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserDelete" approved="yes">
+        <source>Delete</source>
+        <target state="final">Cancella</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserDeleteConfirmation" approved="yes">
+        <source>Are you sure to delete this User?</source>
+        <target state="final">Sei sicuro di cancellare questo Utente?</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserEdit">
+        <source>Edit</source>
+        <target state="needs-translation">Edit</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserLogout">
+        <source>Logout</source>
+        <target state="needs-translation">Logout</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserStatusOffline">
+        <source>Offline</source>
+        <target state="needs-translation">Offline</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserStatusOnline">
+        <source>Online</source>
+        <target state="needs-translation">Online</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserVisibilityHide">
+        <source>Disable</source>
+        <target state="needs-translation">Disable</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserVisibilityHidden">
+        <source>Hidden</source>
+        <target state="needs-translation">Hidden</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserVisibilityUnhide">
+        <source>Enable</source>
+        <target state="needs-translation">Enable</target>
+      </trans-unit>
+      <trans-unit id="BackendListFilterLabel" approved="yes">
+        <source>Search</source>
+        <target state="final">Cerca</target>
+      </trans-unit>
+      <trans-unit id="BackendListLoginAs" approved="yes">
+        <source>Login as</source>
+        <target state="final">Accedi come</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationNoteTitle">
+        <source>Possible action:</source>
+        <target state="needs-translation">Possible action:</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationNoteText">
+        <source>%s approval(s) available</source>
+        <target state="needs-translation">%s approval(s) available</target>
+      </trans-unit>
+      <trans-unit id="AdminBackendConfirmationNoteText">
+        <source>%s user(s) need to be confirmed by admin</source>
+        <target state="needs-translation">%s user(s) need to be confirmed by admin</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationColumnAction">
+        <source>Actions</source>
+        <target state="needs-translation">Actions</target>
+      </trans-unit>
+      <trans-unit id="BackendMissingConfigPID">
+        <source>The config PID is missing!</source>
+        <target state="needs-translation">The config PID is missing!</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationColumnUid">
+        <source>UID</source>
+        <target state="needs-translation">UID</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageConfirmed">
+        <source>%s was successfully approved</source>
+        <target state="needs-translation">%s was successfully approved</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageFailed">
+        <source>The user confirmation failed, please check your system log or check your config</source>
+        <target state="needs-translation">The user confirmation failed, please check your system log or check your config</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageRefused">
+        <source>%s was refused</source>
+        <target state="needs-translation">%s was refused</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationResendUserConfirmationRequest">
+        <source>resend user confirmation e-mail</source>
+        <target state="needs-translation">resend user confirmation e-mail</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageReSend">
+        <source>%s confirmation mail was resent</source>
+        <target state="needs-translation">%s confirmation mail was resent</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationDialogueMessage">
+        <source>Your userprofile is not confirmed yet.</source>
+        <target state="needs-translation">Your userprofile is not confirmed yet.</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationDialogueLink">
+        <source>Resend confirmation email?</source>
+        <target state="needs-translation">Resend confirmation email?</target>
+      </trans-unit>
+      <trans-unit id="createStatus">
+        <source>User registration</source>
+        <target state="needs-translation">User registration</target>
+      </trans-unit>
+      <trans-unit id="js.loading_states">
+        <source>Loading states ...</source>
+        <target state="needs-translation">Loading states ...</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
