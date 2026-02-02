@@ -32,17 +32,12 @@ use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
 /**
- * Class NewController
- *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class NewController extends AbstractFrontendController
 {
     /**
      * Render registration form
-     *
-     * @param User|null $user
-     * @throws JsonException
      */
     public function newAction(): ResponseInterface
     {
@@ -56,8 +51,6 @@ class NewController extends AbstractFrontendController
     }
 
     /**
-     * action create
-     *
      * @throws IllegalObjectTypeException
      * @throws InvalidPasswordHashException
      */
@@ -108,7 +101,6 @@ class NewController extends AbstractFrontendController
      * @param string|null $adminHash
      * @return ResponseInterface
      * @throws IllegalObjectTypeException
-     * @throws JsonException
      * @throws PropagateResponseException
      * @throws UnknownObjectException
      * @SuppressWarnings(PHPMD.ExitExpression)
@@ -254,7 +246,7 @@ class NewController extends AbstractFrontendController
      *
      * @return bool allow further functions
      * @throws IllegalObjectTypeException
-     * @throws UnknownObjectException
+     * @throws UnknownObjectException|PropagateResponseException
      */
     protected function statusUserConfirmation(User $user, string $hash, string $status): bool
     {
@@ -325,12 +317,14 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: Admin confirmation
      *
+     * @param User $user
      * @param $hash
-     * @param $status
+     * @param string $status
+     * @param bool $backend
      * @return bool allow further functions
      * @throws IllegalObjectTypeException
+     * @throws PropagateResponseException
      * @throws UnknownObjectException
-     *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     protected function statusAdminConfirmation(User $user, $hash, string $status, bool $backend = false): bool
