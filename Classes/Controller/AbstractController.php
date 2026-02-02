@@ -662,7 +662,14 @@ abstract class AbstractController extends ActionController
 
     protected function validateMissingCaptcha(string $redirectAction): void
     {
-        if ($this->isCaptchaEnabled() && $this->request->getAttribute('extbase')->getArgument('captcha') === '') {
+        if (!$this->isCaptchaEnabled()) {
+            return;
+        }
+
+        $params = $this->request->getAttribute('extbase');
+        $captchaValue = ($params?->hasArgument('captcha') ?? false) ? $params->getArgument('captcha') : null;
+
+        if (empty($captchaValue)) {
             $this->addFlashMessage(
                 LocalizationUtility::translate('validationErrorCaptcha'),
                 '',
@@ -676,9 +683,8 @@ abstract class AbstractController extends ActionController
     {
         $extbaseAttribute = $this->request->getAttribute('extbase');
         $controllerName = strtolower($extbaseAttribute->getControllerName());
+        $isCaptchaValidationEnabled = (bool)((int)($this->config[$controllerName . '.']['validation.']['captcha.']['captcha'] ?? 0));
 
-        return $extbaseAttribute->hasArgument('captcha') &&
-            $this->config[$controllerName . '.']['validation.']['captcha.']['captcha'] == true &&
-            ExtensionManagementUtility::isLoaded('sr_freecap');
+        return $isCaptchaValidationEnabled && ExtensionManagementUtility::isLoaded('sr_freecap');
     }
 }
