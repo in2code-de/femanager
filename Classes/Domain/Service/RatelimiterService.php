@@ -67,24 +67,6 @@ class RatelimiterService implements SingletonInterface
         }
     }
 
-    protected function getCookie()
-    {
-        $this->touchCookie();
-
-        return $this->getTSFE()->fe_user->getSessionData(self::SESSION_KEY);
-    }
-
-    public function touchCookie(): void
-    {
-        $feUser = $this->getTSFE()->fe_user;
-        $identifier = $feUser->getSessionData(self::SESSION_KEY);
-
-        if ($identifier === null) {
-            $unique = GeneralUtility::makeInstance(Random::class)->generateRandomHexString(16);
-            $feUser->setAndSaveSessionData(self::SESSION_KEY, $unique);
-        }
-    }
-
     protected function consumeToken(string $tokenName, string $value): array
     {
         $cacheID = $this->getCacheID($tokenName, $value);
