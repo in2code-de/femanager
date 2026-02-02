@@ -5,46 +5,28 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
 use Psr\Http\Message\RequestInterface;
-use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class RatelimiterService implements SingletonInterface
 {
-    final public const CACHE_IDENTIFIER = 'femanager_ratelimiter';
-
     final public const DEFAULT_CONFIG = ['timeframe' => 60, 'limit' => 3];
-
     final public const LIMIT_IP = 'limit_ip_';
-
-    final public const SESSION_KEY = 'tx_femanager_ratelimiter';
-
-    /** @var FrontendInterface */
-    protected $cache;
-
+    private FrontendInterface $cache;
+    protected Context $context;
     protected int $limit;
-
     protected int $timeframe;
 
-    public function __construct()
+    public function __construct(FrontendInterface $cache, Context $context)
     {
-        $this->cache = GeneralUtility::makeInstance(CacheManager::class)->getCache(self::CACHE_IDENTIFIER);
         $setup = $this->getRequest()->getAttribute('frontend.typoscript')->getSetupArray();
         $config = $setup['plugin.']['tx_femanager.']['settings.']['ratelimiter.'] ?? self::DEFAULT_CONFIG;
         $this->timeframe = (int)$config['timeframe'];
         $this->limit = (int)$config['limit'];
-    }
-
-    /**
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    protected function getTSFE(): TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'];
+        $this->context = $context;
+        $this->cache = $cache;
     }
 
     public function isLimited(): bool
@@ -72,7 +54,7 @@ class RatelimiterService implements SingletonInterface
         $cacheID = $this->getCacheID($tokenName, $value);
 
         $token = $this->retrieveToken($cacheID);
-        $token[] = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+        $token[] = $this->context->getPropertyFromAspect('date', 'timestamp');
         $this->cache->set($cacheID, $token, [], $this->timeframe);
 
         return $token;
@@ -97,8 +79,7 @@ class RatelimiterService implements SingletonInterface
     protected function filterExpiredToken(array $token): array
     {
         $slidingWindowStartTime =
-            GeneralUtility::makeInstance(Context::class)
-                ->getPropertyFromAspect('date', 'timestamp') - $this->timeframe;
+            $this->context->getPropertyFromAspect('date', 'timestamp') - $this->timeframe;
         foreach ($token as $idx => $accessTime) {
             if ($accessTime < $slidingWindowStartTime) {
                 unset($token[$idx]);
@@ -111,7 +92,6 @@ class RatelimiterService implements SingletonInterface
     protected function getToken(string $tokenName, string $value): array
     {
         $cacheID = $this->getCacheID($tokenName, $value);
-
         return $this->retrieveToken($cacheID);
     }
 
