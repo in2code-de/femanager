@@ -63,7 +63,7 @@ class SendMailService
 
         $this->contentObjectStart($variables);
 
-        if(ConfigurationUtility::useFluidMail()) {
+        if (ConfigurationUtility::useFluidMail()) {
             $mailService = GeneralUtility::makeInstance(FluidMailService::class, $this);
         } else {
             $mailService = GeneralUtility::makeInstance(MailMessageService::class, $this);
@@ -85,7 +85,7 @@ class SendMailService
             return false;
         }
 
-        if(ConfigurationUtility::useFluidMail()) {
+        if (ConfigurationUtility::useFluidMail()) {
             $mailService = GeneralUtility::makeInstance(FluidMailService::class, $this);
         } else {
             $mailService = GeneralUtility::makeInstance(MailMessageService::class, $this);

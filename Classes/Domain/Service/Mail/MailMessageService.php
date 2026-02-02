@@ -1,4 +1,5 @@
 <?php
+
 /*
  * **************************************************************
  *  *
@@ -44,7 +45,6 @@ use TYPO3\CMS\Extbase\Mvc\RequestInterface;
  */
 class MailMessageService extends AbstractMailService
 {
-
     public function send(
         string $template,
         array $receiver,
@@ -54,7 +54,6 @@ class MailMessageService extends AbstractMailService
         array $typoScript = [],
         ?RequestInterface $request = null
     ): bool {
-
         $email = GeneralUtility::makeInstance(MailMessage::class);
 
         $variables = $this->embedImages($variables, $typoScript, $email);
@@ -147,7 +146,7 @@ class MailMessageService extends AbstractMailService
 
     protected function setReplyTo(array $typoScript, MailMessage $email): void
     {
-        if (is_null( $typoScript['replyTo'] ?? null)) {
+        if (is_null($typoScript['replyTo'] ?? null)) {
             return;
         }
         $replyTo = $this->contentObject->cObjGetSingle($typoScript['replyTo'], $typoScript['replyTo.']);
@@ -223,5 +222,4 @@ class MailMessageService extends AbstractMailService
     {
         return TemplateUtility::getTemplatePath('Email/' . ucfirst($fileName) . '.html');
     }
-
 }

@@ -89,7 +89,6 @@ class FluidMailService extends AbstractMailService
         }
     }
 
-
     /**
      * @return array<Address>
      */
@@ -200,5 +199,4 @@ class FluidMailService extends AbstractMailService
 
         return $attachments;
     }
-
 }

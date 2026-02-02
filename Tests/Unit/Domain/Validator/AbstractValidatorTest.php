@@ -36,7 +36,7 @@ class AbstractValidatorTest extends UnitTestCase
                 new UserRepository(),
                 $this->getMockBuilder(ConfigurationManagerInterface::class)->disableOriginalConstructor()->getMock(),
                 new PluginService(),
-                $eventDispatcher
+                $eventDispatcher,
             ]
         );
     }

@@ -65,7 +65,8 @@ class UserController extends AbstractFrontendController
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATENOTAUTHORIZED),
                 '',
-                ContextualFeedbackSeverity::ERROR);
+                ContextualFeedbackSeverity::ERROR
+            );
         }
 
         return $this->redirectToUri(FrontendUtility::getUriToCurrentPage());

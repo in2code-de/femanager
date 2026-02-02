@@ -52,8 +52,8 @@ class FrontendUtilityTest extends UnitTestCase
     {
         $postData = [
             'tx_femanager_pi1' => [
-                'controller' => 'foo'
-            ]
+                'controller' => 'foo',
+            ],
         ];
 
         $request = (new ServerRequest('POST', '/'))
@@ -70,8 +70,8 @@ class FrontendUtilityTest extends UnitTestCase
     {
         $postData = [
             'tx_femanager_pi1' => [
-                'action' => 'bar'
-            ]
+                'action' => 'bar',
+            ],
         ];
 
         $request = (new ServerRequest('POST', '/'))

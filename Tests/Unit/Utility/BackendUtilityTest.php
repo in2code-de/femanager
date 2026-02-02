@@ -45,10 +45,10 @@ class BackendUtilityTest extends UnitTestCase
     public function testGetCurrentParameters(): void
     {
         $getData = [
-            'foo' => ['bar']
+            'foo' => ['bar'],
         ];
         $postData = [
-            'klks' => ['test']
+            'klks' => ['test'],
         ];
 
         $GLOBALS['TYPO3_REQUEST'] = (new \GuzzleHttp\Psr7\ServerRequest('POST', '/'))
