@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Controller;
 
+use DateTime;
+use Exception;
 use In2code\Femanager\DataProcessor\DataProcessorRunner;
 use In2code\Femanager\Domain\Model\Log;
 use In2code\Femanager\Domain\Model\User;
@@ -23,6 +25,7 @@ use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
+use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
@@ -301,7 +304,7 @@ abstract class AbstractController extends ActionController
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function finalCreate(
-        \In2code\Femanager\Domain\Model\User $user,
+        User $user,
         string $action,
         string $redirectByActionName,
         bool $login = true,
@@ -311,9 +314,9 @@ abstract class AbstractController extends ActionController
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         if (ConfigurationUtility::getValue(
-            'new./email./createUserNotify./sender./email./value',
-            $this->config
-        ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
+                'new./email./createUserNotify./sender./email./value',
+                $this->config
+            ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
             $this->sendMailService->send(
                 'createUserNotify',
                 StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
@@ -350,7 +353,8 @@ abstract class AbstractController extends ActionController
                 'createNotify',
                 StringUtility::makeEmailArray(
                     $createAdminNotify,
-                    ConfigurationUtility::getValue('new./email./createAdminNotify./receiver./name./value', $this->config)
+                    ConfigurationUtility::getValue('new./email./createAdminNotify./receiver./name./value',
+                        $this->config)
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 $this->contentObject->cObjGetSingle(
@@ -452,7 +456,11 @@ abstract class AbstractController extends ActionController
     protected function isSpoof(User $user, int $uid, string $receivedToken): bool
     {
         $errorOnProfileUpdate = false;
-        $knownToken = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Crypto\HashService::class)->hmac((string)$user->getUid(), (string)($user->getCrdate() ?: new \DateTime('01.01.1970'))->getTimestamp());
+        $knownToken = GeneralUtility::makeInstance(HashService::class)
+            ->hmac(
+                (string)$user->getUid(),
+                (string)($user->getCrdate() ?: new DateTime('01.01.1970'))->getTimestamp()
+            );
 
         //check if the params are valid
         if (!hash_equals($knownToken, $receivedToken)) {
@@ -472,10 +480,6 @@ abstract class AbstractController extends ActionController
      */
     public function assignForAll(): void
     {
-        $jsLabels = [
-            'loading_states' => LocalizationUtility::translate('js.loading_states'),
-            'please_choose' => LocalizationUtility::translate('pleaseChoose'),
-        ];
         $this->view->assignMultiple(
             [
                 'languageUid' => FrontendUtility::getFrontendLanguageUid(),
@@ -483,13 +487,18 @@ abstract class AbstractController extends ActionController
                 'Pid' => FrontendUtility::getCurrentPid(),
                 'data' => $this->contentObject->data,
                 'useStaticInfoTables' => ExtensionManagementUtility::isLoaded('static_info_tables'),
-                'jsLabels' => json_encode($jsLabels, JSON_THROW_ON_ERROR),
+                'jsLabels' => json_encode(
+                    [
+                        'loading_states' => LocalizationUtility::translate('js.loading_states'),
+                        'please_choose' => LocalizationUtility::translate('pleaseChoose'),
+                    ]
+                ),
             ]
         );
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected function initializeAction(): void
@@ -610,7 +619,8 @@ abstract class AbstractController extends ActionController
             'createUserConfirmation',
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             StringUtility::makeEmailArray(
-                ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value', $this->config),
+                ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value',
+                    $this->config),
                 ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config)
             ),
             $this->contentObject->cObjGetSingle(
