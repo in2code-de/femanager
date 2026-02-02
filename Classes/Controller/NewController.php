@@ -46,7 +46,8 @@ class NewController extends AbstractFrontendController
                 'allUserGroups' => $this->allUserGroups,
             ]
         );
-        $this->assignForAll();
+        $this->addDefaultViewVariables();
+
         return $this->htmlResponse();
     }
 
@@ -144,7 +145,7 @@ class NewController extends AbstractFrontendController
                     'hash' => $hash,
                 ]
             );
-            $this->assignForAll();
+            $this->addDefaultViewVariables();
             return $this->htmlResponse();
         }
 
@@ -159,7 +160,7 @@ class NewController extends AbstractFrontendController
                     'hash' => $hash,
                 ]
             );
-            $this->assignForAll();
+            $this->addDefaultViewVariables();
             return $this->htmlResponse();
         }
 
@@ -183,7 +184,7 @@ class NewController extends AbstractFrontendController
                     'hash' => $hash,
                 ]
             );
-            $this->assignForAll();
+            $this->addDefaultViewVariables();
             return $this->htmlResponse();
         }
 
@@ -209,7 +210,7 @@ class NewController extends AbstractFrontendController
                     'hash' => $hash,
                 ]
             );
-            $this->assignForAll();
+            $this->addDefaultViewVariables();
             return $this->htmlResponse();
         }
 
@@ -408,7 +409,7 @@ class NewController extends AbstractFrontendController
      */
     public function createStatusAction(): ResponseInterface
     {
-        $this->assignForAll();
+        $this->addDefaultViewVariables();
         return $this->htmlResponse();
     }
 

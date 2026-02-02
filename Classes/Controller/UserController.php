@@ -38,14 +38,14 @@ class UserController extends AbstractFrontendController
                 'filter' => $filter,
             ]
         );
-        $this->assignForAll();
+        $this->addDefaultViewVariables();
         return $this->htmlResponse();
     }
 
     public function showAction(?User $user = null): ResponseInterface
     {
         $this->view->assign('user', $this->getUser($user));
-        $this->assignForAll();
+        $this->addDefaultViewVariables();
         return $this->htmlResponse();
     }
 

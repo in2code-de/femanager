@@ -478,7 +478,7 @@ abstract class AbstractController extends ActionController
     /**
      * Assigns all values, which should be available in all views
      */
-    public function assignForAll(): void
+    public function addDefaultViewVariables(): void
     {
         $this->view->assignMultiple(
             [

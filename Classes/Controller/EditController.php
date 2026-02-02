@@ -45,7 +45,7 @@ class EditController extends AbstractFrontendController
             'allUserGroups' => $this->allUserGroups,
             'token' => $token,
         ]);
-        $this->assignForAll();
+        $this->addDefaultViewVariables();
         return $this->htmlResponse();
     }
 

@@ -47,7 +47,7 @@ class InvitationController extends AbstractFrontendController
         }
 
         $this->view->assign('allUserGroups', $this->allUserGroups);
-        $this->assignForAll();
+        $this->addDefaultViewVariables();
         return $this->htmlResponse();
     }
 
@@ -193,7 +193,7 @@ class InvitationController extends AbstractFrontendController
             ]
         );
 
-        $this->assignForAll();
+        $this->addDefaultViewVariables();
         return $this->htmlResponse();
     }
 
