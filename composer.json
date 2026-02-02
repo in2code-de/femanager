@@ -25,15 +25,15 @@
   "license": "GPL-2.0-or-later",
   "require": {
     "php": ">=8.1",
+    "ext-intl": "*",
     "ext-json": "*",
     "ext-pdo": "*",
-    "ext-intl": "*",
     "symfony/config": "^6.4 || ^7.0",
-    "typo3/cms-core": "^13.4.0",
     "typo3/cms-backend": "^13.4.0",
+    "typo3/cms-core": "^13.4.0",
     "typo3/cms-extbase": "^13.4.0",
-    "typo3/cms-frontend": "^13.4.0",
-    "typo3/cms-fluid": "^13.4.0"
+    "typo3/cms-fluid": "^13.4.0",
+    "typo3/cms-frontend": "^13.4.0"
   },
   "repositories": [
     {
@@ -46,6 +46,7 @@
   },
   "require-dev": {
     "behat/behat": "^3.12",
+    "sjbr/sr-freecap": "^13.4",
     "behat/mink-selenium2-driver": "^1.6",
     "drevops/behat-screenshot": "^1.2",
     "friends-of-behat/mink-browserkit-driver": "^1.6",
