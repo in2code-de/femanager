@@ -11,11 +11,8 @@ use In2code\Femanager\Utility\StringUtility;
 use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
- * Class ClientsideValidator
- *
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class ClientsideValidator extends AbstractValidator
@@ -27,81 +24,23 @@ class ClientsideValidator extends AbstractValidator
      *            uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special),
      *            inList(1,2,3)
      *
-     * @var string
      */
-    protected $validationSettingsString;
-
-    /**
-     * Field Value
-     *
-     * @var string
-     */
-    protected $value;
-
-    /**
-     * Field Name
-     *
-     * @var string
-     */
-    protected $fieldName;
-
-    /**
-     * User
-     *
-     * @var User
-     */
-    protected $user;
+    protected string $validationSettingsString = '';
+    protected string $value = '';
+    protected string $fieldName = '';
+    protected ?User $user = null;
 
     /**
      * Error message container
-     *
-     * @var array
      */
-    protected $messages = [];
+    protected array $messages = [];
 
     /**
      * Additional Values (for comparing a value with another)
-     *
-     * @var string
      */
-    protected $additionalValue;
-
-    /**
-     * @var int
-     */
-    protected $plugin = 0;
-
-    /**
-     * @var string
-     */
-    protected $pluginName = '';
-
-    /**
-     * @var string
-     */
-    protected $actionName = '';
-
-    protected function init()
-    {
-        $this->initializeObject();
-        $this->setPluginVariables();
-        $this->setClientValidationSettings();
-    }
-
-    protected function setClientValidationSettings()
-    {
-        $pluginName = $this->getPluginName();
-        if ($pluginName !== '') {
-            $config = $this->configurationManager->getConfiguration(
-                ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
-                'Femanager',
-                null
-            );
-            $controllerName = $this->getControllerNameByPlugin($pluginName);
-            $validationName = $this->getValidationNameByPlugin($pluginName);
-            $this->validationSettings = $config[$controllerName][$validationName];
-        }
-    }
+    protected string $additionalValue = '';
+    protected int $pluginUid = 0;
+    protected string $actionName = '';
 
     /**
      * Validate Field
@@ -109,9 +48,9 @@ class ClientsideValidator extends AbstractValidator
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function validateField(string $pluginName = 'tx_femanager_new'): bool
+    public function validateField(): bool
     {
-        if ($this->isValidationSettingsDifferentToGlobalSettings($pluginName)) {
+        if ($this->isValidationSettingsDifferentToGlobalSettings()) {
             $this->addMessage('validationErrorGeneral');
 
             return false;
@@ -305,38 +244,24 @@ class ClientsideValidator extends AbstractValidator
      * do not match, it could be possible that there is a manipulation. In this case, we stop validation and return a
      * global error message
      */
-    protected function isValidationSettingsDifferentToGlobalSettings(string $pluginName = 'tx_femanager_new'): bool
+    protected function isValidationSettingsDifferentToGlobalSettings(): bool
     {
-        return $this->getValidationSettingsString() !== $this->getValidationSettingsFromTypoScript($pluginName);
+        return $this->validationSettingsString !== $this->getValidationSettingsFromTypoScript();
     }
 
-    /**
-     * Set validation
-     *
-     * @param string $validationSettingsString
-     */
-    public function setValidationSettingsString($validationSettingsString): static
+    public function setValidationSettingsString(string $validationSettingsString): static
     {
         $this->validationSettingsString = $validationSettingsString;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getValidationSettingsString()
+    public function getValidationSettingsFromTypoScript(): string
     {
-        return $this->validationSettingsString;
-    }
-
-    public function getValidationSettingsFromTypoScript(string $pluginName = 'tx_femanager_new'): string
-    {
-        $controllerName = $this->getControllerNameByPlugin($pluginName);
         $validationService = GeneralUtility::makeInstance(
             ValidationSettingsService::class,
-            $controllerName,
-            $this->getValidationNameByPlugin($pluginName)
+            $this->getControllerName(),
+            $this->getValidationName()
         );
 
         return $validationService->getValidationStringForField($this->fieldName);
@@ -349,80 +274,49 @@ class ClientsideValidator extends AbstractValidator
      */
     protected function getValidationSettings(): array
     {
-        if (!is_string($this->validationSettingsString)) {
-            return [];
-        }
-
         $singleSettingsArray = GeneralUtility::trimExplode(',', $this->validationSettingsString, true);
         foreach ($singleSettingsArray as &$singleSetting) {
-            if (str_contains((string)$singleSetting, '|')) {
-                $singleSetting = str_replace('|', ',', (string)$singleSetting);
+            if (str_contains($singleSetting, '|')) {
+                $singleSetting = str_replace('|', ',', $singleSetting);
             }
         }
 
         return $singleSettingsArray;
     }
 
-    /**
-     * @param string $value
-     */
-    public function setValue($value): static
+    public function setValue(string $value): static
     {
         $this->value = $value;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }
 
     /**
      * Add a message to the errormessage array
-     *
-     * @param string $message
      */
-    public function addMessage($message): void
+    public function addMessage(string $message): void
     {
         $this->messages = array_merge($this->messages, [$message]);
     }
 
-    /**
-     * @param array $messages
-     */
-    public function setMessages($messages): static
-    {
-        $this->messages = $messages;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getMessages()
+    public function getMessages(): array
     {
         return $this->messages;
     }
 
-    /**
-     * @param string $fieldName
-     */
-    public function setFieldName($fieldName): static
+    public function setFieldName(string $fieldName): static
     {
         $this->fieldName = $fieldName;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFieldName()
+    public function getFieldName(): string
     {
         return $this->fieldName;
     }
@@ -434,75 +328,28 @@ class ClientsideValidator extends AbstractValidator
         return $this;
     }
 
-    /**
-     * @return User
-     */
-    public function getUser()
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    /**
-     * @param string $additionalValue
-     */
-    public function setAdditionalValue($additionalValue): static
+    public function setAdditionalValue(string $additionalValue): static
     {
         $this->additionalValue = $additionalValue;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAdditionalValue()
+    public function getAdditionalValue(): string
     {
         return $this->additionalValue;
     }
 
-    public function getPlugin(): int
+    public function setPluginUid(int $pluginUid): static
     {
-        return $this->plugin;
-    }
-
-    public function setPlugin(int $plugin): static
-    {
-        $this->plugin = $plugin;
+        $this->pluginUid = $pluginUid;
 
         return $this;
-    }
-
-    public function getPluginName(): string
-    {
-        return $this->pluginName;
-    }
-
-    public function setPluginName(string $pluginName): static
-    {
-        $this->pluginName = $pluginName;
-
-        return $this;
-    }
-
-    protected function getActionName(): string
-    {
-        return $this->actionName;
-    }
-
-    public function setActionName(string $actionName): static
-    {
-        $this->actionName = $actionName;
-
-        return $this;
-    }
-
-    protected function getValidationNameByPlugin(string $plugin = 'tx_femanager_new'): string
-    {
-        if ($this->getControllerNameByPlugin($plugin) === 'invitation' && $this->getActionName() === 'edit') {
-            return 'validationEdit';
-        }
-
-        return 'validation';
     }
 
     /**
@@ -510,7 +357,7 @@ class ClientsideValidator extends AbstractValidator
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    protected function isValid($value): void
+    protected function isValid(mixed $value): void
     {
     }
 }

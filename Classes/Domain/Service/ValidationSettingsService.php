@@ -4,20 +4,14 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Service;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use In2code\Femanager\Utility\ConfigurationUtility;
 
-/**
- * Class ValidationSettingsService
- */
 class ValidationSettingsService
 {
     /**
      * Validation names with simple configuration
-     *
-     * @var array
      */
-    protected $simpleValidations = [
+    protected array $simpleValidations = [
         'date',
         'email',
         'intOnly',
@@ -51,7 +45,7 @@ class ValidationSettingsService
     public function getValidationStringForField(string $fieldName): string
     {
         $string = '';
-        $validationSettings = $this->getSettings()[$this->controllerName][$this->validationName][$fieldName] ?? [];
+        $validationSettings = $this->getValidationSettings()[$fieldName] ?? [];
 
         if (is_array($validationSettings)) {
             foreach ($validationSettings as $validation => $configuration) {
@@ -66,9 +60,15 @@ class ValidationSettingsService
         return $string;
     }
 
-    public function isValidationEnabled(string $type = 'client'): bool
+    public function isClientValidationEnabled(): bool
     {
-        $validationSetting = $this->getSettings()[$this->controllerName]['validation']['_enable'][$type] ?? '0';
+        $validationSetting = ConfigurationUtility::getConfiguration()[$this->controllerName]['validation']['_enable']['client'] ?? '0';
+        return $validationSetting === '1';
+    }
+
+    public function isServersideValidationEnabled(): bool
+    {
+        $validationSetting = ConfigurationUtility::getConfiguration()[$this->controllerName]['validation']['_enable']['server'] ?? '0';
         return $validationSetting === '1';
     }
 
@@ -77,7 +77,7 @@ class ValidationSettingsService
      * @param string $configuration
      * @return string
      */
-    protected function getSingleValidationString($validation, $configuration)
+    protected function getSingleValidationString(string $validation, string $configuration): string
     {
         $string = '';
         if ($this->isSimpleValidation($validation) && $configuration === '1') {
@@ -94,21 +94,14 @@ class ValidationSettingsService
 
     /**
      * Check if validation is simple or extended
-     *
-     * @param string $validation
      */
-    protected function isSimpleValidation($validation): bool
+    protected function isSimpleValidation(string $validation): bool
     {
         return in_array($validation, $this->simpleValidations);
     }
 
-    protected function getSettings(string $pluginSignature = 'femanager_pi1'): array
+    public function getValidationSettings(): array
     {
-        $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
-        return (array)$configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
-            'femanager',
-            $pluginSignature
-        );
+        return ConfigurationUtility::getConfiguration()[$this->controllerName][$this->validationName];
     }
 }

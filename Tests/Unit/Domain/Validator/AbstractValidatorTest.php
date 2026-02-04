@@ -3,7 +3,6 @@
 namespace In2code\Femanager\Tests\Unit\Domain\Validator;
 
 use In2code\Femanager\Domain\Repository\UserRepository;
-use In2code\Femanager\Domain\Service\PluginService;
 use In2code\Femanager\Domain\Validator\AbstractValidator;
 use In2code\Femanager\Tests\Unit\Fixture\Domain\Validator\AbstractValidator as AbstractValidatorFixture;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -35,7 +34,6 @@ class AbstractValidatorTest extends UnitTestCase
             [
                 new UserRepository(),
                 $this->getMockBuilder(ConfigurationManagerInterface::class)->disableOriginalConstructor()->getMock(),
-                new PluginService(),
                 $eventDispatcher,
             ]
         );
@@ -195,7 +193,7 @@ class AbstractValidatorTest extends UnitTestCase
     {
         self::assertSame(
             $expectedResult,
-            $this->generalValidatorMock->_call('validateMin', $value, $allowedLength)
+            $this->generalValidatorMock->_call('validateMin', $value, (string)$allowedLength)
         );
     }
 
@@ -246,7 +244,7 @@ class AbstractValidatorTest extends UnitTestCase
     {
         self::assertSame(
             $expectedResult,
-            $this->generalValidatorMock->_call('validateMax', $value, $allowedLength)
+            $this->generalValidatorMock->_call('validateMax', $value, (string)$allowedLength)
         );
     }
 

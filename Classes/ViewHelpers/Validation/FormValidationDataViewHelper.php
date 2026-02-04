@@ -9,19 +9,22 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class FormValidationDataViewHelper
- */
 class FormValidationDataViewHelper extends AbstractValidationViewHelper implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
+    public function initializeArguments(): void
+    {
+        parent::initializeArguments();
+        $this->registerArgument('settings', 'array ', 'all TypoScript settings for this form', true);
+        $this->registerArgument('fieldName', 'string ', 'Fieldname which should get validated', true);
+        $this->registerArgument('additionalAttributes', 'array ', '$additionalAttributes for this field', false, []);
+    }
+
     /**
      * Set javascript validation data for input fields
-     *
-     * @return array
      */
-    public function render()
+    public function render(): array
     {
         $settings = $this->arguments['settings'];
         $fieldName = $this->arguments['fieldName'];
@@ -38,7 +41,7 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper implemen
             $this->getControllerName(),
             $this->getValidationName()
         );
-        if ($validationService->isValidationEnabled('client')) {
+        if ($validationService->isClientValidationEnabled()) {
             $validationString = $validationService->getValidationStringForField($fieldName);
             if (!empty($validationString)) {
                 if (!empty($additionalAttributes['data-validation'])) {
@@ -50,18 +53,5 @@ class FormValidationDataViewHelper extends AbstractValidationViewHelper implemen
         }
 
         return $additionalAttributes;
-    }
-
-    /**
-     * Initialize the arguments.
-     *
-     * @api
-     */
-    public function initializeArguments(): void
-    {
-        parent::initializeArguments();
-        $this->registerArgument('settings', 'array ', 'all TypoScript settings for this form', true);
-        $this->registerArgument('fieldName', 'string ', 'Fieldname which should get validated', true);
-        $this->registerArgument('additionalAttributes', 'array ', '$additionalAttributes for this field', false);
     }
 }

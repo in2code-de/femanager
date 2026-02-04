@@ -5,70 +5,61 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Model\User;
-use In2code\Femanager\Domain\Repository\PluginRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
-use In2code\Femanager\Domain\Service\PluginService;
 use In2code\Femanager\Event\UniqueUserEvent;
-use In2code\Femanager\Utility\FrontendUtility;
+use In2code\Femanager\Utility\ConfigurationUtility;
 use LogicException;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
-use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
- * Class GeneralValidator
- *
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 abstract class AbstractValidator extends AbstractValidatorExtbase
 {
-    /**
-     * Former known as piVars
-     *
-     * @var array
-     */
-    public $pluginVariables;
+    final public const ALLOWED_PLUGIN_NAMESPACES = [
+        'tx_femanager_registration',
+        'tx_femanager_edit',
+        'tx_femanager_list',
+        'tx_femanager_detail',
+        'tx_femanager_invitation',
+        'tx_femanager_resendConfirmationMail',
+    ];
 
+    protected ?ContentObjectRenderer $currentContentObject = null;
+    public array $pluginVariables = [];
+    protected bool $isValid = true;
+    protected string $referrerActionName = '';
+    protected string $pluginName = '';
     /**
-     * Validationsettings
+     * the extbase plugin namespace (with tx_ prefix) e.g. tx_femanager_registration
      */
-    public $validationSettings = [];
+    protected string $pluginNamespace = '';
+    protected array $typoScriptConfiguration = [];
 
-    /**
-     * Is Valid
-     */
-    protected $isValid = true;
-
-    public function __construct(protected ?UserRepository $userRepository, public ?ConfigurationManagerInterface $configurationManager, protected ?PluginService $pluginService, protected ?EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        protected readonly UserRepository $userRepository,
+        public readonly ConfigurationManagerInterface $configurationManager,
+        protected readonly EventDispatcherInterface $eventDispatcher
+    ) {
     }
 
-    public function initializeObject(): void
+    public function init(): void
     {
-        if (!$this->configurationManager instanceof \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface) {
-            $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
-        }
+        $extbaseRequestParameter = $this->request->getAttribute('extbase');
+        $referrerArguments = $extbaseRequestParameter?->getInternalArgument('__referrer') ?? null;
+        $this->typoScriptConfiguration = ConfigurationUtility::getConfiguration();
 
-        if (!$this->eventDispatcher instanceof \Psr\EventDispatcher\EventDispatcherInterface) {
-            $this->eventDispatcher = GeneralUtility::makeInstance(EventDispatcher::class);
-        }
-
-        if (!$this->userRepository instanceof \In2code\Femanager\Domain\Repository\UserRepository) {
-            $this->userRepository = GeneralUtility::makeInstance(UserRepository::class);
-        }
-
-        if (!$this->pluginService instanceof \In2code\Femanager\Domain\Service\PluginService) {
-            $this->pluginService = GeneralUtility::makeInstance(PluginService::class);
-        }
+        $this->currentContentObject = $this->request->getAttribute('currentContentObject') ?? null;
+        $this->pluginNamespace = 'tx_' . $extbaseRequestParameter->getControllerExtensionKey() . '_' . strtolower($extbaseRequestParameter->getPluginName());
+        $this->pluginVariables = ($extbaseRequestParameter?->getArguments() ?? false) ? $extbaseRequestParameter?->getArguments() : [];
+        $this->referrerActionName = $referrerArguments['@action'] ?? '';
     }
 
-    /**
-     * Validation for required
-     */
     protected function validateRequired(mixed $value): bool
     {
         if (!is_object($value)) {
@@ -86,28 +77,19 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         return $value instanceof \DateTime;
     }
 
-    /**
-     * Validation for required
-     */
     protected function validateFileRequired(mixed $value, string $fieldName): bool
     {
         if (empty($value)) {
-            $request = $GLOBALS['TYPO3_REQUEST'];
-            $uploadedFiles = $request->getUploadedFiles();
-
-            if (isset($uploadedFiles[$this->pluginService->getFemanagerPluginNameFromRequest()][$fieldName])) {
-                return true;
-            }
-        } else {
             return $this->validateRequired($value);
+        }
+
+        if (array_key_exists($fieldName,$this->request->getUploadedFiles())) {
+            return true;
         }
 
         return false;
     }
 
-    /**
-     * Validation for email
-     */
     protected function validateEmail(string $value): bool
     {
         return GeneralUtility::validEmail($value);
@@ -115,74 +97,56 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     /**
      * Validation for Minimum of characters
-     *
-     * @param string $value
-     * @param string $validationSetting
      */
-    protected function validateMin($value, $validationSetting): bool
+    protected function validateMin(string $value, string $validationSetting): bool
     {
         return mb_strlen($value) >= $validationSetting;
     }
 
     /**
      * Validation for Maximum of characters
-     *
-     * @param string $value
-     * @param string $validationSetting
      */
-    protected function validateMax($value, $validationSetting): bool
+    protected function validateMax(string $value, string $validationSetting): bool
     {
         return mb_strlen($value) <= $validationSetting;
     }
 
     /**
-        * Validation for Minimum of characters
-        *
-        * @param int $value
-        * @param string $validationSetting
-        */
-    protected function validateMinInt($value, $validationSetting): bool
+     * Validation for Minimum of characters
+     */
+    protected function validateMinInt(int $value, string $validationSetting): bool
     {
         return $value >= $validationSetting;
     }
 
     /**
      * Validation for Maximum of characters
-     *
-     * @param int $value
-     * @param string $validationSetting
      */
-    protected function validateMaxInt($value, $validationSetting): bool
+    protected function validateMaxInt(int $value, string $validationSetting): bool
     {
         return $value <= $validationSetting;
     }
 
     /**
      * Validation for Numbers only
-     *
-     * @param string $value
      */
-    protected function validateInt($value): bool
+    protected function validateInt(string $value): bool
     {
         return is_numeric($value);
     }
 
     /**
      * Validation for Letters (a-zA-Z), hyphen and underscore
-     *
-     * @param string $value
      */
-    protected function validateLetters($value): bool
+    protected function validateLetters(string $value): bool
     {
         return preg_replace('/[^a-zA-Z_-]/', '', $value) === $value;
     }
 
     /**
      * Validation for all Unicode letters, hyphen and underscore
-     *
-     * @param string $value
      */
-    protected function validateUnicodeLetters($value): bool
+    protected function validateUnicodeLetters(string $value): bool
     {
         return (bool)preg_match('/^[\pL_-]+$/u', $value);
     }
@@ -266,55 +230,40 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
 
     /**
      * String contains number?
-     *
-     * @param string $value
-     * @return bool
      */
-    protected function stringContainsNumber($value)
+    protected function stringContainsNumber(string $value): bool
     {
         return strlen((string)preg_replace('/[^0-9]/', '', $value)) > 0;
     }
 
     /**
      * String contains letter?
-     *
-     * @param string $value
-     * @return bool
      */
-    protected function stringContainsLetter($value)
+    protected function stringContainsLetter(string $value): bool
     {
         return strlen((string)preg_replace('/[^a-zA-Z_-]/', '', $value)) > 0;
     }
 
     /**
      * String contains uppercase letter?
-     *
-     * @param string $value
-     * @return bool
      */
-    protected function stringContainsUppercase($value)
+    protected function stringContainsUppercase(string $value): bool
     {
         return strlen((string)preg_replace('/[^A-Z]/', '', $value)) > 0;
     }
 
     /**
      * String contains special character?
-     *
-     * @param string $value
-     * @return bool
      */
-    protected function stringContainsSpecialCharacter($value)
+    protected function stringContainsSpecialCharacter(string $value): bool
     {
         return strlen((string)preg_replace('/[^a-zA-Z0-9]/', '', $value)) !== strlen($value);
     }
 
     /**
      * String contains space character?
-     *
-     * @param string $value
-     * @return bool
      */
-    protected function stringContainsSpaceCharacter($value)
+    protected function stringContainsSpaceCharacter(string $value): bool
     {
         return str_contains($value, ' ');
     }
@@ -347,14 +296,16 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         $dateParts = [];
         switch ($validationSetting) {
             case 'd.m.Y':
-                if (preg_match('/^(\d{2})\.(\d{2})\.(\d{4})$/', $value, $dateParts) && checkdate((int)$dateParts[2], (int)$dateParts[1], (int)$dateParts[3])) {
+                if (preg_match('/^(\d{2})\.(\d{2})\.(\d{4})$/', $value, $dateParts) && checkdate((int)$dateParts[2],
+                        (int)$dateParts[1], (int)$dateParts[3])) {
                     return true;
                 }
 
                 break;
 
             case 'm/d/Y':
-                if (preg_match('/^(\d{2})\/(\d{2})\/(\d{4})$/', $value, $dateParts) && checkdate((int)$dateParts[1], (int)$dateParts[2], (int)$dateParts[3])) {
+                if (preg_match('/^(\d{2})\/(\d{2})\/(\d{4})$/', $value, $dateParts) && checkdate((int)$dateParts[1],
+                        (int)$dateParts[2], (int)$dateParts[3])) {
                     return true;
                 }
 
@@ -366,109 +317,55 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         return false;
     }
 
-    protected function init()
-    {
-        $this->initializeObject();
-        $this->setPluginVariables();
-        $this->setValidationSettings();
-    }
-
-    /**
-     * @return void
-     *
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    protected function setPluginVariables()
-    {
-        $allParams = [];
-        // Get the current request object
-        $request = $GLOBALS['TYPO3_REQUEST'];
-        if (ApplicationType::fromRequest($request)->isFrontend()) {
-            $queryParams = $request->getQueryParams(); // GET parameters
-            $parsedBody = $request->getParsedBody(); // POST parameters
-            $allParams = array_merge($queryParams, $parsedBody);
-        }
-
-        // collect variables from plugins starting with tx_femanager
-        $this->pluginVariables = [];
-        foreach ($allParams as $key => $value) {
-            if (str_starts_with($key, 'tx_femanager')) {
-                $this->pluginVariables[$key] = $value;
-            }
-        }
-    }
-
-    protected function setValidationSettings()
-    {
-        $pluginName = $this->pluginService->getFemanagerPluginNameFromRequest();
-        if ($pluginName !== '') {
-            $config = $this->configurationManager->getConfiguration(
-                ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
-                'Femanager',
-                null
-            );
-            $controllerName = $this->getControllerName();
-            $validationName = $this->getValidationName();
-            $this->validationSettings = $config[$controllerName][$validationName];
-        }
-    }
-
     protected function getValidationName(): string
     {
-        if ($this->getControllerName() === 'invitation' && $this->getActionName() === 'edit') {
+        if ($this->getControllerName() === 'invitation' && $this->referrerActionName === 'edit') {
             return 'validationEdit';
         }
 
         return 'validation';
     }
 
-    protected function getActionName(): string
-    {
-        $pluginName = $this->pluginService->getFemanagerPluginNameFromRequest();
-        return $this->pluginVariables[$pluginName]['__referrer']['@action'] ?? '';
-    }
-
-    /**
-     * Get controller name in lowercase
-     */
     protected function getControllerName(): string
     {
-        // Security check: see Commit ae6c8d0b390a96d11fe7e3a524b0ace2cb23b7da
-        // only allow controller names 'new', 'edit' and 'invitation
-        $controllerName = 'new';
-        $pluginName = $this->pluginService->getFemanagerPluginNameFromRequest();
-        $controllerNameInPlugin = $this->pluginVariables[$pluginName]['__referrer']['@controller'] ?? '';
-        if ($controllerNameInPlugin === 'Edit') {
-            $controllerName = 'edit';
-        } elseif ($controllerNameInPlugin === 'Invitation') {
-            $controllerName = 'invitation';
+        if (!in_array($this->pluginNamespace, self::ALLOWED_PLUGIN_NAMESPACES)) {
+            throw new LogicException('Plugin namespace is not allowed', 1683551467);
         }
 
-        $this->checkAllowedPluginName($pluginName);
-        return $controllerName;
-    }
-
-    protected function getControllerNameByPlugin(string $plugin): string
-    {
         // Security check: see Commit ae6c8d0b390a96d11fe7e3a524b0ace2cb23b7da
         // only allow controller names 'new', 'edit' and 'invitation
-        if ($plugin === 'tx_femanager_edit') {
+        if ($this->pluginNamespace === 'tx_femanager_edit') {
             return 'edit';
         }
 
-        if ($plugin === 'tx_femanager_invitation') {
+        if ($this->pluginNamespace === 'tx_femanager_invitation') {
             return 'invitation';
         }
 
         return 'new';
     }
 
-    protected function checkAllowedPluginName(string $pluginName)
+    protected function getReferrerActionName(): string
     {
-        $pluginRepository = GeneralUtility::makeInstance(PluginRepository::class);
-        $pageIdentifier = FrontendUtility::getCurrentPid();
-        if ($pluginRepository->isPluginWithViewOnGivenPage($pageIdentifier, $pluginName) === false) {
-            throw new LogicException('PluginName is not allowed', 1683551467);
-        }
+        return $this->referrerActionName;
+    }
+
+    public function setReferrerActionName(string $referrerActionName): static
+    {
+        $this->referrerActionName = $referrerActionName;
+
+        return $this;
+    }
+
+    public function getPluginName(): string
+    {
+        return $this->pluginNamespace;
+    }
+
+    public function setPluginNamespace(string $pluginNamespace): static
+    {
+        $this->pluginNamespace = $pluginNamespace;
+
+        return $this;
     }
 }

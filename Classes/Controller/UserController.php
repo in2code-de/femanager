@@ -17,11 +17,10 @@ use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
- * Class UserController
- *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class UserController extends AbstractFrontendController
@@ -72,18 +71,20 @@ class UserController extends AbstractFrontendController
         return $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
     }
 
+    /**
+     * @throws NoSuchArgumentException
+     */
     public function validateAction(): ResponseInterface
     {
-        $requestBody = $this->request->getParsedBody();
-        $validation = $requestBody['tx_femanager_validation']['validation'] ?? '';
-        $value =  $requestBody['tx_femanager_validation']['value'] ?? '';
-        $field =  $requestBody['tx_femanager_validation']['field'] ?? '';
-        // TODO: string
-        $user =  $requestBody['tx_femanager_validation']['user'] ?? null;
-        $additionalValue =  $requestBody['tx_femanager_validation']['additionalValue'] ?? '';
-        $plugin =  (int)$requestBody['tx_femanager_validation']['plugin'];
-        $pluginName =  $requestBody['tx_femanager_validation']['pluginName'] ?? '';
-        $referrerAction = $requestBody['tx_femanager_validation']['referrerAction'] ?? '';
+        $extbaseArguments = $this->request->getAttribute('extbase');
+        $validation = $extbaseArguments->getArgument('validation') ?? '';
+        $value =  $extbaseArguments->getArgument('value') ?? '';
+        $field =  $extbaseArguments->getArgument('field') ?? '';
+        $user = $extbaseArguments->getArgument('user') ?? null;
+        $additionalValue =  $extbaseArguments->getArgument('additionalValue') ?? '';
+        $pluginUid =  (int)$extbaseArguments->getArgument('plugin');
+        $pluginNamespace =  $extbaseArguments->getArgument('pluginName') ?? '';
+        $referrerAction = $extbaseArguments->getArgument('referrerAction') ?? '';
 
         if ($user !== null) {
             $user = $this->userRepository->findByUid((int)$user);
@@ -92,14 +93,14 @@ class UserController extends AbstractFrontendController
         $clientsideValidator = GeneralUtility::makeInstance(ClientsideValidator::class);
         $result = $clientsideValidator
             ->setValidationSettingsString($validation)
+            ->setPluginNamespace($pluginNamespace)
             ->setValue($value)
             ->setFieldName($field)
             ->setUser($user)
             ->setAdditionalValue($additionalValue)
-            ->setPlugin($plugin)
-            ->setPluginName($pluginName)
-            ->setActionName($referrerAction)
-            ->validateField($pluginName);
+            ->setPluginUid($pluginUid)
+            ->setReferrerActionName($referrerAction)
+            ->validateField();
 
         $this->view->assignMultiple(
             [

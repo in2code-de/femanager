@@ -8,13 +8,14 @@ use In2code\Femanager\DataProvider\CountryZonesDataProvider;
 use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 class ShouldValidateStateCondition implements ValidationConditionInterface
 {
     protected bool $isStaticInfoTablesLoaded;
 
-    protected $countryZonesDataProvider;
+    protected ?CountryZonesDataProvider $countryZonesDataProvider = null;
 
     public function __construct()
     {
@@ -24,6 +25,9 @@ class ShouldValidateStateCondition implements ValidationConditionInterface
         }
     }
 
+    /**
+     * @throws PropertyNotAccessibleException
+     */
     public function shouldValidate(User $user, string $fieldName, array $validationSettings): bool
     {
         return $this->isStaticInfoTablesLoaded

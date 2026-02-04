@@ -4,70 +4,45 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Validator;
 
-use In2code\Femanager\Domain\Service\PluginService;
+use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Utility\ConfigurationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator as AbstractValidatorExtbase;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
-/**
- * Class PasswordValidator
- */
 class PasswordValidator extends AbstractValidatorExtbase
 {
-    /**
-     * Content Object
-     *
-     * @var object
-     */
-    protected $cObj;
+    protected ?ContentObjectRenderer $currentContentObject = null;
+   public array $extbaseArguments = [];
+    public array $typoScriptConfiguration = [];
+    protected string $referrerActionName = '';
 
-    /**
-     * Plugin Variables
-     *
-     * @var array
-     */
-    public $piVars = [];
-
-    /**
-     * TypoScript Configuration
-     *
-     * @var array
-     */
-    public $configuration = [];
-
-    /**
-     * Action Name
-     *
-     * @var string
-     */
-    protected $actionName;
-
-    public function __construct(public ?ConfigurationManagerInterface $configurationManager)
+    public function __construct(public readonly ConfigurationManagerInterface $configurationManager)
     {
     }
 
-    public function initializeObject(): void
+    protected function init(): void
     {
-        if (!$this->configurationManager instanceof \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface) {
-            $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
-        }
+        $this->typoScriptConfiguration = ConfigurationUtility::getConfiguration();
+        $this->currentContentObject = $this->request->getAttribute('currentContentObject');
+        $extbaseRequestParameter = $this->request->getAttribute('extbase');
+        $this->extbaseArguments = ($extbaseRequestParameter?->getArguments() ?? false) ? $extbaseRequestParameter?->getArguments() : [];
+        $this->referrerActionName = ($extbaseRequestParameter?->getInternalArgument('__referrer')['@action'] ?? false) ? $extbaseRequestParameter?->getInternalArgument('__referrer')['@action'] : '';
     }
 
     /**
-     * Validation of given Params
-     *
-     * @param $user
+     * @param User $value
      */
-    protected function isValid($user): void
+    protected function isValid(mixed $value): void
     {
-        $this->initializeObject();
+        $user = $value;
         $this->init();
 
         // if password fields are not active or if keep function active
         if ($this->passwordFieldsAdded() && !$this->keepPasswordIfEmpty()) {
             $password = $user->getPassword();
-            $passwordRepeat = $this->piVars['password_repeat'] ?? '';
+            $passwordRepeat = $this->extbaseArguments['password_repeat'] ?? '';
 
             if ($password !== $passwordRepeat) {
                 $this->addError('validationErrorPasswordRepeat', 0, ['field' => 'password']);
@@ -80,10 +55,10 @@ class PasswordValidator extends AbstractValidatorExtbase
      */
     protected function keepPasswordIfEmpty(): bool
     {
-        return isset($this->configuration['edit']['misc']['keepPasswordIfEmpty']) &&
-            $this->configuration['edit']['misc']['keepPasswordIfEmpty'] === '1' &&
-            (!isset($this->piVars['user']['password']) || $this->piVars['user']['password'] === '') &&
-            (!isset($this->piVars['password_repeat']) || $this->piVars['password_repeat'] === '');
+        return isset($this->typoScriptConfiguration['edit']['misc']['keepPasswordIfEmpty']) &&
+            $this->typoScriptConfiguration['edit']['misc']['keepPasswordIfEmpty'] === '1' &&
+            (!isset($this->extbaseArguments['user']['password']) || $this->extbaseArguments['user']['password'] === '') &&
+            (!isset($this->extbaseArguments['password_repeat']) || $this->extbaseArguments['password_repeat'] === '');
     }
 
     /**
@@ -91,10 +66,10 @@ class PasswordValidator extends AbstractValidatorExtbase
      */
     protected function passwordFieldsAdded(): bool
     {
-        $flexFormValues = GeneralUtility::xml2array($this->cObj->data['pi_flexform']);
+        $flexFormValues = GeneralUtility::xml2array($this->currentContentObject->data['pi_flexform']);
         if (is_array($flexFormValues)) {
             $fields =
-                $flexFormValues['data'][$this->actionName]['lDEF']['settings.' . $this->actionName . '.fields']['vDEF']
+                $flexFormValues['data'][$this->referrerActionName]['lDEF']['settings.' . $this->referrerActionName . '.fields']['vDEF']
                 ?? [];
             if (empty($fields) || GeneralUtility::inList($fields, 'password')) {
                 // password fields are added to form
@@ -104,29 +79,5 @@ class PasswordValidator extends AbstractValidatorExtbase
 
         // password fields are not added to form
         return false;
-    }
-
-    /**
-     * Initialize Validator Function
-     */
-    protected function init()
-    {
-        $pluginName = GeneralUtility::makeInstance(PluginService::class)
-            ->getFemanagerPluginNameFromRequest();
-        $this->configuration = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
-            'Femanager',
-            null
-        );
-        $this->cObj = $this->request->getAttribute('currentContentObject');
-        $this->piVars = $this->cObj->getRequest()->getParsedBody()[$pluginName] ??
-            $this->cObj->getRequest()->getQueryParams()[$pluginName] ?? null;
-
-        $this->actionName = $this->piVars['__referrer']['@action'];
-    }
-
-    public function setContentObjectRenderer(ContentObjectRenderer $cObj): void
-    {
-        $this->cObj = $cObj;
     }
 }

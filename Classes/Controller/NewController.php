@@ -20,7 +20,6 @@ use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
-use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
@@ -53,7 +52,7 @@ class NewController extends AbstractFrontendController
 
     /**
      * @throws IllegalObjectTypeException
-     * @throws InvalidPasswordHashException
+     * @throws InvalidPasswordHashException|PropagateResponseException
      */
     #[Validate(['validator' => ServersideValidator::class, 'param' => 'user'])]
     #[Validate(['validator' => PasswordValidator::class, 'param' => 'user'])]

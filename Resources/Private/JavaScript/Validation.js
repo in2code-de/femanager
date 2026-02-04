@@ -110,7 +110,7 @@ class FemanagerValidation {
         }
 
         const form = element.closest('form');
-        const plugin = form.dataset.femanagerPlugin;
+        const pluginUid = form.dataset.femanagerPlugin;
         const pluginName = 'tx_' + form.dataset.femanagerPluginName;
         const user = form.querySelector('div:first-child input[name="' + pluginName + '[user][__identity]"]')?.value;
         const action = form.querySelector('div:first-child input[name="' + pluginName + '[__referrer][@action]"]')?.value;
@@ -146,7 +146,7 @@ class FemanagerValidation {
         formData.append('tx_femanager_validation[field]', this.getFieldName(element) || '');
         formData.append('tx_femanager_validation[user]', user !== undefined ? user : '');
         formData.append('tx_femanager_validation[additionalValue]', additionalValue || '');
-        formData.append('tx_femanager_validation[plugin]', plugin || '');
+        formData.append('tx_femanager_validation[plugin]', pluginUid || '');
         formData.append('tx_femanager_validation[pluginName]', pluginName || '');
         formData.append('tx_femanager_validation[referrerAction]', action || '');
 
