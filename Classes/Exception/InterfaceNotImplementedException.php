@@ -6,6 +6,6 @@ namespace In2code\Femanager\Exception;
 
 use Exception;
 
-class FileNotFoundException extends Exception
+class InterfaceNotImplementedException extends Exception
 {
 }

@@ -5,120 +5,81 @@ declare(strict_types=1);
 namespace In2code\Femanager\Finisher;
 
 use In2code\Femanager\Domain\Model\User;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
-/**
- * Class AbstractFinisher
- */
 abstract class AbstractFinisher implements FinisherInterface
 {
-    /**
-     * @var User
-     */
-    protected $user;
-
-    /**
-     * Extension settings
-     *
-     * @var array
-     */
-    protected $settings;
-
-    /**
-     * Finisher service configuration
-     *
-     * @var array
-     */
-    protected $configuration;
+    protected User $user;
+    protected array $typoScriptSettings = [];
+    protected array $finisherConfiguration = [];
+    protected ?TypoScriptService $typoScriptService = null;
 
     /**
      * Controller actionName - usually "createAction" or "confirmationAction"
-     *
-     * @var string
      */
-    protected $actionMethodName;
+    protected string $actionMethodName = '';
 
-    /**
-     * @return User
-     */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @param User $user
-     * @return AbstractFinisher
-     */
-    public function setUser($user)
+    public function setUser($user): FinisherInterface
     {
         $this->user = $user;
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getSettings()
+    public function getSettings(): array
     {
-        return $this->settings;
+        return $this->typoScriptSettings;
     }
 
-    /**
-     * @param array $settings
-     * @return AbstractFinisher
-     */
-    public function setSettings($settings)
+    public function setSettings($settings): FinisherInterface
     {
-        $this->settings = $settings;
+        $this->typoScriptSettings = $settings;
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getConfiguration()
+    public function getFinisherConfiguration(): array
     {
-        return $this->configuration;
+        return $this->finisherConfiguration;
     }
 
-    /**
-     * @param array $configuration
-     * @return AbstractFinisher
-     */
-    public function setConfiguration($configuration)
+    public function setFinisherConfiguration(array $finisherConfiguration): FinisherInterface
     {
-        $this->configuration = $configuration;
+        $this->finisherConfiguration = $finisherConfiguration;
         return $this;
     }
 
-    public function getActionMethodName()
+    public function getActionMethodName(): string
     {
         return $this->actionMethodName;
     }
 
-    /**
-     * @return AbstractFinisher
-     */
-    public function setActionMethodName(string $actionMethodName)
+    public function setActionMethodName(string $actionMethodName): FinisherInterface
     {
         $this->actionMethodName = $actionMethodName;
         return $this;
     }
 
-    public function initializeFinisher()
+    public function initializeFinisher(): void
     {
     }
 
     public function __construct(
         User $user,
-        array $configuration,
-        array $settings,
+        array $finisherConfiguration,
+        array $typoScriptSettings,
         string $actionMethodName,
-        protected \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject
+        protected ContentObjectRenderer $contentObject
     ) {
         $this->setUser($user);
-        $this->setConfiguration($configuration);
-        $this->setSettings($settings);
+        $this->setFinisherConfiguration($finisherConfiguration);
+        $this->setSettings($typoScriptSettings);
         $this->setActionMethodName($actionMethodName);
+        $this->typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
     }
 }
