@@ -8,15 +8,13 @@ use In2code\Femanager\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
-/**
- * Class DateConverter
- */
 class DateConverter extends AbstractDataProcessor
 {
     public function process(): void
     {
         if (!empty($this->controllerArguments['user'])) {
-            foreach (GeneralUtility::trimExplode(',', $this->getConfiguration('fieldNames'), true) as $fieldName) {
+            $fieldNames = GeneralUtility::trimExplode(',', $this->getConfiguration('fieldNames'), true);
+            foreach ($fieldNames as $fieldName) {
                 $this->controllerArguments['user']
                     ->getPropertyMappingConfiguration()
                     ->forProperty($fieldName)

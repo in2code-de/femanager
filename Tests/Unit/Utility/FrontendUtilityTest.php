@@ -43,40 +43,4 @@ class FrontendUtilityTest extends UnitTestCase
         self::assertSame('Kaspar', $user->getFirstName());
         self::assertSame('Tx_Extbase_Domain_Model_FrontendUser', $user->getTxExtbaseType());
     }
-
-    /**
-     * @SuppressWarnings(PHPMD.Superglobals)
-     * @covers ::getControllerName
-     */
-    public function testGetControllerName(): void
-    {
-        $postData = [
-            'tx_femanager_pi1' => [
-                'controller' => 'foo',
-            ],
-        ];
-
-        $request = (new ServerRequest('POST', '/'))
-            ->withParsedBody($postData);
-
-        self::assertSame('foo', FrontendUtility::getControllerName($request));
-    }
-
-    /**
-     * @SuppressWarnings(PHPMD.Superglobals)
-     * @covers ::getActionName
-     */
-    public function testGetActionName(): void
-    {
-        $postData = [
-            'tx_femanager_pi1' => [
-                'action' => 'bar',
-            ],
-        ];
-
-        $request = (new ServerRequest('POST', '/'))
-            ->withParsedBody($postData);
-
-        self::assertSame('bar', FrontendUtility::getActionName($request));
-    }
 }

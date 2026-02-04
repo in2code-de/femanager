@@ -9,7 +9,6 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Validator\ClientsideValidator;
 use In2code\Femanager\Event\ImpersonateEvent;
 use In2code\Femanager\Utility\BackendUserUtility;
-use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
@@ -68,7 +67,13 @@ class UserController extends AbstractFrontendController
             );
         }
 
-        return $this->redirectToUri(FrontendUtility::getUriToCurrentPage());
+        return $this->redirectToUri(
+            $this->contentObject->typoLink_URL(
+                [
+                    'parameter' => $this->request->getAttribute('frontend.page.information')->getId(),
+                ]
+            )
+        );
     }
 
     /**
@@ -78,12 +83,12 @@ class UserController extends AbstractFrontendController
     {
         $extbaseArguments = $this->request->getAttribute('extbase');
         $validation = $extbaseArguments->getArgument('validation') ?? '';
-        $value =  $extbaseArguments->getArgument('value') ?? '';
-        $field =  $extbaseArguments->getArgument('field') ?? '';
+        $value = $extbaseArguments->getArgument('value') ?? '';
+        $field = $extbaseArguments->getArgument('field') ?? '';
         $user = $extbaseArguments->getArgument('user') ?? null;
-        $additionalValue =  $extbaseArguments->getArgument('additionalValue') ?? '';
-        $pluginUid =  (int)$extbaseArguments->getArgument('plugin');
-        $pluginNamespace =  $extbaseArguments->getArgument('pluginName') ?? '';
+        $additionalValue = $extbaseArguments->getArgument('additionalValue') ?? '';
+        $pluginUid = (int)$extbaseArguments->getArgument('plugin');
+        $pluginNamespace = $extbaseArguments->getArgument('pluginName') ?? '';
         $referrerAction = $extbaseArguments->getArgument('referrerAction') ?? '';
 
         if ($user !== null) {

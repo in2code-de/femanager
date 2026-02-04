@@ -17,7 +17,6 @@ use In2code\Femanager\Event\FinalUpdateEvent;
 use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\BackendUtility;
 use In2code\Femanager\Utility\ConfigurationUtility;
-use In2code\Femanager\Utility\FrontendUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\LogUtility;
@@ -25,6 +24,7 @@ use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ApplicationType;
@@ -487,9 +487,9 @@ abstract class AbstractController extends ActionController
     {
         $this->view->assignMultiple(
             [
-                'languageUid' => FrontendUtility::getFrontendLanguageUid(),
+                'languageUid' => GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId(),
                 'storagePid' => $this->allConfig['persistence']['storagePid'] ?? 0,
-                'Pid' => FrontendUtility::getCurrentPid(),
+                'Pid' => $this->request->getAttribute('frontend.page.information')->getId(),
                 'data' => $this->contentObject->data,
                 'useStaticInfoTables' => ExtensionManagementUtility::isLoaded('static_info_tables'),
                 'jsLabels' => json_encode(
