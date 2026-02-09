@@ -32,7 +32,7 @@ UserBackend / List
 							</tr>
 							<tr class="c-headLine">
 								<td nowrap="nowrap" class="col-icon">
-									<a title="Create New User" href="{femanager:Misc.BackendNewLink(tableName:'fe_users')}">
+									<a title="Create New User" href="{be:uri.newRecord(table:'fe_users', pid:currentSelectedPid)}">
 										<core:icon identifier="actions-document-new" />
 									</a>
 								</td>
@@ -135,7 +135,7 @@ UserBackend / List
 										<f:comment>
 											Edit Icon
 										</f:comment>
-										<a title="{f:translate(key:'BackendListUserEdit')}" href="{femanager:Misc.BackendEditLink(tableName:'fe_users',identifier:user.uid)}">
+										<a title="{f:translate(key:'BackendListUserEdit')}" href="{be:uri.editRecord(uid:user.uid, table:'fe_users')}">
 											<core:icon identifier="actions-document-open" />
 										</a>
 

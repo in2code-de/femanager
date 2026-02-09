@@ -9,7 +9,7 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Class BackendEditLinkViewHelper
+ * @deprecated will be removed with V14
  */
 class BackendEditLinkViewHelper extends AbstractViewHelper
 {

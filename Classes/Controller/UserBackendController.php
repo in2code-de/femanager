@@ -12,6 +12,7 @@ use In2code\Femanager\Event\AdminConfirmationUserEvent;
 use In2code\Femanager\Event\RefuseUserEvent;
 use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\BackendUserUtility;
+use In2code\Femanager\Utility\BackendUtility;
 use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
@@ -80,6 +81,7 @@ class UserBackendController extends AbstractController
                 'action' => 'list',
                 'loginAsEnabled' => $this->loginAsEnabled(),
                 'configPID' => $this->getConfigPID(),
+                'currentSelectedPid' => BackendUtility::getPageIdentifier() ?? 0
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/List');

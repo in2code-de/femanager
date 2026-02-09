@@ -9,7 +9,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * @SuppressWarnings(PHPMD.LongClassName)
- * @deprecated will be removed with TYPO3 V14
+ * @deprecated will be removed with V14
  */
 class IsBackendAdministratorAuthenticationViewHelper extends AbstractViewHelper
 {

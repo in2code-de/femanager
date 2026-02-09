@@ -10,9 +10,6 @@ use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 
-/**
- * Class BackendUtility
- */
 class BackendUtility
 {
     public static function getPageIdentifier(): int
@@ -28,6 +25,7 @@ class BackendUtility
      * @param bool $addReturnUrl add current URI as returnUrl
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     * @deprecated will be removed with V14
      */
     public static function getBackendEditUri(string $tableName, int $identifier, bool $addReturnUrl = true): string
     {
@@ -54,6 +52,7 @@ class BackendUtility
      * @param bool $addReturnUrl add current URI as returnUrl
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     * @deprecated will be removed with V14
      */
     public static function getBackendNewUri(string $tableName, int $pageIdentifier, bool $addReturnUrl = true): string
     {
