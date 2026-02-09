@@ -4,34 +4,25 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\ViewHelpers\Validation;
 
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
-/**
- * Class AbstractValidationViewHelper
- */
 abstract class AbstractValidationViewHelper extends AbstractViewHelper
 {
     /**
      * Get key for typoscript configuration "validation"
-     *
-     * @throws FluidViewHelperException
      */
     protected function getValidationName(): string
     {
         $validationName = 'validation';
+        $request = $this->getRequest();
 
-        // special case for second step in invitation
-        if (! $this->renderingContext instanceof RenderingContext) {
-            throw new FluidViewHelperException(
-                'Something went wrong; RenderingContext should be available in ViewHelper',
-                1638341336
-            );
+        if (!$request) {
+            throw new FluidViewHelperException('Request object is missing.', 1638341336);
         }
 
-        if ($this->getControllerName() === 'invitation' &&
-            $this->renderingContext->getRequest()->getControllerActionName() === 'edit') {
+        if ($this->getControllerName() === 'invitation' && $request->getControllerActionName() === 'edit') {
             return 'validationEdit';
         }
 
@@ -42,17 +33,22 @@ abstract class AbstractValidationViewHelper extends AbstractViewHelper
      * Return controllername in lowercase
      *
      * @return string "new", "edit", "invitation"
-     * @throws FluidViewHelperException
      */
     protected function getControllerName(): string
     {
-        if (! $this->renderingContext instanceof RenderingContext) {
-            throw new FluidViewHelperException(
-                'Something went wrong; RenderingContext should be available in ViewHelper',
-                1638341335
-            );
-        }
+       $request = $this->getRequest();
+       if (!$request) {
+           throw new FluidViewHelperException('Request object is missing.', 1638341336);
+       }
 
-        return strtolower((string)$this->renderingContext->getRequest()->getControllerName());
+        return strtolower((string)$request->getControllerName());
+    }
+
+    private function getRequest(): ?ServerRequestInterface
+    {
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            return $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+        return null;
     }
 }

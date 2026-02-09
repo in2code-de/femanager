@@ -6,15 +6,12 @@ namespace In2code\Femanager\ViewHelpers\Misc;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
-/**
- * Class UpperViewHelper
- */
 class UpperViewHelper extends AbstractViewHelper
 {
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerArgument('string', 'string', 'string', false);
+        $this->registerArgument('string', 'string', 'string');
     }
 
     public function render(): string

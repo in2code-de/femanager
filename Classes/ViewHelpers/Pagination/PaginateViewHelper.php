@@ -20,9 +20,9 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
 /**
- * PaginateViewHelper
- *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ *
+ * @deprecated will be removed with V14
  */
 class PaginateViewHelper extends AbstractViewHelper
 {

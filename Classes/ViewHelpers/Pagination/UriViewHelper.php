@@ -12,7 +12,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
 /**
- * UriViewHelper
+ * @deprecated will be removed with V14
  */
 class UriViewHelper extends AbstractTagBasedViewHelper
 {
