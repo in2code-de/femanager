@@ -7,20 +7,14 @@ namespace In2code\Femanager\ViewHelpers\Misc;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
 
 /**
- * Class GetFirstViewHelper
+ * @deprecated will be removed with V14
  */
 class GetFirstViewHelper extends AbstractFormFieldViewHelper
 {
-    /**
-     * Initialize the arguments.
-     *
-     * @api
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
-        $this->registerArgument('objectStorage', 'object', 'first subobject of objectstorage', false);
+        $this->registerArgument('objectStorage', 'object', 'first subobject of objectStorage');
     }
 
     /**
@@ -28,6 +22,8 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
      */
     public function render(): mixed
     {
+        trigger_error('This viewHelper will be removed with V14. Use objects.0 to access the first object');
+
         $objectStorage = $this->arguments['objectStorage'];
         if ($objectStorage === null) {
             return '';
