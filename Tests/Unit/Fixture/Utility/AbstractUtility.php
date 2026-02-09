@@ -31,14 +31,6 @@ class AbstractUtility extends AbstractUtilityFemanager
         return self::getUserGroupRepository();
     }
 
-    /**
-     * @return TypoScriptFrontendController
-     */
-    public static function getTypoScriptFrontendControllerPublic()
-    {
-        return self::getTypoScriptFrontendController();
-    }
-
     public static function getContentObjectPublic(): \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
     {
         return self::getContentObject();

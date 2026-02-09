@@ -14,7 +14,6 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use UnexpectedValueException;
 
 /**
@@ -57,15 +56,6 @@ abstract class AbstractUtility
     protected static function getUserGroupRepository(): UserGroupRepository
     {
         return GeneralUtility::makeInstance(UserGroupRepository::class);
-    }
-
-    /**
-     * @return TypoScriptFrontendController|null
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    protected static function getTypoScriptFrontendController()
-    {
-        return $GLOBALS['TSFE'] ?? null;
     }
 
     /**
