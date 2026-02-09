@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\ViewHelpers\Form;
 
-use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use In2code\Femanager\Utility\TypoScriptUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
@@ -16,6 +14,11 @@ class TextfieldViewHelper extends AbstractFormFieldViewHelper
      * @var string
      */
     protected $tagName = 'input';
+
+    public function __construct(protected readonly TypoScriptUtility $typoScriptUtility)
+    {
+        parent::__construct();
+    }
 
     /**
      * Initialize the arguments.
@@ -71,21 +74,12 @@ class TextfieldViewHelper extends AbstractFormFieldViewHelper
      */
     protected function getValueFromTypoScript(): string
     {
-        if (!$this->renderingContext instanceof RenderingContext) {
-            throw new FluidViewHelperException(
-                'Something went wrong; RenderingContext should be available in ViewHelper',
-                1638341334
-            );
-        }
-
-        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
-        $controllerName = strtolower((string)$request->getControllerName());
+        $request = $this->getRequest();
+        $controllerName = strtolower($request->getControllerName());
         $contentObject = $request->getAttribute('currentContentObject');
-        $typoScript = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-        );
+        $typoScript = $this->typoScriptUtility->getTypoScript();
         $prefillTypoScript =
-            $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? 0;
+            $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? [];
         return $contentObject->cObjGetSingle(
             $prefillTypoScript[$this->arguments['property']] ?? '',
             $prefillTypoScript[$this->arguments['property'] . '.'] ?? ''

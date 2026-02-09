@@ -11,17 +11,11 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Class GetCountriesFromStaticInfoTablesViewHelper
- *
  * @SuppressWarnings(PHPMD.LongClassName)
  */
 class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
 {
-    /**
-     * @phpstan-ignore-next-line
-     * @var CountryRepository
-     */
-    protected $countryRepository;
+    protected ?CountryRepository $countryRepository = null;
 
     public function __construct()
     {
@@ -30,54 +24,6 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
         }
     }
 
-    /**
-     * Build a country array
-     */
-    public function render(): array
-    {
-        if ($this->countryRepository === null) {
-            return ['ERROR: static_info_tables is not loaded'];
-        }
-
-        $key = $this->arguments['key'];
-        $value = $this->arguments['value'];
-        $sortbyField = $this->arguments['sortbyField'];
-        $sorting = $this->arguments['sorting'];
-
-        $countries = $this->countryRepository->findAllOrderedBy($sortbyField, $sorting);
-        $countriesArray = [];
-        if ($this->arguments['preferredCountries']) {
-            foreach (
-                $this->countryRepository->findAllowedByIsoCodeA3($this->arguments['preferredCountries']) as $country
-            ) {
-                $countriesArray[ObjectAccess::getProperty($country, $key)] =
-                    ObjectAccess::getProperty($country, $value);
-            }
-
-            $countriesArray['---'] = '---';
-        }
-
-        if ($this->arguments['limitCountries']) {
-            foreach ($this->countryRepository->findAllowedByIsoCodeA3($this->arguments['limitCountries']) as $country) {
-                $countriesArray[ObjectAccess::getProperty($country, $key)] =
-                    ObjectAccess::getProperty($country, $value);
-            }
-
-            return $countriesArray;
-        }
-
-        foreach ($countries as $country) {
-            /** @var $country \SJBR\StaticInfoTables\Domain\Model\Country */
-            /* @phpstan-ignore-next-line */
-            $countriesArray[ObjectAccess::getProperty($country, $key)] = ObjectAccess::getProperty($country, $value);
-        }
-
-        return $countriesArray;
-    }
-
-    /**
-     * Initialize
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
@@ -123,5 +69,47 @@ class GetCountriesFromStaticInfoTablesViewHelper extends AbstractViewHelper
             false,
             ''
         );
+    }
+
+    public function render(): array
+    {
+        if ($this->countryRepository === null) {
+            return ['ERROR: static_info_tables is not loaded'];
+        }
+
+        $key = $this->arguments['key'];
+        $value = $this->arguments['value'];
+        $sortbyField = $this->arguments['sortbyField'];
+        $sorting = $this->arguments['sorting'];
+
+        $countries = $this->countryRepository->findAllOrderedBy($sortbyField, $sorting);
+        $countriesArray = [];
+        if ($this->arguments['preferredCountries']) {
+            foreach (
+                $this->countryRepository->findAllowedByIsoCodeA3($this->arguments['preferredCountries']) as $country
+            ) {
+                $countriesArray[ObjectAccess::getProperty($country, $key)] =
+                    ObjectAccess::getProperty($country, $value);
+            }
+
+            $countriesArray['---'] = '---';
+        }
+
+        if ($this->arguments['limitCountries']) {
+            foreach ($this->countryRepository->findAllowedByIsoCodeA3($this->arguments['limitCountries']) as $country) {
+                $countriesArray[ObjectAccess::getProperty($country, $key)] =
+                    ObjectAccess::getProperty($country, $value);
+            }
+
+            return $countriesArray;
+        }
+
+        foreach ($countries as $country) {
+            /** @var $country \SJBR\StaticInfoTables\Domain\Model\Country */
+            /* @phpstan-ignore-next-line */
+            $countriesArray[ObjectAccess::getProperty($country, $key)] = ObjectAccess::getProperty($country, $value);
+        }
+
+        return $countriesArray;
     }
 }

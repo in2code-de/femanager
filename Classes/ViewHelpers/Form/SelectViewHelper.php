@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\ViewHelpers\Form;
 
-use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use BackedEnum;
+use In2code\Femanager\Utility\TypoScriptUtility;
+use TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
+use UnitEnum;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
@@ -21,6 +21,11 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
      * @var string
      */
     protected $tagName = 'select';
+
+    public function __construct(protected readonly TypoScriptUtility $typoScriptUtility)
+    {
+        parent::__construct();
+    }
 
     public function initialize(): void
     {
@@ -242,20 +247,10 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
             }
         }
 
-        // set preselection from TypoScript
-        if (! $this->renderingContext instanceof RenderingContext) {
-            throw new FluidViewHelperException(
-                'Something went wrong; RenderingContext should be available in ViewHelper',
-                1638341673
-            );
-        }
-
-        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
-        $controllerName = strtolower((string)$request->getControllerName());
+        $request = $this->getRequest();
+        $controllerName = strtolower($request->getControllerName());
         $contentObject = $request->getAttribute('currentContentObject');
-        $typoScript = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-        );
+        $typoScript = $this->typoScriptUtility->getTypoScript();
         $prefillTypoScript =
             $typoScript['plugin.']['tx_femanager.']['settings.'][$controllerName . '.']['prefill.'] ?? [];
         if (!empty($prefillTypoScript[$this->getFieldName()])) {
@@ -289,10 +284,10 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
                 }
                 return $this->persistenceManager->getIdentifierByObject($valueElement);
             }
-            if ($valueElement instanceof \BackedEnum) {
+            if ($valueElement instanceof BackedEnum) {
                 return $valueElement->value;
             }
-            if ($valueElement instanceof \UnitEnum) {
+            if ($valueElement instanceof UnitEnum) {
                 return $valueElement->name;
             }
             return (string)$valueElement;
@@ -318,9 +313,6 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
         return $output;
     }
 
-    /**
-     * Get Field name
-     */
     protected function getFieldName(): string
     {
         preg_match_all('/\[.*?\]/i', $this->getNameWithoutPrefix(), $name);
