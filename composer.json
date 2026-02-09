@@ -46,7 +46,6 @@
   },
   "require-dev": {
     "behat/behat": "^3.12",
-    "sjbr/sr-freecap": "^13.4",
     "behat/mink-selenium2-driver": "^1.6",
     "drevops/behat-screenshot": "^1.2",
     "friends-of-behat/mink-browserkit-driver": "^1.6",
@@ -62,6 +61,8 @@
     "phpunit/phpunit": "^11.4",
     "saschaegerer/phpstan-typo3": "^1.8",
     "se/selenium-server-standalone": "^3.141",
+    "sjbr/sr-freecap": "^13.4",
+    "sjbr/static-info-tables": "^13.4",
     "typo3/cms-adminpanel": "^13.4.0",
     "typo3/cms-belog": "^13.4.0",
     "typo3/cms-beuser": "^13.4.0",
