@@ -11,7 +11,6 @@ http:
       rule: HostRegexp(`^femanager\.ddev\.site$`)
       
       service: "femanager-web-80"
-      ruleSyntax: v3
       tls: false
       # middlewares:
       #   - "femanager-redirectHttps"
@@ -21,7 +20,6 @@ http:
       rule: HostRegexp(`^femanager\.ddev\.site$`)
       
       service: "femanager-web-8025"
-      ruleSyntax: v3
       tls: false
       # middlewares:
       #   - "femanager-redirectHttps"
@@ -31,7 +29,6 @@ http:
       rule: HostRegexp(`^femanager\.ddev\.site$`)
       
       service: "femanager-xhgui-80"
-      ruleSyntax: v3
       tls: false
       # middlewares:
       #   - "femanager-redirectHttps"
@@ -44,7 +41,6 @@ http:
       rule: HostRegexp(`^femanager\.ddev\.site$`)
       
       service: "femanager-web-80"
-      ruleSyntax: v3
       
       tls: true
       
@@ -54,7 +50,6 @@ http:
       rule: HostRegexp(`^femanager\.ddev\.site$`)
       
       service: "femanager-web-8025"
-      ruleSyntax: v3
       
       tls: true
       
@@ -65,7 +60,6 @@ http:
       rule: HostRegexp(`^femanager\.ddev\.site$`)
       
       service: "femanager-xhgui-80"
-      ruleSyntax: v3
       
       tls: true
       

@@ -16,25 +16,8 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use UnexpectedValueException;
 
-/**
- * Class AbstractUtility
- */
 abstract class AbstractUtility
 {
-    /**
-     * Get table configuration array for a defined table
-     *
-     * @param string $table
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    protected static function getTcaFromTable($table = 'fe_users'): array
-    {
-        if (!empty($GLOBALS['TCA'][$table])) {
-            return $GLOBALS['TCA'][$table];
-        }
-
-        return [];
-    }
 
     /**
      * @SuppressWarnings(PHPMD.Superglobals)
@@ -43,14 +26,6 @@ abstract class AbstractUtility
     public static function getConnectionPool(): ConnectionPool
     {
         return GeneralUtility::makeInstance(ConnectionPool::class);
-    }
-
-    /**
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    protected static function getFilesArray(): array
-    {
-        return $_FILES;
     }
 
     protected static function getUserGroupRepository(): UserGroupRepository
