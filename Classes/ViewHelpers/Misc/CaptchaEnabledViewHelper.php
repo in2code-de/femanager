@@ -4,40 +4,35 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\ViewHelpers\Misc;
 
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as FluidViewHelperException;
 
-/**
- * Look if captcha is enabled
- */
 class CaptchaEnabledViewHelper extends AbstractViewHelper
 {
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerArgument('settings', 'bool', 'array $settings TypoScript', true);
+        $this->registerArgument('settings', 'array', 'array $settings TypoScript', true);
     }
 
-    /**
-     * Check if captcha is enabled
-     * @throws FluidViewHelperException
-     */
     public function render(): bool
     {
-        if (! $this->renderingContext instanceof RenderingContext) {
-            throw new FluidViewHelperException(
-                'Something went wrong; RenderingContext should be available in ViewHelper',
-                1638341672
-            );
+        $request = $this->getRequest();
+        if (!$request) {
+            return false;
         }
 
-        $controllerName = strtolower((string)$this->renderingContext->getRequest()->getControllerName());
+        $controllerName = strtolower((string)$request->getControllerName());
+        $isCaptchaEnabled = (bool)($this->arguments['settings'][$controllerName]['validation']['captcha'] ?? false);
+        return ExtensionManagementUtility::isLoaded('sr_freecap') && $isCaptchaEnabled;
+    }
 
-        return ExtensionManagementUtility::isLoaded('sr_freecap')
-            && $this->templateVariableContainer->getByPath(
-                'settings.' . $controllerName . '.validation.captcha.captcha'
-            );
+    private function getRequest(): ?ServerRequestInterface
+    {
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            return $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+        return null;
     }
 }
