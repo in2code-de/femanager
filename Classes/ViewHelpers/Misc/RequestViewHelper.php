@@ -8,7 +8,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Class RequestViewHelper
+ * @deprecated will be removed with V14
  */
 class RequestViewHelper extends AbstractViewHelper
 {
@@ -26,6 +26,13 @@ class RequestViewHelper extends AbstractViewHelper
      * @var array
      */
     protected $testVariables;
+
+    public function initializeArguments(): void
+    {
+        parent::initializeArguments();
+        $this->registerArgument('parameter', 'string', 'like tx_ext_pi1|list|field', false, '');
+        $this->registerArgument('htmlspecialchars', 'bool', 'Enable/Disable htmlspecialchars', false, true);
+    }
 
     /**
      * Get a GET or POST parameter
@@ -60,15 +67,10 @@ class RequestViewHelper extends AbstractViewHelper
         return $this->variable;
     }
 
-    /**
-     * Initially sets $this->variable
-     *
-     * @param $parameter
-     */
     protected function init($parameter): array
     {
         $parts = explode('|', (string)$parameter);
-        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        $request = $this->getRequest();
         $this->variable = $request->getParsedBody()[$parts[0]] ?? $request->getQueryParams()[$parts[0]] ?? null;
         if ($this->testVariables) {
             $this->variable = $this->testVariables[$parts[0]];
@@ -77,13 +79,12 @@ class RequestViewHelper extends AbstractViewHelper
         return $parts;
     }
 
-    /**
-     * Register all arguments for this viewhelper
-     */
-    public function initializeArguments(): void
+    private function getRequest(): ServerRequestInterface|null
     {
-        parent::initializeArguments();
-        $this->registerArgument('parameter', 'string', 'like tx_ext_pi1|list|field', false, '');
-        $this->registerArgument('htmlspecialchars', 'bool', 'Enable/Disable htmlspecialchars', false, true);
+        if ($this->renderingContext->hasAttribute(ServerRequestInterface::class)) {
+            return $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        }
+        return null;
     }
+
 }

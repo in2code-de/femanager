@@ -81,7 +81,8 @@ class UserBackendController extends AbstractController
                 'action' => 'list',
                 'loginAsEnabled' => $this->loginAsEnabled(),
                 'configPID' => $this->getConfigPID(),
-                'currentSelectedPid' => BackendUtility::getPageIdentifier() ?? 0
+                'currentSelectedPid' => BackendUtility::getPageIdentifier() ?? 0,
+                'filter' => $filter
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/List');
@@ -101,6 +102,7 @@ class UserBackendController extends AbstractController
                 ),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'confirmation',
+                'filter' => $filter
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/Confirmation');
@@ -225,6 +227,7 @@ class UserBackendController extends AbstractController
                 ),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'listOpenUserConfirmations',
+                'filter' => $filter
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/ListOpenUserConfirmations');

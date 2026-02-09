@@ -10,11 +10,10 @@ UserBackend / List
 	<div class="femanager_list">
 		<f:render partial="Misc/FlashMessages" arguments="{_all}" />
 
-		<f:render partial="Backend/Searchform" />
+		<f:render partial="Backend/Searchform" arguments="{_all}" />
 
 		<f:if condition="{users}">
 			<f:then>
-
 				<femanager:pagination.paginate objects="{users}" as="usersPage" itemsPerPage="100">
 
 					<table cellspacing="0" cellpadding="0" border="0" class="table table-striped table-hover">
@@ -229,19 +228,11 @@ UserBackend / List
 				<div class="femanager_note">
 					<f:translate key="noRecordsFound" />
 					<br />
-					<f:if condition="{femanager:Misc.Request(parameter:'tx_femanager_web_femanagerm1|filter|searchword')}">
-						<f:then>
-							<f:link.action>
-								<f:translate key="noRecordsFoundClearFilter">Clean filter.</f:translate>
-							</f:link.action>
-						</f:then>
-						<f:else>
-							<f:if condition="{femanager:Condition.IsBackendAdministratorAuthentication()}">
-								<f:link.action class="underline" additionalParams="{id:0}">
-									<f:translate key="noRecordsFoundGoToPage0">Show all users from all pages (for admins only).</f:translate>
-								</f:link.action>
-							</f:if>
-						</f:else>
+
+					<f:if condition="{femanager:Condition.IsBackendAdministratorAuthentication()}">
+						<f:link.action class="underline" additionalParams="{id:0}">
+							<f:translate key="noRecordsFoundGoToPage0">Show all users from all pages (for admins only).</f:translate>
+						</f:link.action>
 					</f:if>
 				</div>
 			</f:else>
