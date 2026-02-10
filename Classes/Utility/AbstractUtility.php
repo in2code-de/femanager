@@ -62,7 +62,7 @@ abstract class AbstractUtility
     /**
      * @throws Exception
      */
-    protected static function getContentObject(): ContentObjectRenderer
+    public static function getContentObject(): ContentObjectRenderer
     {
         return GeneralUtility::makeInstance(ContentObjectRenderer::class);
     }
