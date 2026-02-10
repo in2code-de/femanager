@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\UserFunc;
 
+use Doctrine\DBAL\Exception;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Service\PageTreeService;
-use In2code\Femanager\Utility\ObjectUtility;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Schema\Struct\SelectItem;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class UserOptions
- */
 class UserOptions
 {
     /**
@@ -21,19 +20,25 @@ class UserOptions
     {
         if ($this->getPages($params) !== []) {
             $params['items'] = [
-                $params['items'][0], // please choose
-                $params['items'][1], // currently logged in user
+                new SelectItem(
+                    'select',
+                    $params['items'][0], // please choose
+                    $params['items'][1], // currently logged in user
+                )
             ];
 
             foreach ($this->getUsers($params) as $user) {
-                $params['items'][] = [$user['username'], $user['uid']];
+                $params['items'][] = new SelectItem('select', $user['username'], $user['uid']);
             }
         }
     }
 
+    /**
+     * @throws Exception
+     */
     protected function getUsers(array $params): array
     {
-        $queryBuilder = ObjectUtility::getQueryBuilder(User::TABLE_NAME);
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable(User::TABLE_NAME);
         $result = $queryBuilder
             ->select('uid', 'username')
             ->from(User::TABLE_NAME)

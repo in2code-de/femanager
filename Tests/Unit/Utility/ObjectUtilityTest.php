@@ -16,15 +16,6 @@ class ObjectUtilityTest extends UnitTestCase
     protected array $testFilesToDelete = [];
 
     /**
-     * @covers ::getQueryBuilder
-     */
-    public function testGetQueryBuilder(): void
-    {
-        $this->expectExceptionCode(1459422492);
-        ObjectUtility::getQueryBuilder('tt_content');
-    }
-
-    /**
      * @covers ::implodeObjectStorageOnProperty
      */
     public function testImplodeObjectStorageOnProperty(): void

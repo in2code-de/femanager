@@ -14,8 +14,12 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 class ObjectUtility extends AbstractUtility
 {
+    /**
+     * @deprecated will be removed with V14
+     */
     public static function getQueryBuilder(string $tableName): QueryBuilder
     {
+        trigger_error('This function will be removed with V14. Instantiate the queryBuilder yourself.');
         return GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
     }
 

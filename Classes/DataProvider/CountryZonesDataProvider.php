@@ -12,9 +12,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CountryZonesDataProvider
 {
-    private $countryZoneRepository;
+    private CountryZoneRepository $countryZoneRepository;
 
-    private $countryRepository;
+    private CountryRepository $countryRepository;
 
     public function __construct()
     {
@@ -27,7 +27,7 @@ class CountryZonesDataProvider
     public function getCountryZonesForCountryIso3(string $countryIso3): array
     {
         $country = $this->getCountryForIsoCode3($countryIso3);
-        if (!$country instanceof \SJBR\StaticInfoTables\Domain\Model\Country) {
+        if (!$country instanceof Country) {
             return [];
         }
 
@@ -45,9 +45,6 @@ class CountryZonesDataProvider
         return $this->countryZoneRepository->countByCountryIsoCodeA3($countryIso3) > 0;
     }
 
-    /**
-     * @return Country|null
-     */
     private function getCountryForIsoCode3(string $countryIso3): ?Country // @phpstan-ignore-line
     {
         $countries = $this->countryRepository->findAllowedByIsoCodeA3($countryIso3);
