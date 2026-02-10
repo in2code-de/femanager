@@ -30,8 +30,7 @@ class UserFieldsOptions
      */
     public function addOptions(array &$params): void
     {
-        $this->initialize();
-        $tSconfig = BackendUtility::getPagesTSconfig($this->getPid());
+        $tSconfig = BackendUtility::getPagesTSconfig($params['effectivePid'] ?? 0);
         $this->addCaptchaOption($params);
         $this->addStateOption($params);
         $tab = $params['config']['itemsProcFuncTab'] . '.';
@@ -70,28 +69,6 @@ class UserFieldsOptions
                 'state',
             ];
         }
-    }
-
-    /**
-     * Read pid from current URL
-     *        URL example:
-     *        http://femanager.localhost.de/typo3/alt_doc.php?&returnUrl=
-     *        %2Ftypo3%2Fsysext%2Fcms%2Flayout%2Fdb_layout.php
-     *        %3Fid%3D17%23element-tt_content-14
-     *        &edit[tt_content][14]=edit
-     */
-    protected function getPid(): int
-    {
-        $pid = 0;
-        $backUrl = str_replace('?', '&', (string)($GLOBALS['TYPO3_REQUEST']->getParsedBody()['returnUrl'] ?? $GLOBALS['TYPO3_REQUEST']->getQueryParams()['returnUrl'] ?? null));
-        $urlParts = GeneralUtility::trimExplode('&', $backUrl, true);
-        foreach ($urlParts as $part) {
-            if (stristr((string)$part, 'id=')) {
-                $pid = str_replace('id=', '', (string)$part);
-            }
-        }
-
-        return (int)$pid;
     }
 
     /**
