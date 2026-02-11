@@ -13,6 +13,8 @@ services:
       resource: '../Classes/*'
       exclude: '../Classes/Domain/Model/*'
 
+    In2code\Femanager\UserFunc\UserFieldsOptions:
+      public: true
     In2code\Femanager\Domain\Validator\AbstractValidator:
       public: true
     In2code\Femanager\DataProvider\CountryDataProvider:
@@ -38,6 +40,4 @@ services:
     In2code\Femanager\UserFunc\StaticInfoTables:
       public: true
     In2code\Femanager\Utility\LogUtility:
-      public: true
-    In2code\Femanager\Domain\Service\PluginService:
       public: true
