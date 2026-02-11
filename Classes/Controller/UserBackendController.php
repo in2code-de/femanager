@@ -25,19 +25,15 @@ use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
-use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Site\SiteFinder;
-use TYPO3\CMS\Core\Type\Bitmask\Permission;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
- * Class UserBackendController
- *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class UserBackendController extends AbstractController
@@ -110,7 +106,7 @@ class UserBackendController extends AbstractController
 
     public function userLogoutAction(User $user): ResponseInterface
     {
-        if ($this->checkPageAndUserAccess($user) === false) {
+        if (!$this->checkPageAndUserAccess($user)) {
             return new ForwardResponse('list');
         }
 
@@ -125,7 +121,7 @@ class UserBackendController extends AbstractController
 
         $user = $this->userRepository->findByUid($userIdentifier);
 
-        if ($this->checkPageAndUserAccess($user) === false) {
+        if (is_null($user) || !$this->checkPageAndUserAccess($user)) {
             return new ForwardResponse('list');
         }
 
@@ -157,34 +153,19 @@ class UserBackendController extends AbstractController
         return $this->redirect('confirmation');
     }
 
-    private function checkPageAndUserAccess($user): bool
-    {
-        if ($user === null) {
-            return false;
-        }
-
-        if (BackendUserUtility::isAdminAuthentication() === false) {
-            // check if the current BE User has access to the page where the FE_User is stored
-            $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
-            $pageRow = $pageRepository->getPage($user->getPid());
-            if ($GLOBALS['BE_USER']->doesUserHaveAccess(
-                $pageRow,
-                Permission::PAGE_SHOW
-            ) === false) {
-                return false;
-            }
-        }
-
-        return true;
+    /**
+     * @deprecated will be removed with V14 use hasBackendUserAccessToFeUserStoragePage() from the BackendUserUtility
+     */
+    private function checkPageAndUserAccess($user): bool {
+        trigger_error('will be removed with V14 use hasBackendUserAccessToFeUserStoragePage()');
+        return BackendUserUtility::hasBackendUserAccessToFeUserStoragePage($user);
     }
 
     public function refuseUserAction(int $userIdentifier): ResponseInterface
     {
-        $this->configPID = $this->getConfigPID();
-
         $user = $this->userRepository->findByUid($userIdentifier);
 
-        if ($this->checkPageAndUserAccess($user) === false) {
+        if (is_null($user) || !$this->checkPageAndUserAccess($user)) {
             return new ForwardResponse('list');
         }
 
@@ -237,7 +218,7 @@ class UserBackendController extends AbstractController
     {
         $user = $this->userRepository->findByUid($userIdentifier);
 
-        if ($this->checkPageAndUserAccess($user) === false) {
+        if (is_null($user) || !$this->checkPageAndUserAccess($user)) {
             return new ForwardResponse('list');
         }
 

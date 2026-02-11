@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Utility;
 
+use In2code\Femanager\Domain\Model\User;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Type\Bitmask\Permission;
 
 class BackendUserUtility extends AbstractUtility
 {
@@ -21,6 +23,19 @@ class BackendUserUtility extends AbstractUtility
     public static function isAdmin(): bool
     {
         return self::getBackendUserAuthentication()->isAdmin();
+    }
+
+    public static function hasBackendUserAccessToFeUserStoragePage(User $user): bool
+    {
+        if (BackendUserUtility::isAdmin()) {
+            return true;
+        }
+
+        // check if the current BE User has access to the page where the FE_User is stored
+        return self::getBackendUserAuthentication()->doesUserHaveAccess(
+            DatabaseUtility::getPageIgnoreEnableFields($user->getPid()),
+            Permission::PAGE_SHOW
+        );
     }
 
     /**
