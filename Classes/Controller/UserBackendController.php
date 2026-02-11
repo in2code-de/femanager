@@ -38,8 +38,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
  */
 class UserBackendController extends AbstractController
 {
-    protected int $configPID;
-
     protected ModuleTemplate $moduleTemplate;
 
     public function __construct(
@@ -86,8 +84,6 @@ class UserBackendController extends AbstractController
 
     public function confirmationAction(array $filter = []): ResponseInterface
     {
-        $this->configPID = $this->getConfigPID();
-
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
         $this->moduleTemplate->assignMultiple(
@@ -117,8 +113,6 @@ class UserBackendController extends AbstractController
 
     public function confirmUserAction(int $userIdentifier): ResponseInterface
     {
-        $this->configPID = $this->getConfigPID();
-
         $user = $this->userRepository->findByUid($userIdentifier);
 
         if (is_null($user) || !$this->checkPageAndUserAccess($user)) {
@@ -280,9 +274,9 @@ class UserBackendController extends AbstractController
         /** @var SiteFinder $siteFinder */
         $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
 
-        $site = $siteFinder->getSiteByPageId($this->configPID);
+        $site = $siteFinder->getSiteByPageId($this->getConfigPID());
         $url = $site->getRouter()->generateUri(
-            $this->configPID,
+            $this->getConfigPID(),
             [
                 'tx_femanager_registration' => [
                     'user' => $userIdentifier,
