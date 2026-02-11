@@ -123,9 +123,15 @@ abstract class AbstractController extends ActionController
     /**
      * Prefix method to createAction()
      *        Create Confirmation from Admin is not necessary
+     * @deprecated will be changed to protected / removed in v14.0.
      */
     public function createAllConfirmed(User $user): ResponseInterface|null
     {
+        trigger_error(
+            'Method createAllConfirmed() will be protected / removed in femanager v14',
+            E_USER_DEPRECATED
+        );
+
         $this->userRepository->add($user);
         $this->persistenceManager->persistAll();
         $this->processUploadedFiles($user);
@@ -210,9 +216,16 @@ abstract class AbstractController extends ActionController
     /**
      * Prefix method to updateAction()
      *        Update Confirmation from Admin is not necessary
+     *
+     * @deprecated will be changed to protected / removed in v14.0.
      */
     public function updateAllConfirmed(User $user)
     {
+        trigger_error(
+            'Method createAllConfirmed() will be protected / removed in femanager v14',
+            E_USER_DEPRECATED
+        );
+
         // send notify email to admin
         $existingUser = clone $this->userRepository->findByUid($user->getUid());
 
@@ -252,10 +265,16 @@ abstract class AbstractController extends ActionController
     /**
      * Prefix method to updateAction(): Update must be confirmed by Admin
      *
+     * @deprecated will be changed to protected / removed in v14.0.
      * @param User $user
      */
     public function updateRequest($user): ResponseInterface|null
     {
+        trigger_error(
+            'Method updateRequest() will be protected / removed in femanager v14',
+            E_USER_DEPRECATED
+        );
+
         if ($this->settings['edit']['confirmByAdmin'] ?? null) {
             $dirtyProperties = UserUtility::getDirtyPropertiesFromUser($user);
             $user = UserUtility::rollbackUserWithChangeRequest($user, $dirtyProperties);
@@ -301,6 +320,8 @@ abstract class AbstractController extends ActionController
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @TODO: Remove Suppress when login is reactivated
+     *
+     * @deprecated will be changed to protected / removed in v14.0.
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function finalCreate(
@@ -311,6 +332,11 @@ abstract class AbstractController extends ActionController
         string $status = '',
         bool $backend = false
     ): ResponseInterface|null {
+        trigger_error(
+            'Method finalCreate() will be protected / removed in femanager v14',
+            E_USER_DEPRECATED
+        );
+
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         if (ConfigurationUtility::getValue(
@@ -482,9 +508,16 @@ abstract class AbstractController extends ActionController
 
     /**
      * Assigns all values, which should be available in all views
+     *
+     * @deprecated will be changed to protected / removed in v14.0.
      */
     public function addDefaultViewVariables(): void
     {
+        trigger_error(
+            'Method addDefaultViewVariables() will be protected / removed in femanager v14',
+            E_USER_DEPRECATED
+        );
+
         $this->view->assignMultiple(
             [
                 'languageUid' => GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId(),
@@ -617,9 +650,16 @@ abstract class AbstractController extends ActionController
 
     /**
      * Send email to user for confirmation
+     *
+     * @deprecated will be changed to protected / removed in v14.0.
      */
     public function sendCreateUserConfirmationMail(User $user): void
     {
+        trigger_error(
+            'Method sendCreateUserConfirmationMail() will be protected / removed in femanager v14',
+            E_USER_DEPRECATED
+        );
+
         $this->sendMailService->send(
             'createUserConfirmation',
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
@@ -641,8 +681,16 @@ abstract class AbstractController extends ActionController
         );
     }
 
+    /**
+     * @deprecated will be changed to protected / removed in v14.0.
+     */
     public function sendCreateUserConfirmationMailFromBackend(User $user): void
     {
+        trigger_error(
+            'Method sendCreateUserConfirmationMailFromBackend() will be protected / removed in femanager v14',
+            E_USER_DEPRECATED
+        );
+
         $receiver = StringUtility::makeEmailArray($user->getEmail(), $user->getUsername());
         $sender = StringUtility::makeEmailArray(
             ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value', $this->config),
