@@ -190,6 +190,9 @@ plugin.tx_femanager {
         www {
           max = 80
         }
+        image {
+          # fileRequired = 1
+        }
       }
 
       # All email settings within the creation process
@@ -848,6 +851,9 @@ plugin.tx_femanager {
         }
         www {
           max = 80
+        }
+        image {
+          # fileRequired = 1
         }
       }
       # All email settings within the update process
