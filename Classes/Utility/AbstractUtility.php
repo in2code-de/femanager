@@ -75,13 +75,4 @@ abstract class AbstractUtility
     {
         return GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
     }
-
-    /**
-     * @return BackendUserAuthentication
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    protected static function getBackendUserAuthentication()
-    {
-        return $GLOBALS['BE_USER'];
-    }
 }
