@@ -49,6 +49,14 @@ class UserBackendController extends AbstractController
         protected LogUtility $logUtility,
         protected ModuleTemplateFactory $moduleTemplateFactory
     ) {
+        parent::__construct(
+            $this->userRepository,
+            $this->userGroupRepository,
+            $this->persistenceManager,
+            $this->sendMailService,
+            $this->finisherRunner,
+            $this->logUtility
+        );
     }
 
     protected function initializeAction(): void
