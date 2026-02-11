@@ -23,14 +23,14 @@ class BackendUserUtilityTest extends UnitTestCase
 
     /**
      * @SuppressWarnings(PHPMD.Superglobals)
-     * @covers ::isAdminAuthentication
+     * @covers ::isAdmin
      * @covers \In2code\Femanager\Utility\AbstractUtility::getBackendUserAuthentication
      */
-    public function testIsAdminAuthentication(): void
+    public function testIsAdmin(): void
     {
         $this->resetSingletonInstances = true;
         $GLOBALS['BE_USER']->user['admin'] = 1;
-        self::assertTrue(BackendUserUtility::isAdminAuthentication());
+        self::assertTrue(BackendUserUtility::isAdmin());
     }
 
     /**

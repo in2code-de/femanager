@@ -131,7 +131,7 @@ if ($extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect')) {
     $GLOBALS['TCA']['fe_users']['columns']['country']['config'] = [
         'type' => 'select',
         'renderType' => 'selectSingle',
-        'itemsProcFunc' => 'In2code\\Femanager\\UserFunc\\StaticInfoTables->getCountryOptions',
+        'itemsProcFunc' => \In2code\Femanager\UserFunc\StaticInfoTables::class . '->getCountryOptions',
         'items' => [
             [
                 'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose',

@@ -130,14 +130,14 @@ UserBackend / List
 								<td nowrap="nowrap">
 									<div class="btn-group">
 										<f:comment>
-											Edit Icon
+											Edit User
 										</f:comment>
 										<a title="{f:translate(key:'BackendListUserEdit')}" href="{be:uri.editRecord(uid:user.uid, table:'fe_users')}" class="btn btn-default">
 											<core:icon identifier="actions-document-open" />
 										</a>
 
 										<f:comment>
-											Delete Icon
+											Delete User
 										</f:comment>
 										<a title="{f:translate(key:'BackendListUserDelete')}"
 										   class="deleteUser cursorpointer btn btn-default"
@@ -147,7 +147,7 @@ UserBackend / List
 										</a>
 
 										<f:comment>
-											Enable/Disable Icon
+											Enable/Disable User
 										</f:comment>
 										<f:if condition="{user.disable} == 1">
 											<f:then>
@@ -168,7 +168,7 @@ UserBackend / List
 
 										<f:if condition="{loginAsEnabled}">
 											<f:comment>
-												Login as Icon
+												Login as User
 											</f:comment>
 											<f:if condition="{user.online} || {user.disable}">
 												<f:then>
@@ -186,7 +186,7 @@ UserBackend / List
 										</f:if>
 
 										<f:comment>
-											Logout Icon
+											Logout User
 										</f:comment>
 										<f:if condition="{user.online}">
 											<f:then>
