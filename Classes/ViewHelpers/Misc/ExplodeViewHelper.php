@@ -24,7 +24,7 @@ class ExplodeViewHelper extends AbstractViewHelper
     public function render(): array
     {
         if ($this->arguments['seperator'] !== ',') {
-            trigger_error('Argument seperator will be replaced with "separator" in V14');
+            trigger_error('Argument seperator will be replaced with "separator" in V14', E_USER_DEPRECATED);
             $this->arguments['separator'] = $this->arguments['seperator'];
         }
 

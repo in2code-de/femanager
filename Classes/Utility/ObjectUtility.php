@@ -19,7 +19,7 @@ class ObjectUtility extends AbstractUtility
      */
     public static function getQueryBuilder(string $tableName): QueryBuilder
     {
-        trigger_error('This function will be removed with V14. Instantiate the queryBuilder yourself.');
+        trigger_error('This function will be removed with V14. Instantiate the queryBuilder yourself.', E_USER_DEPRECATED);
         return GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
     }
 

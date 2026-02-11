@@ -22,7 +22,7 @@ class GetFirstViewHelper extends AbstractFormFieldViewHelper
      */
     public function render(): mixed
     {
-        trigger_error('This viewHelper will be removed with V14. Use objects.0 to access the first object');
+        trigger_error('This viewHelper will be removed with V14. Use objects.0 to access the first object', E_USER_DEPRECATED);
 
         $objectStorage = $this->arguments['objectStorage'];
         if ($objectStorage === null) {
