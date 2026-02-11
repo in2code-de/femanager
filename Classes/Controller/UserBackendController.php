@@ -79,7 +79,7 @@ class UserBackendController extends AbstractController
                 'users' => $this->userRepository->findAllInBackend($filter),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'list',
-                'loginAsEnabled' => $this->loginAsEnabled(),
+                'loginAsEnabled' => ConfigurationUtility::isEnableLoginAsActive(),
                 'configPID' => $this->getConfigPID(),
                 'currentSelectedPid' => BackendUtility::getPageIdentifier() ?? 0,
                 'filter' => $filter
@@ -322,9 +322,11 @@ class UserBackendController extends AbstractController
      * @throws AspectNotFoundException
      *
      * @SuppressWarnings(PHPMD.Superglobals)
+     * @deprecated will be removed with V14 use ConfigurationUtility::isEnableLoginAsActive() instead
      */
     private function loginAsEnabled(): bool
     {
+        trigger_error('will be removed with V14 use ConfigurationUtility::isEnableLoginAsActive() instead', E_USER_DEPRECATED);
         $context = GeneralUtility::makeInstance(Context::class);
         if ($context->getPropertyFromAspect('backend.user', 'isAdmin') === true) {
             return true;

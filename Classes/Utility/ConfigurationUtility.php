@@ -166,6 +166,13 @@ class ConfigurationUtility extends AbstractUtility
         return (bool)$config;
     }
 
+    public static function isEnableLoginAsActive(): bool
+    {
+        $config = BackendUserUtility::getBackendUserAuthentication()
+            ->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? false;
+        return (bool)$config;
+    }
+
     public static function isCreateUserNotifyActive(array $config): bool
     {
         return ConfigurationUtility::getValue(

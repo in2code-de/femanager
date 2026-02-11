@@ -22,9 +22,10 @@ class BackendUserUtility extends AbstractUtility
 
     /**
      * @return BackendUserAuthentication
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
-    protected static function getBackendUserAuthentication()
+    public static function getBackendUserAuthentication(): BackendUserAuthentication
     {
-        return parent::getBackendUserAuthentication();
+        return $GLOBALS['BE_USER'];
     }
 }
