@@ -6,18 +6,21 @@ namespace In2code\Femanager\Utility;
 
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
-/**
- * Class BackendUserUtility
- */
 class BackendUserUtility extends AbstractUtility
 {
+    /**
+     * @deprecated will be removed with V14. use BackendUserUtility::isAdmin() instead
+     * @return bool
+     */
     public static function isAdminAuthentication(): bool
     {
-        $userAuthentication = self::getBackendUserAuthentication();
-        $isUserBackendEnableLoginAs =
-            $userAuthentication->getTSConfig()['tx_femanager.']['UserBackend.']['enableLoginAs'] ?? 0;
+        trigger_error('will be removed with V14. use BackendUserUtility::isAdmin() instead', E_USER_DEPRECATED);
+        return self::isAdmin();
+    }
 
-        return $userAuthentication->user['admin'] === 1 || (int)$isUserBackendEnableLoginAs === 1;
+    public static function isAdmin(): bool
+    {
+        return self::getBackendUserAuthentication()->isAdmin();
     }
 
     /**
