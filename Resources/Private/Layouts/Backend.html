@@ -10,14 +10,14 @@
 					<div class="module-docheader-bar-column-left">
 						<f:if condition="{femanager:be.isConfirmationModuleActivated()}">
 							<div class="btn-group btn-group-xs" role="group">
-								<f:link.action action="list" class="btn btn-default{femanager:Be.GetClassNameOnAction(actionName:'list')}">
+								<f:link.action action="list" class="btn {f:if(condition: '{action}==\'list\'',then:' btn-primary', else:' btn-default')}">
 									<f:translate key="BackendSelectionList">List</f:translate>
 								</f:link.action>
-								<f:link.action action="confirmation" class="btn btn-default{femanager:Be.GetClassNameOnAction(actionName:'confirmation')}">
+								<f:link.action action="confirmation" class="btn {f:if(condition: '{action}==\'confirmation\'',then:' btn-primary', else:' btn-default')}">
 									<f:translate key="BackendSelectionList">Admin Confirmation</f:translate>
 								</f:link.action>
 								<f:if condition="{femanager:be.IsResendUserConfirmationRequestActivated()}">
-									<f:link.action action="listOpenUserConfirmations" class="btn btn-default{femanager:Be.GetClassNameOnAction(actionName:'listOpenUserConfirmations')}">
+									<f:link.action action="listOpenUserConfirmations" class="btn  {f:if(condition: '{action}==\'listOpenUserConfirmations\'',then:' btn-primary', else:' btn-default')}">
 										<f:translate key="BackendSelectionList">Open User Confirmtions</f:translate>
 									</f:link.action>
 								</f:if>

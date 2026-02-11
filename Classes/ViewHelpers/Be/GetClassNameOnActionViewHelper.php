@@ -8,6 +8,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
+/**
+ * @deprecated will be removed with V14
+ */
 class GetClassNameOnActionViewHelper extends AbstractViewHelper
 {
     public function initializeArguments(): void
