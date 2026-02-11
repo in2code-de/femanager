@@ -129,7 +129,7 @@ class UserController extends AbstractFrontendController
     {
         $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
 
-        if (!BackendUserUtility::isAdminAuthentication()) {
+        if (!BackendUserUtility::isAdmin()) {
             throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'), 1516373787864);
         }
 

@@ -24,7 +24,7 @@ class UserRepository extends Repository
      * @param int $uid fe_users UID
      * @return User
      */
-    public function findByUid($uid)
+    public function findByUid($uid): ?User
     {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);
@@ -210,7 +210,7 @@ class UserRepository extends Repository
     {
         if (BackendUtility::getPageIdentifier() > 0) {
             $and[] = $query->in('pid', $this->getTreeList(BackendUtility::getPageIdentifier()));
-        } elseif (!BackendUserUtility::isAdminAuthentication()) {
+        } elseif (!BackendUserUtility::isAdmin()) {
             $and[] = $query->equals('uid', 0);
         }
 
