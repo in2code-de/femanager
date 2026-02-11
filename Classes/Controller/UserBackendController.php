@@ -235,8 +235,16 @@ class UserBackendController extends AbstractController
         return $this->redirect('listOpenUserConfirmations');
     }
 
+    /**
+     * @deprecated will be changed to protected in v14.0.
+     */
     public function getConfigPID(): int
     {
+        trigger_error(
+            'Method getConfigPID() will be protected in femanager v14. Stop calling this method from outside of this class.',
+            E_USER_DEPRECATED
+        );
+
         if (isset($this->moduleConfig['settings.']['configPID']) && $this->moduleConfig['settings.']['configPID'] > 0) {
             return (int)$this->moduleConfig['settings.']['configPID'];
         }
@@ -259,9 +267,16 @@ class UserBackendController extends AbstractController
      * @throws SiteNotFoundException
      *
      * @SuppressWarnings(PHPMD.Superglobals)
+     *
+     * @deprecated will be changed to protected or deleted in v14.0.
      */
     public function getFrontendRequestResult(string $status, int $userIdentifier, User $user)
     {
+        trigger_error(
+            'Method getFrontendRequestResult() will be protected / removed in femanager v14. Stop calling this method from outside of this class.',
+            E_USER_DEPRECATED
+        );
+
         /** @var SiteFinder $siteFinder */
         $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
 
@@ -307,7 +322,8 @@ class UserBackendController extends AbstractController
      */
     private function loginAsEnabled(): bool
     {
-        trigger_error('will be removed with V14 use ConfigurationUtility::isEnableLoginAsActive() instead', E_USER_DEPRECATED);
+        trigger_error('will be removed with V14 use ConfigurationUtility::isEnableLoginAsActive() instead',
+            E_USER_DEPRECATED);
         $context = GeneralUtility::makeInstance(Context::class);
         if ($context->getPropertyFromAspect('backend.user', 'isAdmin') === true) {
             return true;
