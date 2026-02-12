@@ -62,7 +62,6 @@
     "saschaegerer/phpstan-typo3": "^1.8",
     "se/selenium-server-standalone": "^3.141",
     "sjbr/sr-freecap": "^13.4",
-    "sjbr/static-info-tables": "^13.4",
     "typo3/cms-adminpanel": "^13.4.0",
     "typo3/cms-belog": "^13.4.0",
     "typo3/cms-beuser": "^13.4.0",
