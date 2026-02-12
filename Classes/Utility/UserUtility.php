@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Utility;
 
+use DateTimeInterface;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Model\UserGroup;
 use In2code\Femanager\Domain\Repository\UserRepository;
@@ -20,6 +21,7 @@ use TYPO3\CMS\Core\Crypto\PasswordHashing\Pbkdf2PasswordHash;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PhpassPasswordHash;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -228,42 +230,77 @@ class UserUtility extends AbstractUtility
             'lastlogin',
         ];
 
-        foreach ($changedObject->_getCleanProperties() as $propertyName => $oldPropertyValue) {
-            if (method_exists($changedObject, 'get' . ucfirst((string)$propertyName))
-                && !in_array($propertyName, $ignoreProperties)
-            ) {
-                $newPropertyValue = $changedObject->{'get' . ucfirst((string)$propertyName)}();
-                if (!is_object($oldPropertyValue) || !is_object($newPropertyValue)) {
-                    if ($oldPropertyValue !== $newPropertyValue) {
-                        $dirtyProperties[$propertyName]['old'] = $oldPropertyValue;
-                        $dirtyProperties[$propertyName]['new'] = $newPropertyValue;
-                    }
-                } elseif ($oldPropertyValue::class === 'DateTime') {
-                    /** @var $oldPropertyValue \DateTime */
-                    /** @var $newPropertyValue \DateTime */
-                    if ($oldPropertyValue->getTimestamp() !== $newPropertyValue->getTimestamp()) {
-                        $dirtyProperties[$propertyName]['old'] = $oldPropertyValue->getTimestamp();
-                        $dirtyProperties[$propertyName]['new'] = $newPropertyValue->getTimestamp();
-                    }
-                } elseif ($oldPropertyValue::class === ObjectStorage::class) {
-                    $titlesOld = ObjectUtility::implodeObjectStorageOnProperty($oldPropertyValue);
-                    $titlesNew = ObjectUtility::implodeObjectStorageOnProperty($newPropertyValue);
-                    if ($titlesOld !== $titlesNew) {
-                        $dirtyProperties[$propertyName]['old'] = $titlesOld;
-                        $dirtyProperties[$propertyName]['new'] = $titlesNew;
-                    }
-                } else {
-                    $uidOld = ObjectAccess::getProperty($oldPropertyValue, 'uid');
-                    $uidNew = ObjectAccess::getProperty($newPropertyValue, 'uid');
-                    if ($uidOld !== $uidNew) {
-                        $dirtyProperties[$propertyName]['old'] = $uidOld;
-                        $dirtyProperties[$propertyName]['new'] = $uidNew;
-                    }
-                }
+        foreach ($changedObject->_getCleanProperties() as $propertyName => $oldValue) {
+            if (in_array($propertyName, $ignoreProperties, true)) {
+                continue;
+            }
+
+            try {
+                $newValue = ObjectAccess::getProperty($changedObject, $propertyName);
+            } catch (\Exception $e) {
+                continue;
+            }
+
+            $change = self::compareValues($oldValue, $newValue);
+
+            if ($change !== null) {
+                $dirtyProperties[$propertyName] = $change;
             }
         }
 
         return $dirtyProperties;
+    }
+
+    /**
+     * Compares two values based on their type and returns the formatted array if they differ, otherwise returns null.
+     */
+    private static function compareValues(mixed $oldValue, mixed $newValue): ?array
+    {
+        // Case A: One of the values is not an object (scalar, null, array)
+        if (!is_object($oldValue) || !is_object($newValue)) {
+            return ($oldValue !== $newValue) ? ['old' => $oldValue, 'new' => $newValue] : null;
+        }
+
+        // FCase B: DateTime (use interface to also cover DateTimeImmutable)
+        if ($oldValue instanceof DateTimeInterface && $newValue instanceof DateTimeInterface) {
+            if ($oldValue->getTimestamp() !== $newValue->getTimestamp()) {
+                return [
+                    'old' => $oldValue->getTimestamp(),
+                    'new' => $newValue->getTimestamp()
+                ];
+            }
+            return null;
+        }
+
+        // Case C: ObjectStorage
+        if ($oldValue instanceof ObjectStorage || $newValue instanceof ObjectStorage) {
+            $titlesOld = ($oldValue instanceof ObjectStorage) ? ObjectUtility::implodeObjectStorageOnProperty($oldValue) : '';
+            $titlesNew = ($newValue instanceof ObjectStorage) ? ObjectUtility::implodeObjectStorageOnProperty($newValue) : '';
+
+            if ($titlesOld !== $titlesNew) {
+                return ['old' => $titlesOld, 'new' => $titlesNew];
+            }
+            return null;
+        }
+
+        // Case D: Extbase Domain Objects (Entities/ValueObjects) We compare using the UID if they are
+        // instances of AbstractDomainObject.
+        if ($oldValue instanceof AbstractDomainObject && $newValue instanceof AbstractDomainObject) {
+            if ($oldValue->getUid() !== $newValue->getUid()) {
+                return [
+                    'old' => $oldValue->getUid(),
+                    'new' => $newValue->getUid()
+                ];
+            }
+            return null;
+        }
+
+        // Fallback: If they are objects, but none of the above rules apply (e.g., generic classes), we compare strictly.
+        if ($oldValue !== $newValue) {
+            return ['old' => $oldValue, 'new' => $newValue];
+        }
+
+        return null;
     }
 
     /**
