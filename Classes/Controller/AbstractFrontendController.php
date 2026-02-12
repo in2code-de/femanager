@@ -6,6 +6,7 @@ use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Domain\Service\RatelimiterService;
 use In2code\Femanager\Domain\Service\SendMailService;
+use In2code\Femanager\Domain\Service\ValidationService;
 use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\LogUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
@@ -19,7 +20,8 @@ abstract class AbstractFrontendController extends AbstractController
         protected SendMailService $sendMailService,
         protected FinisherRunner $finisherRunner,
         protected LogUtility $logUtility,
-        protected RatelimiterService $ratelimiterService
+        protected RatelimiterService $ratelimiterService,
+        protected ValidationService $validationService,
     ) {
     }
 }

@@ -90,6 +90,19 @@ class InvitationController extends AbstractFrontendController
             $user->setEmail($user->getUsername());
         }
 
+        // revalidate user after modification
+        $validationErrors = $this->validationService->doServersideValidation($user, $this->request);
+        if (!empty($validationErrors)) {
+            foreach ($validationErrors as $validationError) {
+                $this->addFlashMessage(
+                    $validationError->getMessage(),
+                    $validationError->getTitle(),
+                    $validationError->getSeverity()
+                );
+            }
+            return $this->redirect('new');
+        }
+
         UserUtility::hashPassword(
             $user,
             ConfigurationUtility::getValue('invitation/misc/passwordSave', $this->settings)

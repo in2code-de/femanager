@@ -78,6 +78,19 @@ class NewController extends AbstractFrontendController
 
         UserUtility::hashPassword($user, ConfigurationUtility::getValue('new/misc/passwordSave', $this->settings));
 
+        // revalidate user after modification
+        $validationErrors = $this->validationService->doServersideValidation($user, $this->request);
+        if (!empty($validationErrors)) {
+            foreach ($validationErrors as $validationError) {
+                $this->addFlashMessage(
+                    $validationError->getMessage(),
+                    $validationError->getTitle(),
+                    $validationError->getSeverity()
+                );
+            }
+            return $this->redirect('new');
+        }
+
         $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
         $this->ratelimiterService->consumeSlot();
 
@@ -107,8 +120,12 @@ class NewController extends AbstractFrontendController
      *
      * @todo refactor the complete status workflow for V14
      */
-    public function confirmCreateRequestAction(int $user, string $hash, string $status = 'adminConfirmation', ?string $adminHash = null): \Psr\Http\Message\ResponseInterface
-    {
+    public function confirmCreateRequestAction(
+        int $user,
+        string $hash,
+        string $status = 'adminConfirmation',
+        ?string $adminHash = null
+    ): \Psr\Http\Message\ResponseInterface {
         $backend = false;
 
         $user = $this->userRepository->findByUid($user);
@@ -134,9 +151,9 @@ class NewController extends AbstractFrontendController
         }
 
         if ($status === 'userConfirmationRefused' && ConfigurationUtility::getValue(
-            'new./email./createUserConfirmation./confirmUserConfirmationRefused',
-            $this->config
-        ) == '1') {
+                'new./email./createUserConfirmation./confirmUserConfirmationRefused',
+                $this->config
+            ) == '1') {
             $this->view->assignMultiple(
                 [
                     'user' => $user,
@@ -149,9 +166,9 @@ class NewController extends AbstractFrontendController
         }
 
         if ($status === 'userConfirmation' && ConfigurationUtility::getValue(
-            'new./email./createUserConfirmation./confirmUserConfirmation',
-            $this->config
-        ) == '1') {
+                'new./email./createUserConfirmation./confirmUserConfirmation',
+                $this->config
+            ) == '1') {
             $this->view->assignMultiple(
                 [
                     'user' => $user,
@@ -164,9 +181,9 @@ class NewController extends AbstractFrontendController
         }
 
         if ($status === 'adminConfirmation' && ConfigurationUtility::getValue(
-            'new./email./createUserConfirmation./confirmAdminConfirmation',
-            $this->config
-        ) == '1') {
+                'new./email./createUserConfirmation./confirmAdminConfirmation',
+                $this->config
+            ) == '1') {
             if (!HashUtility::validHash($adminHash, $user, 'admin')) {
                 $this->addFlashMessage(
                     LocalizationUtility::translate('error_not_authorized'),
