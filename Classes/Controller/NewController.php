@@ -22,6 +22,7 @@ use In2code\Femanager\Utility\StringUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
+use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Http\ServerRequestFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
@@ -96,7 +97,7 @@ class NewController extends AbstractFrontendController
 
         $response = $this->isAllConfirmed() ? $this->createAllConfirmed($user) : $this->createRequest($user);
 
-        if ($response instanceof \Psr\Http\Message\ResponseInterface) {
+        if ($response instanceof ResponseInterface) {
             return $response;
         }
 
@@ -125,7 +126,7 @@ class NewController extends AbstractFrontendController
         string $hash,
         string $status = 'adminConfirmation',
         ?string $adminHash = null
-    ): \Psr\Http\Message\ResponseInterface {
+    ): ResponseInterface {
         $backend = false;
 
         $user = $this->userRepository->findByUid($user);
@@ -243,12 +244,8 @@ class NewController extends AbstractFrontendController
             $this->persistenceManager->persistAll();
             $event = new UserWasConfirmedByAdminEvent($request, $user);
             $this->eventDispatcher->dispatch($event);
-            /**
-             * this request was triggered via Backend Module "Frontend users",
-             * so we stop here and provide a feedback to the BE
-             */
-            echo json_encode(['status' => 'okay']) . PHP_EOL;
-            die();
+            // Backend request - return JSON response
+            return new JsonResponse(['status' => 'okay']);
         }
 
         if ($furtherFunctions) {
