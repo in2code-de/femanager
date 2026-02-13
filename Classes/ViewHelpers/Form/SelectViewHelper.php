@@ -318,6 +318,20 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
         return $output;
     }
 
+    /**
+     * Prefer explicit name argument over property-based name generation.
+     * This ensures correct POST data format (array) for ObjectStorage properties
+     * like usergroup, while property is still used for pre-selection via getValueAttribute().
+     */
+    protected function getNameWithoutPrefix(): string
+    {
+        if ($this->hasArgument('name') && $this->arguments['name'] !== '') {
+            return $this->arguments['name'];
+        }
+
+        return parent::getNameWithoutPrefix();
+    }
+
     protected function getFieldName(): string
     {
         preg_match_all('/\[.*?\]/i', $this->getNameWithoutPrefix(), $name);
