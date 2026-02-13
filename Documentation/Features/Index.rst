@@ -31,6 +31,7 @@ See some features or best practice parts of the extension femanager.
    Events/Index
    ResendUserConfirmationRequest/Index
    RateLimiter/Index
+   LoginAs/Index
 
 .. _features:
 
@@ -91,6 +92,7 @@ Backend Module
 - Hide and delete of fe_users via AJAX
 - Shows Login status
 - Logout of a frontend user
+- Login as frontend user (impersonate) for administrators
 
 
 General
