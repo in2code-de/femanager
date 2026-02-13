@@ -246,8 +246,10 @@ class SelectViewHelper extends AbstractFormFieldViewHelper
             }
         }
         $selectedValues = [];
-        foreach ($value as $selectedValueElement) {
-            $selectedValues[] = $this->getOptionValueScalar($selectedValueElement);
+        if (!is_null($value)) {
+            foreach ($value as $selectedValueElement) {
+                $selectedValues[] = $this->getOptionValueScalar($selectedValueElement);
+            }
         }
 
         $request = $this->getRequest();
