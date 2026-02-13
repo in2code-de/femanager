@@ -41,33 +41,42 @@ class TemplateUtility extends AbstractUtility
      *        will be returned. If TRUE all (possible) paths will be returned.
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     * @deprecated function signature will change in V14. The parameter $returnAllPaths will be removed
      */
     public static function getTemplateFolders(string $part = 'template', $returnAllPaths = false): array
     {
-        $templatePaths = [];
         $configuration = self::getConfigurationManager()
             ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'femanager');
-        if (!empty($configuration['view'][$part . 'RootPaths'] ?? '')) {
-            $templatePaths = $configuration['view'][$part . 'RootPaths'] ?? '';
-            $templatePaths = array_values($templatePaths);
+
+        $viewConfig = $configuration['view'] ?? [];
+        $rootPaths = $viewConfig[$part . 'RootPaths'] ?? [];
+
+        // Ensure sorting (highest index = highest priority)
+        if ($rootPaths !== []) {
+            ksort($rootPaths);
         }
 
-        if ($returnAllPaths || $templatePaths === []) {
-            $path = $configuration['view'][$part . 'RootPath'] ?? '';
-            if (!empty($path)) {
-                $templatePaths[] = $path;
+        // Fallback paths
+        $fallbacks = [];
+        if ($returnAllPaths || $rootPaths === []) {
+            if (!empty($viewConfig[$part . 'RootPath'])) {
+                $fallbacks[] = $viewConfig[$part . 'RootPath'];
             }
-
-            $templatePaths[] = 'EXT:femanager/Resources/Private/' . ucfirst($part) . 's/';
+            $fallbacks[] = 'EXT:femanager/Resources/Private/' . ucfirst($part) . 's/';
         }
 
-        $templatePaths = array_unique($templatePaths);
-        $absolutePaths = [];
-        foreach ($templatePaths as $templatePath) {
-            $absolutePaths[] = GeneralUtility::getFileAbsFileName($templatePath);
-        }
+        // Merge paths and remove duplicates. We use array_merge and array_unique here for clean indexes.
+        $templatePaths = array_unique(array_merge($rootPaths, $fallbacks));
 
-        return $absolutePaths;
+        // Convert paths into absolute paths
+        $absolutePaths = array_map(
+            [GeneralUtility::class, 'getFileAbsFileName'],
+            $templatePaths
+        );
+
+        // remove possible empty values e.g. if the given path to getFileAbsFileName can not be resolved
+        $filteredPaths = array_filter($absolutePaths);
+        return array_values($filteredPaths);
     }
 
     /**
