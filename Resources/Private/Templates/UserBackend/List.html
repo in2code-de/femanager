@@ -141,6 +141,8 @@ UserBackend / List
 										</f:comment>
 										<a title="{f:translate(key:'BackendListUserDelete')}"
 										   class="deleteUser cursorpointer btn btn-default"
+										   data-title="Delete User"
+										   data-content="Are you sure you want to delete this user?"
 										   href="{be:moduleLink(route:'tce_db', query:'cmd[fe_users][{user.uid}][delete]=1', currentUrlParameterName:'redirect')}"
 										>
 											<core:icon identifier="actions-edit-delete" />
