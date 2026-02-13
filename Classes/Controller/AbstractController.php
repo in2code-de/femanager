@@ -340,9 +340,9 @@ abstract class AbstractController extends ActionController
         $this->loginPreflight($user, $login);
         $variables = ['user' => $user, 'settings' => $this->settings, 'hash' => HashUtility::createHashForUser($user)];
         if (ConfigurationUtility::getValue(
-                'new./email./createUserNotify./sender./email./value',
-                $this->config
-            ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
+            'new./email./createUserNotify./sender./email./value',
+            $this->config
+        ) && ConfigurationUtility::getValue('new./email./createUserNotify./sender./name./value', $this->config)) {
             $this->sendMailService->send(
                 'createUserNotify',
                 StringUtility::makeEmailArray($user->getEmail(), $user->getFirstName() . ' ' . $user->getLastName()),
@@ -379,8 +379,10 @@ abstract class AbstractController extends ActionController
                 'createNotify',
                 StringUtility::makeEmailArray(
                     $createAdminNotify,
-                    ConfigurationUtility::getValue('new./email./createAdminNotify./receiver./name./value',
-                        $this->config)
+                    ConfigurationUtility::getValue(
+                        'new./email./createAdminNotify./receiver./name./value',
+                        $this->config
+                    )
                 ),
                 StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
                 $this->contentObject->cObjGetSingle(
@@ -664,8 +666,10 @@ abstract class AbstractController extends ActionController
             'createUserConfirmation',
             StringUtility::makeEmailArray($user->getEmail(), $user->getUsername()),
             StringUtility::makeEmailArray(
-                ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./email./value',
-                    $this->config),
+                ConfigurationUtility::getValue(
+                    'new./email./createUserConfirmation./sender./email./value',
+                    $this->config
+                ),
                 ConfigurationUtility::getValue('new./email./createUserConfirmation./sender./name./value', $this->config)
             ),
             $this->contentObject->cObjGetSingle(

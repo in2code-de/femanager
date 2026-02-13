@@ -24,7 +24,7 @@ class UserOptions
                     'select',
                     $params['items'][0], // please choose
                     $params['items'][1], // currently logged in user
-                )
+                ),
             ];
 
             foreach ($this->getUsers($params) as $user) {

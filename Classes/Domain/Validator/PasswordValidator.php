@@ -14,7 +14,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class PasswordValidator extends AbstractValidatorExtbase
 {
     protected ?ContentObjectRenderer $currentContentObject = null;
-   public array $extbaseArguments = [];
+    public array $extbaseArguments = [];
     public array $typoScriptConfiguration = [];
     protected string $referrerActionName = '';
 

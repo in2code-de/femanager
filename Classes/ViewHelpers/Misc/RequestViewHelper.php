@@ -86,5 +86,4 @@ class RequestViewHelper extends AbstractViewHelper
         }
         return null;
     }
-
 }

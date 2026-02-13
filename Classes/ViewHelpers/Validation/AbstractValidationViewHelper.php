@@ -36,10 +36,10 @@ abstract class AbstractValidationViewHelper extends AbstractViewHelper
      */
     protected function getControllerName(): string
     {
-       $request = $this->getRequest();
-       if (!$request) {
-           throw new FluidViewHelperException('Request object is missing.', 1638341336);
-       }
+        $request = $this->getRequest();
+        if (!$request) {
+            throw new FluidViewHelperException('Request object is missing.', 1638341336);
+        }
 
         return strtolower((string)$request->getControllerName());
     }

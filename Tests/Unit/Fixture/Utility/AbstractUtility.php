@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace In2code\Femanager\Tests\Unit\Fixture\Utility;
 
 use In2code\Femanager\Utility\AbstractUtility as AbstractUtilityFemanager;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class AbstractUtility extends AbstractUtilityFemanager
 {
-
     public static function getUserGroupRepositoryPublic(): \In2code\Femanager\Domain\Repository\UserGroupRepository
     {
         return self::getUserGroupRepository();

@@ -23,7 +23,6 @@ class ClientsideValidator extends AbstractValidator
      *            required, email, min(12), max(13), intOnly, lettersOnly,unicodeLettersOnly
      *            uniqueInPage, uniqueInDb, date, mustInclude(number,letter,special),
      *            inList(1,2,3)
-     *
      */
     protected string $validationSettingsString = '';
     protected string $value = '';

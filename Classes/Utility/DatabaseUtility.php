@@ -25,7 +25,9 @@ class DatabaseUtility
             ->select('*')
             ->from('pages')
             ->where(
-                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid)
+                $queryBuilder->expr()->eq(
+                    'uid',
+                    $queryBuilder->createNamedParameter($uid)
                 )
             )->executeQuery()->fetchAssociative();
     }

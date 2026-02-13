@@ -67,9 +67,9 @@ class SaveToAnyTableFinisher extends AbstractFinisher implements FinisherInterfa
     protected function isTableEnabled(string $table): bool
     {
         return $this->contentObject->cObjGetSingle(
-                (string)$this->finisherConfiguration[$table]['_enable'],
-                (array)$this->finisherConfiguration[$table]['_enable.']
-            ) === '1';
+            (string)$this->finisherConfiguration[$table]['_enable'],
+            (array)$this->finisherConfiguration[$table]['_enable.']
+        ) === '1';
     }
 
     /**

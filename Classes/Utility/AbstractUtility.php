@@ -6,7 +6,6 @@ namespace In2code\Femanager\Utility;
 
 use Exception;
 use In2code\Femanager\Domain\Repository\UserGroupRepository;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
@@ -18,7 +17,6 @@ use UnexpectedValueException;
 
 abstract class AbstractUtility
 {
-
     /**
      * @SuppressWarnings(PHPMD.Superglobals)
      * @codeCoverageIgnore

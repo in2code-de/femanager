@@ -7,8 +7,6 @@ use Psr\EventDispatcher\ListenerProviderInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Country\CountryProvider;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
-use TYPO3\CMS\Core\Http\ServerRequest;
-use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;

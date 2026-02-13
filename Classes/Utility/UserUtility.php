@@ -266,7 +266,7 @@ class UserUtility extends AbstractUtility
             if ($oldValue->getTimestamp() !== $newValue->getTimestamp()) {
                 return [
                     'old' => $oldValue->getTimestamp(),
-                    'new' => $newValue->getTimestamp()
+                    'new' => $newValue->getTimestamp(),
                 ];
             }
             return null;
@@ -289,7 +289,7 @@ class UserUtility extends AbstractUtility
             if ($oldValue->getUid() !== $newValue->getUid()) {
                 return [
                     'old' => $oldValue->getUid(),
-                    'new' => $newValue->getUid()
+                    'new' => $newValue->getUid(),
                 ];
             }
             return null;

@@ -2,7 +2,6 @@
 
 namespace In2code\Femanager\Tests\Unit\Utility;
 
-use GuzzleHttp\Psr7\ServerRequest;
 use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Tests\Helper\TestingHelper;
 use In2code\Femanager\Utility\FrontendUtility;

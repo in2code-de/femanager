@@ -83,7 +83,7 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
             return $this->validateRequired($value);
         }
 
-        if (array_key_exists($fieldName,$this->request->getUploadedFiles())) {
+        if (array_key_exists($fieldName, $this->request->getUploadedFiles())) {
             return true;
         }
 
@@ -296,16 +296,22 @@ abstract class AbstractValidator extends AbstractValidatorExtbase
         $dateParts = [];
         switch ($validationSetting) {
             case 'd.m.Y':
-                if (preg_match('/^(\d{2})\.(\d{2})\.(\d{4})$/', $value, $dateParts) && checkdate((int)$dateParts[2],
-                        (int)$dateParts[1], (int)$dateParts[3])) {
+                if (preg_match('/^(\d{2})\.(\d{2})\.(\d{4})$/', $value, $dateParts) && checkdate(
+                    (int)$dateParts[2],
+                    (int)$dateParts[1],
+                    (int)$dateParts[3]
+                )) {
                     return true;
                 }
 
                 break;
 
             case 'm/d/Y':
-                if (preg_match('/^(\d{2})\/(\d{2})\/(\d{4})$/', $value, $dateParts) && checkdate((int)$dateParts[1],
-                        (int)$dateParts[2], (int)$dateParts[3])) {
+                if (preg_match('/^(\d{2})\/(\d{2})\/(\d{4})$/', $value, $dateParts) && checkdate(
+                    (int)$dateParts[1],
+                    (int)$dateParts[2],
+                    (int)$dateParts[3]
+                )) {
                     return true;
                 }
 

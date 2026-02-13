@@ -17,7 +17,8 @@ class ValidationService
 {
     public function __construct(
         protected ValidatorResolver $validatorResolver
-    ) {}
+    ) {
+    }
 
     /**
      * @return array<FlashMessage>
@@ -31,7 +32,8 @@ class ValidationService
         if ($results->hasErrors()) {
             foreach ($results->getFlattenedErrors() as $errors) {
                 foreach ($errors as $error) {
-                    $validationErrors[] = GeneralUtility::makeInstance(FlashMessage::class,
+                    $validationErrors[] = GeneralUtility::makeInstance(
+                        FlashMessage::class,
                         LocalizationUtility::translate('validationErrorUniqueDb', 'femanager', $error->getArguments()),
                         $error->getTitle(),
                         ContextualFeedbackSeverity::ERROR,

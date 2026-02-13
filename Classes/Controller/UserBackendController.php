@@ -84,7 +84,7 @@ class UserBackendController extends AbstractController
                 'loginAsEnabled' => ConfigurationUtility::isEnableLoginAsActive(),
                 'configPID' => $this->getConfigPID(),
                 'currentSelectedPid' => BackendUtility::getPageIdentifier() ?? 0,
-                'filter' => $filter
+                'filter' => $filter,
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/List');
@@ -102,7 +102,7 @@ class UserBackendController extends AbstractController
                 ),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'confirmation',
-                'filter' => $filter
+                'filter' => $filter,
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/Confirmation');
@@ -158,7 +158,8 @@ class UserBackendController extends AbstractController
     /**
      * @deprecated will be removed with V14 use hasBackendUserAccessToFeUserStoragePage() from the BackendUserUtility
      */
-    private function checkPageAndUserAccess($user): bool {
+    private function checkPageAndUserAccess($user): bool
+    {
         trigger_error('will be removed with V14 use hasBackendUserAccessToFeUserStoragePage()');
         return BackendUserUtility::hasBackendUserAccessToFeUserStoragePage($user);
     }
@@ -210,7 +211,7 @@ class UserBackendController extends AbstractController
                 ),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'listOpenUserConfirmations',
-                'filter' => $filter
+                'filter' => $filter,
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/ListOpenUserConfirmations');
@@ -324,8 +325,10 @@ class UserBackendController extends AbstractController
      */
     private function loginAsEnabled(): bool
     {
-        trigger_error('will be removed with V14 use ConfigurationUtility::isEnableLoginAsActive() instead',
-            E_USER_DEPRECATED);
+        trigger_error(
+            'will be removed with V14 use ConfigurationUtility::isEnableLoginAsActive() instead',
+            E_USER_DEPRECATED
+        );
         $context = GeneralUtility::makeInstance(Context::class);
         if ($context->getPropertyFromAspect('backend.user', 'isAdmin') === true) {
             return true;

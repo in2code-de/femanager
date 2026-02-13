@@ -25,7 +25,7 @@ class GetCountriesViewHelper extends AbstractViewHelper
     public function render(): array
     {
         $request = $this->getRequest();
-        if(!$request) {
+        if (!$request) {
             return [];
         }
 
