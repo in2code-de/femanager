@@ -108,16 +108,11 @@ class NewController extends AbstractFrontendController
      * Dispatcher action for every confirmation request
      *
      * @param int $user User UID (user could be hidden)
-     * @param string $hash Given hash
-     * @param string $status
-     *              "userConfirmation", "userConfirmationRefused", "adminConfirmation",
+     * @param string $status "userConfirmation", "userConfirmationRefused", "adminConfirmation",
      *              "adminConfirmationRefused", "adminConfirmationRefusedSilent"
-     * @param string|null $adminHash
-     * @return ResponseInterface
      * @throws IllegalObjectTypeException
      * @throws PropagateResponseException
      * @throws UnknownObjectException
-     * @SuppressWarnings(PHPMD.ExitExpression)
      *
      * @todo refactor the complete status workflow for V14
      */
@@ -331,17 +326,13 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: Admin confirmation
      *
-     * @param User $user
-     * @param $hash
-     * @param string $status
-     * @param bool $backend
      * @return bool allow further functions
      * @throws IllegalObjectTypeException
      * @throws PropagateResponseException
      * @throws UnknownObjectException
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    protected function statusAdminConfirmation(User $user, $hash, string $status, bool $backend = false): bool
+    protected function statusAdminConfirmation(User $user, string $hash, string $status, bool $backend = false): bool
     {
         if (HashUtility::validHash($hash, $user)) {
             if ($user->getTxFemanagerConfirmedbyadmin()) {
@@ -378,12 +369,10 @@ class NewController extends AbstractFrontendController
     /**
      * Status action: Admin refused profile creation (normal or silent)
      *
-     * @param $hash
-     * @param $status
      * @return bool allow further functions
      * @throws IllegalObjectTypeException
      */
-    protected function statusAdminConfirmationRefused(User $user, $hash, $status): bool
+    protected function statusAdminConfirmationRefused(User $user, string $hash, string $status): bool
     {
         if (HashUtility::validHash($hash, $user)) {
             $this->logUtility->log(Log::STATUS_REGISTRATIONREFUSEDADMIN, $user);
@@ -453,7 +442,7 @@ class NewController extends AbstractFrontendController
     /**
      * Send email to user for confirmation
      */
-    protected function createUserConfirmationRequest(User $user): \Psr\Http\Message\ResponseInterface
+    protected function createUserConfirmationRequest(User $user): ResponseInterface
     {
         $this->sendCreateUserConfirmationMail($user);
         $this->addFlashMessage(LocalizationUtility::translate('createRequestWaitingForUserConfirm'));
@@ -463,7 +452,7 @@ class NewController extends AbstractFrontendController
     /**
      * Send email to admin for confirmation
      */
-    protected function createAdminConfirmationRequest(User $user)
+    protected function createAdminConfirmationRequest(User $user): void
     {
         $aacService = GeneralUtility::makeInstance(
             AutoAdminConfirmationService::class,
@@ -530,7 +519,7 @@ class NewController extends AbstractFrontendController
             $mail = $result['user']['email'] ?? '';
             if ($mail && GeneralUtility::validEmail($mail)) {
                 $user = $this->userRepository->findFirstByEmail($mail);
-                if (is_a($user, User::class)) {
+                if ($user instanceof User) {
                     $this->sendCreateUserConfirmationMail($user);
                     $this->addFlashMessage(
                         LocalizationUtility::translate('resendConfirmationMailSend'),
