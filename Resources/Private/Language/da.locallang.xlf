@@ -159,6 +159,10 @@
         <source>State</source>
         <target state="final">Status</target>
       </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.additional_properties">
+        <source>Additional Properties</source>
+        <target state="needs-translation">Additional Properties</target>
+      </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.100" approved="yes">
         <source>Registration</source>
         <target state="final">Registrerering</target>
@@ -254,6 +258,14 @@
       <trans-unit id="tx_femanager_domain_model_log.state.405" approved="yes">
         <source>Password changed and profile activated</source>
         <target state="final">Adgangskode ændret og profil aktiveret</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.501">
+        <source>Was impersonated by Backend User (login as)</source>
+        <target state="needs-translation">Was impersonated by Backend User (login as)</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.502">
+        <source>Impersonation was denied for Backend User (login as)</source>
+        <target state="needs-translation">Impersonation was denied for Backend User (login as)</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
         <source>User</source>
