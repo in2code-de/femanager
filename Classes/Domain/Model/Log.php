@@ -51,6 +51,9 @@ class Log extends AbstractEntity
 
     final public const STATUS_INVITATIONPROFILEENABLED = 405;
 
+    final public const STATUS_LOGIN_AS = 501;
+    final public const STATUS_LOGIN_AS_DENIED = 502;
+
     /**
      * title
      *
@@ -71,6 +74,8 @@ class Log extends AbstractEntity
      * @var User
      */
     protected $user;
+
+    protected string $additionalProperties = '';
 
     /**
      * @param string $title
@@ -123,5 +128,15 @@ class Log extends AbstractEntity
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function getAdditionalProperties(): string
+    {
+        return $this->additionalProperties;
+    }
+
+    public function setAdditionalProperties(string $additionalProperties): void
+    {
+        $this->additionalProperties = $additionalProperties;
     }
 }

@@ -120,6 +120,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state">
 				<source>State</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.additional_properties">
+				<source>Additional Properties</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.100">
 				<source>Registration</source>
 			</trans-unit>
@@ -191,6 +194,12 @@
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.405">
 				<source>Password changed and profile activated</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.501">
+				<source>Was impersonated by Backend User (login as)</source>
+			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.502">
+				<source>Impersonation was denied for Backend User (login as)</source>
 			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.user">
 				<source>User</source>
