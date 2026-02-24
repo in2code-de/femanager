@@ -114,6 +114,17 @@ class UserController extends AbstractFrontendController
         $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
 
         if (!BackendUserUtility::isAdminAuthentication()) {
+            $this->logUtility->log(
+                LOG::STATUS_LOGIN_AS_DENIED,
+                $user,
+                [
+                    'backendUser' => [
+                        'uid' => $GLOBALS['BE_USER']?->user['uid'],
+                        'username' => $GLOBALS['BE_USER']->user['username']
+                    ]
+                ]
+            );
+            $this->persistenceManager->persistAll();
             throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'), 1516373787864);
         }
 
@@ -121,6 +132,17 @@ class UserController extends AbstractFrontendController
             ->setTargetPageUid($redirectPid)
             ->setCreateAbsoluteUri(true)
             ->build();
+
+        $this->logUtility->log(
+            LOG::STATUS_LOGIN_AS,
+            $user,
+            [
+                'backendUser' => [
+                    'uid' => $GLOBALS['BE_USER']?->user['uid'],
+                    'username' => $GLOBALS['BE_USER']->user['username']
+                ]
+            ]
+        );
 
         // create a new session for the frontend user
         UserUtility::login($user);
