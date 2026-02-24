@@ -25,7 +25,7 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'title, crdate, state, user, ' .
+            'showitem' => 'title, crdate, state, user, additional_properties,' .
                 '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,sys_language_uid, ' .
                 'l10n_parent, l10n_diffsource, hidden, starttime, endtime',
         ],
@@ -162,9 +162,24 @@ return [
                         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.405',
                         'value' => Log::STATUS_INVITATIONPROFILEENABLED,
                     ],
+                    [
+                        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.501',
+                        'value' => Log::STATUS_LOGIN_AS,
+                    ],
+                    [
+                        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.502',
+                        'value' => Log::STATUS_LOGIN_AS_DENIED,
+                    ],
                 ],
                 'size' => 1,
                 'maxitems' => 1,
+            ],
+        ],
+        'additional_properties' => [
+            'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.additional_properties',
+            'config' => [
+                'type' => 'json',
+                'readOnly' => true,
             ],
         ],
         'user' => [
