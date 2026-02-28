@@ -259,13 +259,13 @@
         <source>Password changed and profile activated</source>
         <target state="final">Adgangskode ændret og profil aktiveret</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.501">
+      <trans-unit id="tx_femanager_domain_model_log.state.501" approved="yes">
         <source>Was impersonated by Backend User (login as)</source>
-        <target state="needs-translation">Was impersonated by Backend User (login as)</target>
+        <target state="final">Udgav sig for at være backend-bruger (logget på som)</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.502">
+      <trans-unit id="tx_femanager_domain_model_log.state.502" approved="yes">
         <source>Impersonation was denied for Backend User (login as)</source>
-        <target state="needs-translation">Impersonation was denied for Backend User (login as)</target>
+        <target state="final">Indlogning som backendbruger blev nægtet (logget ind som)</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
         <source>User</source>
