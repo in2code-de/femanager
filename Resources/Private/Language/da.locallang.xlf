@@ -159,9 +159,9 @@
         <source>State</source>
         <target state="final">Status</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.additional_properties">
+      <trans-unit id="tx_femanager_domain_model_log.additional_properties" approved="yes">
         <source>Additional Properties</source>
-        <target state="needs-translation">Additional Properties</target>
+        <target state="final">Yderligere egenskaber</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.100" approved="yes">
         <source>Registration</source>
