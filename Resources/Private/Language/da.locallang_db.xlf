@@ -175,9 +175,9 @@
         <source>State</source>
         <target state="final">Tilstand</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.additional_properties">
+      <trans-unit id="tx_femanager_domain_model_log.additional_properties" approved="yes">
         <source>Additional Properties</source>
-        <target state="needs-translation">Additional Properties</target>
+        <target state="final">Yderligere egenskaber</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.100" approved="yes">
         <source>Registration</source>
@@ -275,13 +275,13 @@
         <source>Password changed and Profile activated</source>
         <target state="final">Adgangskode ændret og profil aktiveret</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.501">
+      <trans-unit id="tx_femanager_domain_model_log.state.501" approved="yes">
         <source>Was impersonated by Backend Admin (login as)</source>
-        <target state="needs-translation">Was impersonated by Backend Admin (login as)</target>
+        <target state="final">Udgav sig for at være backend-adminbruger (logget på som)</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.502">
+      <trans-unit id="tx_femanager_domain_model_log.state.502" approved="yes">
         <source>Impersonation was denied for Backend User (login as)</source>
-        <target state="needs-translation">Impersonation was denied for Backend User (login as)</target>
+        <target state="final">Indlogning som backendbruger blev nægtet (logget ind som)</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
         <source>User</source>
