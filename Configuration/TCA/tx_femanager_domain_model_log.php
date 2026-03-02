@@ -259,6 +259,14 @@ return [
                         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.502',
                         'value' => Log::STATUS_LOGIN_AS_DENIED,
                     ],
+                    [
+                        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.601',
+                        'value' => Log::STATUS_FRONTEND_LOGIN_SUCCESSFUL,
+                    ],
+                    [
+                        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.602',
+                        'value' => Log::STATUS_FRONTEND_LOGIN_FAILED,
+                    ],
                 ],
                 'size' => 1,
                 'maxitems' => 1,
@@ -272,6 +280,15 @@ return [
             ],
         ],
         'user' => [
+            'label' => 'User',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'fe_user',
+                'default' => 0,
+            ]
+        ],
+        'tstamp' => [
             'config' => [
                 'type' => 'passthrough',
             ],

@@ -12,11 +12,11 @@
 			<div class="typo3-docheader-functions">
 				<div class="module-docheader-bar module-docheader-bar-navigation">
 					<div class="module-docheader-bar-column-left">
-						<f:if condition="{femanager:be.isConfirmationModuleActivated()}">
-							<div class="btn-group btn-group-xs" role="group">
-								<f:link.action action="list" class="btn btn-default{femanager:Be.GetClassNameOnAction(actionName:'list')}">
-									<f:translate key="BackendSelectionList">List</f:translate>
-								</f:link.action>
+						<div class="btn-group btn-group-xs" role="group">
+							<f:link.action action="list" class="btn {f:if(condition: '{action}==\'list\'',then:' btn-primary', else:' btn-default')}{femanager:Be.GetClassNameOnAction(actionName:'list')}">
+								<f:translate key="BackendSelectionList">List</f:translate>
+							</f:link.action>
+							<f:if condition="{femanager:be.isConfirmationModuleActivated()}">
 								<f:link.action action="confirmation" class="btn btn-default{femanager:Be.GetClassNameOnAction(actionName:'confirmation')}">
 									<f:translate key="BackendSelectionList">Admin Confirmation</f:translate>
 								</f:link.action>
@@ -25,8 +25,13 @@
 										<f:translate key="BackendSelectionList">Open User Confirmtions</f:translate>
 									</f:link.action>
 								</f:if>
-							</div>
-						</f:if>
+							</f:if>
+							<f:if condition="{logEnabled}">
+								<f:link.action action="log" class="btn  {f:if(condition: '{action}==\'log\'',then:' btn-primary', else:' btn-default')}">
+									Log
+								</f:link.action>
+							</f:if>
+						</div>
 					</div>
 					<div class="module-docheader-bar-column-right">
 						<f:be.pagePath />

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace In2code\Femanager\Domain\Model;
 
+use DateTimeImmutable;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -11,6 +12,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Log extends AbstractEntity
 {
+    public const TABLE_NAME = 'tx_femanager_domain_model_log';
+
     final public const STATUS_NEWREGISTRATION = 101;
     final public const STATUS_REGISTRATIONCONFIRMEDUSER = 102;
     final public const STATUS_REGISTRATIONCONFIRMEDADMIN = 103;
@@ -34,82 +37,47 @@ class Log extends AbstractEntity
     final public const STATUS_LOGIN_AS = 501;
     final public const STATUS_LOGIN_AS_DENIED = 502;
 
-    /**
-     * title
-     *
-     * @var string
-     */
-    protected $title;
+    final public const STATUS_FRONTEND_LOGIN_SUCCESSFUL = 601;
+    final public const STATUS_FRONTEND_LOGIN_FAILED = 602;
 
-    /**
-     * state
-     *
-     * @var int
-     */
-    protected $state;
-
-    /**
-     * user
-     *
-     * @var User
-     */
-    protected $user;
-
+    protected string $title;
+    protected int $state;
+    protected ?User $user = null;
+    protected DateTimeImmutable $tstamp;
     protected string $additionalProperties = '';
 
-    /**
-     * @param string $title
-     * @return Log
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): static
     {
         $this->title = $title;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
      * @param int $state
-     * @return Log
      */
-    public function setState($state)
+    public function setState($state): static
     {
         $this->state = $state;
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getState()
+    public function getState(): int
     {
         return $this->state;
     }
 
-    /**
-     * Set user
-     *
-     * @return Log
-     */
-    public function setUser(User $user)
+    public function setUser(?User $user): static
     {
         $this->user = $user;
         return $this;
     }
 
-    /**
-     * Get user
-     *
-     * @return User
-     */
-    public function getUser()
+    public function getUser(): ?User
     {
         return $this->user;
     }
@@ -122,5 +90,20 @@ class Log extends AbstractEntity
     public function setAdditionalProperties(string $additionalProperties): void
     {
         $this->additionalProperties = $additionalProperties;
+    }
+
+    public function getAdditionalPropertiesAsArray(): array
+    {
+        return json_decode($this->additionalProperties, true) ?? [];
+    }
+
+    public function getTstamp(): DateTimeImmutable
+    {
+        return $this->tstamp;
+    }
+
+    public function setTstamp(DateTimeImmutable $tstamp): void
+    {
+        $this->tstamp = $tstamp;
     }
 }

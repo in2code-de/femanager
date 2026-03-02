@@ -1,0 +1,43 @@
+{namespace femanager=In2code\Femanager\ViewHelpers}
+{namespace core=TYPO3\CMS\Core\ViewHelpers}
+{namespace be=TYPO3\CMS\Backend\ViewHelpers}
+<f:layout name="Backend"/>
+
+<f:section name="main">
+	<div class="t3js-module-body">
+		<f:render partial="Backend/Log/Filter" arguments="{_all}"/>
+
+		<f:for each="{groupedLogEntries}" as="day" key="dayTimestamp">
+			<h3>
+				<f:format.date format="{settings.dateFormat}">@{dayTimestamp}</f:format.date>
+			</h3>
+
+			<div class="table-fit">
+				<table class="table table-striped table-hover">
+					<thead>
+					<tr>
+						<th><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:log.headline.time" /></th>
+						<th><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:log.headline.state" /></th>
+						<th><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:log.headline.user" /></th>
+						<th><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:log.headline.details" /></th>
+					</tr>
+					</thead>
+					<tbody>
+						<f:for each="{day}" as="log">
+							<tr>
+								<td><f:format.date format="H:i:s">{log.tstamp}</f:format.date></td>
+								<td><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.{log.state}" /></td>
+								<td>{log.user.username}</td>
+								<td>
+									<f:if condition="{log.additionalProperties}">
+										<femanager:be.renderData data="{log.additionalPropertiesAsArray}" />
+									</f:if>
+								</td>
+							</tr>
+						</f:for>
+					</tbody>
+				</table>
+			</div>
+		</f:for>
+	</div>
+</f:section>

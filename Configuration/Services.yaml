@@ -8,6 +8,11 @@ services:
       resource: '../Classes/*'
       exclude: '../Classes/Domain/Model/*'
 
+    In2code\Femanager\EventListener\FrontendLoginEventListener:
+      tags:
+        - name: event.listener
+          identifier: 'femanager/frontend-login'
+
     In2code\Femanager\Domain\Validator\AbstractValidator:
       public: true
     In2code\Femanager\DataProvider\CountryDataProvider:

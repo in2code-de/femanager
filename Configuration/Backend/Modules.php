@@ -16,6 +16,7 @@ if (!ConfigurationUtility::isDisableModuleActive()) {
             'controllerActions' => [
                 UserBackendController::class => [
                     'list',
+                    'log',
                     'confirmation',
                     'userLogout',
                     'confirmUser',

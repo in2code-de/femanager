@@ -1,8 +1,18 @@
 define(
     [
-        'jquery'
+        'jquery',
+        'TYPO3/CMS/Backend/DateTimePicker',
+        'TYPO3/CMS/Backend/Input/Clearable'
     ],
-    function ($) {
+    function ($, DateTimePicker) {
+
+        document.querySelectorAll('.module .t3js-clearable').forEach(function (el) {
+            el.clearable();
+        });
+        document.querySelectorAll('.module .t3js-datetimepicker').forEach(function (el) {
+            DateTimePicker.initializeField(el)
+        });
+
         $(document).ready(function ($) {
             // Hide/Unhide User
             $('.hideUser, .unhideUser').click(function () {
