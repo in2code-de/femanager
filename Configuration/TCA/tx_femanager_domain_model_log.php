@@ -183,6 +183,15 @@ return [
             ],
         ],
         'user' => [
+            'label' => 'User',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'fe_user',
+                'default' => 0,
+            ]
+        ],
+        'tstamp' => [
             'config' => [
                 'type' => 'passthrough',
             ],

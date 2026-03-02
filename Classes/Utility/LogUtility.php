@@ -26,17 +26,20 @@ class LogUtility
 
     /**
      * @param int $state State to log
-     * @param User $user Related User
+     * @param ?User $user Related User
      * @param array $additionalProperties for individual logging
      * @codeCoverageIgnore
      */
-    public function log($state, User $user, array $additionalProperties = []): void
+    public function log($state, ?User $user = null, array $additionalProperties = []): void
     {
         if (!ConfigurationUtility::isDisableLogActive()) {
             $log = GeneralUtility::makeInstance(Log::class);
             $log->setTitle(LocalizationUtility::translateByState($state));
             $log->setState($state);
-            $log->setUser($user);
+
+            if ($user) {
+                $log->setUser($user);
+            }
 
             if (!empty($additionalProperties)) {
                 try {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace In2code\Femanager\Controller;
 
 use In2code\Femanager\Domain\Model\User;
+use In2code\Femanager\Domain\Repository\LogRepository;
 use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Domain\Service\SendMailService;
@@ -47,7 +48,8 @@ class UserBackendController extends AbstractController
         protected SendMailService $sendMailService,
         protected FinisherRunner $finisherRunner,
         protected LogUtility $logUtility,
-        protected ModuleTemplateFactory $moduleTemplateFactory
+        protected ModuleTemplateFactory $moduleTemplateFactory,
+        protected LogRepository $logRepository
     ) {
         parent::__construct(
             $this->userRepository,
@@ -82,12 +84,38 @@ class UserBackendController extends AbstractController
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'list',
                 'loginAsEnabled' => ConfigurationUtility::isEnableLoginAsActive(),
+                'logEnabled' => !ConfigurationUtility::isDisableLogActive(),
                 'configPID' => $this->getConfigPID(),
                 'currentSelectedPid' => BackendUtility::getPageIdentifier() ?? 0,
                 'filter' => $filter,
             ]
         );
         return $this->moduleTemplate->renderResponse('UserBackend/List');
+    }
+
+    public function logAction(array $filter = []): ResponseInterface
+    {
+        $this->moduleTemplate->assignMultiple([
+                'users' => $this->userRepository->findAllInBackend([]),
+                'groupedLogEntries' => $this->groupLogEntriesDay($this->logRepository->findByFilter($filter)),
+                'action' => 'log',
+                'logEnabled' => !ConfigurationUtility::isDisableLogActive(),
+                'filter' => array_filter($filter)
+            ]
+        );
+
+        return $this->moduleTemplate->renderResponse('UserBackend/Log');
+    }
+
+    protected function groupLogEntriesDay(iterable $logEntries): iterable
+    {
+        $targetStructure = [];
+        foreach ($logEntries as $entry) {
+            $timestampDay = strtotime($entry->getTstamp()->format('Y-m-d'));
+            $targetStructure[$timestampDay][] = $entry;
+        }
+        krsort($targetStructure);
+        return $targetStructure;
     }
 
     public function confirmationAction(array $filter = []): ResponseInterface
@@ -101,6 +129,7 @@ class UserBackendController extends AbstractController
                     ConfigurationUtility::isBackendModuleFilterUserConfirmation()
                 ),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
+                'logEnabled' => !ConfigurationUtility::isDisableLogActive(),
                 'action' => 'confirmation',
                 'filter' => $filter,
             ]
@@ -211,6 +240,7 @@ class UserBackendController extends AbstractController
                 ),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'listOpenUserConfirmations',
+                'logEnabled' => !ConfigurationUtility::isDisableLogActive(),
                 'filter' => $filter,
             ]
         );

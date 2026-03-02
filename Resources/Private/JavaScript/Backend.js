@@ -2,6 +2,15 @@ import RegularEvent from '@typo3/core/event/regular-event.js';
 import Notification from '@typo3/backend/notification.js';
 import Modal from '@typo3/backend/modal.js';
 import Severity from '@typo3/backend/severity.js';
+import DateTimePicker from '@typo3/backend/date-time-picker.js';
+import '@typo3/backend/input/clearable.js'; // Der reine Import reicht völlig aus!
+
+function initializeDateTimePickerElements() {
+    const dateTimePickerElements = document.querySelectorAll('.t3js-datetimepicker');
+    dateTimePickerElements.forEach(e => DateTimePicker.initialize(e));
+}
+
+initializeDateTimePickerElements();
 
 new RegularEvent('click', (event, target) => {
     event.preventDefault();

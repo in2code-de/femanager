@@ -1,0 +1,112 @@
+<html
+	xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+	data-namespace-typo3-fluid="true">
+
+<f:form action="log" name="filter">
+	<f:asset.module identifier="@typo3/backend/date-time-picker.js"/>
+
+	<div class="form-row">
+		<div class="form-group">
+			<label for="user" class="form-label"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:filter.user" /></label>
+			<f:form.select
+				prependOptionLabel="{f:translate(key='LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:all')}"
+				prependOptionValue="0"
+				name="filter[user]"
+				class="form-select"
+				options="{users}"
+				optionLabelField="username"
+				value="{filter.user}"
+				id="user">
+			</f:form.select>
+		</div>
+
+			<div class="form-group">
+				<label for="state" class="form-label"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:filter.state" /></label>
+				<f:form.select
+					prependOptionLabel="{f:translate(key='LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:all')}"
+					prependOptionValue=""
+					class="form-select"
+					name="filter[state]"
+					id="state">
+						<f:form.select.optgroup label="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.100')}">
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_NEWREGISTRATION')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.101" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_REGISTRATIONCONFIRMEDUSER')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.102" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_REGISTRATIONCONFIRMEDADMIN')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.103" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_REGISTRATIONREFUSEDUSER')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.104" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_REGISTRATIONREFUSEDADMIN')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.105" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_PROFILECREATIONREQUEST')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.106" /></f:form.select.option>
+						</f:form.select.optgroup>
+						<f:form.select.optgroup label="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.100')}">
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_PROFILEUPDATED')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.201" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_PROFILEUPDATECONFIRMEDADMIN')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.202" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_PROFILEUPDATEREFUSEDADMIN')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.203" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_PROFILEUPDATEREQUEST')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.204" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_PROFILEUPDATEREFUSEDSECURITY')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.205" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_PROFILEUPDATEIMAGEDELETE')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.206" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_PROFILEUPDATEATTEMPTEDSPOOF')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.207" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_PROFILEUPDATENOTAUTHORIZED')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.208" /></f:form.select.option>
+						</f:form.select.optgroup>
+						<f:form.select.optgroup label="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.300')}">
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_PROFILEDELETE')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.301" /></f:form.select.option>
+						</f:form.select.optgroup>
+						<f:form.select.optgroup label="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.400')}">
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_INVITATIONPROFILECREATED')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.401" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_INVITATIONPROFILEDELETEDUSER')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.402" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_INVITATIONHASHERROR')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.403" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_INVITATIONRESTRICTEDPAGE')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.404" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_INVITATIONPROFILEENABLED')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.405" /></f:form.select.option>
+						</f:form.select.optgroup>
+						<f:form.select.optgroup label="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.500')}">
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_LOGIN_AS')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.501" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_LOGIN_AS_DENIED')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.502" /></f:form.select.option>
+						</f:form.select.optgroup>
+						<f:form.select.optgroup label="{f:translate(key:'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.600')}">
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_FRONTEND_LOGIN_SUCCESSFUL')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.601" /></f:form.select.option>
+							<f:form.select.option value="{f:constant(name: '\In2code\Femanager\Domain\Model\Log::STATUS_FRONTEND_LOGIN_FAILED')}"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.602" /></f:form.select.option>
+						</f:form.select.optgroup>
+				</f:form.select>
+			</div>
+
+		<div class="form-group">
+			<label for="fromDate" class="form-label"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:filter.from" /></label>
+			<div class="input-group">
+				<f:form.textfield
+					name="filter[fromDate]"
+					value="{f:format.date(format:'Y-m-d\TH:i:s\Z', date: '{filter.fromDate}')}"
+					id="fromDate"
+					type="text"
+					additionalAttributes="{'autocomplete': 'off'}"
+					class="form-control t3js-datetimepicker t3js-clearable"
+					data="{date-type: 'datetime'}"
+				/>
+				<label class="btn btn-default" for="fromDate">
+					<core:icon identifier="actions-calendar" />
+				</label>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="untilDate" class="form-label"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:filter.to" /></label>
+			<div class="input-group">
+				<f:form.textfield
+					name="filter[untilDate]"
+					value="{f:format.date(format:'Y-m-d\TH:i:s\Z', date: '{filter.untilDate}')}"
+					additionalAttributes="{'autocomplete': 'off'}"
+					id="untilDate"
+					class="form-control form-control-clearable t3js-datetimepicker"
+					data="{date-type: 'datetime'}"
+				/>
+				<label class="btn btn-default" for="untilDate">
+					<core:icon identifier="actions-calendar" />
+				</label>
+			</div>
+		</div>
+
+		<div class="form-group align-self-end">
+			<f:form.button type="submit" class="btn btn-primary"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:filter.filter" /></f:form.button>
+			<f:link.action action="log" class="btn btn-link"><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:filter.reset" /></f:link.action>
+		</div>
+	</div>
+</f:form>
+</html>
