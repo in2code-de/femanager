@@ -1596,7 +1596,7 @@ plugin.tx_femanager {
     list {
       filter {
         searchword {
-          fieldsToSearch = address, city, company, country, email, fax, first_name, image, last_name, middle_name, name, telephone, title, usergroup.title, username, www, zip
+          fieldsToSearch = address, city, company, country, email, fax, first_name, last_name, middle_name, name, telephone, title, usergroup.title, username, www, zip
         }
       }
     }
