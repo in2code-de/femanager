@@ -4,6 +4,17 @@
 Changelog
 =========
 -
+      :Version: 8.4.0
+      :Date: 2026-03-03
+      :Changes:
+      * [FEATURE] Add log backend view, frontend login logging and log cleanup command - thx to Sebastian Stein (in2code)
+      * [FEATURE] Add logging for loginAs impersonation attempts - thx to Sebastian Stein (in2code)
+      * [BUGFIX] remove feature check from isAdminAuthentication() - thx to Sebastian Stein (in2code)
+      * [BUGFIX] Apply TCA migrations for TYPO3 12LTS - thx Oliver Klee
+      * [BACKPORT][BUGFIX] respect "includeHiddenContent" for plugin validation - thx to Sebastian Stein (in2code)
+      * []BUGFIX] admin confirm/refuse backend actions  - thx to Stefan Busemann (in2code)
+      * [BUGFIX Remove errorneous function call from partial revert - thx to Andreas Nedbal (in2code)
+-
       :Version: 8.3.3
       :Date: 2025-09-25
       :Changes:
