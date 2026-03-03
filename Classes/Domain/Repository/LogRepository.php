@@ -6,10 +6,15 @@ namespace In2code\Femanager\Domain\Repository;
 
 use DateTimeImmutable;
 use Exception;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class LogRepository extends Repository
 {
+    protected $defaultOrderings = array(
+        'tstamp' => QueryInterface::ORDER_DESCENDING
+    );
+
     public function findByFilter(array $filter): iterable
     {
         $constraints = [];

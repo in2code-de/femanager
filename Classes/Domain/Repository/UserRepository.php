@@ -37,6 +37,19 @@ class UserRepository extends Repository
         return $user;
     }
 
+    public function findByUsername(string $username): ?User
+    {
+        $query = $this->createQuery();
+        $this->ignoreEnableFieldsAndStoragePage($query);
+        $query->getQuerySettings()->setRespectSysLanguage(false);
+        $and = $query->equals('username', $username);
+
+        /** @var User|null $user */
+        $user = $query->matching($query->logicalAnd($and))->execute()->getFirst();
+
+        return $user;
+    }
+
     /**
      * Find users by commaseparated usergroup list
      *
