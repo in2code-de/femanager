@@ -155,6 +155,22 @@ class NewController extends AbstractFrontendController
             return $this->htmlResponse();
         }
 
+
+        if ($status === 'userConfirmationRefused' && ConfigurationUtility::getValue(
+                'new./email./createUserConfirmation./confirmUserConfirmationRefused',
+                $this->config
+            ) == '1') {
+            $this->view->assignMultiple(
+                [
+                    'user' => $user,
+                    'status' => 'confirmDeletion',
+                    'hash' => $hash,
+                ]
+            );
+            $this->assignForAll();
+            return $this->htmlResponse();
+        }
+
         if ($status === 'adminConfirmation' && ConfigurationUtility::getValue(
                 'new./email./createUserConfirmation./confirmAdminConfirmation',
                 $this->config
