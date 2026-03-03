@@ -32,16 +32,17 @@ Quick guide:
 ## Which femanager for which TYPO3 and PHP?
 
 | Femanager | TYPO3     | PHP       | Support/Development                                               | Branch |
-|-----------|-----------|-----------|-------------------------------------------------------------------|-------|
-| 13.x      | 13 LTS    | 8.2 - 8.4 | Features, Bugfixes, Security Updates                              | main  |
-| 8.x       | 12 LTS    | 8.1 - 8.2 | Bugfixes, Security Updates                                        | v8    |
-| 7.x       | 11 ELTS   | 7.4 - 8.1 | Security Updates - If you want feature backports ask for an offer | v7    |
-| 6.x       | 10 ELTS   | 7.2 - 7.4 | Security Updates - If you want feature backports ask for an offer | v6    |
-| 5.x       | 8, 9 LTS  | 7.2 - 7.3 | Out of support / security updates on demand (ask for an offer)    | v5    |
-| 4.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer)    | n/a   |
-| 3.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer)    | n/a   |
-| 2.x       | 7.6       | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer)    | v2    |
-| 1.x       | 6.2 - 7.6 | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer)    | n/a   |
+|-----------|-----------|-----------|-------------------------------------------------------------------|--------|
+| 14.x      | 14 LTS    | 8.2 - 8.4 | Features, Bugfixes, Security Updates                              | main   |
+| 13.x      | 13 LTS    | 8.2 - 8.4 | Bugfixes, Security Updates                                        | V13    |
+| 8.x       | 12 LTS    | 8.1 - 8.2 | Security Updates                                                  | v8     |
+| 7.x       | 11 ELTS   | 7.4 - 8.1 | Security Updates - If you want feature backports ask for an offer | v7     |
+| 6.x       | 10 ELTS   | 7.2 - 7.4 | Out of support / security updates on demand (ask for an offer)    | v6     |
+| 5.x       | 8, 9 LTS  | 7.2 - 7.3 | Out of support / security updates on demand (ask for an offer)    | v5     |
+| 4.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer)    | n/a    |
+| 3.x       | 8.7       | 7.0 - 7.2 | Out of support / security updates on demand (ask for an offer)    | n/a    |
+| 2.x       | 7.6       | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer)    | v2     |
+| 1.x       | 6.2 - 7.6 | 5.5 - 7.0 | Out of support / security updates on demand (ask for an offer)    | n/a    |
 
 ## Your Contribution
 

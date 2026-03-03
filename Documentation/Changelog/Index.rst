@@ -4,6 +4,27 @@
 Changelog
 =========
 -
+      :Version: 13.3.0
+      :Date: 2026-03-03
+      :Changes:
+      * [FEATURE] Add log backend view, frontend login logging and log cleanup command - thx to Sebastian Stein (in2code)
+      * [FEATURE] Add logging for loginAs impersonation attempts
+      * [BUGFIX] add missing status "confirmAdminRefusedSilent" to statusAdminConfirmationRefused - thx Sebastian Stein (in2code)
+      * []BUGFIX] Compatibility with PostgreSQL - thx to https://github.com/sgrossberndt
+      * [BUGFIX] Support multiple values in SelectViewHelper - thx to Devid Messner
+      * [BUGFIX] Prefer explicit name over property in SelectViewHelper - thx Sebastian Stein (in2code)
+      * [BUGFIX] prevent exception if getValueAttribute() of SelectViewHelper is null - thx Sebastian Stein (in2code)
+      * [BUGFIX] add missing property to usergroup select  - thx Sebastian Stein (in2code)
+      * [BUGFIX] execute serversideValidator user after modifications - thx Sebastian Stein (in2code)
+      * [BUGFIX] remove feature check from isAdminAuthentication() - thx Sebastian Stein (in2code)
+      * [BUGFIX] prevent captcha bypass if captcha is used in combination with sr_freecap - thx Sebastian Stein (in2code)
+      * [BUGFIX] respect "includeHiddenContent" for plugin validation - thx Sebastian Stein (in2code)
+      * [TASK] add deprecation annotations - thx Sebastian Stein (in2code)
+      * [REFACTOR] Backend.js to use TYPO3 v13 ES module APIs - thx Sebastian Stein (in2code)
+      * [REFACTOR] Optimize dirty property detection for Users - thx Sebastian Stein (in2code)
+      * [CLEANUP] Remove unused and outdated code - thx Sebastian Stein (in2code)
+
+-
       :Version: 13.2.1
       :Date: 2025-12-18
       :Changes:
