@@ -175,13 +175,25 @@ class UserRepository extends Repository
      *
      * @param array $filter Filter Array
      */
-    public function findAllInBackend(array $filter): QueryResultInterface|array
+    public function findOnPageByBackendFilter(array $filter): QueryResultInterface|array
     {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);
         $and = [$query->greaterThan('uid', 0)];
         $and = $this->filterByPage($and, $query);
         $and = $this->filterBySearchword($filter, $query, $and);
+
+        $query->matching($query->logicalAnd(...$and));
+        $query->setOrderings(['username' => QueryInterface::ORDER_ASCENDING]);
+
+        return $query->execute();
+    }
+
+    public function findAllWithoutDeleted(): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $this->ignoreEnableFieldsAndStoragePage($query);
+        $and = [$query->greaterThan('uid', 0)];
 
         $query->matching($query->logicalAnd(...$and));
         $query->setOrderings(['username' => QueryInterface::ORDER_ASCENDING]);
