@@ -267,6 +267,18 @@
         <source>Impersonation was denied for Backend User (login as)</source>
         <target state="needs-translation">Impersonation was denied for Backend User (login as)</target>
       </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.600">
+        <source>Frontend Login</source>
+        <target state="needs-translation">Frontend Login</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.601">
+        <source>Successful frontend login</source>
+        <target state="needs-translation">Successful frontend login</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.602">
+        <source>Failed frontend login</source>
+        <target state="needs-translation">Failed frontend login</target>
+      </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
         <source>User</source>
         <target state="final">Пользователь</target>
