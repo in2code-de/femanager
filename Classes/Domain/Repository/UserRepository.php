@@ -170,7 +170,7 @@ class UserRepository extends Repository
      *
      * @param array $filter Filter Array
      */
-    public function findAllInBackend(array $filter): QueryResultInterface|array
+    public function findOnPageByBackendFilter(array $filter): QueryResultInterface|array
     {
         $query = $this->createQuery();
         $this->ignoreEnableFieldsAndStoragePage($query);
@@ -182,6 +182,18 @@ class UserRepository extends Repository
         $records = $query->execute();
 
         return $records;
+    }
+
+    public function findAllWithoutDeleted(): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $this->ignoreEnableFieldsAndStoragePage($query);
+        $and = [$query->greaterThan('uid', 0)];
+
+        $query->matching($query->logicalAnd(...$and));
+        $query->setOrderings(['username' => QueryInterface::ORDER_ASCENDING]);
+
+        return $query->execute();
     }
 
     /**

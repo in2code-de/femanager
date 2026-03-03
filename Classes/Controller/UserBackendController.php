@@ -89,7 +89,7 @@ class UserBackendController extends AbstractController
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $this->moduleTemplate->assignMultiple(
             [
-                'users' => $this->userRepository->findAllInBackend($filter),
+                'users' => $this->userRepository->findOnPageByBackendFilter($filter),
                 'moduleUri' => $uriBuilder->buildUriFromRoute('tce_db'),
                 'action' => 'list',
                 'loginAsEnabled' => $this->loginAsEnabled(),
@@ -105,7 +105,7 @@ class UserBackendController extends AbstractController
     public function logAction(array $filter = []): ResponseInterface
     {
         $this->moduleTemplate->assignMultiple([
-                'users' => $this->userRepository->findAllInBackend([]),
+                'users' => $this->userRepository->findAllWithoutDeleted(),
                 'groupedLogEntries' => $this->groupLogEntriesDay($this->logRepository->findByFilter($filter)),
                 'action' => 'log',
                 'logEnabled' => !ConfigurationUtility::isDisableLogActive(),
