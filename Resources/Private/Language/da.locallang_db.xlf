@@ -275,6 +275,10 @@
         <source>Password changed and Profile activated</source>
         <target state="final">Adgangskode ændret og profil aktiveret</target>
       </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.500">
+        <source>Backend impersonation</source>
+        <target state="needs-translation">Backend impersonation</target>
+      </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.501" approved="yes">
         <source>Was impersonated by Backend Admin (login as)</source>
         <target state="final">Udgav sig for at være backend-adminbruger (logget på som)</target>
@@ -282,6 +286,22 @@
       <trans-unit id="tx_femanager_domain_model_log.state.502" approved="yes">
         <source>Impersonation was denied for Backend User (login as)</source>
         <target state="final">Indlogning som backendbruger blev nægtet (logget ind som)</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.600">
+        <source>Frontend Login</source>
+        <target state="needs-translation">Frontend Login</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.601">
+        <source>Successful frontend login</source>
+        <target state="needs-translation">Successful frontend login</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.602">
+        <source>Failed frontend login</source>
+        <target state="needs-translation">Failed frontend login</target>
+      </trans-unit>
+      <trans-unit id="all">
+        <source>All</source>
+        <target state="needs-translation">All</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
         <source>User</source>
@@ -474,6 +494,46 @@
       <trans-unit id="noZonesForThisCountry" approved="yes">
         <source>No zones available for the chosen country</source>
         <target state="final">Ingen zoner tilgængelige for det valgte land</target>
+      </trans-unit>
+      <trans-unit id="filter.filter">
+        <source>Filter</source>
+        <target state="needs-translation">Filter</target>
+      </trans-unit>
+      <trans-unit id="filter.reset">
+        <source>Reset</source>
+        <target state="needs-translation">Reset</target>
+      </trans-unit>
+      <trans-unit id="filter.user">
+        <source>User</source>
+        <target state="needs-translation">User</target>
+      </trans-unit>
+      <trans-unit id="filter.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="filter.from">
+        <source>From</source>
+        <target state="needs-translation">From</target>
+      </trans-unit>
+      <trans-unit id="filter.to">
+        <source>To</source>
+        <target state="needs-translation">To</target>
+      </trans-unit>
+      <trans-unit id="log.headline.time">
+        <source>Time</source>
+        <target state="needs-translation">Time</target>
+      </trans-unit>
+      <trans-unit id="log.headline.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="log.headline.user">
+        <source>User</source>
+        <target state="needs-translation">User</target>
+      </trans-unit>
+      <trans-unit id="log.headline.details">
+        <source>Details</source>
+        <target state="needs-translation">Details</target>
       </trans-unit>
     </body>
   </file>
