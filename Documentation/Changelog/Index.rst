@@ -4,6 +4,12 @@
 Changelog
 =========
 -
+      :Version: 13.3.1
+      :Date: 2025-12-18
+      :Changes:
+      * [BUGFIX] prevent dependency injection exception if sf_freecap is not present
+
+-
       :Version: 13.3.0
       :Date: 2026-03-03
       :Changes:
