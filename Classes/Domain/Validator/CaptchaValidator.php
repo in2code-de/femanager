@@ -6,8 +6,8 @@ namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Repository\UserRepository;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class CaptchaValidator extends AbstractValidator
@@ -16,7 +16,6 @@ class CaptchaValidator extends AbstractValidator
         UserRepository $userRepository,
         ConfigurationManagerInterface $configurationManager,
         EventDispatcherInterface $eventDispatcher,
-        protected readonly WordRepository $wordRepository,
     ) {
         parent::__construct($userRepository, $configurationManager, $eventDispatcher);
     }
@@ -40,13 +39,14 @@ class CaptchaValidator extends AbstractValidator
     protected function validCaptcha(string $captcha): bool
     {
         $isValid = false;
-        $this->wordRepository->setRequest($this->request);
-        $wordObject = $this->wordRepository->getWord();
+        $wordRepository = GeneralUtility::makeInstance(\SJBR\SrFreecap\Domain\Repository\WordRepository::class);
+        $wordRepository->setRequest($this->request);
+        $wordObject = $wordRepository->getWord();
         $wordHash = $wordObject->getWordHash();
         if (!empty($wordHash) && ($captcha !== '' && $captcha !== '0') && $wordObject->getHashFunction() === 'md5') {
             $userHash = md5(strtolower(mb_convert_encoding($captcha, 'ISO-8859-1')));
             if (hash_equals($wordHash, $userHash)) {
-                $this->wordRepository->cleanUpWord();
+                $wordRepository->cleanUpWord();
                 $isValid = true;
             }
         }
