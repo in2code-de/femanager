@@ -230,7 +230,6 @@ class UserRepository extends Repository
                 $orConditions[] = $query->like('email', '%' . $searchword . '%');
                 $orConditions[] = $query->like('fax', '%' . $searchword . '%');
                 $orConditions[] = $query->like('first_name', '%' . $searchword . '%');
-                $orConditions[] = $query->like('image', '%' . $searchword . '%');
                 $orConditions[] = $query->like('last_name', '%' . $searchword . '%');
                 $orConditions[] = $query->like('middle_name', '%' . $searchword . '%');
                 $orConditions[] = $query->like('name', '%' . $searchword . '%');
@@ -262,7 +261,7 @@ class UserRepository extends Repository
     protected function getTreeList($pageIdentifier): array
     {
         $pageTreeService = GeneralUtility::makeInstance(PageTreeService::class);
-        $treeList = $pageTreeService->getTreeList($pageIdentifier, 99, 0, '1');
+        $treeList = $pageTreeService->getTreeList($pageIdentifier, 99);
 
         return GeneralUtility::trimExplode(',', (string)$treeList, true);
     }
