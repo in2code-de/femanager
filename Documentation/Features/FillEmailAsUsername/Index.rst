@@ -3,7 +3,7 @@
 
 .. _fillEmailAsUsername:
 
-Fill Email as Username during registraion
+Fill Email as Username during registration
 -----------------------------------------
 
 Introduction
