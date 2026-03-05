@@ -47,7 +47,7 @@ $feUsersColumns = [
             'fe_users.crdate',
         'config' => [
             'type' => 'datetime',
-            'format' => 'date',
+            'format' => 'datetime',
             'readOnly' => true,
             'default' => time(),
         ],
@@ -58,7 +58,7 @@ $feUsersColumns = [
             'fe_users.tstamp',
         'config' => [
             'type' => 'datetime',
-            'format' => 'date',
+            'format' => 'datetime',
             'readOnly' => true,
             'default' => time(),
         ],
