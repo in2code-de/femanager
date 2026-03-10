@@ -44,13 +44,7 @@
 			</div>
 		</div>
 		<div class="module-body femanager-backend">
-			<f:flashMessages as="flashMessages">
-				<div class="alert alert-warning">
-					<f:for each="{flashMessages}" as="flashMessage">
-						<div class="message-body">{flashMessage.message}</div>
-					</f:for>
-				</div>
-			</f:flashMessages>
+			<f:flashMessages />
 
 			<f:render section="main" />
 		</div>
