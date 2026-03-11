@@ -240,7 +240,7 @@ class NewController extends AbstractFrontendController
             $event = new UserWasConfirmedByAdminEvent($request, $user);
             $this->eventDispatcher->dispatch($event);
             // Backend request - return JSON response
-            return new JsonResponse(['status' => 'okay']);
+            throw new PropagateResponseException(new JsonResponse(['status' => 'okay']), 1773131083);
         }
 
         if ($furtherFunctions) {
