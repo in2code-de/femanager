@@ -911,6 +911,10 @@
         <source>UID</source>
         <target state="final">UID</target>
       </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageLogout">
+        <source>%s was successfully logged out</source>
+        <target state="needs-translation">%s was successfully logged out</target>
+      </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageConfirmed" approved="yes">
         <source>%s was successfully approved</source>
         <target state="final">%s is met succes goedgekeurd</target>
