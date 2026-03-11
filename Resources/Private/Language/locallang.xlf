@@ -689,6 +689,9 @@
 			<trans-unit id="BackendConfirmationColumnUid">
 				<source>UID</source>
 			</trans-unit>
+			<trans-unit id="BackendConfirmationFlashMessageLogout">
+				<source>%s was successfully logged out</source>
+			</trans-unit>
 			<trans-unit id="BackendConfirmationFlashMessageConfirmed">
 				<source>%s was successfully approved</source>
 			</trans-unit>

@@ -144,7 +144,13 @@ class UserBackendController extends AbstractController
         }
 
         UserUtility::removeFrontendSessionToUser($user);
-        $this->addFlashMessage('User successfully logged out');
+        $this->addFlashMessage(
+            LocalizationUtility::translate(
+                'BackendConfirmationFlashMessageLogout',
+                'femanager',
+                [$user->getUsername()]
+            )
+        );
         return $this->redirect('list');
     }
 
@@ -166,8 +172,7 @@ class UserBackendController extends AbstractController
                     'BackendConfirmationFlashMessageConfirmed',
                     'femanager',
                     [$user->getUsername()]
-                ),
-                'User Confirmation'
+                )
             );
         } else {
             $this->addFlashMessage(
@@ -176,7 +181,7 @@ class UserBackendController extends AbstractController
                     'femanager',
                     [$user->getUsername()]
                 ),
-                'User Confirmation',
+                '',
                 ContextualFeedbackSeverity::ERROR
             );
         }
@@ -220,7 +225,7 @@ class UserBackendController extends AbstractController
                     'femanager',
                     [$user->getUsername()]
                 ),
-                'User Confirmation',
+                '',
                 ContextualFeedbackSeverity::ERROR
             );
         }
@@ -283,11 +288,8 @@ class UserBackendController extends AbstractController
         }
 
         $this->addFlashMessage(
-            LocalizationUtility::translate(
-                'BackendMissingConfigPID',
-                'femanager'
-            ),
-            'Backend Configuration',
+            LocalizationUtility::translate('BackendMissingConfigPID'),
+            '',
             ContextualFeedbackSeverity::ERROR
         );
 
@@ -332,11 +334,8 @@ class UserBackendController extends AbstractController
             $content = $response->getReasonPhrase();
             $GLOBALS['BE_USER']->writelog(4, 0, 1, 0, 'femanager: Frontend request failed.', $content);
             $this->addFlashMessage(
-                LocalizationUtility::translate(
-                    'BackendConfirmationFlashMessageFailed',
-                    'femanager'
-                ),
-                'User Confirmation',
+                LocalizationUtility::translate('BackendConfirmationFlashMessageFailed'),
+                '',
                 ContextualFeedbackSeverity::ERROR
             );
         } else {
