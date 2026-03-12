@@ -4,6 +4,17 @@
 Changelog
 =========
 -
+      :Version: 13.3.2
+      :Date: 2025-12-03
+      :Changes:
+      * [TASK] Uniform output of FlashMessages in the backend (#698) - thx to Stephan Großberndt
+      * [BUGFIX] Allow to resend the confirmation email from Registration and ResendConfirmationMail plugin - thx to Stephan Großberndt
+      * [BUGFIX] Restore functionality "Confirm user by admin from the backend"  - thx to Stephan Großberndt
+      * [BUGFIX] Display time for `crdate` and `tstamp` of `fe_users` in the backend  - thx to Stephan Großberndt
+      * [BUGFIX] Corrected typos  - thx to Stephan Großberndt
+      * [TASK] Adapt Dev env for typo3-13 branch  - thx to Stefan Busemann (in2code)
+
+-
       :Version: 13.3.1
       :Date: 2025-12-18
       :Changes:
