@@ -275,9 +275,9 @@
         <source>Password changed and Profile activated</source>
         <target state="final">Adgangskode ændret og profil aktiveret</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.500">
+      <trans-unit id="tx_femanager_domain_model_log.state.500" approved="yes">
         <source>Backend impersonation</source>
-        <target state="needs-translation">Backend impersonation</target>
+        <target state="final">Backend imitering</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.501" approved="yes">
         <source>Was impersonated by Backend Admin (login as)</source>
@@ -287,21 +287,21 @@
         <source>Impersonation was denied for Backend User (login as)</source>
         <target state="final">Indlogning som backendbruger blev nægtet (logget ind som)</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.600">
+      <trans-unit id="tx_femanager_domain_model_log.state.600" approved="yes">
         <source>Frontend Login</source>
-        <target state="needs-translation">Frontend Login</target>
+        <target state="final">Frontend log ind</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.601">
+      <trans-unit id="tx_femanager_domain_model_log.state.601" approved="yes">
         <source>Successful frontend login</source>
-        <target state="needs-translation">Successful frontend login</target>
+        <target state="final">Log ind på frontend med succes</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.602">
+      <trans-unit id="tx_femanager_domain_model_log.state.602" approved="yes">
         <source>Failed frontend login</source>
-        <target state="needs-translation">Failed frontend login</target>
+        <target state="final">Mislykket frontend log ind</target>
       </trans-unit>
-      <trans-unit id="all">
+      <trans-unit id="all" approved="yes">
         <source>All</source>
-        <target state="needs-translation">All</target>
+        <target state="final">Alle</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
         <source>User</source>
@@ -495,45 +495,45 @@
         <source>No zones available for the chosen country</source>
         <target state="final">Ingen zoner tilgængelige for det valgte land</target>
       </trans-unit>
-      <trans-unit id="filter.filter">
+      <trans-unit id="filter.filter" approved="yes">
         <source>Filter</source>
-        <target state="needs-translation">Filter</target>
+        <target state="final">Filtrér</target>
       </trans-unit>
-      <trans-unit id="filter.reset">
+      <trans-unit id="filter.reset" approved="yes">
         <source>Reset</source>
-        <target state="needs-translation">Reset</target>
+        <target state="final">Nulstil</target>
       </trans-unit>
-      <trans-unit id="filter.user">
+      <trans-unit id="filter.user" approved="yes">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="final">Bruger</target>
       </trans-unit>
-      <trans-unit id="filter.state">
+      <trans-unit id="filter.state" approved="yes">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="final">Tilstand</target>
       </trans-unit>
-      <trans-unit id="filter.from">
+      <trans-unit id="filter.from" approved="yes">
         <source>From</source>
-        <target state="needs-translation">From</target>
+        <target state="final">Fra</target>
       </trans-unit>
-      <trans-unit id="filter.to">
+      <trans-unit id="filter.to" approved="yes">
         <source>To</source>
-        <target state="needs-translation">To</target>
+        <target state="final">Til</target>
       </trans-unit>
-      <trans-unit id="log.headline.time">
+      <trans-unit id="log.headline.time" approved="yes">
         <source>Time</source>
-        <target state="needs-translation">Time</target>
+        <target state="final">Tid</target>
       </trans-unit>
-      <trans-unit id="log.headline.state">
+      <trans-unit id="log.headline.state" approved="yes">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="final">Tilstand</target>
       </trans-unit>
-      <trans-unit id="log.headline.user">
+      <trans-unit id="log.headline.user" approved="yes">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="final">Bruger</target>
       </trans-unit>
-      <trans-unit id="log.headline.details">
+      <trans-unit id="log.headline.details" approved="yes">
         <source>Details</source>
-        <target state="needs-translation">Details</target>
+        <target state="final">Detaljer</target>
       </trans-unit>
     </body>
   </file>
