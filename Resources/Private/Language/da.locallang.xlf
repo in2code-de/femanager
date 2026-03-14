@@ -271,13 +271,13 @@
         <source>Frontend Login</source>
         <target state="final">Frontend log ind</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.601">
+      <trans-unit id="tx_femanager_domain_model_log.state.601" approved="yes">
         <source>Successful frontend login</source>
-        <target state="needs-translation">Successful frontend login</target>
+        <target state="final">Log ind på frontend med succes</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.602">
+      <trans-unit id="tx_femanager_domain_model_log.state.602" approved="yes">
         <source>Failed frontend login</source>
-        <target state="needs-translation">Failed frontend login</target>
+        <target state="final">Mislykket frontend log ind</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
         <source>User</source>
@@ -911,9 +911,9 @@
         <source>UID</source>
         <target state="final">UID</target>
       </trans-unit>
-      <trans-unit id="BackendConfirmationFlashMessageLogout">
+      <trans-unit id="BackendConfirmationFlashMessageLogout" approved="yes">
         <source>%s was successfully logged out</source>
-        <target state="needs-translation">%s was successfully logged out</target>
+        <target state="final">%s blev logget ud med succes</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageConfirmed" approved="yes">
         <source>%s was successfully approved</source>
