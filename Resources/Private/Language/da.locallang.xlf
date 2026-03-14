@@ -267,9 +267,9 @@
         <source>Impersonation was denied for Backend User (login as)</source>
         <target state="final">Indlogning som backendbruger blev nægtet (logget ind som)</target>
       </trans-unit>
-      <trans-unit id="tx_femanager_domain_model_log.state.600">
+      <trans-unit id="tx_femanager_domain_model_log.state.600" approved="yes">
         <source>Frontend Login</source>
-        <target state="needs-translation">Frontend Login</target>
+        <target state="final">Frontend log ind</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.601">
         <source>Successful frontend login</source>
