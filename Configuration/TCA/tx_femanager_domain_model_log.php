@@ -187,7 +187,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'fe_user',
+                'foreign_table' => 'fe_users',
                 'default' => 0,
             ]
         ],
