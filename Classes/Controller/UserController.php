@@ -9,6 +9,7 @@ use In2code\Femanager\Domain\Model\User;
 use In2code\Femanager\Domain\Validator\ClientsideValidator;
 use In2code\Femanager\Event\ImpersonateEvent;
 use In2code\Femanager\Utility\BackendUserUtility;
+use In2code\Femanager\Utility\ConfigurationUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
@@ -129,7 +130,8 @@ class UserController extends AbstractFrontendController
     {
         $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
 
-        if (!BackendUserUtility::isAdmin()) {
+        // this action is only allowed for admins or backend users, which have the UserTS setting activated
+        if (!BackendUserUtility::isAdmin() && !ConfigurationUtility::isEnableLoginAsActive()) {
             $this->logUtility->log(
                 LOG::STATUS_LOGIN_AS_DENIED,
                 $user,
