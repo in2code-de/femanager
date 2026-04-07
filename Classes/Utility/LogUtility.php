@@ -39,6 +39,7 @@ class LogUtility
 
             if ($user) {
                 $log->setUser($user);
+                $log->setPid($user->getPid());
             }
 
             if (!empty($additionalProperties)) {
