@@ -500,6 +500,14 @@ class NewController extends AbstractFrontendController
         return !empty($this->settings['new']['confirmByAdmin']) && !$user->getTxFemanagerConfirmedbyadmin();
     }
 
+    protected function getArgumentMissingFallbackActions(): array
+    {
+        return [
+            'create' => 'new',
+            'confirmCreateRequest' => 'new',
+        ];
+    }
+
     /**
      * Just for showing empty dialogue to resend confirmation mail
      */

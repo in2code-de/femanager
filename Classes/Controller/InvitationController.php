@@ -317,6 +317,16 @@ class InvitationController extends AbstractFrontendController
         return $this->htmlResponse();
     }
 
+    protected function getArgumentMissingFallbackActions(): array
+    {
+        return [
+            'create' => 'new',
+            'edit' => 'status',
+            'update' => 'status',
+            'delete' => 'status',
+        ];
+    }
+
     /**
      * Check if user is allowed to see this action
      */

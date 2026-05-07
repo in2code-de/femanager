@@ -12,7 +12,9 @@ use In2code\Femanager\Domain\Service\SendMailService;
 use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\LogUtility;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Controller\Exception\RequiredArgumentMissingException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 class DataController extends ActionController
@@ -38,5 +40,13 @@ class DataController extends ActionController
         }
 
         return $this->jsonResponse(json_encode($jsonData, JSON_THROW_ON_ERROR));
+    }
+
+    protected function handleArgumentMappingExceptions(\Exception $exception): void
+    {
+        if ($exception instanceof RequiredArgumentMissingException) {
+            throw new PropagateResponseException($this->jsonResponse('{}'), 1746612002);
+        }
+        parent::handleArgumentMappingExceptions($exception);
     }
 }

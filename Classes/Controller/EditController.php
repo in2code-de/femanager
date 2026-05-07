@@ -241,4 +241,13 @@ class EditController extends AbstractFrontendController
             $user->setEmail($user->getUsername());
         }
     }
+
+    protected function getArgumentMissingFallbackActions(): array
+    {
+        return [
+            'update' => 'edit',
+            'confirmUpdateRequest' => 'edit',
+            'delete' => 'edit',
+        ];
+    }
 }

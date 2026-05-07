@@ -166,6 +166,14 @@ class UserController extends AbstractFrontendController
         return new RedirectResponse($redirectUri);
     }
 
+    protected function getArgumentMissingFallbackActions(): array
+    {
+        return [
+            'imageDelete' => 'list',
+            'loginAs' => 'list',
+        ];
+    }
+
     /**
      * @return User
      */
