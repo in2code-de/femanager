@@ -21,9 +21,7 @@ class SendMailService
     /**
      * SendMailService constructor.
      */
-    public function __construct(
-        private readonly ?EventDispatcherInterface $dispatcher
-    ) {
+    public function __construct() {
         $this->contentObject = ObjectUtility::getContentObject();
     }
 

@@ -34,7 +34,7 @@ class ValidationService
                 foreach ($errors as $error) {
                     $validationErrors[] = GeneralUtility::makeInstance(
                         FlashMessage::class,
-                        LocalizationUtility::translate('validationErrorUniqueDb', 'femanager', $error->getArguments()),
+                        LocalizationUtility::translate($error['message'], 'femanager', $error->getArguments()),
                         $error->getTitle(),
                         ContextualFeedbackSeverity::ERROR,
                     );
