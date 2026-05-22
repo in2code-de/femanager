@@ -3,6 +3,18 @@
 
 Changelog
 =========
+
+-
+      :Version: 13.3.3
+      :Date: 2026-05-22
+      :Changes:
+      * [BUGFIX] Gracefully handle missing required action arguments in controllers - Sebastian Stein (in2code)
+      * [BUGFIX] Missing options in state field - thx Philipp Kitzberger
+      * [BUGFIX] Show correct message on server side validation error - thx to Stephan Großberndt
+      * [BUGFIX] loginAsAction rejects non-admin users despite enableLoginAs TSConfig - thx to janslu
+      * [BUGFIX] Remove unused EventDispatcherInterface - Stefan Busemann (in2code)
+      * [BUGFIX] Fix femanager log TCA foreign_table typo - thx to smirgol
+
 -
       :Version: 13.3.2
       :Date: 2025-12-03
