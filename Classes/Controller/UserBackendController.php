@@ -329,6 +329,7 @@ class UserBackendController extends AbstractController
                 'tx_femanager_registration' => [
                     'user' => $userIdentifier,
                     'hash' => HashUtility::createHashForUser($user),
+                    'adminHash' => HashUtility::createHashForUser($user, 'admin'),
                     'status' => $status,
                     'action' => 'confirmCreateRequest',
                     'controller' => 'New',
