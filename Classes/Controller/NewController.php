@@ -37,6 +37,20 @@ use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 class NewController extends AbstractFrontendController
 {
     /**
+     * Status values that perform an admin-side state change (enable or delete a pending user) and
+     * therefore always require a valid adminHash, independently of the confirmAdminConfirmation setting.
+     */
+    private const ADMIN_CONFIRMATION_STATUSES = [
+        'adminConfirmation',
+        'confirmAdmin',
+        'adminConfirmationRefused',
+        'adminConfirmationRefusedSilent',
+        'confirmAdminDeletion',
+        'confirmAdminRefused',
+        'confirmAdminRefusedSilent',
+    ];
+
+    /**
      * Render registration form
      */
     public function newAction(): ResponseInterface
@@ -137,6 +151,17 @@ class NewController extends AbstractFrontendController
             throw new PropagateResponseException($this->redirect('new'), 9459349538);
         }
 
+        if (in_array($status, self::ADMIN_CONFIRMATION_STATUSES, true)
+            && HashUtility::validHash((string)$adminHash, $user, 'admin') === false
+        ) {
+            $this->addFlashMessage(
+                LocalizationUtility::translate('error_not_authorized'),
+                '',
+                ContextualFeedbackSeverity::ERROR
+            );
+            throw new PropagateResponseException($this->redirect('new'), 1743766811);
+        }
+
         $request = ServerRequestFactory::fromGlobals();
         // check if the request was triggered via Backend
         if ($request->hasHeader('Accept')) {
@@ -180,20 +205,12 @@ class NewController extends AbstractFrontendController
             'new./email./createUserConfirmation./confirmAdminConfirmation',
             $this->config
         ) == '1') {
-            if (!HashUtility::validHash($adminHash, $user, 'admin')) {
-                $this->addFlashMessage(
-                    LocalizationUtility::translate('error_not_authorized'),
-                    '',
-                    ContextualFeedbackSeverity::ERROR
-                );
-                throw new PropagateResponseException($this->redirect('new'), 1743766811);
-            }
-
             $this->view->assignMultiple(
                 [
                     'user' => $user,
                     'status' => 'confirmAdmin',
                     'hash' => $hash,
+                    'adminHash' => $adminHash,
                 ]
             );
             $this->addDefaultViewVariables();
@@ -205,21 +222,13 @@ class NewController extends AbstractFrontendController
                 'new./email./createUserConfirmation./confirmAdminConfirmation',
                 $this->config
             ) == '1') {
-            if (!HashUtility::validHash($adminHash, $user, 'admin')) {
-                $this->addFlashMessage(
-                    LocalizationUtility::translate('error_not_authorized'),
-                    '',
-                    ContextualFeedbackSeverity::ERROR
-                );
-                throw new PropagateResponseException($this->redirect('new'), 1743766811);
-            }
-
             $this->view->assignMultiple(
                 [
                     'user' => $user,
                     'status' => 'confirmAdminRefused',
                     'silent' => $status === 'adminConfirmationRefusedSilent',
                     'hash' => $hash,
+                    'adminHash' => $adminHash,
                 ]
             );
             $this->addDefaultViewVariables();
