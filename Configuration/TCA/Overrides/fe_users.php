@@ -81,6 +81,18 @@ $feUsersColumns = [
             'default' => 0,
         ],
     ],
+    'tx_femanager_confirmation_required' => [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.confirmationRequired',
+        'config' => [
+            'type' => 'check',
+            'items' => [
+                ['label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.confirmationRequired.user'],
+                ['label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:fe_users.confirmationRequired.admin'],
+            ],
+            'default' => 0,
+        ],
+    ],
     'tx_femanager_terms' => [
         'exclude' => 1,
         'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:' .
@@ -142,8 +154,8 @@ if ($extConf->get('femanager', 'overrideFeUserCountryFieldWithSelect')) {
     ];
 }
 
-$fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin, tx_femanager_terms, ' .
-    'tx_femanager_terms_date_of_acceptance';
+$fields = 'crdate, tstamp, tx_femanager_confirmedbyuser, tx_femanager_confirmedbyadmin, ' .
+    'tx_femanager_confirmation_required, tx_femanager_terms, tx_femanager_terms_date_of_acceptance';
 
 if (!ConfigurationUtility::isDisableLogActive()) {
     $feUsersColumns['tx_femanager_log'] = [

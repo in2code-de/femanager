@@ -21,6 +21,10 @@ class User extends AbstractEntity
 {
     final public const TABLE_NAME = 'fe_users';
 
+    public const CONFIRMATION_REQUIRED_NONE = 0;
+    public const CONFIRMATION_REQUIRED_USER = 1;
+    public const CONFIRMATION_REQUIRED_ADMIN = 2;
+
     /**
      * @var ObjectStorage<UserGroup>
      */
@@ -135,6 +139,14 @@ class User extends AbstractEntity
      * @var bool
      */
     protected $txFemanagerConfirmedbyadmin;
+
+    /**
+     * Bitmask of the confirmations required for this user (see CONFIRMATION_REQUIRED_* constants).
+     * Stored at registration time so the required workflow no longer depends on ambient plugin settings.
+     *
+     * @var int
+     */
+    protected int $txFemanagerConfirmationRequired = self::CONFIRMATION_REQUIRED_NONE;
 
     /**
      * @var bool
@@ -626,6 +638,27 @@ class User extends AbstractEntity
     public function getTxFemanagerConfirmedbyuser(): bool
     {
         return $this->txFemanagerConfirmedbyuser;
+    }
+
+    public function getTxFemanagerConfirmationRequired(): int
+    {
+        return $this->txFemanagerConfirmationRequired;
+    }
+
+    public function setTxFemanagerConfirmationRequired(int $value): self
+    {
+        $this->txFemanagerConfirmationRequired = $value;
+        return $this;
+    }
+
+    public function isUserConfirmationRequired(): bool
+    {
+        return ($this->txFemanagerConfirmationRequired & self::CONFIRMATION_REQUIRED_USER) !== 0;
+    }
+
+    public function isAdminConfirmationRequired(): bool
+    {
+        return ($this->txFemanagerConfirmationRequired & self::CONFIRMATION_REQUIRED_ADMIN) !== 0;
     }
 
     /**
