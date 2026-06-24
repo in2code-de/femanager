@@ -30,4 +30,7 @@ call_user_func(function () {
     if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['femanager_ratelimiter'])) {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['femanager_ratelimiter'] = [];
     }
+
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['femanager_confirmationrequiredupdater']
+        = \In2code\Femanager\Updates\ConfirmationRequiredUpdater::class;
 });

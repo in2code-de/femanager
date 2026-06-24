@@ -80,6 +80,8 @@ class NewController extends AbstractFrontendController
         $this->eventDispatcher->dispatch(new BeforeUserCreateEvent($user));
         $this->ratelimiterService->consumeSlot();
 
+        $user->setTxFemanagerConfirmationRequired($this->determineRequiredConfirmation());
+
         if ($this->isAllConfirmed()) {
             $this->createAllConfirmed($user);
         } else {
@@ -405,12 +407,65 @@ class NewController extends AbstractFrontendController
     }
 
     /**
+     * Build the confirmation bitmask from the registration settings. This is evaluated once during
+     * registration (where the settings reliably belong to the registration plugin) and persisted on
+     * the user, so later steps no longer depend on the ambient plugin settings.
+     */
+    protected function determineRequiredConfirmation(): int
+    {
+        $confirmationRequired = User::CONFIRMATION_REQUIRED_NONE;
+        if (!empty($this->settings['new']['confirmByUser'])) {
+            $confirmationRequired |= User::CONFIRMATION_REQUIRED_USER;
+        }
+        if (!empty($this->settings['new']['confirmByAdmin'])) {
+            $confirmationRequired |= User::CONFIRMATION_REQUIRED_ADMIN;
+        }
+
+        return $confirmationRequired;
+    }
+
+    /**
+     * Effective confirmation bitmask for a user. Accounts created before the
+     * tx_femanager_confirmation_required field existed carry the stored value NONE; for those the
+     * requirement is inferred from the confirmation state - mirroring ConfirmationRequiredUpdater - so
+     * the workflow stays correct even when the upgrade wizard has not been executed yet.
+     */
+    protected function getEffectiveConfirmationRequired(User $user): int
+    {
+        $stored = $user->getTxFemanagerConfirmationRequired();
+        if ($stored !== User::CONFIRMATION_REQUIRED_NONE) {
+            return $stored;
+        }
+
+        if ($user->getDisable() === false || $user->getTxFemanagerConfirmedbyadmin()) {
+            return User::CONFIRMATION_REQUIRED_NONE;
+        }
+
+        return $user->getTxFemanagerConfirmedbyuser()
+            ? User::CONFIRMATION_REQUIRED_ADMIN
+            : (User::CONFIRMATION_REQUIRED_USER | User::CONFIRMATION_REQUIRED_ADMIN);
+    }
+
+    /**
      * @param User $user
      * @return bool
      */
     protected function isAdminConfirmationMissing(User $user)
     {
-        return !empty($this->settings['new']['confirmByAdmin']) && !$user->getTxFemanagerConfirmedbyadmin();
+        return $user->getTxFemanagerConfirmedbyadmin() === false
+            && ($this->getEffectiveConfirmationRequired($user) & User::CONFIRMATION_REQUIRED_ADMIN) !== 0;
+    }
+
+    /**
+     * The resend action (re)sends the *user* confirmation link. It must only do so for accounts that
+     * actually still await a user confirmation. The resend plugin has no knowledge of the registration
+     * settings, so the decision is taken from the user record - otherwise a valid confirmation link
+     * could be handed out for admin-only or already confirmed accounts.
+     */
+    protected function isUserConfirmationResendable(User $user): bool
+    {
+        return $user->getTxFemanagerConfirmedbyuser() === false
+            && ($this->getEffectiveConfirmationRequired($user) & User::CONFIRMATION_REQUIRED_USER) !== 0;
     }
 
     /**
@@ -430,24 +485,29 @@ class NewController extends AbstractFrontendController
     {
         // @todo find a better way to fetch the data
         $result = GeneralUtility::_GP('tx_femanager_pi1');
-        if (is_array($result)) {
-            if (GeneralUtility::validEmail($result['user']['email'])) {
-                $user = $this->userRepository->findFirstByEmail($result['user']['email']);
-                if (is_a($user, User::class)) {
-                    $this->sendCreateUserConfirmationMail($user);
-                    $this->addFlashMessage(
-                        LocalizationUtility::translate('resendConfirmationMailSend'),
-                        '',
-                        AbstractMessage::INFO
-                    );
-                    $this->redirect('resendConfirmationDialogue');
-                }
-            }
+        $mail = is_array($result) ? ($result['user']['email'] ?? '') : '';
+
+        if ($mail === '' || GeneralUtility::validEmail($mail) === false) {
+            $this->addFlashMessage(
+                LocalizationUtility::translate('resendConfirmationMailFail'),
+                LocalizationUtility::translate('validationError'),
+                AbstractMessage::ERROR
+            );
+            $this->redirect('resendConfirmationDialogue');
         }
+
+        // A confirmation mail is only sent when the account actually has a pending user confirmation.
+        // The response is identical for every valid address (sent, nothing to send, or no such
+        // account), so it cannot be used to find out whether an account exists for a given email.
+        $user = $this->userRepository->findFirstByEmail($mail);
+        if ($user instanceof User && $this->isUserConfirmationResendable($user)) {
+            $this->sendCreateUserConfirmationMail($user);
+        }
+
         $this->addFlashMessage(
-            LocalizationUtility::translate('resendConfirmationMailFail'),
-            LocalizationUtility::translate('validationError'),
-            AbstractMessage::ERROR
+            LocalizationUtility::translate('resendConfirmationMailSend'),
+            '',
+            AbstractMessage::INFO
         );
         $this->redirect('resendConfirmationDialogue');
     }
