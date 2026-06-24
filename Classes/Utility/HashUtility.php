@@ -16,22 +16,24 @@ class HashUtility extends AbstractUtility
      *
      * @param string $hash
      * @param User $user
+     * @param string $suffix
      * @return bool
      */
-    public static function validHash($hash, User $user)
+    public static function validHash($hash, User $user, string $suffix = '')
     {
-        return self::createHashForUser($user) === $hash;
+        return self::createHashForUser($user, $suffix) === $hash;
     }
 
     /**
      * Create hash for a user
      *
      * @param User $user
+     * @param string $suffix
      * @return string
      */
-    public static function createHashForUser(User $user)
+    public static function createHashForUser(User $user, string $suffix = '')
     {
-        return self::hashString($user->getUsername());
+        return self::hashString($user->getUsername() . $suffix);
     }
 
     /**

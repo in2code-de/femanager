@@ -30,6 +30,16 @@ class NewController extends AbstractFrontendController
 {
 
     /**
+     * Status values that perform an admin-side state change (enable or delete a pending user) and
+     * therefore always require a valid adminHash.
+     */
+    private const ADMIN_CONFIRMATION_STATUSES = [
+        'adminConfirmation',
+        'adminConfirmationRefused',
+        'adminConfirmationRefusedSilent',
+    ];
+
+    /**
      * Render registration form
      *
      */
@@ -87,8 +97,9 @@ class NewController extends AbstractFrontendController
      * @param string $status
      *            "userConfirmation", "userConfirmationRefused", "adminConfirmation",
      *            "adminConfirmationRefused", "adminConfirmationRefusedSilent"
+     * @param string $adminHash
      */
-    public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation')
+    public function confirmCreateRequestAction($user, $hash, $status = 'adminConfirmation', $adminHash = null)
     {
         $backend = false;
 
@@ -98,6 +109,13 @@ class NewController extends AbstractFrontendController
 
         if ($user === null) {
             $this->addFlashMessage(LocalizationUtility::translate('missingUserInDatabase'), '', FlashMessage::ERROR);
+            $this->redirect('new');
+        }
+
+        if (in_array($status, self::ADMIN_CONFIRMATION_STATUSES, true)
+            && HashUtility::validHash((string)$adminHash, $user, 'admin') === false
+        ) {
+            $this->addFlashMessage(LocalizationUtility::translate('error_not_authorized'), '', FlashMessage::ERROR);
             $this->redirect('new');
         }
 
@@ -369,7 +387,8 @@ class NewController extends AbstractFrontendController
                 'New Registration request',
                 [
                     'user' => $user,
-                    'hash' => HashUtility::createHashForUser($user)
+                    'hash' => HashUtility::createHashForUser($user),
+                    'adminHash' => HashUtility::createHashForUser($user, 'admin')
                 ],
                 $this->config['new.']['email.']['createAdminConfirmation.']
             );
