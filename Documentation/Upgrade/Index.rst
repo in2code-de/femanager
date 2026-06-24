@@ -5,7 +5,90 @@
 Upgrade
 =======
 
-:ref:`v7.1` | :ref:`v6.0` | :ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+:ref:`v7.5.2` | :ref:`v7.1` | :ref:`v6.0` | :ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+
+.. _v7.5.2:
+
+to version 7.5.2 (security update)
+----------------------------------
+
+This is a security release that closes a registration confirmation bypass. Two issues are fixed:
+
+* The admin confirmation action (``status=adminConfirmation``) could be triggered with the regular
+  user confirmation ``hash`` when the default settings were used, because the dedicated ``adminHash``
+  was only validated when ``confirmAdminConfirmation`` was enabled. A registrant who obtained their
+  own user confirmation hash could therefore approve their own account without admin interaction.
+* The "Resend Confirmation Mail" action sent the user confirmation email (containing that ``hash``)
+  for any submitted address, even on sites that only use admin confirmation.
+
+.. important::
+
+   After updating, run the upgrade wizard
+   :guilabel:`Admin Tools > Upgrade > Run Upgrade Wizard > "EXT:femanager: Migrate required confirmation for pending users"`.
+   It populates the new field ``fe_users.tx_femanager_confirmation_required`` for accounts that were
+   still pending at the time of the update. See "Fallback" below for the behaviour if it is not run.
+
+What changed
+~~~~~~~~~~~~
+
+* **adminHash is now mandatory for every admin action.** Admin confirmation, refusal and silent
+  refusal always require a valid ``adminHash``, independently of the ``confirmAdminConfirmation``
+  setting. The regular user ``hash`` alone is no longer sufficient.
+* **The required confirmation is stored on the user.** During registration femanager now persists
+  which confirmations are required (user and/or admin) in the new field
+  ``fe_users.tx_femanager_confirmation_required``. The workflow reads this field instead of the
+  ambient plugin settings, which the "Resend Confirmation Mail" plugin does not have access to.
+* **Resend only resends a pending user confirmation.** The resend action sends the user confirmation
+  email only when the account still has an outstanding user confirmation (already confirmed accounts,
+  or accounts that only await admin approval, are not resent). To avoid disclosing whether an account
+  exists for a given email address, the same neutral message is shown for every valid address -
+  regardless of whether a mail was sent, nothing was pending, or no such account exists.
+
+Customized email/confirmation templates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you override any of these templates, add the ``adminHash`` argument to all admin action links,
+otherwise the links will be rejected as "not authorized":
+
+* :file:`Resources/Private/Templates/Email/CreateAdminConfirmation.html`
+* :file:`Resources/Private/Templates/Email/CreateNotify.html`
+* :file:`Resources/Private/Templates/New/ConfirmCreateRequest.html` (the ``adminHash`` hidden field
+  in the ``confirmedByAdmin`` and ``confirmedByAdminRefused`` cases)
+
+Example:
+
+.. code-block:: html
+
+   old: <f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, status:'adminConfirmation'}">
+   new: <f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, adminHash:adminHash, status:'adminConfirmation'}">
+
+Fallback if the upgrade wizard is not run
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The fix does not depend on the wizard for its security: for accounts that still have the default
+value ``0`` (``none``) - i.e. accounts created before the field existed - the required confirmation
+is inferred at runtime from the confirmation state, mirroring the wizard:
+
+* disabled, confirmed by user, not by admin → admin confirmation is still required
+* disabled, confirmed by neither → both confirmations are required (an admin can always release the
+  account from the backend)
+* already confirmed by admin, or enabled → no confirmation pending
+
+As a result the registration workflow and the resend action behave correctly even without the wizard.
+Running the wizard is still recommended: it persists the precise requirement so it is shown and
+filterable in the backend and the runtime fallback is no longer needed.
+
+.. warning::
+
+   There is no way to find out retroactively whether an existing, still pending account originally
+   required an admin confirmation or not. For the ambiguous case (a disabled account that has been
+   confirmed by neither the user nor an admin) both the wizard and the runtime fallback therefore
+   choose the safe option and require an admin confirmation. On a site that only uses user
+   confirmation this means such legacy accounts now additionally wait for an admin, even though no
+   admin confirmation was originally intended. These accounts are not lost: an administrator can
+   release them at any time via :guilabel:`Web > Frontend Users` (femanager backend module). Only
+   accounts that were already pending at the time of the update are affected; accounts created
+   afterwards store their exact requirement and are never over-restricted.
 
 .. _v7.1:
 

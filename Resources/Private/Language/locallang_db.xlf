@@ -102,6 +102,15 @@
 			<trans-unit id="fe_users.registrationconfirmedbyadmin">
 				<source>Registration confirmed by admin</source>
 			</trans-unit>
+			<trans-unit id="fe_users.confirmationRequired">
+				<source>Required confirmations</source>
+			</trans-unit>
+			<trans-unit id="fe_users.confirmationRequired.user">
+				<source>User confirmation required</source>
+			</trans-unit>
+			<trans-unit id="fe_users.confirmationRequired.admin">
+				<source>Admin confirmation required</source>
+			</trans-unit>
 			<trans-unit id="fe_users.tab">
 				<source>Registration</source>
 			</trans-unit>
