@@ -23,7 +23,6 @@ Feature: AllFieldsNoConfirm
       | Website | www.in2code.de |
       | Company | in2code GmbH |
       | Birthdate | 20/01/1979 |
-    And I select "Group 2" from "tx_femanager_registration[user][usergroup][0]"
     And I select "Germany" from "tx_femanager_registration[user][country]"
     And I press "Create Profile Now"
     Then I wait "4" seconds
@@ -45,7 +44,6 @@ Feature: AllFieldsNoConfirm
     Then I should see "Rosenheim"
     Then I should see "www.in2code.de"
     Then I should see "in2code GmbH"
-    Then I should see "usergroup => '2'"
 
   # Clean up
   Scenario: Delete all temporary fe_users entries

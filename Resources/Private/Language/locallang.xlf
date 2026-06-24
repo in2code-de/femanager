@@ -617,6 +617,9 @@
 			<trans-unit id="pleaseChoose">
 				<source>Please choose ...</source>
 			</trans-unit>
+			<trans-unit id="usergroupSelectionNotConfigured">
+				<source>The usergroup selection is currently not available. Please contact the administrator.</source>
+			</trans-unit>
 			<trans-unit id="pleaseChooseCountry">
 				<source>Please choose a country ...</source>
 			</trans-unit>
