@@ -29,7 +29,12 @@ class InvitationController extends AbstractFrontendController
     public function newAction()
     {
         $this->allowedUserForInvitationNewAndCreate();
-        $this->view->assign('allUserGroups', $this->allUserGroups);
+        $this->view->assignMultiple(
+            [
+                'allUserGroups' => $this->allUserGroups,
+                'usergroupFieldMode' => $this->userGroupSanitizationService->getFieldRenderMode($this->settings['invitation'] ?? [])
+            ]
+        );
         $this->assignForAll();
     }
 
@@ -57,6 +62,11 @@ class InvitationController extends AbstractFrontendController
         $user = FrontendUtility::forceValues(
             $user,
             $this->config['invitation.']['forceValues.']['beforeAnyConfirmation.']
+        );
+        $user = $this->userGroupSanitizationService->sanitize(
+            $user,
+            $this->settings['invitation'] ?? [],
+            $this->userGroupSanitizationService->getOriginalUsergroupUids($user)
         );
         $user = UserUtility::fallbackUsernameAndPassword($user);
         if ($this->settings['invitation']['fillEmailWithUsername'] === '1') {
@@ -194,6 +204,11 @@ class InvitationController extends AbstractFrontendController
             );
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings, 'invitation');
+        $user = $this->userGroupSanitizationService->sanitize(
+            $user,
+            $this->settings['invitation'] ?? [],
+            $this->userGroupSanitizationService->getOriginalUsergroupUids($user)
+        );
         UserUtility::hashPassword($user, $this->settings['invitation']['misc']['passwordSave']);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();

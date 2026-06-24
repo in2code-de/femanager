@@ -699,6 +699,11 @@ plugin.tx_femanager {
         # Remove Usergroups from Usergroup Selection in Frontend
         #        removeFromUserGroupSelection = 2,3
 
+        # SECURITY: Allow frontend users to assign ANY frontend usergroup to themselves.
+        # Keep this disabled (0). To allow only specific groups, set validation.usergroup.inList
+        # instead. If neither is configured, submitted usergroup values are ignored (fail closed).
+        allowUnrestrictedUserGroupSelection = 0
+
         # initially save password as hash ("Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", "Md5" or empty for extension saltedpasswords - if installed)
         #        passwordSave = Md5
 
@@ -1089,6 +1094,11 @@ plugin.tx_femanager {
 
         # Remove Usergroups from Usergroup Selection in Frontend
         #        removeFromUserGroupSelection = 2,3
+
+        # SECURITY: Allow frontend users to assign ANY frontend usergroup to themselves.
+        # Keep this disabled (0). To allow only specific groups, set validation.usergroup.inList
+        # instead. If neither is configured, submitted usergroup values are ignored (fail closed).
+        allowUnrestrictedUserGroupSelection = 0
 
         # initially save password as hash ("Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", "Md5" or empty for extension saltedpasswords - if installed)
         #        passwordSave = Md5
@@ -1548,6 +1558,11 @@ plugin.tx_femanager {
       misc {
         # Remove Usergroups from Usergroup Selection in Frontend
         #        removeFromUserGroupSelection = 2,3
+
+        # SECURITY: Allow frontend users to assign ANY frontend usergroup to themselves.
+        # Keep this disabled (0). To allow only specific groups, set validation.usergroup.inList
+        # instead. If neither is configured, submitted usergroup values are ignored (fail closed).
+        allowUnrestrictedUserGroupSelection = 0
 
         # initially save password as hash ("Argon2i", "Bcrypt", "Pbkdf2", "Phpass", "Blowfish", "Md5" or empty for extension saltedpasswords - if installed)
         #        passwordSave = Md5
