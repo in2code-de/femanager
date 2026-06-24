@@ -4,27 +4,39 @@
 
 
 <f:section name="default">
-	<div class="femanager_fieldset femanager_usergroup form-group">
-		<label for="femanager_field_usergroup" class="col-sm-2 control-label">
-			<f:translate key="tx_femanager_domain_model_user.usergroup" />
-			<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'usergroup')}">
-				<span>*</span>
-			</f:if>
-		</label>
-		<div class="col-sm-10">
-			<femanager:form.select
-					id="femanager_field_usergroup"
-					name="user[usergroup][0]"
-					options="{allUserGroups}"
-					optionValueField="uid"
-					optionLabelField="title"
-					sortByOptionLabel="1"
-					defaultOption="{f:translate(key:'pleaseChoose')}"
-					class="form-control"
-					value="{femanager:Misc.GetFirst(objectStorage:user.usergroup)}"
-					additionalAttributes="{femanager:Validation.FormValidationData(settings: settings, fieldName: 'usergroup')}" />
-		</div>
-	</div>
+	<f:switch expression="{usergroupFieldMode}">
+		<f:case value="hidden"></f:case>
+		<f:case value="notice">
+			<div class="femanager_fieldset femanager_usergroup form-group">
+				<div class="col-sm-10">
+					<p class="femanager_usergroup_notice"><f:translate key="usergroupSelectionNotConfigured" /></p>
+				</div>
+			</div>
+		</f:case>
+		<f:defaultCase>
+			<div class="femanager_fieldset femanager_usergroup form-group">
+				<label for="femanager_field_usergroup" class="col-sm-2 control-label">
+					<f:translate key="tx_femanager_domain_model_user.usergroup" />
+					<f:if condition="{femanager:Validation.IsRequiredField(fieldName:'usergroup')}">
+						<span>*</span>
+					</f:if>
+				</label>
+				<div class="col-sm-10">
+					<femanager:form.select
+							id="femanager_field_usergroup"
+							name="user[usergroup][0]"
+							options="{allUserGroups}"
+							optionValueField="uid"
+							optionLabelField="title"
+							sortByOptionLabel="1"
+							defaultOption="{f:translate(key:'pleaseChoose')}"
+							class="form-control"
+							value="{femanager:Misc.GetFirst(objectStorage:user.usergroup)}"
+							additionalAttributes="{femanager:Validation.FormValidationData(settings: settings, fieldName: 'usergroup')}" />
+				</div>
+			</div>
+		</f:defaultCase>
+	</f:switch>
 </f:section>
 
 
