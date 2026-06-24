@@ -74,6 +74,7 @@ User / Status
 
 					<f:form.hidden name="user" value="{user.uid}" />
 					<f:form.hidden name="hash" value="{hash}" />
+					<f:form.hidden name="adminHash" value="{adminHash}" />
 					<f:form.hidden name="status" value="confirmedByAdmin" />
 				</fieldset>
 
@@ -111,6 +112,7 @@ User / Status
 
 					<f:form.hidden name="user" value="{user.uid}" />
 					<f:form.hidden name="hash" value="{hash}" />
+					<f:form.hidden name="adminHash" value="{adminHash}" />
 					<f:if condition="{silent}">
 						<f:then>
 							<f:form.hidden name="status" value="confirmAdminRefusedSilent" />
