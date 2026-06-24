@@ -46,7 +46,12 @@ class InvitationController extends AbstractFrontendController
             );
             return $this->redirect('status');
         }
-        $this->view->assign('allUserGroups', $this->allUserGroups);
+        $this->view->assignMultiple(
+            [
+                'allUserGroups' => $this->allUserGroups,
+                'usergroupFieldMode' => $this->userGroupSanitizationService->getFieldRenderMode($this->settings['invitation'] ?? [])
+            ]
+        );
         $this->assignForAll();
         return $this->htmlResponse();
     }
@@ -81,6 +86,11 @@ class InvitationController extends AbstractFrontendController
         $user = FrontendUtility::forceValues(
             $user,
             ConfigurationUtility::getValue('invitation./forceValues./beforeAnyConfirmation.', $this->config)
+        );
+        $user = $this->userGroupSanitizationService->sanitize(
+            $user,
+            $this->settings['invitation'] ?? [],
+            $this->userGroupSanitizationService->getOriginalUsergroupUids($user)
         );
         $user = UserUtility::fallbackUsernameAndPassword($user);
         if (ConfigurationUtility::getValue('invitation/fillEmailWithUsername', $this->settings) === '1') {
@@ -233,6 +243,11 @@ class InvitationController extends AbstractFrontendController
             );
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings, 'invitation');
+        $user = $this->userGroupSanitizationService->sanitize(
+            $user,
+            $this->settings['invitation'] ?? [],
+            $this->userGroupSanitizationService->getOriginalUsergroupUids($user)
+        );
         UserUtility::hashPassword(
             $user,
             ConfigurationUtility::getValue('invitation/misc/passwordSave', $this->settings)
