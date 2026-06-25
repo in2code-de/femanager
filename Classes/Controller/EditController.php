@@ -60,16 +60,16 @@ class EditController extends AbstractFrontendController
     public function updateAction(User $user)
     {
         $currentUser = UserUtility::getCurrentUser();
-        $userValues = $this->request->hasArgument('user') ? $this->request->getArgument('user') : null;
-        $token = $this->request->hasArgument('token') ? $this->request->getArgument('token') : null;
+        $userValues = $this->request->getArgument('user') ?? [];
+        $token = $this->request->getArgument('token') ?? null;
+        $identity = (int)($userValues['__identity'] ?? 0);
+        $isSpoof = $this->isSpoof($currentUser, $identity, $token);
 
-        if ($currentUser === null ||
-            empty($userValues['__identity']) ||
-            (int)$userValues['__identity'] === null ||
-            $token === null ||
-            $this->isSpoof($currentUser, (int)$userValues['__identity'], $token)
-        ) {
-            $this->logUtility->log(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY, $user);
+        if (!$currentUser instanceof User || $identity === 0 || $token === null || $isSpoof) {
+            $logStatus = $isSpoof ? Log::STATUS_PROFILEUPDATEATTEMPTEDSPOOF : Log::STATUS_PROFILEUPDATEREFUSEDSECURITY;
+            $logContext = $isSpoof ? $currentUser : $user;
+            $this->logUtility->log($logStatus, $logContext);
+
             $this->addFlashMessage(
                 LocalizationUtility::translateByState(Log::STATUS_PROFILEUPDATEREFUSEDSECURITY),
                 '',
