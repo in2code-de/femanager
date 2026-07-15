@@ -68,10 +68,10 @@
 </f:for>
 
 <f:translate key="emailUpdateRequestLinkConfirm" />:
-<f:uri.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash}" />
+<f:uri.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash, adminHash:adminHash}" />
 
 <f:translate key="emailUpdateRequestLinkRefuse" />:
-<f:uri.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash, status:'refuse'}" />
+<f:uri.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash, adminHash:adminHash, status:'refuse'}" />
 
 <f:translate key="emailUpdateRequestLinkSiltentRefuse" />:
-<f:uri.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash, status:'silentRefuse'}" />
+<f:uri.action action="confirmUpdateRequest" controller="Edit" absolute="1" arguments="{user:user, hash:hash, adminHash:adminHash, status:'silentRefuse'}" />
