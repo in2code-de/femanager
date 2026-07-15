@@ -73,13 +73,25 @@ class EditController extends AbstractFrontendController
     }
 
     /**
+     * Confirm, refuse or silently refuse a profile change request.
+     *
+     * All three actions are admin actions and therefore always require a valid adminHash.
+     * The regular user hash alone is no longer sufficient.
+     *
      * @param User $user User object
      * @param string $hash
      * @param string $status could be "confirm", "refuse", "silentRefuse"
+     * @param string|null $adminHash Hash to authorize the admin action
      */
-    public function confirmUpdateRequestAction(User $user, $hash, $status = 'confirm')
+    public function confirmUpdateRequestAction(User $user, $hash, $status = 'confirm', $adminHash = null)
     {
         $this->view->assign('user', $user);
+
+        if (HashUtility::validHash((string)$adminHash, $user, 'admin') === false) {
+            $this->addFlashMessage(LocalizationUtility::translate('error_not_authorized'), '', FlashMessage::ERROR);
+            return;
+        }
+
         if (!HashUtility::validHash($hash, $user) || !$user->getTxFemanagerChangerequest()) {
             $this->addFlashMessage(LocalizationUtility::translate('updateFailedProfile'), '', FlashMessage::ERROR);
             return;

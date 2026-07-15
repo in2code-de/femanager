@@ -36,7 +36,9 @@ What changed
 
 * **A dedicated adminHash is now mandatory for every admin action.** ``HashUtility`` can now derive a
   separate ``admin`` hash for a user, and admin confirmation, refusal and silent refusal always
-  require a valid ``adminHash``. The regular user ``hash`` alone is no longer sufficient.
+  require a valid ``adminHash``. The regular user ``hash`` alone is no longer sufficient. This applies
+  both to the registration confirmation (``New`` controller) and to the profile change confirmation
+  (``Edit`` controller, ``confirmUpdateRequest``).
 * **The required confirmation is stored on the user.** During registration femanager now persists
   which confirmations are required (user and/or admin) in the new field
   ``fe_users.tx_femanager_confirmation_required``. The workflow reads this field instead of the
@@ -55,6 +57,7 @@ otherwise the links will be rejected as "not authorized":
 
 * :file:`Resources/Private/Templates/Email/CreateAdminConfirmation.html`
 * :file:`Resources/Private/Templates/Email/CreateNotify.html`
+* :file:`Resources/Private/Templates/Email/UpdateRequest.html`
 
 Example:
 
