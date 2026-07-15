@@ -287,6 +287,7 @@ abstract class AbstractController extends ActionController
                     'user' => $user,
                     'changes' => $dirtyProperties,
                     'hash' => HashUtility::createHashForUser($user),
+                    'adminHash' => HashUtility::createHashForUser($user, 'admin'),
                 ],
                 $this->config['edit.']['email.']['updateRequest.'] ?? [],
                 $this->request
