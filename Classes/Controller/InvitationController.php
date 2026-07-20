@@ -70,7 +70,7 @@ class InvitationController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            $this->redirect('status');
+            return $this->redirect('status');
         }
 
         if ($this->allowedUserForInvitationNewAndCreate() !== true) {
@@ -174,7 +174,7 @@ class InvitationController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            $this->redirect('status');
+            return $this->redirect('status');
         }
 
         // User must not be deleted (deleted = 0) and not be activated (disable = 1)
@@ -184,7 +184,7 @@ class InvitationController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            $this->redirect('status');
+           return $this->redirect('status');
         }
 
         $this->eventDispatcher->dispatch(new InviteUserEditEvent($user, $hash));
@@ -228,7 +228,7 @@ class InvitationController extends AbstractFrontendController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
-            $this->redirect('status');
+            return $this->redirect('status');
         }
         $this->addFlashMessage(LocalizationUtility::translate('createAndInvitedFinished'));
         $this->logUtility->log(Log::STATUS_INVITATIONPROFILEENABLED, $user);
