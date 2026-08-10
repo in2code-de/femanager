@@ -5,951 +5,951 @@
     <body>
       <trans-unit id="tx_femanager_domain_model_user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Felhasználó</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.username">
         <source>Username</source>
-        <target state="needs-translation">Username</target>
+        <target state="translated">Felhasználónév</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.password">
         <source>Password</source>
-        <target state="needs-translation">Password</target>
+        <target state="translated">Jelszó</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.password_repeat">
         <source>Repeat Password</source>
-        <target state="needs-translation">Repeat Password</target>
+        <target state="translated">Jelszó megismétlése</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.usergroup">
         <source>Usergroup</source>
-        <target state="needs-translation">Usergroup</target>
+        <target state="translated">Felhasználói csoport</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.name">
         <source>Full Name</source>
-        <target state="needs-translation">Full Name</target>
+        <target state="translated">Teljes név</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.firstName">
         <source>Firstname</source>
-        <target state="needs-translation">Firstname</target>
+        <target state="translated">Keresztnév</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.middleName">
         <source>Middlename</source>
-        <target state="needs-translation">Middlename</target>
+        <target state="translated">Középső név</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastName">
         <source>Lastname</source>
-        <target state="needs-translation">Lastname</target>
+        <target state="translated">Vezetéknév</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
         <source>Birthdate</source>
-        <target state="needs-translation">Birthdate</target>
+        <target state="translated">Születési dátum</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint">
         <source>Please type your birthdate as MM/DD/YYYY</source>
-        <target state="needs-translation">Please type your birthdate as MM/DD/YYYY</target>
+        <target state="translated">Kérjük, add meg a születési dátumod ÉÉÉÉ.HH.NN. formátumban</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.placeholder">
         <source>MM/DD/YYYY</source>
-        <target state="needs-translation">MM/DD/YYYY</target>
+        <target state="translated">ÉÉÉÉ.HH.NN.</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateFormat">
         <source>m/d/Y</source>
-        <target state="needs-translation">m/d/Y</target>
+        <target state="translated">Y. m. d.</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender">
         <source>Gender</source>
-        <target state="needs-translation">Gender</target>
+        <target state="translated">Nem</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item0">
         <source>Male</source>
-        <target state="needs-translation">Male</target>
+        <target state="translated">Férfi</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item1">
         <source>Female</source>
-        <target state="needs-translation">Female</target>
+        <target state="translated">Nő</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
         <source>Diverse</source>
-        <target state="needs-translation">Diverse</target>
+        <target state="translated">Egyéb</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address">
         <source>Address</source>
-        <target state="needs-translation">Address</target>
+        <target state="translated">Cím</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.telephone">
         <source>Telephone</source>
-        <target state="needs-translation">Telephone</target>
+        <target state="translated">Telefon</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.fax">
         <source>Fax</source>
-        <target state="needs-translation">Fax</target>
+        <target state="translated">Fax</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.email">
         <source>Email</source>
-        <target state="needs-translation">Email</target>
+        <target state="translated">E-mail</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.title">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="translated">Titulus</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.zip">
         <source>ZIP</source>
-        <target state="needs-translation">ZIP</target>
+        <target state="translated">Irányítószám</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.city">
         <source>City</source>
-        <target state="needs-translation">City</target>
+        <target state="translated">Város</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.country">
         <source>Country</source>
-        <target state="needs-translation">Country</target>
+        <target state="translated">Ország</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Tartomány</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.www">
         <source>Website</source>
-        <target state="needs-translation">Website</target>
+        <target state="translated">Weboldal</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.company">
         <source>Company</source>
-        <target state="needs-translation">Company</target>
+        <target state="translated">Cég</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.image">
         <source>Image</source>
-        <target state="needs-translation">Image</target>
+        <target state="translated">Kép</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.captcha">
         <source>Captcha</source>
-        <target state="needs-translation">Captcha</target>
+        <target state="translated">Ellenőrző kód</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.terms">
         <source>I accept the terms and conditions</source>
-        <target state="needs-translation">I accept the terms and conditions</target>
+        <target state="translated">Elfogadom az általános szerződési feltételeket</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.termslinktext">
         <source>Click here for terms and conditions</source>
-        <target state="needs-translation">Click here for terms and conditions</target>
+        <target state="translated">Kattints ide az általános szerződési feltételekért</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastlogin">
         <source>Last login</source>
-        <target state="needs-translation">Last login</target>
+        <target state="translated">Utolsó bejelentkezés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.inactivesince">
         <source>Inactive since</source>
-        <target state="needs-translation">Inactive since</target>
+        <target state="translated">Inaktív ekkortól</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.crdate">
         <source>Creation Time</source>
-        <target state="needs-translation">Creation Time</target>
+        <target state="translated">Létrehozás ideje</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log">
         <source>User Log</source>
-        <target state="needs-translation">User Log</target>
+        <target state="translated">Felhasználói napló</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.title">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="translated">Cím</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.crdate">
         <source>Time</source>
-        <target state="needs-translation">Time</target>
+        <target state="translated">Időpont</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Állapot</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.additional_properties">
         <source>Additional Properties</source>
-        <target state="needs-translation">Additional Properties</target>
+        <target state="translated">További tulajdonságok</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.100">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Regisztráció</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.101">
         <source>New Registration</source>
-        <target state="needs-translation">New Registration</target>
+        <target state="translated">Új regisztráció</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.102">
         <source>Registration confirmed by user</source>
-        <target state="needs-translation">Registration confirmed by user</target>
+        <target state="translated">Regisztráció felhasználó által megerősítve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.103">
         <source>Registration confirmed by admin</source>
-        <target state="needs-translation">Registration confirmed by admin</target>
+        <target state="translated">Regisztráció adminisztrátor által megerősítve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.104">
         <source>Registration refused by user</source>
-        <target state="needs-translation">Registration refused by user</target>
+        <target state="translated">Regisztráció felhasználó által elutasítva</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.105">
         <source>Registration refused by admin</source>
-        <target state="needs-translation">Registration refused by admin</target>
+        <target state="translated">Regisztráció adminisztrátor által elutasítva</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.106">
         <source>Profile creation request</source>
-        <target state="needs-translation">Profile creation request</target>
+        <target state="translated">Profil létrehozására vonatkozó kérelem</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.200">
         <source>Update</source>
-        <target state="needs-translation">Update</target>
+        <target state="translated">Frissítés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.201">
         <source>Profile updated</source>
-        <target state="needs-translation">Profile updated</target>
+        <target state="translated">Profil frissítve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.202">
         <source>Profile update confirmed by admin</source>
-        <target state="needs-translation">Profile update confirmed by admin</target>
+        <target state="translated">Profil frissítése adminisztrátor által megerősítve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.203">
         <source>Profile update refused by admin</source>
-        <target state="needs-translation">Profile update refused by admin</target>
+        <target state="translated">Profil frissítése adminisztrátor által elutasítva</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.204">
         <source>Profile update request</source>
-        <target state="needs-translation">Profile update request</target>
+        <target state="translated">Profil frissítésére vonatkozó kérelem</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.205">
         <source>Profile update security failure</source>
-        <target state="needs-translation">Profile update security failure</target>
+        <target state="translated">Profil frissítésének biztonsági hibája</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.206">
         <source>Image deleted</source>
-        <target state="needs-translation">Image deleted</target>
+        <target state="translated">Kép törölve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.207">
         <source>Attempted to spoof profile</source>
-        <target state="needs-translation">Attempted to spoof profile</target>
+        <target state="translated">Kísérlet a profil meghamisítására</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.208">
         <source>Profile update not authorized</source>
-        <target state="needs-translation">Profile update not authorized</target>
+        <target state="translated">Profil frissítése nem engedélyezett</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="translated">Törlés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.301">
         <source>Profile deleted</source>
-        <target state="needs-translation">Profile deleted</target>
+        <target state="translated">Profil törölve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.400">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Meghívás</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.401">
         <source>Profile created and user invited</source>
-        <target state="needs-translation">Profile created and user invited</target>
+        <target state="translated">Profil létrehozva, a felhasználó meghívva</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.402">
         <source>Profile deleted by user</source>
-        <target state="needs-translation">Profile deleted by user</target>
+        <target state="translated">Profil törölve a felhasználó által</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.403">
         <source>Wrong hash</source>
-        <target state="needs-translation">Wrong hash</target>
+        <target state="translated">Hibás hash</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.404">
         <source>You tried to open a restricted page</source>
-        <target state="needs-translation">You tried to open a restricted page</target>
+        <target state="translated">Megpróbáltál megnyitni egy korlátozott oldalt</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.405">
         <source>Password changed and profile activated</source>
-        <target state="needs-translation">Password changed and profile activated</target>
+        <target state="translated">Jelszó módosítva és profil aktiválva</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.501">
         <source>Was impersonated by Backend User (login as)</source>
-        <target state="needs-translation">Was impersonated by Backend User (login as)</target>
+        <target state="translated">Megszemélyesítés a backend-felhasználó által (login as)</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.502">
         <source>Impersonation was denied for Backend User (login as)</source>
-        <target state="needs-translation">Impersonation was denied for Backend User (login as)</target>
+        <target state="translated">Megszemélyesítés megtagadva a backend-felhasználó számára (login as)</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.600">
         <source>Frontend Login</source>
-        <target state="needs-translation">Frontend Login</target>
+        <target state="translated">Frontend-bejelentkezés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.601">
         <source>Successful frontend login</source>
-        <target state="needs-translation">Successful frontend login</target>
+        <target state="translated">Sikeres frontend-bejelentkezés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.602">
         <source>Failed frontend login</source>
-        <target state="needs-translation">Failed frontend login</target>
+        <target state="translated">Sikertelen frontend-bejelentkezés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Felhasználó</target>
       </trans-unit>
       <trans-unit id="error_no_typoscript">
         <source>No TypoScript found. Did you already include the static Template?</source>
-        <target state="needs-translation">No TypoScript found. Did you already include the static Template?</target>
+        <target state="translated">Nem található TypoScript. Már beillesztetted a statikus sablont?</target>
       </trans-unit>
       <trans-unit id="error_no_typoscript_be">
         <source>No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</source>
-        <target state="needs-translation">No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</target>
+        <target state="translated">Nem található TypoScript. Már beállítottad a module.tx_femanager.settings.configPID értéket a PageTS-ben?</target>
       </trans-unit>
       <trans-unit id="error_no_storagepid">
         <source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
-        <target state="needs-translation">No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</target>
+        <target state="translated">Nincs beállítva Storage PID. Kérjük, állítsd be a Storage PID-et a TypoScriptben vagy a plugin beállításaiban.</target>
       </trans-unit>
       <trans-unit id="error_not_authorized">
         <source>You are not authorized for this action</source>
-        <target state="needs-translation">You are not authorized for this action</target>
+        <target state="translated">Nincs jogosultságod ehhez a művelethez</target>
       </trans-unit>
       <trans-unit id="validationError">
         <source>Error</source>
-        <target state="needs-translation">Error</target>
+        <target state="translated">Hiba</target>
       </trans-unit>
       <trans-unit id="validationErrorRequiredModel">
         <source>Username and password must be filled</source>
-        <target state="needs-translation">Username and password must be filled</target>
+        <target state="translated">Meg kell adni a felhasználónevet és a jelszót</target>
       </trans-unit>
       <trans-unit id="validationErrorWrongDateFormat">
         <source>Given date format is wrong</source>
-        <target state="needs-translation">Given date format is wrong</target>
+        <target state="translated">A megadott dátumformátum hibás</target>
       </trans-unit>
       <trans-unit id="validationErrorRequired">
         <source>Field %s is required</source>
-        <target state="needs-translation">Field %s is required</target>
+        <target state="translated">A(z) %s mező kitöltése kötelező</target>
       </trans-unit>
       <trans-unit id="validationErrorEmail">
         <source>Field %s is not a valid email address</source>
-        <target state="needs-translation">Field %s is not a valid email address</target>
+        <target state="translated">A(z) %s mező nem érvényes e-mail cím</target>
       </trans-unit>
       <trans-unit id="validationErrorMin">
         <source>Please add more characters to field %s</source>
-        <target state="needs-translation">Please add more characters to field %s</target>
+        <target state="translated">Kérjük, adj hozzá több karaktert a(z) %s mezőhöz</target>
       </trans-unit>
       <trans-unit id="validationErrorMax">
         <source>Please add less characters to field %s</source>
-        <target state="needs-translation">Please add less characters to field %s</target>
+        <target state="translated">A(z) %s mezőben kevesebb karaktert adj meg</target>
       </trans-unit>
       <trans-unit id="validationErrorMinInt">
         <source>Please respect the minimum value for field %s</source>
-        <target state="needs-translation">Please respect the minimum value for field %s</target>
+        <target state="translated">Kérlek, tartsd be a(z) %s mező minimális értékét</target>
       </trans-unit>
       <trans-unit id="validationErrorMaxInt">
         <source>Please respect the maximum value for field %s</source>
-        <target state="needs-translation">Please respect the maximum value for field %s</target>
+        <target state="translated">Kérlek, tartsd be a(z) %s mező maximális értékét</target>
       </trans-unit>
       <trans-unit id="validationErrorInt">
         <source>Only numbers are allowed in field %s</source>
-        <target state="needs-translation">Only numbers are allowed in field %s</target>
+        <target state="translated">A(z) %s mezőbe csak számokat írhatsz</target>
       </trans-unit>
       <trans-unit id="validationErrorLetters">
         <source>Only letters are allowed in field %s</source>
-        <target state="needs-translation">Only letters are allowed in field %s</target>
+        <target state="translated">A(z) %s mezőbe csak betűket írhatsz</target>
       </trans-unit>
       <trans-unit id="validationErrorUniquePage">
         <source>Value of field %s is already in use</source>
-        <target state="needs-translation">Value of field %s is already in use</target>
+        <target state="translated">A(z) %s mező értéke már használatban van</target>
       </trans-unit>
       <trans-unit id="validationErrorUniqueDb">
         <source>Value of field %s is already in use</source>
-        <target state="needs-translation">Value of field %s is already in use</target>
+        <target state="translated">A(z) %s mező értéke már használatban van</target>
       </trans-unit>
       <trans-unit id="validationErrorMustInclude">
         <source>Try another value for field %s</source>
-        <target state="needs-translation">Try another value for field %s</target>
+        <target state="translated">A(z) %s mezőhöz próbálj más értéket</target>
       </trans-unit>
       <trans-unit id="validationErrorMustNotInclude">
         <source>Not allowed signs in field %s</source>
-        <target state="needs-translation">Not allowed signs in field %s</target>
+        <target state="translated">A(z) %s mezőben nem megengedett karakterek szerepelnek</target>
       </trans-unit>
       <trans-unit id="validationErrorInList">
         <source>This value is not allowed in field %s</source>
-        <target state="needs-translation">This value is not allowed in field %s</target>
+        <target state="translated">Ez az érték nem megengedett a(z) %s mezőben</target>
       </trans-unit>
       <trans-unit id="validationErrorSameAs">
         <source>Values do not match</source>
-        <target state="needs-translation">Values do not match</target>
+        <target state="translated">Az értékek nem egyeznek</target>
       </trans-unit>
       <trans-unit id="validationErrorPasswordRepeat">
         <source>Both passwords do not match</source>
-        <target state="needs-translation">Both passwords do not match</target>
+        <target state="translated">A két jelszó nem egyezik</target>
       </trans-unit>
       <trans-unit id="validationErrorDate">
         <source>Date has the wrong format</source>
-        <target state="needs-translation">Date has the wrong format</target>
+        <target state="translated">A dátum formátuma hibás</target>
       </trans-unit>
       <trans-unit id="validationErrorCaptcha">
         <source>Wrong Captcha code</source>
-        <target state="needs-translation">Wrong Captcha code</target>
+        <target state="translated">Hibás captcha kód</target>
       </trans-unit>
       <trans-unit id="validationErrorGeneral">
         <source>Field could not be validated</source>
-        <target state="needs-translation">Field could not be validated</target>
+        <target state="translated">A mezőt nem sikerült ellenőrizni</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationSubject">
         <source>Please confirm a new registration</source>
-        <target state="needs-translation">Please confirm a new registration</target>
+        <target state="translated">Kérlek, hagyd jóvá az új regisztrációt</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationSalutation">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="translated">Kedves Adminisztrátor,</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationUserProperties">
         <source>User properties:</source>
-        <target state="needs-translation">User properties:</target>
+        <target state="translated">Felhasználói adatok:</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationText1">
         <source>Please confirm registration of %s by clicking the following link:</source>
-        <target state="needs-translation">Please confirm registration of %s by clicking the following link:</target>
+        <target state="translated">Kérlek, erősítsd meg a(z) %s regisztrációját a következő linkre kattintva:</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationLinkConfirm">
         <source>Confirm registration</source>
-        <target state="needs-translation">Confirm registration</target>
+        <target state="translated">Regisztráció megerősítése</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationText2">
         <source>If you want to delete the registration, click this link:</source>
-        <target state="needs-translation">If you want to delete the registration, click this link:</target>
+        <target state="translated">Ha törölni szeretnéd a regisztrációt, kattints erre a linkre:</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefused">
         <source>Delete profile</source>
-        <target state="needs-translation">Delete profile</target>
+        <target state="translated">Profil törlése</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationText3">
         <source>If you want to delete the registration, without sending an email to the user, click this link:</source>
-        <target state="needs-translation">If you want to delete the registration, without sending an email to the user, click this link:</target>
+        <target state="translated">Ha törölni szeretnéd a regisztrációt anélkül, hogy e-mailt küldenél a felhasználónak, kattints erre a linkre:</target>
       </trans-unit>
       <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent">
         <source>Silently delete profile</source>
-        <target state="needs-translation">Silently delete profile</target>
+        <target state="translated">Profil csendes törlése</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationSubject">
         <source>Please confirm your profile creation request</source>
-        <target state="needs-translation">Please confirm your profile creation request</target>
+        <target state="translated">Kérlek, erősítsd meg a profil létrehozására vonatkozó kérelmedet</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationSalutation">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Kedves</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationText1">
         <source>Please confirm your profile registration on our server by clicking the following link:</source>
-        <target state="needs-translation">Please confirm your profile registration on our server by clicking the following link:</target>
+        <target state="translated">Kérlek, erősítsd meg a profilod regisztrációját a szerverünkön a következő linkre kattintva:</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationLinkConfirm">
         <source>Confirm profile</source>
-        <target state="needs-translation">Confirm profile</target>
+        <target state="translated">Profil megerősítése</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationText2">
         <source>If you don't want to be registered on our system, click this link:</source>
-        <target state="needs-translation">If you don't want to be registered on our system, click this link:</target>
+        <target state="translated">Ha nem szeretnél regisztrálva lenni a rendszerünkben, kattints erre a linkre:</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationLinkConfirmRefused">
         <source>Delete profile</source>
-        <target state="needs-translation">Delete profile</target>
+        <target state="translated">Profil törlése</target>
       </trans-unit>
       <trans-unit id="emailCreateUserConfirmationSignature">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="translated">A weboldal csapata.</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifySubject">
         <source>Your registration was confirmed</source>
-        <target state="needs-translation">Your registration was confirmed</target>
+        <target state="translated">A regisztrációdat megerősítettük</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifySalutation">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Kedves</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifyText1">
         <source>Your profile was confirmed and successfully created.</source>
-        <target state="needs-translation">Your profile was confirmed and successfully created.</target>
+        <target state="translated">A profilodat megerősítettük, és sikeresen létrehoztuk.</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifySignature">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="translated">A weboldal csapata.</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifyRefusedSubject">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Kedves</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifyRefusedSalutation">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Kedves</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifyRefusedText1">
         <source>Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</source>
-        <target state="needs-translation">Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</target>
+        <target state="translated">Köszönjük a profil-kérelmedet. Sajnálattal közöljük, hogy el kellett utasítanunk a kérelmedet.</target>
       </trans-unit>
       <trans-unit id="emailCreateUserNotifyRefusedSignature">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="translated">A weboldal csapata.</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifySubject">
         <source>New profile registration</source>
-        <target state="needs-translation">New profile registration</target>
+        <target state="translated">Új profilregisztráció</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifySalutation">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="translated">Kedves Adminisztrátor,</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifyText1">
         <source>Profile creation - User %s</source>
-        <target state="needs-translation">Profile creation - User %s</target>
+        <target state="translated">Profil létrehozása – %s felhasználó</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifyText2">
         <source>Profile creation - User %s set a new password and profile was enabled</source>
-        <target state="needs-translation">Profile creation - User %s set a new password and profile was enabled</target>
+        <target state="translated">Profil létrehozása – %s felhasználó új jelszót állított be, és a profil aktiválva lett</target>
       </trans-unit>
       <trans-unit id="emailCreateNotifyUserProperties">
         <source>Profile properties:</source>
-        <target state="needs-translation">Profile properties:</target>
+        <target state="translated">Profil adatai:</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifySubject">
         <source>Profile update</source>
-        <target state="needs-translation">Profile update</target>
+        <target state="translated">Profil módosítás</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifySalutation">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="translated">Kedves Adminisztrátor,</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifyText1">
         <source>Profile change by user %s</source>
-        <target state="needs-translation">Profile change by user %s</target>
+        <target state="translated">%s felhasználó módosította a profilját</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifyField">
         <source>Fieldname</source>
-        <target state="needs-translation">Fieldname</target>
+        <target state="translated">Mező neve</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifyOld">
         <source>Old value</source>
-        <target state="needs-translation">Old value</target>
+        <target state="translated">Régi érték</target>
       </trans-unit>
       <trans-unit id="emailUpdateNotifyNew">
         <source>New value</source>
-        <target state="needs-translation">New value</target>
+        <target state="translated">Új érték</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestSubject">
         <source>New profile change request</source>
-        <target state="needs-translation">New profile change request</target>
+        <target state="translated">Új profil-módosítási kérelem</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestSalutation">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="translated">Kedves Adminisztrátor,</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestText1">
         <source>Profile change request from %s</source>
-        <target state="needs-translation">Profile change request from %s</target>
+        <target state="translated">Profil-módosítási kérelem %s felhasználótól</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestText2">
         <source>All changes:</source>
-        <target state="needs-translation">All changes:</target>
+        <target state="translated">Minden változás:</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestField">
         <source>Fieldname</source>
-        <target state="needs-translation">Fieldname</target>
+        <target state="translated">Mező neve</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestOld">
         <source>Old value</source>
-        <target state="needs-translation">Old value</target>
+        <target state="translated">Régi érték</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestNew">
         <source>New value</source>
-        <target state="needs-translation">New value</target>
+        <target state="translated">Új érték</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestLinkConfirm">
         <source>Confirm changes</source>
-        <target state="needs-translation">Confirm changes</target>
+        <target state="translated">Módosítások megerősítése</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestLinkRefuse">
         <source>Refuse changes and notify user</source>
-        <target state="needs-translation">Refuse changes and notify user</target>
+        <target state="translated">Módosítások elutasítása és a felhasználó értesítése</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestLinkSiltentRefuse">
         <source>Refuse changes and do not notify user</source>
-        <target state="needs-translation">Refuse changes and do not notify user</target>
+        <target state="translated">Módosítások elutasítása a felhasználó értesítése nélkül</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedSubject">
         <source>Your update request was refused</source>
-        <target state="needs-translation">Your update request was refused</target>
+        <target state="translated">A módosítási kérelmed elutasításra került</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedSalutation">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Kedves</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedText1">
         <source>Thank you for your update request. We're sorry to tell you, that we had to refuse your request.</source>
-        <target state="needs-translation">Thank you for your update request. We're sorry to tell you, that we had to refuse your request.</target>
+        <target state="translated">Köszönjük a módosítási kérelmedet. Sajnálattal tudatjuk, hogy kérelmedet el kellett utasítanunk.</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedText2">
         <source>Please contact %s for further information.</source>
-        <target state="needs-translation">Please contact %s for further information.</target>
+        <target state="translated">További információkért fordulj a következőhöz: %s.</target>
       </trans-unit>
       <trans-unit id="emailUpdateRequestRefusedSignature">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="translated">A weboldal csapata.</target>
       </trans-unit>
       <trans-unit id="emailInvitationSubject">
         <source>Confirm your profile</source>
-        <target state="needs-translation">Confirm your profile</target>
+        <target state="translated">Erősítsd meg a profilod</target>
       </trans-unit>
       <trans-unit id="emailInvitationSalutation">
         <source>Dear</source>
-        <target state="needs-translation">Dear</target>
+        <target state="translated">Kedves</target>
       </trans-unit>
       <trans-unit id="emailInvitationText1">
         <source>Your new profile was just created.</source>
-        <target state="needs-translation">Your new profile was just created.</target>
+        <target state="translated">Az új profilod éppen most került létrehozásra.</target>
       </trans-unit>
       <trans-unit id="emailInvitationText2">
         <source>Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</source>
-        <target state="needs-translation">Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</target>
+        <target state="translated">Kérjük, erősítsd meg profilod regisztrációját a szerverünkön a következő linkre kattintva. Ezt követően megadhatsz egy jelszót.</target>
       </trans-unit>
       <trans-unit id="emailInvitationLinkConfirm">
         <source>Confirm Profile</source>
-        <target state="needs-translation">Confirm Profile</target>
+        <target state="translated">Profil megerősítése</target>
       </trans-unit>
       <trans-unit id="emailInvitationText3">
         <source>If you don't want to be registered on our system, click this link.</source>
-        <target state="needs-translation">If you don't want to be registered on our system, click this link.</target>
+        <target state="translated">Ha nem szeretnél regisztrálva lenni a rendszerünkben, kattints erre a linkre.</target>
       </trans-unit>
       <trans-unit id="emailInvitationLinkConfirmRefused">
         <source>Delete Profile</source>
-        <target state="needs-translation">Delete Profile</target>
+        <target state="translated">Profil törlése</target>
       </trans-unit>
       <trans-unit id="emailInvitationSignature">
         <source>Your website team.</source>
-        <target state="needs-translation">Your website team.</target>
+        <target state="translated">A weboldal csapata.</target>
       </trans-unit>
       <trans-unit id="emailInvitationAdminNotifiyStep1Subject">
         <source>User was invited</source>
-        <target state="needs-translation">User was invited</target>
+        <target state="translated">A felhasználó meghívásra került</target>
       </trans-unit>
       <trans-unit id="emailInvitationAdminNotifiySubject">
         <source>User invitation - Profile finally created</source>
-        <target state="needs-translation">User invitation - Profile finally created</target>
+        <target state="translated">Felhasználói meghívás – profil véglegesen létrehozva</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyStep1Subject">
         <source>User refused invitation</source>
-        <target state="needs-translation">User refused invitation</target>
+        <target state="translated">A felhasználó visszautasította a meghívást</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiySalutation">
         <source>Dear Admin,</source>
-        <target state="needs-translation">Dear Admin,</target>
+        <target state="translated">Kedves Adminisztrátor,</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyText1">
         <source>Profile invitation of %s</source>
-        <target state="needs-translation">Profile invitation of %s</target>
+        <target state="translated">%s profiljának meghívása</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyText2">
         <source>Profile invitation - User %s refused to set a new password. The profile was deleted.</source>
-        <target state="needs-translation">Profile invitation - User %s refused to set a new password. The profile was deleted.</target>
+        <target state="translated">Profilmeghívás – %s felhasználó megtagadta az új jelszó beállítását. A profil törlésre került.</target>
       </trans-unit>
       <trans-unit id="emailInvitationUserRefusedAdminNotifiyUserProperties">
         <source>Profile properties:</source>
-        <target state="needs-translation">Profile properties:</target>
+        <target state="translated">Profil adatai:</target>
       </trans-unit>
       <trans-unit id="noRecordsFound">
         <source>No records found.</source>
-        <target state="needs-translation">No records found.</target>
+        <target state="translated">Nem található rekord.</target>
       </trans-unit>
       <trans-unit id="noRecordsFoundClearFilter">
         <source>Clean filter.</source>
-        <target state="needs-translation">Clean filter.</target>
+        <target state="translated">Szűrő törlése.</target>
       </trans-unit>
       <trans-unit id="noRecordsFoundGoToPage0">
         <source>Show all users from all pages (for administrators only).</source>
-        <target state="needs-translation">Show all users from all pages (for administrators only).</target>
+        <target state="translated">Összes felhasználó mutatása minden oldalról (csak adminisztrátoroknak).</target>
       </trans-unit>
       <trans-unit id="noRecordFoundShow">
         <source>No FE_User given or not logged in</source>
-        <target state="needs-translation">No FE_User given or not logged in</target>
+        <target state="translated">Nincs megadva FE_User, vagy nincs bejelentkezve</target>
       </trans-unit>
       <trans-unit id="notLoggedIn">
         <source>Please log in before</source>
-        <target state="needs-translation">Please log in before</target>
+        <target state="translated">Kérjük, előbb jelentkezzen be</target>
       </trans-unit>
       <trans-unit id="submitNew">
         <source>Create Profile Now</source>
-        <target state="needs-translation">Create Profile Now</target>
+        <target state="translated">Profil létrehozása</target>
       </trans-unit>
       <trans-unit id="submitResend">
         <source>Resend now</source>
-        <target state="needs-translation">Resend now</target>
+        <target state="translated">Újraküldés</target>
       </trans-unit>
       <trans-unit id="passwordRepeat">
         <source>Repeat Password</source>
-        <target state="needs-translation">Repeat Password</target>
+        <target state="translated">Jelszó megismétlése</target>
       </trans-unit>
       <trans-unit id="titleCreateProfile">
         <source>Create a new user-profile</source>
-        <target state="needs-translation">Create a new user-profile</target>
+        <target state="translated">Új felhasználói profil létrehozása</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailTitle">
         <source>Resend confirmation mail</source>
-        <target state="needs-translation">Resend confirmation mail</target>
+        <target state="translated">Megerősítő e-mail újraküldése</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailFieldsetLegend">
         <source>Please enter your email address</source>
-        <target state="needs-translation">Please enter your email address</target>
+        <target state="translated">Kérjük, adja meg az e-mail címét</target>
       </trans-unit>
       <trans-unit id="submitEdit">
         <source>Update Profile</source>
-        <target state="needs-translation">Update Profile</target>
+        <target state="translated">Profil frissítése</target>
       </trans-unit>
       <trans-unit id="create">
         <source>Profile successfully created</source>
-        <target state="needs-translation">Profile successfully created</target>
+        <target state="translated">A profil sikeresen létrehozva</target>
       </trans-unit>
       <trans-unit id="createAndInvited">
         <source>Profile successfully created and user informed</source>
-        <target state="needs-translation">Profile successfully created and user informed</target>
+        <target state="translated">A profil sikeresen létrehozva és a felhasználó értesítve</target>
       </trans-unit>
       <trans-unit id="createAndInvitedFinished">
         <source>Profile successfully changed and enabled</source>
-        <target state="needs-translation">Profile successfully changed and enabled</target>
+        <target state="translated">A profil sikeresen módosítva és aktiválva</target>
       </trans-unit>
       <trans-unit id="createRequestWaitingForUserConfirm">
         <source>Thank you for your request. Please check your mail account to confirm the profile.</source>
-        <target state="needs-translation">Thank you for your request. Please check your mail account to confirm the profile.</target>
+        <target state="translated">Köszönjük a kérését. Kérjük, ellenőrizze az e-mail-fiókját a profil megerősítéséhez.</target>
       </trans-unit>
       <trans-unit id="createRequestWaitingForAdminConfirm">
         <source>Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</source>
-        <target state="needs-translation">Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</target>
+        <target state="translated">Köszönjük a regisztrációt. Profilja akkor lesz elérhető, amint az adminisztrátor megerősíti a kérését.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailSend">
         <source>An email was sent to your account. Please check your inbox.</source>
-        <target state="needs-translation">An email was sent to your account. Please check your inbox.</target>
+        <target state="translated">E-mailt küldtünk a fiókjára. Kérjük, ellenőrizze a bejövő leveleit.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationMailFail">
         <source>We received no valid mail.</source>
-        <target state="needs-translation">We received no valid mail.</target>
+        <target state="translated">Nem kaptunk érvényes e-mailt.</target>
       </trans-unit>
       <trans-unit id="ratelimiter_too_many_attempts">
         <source>Too many attempts from this IP address. Try again later.</source>
-        <target state="needs-translation">Too many attempts from this IP address. Try again later.</target>
+        <target state="translated">Túl sok próbálkozás erről az IP-címről. Próbálja újra később.</target>
       </trans-unit>
       <trans-unit id="createFailedProfile">
         <source>Profile creation failed</source>
-        <target state="needs-translation">Profile creation failed</target>
+        <target state="translated">A profil létrehozása sikertelen</target>
       </trans-unit>
       <trans-unit id="userAlreadyConfirmed">
         <source>Profile is already confirmed</source>
-        <target state="needs-translation">Profile is already confirmed</target>
+        <target state="translated">A profil már meg van erősítve</target>
       </trans-unit>
       <trans-unit id="missingUserInDatabase">
         <source>No Profile found in database. Maybe it was deleted before.</source>
-        <target state="needs-translation">No Profile found in database. Maybe it was deleted before.</target>
+        <target state="translated">A profil nem található az adatbázisban. Lehet, hogy korábban törölték.</target>
       </trans-unit>
       <trans-unit id="createProfileDeleted">
         <source>Profile successfully deleted</source>
-        <target state="needs-translation">Profile successfully deleted</target>
+        <target state="translated">A profil sikeresen törölve</target>
       </trans-unit>
       <trans-unit id="titleUpdateProfile">
         <source>Update your user-profile</source>
-        <target state="needs-translation">Update your user-profile</target>
+        <target state="translated">Felhasználói profiljának frissítése</target>
       </trans-unit>
       <trans-unit id="confirmUserConfirmation">
         <source>Please confirm the creation of your account.</source>
-        <target state="needs-translation">Please confirm the creation of your account.</target>
+        <target state="translated">Kérjük, erősítse meg a fiókja létrehozását.</target>
       </trans-unit>
       <trans-unit id="confirmUserConfirmationRefused">
         <source>Please confirm the deletion of your account.</source>
-        <target state="needs-translation">Please confirm the deletion of your account.</target>
+        <target state="translated">Kérjük, erősítse meg a fiókja törlését.</target>
       </trans-unit>
       <trans-unit id="confirmAdminConfirmation">
         <source>Please confirm the creation of this account.</source>
-        <target state="needs-translation">Please confirm the creation of this account.</target>
+        <target state="translated">Kérjük, erősítse meg a fiók létrehozását.</target>
       </trans-unit>
       <trans-unit id="confirmAdminConfirmationRefused">
         <source>Please confirm the deletion of this account.</source>
-        <target state="needs-translation">Please confirm the deletion of this account.</target>
+        <target state="translated">Kérjük, erősítse meg a fiók törlését.</target>
       </trans-unit>
       <trans-unit id="confirmAdminConfirmationRefusedSilent">
         <source>Please confirm the silent deletion of this account.</source>
-        <target state="needs-translation">Please confirm the silent deletion of this account.</target>
+        <target state="translated">Kérjük, erősítse meg a fiók néma törlését.</target>
       </trans-unit>
       <trans-unit id="update">
         <source>Profile successfully changed</source>
-        <target state="needs-translation">Profile successfully changed</target>
+        <target state="translated">A profil sikeresen módosítva</target>
       </trans-unit>
       <trans-unit id="noChanges">
         <source>No changes detected, nothing to update</source>
-        <target state="needs-translation">No changes detected, nothing to update</target>
+        <target state="translated">Nem történt változás, nincs mit frissíteni</target>
       </trans-unit>
       <trans-unit id="updateRequest">
         <source>Your change request was transmitted to the administrator. After a confirmation, your profile will be up-to-date.</source>
-        <target state="needs-translation">Your change request was transmitted to the administrator. After a confirmation, your profile will be up-to-date.</target>
+        <target state="translated">A változtatási kérelme továbbításra került az adminisztrátorhoz. A megerősítés után a profilja naprakész lesz.</target>
       </trans-unit>
       <trans-unit id="login">
         <source>You're successfully logged in now</source>
-        <target state="needs-translation">You're successfully logged in now</target>
+        <target state="translated">Sikeresen bejelentkezett</target>
       </trans-unit>
       <trans-unit id="deleteProfile">
         <source>Delete Profile</source>
-        <target state="needs-translation">Delete Profile</target>
+        <target state="translated">Profil törlése</target>
       </trans-unit>
       <trans-unit id="updateProfile">
         <source>Profile successfully updated</source>
-        <target state="needs-translation">Profile successfully updated</target>
+        <target state="translated">A profil sikeresen frissítve</target>
       </trans-unit>
       <trans-unit id="updateFailedProfile">
         <source>Profile update failed</source>
-        <target state="needs-translation">Profile update failed</target>
+        <target state="translated">A profil frissítése sikertelen</target>
       </trans-unit>
       <trans-unit id="field_image_fineuploader">
         <source>Please enable fineUploader plugin</source>
-        <target state="needs-translation">Please enable fineUploader plugin</target>
+        <target state="translated">Kérjük, engedélyezze a fineUploader bővítményt</target>
       </trans-unit>
       <trans-unit id="field_image_drag">
         <source>Drag file</source>
-        <target state="needs-translation">Drag file</target>
+        <target state="translated">Húzza ide a fájlt</target>
       </trans-unit>
       <trans-unit id="field_image_drag_processing">
         <source>Drag in progress ...</source>
-        <target state="needs-translation">Drag in progress ...</target>
+        <target state="translated">Húzás folyamatban ...</target>
       </trans-unit>
       <trans-unit id="field_image_upload">
         <source>Upload</source>
-        <target state="needs-translation">Upload</target>
+        <target state="translated">Feltöltés</target>
       </trans-unit>
       <trans-unit id="empty">
         <source>empty</source>
-        <target state="needs-translation">empty</target>
+        <target state="translated">üres</target>
       </trans-unit>
       <trans-unit id="pleaseChoose">
         <source>Please choose ...</source>
-        <target state="needs-translation">Please choose ...</target>
+        <target state="translated">Kérlek, válassz ...</target>
       </trans-unit>
       <trans-unit id="pleaseChooseCountry">
         <source>Please choose a country ...</source>
-        <target state="needs-translation">Please choose a country ...</target>
+        <target state="translated">Kérlek, válassz országot ...</target>
       </trans-unit>
       <trans-unit id="FilterLabel">
         <source>Search</source>
-        <target state="needs-translation">Search</target>
+        <target state="translated">Keresés</target>
       </trans-unit>
       <trans-unit id="FilterPlaceholder">
         <source>Search ...</source>
-        <target state="needs-translation">Search ...</target>
+        <target state="translated">Keresés ...</target>
       </trans-unit>
       <trans-unit id="FilterSubmit">
         <source>Filter now</source>
-        <target state="needs-translation">Filter now</target>
+        <target state="translated">Szűrés most</target>
       </trans-unit>
       <trans-unit id="UserDeleteConfirmation">
         <source>Are you sure to delete your profile?</source>
-        <target state="needs-translation">Are you sure to delete your profile?</target>
+        <target state="translated">Biztosan törlöd a profilodat?</target>
       </trans-unit>
       <trans-unit id="titleInvitationProfile">
         <source>Invite a new user</source>
-        <target state="needs-translation">Invite a new user</target>
+        <target state="translated">Új felhasználó meghívása</target>
       </trans-unit>
       <trans-unit id="titleInvitationSetPassword">
         <source>Please set a new password</source>
-        <target state="needs-translation">Please set a new password</target>
+        <target state="translated">Kérlek, állíts be új jelszót</target>
       </trans-unit>
       <trans-unit id="BackendListUserDelete">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="translated">Törlés</target>
       </trans-unit>
       <trans-unit id="BackendListUserDeleteConfirmation">
         <source>Are you sure to delete this User?</source>
-        <target state="needs-translation">Are you sure to delete this User?</target>
+        <target state="translated">Biztosan törlöd ezt a felhasználót?</target>
       </trans-unit>
       <trans-unit id="BackendListUserEdit">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Szerkesztés</target>
       </trans-unit>
       <trans-unit id="BackendListUserLogout">
         <source>Logout</source>
-        <target state="needs-translation">Logout</target>
+        <target state="translated">Kijelentkezés</target>
       </trans-unit>
       <trans-unit id="BackendListUserStatusOffline">
         <source>Offline</source>
-        <target state="needs-translation">Offline</target>
+        <target state="translated">Offline</target>
       </trans-unit>
       <trans-unit id="BackendListUserStatusOnline">
         <source>Online</source>
-        <target state="needs-translation">Online</target>
+        <target state="translated">Online</target>
       </trans-unit>
       <trans-unit id="BackendListUserVisibilityHide">
         <source>Disable</source>
-        <target state="needs-translation">Disable</target>
+        <target state="translated">Letiltás</target>
       </trans-unit>
       <trans-unit id="BackendListUserVisibilityHidden">
         <source>Hidden</source>
-        <target state="needs-translation">Hidden</target>
+        <target state="translated">Rejtett</target>
       </trans-unit>
       <trans-unit id="BackendListUserVisibilityUnhide">
         <source>Enable</source>
-        <target state="needs-translation">Enable</target>
+        <target state="translated">Engedélyezés</target>
       </trans-unit>
       <trans-unit id="BackendListFilterLabel">
         <source>Search</source>
-        <target state="needs-translation">Search</target>
+        <target state="translated">Keresés</target>
       </trans-unit>
       <trans-unit id="BackendListLoginAs">
         <source>Login as</source>
-        <target state="needs-translation">Login as</target>
+        <target state="translated">Bejelentkezés mint</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteTitle">
         <source>Possible action:</source>
-        <target state="needs-translation">Possible action:</target>
+        <target state="translated">Lehetséges művelet:</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationNoteText">
         <source>%s approval(s) available</source>
-        <target state="needs-translation">%s approval(s) available</target>
+        <target state="translated">%s jóváhagyás érhető el</target>
       </trans-unit>
       <trans-unit id="AdminBackendConfirmationNoteText">
         <source>%s user(s) need to be confirmed by admin</source>
-        <target state="needs-translation">%s user(s) need to be confirmed by admin</target>
+        <target state="translated">%s felhasználó vár adminisztrátori jóváhagyásra</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnAction">
         <source>Actions</source>
-        <target state="needs-translation">Actions</target>
+        <target state="translated">Műveletek</target>
       </trans-unit>
       <trans-unit id="BackendMissingConfigPID">
         <source>The config PID is missing!</source>
-        <target state="needs-translation">The config PID is missing!</target>
+        <target state="translated">A konfigurációs PID hiányzik!</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationColumnUid">
         <source>UID</source>
-        <target state="needs-translation">UID</target>
+        <target state="translated">UID</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageLogout">
         <source>%s was successfully logged out</source>
-        <target state="needs-translation">%s was successfully logged out</target>
+        <target state="translated">%s sikeresen ki lett jelentkeztetve</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageConfirmed">
         <source>%s was successfully approved</source>
-        <target state="needs-translation">%s was successfully approved</target>
+        <target state="translated">%s sikeresen jóvá lett hagyva</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageFailed">
         <source>The user confirmation failed, please check your system log or check your config</source>
-        <target state="needs-translation">The user confirmation failed, please check your system log or check your config</target>
+        <target state="translated">A felhasználó jóváhagyása nem sikerült, ellenőrizd a rendszernaplót vagy a konfigurációt</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageRefused">
         <source>%s was refused</source>
-        <target state="needs-translation">%s was refused</target>
+        <target state="translated">%s el lett utasítva</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationResendUserConfirmationRequest">
         <source>resend user confirmation e-mail</source>
-        <target state="needs-translation">resend user confirmation e-mail</target>
+        <target state="translated">felhasználói jóváhagyó e-mail újraküldése</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageReSend">
         <source>%s confirmation mail was resent</source>
-        <target state="needs-translation">%s confirmation mail was resent</target>
+        <target state="translated">%s jóváhagyó e-mailje újra ki lett küldve</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueMessage">
         <source>Your userprofile is not confirmed yet.</source>
-        <target state="needs-translation">Your userprofile is not confirmed yet.</target>
+        <target state="translated">A felhasználói profilod még nincs megerősítve.</target>
       </trans-unit>
       <trans-unit id="resendConfirmationDialogueLink">
         <source>Resend confirmation email?</source>
-        <target state="needs-translation">Resend confirmation email?</target>
+        <target state="translated">Megerősítő e-mail újraküldése?</target>
       </trans-unit>
       <trans-unit id="createStatus">
         <source>User registration</source>
-        <target state="needs-translation">User registration</target>
+        <target state="translated">Felhasználói regisztráció</target>
       </trans-unit>
       <trans-unit id="js.loading_states">
         <source>Loading states ...</source>
-        <target state="needs-translation">Loading states ...</target>
+        <target state="translated">Állapotok betöltése ...</target>
       </trans-unit>
     </body>
   </file>
