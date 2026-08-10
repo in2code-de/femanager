@@ -5,535 +5,535 @@
     <body>
       <trans-unit id="tx_femanager_domain_model_user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Felhasználó</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.username">
         <source>Username</source>
-        <target state="needs-translation">Username</target>
+        <target state="translated">Felhasználónév</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.password">
         <source>Password</source>
-        <target state="needs-translation">Password</target>
+        <target state="translated">Jelszó</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.usergroup">
         <source>Usergroup</source>
-        <target state="needs-translation">Usergroup</target>
+        <target state="translated">Felhasználócsoport</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.name">
         <source>Name</source>
-        <target state="needs-translation">Name</target>
+        <target state="translated">Név</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.firstName">
         <source>Firstname</source>
-        <target state="needs-translation">Firstname</target>
+        <target state="translated">Keresztnév</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.middleName">
         <source>Middlename</source>
-        <target state="needs-translation">Middlename</target>
+        <target state="translated">Középső név</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastName">
         <source>Lastname</source>
-        <target state="needs-translation">Lastname</target>
+        <target state="translated">Vezetéknév</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
         <source>Birthdate</source>
-        <target state="needs-translation">Birthdate</target>
+        <target state="translated">Születési dátum</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender">
         <source>Gender</source>
-        <target state="needs-translation">Gender</target>
+        <target state="translated">Nem</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item0">
         <source>male</source>
-        <target state="needs-translation">male</target>
+        <target state="translated">férfi</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item1">
         <source>female</source>
-        <target state="needs-translation">female</target>
+        <target state="translated">nő</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.gender.item2">
         <source>diverse</source>
-        <target state="needs-translation">diverse</target>
+        <target state="translated">diverz</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.address">
         <source>Address</source>
-        <target state="needs-translation">Address</target>
+        <target state="translated">Cím</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.telephone">
         <source>Telephone</source>
-        <target state="needs-translation">Telephone</target>
+        <target state="translated">Telefonszám</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.fax">
         <source>Fax</source>
-        <target state="needs-translation">Fax</target>
+        <target state="translated">Fax</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.email">
         <source>Email</source>
-        <target state="needs-translation">Email</target>
+        <target state="translated">E-mail</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.title">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="translated">Megszólítás</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.zip">
         <source>ZIP</source>
-        <target state="needs-translation">ZIP</target>
+        <target state="translated">Irányítószám</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.city">
         <source>City</source>
-        <target state="needs-translation">City</target>
+        <target state="translated">Város</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.country">
         <source>Country</source>
-        <target state="needs-translation">Country</target>
+        <target state="translated">Ország</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Megye</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.www">
         <source>Website</source>
-        <target state="needs-translation">Website</target>
+        <target state="translated">Weboldal</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.company">
         <source>Company</source>
-        <target state="needs-translation">Company</target>
+        <target state="translated">Cég</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.image">
         <source>Image</source>
-        <target state="needs-translation">Image</target>
+        <target state="translated">Kép</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.lastlogin">
         <source>Last login</source>
-        <target state="needs-translation">Last login</target>
+        <target state="translated">Utolsó bejelentkezés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.captcha">
         <source>Captcha</source>
-        <target state="needs-translation">Captcha</target>
+        <target state="translated">Captcha</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Megye</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_user.terms">
         <source>Terms and conditions</source>
-        <target state="needs-translation">Terms and conditions</target>
+        <target state="translated">ÁSZF</target>
       </trans-unit>
       <trans-unit id="fe_users.crdate">
         <source>Creation Time</source>
-        <target state="needs-translation">Creation Time</target>
+        <target state="translated">Létrehozás ideje</target>
       </trans-unit>
       <trans-unit id="fe_users.tstamp">
         <source>Last profile change at</source>
-        <target state="needs-translation">Last profile change at</target>
+        <target state="translated">Utolsó profilváltoztatás ideje</target>
       </trans-unit>
       <trans-unit id="fe_users.registrationconfirmedbyuser">
         <source>Registration confirmed by user</source>
-        <target state="needs-translation">Registration confirmed by user</target>
+        <target state="translated">Regisztráció felhasználó által megerősítve</target>
       </trans-unit>
       <trans-unit id="fe_users.registrationconfirmedbyadmin">
         <source>Registration confirmed by admin</source>
-        <target state="needs-translation">Registration confirmed by admin</target>
+        <target state="translated">Regisztráció adminisztrátor által megerősítve</target>
       </trans-unit>
       <trans-unit id="fe_users.tab">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Regisztráció</target>
       </trans-unit>
       <trans-unit id="fe_users.log">
         <source>FE_user Log</source>
-        <target state="needs-translation">FE_user Log</target>
+        <target state="translated">FE felhasználó napló</target>
       </trans-unit>
       <trans-unit id="fe_users.terms">
         <source>User accepted terms and conditions</source>
-        <target state="needs-translation">User accepted terms and conditions</target>
+        <target state="translated">A felhasználó elfogadta az ÁSZF-et</target>
       </trans-unit>
       <trans-unit id="fe_users.terms_version">
         <source>Accepted version of terms and conditions</source>
-        <target state="needs-translation">Accepted version of terms and conditions</target>
+        <target state="translated">Elfogadott ÁSZF-verzió</target>
       </trans-unit>
       <trans-unit id="fe_users.terms_date_of_acceptance">
         <source>Accepted datetime of terms and conditions</source>
-        <target state="needs-translation">Accepted datetime of terms and conditions</target>
+        <target state="translated">ÁSZF elfogadásának időpontja</target>
       </trans-unit>
       <trans-unit id="fe_users.changerequest">
         <source>Change Request</source>
-        <target state="needs-translation">Change Request</target>
+        <target state="translated">Módosítási kérelem</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log">
         <source>User Log</source>
-        <target state="needs-translation">User Log</target>
+        <target state="translated">Felhasználói napló</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.title">
         <source>Title</source>
-        <target state="needs-translation">Title</target>
+        <target state="translated">Cím</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.crdate">
         <source>Time</source>
-        <target state="needs-translation">Time</target>
+        <target state="translated">Időpont</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Állapot</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.additional_properties">
         <source>Additional Properties</source>
-        <target state="needs-translation">Additional Properties</target>
+        <target state="translated">További tulajdonságok</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.100">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Regisztráció</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.101">
         <source>New Registration</source>
-        <target state="needs-translation">New Registration</target>
+        <target state="translated">Új regisztráció</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.102">
         <source>Registration confirmed by user</source>
-        <target state="needs-translation">Registration confirmed by user</target>
+        <target state="translated">Regisztráció felhasználó által megerősítve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.103">
         <source>Registration confirmed by admin</source>
-        <target state="needs-translation">Registration confirmed by admin</target>
+        <target state="translated">Regisztráció adminisztrátor által megerősítve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.104">
         <source>Registration refused by user</source>
-        <target state="needs-translation">Registration refused by user</target>
+        <target state="translated">Regisztráció felhasználó által elutasítva</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.105">
         <source>Registration refused by admin</source>
-        <target state="needs-translation">Registration refused by admin</target>
+        <target state="translated">Regisztráció adminisztrátor által elutasítva</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.106">
         <source>Profile creation request</source>
-        <target state="needs-translation">Profile creation request</target>
+        <target state="translated">Profillétrehozási kérelem</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.200">
         <source>Update</source>
-        <target state="needs-translation">Update</target>
+        <target state="translated">Frissítés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.201">
         <source>Profile updated</source>
-        <target state="needs-translation">Profile updated</target>
+        <target state="translated">Profil frissítve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.202">
         <source>Profile update confirmed by admin</source>
-        <target state="needs-translation">Profile update confirmed by admin</target>
+        <target state="translated">Profilfrissítés adminisztrátor által megerősítve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.203">
         <source>Profile update refused by admin</source>
-        <target state="needs-translation">Profile update refused by admin</target>
+        <target state="translated">Profilfrissítés adminisztrátor által elutasítva</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.204">
         <source>Profile update request</source>
-        <target state="needs-translation">Profile update request</target>
+        <target state="translated">Profilfrissítési kérelem</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.205">
         <source>Profile update security failure</source>
-        <target state="needs-translation">Profile update security failure</target>
+        <target state="translated">Profilfrissítési biztonsági hiba</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.206">
         <source>Image deleted</source>
-        <target state="needs-translation">Image deleted</target>
+        <target state="translated">Kép törölve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.207">
         <source>Attempted to spoof profile</source>
-        <target state="needs-translation">Attempted to spoof profile</target>
+        <target state="translated">A profil meghamisítására tett kísérlet</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.208">
         <source>Profile update not authorized</source>
-        <target state="needs-translation">Profile update not authorized</target>
+        <target state="translated">Profilfrissítés nem engedélyezett</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.300">
         <source>Delete</source>
-        <target state="needs-translation">Delete</target>
+        <target state="translated">Törlés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.301">
         <source>Profile deleted</source>
-        <target state="needs-translation">Profile deleted</target>
+        <target state="translated">Profil törölve</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.400">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Meghívás</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.401">
         <source>Profile created and User invited</source>
-        <target state="needs-translation">Profile created and User invited</target>
+        <target state="translated">Profil létrehozva, a felhasználó meghívva</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.402">
         <source>Profile deleted from User</source>
-        <target state="needs-translation">Profile deleted from User</target>
+        <target state="translated">A profil törölve a felhasználótól</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.403">
         <source>Wrong Hash</source>
-        <target state="needs-translation">Wrong Hash</target>
+        <target state="translated">Hibás hash</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.404">
         <source>You tried to open a restricted page</source>
-        <target state="needs-translation">You tried to open a restricted page</target>
+        <target state="translated">Korlátozott oldalt próbált megnyitni</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.405">
         <source>Password changed and Profile activated</source>
-        <target state="needs-translation">Password changed and Profile activated</target>
+        <target state="translated">Jelszó módosítva és profil aktiválva</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.500">
         <source>Backend impersonation</source>
-        <target state="needs-translation">Backend impersonation</target>
+        <target state="translated">Backend megszemélyesítés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.501">
         <source>Was impersonated by Backend Admin (login as)</source>
-        <target state="needs-translation">Was impersonated by Backend Admin (login as)</target>
+        <target state="translated">A backend admin megszemélyesítette (bejelentkezés másként)</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.502">
         <source>Impersonation was denied for Backend User (login as)</source>
-        <target state="needs-translation">Impersonation was denied for Backend User (login as)</target>
+        <target state="translated">A megszemélyesítés megtagadva a backend felhasználótól (bejelentkezés másként)</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.600">
         <source>Frontend Login</source>
-        <target state="needs-translation">Frontend Login</target>
+        <target state="translated">Frontend bejelentkezés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.601">
         <source>Successful frontend login</source>
-        <target state="needs-translation">Successful frontend login</target>
+        <target state="translated">Sikeres frontend bejelentkezés</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.602">
         <source>Failed frontend login</source>
-        <target state="needs-translation">Failed frontend login</target>
+        <target state="translated">Sikertelen frontend bejelentkezés</target>
       </trans-unit>
       <trans-unit id="all">
         <source>All</source>
-        <target state="needs-translation">All</target>
+        <target state="translated">Összes</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Felhasználó</target>
       </trans-unit>
       <trans-unit id="flexform.main.title">
         <source>Main Settings</source>
-        <target state="needs-translation">Main Settings</target>
+        <target state="translated">Fő beállítások</target>
       </trans-unit>
       <trans-unit id="flexform.main.view">
         <source>Choose View</source>
-        <target state="needs-translation">Choose View</target>
+        <target state="translated">Nézet kiválasztása</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.0">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Regisztráció</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.1">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Szerkesztés</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.2">
         <source>List</source>
-        <target state="needs-translation">List</target>
+        <target state="translated">Lista</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.3">
         <source>Detail</source>
-        <target state="needs-translation">Detail</target>
+        <target state="translated">Részletek</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.4">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Meghívás</target>
       </trans-unit>
       <trans-unit id="flexform.main.view.5">
         <source>Resend confirmation mail</source>
-        <target state="needs-translation">Resend confirmation mail</target>
+        <target state="translated">Megerősítő levél újraküldése</target>
       </trans-unit>
       <trans-unit id="flexform.new.title">
         <source>Registration</source>
-        <target state="needs-translation">Registration</target>
+        <target state="translated">Regisztráció</target>
       </trans-unit>
       <trans-unit id="flexform.new.fields">
         <source>Select Fields for New-Form (empty = all fields)</source>
-        <target state="needs-translation">Select Fields for New-Form (empty = all fields)</target>
+        <target state="translated">Mezők kiválasztása az új űrlaphoz (üres = minden mező)</target>
       </trans-unit>
       <trans-unit id="flexform.new.overrideUserGroup">
         <source>Select Usergroups for new Users</source>
-        <target state="needs-translation">Select Usergroups for new Users</target>
+        <target state="translated">Felhasználócsoportok kiválasztása az új felhasználóknak</target>
       </trans-unit>
       <trans-unit id="flexform.new.confirmByUser">
         <source>Registration must be confirmed from sender</source>
-        <target state="needs-translation">Registration must be confirmed from sender</target>
+        <target state="translated">A regisztrációt a feladónak meg kell erősítenie</target>
       </trans-unit>
       <trans-unit id="flexform.new.showTermsAndConditions">
         <source>User must accept terms and conditions</source>
-        <target state="needs-translation">User must accept terms and conditions</target>
+        <target state="translated">A felhasználónak el kell fogadnia az általános szerződési feltételeket</target>
       </trans-unit>
       <trans-unit id="flexform.new.confirmByAdmin">
         <source>Registration must be confirmed from an admin (add one or more emails)</source>
-        <target state="needs-translation">Registration must be confirmed from an admin (add one or more emails)</target>
+        <target state="translated">A regisztrációt egy adminnak meg kell erősítenie (egy vagy több e-mail cím megadása)</target>
       </trans-unit>
       <trans-unit id="flexform.new.notifyAdmin">
         <source>Notify admin on registration (add one or more emails)</source>
-        <target state="needs-translation">Notify admin on registration (add one or more emails)</target>
+        <target state="translated">Admin értesítése regisztrációkor (egy vagy több e-mail cím megadása)</target>
       </trans-unit>
       <trans-unit id="flexform.edit.title">
         <source>Edit</source>
-        <target state="needs-translation">Edit</target>
+        <target state="translated">Szerkesztés</target>
       </trans-unit>
       <trans-unit id="flexform.edit.fields">
         <source>Select Fields for Edit-Form (empty = all fields)</source>
-        <target state="needs-translation">Select Fields for Edit-Form (empty = all fields)</target>
+        <target state="translated">Mezők kiválasztása a szerkesztő űrlaphoz (üres = minden mező)</target>
       </trans-unit>
       <trans-unit id="flexform.edit.showDeleteLink">
         <source>Show Delete Button in Edit Form</source>
-        <target state="needs-translation">Show Delete Button in Edit Form</target>
+        <target state="translated">Törlés gomb megjelenítése a szerkesztő űrlapon</target>
       </trans-unit>
       <trans-unit id="flexform.edit.confirmByAdmin">
         <source>Profile update must be confirmed from an admin (add one or more emails)</source>
-        <target state="needs-translation">Profile update must be confirmed from an admin (add one or more emails)</target>
+        <target state="translated">A profil frissítését egy adminnak meg kell erősítenie (egy vagy több e-mail cím megadása)</target>
       </trans-unit>
       <trans-unit id="flexform.edit.notifyAdmin">
         <source>Notify admin on Profile update (add one or more emails)</source>
-        <target state="needs-translation">Notify admin on Profile update (add one or more emails)</target>
+        <target state="translated">Admin értesítése a profil frissítésekor (egy vagy több e-mail cím megadása)</target>
       </trans-unit>
       <trans-unit id="flexform.list.title">
         <source>Listview</source>
-        <target state="needs-translation">Listview</target>
+        <target state="translated">Listanézet</target>
       </trans-unit>
       <trans-unit id="flexform.list.filter">
         <source>Show Searchfield</source>
-        <target state="needs-translation">Show Searchfield</target>
+        <target state="translated">Keresőmező megjelenítése</target>
       </trans-unit>
       <trans-unit id="flexform.list.limit">
         <source>Limit</source>
-        <target state="needs-translation">Limit</target>
+        <target state="translated">Korlát</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby">
         <source>Order by</source>
-        <target state="needs-translation">Order by</target>
+        <target state="translated">Rendezés alapján</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby.0">
         <source>Lastname</source>
-        <target state="needs-translation">Lastname</target>
+        <target state="translated">Vezetéknév</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby.1">
         <source>Firstname</source>
-        <target state="needs-translation">Firstname</target>
+        <target state="translated">Keresztnév</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby.2">
         <source>Company</source>
-        <target state="needs-translation">Company</target>
+        <target state="translated">Cég</target>
       </trans-unit>
       <trans-unit id="flexform.list.orderby.3">
         <source>Username</source>
-        <target state="needs-translation">Username</target>
+        <target state="translated">Felhasználónév</target>
       </trans-unit>
       <trans-unit id="flexform.list.sorting">
         <source>Sorting</source>
-        <target state="needs-translation">Sorting</target>
+        <target state="translated">Rendezés sorrendje</target>
       </trans-unit>
       <trans-unit id="flexform.list.sorting.0">
         <source>Ascending</source>
-        <target state="needs-translation">Ascending</target>
+        <target state="translated">Növekvő</target>
       </trans-unit>
       <trans-unit id="flexform.list.sorting.1">
         <source>Descending</source>
-        <target state="needs-translation">Descending</target>
+        <target state="translated">Csökkenő</target>
       </trans-unit>
       <trans-unit id="flexform.list.usergroup">
         <source>Show from usergroup (empty = show all)</source>
-        <target state="needs-translation">Show from usergroup (empty = show all)</target>
+        <target state="translated">Megjelenítés felhasználócsoport alapján (üres = minden megjelenítése)</target>
       </trans-unit>
       <trans-unit id="flexform.show.title">
         <source>Detailview</source>
-        <target state="needs-translation">Detailview</target>
+        <target state="translated">Részletnézet</target>
       </trans-unit>
       <trans-unit id="flexform.show.user">
         <source>User to show</source>
-        <target state="needs-translation">User to show</target>
+        <target state="translated">Megjelenítendő felhasználó</target>
       </trans-unit>
       <trans-unit id="flexform.show.user.1">
         <source>[Logged in FE User]</source>
-        <target state="needs-translation">[Logged in FE User]</target>
+        <target state="translated">[Bejelentkezett FE felhasználó]</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.title">
         <source>Invitation</source>
-        <target state="needs-translation">Invitation</target>
+        <target state="translated">Meghívás</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.allowedUserGroups">
         <source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
-        <target state="needs-translation">Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</target>
+        <target state="translated">A "Meghívás hozzáadása" korlátozása egy vagy több felhasználócsoportra (üres = nincs korlátozás)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.fields">
         <source>Select Fields for invitation-Form (empty = all fields)</source>
-        <target state="needs-translation">Select Fields for invitation-Form (empty = all fields)</target>
+        <target state="translated">Mezők kiválasztása a meghívó űrlaphoz (üres = minden mező)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.overrideUserGroup">
         <source>Select Usergroups for new Users</source>
-        <target state="needs-translation">Select Usergroups for new Users</target>
+        <target state="translated">Felhasználócsoportok kiválasztása az új felhasználóknak</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.confirmByAdmin">
         <source>Registration must be confirmed from an admin (add one or more emails)</source>
-        <target state="needs-translation">Registration must be confirmed from an admin (add one or more emails)</target>
+        <target state="translated">A regisztrációt egy adminnak meg kell erősítenie (egy vagy több e-mail cím megadása)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.notifyAdminStep1">
         <source>Notify admin on step 1 (add one or more emails)</source>
-        <target state="needs-translation">Notify admin on step 1 (add one or more emails)</target>
+        <target state="translated">Admin értesítése az 1. lépésnél (egy vagy több e-mail cím megadása)</target>
       </trans-unit>
       <trans-unit id="flexform.invitation.notifyAdmin">
         <source>Notify admin if user sets a password (add one or more emails)</source>
-        <target state="needs-translation">Notify admin if user sets a password (add one or more emails)</target>
+        <target state="translated">Admin értesítése, ha a felhasználó jelszót állít be (egy vagy több e-mail cím megadása)</target>
       </trans-unit>
       <trans-unit id="flexform.misc.title">
         <source>Additional Settings</source>
-        <target state="needs-translation">Additional Settings</target>
+        <target state="translated">További beállítások</target>
       </trans-unit>
       <trans-unit id="flexform.misc.termsUrl">
         <source>Page with terms and conditions</source>
-        <target state="needs-translation">Page with terms and conditions</target>
+        <target state="translated">Általános szerződési feltételeket tartalmazó oldal</target>
       </trans-unit>
       <trans-unit id="pleaseChoose">
         <source>Please choose...</source>
-        <target state="needs-translation">Please choose...</target>
+        <target state="translated">Kérlek, válassz...</target>
       </trans-unit>
       <trans-unit id="pleaseChooseCountry">
         <source>Please choose a country...</source>
-        <target state="needs-translation">Please choose a country...</target>
+        <target state="translated">Kérlek, válassz országot...</target>
       </trans-unit>
       <trans-unit id="noZonesForThisCountry">
         <source>No zones available for the chosen country</source>
-        <target state="needs-translation">No zones available for the chosen country</target>
+        <target state="translated">Nincs elérhető régió a kiválasztott országhoz</target>
       </trans-unit>
       <trans-unit id="filter.filter">
         <source>Filter</source>
-        <target state="needs-translation">Filter</target>
+        <target state="translated">Szűrő</target>
       </trans-unit>
       <trans-unit id="filter.reset">
         <source>Reset</source>
-        <target state="needs-translation">Reset</target>
+        <target state="translated">Visszaállítás</target>
       </trans-unit>
       <trans-unit id="filter.user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Felhasználó</target>
       </trans-unit>
       <trans-unit id="filter.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Állapot</target>
       </trans-unit>
       <trans-unit id="filter.from">
         <source>From</source>
-        <target state="needs-translation">From</target>
+        <target state="translated">Tól</target>
       </trans-unit>
       <trans-unit id="filter.to">
         <source>To</source>
-        <target state="needs-translation">To</target>
+        <target state="translated">Ig</target>
       </trans-unit>
       <trans-unit id="log.headline.time">
         <source>Time</source>
-        <target state="needs-translation">Time</target>
+        <target state="translated">Idő</target>
       </trans-unit>
       <trans-unit id="log.headline.state">
         <source>State</source>
-        <target state="needs-translation">State</target>
+        <target state="translated">Állapot</target>
       </trans-unit>
       <trans-unit id="log.headline.user">
         <source>User</source>
-        <target state="needs-translation">User</target>
+        <target state="translated">Felhasználó</target>
       </trans-unit>
       <trans-unit id="log.headline.details">
         <source>Details</source>
-        <target state="needs-translation">Details</target>
+        <target state="translated">Részletek</target>
       </trans-unit>
     </body>
   </file>
