@@ -140,8 +140,6 @@ class UserController extends AbstractFrontendController
      */
     public function loginAsAction(User $user, int $redirectPid = 1): ResponseInterface
     {
-        $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
-
         // this action is only allowed for admins or backend users, which have the UserTS setting activated
         if (!BackendUserUtility::isAdmin() && !ConfigurationUtility::isEnableLoginAsActive()) {
             $this->logUtility->log(
@@ -157,6 +155,8 @@ class UserController extends AbstractFrontendController
             $this->persistenceManager->persistAll();
             throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'), 1516373787864);
         }
+
+        $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
 
         $redirectUri = $this->uriBuilder
             ->setTargetPageUid($redirectPid)
