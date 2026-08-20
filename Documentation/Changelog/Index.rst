@@ -15,6 +15,14 @@ Changelog
       Release Description
 
 -
+      :Version: 6.4.4
+      :Date: 2026-08-20
+      :Changes:
+
+      * [BUGFIX] Activate invited user on password submit instead of on form open
+
+
+-
       :Version: 6.4.3
       :Date: 2025-09-17
       :Changes:
