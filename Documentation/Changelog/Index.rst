@@ -4,6 +4,24 @@
 Changelog
 =========
 -
+      :Version: 7.5.4
+      :Date: 2026-08-20
+      :Changes:
+      * [BUGFIX] Activate invited user on password submit instead of on form open
+
+-
+      :Version: 7.5.3
+      :Date: 2025-07-22
+      :Changes:
+      * [SECURITY] Avoid unintended persistence
+
+-
+      :Version: 7.5.2
+      :Date: 2025-06-17
+      :Changes:
+      * [BUGFIX] missing HTML View for confirmedByAdminRefusedSilent
+
+-
       :Version: 7.5.1
       :Date: 2025-06-10
       :Changes:
