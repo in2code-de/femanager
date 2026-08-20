@@ -113,14 +113,13 @@ User / Status
 					<f:form.hidden name="hash" value="{hash}" />
 					<f:if condition="{silent}">
 						<f:then>
-							<f:form.hidden name="status" value="confirmAdminRefusedSilent" />
+							<f:form.hidden name="status" value="confirmedByAdminRefusedSilent" />
 						</f:then>
 						<f:else>
 							<f:form.hidden name="status" value="confirmedByAdminRefused" />
 						</f:else>
 					</f:if>
 				</fieldset>
-
 				<div class="femanager_fieldset femanager_submit form-group">
 					<div class="col-sm-10 col-sm-offset-2">
 						<p><f:translate key="LLL:EXT:femanager/Resources/Private/Language/locallang.xlf:emailCreateAdminConfirmationUserProperties" /></p>

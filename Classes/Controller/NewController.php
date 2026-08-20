@@ -236,14 +236,14 @@ class NewController extends AbstractFrontendController
 
             case 'adminConfirmationRefused':
                 // Admin refuses profile
-                if ($status === 'userConfirmationRefused' && ConfigurationUtility::getValue(
-                        'new./email./createUserConfirmation./confirmUserConfirmationRefused',
+                if (ConfigurationUtility::getValue(
+                        'new./email./createUserConfirmation./confirmAdminConfirmation',
                         $this->config
                     ) == '1') {
                     $this->view->assignMultiple(
                         [
                             'user' => $user,
-                            'status' => 'confirmDeletion',
+                            'status' => 'confirmAdminRefused',
                             'hash' => $hash,
                         ]
                     );
@@ -253,6 +253,24 @@ class NewController extends AbstractFrontendController
                 break;
 
             case 'adminConfirmationRefusedSilent':
+                // Admin refuses profile
+                if (ConfigurationUtility::getValue(
+                        'new./email./createUserConfirmation./confirmAdminConfirmation',
+                        $this->config
+                    ) == '1') {
+                    $this->view->assignMultiple(
+                        [
+                            'user' => $user,
+                            'status' => 'confirmAdminRefused',
+                            'hash' => $hash,
+                        ]
+                    );
+                    $this->assignForAll();
+                    return $this->htmlResponse();
+                }
+                $furtherFunctions = $this->statusAdminConfirmationRefused($user, $hash, $status);
+                break;
+            case  'confirmedByAdminRefusedSilent':
                 $furtherFunctions = $this->statusAdminConfirmationRefused($user, $hash, $status);
                 break;
 
