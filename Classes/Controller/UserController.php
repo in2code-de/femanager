@@ -123,8 +123,6 @@ class UserController extends AbstractFrontendController
      */
     public function loginAsAction(User $user, int $redirectPid = 1): ResponseInterface
     {
-        $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
-
         if (!BackendUserUtility::isAdminAuthentication()) {
             $this->logUtility->log(
                 LOG::STATUS_LOGIN_AS_DENIED,
@@ -139,6 +137,8 @@ class UserController extends AbstractFrontendController
             $this->persistenceManager->persistAll();
             throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'), 1516373787864);
         }
+
+        $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
 
         $redirectUri = $this->uriBuilder
             ->setTargetPageUid($redirectPid)
