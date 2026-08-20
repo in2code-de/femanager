@@ -5,6 +5,16 @@ Changelog
 =========
 
 -
+      :Version: 13.3.4
+      :Date: 2026-08-20
+      :Changes:
+      * [BUGFIX] Invalidate session cookie when deleting account - thx to Jens Pausewang
+      * [BUGFIX] Prevent null pid on log entries
+      * [BUGFIX] Display time for `crdate` of `tx_femanager_domain_model_log` in the backend - thx to Stephan Großberndt
+      * [BUGFIX] Fix PHP warning when showing message on server side validation error - thx to Stephan Großberndt
+      * [BUGFIX] Activate invited user on password submit instead of on form open
+
+-
       :Version: 13.3.3
       :Date: 2026-05-22
       :Changes:

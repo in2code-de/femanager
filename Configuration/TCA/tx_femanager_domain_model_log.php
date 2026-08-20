@@ -57,7 +57,7 @@ return [
                 'tx_femanager_domain_model_log.crdate',
             'config' => [
                 'type' => 'datetime',
-                'format' => 'date',
+                'format' => 'datetime',
                 'readOnly' => true,
                 'default' => time(),
             ],

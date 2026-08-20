@@ -25,6 +25,7 @@ use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 /**
  * Class EditController
@@ -231,6 +232,8 @@ class EditController extends AbstractFrontendController
         $this->logUtility->log(Log::STATUS_PROFILEDELETE, $user);
         $this->addFlashMessage(LocalizationUtility::translateByState(Log::STATUS_PROFILEDELETE));
         $this->userRepository->remove($user);
+        $this->invalidateSessionCookie();
+
         return $this->redirectByAction('delete', 'redirect', 'edit');
     }
 
@@ -262,5 +265,13 @@ class EditController extends AbstractFrontendController
             'confirmUpdateRequest' => 'edit',
             'delete' => 'edit',
         ];
+    }
+
+    protected function invalidateSessionCookie()
+    {
+        $frontendUser = $this->request->getAttribute('frontend.user');
+        if ($frontendUser instanceof FrontendUserAuthentication) {
+            $frontendUser->logoff();
+        }
     }
 }
