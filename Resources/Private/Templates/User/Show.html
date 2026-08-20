@@ -14,7 +14,7 @@
 					<f:if condition="{user.username}">
 						<li>
 							<f:translate key="tx_femanager_domain_model_user.username" />:
-							<f:link.action action="show" arguments="{user:user}">{user.username}</f:link.action>
+							<f:link.action action="show" arguments="{user:user, hash:showHash}">{user.username}</f:link.action>
 						</li>
 					</f:if>
 					<f:if condition="{user.usergroup}">

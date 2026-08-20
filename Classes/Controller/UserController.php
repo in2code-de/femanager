@@ -8,6 +8,7 @@ use In2code\Femanager\Domain\Validator\ClientsideValidator;
 use In2code\Femanager\Event\ImpersonateEvent;
 use In2code\Femanager\Utility\BackendUserUtility;
 use In2code\Femanager\Utility\FrontendUtility;
+use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
 use TYPO3\CMS\Core\Error\Http\UnauthorizedException;
@@ -24,13 +25,20 @@ class UserController extends AbstractFrontendController
      */
     public function listAction(array $filter = [])
     {
+        $users = $this->userRepository->findByUsergroups(
+            $this->settings['list']['usergroup'] ?? '',
+            $this->settings,
+            $filter
+        );
+        $showHashes = [];
+        foreach ($users as $user) {
+            $showHashes[$user->getUid()] = HashUtility::createHashForUser($user, 'show');
+        }
+
         $this->view->assignMultiple(
             [
-                'users' => $this->userRepository->findByUsergroups(
-                    $this->settings['list']['usergroup'],
-                    $this->settings,
-                    $filter
-                ),
+                'users' => $users,
+                'showHashes' => $showHashes,
                 'filter' => $filter
             ]
         );
@@ -52,9 +60,13 @@ class UserController extends AbstractFrontendController
     /**
      * @param User $user
      */
-    public function showAction(User $user = null)
+    public function showAction(User $user = null, string $hash = '')
     {
-        $this->view->assign('user', $this->getUser($user));
+        $user = $this->getUser($user, $hash);
+        $this->view->assignMultiple([
+            'user' => $user,
+            'showHash' => $user instanceof User ? HashUtility::createHashForUser($user, 'show') : '',
+        ]);
         $this->assignForAll();
     }
 
@@ -139,14 +151,17 @@ class UserController extends AbstractFrontendController
      * @param User $user
      * @return User
      */
-    protected function getUser(User $user = null)
+    protected function getUser(User $user = null, string $hash = '')
     {
-        if ($user === null) {
-            if (is_numeric($this->settings['show']['user'])) {
-                $user = $this->userRepository->findByUid($this->settings['show']['user']);
-            } elseif ($this->settings['show']['user'] === '[this]') {
-                $user = $this->user;
-            }
+        $configuredUser = $this->settings['show']['user'] ?? '';
+        if (is_numeric($configuredUser)) {
+            return $this->userRepository->findByUid($configuredUser);
+        }
+        if ($configuredUser === '[this]') {
+            return $this->user;
+        }
+        if ($user instanceof User && !HashUtility::validHash($hash, $user, 'show')) {
+            throw new UnauthorizedException('Unauthorized user detail request', 1754916601);
         }
         return $user;
     }
