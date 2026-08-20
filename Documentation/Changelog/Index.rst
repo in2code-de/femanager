@@ -4,6 +4,13 @@
 Changelog
 =========
 -
+      :Version: 8.4.1
+      :Date: 2026-08-20
+      :Changes:
+      * [BUGFIX] Activate invited user on password submit instead of on form open
+      * [BUGFIX] Missing userConfirmationRefused statement
+
+-
       :Version: 8.4.0
       :Date: 2026-03-03
       :Changes:
@@ -15,6 +22,7 @@ Changelog
       * [BUGFIX] admin confirm/refuse backend actions - thx to Stefan Busemann (in2code)
       * [BUGFIX] Missing userConfirmationRefused statement - thx to Stefan Busemann (in2code)
       * [BUGFIX Remove errorneous function call from partial revert - thx to Andreas Nedbal (in2code)
+
 -
       :Version: 8.3.3
       :Date: 2025-09-25

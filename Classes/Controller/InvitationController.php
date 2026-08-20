@@ -187,10 +187,6 @@ class InvitationController extends AbstractFrontendController
             $this->redirect('status');
         }
 
-        $user->setDisable(false);
-        $this->userRepository->update($user);
-        $this->persistenceManager->persistAll();
-
         $this->eventDispatcher->dispatch(new InviteUserEditEvent($user, $hash));
 
         $this->view->assignMultiple(
@@ -202,6 +198,21 @@ class InvitationController extends AbstractFrontendController
 
         $this->assignForAll();
         return $this->htmlResponse();
+    }
+
+    /**
+     * The invited user is still disabled (disable=1) at this point. Extbase's typed-argument
+     * mapping respects enableFields and would not find it. Pre-loading it through the repository
+     * (which ignores enableFields) registers it in the persistence session, so the typed
+     * "user" argument is resolved from there instead of a fresh, enableFields-restricted query.
+     */
+    public function initializeUpdateAction(): void
+    {
+        $submitted = $this->request->hasArgument('user') ? $this->request->getArgument('user') : null;
+        $userUid = (int)(is_array($submitted) ? ($submitted['__identity'] ?? 0) : 0);
+        if ($userUid > 0) {
+            $this->userRepository->findByUid($userUid);
+        }
     }
 
     /**
@@ -252,6 +263,7 @@ class InvitationController extends AbstractFrontendController
             $user,
             ConfigurationUtility::getValue('invitation/misc/passwordSave', $this->settings)
         );
+        $user->setDisable(false);
         $this->userRepository->update($user);
         $this->persistenceManager->persistAll();
         $this->eventDispatcher->dispatch(new InviteUserUpdateEvent($user));
