@@ -14,8 +14,78 @@ Upgrade
 to version 8.4.1 (security update)
 ----------------------------------
 
-This is a security release that closes a registration confirmation bypass. Two issues are fixed:
+This security release closes multiple security issues:
 
+----
+
+Privilege escalation:
+~~~~~~~~~~~
+
+Closes a privilege escalation in the frontend usergroup selection.
+
+The registration, edit and invitation forms can render a usergroup ``<select>``. The frontend
+template and the rendered dropdown were treated as the only restriction on which usergroup a user
+could choose. They are **not** a security boundary: a crafted request can submit any usergroup uid,
+regardless of what the form offers. A logged-in frontend user could therefore assign **any**
+frontend usergroup - including privileged ones - to their own account.
+
+What changed
+""""""""""""
+
+The submitted usergroup relation is now validated on the server before the user is persisted, in a
+single place (``UserGroupSanitizationService``). The form is **secure by default / fail closed**:
+
+* **Forced groups** - if ``settings.<form>.overrideUserGroup`` is set, the configured group(s)
+  always win and the submitted value is ignored (unchanged behaviour).
+* **Field not editable** - if ``usergroup`` is not part of the configured ``fields``, any submitted
+  usergroup change is reverted.
+* **Allowlist** - if ``settings.<form>.validation.usergroup.inList`` is set, the submitted uids are
+  reduced to that list. This is the recommended way to let users choose a group.
+* **Opt-in for unrestricted selection** - if no allowlist is configured but
+  ``settings.<form>.misc.allowUnrestrictedUserGroupSelection = 1`` is set, every offered group may
+  be selected (legacy behaviour).
+* **Fail closed** - if neither an allowlist nor the opt-in is configured, the submitted usergroup
+  change is **ignored** and a log entry (``Profile update not authorized``) is written.
+
+Every reverted or reduced submission is logged so unexpected usergroup changes become visible.
+
+.. important::
+
+   Installations that previously relied on an **unconfigured** usergroup selection (no
+   ``validation.usergroup.inList``) will no longer accept user-submitted usergroups by default. This
+   is intentional. To keep offering a usergroup selection, do **one** of the following per form
+   (``new``, ``edit``, ``invitation``):
+
+   * Configure an allowlist (recommended):
+
+     .. code-block:: typoscript
+
+        plugin.tx_femanager.settings.edit.validation.usergroup.inList = 1,2,3
+
+   * Or explicitly restore the former, unrestricted behaviour:
+
+     .. code-block:: typoscript
+
+        plugin.tx_femanager.settings.edit.misc.allowUnrestrictedUserGroupSelection = 1
+
+Customized usergroup templates
+""""""""""""""""""""""""""""""
+
+If you override :file:`Resources/Private/Partials/Fields/Usergroup.html`, note that the field is now
+rendered depending on the new ``usergroupFieldMode`` variable
+(``select`` / ``hidden`` / ``notice``). When neither an allowlist nor the opt-in is configured, a
+generic notice (``usergroupSelectionNotConfigured``) is shown instead of the selection; the specific
+missing configuration is **not** exposed in the frontend but written to the TYPO3 log. Compare your
+template with the shipped partial to pick up this behaviour.
+
+See :ref:`usergroupsecurity` for the full description of the feature.
+
+----
+
+Registration confirmation bypass:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Closes a registration confirmation bypass. Two issues are fixed:
 * The admin confirmation action (``status=adminConfirmation``) could be triggered with the regular
   user confirmation ``hash`` when the default settings were used, because the dedicated ``adminHash``
   was only validated when ``confirmAdminConfirmation`` was enabled. A registrant who obtained their
@@ -31,7 +101,7 @@ This is a security release that closes a registration confirmation bypass. Two i
    still pending at the time of the update. See "Fallback" below for the behaviour if it is not run.
 
 What changed
-~~~~~~~~~~~~
+""""""""""""
 
 * **adminHash is now mandatory for every admin action.** Admin confirmation, refusal and silent
   refusal always require a valid ``adminHash``, independently of the ``confirmAdminConfirmation``
@@ -49,7 +119,7 @@ What changed
   regardless of whether a mail was sent, nothing was pending, or no such account exists.
 
 Customized email/confirmation templates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""""""""""""""""""""""""""""""""""""""
 
 If you override any of these templates, add the ``adminHash`` argument to all admin action links,
 otherwise the links will be rejected as "not authorized":
@@ -68,7 +138,7 @@ Example:
    new: <f:link.action action="confirmCreateRequest" controller="New" absolute="1" arguments="{user:user, hash:hash, adminHash:adminHash, status:'adminConfirmation'}">
 
 Fallback if the upgrade wizard is not run
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""""""""""""""""""""""""""""""""""""""""
 
 The fix does not depend on the wizard for its security: for accounts that still have the default
 value ``0`` (``none``) - i.e. accounts created before the field existed - the required confirmation
@@ -94,6 +164,8 @@ filterable in the backend and the runtime fallback is no longer needed.
    release them at any time via :guilabel:`Web > Frontend Users` (femanager backend module). Only
    accounts that were already pending at the time of the update are affected; accounts created
    afterwards store their exact requirement and are never over-restricted.
+
+----
 
 .. _v8.1:
 
