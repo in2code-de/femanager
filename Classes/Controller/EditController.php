@@ -36,7 +36,8 @@ class EditController extends AbstractFrontendController
         $this->view->assignMultiple([
             'user' => $this->user,
             'allUserGroups' => $this->allUserGroups,
-            'token' => $token
+            'usergroupFieldMode' => $this->userGroupSanitizationService->getFieldRenderMode($this->settings['edit'] ?? []),
+            'token' => $token,
         ]);
         $this->assignForAll();
         return $this->htmlResponse();
@@ -85,6 +86,12 @@ class EditController extends AbstractFrontendController
         $user = FrontendUtility::forceValues(
             $user,
             ConfigurationUtility::getValue('edit./forceValues./beforeAnyConfirmation.', $this->config)
+        );
+
+        $user = $this->userGroupSanitizationService->sanitize(
+            $user,
+            $this->settings['edit'] ?? [],
+            $this->userGroupSanitizationService->getOriginalUsergroupUids($user)
         );
 
         $this->emailForUsername($user);
@@ -175,6 +182,13 @@ class EditController extends AbstractFrontendController
                 }
             }
         }
+
+        $user = $this->userGroupSanitizationService->sanitize(
+            $user,
+            $this->settings['edit'] ?? [],
+            $this->userGroupSanitizationService->getOriginalUsergroupUids($user)
+        );
+
         $user = FrontendUtility::forceValues($user, $this->config['edit.']['forceValues.']['onAdminConfirmation.']);
         $this->logUtility->log(Log::STATUS_PROFILEUPDATECONFIRMEDADMIN, $user);
         $this->addFlashMessage(LocalizationUtility::translate('updateProfile'));

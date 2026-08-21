@@ -25,6 +25,7 @@ See some features or best practice parts of the extension femanager.
    FillEmailAsUsername/Index
    NewFields/Index
    NewValidators/Index
+   UsergroupSecurity/Index
    AutoConfirmation/Index
    Finishers/Index
    Signals/Index

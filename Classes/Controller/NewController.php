@@ -53,7 +53,8 @@ class NewController extends AbstractFrontendController
     {
         $this->view->assignMultiple(
             [
-                'allUserGroups' => $this->allUserGroups
+                'allUserGroups' => $this->allUserGroups,
+                'usergroupFieldMode' => $this->userGroupSanitizationService->getFieldRenderMode($this->settings['new'] ?? []),
             ]
         );
         $this->assignForAll();
@@ -81,6 +82,11 @@ class NewController extends AbstractFrontendController
             $this->redirect('createStatus');
         }
         $user = UserUtility::overrideUserGroup($user, $this->settings);
+        $user = $this->userGroupSanitizationService->sanitize(
+            $user,
+            $this->settings['new'] ?? [],
+            $this->userGroupSanitizationService->getOriginalUsergroupUids($user)
+        );
         $configuration = ConfigurationUtility::getValue('new./forceValues./beforeAnyConfirmation.', $this->config);
         $user = FrontendUtility::forceValues($user, $configuration);
         $user = UserUtility::fallbackUsernameAndPassword($user);

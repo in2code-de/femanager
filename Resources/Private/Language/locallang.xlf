@@ -165,6 +165,9 @@
 			<trans-unit id="tx_femanager_domain_model_log.state.207">
 				<source>Attempted to spoof profile</source>
 			</trans-unit>
+			<trans-unit id="tx_femanager_domain_model_log.state.208">
+				<source>Profile update not authorized</source>
+			</trans-unit>
 			<trans-unit id="tx_femanager_domain_model_log.state.300">
 				<source>Delete</source>
 			</trans-unit>
