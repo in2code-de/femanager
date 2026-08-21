@@ -8,6 +8,7 @@ use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Domain\Service\RatelimiterService;
 use In2code\Femanager\Domain\Service\SendMailService;
+use In2code\Femanager\Domain\Service\UserGroupSanitizationService;
 use In2code\Femanager\Domain\Service\ValidationService;
 use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\LogUtility;
@@ -26,6 +27,7 @@ abstract class AbstractFrontendController extends AbstractController
         protected LogUtility $logUtility,
         protected RatelimiterService $ratelimiterService,
         protected ValidationService $validationService,
+        protected UserGroupSanitizationService $userGroupSanitizationService,
     ) {
     }
 

@@ -652,6 +652,10 @@ TypoScript
                         sameAs = password
                     }
                     usergroup {
+                        # SECURITY: set inList to an allowlist of usergroup uids if users may
+                        # choose their group. Without it (and without
+                        # misc.allowUnrestrictedUserGroupSelection = 1) submitted usergroups are
+                        # ignored. See "Securing the usergroup selection" in the documentation.
                         #inList = 1,2,3
                     }
                     captcha {
@@ -1276,6 +1280,10 @@ TypoScript
                         sameAs = password
                     }
                     usergroup {
+                        # SECURITY: set inList to an allowlist of usergroup uids if users may
+                        # choose their group. Without it (and without
+                        # misc.allowUnrestrictedUserGroupSelection = 1) submitted usergroups are
+                        # ignored. See "Securing the usergroup selection" in the documentation.
                         #inList = 1,2,3
                     }
                     captcha {
@@ -1633,6 +1641,10 @@ TypoScript
                         email = 1
                     }
                     usergroup {
+                        # SECURITY: set inList to an allowlist of usergroup uids if users may
+                        # choose their group. Without it (and without
+                        # misc.allowUnrestrictedUserGroupSelection = 1) submitted usergroups are
+                        # ignored. See "Securing the usergroup selection" in the documentation.
                         #inList = 1,2,3
                     }
                     captcha {
