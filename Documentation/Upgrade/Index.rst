@@ -5,11 +5,11 @@
 Upgrade
 =======
 
-:ref:`v7.5.2` | :ref:`v7.1` | :ref:`v6.0` | :ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+:ref:`v7.5.5` | :ref:`v7.1` | :ref:`v6.0` | :ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
 
-.. _v7.5.2:
+.. _v7.5.5:
 
-to version 7.5.2 (security update)
+to version 7.5.5 (security update)
 ----------------------------------
 
 This security release closes multiple security issues:
