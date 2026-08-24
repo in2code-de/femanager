@@ -15,6 +15,19 @@ Changelog
       Release Description
 
 -
+      :Version: 6.4.5
+      :Date: 2026-08-25
+      :Changes:
+
+      * [SECURITY] Dispatch ImpersonateEvent only after authorization check
+      * [SECURITY] Use timing-safe comparison in HashUtility::validHash
+      * [SECURITY] Prevent user disclosure via user argument in showAction
+      * [SECURITY] Require valid adminHash for admin profile change confirmation
+      * [SECURITY] Prevent usergroup privilege escalation in frontend forms
+      * [SECURITY] Prevent admin confirmation bypass via resend confirmation mail
+      * [SECURITY] Require valid adminHash for admin registration confirmation
+
+-
       :Version: 6.4.4
       :Date: 2026-08-20
       :Changes:

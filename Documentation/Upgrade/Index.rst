@@ -8,11 +8,11 @@ Upgrade
 
 .. only:: html
 
-	:ref:`v6.4.4` | :ref:`v6.3.4` | :ref:`v6.0` |:ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
+	:ref:`v6.4.5` | :ref:`v6.3.4` | :ref:`v6.0` |:ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0`
 
-.. _v6.4.4:
+.. _v6.4.5:
 
-to version 6.4.4 (security update)
+to version 6.4.5 (security update)
 ----------------------------------
 
 This security release closes multiple security issues:
