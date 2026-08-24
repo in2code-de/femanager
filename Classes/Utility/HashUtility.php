@@ -21,7 +21,7 @@ class HashUtility extends AbstractUtility
      */
     public static function validHash($hash, User $user, string $suffix = '')
     {
-        return self::createHashForUser($user, $suffix) === $hash;
+        return hash_equals(self::createHashForUser($user, $suffix), $hash);
     }
 
     /**
