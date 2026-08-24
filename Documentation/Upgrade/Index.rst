@@ -9,9 +9,9 @@ Upgrade
 
 	:ref:`v8.4.2` | :ref:`v8.1` | :ref:`v8.0` | :ref:`v7.1` | :ref:`v6.0` | :ref:`v5.2` | :ref:`v5.0` | :ref:`v4.0` |
 
-.. _v8.4.1:
+.. _v8.4.2:
 
-to version 8.4.1 (security update)
+to version 8.4.2 (security update)
 ----------------------------------
 
 This security release closes multiple security issues:
