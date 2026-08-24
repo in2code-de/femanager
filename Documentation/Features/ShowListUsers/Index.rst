@@ -8,7 +8,8 @@ Show and List Frontend Users
 This Feature allows you to display the data of the current user, a selected user by an editor or list users and provide
 a detail page.
 
-Caution: Please take care that you do not disclose information in public environments and be careful which data you show in the detail view.
+Caution: Please take care that you do not disclose information in public environments and be careful which data you
+show in the detail view.
 
 Show the current user
 ^^^^^^^^^^^^^^^^^^^^^
@@ -42,8 +43,38 @@ You can provide a detail view of a given frontend user
 
 
 .. attention::
-   If you add this plugin with the selected view, take care that you do not disclose information in public environments and be careful which data you show in the detail view.
-   If you don't select any frontend user, any users can be displayed by passing the get param &tx_femanager_pi1[user]=XX to the detail page url. Be careful to avoid unwanted information disclosure!
+   Take care that you do not disclose information in public environments and be careful which data you show in the
+   detail view.
+
+   If you do not select a frontend user, the detail view only renders a user that was linked from a femanager list
+   plugin. Those links carry a signed ``hash`` argument that is validated before the record is rendered, so a
+   hand-crafted URL with an arbitrary ``tx_femanager_detail[user]=XX`` and no valid hash is rejected.
+
+Custom list and detail templates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Every link to the ``show`` action that passes a ``user`` must also pass the corresponding signed ``hash``. This
+also applies to customized list templates. Without the hash, the detail request is rejected.
+
+``UserController::listAction`` assigns the ``showHashes`` array, keyed by the user uid. Use it in customized list
+templates as follows:
+
+.. code-block:: html
+
+   <f:for each="{users}" as="user">
+      <f:variable name="showHash" value="{showHashes.{user.uid}}" />
+      <f:link.action action="show" arguments="{user:user, hash:showHash}">
+         {user.username}
+      </f:link.action>
+   </f:for>
+
+In a customized detail template, use the single ``showHash`` variable for a self-referencing link:
+
+.. code-block:: html
+
+   <f:link.action action="show" arguments="{user:user, hash:showHash}">
+      {user.username}
+   </f:link.action>
 
 
 

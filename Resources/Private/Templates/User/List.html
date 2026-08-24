@@ -16,15 +16,16 @@
 			<f:then>
 				<ul class="media-list">
 					<f:for each="{users}" as="user">
+						<f:variable name="showHash" value="{showHashes.{user.uid}}" />
 						<li class="media list-group-item">
 							<f:for each="{user.image}" as="image">
-								<f:link.action action="show" arguments="{user:user}" class="pull-left">
+								<f:link.action action="show" arguments="{user:user, hash:showHash}" class="pull-left">
 									<f:image image="{image}" width="80c" height="80c" class="media-object" />
 								</f:link.action>
 							</f:for>
 							<div class="media-body">
 								<h4 class="media-heading">
-									<f:link.action action="show" arguments="{user:user}">
+									<f:link.action action="show" arguments="{user:user, hash:showHash}">
 										{user.username}
 									</f:link.action>
 								</h4>
@@ -60,11 +61,12 @@
 			<f:then>
 				<ul>
 					<f:for each="{users}" as="user">
+						<f:variable name="showHash" value="{showHashes.{user.uid}}" />
 						<li>
 							<ul>
 								<li>
 									<f:translate key="tx_femanager_domain_model_user.username" />:
-									<f:link.action action="show" arguments="{user:user}">{user.username}</f:link.action>
+									<f:link.action action="show" arguments="{user:user, hash:showHash}">{user.username}</f:link.action>
 								</li>
 								<li>
 									<f:translate key="tx_femanager_domain_model_user.usergroup" />:

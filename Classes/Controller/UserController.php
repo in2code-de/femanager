@@ -10,6 +10,7 @@ use In2code\Femanager\Domain\Validator\ClientsideValidator;
 use In2code\Femanager\Event\ImpersonateEvent;
 use In2code\Femanager\Utility\BackendUserUtility;
 use In2code\Femanager\Utility\ConfigurationUtility;
+use In2code\Femanager\Utility\HashUtility;
 use In2code\Femanager\Utility\LocalizationUtility;
 use In2code\Femanager\Utility\UserUtility;
 use Psr\Http\Message\ResponseInterface;
@@ -27,13 +28,20 @@ class UserController extends AbstractFrontendController
 {
     public function listAction(array $filter = []): ResponseInterface
     {
+        $users = $this->userRepository->findByUsergroups(
+            $this->settings['list']['usergroup'] ?? '',
+            $this->settings,
+            $filter
+        );
+        $showHashes = [];
+        foreach ($users as $user) {
+            $showHashes[$user->getUid()] = HashUtility::createHashForUser($user, 'show');
+        }
+
         $this->view->assignMultiple(
             [
-                'users' => $this->userRepository->findByUsergroups(
-                    $this->settings['list']['usergroup'] ?? '',
-                    $this->settings,
-                    $filter
-                ),
+                'users' => $users,
+                'showHashes' => $showHashes,
                 'filter' => $filter,
             ]
         );
@@ -41,9 +49,13 @@ class UserController extends AbstractFrontendController
         return $this->htmlResponse();
     }
 
-    public function showAction(?User $user = null): ResponseInterface
+    public function showAction(?User $user = null, string $hash = ''): ResponseInterface
     {
-        $this->view->assign('user', $this->getUser($user));
+        $user = $this->getUser($user, $hash);
+        $this->view->assignMultiple([
+            'user' => $user,
+            'showHash' => $user instanceof User ? HashUtility::createHashForUser($user, 'show') : '',
+        ]);
         $this->addDefaultViewVariables();
         return $this->htmlResponse();
     }
@@ -128,8 +140,6 @@ class UserController extends AbstractFrontendController
      */
     public function loginAsAction(User $user, int $redirectPid = 1): ResponseInterface
     {
-        $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
-
         // this action is only allowed for admins or backend users, which have the UserTS setting activated
         if (!BackendUserUtility::isAdmin() && !ConfigurationUtility::isEnableLoginAsActive()) {
             $this->logUtility->log(
@@ -138,13 +148,15 @@ class UserController extends AbstractFrontendController
                 [
                     'backendUser' => [
                         'uid' => $GLOBALS['BE_USER']?->user['uid'],
-                        'username' => $GLOBALS['BE_USER']->user['username']
-                    ]
+                        'username' => $GLOBALS['BE_USER']->user['username'],
+                    ],
                 ]
             );
             $this->persistenceManager->persistAll();
             throw new UnauthorizedException(LocalizationUtility::translate('error_not_authorized'), 1516373787864);
         }
+
+        $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
 
         $redirectUri = $this->uriBuilder
             ->setTargetPageUid($redirectPid)
@@ -157,8 +169,8 @@ class UserController extends AbstractFrontendController
             [
                 'backendUser' => [
                     'uid' => $GLOBALS['BE_USER']?->user['uid'],
-                    'username' => $GLOBALS['BE_USER']->user['username']
-                ]
+                    'username' => $GLOBALS['BE_USER']->user['username'],
+                ],
             ]
         );
 
@@ -176,17 +188,17 @@ class UserController extends AbstractFrontendController
         ];
     }
 
-    /**
-     * @return User
-     */
-    protected function getUser(?User $user = null)
+    protected function getUser(?User $user = null, string $hash = ''): ?User
     {
-        if (!$user instanceof \In2code\Femanager\Domain\Model\User) {
-            if (is_numeric($this->settings['show']['user'])) {
-                $user = $this->userRepository->findByUid($this->settings['show']['user']);
-            } elseif ($this->settings['show']['user'] === '[this]') {
-                $user = $this->user;
-            }
+        $configuredUser = $this->settings['show']['user'] ?? '';
+        if (is_numeric($configuredUser)) {
+            return $this->userRepository->findByUid($configuredUser);
+        }
+        if ($configuredUser === '[this]') {
+            return $this->user;
+        }
+        if ($user instanceof User && !HashUtility::validHash($hash, $user, 'show')) {
+            throw new UnauthorizedException('Unauthorized user detail request', 1754916601);
         }
 
         return $user;
