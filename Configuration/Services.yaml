@@ -18,6 +18,8 @@ services:
       public: true
     In2code\Femanager\Domain\Service\SendMailService:
       public: true
+    In2code\Femanager\Domain\Service\UserGroupSanitizationService:
+      public: true
     In2code\Femanager\Domain\Validator\ShouldValidateStateCondition:
       public: true
     In2code\Femanager\Finisher\FinisherRunner:
