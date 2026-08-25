@@ -8,6 +8,7 @@ Changelog
       :Version: 8.4.2
       :Date: 2026-08-25
       :Changes:
+      * [SECURITY] Broken Access Control in Inviation controller
       * [SECURITY] Dispatch ImpersonateEvent only after authorization check
       * [SECURITY] Use timing-safe comparison in HashUtility::validHash
       * [SECURITY] Prevent user disclosure via user argument in showAction

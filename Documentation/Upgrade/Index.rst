@@ -18,6 +18,13 @@ This security release closes multiple security issues:
 
 ----
 
+Broken access control:
+~~~~~~~~~~~
+
+Closes a broken access control issue in the invitation component.
+
+----
+
 Privilege escalation:
 ~~~~~~~~~~~
 
