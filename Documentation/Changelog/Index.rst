@@ -15,6 +15,13 @@ Changelog
       Release Description
 
 -
+      :Version: 6.4.6
+      :Date: 2026-08-25
+      :Changes:
+
+      * [BUGFIX] add UserGroupSanitizationService as public service
+
+-
       :Version: 6.4.5
       :Date: 2026-08-25
       :Changes:
