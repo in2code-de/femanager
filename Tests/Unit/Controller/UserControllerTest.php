@@ -10,6 +10,7 @@ use In2code\Femanager\Domain\Repository\UserGroupRepository;
 use In2code\Femanager\Domain\Repository\UserRepository;
 use In2code\Femanager\Domain\Service\RatelimiterService;
 use In2code\Femanager\Domain\Service\SendMailService;
+use In2code\Femanager\Domain\Service\UserGroupSanitizationService;
 use In2code\Femanager\Domain\Service\ValidationService;
 use In2code\Femanager\Finisher\FinisherRunner;
 use In2code\Femanager\Utility\HashUtility;
@@ -41,6 +42,7 @@ class UserControllerTest extends UnitTestCase
             $this->createMock(LogUtility::class),
             $this->createMock(RatelimiterService::class),
             $this->createMock(ValidationService::class),
+            $this->createMock(UserGroupSanitizationService::class)
         );
     }
 
