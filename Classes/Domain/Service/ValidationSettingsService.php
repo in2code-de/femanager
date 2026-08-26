@@ -5,9 +5,15 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Service;
 
 use In2code\Femanager\Utility\ConfigurationUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 class ValidationSettingsService
 {
+    /**
+     * Extension providing the captcha implementation
+     */
+    protected const EXTENSION_KEY_CAPTCHA_PROVIDER = 'sr_freecap';
+
     /**
      * Validation names with simple configuration
      */
@@ -70,6 +76,17 @@ class ValidationSettingsService
     {
         $validationSetting = ConfigurationUtility::getConfiguration()[$this->controllerName]['validation']['_enable']['server'] ?? '0';
         return $validationSetting === '1';
+    }
+
+    /**
+     * A captcha can only be validated if it is configured for the current plugin
+     * and if the extension providing it is available.
+     */
+    public function isCaptchaEnabled(): bool
+    {
+        $isCaptchaConfigured = (bool)(ConfigurationUtility::getConfiguration()[$this->controllerName][$this->validationName]['captcha']['captcha'] ?? false);
+
+        return $isCaptchaConfigured && ExtensionManagementUtility::isLoaded(self::EXTENSION_KEY_CAPTCHA_PROVIDER);
     }
 
     /**

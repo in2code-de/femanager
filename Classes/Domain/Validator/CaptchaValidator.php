@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace In2code\Femanager\Domain\Validator;
 
 use In2code\Femanager\Domain\Repository\UserRepository;
+use In2code\Femanager\Domain\Service\ValidationSettingsService;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
@@ -59,7 +59,12 @@ class CaptchaValidator extends AbstractValidator
      */
     protected function captchaEnabled(): bool
     {
-        return ExtensionManagementUtility::isLoaded('sr_freecap')
-            && !empty($this->validationSettings['captcha']['captcha']);
+        $validationSettingsService = GeneralUtility::makeInstance(
+            ValidationSettingsService::class,
+            $this->getControllerName(),
+            $this->getValidationName()
+        );
+
+        return $validationSettingsService->isCaptchaEnabled();
     }
 }
