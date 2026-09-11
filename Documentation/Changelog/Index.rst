@@ -5,6 +5,12 @@ Changelog
 =========
 
 -
+      :Version: 13.3.6
+      :Date: 2026-09-11
+      :Changes:
+      * [BUGFIX] Restore captcha validation in CaptchaValidator - thx to Alfred Bösch
+
+-
       :Version: 13.3.5
       :Date: 2026-08-25
       :Changes:
