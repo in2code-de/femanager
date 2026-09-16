@@ -89,7 +89,7 @@ class EditController extends AbstractFrontendController
      * @param User $user User object
      * @param string $hash
      * @param string $status could be "confirm", "refuse", "silentRefuse"
-     * @param string|null $adminHash Hash to authorize the admin action
+     * @param string $adminHash Hash to authorize the admin action
      */
     public function confirmUpdateRequestAction(User $user, $hash, $status = 'confirm', $adminHash = null)
     {
