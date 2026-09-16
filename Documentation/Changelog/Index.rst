@@ -15,6 +15,13 @@ Changelog
       Release Description
 
 -
+      :Version: 6.4.7
+      :Date: 2026-09-16
+      :Changes:
+
+      * [BUGFIX] Fix Extbase argument type of adminHash in confirmUpdateRequest
+
+-
       :Version: 6.4.6
       :Date: 2026-08-25
       :Changes:
