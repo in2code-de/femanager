@@ -8,7 +8,7 @@ Feature: FillEmailAsUsername
     And I fill in the following:
       | Password | test |
       | Repeat Password | test |
-      | Email | FillEmailAsUsername@local.de |
+      | Username | FillEmailAsUsername@local.de |
     And I press "Create Profile Now"
     Then I wait "4" seconds
     Then I should see "User registration"
