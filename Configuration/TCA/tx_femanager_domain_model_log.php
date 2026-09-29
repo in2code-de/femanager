@@ -127,7 +127,7 @@ return [
                         'value' => Log::STATUS_PROFILEUPDATEIMAGEDELETE,
                     ],
                     [
-                        'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.207',
+                        'label' => 'LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_log.state.207',
                         'value' => Log::STATUS_PROFILEUPDATEATTEMPTEDSPOOF,
                     ],
                     [
