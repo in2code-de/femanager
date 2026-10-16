@@ -5,6 +5,13 @@ Changelog
 =========
 
 -
+      :Version: 13.4.0
+      :Date: 2026-10-16
+      :Changes:
+      * [BUGFIX] Respect TypoScript setting loginAs.redirect for impersonation again
+      * [BUGFIX] Fix TCA definition of tx_femanager_domain_model_log.state (#727) - thx to alexander-nitsche-governikus
+
+-
       :Version: 13.3.6
       :Date: 2026-09-11
       :Changes:
