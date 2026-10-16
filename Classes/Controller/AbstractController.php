@@ -456,8 +456,24 @@ abstract class AbstractController extends ActionController
         string $category = 'redirect',
         ?string $defaultAction = 'new'
     ): ResponseInterface {
-        $target = null;
-        // redirect from TypoScript cObject
+        $target = $this->getRedirectTargetByAction($action, $category);
+        if ($target !== '') {
+            return $this->redirectToUri($target);
+        }
+
+        return $this->redirect($defaultAction);
+    }
+
+    /**
+     * Get redirect target from TypoScript cObject setting
+     *
+     * @param string $action "new", "edit", "loginAs"
+     * @param string $category "redirect", "requestRedirect" value from TypoScript
+     * @return string Target uri or empty string if no redirect is configured
+     */
+    protected function getRedirectTargetByAction(string $action, string $category = 'redirect'): string
+    {
+        $target = '';
         if ($this->contentObject->cObjGetSingle(
             (string)ConfigurationUtility::getValue($action . './' . $category, $this->config),
             (array)ConfigurationUtility::getValue($action . './' . $category . '.', $this->config),
@@ -474,12 +490,11 @@ abstract class AbstractController extends ActionController
             );
         }
 
-        // if redirect target
-        if ($target) {
-            return $this->redirectToUri(StringUtility::removeDoubleSlashesFromUri($target));
+        if ($target !== '') {
+            $target = (string)StringUtility::removeDoubleSlashesFromUri($target);
         }
 
-        return $this->redirect($defaultAction);
+        return $target;
     }
 
     /**

@@ -18,8 +18,8 @@ The button is only available for users who are **offline** and **not disabled**.
 currently online or disabled, the button is shown in a disabled state.
 
 .. attention::
-   This feature is restricted to backend administrators only. Non-admin backend users cannot use
-   this feature even if it is enabled.
+   This feature is available for backend administrators and for backend users which have
+   ``tx_femanager.UserBackend.enableLoginAs = 1`` set in their UserTSConfig.
 
 
 Configuration
@@ -40,7 +40,8 @@ Redirect Page
 ^^^^^^^^^^^^^
 
 By default, the administrator is redirected to the page configured in ``module.tx_femanager.settings.configPID``
-after the impersonation login. You can customize the redirect target via TypoScript:
+after the impersonation login. You can customize the redirect target via TypoScript. If a redirect is
+configured via TypoScript, it takes precedence over ``configPID``:
 
 .. code-block:: typoscript
 

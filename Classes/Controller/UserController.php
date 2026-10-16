@@ -158,10 +158,14 @@ class UserController extends AbstractFrontendController
 
         $this->eventDispatcher->dispatch(new ImpersonateEvent($user, $GLOBALS['BE_USER']?->user['uid']));
 
-        $redirectUri = $this->uriBuilder
-            ->setTargetPageUid($redirectPid)
-            ->setCreateAbsoluteUri(true)
-            ->build();
+        // redirect from TypoScript settings.loginAs.redirect, fallback to configPID from backend module
+        $redirectUri = $this->getRedirectTargetByAction('loginAs');
+        if ($redirectUri === '') {
+            $redirectUri = $this->uriBuilder
+                ->setTargetPageUid($redirectPid)
+                ->setCreateAbsoluteUri(true)
+                ->build();
+        }
 
         $this->logUtility->log(
             LOG::STATUS_LOGIN_AS,
