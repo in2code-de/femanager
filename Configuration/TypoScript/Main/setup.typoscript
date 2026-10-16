@@ -22,6 +22,20 @@ plugin.tx_femanager {
   }
   settings {
 
+    # Paths for email templates if useFluidMail is enabled
+    # (added to $GLOBALS['TYPO3_CONF_VARS']['MAIL'][*RootPaths] and take precedence over them)
+    email {
+      templateRootPaths {
+        10 = {$plugin.tx_femanager.settings.email.templateRootPath}
+      }
+      partialRootPaths {
+        10 = {$plugin.tx_femanager.settings.email.partialRootPath}
+      }
+      layoutRootPaths {
+        10 = {$plugin.tx_femanager.settings.email.layoutRootPath}
+      }
+    }
+
     ###################################
     # Settings for CREATE user profiles
     ###################################

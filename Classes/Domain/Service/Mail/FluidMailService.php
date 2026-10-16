@@ -11,8 +11,11 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Address;
 use TYPO3\CMS\Core\Mail\FluidEmail;
 use TYPO3\CMS\Core\Mail\MailerInterface;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
+use TYPO3\CMS\Fluid\View\TemplatePaths;
 
 class FluidMailService extends AbstractMailService
 {
@@ -25,7 +28,7 @@ class FluidMailService extends AbstractMailService
         array $typoScript = [],
         RequestInterface|null $request = null
     ): bool {
-        $email = new FluidEmail();
+        $email = $this->createEmail();
 
         $variables = $this->embedImages($variables, $typoScript, $email);
 
@@ -68,7 +71,7 @@ class FluidMailService extends AbstractMailService
         array $typoScript = [],
         RequestInterface|null $request = null
     ): bool {
-        $email = new FluidEmail();
+        $email = $this->createEmail();
         $variables = $this->embedImages($variables, $typoScript, $email);
         $email
             ->setRequest($request)
@@ -86,6 +89,49 @@ class FluidMailService extends AbstractMailService
             return true;
         } catch (TransportExceptionInterface) {
             return false;
+        }
+    }
+
+    protected function createEmail(): FluidEmail
+    {
+        return new FluidEmail($this->getTemplatePaths());
+    }
+
+    /**
+     * Use the paths of $GLOBALS['TYPO3_CONF_VARS']['MAIL'] and plugin.tx_femanager.settings.email.*RootPaths,
+     * paths from TypoScript always take precedence
+     */
+    protected function getTemplatePaths(): TemplatePaths
+    {
+        $emailSettings = $this->getEmailSettings();
+        $templatePaths = new TemplatePaths();
+        $templatePaths->setTemplateRootPaths($this->mergeRootPaths('templateRootPaths', $emailSettings));
+        $templatePaths->setLayoutRootPaths($this->mergeRootPaths('layoutRootPaths', $emailSettings));
+        $templatePaths->setPartialRootPaths($this->mergeRootPaths('partialRootPaths', $emailSettings));
+
+        return $templatePaths;
+    }
+
+    /**
+     * TemplatePaths sorts by key, so the paths get reindexed to keep the TypoScript paths behind the MAIL paths
+     */
+    protected function mergeRootPaths(string $rootPathType, array $emailSettings): array
+    {
+        $mailPaths = (array)($GLOBALS['TYPO3_CONF_VARS']['MAIL'][$rootPathType] ?? []);
+        $typoScriptPaths = array_filter((array)($emailSettings[$rootPathType] ?? []));
+
+        return array_merge(
+            array_values(ArrayUtility::sortArrayWithIntegerKeys($mailPaths)),
+            array_values(ArrayUtility::sortArrayWithIntegerKeys($typoScriptPaths))
+        );
+    }
+
+    protected function getEmailSettings(): array
+    {
+        try {
+            return (array)ConfigurationUtility::getConfiguration('email');
+        } catch (MissingArrayPathException) {
+            return [];
         }
     }
 

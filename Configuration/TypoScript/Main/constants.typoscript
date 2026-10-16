@@ -37,6 +37,17 @@ plugin.tx_femanager {
     # cat=plugin.tx_femanager//0930; type=int+; label= Page ID for the resend email confirmation view
     showResendUserConfirmationRequestView = 0
 
+    email {
+      # cat=plugin.tx_femanager/file; type=string; label= Path to email template root (only if useFluidMail is enabled)
+      templateRootPath =
+
+      # cat=plugin.tx_femanager/file; type=string; label= Path to email template partials (only if useFluidMail is enabled)
+      partialRootPath =
+
+      # cat=plugin.tx_femanager/file; type=string; label= Path to email template layouts (only if useFluidMail is enabled)
+      layoutRootPath =
+    }
+
     ratelimiter {
       # cat=plugin.tx_femanager//0980; type=int+; label=Number of seconds for the sliding window rate limiter
       timeframe = 3600

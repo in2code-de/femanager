@@ -8,6 +8,7 @@ Changelog
       :Version: 13.4.0
       :Date: 2026-10-16
       :Changes:
+      * [BUGFIX] Allow overriding FluidEmail templates via plugin.tx_femanager.settings.email.*RootPaths (#726)
       * [BUGFIX] Respect TypoScript setting loginAs.redirect for impersonation again
       * [BUGFIX] Fix TCA definition of tx_femanager_domain_model_log.state (#727) - thx to alexander-nitsche-governikus
 
