@@ -161,7 +161,7 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.additional_properties">
         <source>Additional Properties</source>
-        <target state="needs-translation">Additional Properties</target>
+        <target state="translated">Zusätzliche Eigenschaften</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.100" approved="yes">
         <source>Registration</source>
@@ -261,23 +261,23 @@
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.501">
         <source>Was impersonated by Backend User (login as)</source>
-        <target state="needs-translation">Was impersonated by Backend User (login as)</target>
+        <target state="translated">War vom Backend-Benutzer identifiziert (Login als)</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.502">
         <source>Impersonation was denied for Backend User (login as)</source>
-        <target state="needs-translation">Impersonation was denied for Backend User (login as)</target>
+        <target state="translated">Imitation wurde für Backend-Benutzer abgelehnt (Login als)</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.600">
         <source>Frontend Login</source>
-        <target state="needs-translation">Frontend Login</target>
+        <target state="translated">Frontend-Login</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.601">
         <source>Successful frontend login</source>
-        <target state="needs-translation">Successful frontend login</target>
+        <target state="translated">Erfolgreiches Frontend Login</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.state.602">
         <source>Failed frontend login</source>
-        <target state="needs-translation">Failed frontend login</target>
+        <target state="translated">Fehlgeschlagener Frontend-Login</target>
       </trans-unit>
       <trans-unit id="tx_femanager_domain_model_log.user" approved="yes">
         <source>User</source>
@@ -913,7 +913,7 @@
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageLogout">
         <source>%s was successfully logged out</source>
-        <target state="needs-translation">%s was successfully logged out</target>
+        <target state="translated">%s wurde erfolgreich abgemeldet</target>
       </trans-unit>
       <trans-unit id="BackendConfirmationFlashMessageConfirmed" approved="yes">
         <source>%s was successfully approved</source>
