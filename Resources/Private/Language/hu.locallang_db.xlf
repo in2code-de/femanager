@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="hu">
+    <header/>
+    <body>
+      <trans-unit id="tx_femanager_domain_model_user">
+        <source>User</source>
+        <target state="translated">Felhasználó</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.username">
+        <source>Username</source>
+        <target state="translated">Felhasználónév</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password">
+        <source>Password</source>
+        <target state="translated">Jelszó</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.usergroup">
+        <source>Usergroup</source>
+        <target state="translated">Felhasználócsoport</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.name">
+        <source>Name</source>
+        <target state="translated">Név</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.firstName">
+        <source>Firstname</source>
+        <target state="translated">Keresztnév</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.middleName">
+        <source>Middlename</source>
+        <target state="translated">Középső név</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastName">
+        <source>Lastname</source>
+        <target state="translated">Vezetéknév</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
+        <source>Birthdate</source>
+        <target state="translated">Születési dátum</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender">
+        <source>Gender</source>
+        <target state="translated">Nem</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item0">
+        <source>male</source>
+        <target state="translated">férfi</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item1">
+        <source>female</source>
+        <target state="translated">nő</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+        <source>diverse</source>
+        <target state="translated">diverz</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.address">
+        <source>Address</source>
+        <target state="translated">Cím</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.telephone">
+        <source>Telephone</source>
+        <target state="translated">Telefonszám</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.fax">
+        <source>Fax</source>
+        <target state="translated">Fax</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.email">
+        <source>Email</source>
+        <target state="translated">E-mail</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.title">
+        <source>Title</source>
+        <target state="translated">Megszólítás</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.zip">
+        <source>ZIP</source>
+        <target state="translated">Irányítószám</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.city">
+        <source>City</source>
+        <target state="translated">Város</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.country">
+        <source>Country</source>
+        <target state="translated">Ország</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="translated">Megye</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.www">
+        <source>Website</source>
+        <target state="translated">Weboldal</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.company">
+        <source>Company</source>
+        <target state="translated">Cég</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.image">
+        <source>Image</source>
+        <target state="translated">Kép</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastlogin">
+        <source>Last login</source>
+        <target state="translated">Utolsó bejelentkezés</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.captcha">
+        <source>Captcha</source>
+        <target state="translated">Captcha</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target state="translated">Megye</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.terms">
+        <source>Terms and conditions</source>
+        <target state="translated">ÁSZF</target>
+      </trans-unit>
+      <trans-unit id="fe_users.crdate">
+        <source>Creation Time</source>
+        <target state="translated">Létrehozás ideje</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tstamp">
+        <source>Last profile change at</source>
+        <target state="translated">Utolsó profilváltoztatás ideje</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyuser">
+        <source>Registration confirmed by user</source>
+        <target state="translated">Regisztráció felhasználó által megerősítve</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyadmin">
+        <source>Registration confirmed by admin</source>
+        <target state="translated">Regisztráció adminisztrátor által megerősítve</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tab">
+        <source>Registration</source>
+        <target state="translated">Regisztráció</target>
+      </trans-unit>
+      <trans-unit id="fe_users.log">
+        <source>FE_user Log</source>
+        <target state="translated">FE felhasználó napló</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms">
+        <source>User accepted terms and conditions</source>
+        <target state="translated">A felhasználó elfogadta az ÁSZF-et</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_version">
+        <source>Accepted version of terms and conditions</source>
+        <target state="translated">Elfogadott ÁSZF-verzió</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_date_of_acceptance">
+        <source>Accepted datetime of terms and conditions</source>
+        <target state="translated">ÁSZF elfogadásának időpontja</target>
+      </trans-unit>
+      <trans-unit id="fe_users.changerequest">
+        <source>Change Request</source>
+        <target state="translated">Módosítási kérelem</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log">
+        <source>User Log</source>
+        <target state="translated">Felhasználói napló</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.title">
+        <source>Title</source>
+        <target state="translated">Cím</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.crdate">
+        <source>Time</source>
+        <target state="translated">Időpont</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state">
+        <source>State</source>
+        <target state="translated">Állapot</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.additional_properties">
+        <source>Additional Properties</source>
+        <target state="translated">További tulajdonságok</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.100">
+        <source>Registration</source>
+        <target state="translated">Regisztráció</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.101">
+        <source>New Registration</source>
+        <target state="translated">Új regisztráció</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.102">
+        <source>Registration confirmed by user</source>
+        <target state="translated">Regisztráció felhasználó által megerősítve</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.103">
+        <source>Registration confirmed by admin</source>
+        <target state="translated">Regisztráció adminisztrátor által megerősítve</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.104">
+        <source>Registration refused by user</source>
+        <target state="translated">Regisztráció felhasználó által elutasítva</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.105">
+        <source>Registration refused by admin</source>
+        <target state="translated">Regisztráció adminisztrátor által elutasítva</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.106">
+        <source>Profile creation request</source>
+        <target state="translated">Profillétrehozási kérelem</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.200">
+        <source>Update</source>
+        <target state="translated">Frissítés</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.201">
+        <source>Profile updated</source>
+        <target state="translated">Profil frissítve</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.202">
+        <source>Profile update confirmed by admin</source>
+        <target state="translated">Profilfrissítés adminisztrátor által megerősítve</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.203">
+        <source>Profile update refused by admin</source>
+        <target state="translated">Profilfrissítés adminisztrátor által elutasítva</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.204">
+        <source>Profile update request</source>
+        <target state="translated">Profilfrissítési kérelem</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.205">
+        <source>Profile update security failure</source>
+        <target state="translated">Profilfrissítési biztonsági hiba</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.206">
+        <source>Image deleted</source>
+        <target state="translated">Kép törölve</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.207">
+        <source>Attempted to spoof profile</source>
+        <target state="translated">A profil meghamisítására tett kísérlet</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.208">
+        <source>Profile update not authorized</source>
+        <target state="translated">Profilfrissítés nem engedélyezett</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.300">
+        <source>Delete</source>
+        <target state="translated">Törlés</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.301">
+        <source>Profile deleted</source>
+        <target state="translated">Profil törölve</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.400">
+        <source>Invitation</source>
+        <target state="translated">Meghívás</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.401">
+        <source>Profile created and User invited</source>
+        <target state="translated">Profil létrehozva, a felhasználó meghívva</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.402">
+        <source>Profile deleted from User</source>
+        <target state="translated">A profil törölve a felhasználótól</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.403">
+        <source>Wrong Hash</source>
+        <target state="translated">Hibás hash</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.404">
+        <source>You tried to open a restricted page</source>
+        <target state="translated">Korlátozott oldalt próbált megnyitni</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.405">
+        <source>Password changed and Profile activated</source>
+        <target state="translated">Jelszó módosítva és profil aktiválva</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.500">
+        <source>Backend impersonation</source>
+        <target state="translated">Backend megszemélyesítés</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.501">
+        <source>Was impersonated by Backend Admin (login as)</source>
+        <target state="translated">A backend admin megszemélyesítette (bejelentkezés másként)</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.502">
+        <source>Impersonation was denied for Backend User (login as)</source>
+        <target state="translated">A megszemélyesítés megtagadva a backend felhasználótól (bejelentkezés másként)</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.600">
+        <source>Frontend Login</source>
+        <target state="translated">Frontend bejelentkezés</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.601">
+        <source>Successful frontend login</source>
+        <target state="translated">Sikeres frontend bejelentkezés</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.602">
+        <source>Failed frontend login</source>
+        <target state="translated">Sikertelen frontend bejelentkezés</target>
+      </trans-unit>
+      <trans-unit id="all">
+        <source>All</source>
+        <target state="translated">Összes</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.user">
+        <source>User</source>
+        <target state="translated">Felhasználó</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.title">
+        <source>Main Settings</source>
+        <target state="translated">Fő beállítások</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view">
+        <source>Choose View</source>
+        <target state="translated">Nézet kiválasztása</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.0">
+        <source>Registration</source>
+        <target state="translated">Regisztráció</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.1">
+        <source>Edit</source>
+        <target state="translated">Szerkesztés</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.2">
+        <source>List</source>
+        <target state="translated">Lista</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.3">
+        <source>Detail</source>
+        <target state="translated">Részletek</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.4">
+        <source>Invitation</source>
+        <target state="translated">Meghívás</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.5">
+        <source>Resend confirmation mail</source>
+        <target state="translated">Megerősítő levél újraküldése</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.title">
+        <source>Registration</source>
+        <target state="translated">Regisztráció</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.fields">
+        <source>Select Fields for New-Form (empty = all fields)</source>
+        <target state="translated">Mezők kiválasztása az új űrlaphoz (üres = minden mező)</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.overrideUserGroup">
+        <source>Select Usergroups for new Users</source>
+        <target state="translated">Felhasználócsoportok kiválasztása az új felhasználóknak</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByUser">
+        <source>Registration must be confirmed from sender</source>
+        <target state="translated">A regisztrációt a feladónak meg kell erősítenie</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.showTermsAndConditions">
+        <source>User must accept terms and conditions</source>
+        <target state="translated">A felhasználónak el kell fogadnia az általános szerződési feltételeket</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByAdmin">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target state="translated">A regisztrációt egy adminnak meg kell erősítenie (egy vagy több e-mail cím megadása)</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.notifyAdmin">
+        <source>Notify admin on registration (add one or more emails)</source>
+        <target state="translated">Admin értesítése regisztrációkor (egy vagy több e-mail cím megadása)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.title">
+        <source>Edit</source>
+        <target state="translated">Szerkesztés</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.fields">
+        <source>Select Fields for Edit-Form (empty = all fields)</source>
+        <target state="translated">Mezők kiválasztása a szerkesztő űrlaphoz (üres = minden mező)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.showDeleteLink">
+        <source>Show Delete Button in Edit Form</source>
+        <target state="translated">Törlés gomb megjelenítése a szerkesztő űrlapon</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.confirmByAdmin">
+        <source>Profile update must be confirmed from an admin (add one or more emails)</source>
+        <target state="translated">A profil frissítését egy adminnak meg kell erősítenie (egy vagy több e-mail cím megadása)</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.notifyAdmin">
+        <source>Notify admin on Profile update (add one or more emails)</source>
+        <target state="translated">Admin értesítése a profil frissítésekor (egy vagy több e-mail cím megadása)</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.title">
+        <source>Listview</source>
+        <target state="translated">Listanézet</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.filter">
+        <source>Show Searchfield</source>
+        <target state="translated">Keresőmező megjelenítése</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.limit">
+        <source>Limit</source>
+        <target state="translated">Korlát</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby">
+        <source>Order by</source>
+        <target state="translated">Rendezés alapján</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.0">
+        <source>Lastname</source>
+        <target state="translated">Vezetéknév</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.1">
+        <source>Firstname</source>
+        <target state="translated">Keresztnév</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.2">
+        <source>Company</source>
+        <target state="translated">Cég</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.3">
+        <source>Username</source>
+        <target state="translated">Felhasználónév</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting">
+        <source>Sorting</source>
+        <target state="translated">Rendezés sorrendje</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.0">
+        <source>Ascending</source>
+        <target state="translated">Növekvő</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.1">
+        <source>Descending</source>
+        <target state="translated">Csökkenő</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.usergroup">
+        <source>Show from usergroup (empty = show all)</source>
+        <target state="translated">Megjelenítés felhasználócsoport alapján (üres = minden megjelenítése)</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.title">
+        <source>Detailview</source>
+        <target state="translated">Részletnézet</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user">
+        <source>User to show</source>
+        <target state="translated">Megjelenítendő felhasználó</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user.1">
+        <source>[Logged in FE User]</source>
+        <target state="translated">[Bejelentkezett FE felhasználó]</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.title">
+        <source>Invitation</source>
+        <target state="translated">Meghívás</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.allowedUserGroups">
+        <source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
+        <target state="translated">A "Meghívás hozzáadása" korlátozása egy vagy több felhasználócsoportra (üres = nincs korlátozás)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.fields">
+        <source>Select Fields for invitation-Form (empty = all fields)</source>
+        <target state="translated">Mezők kiválasztása a meghívó űrlaphoz (üres = minden mező)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.overrideUserGroup">
+        <source>Select Usergroups for new Users</source>
+        <target state="translated">Felhasználócsoportok kiválasztása az új felhasználóknak</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.confirmByAdmin">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target state="translated">A regisztrációt egy adminnak meg kell erősítenie (egy vagy több e-mail cím megadása)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdminStep1">
+        <source>Notify admin on step 1 (add one or more emails)</source>
+        <target state="translated">Admin értesítése az 1. lépésnél (egy vagy több e-mail cím megadása)</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdmin">
+        <source>Notify admin if user sets a password (add one or more emails)</source>
+        <target state="translated">Admin értesítése, ha a felhasználó jelszót állít be (egy vagy több e-mail cím megadása)</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.title">
+        <source>Additional Settings</source>
+        <target state="translated">További beállítások</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.termsUrl">
+        <source>Page with terms and conditions</source>
+        <target state="translated">Általános szerződési feltételeket tartalmazó oldal</target>
+      </trans-unit>
+      <trans-unit id="pleaseChoose">
+        <source>Please choose...</source>
+        <target state="translated">Kérlek, válassz...</target>
+      </trans-unit>
+      <trans-unit id="pleaseChooseCountry">
+        <source>Please choose a country...</source>
+        <target state="translated">Kérlek, válassz országot...</target>
+      </trans-unit>
+      <trans-unit id="noZonesForThisCountry">
+        <source>No zones available for the chosen country</source>
+        <target state="translated">Nincs elérhető régió a kiválasztott országhoz</target>
+      </trans-unit>
+      <trans-unit id="filter.filter">
+        <source>Filter</source>
+        <target state="translated">Szűrő</target>
+      </trans-unit>
+      <trans-unit id="filter.reset">
+        <source>Reset</source>
+        <target state="translated">Visszaállítás</target>
+      </trans-unit>
+      <trans-unit id="filter.user">
+        <source>User</source>
+        <target state="translated">Felhasználó</target>
+      </trans-unit>
+      <trans-unit id="filter.state">
+        <source>State</source>
+        <target state="translated">Állapot</target>
+      </trans-unit>
+      <trans-unit id="filter.from">
+        <source>From</source>
+        <target state="translated">Tól</target>
+      </trans-unit>
+      <trans-unit id="filter.to">
+        <source>To</source>
+        <target state="translated">Ig</target>
+      </trans-unit>
+      <trans-unit id="log.headline.time">
+        <source>Time</source>
+        <target state="translated">Idő</target>
+      </trans-unit>
+      <trans-unit id="log.headline.state">
+        <source>State</source>
+        <target state="translated">Állapot</target>
+      </trans-unit>
+      <trans-unit id="log.headline.user">
+        <source>User</source>
+        <target state="translated">Felhasználó</target>
+      </trans-unit>
+      <trans-unit id="log.headline.details">
+        <source>Details</source>
+        <target state="translated">Részletek</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

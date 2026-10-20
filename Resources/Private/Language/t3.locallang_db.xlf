@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="tx_femanager_domain_model_user">
+        <source>User</source>
+        <target>crwdns136254:0crwdne136254:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.username">
+        <source>Username</source>
+        <target>crwdns136256:0crwdne136256:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password">
+        <source>Password</source>
+        <target>crwdns136258:0crwdne136258:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.usergroup">
+        <source>Usergroup</source>
+        <target>crwdns136260:0crwdne136260:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.name">
+        <source>Name</source>
+        <target>crwdns136262:0crwdne136262:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.firstName">
+        <source>Firstname</source>
+        <target>crwdns136264:0crwdne136264:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.middleName">
+        <source>Middlename</source>
+        <target>crwdns136266:0crwdne136266:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastName">
+        <source>Lastname</source>
+        <target>crwdns136268:0crwdne136268:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
+        <source>Birthdate</source>
+        <target>crwdns136270:0crwdne136270:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender">
+        <source>Gender</source>
+        <target>crwdns136272:0crwdne136272:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item0">
+        <source>male</source>
+        <target>crwdns136274:0crwdne136274:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item1">
+        <source>female</source>
+        <target>crwdns136276:0crwdne136276:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+        <source>diverse</source>
+        <target>crwdns335700:0crwdne335700:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.address">
+        <source>Address</source>
+        <target>crwdns136278:0crwdne136278:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.telephone">
+        <source>Telephone</source>
+        <target>crwdns136280:0crwdne136280:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.fax">
+        <source>Fax</source>
+        <target>crwdns136282:0crwdne136282:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.email">
+        <source>Email</source>
+        <target>crwdns136284:0crwdne136284:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.title">
+        <source>Title</source>
+        <target>crwdns136286:0crwdne136286:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.zip">
+        <source>ZIP</source>
+        <target>crwdns136288:0crwdne136288:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.city">
+        <source>City</source>
+        <target>crwdns136290:0crwdne136290:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.country">
+        <source>Country</source>
+        <target>crwdns136292:0crwdne136292:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target>crwdns136294:0crwdne136294:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.www">
+        <source>Website</source>
+        <target>crwdns136296:0crwdne136296:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.company">
+        <source>Company</source>
+        <target>crwdns136298:0crwdne136298:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.image">
+        <source>Image</source>
+        <target>crwdns136300:0crwdne136300:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastlogin">
+        <source>Last login</source>
+        <target>crwdns136302:0crwdne136302:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.captcha">
+        <source>Captcha</source>
+        <target>crwdns136304:0crwdne136304:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target>crwdns136294:0crwdne136294:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.terms">
+        <source>Terms and conditions</source>
+        <target>crwdns136308:0crwdne136308:0</target>
+      </trans-unit>
+      <trans-unit id="fe_users.crdate">
+        <source>Creation Time</source>
+        <target>crwdns136310:0crwdne136310:0</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tstamp">
+        <source>Last profile change at</source>
+        <target>crwdns136312:0crwdne136312:0</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyuser">
+        <source>Registration confirmed by user</source>
+        <target>crwdns136314:0crwdne136314:0</target>
+      </trans-unit>
+      <trans-unit id="fe_users.registrationconfirmedbyadmin">
+        <source>Registration confirmed by admin</source>
+        <target>crwdns136316:0crwdne136316:0</target>
+      </trans-unit>
+      <trans-unit id="fe_users.tab">
+        <source>Registration</source>
+        <target>crwdns136318:0crwdne136318:0</target>
+      </trans-unit>
+      <trans-unit id="fe_users.log">
+        <source>FE_user Log</source>
+        <target>crwdns136320:0crwdne136320:0</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms">
+        <source>User accepted terms and conditions</source>
+        <target>crwdns136322:0crwdne136322:0</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_version">
+        <source>Accepted version of terms and conditions</source>
+        <target>crwdns136324:0crwdne136324:0</target>
+      </trans-unit>
+      <trans-unit id="fe_users.terms_date_of_acceptance">
+        <source>Accepted datetime of terms and conditions</source>
+        <target>crwdns136326:0crwdne136326:0</target>
+      </trans-unit>
+      <trans-unit id="fe_users.changerequest">
+        <source>Change Request</source>
+        <target>crwdns136328:0crwdne136328:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log">
+        <source>User Log</source>
+        <target>crwdns136330:0crwdne136330:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.title">
+        <source>Title</source>
+        <target>crwdns136332:0crwdne136332:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.crdate">
+        <source>Time</source>
+        <target>crwdns136334:0crwdne136334:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state">
+        <source>State</source>
+        <target>crwdns136336:0crwdne136336:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.additional_properties">
+        <source>Additional Properties</source>
+        <target>crwdns392992:0crwdne392992:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.100">
+        <source>Registration</source>
+        <target>crwdns136338:0crwdne136338:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.101">
+        <source>New Registration</source>
+        <target>crwdns136340:0crwdne136340:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.102">
+        <source>Registration confirmed by user</source>
+        <target>crwdns136342:0crwdne136342:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.103">
+        <source>Registration confirmed by admin</source>
+        <target>crwdns136344:0crwdne136344:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.104">
+        <source>Registration refused by user</source>
+        <target>crwdns136346:0crwdne136346:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.105">
+        <source>Registration refused by admin</source>
+        <target>crwdns136348:0crwdne136348:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.106">
+        <source>Profile creation request</source>
+        <target>crwdns136350:0crwdne136350:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.200">
+        <source>Update</source>
+        <target>crwdns136352:0crwdne136352:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.201">
+        <source>Profile updated</source>
+        <target>crwdns136354:0crwdne136354:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.202">
+        <source>Profile update confirmed by admin</source>
+        <target>crwdns136356:0crwdne136356:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.203">
+        <source>Profile update refused by admin</source>
+        <target>crwdns136358:0crwdne136358:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.204">
+        <source>Profile update request</source>
+        <target>crwdns136360:0crwdne136360:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.205">
+        <source>Profile update security failure</source>
+        <target>crwdns136362:0crwdne136362:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.206">
+        <source>Image deleted</source>
+        <target>crwdns136364:0crwdne136364:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.207">
+        <source>Attempted to spoof profile</source>
+        <target>crwdns374330:0crwdne374330:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.208">
+        <source>Profile update not authorized</source>
+        <target>crwdns378118:0crwdne378118:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.300">
+        <source>Delete</source>
+        <target>crwdns136366:0crwdne136366:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.301">
+        <source>Profile deleted</source>
+        <target>crwdns136368:0crwdne136368:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.400">
+        <source>Invitation</source>
+        <target>crwdns136370:0crwdne136370:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.401">
+        <source>Profile created and User invited</source>
+        <target>crwdns136372:0crwdne136372:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.402">
+        <source>Profile deleted from User</source>
+        <target>crwdns136374:0crwdne136374:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.403">
+        <source>Wrong Hash</source>
+        <target>crwdns136376:0crwdne136376:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.404">
+        <source>You tried to open a restricted page</source>
+        <target>crwdns136378:0crwdne136378:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.405">
+        <source>Password changed and Profile activated</source>
+        <target>crwdns136380:0crwdne136380:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.500">
+        <source>Backend impersonation</source>
+        <target>crwdns393490:0crwdne393490:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.501">
+        <source>Was impersonated by Backend Admin (login as)</source>
+        <target>crwdns392994:0crwdne392994:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.502">
+        <source>Impersonation was denied for Backend User (login as)</source>
+        <target>crwdns392996:0crwdne392996:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.600">
+        <source>Frontend Login</source>
+        <target>crwdns393492:0crwdne393492:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.601">
+        <source>Successful frontend login</source>
+        <target>crwdns393494:0crwdne393494:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.602">
+        <source>Failed frontend login</source>
+        <target>crwdns393496:0crwdne393496:0</target>
+      </trans-unit>
+      <trans-unit id="all">
+        <source>All</source>
+        <target>crwdns393498:0crwdne393498:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.user">
+        <source>User</source>
+        <target>crwdns136382:0crwdne136382:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.title">
+        <source>Main Settings</source>
+        <target>crwdns136384:0crwdne136384:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view">
+        <source>Choose View</source>
+        <target>crwdns136386:0crwdne136386:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.0">
+        <source>Registration</source>
+        <target>crwdns136388:0crwdne136388:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.1">
+        <source>Edit</source>
+        <target>crwdns136390:0crwdne136390:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.2">
+        <source>List</source>
+        <target>crwdns136392:0crwdne136392:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.3">
+        <source>Detail</source>
+        <target>crwdns136394:0crwdne136394:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.4">
+        <source>Invitation</source>
+        <target>crwdns136396:0crwdne136396:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.main.view.5">
+        <source>Resend confirmation mail</source>
+        <target>crwdns136398:0crwdne136398:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.title">
+        <source>Registration</source>
+        <target>crwdns136400:0crwdne136400:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.fields">
+        <source>Select Fields for New-Form (empty = all fields)</source>
+        <target>crwdns136402:0crwdne136402:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.overrideUserGroup">
+        <source>Select Usergroups for new Users</source>
+        <target>crwdns136404:0crwdne136404:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByUser">
+        <source>Registration must be confirmed from sender</source>
+        <target>crwdns136406:0crwdne136406:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.showTermsAndConditions">
+        <source>User must accept terms and conditions</source>
+        <target>crwdns136408:0crwdne136408:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.confirmByAdmin">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target>crwdns136410:0crwdne136410:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.new.notifyAdmin">
+        <source>Notify admin on registration (add one or more emails)</source>
+        <target>crwdns136412:0crwdne136412:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.title">
+        <source>Edit</source>
+        <target>crwdns136414:0crwdne136414:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.fields">
+        <source>Select Fields for Edit-Form (empty = all fields)</source>
+        <target>crwdns136416:0crwdne136416:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.showDeleteLink">
+        <source>Show Delete Button in Edit Form</source>
+        <target>crwdns136418:0crwdne136418:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.confirmByAdmin">
+        <source>Profile update must be confirmed from an admin (add one or more emails)</source>
+        <target>crwdns136420:0crwdne136420:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.edit.notifyAdmin">
+        <source>Notify admin on Profile update (add one or more emails)</source>
+        <target>crwdns136422:0crwdne136422:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.title">
+        <source>Listview</source>
+        <target>crwdns136424:0crwdne136424:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.filter">
+        <source>Show Searchfield</source>
+        <target>crwdns136426:0crwdne136426:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.limit">
+        <source>Limit</source>
+        <target>crwdns136428:0crwdne136428:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby">
+        <source>Order by</source>
+        <target>crwdns136430:0crwdne136430:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.0">
+        <source>Lastname</source>
+        <target>crwdns136432:0crwdne136432:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.1">
+        <source>Firstname</source>
+        <target>crwdns136434:0crwdne136434:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.2">
+        <source>Company</source>
+        <target>crwdns136436:0crwdne136436:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.orderby.3">
+        <source>Username</source>
+        <target>crwdns136556:0crwdne136556:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting">
+        <source>Sorting</source>
+        <target>crwdns136438:0crwdne136438:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.0">
+        <source>Ascending</source>
+        <target>crwdns136440:0crwdne136440:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.sorting.1">
+        <source>Descending</source>
+        <target>crwdns136442:0crwdne136442:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.list.usergroup">
+        <source>Show from usergroup (empty = show all)</source>
+        <target>crwdns136444:0crwdne136444:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.title">
+        <source>Detailview</source>
+        <target>crwdns136446:0crwdne136446:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user">
+        <source>User to show</source>
+        <target>crwdns136448:0crwdne136448:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.show.user.1">
+        <source>[Logged in FE User]</source>
+        <target>crwdns136450:0crwdne136450:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.title">
+        <source>Invitation</source>
+        <target>crwdns136452:0crwdne136452:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.allowedUserGroups">
+        <source>Restrict "Add Invitation" to one or more Usergroups (empty = No Restriction)</source>
+        <target>crwdns136454:0crwdne136454:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.fields">
+        <source>Select Fields for invitation-Form (empty = all fields)</source>
+        <target>crwdns136456:0crwdne136456:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.overrideUserGroup">
+        <source>Select Usergroups for new Users</source>
+        <target>crwdns136458:0crwdne136458:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.confirmByAdmin">
+        <source>Registration must be confirmed from an admin (add one or more emails)</source>
+        <target>crwdns136460:0crwdne136460:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdminStep1">
+        <source>Notify admin on step 1 (add one or more emails)</source>
+        <target>crwdns136462:0crwdne136462:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.invitation.notifyAdmin">
+        <source>Notify admin if user sets a password (add one or more emails)</source>
+        <target>crwdns136464:0crwdne136464:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.title">
+        <source>Additional Settings</source>
+        <target>crwdns136466:0crwdne136466:0</target>
+      </trans-unit>
+      <trans-unit id="flexform.misc.termsUrl">
+        <source>Page with terms and conditions</source>
+        <target>crwdns136468:0crwdne136468:0</target>
+      </trans-unit>
+      <trans-unit id="pleaseChoose">
+        <source>Please choose...</source>
+        <target>crwdns136470:0crwdne136470:0</target>
+      </trans-unit>
+      <trans-unit id="pleaseChooseCountry">
+        <source>Please choose a country...</source>
+        <target>crwdns136472:0crwdne136472:0</target>
+      </trans-unit>
+      <trans-unit id="noZonesForThisCountry">
+        <source>No zones available for the chosen country</source>
+        <target>crwdns136558:0crwdne136558:0</target>
+      </trans-unit>
+      <trans-unit id="filter.filter">
+        <source>Filter</source>
+        <target>crwdns393500:0crwdne393500:0</target>
+      </trans-unit>
+      <trans-unit id="filter.reset">
+        <source>Reset</source>
+        <target>crwdns393502:0crwdne393502:0</target>
+      </trans-unit>
+      <trans-unit id="filter.user">
+        <source>User</source>
+        <target>crwdns393504:0crwdne393504:0</target>
+      </trans-unit>
+      <trans-unit id="filter.state">
+        <source>State</source>
+        <target>crwdns393506:0crwdne393506:0</target>
+      </trans-unit>
+      <trans-unit id="filter.from">
+        <source>From</source>
+        <target>crwdns393508:0crwdne393508:0</target>
+      </trans-unit>
+      <trans-unit id="filter.to">
+        <source>To</source>
+        <target>crwdns393510:0crwdne393510:0</target>
+      </trans-unit>
+      <trans-unit id="log.headline.time">
+        <source>Time</source>
+        <target>crwdns393512:0crwdne393512:0</target>
+      </trans-unit>
+      <trans-unit id="log.headline.state">
+        <source>State</source>
+        <target>crwdns393514:0crwdne393514:0</target>
+      </trans-unit>
+      <trans-unit id="log.headline.user">
+        <source>User</source>
+        <target>crwdns393516:0crwdne393516:0</target>
+      </trans-unit>
+      <trans-unit id="log.headline.details">
+        <source>Details</source>
+        <target>crwdns393518:0crwdne393518:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

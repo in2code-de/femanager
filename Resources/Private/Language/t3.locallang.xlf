@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="tx_femanager_domain_model_user">
+        <source>User</source>
+        <target>crwdns135816:0crwdne135816:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.username">
+        <source>Username</source>
+        <target>crwdns135818:0crwdne135818:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password">
+        <source>Password</source>
+        <target>crwdns135820:0crwdne135820:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.password_repeat">
+        <source>Repeat Password</source>
+        <target>crwdns135822:0crwdne135822:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.usergroup">
+        <source>Usergroup</source>
+        <target>crwdns135824:0crwdne135824:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.name">
+        <source>Full Name</source>
+        <target>crwdns135826:0crwdne135826:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.firstName">
+        <source>Firstname</source>
+        <target>crwdns135828:0crwdne135828:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.middleName">
+        <source>Middlename</source>
+        <target>crwdns135830:0crwdne135830:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastName">
+        <source>Lastname</source>
+        <target>crwdns135832:0crwdne135832:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth">
+        <source>Birthdate</source>
+        <target>crwdns135834:0crwdne135834:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.hint">
+        <source>Please type your birthdate as MM/DD/YYYY</source>
+        <target>crwdns135836:0crwdne135836:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateOfBirth.placeholder">
+        <source>MM/DD/YYYY</source>
+        <target>crwdns135838:0crwdne135838:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.dateFormat">
+        <source>m/d/Y</source>
+        <target>crwdns135840:0crwdne135840:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender">
+        <source>Gender</source>
+        <target>crwdns135842:0crwdne135842:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item0">
+        <source>Male</source>
+        <target>crwdns135844:0crwdne135844:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item1">
+        <source>Female</source>
+        <target>crwdns135846:0crwdne135846:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.gender.item2">
+        <source>Diverse</source>
+        <target>crwdns335698:0crwdne335698:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.address">
+        <source>Address</source>
+        <target>crwdns135848:0crwdne135848:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.telephone">
+        <source>Telephone</source>
+        <target>crwdns135850:0crwdne135850:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.fax">
+        <source>Fax</source>
+        <target>crwdns135852:0crwdne135852:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.email">
+        <source>Email</source>
+        <target>crwdns135854:0crwdne135854:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.title">
+        <source>Title</source>
+        <target>crwdns135856:0crwdne135856:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.zip">
+        <source>ZIP</source>
+        <target>crwdns135858:0crwdne135858:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.city">
+        <source>City</source>
+        <target>crwdns135860:0crwdne135860:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.country">
+        <source>Country</source>
+        <target>crwdns135862:0crwdne135862:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.state">
+        <source>State</source>
+        <target>crwdns135864:0crwdne135864:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.www">
+        <source>Website</source>
+        <target>crwdns135866:0crwdne135866:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.company">
+        <source>Company</source>
+        <target>crwdns135868:0crwdne135868:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.image">
+        <source>Image</source>
+        <target>crwdns135870:0crwdne135870:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.captcha">
+        <source>Captcha</source>
+        <target>crwdns135872:0crwdne135872:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.terms">
+        <source>I accept the terms and conditions</source>
+        <target>crwdns135874:0crwdne135874:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.termslinktext">
+        <source>Click here for terms and conditions</source>
+        <target>crwdns135876:0crwdne135876:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.lastlogin">
+        <source>Last login</source>
+        <target>crwdns135878:0crwdne135878:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.inactivesince">
+        <source>Inactive since</source>
+        <target>crwdns292637:0crwdne292637:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_user.crdate">
+        <source>Creation Time</source>
+        <target>crwdns135880:0crwdne135880:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log">
+        <source>User Log</source>
+        <target>crwdns135882:0crwdne135882:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.title">
+        <source>Title</source>
+        <target>crwdns135884:0crwdne135884:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.crdate">
+        <source>Time</source>
+        <target>crwdns135886:0crwdne135886:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state">
+        <source>State</source>
+        <target>crwdns135888:0crwdne135888:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.additional_properties">
+        <source>Additional Properties</source>
+        <target>crwdns392986:0crwdne392986:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.100">
+        <source>Registration</source>
+        <target>crwdns135890:0crwdne135890:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.101">
+        <source>New Registration</source>
+        <target>crwdns135892:0crwdne135892:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.102">
+        <source>Registration confirmed by user</source>
+        <target>crwdns135894:0crwdne135894:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.103">
+        <source>Registration confirmed by admin</source>
+        <target>crwdns135896:0crwdne135896:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.104">
+        <source>Registration refused by user</source>
+        <target>crwdns135898:0crwdne135898:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.105">
+        <source>Registration refused by admin</source>
+        <target>crwdns135900:0crwdne135900:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.106">
+        <source>Profile creation request</source>
+        <target>crwdns135902:0crwdne135902:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.200">
+        <source>Update</source>
+        <target>crwdns135904:0crwdne135904:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.201">
+        <source>Profile updated</source>
+        <target>crwdns135906:0crwdne135906:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.202">
+        <source>Profile update confirmed by admin</source>
+        <target>crwdns135908:0crwdne135908:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.203">
+        <source>Profile update refused by admin</source>
+        <target>crwdns135910:0crwdne135910:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.204">
+        <source>Profile update request</source>
+        <target>crwdns135912:0crwdne135912:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.205">
+        <source>Profile update security failure</source>
+        <target>crwdns135914:0crwdne135914:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.206">
+        <source>Image deleted</source>
+        <target>crwdns135916:0crwdne135916:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.207">
+        <source>Attempted to spoof profile</source>
+        <target>crwdns374312:0crwdne374312:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.208">
+        <source>Profile update not authorized</source>
+        <target>crwdns378116:0crwdne378116:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.300">
+        <source>Delete</source>
+        <target>crwdns135918:0crwdne135918:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.301">
+        <source>Profile deleted</source>
+        <target>crwdns135920:0crwdne135920:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.400">
+        <source>Invitation</source>
+        <target>crwdns135922:0crwdne135922:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.401">
+        <source>Profile created and user invited</source>
+        <target>crwdns135924:0crwdne135924:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.402">
+        <source>Profile deleted by user</source>
+        <target>crwdns135926:0crwdne135926:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.403">
+        <source>Wrong hash</source>
+        <target>crwdns135928:0crwdne135928:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.404">
+        <source>You tried to open a restricted page</source>
+        <target>crwdns135930:0crwdne135930:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.405">
+        <source>Password changed and profile activated</source>
+        <target>crwdns135932:0crwdne135932:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.501">
+        <source>Was impersonated by Backend User (login as)</source>
+        <target>crwdns392988:0crwdne392988:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.502">
+        <source>Impersonation was denied for Backend User (login as)</source>
+        <target>crwdns392990:0crwdne392990:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.600">
+        <source>Frontend Login</source>
+        <target>crwdns393520:0crwdne393520:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.601">
+        <source>Successful frontend login</source>
+        <target>crwdns393522:0crwdne393522:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.state.602">
+        <source>Failed frontend login</source>
+        <target>crwdns393524:0crwdne393524:0</target>
+      </trans-unit>
+      <trans-unit id="tx_femanager_domain_model_log.user">
+        <source>User</source>
+        <target>crwdns135934:0crwdne135934:0</target>
+      </trans-unit>
+      <trans-unit id="error_no_typoscript">
+        <source>No TypoScript found. Did you already include the static Template?</source>
+        <target>crwdns135936:0crwdne135936:0</target>
+      </trans-unit>
+      <trans-unit id="error_no_typoscript_be">
+        <source>No TypoScript found. Did you already setup module.tx_femanager.settings.configPID in your PageTS?</source>
+        <target>crwdns135938:0crwdne135938:0</target>
+      </trans-unit>
+      <trans-unit id="error_no_storagepid">
+        <source>No Storage PID was set. Please set the storage PID via TypoScript or in the plugin settings.</source>
+        <target>crwdns135940:0crwdne135940:0</target>
+      </trans-unit>
+      <trans-unit id="error_not_authorized">
+        <source>You are not authorized for this action</source>
+        <target>crwdns135942:0crwdne135942:0</target>
+      </trans-unit>
+      <trans-unit id="validationError">
+        <source>Error</source>
+        <target>crwdns135944:0crwdne135944:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorRequiredModel">
+        <source>Username and password must be filled</source>
+        <target>crwdns135946:0crwdne135946:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorWrongDateFormat">
+        <source>Given date format is wrong</source>
+        <target>crwdns135948:0crwdne135948:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorRequired">
+        <source>Field %s is required</source>
+        <target>crwdns135950:0%scrwdne135950:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorEmail">
+        <source>Field %s is not a valid email address</source>
+        <target>crwdns135952:0%scrwdne135952:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMin">
+        <source>Please add more characters to field %s</source>
+        <target>crwdns135954:0%scrwdne135954:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMax">
+        <source>Please add less characters to field %s</source>
+        <target>crwdns135956:0%scrwdne135956:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMinInt">
+        <source>Please respect the minimum value for field %s</source>
+        <target>crwdns374314:0%scrwdne374314:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMaxInt">
+        <source>Please respect the maximum value for field %s</source>
+        <target>crwdns374316:0%scrwdne374316:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorInt">
+        <source>Only numbers are allowed in field %s</source>
+        <target>crwdns135958:0%scrwdne135958:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorLetters">
+        <source>Only letters are allowed in field %s</source>
+        <target>crwdns135960:0%scrwdne135960:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorUniquePage">
+        <source>Value of field %s is already in use</source>
+        <target>crwdns135962:0%scrwdne135962:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorUniqueDb">
+        <source>Value of field %s is already in use</source>
+        <target>crwdns135964:0%scrwdne135964:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMustInclude">
+        <source>Try another value for field %s</source>
+        <target>crwdns135966:0%scrwdne135966:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorMustNotInclude">
+        <source>Not allowed signs in field %s</source>
+        <target>crwdns135968:0%scrwdne135968:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorInList">
+        <source>This value is not allowed in field %s</source>
+        <target>crwdns135970:0%scrwdne135970:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorSameAs">
+        <source>Values do not match</source>
+        <target>crwdns301520:0crwdne301520:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorPasswordRepeat">
+        <source>Both passwords do not match</source>
+        <target>crwdns301522:0crwdne301522:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorDate">
+        <source>Date has the wrong format</source>
+        <target>crwdns135976:0crwdne135976:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorCaptcha">
+        <source>Wrong Captcha code</source>
+        <target>crwdns135978:0crwdne135978:0</target>
+      </trans-unit>
+      <trans-unit id="validationErrorGeneral">
+        <source>Field could not be validated</source>
+        <target>crwdns135980:0crwdne135980:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationSubject">
+        <source>Please confirm a new registration</source>
+        <target>crwdns135982:0crwdne135982:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationSalutation">
+        <source>Dear Admin,</source>
+        <target>crwdns135984:0crwdne135984:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationUserProperties">
+        <source>User properties:</source>
+        <target>crwdns135986:0crwdne135986:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationText1">
+        <source>Please confirm registration of %s by clicking the following link:</source>
+        <target>crwdns135988:0%scrwdne135988:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirm">
+        <source>Confirm registration</source>
+        <target>crwdns135990:0crwdne135990:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationText2">
+        <source>If you want to delete the registration, click this link:</source>
+        <target>crwdns135992:0crwdne135992:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefused">
+        <source>Delete profile</source>
+        <target>crwdns135994:0crwdne135994:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationText3">
+        <source>If you want to delete the registration, without sending an email to the user, click this link:</source>
+        <target>crwdns135996:0crwdne135996:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateAdminConfirmationLinkConfirmRefusedSilent">
+        <source>Silently delete profile</source>
+        <target>crwdns135998:0crwdne135998:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationSubject">
+        <source>Please confirm your profile creation request</source>
+        <target>crwdns136000:0crwdne136000:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationSalutation">
+        <source>Dear</source>
+        <target>crwdns136002:0crwdne136002:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationText1">
+        <source>Please confirm your profile registration on our server by clicking the following link:</source>
+        <target>crwdns136004:0crwdne136004:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationLinkConfirm">
+        <source>Confirm profile</source>
+        <target>crwdns136006:0crwdne136006:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationText2">
+        <source>If you don't want to be registered on our system, click this link:</source>
+        <target>crwdns136008:0crwdne136008:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationLinkConfirmRefused">
+        <source>Delete profile</source>
+        <target>crwdns136010:0crwdne136010:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserConfirmationSignature">
+        <source>Your website team.</source>
+        <target>crwdns136012:0crwdne136012:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifySubject">
+        <source>Your registration was confirmed</source>
+        <target>crwdns136014:0crwdne136014:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifySalutation">
+        <source>Dear</source>
+        <target>crwdns136016:0crwdne136016:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyText1">
+        <source>Your profile was confirmed and successfully created.</source>
+        <target>crwdns136018:0crwdne136018:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifySignature">
+        <source>Your website team.</source>
+        <target>crwdns136020:0crwdne136020:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedSubject">
+        <source>Dear</source>
+        <target>crwdns136022:0crwdne136022:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedSalutation">
+        <source>Dear</source>
+        <target>crwdns136024:0crwdne136024:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedText1">
+        <source>Thank you for your profile request. We're sorry to tell you, that we had to refuse your request.</source>
+        <target>crwdns136026:0crwdne136026:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateUserNotifyRefusedSignature">
+        <source>Your website team.</source>
+        <target>crwdns136028:0crwdne136028:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifySubject">
+        <source>New profile registration</source>
+        <target>crwdns136030:0crwdne136030:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifySalutation">
+        <source>Dear Admin,</source>
+        <target>crwdns136032:0crwdne136032:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifyText1">
+        <source>Profile creation - User %s</source>
+        <target>crwdns136034:0%scrwdne136034:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifyText2">
+        <source>Profile creation - User %s set a new password and profile was enabled</source>
+        <target>crwdns136036:0%scrwdne136036:0</target>
+      </trans-unit>
+      <trans-unit id="emailCreateNotifyUserProperties">
+        <source>Profile properties:</source>
+        <target>crwdns136038:0crwdne136038:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifySubject">
+        <source>Profile update</source>
+        <target>crwdns136040:0crwdne136040:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifySalutation">
+        <source>Dear Admin,</source>
+        <target>crwdns136042:0crwdne136042:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyText1">
+        <source>Profile change by user %s</source>
+        <target>crwdns136044:0%scrwdne136044:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyField">
+        <source>Fieldname</source>
+        <target>crwdns136046:0crwdne136046:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyOld">
+        <source>Old value</source>
+        <target>crwdns136048:0crwdne136048:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateNotifyNew">
+        <source>New value</source>
+        <target>crwdns136050:0crwdne136050:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestSubject">
+        <source>New profile change request</source>
+        <target>crwdns136052:0crwdne136052:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestSalutation">
+        <source>Dear Admin,</source>
+        <target>crwdns136054:0crwdne136054:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestText1">
+        <source>Profile change request from %s</source>
+        <target>crwdns136056:0%scrwdne136056:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestText2">
+        <source>All changes:</source>
+        <target>crwdns136058:0crwdne136058:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestField">
+        <source>Fieldname</source>
+        <target>crwdns136060:0crwdne136060:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestOld">
+        <source>Old value</source>
+        <target>crwdns136062:0crwdne136062:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestNew">
+        <source>New value</source>
+        <target>crwdns136064:0crwdne136064:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestLinkConfirm">
+        <source>Confirm changes</source>
+        <target>crwdns136066:0crwdne136066:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestLinkRefuse">
+        <source>Refuse changes and notify user</source>
+        <target>crwdns136068:0crwdne136068:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestLinkSiltentRefuse">
+        <source>Refuse changes and do not notify user</source>
+        <target>crwdns136070:0crwdne136070:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedSubject">
+        <source>Your update request was refused</source>
+        <target>crwdns136072:0crwdne136072:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedSalutation">
+        <source>Dear</source>
+        <target>crwdns136074:0crwdne136074:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedText1">
+        <source>Thank you for your update request. We're sorry to tell you, that we had to refuse your request.</source>
+        <target>crwdns136076:0crwdne136076:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedText2">
+        <source>Please contact %s for further information.</source>
+        <target>crwdns136078:0%scrwdne136078:0</target>
+      </trans-unit>
+      <trans-unit id="emailUpdateRequestRefusedSignature">
+        <source>Your website team.</source>
+        <target>crwdns136080:0crwdne136080:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationSubject">
+        <source>Confirm your profile</source>
+        <target>crwdns136082:0crwdne136082:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationSalutation">
+        <source>Dear</source>
+        <target>crwdns136084:0crwdne136084:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationText1">
+        <source>Your new profile was just created.</source>
+        <target>crwdns136086:0crwdne136086:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationText2">
+        <source>Please confirm your profile registration on our server by clicking the following link. After that, you can define a password.</source>
+        <target>crwdns136088:0crwdne136088:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationLinkConfirm">
+        <source>Confirm Profile</source>
+        <target>crwdns136090:0crwdne136090:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationText3">
+        <source>If you don't want to be registered on our system, click this link.</source>
+        <target>crwdns136092:0crwdne136092:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationLinkConfirmRefused">
+        <source>Delete Profile</source>
+        <target>crwdns136094:0crwdne136094:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationSignature">
+        <source>Your website team.</source>
+        <target>crwdns136096:0crwdne136096:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationAdminNotifiyStep1Subject">
+        <source>User was invited</source>
+        <target>crwdns136098:0crwdne136098:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationAdminNotifiySubject">
+        <source>User invitation - Profile finally created</source>
+        <target>crwdns136100:0crwdne136100:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyStep1Subject">
+        <source>User refused invitation</source>
+        <target>crwdns136102:0crwdne136102:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiySalutation">
+        <source>Dear Admin,</source>
+        <target>crwdns136104:0crwdne136104:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyText1">
+        <source>Profile invitation of %s</source>
+        <target>crwdns136106:0%scrwdne136106:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyText2">
+        <source>Profile invitation - User %s refused to set a new password. The profile was deleted.</source>
+        <target>crwdns136108:0%scrwdne136108:0</target>
+      </trans-unit>
+      <trans-unit id="emailInvitationUserRefusedAdminNotifiyUserProperties">
+        <source>Profile properties:</source>
+        <target>crwdns136110:0crwdne136110:0</target>
+      </trans-unit>
+      <trans-unit id="noRecordsFound">
+        <source>No records found.</source>
+        <target>crwdns136112:0crwdne136112:0</target>
+      </trans-unit>
+      <trans-unit id="noRecordsFoundClearFilter">
+        <source>Clean filter.</source>
+        <target>crwdns136114:0crwdne136114:0</target>
+      </trans-unit>
+      <trans-unit id="noRecordsFoundGoToPage0">
+        <source>Show all users from all pages (for administrators only).</source>
+        <target>crwdns136116:0crwdne136116:0</target>
+      </trans-unit>
+      <trans-unit id="noRecordFoundShow">
+        <source>No FE_User given or not logged in</source>
+        <target>crwdns136118:0crwdne136118:0</target>
+      </trans-unit>
+      <trans-unit id="notLoggedIn">
+        <source>Please log in before</source>
+        <target>crwdns136120:0crwdne136120:0</target>
+      </trans-unit>
+      <trans-unit id="submitNew">
+        <source>Create Profile Now</source>
+        <target>crwdns136122:0crwdne136122:0</target>
+      </trans-unit>
+      <trans-unit id="submitResend">
+        <source>Resend now</source>
+        <target>crwdns136124:0crwdne136124:0</target>
+      </trans-unit>
+      <trans-unit id="passwordRepeat">
+        <source>Repeat Password</source>
+        <target>crwdns136126:0crwdne136126:0</target>
+      </trans-unit>
+      <trans-unit id="titleCreateProfile">
+        <source>Create a new user-profile</source>
+        <target>crwdns136128:0crwdne136128:0</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailTitle">
+        <source>Resend confirmation mail</source>
+        <target>crwdns136130:0crwdne136130:0</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailFieldsetLegend">
+        <source>Please enter your email address</source>
+        <target>crwdns136132:0crwdne136132:0</target>
+      </trans-unit>
+      <trans-unit id="submitEdit">
+        <source>Update Profile</source>
+        <target>crwdns136134:0crwdne136134:0</target>
+      </trans-unit>
+      <trans-unit id="create">
+        <source>Profile successfully created</source>
+        <target>crwdns136136:0crwdne136136:0</target>
+      </trans-unit>
+      <trans-unit id="createAndInvited">
+        <source>Profile successfully created and user informed</source>
+        <target>crwdns136138:0crwdne136138:0</target>
+      </trans-unit>
+      <trans-unit id="createAndInvitedFinished">
+        <source>Profile successfully changed and enabled</source>
+        <target>crwdns136140:0crwdne136140:0</target>
+      </trans-unit>
+      <trans-unit id="createRequestWaitingForUserConfirm">
+        <source>Thank you for your request. Please check your mail account to confirm the profile.</source>
+        <target>crwdns136142:0crwdne136142:0</target>
+      </trans-unit>
+      <trans-unit id="createRequestWaitingForAdminConfirm">
+        <source>Thank you for your registration. Your profile will be available as soon as the admin confirms your request.</source>
+        <target>crwdns342552:0crwdne342552:0</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailSend">
+        <source>An email was sent to your account. Please check your inbox.</source>
+        <target>crwdns374318:0crwdne374318:0</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationMailFail">
+        <source>We received no valid mail.</source>
+        <target>crwdns136148:0crwdne136148:0</target>
+      </trans-unit>
+      <trans-unit id="ratelimiter_too_many_attempts">
+        <source>Too many attempts from this IP address. Try again later.</source>
+        <target>crwdns136150:0crwdne136150:0</target>
+      </trans-unit>
+      <trans-unit id="createFailedProfile">
+        <source>Profile creation failed</source>
+        <target>crwdns136152:0crwdne136152:0</target>
+      </trans-unit>
+      <trans-unit id="userAlreadyConfirmed">
+        <source>Profile is already confirmed</source>
+        <target>crwdns136154:0crwdne136154:0</target>
+      </trans-unit>
+      <trans-unit id="missingUserInDatabase">
+        <source>No Profile found in database. Maybe it was deleted before.</source>
+        <target>crwdns136156:0crwdne136156:0</target>
+      </trans-unit>
+      <trans-unit id="createProfileDeleted">
+        <source>Profile successfully deleted</source>
+        <target>crwdns136158:0crwdne136158:0</target>
+      </trans-unit>
+      <trans-unit id="titleUpdateProfile">
+        <source>Update your user-profile</source>
+        <target>crwdns136160:0crwdne136160:0</target>
+      </trans-unit>
+      <trans-unit id="confirmUserConfirmation">
+        <source>Please confirm the creation of your account.</source>
+        <target>crwdns374320:0crwdne374320:0</target>
+      </trans-unit>
+      <trans-unit id="confirmUserConfirmationRefused">
+        <source>Please confirm the deletion of your account.</source>
+        <target>crwdns336844:0crwdne336844:0</target>
+      </trans-unit>
+      <trans-unit id="confirmAdminConfirmation">
+        <source>Please confirm the creation of this account.</source>
+        <target>crwdns374322:0crwdne374322:0</target>
+      </trans-unit>
+      <trans-unit id="confirmAdminConfirmationRefused">
+        <source>Please confirm the deletion of this account.</source>
+        <target>crwdns374324:0crwdne374324:0</target>
+      </trans-unit>
+      <trans-unit id="confirmAdminConfirmationRefusedSilent">
+        <source>Please confirm the silent deletion of this account.</source>
+        <target>crwdns374326:0crwdne374326:0</target>
+      </trans-unit>
+      <trans-unit id="update">
+        <source>Profile successfully changed</source>
+        <target>crwdns136162:0crwdne136162:0</target>
+      </trans-unit>
+      <trans-unit id="noChanges">
+        <source>No changes detected, nothing to update</source>
+        <target>crwdns136164:0crwdne136164:0</target>
+      </trans-unit>
+      <trans-unit id="updateRequest">
+        <source>Your change request was transmitted to the administrator. After a confirmation, your profile will be up-to-date.</source>
+        <target>crwdns136166:0crwdne136166:0</target>
+      </trans-unit>
+      <trans-unit id="login">
+        <source>You're successfully logged in now</source>
+        <target>crwdns136168:0crwdne136168:0</target>
+      </trans-unit>
+      <trans-unit id="deleteProfile">
+        <source>Delete Profile</source>
+        <target>crwdns136170:0crwdne136170:0</target>
+      </trans-unit>
+      <trans-unit id="updateProfile">
+        <source>Profile successfully updated</source>
+        <target>crwdns136172:0crwdne136172:0</target>
+      </trans-unit>
+      <trans-unit id="updateFailedProfile">
+        <source>Profile update failed</source>
+        <target>crwdns136174:0crwdne136174:0</target>
+      </trans-unit>
+      <trans-unit id="field_image_fineuploader">
+        <source>Please enable fineUploader plugin</source>
+        <target>crwdns136176:0crwdne136176:0</target>
+      </trans-unit>
+      <trans-unit id="field_image_drag">
+        <source>Drag file</source>
+        <target>crwdns136178:0crwdne136178:0</target>
+      </trans-unit>
+      <trans-unit id="field_image_drag_processing">
+        <source>Drag in progress ...</source>
+        <target>crwdns136180:0crwdne136180:0</target>
+      </trans-unit>
+      <trans-unit id="field_image_upload">
+        <source>Upload</source>
+        <target>crwdns136182:0crwdne136182:0</target>
+      </trans-unit>
+      <trans-unit id="empty">
+        <source>empty</source>
+        <target>crwdns136184:0crwdne136184:0</target>
+      </trans-unit>
+      <trans-unit id="pleaseChoose">
+        <source>Please choose ...</source>
+        <target>crwdns136186:0crwdne136186:0</target>
+      </trans-unit>
+      <trans-unit id="pleaseChooseCountry">
+        <source>Please choose a country ...</source>
+        <target>crwdns136188:0crwdne136188:0</target>
+      </trans-unit>
+      <trans-unit id="FilterLabel">
+        <source>Search</source>
+        <target>crwdns136190:0crwdne136190:0</target>
+      </trans-unit>
+      <trans-unit id="FilterPlaceholder">
+        <source>Search ...</source>
+        <target>crwdns136192:0crwdne136192:0</target>
+      </trans-unit>
+      <trans-unit id="FilterSubmit">
+        <source>Filter now</source>
+        <target>crwdns136194:0crwdne136194:0</target>
+      </trans-unit>
+      <trans-unit id="UserDeleteConfirmation">
+        <source>Are you sure to delete your profile?</source>
+        <target>crwdns136196:0crwdne136196:0</target>
+      </trans-unit>
+      <trans-unit id="titleInvitationProfile">
+        <source>Invite a new user</source>
+        <target>crwdns136198:0crwdne136198:0</target>
+      </trans-unit>
+      <trans-unit id="titleInvitationSetPassword">
+        <source>Please set a new password</source>
+        <target>crwdns136200:0crwdne136200:0</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserDelete">
+        <source>Delete</source>
+        <target>crwdns136202:0crwdne136202:0</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserDeleteConfirmation">
+        <source>Are you sure to delete this User?</source>
+        <target>crwdns136204:0crwdne136204:0</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserEdit">
+        <source>Edit</source>
+        <target>crwdns136206:0crwdne136206:0</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserLogout">
+        <source>Logout</source>
+        <target>crwdns136208:0crwdne136208:0</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserStatusOffline">
+        <source>Offline</source>
+        <target>crwdns136210:0crwdne136210:0</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserStatusOnline">
+        <source>Online</source>
+        <target>crwdns136212:0crwdne136212:0</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserVisibilityHide">
+        <source>Disable</source>
+        <target>crwdns136214:0crwdne136214:0</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserVisibilityHidden">
+        <source>Hidden</source>
+        <target>crwdns136216:0crwdne136216:0</target>
+      </trans-unit>
+      <trans-unit id="BackendListUserVisibilityUnhide">
+        <source>Enable</source>
+        <target>crwdns136218:0crwdne136218:0</target>
+      </trans-unit>
+      <trans-unit id="BackendListFilterLabel">
+        <source>Search</source>
+        <target>crwdns136220:0crwdne136220:0</target>
+      </trans-unit>
+      <trans-unit id="BackendListLoginAs">
+        <source>Login as</source>
+        <target>crwdns136222:0crwdne136222:0</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationNoteTitle">
+        <source>Possible action:</source>
+        <target>crwdns136224:0crwdne136224:0</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationNoteText">
+        <source>%s approval(s) available</source>
+        <target>crwdns136226:0%scrwdne136226:0</target>
+      </trans-unit>
+      <trans-unit id="AdminBackendConfirmationNoteText">
+        <source>%s user(s) need to be confirmed by admin</source>
+        <target>crwdns301524:0%scrwdne301524:0</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationColumnAction">
+        <source>Actions</source>
+        <target>crwdns136230:0crwdne136230:0</target>
+      </trans-unit>
+      <trans-unit id="BackendMissingConfigPID">
+        <source>The config PID is missing!</source>
+        <target>crwdns136232:0crwdne136232:0</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationColumnUid">
+        <source>UID</source>
+        <target>crwdns136234:0crwdne136234:0</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageLogout">
+        <source>%s was successfully logged out</source>
+        <target>crwdns393558:0%scrwdne393558:0</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageConfirmed">
+        <source>%s was successfully approved</source>
+        <target>crwdns136236:0%scrwdne136236:0</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageFailed">
+        <source>The user confirmation failed, please check your system log or check your config</source>
+        <target>crwdns136238:0crwdne136238:0</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageRefused">
+        <source>%s was refused</source>
+        <target>crwdns136240:0%scrwdne136240:0</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationResendUserConfirmationRequest">
+        <source>resend user confirmation e-mail</source>
+        <target>crwdns136242:0crwdne136242:0</target>
+      </trans-unit>
+      <trans-unit id="BackendConfirmationFlashMessageReSend">
+        <source>%s confirmation mail was resent</source>
+        <target>crwdns301526:0%scrwdne301526:0</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationDialogueMessage">
+        <source>Your userprofile is not confirmed yet.</source>
+        <target>crwdns136246:0crwdne136246:0</target>
+      </trans-unit>
+      <trans-unit id="resendConfirmationDialogueLink">
+        <source>Resend confirmation email?</source>
+        <target>crwdns136248:0crwdne136248:0</target>
+      </trans-unit>
+      <trans-unit id="createStatus">
+        <source>User registration</source>
+        <target>crwdns209516:0crwdne209516:0</target>
+      </trans-unit>
+      <trans-unit id="js.loading_states">
+        <source>Loading states ...</source>
+        <target>crwdns136250:0crwdne136250:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
