@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2013-04-13T15:49:07Z" product-name="femanager" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="username.description">
+        <source>username</source>
+        <target>crwdns136252:0crwdne136252:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
