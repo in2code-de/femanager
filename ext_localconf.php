@@ -88,7 +88,7 @@ call_user_func(function () {
         [
             \In2code\Femanager\Controller\DataController::class => 'getStatesForCountry',
         ],
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_PLUGIN
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -100,7 +100,7 @@ call_user_func(function () {
         [
             \In2code\Femanager\Controller\UserController::class => 'validate',
         ],
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_PLUGIN
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -112,7 +112,7 @@ call_user_func(function () {
         [
             \In2code\Femanager\Controller\UserController::class => 'loginAs',
         ],
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_PLUGIN
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMap::class] = [
