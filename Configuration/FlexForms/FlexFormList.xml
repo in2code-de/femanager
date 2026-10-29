@@ -18,8 +18,7 @@
 					<settings.list.limit>
 						<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.limit</label>
 						<config>
-							<type>input</type>
-							<eval>trim,int</eval>
+							<type>number</type>
 							<size>4</size>
 						</config>
 					</settings.list.limit>
@@ -30,20 +29,20 @@
 							<renderType>selectSingle</renderType>
 							<items type="array">
 								<numIndex index="0" type="array">
-									<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.orderby.0</numIndex>
-									<numIndex index="1">last_name</numIndex>
+									<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.orderby.0</label>
+									<value>last_name</value>
 								</numIndex>
 								<numIndex index="1" type="array">
-									<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.orderby.1</numIndex>
-									<numIndex index="1">first_name</numIndex>
+									<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.orderby.1</label>
+									<value>first_name</value>
 								</numIndex>
 								<numIndex index="2" type="array">
-									<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.orderby.2</numIndex>
-									<numIndex index="1">company</numIndex>
+									<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.orderby.2</label>
+									<value>company</value>
 								</numIndex>
 								<numIndex index="3" type="array">
-									<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.orderby.3</numIndex>
-									<numIndex index="1">username</numIndex>
+									<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.orderby.3</label>
+									<value>username</value>
 								</numIndex>
 							</items>
 							<maxitems>1</maxitems>
@@ -57,12 +56,12 @@
 							<renderType>selectSingle</renderType>
 							<items type="array">
 								<numIndex index="0" type="array">
-									<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.sorting.0</numIndex>
-									<numIndex index="1">asc</numIndex>
+									<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.sorting.0</label>
+									<value>asc</value>
 								</numIndex>
 								<numIndex index="1" type="array">
-									<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.sorting.1</numIndex>
-									<numIndex index="1">desc</numIndex>
+									<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.list.sorting.1</label>
+									<value>desc</value>
 								</numIndex>
 							</items>
 							<maxitems>1</maxitems>

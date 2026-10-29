@@ -15,12 +15,12 @@
 							<renderType>selectSingle</renderType>
 							<items type="array">
 								<numIndex index="0" type="array">
-									<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose</numIndex>
-									<numIndex index="1"></numIndex>
+									<label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:pleaseChoose</label>
+									<value></value>
 								</numIndex>
 								<numIndex index="1" type="array">
-									<numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.show.user.1</numIndex>
-									<numIndex index="1">[this]</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.show.user.1</label>
+                                    <value>[this]</value>
 								</numIndex>
 							</items>
 							<maxitems>1</maxitems>

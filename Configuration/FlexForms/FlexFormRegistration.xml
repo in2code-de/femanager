@@ -15,88 +15,88 @@
                             <renderType>selectMultipleSideBySide</renderType>
                             <items type="array">
                                 <numIndex index="0" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.username</numIndex>
-                                    <numIndex index="1">username</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.username</label>
+                                    <value>username</value>
                                 </numIndex>
                                 <numIndex index="1" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.password</numIndex>
-                                    <numIndex index="1">password</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.password</label>
+                                    <value>password</value>
                                 </numIndex>
                                 <numIndex index="2" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.usergroup</numIndex>
-                                    <numIndex index="1">usergroup</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.usergroup</label>
+                                    <value>usergroup</value>
                                 </numIndex>
                                 <numIndex index="3" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.name</numIndex>
-                                    <numIndex index="1">name</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.name</label>
+                                    <value>name</value>
                                 </numIndex>
                                 <numIndex index="4" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.firstName</numIndex>
-                                    <numIndex index="1">firstName</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.firstName</label>
+                                    <value>firstName</value>
                                 </numIndex>
                                 <numIndex index="5" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.middleName</numIndex>
-                                    <numIndex index="1">middleName</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.middleName</label>
+                                    <value>middleName</value>
                                 </numIndex>
                                 <numIndex index="6" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.lastName</numIndex>
-                                    <numIndex index="1">lastName</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.lastName</label>
+                                    <value>lastName</value>
                                 </numIndex>
                                 <numIndex index="7" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.address</numIndex>
-                                    <numIndex index="1">address</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.address</label>
+                                    <value>address</value>
                                 </numIndex>
                                 <numIndex index="8" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.telephone</numIndex>
-                                    <numIndex index="1">telephone</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.telephone</label>
+                                    <value>telephone</value>
                                 </numIndex>
                                 <numIndex index="9" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.fax</numIndex>
-                                    <numIndex index="1">fax</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.fax</label>
+                                    <value>fax</value>
                                 </numIndex>
                                 <numIndex index="10" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.email</numIndex>
-                                    <numIndex index="1">email</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.email</label>
+                                    <value>email</value>
                                 </numIndex>
                                 <numIndex index="11" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.title</numIndex>
-                                    <numIndex index="1">title</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.title</label>
+                                    <value>title</value>
                                 </numIndex>
                                 <numIndex index="12" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.zip</numIndex>
-                                    <numIndex index="1">zip</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.zip</label>
+                                    <value>zip</value>
                                 </numIndex>
                                 <numIndex index="13" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.city</numIndex>
-                                    <numIndex index="1">city</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.city</label>
+                                    <value>city</value>
                                 </numIndex>
                                 <numIndex index="14" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.country</numIndex>
-                                    <numIndex index="1">country</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.country</label>
+                                    <value>country</value>
                                 </numIndex>
                                 <numIndex index="15" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.www</numIndex>
-                                    <numIndex index="1">www</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.www</label>
+                                    <value>www</value>
                                 </numIndex>
                                 <numIndex index="16" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.company</numIndex>
-                                    <numIndex index="1">company</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.company</label>
+                                    <value>company</value>
                                 </numIndex>
                                 <numIndex index="17" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.image</numIndex>
-                                    <numIndex index="1">image</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.image</label>
+                                    <value>image</value>
                                 </numIndex>
                                 <numIndex index="18" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gender</numIndex>
-                                    <numIndex index="1">gender</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.gender</label>
+                                    <value>gender</value>
                                 </numIndex>
                                 <numIndex index="19" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.dateOfBirth</numIndex>
-                                    <numIndex index="1">dateOfBirth</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.dateOfBirth</label>
+                                    <value>dateOfBirth</value>
                                 </numIndex>
                                 <numIndex index="20" type="array">
-                                    <numIndex index="0">LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.terms</numIndex>
-                                    <numIndex index="1">terms</numIndex>
+                                    <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:tx_femanager_domain_model_user.terms</label>
+                                    <value>terms</value>
                                 </numIndex>
                             </items>
                             <maxitems>100</maxitems>
@@ -112,7 +112,6 @@
                         <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.new.overrideUserGroup</label>
                         <config>
                             <type>group</type>
-                            <internal_type>db</internal_type>
                             <allowed>fe_groups</allowed>
                             <size>3</size>
                             <maxitems>50</maxitems>
@@ -155,7 +154,6 @@
                         <label>LLL:EXT:femanager/Resources/Private/Language/locallang_db.xlf:flexform.misc.termsUrl</label>
                         <config>
                             <type>group</type>
-                            <internal_type>db</internal_type>
                             <allowed>pages</allowed>
                             <size>1</size>
                             <maxitems>1</maxitems>
