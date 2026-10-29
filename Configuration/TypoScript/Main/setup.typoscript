@@ -1816,7 +1816,7 @@ femanager_validation {
     controller = User
     action = validate
     features.requireCHashArgumentForActionArguments = 0
-    10 =< tt_content.list.20.femanager_validation
+    10 =< tt_content.femanager_validation.20
   }
 }
 
