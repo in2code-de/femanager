@@ -6,11 +6,14 @@ Changelog
 
 -
       :Version: 13.4.0
-      :Date: 2026-10-16
+      :Date: 2026-11-10
       :Changes:
+      * [TASK] Migrate the internal plugins Data, Validation and Impersonate to the CType registration to avoid deprecations in TYPO3 13.4 (#736) - thx to Nicole Hummel
+      * [TASK] Migrate the FlexForm items to the associative array keys label and value (#736) - thx to Nicole Hummel
       * [BUGFIX] Allow overriding FluidEmail templates via plugin.tx_femanager.settings.email.*RootPaths (#726)
-      * [BUGFIX] Respect TypoScript setting loginAs.redirect for impersonation again
+      * [BUGFIX] Respect TypoScript setting loginAs.redirect for impersonation again (#730)
       * [BUGFIX] Fix TCA definition of tx_femanager_domain_model_log.state (#727) - thx to alexander-nitsche-governikus
+      * [TEST] Add behaviour tests for the redirect after the user and admin confirmation
 
 -
       :Version: 13.3.6
