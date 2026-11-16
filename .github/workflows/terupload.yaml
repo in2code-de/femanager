@@ -3,15 +3,42 @@ name: TERUpload
 on:
   push:
     tags:
-      - "**"
+      - "[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   TERUpload:
+    # The pro repository shares this code base but must never release to the TER
+    if: github.repository == 'in2code-de/femanager'
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
+    env:
+      EXTENSION_KEY: femanager
+      VERSION: ${{ github.ref_name }}
     steps:
-      - uses: actions/checkout@v1
-      - uses: tomasnorre/typo3-upload-ter@v2
+      - uses: actions/checkout@v4
+
+      # actions/checkout turns annotated tags into lightweight ones, so the tag message has to be fetched again
+      - name: Fetch annotated tag
+        run: git fetch --force origin "refs/tags/${VERSION}:refs/tags/${VERSION}"
+
+      - uses: shivammathur/setup-php@v2
         with:
-          api-token: ${{ secrets.TYPO3_API_TOKEN }}
+          php-version: '8.3'
+          extensions: zip
+          tools: composer:v2
+
+      - name: Install tailor
+        run: composer global require typo3/tailor:^2.1 --prefer-dist --no-progress
+
+      # git archive leaves out every path marked as export-ignore in .gitattributes
+      - name: Create extension archive
+        run: git archive -o "${EXTENSION_KEY}_${VERSION}.zip" "${VERSION}"
+
+      - name: Publish to TER
+        env:
+          TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
+        run: |
+          COMMENT=$(git tag -l --format='%(contents)' "${VERSION}")
+          COMMENT=${COMMENT:-$(git log -1 --pretty=%B)}
+          "$(composer global config bin-dir --absolute)/tailor" ter:publish "${VERSION}" "${EXTENSION_KEY}" \
+            --artefact="${EXTENSION_KEY}_${VERSION}.zip" \
+            --comment="${COMMENT}"
