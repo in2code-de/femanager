@@ -5,6 +5,13 @@ Changelog
 =========
 
 -
+      :Version: 13.4.1
+      :Date: 2026-11-16
+      :Changes:
+      * [TASK] Remove the automatic TER upload via GitHub Actions, releases are uploaded to the TER manually
+      * [TASK] Remove the outdated composer script prepare-release, the package content is defined by the export-ignore entries of .gitattributes
+
+-
       :Version: 13.4.0
       :Date: 2026-11-10
       :Changes:
