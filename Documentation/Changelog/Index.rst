@@ -5,6 +5,12 @@ Changelog
 =========
 
 -
+      :Version: 13.4.1
+      :Date: 2026-11-16
+      :Changes:
+      * [BUGFIX] Fix the automatic TER upload via GitHub Actions: the package is now built with git archive and the export-ignore entries of .gitattributes
+
+-
       :Version: 13.4.0
       :Date: 2026-11-10
       :Changes:
