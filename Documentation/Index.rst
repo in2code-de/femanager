@@ -47,6 +47,7 @@ Femanager offers an extensive frontend user registration including management fu
 	Upgrade/Index
 	Features/Index
 	FAQ/Index
+	Development/Index
 	Changelog/Index
 
 ..  Meta Menu

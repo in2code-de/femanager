@@ -81,11 +81,8 @@ Translation for femanager can be found at: https://crowdin.com/project/typo3-ext
 
 #### Release to TER (maintainers)
 
-Releases are uploaded to the TER with `ddev ter-release <tag> ["<release note>"] [--dry-run]`, never automatically.
-The tag must already be pushed to the public repository, and its `ext_emconf.php` must have the same version. Without a
-release note the command asks for one. `--dry-run` runs all checks and builds the zip in `.Build/ter-release/` without
-uploading. The TER access token is read from `TYPO3_API_TOKEN` or asked for; to store it for your user only, run
-`ddev config global --web-environment-add="TYPO3_API_TOKEN=<token>"`. Never commit it.
+Releases are uploaded to the TER with `ddev ter-release`, see
+[Documentation/Development/TerRelease.rst](Documentation/Development/TerRelease.rst).
 
 ## Screenshots
 
