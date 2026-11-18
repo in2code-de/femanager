@@ -1,0 +1,117 @@
+#!/bin/bash
+
+## Description: Upload a tagged release of femanager to the TER, after checks and a confirmation
+## Usage: ter-release <tag> ["<release note>"] [--dry-run]
+## Example: "ddev ter-release 13.4.2" or "ddev ter-release 13.4.2 'Bugfix release'" or "ddev ter-release 13.4.2 --dry-run"
+
+set -euo pipefail
+
+readonly EXTENSION_KEY='femanager'
+readonly PUBLIC_REPOSITORY='https://github.com/in2code-de/femanager.git'
+readonly TER_API='https://extensions.typo3.org/api/v1/extension'
+readonly TAILOR_DIRECTORY='/tmp/tailor'
+readonly TAILOR_VERSION='^2.1'
+
+fail() {
+    echo "ERROR: $*" >&2
+    exit 1
+}
+
+git() {
+    command git -c safe.directory='*' "$@"
+}
+
+tag=''
+releaseNote=''
+dryRun=false
+for argument in "$@"; do
+    case "$argument" in
+        --dry-run) dryRun=true ;;
+        -*) fail "Unknown option '$argument'" ;;
+        *)
+            if [ -z "$tag" ]; then
+                tag="$argument"
+            elif [ -z "$releaseNote" ]; then
+                releaseNote="$argument"
+            else
+                fail 'Too many arguments. Usage: ddev ter-release <tag> ["<release note>"] [--dry-run]'
+            fi
+            ;;
+    esac
+done
+
+[ -n "$tag" ] || fail 'Missing tag. Usage: ddev ter-release <tag> ["<release note>"] [--dry-run]'
+[[ "$tag" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || fail "Tag '$tag' is not a version like 13.4.2"
+
+cd "$(git rev-parse --show-toplevel)"
+
+echo "Checking tag $tag ..."
+localCommit="$(git rev-parse -q --verify "refs/tags/$tag^{commit}")" || fail "Tag $tag does not exist locally (git fetch --tags?)"
+
+remoteRefs="$(git ls-remote "$PUBLIC_REPOSITORY" "refs/tags/$tag" "refs/tags/$tag^{}")" \
+    || fail "Could not reach $PUBLIC_REPOSITORY"
+publicCommit="$(echo "$remoteRefs" | awk '$2 ~ /\^\{\}$/ {print $1}')"
+[ -n "$publicCommit" ] || publicCommit="$(echo "$remoteRefs" | awk '{print $1}')"
+[ -n "$publicCommit" ] || fail "Tag $tag is not in the public repository $PUBLIC_REPOSITORY. Only public releases may go to the TER."
+[ "$publicCommit" = "$localCommit" ] \
+    || fail "Tag $tag points to $localCommit locally but to $publicCommit in the public repository"
+
+emconfVersion="$(git show "$tag:ext_emconf.php" | sed -n "s/.*'version' *=> *'\([^']*\)'.*/\1/p" | head -1)"
+[ "$emconfVersion" = "$tag" ] || fail "ext_emconf.php of tag $tag has version '$emconfVersion'"
+
+terStatus="$(curl -s -o /dev/null -w '%{http_code}' "$TER_API/$EXTENSION_KEY/$tag")"
+case "$terStatus" in
+    404) ;;
+    200) fail "Version $tag of $EXTENSION_KEY already exists in the TER" ;;
+    *) fail "Could not check the TER for version $tag (HTTP $terStatus)" ;;
+esac
+
+if [ -z "$releaseNote" ]; then
+    defaultReleaseNote="Release Notes: https://github.com/in2code-de/femanager/releases/tag/$tag"
+    read -r -p "Release note [$defaultReleaseNote]: " releaseNote
+    releaseNote="${releaseNote:-$defaultReleaseNote}"
+fi
+
+artefactDirectory="$PWD/.Build/ter-release"
+artefact="$artefactDirectory/${EXTENSION_KEY}_$tag.zip"
+mkdir -p "$artefactDirectory"
+rm -f "$artefact"
+git archive --prefix="$EXTENSION_KEY/" -o "$artefact" "$tag"
+fileCount="$(php -r '$zip = new ZipArchive(); $zip->open($argv[1]); echo $zip->numFiles;' "$artefact")"
+
+echo
+echo "  Extension:    $EXTENSION_KEY"
+echo "  Version:      $tag"
+echo "  Commit:       $localCommit"
+echo "  Release note: $releaseNote"
+echo "  Artefact:     ${artefact#"$PWD/"} ($fileCount entries)"
+echo
+
+if [ "$dryRun" = true ]; then
+    echo 'Dry run: all checks passed, nothing was uploaded. The artefact is kept for inspection.'
+    exit 0
+fi
+
+read -r -p 'Upload to TER? [y/N] ' confirmation
+if [ "$confirmation" != 'y' ] && [ "$confirmation" != 'Y' ]; then
+    rm -f "$artefact"
+    echo 'Aborted, nothing was uploaded.'
+    exit 1
+fi
+
+if [ -z "${TYPO3_API_TOKEN:-}" ]; then
+    read -r -s -p 'TER access token: ' TYPO3_API_TOKEN
+    echo
+    [ -n "$TYPO3_API_TOKEN" ] || fail 'No TER access token given'
+fi
+export TYPO3_API_TOKEN
+
+if [ ! -x "$TAILOR_DIRECTORY/vendor/bin/tailor" ]; then
+    echo 'Installing tailor ...'
+    mkdir -p "$TAILOR_DIRECTORY"
+    composer --working-dir="$TAILOR_DIRECTORY" require "typo3/tailor:$TAILOR_VERSION" --no-interaction --quiet
+fi
+
+"$TAILOR_DIRECTORY/vendor/bin/tailor" ter:publish "$tag" "$EXTENSION_KEY" --artefact="$artefact" --comment="$releaseNote"
+rm -f "$artefact"
+echo "Version $tag of $EXTENSION_KEY was uploaded to the TER."

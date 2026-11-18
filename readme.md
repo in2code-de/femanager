@@ -79,6 +79,14 @@ Translation for femanager can be found at: https://crowdin.com/project/typo3-ext
 2. Run `ddev start`
 3. Run `ddev initialize` to setup configurations and test database
 
+#### Release to TER (maintainers)
+
+Releases are uploaded to the TER with `ddev ter-release <tag> ["<release note>"] [--dry-run]`, never automatically.
+The tag must already be pushed to the public repository, and its `ext_emconf.php` must have the same version. Without a
+release note the command asks for one. `--dry-run` runs all checks and builds the zip in `.Build/ter-release/` without
+uploading. The TER access token is read from `TYPO3_API_TOKEN` or asked for; to store it for your user only, run
+`ddev config global --web-environment-add="TYPO3_API_TOKEN=<token>"`. Never commit it.
+
 ## Screenshots
 
 <img src="/Documentation/Images/femanager_create1.png" width="500" alt="Profile creation"/>
